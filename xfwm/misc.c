@@ -265,11 +265,25 @@ void
 RevertFocus (XfwmWindow * Tmp_win)
 {
   XfwmWindow * t;
+  XfwmWindow *MouseWin;
+  Window mw;
+
   if ((!Tmp_win) || (Scr.Focus != Tmp_win))
     return;
-    
+  
+  XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
+  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
+  {
+    MouseWin = NULL;
+  }
+  if ((MouseWin) && AcceptInput (MouseWin))
+  {
+    SetFocus (MouseWin->w, MouseWin, False, False);
+    return;
+  }
+
   t = Tmp_win->next;
-  while (t && !AcceptInput (t))
+  while (t && (!AcceptInput(t) || (t->flags & ICONIFIED) || (Tmp_win->Desk != t->Desk)))
   {
     t = t->next;
   }
@@ -280,16 +294,16 @@ RevertFocus (XfwmWindow * Tmp_win)
   }
 
   t = Tmp_win->prev;
-  while (t && !AcceptInput (t))
+  while ((t != &Scr.XfwmRoot) && (!AcceptInput(t) || (t->flags & ICONIFIED) || (Tmp_win->Desk != t->Desk)))
   {
     t = t->prev;
   }
-  if (t)
+  if (t != &Scr.XfwmRoot)
   {
     SetFocus (t->w, t, True, False);
     return;
   }
-
+  XBell (dpy, 0);
   SetFocus (Scr.NoFocusWin, NULL, False, False);
 }
 /***************************************************************************

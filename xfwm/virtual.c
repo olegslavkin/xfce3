@@ -171,11 +171,11 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
       }
     }
 
-    if ((MouseWin) && !(Scr.Options & ClickToFocus) && AcceptInput (MouseWin))
+    if ((MouseWin) && !(Scr.Options & ClickToFocus) && AcceptInput(MouseWin))
       SetFocus (MouseWin->w, MouseWin, True, False);
-    else if (FocusWin)
+    else if ((FocusWin) && AcceptInput(FocusWin))
       SetFocus (FocusWin->w, FocusWin, True, False);
-    else if (StickyWin && (StickyWin->flags & STICKY))
+    else if ((StickyWin) && AcceptInput(StickyWin) && (StickyWin->flags & STICKY))
       SetFocus (StickyWin->w, StickyWin, True, False);
     else
       SetFocus (Scr.NoFocusWin, NULL, False, False);

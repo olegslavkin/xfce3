@@ -713,14 +713,14 @@ HandlePropertyNotify ()
     }
     else if (Event.xproperty.atom == _XA_WM_STATE)
     {
-      if ((Tmp_win != NULL) && (Tmp_win == Scr.Focus))
+      if ((Tmp_win) && (Tmp_win == Scr.Focus) && AcceptInput(Tmp_win))
       {
 	SetFocus (Tmp_win->w, Tmp_win, True, True);
       }
     }
     else if (Event.xproperty.atom == _XA_WIN_LAYER)
     {
-      if ((Tmp_win != NULL) && (GetWindowLayer (Tmp_win)))
+      if ((Tmp_win) && (GetWindowLayer (Tmp_win)))
       {
 	RaiseWindow (Tmp_win);
       }
@@ -952,7 +952,7 @@ HandleMapNotify ()
 
   XMapWindow (dpy, Tmp_win->w);
 
-  if ((Tmp_win->Desk == Scr.CurrentDesk) && (Scr.Options & MapFocus))
+  if ((Tmp_win->Desk == Scr.CurrentDesk) && (Scr.Options & MapFocus) && AcceptInput (Tmp_win))
   {
     SetFocus (Tmp_win->w, Tmp_win, True, False);
   }
@@ -1148,8 +1148,10 @@ HandleButtonPress ()
   {
     if (!(Tmp_win->triggered) || (Event.xbutton.window == Tmp_win->frame))
     {
-      if (Tmp_win != Scr.Focus)
+      if ((Tmp_win != Scr.Focus) && AcceptInput(Tmp_win))
+      {
 	SetFocus (Tmp_win->w, Tmp_win, True, False);
+      }
       Context = GetContext (Tmp_win, &Event, &PressedW);
       if ((Event.xbutton.button == 1) && ((Scr.Options & AutoRaiseWin) || (Scr.Options & ClickToFocus) || (Scr.Options & ClickRaise) || (!(Tmp_win->flags & TITLE)) || (Context != C_WINDOW)))
       {
@@ -1296,13 +1298,15 @@ HandleEnterNotify ()
 #endif
     return;
   }
-  if (!(Scr.Options & ClickToFocus) && !(e->focus) && ((e->x_root != old_x_root) || (e->y_root != old_y_root) || (Scr.Options & ForceFocus)) && (e->mode == NotifyNormal))
+  if (AcceptInput(Tmp_win) && !(Scr.Options & ClickToFocus) && !(e->focus) && ((e->x_root != old_x_root) || (e->y_root != old_y_root) || (Scr.Options & ForceFocus)) && (e->mode == NotifyNormal))
 
   {
     SetFocus (Tmp_win->w, Tmp_win, True, False);
 
     if (((Scr.Options & AutoRaiseWin) && (Scr.AutoRaiseDelay > 0)) && (!(Tmp_win->flags & ICONIFIED) && !(Tmp_win->flags & RAISEDWIN)))
+    {
       SetTimer (Scr.AutoRaiseDelay);
+    }
   }
   old_x_root = e->x_root;
   old_y_root = e->y_root;

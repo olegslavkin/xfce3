@@ -262,7 +262,7 @@ DeferExecution (XEvent * eventp, Window * w, XfwmWindow ** tmp_win, unsigned lon
 void
 FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
 {
-  if (t == (XfwmWindow *) 0)
+  if (!(t && AcceptInput(t)))
     return;
 
   if ((DeIconifyFlag) && (t->flags & ICONIFIED))

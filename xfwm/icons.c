@@ -845,7 +845,7 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
     if (tmp_win->icon_pixmap_w != None)
       XMapWindow (dpy, tmp_win->icon_pixmap_w);
 
-    if ((tmp_win->Desk == Scr.CurrentDesk) && (tmp_win == Scr.Focus) && (Scr.Options & ClickToFocus))
+    if ((tmp_win->Desk == Scr.CurrentDesk) && (tmp_win == Scr.Focus))
     {
       if (Scr.PreviousFocus == Scr.Focus)
 	Scr.PreviousFocus = NULL;

@@ -128,7 +128,15 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     if (startDesk != Scr.CurrentDesk)
     {
       MapIt (tmp_win);
-      SetFocus (tmp_win->w, tmp_win, False, False);
+      if (AcceptInput(tmp_win))
+      {
+        SetFocus (tmp_win->w, tmp_win, False, False);
+      }
+      else if (Scr.PreviousFocus && (Scr.PreviousFocus->Desk) != Scr.CurrentDesk)
+      {
+        Scr.PreviousFocus = NULL;
+	SetFocus (Scr.NoFocusWin, NULL, False, False);
+      }
     }
   }
   else
@@ -475,7 +483,7 @@ XFwmMoveWindow (XfwmWindow * tmp_win, int xl, int yt, int Width, int Height, int
   int newdesk = desk;
   int evx, evy;
   int warpx, warpy;
-
+  
   if (Scr.SnapSize < MINRESISTANCE)
   {				/* do the standard stuff */
     domove (tmp_win, xl, yt, Width, Height, opaque_move);
@@ -505,8 +513,6 @@ XFwmMoveWindow (XfwmWindow * tmp_win, int xl, int yt, int Width, int Height, int
     {
       Scr.EdgeScrollY = Scr.EdgeScrollX = 0;
     }
-
-
     /* now check if some EdgeCounter has reached Snapsize, so that
        we shall emit signals to switch to the next desk (computed in 
        the deskwrap-helper)
@@ -522,7 +528,7 @@ XFwmMoveWindow (XfwmWindow * tmp_win, int xl, int yt, int Width, int Height, int
       newdesk = _xfwm_deskwrap (-1, 0);
       if (opaque_move)
 	tmp_win->Desk = newdesk;
-      changeDesks (0, newdesk, 0, 0, !opaque_move);
+      changeDesks (0, newdesk, False, False, !opaque_move);
       DispatchEvent ();
       domove (tmp_win, xl + (Scr.MyDisplayWidth - Scr.SnapSize), yt, Width, Height, opaque_move);
       return (newdesk);
@@ -538,7 +544,7 @@ XFwmMoveWindow (XfwmWindow * tmp_win, int xl, int yt, int Width, int Height, int
       newdesk = _xfwm_deskwrap (+1, 0);
       if (opaque_move)
 	tmp_win->Desk = newdesk;
-      changeDesks (0, newdesk, 0, 0, !opaque_move);
+      changeDesks (0, newdesk, False, False, !opaque_move);
       DispatchEvent ();
       domove (tmp_win, xl - (Scr.MyDisplayWidth - Scr.SnapSize), yt, Width, Height, opaque_move);
       return (newdesk);
@@ -554,7 +560,7 @@ XFwmMoveWindow (XfwmWindow * tmp_win, int xl, int yt, int Width, int Height, int
       newdesk = _xfwm_deskwrap (0, -1);
       if (opaque_move)
 	tmp_win->Desk = newdesk;
-      changeDesks (0, newdesk, 0, 0, !opaque_move);
+      changeDesks (0, newdesk, False, False, !opaque_move);
       DispatchEvent ();
       domove (tmp_win, xl, yt + (Scr.MyDisplayHeight - Scr.SnapSize), Width, Height, opaque_move);
       return (newdesk);
@@ -570,7 +576,7 @@ XFwmMoveWindow (XfwmWindow * tmp_win, int xl, int yt, int Width, int Height, int
       newdesk = _xfwm_deskwrap (0, +1);
       if (opaque_move)
 	tmp_win->Desk = newdesk;
-      changeDesks (0, newdesk, 0, 0, !opaque_move);
+      changeDesks (0, newdesk, False, False, !opaque_move);
       DispatchEvent ();
       domove (tmp_win, xl, yt - (Scr.MyDisplayHeight - Scr.SnapSize), Width, Height, opaque_move);
       return (newdesk);
