@@ -232,6 +232,7 @@ icons_DATA = \
  Viewer.xpm \
  WordProcessing.xpm \
  xfsamba.xpm \
+ xfskin.xpm \
  XV.xpm \
  X_server.xpm \
  Xmix.xpm \

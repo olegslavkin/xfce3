@@ -103,4 +103,6 @@ icons_DATA=\
  X_server.xpm \
  Xmix.xpm \
  Xterm.xpm \
- Xv.xpm
+ Xv.xpm \
+ xfskin.xpm
+ 
