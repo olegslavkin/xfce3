@@ -67,7 +67,7 @@
 #endif
 
 #ifndef DEFAULTFONT
-#define DEFAULTFONT 	"-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-15"
+#define DEFAULTFONT 	"-adobe-helvetica-medium-r-normal-*-10-*-*-*-p-*-iso8859-15"
 #endif
 
 #ifndef XFCEDEFAULTFONT
