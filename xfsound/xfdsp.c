@@ -157,12 +157,12 @@ i_play (char *soundfile)
   frameRate = (int) afGetRate(fp, AF_DEFAULT_TRACK);
   if ((sampleFormat != AF_SAMPFMT_TWOSCOMP) && (sampleFormat != AF_SAMPFMT_UNSIGNED))
   {
-	  printf("The audio file must contain integer data in two's complement or unsigned format.\n");
+	  printf("xfsound: The audio file must contain integer data in two's complement or unsigned format.\n");
           afCloseFile (fp);
           exit(-1);
   }
   curr[0] = sampleWidth;
-  curr[1] = sampleFormat;
+  curr[1] = channelCount;
   curr[2] = frameRate;
 #else
   curr[0] = 8;
@@ -173,7 +173,17 @@ i_play (char *soundfile)
 #if defined(HAVE_ARTS)
   stream = arts_play_stream(frameRate, sampleWidth, channelCount, "linuxtest");
 #else
-  cardctl (masterfd, curr);
+  cardctl (masterfd, &curr);
+  if ((curr[0] != sampleWidth) || (curr[1] != channelCount) || (curr[2] != frameRate))
+  {
+    fprintf (stderr, "xfsound: Sound format of file %s\n", soundfile);
+    fprintf (stderr, "is not supported by the sound device. The sound will not be played.\n");
+    fprintf (stderr, "Format requested: sampleWidth=%i channelCount=%i frameRate=%i\n", sampleWidth, channelCount, frameRate);
+    fprintf (stderr, "Format supported: sampleWidth=%i channelCount=%i frameRate=%i\n", curr[0], curr[1], curr[2]);
+    close (masterfd);
+    afCloseFile (fp);
+    exit(-1);
+  }
 #endif
 
 #if defined(HAVE_AUDIOFILE)
@@ -238,15 +248,16 @@ setcard (void)
 }
 
 void
-cardctl (int fp, ST_CONFIG parm)
+cardctl (int fp, ST_CONFIG *parm)
 {
-#if !defined(HAVE_ARTS)
   int format, frequency, channels;
   
-  format = parm[0];
-  channels = parm[1];
-  frequency = parm[2];
+  format    = (*parm)[0];
+  channels  = (*parm)[1];
+  frequency = (*parm)[2];
 
+#if !defined(HAVE_ARTS)
+    
   if (ioctl (fp, SNDCTL_DSP_SETFMT, &format) == -1)
   {
 #ifdef DEBUG
@@ -266,6 +277,9 @@ cardctl (int fp, ST_CONFIG parm)
 #endif
   }
 #endif
+  (*parm)[0] = format;
+  (*parm)[1] = channels;
+  (*parm)[2] = frequency;
 }
 #else
 int
@@ -281,9 +295,9 @@ setcard (void)
 }
 
 void
-cardctl (int fp, ST_CONFIG parm)
+cardctl (int fp, ST_CONFIG * parm)
 {
-  return NULL;
+  ;
 }
 
 #endif
