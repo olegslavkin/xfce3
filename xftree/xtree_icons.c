@@ -524,7 +524,7 @@ static void recreate_higher_pixmaps(void){
 #ifdef HAVE_GDK_PIXBUF
 	  if (gPIM[i]) {
 		gdk_pixmap_unref(gPIM[i]);
-	//	create_higher_bitmap(i);
+		create_higher_bitmap(i);
 	  }
 #endif
   }
