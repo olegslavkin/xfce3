@@ -87,6 +87,7 @@ char *resmap[] = { "",		/* Color 0 */
   "*Text*background",
   "*List*background",
   "*textBackground",
+  "XTerm*background",
   "*XmTextField.background",
   "*XmText.background",
   "Netscape*XmTextField.background",
@@ -121,6 +122,7 @@ char *resmapSel[] = { "",	/* Color 0 */
   "",				/* Color 4 */
   "*XmTextField.selectBackground",
   "*XmText.selectBackground",
+  "XTerm*selectBackground",
   "Netscape*XmTextField.selectBackground",
   "Netscape*XmText.selectBackground",
   "*selectBackground",
@@ -144,6 +146,7 @@ char *resmapTxt[] = { "",	/* Color 0 */
   "*Text*foreground",
   "*List*foreground",
   "*textForeground",
+  "XTerm*foreground",
   "*XmTextField*foreground",
   "*XmText*foreground",
   "Netscape*XmTextField.foreground",
@@ -176,6 +179,7 @@ char *resmapSelTxt[] = { "",	/* Color 0 */
   "",				/* Color 4 */
   "*XmTextField.selectForeground",
   "*XmText.selectForeground",
+  "XTerm*selectForeground",
   "Netscape*XmTextField.selectForeground",
   "Netscape*XmText.selectForeground",
   "*selectForeground",
