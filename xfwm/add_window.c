@@ -481,7 +481,7 @@ AddWindow (Window w)
 
   XSync (dpy, 0);
   MyXUngrabServer (dpy);
-
+  
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);

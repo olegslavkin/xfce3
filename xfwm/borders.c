@@ -331,14 +331,6 @@ SetupFrame (XfwmWindow * tmp_win, int x, int y, int w, int h, Bool sendEvent, Bo
   if (tmp_win->title_width < 1)
     tmp_win->title_width = 1;
 
-  /*
-   * According to the July 27, 1988 ICCCM draft, we should send a
-   * "synthetic" ConfigureNotify event to the client if the window
-   * was moved but not resized.
-   */
-  if (!sendEvent && Moved && !Resized)
-    sendEvent = True;
-
   winmask = (CWX | CWY | CWWidth | CWHeight);
   if (Resized)
   {
@@ -522,12 +514,18 @@ SetupFrame (XfwmWindow * tmp_win, int x, int y, int w, int h, Bool sendEvent, Bo
     if ((Resized) && (tmp_win->wShaped))
       SetShape (tmp_win, w);
   }
-  if (sendEvent)
+  /*
+   * According to the July 27, 1988 ICCCM draft, we should send a
+   * "synthetic" ConfigureNotify event to the client if the window
+   * was moved but not resized.
+   */
+  if (sendEvent || (Moved && !Resized))
   {
     sendclient_event (tmp_win, x, y, w, horig);
   }
   if (broadcast)
     BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, tmp_win);
+  XSync (dpy, 0);
 }
 
 /****************************************************************************

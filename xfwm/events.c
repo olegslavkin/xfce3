@@ -1556,7 +1556,17 @@ HandleConfigureRequest ()
     SetBorder (Tmp_win, Scr.Hilite == Tmp_win, True, True, None);
   }
 
-  SetupFrame (Tmp_win, x, y, width, height, False, True);
+  if (cre->value_mask & (CWX | CWY | CWWidth | CWHeight | CWStackMode))
+  {
+    /* 
+       Not sure if we should send an event in all cases when
+       responding to a configureRequest event. I guess, by reading
+       the ICCCM 2.x that we should not, however, some apps seem
+       to be waiting for that event, so we send it... Thus the 
+       "True" in 6th field of the SetupFrame call.
+     */
+    SetupFrame (Tmp_win, x, y, width, height, True, True);
+  }
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleConfigureRequest ()\n");
 #endif
