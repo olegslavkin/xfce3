@@ -178,13 +178,18 @@ void cb_paste(GtkWidget * widget, GtkCTree * ctree){
 	  return;
   }
 
-  if (!(num = g_list_length (GTK_CLIST (ctree)->selection))) 
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))>1) 
 	  goto invalid_paste;
-  t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), 
+  if (!num) {
+	  GtkCTreeNode *root;
+          root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+	  t_en= gtk_ctree_node_get_row_data (GTK_CTREE (ctree),root); 
+  }
+  else t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), 
 		  (GTK_CLIST (ctree)->selection)->data);
 
   /*fprintf(stderr,"dbg:selection target=%s\n",t_en->path);*/
-  if ((num != 1) ||(!(t_en->type & FT_DIR))){
+  if (!(t_en->type & FT_DIR)){
 invalid_paste:
 	  xf_dlg_error(win->top,_("Please select exactly one directory to insert the pasteboard contents."),NULL);
 	  return;
@@ -237,7 +242,8 @@ pasteboard_is_empty:
   /*fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
 
    if (tmpfile) {
-	  IndirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
+	  if ((cut)&&(on_same_device())) DirectTransfer((GtkWidget *)ctree,TR_MOVE,tmpfile);
+	  else IndirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
 	  unlink(tmpfile);  
   }
   if (cut) unlink(pasteboard);
