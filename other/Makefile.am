@@ -6,6 +6,7 @@ CLEANFILES = \
  COPYING \
  xfbdrc \
  xfce3rc \
+ xfce3rc.bg \
  xfce3rc.cs \
  xfce3rc.de \
  xfce3rc.fr \

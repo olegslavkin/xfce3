@@ -139,6 +139,7 @@ CLEANFILES = \
  COPYING \
  xfbdrc \
  xfce3rc \
+ xfce3rc.bg \
  xfce3rc.cs \
  xfce3rc.de \
  xfce3rc.fr \
@@ -194,7 +195,7 @@ CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
 DATA =  $(conffiles_DATA) $(sysfiles_DATA)
 
-DIST_COMMON =  Makefile.am Makefile.in
+DIST_COMMON =  COPYING Makefile.am Makefile.in
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
