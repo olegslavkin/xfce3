@@ -14,7 +14,7 @@
 #include <string.h>
 
 #define __ICONV_BUFSIZE__ 4096
-#define DEFAULT_CHARSET "ISO-8859-1"
+#define DEFAULT_CHARSET "ISO-8859-15"
 
 char * get_charset_from_lang (void)
 {

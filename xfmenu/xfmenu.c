@@ -68,7 +68,7 @@
 
 #define GMENUPATH "/share/gnome/apps"
 #define KMENUPATH "/share/applnk"
-#define DEFAULT_CHARSET "ISO-8859-1"
+#define DEFAULT_CHARSET "ISO-8859-15"
 #ifdef HAVE_ICONV
 #define F 0   /* character never appears in text */
 #define T 1   /* character appears in plain ASCII text */
