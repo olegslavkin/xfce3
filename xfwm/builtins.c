@@ -2461,6 +2461,7 @@ void
 SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
   XfwmWindow *t, *tp;
+  XEvent JunkEvent;
   Bool finished = FALSE;
   Bool namechanged = FALSE;
   Bool abort = FALSE;
@@ -2615,12 +2616,12 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     XDestroyWindow (dpy, taskw);
     XSync (dpy, 0);
 #ifdef REQUIRES_STASHEVENT
-    while (XCheckTypedEvent (dpy, EnterNotify, &Event))
+    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
     {
-      StashEventTime (&Event);
+      StashEventTime (&JunkEvent);
     }
 #else
-    while (XCheckTypedEvent (dpy, EnterNotify, &Event));
+    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
 #endif
   }
 

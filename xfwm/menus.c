@@ -569,14 +569,13 @@ PopDownMenu ()
   XUnmapWindow (dpy, ActiveMenu->w);
   XSync (dpy, 0);
 #ifdef REQUIRES_STASHEVENT
-  while (XCheckMaskEvent (dpy, EnterWindowMask | LeaveWindowMask, &JunkEvent))
-  {
-    StashEventTime (&JunkEvent);
-  }
+    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
+    {
+      StashEventTime (&JunkEvent);
+    }
 #else
-  while (XCheckMaskEvent (dpy, EnterWindowMask | LeaveWindowMask, &JunkEvent))
+    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
 #endif
-
   UninstallRootColormap ();
   if (!menu_on)
   {

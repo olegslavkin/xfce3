@@ -1024,46 +1024,6 @@ HandleUnmapNotify ()
     XUnmapWindow (dpy, Event.xunmap.window);
   }
 
-  if (Tmp_win == Scr.Hilite)
-  {
-    Scr.Hilite = NULL;
-  }
-
-  if (Scr.LastWindowRaised == Tmp_win)
-  {
-    Scr.LastWindowRaised = NULL;
-  }
-
-  if (Scr.LastWindowLowered == Tmp_win)
-  {
-    Scr.LastWindowLowered = NULL;
-  }
-
-  if (Scr.PreviousFocus == Tmp_win)
-  {
-    Scr.PreviousFocus = NULL;
-  }
-
-  if (Tmp_win == Scr.Focus)
-  {
-    if (Tmp_win->next)
-      SetFocus (Tmp_win->next->w, Tmp_win->next, 1);
-    else if (Tmp_win->prev)
-      SetFocus (Tmp_win->prev->w, Tmp_win->prev, 1);
-    else
-      SetFocus (Scr.NoFocusWin, NULL, 0);
-  }
-
-  if (Tmp_win == Scr.pushed_window)
-  {
-    Scr.pushed_window = NULL;
-  }
-
-  if (Tmp_win == colormap_win)
-  {
-    colormap_win = NULL;
-  }
-
   if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
   {
 #ifdef DEBUG
