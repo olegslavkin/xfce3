@@ -68,7 +68,7 @@ char *screen_names[] = { N_("One"), N_("Two"), N_("Three"), N_("Four"), N_("Five
 
 gint screen_colors[] = { 2, 5, 4, 6 };
 
-#ifdef 0
+#if 0
 char *screen_class[] = { "gxfce_color2",
   "gxfce_color5",
   "gxfce_color4",
@@ -301,7 +301,7 @@ create_gxfce_screen_buttons (GtkWidget * toplevel)
     screen_buttons.screen_button[i] = gtk_radio_button_new (desktops_table_group);
     gtk_widget_set_usize (screen_buttons.screen_button[i], SCREEN_BUTTON_WIDTH, 0);
     desktops_table_group = gtk_radio_button_group (GTK_RADIO_BUTTON (screen_buttons.screen_button[i]));
-#ifdef 0
+#if 0
     gtk_widget_set_name (screen_buttons.screen_button[i], screen_class[i % 4]);
 #else
     gtk_widget_set_name (screen_buttons.screen_button[i], "gxfce_color4");
