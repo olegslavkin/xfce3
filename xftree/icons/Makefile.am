@@ -54,4 +54,8 @@ text.xpm \
 trash.xpm \
 warning.xpm \
 wg1.xpm \
-xftree_icon.xpm
+xftree_icon.xpm \
+pd.xpm \
+dir_ro.xpm \
+dir_ro_open.xpm
+
