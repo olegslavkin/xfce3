@@ -29,6 +29,7 @@
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <glib.h>
 #include "constant.h"
 #include "sendinfo.h"
 #include "my_string.h"
@@ -158,5 +159,5 @@ exec_comm (char *comm, int wm)
 	    }
 	}
     }
-  free (command);
+  g_free (command);
 }
