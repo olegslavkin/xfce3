@@ -1014,6 +1014,7 @@ HandleUnmapNotify ()
 {
   int dstx, dsty;
   Window dumwin;
+  XEvent dummy;
   int weMustUnmap;
 
 #ifdef DEBUG
@@ -1082,7 +1083,7 @@ HandleUnmapNotify ()
   }
 
   MyXGrabServer (dpy);
-  if (XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
+  if (!XCheckTypedWindowEvent (dpy, Event.xunmap.window, DestroyNotify, &dummy) && XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
   {
     XEvent ev;
     Bool reparented;
