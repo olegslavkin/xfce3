@@ -168,8 +168,6 @@ io_system (char **argv,GtkWidget *parent)
        if (execve (argv[0], argv, environ) == -1) {
            /*FILE *mess;*/
 	   if (errno != ENOEXEC) execvp (argv[0], argv); 
-#if 0
-	   /* this is not very portable */
 	   mess=fopen("/tmp/xftree.USR1","w");
 	   if (mess){
 	       fprintf(mess,"%s: %s\n",argv[0],strerror(errno));
@@ -177,7 +175,6 @@ io_system (char **argv,GtkWidget *parent)
 	       kill(io_pid,SIGUSR1);
 	   }
 	   usleep(50000);
-#endif
 	   /*perror (argv[0]);*/
        }
     }
