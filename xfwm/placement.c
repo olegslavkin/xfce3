@@ -262,6 +262,22 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
     /* the USPosition was specified, or the window is a transient,
      * or it starts iconic so place it automatically */
 
+    if ((tmp_win->hints.flags & PWinGravity) && (tmp_win->hints.win_gravity == StaticGravity))
+    {
+      tmp_win->attr.x -= (tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->attr.y -= (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+    }
+    else
+    {
+      if (tmp_win->gravx > 0)
+	tmp_win->attr.x -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
+      else if (tmp_win->gravx < 0)
+	tmp_win->attr.x +=  tmp_win->old_bw - tmp_win->bw;
+      if (tmp_win->gravy > 0)
+	tmp_win->attr.y -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
+      else if (tmp_win->gravy < 0)
+	tmp_win->attr.y +=  tmp_win->old_bw - tmp_win->bw;
+    }
 #if defined(HAVE_X11_EXTENSIONS_XINERAMA_H) || defined(EMULATE_XINERAMA)
     if ((!(tmp_win->flags & RECAPTURE)) && (xinerama_heads != 0) && (xinerama_infos != NULL) && (enable_xinerama))
     {
@@ -306,22 +322,6 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
 	tmp_win->attr.y = MyDisplayY (center_x, center_y);
       }
     }
-    else
-    {
-      if (tmp_win->gravx > 0)
-        tmp_win->attr.x -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
-      if (tmp_win->gravy > 0)
-        tmp_win->attr.y -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
-    }
-#else
-    if (tmp_win->gravx > 0)
-      tmp_win->attr.x -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
-    else if (tmp_win->gravx < 0)
-      tmp_win->attr.x +=  tmp_win->old_bw - tmp_win->bw;
-    if (tmp_win->gravy > 0)
-      tmp_win->attr.y -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
-    else if (tmp_win->gravy < 0)
-      tmp_win->attr.y +=  tmp_win->old_bw - tmp_win->bw;
 #endif
   }
   tmp_win->xdiff = tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw;
