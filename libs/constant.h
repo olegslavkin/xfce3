@@ -71,11 +71,7 @@
 #endif
 
 #ifndef XFCEDEFAULTFONT
-  #ifdef HAVE_X11_XFT_XFT_H
-    #define XFCEDEFAULTFONT 	"-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1"
-  #else
-    #define XFCEDEFAULTFONT 	"-lfp-uniread variable-medium-r-normal-*-9-*-*-*-p-*-iso8859-1"
-  #endif
+#define XFCEDEFAULTFONT	DEFAULTFONT
 #endif
 
 #ifndef TIPFONT
