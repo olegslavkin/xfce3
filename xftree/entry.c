@@ -264,10 +264,14 @@ int entry_update (entry * en)
 	  return (-1); /* its gone */
   }
   
+  
   if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode))) {
      struct stat ss;
      if (stat (en->path, &ss) == -1) return (-1); /* its gone */
-     if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);
+     if (EN_IS_DIR (en) && S_ISLNK (s.st_mode)) {
+	     dup_stat(&s,&ss); 
+     }
+     else if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);
   }
   
   if (en->st.st_size<0) rc = 1;

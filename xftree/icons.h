@@ -6,9 +6,7 @@
 #include "icons/page_link.xpm"
 #include "icons/dir_close.xpm"
 #include "icons/dir_pd.xpm"
-#include "icons/dir_close_lnk.xpm"
 #include "icons/dir_open.xpm"
-#include "icons/dir_open_lnk.xpm"
 #include "icons/dir_up.xpm"
 #include "icons/page_exe.xpm"
 #include "icons/page_exe_script.xpm"
@@ -17,7 +15,6 @@
 #include "icons/fifo.xpm"
 #include "icons/socket.xpm"
 #include "icons/block_dev.xpm"
-#include "icons/stale_lnk.xpm"
 #include "icons/page_tar.xpm"
 #include "icons/page_compressed.xpm"
 #include "icons/page_text.xpm"
@@ -30,4 +27,5 @@
 #include "icons/page_adobe.xpm"
 #include "icons/package_green.xpm"
 #include "icons/link_flag.xpm"
+#include "icons/exe.xpm"
 #endif

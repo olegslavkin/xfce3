@@ -25,6 +25,7 @@
 #endif
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "icons.h"
 #include "xtree_icons.h"
@@ -56,8 +57,8 @@ int kolor;
 
 enum
 {
-  PIX_DIR_OPEN=0, PIX_DIR_OPEN_LNK,
-  PIX_DIR_CLOSE,PIX_DIR_CLOSE_LNK,PIX_DIR_UP,
+  PIX_DIR_OPEN=0, 
+  PIX_DIR_CLOSE,PIX_DIR_UP,
   PIX_DIR_PD,
   PIX_PAGE,PIX_PAGE_C,PIX_PAGE_F,PIX_PAGE_O,
   	PIX_PAGE_H,PIX_PAGE_LNK,PIX_CORE,PIX_TAR,
@@ -68,6 +69,7 @@ enum
   PIX_PAGE_AUDIO,
   PIX_PACKAGE,
   PIX_LINKFLAG, 
+  PIX_EXEFLAG, 
   PIX_PAGE_HTML, 
   PIX_CHAR_DEV,
   PIX_FIFO,
@@ -84,6 +86,7 @@ enum
   PIM_DIR_CLOSE,
   PIM_PACKAGE,
   PIM_LINKFLAG, 
+  PIM_EXEFLAG, 
   PIM_DIR_PD,
   PIM_PAGE,
   PIM_PAGE_HTML, 
@@ -91,13 +94,14 @@ enum
   PIM_FIFO,
   PIM_SOCKET,
   PIM_BLOCK_DEV,
-  PIM_STALE_LNK,
   PIM_EXE,
   LAST_PIM
 };
 
-static GdkPixmap *gPIX[LAST_PIX];
-static GdkPixmap *gPIM[LAST_PIM];
+static GdkPixmap *gPIX[LAST_PIX*4];/*1=normal,2=exe,3=lnk,4=lnk+exe*/
+static GdkPixmap *gPIM[LAST_PIM*4];
+static int pix_w,pix_h;
+static GtkWidget *hack=NULL; 
 
 /* masks that are duplicated elsewhere are initialized to NULL */
 static pixmap_list pixmaps[]={
@@ -106,6 +110,7 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_ADOBE,	NULL,			page_adobe_xpm},
 	{gPIX+PIX_PACKAGE,	gPIM+PIM_PACKAGE,	package_green_xpm},
 	{gPIX+PIX_LINKFLAG,	gPIM+PIM_LINKFLAG,	link_flag_xpm},
+	{gPIX+PIX_EXEFLAG,	gPIM+PIM_EXEFLAG,	exe_xpm},
 	{gPIX+PIX_PAGE_AUDIO,	NULL,			page_audio_xpm},
 	{gPIX+PIX_TEXT,		NULL,			page_text_xpm},
 	{gPIX+PIX_COMPRESSED,	NULL,			page_compressed_xpm},
@@ -116,9 +121,7 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_BAK,		NULL,			page_backup_xpm},
 	{gPIX+PIX_DIR_PD,	NULL,			dir_pd_xpm},
 	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
-	{gPIX+PIX_DIR_OPEN_LNK,	NULL,			dir_open_lnk_xpm},
 	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
-	{gPIX+PIX_DIR_CLOSE_LNK,NULL,			dir_close_lnk_xpm},
 	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
 	{gPIX+PIX_EXE,		gPIM+PIM_EXE,		page_exe_xpm},
 	{gPIX+PIX_EXE_LINK,	NULL,			page_exe_link_xpm},
@@ -128,12 +131,13 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_BLOCK_DEV,	gPIM+PIM_BLOCK_DEV,	block_dev_xpm},
 	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
 	{gPIX+PIX_SOCKET,	gPIM+PIM_SOCKET,	socket_xpm},
-	{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},
+	/*{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},*/
 	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
 	{NULL,NULL,NULL}
 };
 
 static gen_pixmap_list gen_pixmaps[]={
+	{gPIX+PIX_STALE_LNK,	NULL,	page_xpm,	"?",	2},
 	{gPIX+PIX_PAGE_C,	NULL,	page_xpm,	"c",	0},
 	{gPIX+PIX_PAGE_H,	NULL,	page_xpm,	"h",	1},
 	{gPIX+PIX_PAGE_F,	NULL,	page_xpm,	"f",	0},
@@ -172,6 +176,7 @@ static gboolean text_type(char *loc){
 	  ".txt",".TXT",".tex",".TEX",
 	  ".doc",".DOC",
 	  ".readme",".README",
+	  ".pl",".sh",".csh",".py",".tsh",
 	  NULL
   };
   return checkif_type(Type,loc);			    
@@ -215,13 +220,6 @@ static gboolean audio_type(char *loc){
   return checkif_type(Type,loc);			    
 }
 
-static gboolean script_type(char *loc){
-  char *Type[]={
-	  ".pl",".sh",".csh",".py",".tsh",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
 static gboolean mail_type(char *loc){
   char *Type[]={
 	  "inbox","outbox","mbox","dead.letter",
@@ -268,119 +266,217 @@ static gboolean packed_type(char *loc){
   return checkif_type(Type,loc);			    
 }
 
-gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
-  char *loc;
-  gboolean isleaf=TRUE;
+static void create_higher_pixmap(int PIXid){
+  GdkGC *gc; 
+  int PIXbase;
+  if (PIXid >= LAST_PIX*3) {
+	  PIXbase = PIXid - (LAST_PIX*3);
+  } else if (PIXid >= LAST_PIX*2) {
+	  PIXbase = PIXid - (LAST_PIX*2);
+  } else if (PIXid >= LAST_PIX) {
+	  PIXbase = PIXid - LAST_PIX;
+  }
+  else {fprintf(stderr,"xftree: error PIXid=%d (max=%d)\n",PIXid,LAST_PIX*4);return;}
+  if ((!gPIX[PIXbase])||(!hack)) {fprintf(stderr,"xftree: error 3344,pixbase=%d\n",PIXbase);return;}
   
-  pix->pixmap=gPIX[PIX_PAGE];
-  pix->pixmask=gPIM[PIM_PAGE];
-  pix->open=pix->openmask=NULL;
-  /* default link icon */
+  /*fprintf(stderr,"dbg: PIXid=%d \n",PIXid);*/
+  gPIX[PIXid]=gdk_pixmap_new (hack->window,pix_w,pix_h,-1);
+  gc = gdk_gc_new (hack->window);
+  gdk_draw_pixmap(gPIX[PIXid],gc,gPIX[PIXbase], 
+		0,0,0,0,
+		pix_w,pix_h);
+  
+  if (PIXid >= LAST_PIX*2) {
+	PIXbase = PIXid - (LAST_PIX*2);
+	gdk_gc_set_clip_mask(gc,gPIM[PIM_EXEFLAG]);
+	gdk_gc_set_clip_origin(gc,0,0);
+	gdk_draw_pixmap(gPIX[PIXid],gc, gPIX[PIX_EXEFLAG],
+        	0,0,0,0,
+		pix_w,pix_h);
+        gdk_gc_set_clip_mask(gc,NULL);
+  } 
+  if ((PIXid < LAST_PIX*2)||(PIXid >= LAST_PIX*3)) {
+	PIXbase = PIXid - LAST_PIX;  
+ 	gdk_gc_set_clip_mask(gc,gPIM[PIM_LINKFLAG]);
+	gdk_gc_set_clip_origin(gc,0,0);
+	gdk_draw_pixmap(gPIX[PIXid],gc, gPIX[PIX_LINKFLAG],
+        	0,0,0,0,
+		pix_w,pix_h);
+        gdk_gc_set_clip_mask(gc,NULL);
+  }
+  gdk_gc_destroy (gc);
+  return; 
+}
+
+#if 0
+static void create_higher_bitmap(int PIMid){
+	/* This should work, but it doesn't */
+  GdkGC *gc; 
+  int PIMbase;
+  if (PIMid >= LAST_PIM*3) {
+	  PIMbase = PIMid - (LAST_PIM*3);
+  } else if (PIMid >= LAST_PIM*2) {
+	  PIMbase = PIMid - (LAST_PIM*2);
+  } else if (PIMid >= LAST_PIM) {
+	  PIMbase = PIMid - LAST_PIM;
+  }
+  else {fprintf(stderr,"xftree: error PIXid=%d (max=%d)\n",PIMid,LAST_PIM*4);return;}
+  if ((!gPIM[PIMbase])||(!hack)) {fprintf(stderr,"xftree: error 3345\n");return;}
+  /*{fprintf(stderr,"dbg: PIMid=%d (max=%d)\n",PIMid,LAST_PIM*4);}*/
+  
+  
+  gPIM[PIMid]=gdk_pixmap_new (hack->window,pix_w,pix_h,1);
+   if (!gPIM[PIMbase]){fprintf(stderr,"xftree: error 3348\n");return;}
+  gc = gdk_gc_new (hack->window);
+  gdk_draw_pixmap((GdkPixmap *)gPIM[PIMid],gc,(GdkPixmap *)gPIM[PIMbase],0,0,0,0,pix_w,pix_h);
+  if (PIMid >= LAST_PIM*2) {
+	PIMbase = PIMid - (LAST_PIM*2);
+	gdk_gc_set_clip_mask(gc,gPIM[PIM_EXEFLAG]);
+	gdk_gc_set_clip_origin(gc,0,0);
+	gdk_draw_pixmap(gPIM[PIMid],gc, gPIM[PIM_EXEFLAG],
+        	0,0,0,0,
+		pix_w,pix_h);
+        gdk_gc_set_clip_mask(gc,NULL);	
+  } 
+  if ((PIMid < LAST_PIM*2)||(PIMid >= LAST_PIM*3)) {
+	PIMbase = PIMid - LAST_PIM;  
+ 	gdk_gc_set_clip_mask(gc,gPIM[PIM_LINKFLAG]);
+	gdk_gc_set_clip_origin(gc,0,0);
+	gdk_draw_pixmap(gPIM[PIMid],gc, gPIM[PIM_LINKFLAG],
+        	0,0,0,0,
+		pix_w,pix_h);
+        gdk_gc_set_clip_mask(gc,NULL);
+ 
+  }
+  gdk_gc_destroy (gc);
+  return; 
+}
+#endif
+
+
+
+gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
+  char *loc,*loc2;
+  gboolean isleaf=TRUE;
+  int i,PIXid[4];
+  
+  /*defaults :*/
+  PIXid[0]=PIXid[2]=PIX_PAGE;
+  PIXid[1]=PIXid[3]=PIM_PAGE;
+
+  /* directories: no icon flag applied */
   if (type & FT_DIR){
-      if (type & FT_TARCHILD) {
+     PIXid[1]=PIM_DIR_CLOSE;
+     PIXid[3]=PIM_DIR_OPEN;
+     isleaf=FALSE;   
+     if (type & FT_TARCHILD) {
 	if ((type & FT_GZ)||(type & FT_COMPRESS )||(type & FT_BZ2)){
-	        pix->pixmap=gPIX[PIX_TAR_TABLE_R];
-	        pix->pixmask=gPIM[PIM_DIR_CLOSE];
-	        pix->open=gPIX[PIX_TAR_EXP_R];
-	        pix->openmask=gPIM[PIM_DIR_OPEN];
-	} else {
-	        pix->pixmap=gPIX[PIX_TAR_TABLE];
-	        pix->pixmask=gPIM[PIM_DIR_CLOSE];
-	        pix->open=gPIX[PIX_TAR_EXP];
-	        pix->openmask=gPIM[PIM_DIR_OPEN];
+	        PIXid[0]=PIX_TAR_TABLE_R;
+	        PIXid[2]=PIX_TAR_EXP_R;
+	} else { /* noncompressed tar subdirectories */
+	        PIXid[0]=PIX_TAR_TABLE;
+	        PIXid[2]=PIX_TAR_EXP;
 	}	
       } else {
-        if (type & FT_LINK) {
-		pix->pixmap=gPIX[PIX_DIR_CLOSE_LNK];
-	 	pix->open=gPIX[PIX_DIR_OPEN_LNK]; 
-        } else {
-	 	pix->pixmap=gPIX[PIX_DIR_CLOSE];
-	        pix->open=gPIX[PIX_DIR_OPEN];
-       }
-       pix->openmask=gPIM[PIM_DIR_OPEN];
-       pix->pixmask=gPIM[PIM_DIR_CLOSE];
+ 	PIXid[0]=PIX_DIR_CLOSE;
+        PIXid[2]=PIX_DIR_OPEN;
+        PIXid[1]=PIM_DIR_CLOSE;
+        PIXid[3]=PIM_DIR_OPEN;
       }
-      return FALSE; /* not leaf */  
+      goto icon_identified;
+  } else if (type & FT_DIR_UP){
+      PIXid[0]=PIX_DIR_UP;
+      PIXid[1]=PIM_DIR_CLOSE;
+      goto icon_identified;
+  } else if (type & FT_DIR_PD) {
+      isleaf=FALSE;
+      PIXid[0]=PIX_DIR_PD;
+      PIXid[1]=PIM_DIR_CLOSE;
+      PIXid[2]=PIX_DIR_OPEN;
+      PIXid[3]=PIM_DIR_OPEN;
+      goto icon_identified;
   }
-  if (type & FT_LINK){
-	 pix->pixmap=gPIX[PIX_LINKFLAG];
-         pix->pixmask=gPIM[PIM_LINKFLAG];    
-  }
-  if (type & FT_EXE) {
-    if (type & FT_LINK) pix->pixmap=gPIX[PIX_EXE_LINK]; 
-    else pix->pixmap=gPIX[PIX_EXE];
-    if ( (loc=strrchr(label,'.')) != NULL ){
-    	if (script_type(loc)) pix->pixmap=gPIX[PIX_EXE_SCRIPT];
-    }
-    pix->pixmask=gPIM[PIM_EXE];    
-  }
-  else if (type & FT_FILE)/* letter modified here */
-  {
-    pix->pixmask=gPIM[PIM_PAGE];
-    if (type & FT_LINK) {
-	    pix->pixmap=gPIX[PIX_PAGE_LNK]; 
-    }
-    else {
-      pix->pixmap=gPIX[PIX_PAGE]; /* default */
-      if (strcmp(label,"core")==0) pix->pixmap=gPIX[PIX_CORE];
-      else if (mail_type(label))	pix->pixmap=gPIX[PIX_MAIL];	      
-      else if ( (loc=strrchr(label,'-')) != NULL ){
-         if (dup_type(loc)) pix->pixmap=gPIX[PIX_DUP];	      
-      }
-      if ( (loc=strrchr(label,'.')) != NULL ){
-	      if (strlen(loc)==2) switch (loc[1]){
-		      case 'c': pix->pixmap=gPIX[PIX_PAGE_C]; break;
-		      case 'h': pix->pixmap=gPIX[PIX_PAGE_H]; break;
-		      case 'f': pix->pixmap=gPIX[PIX_PAGE_F]; break;
-		      case 'o': pix->pixmap=gPIX[PIX_PAGE_O]; break;
-		      default: break;				      
-	      }
-	      else if (bak_type(loc)) 		pix->pixmap=gPIX[PIX_BAK];	      
-	      else if (image_type(loc)) 	pix->pixmap=gPIX[PIX_IMAGE];
-	      else if (text_type(loc))  	pix->pixmap=gPIX[PIX_TEXT];
-	      else if (ps_type(loc))  		pix->pixmap=gPIX[PIX_PS];
-	      else if (adobe_type(loc))  	pix->pixmap=gPIX[PIX_ADOBE];
-	      else if (packed_type(loc)){
-	      	      pix->pixmap=gPIX[PIX_PACKAGE];
-	              pix->pixmask=gPIM[PIM_PACKAGE];
-	      }
-	      else if (compressed_type(loc)) {
-	      	     pix->pixmap=gPIX[PIX_COMPRESSED];
-  		     pix->open=gPIX[PIX_COMPRESSED];
-		     pix->openmask=gPIM[PIM_PAGE];
-	      }
-	      else if (www_type(loc)) {
-		           pix->pixmap=gPIX[PIX_PAGE_HTML];
-	                   pix->pixmask=gPIM[PIM_PAGE_HTML];
-	      }
- 	      else if (audio_type(loc)) {
-		           pix->pixmap=gPIX[PIX_PAGE_AUDIO];
-	      }
-   	      else if (strcmp(loc,".po")==0) pix->pixmap=gPIX[PIX_PO];
-   	      else if (strcmp(loc,".tar")==0){
-		     pix->pixmap=gPIX[PIX_TAR];
-  		     pix->open=gPIX[PIX_TAR];
-		     pix->openmask=gPIM[PIM_PAGE];
-	      }
-      }
-    }  
-  }
-  else if (type & FT_DIR_UP) {pix->pixmap=gPIX[PIX_DIR_UP],pix->pixmask=gPIM[PIM_DIR_CLOSE];}
-  else if (type & FT_DIR_PD) {
-	  isleaf=FALSE;
-	  pix->pixmap=gPIX[PIX_DIR_PD],pix->pixmask=gPIM[PIM_DIR_CLOSE];
-	  pix->open=gPIX[PIX_DIR_OPEN],pix->openmask=gPIM[PIM_DIR_OPEN];
-  }
-  else if (type & FT_CHAR_DEV){pix->pixmap=gPIX[PIX_CHAR_DEV],pix->pixmask=gPIM[PIM_CHAR_DEV];}
-  else if (type & FT_BLOCK_DEV){pix->pixmap=gPIX[PIX_BLOCK_DEV],pix->pixmask=gPIM[PIM_BLOCK_DEV];}
-  else if (type & FT_FIFO){pix->pixmap=gPIX[PIX_FIFO],pix->pixmask=gPIM[PIM_FIFO];}
-  else if (type & FT_SOCKET){pix->pixmap=gPIX[PIX_SOCKET],pix->pixmask=gPIM[PIM_SOCKET];}
-  else if (type & FT_STALE_LINK){pix->pixmap=gPIX[PIX_STALE_LNK],pix->pixmask=gPIM[PIM_STALE_LNK];}
 
+  /* whatever it is, it's not a directory */
+
+  /* special files : */
+  if (type & FT_CHAR_DEV){ PIXid[0]=PIX_CHAR_DEV,PIXid[1]=PIM_CHAR_DEV; }
+  else if (type & FT_BLOCK_DEV){PIXid[0]=PIX_BLOCK_DEV,PIXid[1]=PIM_BLOCK_DEV;}
+  else if (type & FT_FIFO){PIXid[0]=PIX_FIFO,PIXid[1]=PIM_FIFO;}
+  else if (type & FT_SOCKET){PIXid[0]=PIX_SOCKET,PIXid[1]=PIM_SOCKET;}
+  else if (type & FT_STALE_LINK){PIXid[0]=PIX_STALE_LNK,PIXid[1]=PIM_PAGE;}
+  if (type & (FT_BLOCK_DEV|FT_CHAR_DEV|FT_FIFO|FT_SOCKET|FT_STALE_LINK))
+	  goto icon_identified;
+
+  /* assignment by filetype */
+  /* case one: whole file label */
+
+   if (strcmp(label,"core")==0) {
+       PIXid[0]=PIX_CORE;
+       goto icon_identified;       
+   }
+   
+  /* case two: act on extension */
+   if ( (loc=strrchr(label,'.')) == NULL ) goto icon_identified;
+   if (mail_type(label)) PIXid[0]=PIX_MAIL;	      
+   else if (((loc2=strrchr(label,'-')) != NULL )&& dup_type(loc2)) PIXid[0]=PIX_DUP;
+   else if (bak_type(loc)) PIXid[0]=PIX_BAK;
+   else if (image_type(loc)) PIXid[0]=PIX_IMAGE;
+   else if (text_type(loc))PIXid[0]= PIX_TEXT;
+   else if (ps_type(loc))PIXid[0]=PIX_PS;
+   else if (adobe_type(loc))PIXid[0]=PIX_ADOBE;
+   else if (packed_type(loc)){PIXid[0]=PIX_PACKAGE,PIXid[1]=PIM_PACKAGE;}
+   else if (compressed_type(loc)) {PIXid[0]=PIX_COMPRESSED,PIXid[2]=PIX_COMPRESSED,PIXid[3]=PIM_PAGE;}
+   else if (www_type(loc)) {PIXid[0]=PIX_PAGE_HTML,PIXid[1]=PIM_PAGE_HTML;}
+   else if (audio_type(loc))PIXid[0]= PIX_PAGE_AUDIO;
+   else if (strcmp(loc,".po")==0) PIXid[0]=PIX_PO;
+   else if (strcmp(loc,".tar")==0){PIXid[0]=PIX_TAR;PIXid[2]=PIX_TAR;PIXid[3]=PIM_PAGE;}
+   else if (strlen(loc)==2) switch (loc[1]){
+      case 'c': PIXid[0]=PIX_PAGE_C; break;
+      case 'h': PIXid[0]=PIX_PAGE_H; break;
+      case 'f': PIXid[0]=PIX_PAGE_F; break;
+      case 'o': PIXid[0]=PIX_PAGE_O; break;
+      default: break;				      
+   }
+
+icon_identified:
+   {
+     int offsetB=0,offsetP=0; 
+     if ((type & FT_LINK)&&(type & FT_DIR)){
+	   offsetP=LAST_PIX,offsetB=LAST_PIM;  
+     } else if ((type & FT_LINK)&&(type & FT_EXE)) {offsetP=3*LAST_PIX,offsetB=3*LAST_PIM;}
+     else if (type & FT_LINK){offsetP=LAST_PIX,offsetB=LAST_PIM;}
+     else if (type & FT_EXE) {offsetP=2*LAST_PIX,offsetB=2*LAST_PIM;}
+     PIXid[0] += offsetP;
+     PIXid[2] += offsetP;
+     /*PIXid[1] += offsetB;*/
+     /*PIXid[3] += offsetB;*/
+   }
+  
+icon_done:
+  /* if the requested icon pixmap does not exist, 
+   * create pixmap on X server */
+  
+  if (!gPIX[PIXid[0]]) {
+          /*fprintf(stderr,"dbg: icondone PIXid=%d\n",PIXid[0]);*/
+	  create_higher_pixmap(PIXid[0]);
+	  /*create_higher_bitmap(PIXid[1]);*/
+  }
+  if (!gPIX[PIXid[2]]) {
+          /*fprintf(stderr,"dbg: icondone PIXid=%d\n",PIXid[2]);*/
+	  create_higher_pixmap(PIXid[2]);
+	  /*create_higher_bitmap(PIXid[3]);*/
+  }
+  
+  pix->pixmap=gPIX[PIXid[0]];
+  pix->pixmask=gPIM[PIXid[1]];
+  pix->open=gPIX[PIXid[2]]; 
+  pix->openmask=gPIM[PIXid[3]];
+  
   return isleaf;
 }
 
-
+#
 static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 		GdkPixmap **pixmap, GdkBitmap **pixmask){
 #ifdef HAVE_GDK_PIXBUF
@@ -391,8 +487,8 @@ static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 	  	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **)(xpm));
 		w=gdk_pixbuf_get_width (orig_pixbuf);
 		if (w) r=(float)h/w; if (r<1.0) r=1.0;
-		x=r*w;
-		y=r*gdk_pixbuf_get_height (orig_pixbuf);
+		pix_w=x=r*w;
+		pix_h=y=r*gdk_pixbuf_get_height (orig_pixbuf);
 
   		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf,x,y,GDK_INTERP_NEAREST);
   		gdk_pixbuf_render_pixmap_and_mask (new_pixbuf,pixmap,pixmask,
@@ -412,18 +508,38 @@ static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 
 }
 
+
+static void recreate_higher_pixmaps(void){
+  int i;
+  for (i=LAST_PIX;i<LAST_PIX*3;i++){ 
+#ifdef HAVE_GDK_PIXBUF
+	  if (gPIX[i]){
+		gdk_pixmap_unref(gPIX[i]);
+	  	create_higher_pixmap(i);
+	  }
+#endif
+  }
+  for (i=LAST_PIM;i<LAST_PIM*3;i++){ 
+#ifdef HAVE_GDK_PIXBUF
+	  if (gPIM[i]) {
+		gdk_pixmap_unref(gPIM[i]);
+	//	create_higher_bitmap(i);
+	  }
+#endif
+  }
+  return; 
+}
+
 void create_pixmaps(int h,GtkWidget *ctree){
   GtkStyle  *style;
   GdkColormap *colormap;
   GdkGC *gc; 
 
   int i;
-  static GtkWidget *hack=NULL; 
   /* hack: to be able to use icons globally, independent of xftree window.*/
-  if (!hack) {hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);}
-  
+  if (!hack) {hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);} 
 #ifndef HAVE_GDK_PIXBUF
-  else return; /* don't recreate pixmaps without gdk-pixbuf  */
+  else return; /* dont recreate without gdkpixbuf */
 #endif
   	
   for (i=0;pixmaps[i].pixmap != NULL; i++){ 
@@ -431,7 +547,6 @@ void create_pixmaps(int h,GtkWidget *ctree){
 	  if ((pixmaps[i].pixmask)&&(*(pixmaps[i].pixmask) != NULL)) gdk_bitmap_unref(*(pixmaps[i].pixmask));
 	  scale_pixmap(hack,h,ctree,pixmaps[i].xpm,pixmaps[i].pixmap,pixmaps[i].pixmask);
   }
- 
   style=gtk_widget_get_style (ctree);
   for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
 	int x,y;
@@ -451,10 +566,8 @@ void create_pixmaps(int h,GtkWidget *ctree){
         if (!gdk_color_white (colormap,&back)) fprintf(stderr,"DBG: no white\n");
 	gc = gdk_gc_new (hack->window);
 	gdk_gc_set_foreground (gc,kolor+gen_pixmaps[i].kolor);
-	gdk_gc_set_background (gc,&back);
-  	
+	gdk_gc_set_background (gc,&back); 	
 
-	
 	if (*(gen_pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(gen_pixmaps[i].pixmap));
 	scale_pixmap(hack,h,ctree,gen_pixmaps[i].xpm,gen_pixmaps[i].pixmap,gen_pixmaps[i].pixmask);
         gdk_string_extents (style->font,gen_pixmaps[i].c,
@@ -467,7 +580,6 @@ void create_pixmaps(int h,GtkWidget *ctree){
 			gdk_char_height (style->font,gen_pixmaps[i].c[0]));
 #endif	
 
-
 	/* numbers for page_xpm */
         x=h/4-lbearing+1;
         y=13*h/16-descent-1;
@@ -475,15 +587,15 @@ void create_pixmaps(int h,GtkWidget *ctree){
 				x,y,gen_pixmaps[i].c,strlen(gen_pixmaps[i].c));
 	gdk_gc_destroy (gc);
 	  
-  }
-   
+  }  
+  recreate_higher_pixmaps();
   return;
 }
 
 void init_pixmaps(void){
 	int i;
-  for (i=0;i<LAST_PIX;i++) gPIX[i]=NULL;
-  for (i=0;i<LAST_PIM;i++) gPIM[i]=NULL;
+  for (i=0;i<LAST_PIX*4;i++) gPIX[i]=NULL;
+  for (i=0;i<LAST_PIM*4;i++) gPIM[i]=NULL;
 }
 
 
