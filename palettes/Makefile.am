@@ -61,6 +61,7 @@ palettes_DATA=\
  Jazza2 \
  KDE \
  Kdetheme \
+ Kindaker \
  KStyle2 \
  KXfce \
  Liquid \

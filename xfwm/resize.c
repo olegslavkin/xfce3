@@ -94,11 +94,8 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
   if (DeferExecution (eventp, &w, &tmp_win, &context, MOVE, ButtonPress))
     return;
 
-  if (tmp_win->flags & ICONIFIED)
-    return;
-
   /* Undecorated managed windows should not be moved */
-  if (!(tmp_win->flags & BORDER))
+  if (!(tmp_win->flags & (TITLE | BORDER | ICONIFIED | FREEMOVE)))
     return;
     
   tmp_win->flags &= ~MAXIMIZED;
