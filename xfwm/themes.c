@@ -330,6 +330,7 @@ DrawIconWindow (XfwmWindow * Tmp_win, XRectangle *area)
   if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && !(Scr.Options & UseShapedIcons))
   {
     XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, BackColor);
+    ClearArea (Tmp_win->icon_pixmap_w, area);
   }
 
   if (Scr.Hilite == Tmp_win)
@@ -4146,7 +4147,6 @@ RelieveWindow_linea (XfwmWindow * t, Window win, XRectangle *area, int x, int y,
       seg[i++].y2 = h + y - 2;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
-
     }
   }
   /* corners */
