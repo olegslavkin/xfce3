@@ -2152,7 +2152,6 @@ cb_destroy (GtkWidget * top, GtkCTree * ctree)
   cfg *win;
   GtkWidget *root;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  
   root = win->top;
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
@@ -2169,7 +2168,8 @@ cb_quit (GtkWidget * top,  GtkCTree * ctree)
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
   save_defaults(NULL);
-  gtk_main_quit();	
+  gtk_widget_destroy (root);
+//  gtk_main_quit();
 }
 	
 
@@ -2414,7 +2414,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menuitem = gtk_menu_item_new_with_label (_("Quit"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_quit), (gpointer) top);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_quit), (gpointer) ctree);
   gtk_menu_set_accel_group (GTK_MENU (menu), accel);
   gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_q,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   
