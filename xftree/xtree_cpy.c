@@ -41,6 +41,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <glob.h>
 #include <X11/Xlib.h>
@@ -134,11 +135,63 @@ static int process_error(int code);
 static void cb_cancel (GtkWidget * w, void *data);
 static gboolean all_recursive=FALSE;
 
+char *src_host=NULL;
+
 /* tmo */
 #define XTIME_IT
 #ifdef TIME_IT
 time_t tiempo;
 #endif
+
+
+int rsync(GtkCTree *ctree,char *src,char *tgt){
+      char *cmd,*argv[6],*c;
+      int status;
+      pid_t pid;
+      cfg *win;
+
+      win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+      
+      if (win->preferences & USE_RSYNC) c = "rsync -av --rsh=ssh";
+      else c = "scp -pvr";
+      cmd=(char *)malloc(strlen("echo \"%%\";")
+		      +2*strlen(src_host)+2*strlen(src)+2*strlen(tgt)
+		       +2*strlen(c)+2*strlen("%% %%:%% %%")+1);
+      if (!cmd) return FALSE;
+      sprintf(cmd,"echo \"%s %s:%s %s\";%s %s:%s %s",
+		      c,src_host,src,tgt,
+		      c,src_host,src,tgt);
+      /*printf("dbg: %s\n",u->url);*/
+      /*printf("dbg: %s\n",cmd);*/
+      argv[0]=TERMINAL;
+      argv[1]="-e";
+      argv[2]="/bin/sh";
+      argv[3]="-c";
+      argv[4]=cmd;
+      argv[5]=0;
+      cursor_wait (GTK_WIDGET (ctree));
+      pid = fork ();
+      if (pid == -1) {
+        g_free(cmd);
+        cursor_reset (GTK_WIDGET (ctree));    
+	return FALSE;
+      }
+      if (pid==0) { /* child process */
+       	execvp (argv[0], argv); 
+        /*perror (argv[0]);*/
+	_exit(123);
+      }
+      g_free(cmd);
+
+      do {
+	while (gtk_events_pending()) gtk_main_iteration();
+      } while (!waitpid(pid,&status,WNOHANG));
+      cursor_reset (GTK_WIDGET (ctree));    
+      update_timer (GTK_CTREE (ctree));
+      return TRUE;
+}
+
+
 
 gboolean on_same_device(void){return same_device;}
 

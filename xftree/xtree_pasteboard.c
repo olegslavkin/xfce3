@@ -78,6 +78,7 @@
 #define CUT_BUFFER 0
 
 extern gboolean tar_extraction;
+extern char *src_host;
 
 /* get rid of any old version pasteboard hanging around */
 static void zap_old_pasteboard(){
@@ -150,10 +151,10 @@ void cb_cut(GtkWidget * widget, GtkCTree * ctree){
 
 /* this is equivalent to copying by dnd */
 void cb_paste(GtkWidget * widget, GtkCTree * ctree){
+  uri *u;
   cfg *win;
   gboolean cut;
-  /*char *src_hostname;*/
-  GList *list;
+  GList *list,*flist;
   entry *t_en;
   char *tmpfile,*b,*word,*path;
   int i,len=-1;
@@ -179,7 +180,8 @@ void cb_paste(GtkWidget * widget, GtkCTree * ctree){
 	  fprintf(stderr,"xftree: source host was not specified.\n");
 	  XFree(b); return;
   }
-  /* not used right now: src_hostname=g_strdup(word);*/
+  src_host=g_strdup(word);
+
   word = word + strlen(word) +1;
   if (word[0]=='\n') {
 	  word++;
@@ -192,25 +194,37 @@ void cb_paste(GtkWidget * widget, GtkCTree * ctree){
   	 
   /* create list to send to CreateTmpList */
   i = uri_parse_list (word, &list);
+  flist=list; /* keep initial pointer to later free the list */
+  u = list->data;
   XFree(b); /* no longer needed here */
   if (!i) return;
   /* create a tmpfile */
   path=valid_path(ctree,TRUE);
   t_en = entry_new_by_path(path);
-  tmpfile=CreateTmpList(win->top,list,t_en);
-  entry_free(t_en);
-  
-  /*fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
-
-   if (tmpfile) {
-     if (tar_extraction){
-	    DirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
-     } else {
-	  if ((cut)&&(on_same_device())) DirectTransfer((GtkWidget *)ctree,TR_MOVE,tmpfile);
-	  else IndirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
-	  unlink(tmpfile); 
-     } 
+  if (u->type == URI_SMB){
+	    extern void SMBGetFile (GtkCTree *,char *,GList *);
+	    /*fprintf(stderr,"dbg: SMB type received.\n");*/
+	    SMBGetFile ((GtkCTree *)ctree,t_en->path,list);
+  } else if (strcmp(src_host,our_host_name()) != 0) {
+     for (;list!=NULL;list=list->next){
+        u = list->data;
+        if (!rsync((GtkCTree *)ctree,u->url,t_en->path)) break;
+     }
+  } else {
+      tmpfile=CreateTmpList(win->top,list,t_en);
+      /*fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
+      if (tmpfile) {
+       if (tar_extraction) DirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
+       else {
+ 	    if ((cut)&&(on_same_device())) DirectTransfer((GtkWidget *)ctree,TR_MOVE,tmpfile);
+	    else IndirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
+       }
+       unlink(tmpfile); 
+      }
   }
+  list=uri_free_list (flist);
+
+  entry_free(t_en);
   if (cut) XStoreBuffer(GDK_DISPLAY(),"",1,CUT_BUFFER); /* store a null string */
   update_timer(ctree);
 

@@ -754,6 +754,16 @@ cb_save_geo (GtkWidget * widget, gpointer ctree)
 }
 
 void
+cb_use_rsync (GtkWidget * widget, gpointer ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= USE_RSYNC;
+  preferences = win->preferences;
+  save_defaults (NULL);
+}
+
+void
 cb_doubleC_goto (GtkWidget * widget, gpointer ctree)
 {
   cfg *win;
@@ -787,6 +797,22 @@ void cb_help_iv(GtkWidget * item, GtkWidget * ctree)
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   xf_dlg_info (win->top, _("The Xftree icon view is the ROX-filer. At the moment this has to be installed\n" 
 "separately from XFCE. A ROX-filer specific for XFCE will soon be available.")
+	    );
+}
+
+void cb_rsync(GtkWidget * item, GtkWidget * ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  xf_dlg_info (win->top, _("Xftree allows you to drag and drop to/from\n"
+			  "xftree windows running on different hosts.\n"
+			  "You may use either scp or rsync for the copying.\n"
+			  "User authentication is done by ssh.\n"
+			  "See \"man ssh\" if you desire host based\n"
+			  "instead of password based authentication.\n\n"
+			  "Xftree will also accept drops from other\n"
+			  "filemanagers running on different hosts.\n"
+			  )
 	    );
 }
 

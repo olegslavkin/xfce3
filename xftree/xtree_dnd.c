@@ -33,9 +33,15 @@
 #include <unistd.h>
 #include <string.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <X11/Xlib.h>
+#include <X11/Xproto.h>
+#include <X11/Xatom.h>
 #include "my_intl.h"
+#include "constant.h"
 #include "entry.h"
 #include "uri.h"
 #include "io.h"
@@ -48,6 +54,7 @@
 #include "xtree_cpy.h"
 #include "xfce-common.h"
 #include "xtree_mess.h"
+#include "xtree_functions.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -64,6 +71,7 @@ void cancel_drop(gboolean state)
 }
 
 extern gboolean tar_extraction;
+extern char *src_host;
 /*
  * called if drop data will be received
  * signal: drag_data_received
@@ -81,6 +89,29 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   int row, col;
   GtkCList *clist;
   char *tmpfile=NULL;
+  GdkAtom atomo;
+  
+  if (src_host) g_free(src_host);
+  atomo=gdk_atom_intern("WM_CLIENT_MACHINE",FALSE);
+  if (atomo  != GDK_NONE) {
+      unsigned char *property_data;
+      unsigned long items,remaining;
+      int actual_format;
+      Atom actual_atom;
+       if (XGetWindowProperty(GDK_DISPLAY(),((GdkWindowPrivate*) context->source_window)->xwindow,
+		      atomo,0,255,FALSE,
+		      XA_STRING,&actual_atom,
+		      &actual_format,&items,&remaining,&property_data)==Success){
+	      /*printf("dbg: property_data=%s\n",property_data);*/
+	      src_host=g_strdup(property_data);
+	      XFree(property_data);
+      } else {
+	      src_host=g_strdup(our_host_name());
+	      /*printf("dbg: failed property get\n"); */
+      } 
+    
+  } else src_host=g_strdup(our_host_name());
+		  
 #ifdef DISABLE_DND
   return;
 #endif
@@ -165,7 +196,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
       return;*/
     }
     
-    if (u->type == URI_SMB){
+    if (u->type == URI_SMB){ /* src_host may be remote or local */
 	    extern void SMBGetFile (GtkCTree *,char *,GList *);
 	    /*fprintf(stderr,"dbg: SMB type received.\n");*/
 	    SMBGetFile ((GtkCTree *)ctree,t_en->path,list);
@@ -173,6 +204,14 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
 	    break;
     } else uri_remove_file_prefix_from_list (list);
     
+    if (strcmp(src_host,our_host_name()) != 0) {
+	    /*printf("dbg: drag received from remote window (%s)\n",src_host);*/
+            for (;list!=NULL;list=list->next){
+              u = list->data;
+	      if (!rsync((GtkCTree *)ctree,u->url,t_en->path)) break;
+	    }
+	    break;
+    }
     
     /* tmpfile ==NULL means drop cancelled*/
     /* above: u = list->data;*/

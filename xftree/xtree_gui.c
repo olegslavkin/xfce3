@@ -915,6 +915,13 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", 
 		    GTK_SIGNAL_FUNC (cb_drag_copy), (gpointer) ctree);
+  
+  menuitem = gtk_check_menu_item_new_with_label (_("Use rsync instead of scp"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (USE_RSYNC & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", 
+		    GTK_SIGNAL_FUNC (cb_use_rsync), (gpointer) ctree);
 
 #if 0
   shortcut_menu (menu, _("Save geometry on exit"), (gpointer) cb_toggle_preferences, 
@@ -961,6 +968,11 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 
   menuitem = gtk_menu_item_new_with_label (_("Drag and drop"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_dnd_help), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  
+  menuitem = gtk_menu_item_new_with_label (_("Rsync and scp"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_rsync), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
@@ -1132,6 +1144,15 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
                   (guchar *)"xftree",  
 		  strlen("xftree")+1);  
   
+  atomo=gdk_atom_intern("WM_CLIENT_MACHINE",FALSE);
+  gdk_property_change (gtk_widget_get_parent_window(vbox),
+		  atomo,
+                  XA_STRING, /* GdkAtom type,*/
+                  8, /* bit per data element: gint format*/
+ 	      	  GDK_PROP_MODE_REPLACE,
+                  (guchar *)our_host_name(),  
+		  strlen(our_host_name())+1);  
+ 
   atomo=gdk_atom_intern("WM_CLIENT_LEADER",TRUE);
   if (atomo != GDK_NONE) {
 	  gdk_property_delete (gtk_widget_get_parent_window(vbox),atomo);

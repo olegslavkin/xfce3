@@ -31,6 +31,7 @@
 /* BYTE 4 */
 #define HIDE_GID		0x1000000
 #define HIDE_DD			0x2000000
+#define USE_RSYNC		0x4000000
 
 
 
@@ -114,6 +115,8 @@ void cb_custom_home(GtkWidget *widget,gpointer data);
 void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree);
 void cb_registered(GtkWidget * item, GtkWidget * ctree);
 void cb_help_iv(GtkWidget * item, GtkWidget * ctree);
+void cb_use_rsync (GtkWidget * widget, gpointer ctree);
+void cb_rsync(GtkWidget * item, GtkWidget * ctree);
 
 void cb_drag_copy (GtkWidget * widget, gpointer ctree);
 void cb_doubleC_goto (GtkWidget * widget, gpointer ctree);
