@@ -64,8 +64,8 @@ typedef struct objeto_globber
   int type;
   int user;
   int group;
-  long unsigned sizeG;
-  long unsigned sizeL;
+  long long sizeG;
+  long long sizeL;
   long unsigned month_t;
   long unsigned day_t;
   long unsigned hour_t;
@@ -143,7 +143,7 @@ glob_set_type (void *address, int type)
 }
 
 int
-glob_set_sizeG (void *address, long unsigned size)
+glob_set_sizeG (void *address, long long size)
 {
   objeto_globber *objeto;
   DO_CHECK_PARAM;
@@ -153,7 +153,7 @@ glob_set_sizeG (void *address, long unsigned size)
 }
 
 int
-glob_set_sizeL (void *address, long unsigned size)
+glob_set_sizeL (void *address, long long size)
 {
   objeto_globber *objeto;
   DO_CHECK_PARAM;

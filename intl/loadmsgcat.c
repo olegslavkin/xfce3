@@ -64,7 +64,7 @@ _nl_load_domain (domain_file)
      struct loaded_l10nfile *domain_file;
 {
   int fd;
-  size_t size;
+  off_t size;
   struct stat st;
   struct mo_file_header *data = (struct mo_file_header *) -1;
 #if (defined HAVE_MMAP && defined HAVE_MUNMAP && !defined DISALLOW_MMAP) \

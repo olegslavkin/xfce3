@@ -2089,7 +2089,7 @@ gboolean process_find_messages (gpointer client_data, gint source, GdkInputCondi
 	    data[1] = st.st_size;
 	    data[2] = st.st_ctime;
 
-	    sprintf (sizeF, "%ld", st.st_size);
+	    sprintf (sizeF, "%lld",(long long) st.st_size);
 	    sprintf (permF, "0%o", st.st_mode & 07777);
 	    textos[3] = sizeF;
 	    textos[4] = ctime (&(st.st_ctime));

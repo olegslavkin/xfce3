@@ -97,7 +97,7 @@ SMBPutForkOver (void)
       char sizeo[64];
       struct stat st;
       char *textos[SHARE_COLUMNS];
-      int i, sizei = 0;
+      off_t i, sizei = 0;
       print_status (_("Upload done."));
       for (i = 0; i < SHARE_COLUMNS; i++)
 	textos[i] = "";
@@ -106,7 +106,7 @@ SMBPutForkOver (void)
 
       if (lstat (fileUp, &st) == 0)
       {
-	sprintf (sizeo, "%ld", st.st_size);
+	sprintf (sizeo, "%lld", (long long)st.st_size);
 	textos[SHARE_SIZE_COLUMN] = sizeo;
 	sizei = st.st_size;
       }
@@ -119,8 +119,8 @@ SMBPutForkOver (void)
       textos[COMMENT_COLUMN] = _("Uploaded file.");
       node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
       {
-	int *data;
-	data = (int *) malloc (2 * sizeof (int));
+	off_t *data;
+	data = (off_t *) malloc (2 * sizeof (off_t));
 	data[0] = sizei;
 	data[1] = 0;		/* for date. No problem here with time_t, but in list.c */
 	gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
