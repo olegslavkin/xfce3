@@ -1504,7 +1504,7 @@ GtkWidget *taskbar_create_gxfce_with_taskbar (GtkWidget *parent,GtkWidget *size_
   popup_menu=gtk_menu_new();
   radio_list=NULL;
 
-  menu_item=gtk_check_menu_item_new_with_label(_("Stand alone"));
+  menu_item=gtk_check_menu_item_new_with_label(_("Stand-alone"));
   gtk_object_set_data (GTK_OBJECT (tb_panel), "tb_mcheck_standalone", menu_item);
   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(menu_item),FALSE);
   gtk_menu_append(GTK_MENU(popup_menu),menu_item);

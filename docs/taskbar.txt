@@ -26,7 +26,7 @@ other buttons are called 'task' buttons.
 'Close' button.
 This button is used to change the most important taskbar options. Right-click on
 it and pop-up menu appears. There you can:
-- 'Standalone' - switch between standalone (Windows95 like) and embedded (default) 
+- 'Stand-alone' - switch between standalone (Windows95 like) and embedded (default) 
    state
 - 'Sort order' - set sort order for 'task' buttons
 - 'System load' - on/off system load indicator on 'close' button. This feature is
@@ -82,14 +82,16 @@ Taskjar mstasz*
 Taskjar xosview*
 Please note that XFCE wildcards ('*' and '?') are allowed
 
-3) various XFCE options.
-Currently only: 
+3) various XFCE options. 
  Option WindowListSkip
 and
  Option NO_WindowListSkip
-are supported. It turns on/off respect to WINDOWLISTSKIP flag, which removes window
+They turn on/off respect to WINDOWLISTSKIP flag, which removes window
 form taskbar. Please note that this option is SET be default (so you must use
 NO_WindowListSkip if you want to have all windows on taskbar)
+
+Option HidePanel
+hides XFCE panel when taskbar is in stand-alone (win95 like) mode
 
 
 
