@@ -27,10 +27,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "icons.h"
-#include "xtree_icons.h"
-#include "xtree_cfg.h"
-#include "entry.h"
+#include "../xftree/icons.h"
+#include "../xftree/xtree_icons.h"
+#include "../xftree/ft_types.h"
 #include "xpmext.h"
 
 #ifdef HAVE_GDK_PIXBUF
@@ -84,6 +83,9 @@ enum
   PIX_STALE_LNK,
   PIX_EXE,PIX_EXE_SCRIPT,PIX_EXE_LINK,
   PIX_EXE_FILE,
+  PIX_COMP1,PIX_COMP2,
+  PIX_WG1,PIX_WG2,
+  PIX_PRINT,
   LAST_PIX
 };
 /* don't repeat masks that already exist */
@@ -106,6 +108,9 @@ enum
   PIM_CORE,
   PIM_EXE_FILE,
   PIM_STALE_LNK,
+  PIM_COMP,
+  PIM_WG,
+  PIM_PRINT,
   LAST_PIM
 };
 
@@ -149,6 +154,11 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
 	{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},
 	{gPIX+PIX_EXE_FILE,	gPIM+PIM_EXE_FILE,	exe_file_xpm},
+	{gPIX+PIX_COMP1,	gPIM+PIM_COMP,		comp1_xpm},
+	{gPIX+PIX_COMP2,	NULL,			comp2_xpm},
+	{gPIX+PIX_WG1,		gPIM+PIM_WG,		wg1_xpm},
+	{gPIX+PIX_WG2,		NULL,			wg2_xpm},
+	{gPIX+PIX_PRINT,	gPIM+PIM_PRINT,		print_xpm},
 	{NULL,NULL,NULL}
 };
 
@@ -383,6 +393,19 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
    PIXid[0]=PIXid[2]=PIX_PD;
    PIXid[1]=PIXid[3]=PIM_PD;
   }
+
+ /* smb type icons */
+  if (type&FT_SMB){
+      if (type&FT_PRINT){PIXid[0]=PIX_PRINT,PIXid[1]=PIM_PRINT;}
+      if (type&FT_COMP1){PIXid[0]=PIX_COMP1,PIXid[1]=PIM_COMP;}
+      if (type&FT_COMP2){PIXid[0]=PIX_COMP2,PIXid[1]=PIM_COMP;}
+      if (type&FT_WG1){PIXid[0]=PIX_WG1,PIXid[1]=PIM_WG;}
+      if (type&FT_WG2){PIXid[0]=PIX_WG2,PIXid[1]=PIM_WG;}
+      /*if (type&FT_HIDDEN){PIXid[0]=PIX_HIDDEN,PIXid[1]=PIM_HIDDEN;}
+      if (type&FT_READONLY){PIXid[0]=PIX_READONLY,PIXid[1]=PIM_READONLY;}*/
+      goto icon_identified;	  
+  }
+  
   /* directories: no icon flag applied */
  if (type & FT_DIR_UP){
       PIXid[0]=PIX_DIR_UP;
@@ -436,6 +459,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
 
   /* assignment by filetype */
   /* case one: whole file label */
+  if (!label) goto icon_identified;
 
    if (strcmp(label,"core")==0) {
        PIXid[0]=PIX_CORE;

@@ -50,35 +50,7 @@ typedef struct
 }
 entry;
 
-
-#define FT_DIR			(1<<0)
-#define FT_DIR_UP		(1<<1)
-#define FT_FILE			(1<<2)
-#define FT_CHAR_DEV		(1<<3)
-#define FT_BLOCK_DEV		(1<<4)
-#define FT_FIFO			(1<<5)
-#define FT_SOCKET		(1<<6)
-#define FT_EXE			(1<<7)
-#define FT_HIDDEN		(1<<8)
-#define FT_LINK			(1<<9)
-#define FT_DIR_PD		(1<<10)
-#define FT_STALE_LINK		(1<<11)
-#define FT_UNKNOWN		(1<<12)
-#define FT_DUMMY		(1<<13)
-
-#define FT_TAR			(1<<14)
-#define FT_TARCHILD		(1<<15)
-#define FT_HAS_DUMMY		(1<<16)
-#define FT_GZ			(1<<17)
-#define FT_COMPRESS		(1<<18)
-#define FT_BZ2			(1<<19)
-
-#define FT_RPM			(1<<20)
-#define FT_RPMCHILD		(1<<21)
-#define FT_DIR_RO		(1<<22)
-#define FT_PD			(1<<23)
-#define FT_ISROOT		(1<<24)
-
+#include "ft_types.h"
 
 
 #define EN_IS_TAR(en) (en->type & FT_TAR)
