@@ -1,4 +1,4 @@
-stylesheetimagesdir=$(datadir)/xfce/help/html/stylesheet-images
+stylesheetimagesdir=@XFCE_DIR@/help/html/stylesheet-images
 stylesheetimages_DATA=\
 warning.gif \
 toc-blank.gif \
