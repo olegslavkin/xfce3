@@ -67,7 +67,7 @@ SMBPutStdout (int n, void *data)
   if (n)
     return TRUE;		/* this would mean binary data */
   line = (char *) data;
-  if (strstr (line, "ERRDOS"))
+  if ((strstr (line, "ERRDOS"))||(strstr (line, "ERRSRV")))
   {				/* server has died */
     SMBResult = CHALLENGED;
   }
@@ -319,7 +319,7 @@ SMBDropFork (void)
           /*fprintf (stderr, "DBG:child->%s\n", w);fflush(NULL);*/
 	  strcat(the_command,w);	  
   }
-  fprintf (stderr, "DBG:child, the_command-> %s\n", the_command);fflush(NULL);
+  /*fprintf (stderr, "DBG:child, the_command-> %s\n", the_command);fflush(NULL);*/
   sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
 
   
@@ -338,11 +338,22 @@ void
 SMBDropFile (char *tmpfile)
 {
 
-  if (!selected.directory) return;
+  if (!selected.directory) goto abortdrop;
+  SMBabortdrop=FALSE;
   while (not_unique (fork_obj)) {
      while (gtk_events_pending()) gtk_main_iteration();
      usleep(50000);
   }
+
+  /* when password challenged, do the drop again. */
+  if (SMBabortdrop) {
+abortdrop:
+	gdk_flush();
+        cursor_reset (GTK_WIDGET (smb_nav));
+        animation (FALSE);
+        return;
+  }	
+  /*printf("dbg: going on. SMBResult=%d (challenged=%d)\n",SMBResult,CHALLENGED);*/
   
   upload_tmpfile=tmpfile;
   stopcleanup = FALSE;

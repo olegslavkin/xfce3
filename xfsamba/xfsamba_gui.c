@@ -259,9 +259,9 @@ destroy_dialog (GtkWidget * widget, gpointer data)
 #endif
     if (current_cache)
       current_cache->visited = 0;
-    /*      
-       pop_cache(thisN->shares); 
-     */
+          
+      /*pop_cache(thisN->shares); */
+     
     SMBResult = SUCCESS;
   }
   if (SMBResult == CHALLENGED)
@@ -345,6 +345,7 @@ passwd_dialog (int caso)
 
   passwd_caso = caso;
 
+  SMBabortdrop=TRUE;
   dialog = gtk_dialog_new ();
   gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
   gtk_window_set_policy (GTK_WINDOW (dialog), TRUE, TRUE, FALSE);
@@ -1225,6 +1226,7 @@ create_smb_window (void)
 	  gtk_clist_set_shadow_type (GTK_CLIST (shares), GTK_SHADOW_IN);
 	  gtk_ctree_set_line_style (GTK_CTREE (shares), GTK_CTREE_LINES_NONE);
 	  gtk_ctree_set_expander_style (GTK_CTREE (shares), GTK_CTREE_EXPANDER_TRIANGLE);
+          gtk_clist_set_selection_mode (GTK_CLIST (shares), GTK_SELECTION_EXTENDED);
 	  gtk_clist_set_reorderable (GTK_CLIST (shares), FALSE);
 	  gtk_signal_connect (GTK_OBJECT (shares), "tree-select-row", GTK_SIGNAL_FUNC (select_share), (gpointer) GTK_WIDGET (shares));
 	  gtk_signal_connect (GTK_OBJECT (shares), "click_column", GTK_SIGNAL_FUNC (on_click_column), NULL);

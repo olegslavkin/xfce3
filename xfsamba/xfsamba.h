@@ -50,6 +50,7 @@
 #define FAILED     1
 #define SUCCESS    2
 #define CHALLENGED 3
+#define EXPECTING  4
 
 /*column zero is reserved for icon, must be nonshared with text */
 
@@ -204,6 +205,7 @@ EXTERN nmb_list *thisN, *headN;
 EXTERN nmb_history *thisH, *headH;
 EXTERN void *fork_obj;
 EXTERN int SMBResult;
+EXTERN int SMBabortdrop;
 EXTERN char *default_user;
 EXTERN gboolean stopcleanup, nonstop;
 

@@ -21,7 +21,7 @@
 /* FIXME: put in dummy entry to get expanders for folders */
 /* FIXME: change messages for xf_dlg routines. */
 /* FIXME: autoordering after a list, direcotires on top. */
-/* FIXME: part 2... get drag src to send to xftree */
+/* FIXME: part 2... get drag src to send to xftree , multiple selection pues.*/
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -145,7 +145,9 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,char *target){
 			 print_status(u->url);
 		 } 
 		 else if (S_ISREG(s.st_mode)) {
-  		   fprintf(tmpfile,"put \"%s\" \"%s\\%s\";\n",u->url,selected.dirname+1,w);
+	  	   fprintf(tmpfile,"cd \"%s\";\n",selected.dirname);
+  		   /*fprintf(tmpfile,"put \"%s\" \"%s\\%s\";\n",u->url,selected.dirname+1,w);*/
+  		   fprintf(tmpfile,"put \"%s\" \"%s\";\n",u->url,w);
 		 }
 		 else if (S_ISDIR(s.st_mode)) {
 	  	   fprintf(tmpfile,"cd \"%s\";\n",selected.dirname);
@@ -206,6 +208,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     gtk_drag_finish (context, FALSE, FALSE, time);
     return;
   }
+
   clist = GTK_CLIST (ctree);
   action = context->action <= GDK_ACTION_DEFAULT ? GDK_ACTION_COPY : context->action;
   row = col = -1;
@@ -230,8 +233,10 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     {
 	char *line[3];
         gtk_ctree_node_get_text ((GtkCTree *)ctree, the_node, COMMENT_COLUMN, line);
-	if ((line[0][0]!='/')&&(strcmp(line[0],"Disk")!=0)){
+	/*printf("dbg:comment line=%s\n",line[0]);*/
+	if ((line[0][0]!='/')&&(strncmp(line[0],"Disk",strlen("Disk"))!=0)){
 		the_node=GTK_CTREE_ROW(the_node)->parent;
+	        /*printf("dbg:nondirectory found\n");*/
 		if (!the_node) return;
 	}
     }
