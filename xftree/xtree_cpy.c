@@ -600,7 +600,6 @@ static void ChildTransfer(void){
 		/*fprintf(stderr,"dbg:(%d)%s->%s\n",type,source,target);*/
 		fprintf(stdout,"child:tgt-src:%s:%s\n",target,source);
 		fprintf(stdout,"child:item:%d\n",child_path_number++);
-		child_file_number=0;
 		if (!SubChildTransfer(target,source)) break;
 	}
 	fclose(tfile);
@@ -719,6 +718,7 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	}		
 	strncpy(child_file,tmpfile,CHILD_FILE_LENGTH);
 	child_file[CHILD_FILE_LENGTH-1]=(char)0;
+	child_file_number=0;
 	child_mode = mode;
  	/* count total files to transfer */
 	count_window(win->top);
