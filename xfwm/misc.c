@@ -262,47 +262,43 @@ free_window_names (XfwmWindow * tmp, Bool nukename, Bool nukeicon)
 }
 
 void
-RevertFocus (XfwmWindow * Tmp_win)
+RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 {
-  XfwmWindow * t;
-  XfwmWindow *MouseWin;
+  XfwmWindow *Win;
   Window mw;
 
   if ((!Tmp_win) || (Scr.Focus != Tmp_win))
     return;
   
   XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
+  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & Win) == XCNOENT)
   {
-    MouseWin = NULL;
+    Win = NULL;
   }
-  if ((MouseWin) && AcceptInput (MouseWin))
+  if ((Win) && AcceptInput (Win))
   {
-    SetFocus (MouseWin->w, MouseWin, False, False);
+    SetFocus (Win->w, Win, False, False);
     return;
   }
 
-  t = Tmp_win->next;
-  while (t && (!AcceptInput(t) || (t->flags & ICONIFIED) || (Tmp_win->Desk != t->Desk)))
+  Win = Tmp_win->next;
+  while (Win && !(AcceptInput(Win) && !(Win->flags & ICONIFIED) && (Tmp_win->Desk == Win->Desk)))
   {
-    t = t->next;
+    Win = Win->next;
   }
-  if (t)
+ 
+  if (Win)
   {
-    SetFocus (t->w, t, True, False);
+    SetFocus (Win->w, Win, True, False);
     return;
   }
 
-  t = Tmp_win->prev;
-  while ((t) && (t != &Scr.XfwmRoot) && (!AcceptInput(t) || (t->flags & ICONIFIED) || (Tmp_win->Desk != t->Desk)))
+  if ((fallback_to_itself) && AcceptInput(Tmp_win))
   {
-    t = t->prev;
-  }
-  if ((t) && (t != &Scr.XfwmRoot))
-  {
-    SetFocus (t->w, t, True, False);
+    SetFocus (Tmp_win->w, Tmp_win, True, False);
     return;
   }
+
   SetFocus (Scr.NoFocusWin, NULL, False, False);
 }
 /***************************************************************************
@@ -360,7 +356,7 @@ Destroy (XfwmWindow * Tmp_win)
 
   if (Scr.Focus == Tmp_win)
   {
-    RevertFocus (Tmp_win);
+    RevertFocus (Tmp_win, False);
   }
 
   XDeleteContext (dpy, Tmp_win->frame, XfwmContext);
