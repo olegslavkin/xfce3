@@ -142,8 +142,6 @@ entry *entry_new_by_path_and_label (char *path, char *label)
 	      entry_free ( en);
 	      return (NULL);
 	    }
-            /*set_time(&(en->date),&(en->st));
-            entry_type_update (en);*/
 	    break;
     case URI_HTTP:
     case URI_FTP:
@@ -206,7 +204,7 @@ entry *entry_new_by_type (char *path, int type)
   en->type = type;
   return (en);
 }
-
+#if 0
 static int entry_type_update (entry * en){
   /* check for stale links */
   en->type = 0;
@@ -243,6 +241,7 @@ static int entry_type_update (entry * en){
   if (io_is_dirup (en->label)) en->type = FT_DIR_UP | FT_DIR;
   return (0);
 }
+#endif
 
 /* update struct stat..
  * return -1 on failure (path has dissappeared)
@@ -265,10 +264,6 @@ int entry_update (entry * en)
   /*if (en->type & (FT_CHAR_DEV|FT_BLOCK_DEV)) return (0);*/
   /*printf("dbg:%s 0x%x ? 0x%x\n",en->label,en->type,FT_CHAR_DEV|FT_BLOCK_DEV);*/
 
-  if (lstat (en->path, &s) == -1) {
-	  return (-1); /* its gone */
-  }
-  
   
   if (S_ISLNK (s.st_mode)){
      struct stat ss;
@@ -279,11 +274,35 @@ int entry_update (entry * en)
 	dup_stat(&(en->st),&s);
 	return (1); 
      }
-     if (S_ISDIR (en->st.st_mode)) {
+     if (S_ISDIR (ss.st_mode)) {
 	     tipo |= FT_DIR;
              dup_stat(&s,&ss);
      } 
+     if ((ss.st_mode & S_IXUSR) || (ss.st_mode & S_IXGRP) || (ss.st_mode & S_IXOTH))
+             tipo |= FT_EXE;
+     
+     if (S_ISREG (ss.st_mode)) tipo |= FT_FILE;
+     else if (S_ISCHR (ss.st_mode)) tipo |= FT_CHAR_DEV;
+     else if (S_ISBLK (ss.st_mode)) tipo |= FT_BLOCK_DEV;
+     else if (S_ISFIFO (ss.st_mode)) tipo |= FT_FIFO;
+     else if (S_ISSOCK (ss.st_mode)) tipo |= FT_SOCKET;
+     
+  } else {
+     if (S_ISDIR (s.st_mode)) tipo |= FT_DIR;
+     if (S_ISREG (s.st_mode)){
+        tipo |= FT_FILE;
+        if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
+             tipo |= FT_EXE;
+     }
+     else if (S_ISCHR (s.st_mode)) tipo |= FT_CHAR_DEV;
+     else if (S_ISBLK (s.st_mode)) tipo |= FT_BLOCK_DEV;
+     else if (S_ISFIFO (s.st_mode)) tipo |= FT_FIFO;
+     else if (S_ISSOCK (s.st_mode)) tipo |= FT_SOCKET;
+     else tipo |= FT_UNKNOWN;
   }
+  if (io_is_dirup (en->label))tipo = FT_DIR_UP | FT_DIR;
+  
+  
   /*if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);*/
   
   if (en->st.st_size<0) rc = 1;
@@ -300,13 +319,9 @@ int entry_update (entry * en)
 #endif
   
   if (rc) {
-    int rct;
     dup_stat(&(en->st),&s);
     set_time(&(en->date),&s);
-    /*rct=entry_type_update (en);*/
-    rct=entry_type_update (en); 
-    if (tipo) en->type |= tipo;
-    if (rct) return rct;
+    en->type = tipo;
   } else {  /* just check for stale links */
     if (S_ISLNK (s.st_mode)) { 
       if (stat (en->path, &s) == -1) {
