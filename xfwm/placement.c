@@ -79,7 +79,7 @@ GetGravityOffsets (XfwmWindow * tmp_win)
       tmp_win->grav_align_y = 0;
       break;
     case NorthGravity:
-      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
       tmp_win->gravy = tmp_win->bw - tmp_win->old_bw;
       tmp_win->grav_align_y = 0;
       break;
@@ -90,12 +90,12 @@ GetGravityOffsets (XfwmWindow * tmp_win)
       break;
     case WestGravity:
       tmp_win->gravx = tmp_win->bw - tmp_win->old_bw;
-      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravy = (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
       tmp_win->grav_align_y = -1;
       break;
     case EastGravity:
       tmp_win->gravx = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
-      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravy = (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
       tmp_win->grav_align_y = -1;
       break;
     case SouthWestGravity:
@@ -104,7 +104,7 @@ GetGravityOffsets (XfwmWindow * tmp_win)
       tmp_win->grav_align_y = -1;
       break;
     case SouthGravity:
-      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
       tmp_win->gravy = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
       tmp_win->grav_align_y = -1;
       break;
@@ -114,11 +114,16 @@ GetGravityOffsets (XfwmWindow * tmp_win)
       tmp_win->grav_align_y = -1;
       break;
     case ForgetGravity:
+      break;
     case CenterGravity:
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
+      tmp_win->gravy = + (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
+      tmp_win->grav_align_y = -1;
+      break;
     case StaticGravity:
     default:
-      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw);
-      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
+      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
       tmp_win->grav_align_y = -1;
       break;
   }
