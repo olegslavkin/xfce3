@@ -149,6 +149,14 @@ AddWindow (Window w)
     return NULL;
   }
 
+  MyXGrabServer(dpy);
+  if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
+  {
+    free (tmp_win);
+    MyXUngrabServer(dpy);
+    return NULL;
+  }
+
   tmp_win->old_bw = tmp_win->attr.border_width;
   XSetWindowBorderWidth (dpy, w, 0);
 
@@ -328,14 +336,6 @@ AddWindow (Window w)
   }
   tmp_win->BackPixel = GetDecor (tmp_win, LoColors.back);
   attributes.background_pixel = tmp_win->BackPixel;
-
-  MyXGrabServer(dpy);
-  if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
-  {
-    free (tmp_win);
-    MyXUngrabServer(dpy);
-    return NULL;
-  }
 
   /* create windows */
 
