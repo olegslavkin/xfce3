@@ -831,7 +831,7 @@ SetRCDefaults ()
     "InactiveColor black #C7C1BD",
     "TitleStyle Active Solid #4D7399",
     "TitleStyle Inactive Solid #9EA2AA",
-    "MenuColor black #C7C1BD white #4D7399",
+    "MenuColor black #C7C1BD black #9EA2AA",
     "CursorColor #FFFFFF black",
     "FocusMode Click",
     "AnimateWin Off",
@@ -1014,9 +1014,9 @@ SetRCDefaults ()
     "Key L5 IW S Lower",
     "Key L5 IW C Raise",
     "Key L7 IW A Iconify",
-    "WindowFont " DEFAULTFONT,
-    "MenuFont " DEFAULTFONT,
-    "IconFont " DEFAULTFONT,
+    "WindowFont " XFWM_TITLEFONT,
+    "MenuFont " XFWM_MENUFONT,
+    "IconFont " XFWM_ICONFONT,
     NULL
   };
   int i = 0;

@@ -14,6 +14,7 @@ exec_prefix = @exec_prefix@
 bindir = @bindir@
 gdm_prefix = @GDM_PREFIX@
 switchdesk_prefix = "/usr/share/apps/switchdesk"
+wmsession_prefix = "/etc/X11/wmsession.d"
 subdir = gdm
 
 ACLOCAL = @ACLOCAL@
@@ -30,7 +31,7 @@ MKINSTALLDIRS = $(top_srcdir)/@MKINSTALLDIRS@
 
 DEFS = @DEFS@
 
-DISTFILES = Makefile.in XFce.in Xclients.xfce.in
+DISTFILES = Makefile.in XFce.in Xclients.xfce.in 10XFce.in
 
 .SUFFIXES:
 
@@ -39,6 +40,8 @@ all: XFCE
 XFCE:
 	@sed -e "s%BIN_DIR%$(bindir)%g" \
 	$(srcdir)/XFce.in > $(srcdir)/XFce
+	@sed -e "s%BIN_DIR%$(bindir)%g" \
+	$(srcdir)/10XFce.in > $(srcdir)/10XFce
 	@sed -e "s%BIN_DIR%$(bindir)%g" \
 	$(srcdir)/Xclients.xfce.in > $(srcdir)/Xclients.xfce
 
@@ -50,22 +53,23 @@ install-data-no: all
 install-data-yes: all
 	if test -r "$(MKINSTALLDIRS)"; then \
 	  $(MKINSTALLDIRS) $(DESTDIR)$(gdm_prefix); \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(switchdesk_prefix); \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(wmsession_prefix); \
 	else \
 	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(gdm_prefix); \
+	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(switchdesk_prefix); \
+	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(wmsession_prefix); \
 	fi
 	$(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
-	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(MKINSTALLDIRS) $(DESTDIR)$(switchdesk_prefix); \
-	else \
-	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(switchdesk_prefix); \
-	fi
-	$(INSTALL_SCRIPT) $(srcdir)/Xclients.xfce $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce; \
+	$(INSTALL_SCRIPT) $(srcdir)/Xclients.xfce $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce;
+	$(INSTALL_SCRIPT) $(srcdir)/10XFce $(DESTDIR)$(wmsession_prefix)/10XFce; \
 
 installcheck:
 
 uninstall:
 	rm -f $(DESTDIR)$(gdm_prefix)/XFce
 	rm -f $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce
+	rm -f $(DESTDIR)$(wmsession_prefix)/10XFce
 
 check: all
 
@@ -80,6 +84,7 @@ clean: mostlyclean
 distclean: clean
 	rm -f Makefile
 	rm -f XFce
+	rm -f 10XFce
 	rm -f Xclients.xfce
 
 maintainer-clean: distclean

@@ -67,7 +67,7 @@
 #endif
 
 #ifndef DEFAULTFONT
-#define DEFAULTFONT 	"-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1"
+#define DEFAULTFONT 	"-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-15"
 #endif
 
 #ifndef XFCEDEFAULTFONT
@@ -119,15 +119,15 @@
 #endif
 
 #ifndef XFWM_TITLEFONT
-#define XFWM_TITLEFONT 	"-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*"
+#define XFWM_TITLEFONT 	DEFAULTFONT
 #endif
 
 #ifndef XFWM_MENUFONT
-#define XFWM_MENUFONT 	"-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*"
+#define XFWM_MENUFONT 	DEFAULTFONT
 #endif
 
 #ifndef XFWM_ICONFONT
-#define XFWM_ICONFONT 	"-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*"
+#define XFWM_ICONFONT 	DEFAULTFONT
 #endif
 
 
