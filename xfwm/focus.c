@@ -69,7 +69,7 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse, Bool force)
   fprintf (stderr, "xfwm : Entering SetFocus ()\n");
 #endif
   /* if there are hints, only set focus if inputhint isn't False */
-  if ((Fw) && (Fw->wmhints) && (Fw->wmhints->flags & InputHint) && !(Fw->wmhints->input))
+  if ((Fw) && !AcceptInput(Fw))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : SetFocus canceled because input hint is false\n");
