@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-21 21:51+0100\n"
+"POT-Creation-Date: 2001-11-23 23:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -647,7 +647,7 @@ msgid "Setup..."
 msgstr ""
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2647
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2576
 #: xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr ""
@@ -774,7 +774,7 @@ msgid "%d bytes"
 msgstr ""
 
 #: xftree/gtk_cpy.c:173 xftree/gtk_cpy.c:178 xftree/gtk_cpy.c:355
-#: xftree/gtk_cpy.c:359 xftree/xtree_gui.c:1255 xftree/xtree_gui.c:1262
+#: xftree/gtk_cpy.c:359
 msgid "Can't stat() file"
 msgstr ""
 
@@ -927,12 +927,12 @@ msgstr ""
 msgid "Open with ..."
 msgstr ""
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:145 xftree/xtree_gui.c:2699
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:145 xftree/xtree_gui.c:2628
 #: xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr ""
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:187 xftree/xtree_gui.c:2613
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:187 xftree/xtree_gui.c:2542
 msgid "Open in terminal"
 msgstr ""
 
@@ -964,7 +964,7 @@ msgstr ""
 msgid "%d bytes received (%d bps)"
 msgstr ""
 
-#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2572
+#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2501
 msgid "Properties"
 msgstr ""
 
@@ -1077,53 +1077,45 @@ msgstr ""
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:182
+#: xftree/xtree_gui.c:195
 #, c-format
-msgid "malloc error in %s at line %d\n"
+msgid "dbg:malloc error in %s at line %d\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:335
+#: xftree/xtree_gui.c:348
 msgid "menu_detach()\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:967
+#: xftree/xtree_gui.c:891
+msgid "error deleting file"
+msgstr ""
+
+#: xftree/xtree_gui.c:989
 msgid "Can't copy device, fifo and socket files as regular files!\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:1059
-msgid "Moving file..\n"
-msgstr ""
-
-#: xftree/xtree_gui.c:1095
+#: xftree/xtree_gui.c:1117
 msgid "move_dir() recursive failed\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:1103
+#: xftree/xtree_gui.c:1125
 msgid "move_dir() move_file() failed\n"
 msgstr ""
 
 #. nothing to delete
-#: xftree/xtree_gui.c:1213 xftree/xtree_gui.c:2152
+#: xftree/xtree_gui.c:1235 xftree/xtree_gui.c:2150
 msgid "No files marked !"
 msgstr ""
 
-#: xftree/xtree_gui.c:1233 xftree/xtree_gui.c:1235
+#: xftree/xtree_gui.c:1259 xftree/xtree_gui.c:1261
 msgid "Delete item ?"
 msgstr ""
 
-#: xftree/xtree_gui.c:1271
-msgid "move_file()"
-msgstr ""
-
-#: xftree/xtree_gui.c:1273
-msgid "Move to trash failed"
-msgstr ""
-
-#: xftree/xtree_gui.c:1288 xftree/xtree_gui.c:1290
+#: xftree/xtree_gui.c:1296 xftree/xtree_gui.c:1298
 msgid "Can't move file to trash, hard delete ?"
 msgstr ""
 
-#: xftree/xtree_gui.c:1342
+#: xftree/xtree_gui.c:1340
 msgid ""
 "This is XFTree, based on 'XTree' \n"
 "(c) by Rasca\n"
@@ -1131,148 +1123,134 @@ msgid ""
 "http://home.pages.de/~rasca/xap/"
 msgstr ""
 
-#: xftree/xtree_gui.c:1387
+#: xftree/xtree_gui.c:1385
 msgid "Can't find row data\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:1494
+#: xftree/xtree_gui.c:1492
 msgid "Go to"
 msgstr ""
 
-#: xftree/xtree_gui.c:1908
+#: xftree/xtree_gui.c:1906
 msgid "New_Folder"
 msgstr ""
 
 #. if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
-#: xftree/xtree_gui.c:1959 xftree/xtree_gui.c:2096
+#: xftree/xtree_gui.c:1957 xftree/xtree_gui.c:2094
 msgid "File exists !"
 msgstr ""
 
-#: xftree/xtree_gui.c:1968
+#: xftree/xtree_gui.c:1966
 msgid "Can't create : "
 msgstr ""
 
-#: xftree/xtree_gui.c:2067
+#: xftree/xtree_gui.c:2065
 msgid "No item marked !"
 msgstr ""
 
-#: xftree/xtree_gui.c:2078
+#: xftree/xtree_gui.c:2076
 msgid "Rename to : "
 msgstr ""
 
-#: xftree/xtree_gui.c:2083
+#: xftree/xtree_gui.c:2081
 msgid "Character not allowed in filename"
 msgstr ""
 
-#: xftree/xtree_gui.c:2322
-msgid "Can't find suffix in filename, using complete filename"
-msgstr ""
-
-#: xftree/xtree_gui.c:2328
-#, c-format
-msgid "Register program for file \"%s\""
-msgstr ""
-
-#: xftree/xtree_gui.c:2332
-#, c-format
-msgid "Register program for suffix \"%s\""
-msgstr ""
-
-#: xftree/xtree_gui.c:2554 xftree/xtree_gui.c:2608
+#: xftree/xtree_gui.c:2483 xftree/xtree_gui.c:2537
 msgid "New window"
 msgstr ""
 
-#: xftree/xtree_gui.c:2556 xftree/xtree_gui.c:2642
+#: xftree/xtree_gui.c:2485 xftree/xtree_gui.c:2571
 msgid "Close window"
 msgstr ""
 
-#: xftree/xtree_gui.c:2560 xftree/xtree_gui.c:2747
+#: xftree/xtree_gui.c:2489 xftree/xtree_gui.c:2676
 msgid "Go to ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2562 xftree/xtree_gui.c:2742
+#: xftree/xtree_gui.c:2491 xftree/xtree_gui.c:2671
 msgid "Go up"
 msgstr ""
 
-#: xftree/xtree_gui.c:2564 xftree/xtree_gui.c:2731
+#: xftree/xtree_gui.c:2493 xftree/xtree_gui.c:2660
 msgid "Go home"
 msgstr ""
 
-#: xftree/xtree_gui.c:2568
+#: xftree/xtree_gui.c:2497
 msgid "New Folder"
 msgstr ""
 
-#: xftree/xtree_gui.c:2570 xftree/xtree_gui.c:2627
+#: xftree/xtree_gui.c:2499 xftree/xtree_gui.c:2556
 msgid "New file ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2576 xftree/xtree_gui.c:2632
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2505 xftree/xtree_gui.c:2561
 msgid "Delete ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2578 xftree/xtree_gui.c:2680
+#: xftree/xtree_gui.c:2507 xftree/xtree_gui.c:2609
 msgid "Open Trash"
 msgstr ""
 
-#: xftree/xtree_gui.c:2580 xftree/xtree_gui.c:2685
+#: xftree/xtree_gui.c:2509 xftree/xtree_gui.c:2614
 msgid "Empty Trash"
 msgstr ""
 
-#: xftree/xtree_gui.c:2584 xftree/xtree_gui.c:2671
+#: xftree/xtree_gui.c:2513 xftree/xtree_gui.c:2600
 msgid "Toggle Dotfiles"
 msgstr ""
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2601
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2530
 msgid "File"
 msgstr ""
 
-#: xftree/xtree_gui.c:2622
+#: xftree/xtree_gui.c:2551
 msgid "New Folder ..."
 msgstr ""
 
 #. Create "Edit" menu
-#: xftree/xtree_gui.c:2655 xfumed/xfumed_gui.c:129
+#: xftree/xtree_gui.c:2584 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr ""
 
-#: xftree/xtree_gui.c:2661
+#: xftree/xtree_gui.c:2590
 msgid "Select all"
 msgstr ""
 
-#: xftree/xtree_gui.c:2666
+#: xftree/xtree_gui.c:2595
 msgid "Unselect"
 msgstr ""
 
 #. Create "Tools" menu
-#: xftree/xtree_gui.c:2693
+#: xftree/xtree_gui.c:2622
 msgid "Tools"
 msgstr ""
 
-#: xftree/xtree_gui.c:2704
+#: xftree/xtree_gui.c:2633
 msgid "Find ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2709
+#: xftree/xtree_gui.c:2638
 msgid "Properties ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2715
+#: xftree/xtree_gui.c:2644
 msgid "Differences ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2720
+#: xftree/xtree_gui.c:2649
 msgid "Patch viewer ..."
 msgstr ""
 
 #. Create "Go To" menu
-#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2725
+#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2654
 msgid "Go"
 msgstr ""
 
 #. TODO #12:
-#: xftree/xtree_gui.c:2737
+#: xftree/xtree_gui.c:2666
 msgid "Go back"
 msgstr ""
 
@@ -1280,49 +1258,53 @@ msgstr ""
 #. gtk_menu_append (GTK_MENU (menu), menuitem);
 #. gtk_widget_show (menuitem);
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2758
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2687
 msgid "Preferences"
 msgstr ""
 
-#: xftree/xtree_gui.c:2764
+#: xftree/xtree_gui.c:2693
 msgid "Save geometry on exit"
 msgstr ""
 
-#: xftree/xtree_gui.c:2766
+#: xftree/xtree_gui.c:2695
 msgid "Double click does GOTO"
 msgstr ""
 
-#: xftree/xtree_gui.c:2768
+#: xftree/xtree_gui.c:2697
 msgid "Short titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:2699
+msgid "Drag does copy"
 msgstr ""
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2773
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2704
 msgid "Help"
 msgstr ""
 
-#: xftree/xtree_gui.c:2780
+#: xftree/xtree_gui.c:2711
 msgid "Default shortcut keys"
 msgstr ""
 
-#: xftree/xtree_gui.c:2785
+#: xftree/xtree_gui.c:2716
 msgid "Custom shortcut keys"
 msgstr ""
 
-#: xftree/xtree_gui.c:2790
+#: xftree/xtree_gui.c:2721
 msgid "About ..."
 msgstr ""
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2946
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2877
 msgid "Name"
 msgstr ""
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2947
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2878
 msgid "Size (bytes)"
 msgstr ""
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2948
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2879
 msgid "Last changed"
 msgstr ""
 
