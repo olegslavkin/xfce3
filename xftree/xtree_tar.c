@@ -758,10 +758,7 @@ void cb_tar_open_with (GtkWidget * item, GtkCTree * ctree)
   
   tgt=tar_open_with(ctree,en->path,en->label);
   if (!tgt) fprintf(stderr,"Could not extract %s\n",en->path);
-  else {
-    chdir ("/tmp");
-    xf_dlg_open_with ((GtkWidget *)ctree,win->xap, prg ? prg : DEF_APP, tgt);
-  }
+  else xf_dlg_open_with ((GtkWidget *)ctree,win->xap, prg ? prg : DEF_APP, tgt);
 }
 
 
