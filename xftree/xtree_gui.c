@@ -1180,6 +1180,7 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   entry *en;
   int result;
   int ask = TRUE;
+  int ask_again = TRUE;
   cfg *win;
   struct stat st_target;
   struct stat st_trash;
@@ -1263,14 +1264,27 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
       }
       else
       {
-	if (dlg_question (_("Can't move file to trash, hard delete ?"), en->path) == DLG_RC_OK)
-	{
-	  delete_files (en->path);
-	  gtk_ctree_remove_node (ctree, node);
-	}
-	else
-	{
-	  gtk_ctree_unselect (ctree, node);
+	if (ask_again) { 
+		if (num - i == 1)
+			result = dlg_question (_("Can't move file to trash, hard delete ?"), en->path);
+		else	
+			result = dlg_question_l (_("Can't move file to trash, hard delete ?"), en->path, DLG_ALL | DLG_SKIP);
+
+			
+		if (result == DLG_RC_ALL)
+    		{
+	 	 ask_again = FALSE;
+      		}
+	} else result=DLG_RC_OK;
+	switch (result) {
+		case DLG_RC_OK:
+		case DLG_RC_ALL:
+		 delete_files (en->path);
+	         gtk_ctree_remove_node (ctree, node);
+		 break;
+		default:
+	         gtk_ctree_unselect (ctree, node);
+		 break;		  
 	}
       }
       ctree_thaw (ctree);
