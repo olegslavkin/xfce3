@@ -3194,3 +3194,22 @@ SetHonorWMFocusHint (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigne
   free (style);
 }
 
+void
+SetUseShapedIcons (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
+{
+  char *style = NULL;
+
+  action = GetNextToken (action, &style);
+
+  if ((mystrncasecmp (style, "On", 2) == 0) || (mystrncasecmp (style, "Y", 1) == 0) || (mystrncasecmp (style, "1", 1) == 0))
+    Scr.Options |= UseShapedIcons;
+  else if ((mystrncasecmp (style, "Of", 2) == 0) || (mystrncasecmp (style, "N", 1) == 0) || (mystrncasecmp (style, "0", 1) == 0))
+    Scr.Options &= ~UseShapedIcons;
+  else
+  {
+    xfwm_msg (ERR, "UseShapedIcons", "Unknown parameter, using UseShapedIcons On");
+    Scr.Options |= UseShapedIcons;
+  }
+  free (style);
+}
+

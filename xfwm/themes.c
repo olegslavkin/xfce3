@@ -222,7 +222,14 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     TextColor = GetDecor (Tmp_win, HiColors.fore);
     BackColor = GetDecor (Tmp_win, HiColors.back);
     if (Tmp_win->icon_w != None)
+    {
       XSetWindowBackground (dpy, Tmp_win->icon_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
+    }
+    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && (Scr.Options & UseShapedIcons))
+    {
+      XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
+      XClearWindow (dpy, Tmp_win->icon_pixmap_w);
+    }
     /* resize the icon name window */
     if (Tmp_win->icon_w != None)
     {
@@ -252,7 +259,14 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     TextColor = GetDecor (Tmp_win, LoColors.fore);
     BackColor = GetDecor (Tmp_win, LoColors.back);
     if (Tmp_win->icon_w != None)
+    {
       XSetWindowBackground (dpy, Tmp_win->icon_w, BackColor);
+    }
+    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && (Scr.Options & UseShapedIcons))
+    {
+      XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, BackColor);
+      XClearWindow (dpy, Tmp_win->icon_pixmap_w);
+    }
     /* resize the icon name window */
     if (Tmp_win->icon_w != None)
     {
@@ -260,8 +274,6 @@ DrawIconWindow (XfwmWindow * Tmp_win)
       Tmp_win->icon_xl_loc = Tmp_win->icon_x_loc;
     }
   }
-  if ((Tmp_win->flags & ICON_OURS) && (Tmp_win->icon_pixmap_w != None))
-    XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, BackColor);
   /* write the icon label */
   if (Scr.IconFont.font)
   {
@@ -282,20 +294,14 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     XClearWindow (dpy, Tmp_win->icon_w);
   }
 
-  if ((Tmp_win->iconPixmap != None) && (!(Tmp_win->flags & SHAPED_ICON)))
+  if ((Tmp_win->iconPixmap != None) && !((Tmp_win->flags & SHAPED_ICON) && (Scr.Options & UseShapedIcons)))
   {
     RelieveIconPixmap (Tmp_win->icon_pixmap_w, Tmp_win->icon_p_width, Tmp_win->icon_p_height, Relief, Shadow);
   }
 
-  /* need to locate the icon pixmap */
-  if (Tmp_win->iconPixmap != None)
+  if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS))
   {
-    if (Tmp_win->iconDepth == Scr.d_depth)
-    {
-      XCopyArea (dpy, Tmp_win->iconPixmap, Tmp_win->icon_pixmap_w, Scr.ScratchGC3, 0, 0, Tmp_win->icon_p_width - 4, Tmp_win->icon_p_height - 4, 2, 2);
-    }
-    else
-      XCopyPlane (dpy, Tmp_win->iconPixmap, Tmp_win->icon_pixmap_w, Scr.ScratchGC3, 0, 0, Tmp_win->icon_p_width - 4, Tmp_win->icon_p_height - 4, 2, 2, 1);
+    DrawIconPixmap (Tmp_win, Scr.ScratchGC3, 2, 2);
   }
 
   if (Tmp_win->icon_w != None)
@@ -1336,7 +1342,6 @@ void
 RelieveIconPixmap_xfce (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
   RelieveRectangle (win, 0, 0, w, h, ReliefGC, ShadowGC);
-  RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
 }
 
 /*
@@ -2648,7 +2653,8 @@ DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l
 void
 RelieveIconTitle_trench (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
-  return;
+  RelieveRectangle (win, 0, 0, w, h, ShadowGC, ReliefGC);
+  RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
 }
 
 void
@@ -3928,13 +3934,16 @@ DrawTrianglePattern_linea (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l,
 void
 RelieveIconTitle_linea (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
-  return;
+  RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
+  XDrawLine (dpy, win, Scr.BlackGC, 0, h - 1, w - 1, h - 1);
+  XDrawLine (dpy, win, Scr.BlackGC, w - 1, 0, w - 1, h - 1);
 }
 
 void
 RelieveIconPixmap_linea (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
-  RelieveRectangle (win, 0, 0, w, h, ReliefGC, ShadowGC);
   RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
+  XDrawLine (dpy, win, Scr.BlackGC, 0, h - 1, w - 1, h - 1);
+  XDrawLine (dpy, win, Scr.BlackGC, w - 1, 0, w - 1, h - 1);
 }
 

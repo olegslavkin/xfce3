@@ -299,7 +299,7 @@ WindowList;
 #define ClickRaise	        (1L<<7)
 #define MapFocus           	(1L<<8)
 #define HonorWMFocusHint        (1L<<9)
-
+#define UseShapedIcons		(1L<<10)
 #define ALL_COMMON_FLAGS (STARTICONIC|STICKY|WINDOWLISTSKIP| \
 			  StickyIcon|CirculateSkipIcon|CirculateSkip)
 

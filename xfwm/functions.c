@@ -149,6 +149,7 @@ static struct functions func_config[] = {
   {"Switch", SwitchFunc, F_SWITCHFUNC, FUNC_NO_WINDOW},
   {"Title", Nop_func, F_TITLE, FUNC_TITLE},
   {"TitleStyle", SetTitleStyle, F_TITLESTYLE, FUNC_NO_WINDOW},
+  {"UseShapedIcons", SetUseShapedIcons, F_SETUSESHAPEDICONS, FUNC_NO_WINDOW},
   {"Wait", wait_func, F_WAIT, FUNC_NO_WINDOW},
   {"WaitSession", wait_session, F_WAITSESSION, FUNC_NO_WINDOW},
   {"WarpToWindow", warp_func, F_WARP, FUNC_NEEDS_WINDOW},

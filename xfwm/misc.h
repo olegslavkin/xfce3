@@ -119,6 +119,7 @@ Bool moveLoop (XfwmWindow *, int, int, int, int, int *, int *, Bool, Bool);
 void Keyboard_shortcuts (XEvent *, int);
 void RedoIconName (XfwmWindow *);
 void DrawIconWindow (XfwmWindow *);
+void DrawIconPixmap(XfwmWindow *, GC, int, int);
 void CreateIconWindow (XfwmWindow * tmp_win, int def_x, int def_y);
 void RelieveParts (XfwmWindow * t, int i, GC hor, GC vert);
 #define NO_HILITE     0x0000
@@ -351,6 +352,7 @@ void SetForceFocus (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned lo
 void SetMapFocus (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 void SetMargin (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 void SetHonorWMFocusHint (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
+void SetUseShapedIcons (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 
 int check_existfile (char *filename);
 /*

@@ -1761,7 +1761,7 @@ InitVariables (void)
   Scr.CornerWidth = CORNER_WIDTH;
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
-  Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
+  Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint | UseShapedIcons);
   Scr.engine = GTK_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;

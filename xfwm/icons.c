@@ -83,6 +83,41 @@ extern Bool enable_xft;
 void GrabIconButtons (XfwmWindow *, Window);
 void GrabIconKeys (XfwmWindow *, Window);
 
+void
+DrawIconPixmap(XfwmWindow * tmp_win, GC gc, int tx, int ty)
+{
+  if (tmp_win->iconDepth == 1)
+  {
+    XCopyPlane(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, gc, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty, 1);
+  }
+  else
+  {
+    static GC clipPixmapGC = None;
+    XGCValues gcv;
+    if (tmp_win->flags & SHAPED_ICON)
+    {
+      gcv.clip_mask = tmp_win->icon_maskPixmap;
+      gcv.clip_x_origin = tx;
+      gcv.clip_y_origin = ty;
+      if (clipPixmapGC == None) 
+      {
+          clipPixmapGC = XCreateGC(dpy, tmp_win->icon_pixmap_w, GCClipMask|GCClipXOrigin|GCClipYOrigin, &gcv);
+      }
+      else
+      {
+	XChangeGC(dpy, clipPixmapGC, GCClipMask|GCClipXOrigin|GCClipYOrigin, &gcv);
+      }
+      XCopyArea(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, clipPixmapGC, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty);
+      gcv.clip_mask = None;
+      XChangeGC(dpy, clipPixmapGC, GCClipMask, &gcv);
+    }
+    else
+    {
+      XCopyArea(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, gc, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty);
+    }
+  }
+}
+
 /****************************************************************************
  *
  * Creates an icon window as needed
@@ -214,7 +249,7 @@ CreateIconWindow (XfwmWindow * tmp_win, int def_x, int def_y)
     XChangeWindowAttributes (dpy, tmp_win->icon_pixmap_w, valuemask, &attributes);
   }
 
-  if (ShapesSupported && (tmp_win->flags & SHAPED_ICON))
+  if (ShapesSupported && (tmp_win->flags & SHAPED_ICON) && (Scr.Options & UseShapedIcons))
   {
     XShapeCombineMask (dpy, tmp_win->icon_pixmap_w, ShapeBounding, 2, 2, tmp_win->icon_maskPixmap, ShapeSet);
   }
@@ -513,17 +548,13 @@ SetDefaultXPMIcon (XfwmWindow * tmp_win)
 #else
   XWindowAttributes root_attr;
   XpmAttributes xpm_attributes;
-  static XpmColorSymbol none_color = { NULL, "None", (Pixel) 0 };
-
+ 
   XGetWindowAttributes (dpy, Scr.Root, &root_attr);
   xpm_attributes.colormap = root_attr.colormap;
   xpm_attributes.depth = Scr.d_depth;
-  xpm_attributes.closeness = 40000;	/* Allow for "similar" colors */
-  xpm_attributes.colorsymbols = &none_color;
-  xpm_attributes.numsymbols = 1;
-  xpm_attributes.valuemask = XpmSize | XpmColormap | XpmCloseness | XpmColorSymbols | XpmDepth;
+  xpm_attributes.closeness = 65535;
+  xpm_attributes.valuemask = XpmSize | XpmColormap | XpmCloseness | XpmDepth;
 
-  res = 0;
   res = (XpmCreatePixmapFromData (dpy, Scr.Root, default_icon, &tmp_win->iconPixmap, &tmp_win->icon_maskPixmap, &xpm_attributes) == XpmSuccess);
 
   if (res)

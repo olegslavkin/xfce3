@@ -28,7 +28,7 @@ if [ -d "$XFCE_DATA/help/" ]
 then 
   HELP_DIR="$XFCE_DATA/help"
 else 
-  HELP_DIR="/etc/X11/xfce/help"
+  HELP_DIR="/usr/share/xfce/help"
 fi
 
 # Look first in ne location then in old location
@@ -56,7 +56,4 @@ then
 else
   $BROWSER "$HELP_FILE"
 fi
-
-
-
 exit 0
