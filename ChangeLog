@@ -1,3 +1,52 @@
+2001-08-02  xfce
+
+	* xfwm/: builtins.c, xfwm.c: Add more controls over internal font
+	management
+
+2001-08-02  xfce
+
+	* xfwm/: builtins.c, themes.c, xfwm.c: Add more controls over new
+	introduced GCs
+
+2001-08-01  xfce
+
+	* palettes/Basic, palettes/Classic, palettes/Classic2,
+	palettes/Win, xfwm/builtins.c, xfwm/screen.h, xfwm/themes.c,
+	xfwm/xfwm.c: Change internals structures and rewrite xfwm's GTK
+	engine
+
+2001-08-01  xfce
+
+	* xfce/configfile.c, xfce/configfile.h, xfce/setup.c, xfce/xfwm.c,
+	xfce/xfwm.h, xfwm/builtins.c, xfwm/screen.h, xfwm/themes.c,
+	xfwm/themes.h, xfwm/xfwm.h: Add new theme engine to xfwm
+
+2001-08-01  xfce
+
+	* po/: sr.gmo, sr.po: Update Serbia translation (Milan Avramovic
+	<chomee@operamail.com>)
+
+2001-07-31  xfce
+
+	* xfce.spec: Whoops, forgot to set RPM build # to 1 (instead of 2
+	as in xfce-3.8.5)
+
+2001-07-31  xfce
+
+	* Makefile.in, xfce-3.8.6.lsm, backdrops/Blue.list,
+	backdrops/Toulouse.list, other/xinitrc, other/xinitrc.mwm,
+	palettes/Classic2, po/xfce.pot, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfce/setup.c: Force gtk in the
+	list of engines
+
+2001-07-31  xfce
+
+	* palettes/: Basic, Classic, Classic2: [no log message]
+
+2001-07-31  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-07-31  xfce
 
 	* palettes/: Classic, Classic2: Change fonts to bold in Classic*
