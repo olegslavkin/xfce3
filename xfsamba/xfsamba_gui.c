@@ -21,10 +21,15 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 #include <signal.h>
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -68,12 +73,7 @@ static nmb_cache *current_cache;
 void
 node_destroy (gpointer p)
 {
-  smb_entry *data;
-  data = (smb_entry *) p;
-  if (data) {
-   if (data->label) g_free(data->label);
-   g_free (data);
-  }
+  smb_entry_free((smb_entry *) p);
 }
  
 static gint
@@ -90,7 +90,7 @@ compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   e2 = row2->row.data;
 
     /* I want to have the directories at the top  */
-  if (e1->i[2] != e2->i[2]){
+   if (e1->i[2] != e2->i[2]){
     return (e2->i[2] - e1->i[2]);
   }
   /*printf("dbg:%d--%d\n",i1[2],i2[2]);*/
@@ -163,17 +163,42 @@ on_click_column (GtkCList * clist, gint column, gpointer data)
   return TRUE;
 }
 
+static void
+cb_xftree (GtkWidget * item, GtkWidget * ctree){
+	char *argv[2];
+	argv[0]="xftree";
+	argv[1]=0;
+	if (!sane(argv[0])){
+		xf_dlg_error(smb_nav,"Could not find",argv[0]);
+	} else io_system(argv,smb_nav);
+}
+
+extern void
+cb_mount (GtkWidget * item, GtkWidget * ctree);
+
+static void
+cb_cut (GtkWidget * item, GtkWidget * ctree){
+	xf_dlg_warning(smb_nav,"This function is not yet active");
+}
+static void
+cb_copy (GtkWidget * item, GtkWidget * ctree){
+	xf_dlg_warning(smb_nav,"This function is not yet active");
+}
+static void
+cb_paste (GtkWidget * item, GtkWidget * ctree){
+	xf_dlg_warning(smb_nav,"This function is not yet active");
+}
 
 static void
 cb_master (GtkWidget * item, GtkWidget * ctree)
 {
-  my_show_message (_("If you have win95 nodes on your network, xfsamba might not find\n" "a master browser. If you start smb services on your linux box,\n" "making it a samba-server, the problem will be fixed as long as\n" "the win95 box(es) are reset. You know the routine, reset wind*ws\n" "for changes to take effect. Otherwise,\n" "you must type in the node to be browsed and hit RETURN.\n"));
+  xf_dlg_warning (smb_nav,_("If you have win95 nodes on your network, xfsamba might not find\n" "a master browser. If you start smb services on your linux box,\n" "making it a samba-server, the problem will be fixed as long as\n" "the win95 box(es) are reset. You know the routine, reset wind*ws\n" "for changes to take effect. Otherwise,\n" "you must type in the node to be browsed and hit RETURN.\n"));
 }
 
 static void
 cb_about (GtkWidget * item, GtkWidget * ctree)
 {
-  my_show_message (_("This is XFSamba " XFSAMBA_VERSION "\n(c) Edscott Wilson Garcia under GNU GPL" "\nXFCE modules are (c) Olivier Fourdan http://www.xfce.org/"));
+  xf_dlg_warning (smb_nav,_("This is XFSamba " XFSAMBA_VERSION "\n(c) Edscott Wilson Garcia under GNU GPL" "\nXFCE modules are (c) Olivier Fourdan http://www.xfce.org/"));
 }
 
 #ifdef OBSOLETE
@@ -437,7 +462,7 @@ cb_download (GtkWidget * widget, gpointer data)
   if (selected.file)
     SMBGetFile ();
   else
-    my_show_message (_("A file must be selected!"));
+    xf_dlg_warning (smb_nav,_("A file must be selected!"));
 }
 
 void
@@ -446,7 +471,7 @@ cb_upload (GtkWidget * widget, gpointer data)
   if (selected.directory)
     SMBPutFile ();
   else
-    my_show_message (_("A directory must be selected!"));
+    xf_dlg_warning (smb_nav,_("A directory must be selected!"));
 }
 
 void
@@ -455,7 +480,7 @@ cb_new_dir (GtkWidget * widget, gpointer data)
   if (selected.directory)
     SMBmkdir ();
   else
-    my_show_message (_("A directory must be selected!"));
+    xf_dlg_warning (smb_nav,_("A directory must be selected!"));
 }
 
 void
@@ -465,7 +490,7 @@ cb_delete (GtkWidget * widget, gpointer data)
     SMBrm ();
   else
   {
-    my_show_message (_("Something to be deleted must be selected!"));
+    xf_dlg_warning (smb_nav,_("Something to be deleted must be selected!"));
   }
 }
 
@@ -478,24 +503,19 @@ cb_tar (GtkWidget * widget, gpointer data)
   }
   else
   {
-    my_show_message (_("A directory must be selected!"));
+    xf_dlg_warning (smb_nav,_("A directory must be selected!"));
   }
 }
 
 extern GtkCTreeNode *DropNode;
 
-void
-select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
-{
-  nmb_cache *cache;
-  char *line[3];
-
+char **get_select_share(GtkCTree * ctree, GList * node){
+  static char *line[3];
+  smb_entry *en;
   if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) node, SHARE_NAME_COLUMN, line))
-    return;
+    return NULL;
   if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) node, COMMENT_COLUMN, line + 1))
-    return;
-
-
+    return NULL;
   selected.directory = selected.file = FALSE;
   if (selected.share) free (selected.share);
   selected.share = NULL;
@@ -506,6 +526,10 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
   if (selected.comment) free (selected.comment);
   selected.comment = NULL;
 
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree,(GtkCTreeNode *) node);
+  if (en->type &(S_T_IPC|S_T_PRINTER)) return NULL;
+  
+  
   selected.comment = (char *) malloc (strlen (line[1]) + 1);
   strcpy (selected.comment, line[1]);
 
@@ -541,7 +565,7 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
     if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) selected.parent_node, COMMENT_COLUMN, line + 1))
     {
       print_diagnostics ("DBG:unable to get parent information\n");
-      return;
+      return FALSE;
     }
     if (!DropNode) DropNode=(GtkCTreeNode *)selected.parent_node;
     if (strncmp (line[1], "Disk", strlen ("Disk")) == 0)
@@ -608,13 +632,25 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
     print_diagnostics (selected.filename);
     print_diagnostics ("\n");
 #endif
-    return;			/* nothing else to do for simple file */
+    return line; /* nothing else to do for simple file (in select_share) */
   }
   else
   {
     selected.filename = NULL;
   }
+  return line;
 
+}
+
+void
+select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
+{
+  nmb_cache *cache;
+  char **line;
+
+  line=get_select_share(ctree,node);
+  if (!line || selected.file) return;
+  
 /* determine whether or not to modify ctree: */
 
   cache = thisN->shares;
@@ -950,7 +986,12 @@ newbox (gboolean pack, int vertical, GtkWidget * parent, gboolean expand, gboole
 #include "icons/view3.xpm"
 #include "icons/delete.xpm"
 #include "icons/new_dir.xpm"
+#include "icons/new_win.xpm"
 #include "icons/tar.xpm"
+#include "icons/tb_cut.xpm"
+#include "icons/tb_copy.xpm"
+#include "icons/tb_paste.xpm"
+#include "icons/mount.xpm"
 
 static GtkWidget *
 icon_button (char **data, char *tip)
@@ -1068,6 +1109,10 @@ create_smb_window (void)
 	   hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{ 
 	 */
 	/* icon bar */
+	button = icon_button (new_win_xpm, _("Xftree ..."));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_xftree), NULL);
+	gtk_widget_show (button);
 	button = icon_button (go_back_xpm, _("Back ..."));
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (go_back), NULL);
@@ -1108,6 +1153,11 @@ create_smb_window (void)
 	gtk_widget_show (separator);
 	gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
 
+	button = icon_button (mount_xpm, _("Mount ..."));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_mount), NULL);
+	gtk_widget_show (button);
+
 	button = icon_button (download_xpm, _("Download ..."));
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_download), NULL);
@@ -1127,7 +1177,21 @@ create_smb_window (void)
 	separator = gtk_vseparator_new ();
 	gtk_widget_show (separator);
 	gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
+	
+	button = icon_button (tb_cut_xpm, _("Cut ..."));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_cut), NULL);
+	gtk_widget_show (button);
+	
+	button = icon_button (tb_copy_xpm, _("Copy ..."));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_copy), NULL);
+	gtk_widget_show (button);
 
+	button = icon_button (tb_paste_xpm, _("Paste ..."));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_paste), NULL);
+	gtk_widget_show (button);
 
 	button = icon_button (help_xpm, _("Help ..."));
 	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
@@ -1234,9 +1298,9 @@ create_smb_window (void)
   	  gtk_signal_connect (GTK_OBJECT (shares), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data), NULL);
   	  gtk_signal_connect (GTK_OBJECT (shares), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
 	  gtk_container_add (GTK_CONTAINER (scrolled), shares);
-	  for (i = 0; i < SHARE_COLUMNS; i++)
+	  (GTK_CLIST (shares))->sort_type = GTK_SORT_ASCENDING;
+          for (i = 0; i < SHARE_COLUMNS; i++)
 	    gtk_clist_set_column_auto_resize ((GtkCList *) shares, i, TRUE);
-	  /*gtk_clist_set_auto_sort ((GtkCList *) shares, TRUE);*/
 	  gtk_widget_show (shares);
 	}
       }
@@ -1406,3 +1470,52 @@ animation (gboolean state)
     gtk_timeout_add (100, (GtkFunction) animate_bar, (gpointer) ((long) anim));
   }
 }
+	
+gboolean sane (char *bin)
+{
+  char *spath, *path, *globstring;
+  glob_t dirlist;
+
+  /* printf("getenv=%s\n",getenv("PATH")); */
+  if (getenv ("PATH"))
+  {
+    path = (char *) malloc (strlen (getenv ("PATH")) + 2);
+    strcpy (path, getenv ("PATH"));
+    strcat (path, ":");
+  }
+  else
+  {
+    path = (char *) malloc (4);
+    strcpy (path, "./:");
+  }
+
+  globstring = (char *) malloc (strlen (path) + strlen (bin) + 1);
+
+/* printf("path=%s\n",path);*/
+
+  if (strstr (path, ":"))
+    spath = strtok (path, ":");
+  else
+    spath = path;
+
+  while (spath)
+  {
+    sprintf (globstring, "%s/%s", spath, bin);
+/*	 printf("checking for %s...\n",globstring);*/
+    if (glob (globstring, GLOB_ERR, NULL, &dirlist) == 0)
+    {
+      /*       printf("found at %s\n",globstring); */
+      free (globstring);
+      globfree (&dirlist);
+      free (path);
+      return TRUE;
+    }
+    globfree (&dirlist);
+    spath = strtok (NULL, ":");
+  }
+  free (globstring);
+  free(path);
+  return FALSE;
+}
+
+

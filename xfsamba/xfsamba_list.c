@@ -37,10 +37,98 @@
 
 #endif
 
-extern gint
-on_click_column (GtkCList * clist, gint column, gpointer data);
 
 static GtkCTreeNode *LastNode;
+void
+smb_entry_free (smb_entry *data)
+{
+  if (data) {
+   if (data->label) g_free(data->label);
+   if (data->share) g_free(data->share);
+   if (data->dirname) g_free(data->dirname);
+   if (data->filename) g_free(data->filename);
+   g_free (data);
+  }
+}
+
+/*
+ */
+smb_entry *smb_entry_new (void)
+{
+  smb_entry *en = g_malloc (sizeof (smb_entry));
+  if (!en) return (NULL);
+  en->share = en->dirname = en->label = en->filename = NULL;
+  en->i[0] = en->i[1] = en->i[2] = en->type = 0;
+  return (en);
+}
+
+
+GtkCTreeNode *add_node(smb_entry *en,char **textos,GtkCTreeNode *nodo){
+  GtkCTreeNode *node;
+  GdkPixmap *gPIXo=NULL,*gPIXc;
+  GdkBitmap *gPIMo=NULL,*gPIMc;
+  gboolean isleaf;
+  if (en->type & S_T_DIRECTORY) { 
+     if (textos[SHARE_SIZE_COLUMN]) 
+	en->i[0] = atoi (textos[SHARE_SIZE_COLUMN]);
+     else en->i[0] = 0;
+     gPIXc=gPIX_dir_close, gPIMc=gPIM_dir_close, 
+     gPIXo=gPIX_dir_open, gPIMo=gPIM_dir_open,
+     isleaf=FALSE;
+  } else if (en->type & S_T_PRINTER){
+      isleaf=TRUE;
+      en->i[0] =  0;
+      gPIXc = gPIXo = gPIX_print;
+      gPIMc = gPIMo = gPIM_print;
+  } else if (en->type & S_T_SHARE) {
+     isleaf=FALSE;
+      en->i[0] =  0;
+      gPIXo = gPIX_dir_open_lnk;
+      gPIXc = gPIX_dir_close_lnk;
+      gPIMo = gPIM_dir_open_lnk;
+      gPIMc = gPIM_dir_close_lnk;
+  } else if (en->type & S_T_IPC) {
+      isleaf=TRUE;
+      en->i[0] =  0;
+      gPIXc = gPIX_dotfile;
+      gPIMc = gPIM_dotfile; 
+  } else {
+	isleaf=TRUE;
+        if (textos[SHARE_SIZE_COLUMN]) 
+	   en->i[0] = atoi (textos[SHARE_SIZE_COLUMN]);
+        else en->i[0] = 0;
+        gPIXc = gPIX_page;
+        gPIMc = gPIM_page;
+	if ((en->type & S_T_READONLY)&&(en->type & S_T_HIDDEN)){
+	  gPIXc = gPIX_rdotfile;
+	  gPIMc = gPIM_rdotfile;
+	} else if (en->type & S_T_READONLY){
+          gPIXc = gPIX_rpage;
+          gPIMc = gPIM_rpage;
+	} else if (en->type & S_T_HIDDEN) {
+	  gPIXc = gPIX_dotfile;
+	  gPIMc = gPIM_dotfile;
+	}
+  }
+  node = gtk_ctree_insert_node ((GtkCTree *) shares, 
+		  nodo, NULL, textos, 
+		  SHARE_COLUMNS, gPIXc, gPIMc, gPIXo, gPIMo, isleaf, FALSE); 
+  en->i[1] = 0; /* to have date sorting work, must parse date into a time_t number */
+
+  /* subsorting order */
+  if (en->type & (S_T_DIRECTORY)) en->i[2] = 3;
+  else if (en->type & S_T_SHARE) en->i[2] = 2;
+  else if (en->type & S_T_PRINTER) en->i[2] = 1;
+  else if (en->type & S_T_IPC) en->i[2] = 0;
+  else  en->i[2] = 4;
+  en->label = g_strdup(textos[SHARE_NAME_COLUMN]);
+    /*printf("dbg:%s-->%d\n",textos[SHARE_NAME_COLUMN],data[2]);*/
+  gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, en, node_destroy);
+    /* FIXME: insert a dummy entry here for dirs. Be sure to remove it on the first expansion,
+     *        as determined by reload. */
+  return node;
+ 
+}
 
 /* function to process stdout produced by child */
 static int
@@ -49,136 +137,94 @@ SMBListStdout (int n, void *data)
   char *line;
   char *textos[SHARE_COLUMNS];
   char directorio[XFSAMBA_MAX_STRING];
-  int i, filenamelen, caso = 0x01;
+  int i, filenamelen;
   char *pw;
-  GdkPixmap *gPIX;
-  GdkBitmap *gPIM;
   GtkCTreeNode *node;
+  smb_entry *en;
+  
 
-  if (n)
-    return TRUE;		/* this would mean binary data */
+  if (n) return TRUE;  /* this would mean binary data */
   line = (char *) data;
   print_diagnostics (line);
-  if (strstr (line, "ERRbadpw"))
-  {				/* server has died */
+  if (strstr (line, "ERRbadpw"))  {/* server has died */
     SMBResult = CHALLENGED;
     print_diagnostics ("DBG:");
     print_diagnostics (line);
 /* here we must pop it from the cache!!!!! */
   }
-  if (strlen (line) < 2)
-    return TRUE;
-  if (strstr (line, "  .   "))
-    return TRUE;
-  if (strstr (line, "  ..   "))
-    return TRUE;
-  if (strncmp (line, "  ", 2))
-    return TRUE;
-  /* ok. Now we have a line to process */
+  if (strlen (line) < 2)	return TRUE;
+  if (strstr (line, "  .   "))	return TRUE;
+  if (strstr (line, "  ..   "))	return TRUE;
+  if (strncmp (line, "  ", 2))	return TRUE;
+  
+  /* ok. Now we have a line to process
+   * This is a line to watch, if smbclient changes the format
+   * for output in file client.c, this must be taken into account */
   /* client.c: "  %-30s%7.7s %8.0f  %s",filename,attr,size,asctime */
   /* asctime=25 */
   /* if (strlen(line) > 25+2+8+1+7) */
 
+  en=smb_entry_new();
+
   pw = line + (strlen (line) - 1 - 25 - 2 - 8);
-  while (pw[0] != ' ')
-  {
-    if (pw == line)
-      break;
+  while (pw[0] != ' ') {
+    if (pw == line) break;
     pw--;
   }
 
   filenamelen = strlen (line) - strlen (pw) - 7;
 
-  while (pw[0] == ' ')
-  {
-    if (pw[0] == 0)
-      break;
+  while (pw[0] == ' ') {
+    if (pw[0] == 0) break;
     pw++;
   }
 
-
   /*filenamelen = strlen (line) - 25 - 2 - 8 - 1 - 7; */
-  for (i = 0; i < SHARE_COLUMNS; i++)
-    textos[i] = "";
+  for (i = 0; i < SHARE_COLUMNS; i++) textos[i] = "";
   textos[SHARE_NAME_COLUMN] = line + 2;
-  for (i = filenamelen + 1; i < filenamelen + 8; i++)
-  {
-    if (line[i] == 'D')
-      caso ^= 0x08;
-    if (line[i] == 'H')
-      caso ^= 0x04;
-    if (line[i] == 'R')
-      caso ^= 0x02;
+  for (i = filenamelen + 1; i < filenamelen + 8; i++)  {
+    if (line[i] == 'D') en->type |= 0x08;
+    if (line[i] == 'H') en->type |= 0x04;
+    if (line[i] == 'R') en->type |= 0x02;
     line[i] = 0;
   }
 
-  if (strstr (pw, "\n"))
-    strtok (pw, "\n");		/* chop */
+  if (strstr (pw, "\n"))  strtok (pw, "\n"); /* chop */
 
-  /*textos[COMMENT_COLUMN] = pw; */
-  if (strstr (pw, " "))
-  {
+  if (strstr (pw, " ")) {
     textos[SHARE_SIZE_COLUMN] = strtok (pw, " ");
     textos[SHARE_DATE_COLUMN] = pw + strlen (pw) + 1;
   }
 
-
+/* This might not be necesary anymore with LANG defined */
   latin_1_readable (line);
-
-  if (caso & 0x08)
+  en->share=g_strdup(NMBshare);
   {
-    if (strcmp (selected.dirname, "/") == 0)
-    {
+    char *word;
+    word = textos[SHARE_NAME_COLUMN];
+    while (word[strlen (word) - 1] == ' ')
+      word[strlen (word) - 1] = 0;
+  }
+
+  if (en->type & S_T_DIRECTORY)
+  {
+    if (strcmp (selected.dirname, "/") == 0) {
       sprintf (directorio, "/%s/%s", NMBshare, line + 2);
-    }
-    else
-    {
+      en->dirname=(char *)malloc(strlen(line + 2)+2);
+      sprintf(en->dirname,"/%s",line + 2);
+    } else {
       sprintf (directorio, "/%s%s/%s", NMBshare, selected.dirname, line + 2);
+      en->dirname=(char *)malloc(strlen(line + 2)+strlen(selected.dirname)+2);
+      sprintf(en->dirname,"%s/%s",selected.dirname,line + 2);
     }
     textos[COMMENT_COLUMN] = directorio;
-    node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
-    /* FIXME: insert a dummy entry here. Be sure to remove it on the first expansion,
-     *        as determined by reload. */
-    /*return TRUE; */
+  } else {
+    en->dirname=g_strdup(selected.dirname);
+    en->filename=g_strdup(textos[SHARE_NAME_COLUMN]);
+    en->type = S_T_FILE;
   }
-  else
-  {
-    /* here, use different icons or notify readonly or hidden... */
-    gPIX = gPIX_page;
-    gPIM = gPIM_page;		/* default */
-    if (caso & 0x02)
-    {
-      gPIX = gPIX_rpage;
-      gPIM = gPIM_rpage;
-    }				/* readonly */
-    if (caso & 0x04)
-    {				/* hidden */
-      if (caso & 0x02)
-      {
-	gPIX = gPIX_rdotfile;
-	gPIM = gPIM_rdotfile;
-      }				/* readonly */
-      else
-      {
-	gPIX = gPIX_dotfile;
-	gPIM = gPIM_dotfile;
-      }
-    }				/* hidden */
-    node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX, gPIM, NULL, NULL, TRUE, FALSE);
-  }
-
-  {
-    smb_entry *data;
-    data = (smb_entry *) malloc (sizeof (smb_entry));
-    /*data[0]=data[1]=0; */
-    data->i[0] = atoi (textos[SHARE_SIZE_COLUMN]);
-    data->i[1] = 0;		/* to have date sorting work, must parse date into a time_t number */
-    data->i[2] = (caso & 0x08)?1:0;
-    data->label = g_strdup(textos[SHARE_NAME_COLUMN]);
-    /*printf("dbg:%s-->%d\n",textos[SHARE_NAME_COLUMN],data[2]);*/
-    gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
-  }
-  gtk_ctree_sort_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);
+  node = add_node(en,textos,(GtkCTreeNode *) selected.node);
+  if (selected.node) gtk_ctree_sort_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);
   return TRUE;
 }
 
@@ -202,7 +248,6 @@ SMBListForkOver (void)
     break;
 
   }
-  on_click_column ((GtkCList *)shares,1,NULL);
   gtk_clist_thaw (GTK_CLIST (shares));
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);

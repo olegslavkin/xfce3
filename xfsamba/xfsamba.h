@@ -3,10 +3,11 @@
  * */
 
 /********** defines ***************/
-
+#include "gtk_dlg.h"
+#include "io.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.37"
+#define XFSAMBA_VERSION "0.39"
 #endif
 
 #ifdef XFSAMBA_MAIN
@@ -72,11 +73,23 @@
 #define WINDOW_WIDTH  400
 #define XFSAMBA_MAX_STRING 255
 
-/******************* structures ****************/
+#define S_T_FILE		0x01
+#define S_T_READONLY		0x02
+#define S_T_HIDDEN		0x04
+#define S_T_DIRECTORY		0x08
+#define S_T_PRINTER		0x10
+#define S_T_IPC			0x20
+#define S_T_HASDUMMY		0x40
+#define S_T_SHARE		0x80
 
-typedef struct smb_entry{
-	off_t i[3];
+/******************* structures ****************/
+typedef struct smb_entry {
 	char *label;
+	char *share;
+	char *dirname;
+	char *filename;
+	off_t i[3];
+	int type;
 } smb_entry;
 
 typedef struct nmb_cache
@@ -196,6 +209,11 @@ GtkWidget *passwd_dialog (int caso);
 GtkWidget *create_smb_window (void);
 void animation (gboolean state);
 void node_destroy (gpointer p);
+void smb_entry_free (smb_entry *data);
+smb_entry *smb_entry_new (void);
+GtkCTreeNode *add_node(smb_entry *en,char **textos,GtkCTreeNode *nodo);
+gboolean sane (char *bin);
+
 
 /************public variables *******************/
 

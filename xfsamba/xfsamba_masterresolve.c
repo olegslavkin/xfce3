@@ -244,7 +244,7 @@ again_master:
       goto again_master;
     {
       print_status (_("Master browser not resolved. Use location box to browse."));
-      my_show_message (_("No master browser resolved.\nPlease type a computer name at location and hit RETURN"));
+      xf_dlg_warning (smb_nav,_("No master browser resolved.\nPlease type a computer name at location and hit RETURN"));
       clean_nmb ();
     }
     return;

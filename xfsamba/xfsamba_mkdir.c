@@ -221,16 +221,19 @@ SMBmkdirForkOver (void)
       {
 	sprintf (textos[COMMENT_COLUMN], "/%s%s/%s", selected.share, selected.dirname, new_dir);
       }
-      node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
       free (textos[COMMENT_COLUMN]);
       {
 	smb_entry *data;
-	data = (smb_entry *) malloc (sizeof (smb_entry));
+	data=smb_entry_new(); 
 	data->i[0] = data->i[1] = 0;
 	data->i[2]=1;
 	data->label=g_strdup(new_dir);
-	
-	gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
+	data->type |= S_T_DIRECTORY;
+	data->dirname = g_strdup(new_dir);
+	data->share=g_strdup(selected.share);
+	data->dirname=g_strdup(new_dir);
+        node = add_node(data,textos,(GtkCTreeNode *) selected.node);
+        gtk_ctree_sort_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);	
       }
 
     }

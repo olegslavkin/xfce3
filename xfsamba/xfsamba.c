@@ -67,9 +67,10 @@
 
 int preferences=0x0;
 
-static void cleanup_tmpfiles(void){
+void cleanup_tmpfiles(void){
    glob_t dirlist;
    int i;
+   rmdir("/tmp/xfsamba");
    if (glob ("/tmp/xfsamba*", GLOB_ERR ,NULL, &dirlist) != 0) {
 		  /*fprintf (stderr, "dbg:%s: no match\n", globstring);*/
 	return;
@@ -258,58 +259,7 @@ abort_dialog (char *message)
   return dialog;
 }
 
-gboolean
-sane (char *bin)
-{
-  char *spath, *path, *globstring;
-  glob_t dirlist;
-
-  /* printf("getenv=%s\n",getenv("PATH")); */
-  if (getenv ("PATH"))
-  {
-    path = (char *) malloc (strlen (getenv ("PATH")) + 2);
-    strcpy (path, getenv ("PATH"));
-    strcat (path, ":");
-  }
-  else
-  {
-    path = (char *) malloc (4);
-    strcpy (path, "./:");
-  }
-
-  globstring = (char *) malloc (strlen (path) + strlen (bin) + 1);
-
-/* printf("path=%s\n",path);*/
-
-  if (strstr (path, ":"))
-    spath = strtok (path, ":");
-  else
-    spath = path;
-
-  while (spath)
-  {
-    sprintf (globstring, "%s/%s", spath, bin);
-/*	 printf("checking for %s...\n",globstring);*/
-    if (glob (globstring, GLOB_ERR, NULL, &dirlist) == 0)
-    {
-      /*       printf("found at %s\n",globstring); */
-      free (globstring);
-      globfree (&dirlist);
-      free (path);
-      return TRUE;
-    }
-    globfree (&dirlist);
-    spath = strtok (NULL, ":");
-  }
-
-  gtk_window_set_transient_for (GTK_WINDOW (abort_dialog (bin)), GTK_WINDOW (smb_nav));
-  gtk_main ();
-  /*printf("samba failure: %s not found in PATH\n",bin); */
-    cleanup_tmpfiles();
-  exit (1);
-}
-
-
+GtkWidget *io_parent;
 static void
 finishit (int sig)
 {
@@ -362,8 +312,14 @@ main (int argc, char *argv[])
   set_icon (smb_nav, "Xfsamba", xfsamba_xpm);
   cursor_wait (GTK_WIDGET (smb_nav));
   animation (TRUE);
-  sane ("nmblookup");
-  sane ("smbclient");
+  if (!sane ("nmblookup")) {
+	  xf_dlg_error(smb_nav,"File not found","nmblookup");
+	  exit(1);
+  }
+  if (!sane ("smbclient")) {
+	  xf_dlg_error(smb_nav,"File not found","smbclient");
+	  exit(1);
+  }
   gtk_timeout_add (500, (GtkFunction) NMBmastersLookup, NULL);
   gtk_main ();
   cleanup_tmpfiles();

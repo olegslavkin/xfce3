@@ -128,7 +128,7 @@ SMBrm (void)
 
   if (!strncmp (selected.comment, "Disk", strlen ("Disk")))
   {
-    my_show_message (_("Sorry, top level shares cannot be removed."));
+    xf_dlg_warning (smb_nav,_("Sorry, top level shares cannot be removed."));
     animation (FALSE);
     cursor_reset (GTK_WIDGET (smb_nav));
     print_status (_("Remove cancelled."));
@@ -148,10 +148,13 @@ SMBrm (void)
 
   if (selected.directory)
   {
-    sprintf (NMBcommand, "rmdir \\\"%s\\\"", selected.dirname);
+    /*sprintf (NMBcommand, "rm \"%s\\*\";rmdir \"%s\\\"", selected.dirname, selected.dirname);*/
+	  /* FIXME: To delete non empty folders */
+    sprintf (NMBcommand, "rmdir \"%s\\\"",  selected.dirname);
   }
   else
   {				/* a file to remove */
+	  /* FIXME: To delete more than one file */
     sprintf (NMBcommand, "cd \\\"%s\\\";del \\\"%s\\\"", selected.dirname, selected.filename);
   }
 
@@ -209,7 +212,7 @@ really_remove (void)
   }
 
   dialog = gtk_dialog_new ();
-  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
   gtk_window_set_policy (GTK_WINDOW (dialog), TRUE, TRUE, FALSE);
   gtk_container_border_width (GTK_CONTAINER (dialog), 5);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);

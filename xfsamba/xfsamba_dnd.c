@@ -321,7 +321,9 @@ void
 on_drag_data_get (GtkWidget * ctree, GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data)
 {
   int num,len;
-  gchar *files;
+  gchar *dnddata=NULL,*files=NULL;
+  GList *s;
+  smb_entry *en;
 
   if (!ctree){
 	 /*fprintf(stderr,"dbg: return 1 from oddg()\n");*/
@@ -343,20 +345,44 @@ on_drag_data_get (GtkWidget * ctree, GdkDragContext * context, GtkSelectionData 
     /* not implemented */
     break;
   default:
-    if (!thisN->password || !selected.share || !selected.dirname 
-		  || !thisN->netbios || !selected.filename) break;
-    len=strlen("smb://@:/\r\n")+strlen(selected.share)
-	    +strlen(selected.dirname)+strlen(selected.filename)
-	    +strlen(thisN->netbios)+strlen(thisN->password);
-    files = g_malloc (len + 1);
+    for (len = 0,s = GTK_CLIST (ctree)->selection; s != NULL; s=s->next){
+	        int addlen;
+		addlen=strlen("smb://@://\r\n");
+                en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+		/*printf("dbg:filename=%s, share=%s, dirname=%s\n",
+					 en->filename,en->share,en->dirname);*/
+		/*line=get_select_share((GtkCTree *)ctree,s->data);*/
+   	        if (!thisN->password || !en->share || !en->dirname || !thisN->netbios ) continue;
+		addlen += (strlen(en->share)+strlen(en->dirname)
+			    +strlen(thisN->netbios)+strlen(thisN->password));
+		if (en->filename){
+			 addlen +=strlen(en->filename); 
+		} 
+		len += addlen;
+    }
+    dnddata = files = g_malloc (len + 1);
     if (!files) break;
-    sprintf (files, "smb://%s@%s:%s%s%s%s\r\n",thisN->password,thisN->netbios,
-		    selected.share,selected.dirname,
-		    (strcmp(selected.dirname,"/")==0)?"":"/",
-		    selected.filename);
-       
-    gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) files, len);
+    files[0]=0;
+    for (s = GTK_CLIST (ctree)->selection; s != NULL; s=s->next){
+           en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+   	   if (!thisN->password || !en->share || !en->dirname || !thisN->netbios ) continue;
+	   if (en->filename)
+		 sprintf (files, "smb://%s@%s:%s%s%s%s\r\n",thisN->password,thisN->netbios,
+		    en->share,
+		     en->dirname,
+		    (strcmp(en->dirname,"/")==0)?"":"/",
+		    (en->filename)?(en->filename):"");
+	   else sprintf (files, "smb://%s@%s:%s%s%s\r\n",thisN->password,thisN->netbios,
+		    en->share,en->dirname,
+		    (strcmp(en->dirname,"/")==0)?"":"/");
+
+	   files = files + strlen(files);
+    }
+    /*printf("dbg:dnddata=%s,len=%d\n",dnddata,len);*/
+    gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) dnddata, len);
+    g_free(dnddata);
     break;
+    
   }
 }
 

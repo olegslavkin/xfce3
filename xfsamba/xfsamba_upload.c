@@ -83,6 +83,7 @@ static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
       char sizeo[64];
       struct stat st;
       char *textos[SHARE_COLUMNS];
+      smb_entry *data;
       off_t i, sizei = 0;
       for (i = 0; i < SHARE_COLUMNS; i++)textos[i] = "";
       textos[SHARE_NAME_COLUMN] = label;
@@ -106,21 +107,18 @@ static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
 	      textos[COMMENT_COLUMN] =line;
       }
       if (!path){
-	      node = gtk_ctree_insert_node (ctree, nodo, NULL, textos, SHARE_COLUMNS, 
-		      gPIX_dir_close, gPIM_dir_close,gPIX_dir_open,gPIM_dir_open, FALSE, FALSE);
+	data=smb_entry_new();
+	data->type |= S_T_DIRECTORY;
+	data->dirname=(char *)malloc(strlen(selected.dirname)+strlen(label)+2);
+	sprintf(data->dirname,"%s/%s",selected.dirname,label);
       } else {
-	      node = gtk_ctree_insert_node (ctree, nodo, NULL, textos, SHARE_COLUMNS, 
-		      gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
+	data=smb_entry_new();
+	data->type |= S_T_FILE;
+	data->share=g_strdup(selected.share);
+	data->dirname=g_strdup(selected.dirname);
+	data->filename=g_strdup(textos[SHARE_NAME_COLUMN]);
       }
-      {
-	smb_entry *data;
-	data = (smb_entry *) malloc (sizeof (smb_entry));
-	data->i[0] = sizei;
-	data->i[1] = time(NULL);
-	if (!path) data->i[2]=1; else data->i[2]=0;
-	data->label=g_strdup(label);
-	gtk_ctree_node_set_row_data_full (ctree, node, data, node_destroy);
-      }
+      node = add_node(data,textos,nodo);
 }
 
 /* function to be run by parent after child has exited
@@ -182,7 +180,7 @@ SMBPutFile (void)
   if (glob (fileS, GLOB_ERR, NULL, &dirlist) != 0)
   {
     globfree (&dirlist);
-    my_show_message (_("Specified file does not exist"));
+    xf_dlg_warning (smb_nav,_("Specified file does not exist"));
     print_status (_("Upload failed."));
     animation (FALSE);
     cursor_reset (GTK_WIDGET (smb_nav));

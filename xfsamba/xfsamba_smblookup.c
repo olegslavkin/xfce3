@@ -94,32 +94,29 @@ SMBprint (nmb_list * currentN)
 {
   nmb_cache *cache;
   GtkCTreeNode *node;
+  smb_entry *data;
   cache = currentN->shares;
   while (cache)
   {
-    GdkPixmap *gPIXo, *gPIXc;
-    GdkBitmap *gPIMo, *gPIMc;
-    if ((cache->textos[COMMENT_COLUMN]) && (strncmp (cache->textos[COMMENT_COLUMN], "Printer", strlen ("Printer")) == 0))
+    data=smb_entry_new();
+    if ((cache->textos[COMMENT_COLUMN]) 
+		    && (strncmp (cache->textos[COMMENT_COLUMN], 
+				    "Printer", strlen ("Printer")) == 0))
     {
-      gPIXc = gPIXo = gPIX_print;
-      gPIMc = gPIMo = gPIM_print;
-    }
-    else
+      data->type |= S_T_PRINTER;
+    } else if ((cache->textos[COMMENT_COLUMN]) 
+		    && (strncmp (cache->textos[COMMENT_COLUMN], 
+				    "IPC", strlen ("IPC")) == 0))
     {
-      gPIXo = gPIX_dir_open_lnk;
-      gPIXc = gPIX_dir_close_lnk;
-      gPIMo = gPIM_dir_open_lnk;
-      gPIMc = gPIM_dir_close_lnk;
+      data->type |= S_T_IPC;
+    } else {
+      data->dirname=g_strdup("/");
+      data->share=g_strdup(cache->textos[SHARE_NAME_COLUMN]);
+      data->type |= S_T_SHARE;
     }
     if (cache->textos[SHARE_NAME_COLUMN])
     {
-	smb_entry *data;
-      node = gtk_ctree_insert_node ((GtkCTree *) shares, NULL, NULL, cache->textos, SHARE_COLUMNS, gPIXc, gPIMc, gPIXo, gPIMo, FALSE, FALSE);
- 	data = (smb_entry *) malloc (sizeof (smb_entry));
-	data->i[0] = data->i[1] = 0;
-	data->i[2]=1;
-	data->label=g_strdup(cache->textos[SHARE_NAME_COLUMN]);
-       gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
+        node = add_node(data,cache->textos,NULL);	
     }
 
     cache = cache->next;
@@ -140,8 +137,14 @@ SMBprint (nmb_list * currentN)
     gtk_clist_set_pixmap ((GtkCList *) workgroups, row, 0, (cache->visited) ? gPIX_wg2 : gPIX_wg1, (cache->visited) ? gPIM_wg2 : gPIM_wg1);
     cache = cache->next;
   }
-  if (SMBResult == SUCCESS)
+  if (SMBResult == SUCCESS){
+    GtkCList *clist;
+    clist=(GtkCList *)shares;
     print_status (_("Query done."));
+    gtk_clist_set_sort_column (clist, SHARE_NAME_COLUMN);
+    clist->sort_type = GTK_SORT_ASCENDING;
+    gtk_clist_sort (clist);    
+  }
   if (SMBResult == FAILED)
     print_status (_("Query failed. Machine may be down."));
 

@@ -25,8 +25,10 @@ xfsamba_SOURCES = tubo.h tubo.c \
 		xfsamba_tar.c \
 		xfsamba_smblookup.c \
 		xfsamba_dnd.c xfsamba_dnd.h \
+		xfsamba_mnt.c \
 		uri.c uri.h \
-		gtk_dlg.c gtk_dlg.h
+		gtk_dlg.c gtk_dlg.h \
+		io.c io.h
 
 
 xfsamba_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \

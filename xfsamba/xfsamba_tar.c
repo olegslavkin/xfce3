@@ -123,7 +123,7 @@ SMBtarForkOver (void)
   default:
     if (tar_options & 0xf00)
     {
-      my_show_message (_("Tar extraction has completed"));
+      xf_dlg_warning (smb_nav,_("Tar extraction has completed"));
       SMBrefresh (thisN->netbios, FORCERELOAD);
     }
     else
@@ -150,11 +150,11 @@ proceed_tar (GtkWidget * widget, gpointer data)
 
     if (tar_options & 0xf00)
     {
-      my_show_message (_("Please select input tarfile next."));
+      xf_dlg_warning (smb_nav,_("Please select input tarfile next."));
     }
     else
     {
-      my_show_message (_("Please select the output tarfile next."));
+      xf_dlg_warning (smb_nav,_("Please select the output tarfile next."));
     }
 
     if (tarO)
@@ -200,7 +200,7 @@ proceed_tar (GtkWidget * widget, gpointer data)
       test = fopen (fileS, "rb");
       if (!test)
       {
-	my_show_message (_("Cannot open tar file"));
+	xf_dlg_warning (smb_nav,_("Cannot open tar file"));
 	goto error_3361;
       }
       fclose (test);
@@ -211,7 +211,7 @@ proceed_tar (GtkWidget * widget, gpointer data)
       test = fopen (fileS, "wb");
       if (!test)
       {
-	my_show_message (_("Cannot create tar file"));
+	xf_dlg_warning (smb_nav,_("Cannot create tar file"));
 	goto error_3361;
       }
       fclose (test);

@@ -75,7 +75,7 @@ NMBmastersForkOver (void)
   {
     print_diagnostics ("Your subnet might be SMB free, or have a win95 master browser.\n");
     print_status (_("No master browser found. See diagnostics."));
-    my_show_message (_("No master browser found.\nPlease type a computer name at location and hit RETURN"));
+    xf_dlg_warning (smb_nav,_("No master browser found.\nPlease type a computer name at location and hit RETURN"));
   }
 }
 
