@@ -97,6 +97,7 @@ enum
   PIM_BLOCK_DEV,
   PIM_EXE,
   PIM_EXE_FILE,
+  PIM_STALE_LNK,
   LAST_PIM
 };
 
@@ -130,12 +131,12 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
 	{gPIX+PIX_SOCKET,	gPIM+PIM_SOCKET,	socket_xpm},
 	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
+	{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},
 	{gPIX+PIX_EXE_FILE,	gPIM+PIM_EXE_FILE,	exe_file_xpm},
 	{NULL,NULL,NULL}
 };
 
 static gen_pixmap_list gen_pixmaps[]={
-	{gPIX+PIX_STALE_LNK,	NULL,	page_xpm,	"?",	2},
 	{gPIX+PIX_PAGE_C,	NULL,	page_xpm,	"c",	0},
 	{gPIX+PIX_PAGE_H,	NULL,	page_xpm,	"h",	1},
 	{gPIX+PIX_PAGE_F,	NULL,	page_xpm,	"f",	0},
@@ -397,7 +398,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
   else if (type & FT_BLOCK_DEV){PIXid[0]=PIX_BLOCK_DEV,PIXid[1]=PIM_BLOCK_DEV;}
   else if (type & FT_FIFO){PIXid[0]=PIX_FIFO,PIXid[1]=PIM_FIFO;}
   else if (type & FT_SOCKET){PIXid[0]=PIX_SOCKET,PIXid[1]=PIM_SOCKET;}
-  else if (type & FT_STALE_LINK){PIXid[0]=PIX_STALE_LNK,PIXid[1]=PIM_PAGE;}
+  else if (type & FT_STALE_LINK){PIXid[0]=PIX_STALE_LNK,PIXid[1]=PIM_STALE_LNK;}
   if (type & (FT_BLOCK_DEV|FT_CHAR_DEV|FT_FIFO|FT_SOCKET|FT_STALE_LINK))
 	  goto icon_identified;
 

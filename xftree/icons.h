@@ -25,4 +25,5 @@
 #include "icons/link_flag.xpm"
 #include "icons/exe.xpm"
 #include "icons/exe_file.xpm"
+#include "icons/stale_lnk.xpm"
 #endif

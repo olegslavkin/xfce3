@@ -277,8 +277,10 @@ int entry_update (entry * en)
      struct stat ss;
      tipo |= FT_LINK;
      if (stat (en->path, &ss) == -1) {
-        en->type |= FT_STALE_LINK;
-	return (1); /* its gone */
+        /*en->type = (FT_STALE_LINK|FT_LINK);*/
+        en->type = FT_STALE_LINK;
+	dup_stat(&(en->st),&s);
+	return (1); 
      }
      if (S_ISDIR (en->st.st_mode)) {
 	     tipo |= FT_DIR;
@@ -311,7 +313,8 @@ int entry_update (entry * en)
   } else {  /* just check for stale links */
     if (S_ISLNK (s.st_mode)) { 
       if (stat (en->path, &s) == -1) {
-        en->type |= FT_STALE_LINK;
+        /*en->type = (FT_STALE_LINK|FT_LINK);*/
+        en->type = FT_STALE_LINK;
 	/*printf("dbg:stalelink2 %s\n",en->path);*/
         return 1;
       }
