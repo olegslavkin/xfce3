@@ -121,9 +121,7 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
   gdouble *newcolor;
   char *geometry;
   cfg *win;
-   /* FIXME: must add the xfwm border width and title bar.
-   * for now using 5 and 30, WFM */
-  gint wm_offsetX=8,wm_offsetY=40;
+  gint wm_offsetX,wm_offsetY;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if ((geometry=(char *)malloc(64))==NULL) return;
@@ -150,7 +148,33 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
   execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
   fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
   return;
- }
+}
+
+
+void
+cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree)
+{
+  cfg *win;
+  gint wm_offsetX,wm_offsetY;
+  char *geometry;
+  
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if ((geometry=(char *)malloc(64))==NULL) return;
+  gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &wm_offsetX, &wm_offsetY);
+  /*fprintf(stderr,"exiting: x=%d,y=%d\n",wm_offsetX, wm_offsetY);*/
+  sprintf(geometry,"%dx%d+%d+%d",
+		  win->top->allocation.width,
+		  win->top->allocation.height,
+		  wm_offsetX,
+		  wm_offsetY);
+
+  preferences ^= LARGE_TOOLBAR;
+  save_defaults (NULL);
+  execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
+  fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
+  return;
+}
+
 
 
 

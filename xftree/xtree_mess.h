@@ -3,6 +3,7 @@
 #define SHORT_TITLES	 	0x04
 #define DRAG_DOES_COPY		0x08
 #define CUSTOM_COLORS		0x10
+#define LARGE_TOOLBAR		0x20
 
 #define XFTREE_CONFIG_FILE "xftreerc"
 
@@ -30,4 +31,5 @@ void cb_default_SCK(GtkWidget * item, GtkWidget * ctree );
 void show_cat (char *message);
 void cb_select_colors (GtkWidget * widget, GtkWidget * ctree);
 void set_colors(GtkWidget * ctree);
+void cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree);
 

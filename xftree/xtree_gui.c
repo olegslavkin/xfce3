@@ -2299,9 +2299,14 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New window"), _("New window"), _("New window"), MyCreateFromPixmapData (toolbar, new_win_xpm), GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Close window"), _("Close window"), _("Close window"), MyCreateFromPixmapData (toolbar, closewin_xpm), GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
-
-  gtk_toolbar_append_space ((GtkToolbar *) toolbar);
+  if (!(preferences & LARGE_TOOLBAR)) {
+     gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Close window"), 
+		     _("Close window"),
+		     _("Close window"), 
+		     MyCreateFromPixmapData (toolbar, closewin_xpm), 
+		     GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
+     gtk_toolbar_append_space ((GtkToolbar *) toolbar);
+  }
 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go back ..."), _("Go back ..."), _("Go back ..."), MyCreateFromPixmapData (toolbar, go_back_xpm), GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);
  
@@ -2314,21 +2319,23 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 
   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New Folder"), _("New Folder"), _("New Folder"), MyCreateFromPixmapData (toolbar, new_dir_xpm), GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
+  if (!(preferences & LARGE_TOOLBAR)) {
+   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New Folder"), _("New Folder"), _("New Folder"), MyCreateFromPixmapData (toolbar, new_dir_xpm), GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New file ..."), _("New file ..."), _("New file ..."), MyCreateFromPixmapData (toolbar, new_file_xpm), GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
+   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New file ..."), _("New file ..."), _("New file ..."), MyCreateFromPixmapData (toolbar, new_file_xpm), GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Properties"), _("Properties"), _("Properties"), MyCreateFromPixmapData (toolbar, appinfo_xpm), GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
+   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Properties"), _("Properties"), _("Properties"), MyCreateFromPixmapData (toolbar, appinfo_xpm), GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
 
-  gtk_toolbar_append_space ((GtkToolbar *) toolbar);
+   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Delete ..."), _("Delete ..."), _("Delete ..."), MyCreateFromPixmapData (toolbar, delete_xpm), GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
+   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Delete ..."), _("Delete ..."), _("Delete ..."), MyCreateFromPixmapData (toolbar, delete_xpm), GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Open Trash"), _("Open Trash"), _("Open Trash"), MyCreateFromPixmapData (toolbar, trash_xpm), GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
+   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Open Trash"), _("Open Trash"), _("Open Trash"), MyCreateFromPixmapData (toolbar, trash_xpm), GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Empty Trash"), _("Empty Trash"), _("Empty Trash"), MyCreateFromPixmapData (toolbar, empty_trash_xpm), GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
+   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Empty Trash"), _("Empty Trash"), _("Empty Trash"), MyCreateFromPixmapData (toolbar, empty_trash_xpm), GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
 
-  gtk_toolbar_append_space ((GtkToolbar *) toolbar);
+   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
+  }
 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Toggle Dotfiles"), _("Toggle Dotfiles"), _("Toggle Dotfiles"), MyCreateFromPixmapData (toolbar, dotfile_xpm), GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
 
@@ -2556,7 +2563,12 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
- 
+  menuitem = gtk_menu_item_new_with_label (_("Change toolbar size"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_change_toolbar), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+
   /* Create "Help" menu */
   menuitem = gtk_menu_item_new_with_label (_("Help"));
   gtk_menu_item_right_justify (GTK_MENU_ITEM (menuitem));
@@ -2965,9 +2977,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   }
 
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
-  gtk_widget_show_all (top);
   gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
   gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+  if (!(preferences & LARGE_TOOLBAR)) gtk_widget_show_all (top);
 
   menutop = create_menu (top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
@@ -2976,6 +2988,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   toolbar = create_toolbar (top, ctree, win);
   gtk_container_add (GTK_CONTAINER (handlebox2), toolbar);
   gtk_widget_show (toolbar);
+
+  if (preferences & LARGE_TOOLBAR) gtk_widget_show_all (top);
+
   icon_name = strrchr (path, '/');
   if ((icon_name) && (!(*(++icon_name))))
     icon_name = NULL;
