@@ -1,3 +1,27 @@
+2001-08-04  xfce
+
+	* xfce-3.8.6.lsm, backdrops/Blue.list, backdrops/Toulouse.list,
+	libs/mygtkclock.c, other/xinitrc, other/xinitrc.mwm, po/xfce.pot,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfhelp,
+	xfwm/add_window.c, xfwm/bindings.c, xfwm/borders.c,
+	xfwm/builtins.c, xfwm/colormaps.c, xfwm/colors.c, xfwm/complex.c,
+	xfwm/decorations.c, xfwm/events.c, xfwm/focus.c, xfwm/functions.c,
+	xfwm/icons.c, xfwm/menus.h, xfwm/misc.h, xfwm/module.c,
+	xfwm/move.c, xfwm/placement.c, xfwm/read.c, xfwm/resize.c,
+	xfwm/session.c, xfwm/style.c, xfwm/themes.c, xfwm/themes.h,
+	xfwm/virtual.c, xfwm/windows.c, xfwm/xfwm.c, xfwm/xfwm.h,
+	xfwm/xinerama.c: Replace all occurences on Boolean with Bool in
+	xfwm code
+
+2001-08-03  xfce
+
+	* autogen.sh: Add autogen.sh script for easy update of
+	automake/autoconf/libtool stuff.
+
+2001-08-03  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-08-03  xfce
 
 	* Makefile.am, Makefile.in, Makefile.init, acinclude.m4,
