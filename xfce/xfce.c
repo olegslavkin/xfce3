@@ -134,7 +134,7 @@ update_gxfce_coord (GtkWidget * toplevel, gint * x, gint * y)
   {
     gtk_widget_size_request (GTK_WIDGET (toplevel), &requisition);
     *x = (gdk_screen_width () - requisition.width) / 2;
-    *y = gdk_screen_height () - requisition.height - 20;
+    *y = gdk_screen_height () - requisition.height;
     if (*x < 0)
       *x = 0;
     if (*y < 0)
