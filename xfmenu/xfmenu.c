@@ -66,6 +66,13 @@
 
 #define GMENUPATH "/share/gnome/apps"
 #define KMENUPATH "/share/applnk"
+#define DEFAULT_CHARSET "ISO-8859-1"
+#define F 0   /* character never appears in text */
+#define T 1   /* character appears in plain ASCII text */
+#define I 2   /* character appears in ISO-8859 text */
+#define X 3   /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
+#define OUTBUF_SIZE	4096
+
 
 /*------------------*
  * typedefs 
@@ -124,10 +131,112 @@ char *lcmessages = NULL;
 char *lang = NULL;
 char *lcmessages_base = NULL;
 char *lang_base = NULL;
+char *charset = NULL;
 
 /*------------------*
  * functions 
  *------------------*/
+
+
+static unsigned int isUtf8(const char *buf) {
+  int i, n;
+  register char c;
+  unsigned int gotone = 0;
+
+  static const char text_chars[256] = 
+  {
+  /*		      BEL BS HT LF    FF CR    */
+	F, F, F, F, F, F, F, T, T, T, T, F, T, T, F, F,  /* 0x0X */
+	/*				ESC	     */
+	F, F, F, F, F, F, F, F, F, F, F, T, F, F, F, F,  /* 0x1X */
+	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x2X */
+	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x3X */
+	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x4X */
+	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x5X */
+	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x6X */
+	T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, F,  /* 0x7X */
+	/*	      NEL			     */
+	X, X, X, X, X, T, X, X, X, X, X, X, X, X, X, X,  /* 0x8X */
+	X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,  /* 0x9X */
+	I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xaX */
+	I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xbX */
+	I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xcX */
+	I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xdX */
+	I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xeX */
+	I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I   /* 0xfX */
+  };
+
+  /* *ulen = 0; */
+  for (i = 0; (c = buf[i]); i++) {
+    if ((c & 0x80) == 0) {	  /* 0xxxxxxx is plain ASCII */
+      /*
+       * Even if the whole file is valid UTF-8 sequences,
+       * still reject it if it uses weird control characters.
+       */
+
+      if (text_chars[(int) c] != (char) T)
+	return 0;
+
+    } else if ((c & 0x40) == 0) { /* 10xxxxxx never 1st byte */
+      return 0;
+    } else {			       /* 11xxxxxx begins UTF-8 */
+      int following;
+
+    if ((c & 0x20) == 0) {	       /* 110xxxxx */
+      following = 1;
+    } else if ((c & 0x10) == 0) {      /* 1110xxxx */
+      following = 2;
+    } else if ((c & 0x08) == 0) {      /* 11110xxx */
+      following = 3;
+    } else if ((c & 0x04) == 0) {      /* 111110xx */
+      following = 4;
+    } else if ((c & 0x02) == 0) {      /* 1111110x */
+      following = 5;
+    } else
+      return 0;
+
+      for (n = 0; n < following; n++) {
+	i++;
+	if (!(c = buf[i]))
+	  goto done;
+
+	if ((c & 0x80) == 0 || (c & 0x40))
+	  return 0;
+      }
+      gotone = 1;
+    }
+  }
+done:
+  return gotone;   /* don't claim it's UTF-8 if it's all 7-bit */
+}
+
+char outbuf[OUTBUF_SIZE];
+char *convert_code (char *fromcode)
+{
+  char *outptr;
+  int outlen=0;
+  int len=0;
+
+  unsigned int utf8 = isUtf8(fromcode);
+
+  memset(outbuf, 0, OUTBUF_SIZE);
+
+  len = strlen(fromcode);
+
+  outptr = outbuf;
+  outlen = OUTBUF_SIZE;
+
+  if (utf8) {
+       iconv_t cd;
+       cd = iconv_open(charset, "UTF8");
+       iconv (cd, &fromcode, &len, &outptr, &outlen);
+       iconv_close(cd);
+  }
+  outbuf[outlen] = '\0';
+  outbuf[outlen+1] = '\0';
+  return outbuf;
+     
+}
 
 /* initialization and 
  * communication with xfwm */
@@ -202,23 +311,54 @@ init_nls (void)
   if (temp)
   {
     char *end;
+    char *dot;
+
     lcmessages = g_strndup (temp, 5);
     lcmessages_base = g_strdup (lcmessages);
+
+    if ((dot = strrchr (lcmessages , '.')))
+    {
+      dot++;
+      charset = (char *) safemalloc (strlen (dot) + 1);
+      strcpy (charset, dot);
+    }
+
     if ((end = strchr (lcmessages_base, '_')))
     {
       *end = '\0';
     }
   }
   temp = g_getenv ("LANG");
+  if (!temp)
+  {
+    temp = g_getenv ("LANGUAGE");
+  }
+
   if (temp)
   {
     char *end;
+    char *dot;
+
     lang = g_strndup (temp, 5);
     lang_base = g_strdup (lang);
+
+    if ((dot = strrchr (lcmessages , '.')))
+    {
+      dot++;
+      charset = (char *) safemalloc (strlen (dot) + 1);
+      strcpy (charset, dot);
+    }
+
     if ((end = strchr (lang_base, '_')))
     {
       *end = '\0';
     }
+  }
+
+  if (!charset)
+  {
+    charset = (char *) safemalloc (strlen (DEFAULT_CHARSET) + 1);
+    strcpy (charset, DEFAULT_CHARSET);
   }
 }
 
@@ -874,6 +1014,13 @@ add_entry_to_menu (char *menu_name, MenuEntry * entry, MenuType mtype)
 
   if (!(entry) || !(entry->name))
     return;
+
+  utf8 = isUtf8(entry->name);
+  if(utf8) { 
+	 memset(buf, 0, 4096);
+	 strcpy(buf, convert_code(entry->name));
+	 strcpy(entry->name, buf);
+  }
 
   if (entry->type == ITEM && is_executable (entry->cmd))
   {
