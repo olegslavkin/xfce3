@@ -153,7 +153,6 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   int i;
   char *label[COLUMNS];
   entry *en;
-  char *icon_name;
   cfg *win;
   struct passwd *pw;
   struct group *gr;
@@ -210,9 +209,11 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   
   ctree_thaw (ctree);
   set_title_ctree (GTK_WIDGET (ctree), en->path);
+#if 0
   icon_name = strrchr (en->path, '/');
   if ((icon_name) && (!(*(++icon_name)))) icon_name = NULL;
   gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, (icon_name ? icon_name : "/"));
+#endif
 
 }
 

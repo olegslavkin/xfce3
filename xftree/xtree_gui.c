@@ -980,7 +980,6 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   GtkCTreeNode *root;
   gchar *label[COLUMNS];
   gchar *titles[COLUMNS];
-  char *icon_name;
   entry *en;
   cfg *win;
   GtkAccelGroup *inner_accel;
@@ -1413,7 +1412,6 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
                               
 
 
-  set_title_ctree (ctree, en->path);
   if (win->width > 0 && win->height > 0)
   {
     gtk_window_set_default_size (GTK_WINDOW (win->top), width, height);
@@ -1488,10 +1486,21 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       gtk_clist_column_titles_hide((GtkCList *)ctree);
   }
   
-  icon_name = strrchr (path, '/');
-  if ((icon_name) && (!(*(++icon_name)))) icon_name = NULL;
+  win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+  if (win->iconname) {
+   if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
+     sprintf(win->iconname,"~%s",path+strlen(getenv ("HOME")));
+   } else sprintf (win->iconname, "%s", (path)?path:"/");
+   gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, 
+		  win->iconname);
+  } 
+  set_icon (win->top,win->iconname, xftree_icon_xpm);
+  set_title_ctree (ctree, en->path);
+  
 
-  set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
+ /* icon_name = strrchr (path, '/');
+  if ((icon_name) && (!(*(++icon_name)))) icon_name = NULL;
+  set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);*/
 
   gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_DATE,!(preferences & HIDE_DATE));
   gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_SIZE,!(preferences & HIDE_SIZE));

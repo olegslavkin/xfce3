@@ -752,7 +752,7 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   update_status(parent,ctree);
 }
 
-
+#if 0
 void
 set_title (GtkWidget * w, const char *path)
 {
@@ -764,6 +764,8 @@ set_title (GtkWidget * w, const char *path)
   free(title);
 
 }
+#endif
+
 void
 set_title_ctree (GtkWidget * ctree, const char *path)
 {
@@ -771,17 +773,34 @@ set_title_ctree (GtkWidget * ctree, const char *path)
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   title = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
-  if (!title) return; 
+  if (win->iconname) g_free(win->iconname);
+  win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+  if (!title || !win->iconname) return; 
+  
+  
   if (win->preferences&SHORT_TITLES) {
 	  char *word;
 	  word = strrchr (path,'/');
 	  if (word) sprintf(title,"%s",(word[1]==0)?word:word+1);
 	  else  sprintf(title,"XFTree");	  
+          gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
   }
-  else sprintf (title, "%s", path);
-  gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
+  else {
+  	/*printf("%s==%s\n",path,getenv ("HOME"));*/
+  	if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
+	  sprintf(title,"~%s",path+strlen(getenv ("HOME")));
+  	} else {
+		sprintf (title, "%s", path);
+  	}	  
+  	gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
+  }
+  /*printf("%s==%s\n",path,getenv ("HOME"));*/
+  if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
+    sprintf(win->iconname,"~%s",path+strlen(getenv ("HOME")));
+  } else sprintf (win->iconname, "%s", path);
+  gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, 
+		  win->iconname);
   free(title);
-
 }
 
 

@@ -49,6 +49,7 @@ typedef struct
   /* geometry */
   int width;
   int height;
+  char *iconname;
   GtkWidget *restore_menu;
   GtkWidget *top;
   GtkWidget *toolbar;
