@@ -1,3 +1,4 @@
+- recursive chown, chmod, chgrp in setting properties.
 - In xtree_tar.c, when determining "mode", do a search of all open xfree
   windows until the extracted file is found (tar_extract()).
 - Toolbar icon + menu elements for "print"

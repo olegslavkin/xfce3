@@ -101,7 +101,7 @@ on_ok (GtkWidget * ok, gpointer data)
     dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
     gtk_widget_destroy (dl.top);
     dl.result = (int) ((long) data);
-#if 0
+#if 10
     /*something wrong here, on first execution of instance.*/
     if ((dl.remember!=NULL)&&(gtk_toggle_button_get_active((GtkToggleButton *)dl.remember))){
       char  *sfx;
@@ -200,7 +200,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   dl.check = check = gtk_check_button_new_with_label (_("Open in terminal"));
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
  
-#if 0
+#if 10
  /*on first exec of dialog, something wrong with dl.remember */
   if (dl.file) { 
    dl.remember = gtk_check_button_new_with_label (_("Remember application"));
