@@ -952,6 +952,7 @@ HandleMapRequest ()
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
       SetMapStateProp (Tmp_win, NormalState);
+      XSync (dpy, 0);
       MyXUngrabServer (dpy);
       break;
     }
@@ -1011,6 +1012,7 @@ HandleMapNotify ()
     XMapWindow (dpy, Tmp_win->frame);
   XMapWindow (dpy, Tmp_win->w);
   SetMapStateProp (Tmp_win, NormalState);
+  XSync (dpy, 0);
   MyXUngrabServer (dpy);
 
   Tmp_win->flags |= MAPPED;
