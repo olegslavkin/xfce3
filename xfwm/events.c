@@ -295,7 +295,7 @@ DispatchEvent ()
 #ifdef REQUIRES_STASHEVENT
   StashEventTime (&Event);
 #endif
-  if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+  if ((w == None) || (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT))
   {
     Tmp_win = NULL;
   }
@@ -421,8 +421,7 @@ HandleFocusIn ()
 #ifdef REQUIRES_STASHEVENT
     StashEventTime (&d);
 #endif
-    if ((w = d.xany.window) == None)
-      continue;
+    if ((w = d.xany.window) == None) continue;
 #ifdef DEBUG
     fprintf (stderr, "xfwm : HandleFocusIn () : Skipping event...\n");
     if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) != XCNOENT)
@@ -434,6 +433,9 @@ HandleFocusIn ()
 
   if (w == None)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : Leaving HandleFocusIn () : window is 'None'\n");
+#endif
     return;
   }
 
@@ -877,6 +879,13 @@ HandleMapRequest ()
 #endif
   Event.xany.window = Event.xmaprequest.window;
 
+  if (Event.xany.window == None)
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : Leaving HandleMapRequest () : Mapping 'None' window !\n");
+#endif
+    return;
+  }
   if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
   {
 #ifdef DEBUG
@@ -1061,7 +1070,7 @@ HandleUnmapNotify ()
     fprintf (stderr, "xfwm : HandleUnmapNotify (): ICCCM2 unmap request\n");
 #endif
     Event.xany.window = Event.xunmap.window;
-    if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+    if ((Event.xany.window == None) || (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT))
     {
 #ifdef DEBUG
       fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Tmp_win == NULL\n");
@@ -1424,9 +1433,19 @@ HandleConfigureRequest ()
 #endif
   Event.xany.window = cre->window;	/* mash parent field */
 
+  if (cre->window == None)
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : Leaving HandleConfigureRequest () : Window is 'None'\n");
+#endif
+    return;
+  }
+  
   if (XFindContext (dpy, cre->window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+  {
     Tmp_win = NULL;
-
+  }
+  
   if (!Tmp_win || (Tmp_win->icon_w == cre->window))
   {
     xwcm = cre->value_mask & (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
