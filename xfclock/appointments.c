@@ -23,6 +23,12 @@ static GtkWidget *editbox = NULL;
 static GtkWidget *appointments_window = NULL;
 char appointments_file[12];
 
+static gint appnt_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+{
+  close_click (widget, data);
+  return (TRUE);
+}
+
 void
 edit_appointments (GtkWidget * widget, gpointer data)
 {
@@ -73,6 +79,7 @@ edit_appointments (GtkWidget * widget, gpointer data)
        GTK_SIGNAL_FUNC (save_click), NULL);
      */
     gtk_signal_connect (GTK_OBJECT (close_btn), "clicked", GTK_SIGNAL_FUNC (close_click), NULL);
+    gtk_signal_connect (GTK_OBJECT (appointments_window), "delete_event", GTK_SIGNAL_FUNC (appnt_delete_event), NULL);
   }
   load_date ();
   gtk_window_set_title (GTK_WINDOW (appointments_window), title);
