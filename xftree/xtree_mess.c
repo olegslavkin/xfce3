@@ -77,6 +77,7 @@
 #include "xtree_mess.h"
 
 #define BYTES "bytes"
+
 void set_colors(GtkWidget * ctree){
 	GtkStyle*  style;
 	int red,green,blue;
@@ -112,6 +113,7 @@ void set_colors(GtkWidget * ctree){
 	gtk_widget_set_style (ctree,style);
 	gtk_widget_ensure_style (ctree);
 }
+
 void
 cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
 {
@@ -146,8 +148,8 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
   save_defaults (NULL);
   execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
   fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
-  return;
 #endif
+  return;
 }
 
 
@@ -173,8 +175,8 @@ cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree)
   save_defaults (NULL);
   execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
   fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
-  return;
 #endif
+  return;
 }
 
 

@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia 2001 for Xfce project
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -25,6 +27,18 @@
 #ifndef __XTREE_GUI_H__
 #define __XTREE_GUI_H__
 #include <gtk/gtk.h>
+
+#define SPACING 	5
+/* moved to reg.h: #define DEF_APP		"netscape"*/
+#define TIMERVAL 	6000
+#define MAXBUF		8192
+
+#define WINCFG		1
+#define TOPWIN		2
+
+#define yes		1
+#define no		0
+#define ERROR 		-1
 
 typedef struct
 {
@@ -62,4 +76,11 @@ void set_title (GtkWidget * w, const char *path);
 
 
 void gui_main (char *path, char *xap, char *trash, char *reg, wgeo_t *, int);
+GtkWidget *
+new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags);
+int
+update_tree (GtkCTree * ctree, GtkCTreeNode * node);
+gint update_timer (GtkCTree * ctree);
+
+
 #endif
