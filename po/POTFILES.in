@@ -39,14 +39,20 @@ xftree/top.c
 xftree/tubo.c
 xftree/uri.c
 xftree/xtree.c
+xftree/xtree_cb.c
+xftree/xtree_colorsel.c
 xftree/xtree_cpy.c
 xftree/xtree_dnd.c
 xftree/xtree_du.c
+xftree/xtree_functions.c
 xftree/xtree_go.c
 xftree/xtree_gui.c
+xftree/xtree_icons.c
 xftree/xtree_mess.c
 xftree/xtree_misc.c
 xftree/xtree_pasteboard.c
+xftree/xtree_tar.c
+xftree/xtree_toolbar.c
 # XFDiff source files
 xfdiff/globber.c
 xfdiff/xfdiff.c
