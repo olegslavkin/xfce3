@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-09-01 22:12+0200\n"
+"POT-Creation-Date: 2002-11-10 14:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1186,7 +1186,7 @@ msgstr ""
 msgid "Open terminal view"
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:202 xftree/xtree_gui.c:158
+#: xfsamba/xfsamba_mkdir.c:211 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
 msgid "New Folder"
 msgstr ""
@@ -3397,23 +3397,23 @@ msgstr ""
 #. no jalo para arreglar directorios:
 #. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
 #.
-#: xfsamba/xfsamba_list.c:236
+#: xfsamba/xfsamba_list.c:237
 msgid "Retrieve done."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:241 xfsamba/xfsamba_smblookup.c:175
+#: xfsamba/xfsamba_list.c:242 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:284
+#: xfsamba/xfsamba_list.c:285
 msgid "List failed."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:303
+#: xfsamba/xfsamba_list.c:309
 msgid "Retreiving..."
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
+#: xfsamba/xfsamba_masterresolve.c:213 xfsamba/xfsamba_masterresolve.c:214
 #: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 msgid "Resolved"
 msgstr ""
@@ -3468,22 +3468,22 @@ msgstr ""
 msgid "Master browser netbios name must be provided."
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:227 xfsamba/xfsamba_masterresolve.c:228
-#: xfsamba/xfsamba_masterresolve.c:234
+#: xfsamba/xfsamba_masterresolve.c:223 xfsamba/xfsamba_masterresolve.c:224
+#: xfsamba/xfsamba_masterresolve.c:230
 msgid "No status response"
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:246
+#: xfsamba/xfsamba_masterresolve.c:242
 msgid "Master browser not resolved. Use location box to browse."
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:247
+#: xfsamba/xfsamba_masterresolve.c:243
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
+#: xfsamba/xfsamba_masterresolve.c:297 xfsamba/xfsamba_masterresolve.c:298
 msgid "Resolving"
 msgstr ""
 
@@ -3503,12 +3503,12 @@ msgstr ""
 msgid "Create directory failed."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:187
+#: xfsamba/xfsamba_mkdir.c:196
 msgid "Creating dir..."
 msgstr ""
 
 #. here, dialog to ask new dir name
-#: xfsamba/xfsamba_mkdir.c:202
+#: xfsamba/xfsamba_mkdir.c:211
 msgid "New directory name:"
 msgstr ""
 
@@ -3516,23 +3516,23 @@ msgstr ""
 msgid "Really delete remote items?"
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:189
+#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:196
 msgid "Remove cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:137
+#: xfsamba/xfsamba_rm.c:144
 msgid "Remove failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:152
+#: xfsamba/xfsamba_rm.c:159
 msgid "Remove complete."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:179
+#: xfsamba/xfsamba_rm.c:186
 msgid "Removing..."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:186
+#: xfsamba/xfsamba_rm.c:193
 msgid "Sorry, top level shares cannot be removed."
 msgstr ""
 
@@ -3604,7 +3604,7 @@ msgstr ""
 msgid "File upload failed. See diagnostics for reason."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:284
+#: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:293
 msgid "Upload done."
 msgstr ""
 
@@ -3624,11 +3624,11 @@ msgstr ""
 msgid "Upload failed."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:254
+#: xfsamba/xfsamba_upload.c:263
 msgid "Upload produced errors. See diagnostics for reason."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:361
+#: xfsamba/xfsamba_upload.c:370
 msgid "Uploading files..."
 msgstr ""
 
