@@ -76,6 +76,12 @@ for i in $FILES; do
 	fi
 done
 
+if [ -f $XFCE_CONF/xinitrc ]; then
+	cp -f XFCE_CONFDIR/xinitrc $HOME/.xfce/ 
+	chmod u+x $HOME/.xfce/xinitrc
+	echo A new file $HOME/.xfce/xinitrc has been created
+fi
+
 if [ ! -f $HOME/.xfcolors ]; then
 	cp -f $XFCE_DATADIR/palettes/Default $HOME/.xfce/xfcolors
 	echo An new file $HOME/.xfce/xfcolors has been created
