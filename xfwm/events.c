@@ -833,6 +833,7 @@ HandleDestroyNotify ()
 #ifdef DEBUG
     fprintf (stderr, "xfwm : HandleDestroyNotify (): Destroying %s\n", Tmp_win->name);
 #endif
+    XRemoveFromSaveSet (dpy, Tmp_win->w);
     Destroy (Tmp_win);
     Tmp_win = NULL;
   }

@@ -425,11 +425,10 @@ Destroy (XfwmWindow * Tmp_win)
   if (Tmp_win->icon_pixmap_w != None)
   {
     XDeleteContext (dpy, Tmp_win->icon_pixmap_w, XfwmContext);
-  }
-  if ((Tmp_win->flags & ICON_OURS) && (Tmp_win->icon_pixmap_w != None))
-  {
-    XDestroyWindow (dpy, Tmp_win->icon_pixmap_w);
-    Tmp_win->icon_pixmap_w = None;
+    if (Tmp_win->flags & ICON_OURS)
+    {
+      XDestroyWindow (dpy, Tmp_win->icon_pixmap_w);
+    }
   }
   if (Tmp_win->flags & TITLE)
   {
@@ -437,8 +436,6 @@ Destroy (XfwmWindow * Tmp_win)
     fprintf (stderr, "xfwm : Destroy () : Destroying title_w\n");
 #endif
     XDeleteContext (dpy, Tmp_win->title_w, XfwmContext);
-    XDestroyWindow (dpy, Tmp_win->title_w);
-    Tmp_win->title_w = None;
     for (i = 0; i < Scr.nr_left_buttons; i++)
       if (Tmp_win->left_w[i] != None)
       {
@@ -446,7 +443,6 @@ Destroy (XfwmWindow * Tmp_win)
         fprintf (stderr, "xfwm : Destroy () : Destroying left_w[%i]\n", i);
 #endif
 	XDeleteContext (dpy, Tmp_win->left_w[i], XfwmContext);
-	XDestroyWindow (dpy, Tmp_win->left_w[i]);
 	Tmp_win->left_w[i] = None;
       }
     for (i = 0; i < Scr.nr_right_buttons; i++)
@@ -456,8 +452,6 @@ Destroy (XfwmWindow * Tmp_win)
         fprintf (stderr, "xfwm : Destroy () : Destroying right_w[%i]\n", i);
 #endif
 	XDeleteContext (dpy, Tmp_win->right_w[i], XfwmContext);
-	XDestroyWindow (dpy, Tmp_win->right_w[i]);
-	Tmp_win->right_w[i] = None;
       }
   }
   if (Tmp_win->flags & BORDER)
@@ -468,14 +462,10 @@ Destroy (XfwmWindow * Tmp_win)
       fprintf (stderr, "xfwm : Destroy () : Destroying sides[%i]\n", i);
 #endif
       XDeleteContext (dpy, Tmp_win->sides[i], XfwmContext);
-      XDestroyWindow (dpy, Tmp_win->sides[i]);
-      XDeleteContext (dpy, Tmp_win->corners[i], XfwmContext);
 #ifdef DEBUG
       fprintf (stderr, "xfwm : Destroy () : Destroying corners[%i]\n", i);
 #endif
-      XDestroyWindow (dpy, Tmp_win->corners[i]);
-      Tmp_win->sides[i] = None;
-      Tmp_win->corners[i] = None;
+      XDeleteContext (dpy, Tmp_win->corners[i], XfwmContext);
     }
   }
 #ifdef DEBUG
