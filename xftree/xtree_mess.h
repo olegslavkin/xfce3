@@ -116,4 +116,5 @@ void cb_drag_copy (GtkWidget * widget, gpointer ctree);
 void cb_doubleC_goto (GtkWidget * widget, gpointer ctree);
 void cb_save_geo (GtkWidget * widget, gpointer ctree);
 void cb_sizeKB (GtkWidget * widget, gpointer ctree);
+void cleanup_tmpfiles(void);
 #endif

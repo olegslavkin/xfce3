@@ -1,3 +1,5 @@
+- In xtree_tar.c, when determining "mode", do a search of all open xfree
+  windows until the extracted file is found (tar_extract()).
 - Toolbar icon + menu elements for "print"
 - Use the conventional Xpasteboard and provide compatibility with
   other file managers and programs for cut+paste (also for the
@@ -10,7 +12,8 @@
   linked lists cut/copy, which in turn, when changed, causes an update_tree
   event.
 - add rsync by d+d between two xftrees running on two different
-  hosts, but on the same X display
+  hosts, but on the same X display or something equivalent like adding rsync 
+  nodes at the root level.
 - Enable "open with" from the innards of tar files. This implies extracting
   to /tmp first, then calling cb_open_with. It requires cleanup of temporary
   files on exit of xftree (all), and thus requires capture of sigint,

@@ -36,6 +36,7 @@
 #ifdef linux
 #include <getopt.h>
 #endif
+#include <signal.h>
 #include <limits.h>
 #include <X11/Xlib.h>		/* XParseGeometry */
 #include <glib.h>
@@ -63,6 +64,15 @@
 #  include "dmalloc.h"
 #endif
 
+static void
+finishit (int sig)
+{
+  fprintf(stderr,"xftree: signal %d received. Cleaning up before exiting\n",sig);
+  cleanup_tmpfiles();
+  on_signal(sig);
+  exit(1);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -80,6 +90,20 @@ main (int argc, char *argv[])
   wgeo_t geo = { -1, -1, 380, 480 };
 
   xfce_init (&argc, &argv);
+
+  /* for temporary file cleanup */
+  signal (SIGHUP, finishit);
+  signal (SIGINT, finishit);
+  signal (SIGQUIT, finishit);
+  signal (SIGABRT, finishit);
+  signal (SIGBUS, finishit);
+  signal (SIGSEGV, finishit);
+  signal (SIGTERM, finishit);
+  signal (SIGFPE, finishit);
+
+  signal (SIGKILL, finishit);
+  signal (SIGUSR1, finishit);
+  signal (SIGUSR2, finishit);
 
   sprintf (rc, "%s/%s/%s", path, BASE_DIR, "xtree.rc");
 
@@ -185,6 +209,7 @@ main (int argc, char *argv[])
   }
   fcntl (ConnectionNumber (GDK_DISPLAY ()), F_SETFD, 1);
   gui_main (path, base, trash, reg, &geo, flags);
+  cleanup_tmpfiles();
   xfce_end ((gpointer) NULL, 0);
   return (0);
 }

@@ -16,3 +16,6 @@ Known bugs:
 *Extraction of files with embeded spaces from the inside of tar files will
  fail.
 
+*If multiple instances of xftree are being run, closing one of them will delete
+ all temporary files. (They are temporary, after all).
+

@@ -45,6 +45,8 @@
 #  include "dmalloc.h"
 #endif
 
+void cleanup_tmpfiles(void);
+
 extern char **environ;
 
 /*
@@ -181,6 +183,7 @@ static void
 sig_seg (int signum)
 {
   fprintf (stderr, "segmention fault (pid=%d)\n", (int) getpid ());
+  cleanup_tmpfiles();
   exit (127);
 }
 

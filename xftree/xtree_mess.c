@@ -1094,3 +1094,14 @@ void cb_custom_home(GtkWidget *widget,gpointer ctree){
   save_defaults(win->top);
   return;
 }
+
+void cleanup_tmpfiles(void){
+   glob_t dirlist;
+   int i;
+   if (glob ("/tmp/xftree*", GLOB_ERR ,NULL, &dirlist) != 0) {
+		  /*fprintf (stderr, "dbg:%s: no match\n", globstring);*/
+	return;
+   } else for (i = 0; i < dirlist.gl_pathc; i++) {
+	   unlink(dirlist.gl_pathv[i]);
+   }
+}

@@ -497,6 +497,7 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
   base = g_malloc (len + 1);
   if (!base){
     xf_dlg_error(win->top,_("internal malloc error:"),strerror(errno));
+    cleanup_tmpfiles();
     exit(1);
   }
   strcpy (base, path);
@@ -958,6 +959,7 @@ XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event)
   fprintf (stderr, "xftree: Fatal XLib internal error\n");
   fprintf (stderr, "%s\n", buf);
   fprintf (stderr, "Request %d, Error %d\n", event->request_code, event->error_code);
+  cleanup_tmpfiles();
   exit (1);
   return (0);
 }

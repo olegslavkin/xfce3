@@ -185,6 +185,7 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
  	  /*fprintf(stderr,"dbg: %s not found\n",path);*/
 	  if ((d_en = entry_new ())==NULL){
 		fprintf(stderr,"xftree: cannot continue xtree_rpm.c\n");
+                cleanup_tmpfiles();
 		exit(1);
 	  }
 	  d_en->type =  FT_TARCHILD|FT_DIR;

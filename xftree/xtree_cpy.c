@@ -280,27 +280,29 @@ void set_override(gboolean state)
 
 static int nitems;
 
-static char *randomTmpName(void){
+char *randomTmpName(char *ext){
     static char *fname=NULL;
     int fnamelen;
+    if (ext==NULL) ext="tmp";
     if (fname) g_free(fname);
-    fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
+    fnamelen=strlen("/tmp/xftree.9999.")+strlen(ext)+1;
     srandom(time(NULL));
     fname = (char *)malloc(sizeof(char)*(fnamelen));
     if (!fname) return NULL;
-    sprintf(fname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
+    sprintf(fname,"/tmp/xftree.%d.%s",(int)((9999.0/RAND_MAX)*random()),ext);
     return fname;
 }
 
 static char *SimpleTmpList(GtkWidget *parent,char *tgt,char *src){
     static char *fname=NULL;
     FILE *tmpfile;
-    if ((fname=randomTmpName())==NULL) return NULL;
+    if ((fname=randomTmpName(NULL))==NULL) return NULL;
     if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
     fprintf(tmpfile,"%d:%s:%s\n",TR_COPY,src,tgt);
     fclose(tmpfile);
     return fname;
 }
+
 
 char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
     char *target;   
@@ -310,7 +312,7 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
     entry *s_en;
     
     nitems=0;
-    if ((fname=randomTmpName())==NULL) return NULL;
+    if ((fname=randomTmpName(NULL))==NULL) return NULL;
     if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
     same_device=TRUE;
     tar_extraction=FALSE;

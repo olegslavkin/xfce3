@@ -72,6 +72,7 @@
 #include "xtree_toolbar.h"
 #include "xtree_functions.h"
 #include "xtree_icons.h"
+#include "xtree_cpy.h"
 #include "tubo.h"
 
 #ifdef HAVE_GDK_PIXBUF
@@ -184,6 +185,7 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
  	  /*fprintf(stderr,"dbg: %s not found\n",path);*/
 	  if ((d_en = entry_new ())==NULL){
 		fprintf(stderr,"xftree: cannot continue xtree_tar.c\n");
+                cleanup_tmpfiles();
 		exit(1);
 	  }
 	  d_en->type =  FT_TARCHILD|FT_DIR;
@@ -490,6 +492,16 @@ static void rwForkOver (void)
   tar_fork_obj=NULL;
   update_timer (tar_ctree);
 }
+/* function called when child is dead */
+static void rwForkOverE (void)
+{
+  if (tar_output) {
+	  close(tar_output);
+	  tar_output=0;
+  }
+  tar_fork_obj=NULL;
+  update_timer (tar_ctree);
+}
 
 
 static int
@@ -634,20 +646,20 @@ int tar_extract(GtkCTree *ctree,char *tgt,char *src){
 	}
 	if (src[strlen(src)-1]=='\n') src[strlen(src)-1]=0;
 	if (src[strlen(src)-1]=='\r') src[strlen(src)-1]=0;
-	/*fprintf(stderr,"tgt=%s\n",tgt);*/
-	/*fprintf(stderr,"src=%s\n",src);*/
+	/*fprintf(stderr,"tgt=%s\n",tgt);
+	fprintf(stderr,"src=%s\n",src);*/
 
 	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 /* FIXME: mode setting dont always work because the search might be done in the wrong xftree window. 
- *        this is not the case with a "delete" command, from where the code was taken */
+ *        this is not the case with a "delete" command */
 	check.path=g_strdup(src);
 	tar_node=gtk_ctree_find_by_row_data_custom (ctree, 
 			GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), 
 			&check, compare_node_path);
         en = gtk_ctree_node_get_row_data (GTK_CTREE (tar_ctree), tar_node);
-	if (en) mode= en->st.st_mode;
-	/*
-	if (!en) fprintf(stderr,"dbg:entry not found\n");
+	if (en && (en->st.st_mode)) mode= en->st.st_mode;
+	
+	/*if (!en) fprintf(stderr,"dbg:entry not found\n");
 	else fprintf(stderr,"dbg:mode=0%o\n",en->st.st_mode);*/
 
 	if (strchr(strchr(src,':')+1,':')) {
@@ -710,10 +722,40 @@ int tar_extract(GtkCTree *ctree,char *tgt,char *src){
 		  return FALSE;
 	}	  
 	strcpy(tar_tgt,tgt);	  
-	tar_fork_obj=Tubo (tubo_cmdE, rwForkOver, 0, rwStdout, rwStderr);
+	tar_fork_obj=Tubo (tubo_cmdE, rwForkOverE, 0, rwStdout, rwStderr);
 	usleep(50000);
         return TRUE;
 }
+
+static char *tar_open_with(GtkCTree *ctree,char *src,char *loc){
+   char *tgt;
+   tgt=randomTmpName(loc);
+   if (!tar_extract(ctree,tgt,src)) return NULL;
+   return tgt;  
+}
+
+void cb_tar_open_with (GtkWidget * item, GtkCTree * ctree)
+{
+  entry *en;
+  cfg *win;
+  GtkCTreeNode *node;
+  char *prg,*tgt;
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if (!count_selection (ctree, &node))
+  {
+    xf_dlg_warning (win->top,_("No files marked !"));
+    return;
+  }
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  prg = reg_app_by_file (win->reg, en->path);
+  
+  tgt=tar_open_with(ctree,en->path,en->label);
+  if (!tgt) fprintf(stderr,"Could not extract %s\n",en->path);
+  else xf_dlg_open_with ((GtkWidget *)ctree,win->xap, prg ? prg : DEF_APP, tgt);
+}
+
+
 
 
 

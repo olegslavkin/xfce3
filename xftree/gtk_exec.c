@@ -221,6 +221,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
       /* this should never happen
        */
       g_print (_("Fatal error in %s at %d\n"), __FILE__, __LINE__);
+      cleanup_tmpfiles();
       exit (1);
     }
     chdir(path);

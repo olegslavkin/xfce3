@@ -74,6 +74,7 @@
 #include "xtree_toolbar.h"
 #include "xtree_cpy.h"
 #include "xtree_icons.h"
+#include "xtree_tar.h"
 #include "icons/xftree_icon.xpm"
 
 
@@ -142,7 +143,7 @@ autotype_t autotype[]= {
     
 #define AUTOTAR_MENU \
     {"", (gpointer) cb_autotar, 0,}
- 
+    
 #define MAINF_DIRECTORY_MENU \
     {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK}, \
@@ -185,7 +186,10 @@ autotype_t autotype[]= {
     {NULL, NULL, 0} 
      
 #define COMMON_MENU_GOTO \
-    {N_("Go to ..."), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK}    
+    {N_("Go to ..."), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK} 
+    
+#define TAR_MENU \
+     {N_("Open with ..."), (gpointer) cb_tar_open_with, 0}
    
 #define FILE_MENU \
      {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
@@ -293,7 +297,7 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       if (EN_IS_DIR (en) && ((event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)) || (win->preferences & DOUBLE_CLICK_GOTO)))
       {
         /* disable goto on FT_TARCHILD */
-        if (en->type & FT_TARCHILD) return TRUE;
+        if (en->type & (FT_RPMCHILD|FT_TARCHILD)) return TRUE;
         /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
 	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
 	return (TRUE);
@@ -309,7 +313,11 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     }
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
     /* disable openwith on FT_TARCHILD */
-    if (en->type & FT_TARCHILD) return TRUE;
+    if (en->type & FT_RPMCHILD) return TRUE;
+    if (en->type & FT_TARCHILD) {
+	    cb_tar_open_with(NULL,GTK_CTREE (ctree));
+	    return TRUE;
+    }
 
     if (en->type & FT_DIR_UP)
     {
@@ -942,6 +950,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
 
   menu_entry tarchild_mlist[] = {
+     TAR_MENU,
      DIR_FILE_MENU,
      MAINF_MENU,
      NONE_MENU
@@ -1299,6 +1308,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   en = entry_new_by_path_and_label (path, path);
   if (!en)
   {
+    cleanup_tmpfiles();
     exit (1);
   }
   en->flags = flags;
@@ -1442,5 +1452,6 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
 
   gtk_main ();
   save_defaults(NULL);
+  cleanup_tmpfiles();
   exit (0);
 }
