@@ -361,13 +361,13 @@ GetContext (XfwmWindow * t, XEvent * e, Window * w)
   {
     if (*w == t->title_w)
       Context = C_TITLE;
-    if (*w == t->w)
+    if ((*w == t->w) || (*w == t->Parent))
       Context = C_WINDOW;
     if (*w == t->icon_w)
       Context = C_ICON;
     if (*w == t->icon_pixmap_w)
       Context = C_ICON;
-    if ((*w == t->frame) || (*w == t->Parent))
+    if (*w == t->frame)
       Context = C_SIDEBAR;
     for (i = 0; i < 4; i++)
       if (*w == t->corners[i])
