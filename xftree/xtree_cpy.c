@@ -1345,27 +1345,27 @@ void cb_symlink (GtkWidget * item, GtkCTree * ctree)
   int num,selected;
   struct stat st;
   cfg *win;
+  char *argv[6];
 
   cursor_wait (GTK_WIDGET (ctree));
   gtk_clist_freeze (GTK_CLIST (ctree));
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   selected = count_selection (ctree, &node);
   if (!selected) {
-	  xf_dlg_error(win->top,"No file or directory selected for symlink!",NULL);
+	  xf_dlg_error(win->top,_("No file or directory selected!"),NULL);
 	  goto symlink_return;
   } else if (selected > 1) {
-	  xf_dlg_error(win->top,"Only one file or directory can be selected for symlink!",NULL);
+	  xf_dlg_error(win->top,_("Only one file or directory can be selected!"),NULL);
 	  goto symlink_return;
   }
   
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  if (en->type & FT_TARCHILD) {
-	xf_dlg_error(win->top,_("This function is not available for the contents of tar files"),NULL);
+  if (en->type & (FT_TARCHILD|FT_RPMCHILD)) {
+	xf_dlg_error(win->top,_("This function is not available for the contents of tar/rpm files"),NULL);
 	goto symlink_return;
   }
 
   if (!io_is_valid (en->label)) goto symlink_return;
-  cursor_wait (GTK_WIDGET (ctree));
   num = 0;
   if ((nfile=(char *) malloc(strlen(en->path)+12))==NULL) goto symlink_return;
 
@@ -1407,11 +1407,15 @@ void cb_symlink (GtkWidget * item, GtkCTree * ctree)
   }
 
   /*fprintf(stderr,"dbg:ln -s %s %s\n",ofile,nfile);*/
-  if (fork()==0){
-	  execlp("ln","ln","-s",ofile,nfile,(char *)0);
-	  _exit(123);
-  } else usleep(50000);
-	   
+  argv[0]="ln";
+  argv[1]="-s";
+  argv[2]=ofile;
+  argv[3]=nfile;
+  argv[4]=0;
+  
+  io_system(argv,win->top);
+  usleep(50000);
+    
    /* immediate refresh */
   update_timer (ctree);
   cursor_reset (GTK_WIDGET (ctree));
@@ -1420,5 +1424,49 @@ void cb_symlink (GtkWidget * item, GtkCTree * ctree)
 symlink_return:
   gtk_clist_thaw (GTK_CLIST (ctree));
   cursor_reset (GTK_WIDGET (ctree));   return;
+}
+
+void cb_touch (GtkWidget * item, GtkCTree * ctree)
+{
+  entry *en;
+  GtkCTreeNode *node;
+  int num;
+  cfg *win;
+  char *argv[4];
+  GList *selection;
+
+  cursor_wait (GTK_WIDGET (ctree));
+  gtk_clist_freeze (GTK_CLIST (ctree));
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  num = count_selection (ctree, &node);
+  if (!num) {
+	  xf_dlg_error(win->top,_("No file or directory selected!"),NULL);
+	  goto touch_return;
+  }    
+  
+  selection = GTK_CLIST (ctree)->selection;
+  node = selection->data;
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree),node);
+
+  if (!io_is_valid (en->label)) goto touch_return;
+
+  argv[0]="touch";
+  argv[2]=0;
+  for (;selection != NULL;selection=selection->next) {
+     node = selection->data;
+     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree),node);
+     if (en->type & (FT_TARCHILD|FT_RPMCHILD)) continue;
+     argv[1]=en->path;
+     io_system(argv,win->top);
+     usleep(50000);
+  }
+   
+   /* immediate refresh */
+  update_timer (ctree);
+  cursor_reset (GTK_WIDGET (ctree));
+touch_return:
+  gtk_clist_thaw (GTK_CLIST (ctree));
+  cursor_reset (GTK_WIDGET (ctree));   
+  return;
 }
 

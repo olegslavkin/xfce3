@@ -145,7 +145,7 @@ autotype_t autotype[]= {
     {"", (gpointer) cb_autotar, 0,}
     
 #define MAINF_ICON_VIEW \
-    {N_("Open icon view"), (gpointer) cb_rox, 0}
+    {N_("Open icon view"), (gpointer) cb_rox, 0, GDK_y,GDK_CONTROL_MASK}
     
 #define MAINF_DIRECTORY_MENU \
     {N_("Open tree view"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
@@ -156,6 +156,7 @@ autotype_t autotype[]= {
 
 #define MAINF_MENU \
     {NULL, NULL, 0}, \
+    {N_("Touch ..."), (gpointer) cb_touch, 0, GDK_a,GDK_MOD1_MASK}, \
     {N_("Symlink ..."), (gpointer) cb_symlink, 0, GDK_l,GDK_MOD1_MASK}, \
     {N_("Delete ..."), (gpointer) cb_delete, 0}
     
@@ -238,7 +239,7 @@ autotype_t autotype[]= {
     {N_("Hide owner"),cb_hide_uid, HIDE_UID, GDK_o,GDK_MOD1_MASK}, \
     {N_("Hide group"),cb_hide_gid, HIDE_GID, GDK_y,GDK_MOD1_MASK}, \
     {N_("Hide mode"),cb_hide_mode, HIDE_MODE, GDK_e,GDK_MOD1_MASK}, \
-    {N_("Hide ../ "),cb_hide_dd, HIDE_DD }
+    {N_("Hide ../ "),cb_hide_dd, HIDE_DD, GDK_f,GDK_MOD1_MASK }
  
 #define HELP_MENU \
     {N_("Sort by file name"), NULL, SORT_NAME, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
