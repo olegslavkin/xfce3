@@ -3,6 +3,7 @@
 
 GtkWidget *
 create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win,gboolean large);
+GdkPixmap *duplicate_xpm(GtkWidget *widget,char **xpm,GdkBitmap **mask);
 
 void cb_config_toolbar(GtkWidget *widget,GtkWidget *ctree); 
 #endif

@@ -84,6 +84,10 @@
 #include "icons/stale_lnk.xpm"
 #include "icons/xftree_icon.xpm"
 
+#ifdef HAVE_GDK_PIXBUF
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#endif
+
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -117,12 +121,20 @@ typedef struct
 }
 menu_entry;
 
-GdkPixmap  *gPIX_dir_close,  *gPIX_dir_open;
-GdkBitmap *gPIM_dir_close, *gPIM_dir_open;
+/*FIXME: initialize all pixmaps and pixmasks to NULL */
 
-static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_up, *gPIX_char_dev, *gPIX_fifo, *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
+GdkPixmap  *gPIX_dir_close=NULL,  *gPIX_dir_open=NULL;
+GdkBitmap *gPIM_dir_close=NULL, *gPIM_dir_open=NULL;
 
-static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
+static GdkPixmap * gPIX_page=NULL, *gPIX_page_lnk=NULL, *gPIX_dir_pd=NULL, 
+	*gPIX_dir_close_lnk=NULL, *gPIX_dir_open_lnk=NULL, *gPIX_dir_up=NULL, 
+	*gPIX_char_dev=NULL, *gPIX_fifo=NULL, *gPIX_socket=NULL, 
+	*gPIX_block_dev=NULL, *gPIX_exe=NULL, *gPIX_stale_lnk=NULL, *gPIX_exe_lnk=NULL;
+
+static GdkBitmap * gPIM_page=NULL, *gPIM_page_lnk=NULL, *gPIM_dir_pd=NULL, 
+	*gPIM_dir_close_lnk=NULL, *gPIM_dir_open_lnk=NULL, *gPIM_dir_up=NULL, 
+	*gPIM_char_dev=NULL, *gPIM_fifo=NULL, *gPIM_socket=NULL, 
+	*gPIM_block_dev=NULL, *gPIM_exe=NULL, *gPIM_stale_lnk=NULL, *gPIM_exe_lnk=NULL;
 
 
 int move_dir (char *source, char *label, char *target, int trash);
@@ -1420,6 +1432,71 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   return menubar;
 }
 
+/* pixmap list */
+typedef struct pixmap_list {
+GdkPixmap  **pixmap;
+GdkBitmap  **pixmask;
+char **xpm;
+} pixmap_list;
+
+
+pixmap_list pixmaps[]={
+	{&gPIX_page,		&gPIM_page,		page_xpm},
+	{&gPIX_page_lnk,	&gPIM_page_lnk,		page_lnk_xpm},
+	{&gPIX_dir_pd,		&gPIM_dir_pd,		dir_pd_xpm},
+	{&gPIX_dir_open,	&gPIM_dir_open,		dir_open_xpm},
+	{&gPIX_dir_open_lnk,	&gPIM_dir_open_lnk,	dir_open_lnk_xpm},
+	{&gPIX_dir_close,	&gPIM_dir_close,	dir_close_xpm},
+	{&gPIX_dir_close_lnk,	&gPIM_dir_close_lnk,	dir_close_lnk_xpm},
+	{&gPIX_dir_up,		&gPIM_dir_up,		dir_up_xpm},
+	{&gPIX_exe,		&gPIM_exe,		exe_xpm},
+	{&gPIX_exe_lnk,		&gPIM_exe_lnk,		exe_lnk_xpm},
+	{&gPIX_char_dev,	&gPIM_char_dev,		char_dev_xpm},
+	{&gPIX_block_dev,	&gPIM_block_dev,	block_dev_xpm},
+	{&gPIX_fifo,		&gPIM_fifo,		fifo_xpm},
+	{&gPIX_socket,		&gPIM_socket,		socket_xpm},
+	{&gPIX_stale_lnk,	&gPIM_stale_lnk,	stale_lnk_xpm},
+	{NULL,NULL,NULL}
+};
+void create_pixmaps(int h){
+  int i;
+  static GtkWidget *hack=NULL; 
+  /* hack: to be able to use icons globally, independent of xftree window.*/
+  if (!hack) {hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);}
+#ifndef HAVE_GDK_PIXBUF
+  else return -1; /* don't recreate pixmaps without gdk-pixbuf */
+#endif
+	
+  for (i=0;pixmaps[i].pixmap != NULL; i++){
+	  if (*(pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(pixmaps[i].pixmap));
+	  if (*(pixmaps[i].pixmask) != NULL) gdk_bitmap_unref(*(pixmaps[i].pixmask));
+#ifdef HAVE_GDK_PIXBUF			 		
+	  if (h<0) 
+#endif
+	      *(pixmaps[i].pixmap) = MyCreateGdkPixmapFromData(pixmaps[i].xpm,hack,
+			      		pixmaps[i].pixmask,FALSE);
+#ifdef HAVE_GDK_PIXBUF			 		
+	  else {
+  		GdkPixbuf *orig_pixbuf,*new_pixbuf;
+		float r=0;
+	  	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **)(pixmaps[i].xpm));
+		if (gdk_pixbuf_get_width (orig_pixbuf)) r=(float)h/gdk_pixbuf_get_width (orig_pixbuf);
+		if (r<1.0) r=1.0;
+  		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf, r*gdk_pixbuf_get_width (orig_pixbuf), 
+		  r*gdk_pixbuf_get_height (orig_pixbuf), GDK_INTERP_NEAREST);
+  		gdk_pixbuf_render_pixmap_and_mask (new_pixbuf, 
+				pixmaps[i].pixmap,pixmaps[i].pixmask, 
+				gdk_pixbuf_get_has_alpha (new_pixbuf));
+  		gdk_pixbuf_unref (orig_pixbuf);
+  		gdk_pixbuf_unref (new_pixbuf);
+		 /*
+		    *(pixmaps[i].pixmap) = duplicate_xpm(hack,pixmaps[i].xpm,pixmaps[i].pixmask);
+		 */   
+	  }
+#endif
+  }
+}
+
 /*
  * create a new toplevel window
  */
@@ -1584,7 +1661,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_DATE] = "";
   win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_policy ((GtkWindow *)win->top,FALSE,TRUE,FALSE);
-                                             
+  gtk_widget_realize (win->top);
+    
   win->gogo = pushgo(path,win->gogo);
                                               
   top_register (win->top);
@@ -1632,7 +1710,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->height = height;
   gtk_object_set_user_data (GTK_OBJECT (ctree), win);
   if (preferences & CUSTOM_COLORS) set_colors(ctree); 
-  if (preferences & CUSTOM_FONT) set_fontT(ctree); 
+  if (preferences & CUSTOM_FONT){
+	int h;
+	h=set_fontT(ctree);
+	create_pixmaps(h);
+  }
   gtk_clist_set_compare_func (GTK_CLIST (ctree), my_compare);
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
 
@@ -1779,6 +1861,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   }
   gtk_menu_attach_to_widget (GTK_MENU (menu[MN_NONE]), ctree, (GtkMenuDetachFunc) menu_detach);
 
+/* first pixmap appearance */
+  
   root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
   en = entry_new_by_path_and_label (path, path);
   if (!en)
@@ -1845,34 +1929,14 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   return (win);
 }
 
-/*
- * create pixmaps and create a new toplevel tree widget
- */
+/* create a new toplevel tree widget */
+
 void
 gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo, int flags)
 {
   GList *reg;
   cfg *new_win;
-  GtkWidget *hack;
-
-  /* hack: to be able to use icons globally, independent of xftree window.*/
-  hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);
-
-  gPIX_page = MyCreateGdkPixmapFromData (page_xpm, hack, &gPIM_page, FALSE);
-  gPIX_page_lnk = MyCreateGdkPixmapFromData (page_lnk_xpm, hack, &gPIM_page_lnk, FALSE);
-  gPIX_dir_pd = MyCreateGdkPixmapFromData (dir_pd_xpm, hack, &gPIM_dir_pd, FALSE);
-  gPIX_dir_open = MyCreateGdkPixmapFromData (dir_open_xpm, hack, &gPIM_dir_open, FALSE);
-  gPIX_dir_open_lnk = MyCreateGdkPixmapFromData (dir_open_lnk_xpm, hack, &gPIM_dir_open_lnk, FALSE);
-  gPIX_dir_close = MyCreateGdkPixmapFromData (dir_close_xpm, hack, &gPIM_dir_close, FALSE);
-  gPIX_dir_close_lnk = MyCreateGdkPixmapFromData (dir_close_lnk_xpm, hack, &gPIM_dir_close_lnk, FALSE);
-  gPIX_dir_up = MyCreateGdkPixmapFromData (dir_up_xpm, hack, &gPIM_dir_up, FALSE);
-  gPIX_exe = MyCreateGdkPixmapFromData (exe_xpm, hack, &gPIM_exe, FALSE);
-  gPIX_exe_lnk = MyCreateGdkPixmapFromData (exe_lnk_xpm, hack, &gPIM_exe_lnk, FALSE);
-  gPIX_char_dev = MyCreateGdkPixmapFromData (char_dev_xpm, hack, &gPIM_char_dev, FALSE);
-  gPIX_block_dev = MyCreateGdkPixmapFromData (block_dev_xpm, hack, &gPIM_block_dev, FALSE);
-  gPIX_fifo = MyCreateGdkPixmapFromData (fifo_xpm, hack, &gPIM_fifo, FALSE);
-  gPIX_socket = MyCreateGdkPixmapFromData (socket_xpm, hack, &gPIM_socket, FALSE);
-  gPIX_stale_lnk = MyCreateGdkPixmapFromData (stale_lnk_xpm, hack, &gPIM_stale_lnk, FALSE);
+  create_pixmaps(-1);
 
   if (!io_is_directory (path))
   {

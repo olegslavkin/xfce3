@@ -82,7 +82,7 @@ static GdkFont *the_font;
 static char *custom_font=NULL;
 
 
-void set_fontT(GtkWidget * ctree){
+int set_fontT(GtkWidget * ctree){
 	GtkStyle  *Ostyle,*style;
 	Ostyle=gtk_widget_get_style (ctree);
     	style = gtk_style_copy (Ostyle);
@@ -93,7 +93,7 @@ void set_fontT(GtkWidget * ctree){
            win = gtk_object_get_user_data (GTK_OBJECT (ctree));
            xf_dlg_error(win->top,_("Could not load specified font\n"),NULL);
            preferences &= (CUSTOM_FONT ^ 0xffffffff);
-           return;
+           return -1;
           }
 	  style->font=the_font;
 	}
@@ -102,7 +102,7 @@ void set_fontT(GtkWidget * ctree){
 	}
 	gtk_widget_set_style (ctree,style);
 	gtk_widget_ensure_style (ctree);
-	return;
+   	return (style->font->ascent + style->font->descent);
 	
 }
 
@@ -205,7 +205,9 @@ cb_select_font (GtkWidget * widget, GtkWidget *ctree)
 	if (custom_font) strcpy(custom_font,font_selected);
 	else preferences &= (CUSTOM_FONT ^ 0xffffffff);
   }
-  set_fontT(ctree);
+  /* FIXME: the create pixmaps is not working to regenerate
+   * the ctree with new size pixmaps  must fix here.*/
+  create_pixmaps(set_fontT(ctree));
   save_defaults (NULL);  
 }
 
