@@ -6,6 +6,8 @@
 %define		confdir /etc/X11
 %define		gtkengines /usr/lib/gtk/themes/engines
 %define		gdmdata /etc/X11/gdm/Sessions
+%define		wmsession /etc/X11/wmsession.d
+%define		switchdesk /usr/share/apps/switchdesk
 
 Summary:	A Powerful X Environment, with Toolbar and Window Manager
 Name:		%{name}
@@ -73,6 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{confdir}/xfce/*
 %{gtkengines}/libxfce.*
 %config(noreplace) %{gdmdata}/XFce
+%config(noreplace) %{wmsession}/10XFce
+%config(noreplace) %{switchdesk}/Xclients.xfce
 
 # %files libs
 # %defattr(-, root, root)

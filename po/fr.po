@@ -1372,17 +1372,17 @@ msgstr "Désélectionner"
 #: xftree/xtree_gui.c:172
 #: xftree/xtree_toolbar.c:109
 msgid "Toggle Dotfiles"
-msgstr "Fichier cachés"
+msgstr "Fichiers cachés"
 
 #: xftree/xtree_gui.c:174
 #: xftree/xtree_toolbar.c:107
 msgid "Open Trash"
-msgstr "Ouvrir la poubelle"
+msgstr "Ouvrir la corbeille"
 
 #: xftree/xtree_gui.c:175
 #: xftree/xtree_toolbar.c:108
 msgid "Empty Trash"
-msgstr "Vider la poubelle"
+msgstr "Vider la corbeille"
 
 #: xftree/xtree_gui.c:179
 msgid "Duplicate"
@@ -1436,7 +1436,7 @@ msgstr "Visualiseur de patch ..."
 #: xftree/xtree_gui.c:206
 #: xftree/xtree_toolbar.c:103
 msgid "Browse SMB network ..."
-msgstr "Parcourir e réseau SMB ..."
+msgstr "Parcourir le réseau SMB ..."
 
 #: xftree/xtree_gui.c:210
 #: xftree/xtree_toolbar.c:90
@@ -1458,7 +1458,7 @@ msgstr "Activer le filtre"
 
 #: xftree/xtree_gui.c:218
 msgid "Abbreviate paths"
-msgstr "Abbreviation des chemins"
+msgstr "Abbréviation des chemins"
 
 #: xftree/xtree_gui.c:220
 msgid "Status box"
@@ -1470,7 +1470,7 @@ msgstr "Titres"
 
 #: xftree/xtree_gui.c:222
 msgid "Short titles"
-msgstr "Abbreviation des titres"
+msgstr "Abbréviation des titres"
 
 #: xftree/xtree_gui.c:224
 #: xftree/xtree_toolbar.c:420
@@ -1551,7 +1551,7 @@ msgstr "Préférences"
 
 #: xftree/xtree_gui.c:790
 msgid "Hide main menu"
-msgstr "Cacher la barre de menu principale"
+msgstr "Cacher la barre de menu principal"
 
 #: xftree/xtree_gui.c:798
 #: xftree/xtree_gui.c:821
@@ -1599,7 +1599,7 @@ msgstr "Glisser/déplacer"
 
 #: xftree/xtree_gui.c:864
 msgid "Unlisted shortcut keys"
-msgstr "Toucher de raccourci non listées"
+msgstr "Touches de raccourci non listées"
 
 #: xftree/xtree_gui.c:869
 msgid "Custom shortcut keys"
@@ -1641,7 +1641,7 @@ msgstr "Groupe"
 
 #: xftree/xtree_gui.c:1046
 msgid "Filter:"
-msgstr "Filtre"
+msgstr "Filtre:"
 
 #: xftree/xtree_gui.c:1057
 msgid "dirs"

@@ -659,7 +659,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
     
     gtk_menu_set_accel_group (GTK_MENU (menu), accel);
     for (i = 0; i < LAST_MENU_ENTRY; i++){
-     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (mlist[i].label);
+     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (_(mlist[i].label));
      else menuitem = gtk_menu_item_new ();
 
      gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
@@ -687,7 +687,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
     
     gtk_menu_set_accel_group (GTK_MENU (menu), accel);
     for (i = 0; i < LAST_MENU_ENTRY; i++){
-     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (mlist[i].label);
+     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (_(mlist[i].label));
      else menuitem = gtk_menu_item_new ();
 
      gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
@@ -715,7 +715,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
     
     gtk_menu_set_accel_group (GTK_MENU (menu), accel);
     for (i = 0; i < LAST_MENU_ENTRY; i++){
-     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (mlist[i].label);
+     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (_(mlist[i].label));
      else menuitem = gtk_menu_item_new ();
 
      gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
@@ -739,7 +739,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
     
     gtk_menu_set_accel_group (GTK_MENU (menu), accel);
     for (i = 0; i < LAST_MENU_ENTRY; i++){
-     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (mlist[i].label);
+     if (mlist[i].label) menuitem = gtk_menu_item_new_with_label (_(mlist[i].label));
      else menuitem = gtk_menu_item_new ();
 
      gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
@@ -764,7 +764,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
     gtk_menu_set_accel_group (GTK_MENU (menu), accel);
     for (i = 0; i < LAST_MENU_ENTRY; i++){
      if (mlist[i].label){
-	menuitem = gtk_check_menu_item_new_with_label (mlist[i].label);
+	menuitem = gtk_check_menu_item_new_with_label (_(mlist[i].label));
   	GTK_CHECK_MENU_ITEM (menuitem)->active = (mlist[i].data & preferences)?1:0;
   	gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
      }
@@ -863,7 +863,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 
   menuitem = gtk_menu_item_new_with_label (_("Unlisted shortcut keys"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem),hlpmenu);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), hlpmenu);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Custom shortcut keys"));
@@ -1123,7 +1123,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   for (i = 0; i < LAST_HELP_MENU_ENTRY; i++)
   {
     if (help_mlist[i].label)
-      menu_item = gtk_menu_item_new_with_label (help_mlist[i].label);
+      menu_item = gtk_menu_item_new_with_label (_(help_mlist[i].label));
     else 
       menu_item = gtk_menu_item_new ();
     gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (cb_default_SCK),ctree);

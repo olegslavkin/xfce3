@@ -142,7 +142,7 @@ on_click_column (GtkCList * clist, gint column, gpointer data)
 static void
 cb_master (GtkWidget * item, GtkWidget * ctree)
 {
-  my_show_message (N_("If you have win95 nodes on your network, xfsamba might not find\n" "a master browser. If you start smb services on your linux box,\n" "making it a samba-server, the problem will be fixed as long as\n" "the win95 box(es) are reset. You know the routine, reset wind*ws\n" "for changes to take effect. Otherwise,\n" "you must type in the node to be browsed and hit RETURN.\n"));
+  my_show_message (_("If you have win95 nodes on your network, xfsamba might not find\n" "a master browser. If you start smb services on your linux box,\n" "making it a samba-server, the problem will be fixed as long as\n" "the win95 box(es) are reset. You know the routine, reset wind*ws\n" "for changes to take effect. Otherwise,\n" "you must type in the node to be browsed and hit RETURN.\n"));
 }
 
 static void

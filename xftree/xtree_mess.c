@@ -753,7 +753,7 @@ void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  xf_dlg_info (win->top,N_("Xftree handles keyboard shortcuts dynamically.\n" 
+  xf_dlg_info (win->top, _("Xftree handles keyboard shortcuts dynamically.\n" 
 "This means that you can open a menu,highlight an entry\nand press a keyboard key to create the shortcut.")
 	    );
 }
@@ -762,7 +762,7 @@ void cb_registered(GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  xf_dlg_info (win->top,N_("Xftree can register applications by filename or filetype\nby selecting \"Register\" from one of the menus or by selecting\n\"Register application\" on mouse double-click.\n" 
+  xf_dlg_info (win->top, _("Xftree can register applications by filename or filetype\nby selecting \"Register\" from one of the menus or by selecting\n\"Register application\" on mouse double-click.\n" 
 "If you wish to edit the applications that are already registered,\n please look at ~/.xfce/xtree.reg.")
 	    );
 }
@@ -771,7 +771,7 @@ void cb_dnd_help(GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  xf_dlg_info (win->top,N_("Xftree handles drag and drop the following way:\n"
+  xf_dlg_info (win->top, _("Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
 "CTRL drag+drop --> copy\n"
 "SHIFT-CTRL drag+drop --> link\n"
@@ -786,8 +786,8 @@ void cb_default_SCK(GtkWidget * item,  GtkWidget * ctree)
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));	
   
-  xf_dlg_info (win->top,_("Keyboard shortcuts are a fast way to access menu functions."));
-	
+  xf_dlg_info (win->top, _("Keyboard shortcuts are a fast way to access menu functions."));
+	 
 }
 
 static GtkWidget *cat=NULL,*text;
