@@ -57,5 +57,7 @@ wg1.xpm \
 xftree_icon.xpm \
 pd.xpm \
 dir_ro.xpm \
-dir_ro_open.xpm
+dir_ro_open.xpm \
+dir_ro_open_dot.xpm \
+dir_open_dot.xpm
 
