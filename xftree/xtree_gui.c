@@ -246,7 +246,7 @@ autotype_t autotype[]= {
 char *mode_txt(mode_t mode){
 	static char modeT[11];
 	modeT[10]=0;
-	if (mode&040000) modeT[0]='d'; else modeT[0]='-';
+	if (S_ISDIR(mode)) modeT[0]='d'; else modeT[0]='-';
 	if (mode&0400) modeT[1]='r'; else modeT[1]='-';
 	if (mode&0200) modeT[2]='w'; else modeT[2]='-';
 	if ((mode&04000)&&(mode&0100)) modeT[3]='s'; 
