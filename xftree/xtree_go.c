@@ -191,6 +191,15 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
 
 }
 
+void regen_ctree(GtkCTree *ctree){
+  GtkCTreeNode * root;
+  entry *en;
+  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
+  internal_go_to (ctree, root,en->path, en->flags);
+  return;
+}
+
 void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags){
   pushpath(ctree,path);
   internal_go_to (ctree,root,path,flags);
@@ -251,6 +260,7 @@ void cb_go_back (GtkWidget * item, GtkCTree * ctree){
     win->gogo=popgo (win->gogo); 
     root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
     internal_go_to (ctree, root, win->gogo->path, IGNORE_HIDDEN);
+    gtk_object_set_user_data (GTK_OBJECT (ctree),win);
   }
 }
 

@@ -13,7 +13,7 @@ void cb_go_up (GtkWidget * item, GtkCTree * ctree);
 void cb_go_back (GtkWidget * item, GtkCTree * ctree);
 golist *pushgo(char *path,golist *thisgo);
 golist *popgo(golist *thisgo);
-
+void regen_ctree(GtkCTree *ctree);
 #endif
 
 

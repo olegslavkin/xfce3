@@ -195,6 +195,7 @@ void
 cb_select_font (GtkWidget * widget, GtkWidget *ctree)
 {
   char *font_selected;
+      
   font_selected = open_fontselection ("fixed");
   if (!font_selected) {
 	  preferences &= (CUSTOM_FONT ^ 0xffffffff);
@@ -205,10 +206,10 @@ cb_select_font (GtkWidget * widget, GtkWidget *ctree)
 	if (custom_font) strcpy(custom_font,font_selected);
 	else preferences &= (CUSTOM_FONT ^ 0xffffffff);
   }
-  /* FIXME: the create pixmaps is not working to regenerate
-   * the ctree with new size pixmaps  must fix here.*/
   create_pixmaps(set_fontT(ctree));
-  save_defaults (NULL);  
+  save_defaults (NULL);
+  regen_ctree((GtkCTree *)ctree);  
+  return;
 }
 
 void
