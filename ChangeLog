@@ -1,3 +1,341 @@
+2001-07-31  xfce
+
+	* palettes/: Classic, Classic2: Change fonts to bold in Classic*
+	palettes
+
+2001-07-30  xfce
+
+	* palettes/: Classic2, DISTFILES.in: Add new (basic but nice)
+	palette Classic2
+
+2001-07-30  xfce
+
+	* libs/mygtkclock.c: Change shadow
+
+2001-07-30  xfce
+
+	* xfce/: setup.c, setup_cb.c, xfwm.c: Change minimum depth to 16bpp
+	for using gradients
+
+2001-07-30  xfce
+
+	* backdrops/Default.xpm: Change default backdrop
+
+2001-07-30  xfce
+
+	* Makefile.in, config.guess, config.sub, backdrops/Blue.list,
+	backdrops/Toulouse.list, libs/Makefile.in, libs/wild.c,
+	other/xinitrc, other/xinitrc.mwm, po/xfce.pot, scripts/Makefile.in,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfce_setup.in,
+	scripts/xfhelp, xfbd/Makefile.in, xfce/Makefile.in,
+	xfce_theme/Makefile.in, xfce_theme/xfce_theme_draw.c,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfmouse/xfmouse_cb.c, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsound/Makefile.in, xftree/Makefile.in,
+	xfumed/Makefile.in, xfumed/interface.c, xfwm/Makefile.in: Various
+	small cleanups
+
+2001-07-29  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, other/xinitrc,
+	other/xinitrc.mwm, scripts/startxfce, scripts/xfce_setup,
+	scripts/xfhelp, xfce_theme/xfce_theme_draw.c, xfwm/builtins.c,
+	xfwm/screen.h, xfwm/themes.c, xfwm/themes.h, xfwm/xfwm.c: Change
+	back xfce gtk engine to previous style, and update xfwm menu style
+
+2001-07-29  xfce
+
+	* configure, configure.in, backdrops/Blue.list,
+	backdrops/Toulouse.list, other/xinitrc, other/xinitrc.mwm,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfhelp: Update
+	configure script (patch by Paul Sidney)
+
+2001-07-28  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Change shadow of selected menu item
+
+2001-07-28  huysmans
+
+	* xfmenu/xfmenu.c: Small fix in locale handling.
+
+2001-07-27  xfce
+
+	* palettes/: Classic, Basic, DISTFILES.in, GTK+Default: Add new
+	palettes
+
+2001-07-26  xfce
+
+	* xfmenu/xfmenu.c: Partially rewrite scanner engine of xfmenu for a
+	better handling of locales
+
+2001-07-26  xfce
+
+	* docs/Makefile.in.in: Replace subdir=html with subdir=docs in
+	Makefile.in.in file
+
+2001-07-26  xfce
+
+	* xfwm/builtins.c: Add focus handling in lower and raiselower
+	functions
+
+2001-07-25  xfce
+
+	* xfmenu/xfmenu.c: Include latest Jaspers xfmenu is stable tree
+	with small additionnal cleanup
+
+2001-07-24  xfce
+
+	* configure, configure.in, xfce-3.8.6.lsm, xfce.spec,
+	xfwm/events.c: Fix problem between xfgnome and xfwm Fix focus
+	problem in xfwm
+
+2001-07-21  xfce
+
+	* Makefile.in, configure, configure.in, xfce.spec,
+	libs/Makefile.in, scripts/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfglob/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsound/Makefile.in,
+	xftree/Makefile.in, xfumed/Makefile.in, xfwm/Makefile.in: Add a
+	missing line in configure.in to generate xfce3rc.sr
+
+2001-07-20  xfce
+
+	* debian/: README.Debian, README.debian, changelog, conffiles,
+	control, copyright, dirs, menu, postinst, postrm, rules,
+	sample.Xclients, sample.fvwm2rc, sample.fvwmrc, sample.mwm.xinitrc,
+	sample.xfbdrc, sample.xfce3rc, sample.xfce3rc.ja,
+	sample.xfce3rc.ko, sample.xfce3rc.zh_CN.GB2312,
+	sample.xfce3rc.zh_TW.Big5, sample.xfcolors, sample.xfmouserc,
+	sample.xfsoundrc, sample.xfwmrc, sample.xinitrc, sample.xsession,
+	sample.xtree.reg, xfce_start, xfcolors: Remove debian subdir
+
+2001-07-20  xfce
+
+	* xfwm/session.c: Fix a potential security hole by replacing
+	tempnam() with mkstemp()
+
+2001-07-20  xfce
+
+	* config.guess, config.sub: Update config scripts
+
+2001-07-20  xfce
+
+	* configure, configure.in: Update configure script
+
+2001-07-20  xfce
+
+	* Makefile.in, libs/Makefile.in, scripts/Makefile.in,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfpager/Makefile.in, xfrun/Makefile.in, xfsamba/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xfumed/Makefile.in,
+	xfwm/Makefile.in: Update libtool
+
+2001-07-19  xfce
+
+	* xfce.spec: Update files
+
+2001-07-19  xfce
+
+	* configure, configure.in, xfce.spec, libs/Makefile.am,
+	libs/Makefile.in, po/xfce.pot: Rollback to static
+	lib[xfce|xfwm]core.a by default
+
+2001-07-19  xfce
+
+	* libs/xfce-common.c: Now add some additional steps for
+	gdk-pixbuf...
+
+2001-07-19  xfce
+
+	* xfce/xfce_main.c: Remove uneeded init
+
+2001-07-19  xfce
+
+	* libs/xfce-common.c: Add removal of Imlib cache
+
+2001-07-19  xfce
+
+	* libs/fileutil.c: Mix g_malloc()/g_free()
+
+2001-07-18  xfce
+
+	* other/xfce3rc.sr: Forgot to remove some files after make
+	distclean
+
+2001-07-18  xfce
+
+	* other/Makefile.in.in: Forgot to remove some file when doing make
+	distclean
+
+2001-07-18  xfce
+
+	* libs/xpmext.c, xfgnome/xfgnome.c, xfwm/builtins.c, xfwm/events.c:
+	Try to remove the sticky problem on some systems
+
+2001-07-18  xfce
+
+	* Makefile.in, scripts/Makefile.in, xfce/Makefile.in,
+	xfce_theme/Makefile.in, xfclock/Makefile.in, xfdiff/Makefile.in,
+	xfglob/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsound/Makefile.in, xftree/Makefile.in,
+	xfumed/Makefile.in, xfwm/Makefile.in: Updating */Makefile.in
+
+2001-07-18  xfce
+
+	* other/Makefile.in.in, other/xfce3rc.cs, palettes/Metal,
+	po/xfce.pot, textures/metal.xpm: Reduce size of metal texture
+
+2001-07-18  xfce
+
+	* Makefile.in, backdrops/DISTFILES.in, backdrops/Green.xpm,
+	libs/xfce-common.c, libs/xfcolor.c, scripts/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfglob/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsound/Makefile.in,
+	xftree/Makefile.in, xfumed/Makefile.in, xfwm/Makefile.in: Small
+	changes in libxfce init
+
+2001-07-17  xfce
+
+	* libs/Makefile.am, libs/Makefile.in, libs/xfce-common.c,
+	libs/xfcolor.c, libs/xpmext.c, po/xfce.pot, xfce/xfce.mo: Clean up
+	stuff, use g_[malloc|realloc|free] when available, etc.
+
+2001-07-16  xfce
+
+	* po/cat-id-tbl.c, po/xfce.pot, xfbd/Makefile.am, xfbd/Makefile.in:
+	Fix a problem in xfbd Makefile reported by Stephane Paltani
+
+2001-07-16  xfce
+
+	* xfce.spec: Change spec file
+
+2001-07-16  xfce
+
+	* xfwm/: functions.c, misc.h, parse.h, read.c, xfwm.c: Fix a
+	problem with config being loaded twice when xfwm.user_menu is
+	missing
+
+2001-07-15  xfce
+
+	* libs/Module.c, libs/mygtkclock.c, xftree/gtk_cpy.c: Fixed a
+	problem in clock widget not displaying 12:00 at midnight in 12-hour
+	mode Fixed xftree copy dialog not displaying destination path Clean
+	up SIGPIPE handlin in libs/Module.c
+
+2001-07-14  xfce
+
+	* configure, configure.in, xfce.spec: Change xfce.spec so rpm
+	archive is now splitted between xfce-libs and xfce
+
+2001-07-13  xfce
+
+	* xfwm/builtins.c: Fixed a problem with margins and maximization of
+	Nautilus' root window
+
+2001-07-13  xfce
+
+	* ChangeLog, Makefile.am, Makefile.in, config.h.in, configure,
+	configure.in, mkinstalldirs, xfce.spec, backdrops/DISTFILES.in,
+	backdrops/GreyArena.xpm, backdrops/WhiteStripes.xpm,
+	docs/DISTFILES.in, docs/Makefile.in.in,
+	docs/html/adv-wm-appearance.html, docs/html/adv-wm-bindings.html,
+	docs/html/adv-wm-commands.html, docs/html/adv-wm-defaults.html,
+	docs/html/adv-wm-examples.html, docs/html/adv-wm-general.html,
+	docs/html/adv-wm-management.html, docs/html/adv-wm-menus.html,
+	docs/html/adv-wm-style.html, docs/html/adv-wm-xresources.html,
+	docs/html/advanced-wm.html, docs/html/copyright.html,
+	docs/html/fileman.html, docs/html/gpl.html, docs/html/help.html,
+	docs/html/install.html, docs/html/intro.html,
+	docs/html/license.html, docs/html/ln9.html,
+	docs/html/overview.html, docs/html/panel.html,
+	docs/html/resources.html, docs/html/setup-startup.html,
+	docs/html/setup-wm.html, docs/html/setup-xfce.html,
+	docs/html/setup.html, docs/html/user-manual.html,
+	docs/html/utilities.html, docs/html/utils-xfbdmgr.html,
+	docs/html/utils-xfclock.html, docs/html/utils-xfdiff.html,
+	docs/html/utils-xfglob.html, docs/html/utils-xfgnome.html,
+	docs/html/utils-xfmenu.html, docs/html/utils-xfmouse.html,
+	docs/html/utils-xfpager.html, docs/html/utils-xfrun.html,
+	docs/html/utils-xfsamba.html, docs/html/utils-xfsound.html,
+	docs/html/utils-xfumed.html, docs/html/wm-examples-2.html,
+	docs/html/wm.html, docs/html/stylesheet-images/caution.gif,
+	docs/html/stylesheet-images/home.gif,
+	docs/html/stylesheet-images/important.gif,
+	docs/html/stylesheet-images/next.gif,
+	docs/html/stylesheet-images/note.gif,
+	docs/html/stylesheet-images/prev.gif,
+	docs/html/stylesheet-images/tip.gif,
+	docs/html/stylesheet-images/toc-blank.gif,
+	docs/html/stylesheet-images/toc-minus.gif,
+	docs/html/stylesheet-images/toc-plus.gif,
+	docs/html/stylesheet-images/up.gif,
+	docs/html/stylesheet-images/warning.gif, docs/images/buttons.jpg,
+	docs/images/xfbd.jpg, docs/images/xfbdmgr.jpg,
+	docs/images/xfce_panel.jpg, docs/images/xfce_popup.jpg,
+	docs/images/xfce_setup1.jpg, docs/images/xfce_setup2.jpg,
+	docs/images/xfce_setup3.jpg, docs/images/xfce_setup4.jpg,
+	docs/images/xfce_slogan.jpg, docs/images/xfce_snap.jpg,
+	docs/images/xfclock.jpg, docs/images/xfdiff.jpg,
+	docs/images/xfglob.jpg, docs/images/xfmouse.jpg,
+	docs/images/xfpager.jpg, docs/images/xfrun.jpg,
+	docs/images/xfsamba.jpg, docs/images/xfsound.jpg,
+	docs/images/xftree.jpg, docs/images/xfumed.jpg, docs/sgml/GPL.sgml,
+	docs/sgml/advanced-xfwm.sgml, docs/sgml/ch-fileman.sgml,
+	docs/sgml/ch-install.sgml, docs/sgml/ch-overview.sgml,
+	docs/sgml/ch-panel.sgml, docs/sgml/ch-resources.sgml,
+	docs/sgml/ch-setup.sgml, docs/sgml/ch-utilities.sgml,
+	docs/sgml/ch-wm-appearance.sgml, docs/sgml/ch-wm-bindings.sgml,
+	docs/sgml/ch-wm-commands.sgml, docs/sgml/ch-wm-defaults.sgml,
+	docs/sgml/ch-wm-examples.sgml, docs/sgml/ch-wm-general.sgml,
+	docs/sgml/ch-wm-management.sgml, docs/sgml/ch-wm-menus.sgml,
+	docs/sgml/ch-wm-style.sgml, docs/sgml/ch-wm-xresources.sgml,
+	docs/sgml/ch-wm.sgml, docs/sgml/copyright.sgml,
+	docs/sgml/license.sgml, docs/sgml/preface.sgml,
+	docs/sgml/userman.sgml, docs/sgml/xfce-help.sgml,
+	html/DISTFILES.in, html/Makefile.in.in, html/help.gl.html,
+	html/help.html, html/help.nl.html, html/slogan.jpg,
+	html/title_legend.jpg, html/xfbd.jpg, html/xfce_action.jpg,
+	html/xfce_colorsel.jpg, html/xfce_fontsel.jpg,
+	html/xfce_modify.jpg, html/xfce_panel.jpg, html/xfce_popup.jpg,
+	html/xfce_popup_detached.jpg, html/xfce_screen.jpg,
+	html/xfce_setup1.jpg, html/xfce_setup2.jpg, html/xfce_setup3.jpg,
+	html/xfce_setup4.jpg, html/xfce_snap.jpg, html/xfmouse.jpg,
+	html/xfpager.jpg, html/xfsound.jpg, html/xftree.jpg,
+	html/xftree_menu.jpg, html/xfwm_menu1.jpg, html/xfwm_menu2.jpg,
+	html/xfwm_menu3.jpg, html/xfwm_menu4.jpg, html/xfwm_menu5.jpg,
+	icons/xfsamba.xpm, libs/Makefile.am, libs/Makefile.in,
+	libs/fileutil.c, other/CONFFILES.in, other/xfce3rc.in,
+	other/xfce3rc.sr, other/xfce3rc.sr.in, palettes/Altxfce2,
+	palettes/Altxfce3, palettes/DISTFILES.in, palettes/Moz9,
+	palettes/Moz9-2, po/ca.gmo, po/ca.po, po/cat-id-tbl.c, po/cs.gmo,
+	po/cs.po, po/da.gmo, po/da.po, po/de.gmo, po/de.po, po/en_GB.gmo,
+	po/en_GB.po, po/es.gmo, po/es.po, po/et.gmo, po/et.po, po/fi.gmo,
+	po/fi.po, po/fr.gmo, po/fr.po, po/gl.gmo, po/gl.po, po/hu.gmo,
+	po/hu.po, po/it.gmo, po/it.po, po/ja.po, po/nl.gmo, po/nl.po,
+	po/pl.gmo, po/pl.po, po/pt_BR.gmo, po/pt_BR.po, po/ro.gmo,
+	po/ro.po, po/ru.gmo, po/ru.po, po/sk.gmo, po/sk.po, po/sr.gmo,
+	po/sr.po, po/sv.gmo, po/sv.po, po/xfce.pot, po/zh.gmo, po/zh.po,
+	po/zh_CN.gmo, po/zh_CN.po, scripts/xfhelp, scripts/xfhelp.in,
+	xfce/configfile.c, xfce/diagnostic.c, xfce/popup.c,
+	xfce/popup_cb.c, xfce/selects.c, xfce/setup.c, xfce/xfce_cb.c,
+	xfce/xfwm.c, xfdiff/xfdiff_gui.c, xfdiff/icons/xfdiff.xpm,
+	xfgnome/xfgnome.h, xfrun/xfrun.c, xfsamba/ChangeLog,
+	xfsamba/Makefile.in, xfsamba/README, xfsamba/xfsamba.c,
+	xfsamba/xfsamba.h, xfsamba/xfsamba_gui.c, xfsamba/xfsamba_lookup.c,
+	xfsamba/icons/xfsamba.xpm, xftree/gtk_cpy.c, xftree/gtk_dlg.c,
+	xftree/xtree_dnd.c, xftree/xtree_gui.c, xfwm/builtins.c,
+	xfwm/events.c, xfwm/misc.c, xfwm/placement.c, xfwm/screen.h,
+	xfwm/session.c, xfwm/stack.c, xfwm/xfwm.c: Huge update after
+	xfce-devel/xfce-stable tree split.
+
 2001-07-11  huysmans  <j.b.huijsmans@chem.rug.nl>
 
 	* /cvsroot/xfce/xfce/po/cs.gmo, /cvsroot/xfce/xfce/po/cs.po, /cvsroot/xfce/xfce/po/da.gmo, /cvsroot/xfce/xfce/po/da.po, /cvsroot/xfce/xfce/po/de.gmo, /cvsroot/xfce/xfce/po/de.po, /cvsroot/xfce/xfce/po/en_GB.po, /cvsroot/xfce/xfce/po/es.gmo, /cvsroot/xfce/xfce/po/es.po, /cvsroot/xfce/xfce/po/et.po, /cvsroot/xfce/xfce/po/fi.po, /cvsroot/xfce/xfce/po/fr.gmo, /cvsroot/xfce/xfce/po/fr.po, /cvsroot/xfce/xfce/po/gl.gmo, /cvsroot/xfce/xfce/po/gl.po, /cvsroot/xfce/xfce/po/hu.gmo, /cvsroot/xfce/xfce/po/hu.po, /cvsroot/xfce/xfce/po/it.po, /cvsroot/xfce/xfce/po/ja.po, /cvsroot/xfce/xfce/po/nl.gmo, /cvsroot/xfce/xfce/po/nl.po, /cvsroot/xfce/xfce/po/pl.po, /cvsroot/xfce/xfce/po/pt_BR.gmo, /cvsroot/xfce/xfce/po/pt_BR.po, /cvsroot/xfce/xfce/po/ro.gmo, /cvsroot/xfce/xfce/po/ro.po, /cvsroot/xfce/xfce/po/ru.po, /cvsroot/xfce/xfce/po/sk.po, /cvsroot/xfce/xfce/po/sr.po, /cvsroot/xfce/xfce/po/sv.po, /cvsroot/xfce/xfce/po/xfce.pot, /cvsroot/xfce/xfce/po/zh.po, /cvsroot/xfce/xfce/po/zh_CN.po, /cvsroot/xfce/xfce/po/ca.po:
