@@ -603,7 +603,8 @@ static gboolean SubChildTransfer(char *target,char *source){
 	 *  in the popup are the same thing for the time being) */	
         if (!rc) return FALSE; /* user intervention */	
 	 
-	if (!(rc & (RW_ERROR_WRITING_TGT|RW_ERROR_OPENING_TGT))) { /* NO ERRORS */
+	if (!(rc & (RW_ERROR_WRITING_TGT|RW_ERROR_OPENING_TGT))) { 
+	   	
 	  if ((child_mode & TR_MOVE) && (unlink(source) < 0)) {
 	   return process_error(RW_ERROR_WRITING_SRC);/* user intervention */
 	  }
@@ -997,7 +998,7 @@ static int internal_rw_file(char *target,char *source,off_t size){
 
 	if ((i<0) || (j<0) || (too_few) || (too_many))
 	{
-		if (unlink(source))return (RW_ERROR_UNLINK_SRC); 
+		if (unlink(target))return (RW_ERROR_UNLINK_SRC); 
 		if (too_few) return (RW_ERROR_TOO_FEW);
 		if (too_many) return (RW_ERROR_TOO_MANY);
 		if (i<0) return (RW_ERROR_READING_SRC);
