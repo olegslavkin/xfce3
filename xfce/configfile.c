@@ -36,6 +36,10 @@
 #include "fileutil.h"
 #include "my_intl.h"
 
+#ifdef HAVE_LIBXML2
+#  include "configtree.h"
+#endif
+
 #ifndef HAVE_SNPRINTF
 #  include "snprintf.h"
 #endif
@@ -145,6 +149,19 @@ initconfig (config * newconf)
   newconf->panel_layer = DEFAULT_LAYER;
   newconf->xfwm_engine = XFCE_ENGINE;
 
+# ifdef HAVE_LIBXML2
+  value = getenv ("DISABLE_XFCE_USER_XMLCONFIG");
+  if (value && (my_strnSTARTS (value, "1") || my_strnSTARTS (value, "y")))
+  {
+    newconf->disable_xmlconfigs = TRUE;
+  }
+  else
+  {
+    newconf->disable_xmlconfigs = FALSE;
+  }
+  newconf->xmlconfigs = NULL; /* no extras here */
+# endif 
+
   return newconf;
 }
 
@@ -179,6 +196,9 @@ backupconfig (char *extension)
       fclose (backfile);
     if (copyfile)
       fclose (copyfile);
+#  ifdef HAVE_LIBXML2
+    gxfce_backup_configs (extension);
+#  endif
   }
 }
 
@@ -334,6 +354,10 @@ writeconfig (void)
     }
     fflush (configfile);
     fclose (configfile);
+#  ifdef HAVE_LIBXML2
+    if (! current_config.disable_xmlconfigs)
+	gxfce_write_configs ();
+#  endif
   }
 }
 
@@ -418,10 +442,14 @@ resetconfig (void)
     }
     fflush (configfile);
     fclose (configfile);
+#  ifdef HAVE_LIBXML2
+    if (! current_config.disable_xmlconfigs)
+	gxfce_reset_configs ();
+#  endif
   }
 }
 
-static char *
+/*static*/ char *
 localize_rcfilename (gboolean disable_user_config)
 {
   char *charset_code;
@@ -818,6 +846,10 @@ readconfig (void)
       }
     }
     fclose (configfile);
+#  ifdef HAVE_LIBXML2
+    if (! current_config.disable_xmlconfigs)
+	gxfce_read_configs ();
+#  endif
   }
 }
 

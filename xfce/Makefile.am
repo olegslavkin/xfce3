@@ -4,6 +4,7 @@ EXTRA_DIST = $(man_MANS) $(xfce_distcvs)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
+ @LIBXML2_CFLAGS@ \
  -I../ -I../libs/ \
  -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
  -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
@@ -31,14 +32,13 @@ xfce_SOURCES = \
 	xfce.c xfce.h \
 	xfce_cb.c xfce_cb.h \
 	xfce_main.c xfce_main.h \
-	xfwm.c xfwm.h
+	xfwm.c xfwm.h \
+	configtree.c configtree.h 
 
 # _distcvs - files being CVS but not listed anywhere. forgotten? _obsolete_?
 xfce_distcvs =  \
   addiconpix.h \
   closepix.h \
-  configtree.c \
-  configtree.h \
   diagicon.h \
   edit.h \
   file1.h \
@@ -67,7 +67,8 @@ xfce_distcvs =  \
   xfce_icon.h
 
 xfce_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ \
- @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
+ @GDK_PIXBUF_LIBS@ ${LIBXML2_LIBS} \
+ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
 
 xfce_DEPENDENCIES = ../libs/libxfcecore.la
 

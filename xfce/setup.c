@@ -217,8 +217,11 @@ create_setup (XFCE_palette * pal)
   GtkWidget *setup_clock_frame;
   GtkWidget *setup_clock_vbox;
   GtkWidget *setup_numscreens_frame;
+  GtkWidget *setup_numscreens_vbox;
   GtkWidget *setup_numscreens_hbox;
   GtkWidget *setup_numscreens_label;
+  GtkWidget *setup_switchdeskfactor_hbox;
+  GtkWidget *setup_switchdeskfactor_label;
   GtkWidget *setup_numpopups_frame;
   GtkWidget *setup_numpopups_hbox;
   GtkWidget *setup_numpopups_label;
@@ -567,11 +570,18 @@ create_setup (XFCE_palette * pal)
   gtk_box_pack_start (GTK_BOX (setup_vbox3), setup_numscreens_frame, TRUE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (setup_numscreens_frame), 5);
 
+  setup_numscreens_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_widget_set_name (setup_numscreens_vbox, "setup_numscreens_vbox");
+  gtk_object_set_data (GTK_OBJECT (setup), "setup_numscreens_vbox", setup_numscreens_vbox);
+  gtk_widget_show (setup_numscreens_vbox);
+  gtk_container_add (GTK_CONTAINER (setup_numscreens_frame), setup_numscreens_vbox);
+  gtk_container_border_width (GTK_CONTAINER (setup_numscreens_vbox), 5);
+
   setup_numscreens_hbox = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (setup_numscreens_hbox, "setup_numscreens_hbox");
   gtk_object_set_data (GTK_OBJECT (setup), "setup_numscreens_hbox", setup_numscreens_hbox);
   gtk_widget_show (setup_numscreens_hbox);
-  gtk_container_add (GTK_CONTAINER (setup_numscreens_frame), setup_numscreens_hbox);
+  gtk_container_add (GTK_CONTAINER (setup_numscreens_vbox), setup_numscreens_hbox);
   gtk_container_border_width (GTK_CONTAINER (setup_numscreens_hbox), 5);
 
   setup_numscreens_label = gtk_label_new (_("Number of virtual desktops : "));
@@ -586,7 +596,32 @@ create_setup (XFCE_palette * pal)
   gtk_widget_set_name (setup_options.setup_numscreens_spinbutton, "setup_numscreens_spinbutton");
   gtk_object_set_data (GTK_OBJECT (setup), "setup_numscreens_spinbutton", setup_options.setup_numscreens_spinbutton);
   gtk_widget_show (setup_options.setup_numscreens_spinbutton);
-  gtk_box_pack_start (GTK_BOX (setup_numscreens_hbox), setup_options.setup_numscreens_spinbutton, FALSE, FALSE, 0);
+  gtk_box_pack_end (GTK_BOX (setup_numscreens_hbox), setup_options.setup_numscreens_spinbutton, FALSE, FALSE, 0);
+
+  setup_switchdeskfactor_hbox = gtk_hbox_new (FALSE, 0);
+  gtk_widget_set_name (setup_switchdeskfactor_hbox, "setup_switchdeskfactor_hbox");
+  gtk_object_set_data (GTK_OBJECT (setup), "setup_switchdeskfactor_hbox", setup_switchdeskfactor_hbox);
+  gtk_widget_show (setup_switchdeskfactor_hbox);
+  gtk_container_add (GTK_CONTAINER (setup_numscreens_vbox), setup_switchdeskfactor_hbox);
+  gtk_container_border_width (GTK_CONTAINER (setup_switchdeskfactor_hbox), 5);
+
+  setup_switchdeskfactor_label = gtk_label_new (_("switch desktop at screen border, fixed factor 4: "));
+  gtk_widget_set_name (setup_switchdeskfactor_label, "setup_switchdeskfactor_label");
+  gtk_object_set_data (GTK_OBJECT (setup), "setup_switchdeskfactor_label", setup_switchdeskfactor_label);
+  gtk_widget_show (setup_switchdeskfactor_label);
+  gtk_box_pack_start (GTK_BOX (setup_switchdeskfactor_hbox), setup_switchdeskfactor_label, FALSE, FALSE, 0);
+  gtk_label_set_justify (GTK_LABEL (setup_switchdeskfactor_label), GTK_JUSTIFY_RIGHT);
+
+# ifdef HAVE_LIBXML2
+  setup_options.setup_switchdeskfactor_spinbutton_adj = gtk_adjustment_new (4, 1, 99, 1, 4, 1);
+# else
+  setup_options.setup_switchdeskfactor_spinbutton_adj = gtk_adjustment_new (4, 4, 4, 1, 4, 1);
+# endif
+  setup_options.setup_switchdeskfactor_spinbutton = gtk_spin_button_new (GTK_ADJUSTMENT (setup_options.setup_switchdeskfactor_spinbutton_adj), 1, 0);
+  gtk_widget_set_name (setup_options.setup_switchdeskfactor_spinbutton, "setup_switchdeskfactor_spinbutton");
+  gtk_object_set_data (GTK_OBJECT (setup), "setup_switchdeskfactor_spinbutton", setup_options.setup_switchdeskfactor_spinbutton);
+  gtk_widget_show (setup_options.setup_switchdeskfactor_spinbutton);
+  gtk_box_pack_end (GTK_BOX (setup_switchdeskfactor_hbox), setup_options.setup_switchdeskfactor_spinbutton, FALSE, FALSE, 0);
 
   setup_numpopups_frame = gtk_frame_new (_("Popups & Icons"));
   gtk_widget_set_name (setup_numscreens_frame, "setup_numpopups_frame");
@@ -1255,6 +1290,7 @@ show_setup (XFCE_palette * pal)
   gtk_adjustment_set_value (GTK_ADJUSTMENT (setup_options.setup_numscreens_spinbutton_adj), current_config.visible_screen);
   gtk_adjustment_set_value (GTK_ADJUSTMENT (setup_options.setup_numpopups_spinbutton_adj), current_config.visible_popup);
   gtk_adjustment_set_value (GTK_ADJUSTMENT (setup_options.setup_snapsize_spinbutton_adj), current_config.snapsize);
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (setup_options.setup_switchdeskfactor_spinbutton_adj), current_config.switchdeskfactor);
   switch (current_config.xfwm_engine)
   {
   case MOFIT_ENGINE:
@@ -1331,6 +1367,7 @@ get_setup_values (void)
   current_config.opaquemove = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_opaquemove_checkbutton));
   current_config.opaqueresize = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_opaqueresize_checkbutton));
   current_config.snapsize = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (setup_options.setup_snapsize_spinbutton));
+  current_config.switchdeskfactor = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (setup_options.setup_switchdeskfactor_spinbutton));
   current_config.gradient_active_title = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_activetitle));
   current_config.gradient_inactive_title = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_inactivetitle));
   current_config.iconpos = (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_leftbutton)) ? 1 : 0) + 2 * (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_botbutton)) ? 1 : 0) + 3 * (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_rightbutton)) ? 1 : 0);

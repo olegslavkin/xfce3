@@ -72,6 +72,9 @@ typedef struct
   gboolean hrs_mode;
   int panel_layer;
   EngineType xfwm_engine;
+  gboolean disable_xmlconfigs;
+  void* xmlconfigs;
+  int switchdeskfactor;
 }
 config;
 
