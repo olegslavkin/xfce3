@@ -136,18 +136,16 @@ AddWindow (Window w)
 
   extern XfwmWindow *colormap_win;
 
+  /* Is the window gonna be removed already ? */
+  if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy) || XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
+  {
+    return (NULL);
+  }
+
   /* allocate space for the xfwm window */
   tmp_win = (XfwmWindow *) calloc (1, sizeof (XfwmWindow));
   if (!tmp_win)
   {
-    return NULL;
-  }
-
-  MyXGrabServer(dpy);
-  if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
-  {
-    free (tmp_win);
-    MyXUngrabServer(dpy);
     return NULL;
   }
 
@@ -331,6 +329,14 @@ AddWindow (Window w)
   tmp_win->BackPixel = GetDecor (tmp_win, LoColors.back);
   attributes.background_pixel = tmp_win->BackPixel;
 
+  MyXGrabServer(dpy);
+  if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
+  {
+    free (tmp_win);
+    MyXUngrabServer(dpy);
+    return NULL;
+  }
+
   /* create windows */
 
   valuemask = CWCursor | CWEventMask;
@@ -486,7 +492,7 @@ AddWindow (Window w)
   InstallWindowColormaps (colormap_win);
 
   /* If for some reason the windows will come out, just destroy it and give up */
-  if (XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
+  if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy) || XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
   {
     Destroy (tmp_win);
     return (NULL);
