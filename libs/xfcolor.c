@@ -912,12 +912,14 @@ void
 create_gtkrc_file (XFCE_palette * p, char *name)
 {
   FILE *f;
+  char *home;
   char tempstr[MAXSTRLEN];
   char lineread[80];
   gboolean gtkrc_by_xfce = TRUE;
   int i;
 
-  snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), (name ? name : gtkrcfile));
+  home =  (char *) getenv ("HOME");
+  snprintf (tempstr, MAXSTRLEN, "%s%s", home, (name ? name : gtkrcfile));
   if (existfile (tempstr) && ((f = fopen (tempstr, "r"))))
   {
     fgets (lineread, 79, f);
@@ -934,7 +936,7 @@ create_gtkrc_file (XFCE_palette * p, char *name)
     if ((f = fopen (tempstr, "w")))
     {
       fprintf (f, "%s\n\n", XFCE3GTKRC);
-      fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
+      fprintf (f, "pixmap_path \"%s:%s/.xfce/:%s/\"\n\n", build_path ("/"), home, home);
       for (i = 1; i < 8; i++)   /* Color 0 is used for the mouse pointer only */
         write_style_to_gtkrc_file (f, p, i, i, 4, "xfce_", (i == 7));
 #ifndef OLD_STYLE
@@ -978,14 +980,16 @@ void
 create_temp_gtkrc_file (XFCE_palette * p)
 {
   FILE *f;
+  char *home;
   char tempstr[MAXSTRLEN];
   int i;
 
-  snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), gtktemprcfile);
+  home =  (char *) getenv ("HOME");
+  snprintf (tempstr, MAXSTRLEN, "%s%s", home, gtktemprcfile);
   if ((f = fopen (tempstr, "w")))
   {
     fprintf (f, "%s\n\n", XFCE3GTKRC);
-    fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
+    fprintf (f, "pixmap_path \"%s:%s/.xfce/:%s/\"\n\n", build_path ("/"), home, home);
     for (i = 0; i < 8; i++)
       write_style_to_gtkrc_file (f, p, i, i, 4, "temp_xfce_", FALSE);
     fprintf (f, "widget       \"*temp_color0*\"  style \"temp_xfce_0\"\n");
