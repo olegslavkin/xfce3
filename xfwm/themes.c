@@ -1287,8 +1287,12 @@ DrawSelectedEntry_xfce (Window win, int x, int y, int w, int h, GC * currentGC)
   Globalgcm = GCForeground;
   XChangeGC (dpy, Scr.ScratchGC1, Globalgcm, &Globalgcv);
   XFillRectangle (dpy, win, Scr.ScratchGC1, x, y, w, h);
+#if 1
+  RelieveRectangle (win, x, y, w, h, Scr.MenuSelShadowGC, Scr.MenuSelReliefGC);
+#else
   RelieveRectangle (win, x, y, w, h, Scr.BlackGC, Scr.BlackGC);
   RelieveRectangle (win, x + 1, y + 1, w - 2, h - 2, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
+#endif
   *currentGC = Scr.MenuSelGC;
 }
 
