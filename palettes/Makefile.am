@@ -22,6 +22,7 @@ palettes_DATA=\
  BlueX2 \
  BlueX3 \
  BlueX4 \
+ Cadmium \
  CandyBox \
  CandyBox2 \
  Cheese \
@@ -33,8 +34,6 @@ palettes_DATA=\
  Craters \
  DarkMetal \
  Default \
- DefaultGrey \
- DefaultTextured \
  Defcon \
  Desert \
  Dolly \
