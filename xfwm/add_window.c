@@ -460,9 +460,6 @@ AddWindow (Window w)
   MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
   MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
 
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
-
   FetchWmProtocols (tmp_win);
   FetchWmColormapWindows (tmp_win);
   if (tmp_win->attr.colormap == None)
@@ -473,14 +470,17 @@ AddWindow (Window w)
   XMapSubwindows (dpy, tmp_win->frame);
 
   x = tmp_win->frame_x;
-  tmp_win->frame_x = 0;
+  tmp_win->frame_x = 1;
   y = tmp_win->frame_y;
-  tmp_win->frame_y = 0;
+  tmp_win->frame_y = 1;
   width = tmp_win->frame_width;
   tmp_win->frame_width = 0;
   height = tmp_win->frame_height;
   tmp_win->frame_height = 0;
   SetupFrame (tmp_win, x, y, width, height, True, True);
+
+  XSync (dpy, 0);
+  MyXUngrabServer (dpy);
 
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 

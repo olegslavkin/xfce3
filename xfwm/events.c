@@ -1519,9 +1519,9 @@ HandleConfigureRequest ()
     Tmp_win->old_bw = cre->border_width;
 
   if (cre->value_mask & CWX)
-    x = cre->x;
+    x = cre->x - (Tmp_win->boundary_width + Tmp_win->bw);
   if (cre->value_mask & CWY)
-    y = cre->y;
+    y = cre->y - (Tmp_win->title_height + Tmp_win->boundary_width + Tmp_win->bw);
   if (cre->value_mask & CWWidth)
     width = cre->width + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
   if (cre->value_mask & CWHeight)
@@ -1534,7 +1534,7 @@ HandleConfigureRequest ()
     SetBorder (Tmp_win, Scr.Hilite == Tmp_win, True, True, None);
   }
 
-  SetupFrame (Tmp_win, x, y, width, height, True, True);
+  SetupFrame (Tmp_win, x, y, width, height, False, True);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleConfigureRequest ()\n");
 #endif
@@ -1645,7 +1645,6 @@ sendclient_event (XfwmWindow * tmp_win, int x, int y, int w, int h)
   client_event.xconfigure.above = 0x0;
   client_event.xconfigure.override_redirect = False;
   XSendEvent (dpy, tmp_win->w, False, StructureNotifyMask, &client_event);
-  XSync (dpy, 0);
 }
 
 void
