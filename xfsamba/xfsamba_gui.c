@@ -193,6 +193,27 @@ cb_master (GtkWidget * item, GtkWidget * ctree)
 {
   xf_dlg_warning (smb_nav,_("If you have win95 nodes on your network, xfsamba might not find\n" "a master browser. If you start smb services on your linux box,\n" "making it a samba-server, the problem will be fixed as long as\n" "the win95 box(es) are reset. You know the routine, reset wind*ws\n" "for changes to take effect. Otherwise,\n" "you must type in the node to be browsed and hit RETURN.\n"));
 }
+static void
+cb_dnd (GtkWidget * item, GtkWidget * ctree)
+{
+  xf_dlg_warning (smb_nav,_("Full drag and drop capability is provided between xfsamba and\n"
+			  "the companion file browser \"xftree\". Drag and drop may or not\n"
+			  "work with other file browsers"));
+}
+static void
+cb_search (GtkWidget * item, GtkWidget * ctree)
+{
+  xf_dlg_warning (smb_nav,_("To search for files on remote SMB shares\n"
+			  "first mount the share with the mount tool\n"
+			  "and then use the xftree search utility to do the search\n"));
+}
+static void
+cb_diff (GtkWidget * item, GtkWidget * ctree)
+{
+  xf_dlg_warning (smb_nav,_("To view differences on a remote SMB share\n"
+			  "first mount the share with the mount tool\n"
+			  "and then use the xftree diff utility to display the differences.\n"));
+}
 
 static void
 cb_about (GtkWidget * item, GtkWidget * ctree)
@@ -1112,6 +1133,7 @@ static void make_menu(GtkWidget *handlebox){
 /* TOOLS */
 	menu = shortcut_menu (MENUBAR, menubar, _("Tools"), NULL, NULL);
 	submenu = shortcut_menu (SUBMENU, menu, _("Local file browser"), GTK_SIGNAL_FUNC (cb_xftree), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Mount remote share"), GTK_SIGNAL_FUNC (cb_mount), NULL);
 /* VIEW */
 	menu = shortcut_menu (MENUBAR, menubar, _("View"), NULL, NULL);
 
@@ -1130,8 +1152,11 @@ static void make_menu(GtkWidget *handlebox){
 /* HELP */
 
 	menu = shortcut_menu (RIGHT_MENU, menubar, _("Help"), NULL, NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("About master browser..."), GTK_SIGNAL_FUNC (cb_master), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("About xfsamba..."), GTK_SIGNAL_FUNC (cb_about), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Drag and drop"), GTK_SIGNAL_FUNC (cb_dnd), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Searching"), GTK_SIGNAL_FUNC (cb_search), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Differences"), GTK_SIGNAL_FUNC (cb_diff), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Master browsers"), GTK_SIGNAL_FUNC (cb_master), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("About xfsamba"), GTK_SIGNAL_FUNC (cb_about), NULL);
 }
 
 #if 0
