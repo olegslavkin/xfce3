@@ -123,20 +123,6 @@ main (int argc, char *argv[])
   /* xfce_init must appear after argument processing 
    * so that alternate display can be specified */
   
-  /* for temporary file cleanup */
-  signal (SIGHUP, finishit);
-  signal (SIGINT, finishit);
-  signal (SIGQUIT, finishit);
-  signal (SIGABRT, finishit);
-  signal (SIGBUS, finishit);
-  signal (SIGSEGV, finishit);
-  signal (SIGTERM, finishit);
-  signal (SIGFPE, finishit);
-
-  signal (SIGKILL, finishit);
-  signal (SIGUSR1, finishit);
-  signal (SIGUSR2, finishit);
-
   sprintf (rc, "%s/%s/%s", getenv("HOME"), BASE_DIR, "xtree.rc");
   read_defaults();
   strcpy (path,(custom_home_dir)?custom_home_dir: getenv ("HOME"));
@@ -206,6 +192,19 @@ main (int argc, char *argv[])
 	  exit(1);  	  
   }
   xfce_init (&argc, &argv);
+ /* for temporary file cleanup (after xfce_init) */
+  signal (SIGHUP, finishit);
+  signal (SIGINT, finishit);
+  signal (SIGQUIT, finishit);
+  signal (SIGABRT, finishit);
+  signal (SIGBUS, finishit);
+  signal (SIGSEGV, finishit);
+  signal (SIGTERM, finishit);
+  signal (SIGFPE, finishit);
+
+  signal (SIGKILL, finishit);
+  signal (SIGUSR1, finishit);
+  signal (SIGUSR2, finishit);
   
   if (argc != optind)
   {
