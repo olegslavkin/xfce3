@@ -232,7 +232,7 @@ apply_wm_colors (const XFCE_palette * p)
     {
       howdark = brightness_pal (p, 7);
     }
-    if (current_config.xfwm_engine == MOFIT_ENGINE)
+    if ((current_config.xfwm_engine == MOFIT_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
       color_to_hex (s, p, 6);
     else
       color_to_hex (s, p, 7);
