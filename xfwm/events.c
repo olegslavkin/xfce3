@@ -754,6 +754,13 @@ HandlePropertyNotify ()
       FetchWmColormapWindows (Tmp_win);	/* frees old data */
       ReInstallActiveColormap ();
     }
+    else if (Event.xproperty.atom == _XA_WM_STATE)
+    {
+      if ((Tmp_win != NULL) && AcceptInput(Tmp_win) && (Tmp_win == Scr.Focus))
+      {
+	SetFocus (Tmp_win->w, Tmp_win, True, True);
+      }
+    }
     else if (Event.xproperty.atom == _XA_WIN_LAYER)
     {
       if ((Tmp_win) && (GetWindowLayer (Tmp_win)))
