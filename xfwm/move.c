@@ -76,7 +76,7 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
   int startDesk;
   int center_x;
   int center_y;
-  Bool window_deleted = FALSE;
+  Bool window_deleted = False;
 
   if (DeferExecution (eventp, &w, &tmp_win, &context, MOVE, ButtonPress))
     return;
@@ -124,7 +124,7 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
       RedrawRightButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
       RedrawLeftButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
     }
-    SetupFrame (tmp_win, FinalX, FinalY, tmp_win->frame_width, tmp_win->frame_height, TRUE, TRUE);
+    SetupFrame (tmp_win, FinalX, FinalY, tmp_win->frame_width, tmp_win->frame_height, True, True);
     if (startDesk != Scr.CurrentDesk)
     {
       MapIt (tmp_win);
@@ -194,7 +194,7 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
 #endif
     }
 
-    done = FALSE;
+    done = False;
     /* Handle a limited number of key press events to allow mouseless
      * operation */
     if (Event.type == KeyPress)
@@ -222,9 +222,9 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
 	  *FinalX = tmp_win->icon_x_loc;
 	  *FinalY = tmp_win->icon_y_loc;
 	}
-	finished = TRUE;
+	finished = True;
       }
-      done = TRUE;
+      done = True;
       break;
     case ButtonPress:
       XAllowEvents (dpy, ReplayPointer, CurrentTime);
@@ -245,8 +245,8 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
       *FinalX = xl;
       *FinalY = yt;
 
-      done = TRUE;
-      finished = TRUE;
+      done = True;
+      finished = True;
       break;
     case MotionNotify:
       xl = Event.xmotion.x_root;
@@ -273,13 +273,13 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
 	  XMoveWindow (dpy, tmp_win->icon_w, tmp_win->icon_xl_loc, yt + tmp_win->icon_p_height);
 
       }
-      done = TRUE;
+      done = True;
       break;
     case UnmapNotify:
       if (Event.xunmap.window == tmp_win->w)
       {
-	finished = TRUE;
-	done = TRUE;
+	finished = True;
+	done = True;
 	window_deleted = True;
       }
       DispatchEvent ();
@@ -287,8 +287,8 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
     case DestroyNotify:
       if ((Event.xdestroywindow.window == tmp_win->frame) || (Event.xdestroywindow.window == tmp_win->w))
       {
-	finished = TRUE;
-	done = TRUE;
+	finished = True;
+	done = True;
 	window_deleted = True;
       }
       DispatchEvent ();

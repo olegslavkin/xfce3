@@ -420,7 +420,7 @@ LookInStyleList (char *name, XClassHint * class, char **value, int *Desk, int *b
     if (class)
     {
       /* first look for the res_class  (lowest priority) */
-      if (matchWildcards (nptr->name, class->res_class) == TRUE)
+      if (matchWildcards (nptr->name, class->res_class) == True)
       {
 	if (nptr->value != NULL)
 	  *value = nptr->value;
@@ -440,7 +440,7 @@ LookInStyleList (char *name, XClassHint * class, char **value, int *Desk, int *b
       }
 
       /* look for the res_name next */
-      if (matchWildcards (nptr->name, class->res_name) == TRUE)
+      if (matchWildcards (nptr->name, class->res_name) == True)
       {
 	if (nptr->value != NULL)
 	  *value = nptr->value;
@@ -460,7 +460,7 @@ LookInStyleList (char *name, XClassHint * class, char **value, int *Desk, int *b
       }
     }
     /* finally, look for name matches */
-    if (matchWildcards (nptr->name, name) == TRUE)
+    if (matchWildcards (nptr->name, name) == True)
     {
       if (nptr->value != NULL)
 	*value = nptr->value;

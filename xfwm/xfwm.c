@@ -401,7 +401,7 @@ main (int argc, char **argv)
     else
     {
       xfwm_msg (ERR, "main", "Unknown option:  `%s'\n", argv[i]);
-      option_error = TRUE;
+      option_error = True;
     }
   }
 
@@ -632,7 +632,7 @@ main (int argc, char **argv)
     LoadWindowStates (restore_filename);
   SessionInit (client_id);
   SetRunLevel (XFWM_RUNNING);
-  /* The restart procedure is now over, no we can safely turn Restarting to FALSE */
+  /* The restart procedure is now over, no we can safely turn Restarting to False */
   Restarting = False;
   HandleEvents ();
   switch (runlevel)
@@ -1023,8 +1023,8 @@ SetRCDefaults ()
  *		put a xfwm frame on the window
  *
  *  Returned Value:
- *	TRUE	- go ahead and frame the window
- *	FALSE	- don't frame the window
+ *	True	- go ahead and frame the window
+ *	False	- don't frame the window
  *
  *  Inputs:
  *	w	- the window to check

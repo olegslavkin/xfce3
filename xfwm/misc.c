@@ -38,13 +38,12 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/stat.h>
 #include <unistd.h>
 #include <signal.h>
 #include <stdarg.h>
-#include <string.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/stat.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
@@ -63,12 +62,24 @@
 #include <Imlib.h>
 #endif
 
+#ifndef HAVE_SNPRINTF
+#  include "snprintf.h"
+#endif
+
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
 
-char NoName[] = "Untitled";	/* name if no name in XA_WM_NAME */
-char NoClass[] = "NoClass";	/* Class if no res_class in class hints */
+#if !defined(MAX_TITLE_LEN)
+#define MAX_TITLE_LEN 80
+#endif
+
+#if !defined(MAX_ICON_LEN)
+#define MAX_ICON_LEN 80
+#endif
+
+char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
+char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
 
 #ifdef HAVE_IMLIB
@@ -90,6 +101,27 @@ check_existfile (char *filename)
   return (0);
 }
 
+char *
+bound_name (char *s, int max_len)
+{
+  char *res;
+  int length;
+  
+  length = strlen (s);
+  if (length > max_len)
+  {
+    res = (char *) safemalloc (max_len + 5);
+    snprintf (res, max_len, "%s", s);
+    strcat (res, "...");
+  }
+  else
+  {
+    res = (char *) safemalloc (length + 1);
+    strcpy (res, s);
+  }
+  return (res);
+}
+
 void
 GetWMName (XfwmWindow * t)
 {
@@ -106,21 +138,18 @@ GetWMName (XfwmWindow * t)
       {
 	if (text_list)
 	{
-	  t->name = (char *) safemalloc (strlen (text_list[0]) + 1);
-	  strcpy (t->name, text_list[0]);
+          t->name = bound_name (text_list[0], MAX_TITLE_LEN);
 	  XFreeStringList (text_list);
 	}
       }
       else
       {
-	t->name = (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
-	strcpy (t->name, (char *) text_prop.value);
+	t->name = bound_name ((char *) text_prop.value, MAX_TITLE_LEN);
       }
     }
     else
     {
-      t->name = (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
-      strcpy (t->name, (char *) text_prop.value);
+      t->name = bound_name ((char *) text_prop.value, MAX_TITLE_LEN);
     }
     XFree (text_prop.value);
   }
@@ -151,21 +180,18 @@ GetWMIconName (XfwmWindow * t)
       {
 	if (text_list)
 	{
-	  t->icon_name = (char *) safemalloc (strlen (text_list[0]) + 1);
-	  strcpy (t->icon_name, text_list[0]);
+          t->icon_name = bound_name (text_list[0], MAX_ICON_LEN);
 	  XFreeStringList (text_list);
 	}
       }
       else
       {
-	t->icon_name = (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
-	strcpy (t->icon_name, (char *) text_prop.value);
+	t->icon_name = bound_name ((char *) text_prop.value, MAX_ICON_LEN);
       }
     }
     else
     {
-      t->icon_name = (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
-      strcpy (t->icon_name, (char *) text_prop.value);
+      t->icon_name = bound_name ((char *) text_prop.value, MAX_ICON_LEN);
     }
     XFree (text_prop.value);
   }
@@ -173,8 +199,7 @@ GetWMIconName (XfwmWindow * t)
   {
     if (t->name)
     {
-      t->icon_name = (char *) safemalloc (strlen (t->name) + 1);
-      strcpy (t->icon_name, t->name);
+      t->icon_name = bound_name (t->name, MAX_ICON_LEN);
     }
     else
     {

@@ -117,7 +117,7 @@ RestackWindow (XfwmWindow * t, Bool top)
 
   for (j = MAX_LAYERS; j >= 0; j--)
   {
-    if ((t->layer == j) && (top == TRUE))
+    if ((t->layer == j) && (top == True))
     {
       /* Raise transients first */
       for (t2 = Scr.stacklist; t2 != NULL; t2 = t2->next)
@@ -138,7 +138,7 @@ RestackWindow (XfwmWindow * t, Bool top)
 	newstack = PushStackList (newstack, wins, t2->win, &i);
       }
     }
-    if ((t->layer == j) && (top == FALSE))
+    if ((t->layer == j) && (top == False))
     {
       /* Raise transients first */
       for (t2 = Scr.stacklist; t2 != NULL; t2 = t2->next)
@@ -171,7 +171,7 @@ RaiseWindow (XfwmWindow * t)
 {
   if (t != Scr.LastWindowRaised)
   {
-    RestackWindow (t, TRUE);
+    RestackWindow (t, True);
   }
   if (t == Scr.LastWindowLowered)
   {
@@ -185,7 +185,7 @@ LowerWindow (XfwmWindow * t)
 {
   if (t != Scr.LastWindowLowered)
   {
-    RestackWindow (t, FALSE);
+    RestackWindow (t, False);
   }
   if (t == Scr.LastWindowRaised)
   {
@@ -275,10 +275,10 @@ GetWindowLayer (XfwmWindow * tmp)
       if (tmp->layer > MAX_LAYERS)
 	tmp->layer = MAX_LAYERS;
       XFree (prop);
-      return (TRUE);
+      return (True);
     }
   }
-  return (FALSE);
+  return (False);
 }
 
 XfwmWindowList *

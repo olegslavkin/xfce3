@@ -874,9 +874,9 @@ HandleMapRequest ()
     {
     case IconicState:
       if (Tmp_win->wmhints)
-	Iconify (Tmp_win, Tmp_win->wmhints->icon_x, Tmp_win->wmhints->icon_y, TRUE);
+	Iconify (Tmp_win, Tmp_win->wmhints->icon_x, Tmp_win->wmhints->icon_y, True);
       else
-	Iconify (Tmp_win, 0, 0, TRUE);
+	Iconify (Tmp_win, 0, 0, True);
       break;
     case DontCareState:
     case NormalState:
@@ -1191,7 +1191,10 @@ HandleButtonPress ()
   }
   else if (Context & C_TITLE)
   {
-    SetTitleBar (ButtonWindow, (Scr.Hilite == ButtonWindow));
+    if (RedrawTitleOnButtonPress ())
+    {
+      SetTitleBar (ButtonWindow, (Scr.Hilite == ButtonWindow));
+    }
   }
 
   /* we have to execute a function or pop up a menu */
@@ -1239,7 +1242,10 @@ HandleButtonPress ()
   }
   else if (Context & C_TITLE)
   {
-    SetTitleBar (ButtonWindow, (Scr.Hilite == ButtonWindow));
+    if (RedrawTitleOnButtonPress ())
+    {
+      SetTitleBar (ButtonWindow, (Scr.Hilite == ButtonWindow));
+    }
   }
   ButtonWindow = NULL;
 #ifdef DEBUG
@@ -1456,7 +1462,7 @@ HandleConfigureRequest ()
   if (cre->value_mask & CWHeight)
     height = cre->height + Tmp_win->title_height + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
 
-  SetupFrame (Tmp_win, x, y, width, height, FALSE, TRUE);
+  SetupFrame (Tmp_win, x, y, width, height, False, True);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleConfigureRequest ()\n");
 #endif

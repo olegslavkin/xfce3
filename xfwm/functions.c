@@ -200,13 +200,13 @@ ExecuteFunction (char *Action, XfwmWindow * tmp_win, XEvent * eventp, unsigned l
   taction = expand (Action, arguments, tmp_win);
   action = GetNextToken (taction, &function);
   j = 0;
-  matched = FALSE;
+  matched = False;
 
   while ((!matched) && (strlen (func_config[j].keyword) > 0))
   {
     if (strcasecmp (function, func_config[j].keyword) == 0)
     {
-      matched = TRUE;
+      matched = True;
       /* found key word */
       func_config[j].action (eventp, w, tmp_win, context, action, &Module);
     }
@@ -244,13 +244,13 @@ find_func_type (char *action)
     ++endtok;
   len = endtok - action;
   j = 0;
-  matched = FALSE;
+  matched = False;
   while ((!matched) && (strlen (func_config[j].keyword) > 0))
   {
     int mlen = strlen (func_config[j].keyword);
     if ((mlen == len) && (mystrncasecmp (action, func_config[j].keyword, mlen) == 0))
     {
-      matched = TRUE;
+      matched = True;
       /* found key word */
       return (int) func_config[j].code;
     }

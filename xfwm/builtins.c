@@ -173,7 +173,7 @@ DeferExecution (XEvent * eventp, Window * w, XfwmWindow ** tmp_win, unsigned lon
   {
     if ((FinishEvent == ButtonPress) || ((FinishEvent == ButtonRelease) && (eventp->type != ButtonPress)))
     {
-      return FALSE;
+      return False;
     }
   }
   if (!GrabEm (cursor))
@@ -223,7 +223,7 @@ DeferExecution (XEvent * eventp, Window * w, XfwmWindow ** tmp_win, unsigned lon
   {
     *context = C_ROOT;
     UngrabEm ();
-    return TRUE;
+    return True;
   }
   if (XFindContext (dpy, *w, XfwmContext, (caddr_t *) tmp_win) == XCNOENT)
   {
@@ -231,7 +231,7 @@ DeferExecution (XEvent * eventp, Window * w, XfwmWindow ** tmp_win, unsigned lon
     XBell (dpy, Scr.screen);
     xfwm_msg (WARN, "DeferExecution", "Cannot determine context");
     UngrabEm ();
-    return (TRUE);
+    return (True);
   }
 
   if (*w == (*tmp_win)->Parent)
@@ -245,13 +245,13 @@ DeferExecution (XEvent * eventp, Window * w, XfwmWindow ** tmp_win, unsigned lon
     {
       *context = C_ROOT;
       UngrabEm ();
-      return TRUE;
+      return True;
     }
 
   *context = GetContext (*tmp_win, eventp, &dummy);
 
   UngrabEm ();
-  return FALSE;
+  return False;
 }
 
 /**************************************************************************
@@ -333,7 +333,7 @@ WarpOn (XfwmWindow * t, int warp_x, int x_unit, int warp_y, int y_unit)
   /* If the window is still not visible, make it visible! */
   if (((t->frame_x + ((t->flags & SHADED) ? t->shade_height : t->frame_height)) < 0) || (t->frame_y + t->frame_width < 0) || (t->frame_x > Scr.MyDisplayWidth) || (t->frame_y > Scr.MyDisplayHeight))
   {
-    SetupFrame (t, 0, 0, t->frame_width, ((t->flags & SHADED) ? t->shade_height : t->frame_height), FALSE, TRUE);
+    SetupFrame (t, 0, 0, t->frame_width, ((t->flags & SHADED) ? t->shade_height : t->frame_height), False, True);
     XWarpPointer (dpy, None, Scr.Root, 0, 0, 0, 0, 2, 2);
   }
 }
@@ -366,7 +366,7 @@ Shade (XfwmWindow * tmp_win)
   tmp_win->shade_height = tmp_win->title_height + 2 * tmp_win->boundary_width;
   /* XUnmapWindow (dpy, tmp_win->Parent); */
 
-  SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, TRUE, TRUE);
+  SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, True, True);
   SetBorder (tmp_win, (Scr.Hilite == tmp_win), True, True, None);
   Broadcast (XFCE_M_SHADE, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
 }
@@ -387,11 +387,11 @@ Unshade (XfwmWindow * tmp_win)
     Animate (tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->title_height + 2 * tmp_win->boundary_width, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height);
   tmp = tmp_win->frame_height;
   tmp_win->frame_height = 0;	/* force redrawing frame */
-  SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp, TRUE, TRUE);
+  SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp, True, True);
   if (tmp_win->Desk == Scr.CurrentDesk)
   {
     RaiseWindow (tmp_win);
-    FocusOn (tmp_win, FALSE);
+    FocusOn (tmp_win, False);
   }
   SetBorder (tmp_win, (Scr.Hilite == tmp_win), True, True, None);
   Broadcast (XFCE_M_UNSHADE, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
@@ -468,7 +468,7 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context
 	Animate (tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, tmp_win->orig_x, tmp_win->orig_y, tmp_win->orig_wd, tmp_win->orig_ht);
     }
 
-    SetupFrame (tmp_win, tmp_win->orig_x, tmp_win->orig_y, tmp_win->orig_wd, tmp_win->orig_ht, TRUE, TRUE);
+    SetupFrame (tmp_win, tmp_win->orig_x, tmp_win->orig_y, tmp_win->orig_wd, tmp_win->orig_ht, True, True);
     SetBorder (tmp_win, Scr.Hilite == tmp_win, True, True, None);
   }
   else
@@ -521,7 +521,7 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context
       else
 	Animate (tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, new_x, new_y, new_width, new_height);
     }
-    SetupFrame (tmp_win, new_x, new_y, new_width, new_height, TRUE, TRUE);
+    SetupFrame (tmp_win, new_x, new_y, new_width, new_height, True, True);
     SetBorder (tmp_win, Scr.Hilite == tmp_win, True, True, None);
   }
 }
@@ -682,7 +682,7 @@ iconify_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long
       DeIconify (tmp_win);
   }
   else if (val1 >= 0)
-    Iconify (tmp_win, eventp->xbutton.x_root - 5, eventp->xbutton.y_root - 5, TRUE);
+    Iconify (tmp_win, eventp->xbutton.x_root - 5, eventp->xbutton.y_root - 5, True);
 }
 
 void
@@ -699,7 +699,7 @@ Iconify_all (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
   {
     if (!((t->win)->flags & ICONIFIED) && !((t->win)->flags & TRANSIENT) && ((t->win)->flags & TITLE) && ((t->win)->Desk == Scr.CurrentDesk))
     {
-      Iconify ((t->win), 0, 0, FALSE);
+      Iconify ((t->win), 0, 0, False);
       /* Restart from scratch */
       t = LastXfwmWindowList (Scr.stacklist);
     }
@@ -1029,7 +1029,7 @@ flip_focus_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
     Scr.XfwmRoot.next = tmp_win;
   }
 
-  FocusOn (tmp_win, FALSE);
+  FocusOn (tmp_win, False);
 }
 
 
@@ -1039,7 +1039,7 @@ focus_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long conte
   if (DeferExecution (eventp, &w, &tmp_win, &context, SELECT, ButtonRelease))
     return;
 
-  FocusOn (tmp_win, FALSE);
+  FocusOn (tmp_win, False);
 }
 
 
@@ -1075,7 +1075,7 @@ popup_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long conte
   }
   ActiveItem = NULL;
   ActiveMenu = NULL;
-  menuFromFrameOrWindowOrTitlebar = FALSE;
+  menuFromFrameOrWindowOrTitlebar = False;
   do_menu (menu, 0);
 }
 
@@ -1099,7 +1099,7 @@ staysup_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
   }
   ActiveItem = NULL;
   ActiveMenu = NULL;
-  menuFromFrameOrWindowOrTitlebar = FALSE;
+  menuFromFrameOrWindowOrTitlebar = False;
 
   /* See bottom of windows.c for rationale behind this */
   if (eventp->type == ButtonPress)
@@ -1893,7 +1893,7 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
     tmp->frame_height = 0;
     tmp->frame_width = 0;
     SetTitleBar (tmp, (tmp == Scr.Hilite));
-    SetupFrame (tmp, x, y, w, h, FALSE, TRUE);
+    SetupFrame (tmp, x, y, w, h, False, True);
     tmp = tmp->next;
   }
   free (font);
@@ -2462,9 +2462,9 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
 {
   XfwmWindow *t, *tp;
   XEvent JunkEvent;
-  Bool finished = FALSE;
-  Bool namechanged = FALSE;
-  Bool abort = FALSE;
+  Bool finished = False;
+  Bool namechanged = False;
+  Bool abort = False;
   int width = 1;
   int height = 1;
   unsigned long valuemask;
@@ -2508,7 +2508,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
   }
 
   InstallRootColormap ();
-  namechanged = TRUE;
+  namechanged = True;
 
   while (!finished)
   {
@@ -2547,13 +2547,13 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
 	valuemask = (CWBackPixel | CWCursor | CWSaveUnder);
 	attributes.background_pixel = Scr.MenuColors.back;
 	attributes.cursor = Scr.XfwmCursors[MENU];
-	attributes.save_under = TRUE;
+	attributes.save_under = True;
 	taskw = XCreateWindow (dpy, Scr.Root, wx, wy, width, height, 0, CopyFromParent, InputOutput, (Visual *) CopyFromParent, valuemask, &attributes);
 	XSaveContext (dpy, taskw, MenuContext, (caddr_t) 0);
 	XMapRaised (dpy, taskw);
       }
       RedrawSwitchWindow (taskw, t->name, width, height);
-      namechanged = FALSE;
+      namechanged = False;
     }
     /* block until there is an event */
     XMaskEvent (dpy, ExposureMask | KeyPressMask | KeyReleaseMask | VisibilityChangeMask, &Event);
@@ -2564,7 +2564,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     switch (Event.type)
     {
     case KeyPress:
-      namechanged = TRUE;
+      namechanged = True;
       keysym = XLookupKeysym (&(Event.xkey), 0);
       if (keysym == XK_Tab)
       {
@@ -2580,21 +2580,21 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
       }
       else if (keysym == XK_space)
       {
-	finished = TRUE;
-	abort = FALSE;
+	finished = True;
+	abort = False;
       }
       else if (keysym == XK_Escape)
       {
-	finished = TRUE;
-	abort = TRUE;
+	finished = True;
+	abort = True;
       }
       break;
     case KeyRelease:
       keysym = XLookupKeysym (&(Event.xkey), 0);
       if (keysym == XK_Alt_L)
       {
-	finished = TRUE;
-	abort = FALSE;
+	finished = True;
+	abort = False;
       }
       break;
     default:
@@ -2621,7 +2621,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     /* switch to the window (without warping the pointer) */
     WarpOn (t, -1, 1, -1, 1);
     /* Focus on window and deiconify if necessary */
-    FocusOn (t, TRUE);
+    FocusOn (t, True);
   }
   UninstallRootColormap ();
   UngrabEm ();
@@ -3021,15 +3021,15 @@ show_buttons (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
   XfwmWindowList *t;
   int val1;
   int val1_unit, n;
-  Bool left = FALSE;
-  Bool right = FALSE;
+  Bool left = False;
+  Bool right = False;
   char *side;
 
   action = GetNextToken (action, &side);
   if (mystrncasecmp (side, "L", 1) == 0)
-    left = TRUE;
+    left = True;
   else if (mystrncasecmp (side, "R", 1) == 0)
-    right = TRUE;
+    right = True;
   free (side);
 
   if ((!left) && (!right))

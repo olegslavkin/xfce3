@@ -407,7 +407,7 @@ AddWindow (Window w)
   tmp_win->frame_width = 0;
   height = tmp_win->frame_height;
   tmp_win->frame_height = 0;
-  SetupFrame (tmp_win, x, y, width, height, TRUE, TRUE);
+  SetupFrame (tmp_win, x, y, width, height, True, True);
 
   XReparentWindow (dpy, w, tmp_win->Parent, 0, 0);
   valuemask = (CWEventMask | CWDontPropagate);
@@ -703,7 +703,7 @@ GetWindowState (XfwmWindow * tmp, unsigned long *state)
   unsigned char *prop;
 
   if (!tmp)
-    return (FALSE);
+    return (False);
 
   if ((XGetWindowProperty (dpy, tmp->w, _XA_WIN_STATE, 0L, 1L, False, XA_CARDINAL, &atype, &aformat, &nitems, &bytes_remain, &prop)) == Success)
   {
@@ -711,11 +711,11 @@ GetWindowState (XfwmWindow * tmp, unsigned long *state)
     {
       *state = (unsigned long) *prop;
       XFree (prop);
-      return (TRUE);
+      return (True);
     }
   }
   *state = 0L;
-  return (FALSE);
+  return (False);
 }
 
 void

@@ -392,7 +392,7 @@ find_context (char *string, int *output, struct charstring *table, char *tline)
   while (i < strlen (string))
   {
     j = 0;
-    matched = FALSE;
+    matched = False;
     while ((!matched) && (table[j].key != 0))
     {
       /* in some BSD implementations, tolower(c) is not defined
@@ -405,7 +405,7 @@ find_context (char *string, int *output, struct charstring *table, char *tline)
       if (tmp1 == table[j].key)
       {
 	*output |= table[j].value;
-	matched = TRUE;
+	matched = True;
       }
       j++;
     }

@@ -65,6 +65,7 @@ void PaintEntry (MenuRoot *, MenuItem *);
 
 void SetInnerBorder (XfwmWindow *, Bool);
 void DrawButton (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
+Bool RedrawTitleOnButtonPress (void);
 void SetTitleBar (XfwmWindow *, Bool);
 void RelieveWindow (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveIconTitle (Window, int, int, GC, GC);
@@ -77,6 +78,7 @@ void DrawTrianglePattern (Window, GC, GC, GC, int, int, int, int, short);
 
 void SetInnerBorder_xfce (XfwmWindow *, Bool);
 void DrawButton_xfce (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
+Bool RedrawTitleOnButtonPress_xfce (void);
 void SetTitleBar_xfce (XfwmWindow *, Bool);
 void RelieveWindow_xfce (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_xfce (Window, int, int, int, int, GC, GC, int);
@@ -89,6 +91,7 @@ void RelieveIconPixmap_xfce (Window, int, int, GC, GC);
 
 void SetInnerBorder_mofit (XfwmWindow *, Bool);
 void DrawButton_mofit (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
+Bool RedrawTitleOnButtonPress_mofit (void);
 void SetTitleBar_mofit (XfwmWindow *, Bool);
 void RelieveWindow_mofit (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_mofit (Window, int, int, int, int, GC, GC, int);
@@ -101,7 +104,7 @@ void RelieveIconPixmap_mofit (Window, int, int, GC, GC);
 
 void SetInnerBorder_trench (XfwmWindow *, Bool);
 void DrawButton_trench (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
-void DrawStripes_trench (XfwmWindow *, Window, int, int, int, int, Bool);
+Bool RedrawTitleOnButtonPress_trench (void);
 void SetTitleBar_trench (XfwmWindow *, Bool);
 void RelieveWindow_trench (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_trench (Window, int, int, int, int, GC, GC, int);
@@ -114,7 +117,7 @@ void RelieveIconPixmap_trench (Window, int, int, GC, GC);
 
 void SetInnerBorder_gtk (XfwmWindow *, Bool);
 void DrawButton_gtk (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
-void DrawStripes_gtk (XfwmWindow *, Window, int, int, int, int, Bool);
+Bool RedrawTitleOnButtonPress_gtk (void);
 void SetTitleBar_gtk (XfwmWindow *, Bool);
 void RelieveWindow_gtk (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_gtk (Window, int, int, int, int, GC, GC, int);
@@ -127,7 +130,7 @@ void RelieveIconPixmap_gtk (Window, int, int, GC, GC);
 
 void SetInnerBorder_linea (XfwmWindow *, Bool);
 void DrawButton_linea (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
-void DrawStripes_linea (XfwmWindow *, Window, int, int, int, int, Bool);
+Bool RedrawTitleOnButtonPress_linea (void);
 void SetTitleBar_linea (XfwmWindow *, Bool);
 void RelieveWindow_linea (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_linea (Window, int, int, int, int, GC, GC, int);

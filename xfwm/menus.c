@@ -72,7 +72,7 @@ int menu_on = 0;
 MenuRoot *ActiveMenu = NULL;	/* the active menu */
 MenuItem *ActiveItem = NULL;	/* the active menu item */
 
-int menuFromFrameOrWindowOrTitlebar = FALSE;
+int menuFromFrameOrWindowOrTitlebar = False;
 
 extern int Context, Button;
 extern XfwmWindow *ButtonWindow, *Tmp_win;
@@ -385,7 +385,7 @@ UpdateMenu (int sticks)
   FindEntry ();
   InitialMI = ActiveItem;
 
-  while (TRUE)
+  while (True)
   {
     /* block until there is an event */
     XMaskEvent (dpy, ButtonPressMask | ButtonReleaseMask | ExposureMask | KeyPressMask | VisibilityChangeMask | ButtonMotionMask, &Event);
@@ -435,7 +435,7 @@ UpdateMenu (int sticks)
       }
       ActiveItem = NULL;
       ActiveMenu = NULL;
-      menuFromFrameOrWindowOrTitlebar = FALSE;
+      menuFromFrameOrWindowOrTitlebar = False;
       return MENU_DONE;
 
     case KeyPress:
@@ -458,7 +458,7 @@ UpdateMenu (int sticks)
 	PopDownMenu ();
 	ActiveItem = NULL;
 	ActiveMenu = NULL;
-	menuFromFrameOrWindowOrTitlebar = FALSE;
+	menuFromFrameOrWindowOrTitlebar = False;
       }
 
       if (retval == MENU_DONE)
@@ -583,10 +583,10 @@ PopDownMenu ()
 #endif
   }
   if (Context & (C_WINDOW | C_FRAME | C_TITLE | C_SIDEBAR))
-    menuFromFrameOrWindowOrTitlebar = TRUE;
+    menuFromFrameOrWindowOrTitlebar = True;
   else
-    menuFromFrameOrWindowOrTitlebar = FALSE;
-  ActiveMenu->in_use = FALSE;
+    menuFromFrameOrWindowOrTitlebar = False;
+  ActiveMenu->in_use = False;
 }
 
 /***************************************************************************
@@ -827,7 +827,7 @@ MakeMenu (MenuRoot * mr)
   attributes.background_pixel = Scr.MenuColors.back;
   attributes.event_mask = (ExposureMask | EnterWindowMask);
   attributes.cursor = Scr.XfwmCursors[MENU];
-  attributes.save_under = TRUE;
+  attributes.save_under = True;
   if (mr->w != None)
   {
     XDestroyWindow (dpy, mr->w);

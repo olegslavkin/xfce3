@@ -732,7 +732,7 @@ DeIconify (XfwmWindow * tmp_win)
   }
 
   RaiseWindow (tmp_win);
-  FocusOn (tmp_win, FALSE);
+  FocusOn (tmp_win, False);
   fast_process_expose ();
   return;
 }

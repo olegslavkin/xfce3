@@ -347,7 +347,7 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
   int y_offset, text_y, d, y_height;
   GC ShadowGC, ReliefGC, currentGC;
   XFontSet fontset = Scr.StdFont.fontset;
-  Bool Selected = FALSE;
+  Bool Selected = False;
 
   y_offset = mi->y_offset;
   y_height = mi->y_height;
@@ -362,7 +362,7 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
   {
 
     DrawSelectedEntry (mr->w, 2, y_offset, mr->width - 4, mi->y_height, &currentGC);
-    Selected = TRUE;
+    Selected = True;
   }
   else
   {
@@ -517,6 +517,21 @@ DrawButton (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC Relief
     DrawButton_linea (t, win, w, h, bf, ReliefGC, ShadowGC, inverted, stateflags);
   else
     DrawButton_mofit (t, win, w, h, bf, ReliefGC, ShadowGC, inverted, stateflags);
+}
+
+Bool 
+RedrawTitleOnButtonPress (void)
+{
+  if (Scr.engine == XFCE_ENGINE)
+    return RedrawTitleOnButtonPress_xfce ();
+  else if (Scr.engine == TRENCH_ENGINE)
+    return RedrawTitleOnButtonPress_trench ();
+  else if (Scr.engine == GTK_ENGINE)
+    return RedrawTitleOnButtonPress_gtk ();
+  else if (Scr.engine == LINEA_ENGINE)
+    return RedrawTitleOnButtonPress_linea ();
+  else
+    return RedrawTitleOnButtonPress_mofit ();
 }
 
 void
@@ -767,6 +782,12 @@ DrawButton_xfce (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC R
   default:
     break;
   }
+}
+
+Bool 
+RedrawTitleOnButtonPress_xfce (void)
+{
+  return (False);
 }
 
 void
@@ -1380,6 +1401,12 @@ DrawButton_mofit (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
   }
 }
 
+Bool 
+RedrawTitleOnButtonPress_mofit (void)
+{
+  return (True);
+}
+
 void
 SetTitleBar_mofit (XfwmWindow * t, Bool onoroff)
 {
@@ -1983,6 +2010,47 @@ SetInnerBorder_trench (XfwmWindow * t, Bool onoroff)
 }
 
 void
+DrawStripes_trench (XfwmWindow * t, Window win, int x, int y, int w, int h, Bool onoroff)
+{
+  GC BackGC = NULL;
+  GC ReliefGC, ShadowGC;
+  int i;
+  int rh;
+
+  if (onoroff)
+  {
+    ReliefGC = GetDecor (t, HiReliefGC);
+    ShadowGC = GetDecor (t, HiShadowGC);
+    BackGC = GetDecor (t, HiBackGC);
+  }
+  else
+  {
+    ReliefGC = GetDecor (t, LoReliefGC);
+    ShadowGC = GetDecor (t, LoShadowGC);
+    BackGC = GetDecor (t, LoBackGC);
+  }
+
+  rh = ((h - 2) >> 1) << 1;
+  for (i = 0; i < rh; i++)
+  {
+    if ((i % 2) == 0)
+    {
+      XDrawPoint (dpy, win, BackGC, x + w - 1, y + i);
+      XDrawLine (dpy, win, ReliefGC, x, y + i, x + w - 2, y + i);
+    }
+    else
+    {
+      XDrawPoint (dpy, win, BackGC, x, y + i);
+      XDrawLine (dpy, win, ShadowGC, x + 1, y + i, x + w, y + i);
+    }
+  }
+  for (i = rh; i < h; i++)
+  {
+    XDrawLine (dpy, win, BackGC, x, y + i, x + w, y + i);
+  }
+}
+
+void
 DrawButton_trench (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
 {
   int type = bf->style & ButtonFaceTypeMask;
@@ -2029,45 +2097,10 @@ DrawButton_trench (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC
   }
 }
 
-void
-DrawStripes_trench (XfwmWindow * t, Window win, int x, int y, int w, int h, Bool onoroff)
+Bool 
+RedrawTitleOnButtonPress_trench (void)
 {
-  GC BackGC = NULL;
-  GC ReliefGC, ShadowGC;
-  int i;
-  int rh;
-
-  if (onoroff)
-  {
-    ReliefGC = GetDecor (t, HiReliefGC);
-    ShadowGC = GetDecor (t, HiShadowGC);
-    BackGC = GetDecor (t, HiBackGC);
-  }
-  else
-  {
-    ReliefGC = GetDecor (t, LoReliefGC);
-    ShadowGC = GetDecor (t, LoShadowGC);
-    BackGC = GetDecor (t, LoBackGC);
-  }
-
-  rh = ((h - 2) >> 1) << 1;
-  for (i = 0; i < rh; i++)
-  {
-    if ((i % 2) == 0)
-    {
-      XDrawPoint (dpy, win, BackGC, x + w - 1, y + i);
-      XDrawLine (dpy, win, ReliefGC, x, y + i, x + w - 2, y + i);
-    }
-    else
-    {
-      XDrawPoint (dpy, win, BackGC, x, y + i);
-      XDrawLine (dpy, win, ShadowGC, x + 1, y + i, x + w, y + i);
-    }
-  }
-  for (i = rh; i < h; i++)
-  {
-    XDrawLine (dpy, win, BackGC, x, y + i, x + w, y + i);
-  }
+  return (False);
 }
 
 void
@@ -2706,6 +2739,12 @@ DrawButton_gtk (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC Re
   }
 }
 
+Bool 
+RedrawTitleOnButtonPress_gtk (void)
+{
+  return (True);
+}
+
 void
 SetTitleBar_gtk (XfwmWindow * t, Bool onoroff)
 {
@@ -3317,6 +3356,12 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
   default:
     break;
   }
+}
+
+Bool 
+RedrawTitleOnButtonPress_linea (void)
+{
+  return (False);
 }
 
 void

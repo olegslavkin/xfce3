@@ -127,7 +127,7 @@ bestplace (XfwmWindow * tmp_win, int px, int py)
   int best_x, best_y;
   int bw, bh;
   unsigned long best_overlaps = 0;
-  Bool first = TRUE;
+  Bool first = True;
 
   bw = tmp_win->attr.width + 2 * (tmp_win->boundary_width + tmp_win->bw);
   bh = tmp_win->attr.height + 2 * (tmp_win->boundary_width + tmp_win->bw) + tmp_win->title_height;
@@ -166,7 +166,7 @@ bestplace (XfwmWindow * tmp_win, int px, int py)
       }
       if (first)
       {
-	first = FALSE;
+	first = False;
       }
     }
   }

@@ -76,7 +76,7 @@ extern Window PressedW;
 void
 resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
-  Bool finished = FALSE, done = FALSE, abort = FALSE, window_deleted = FALSE;
+  Bool finished = False, done = False, abort = False, window_deleted = False;
   int x, y, mouse_x, mouse_y;
   int delta_x;
   int delta_y;
@@ -120,7 +120,7 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
 
 
     ConstrainSize (tmp_win, &dragWidth, &dragHeight);
-    SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, dragWidth, dragHeight, FALSE, TRUE);
+    SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, dragWidth, dragHeight, False, True);
 
     ResizeWindow = None;
     return;
@@ -248,7 +248,7 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
       };
     }
 
-    done = FALSE;
+    done = False;
     /* Handle a limited number of key press events to allow mouseless
      * operation */
     if (Event.type == KeyPress)
@@ -267,26 +267,26 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
       /* simple code to bag out of move - CKH */
       if (XLookupKeysym (&(Event.xkey), 0) == XK_Escape)
       {
-	abort = TRUE;
-	finished = TRUE;
+	abort = True;
+	finished = True;
       }
-      done = TRUE;
+      done = True;
       break;
     case ButtonRelease:
-      finished = TRUE;
-      done = TRUE;
+      finished = True;
+      done = True;
       break;
     case MotionNotify:
       x = Event.xmotion.x_root + delta_x;
       y = Event.xmotion.y_root + delta_y;
       DoResize (x, y, tmp_win);
-      done = TRUE;
+      done = True;
       break;
     case UnmapNotify:
       if (Event.xunmap.window == tmp_win->w)
       {
-	finished = TRUE;
-	done = TRUE;
+	finished = True;
+	done = True;
 	window_deleted = True;
       }
       DispatchEvent ();
@@ -294,8 +294,8 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
     case DestroyNotify:
       if ((Event.xdestroywindow.window == tmp_win->frame) || (Event.xdestroywindow.window == tmp_win->w))
       {
-	finished = TRUE;
-	done = TRUE;
+	finished = True;
+	done = True;
 	window_deleted = True;
       }
       DispatchEvent ();
@@ -327,10 +327,10 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
     if (!abort)
     {
       ConstrainSize (tmp_win, &dragWidth, &dragHeight);
-      SetupFrame (tmp_win, dragx, dragy, dragWidth, ((tmp_win->flags & SHADED) ? initHeight : dragHeight), FALSE, TRUE);
+      SetupFrame (tmp_win, dragx, dragy, dragWidth, ((tmp_win->flags & SHADED) ? initHeight : dragHeight), False, True);
     }
     else
-      SetupFrame (tmp_win, origx, origy, origWidth, ((tmp_win->flags & SHADED) ? initHeight : origHeight), FALSE, TRUE);
+      SetupFrame (tmp_win, origx, origy, origWidth, ((tmp_win->flags & SHADED) ? initHeight : origHeight), False, True);
   }
   UninstallRootColormap ();
   ResizeWindow = None;
@@ -420,7 +420,7 @@ DoResize (int x_root, int y_root, XfwmWindow * tmp_win)
     if (!(Scr.Options & ResizeOpaqueWin))
       MoveOutline (tmp_win, dragx, dragy, dragWidth, dragHeight);
     else
-      SetupFrame (tmp_win, dragx, dragy, dragWidth, ((tmp_win->flags & SHADED) ? initHeight : dragHeight), FALSE, FALSE);
+      SetupFrame (tmp_win, dragx, dragy, dragWidth, ((tmp_win->flags & SHADED) ? initHeight : dragHeight), False, False);
   }
 }
 
