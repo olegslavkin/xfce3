@@ -1,3 +1,69 @@
+2001-11-01  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2001-11-01  xfce
+
+	* xfce-3.8.11.lsm, backdrops/Blue.list, backdrops/Toulouse.list,
+	other/xinitrc, other/xinitrc.mwm, po/xfce.pot, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfwm/session.c: Fix a very
+	stupid bug in session management code
+
+2001-11-01  xfce
+
+	* xfce-3.8.10.lsm, xfce-3.8.11.lsm: Update lsm files
+
+2001-11-01  xfce
+
+	* configure, configure.in, xfce.spec, backdrops/Blue.list,
+	backdrops/Toulouse.list, other/xinitrc, other/xinitrc.mwm,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfhelp,
+	xftree/Makefile.in: Change version to 3.8.11
+
+2001-10-31  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, other/xinitrc,
+	other/xinitrc.mwm, po/xfce.pot, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfwm/events.c, xfwm/misc.c,
+	xfwm/xfwm.c, xfwm/xfwm.h: Fixed a problem when restarting xfwm from
+	a desk not being the first desk
+
+2001-10-31  edscott
+
+	* xftree/TODO: added todo number 7
+
+2001-10-31  edscott
+
+	* xftree/TODO: Added to-do list to please hardcore xftree users.
+
+2001-10-29  xfce
+
+	* Makefile.in, libs/Makefile.in, scripts/Makefile.in,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfpager/Makefile.in, xfrun/Makefile.in, xfsamba/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xfumed/Makefile.in,
+	xfwm/Makefile.in: Update Makefiles
+
+2001-10-29  xfce
+
+	* xfce-3.8.10.lsm, xfce-3.8.9.lsm: Update lsm file
+
+2001-10-29  xfce
+
+	* Makefile.in, configure, configure.in, xfce.spec,
+	backdrops/Blue.list, backdrops/Toulouse.list, libs/Makefile.in,
+	other/xinitrc, other/xinitrc.mwm, po/cat-id-tbl.c, po/xfce.pot,
+	scripts/Makefile.in, scripts/startxfce, scripts/xfce_setup,
+	scripts/xfhelp, xfbd/Makefile.in, xfce/Makefile.in,
+	xfce_theme/Makefile.in, xfclock/Makefile.in, xfdiff/Makefile.in,
+	xfglob/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsound/Makefile.in, xftree/Makefile.in,
+	xfumed/Makefile.in, xfwm/Makefile.in: Update version number and
+	regenerate configure script
+
 2001-10-29  xfce
 
 	* ChangeLog: Update ChangeLog
