@@ -321,6 +321,14 @@ static gboolean text_type(char *loc){
   };
   return checkif_type(Type,loc);			    
 }
+static gboolean word_type(char *loc){
+  char *Type[]={
+	  ".doc",".DOC",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+
 static gboolean compressed_type(char *loc){
   char *Type[]={
 	  ".gz",".tgz",".bz2",".Z",
@@ -466,6 +474,7 @@ gboolean set_icon_pix(icon_pix *pix,entry *en) {
  	      else if (audio_type(loc)) {
 		           pix->pixmap=gPIX[PIX_PAGE_AUDIO];
 	      }
+   	      else if (strcmp(loc,".po")==0) pix->pixmap=gPIX[PIX_PO];
    	      else if (strcmp(loc,".tar")==0){
 		     pix->pixmap=gPIX[PIX_TAR];
   		     pix->open=gPIX[PIX_TAR];
