@@ -67,8 +67,6 @@
 
 extern gint check_mail (gpointer data);
 
-char **g_argv;
-
 void
 reap (int sig)
 {
@@ -88,8 +86,6 @@ main (int argc, char *argv[])
 {
   char gtkrc_file[MAXSTRLEN + 1];
   static int dg;
-
-  g_argv = argv;
 
   xfce_init (&argc, &argv);
 
