@@ -109,11 +109,11 @@ char *our_host_name(void)
  static char *name = NULL;
  if (!name){
 	char buffer[256];
-	if (gethostname(buffer, 256) == 0)
+	if (gethostname(buffer, 255) == 0)
 	{
 	  /* gethostname doesn't always return the full name... */
 	  struct hostent *ent;
-	  buffer[256] = '\0';
+	  buffer[255] = '\0';
 	  ent = gethostbyname(buffer);
 	  name = g_strdup(ent ? ent->h_name : buffer);
 	}
@@ -806,20 +806,6 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   update_status(parent,ctree);
 }
 
-#if 0
-void
-set_title (GtkWidget * w, const char *path)
-{
-  char *title;
-  title = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
-  if (!title) return; 
-  sprintf (title, "XFTree: %s", path);
-  gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (w)), title);
-  free(title);
-
-}
-#endif
-
 void
 set_title_ctree (GtkWidget * ctree, const char *path)
 {
@@ -831,19 +817,6 @@ set_title_ctree (GtkWidget * ctree, const char *path)
   
   hostname=our_host_name();
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  /* FIXME: slackware 8 is coming here with a crazy "path"
-   * this variable is en->path from everywhere this function
-   * is called. 
-   * Maybe "en" is freed along the way? 
-   * Maybe it is not correctly assigned somewhere?
-   * It seems that this occurs at startup, which points to 
-   * the call at xtree_gui.c. Look at why en->path would be 
-   * dereferenced here. This does not happen with RH-linux.
-   * Maybe getenv("HOME") is not working right in slackware?
-   *
-   * possible workaround: always initialize en->path=NULL (this isn't done?)
-   *      and do a return on !path
-   *      */
   title = (char *)malloc((strlen("XFTree: ")+strlen(hostname)+strlen(path)+1)*sizeof(char));
   if (win->iconname) g_free(win->iconname);
   win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(hostname)+strlen(path)+1)*sizeof(char));
