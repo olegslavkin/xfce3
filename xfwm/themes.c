@@ -1124,14 +1124,13 @@ SetTitleBar_xfce (XfwmWindow * t, XRectangle *area, Bool onoroff)
       XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
     }
   }
+
 #ifndef OLD_STYLE
   RelieveRoundedRectangle (t->title_w, NULL, 0, 0, t->title_width, t->title_height - 1, ShadowGC, ReliefGC);
 #else
-  /* Old style */
   RelieveRoundedRectangle (t->title_w, NULL, 0, 0, t->title_width, t->title_height, ShadowGC, ReliefGC);
-  if (!onoroff)
-    RelieveRoundedRectangle (t->title_w, NULL, 1, 1, t->title_width - 2, t->title_height - 2, ReliefGC, ShadowGC);
 #endif
+
   if (area)
   {
     XSetClipMask(dpy, ReliefGC, None);

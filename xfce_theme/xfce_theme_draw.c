@@ -1,6 +1,28 @@
+/*  gxfce
+ *  Copyright (C) 1999 Olivier Fourdan (fourdan@xfce.org)
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*/
+
 #include <math.h>
 #include <gtk/gtk.h>
 #include <string.h>
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
 
 /* 
   Portions based on Raleigh theme by Owen Taylor
@@ -349,6 +371,16 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
 
     break;
   case GTK_SHADOW_OUT:
+#ifdef OLD_STYLE
+    gdk_draw_line (window, gc2, x, y, x + width - 1, y);
+    gdk_draw_line (window, gc2, x, y, x, y + height - 1);
+    gdk_draw_line (window, gc1, x, y + height - 1, x + width - 1, y + height - 1);
+    gdk_draw_line (window, gc1, x + width - 1, y, x + width - 1, y + height - 1);
+    gdk_draw_line (window, style->bg_gc[state_type], x + 1, y + 1, x + width - 2, y + 1);
+    gdk_draw_line (window, style->bg_gc[state_type], x + 1, y + 1, x + 1, y + height - 2);
+    gdk_draw_line (window, style->bg_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
+    gdk_draw_line (window, style->bg_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
+#else
     gdk_draw_line (window, style->black_gc, x, y, x + width - 1, y);
     gdk_draw_line (window, style->black_gc, x, y, x, y + height - 1);
     gdk_draw_line (window, style->black_gc, x, y + height - 1, x + width - 1, y + height - 1);
@@ -357,7 +389,7 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
     gdk_draw_line (window, gc2, x + 1, y + 1, x + 1, y + height - 2);
     gdk_draw_line (window, gc1, x + 1, y + height - 2, x + width - 2, y + height - 2);
     gdk_draw_line (window, gc1, x + width - 2, y + 1, x + width - 2, y + height - 2);
-
+#endif
     break;
   }
   if (area)
