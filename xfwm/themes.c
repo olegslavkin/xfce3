@@ -877,17 +877,8 @@ SetTitleBar_xfce (XfwmWindow * t, Bool onoroff)
   }
 
 #ifndef OLD_STYLE
-  if (onoroff)
-  {
-    bf = &GetDecor (t, titlebar.state[title_state]);
-    DrawButton_xfce (t, t->title_w, t->title_width, t->title_height - 1, bf, ShadowGC, ReliefGC, True, 0);
-  }
-  else
-  {
-    GC BackGC = NULL;
-    BackGC = GetDecor (t, LoBackGC);
-    XFillRectangle (dpy, t->title_w, BackGC, 0, 0, t->title_width, t->title_height);
-  }
+  bf = &GetDecor (t, titlebar.state[title_state]);
+  DrawButton_xfce (t, t->title_w, t->title_width, t->title_height - 1, bf, ShadowGC, ReliefGC, True, 0);
   XDrawLine (dpy, t->title_w, ShadowGC, 0, t->title_height - 1, t->title_width, t->title_height - 1);
 #else
   bf = &GetDecor (t, titlebar.state[title_state]);
@@ -932,10 +923,7 @@ SetTitleBar_xfce (XfwmWindow * t, Bool onoroff)
     }
   }
 #ifndef OLD_STYLE
-  if (onoroff)
-  {
-    RelieveRoundedRectangle (t->title_w, 0, 0, t->title_width, t->title_height - 1, ShadowGC, ReliefGC);
-  }
+  RelieveRoundedRectangle (t->title_w, 0, 0, t->title_width, t->title_height - 1, ShadowGC, ReliefGC);
 #else
   /* Old style */
   RelieveRoundedRectangle (t->title_w, 0, 0, t->title_width, t->title_height, ShadowGC, ReliefGC);

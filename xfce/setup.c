@@ -773,7 +773,6 @@ create_setup (XFCE_palette * pal)
   gtk_box_pack_start (GTK_BOX (setup_vbox4), setup_options.setup_gradient_activetitle, TRUE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (setup_options.setup_gradient_activetitle), 2);
 
-#ifdef OLD_STYLE
   setup_options.setup_gradient_inactivetitle = gtk_check_button_new_with_label (_("Use gradient color for inactive windows"));
   gtk_widget_set_name (setup_options.setup_gradient_inactivetitle, "setup_gradient_inactivetitle");
   gtk_object_set_data (GTK_OBJECT (setup), "setup_gradient_inactivetitle", setup_options.setup_gradient_inactivetitle);
@@ -782,7 +781,6 @@ create_setup (XFCE_palette * pal)
 
   gtk_box_pack_start (GTK_BOX (setup_vbox4), setup_options.setup_gradient_inactivetitle, TRUE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (setup_options.setup_gradient_inactivetitle), 2);
-#endif
 
   setup_xfwm_engine_frame = gtk_frame_new (NULL);
   gtk_widget_set_name (setup_xfwm_engine_frame, "setup_xfwm_engine_frame");
@@ -1231,10 +1229,8 @@ show_setup (XFCE_palette * pal)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_opaqueresize_checkbutton), (current_config.opaqueresize != 0));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_activetitle), ((DEFAULT_DEPTH >= 16) ? (current_config.gradient_active_title != 0) : FALSE));
   gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_gradient_activetitle), (DEFAULT_DEPTH >= 16));
-#ifdef OLD_STYLE
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_inactivetitle), ((DEFAULT_DEPTH >= 16) ? (current_config.gradient_inactive_title != 0) : FALSE));
   gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_gradient_inactivetitle), (DEFAULT_DEPTH >= 16));
-#endif
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_topbutton), (current_config.iconpos == 0));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_leftbutton), (current_config.iconpos == 1));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_botbutton), (current_config.iconpos == 2));
@@ -1336,11 +1332,7 @@ get_setup_values (void)
   current_config.opaqueresize = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_opaqueresize_checkbutton));
   current_config.snapsize = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (setup_options.setup_snapsize_spinbutton));
   current_config.gradient_active_title = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_activetitle));
-#ifdef OLD_STYLE
   current_config.gradient_inactive_title = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_inactivetitle));
-#else
-  current_config.gradient_inactive_title = False;
-#endif
   current_config.iconpos = (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_leftbutton)) ? 1 : 0) + 2 * (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_botbutton)) ? 1 : 0) + 3 * (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_rightbutton)) ? 1 : 0);
   if (current_config.fonts[0])
     g_free (current_config.fonts[0]);
