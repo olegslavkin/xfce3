@@ -15,6 +15,8 @@
 
 /* Initially inspired by fvwm2, enlightment and twm implementations */
 
+#include "configure.h"
+
 #ifdef HAVE_CONFIG_H
 #  include "config.h"
 #endif

@@ -34,6 +34,10 @@
 
 #include "configure.h"
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>

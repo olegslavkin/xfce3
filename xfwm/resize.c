@@ -31,6 +31,10 @@
  ***********************************************************************/
 #include "configure.h"
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <stdio.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>

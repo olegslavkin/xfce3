@@ -280,7 +280,6 @@ FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
   }
 
   SetFocus (t->w, t, 1);
-  UngrabEm ();
 }
 
 
@@ -334,7 +333,6 @@ WarpOn (XfwmWindow * t, int warp_x, int x_unit, int warp_y, int y_unit)
     SetupFrame (t, 0, 0, t->frame_width, ((t->flags & SHADED) ? t->shade_height : t->frame_height), FALSE, TRUE);
     XWarpPointer (dpy, None, Scr.Root, 0, 0, 0, 0, 2, 2);
   }
-  UngrabEm ();
 }
 
 /***********************************************************************
@@ -2607,11 +2605,14 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
       break;
     }
   }
+  UninstallRootColormap ();
+  UngrabEm ();
   if (taskw != None)
   {
     XDeleteContext (dpy, taskw, MenuContext);
     XUnmapWindow (dpy, taskw);
     XDestroyWindow (dpy, taskw);
+    XSync (dpy, 0);
 #ifdef REQUIRES_STASHEVENT
     while (XCheckTypedEvent (dpy, EnterNotify, &Event))
     {
@@ -2629,9 +2630,6 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     /* Focus on window and deiconify if necessary */
     FocusOn (t, TRUE);
   }
-
-  UninstallRootColormap ();
-  UngrabEm ();
 }
 
 void
