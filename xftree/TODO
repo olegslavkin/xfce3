@@ -16,6 +16,10 @@ bugs to fix: information dialogs can get lost beneath
                     all over yet)
              erratic behavior when the top open folder gets moved away by 
              another process.
++ desktop icons
++ useful dialog by copying multiple files (repeats #10)
++ different type documents have different pixmapped icons
++ much more configurable (file open actons ...)
 done:
 -modal dialog bug fixed throughout
 -fixed a small bug in cb_exec
