@@ -1,24 +1,33 @@
-20- Config option: fonts
-21- Config table for toolbar icons (both large and small)
+Three big ones:
+7- Add code necesary to d+d files to/from xfsamba.
+6.- MC style opening of packed files: Click on files and you see the internal
+structure as if it wasn't packed. Makes it very easy to copy and move content
+from these files straight to where you want it.
+18- different type icons for different documents and configurable icon sizes.
+
+
+bug (cb_exec): 
+Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
+the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
+
+
 easy:
 16- Config option: Default "open with" program
 
 complicated:
-6.- MC style opening of packed files: Click on files and you see the internal
-structure as if it wasn't packed. Makes it very easy to copy and move content
-from these files straight to where you want it.
 4- gtk-2 
-7- Add code necesary to d+d files to/from xfsamba.
 
 unknown:
 14- add "save user shortcutkeys to config options:
     does gtk store the custom values in the associated accel?
     if so, how do you retrieve the values?
 17- desktop icons
-18- different type documents have different pixmapped icons
-19- much more configurable (file open actons ...)
 
-bugs to fix:
+BUGS to fix:
+
+Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
+the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
+
   -goback function loses some history elements: check create/destroy
     algorithm. 
   -information dialogs can get lost beneath 
@@ -28,9 +37,12 @@ bugs to fix:
                     all over yet)
   -erratic behavior when the top open folder gets moved away by 
              another process, must fail gracefully.
-
+****************************************************************
 ****************************************************************
 done:
+19- much more configurable (file open actons ...)
+21- Config table for toolbar icons (both large and small)
+20- Config option: fonts
 3- Debug the "goto" option (seems the "fork" may lose variables at times).
   nope: was a memory allocation error involving glists. That g_list_free
   is not very good since it is a void function. ideally it should return

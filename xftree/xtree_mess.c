@@ -57,7 +57,7 @@
 #include "../xfdiff/xfdiff_colorsel.h"
 #include "xtree_go.h"
 #include "xtree_cb.h"
-
+#include "fontselection.h"
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -78,11 +78,13 @@
 #include "xtree_mess.h"
 
 #define BYTES "bytes"
+static GdkFont *the_font; 
+static char *custom_font=NULL;
+
 
 void set_colors(GtkWidget * ctree){
 	GtkStyle *style;
 	static GtkStyle *Ostyle=NULL;
-	
 	int red,green,blue;
 
 	red = ctree_color.red & 0xffff;
@@ -90,6 +92,21 @@ void set_colors(GtkWidget * ctree){
 	blue = ctree_color.blue & 0xffff;
 	if (!Ostyle) Ostyle=gtk_widget_get_style (ctree);
     	style = gtk_style_copy (Ostyle);
+
+	if ((preferences & CUSTOM_FONT)&&(custom_font)) {
+	  the_font = gdk_font_load (custom_font);
+          if (the_font == NULL) {
+           cfg *win;
+           win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+           xf_dlg_error(win->top,_("Could not load specified font\n"),NULL);
+           preferences &= (CUSTOM_FONT ^ 0xffffffff);
+           return;
+          }
+	  style->font=the_font;
+	}
+	if (!(preferences & CUSTOM_FONT)){
+		style->font=Ostyle->font;
+	}
 	
 	if (!(preferences & CUSTOM_COLORS)){
 		gtk_widget_set_style (ctree,style);
@@ -125,25 +142,16 @@ void set_colors(GtkWidget * ctree){
 	return;
 }
 
+ 
 void
 cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
 {
   gdouble colors[4];
   gdouble *newcolor;
-  char *geometry;
   cfg *win;
-  gint wm_offsetX,wm_offsetY;
 
   
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if ((geometry=(char *)malloc(64))==NULL) return;
-  gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &wm_offsetX, &wm_offsetY);
-  /*fprintf(stderr,"exiting: x=%d,y=%d\n",wm_offsetX, wm_offsetY);*/
-  sprintf(geometry,"%dx%d+%d+%d",
-		  win->top->allocation.width,
-		  win->top->allocation.height,
-		  wm_offsetX,
-		  wm_offsetY);
 
   colors[0] = ((gdouble) ctree_color.red) / COLOR_GDK;
   colors[1] = ((gdouble) ctree_color.green) / COLOR_GDK;
@@ -163,9 +171,34 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
   return;
 }
 
+void
+cb_select_font (GtkWidget * widget, GtkWidget *ctree)
+{
+  custom_font = open_fontselection ((custom_font)?custom_font:"fixed");
+  if (!custom_font) {
+	  preferences &= (CUSTOM_FONT ^ 0xffffffff);
+  } else  preferences |= CUSTOM_FONT;
+  set_colors(ctree);
+}
 
 void
-cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree)
+cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
+{
+  preferences ^= HIDE_DATE;
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
+  return;
+}
+
+void
+cb_hide_size (GtkWidget * widget, GtkWidget *ctree)
+{
+  preferences ^= HIDE_SIZE;
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
+  return;
+}
+
+void
+redraw_top (GtkWidget * ctree)
 {
   cfg *win,*new_win;
   gint X,Y;
@@ -176,48 +209,31 @@ cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree)
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &X, &Y);
 
-  preferences ^= LARGE_TOOLBAR;
-  /* save preferences */
-  save_defaults (NULL);
-
   /* apply new configuration: */
   node=GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
 
   new_win=new_top (win->gogo->path, win->xap, win->trash, win->reg, win->width, win->height, en->flags);
-  gdk_flush();
   /* pass on history list*/
   while (new_win->gogo) new_win->gogo = popgo(new_win->gogo);
   new_win->gogo = win->gogo;
   win->gogo = NULL; /* so golist wont be destroyed */
   cb_destroy (NULL,(GtkCTree *)ctree);/* destroy old configuration */
   
-/*#define __NO_RACE_CONDITION_WITH_XFWM */
-#ifdef __NO_RACE_CONDITION_WITH_XFWM
   {
     gint x,y;
-    gtk_widget_set_uposition (new_win->top, X, Y); /* this instruction races xfwm */
-    gdk_flush(); /* helps control race, but cannot avoid */
-
-    /* xfwm won the race? Try again */
-    gtk_widget_set_uposition (new_win->top, X, Y); 
+    gtk_window_reposition (GTK_WINDOW(new_win->top),X,Y);
     gdk_flush(); 
-    /* no use trying again :-( */
-   
+    usleep(100000); /* don't race xfwm */
     gdk_window_get_root_origin ((new_win->top)->window, &x, &y);
-    gtk_widget_set_uposition (new_win->top,x+(X-x), Y+(Y-y) );
-    gdk_flush();
-    printf("dbg:old x=%d, y=%d\n",X,Y);
+    gtk_window_reposition (GTK_WINDOW(new_win->top),X+(X-x),Y+(Y-y));
+    /*printf("dbg:old x=%d, y=%d\n",X,Y);
     printf("dbg:new x=%d, y=%d\n",x,y);
-    printf("dbg:correct x=%d, y=%d\n",X+(X-x), Y+(Y-y));
+    printf("dbg:correct x=%d, y=%d\n",X+(X-x), Y+(Y-y));*/
   }
-#endif
 
   return;
 }
-
-
-
 
 char * override_txt(char *new_file,char *old_file)
 {
@@ -323,6 +339,9 @@ failed:
   }
   fprintf (defaults, "# file created by xftree, if removed xftree returns to defaults.\n");
   fprintf (defaults, "preferences : %d\n", preferences);
+  fprintf (defaults, "smallTB : %d\n",stateTB[0] );
+  fprintf (defaults, "largeTB : %d\n",stateTB[1] );
+  fprintf (defaults, "custom_font :%s\n",(custom_font)?custom_font:"fixed");
   if (preferences & SAVE_GEOMETRY) {
 	  /*printf("dbg:x=%d,y=%d\n",geometryX,geometryY);*/
 	  fprintf (defaults, "geometry : %d,%d\n",geometryX,geometryY);
@@ -340,6 +359,10 @@ void read_defaults(void){
 
   /* default custom colors: */
   ctree_color.red = ctree_color.green = ctree_color.blue = 10000;
+  /* default masks */
+  /*stateTB[0] = 0x1fff;*/
+  stateTB[0] = 0xffffffff;
+  stateTB[1] = 0x801e1;
   len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFTREE_CONFIG_FILE) + 1;
   homedir = (char *) malloc ((len) * sizeof (char));
   if (!homedir) {
@@ -362,12 +385,31 @@ void read_defaults(void){
 		if (!word) break;
 		preferences=atoi(word);
 	}
+	if (strstr(homedir,"smallTB :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");
+		if (!word) break;
+		stateTB[0]=atoi(word);
+	}
+	if (strstr(homedir,"largeTB :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");
+		if (!word) break;
+		stateTB[1]=atoi(word);
+	}
 	if (strstr(homedir,"geometry :")){
 		strtok(homedir,":");
 		word=strtok(NULL,",");if (!word) break;
 		geometryX=atoi(word);
 		word=strtok(NULL,"\n");if (!word) break;
 		geometryY=atoi(word);
+	}
+	if (strstr(homedir,"custom_font :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");if (!word) break;
+		if (custom_font) free(custom_font);
+		custom_font=(char *)malloc(strlen(word)+1);
+		if (custom_font) strcpy(custom_font,word);
 	}
 	if (strstr(homedir,"ctree_color :")){
 		strtok(homedir,":");
@@ -494,9 +536,4 @@ show_cat (char *message)
 
 }
 
-  
-  
-  
-     	   
 
-	

@@ -23,7 +23,7 @@ xftree_SOURCES = \
 	xtree.c \
 	xtree_cfg.h \
 	xtree_dnd.c xtree_dnd.h \
-	xtree_gui.c xtree_gui.h \
+	xtree_gui.c xtree_gui.h icons.h \
 	xtree_cb.c xtree_cb.h \
 	xtree_go.c xtree_go.h \
 	xtree_misc.c xtree_misc.h \
@@ -31,6 +31,7 @@ xftree_SOURCES = \
 	xtree_mess.c xtree_mess.h \
 	xtree_cpy.c xtree_cpy.h \
 	xtree_pasteboard.c xtree_pasteboard.h \
+	xtree_toolbar.c xtree_toolbar.h \
 	xtree_colorsel.c xfdiff_colorsel.h
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \

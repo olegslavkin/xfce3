@@ -62,19 +62,11 @@
 #include "reg.h"
 #include "xfcolor.h"
 #include "xfce-common.h"
-#include "icons/new_file.xpm"
-#include "icons/new_dir.xpm"
-#include "icons/new_win.xpm"
-#include "icons/appinfo.xpm"
-#include "icons/closewin.xpm"
-#include "icons/delete.xpm"
-#include "icons/dotfile.xpm"
-#include "icons/home.xpm"
-#include "icons/empty_trash.xpm"
-#include "icons/trash.xpm"
-#include "icons/go_back.xpm"
-#include "icons/go_to.xpm"
-#include "icons/go_up.xpm"
+#include "xtree_mess.h"
+#include "xtree_pasteboard.h"
+#include "xtree_go.h"
+#include "xtree_cb.h"
+#include "xtree_toolbar.h"
 #include "icons/page.xpm"
 #include "icons/page_lnk.xpm"
 #include "icons/dir_close.xpm"
@@ -92,10 +84,6 @@
 #include "icons/stale_lnk.xpm"
 #include "icons/xftree_icon.xpm"
 
-#include "xtree_mess.h"
-#include "xtree_pasteboard.h"
-#include "xtree_go.h"
-#include "xtree_cb.h"
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -1155,64 +1143,6 @@ XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event)
   return (0);
 }
 
-typedef struct boton_icono {
-	char *text;
-	char **icon;
-	gpointer function;
-} boton_icono;
-
-/* only 32 elements allowed in TOOLBARICONS */
-#define TOOLBARICONS \
-  {_("New window"),	new_win_xpm,	cb_new_window},	\
-  {_("Close window"),	closewin_xpm,	cb_destroy}, \
-  {_("Go back ..."), 	go_back_xpm,	cb_go_back}, \
-  {_("Go to ..."), 	go_to_xpm,	cb_go_to}, \
-  {_("Go up"), 		go_up_xpm,	cb_go_up}, \
-  {_("Go home"),	home_xpm,	cb_go_home}, \
-  {_("New Folder"),	new_dir_xpm,	cb_new_subdir}, \
-  {_("New file ..."),	new_file_xpm,	cb_new_file}, \
-  {_("Properties"),	appinfo_xpm,	cb_props}, \
-  {_("Delete ..."),	delete_xpm,	cb_delete}, \
-  {_("Open Trash"),	trash_xpm,	cb_open_trash}, \
-  {_("Empty Trash"),	empty_trash_xpm,cb_empty_trash}, \
-  {_("Toggle Dotfiles"),dotfile_xpm,	on_dotfiles}, \
-  {NULL,NULL,NULL} 
-  /*
-void on_cancel();
-void on_ok();
-void toolbar_dialog (ctree){
-}*/
-
-GtkWidget *
-create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
-{
-  int i;
-  unsigned int mask;
-  GtkWidget *toolbar;
-  boton_icono toolbarIcon[]={TOOLBARICONS};
-
-  toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_toolbar_set_space_style ((GtkToolbar *) toolbar, GTK_TOOLBAR_SPACE_LINE);
-  gtk_toolbar_set_button_relief ((GtkToolbar *) toolbar, GTK_RELIEF_NONE);
-  gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
-
-  for (i=0;toolbarIcon[i].text != NULL;i++) {
-	  /* FIXME: make these masks configurable by a table dialog 
-	   * This way the user can configure what toolbar icons to
-	   * show and which not to show.*/
-     if (preferences & LARGE_TOOLBAR) mask=0x103d;
-     else mask=0xffffffff;
-     if (mask & (0x01<<i)) {
-       gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-	toolbarIcon[i].text,toolbarIcon[i].text,toolbarIcon[i].text,
-	MyCreateFromPixmapData (toolbar, toolbarIcon[i].icon), 
-	GTK_SIGNAL_FUNC (toolbarIcon[i].function), 
-	(gpointer) ctree);
-     }
-  }
-  return toolbar;
-}
-
 GtkWidget *
 create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 {
@@ -1359,7 +1289,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menuitem = gtk_menu_item_new_with_label (_("Run program ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_exec), (gpointer) win);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_exec), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new_with_label (_("Find ..."));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_find), (gpointer) ctree);
@@ -1373,12 +1303,12 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Differences ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 0));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Patch viewer ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 1));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   /* Create "Go To" menu */
@@ -1427,18 +1357,37 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   shortcut_menu (menu, _("Short titles"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(SHORT_TITLES)) );
   shortcut_menu (menu, _("Drag does copy"), (gpointer) cb_toggle_preferences, 
-		  (gpointer)((long)(DRAG_DOES_COPY)) ); 
+		  (gpointer)((long)(DRAG_DOES_COPY)) );
+  
   menuitem = gtk_menu_item_new_with_label (_("Set background color"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_colors), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-
-#if 0
-  menuitem = gtk_menu_item_new_with_label (_("Change toolbar size"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_change_toolbar), ctree);
+  
+  menuitem = gtk_menu_item_new_with_label (_("Set font"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_font), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-#endif
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Hide dates"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_DATE & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_hide_date), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Hide sizes"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_SIZE & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_hide_size), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new_with_label (_("Configure toolbar"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_config_toolbar), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
   /* Create "Help" menu */
   menuitem = gtk_menu_item_new_with_label (_("Help"));
   gtk_menu_item_right_justify (GTK_MENU_ITEM (menuitem));
@@ -1476,8 +1425,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   GtkWidget *handlebox1;
   GtkWidget *handlebox2;
   GtkWidget *menutop;
-  GtkWidget *toolbar;
   GtkWidget *scrolled;
+  GtkWidget *toolbar;
   GtkWidget *ctree;
   GtkWidget **menu;
   GtkWidget *menu_item;
@@ -1629,9 +1578,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_DATE] = "";
   win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   win->gogo = pushgo(path,win->gogo);
-
+                                              
   top_register (win->top);
-
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (win->top), vbox);
   gtk_widget_show (vbox);
@@ -1671,9 +1619,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->width = width;
   win->height = height;
   gtk_object_set_user_data (GTK_OBJECT (ctree), win);
-  if (preferences & CUSTOM_COLORS) set_colors(ctree); 
+  if (preferences & (CUSTOM_COLORS|CUSTOM_FONT)) set_colors(ctree); 
   gtk_clist_set_compare_func (GTK_CLIST (ctree), my_compare);
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
+
   gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 0, TRUE);
   gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 1, TRUE);
   gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 2, TRUE);
@@ -1855,9 +1804,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
   gtk_widget_show (menutop);
 
+  
   toolbar = create_toolbar (win->top, ctree, win);
   gtk_container_add (GTK_CONTAINER (handlebox2), toolbar);
   gtk_widget_show (toolbar);
+  win->toolbar=handlebox2;
 
   if (preferences & LARGE_TOOLBAR) gtk_widget_show_all (win->top);
 
@@ -1866,6 +1817,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     icon_name = NULL;
 
   set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
+  if (preferences & HIDE_TOOLBAR) gtk_widget_hide(handlebox2);
+
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
 
   return (win);
 }

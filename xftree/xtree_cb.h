@@ -6,11 +6,10 @@ void
 cb_select (GtkWidget * item, GtkCTree * ctree);
 void
 cb_unselect (GtkWidget * widget, GtkCTree * ctree);
-/* FIXME: all cb_functions should used ctree, since
- * cfg variable in ctree contains all application
- * information*/
 void
-cb_diff (GtkWidget * widget, gpointer data);
+cb_diff (GtkWidget * widget, GtkCTree * ctree);
+void
+cb_patch (GtkWidget * widget, GtkCTree * ctree);
 void
 cb_empty_trash (GtkWidget * widget, GtkCTree * ctree);
 void
@@ -39,11 +38,11 @@ void
 cb_quit (GtkWidget * top,  GtkCTree * ctree);
 void
 cb_term (GtkWidget * item, GtkWidget * ctree);
-/* FIXME: same as above */
 void
-cb_exec (GtkWidget * top, gpointer data);
+cb_exec (GtkWidget * top, GtkWidget * ctree);
+void 
+cb_refresh (GtkWidget * item, GtkCTree * ctree);
 /* at xtree_du.c: */
 void 
 cb_du (GtkWidget * item, GtkCTree * ctree);
 
-	

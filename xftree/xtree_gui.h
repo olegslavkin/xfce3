@@ -68,6 +68,7 @@ enum
   COLUMNS			/* number of columns */
 };
 
+
 int count_selection (GtkCTree * ctree, GtkCTreeNode ** first);
 
 void node_destroy (gpointer p);
@@ -88,5 +89,6 @@ int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
 
 gint update_timer (GtkCTree * ctree);
 
+void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
 
 #endif

@@ -202,19 +202,53 @@ cb_unselect (GtkWidget * widget, GtkCTree * ctree)
 
 /* function to call xfdiff */
 void
-cb_diff (GtkWidget * widget, gpointer data)
+cb_diff (GtkWidget * widget,  GtkCTree * ctree)
 {
   /* use:
    * prompting for left and right files: xfdiff [left file] [right file]
    * without prompting for files:        xfdiff -n  
    * prompting for patch dir and file:   xfdiff -p [directory] [patch file]
    * */
-  int patch;
-  patch = (int) data;
-  if (patch)
-    io_system ("xfdiff -p&");
-  else
+  int num;
+  GtkCTreeNode *node;
+  char *command;
+  entry *en_1,*en_2;
+  GList *selection;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  num = count_selection (ctree, &node);
+  if (!num) {
     io_system ("xfdiff&");
+    return;
+  }
+  if (num != 2) {
+    xf_dlg_warning (win->top,_("Please select two files or directories!"));
+    return;
+  }
+  selection = GTK_CLIST (ctree)->selection;
+  node = selection->data;
+  en_1 = gtk_ctree_node_get_row_data (ctree, node);
+  selection=selection->next;
+  node = selection->data;
+  en_2 = gtk_ctree_node_get_row_data (ctree, node);
+	  
+  command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+4);
+  if (!command) return;
+  sprintf(command,"xfdiff %s %s&",en_1->path,en_2->path);
+  io_system (command);
+  free(command);
+}
+
+/* function2 to call xfdiff */
+void
+cb_patch (GtkWidget * widget,  GtkCTree * ctree)
+{
+  /* use:
+   * prompting for left and right files: xfdiff [left file] [right file]
+   * without prompting for files:        xfdiff -n  
+   * prompting for patch dir and file:   xfdiff -p [directory] [patch file]
+   * */
+    io_system ("xfdiff -p&");
 }
 
 /*
@@ -663,6 +697,12 @@ delete_done:
   ctree_thaw (ctree);
   update_timer (ctree);
 }
+
+void
+cb_refresh (GtkWidget * widget, GtkWidget * ctree){
+  update_timer (GTK_CTREE (ctree));
+}
+	
 
 /*
  * open find dialog
@@ -1187,12 +1227,11 @@ cb_term (GtkWidget * item, GtkWidget * ctree)
   io_system (path);
 }
 
-/*
- */
 void
-cb_exec (GtkWidget * top, gpointer data)
+cb_exec (GtkWidget * top,GtkWidget * ctree)
 {
-  cfg *win = (cfg *) data;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   xf_dlg_execute (win->top,win->xap, NULL);
 }
 

@@ -4,16 +4,22 @@
 #define DRAG_DOES_COPY		0x08
 #define CUSTOM_COLORS		0x10
 #define LARGE_TOOLBAR		0x20
+#define HIDE_TOOLBAR		0x40
+#define CUSTOM_FONT		0x80
+#define HIDE_SIZE		0x100
+#define HIDE_DATE		0x200
 
 #define XFTREE_CONFIG_FILE "xftreerc"
 
 #ifdef XTREE_MESS_MAIN  
-int preferences,geometryX,geometryY;
+unsigned int preferences,stateTB[2];
+int geometryX,geometryY;
 GtkWidget *Awin;
 char *Apath;
 GdkColor ctree_color;
 #else /* XTREE_MESS_MAIN */
-extern int preferences,geometryX,geometryY;
+extern unsigned int preferences,stateTB[2];
+extern int geometryX,geometryY;
 extern GtkWidget *Awin;
 extern char *Apath;
 extern GdkColor ctree_color;
@@ -30,6 +36,9 @@ void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree);
 void cb_default_SCK(GtkWidget * item, GtkWidget * ctree );
 void show_cat (char *message);
 void cb_select_colors (GtkWidget * widget, GtkWidget * ctree);
+void cb_select_font (GtkWidget * widget, GtkWidget * ctree);
+void cb_hide_date (GtkWidget * widget, GtkWidget * ctree);
+void cb_hide_size (GtkWidget * widget, GtkWidget * ctree);
 void set_colors(GtkWidget * ctree);
-void cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree);
+void redraw_top (GtkWidget * ctree);
 
