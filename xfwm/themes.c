@@ -3385,12 +3385,12 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
 
     if (inverted)
     {
-      XDrawLine (dpy, win, LoGC, 2, 1, w - 3, 1);
-      XDrawLine (dpy, win, LoGC, 1, 2, 1, h - 3);
-      XDrawLine (dpy, win, Scr.BlackGC, 2, 2, w - 4, 2);
-      XDrawLine (dpy, win, Scr.BlackGC, 2, 2, 2, h - 4);
-      XDrawLine (dpy, win, HiGC, 2, h - 2, w - 3, h - 2);
-      XDrawLine (dpy, win, HiGC, w - 2, 2, w - 2, h - 3);
+      XDrawLine (dpy, win, LoGC, 1, 0, w - 2, 0);
+      XDrawLine (dpy, win, LoGC, 0, 1, 0, h - 2);
+      XDrawLine (dpy, win, Scr.BlackGC, 1, 1, w - 2, 1);
+      XDrawLine (dpy, win, Scr.BlackGC, 1, 1, 1, h - 2);
+      XDrawLine (dpy, win, HiGC, 1, h - 1, w - 2, h - 1);
+      XDrawLine (dpy, win, HiGC, w - 1, 1, w - 1, h - 2);
     }
     else
     {
