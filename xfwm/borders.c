@@ -74,7 +74,6 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
   Pixel BackColor;
   Pixmap TextColor;
   Bool NewColor = False;
-  XSetWindowAttributes attributes;
   unsigned long valuemask;
   static unsigned int corners[4];
   Window w;
