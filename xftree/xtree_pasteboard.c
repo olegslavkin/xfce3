@@ -152,7 +152,7 @@ void cb_cut(GtkWidget * widget, GtkCTree * ctree){
 void cb_paste(GtkWidget * widget, GtkCTree * ctree){
   cfg *win;
   gboolean cut;
-  char *src_hostname;
+  /*char *src_hostname;*/
   GList *list;
   entry *t_en;
   char *tmpfile,*b,*word,*path;
@@ -175,9 +175,20 @@ void cb_paste(GtkWidget * widget, GtkCTree * ctree){
   if ((word=strtok(NULL,":"))==NULL) { XFree(b); return;}  
   if (strstr(word,"cut")) cut=TRUE; else cut=FALSE;
   if ((word=strtok(NULL,":"))==NULL) { XFree(b); return;}  
-  src_hostname=g_strdup(word);
-  if (!src_hostname) fprintf(stderr,"xftree: source host was not specified.\n");
-  if ((word=strtok(NULL,"\n"))==NULL){ XFree(b); return;}  
+  if (!word) {
+	  fprintf(stderr,"xftree: source host was not specified.\n");
+	  XFree(b); return;
+  }
+  /* not used right now: src_hostname=g_strdup(word);*/
+  word = word + strlen(word) +1;
+  if (word[0]=='\n') {
+	  word++;
+	  if (word[0]==0) { XFree(b); return;}
+  } else {
+    if ((word=strtok(NULL,"\n"))==NULL) { XFree(b); return;}  
+    word = word + strlen(word) +1;
+  }
+  
   	 
   /* create list to send to CreateTmpList */
   i = uri_parse_list (word, &list);
