@@ -846,7 +846,7 @@ SetRCDefaults ()
     "IconGrid 10",
     "IconSpacing 5",
     "IconPos Right",
-    "Style \"*\" Title, BorderWidth 6",
+    "Style \"*\" Title, BorderWidth 4",
     "Style \"XFce*\" Sticky",
     "Style \"XFbd*\" Sticky",
     "Style \"Popup*\" Sticky",
