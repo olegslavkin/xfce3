@@ -34,6 +34,7 @@ palettes_DATA=\
  DarkMetal \
  Default \
  DefaultGrey \
+ DefaultTextured \
  Defcon \
  Desert \
  Dolly \

@@ -63,7 +63,7 @@
 #endif
 
 #ifndef DEFAULTTEXTURE
-#define DEFAULTTEXTURE 	"textures/DefaultGrad.xpm"
+#define DEFAULTTEXTURE 	""
 #endif
 
 #ifndef DEFAULTFONT
