@@ -96,9 +96,7 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
   if (Scr.CurrentDesk == oldDesk)
     return;
 
-#ifdef REQUIRES_XSYNC
   XSync (dpy, 0);
-#endif
   if (grab)
     MyXGrabServer (dpy);
 
@@ -165,6 +163,8 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
     int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
     unsigned int dummy_mask;
 
+    /* Free some CPU, pause for 10 ms */
+    sleep_a_little (10000);
     XSync (dpy, 0);
     MouseWin = NULL;
     if (!(Scr.Options & ClickToFocus))
@@ -187,9 +187,7 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
   }
   if (grab)
     MyXUngrabServer (dpy);
-#ifdef REQUIRES_XSYNC
   XSync (dpy, 0);
-#endif
 }
 
 /**************************************************************************
