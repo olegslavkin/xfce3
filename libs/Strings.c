@@ -264,3 +264,118 @@ StrEquals (char *s1, char *s2)
     return 0;
   return (mystrcasecmp (s1, s2) == 0);
 }
+
+#ifdef HAVE_ICONV
+/* UTF8 stuff */
+
+#define F 0   /* character never appears in text */
+#define T 1   /* character appears in plain ASCII text */
+#define I 2   /* character appears in ISO-8859 text */
+#define X 3   /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
+
+static unsigned int isUtf8(const char *buf) {
+  int i, n;
+  register char c;
+  unsigned int gotone = 0;
+
+  static const char text_chars[256] = {
+  /*                  BEL BS HT LF    FF CR    */
+        F, F, F, F, F, F, F, T, T, T, T, F, T, T, F, F,  /* 0x0X */
+        /*                              ESC          */
+        F, F, F, F, F, F, F, F, F, F, F, T, F, F, F, F,  /* 0x1X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x2X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x3X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x4X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x5X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x6X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, F,  /* 0x7X */
+        /*            NEL                            */
+        X, X, X, X, X, T, X, X, X, X, X, X, X, X, X, X,  /* 0x8X */
+        X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,  /* 0x9X */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xaX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xbX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xcX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xdX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xeX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I   /* 0xfX */
+  };
+
+  /* *ulen = 0; */
+  for (i = 0; (c = buf[i]); i++) {
+    if ((c & 0x80) == 0) {        /* 0xxxxxxx is plain ASCII */
+      /*
+       * Even if the whole file is valid UTF-8 sequences,
+       * still reject it if it uses weird control characters.
+       */
+
+      if (text_chars[c] != T)
+        return 0;
+
+    } else if ((c & 0x40) == 0) { /* 10xxxxxx never 1st byte */
+      return 0;
+    } else {                           /* 11xxxxxx begins UTF-8 */
+      int following;
+
+    if ((c & 0x20) == 0) {             /* 110xxxxx */
+      following = 1;
+    } else if ((c & 0x10) == 0) {      /* 1110xxxx */
+      following = 2;
+    } else if ((c & 0x08) == 0) {      /* 11110xxx */
+      following = 3;
+    } else if ((c & 0x04) == 0) {      /* 111110xx */
+      following = 4;
+    } else if ((c & 0x02) == 0) {      /* 1111110x */
+      following = 5;
+    } else
+      return 0;
+
+      for (n = 0; n < following; n++) {
+        i++;
+        if (!(c = buf[i]))
+          goto done;
+
+        if ((c & 0x80) == 0 || (c & 0x40))
+          return 0;
+      }
+      gotone = 1;
+    }
+  }
+done:
+  return gotone;   /* don't claim it's UTF-8 if it's all 7-bit */
+}
+
+#undef F
+#undef T
+#undef I
+#undef X
+
+#define OUTBUF_SIZE     32768
+
+char outbuf[OUTBUF_SIZE];
+char *convert_code (char *fromcode)
+{
+  char *outptr;
+  int outlen=0;
+  int len=0;
+
+  unsigned int utf8 = isUtf8(fromcode);
+
+  memset(outbuf, 0, OUTBUF_SIZE);
+
+  len = strlen(fromcode);
+
+  outptr = outbuf;
+  outlen = OUTBUF_SIZE;
+
+  if (utf8) {
+  	iconv_t cd;
+     	cd = iconv_open("EUCKR", "UTF8");
+  	iconv (cd, &fromcode, &len, &outptr, &outlen);
+  	iconv_close(cd);
+  }
+  outbuf[outlen] = '\0';
+  outbuf[outlen+1] = '\0';
+  return outbuf;
+}
+
+#endif
