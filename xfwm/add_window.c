@@ -314,7 +314,6 @@ AddWindow (Window w)
   attributes.background_pixel = tmp_win->BackPixel;
 
   /* Grab the server so the window doesn't go away while we're capturing it */
-  XSync (dpy, 0);
   MyXGrabServer (dpy);
   if (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0)
   {
@@ -515,7 +514,6 @@ GrabButtons (XfwmWindow * tmp_win)
     return;
 
   MouseEntry = Scr.AllBindings;
-  XSync (dpy, 0);
   while (MouseEntry != (Binding *) 0)
   {
     if ((MouseEntry->Action != NULL) && (MouseEntry->Context & C_WINDOW) && (MouseEntry->IsMouse == 1))
@@ -551,7 +549,6 @@ GrabKeys (XfwmWindow * tmp_win)
   if (!tmp_win)
     return;
 
-  XSync (dpy, 0);
   for (tmp = Scr.AllBindings; tmp != NULL; tmp = tmp->NextBinding)
   {
     if ((tmp->Context & (C_WINDOW | C_TITLE | C_RALL | C_LALL | C_SIDEBAR)) && (tmp->IsMouse == 0))
@@ -636,7 +633,6 @@ GetWindowSizeHints (XfwmWindow * tmp)
   if (!tmp)
     return;
 
-  XSync (dpy, 0);
   if (!XGetWMNormalHints (dpy, tmp->w, &tmp->hints, &supplied))
   {
     tmp->hints.flags = 0;
