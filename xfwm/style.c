@@ -243,16 +243,16 @@ ProcessNewStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 	restofline += 11;
 	off_flags |= START_ICONIC_FLAG;
       }
-      else if (mystrncasecmp (restofline, "stayonbottom", 13) == 0)
+      else if (mystrncasecmp (restofline, "stayonbottom", 12) == 0)
       {
 	/* This one is kept for backward compatibility */
-	restofline += 13;
+	restofline += 12;
 	layer = 0;
       }
-      else if (mystrncasecmp (restofline, "stayontop", 10) == 0)
+      else if (mystrncasecmp (restofline, "stayontop", 9) == 0)
       {
 	/* This one is kept for backward compatibility */
-	restofline += 10;
+	restofline += 9;
 	layer = MAX_LAYERS;
       }
       else if (mystrncasecmp (restofline, "sticky", 6) == 0)
@@ -260,9 +260,9 @@ ProcessNewStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 	off_flags |= STICKY_FLAG;
 	restofline += 6;
       }
-      else if (mystrncasecmp (restofline, "startondesk", 12) == 0)
+      else if (mystrncasecmp (restofline, "startondesk", 11) == 0)
       {
-	restofline += 12;
+	restofline += 11;
 	off_flags |= STARTONDESK_FLAG;
 	sscanf (restofline, "%d", &desknumber);
 	while (isspace (*restofline))
