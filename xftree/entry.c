@@ -142,8 +142,8 @@ entry *entry_new_by_path_and_label (char *path, char *label)
 	      entry_free ( en);
 	      return (NULL);
 	    }
-            set_time(&(en->date),&(en->st));
-            entry_type_update (en);
+            /*set_time(&(en->date),&(en->st));
+            entry_type_update (en);*/
 	    break;
     case URI_HTTP:
     case URI_FTP:
