@@ -41,6 +41,8 @@ typedef struct
   off_t size;
 }
 fprop;
+/* dlg_prop is deprecated. use xf_dlg_prop instead */
 
+int xf_dlg_prop (GtkWidget *parent,char *path, fprop * prop, int multi);
 int dlg_prop (char *path, fprop * prop, int multi);
 #endif

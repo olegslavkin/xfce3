@@ -81,7 +81,7 @@ download (uri * u, char *path)
     sprintf (target, "%s/%s", path, uri_basename (u->url));
     if (io_is_file (target))
     {
-      /*if (dlg_question (_("Override file ?"), target) != DLG_RC_OK)*/
+/* FIXME. Use xf_dlg_new instead. What is the parent widget address? */	    
       if (dlg_new(override_txt(target,NULL),NULL,NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
 	return 0;

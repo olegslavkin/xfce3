@@ -17,6 +17,9 @@ bugs to fix: information dialogs can get lost beneath
              erratic behavior when the top open folder gets moved away by 
              another process.
 done:
+-modal dialog bug fixed throughout
+-fixed a small bug in cb_exec
+
 bug: information dialogs can get lost beneath 
 	- fixed for all gtk_dlg.
 13- add help for creating custom shortcut keys, and default defined shorcut keys

@@ -1627,7 +1627,7 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       }
       else
       {
-	dlg_open_with (win->xap, "", en->path);
+	xf_dlg_open_with (win->top,win->xap, "", en->path);
       }
     }
     chdir (wd);
@@ -2154,7 +2154,7 @@ cb_open_with (GtkWidget * item, GtkCTree * ctree)
   }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   prg = reg_app_by_file (win->reg, en->path);
-  dlg_open_with (win->xap, prg ? prg : DEF_APP, en->path);
+  xf_dlg_open_with (win->top,win->xap, prg ? prg : DEF_APP, en->path);
 }
 
 /*
@@ -2233,7 +2233,7 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
 	nprop.mtime = oprop.mtime;
 	nprop.atime = oprop.atime;
 	nprop.size = oprop.size;
-	rc = dlg_prop (en->path, &nprop, flags);
+	rc = xf_dlg_prop (win->top,en->path, &nprop, flags);
       }
       switch (rc)
       {
@@ -2524,7 +2524,7 @@ static void
 cb_exec (GtkWidget * top, gpointer data)
 {
   cfg *win = (cfg *) data;
-  dlg_execute (win->xap, NULL);
+  xf_dlg_execute (win->top,win->xap, NULL);
 }
 
 XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event)
@@ -2699,7 +2699,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menuitem = gtk_menu_item_new_with_label (_("Run program ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_exec), (gpointer) top);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_exec), (gpointer) win);
 
   menuitem = gtk_menu_item_new_with_label (_("Find ..."));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_find), (gpointer) ctree);
@@ -3014,7 +3014,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       menu_item = gtk_menu_item_new_with_label (help_mlist[i].label);
     else
       menu_item = gtk_menu_item_new ();
-    gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (cb_default_SCK),(gpointer)(help_mlist+i));
+    gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (cb_default_SCK),ctree);
     if (help_mlist[i].key)
     {
       gtk_widget_add_accelerator (menu_item, "activate", inner_accel, help_mlist[i].key, help_mlist[i].mod,GTK_ACCEL_VISIBLE);

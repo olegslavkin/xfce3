@@ -125,9 +125,11 @@ on_ok (GtkWidget * ok, gpointer data)
 
 /*
  * create a modal dialog and handle it
- */
-gint
-dlg_open_with (char *xap, char *defval, char *file)
+ * dlg_open_with is deprecated */
+gint dlg_open_with (char *xap, char *defval, char *file){
+	return (xf_dlg_open_with (NULL,xap,defval,file));
+}
+gint xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *label, *box, *check;
 
@@ -150,6 +152,8 @@ dlg_open_with (char *xap, char *defval, char *file)
   gtk_window_set_title (GTK_WINDOW (dl.top), title);
   gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
+  if (parent) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent)); 
+  
   gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dl.top)->vbox), 5);
 
   ok = gtk_button_new_with_label (_("Ok"));

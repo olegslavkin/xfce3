@@ -23,6 +23,7 @@ GtkWidget *
 void 
  cb_toggle_preferences (GtkWidget * widget, gpointer data);
 void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree);
-void cb_default_SCK(GtkWidget * item, gpointer data);
+void cb_default_SCK(GtkWidget * item, GtkWidget * ctree );
+void show_cat (char *message);
 
 

@@ -121,7 +121,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     else
     {
-      dlg_error (_("Unknown action !"), NULL);
+      xf_dlg_error (win->top,_("Unknown action !"), NULL);
       gtk_drag_finish (context, FALSE, FALSE, time);
       return;
     }
@@ -136,7 +136,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     if ((!(en->type & FT_DIR)) || (en->type & FT_DIR_UP) || (!io_is_valid (en->label)))
     {
-      dlg_error (_("Target must be a directory !"), NULL);
+      xf_dlg_error (win->top,_("Target must be a directory !"), NULL);
       gtk_drag_finish (context, FALSE, (mode == TR_MOVE), time);
       uri_free_list (list);
       return;
@@ -162,7 +162,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
 	}
 	tmp = g_list_append (tmp, s_en);
         /*printf("dbg:dnd transfer\n");*/
-	if (!transfer (NULL, tmp, en->path, mode, &source_state)) {
+	if (!transfer (win->top,NULL, tmp, en->path, mode, &source_state)) {
         /*printf("dbg:dnd transfer returned false\n");*/
 		goto END;
 	}

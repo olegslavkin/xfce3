@@ -52,6 +52,7 @@
 #include "xfcolor.h"
 #include "xfce-common.h"
 #include "../xfsamba/tubo.h"
+#include "xtree_mess.h"
 
 
 #ifdef HAVE_GDK_IMLIB
@@ -81,7 +82,7 @@ duStdout (int n, void *data)
   int i;
   
   if (n) return TRUE; /* this would mean binary data */
-  if (!first) return TRUE; /* bug avoider, since we can only create a single instance of dlg_new at a time*/
+  if (!first) return TRUE; /* bug avoider, since we can only create a single instance of dlg_new at a time  */
   first=FALSE;
 
   line = (char *) data;
@@ -93,8 +94,7 @@ duStdout (int n, void *data)
   texto = (char *) malloc(strlen(line)+strlen(du_txt)+3);
   if (!texto) return TRUE; /*unprobable memory allocation trouble */
   sprintf(texto,"%s\n%s",du_txt,line); 
-  /* this should be a text box, to avoid "first" variable and process several paths at once...*/
-  dlg_new(texto,NULL,NULL,DLG_CANCEL);
+  show_cat(texto);
   /*fprintf(stdout,"%s\n",line);*/
   free(texto);
   return TRUE;
@@ -123,7 +123,10 @@ duFork (void)
   _exit (127);
 }
 
-
+/* FIXME: path should be constructed with multiple path if
+ * more than one file selected, to permit simultaneous
+ * diskusage reports. Watch out for memory allocation
+ * problems */
 void 
 cb_du (GtkWidget * item, GtkCTree * ctree)
 {

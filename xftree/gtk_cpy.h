@@ -30,6 +30,6 @@
 #define TR_LINK		4
 #define TR_OVERRIDE	8
 
-int transfer (GtkCTree * s, GList * list, char *target, int mode, int *alive);
+int transfer (GtkWidget *parent,GtkCTree * s, GList * list, char *target, int mode, int *alive);
 void transfer_view (GtkWidget *, int *);
 #endif

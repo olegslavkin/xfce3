@@ -233,30 +233,99 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
 			  
 void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
 {
-  dlg_info (N_("GTK handles keyboard shortcuts dynamically\n" 
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  xf_dlg_info (win->top,N_("Xftree handles keyboard shortcuts dynamically.\n" 
 "This means that you can open a menu,highlight an entry\nand press a keyboard key to create the shortcut.")
 	    );
 }
 
-void cb_default_SCK(GtkWidget * item, gpointer data)
+void cb_default_SCK(GtkWidget * item,  GtkWidget * ctree)
 {
-#if 0
-	char * message;
-	char *txt=_("You selected the default keyboard shortcut for ");
-	menu_entry *helpitem;
-	helpitem = (menu_entry *)data;
-	if ((!helpitem) || (!(helpitem->label))) return;
-	message=(char *)malloc((strlen(txt)+strlen(helpitem->label)+1)*sizeof(char));
-	if (!message) return;
-	sprintf(message,"%s%s",txt,helpitem->label);
-	dlg_info (message);
-	free(message);
-#endif
-	dlg_info (_("Keyboard shortcuts are a fast way to access menu functions."));
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));	
+  
+  xf_dlg_info (win->top,_("Keyboard shortcuts are a fast way to access menu functions."));
 	
 }
 
+static GtkWidget *cat=NULL,*text;
+static void
+on_clear (GtkWidget * widget, gpointer data)
+{
+  guint lg;
+  lg = gtk_text_get_length (GTK_TEXT (text));
+  gtk_text_backward_delete (GTK_TEXT (text), lg);
+}
+
+static void
+on_ok (GtkWidget * widget, gpointer data)
+{
+  gtk_widget_hide (GTK_WIDGET (cat));
+  gdk_window_withdraw ((GTK_WIDGET (cat))->window);
+}
+
 	  
+void
+show_cat (char *message)
+{
+  GtkWidget *bbox, *scrolled, *button;
+  
+  if ((!message) || (!strlen (message)))
+    return;
+  if (cat != NULL)
+  {
+    gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, message, strlen (message));
+    if (!GTK_WIDGET_VISIBLE (cat))
+      gtk_widget_show (cat);
+    return;
+  }
+
+  cat = gtk_dialog_new ();
+  gtk_container_border_width (GTK_CONTAINER (cat), 5);
+
+  gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_CENTER);
+  gtk_window_set_title (GTK_WINDOW (cat),_("Xftree results"));
+  gtk_widget_realize (cat);
+
+
+  scrolled = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (cat)->vbox), scrolled, TRUE, TRUE, 0);
+  gtk_widget_show (scrolled);
+
+  text = gtk_text_new (NULL, NULL);
+  gtk_text_set_editable (GTK_TEXT (text), FALSE);
+  gtk_text_set_word_wrap (GTK_TEXT (text), FALSE);
+  gtk_text_set_line_wrap (GTK_TEXT (text), TRUE);
+  gtk_widget_show (text);
+  gtk_container_add (GTK_CONTAINER (scrolled), text);
+
+  bbox = gtk_hbutton_box_new ();
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (bbox), 5);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (cat)->action_area), bbox, FALSE, TRUE, 0);
+  gtk_widget_show (bbox);
+  button = gtk_button_new_with_label (_("Clear"));
+  gtk_box_pack_end (GTK_BOX (bbox), button, FALSE, FALSE, 0);
+  gtk_widget_show (button);
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (on_clear), (gpointer) GTK_WIDGET (cat));
+
+  button = gtk_button_new_with_label (_("Dismiss"));
+  gtk_box_pack_end (GTK_BOX (bbox), button, FALSE, FALSE, 0);
+  gtk_widget_show (button);
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) GTK_WIDGET (cat));
+  gtk_signal_connect (GTK_OBJECT (cat), "delete_event", GTK_SIGNAL_FUNC (on_ok), (gpointer) GTK_WIDGET (cat));
+
+  gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, message, strlen (message));
+  gtk_widget_show (text);
+/*  set_icon (cat, _("Show disk usage ..."), put_some_icon_here_xpm); FIXME*/
+  gtk_widget_show (cat);
+
+  return;
+
+}
+
   
   
   

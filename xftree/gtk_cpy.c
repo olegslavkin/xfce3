@@ -92,8 +92,8 @@ cb_cancel (GtkWidget * w, void *data)
 /*
  * copy/move a file and update the dialog box
  */
-int
-trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
+static int
+trans_file (GtkWidget *parent,entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
 {
   char target[PATH_MAX + 1];
   char lnk[PATH_MAX + 1];
@@ -154,9 +154,8 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
     /* check if they are the same files */
     if (t_stat.st_ino != sen->inode)
     {
-     /* rc = dlg_ok_skip (_("Override file?"), target);*/ 
       if (!force_override) {
-	rc=dlg_new(override_txt(target,sen->path),NULL,NULL,DLG_CANCEL|DLG_OK|DLG_SKIP|DLG_ALL);
+	rc=xf_dlg_new(parent,override_txt(target,sen->path),NULL,NULL,DLG_CANCEL|DLG_OK|DLG_SKIP|DLG_ALL);
       
         if (rc == DLG_RC_SKIP) 	 return (TRUE);
         if (rc == DLG_RC_CANCEL) return (FALSE);
@@ -171,12 +170,12 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   }
   else if (lstat (ten->path, &t_stat) == ERROR)
   {
-    return dlg_continue (_("Can't stat() file"), ten->path);
+    return xf_dlg_continue (parent,_("Can't stat() file"), ten->path);
   }
 
   if (lstat (sen->path, &s_stat) == ERROR)
   {
-    return dlg_continue (_("Can't stat() file"), sen->path);
+    return xf_dlg_continue (parent,_("Can't stat() file"), sen->path);
   }
 #if 0
   /* If src and dest aren't on the same device, ask user */
@@ -205,7 +204,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
        */
       if (rename (sen->path, target) == ERROR)
       {
-	return dlg_continue (sen->path, strerror (errno));
+	return xf_dlg_continue (parent,sen->path, strerror (errno));
       }
       return (TRUE);
     }
@@ -214,7 +213,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   {
     if (symlink (sen->path, target) == -1)
     {
-      return dlg_continue (lnk, strerror (errno));
+      return xf_dlg_continue (parent,lnk, strerror (errno));
     }
     return (TRUE);
   }
@@ -231,13 +230,13 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
     lnk[len] = '\0';
     if (symlink (lnk, target) == -1)
     {
-      return dlg_continue (lnk, strerror (errno));
+      return xf_dlg_continue (parent,lnk, strerror (errno));
     }
     if (mode & TR_MOVE)
     {
       if (unlink (sen->path) == ERROR)
       {
-	return dlg_continue (sen->path, strerror (errno));
+	return xf_dlg_continue (parent,sen->path, strerror (errno));
       }
     }
     return (TRUE);
@@ -245,16 +244,16 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   /* we can't copy device files */
   if (EN_IS_DEVICE (sen))
   {
-    return dlg_continue (sen->path, _("Can't copy device file"));
+    return xf_dlg_continue (parent,sen->path, _("Can't copy device file"));
   }
   /* we can't copy fifo files */
   if (EN_IS_FIFO (sen))
   {
-    return dlg_continue (sen->path, _("Can't copy FIFO"));
+    return xf_dlg_continue (parent,sen->path, _("Can't copy FIFO"));
   }
   if (EN_IS_SOCKET (sen))
   {
-    return dlg_continue (sen->path, _("Can't copy socket"));
+    return xf_dlg_continue (parent,sen->path, _("Can't copy socket"));
   }
 
   /* we have to copy the data by reading/writing
@@ -262,13 +261,13 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   ofp = fopen (sen->path, "rb");
   if (!ofp)
   {
-    return dlg_error_continue (sen->path, strerror (errno));
+    return xf_dlg_error_continue (parent,sen->path, strerror (errno));
   }
   nfp = fopen (target, "wb");
   if (!nfp)
   {
     fclose (ofp);
-    return dlg_error_continue (target, strerror (errno));
+    return xf_dlg_error_continue (parent,target, strerror (errno));
   }
   all = 0;
   while ((len = fread (buff, 1, BUFLEN, ofp)) > 0)
@@ -289,11 +288,11 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   fclose (ofp);
   if (all < sen->size)
   {
-    dlg_error (_("Too few bytes transferred ! Device full ?"), target);
+    xf_dlg_error (parent,_("Too few bytes transferred ! Device full ?"), target);
   }
   else if (all > sen->size)
   {
-    dlg_error (_("Too many bytes transferred !?"), target);
+    xf_dlg_error (parent,_("Too many bytes transferred !?"), target);
   }
   if (stat (sen->path, &s_stat) != ERROR)
   {
@@ -303,7 +302,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   {
     if (unlink (sen->path) == ERROR)
     {
-      return dlg_error_continue (sen->path, strerror (errno));
+      return xf_dlg_error_continue (parent,sen->path, strerror (errno));
     }
   }
   return (TRUE);
@@ -313,8 +312,8 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
  * move/copy a directory to the named target
  * args: e.g. /opt/src -> /usr will move/copy to /usr/src
  */
-int
-trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
+static int
+trans_dir (GtkWidget *parent,entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
 {
   char target[PATH_MAX + 1];
   char source[PATH_MAX + 1];
@@ -339,7 +338,7 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
 
   if (strcmp (sen->path, target) == 0)
   {
-    dlg_error (_("Source and Target directories are the same"), target);
+    xf_dlg_error (parent,_("Source and Target directories are the same"), target);
     return (FALSE);
   }
   if (mode == TR_MOVE)
@@ -353,11 +352,11 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
      */
     if (lstat (sen->path, &s_stat) == ERROR)
     {
-      return dlg_error_continue (_("Can't stat() file"), sen->path);
+      return xf_dlg_error_continue (parent,_("Can't stat() file"), sen->path);
     }
     if (stat (ten->path, &t_stat) == ERROR)
     {
-      return dlg_error_continue (_("Can't stat() file"), ten->path);
+      return xf_dlg_error_continue (parent,_("Can't stat() file"), ten->path);
     }
     if (s_stat.st_dev == t_stat.st_dev)
     {
@@ -365,7 +364,7 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
        */
       if (rename (sen->path, target) == ERROR)
       {
-	return dlg_error_continue (sen->path, strerror (errno));
+	return xf_dlg_error_continue (parent,sen->path, strerror (errno));
       }
       return (TRUE);
     }
@@ -374,14 +373,14 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   {
     if (symlink (sen->path, target) == -1)
     {
-      return dlg_continue (sen->path, strerror (errno));
+      return xf_dlg_continue (parent,sen->path, strerror (errno));
     }
     return (TRUE);
   }
   dir = opendir (sen->path);
   if (!dir)
   {
-    return dlg_error_continue (sen->path, strerror (errno));
+    return xf_dlg_error_continue (parent,sen->path, strerror (errno));
   }
   if (mkdir (target, 0xFFFF) == ERROR)
   {
@@ -390,14 +389,14 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
       if (!io_is_directory (target))
       {
 	closedir (dir);
-	return dlg_skip (target, _("exists and is not a directory"));
+	return xf_dlg_skip (parent,target, _("exists and is not a directory"));
       }
       /* else: silent ignore that the directory is still there
        */
     }
     else
     {
-      dlg_error (target, strerror (errno));
+      xf_dlg_error (parent,target, strerror (errno));
       closedir (dir);
       return (0);
     }
@@ -420,11 +419,11 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
     if (EN_IS_DIR (new_sen) && (!EN_IS_LINK (new_sen)))
     {
       /* do not follow links */
-      rc = trans_dir (new_sen, new_ten, mode, info, st);
+      rc = trans_dir (parent,new_sen, new_ten, mode, info, st);
     }
     else
     {
-      rc = trans_file (new_sen, new_ten, mode, info, st);
+      rc = trans_file (parent,new_sen, new_ten, mode, info, st);
     }
     entry_free (new_sen);
     entry_free (new_ten);
@@ -439,7 +438,7 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   {
     if (rmdir (sen->path) == ERROR)
     {
-      return dlg_error_continue (sen->path, strerror (errno));
+      return xf_dlg_error_continue (parent,sen->path, strerror (errno));
     }
   }
   return (TRUE);
@@ -449,7 +448,7 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
  * move or copy files
  */
 int
-transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
+transfer (GtkWidget *parent,GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
 {
   GtkWidget *dialog, *cancel, *label[2], *box, *table, *info[3];
   GtkCTreeNode *node;
@@ -458,6 +457,7 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
   int nitems, rc;
   state st[2];
   int status;
+
 
   status = ST_OK;
   st[0].status = st[1].status = &status;
@@ -484,18 +484,18 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
   nitems = g_list_length (list);
   if ((!nitems) || (!list))
   {
-    dlg_error (_("transfer()"), _("fatal error"));
+    xf_dlg_error (parent,_("transfer()"), _("fatal error"));
     return (FALSE);
   }
   target_en = entry_new_by_path (path);
   if (!target_en)
   {
-    dlg_error (_("Error getting info from"), path);
+    xf_dlg_error (parent,_("Error getting info from"), path);
     return (FALSE);
   }
   if ((nitems > 1) && (!(EN_IS_DIR (target_en))))
   {
-    dlg_error (_("Fatal Error"), _("Can't transfer items to a file"));
+    xf_dlg_error (parent,_("Fatal Error"), _("Can't transfer items to a file"));
     return (FALSE);
   }
 
@@ -545,7 +545,7 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
     en = (entry *) list->data;
     if (EN_IS_DIR (en) && (!EN_IS_DIR (target_en)))
     {
-      dlg_error (_("Error"), _("Can't transfer a directory to a file"));
+      xf_dlg_error (parent,_("Error"), _("Can't transfer a directory to a file"));
       entry_free (target_en);
       goto END;
     }
@@ -553,11 +553,11 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
     {
       if (EN_IS_DIR (en) && (!EN_IS_LINK (en)))
       {
-	rc = trans_dir (en, target_en, mode, info, &st[0]);
+	rc = trans_dir (parent,en, target_en, mode, info, &st[0]);
       }
       else
       {
-	rc = trans_file (en, target_en, mode, info, &st[0]);
+	rc = trans_file (parent,en, target_en, mode, info, &st[0]);
         /*printf("dbg: return is %d\n",rc);*/
       }
       if (*alive && (mode == TR_MOVE) && rc && s_ctree)
@@ -583,7 +583,7 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
     list = list->next;
   }
 
-  /* release the toplevel from the list of all toplevels
+  /* release the parentlevel from the list of all parentlevels
    */
 END:
   top_delete (dialog);
