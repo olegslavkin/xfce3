@@ -631,6 +631,8 @@ cut_out:
 }
 
 static GtkWidget *count_label;
+static gboolean count_cancelled;
+static GtkWidget *countW=NULL;
 
 static int SubParentCount(char *source){
 	struct stat s_stat;
@@ -659,12 +661,13 @@ static int SubParentCount(char *source){
 			 else short_txt=strrchr(source,'/')+1;
 			 if (*short_txt==0) short_txt=source;
 			 sprintf(count_txt,"%s --> %d",short_txt,count);
-			 gtk_label_set_text (GTK_LABEL (count_label),count_txt );
+			 if (!count_cancelled) gtk_label_set_text (GTK_LABEL (count_label),count_txt );
 			 g_free(count_txt);
 			 while (gtk_events_pending()) gtk_main_iteration();
  			 gdk_flush();
 		 }
 		 for (i = 0; i < dirlist.gl_pathc; i++) {
+	          if (count_cancelled) return 0;
 		  if (strstr(dirlist.gl_pathv[i],"/")) src=strrchr(dirlist.gl_pathv[i],'/')+1;
 		  else src = dirlist.gl_pathv[i];
 		  if ((strcmp(src,".")==0)||(strcmp(src,"..")==0)) continue;
@@ -691,7 +694,7 @@ static gint ParentCount(gpointer data){
 		g_free(line);
 		goto count_done; 
 	}
-	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile)){
+	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile) && !count_cancelled){
 		/*fprintf(stderr,"dbg:%s\n",line);*/
 		type=atoi(strtok(line,":"));
 		source=strtok(NULL,":");
@@ -706,8 +709,14 @@ count_done:
 	gtk_main_quit();
 	return FALSE;
 }
+
+
+static void cb_count_destroy(GtkWidget *widget,gpointer data){
+	count_cancelled=TRUE; /* for user destruction */
+	countW=NULL;
+}
+
 static void count_window(GtkWidget *parent){
-  GtkWidget *countW;
   countW=gtk_dialog_new ();
   
   gtk_window_position (GTK_WINDOW (countW), GTK_WIN_POS_CENTER);
@@ -721,12 +730,16 @@ static void count_window(GtkWidget *parent){
   gtk_widget_realize (countW);
   if (preferences&SMALL_DIALOGS) gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER);
   if (parent) gtk_window_set_transient_for (GTK_WINDOW (countW), GTK_WINDOW (parent)); 
+  gtk_signal_connect (GTK_OBJECT (countW), "destroy", GTK_SIGNAL_FUNC (cb_count_destroy), NULL);
   gtk_widget_show_all(countW);
   gdk_flush();
   /* add timeout */
   gtk_timeout_add (260, (GtkFunction) ParentCount, NULL);
   gtk_main();
-  gtk_widget_destroy(countW);
+  if (countW) {
+	  gtk_widget_destroy(countW);
+	  count_cancelled=FALSE;
+  }
   return ;
 }
 
@@ -745,7 +758,9 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	child_file_number=0;
 	child_mode = mode;
  	/* count total files to transfer */
+	count_cancelled=FALSE;
 	count_window(win->top);
+	if (count_cancelled) return TRUE;
 	/*fprintf(stderr,"dbg:Total files=%d\n",total_files);*/
  	if (!cpy_dlg) cpy_dlg=show_cpy(win->top,TRUE,mode);
         /*set_show_cpy_bar(0,nitems);*/
@@ -949,7 +964,7 @@ static int rwStdout (int n, void *data){
   	strtok(line,":");
   	strtok(NULL,":");
   	texto=strtok(NULL,"\n");
-	if (texto) gtk_label_set_text (GTK_LABEL (info[2]),texto );
+	if (texto && info[2]) gtk_label_set_text (GTK_LABEL (info[2]),texto );
 	return TRUE;
   }
  /* src-tgt update */
@@ -1032,7 +1047,7 @@ void set_show_cpy(char *target,char *source){
 	gtk_entry_set_text (GTK_ENTRY (info[0]), source);
 	gtk_entry_set_text (GTK_ENTRY (info[1]), target);
 	sprintf (line, _("%d / %d"), 0,total_files);
-	gtk_label_set_text (GTK_LABEL (info[2]),line );
+	if (info[2])gtk_label_set_text (GTK_LABEL (info[2]),line );
 }
 
 /* function to set the state of the progress bar*/
