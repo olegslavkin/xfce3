@@ -147,6 +147,8 @@ static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close_lnk,
 
 static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
 
+
+
 static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg, int width, int height, int flags);
 int move_dir (char *source, char *label, char *target, int trash);
 
@@ -340,9 +342,10 @@ menu_detach ()
 /*
  */
 void
-cb_open_trash (GtkWidget * item, void *data)
+cb_open_trash (GtkWidget * item, GtkCTree *ctree)
 {
-  cfg *win = (cfg *) data;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   new_top (win->trash, win->xap, win->trash, win->reg, win->width, win->height, 0);
 }
 
@@ -2113,8 +2116,10 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
 /*
  */
 void
-on_destroy (GtkWidget * top, cfg * win)
+on_destroy (GtkWidget * top,  GtkCTree * ctree)
 {
+  cfg * win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   geometryX = top->allocation.width;
   geometryY = top->allocation.height;
   save_defaults(win->top);
@@ -2142,20 +2147,25 @@ gint on_delete (GtkWidget * w, GdkEvent * event, gpointer data)
 }
 
 static void
-cb_destroy (GtkWidget * top, gpointer data)
+cb_destroy (GtkWidget * top, GtkCTree * ctree)
 {
+  cfg *win;
   GtkWidget *root;
-  root = (GtkWidget *)data;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
+  root = win->top;
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
   save_defaults(NULL);
-  gtk_widget_destroy ((GtkWidget *) data);
+  gtk_widget_destroy (root);
 }
 static void 
-cb_quit (GtkWidget * top, gpointer data)
+cb_quit (GtkWidget * top,  GtkCTree * ctree)
 {
+  cfg *win;
   GtkWidget *root;
-  root = (GtkWidget *)data;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  root = win->top;
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
   save_defaults(NULL);
@@ -2287,58 +2297,59 @@ XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event)
   return (0);
 }
 
+typedef struct boton_icono {
+	char *text;
+	char **icon;
+	gpointer function;
+} boton_icono;
+
+
+
 GtkWidget *
 create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 {
+  int i;
+  unsigned int mask;
   GtkWidget *toolbar;
+  /* FIXME: make this structure array the return value from
+   * a function, so that the configuration option can
+   * use the same values to create the dialog table
+   * for the preferences dialog */
+  boton_icono toolbarIcon[]={/* only 32 elements allowed */
+  {_("New window"),	new_win_xpm,	cb_new_window},	
+  {_("Close window"),	closewin_xpm,	cb_destroy}, 
+  {_("Go back ..."), 	go_back_xpm,	cb_go_back},
+  {_("Go to ..."), 	go_to_xpm,	cb_go_to},
+  {_("Go up"), 		go_up_xpm,	cb_go_up},
+  {_("Go home"),	home_xpm,	cb_go_home},
+  {_("New Folder"),	new_dir_xpm,	cb_new_subdir},
+  {_("New file ..."),	new_file_xpm,	cb_new_file},
+  {_("Properties"),	appinfo_xpm,	cb_props},
+  {_("Delete ..."),	delete_xpm,	cb_delete},
+  {_("Open Trash"),	trash_xpm,	cb_open_trash},
+  {_("Empty Trash"),	empty_trash_xpm,cb_empty_trash},
+  {_("Toggle Dotfiles"),dotfile_xpm,	on_dotfiles},
+  {NULL,NULL,NULL}};
 
   toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
   gtk_toolbar_set_space_style ((GtkToolbar *) toolbar, GTK_TOOLBAR_SPACE_LINE);
   gtk_toolbar_set_button_relief ((GtkToolbar *) toolbar, GTK_RELIEF_NONE);
   gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New window"), _("New window"), _("New window"), MyCreateFromPixmapData (toolbar, new_win_xpm), GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
-
-  if (!(preferences & LARGE_TOOLBAR)) {
-     gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Close window"), 
-		     _("Close window"),
-		     _("Close window"), 
-		     MyCreateFromPixmapData (toolbar, closewin_xpm), 
-		     GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
-     gtk_toolbar_append_space ((GtkToolbar *) toolbar);
+  for (i=0;toolbarIcon[i].text != NULL;i++) {
+	  /* FIXME: make these masks configurable by a table dialog 
+	   * This way the user can configure what toolbar icons to
+	   * show and which not to show.*/
+     if (preferences & LARGE_TOOLBAR) mask=0x103d;
+     else mask=0xffffffff;
+     if (mask & (0x01<<i)) {
+       gtk_toolbar_append_item ((GtkToolbar *) toolbar,
+	toolbarIcon[i].text,toolbarIcon[i].text,toolbarIcon[i].text,
+	MyCreateFromPixmapData (toolbar, toolbarIcon[i].icon), 
+	GTK_SIGNAL_FUNC (toolbarIcon[i].function), 
+	(gpointer) ctree);
+     }
   }
-
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go back ..."), _("Go back ..."), _("Go back ..."), MyCreateFromPixmapData (toolbar, go_back_xpm), GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);
- 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go to ..."), _("Go to ..."), _("Go to ..."), MyCreateFromPixmapData (toolbar, go_to_xpm), GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
-
-
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go up"), _("Go up"), _("Go up"), MyCreateFromPixmapData (toolbar, go_up_xpm), GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
-
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go home"), _("Go home"), _("Go home"), MyCreateFromPixmapData (toolbar, home_xpm), GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
-
-  gtk_toolbar_append_space ((GtkToolbar *) toolbar);
-
-  if (!(preferences & LARGE_TOOLBAR)) {
-   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New Folder"), _("New Folder"), _("New Folder"), MyCreateFromPixmapData (toolbar, new_dir_xpm), GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
-
-   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New file ..."), _("New file ..."), _("New file ..."), MyCreateFromPixmapData (toolbar, new_file_xpm), GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
-
-   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Properties"), _("Properties"), _("Properties"), MyCreateFromPixmapData (toolbar, appinfo_xpm), GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
-
-   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
-
-   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Delete ..."), _("Delete ..."), _("Delete ..."), MyCreateFromPixmapData (toolbar, delete_xpm), GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
-
-   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Open Trash"), _("Open Trash"), _("Open Trash"), MyCreateFromPixmapData (toolbar, trash_xpm), GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
-
-   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Empty Trash"), _("Empty Trash"), _("Empty Trash"), MyCreateFromPixmapData (toolbar, empty_trash_xpm), GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
-
-   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
-  }
-
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Toggle Dotfiles"), _("Toggle Dotfiles"), _("Toggle Dotfiles"), MyCreateFromPixmapData (toolbar, dotfile_xpm), GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
-
   return toolbar;
 }
 
@@ -2398,7 +2409,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menuitem = gtk_menu_item_new_with_label (_("Close window"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_destroy), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new_with_label (_("Quit"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2469,7 +2480,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menuitem = gtk_menu_item_new_with_label (_("Open Trash"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new_with_label (_("Empty Trash"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2676,9 +2687,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     
 #define COMMON_MENU_LAST \
     {N_("Run program ..."), (gpointer) cb_exec, WINCFG,GDK_x,GDK_CONTROL_MASK},\
-    {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_o,GDK_CONTROL_MASK},\
+    {N_("Open Trash"), (gpointer) cb_open_trash, 0, GDK_o,GDK_CONTROL_MASK},\
     {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,GDK_CONTROL_MASK},\
-    {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_z,GDK_CONTROL_MASK}
+    {N_("Close window"), (gpointer) cb_destroy, 0, GDK_z,GDK_CONTROL_MASK}
 /* quit only on main menu now, so that default geometry is saved correctly with cb_quit.*/
     
 #define COMMON_HELP_3 \
@@ -2761,8 +2772,6 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->top = top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   win->gogo = pushgo(path,win->gogo);
 
-  gtk_signal_connect (GTK_OBJECT (top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) win);
-  gtk_signal_connect (GTK_OBJECT (top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) win);
   top_register (top);
 
   vbox = gtk_vbox_new (FALSE, 0);
@@ -2786,6 +2795,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_clist_set_auto_sort (GTK_CLIST (ctree), FALSE);
   gtk_signal_connect (GTK_OBJECT (ctree), "tree-expand", GTK_SIGNAL_FUNC (tree_unselect),ctree);
   gtk_signal_connect (GTK_OBJECT (ctree), "tree-collapse", GTK_SIGNAL_FUNC (tree_unselect),ctree);
+  
+  gtk_signal_connect (GTK_OBJECT (top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) ctree);
 
   accel = gtk_accel_group_new ();
   gtk_accel_group_attach (accel, GTK_OBJECT (top));
