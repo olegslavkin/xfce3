@@ -281,11 +281,10 @@ WindowList;
 #define DoesWmDeleteWindow	(1L<<19)
 #define ICON_MOVED              (1L<<20)
 #define ICON_UNMAPPED           (1L<<21)
-#define MAP_PENDING             (1L<<22)
-#define RAISEDWIN               (1L<<23)	/* Used for autoraise facility */
-#define SHADED                  (1L<<24)
-#define WM_NAME_CHANGED         (1L<<25)
-#define RECAPTURE               (1L<<28)
+#define RAISEDWIN               (1L<<22)	/* Used for autoraise facility */
+#define SHADED                  (1L<<23)
+#define WM_NAME_CHANGED         (1L<<24)
+#define RECAPTURE               (1L<<25)
 
 
 /* options flags (apply to all windows) */

@@ -693,6 +693,8 @@ void
 DeIconify (XfwmWindow * tmp_win)
 {
   XfwmWindow *t;
+  XWindowAttributes winattrs;
+  unsigned long eventMask;
 
   if (!tmp_win)
     return;
@@ -703,9 +705,33 @@ DeIconify (XfwmWindow * tmp_win)
   {
     if ((t == tmp_win) || ((t->flags & TRANSIENT) && (t->transientfor == tmp_win->w)))
     {
+      XGetWindowAttributes (dpy, t->w, &winattrs);
+      eventMask = winattrs.your_event_mask;
+      XSelectInput (dpy, t->w, (eventMask & ~StructureNotifyMask));
+      if (t->Desk == Scr.CurrentDesk)
+      {
+	XMapWindow (dpy, t->frame);
+      }
+      XMapWindow (dpy, t->Parent);
       XMapWindow (dpy, t->w);
+      SetMapStateProp (t, NormalState);
+      t->flags &= ~(ICONIFIED | ICON_UNMAPPED | STARTICONIC);
+      t->flags |= MAPPED;
+      XSelectInput (dpy, t->w, eventMask);
+      if (t->icon_w)
+	XUnmapWindow (dpy, t->icon_w);
+      if (t->icon_pixmap_w)
+	XUnmapWindow (dpy, t->icon_pixmap_w);
+      Broadcast (XFCE_M_DEICONIFY, 3, t->w, t->frame, (unsigned long) t, 0, 0, 0, 0);
     }
   }
+
+  RaiseWindow (tmp_win);
+  if ((tmp_win->Desk == Scr.CurrentDesk) && AcceptInput (tmp_win))
+  {
+    SetFocus (tmp_win->w, tmp_win, True, False);
+  }
+
   return;
 }
 

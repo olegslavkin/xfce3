@@ -888,7 +888,7 @@ UnmapIt (XfwmWindow * t)
     if (t->icon_w != None)
       XUnmapWindow (dpy, t->icon_w);
   }
-  else if (t->flags & (MAPPED | MAP_PENDING))
+  else if (t->flags & MAPPED)
   {
     XUnmapWindow (dpy, t->w);
     XUnmapWindow (dpy, t->frame);
@@ -925,7 +925,6 @@ MapIt (XfwmWindow * t)
     XMapWindow (dpy, t->frame);
     XMapWindow (dpy, t->Parent);
     XMapWindow (dpy, t->w);
-    t->flags |= MAP_PENDING;
   }
   XSelectInput (dpy, t->w, eventMask);
 }
