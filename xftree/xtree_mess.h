@@ -1,6 +1,7 @@
 #define SAVE_GEOMETRY 		0x01
 #define DOUBLE_CLICK_GOTO 	0x02
 #define SHORT_TITLES	 	0x04
+#define DRAG_DOES_COPY		0x08
 
 #define XFTREE_CONFIG_FILE "xftreerc"
 
@@ -16,8 +17,7 @@ extern char *Apath;
 
 void read_defaults(void);
 void save_defaults(void);
-char * 
- override_txt(char *new_file,char *old_file);
+char * override_txt(char *new_file,char *old_file);
 GtkWidget *
  shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data);
 void 

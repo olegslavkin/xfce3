@@ -35,13 +35,15 @@ typedef struct
 reg, reg_t;
 
 GList *reg_build_list (char *file);
-void reg_destroy_list (GList * list);
 GList *reg_add_suffix (GList * list, char *sfx, char *prog, char *args);
 char *reg_app_by_file (GList * list, char *file);
-char *reg_app_by_suffix (GList * list, char *sfx);
 reg_t *reg_prog_by_file (GList * list, char *file);
 reg_t *reg_prog_by_suffix (GList * list, char *sfx);
 GList *reg_app_list (GList * list);
 int reg_save (GList * list);
+void cb_register (GtkWidget * item, GtkWidget * ctree);
+
+/* FIXME: make DEF_APP a dynamic configurable option: */
+#define DEF_APP		"netscape"
 
 #endif

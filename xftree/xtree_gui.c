@@ -124,7 +124,7 @@ enum
 };
 
 #define SPACING 	5
-#define DEF_APP		"netscape"
+/* moved to reg.h: #define DEF_APP		"netscape"*/
 #define TIMERVAL 	6000
 #define MAXBUF		8192
 
@@ -167,21 +167,34 @@ static GtkAccelGroup *accel;
 gint update_timer (GtkCTree * ctree);
 static void cb_new_subdir (GtkWidget * item, GtkWidget * ctree);
 
+static gboolean abort_delete=FALSE;
 
-
-
+/* FIXME: xtree_gui.c file too big. Takes too long to compile.
+ * (must KISS to make for easier maintainance). 
+ * split off stuff into a few smaller ones, with static functions
+ * BTW, there is a terrible lack of static functions. Local functions
+ * are exported globally all over the place, which makes linker work more
+ * and does not KISS.
+ * */
 
 /*
  */
 #define FATAL 1
 #define alloc_error_fatal() alloc_error(__FILE__,__LINE__,FATAL)
 
+static int errno_error_continue(GtkWidget *parent,char *path){
+	return xf_dlg_error_continue (parent,strerror(errno),path);
+}
+/*
+static int errno_error(GtkWidget *parent,char *path){
+	return xf_dlg_error (parent,strerror(errno),path);
+}*/
 static void
 alloc_error (char *file, int num, int mode)
 {
-  fprintf (stderr, _("malloc error in %s at line %d\n"), file, num);
-  if (mode == FATAL)
-    exit (1);
+  fprintf (stderr, _("dbg:malloc error in %s at line %d\n"), file, num);
+  /*xf_dlg_error (parent,strerror(errno),file);*/
+  if (mode == FATAL) exit (1);
 }
 
 /*
@@ -425,6 +438,12 @@ cb_select (GtkWidget * item, GtkCTree * ctree)
  */
 void
 cb_unselect (GtkWidget * widget, GtkCTree * ctree)
+{
+  gtk_ctree_unselect_recursive (ctree, NULL);
+}
+
+void
+tree_unselect  (GtkCTree *ctree,GList *node,gpointer user_data)
 {
   gtk_ctree_unselect_recursive (ctree, NULL);
 }
@@ -825,10 +844,11 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 }
 
 /*
- * realy delete files incl. subs
+ * really delete files incl. subs
  */
-void
-delete_files (char *path)
+
+gboolean
+delete_files (GtkWidget *parent,char *path)
 {
   struct stat st;
   DIR *dir;
@@ -836,44 +856,46 @@ delete_files (char *path)
   struct dirent *de;
   char complete[PATH_MAX + NAME_MAX + 1];
 
-  if (lstat (path, &st) == -1)
-  {
-    perror (path);
-    return;
-  }
+/*  printf("dbg:delete_files():%s\n",path);fflush(NULL);*/
+  if (abort_delete) return TRUE;
+
+  if (lstat (path, &st) == -1) goto delete_error_errno;
   if ((test = strrchr (path, '/')))
   {
     test++;
-    if (!io_is_valid (test))
-      return;
+    if (!io_is_valid (test)) goto delete_error;
   }
   if (S_ISDIR (st.st_mode) && (!S_ISLNK (st.st_mode)))
   {
-    if (access (path, R_OK | W_OK) == -1)
-    {
-      return;
-    }
-    dir = opendir (path);
-    if (!dir)
-    {
-      return;
-    }
+    if (access (path, R_OK | W_OK) == -1)goto delete_error;
+    if ((dir = opendir (path))==NULL) goto delete_error;
     while ((de = readdir (dir)) != NULL)
     {
-      if (io_is_current (de->d_name))
-	continue;
-      if (io_is_dirup (de->d_name))
-	continue;
+      if (io_is_current (de->d_name)) continue;
+      if (io_is_dirup (de->d_name))   continue;
       sprintf (complete, "%s/%s", path, de->d_name);
-      delete_files (complete);
+      delete_files (parent,complete);
     }
     closedir (dir);
-    rmdir (path);
+    if (rmdir (path)<1)goto delete_error_errno; 
   }
   else
   {
-    unlink (path);
+    if (unlink (path)<1){
+/*	    printf("dbg:%d:%s\n",errno,strerror(errno));*/
+	    goto delete_error_errno; 
+    }
   }
+  return TRUE;
+delete_error:
+  if (xf_dlg_new (parent,_("error deleting file"),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)
+	  abort_delete=TRUE;
+  return FALSE;
+delete_error_errno:
+  if ((errno)&&(xf_dlg_new (parent,strerror(errno),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)) abort_delete=TRUE;	  
+  return FALSE;
+  
+  
 }
 
 /*
@@ -881,7 +903,7 @@ delete_files (char *path)
  * label: filename
  * target: copy filename to target directory
  */
-int
+gboolean
 move_file (char *ofile, char *label, char *target, int trash)
 {
   int len, num = 0;
@@ -970,12 +992,12 @@ move_file (char *ofile, char *label, char *target, int trash)
    */
   ofp = fopen (ofile, "rb");
   if (!ofp)
-    return (0);
+    return (FALSE);
   nfp = fopen (nfile, "wb");
   if (!nfp)
   {
     fclose (ofp);
-    return (0);
+    return (FALSE);
   }
   while ((num = fread (buff, 1, 1024, ofp)) > 0)
   {
@@ -1056,7 +1078,7 @@ move_dir (char *source, char *label, char *target, int trash)
 
   if (!S_ISDIR (st_source.st_mode))
   {
-    printf (_("Moving file..\n"));
+    /*printf ("dbg:Moving file..\n");*/
     return move_file (source, label, target, trash);
   }
 
@@ -1171,7 +1193,7 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
     if (io_is_dirup (de->d_name))
       continue;
     sprintf (complete, "%s/%s", win->trash, de->d_name);
-    delete_files (complete);
+    delete_files (win->top,complete);
 
     if (check.flags)
     {
@@ -1187,7 +1209,6 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
   closedir (dir);
   cursor_reset (GTK_WIDGET (ctree));
 }
-
 /*
  * menu callback for deleting files
  */
@@ -1203,9 +1224,10 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   cfg *win;
   struct stat st_target;
   struct stat st_trash;
+  GList *selection;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-
+  abort_delete=FALSE;
   num = count_selection (ctree, &node);
   if (!num)
   {
@@ -1213,18 +1235,22 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     xf_dlg_warning (win->top,_("No files marked !"));
     return;
   }
-  for (i = 0; i < num; i++)
+  selection = GTK_CLIST (ctree)->selection;
+  
+  /*freezeit */
+  ctree_freeze (ctree);
+  
+/* using variable selection alllows to skip all the node unselect stuff
+ * which is making a lot of bug noise
+ * */
+  for (i = 0; (i < num)&&selection; i++,selection=selection->next)
   {
-    if (!GTK_CLIST (ctree)->selection)
-    {
-      continue;
-    }
-    node = GTK_CLIST (ctree)->selection->data;
+    node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
     if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
     {
-      /* we do not process ".." */
-      gtk_ctree_unselect (ctree, node);
+      /* we do not process ".." (don't bother unselecting)*/
+      /*gtk_ctree_unselect (ctree, node);*/
       continue;
     }
     if (ask)
@@ -1236,49 +1262,31 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     }
     else
       result = DLG_RC_ALL;
-    if (result == DLG_RC_CANCEL)
-    {
-      return;
-    }
+    if (result == DLG_RC_CANCEL) goto delete_done;
     else if (result == DLG_RC_OK || result == DLG_RC_ALL)
     {
       if (result == DLG_RC_ALL)
       {
 	ask = FALSE;
       }
-      while (gtk_events_pending ())
-	gtk_main_iteration ();
-      ctree_freeze (ctree);
+      /* again, update tree until the end. (bug aversion comittee) */
+      /*while (gtk_events_pending ()) gtk_main_iteration ();*/
 
       if (lstat (en->path, &st_target) == -1)
       {
-	xf_dlg_error (win->top,_("Can't stat() file"), en->path);
-	ctree_thaw (ctree);
-	return;
+	if (errno_error_continue(win->top,en->path) == DLG_RC_CANCEL) goto delete_done;
       }
 
       if (stat (win->trash, &st_trash) == -1)
       {
-	xf_dlg_error (win->top,_("Can't stat() file"), win->trash);
-	ctree_thaw (ctree);
-	return;
+	if (errno_error_continue(win->top,win->trash) == DLG_RC_CANCEL) goto delete_done;
       }
 
       if (((en->type & FT_FILE) || (en->type & FT_LINK)) && (my_strncmp (en->path, win->trash, strlen (win->trash))) && (st_target.st_dev == st_trash.st_dev) && (st_target.st_size < 1048576))
       {
 	if (!move_file (en->path, en->label, win->trash, 1))
 	{
-	  perror (_("move_file()"));
-	  gtk_ctree_unselect (ctree, node);
-	  if (xf_dlg_error_continue (win->top,en->path, _("Move to trash failed")) == DLG_RC_CANCEL)
-	  {
-	    ctree_thaw (ctree);
-	    return;
-	  }
-	}
-	else
-	{
-	  gtk_ctree_remove_node (ctree, node);
+ 	  if (errno_error_continue(win->top,en->path) == DLG_RC_CANCEL) goto delete_done;
 	}
       }
       else
@@ -1295,24 +1303,14 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
 	 	 ask_again = FALSE;
       		}
 	} else result=DLG_RC_OK;
-	switch (result) {
-		case DLG_RC_OK:
-		case DLG_RC_ALL:
-		 delete_files (en->path);
-	         gtk_ctree_remove_node (ctree, node);
-		 break;
-		default:
-	         gtk_ctree_unselect (ctree, node);
-		 break;		  
-	}
+	if ((result == DLG_RC_ALL)||(result ==DLG_RC_OK)) delete_files (win->top,en->path);
       }
-      ctree_thaw (ctree);
-    }
-    else if (result == DLG_RC_SKIP)
-    {
-      gtk_ctree_unselect (ctree, node);
     }
   }
+  /* immediate refresh */
+delete_done:  
+  ctree_thaw (ctree);
+  update_timer (ctree);
 }
 
 /*
@@ -2294,75 +2292,6 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
 }
 
 
-/*
- * ask user if he want to register a named suffix
- */
-void
-cb_register (GtkWidget * item, GtkWidget * ctree)
-{
-  GtkCTreeNode *node;
-  char label[PATH_MAX + 1];
-  char path[PATH_MAX + 1];
-  char *sfx, *arg;
-  entry *en;
-  cfg *win;
-  GList *apps;
-  reg_t *prog;
-
-  if (!GTK_CLIST (ctree)->selection)
-    return;
-  ctree_freeze (GTK_CTREE (ctree));
-  node = GTK_CLIST (ctree)->selection->data;
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-
-  sfx = strrchr (en->label, '.');
-  if (!sfx)
-  {
-    if (xf_dlg_continue (win->top,_("Can't find suffix in filename, using complete filename"), en->label) != DLG_RC_OK)
-    {
-      ctree_thaw (GTK_CTREE (ctree));
-      return;
-    }
-    sfx = en->label;
-    sprintf (label, _("Register program for file \"%s\""), sfx);
-  }
-  else
-  {
-    sprintf (label, _("Register program for suffix \"%s\""), sfx);
-  }
-  prog = reg_prog_by_suffix (win->reg, sfx);
-  if (prog)
-  {
-    if (prog->arg)
-    {
-      snprintf (path, PATH_MAX, "%s %s", prog->app, prog->arg);
-    }
-    else
-    {
-      strcpy (path, prog->app);
-    }
-  }
-  else
-    strcpy (path, DEF_APP);
-  apps = reg_app_list (win->reg);
-  if (xf_dlg_combo (win->top,label, path, apps) == DLG_RC_OK)
-  {
-    if (*path)
-    {
-      if ((arg = strchr (path, ' ')) != NULL)
-      {
-	*arg++ = '\0';
-	if (!*arg)
-	  arg = NULL;
-      }
-      win->reg = reg_add_suffix (win->reg, sfx, path, arg);
-      reg_save (win->reg);
-    }
-  }
-  ctree_thaw (GTK_CTREE (ctree));
-  g_list_free (apps);
-}
 
 /*
  */
@@ -2767,6 +2696,8 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 		  (gpointer)((long)(DOUBLE_CLICK_GOTO)) );
   shortcut_menu (menu, _("Short titles"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(SHORT_TITLES)) );
+  shortcut_menu (menu, _("Drag does copy"), (gpointer) cb_toggle_preferences, 
+		  (gpointer)((long)(DRAG_DOES_COPY)) );
   
 
   /* Create "Help" menu */
@@ -2974,6 +2905,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   ctree = gtk_ctree_new_with_titles (COLUMNS, 0, titles);
   gtk_clist_set_auto_sort (GTK_CLIST (ctree), FALSE);
+  gtk_signal_connect (GTK_OBJECT (ctree), "tree-expand", GTK_SIGNAL_FUNC (tree_unselect),ctree);
+  gtk_signal_connect (GTK_OBJECT (ctree), "tree-collapse", GTK_SIGNAL_FUNC (tree_unselect),ctree);
 
   accel = gtk_accel_group_new ();
   gtk_accel_group_attach (accel, GTK_OBJECT (top));

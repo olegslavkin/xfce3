@@ -22,11 +22,53 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <stdio.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <utime.h>
+#include <stdlib.h>
+#include <time.h>
 #include <string.h>
 #include <glib.h>
-#include "reg.h"
+#include <errno.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <X11/Xlib.h>
+#include <X11/Xproto.h>
+#include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
+#include "constant.h"
+#include "my_intl.h"
 #include "my_string.h"
+#include "xpmext.h"
+#include "xtree_gui.h"
+#include "gtk_dlg.h"
+#include "gtk_exec.h"
+#include "gtk_prop.h"
+#include "reg.h"
+#include "gtk_dnd.h"
+#include "xtree_cfg.h"
+#include "xtree_dnd.h"
+#include "entry.h"
+#include "uri.h"
+#include "io.h"
+#include "top.h"
+#include "reg.h"
+#include "xfcolor.h"
+#include "xfce-common.h"
+#include "xtree_mess.h"
+
+#ifdef HAVE_GDK_IMLIB
+#include <gdk_imlib.h>
+#endif
+
+#ifndef HAVE_SNPRINTF
+#  include "snprintf.h"
+#endif
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -472,3 +514,78 @@ reg_execute (reg_t * app, char *file)
 {
   return 0;
 }
+
+/*
+ * ask user if he want to register a named suffix
+ */
+void
+cb_register (GtkWidget * item, GtkWidget * ctree)
+{
+  GtkCTreeNode *node;
+  char label[PATH_MAX + 1];
+  char path[PATH_MAX + 1];
+  char *sfx, *arg;
+  entry *en;
+  cfg *win;
+  GList *apps;
+  reg_t *prog;
+
+  if (!GTK_CLIST (ctree)->selection)
+    return;
+  cursor_wait (GTK_WIDGET (ctree));
+  gtk_clist_freeze (GTK_CLIST (ctree));
+  node = GTK_CLIST (ctree)->selection->data;
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  sfx = strrchr (en->label, '.');
+  if (!sfx)
+  {
+    if (xf_dlg_continue (win->top,_("Can't find suffix in filename, using complete filename"), en->label) != DLG_RC_OK)
+    {
+      gtk_clist_thaw (GTK_CLIST (ctree));
+      cursor_reset (GTK_WIDGET (ctree));
+      return;
+    }
+    sfx = en->label;
+    sprintf (label, _("Register program for file \"%s\""), sfx);
+  }
+  else
+  {
+    sprintf (label, _("Register program for suffix \"%s\""), sfx);
+  }
+  prog = reg_prog_by_suffix (win->reg, sfx);
+  if (prog)
+  {
+    if (prog->arg)
+    {
+      snprintf (path, PATH_MAX, "%s %s", prog->app, prog->arg);
+    }
+    else
+    {
+      strcpy (path, prog->app);
+    }
+  }
+  else
+    strcpy (path, DEF_APP);
+  apps = reg_app_list (win->reg);
+  if (xf_dlg_combo (win->top,label, path, apps) == DLG_RC_OK)
+  {
+    if (*path)
+    {
+      if ((arg = strchr (path, ' ')) != NULL)
+      {
+	*arg++ = '\0';
+	if (!*arg)
+	  arg = NULL;
+      }
+      win->reg = reg_add_suffix (win->reg, sfx, path, arg);
+      reg_save (win->reg);
+    }
+  }
+  gtk_clist_thaw (GTK_CLIST (ctree));
+  cursor_reset (GTK_WIDGET (ctree)); 
+  g_list_free (apps);
+}
+
+
