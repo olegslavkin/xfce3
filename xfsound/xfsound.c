@@ -63,36 +63,21 @@
 #define RCFILE                  "xfsoundrc"
 
 T_messages messages[KNOWN_MESSAGES + KNOWN_BUILTIN] = {
-  {XFCE_M_NEW_DESK, N_("New Desk")}
-  ,
-  {XFCE_M_ADD_WINDOW, N_("Add Window")}
-  ,
-  {XFCE_M_RAISE_WINDOW, N_("Raise Window")}
-  ,
-  {XFCE_M_LOWER_WINDOW, N_("Lower Window")}
-  ,
-  {XFCE_M_CONFIGURE_WINDOW, N_("Configure Window")}
-  ,
-  {XFCE_M_FOCUS_CHANGE, N_("Focus Change")}
-  ,
-  {XFCE_M_DESTROY_WINDOW, N_("Destroy Window")}
-  ,
-  {XFCE_M_ICONIFY, N_("Iconify")}
-  ,
-  {XFCE_M_DEICONIFY, N_("De-iconify")}
-  ,
-  {XFCE_M_SHADE, N_("Shade")}
-  ,
-  {XFCE_M_UNSHADE, N_("Un-Shade")}
-  ,
-  {XFCE_M_MAXIMIZE, N_("Maximize")}
-  ,
-  {XFCE_M_DEMAXIMIZE, N_("De-maximize")}
-  ,
-  {0, N_("Startup")}
-  ,
-  {0, N_("Shutdown")}
-  ,
+  {XFCE_M_NEW_DESK, N_("New Desk")},
+  {XFCE_M_ADD_WINDOW, N_("Add Window")},
+  {XFCE_M_RAISE_WINDOW, N_("Raise Window")},
+  {XFCE_M_LOWER_WINDOW, N_("Lower Window")},
+  {XFCE_M_CONFIGURE_WINDOW, N_("Configure Window")},
+  {XFCE_M_FOCUS_CHANGE, N_("Focus Change")},
+  {XFCE_M_DESTROY_WINDOW, N_("Destroy Window")},
+  {XFCE_M_ICONIFY, N_("Iconify")},
+  {XFCE_M_DEICONIFY, N_("De-iconify")},
+  {XFCE_M_SHADE, N_("Shade")},
+  {XFCE_M_UNSHADE, N_("Un-Shade")},
+  {XFCE_M_MAXIMIZE, N_("Maximize")},
+  {XFCE_M_DEMAXIMIZE, N_("De-maximize")},
+  {0, N_("Startup")},
+  {0, N_("Shutdown")},
   {0, N_("Unknown")}
 };
 

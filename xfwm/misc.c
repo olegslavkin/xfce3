@@ -673,8 +673,15 @@ UngrabEm (void)
   XUngrabPointer (dpy, CurrentTime);
   if (Scr.PreviousFocus != NULL)
   {
-    w = Scr.PreviousFocus->w;
-
+    if ((Scr.PreviousFocus->flags & ICONIFIED) && (Scr.PreviousFocus->icon_w))
+    {
+      w = Scr.PreviousFocus->icon_w;
+    }
+    else
+    {
+      w = Scr.PreviousFocus->w;
+    }
+    
     /* if the window still exists, focus on it */
     if (w)
     {
