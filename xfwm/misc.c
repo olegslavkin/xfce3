@@ -273,23 +273,25 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
   fprintf (stderr, "xfwm : RevertFocus () : Entering routine\n");
 #endif
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & Win) == XCNOENT)
+  if (fallback_to_itself)
   {
-    Win = NULL;
-  }
-  if ((Win) && (Win != Tmp_win) && AcceptInput(Win))
-  {
+    XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
+    if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & Win) == XCNOENT)
+    {
+      Win = NULL;
+    }
+    if ((Win) && (Win != Tmp_win) && AcceptInput(Win))
+    {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
+      fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
 #endif
-    SetFocus (Win->w, Win, False, False);
+      SetFocus (Win->w, Win, True, False);
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+      fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
-    return;
+      return;
+    }
   }
-
   Win = Tmp_win->next;
   while (Win && !(AcceptInput(Win) && !(Win->flags & ICONIFIED) && (Tmp_win->Desk == Win->Desk)))
   {
