@@ -894,9 +894,11 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
 #else
   fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (unsigned short) p->r[selected], (unsigned short) p->g[selected], (unsigned short) p->b[selected]);
 #endif
-  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (unsigned short) p->r[base], (unsigned short) p->g[base], (unsigned short) p->b[base]);
+  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (unsigned short) p->r[selected], (unsigned short) p->g[selected], (unsigned short) p->b[selected]);
 
   fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((unsigned short) p->r[selected]) ^ 255, ((unsigned short) p->g[selected]) ^ 128, ((unsigned short) p->b[selected]) ^ 64);
+
+  fprintf (f, "  base[SELECTED]      = \"#%02X%02X%02X\"\n", (unsigned short) p->r[base], (unsigned short) p->g[base], (unsigned short) p->b[base]);
 
   fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (unsigned short) p->r[normal], (unsigned short) p->g[normal], (unsigned short) p->b[normal]);
 
@@ -1021,25 +1023,25 @@ defpal (XFCE_palette * p)
   p->b[0] = 255;
   p->r[1] = 183;
   p->g[1] = 183;
-  p->b[1] = 181;
+  p->b[1] = 175;
   p->r[2] =  26;
   p->g[2] = 101;
   p->b[2] = 162;
   p->r[3] = 183;
   p->g[3] = 183;
-  p->b[3] = 181;
+  p->b[3] = 175;
   p->r[4] = 229;
   p->g[4] = 229;
-  p->b[4] = 226;
+  p->b[4] = 223;
   p->r[5] = 229;
   p->g[5] = 229;
-  p->b[5] = 226;
+  p->b[5] = 223;
   p->r[6] =  10;
   p->g[6] = 137;
   p->b[6] =  94;
   p->r[7] = 215;
   p->g[7] = 215;
-  p->b[7] = 213;
+  p->b[7] = 207;
   p->texture = g_realloc (p->texture, sizeof (char) * (strlen (DEFAULTTEXTURE) + 1));
   strcpy (p->texture, DEFAULTTEXTURE);
 }
