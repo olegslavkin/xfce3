@@ -15,10 +15,8 @@ xfwm_SOURCES = \
 	default_icon.h \
 	menus.h \
 	misc.h \
-	module.h \
 	parse.h \
 	screen.h \
-	version.h \
 	xfwm.h \
 	add_window.c \
 	bindings.c \
