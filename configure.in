@@ -549,6 +549,7 @@ xfglob/Makefile \
 xfglob/icons/Makefile \
 xfsamba/Makefile \
 xfsamba/icons/Makefile \
+xfskin/Makefile \
 xfumed/Makefile \
 xfumed/icons/Makefile \
 scripts/Makefile \
@@ -591,6 +592,7 @@ sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3r
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.in >  other/xinitrc
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.mwm.in >  other/xinitrc.mwm
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" xfskin/xfskin.in >  xfskin/xfskin
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" other/xfbdrc.in > other/xfbdrc
 sed -e "s%XFCE_VERSION%$VERSION%g" -e "s%DATE%`date`%g" -e "s%HOSTNAME%`hostname`%g" other/COPYING.in > other/COPYING
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Blue.list.in >  backdrops/Blue.list

@@ -28,7 +28,7 @@ libtool: $(LIBTOOL_DEPS)
 	$(SHELL) ./config.status --recheck
 
 SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock \
-	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts \
+	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed xfskin scripts \
 	other backdrops icons palettes textures sounds docs po dt gdm \
 	fonts cursors
 

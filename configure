@@ -13574,7 +13574,7 @@ echo "${ECHO_T}XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&6
 echo "$as_me:13574: result: XFCE_CONFDIR set to $XFCE_CONFDIR" >&5
 echo "${ECHO_T}XFCE_CONFDIR set to $XFCE_CONFDIR" >&6
 
-ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xftree/icons/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfdiff/icons/Makefile xfglob/Makefile xfglob/icons/Makefile xfsamba/Makefile xfsamba/icons/Makefile xfumed/Makefile xfumed/icons/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/sgml/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
+ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xftree/icons/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfdiff/icons/Makefile xfglob/Makefile xfglob/icons/Makefile xfskin/Makefile xfsamba/Makefile xfsamba/icons/Makefile xfumed/Makefile xfumed/icons/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/sgml/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -13916,6 +13916,7 @@ do
   "xfsamba/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfsamba/icons/Makefile" ;;
   "xfumed/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfumed/Makefile" ;;
   "xfumed/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfumed/icons/Makefile" ;;
+  "xfskin/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfskin/Makefile" ;;
   "scripts/Makefile" ) CONFIG_FILES="$CONFIG_FILES scripts/Makefile" ;;
   "intl/Makefile" ) CONFIG_FILES="$CONFIG_FILES intl/Makefile" ;;
   "dt/Makefile" ) CONFIG_FILES="$CONFIG_FILES dt/Makefile" ;;
