@@ -48,6 +48,7 @@
 #include "my_intl.h"
 #include "my_string.h"
 #include "xpmext.h"
+#include "xtree_functions.h"
 #include "xtree_gui.h"
 #include "gtk_dlg.h"
 #include "gtk_exec.h"

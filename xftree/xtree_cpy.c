@@ -66,6 +66,7 @@
 #include "xtree_cfg.h"
 #include "xtree_dnd.h"
 #include "xtree_misc.h"
+#include "xtree_functions.h"
 #include "xtree_gui.h"
 #include "xtree_cpy.h"
 #include "xfce-common.h"

@@ -47,4 +47,3 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile);
 gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile);
 void set_override(gboolean state);
 gboolean on_same_device(void);
-

@@ -68,28 +68,38 @@ enum
   COLUMNS			/* number of columns */
 };
 
+#ifdef __XFTREE_GUI_MAIN__
+GdkPixmap  *gPIX_dir_close=NULL,  *gPIX_dir_open=NULL,
+        * gPIX_page=NULL,*gPIX_core=NULL, 
+	*gPIX_pageC=NULL, *gPIX_pageH=NULL,*gPIX_pageF=NULL,
+	*gPIX_tar=NULL,*gPIX_compressed=NULL,*gPIX_image=NULL,*gPIX_text=NULL,
+	*gPIX_page_lnk=NULL, *gPIX_dir_pd=NULL, 
+	*gPIX_dir_close_lnk=NULL, *gPIX_dir_open_lnk=NULL, *gPIX_dir_up=NULL, 
+	*gPIX_char_dev=NULL, *gPIX_fifo=NULL, *gPIX_socket=NULL, 
+	*gPIX_block_dev=NULL, *gPIX_exe=NULL, *gPIX_stale_lnk=NULL, *gPIX_exe_lnk=NULL;
+/* don't repeat masks that already exist */
+GdkBitmap * gPIM_page=NULL,*gPIM_char_dev=NULL, *gPIM_fifo=NULL, *gPIM_socket=NULL, 
+	*gPIM_block_dev=NULL, *gPIM_exe=NULL, *gPIM_stale_lnk=NULL,
+	*gPIM_dir_close=NULL, *gPIM_dir_open=NULL;
 
-int count_selection (GtkCTree * ctree, GtkCTreeNode ** first);
-
-void node_destroy (gpointer p);
-
-void ctree_thaw (GtkCTree * ctree);
-
-void ctree_freeze (GtkCTree * ctree);
-
-void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags);
-
-void set_title (GtkWidget * w, const char *path);
+#else
+extern GdkPixmap  *gPIX_dir_close,  *gPIX_dir_open,
+        * gPIX_page,*gPIX_core, 
+	*gPIX_pageC, *gPIX_pageH,*gPIX_pageF,
+	*gPIX_tar,*gPIX_compressed,*gPIX_image,*gPIX_text,
+	*gPIX_page_lnk, *gPIX_dir_pd, 
+	*gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_up, 
+	*gPIX_char_dev, *gPIX_fifo, *gPIX_socket, 
+	*gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
+/* don't repeat masks that already exist */
+extern GdkBitmap * gPIM_page,*gPIM_char_dev, *gPIM_fifo, *gPIM_socket, 
+	*gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk,
+	*gPIM_dir_close, *gPIM_dir_open;
+#endif
 
 void gui_main (char *path, char *xap, char *trash, char *reg, wgeo_t *, int);
 
 cfg *new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags);
-
-int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
-
-gint update_timer (GtkCTree * ctree);
-
-void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
 
 void create_pixmaps(int h,GtkWidget * ctree);
 #endif
