@@ -628,8 +628,8 @@ int
 checkdir (char *file)
 {
   struct stat st;
-  lstat (file, &st);
-  if ((st.st_mode & S_IFDIR) || (st.st_mode & (S_IFLNK ^ S_IFREG)))
+  stat (file, &st);
+  if (st.st_mode & S_IFDIR) 
   {
     /*my_show_message(_("That is a directory (or symlink)")); */
     return TRUE;
@@ -641,8 +641,8 @@ int
 checknotdir (char *file)
 {
   struct stat st;
-  lstat (file, &st);
-  if ((st.st_mode & S_IFDIR) || (st.st_mode & (S_IFLNK ^ S_IFREG)));
+  stat (file, &st);
+  if (st.st_mode & S_IFDIR);
   else
   {
     my_show_message (_("No directory was selected!"));
