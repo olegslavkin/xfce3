@@ -675,6 +675,7 @@ void
 signal_setup (void)
 {
   /* Handle some signals */
+#ifndef DEBUG
   signal (SIGHUP, on_signal);
   signal (SIGINT, on_signal);
   signal (SIGQUIT, on_signal);
@@ -683,6 +684,7 @@ signal_setup (void)
   signal (SIGSEGV, on_signal);
   signal (SIGTERM, on_signal);
   signal (SIGFPE, on_signal);
+#endif
 }
 
 void
@@ -694,14 +696,13 @@ xfce_init (int *argc, char **argv[])
   bindtextdomain (PACKAGE, XFCE_LOCALE_DIR);
   textdomain (PACKAGE);
   gtk_init (argc, argv);
-  init_xfce_rcfile();
-
 #ifdef HAVE_GDK_IMLIB
   gdk_imlib_init ();
 /* Get gdk to use imlib's visual and colormap */
   gtk_widget_push_visual (gdk_imlib_get_visual ());
   gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 #endif
+  init_xfce_rcfile();
 }
 
 void

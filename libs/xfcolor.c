@@ -1033,5 +1033,4 @@ void init_xfce_rcfile (void)
   snprintf (rcfile, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), gtktemprcfile);
   gtk_rc_parse(rcfile);
   gtk_rc_add_default_file (rcfile);
-  gtk_rc_init ();
 }
