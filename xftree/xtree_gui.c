@@ -1619,7 +1619,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->width = width;
   win->height = height;
   gtk_object_set_user_data (GTK_OBJECT (ctree), win);
-  if (preferences & (CUSTOM_COLORS|CUSTOM_FONT)) set_colors(ctree); 
+  if (preferences & CUSTOM_COLORS) set_colors(ctree); 
+  if (preferences & CUSTOM_FONT) set_fontT(ctree); 
   gtk_clist_set_compare_func (GTK_CLIST (ctree), my_compare);
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
 

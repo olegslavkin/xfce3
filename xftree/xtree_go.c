@@ -203,7 +203,6 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
 {
   GtkCTreeNode *node, *root;
   entry *en;
-  static char *path=NULL;
   static GList *list=NULL;
   int count;
   cfg *win;
@@ -215,20 +214,18 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   /* count selection returns root-node when count==0 ;-) */
+  /* therefore, en != NULL */
   count = count_selection (ctree, &node); 
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  /* therefore, en != NULL */
-
-  /* FIXME: (at GTK_DLG and all calls to new_dlg with
-   *         text entries)
-   *         needs this much memory because of design fault of gtk_dlg routines: */
-  if (strlen(en->path) > PATH_MAX + NAME_MAX ) return;
-  if (path) free(path);
-  if (!(path=(char *)malloc(PATH_MAX + NAME_MAX + 1) ) ) return;
-  
-  strcpy (path, en->path);
-  if ((count != 1) || !(en->type & FT_DIR)) { /* make combo box */
-    if (win->gogo) for (thisgo=win->gogo->previous; thisgo!=NULL; thisgo=thisgo->previous){
+  /* if double click is selected for goto, then doing the 
+   * following line is totally unnecesary and hinders the speed 
+   * of xftree, so it is disactivated */
+  if (!(preferences & DOUBLE_CLICK_GOTO) && (count == 1) && (en->type & FT_DIR)) {
+  	go_to (ctree, root, en->path, en->flags);
+	return;
+  }
+   /* make combo box */
+  if (win->gogo) for (thisgo=win->gogo->previous; thisgo!=NULL; thisgo=thisgo->previous){
 	golist *testgo;
 	for (testgo=thisgo->previous;testgo!=NULL;testgo=testgo->previous) {
 		/* if ahead in list, dont put it in now */
@@ -236,15 +233,10 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
 	}
 	list = g_list_prepend (list,thisgo->path);
 skipit:;
-    }
-    strcpy(path,"/");
-    entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), path, list);
-    if (!entry_return) return;
-    free(path);
-    path=entry_return;
-    
-  }
-  go_to (ctree, root, path, en->flags);
+  } 
+  entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), "/", list);
+  if (!entry_return) return;
+  go_to (ctree, root,entry_return , en->flags);
 }
 
 void cb_go_back (GtkWidget * item, GtkCTree * ctree){

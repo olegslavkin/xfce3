@@ -82,17 +82,10 @@ static GdkFont *the_font;
 static char *custom_font=NULL;
 
 
-void set_colors(GtkWidget * ctree){
-	GtkStyle *style;
-	static GtkStyle *Ostyle=NULL;
-	int red,green,blue;
-
-	red = ctree_color.red & 0xffff;
-	green = ctree_color.green & 0xffff;
-	blue = ctree_color.blue & 0xffff;
-	if (!Ostyle) Ostyle=gtk_widget_get_style (ctree);
+void set_fontT(GtkWidget * ctree){
+	GtkStyle  *Ostyle,*style;
+	Ostyle=gtk_widget_get_style (ctree);
     	style = gtk_style_copy (Ostyle);
-
 	if ((preferences & CUSTOM_FONT)&&(custom_font)) {
 	  the_font = gdk_font_load (custom_font);
           if (the_font == NULL) {
@@ -107,7 +100,24 @@ void set_colors(GtkWidget * ctree){
 	if (!(preferences & CUSTOM_FONT)){
 		style->font=Ostyle->font;
 	}
+	gtk_widget_set_style (ctree,style);
+	gtk_widget_ensure_style (ctree);
+	return;
 	
+}
+
+
+void set_colors(GtkWidget * ctree){
+	GtkStyle *Ostyle,*style;
+	int red,green,blue;
+	int Nred,Ngreen,Nblue;
+
+	red = ctree_color.red & 0xffff;
+	green = ctree_color.green & 0xffff;
+	blue = ctree_color.blue & 0xffff;
+	Ostyle=gtk_widget_get_style (ctree);
+    	style = gtk_style_copy (Ostyle);
+
 	if (!(preferences & CUSTOM_COLORS)){
 		gtk_widget_set_style (ctree,style);
 		gtk_widget_ensure_style (ctree);
@@ -130,13 +140,23 @@ void set_colors(GtkWidget * ctree){
 	style->fg[GTK_STATE_SELECTED].green=green;
 	style->fg[GTK_STATE_SELECTED].blue=blue;
 	  /* foregrounds */
-	style->fg[GTK_STATE_NORMAL].red=(red^0xffff)&(0xffff);
-	style->fg[GTK_STATE_NORMAL].green=(green^0xffff)&(0xffff);
-	style->fg[GTK_STATE_NORMAL].blue=(blue^0xffff)&(0xffff);
+	
+	Nred=(red^0xffff)&(0xffff);
+	Ngreen=(green^0xffff)&(0xffff);
+	Nblue=(blue^0xffff)&(0xffff);
+
+	
+	if (red + green + blue < 3*32768) Nred=Ngreen=Nblue=65535;
+	else Nred=Ngreen=Nblue=0;
+	
+	style->fg[GTK_STATE_NORMAL].red=Nred;
+	style->fg[GTK_STATE_NORMAL].green=Ngreen;
+	style->fg[GTK_STATE_NORMAL].blue=Nblue;
 	  
-	style->bg[GTK_STATE_SELECTED].red=(red^0xffff)&(0xffff);
-	style->bg[GTK_STATE_SELECTED].green=(green^0xffff)&(0xffff);
-	style->bg[GTK_STATE_SELECTED].blue=(blue^0xffff)&(0xffff);
+	style->bg[GTK_STATE_SELECTED].red=Nred;
+	style->bg[GTK_STATE_SELECTED].green=Ngreen;
+	style->bg[GTK_STATE_SELECTED].blue=Nblue;
+	
 	gtk_widget_set_style (ctree,style);
 	gtk_widget_ensure_style (ctree);
 	return;
@@ -166,19 +186,27 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
   } else {
       preferences &= (CUSTOM_COLORS ^ 0xffffffff);
   }
-  save_defaults (NULL);
   set_colors(ctree);
+  save_defaults (NULL);  
   return;
 }
 
 void
 cb_select_font (GtkWidget * widget, GtkWidget *ctree)
 {
-  custom_font = open_fontselection ((custom_font)?custom_font:"fixed");
-  if (!custom_font) {
+  char *font_selected;
+  font_selected = open_fontselection ("fixed");
+  if (!font_selected) {
 	  preferences &= (CUSTOM_FONT ^ 0xffffffff);
-  } else  preferences |= CUSTOM_FONT;
-  set_colors(ctree);
+  } else  {
+	preferences |= CUSTOM_FONT;
+  	if (custom_font) free(custom_font);
+	custom_font=(char *)malloc(strlen(font_selected)+1);
+	if (custom_font) strcpy(custom_font,font_selected);
+	else preferences &= (CUSTOM_FONT ^ 0xffffffff);
+  }
+  set_fontT(ctree);
+  save_defaults (NULL);  
 }
 
 void

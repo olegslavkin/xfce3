@@ -635,15 +635,9 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     if (ask)
     {
       if (num - i == 1)
-	      /*FIXME: in gtk_dlg. xf_dlg_question and xf_dlg_questionl are
-	       * causing sigsegv in my machine. Some sort of memory problem 
-	       * with these routines. Taking oug th DLG_ENTRY_VIEW makes them
-	       * work fine, as shown below */
-	/*result = xf_dlg_question (win->top,_("Delete item ?"), en->path);*/
-        result = xf_dlg_new(win->top,_("Delete item ?"), en->path,NULL,DLG_YES_NO|DLG_QUESTION);
+	result = xf_dlg_question (win->top,_("Delete item ?"), en->path);
       else
-        result = xf_dlg_new(win->top,_("Delete item ?"), en->path,NULL,DLG_ALL|DLG_SKIP|DLG_YES_NO|DLG_QUESTION);
-	/*result = xf_dlg_question_l (win->top,_("Delete item ?"), en->path, DLG_ALL | DLG_SKIP);*/
+	result = xf_dlg_question_l (win->top,_("Delete item ?"), en->path, DLG_ALL | DLG_SKIP);
     }
     else
       result = DLG_RC_ALL;
@@ -843,7 +837,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   }
   
 
-  sprintf (fullpath, "%s%s", path, label);
+  sprintf (fullpath, "%s%s", path, entry_return);
   if (stat (fullpath, &st) != -1) {
       /*if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)*/
       if (xf_dlg_new(win->top,override_txt(fullpath,NULL),

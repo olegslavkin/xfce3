@@ -397,7 +397,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 		if (!globstring) return FALSE;
 		sprintf(globstring,"%s/*",source);
 		/* create target dir */
-		if (mkdir(target,s_stat.st_mode)<0){
+		if (mkdir(target,(s_stat.st_mode|0700))<0){
 			fprintf(stdout,"child:%s %s\n",strerror(errno),target);
 			return FALSE;
 		}

@@ -40,5 +40,6 @@ void cb_select_font (GtkWidget * widget, GtkWidget * ctree);
 void cb_hide_date (GtkWidget * widget, GtkWidget * ctree);
 void cb_hide_size (GtkWidget * widget, GtkWidget * ctree);
 void set_colors(GtkWidget * ctree);
+void set_fontT(GtkWidget * ctree);
 void redraw_top (GtkWidget * ctree);
 
