@@ -652,17 +652,21 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
 
 /*
  */
+extern gboolean source_set_sem;
 void
 on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 {
   GtkCTreeNode *child;
   cfg *win;
   entry *en;
-
+  
   en = gtk_ctree_node_get_row_data (ctree, node);
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  gtk_drag_source_unset ((GtkWidget *)ctree);
+  if (source_set_sem) {
+	  gtk_drag_source_unset ((GtkWidget *)ctree);
+	  source_set_sem=FALSE;
+  }
 
 
   
@@ -723,7 +727,10 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   entry *en;
   GtkCTreeNode *child,*parent;
 
-  gtk_drag_source_unset ((GtkWidget *)ctree);
+  if (source_set_sem) {
+	  gtk_drag_source_unset ((GtkWidget *)ctree);
+	  source_set_sem=FALSE;
+  }
   
   /* unselect all children */
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -882,7 +889,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     /* this may be a dummy subtree, and need not be updated when node is collapsed
      * when node is expanded, each subnode will be updated individually by
      * the recursive tree function, methinks */
-    if (!(GTK_CTREE_ROW (child)->children) && (io_is_valid (child_en->label)) && !(child_en->type & FT_DIR_UP) && !(child_en->type & FT_DIR_PD) && (child_en->type & FT_DIR)){
+    if (!(GTK_CTREE_ROW (child)->children) && (io_is_valid (child_en->label)) && !(child_en->type & (FT_DIR_UP|FT_DIR_PD)) && (child_en->type & FT_DIR)){
       add_subtree (GTK_CTREE (ctree), child, child_en->path, 1, child_en->flags);
       reset_icon(GTK_CTREE (ctree),child);      
     }

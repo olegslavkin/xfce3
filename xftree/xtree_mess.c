@@ -809,8 +809,11 @@ void cb_dnd_help(GtkWidget * item, GtkWidget * ctree)
 "SHIFT-CTRL drag+drop --> link\n"
 "The default drag+drop action is move,\n" 
 "but can be changed in the preferences menu.\n"
-"To drag multiple files, use the middle button.\n")
-	    );
+"To drag multiple files, use the middle button.\n"
+"Also:\n"
+"Multiple selection by button 1 click-and-drag\n"
+"is available on the first click after a GOTO.\n")
+	);
 }
 
 void cb_default_SCK(GtkWidget * item,  GtkWidget * ctree)

@@ -347,6 +347,23 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
 /*
  * start the marked program on double click
  */
+gboolean source_set_sem=FALSE;
+gboolean was_double_click=FALSE;
+static gint
+on_button_release (GtkWidget * ctree, GdkEventButton * event, void *menu){
+  if (was_double_click) return 1;
+  if ( (event->button == 1)){
+     if (!source_set_sem) {
+        source_set_sem=TRUE;
+        gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, 
+		  target_table, NUM_TARGETS, 
+		  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+     }
+  }
+  return 1;
+}
+
+	
 static gint
 on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
 {
@@ -356,16 +373,11 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
   gint row, col;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
     /*fprintf(stderr,"dbg:  click detected\n"); */
-  if ( (event->button == 1)){
-     gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, 
-		  target_table, NUM_TARGETS, 
-		  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
-  }
 
   if ((event->type == GDK_2BUTTON_PRESS) && (event->button == 1))
   {
     /*fprintf(stderr,"dbg: double click detected\n"); */
-	  
+    was_double_click=TRUE;	  
     /* check if the double click was over a directory */
     row = -1;
     gtk_clist_get_selection_info (GTK_CLIST (ctree), event->x, event->y, &row, &col);
@@ -391,9 +403,8 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       return (TRUE);
     }
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
     return startit(ctree,en,event->state, node);
-  }
+  } else was_double_click=FALSE;
   return (FALSE);
 }
 
@@ -1389,6 +1400,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_signal_connect (GTK_OBJECT (ctree), "tree_collapse", GTK_SIGNAL_FUNC (on_collapse), NULL);
   gtk_signal_connect (GTK_OBJECT (ctree), "click_column", GTK_SIGNAL_FUNC (on_click_column), en);
   gtk_signal_connect_after (GTK_OBJECT (ctree), "button_press_event", GTK_SIGNAL_FUNC (on_double_click), root);
+  gtk_signal_connect_after (GTK_OBJECT (ctree), "button_release_event", GTK_SIGNAL_FUNC (on_button_release), root);
   gtk_signal_connect (GTK_OBJECT (ctree), "button_press_event", GTK_SIGNAL_FUNC (on_button_press), menu);
   gtk_signal_connect (GTK_OBJECT (ctree), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), menu);
   gtk_signal_connect (GTK_OBJECT (ctree), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data), win);

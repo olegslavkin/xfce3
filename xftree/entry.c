@@ -256,6 +256,7 @@ int entry_update (entry * en)
   if (strncmp(en->path,"tar:",strlen("tar:")) == 0) return (0);
   if (strncmp(en->path,"rpm:",strlen("rpm:")) == 0) return (0);
   if (en->type & FT_ISROOT) tipo |= FT_ISROOT;
+  if (en->type & FT_HAS_DUMMY) tipo |= FT_HAS_DUMMY;
 
   if (lstat (en->path, &s) == -1) {
 	  return (-1); /* its gone */

@@ -215,7 +215,6 @@ void
 SMBGetFile (GtkCTree *ctree, char *target,char *dndS)
 {
   char *host,*user,*share,*file,*filename=NULL;
-  int i;
   cfg *win;
   SMBctree=(GtkWidget *)ctree;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
