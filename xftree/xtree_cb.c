@@ -405,7 +405,6 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   struct stat st_trash;
   GList *selection;
 
-  
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   abort_delete=FALSE;
   num = count_selection (ctree, &node);
@@ -1091,8 +1090,7 @@ static void tubo_cmd(void){
 		      i++;
 		      if (i>=64) { argv[63]=0; break; }
 	      } while (1);
-        } else 
-	{argv[i++]=autotype[autotype_cmd].command;}
+        } else argv[i++]=autotype[autotype_cmd].command;
 	argv[i++]=autotype_path;
 	argv[i]=0;
 	/*for (i=0;argv[i]!=NULL;i++) fprintf(stdout,"--arg[%d]=%s\n",i,argv[i]);
@@ -1124,6 +1122,8 @@ static void tubo_cmd(void){
 	   _exit(123);
 	} else usleep(500);
 	wait(&status);
+	fflush(NULL);
+	sleep(1);
 	_exit(123);
 }
 
@@ -1229,11 +1229,12 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
       goto end_autotype;
      
   }
-  loc=strrchr(en->path,'.');
-  if (loc) for (i=0;1;i++){
+  /*loc=strrchr(en->path,'.'); if (loc) */
+  for (i=0;1;i++){
        /*printf("dbg: autotype=%s,%s\n",autotype[i].extension,autotype[i].command);*/
        if (autotype[i].extension==NULL) break;
-       if (strcmp(loc,autotype[i].extension)==0) break;
+       loc=strstr(en->path,autotype[i].extension);
+       if ((loc)&&(strcmp(loc,autotype[i].extension)==0)) break;
   }
   if (autotype[i].command==NULL) goto end_autotype;
   path=valid_path((GtkCTree *)ctree,FALSE);

@@ -116,9 +116,11 @@ static GtkAccelGroup *accel;
  * leave a blank at end if using options (to be safe) */
 
 autotype_t autotype[]= {
+	{".tar.gz","tar -xzf ",N_("Extract files from"),N_("Extract into")},
 	{".gz","gunzip",N_("Uncompress"),NULL},
 	{".tar","tar -xf ",N_("Extract files from"),N_("Extract into")},
 	{".tgz","tar -xzf ",N_("Extract files from"),N_("Extract into")},
+	{".tar.bz2","tar --use-compress-program bunzip2 -xf",N_("Extract files from"),N_("Extract into")},
 	{".bz2","bunzip2",N_("Uncompress"),NULL},
 	{".Z","uncompress",N_("Uncompress"),NULL},
 	{".ZIP","unzip",N_("Uncompress"),NULL},
@@ -539,10 +541,11 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 	gtk_widget_show(at);
       } else if (num==MN_FILE) {/* use default autotypes */	      
        char *loc;
-       loc=strrchr(en->path,'.');
-       if (loc) for (i=0;1;i++){
+       /*loc=strrchr(en->path,'.'); if (loc) */
+       for (i=0;1;i++){
 	       if (autotype[i].extension==NULL) break;
-	       if (strcmp(loc,autotype[i].extension)==0){
+	       loc=strstr(en->path,autotype[i].extension);
+	       if ((loc)&&(strcmp(loc,autotype[i].extension)==0)){
 		       GtkLabel *label;
 	               if (text) free(text);
 		       label=(GtkLabel *)(((GtkBin *)(win->autotype_C))->child);
