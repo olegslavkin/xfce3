@@ -490,6 +490,19 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
  */
 
 void
+SetInnerBorder (XfwmWindow * t, Bool onoroff)
+{
+  if (Scr.engine == XFCE_ENGINE)
+    SetInnerBorder_xfce (t, onoroff);
+  else if (Scr.engine == TRENCH_ENGINE)
+    SetInnerBorder_trench (t, onoroff);
+  else if (Scr.engine == GTK_ENGINE)
+    SetInnerBorder_gtk (t, onoroff);
+  else
+    SetInnerBorder_mofit (t, onoroff);
+}
+
+void
 DrawButton (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
 {
   if (Scr.engine == XFCE_ENGINE)
@@ -622,6 +635,22 @@ DrawTrianglePattern (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t
 /*
  * Xfce theme specific routines
  */
+
+void
+SetInnerBorder_xfce (XfwmWindow * t, Bool onoroff)
+{
+  XSetWindowAttributes attributes;
+  unsigned long valuemask;
+  if (t->bw)
+  {
+    valuemask = CWBorderPixel;
+    if (onoroff)
+      attributes.border_pixel = BlackPixel (dpy, Scr.screen);
+    else
+      attributes.border_pixel = GetDecor (t, LoRelief.back);
+    XChangeWindowAttributes (dpy, t->Parent, valuemask, &attributes);
+  }
+}
 
 void
 DrawButton_xfce (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
@@ -1271,6 +1300,22 @@ RelieveIconPixmap_xfce (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
  */
 
 void
+SetInnerBorder_mofit (XfwmWindow * t, Bool onoroff)
+{
+  XSetWindowAttributes attributes;
+  unsigned long valuemask;
+  if (t->bw)
+  {
+    valuemask = CWBorderPixel;
+    if (onoroff)
+      attributes.border_pixel = GetDecor (t, HiColors.back);
+    else
+      attributes.border_pixel = GetDecor (t, LoColors.back);
+    XChangeWindowAttributes (dpy, t->Parent, valuemask, &attributes);
+  }
+}
+
+void
 DrawButton_mofit (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
 {
   int type = bf->style & ButtonFaceTypeMask;
@@ -1897,6 +1942,22 @@ RelieveIconPixmap_mofit (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 /*
  * Trench theme specific routines
  */
+
+void
+SetInnerBorder_trench (XfwmWindow * t, Bool onoroff)
+{
+  XSetWindowAttributes attributes;
+  unsigned long valuemask;
+  if (t->bw)
+  {
+    valuemask = CWBorderPixel;
+    if (onoroff)
+      attributes.border_pixel = BlackPixel (dpy, Scr.screen);
+    else
+      attributes.border_pixel = GetDecor (t, LoRelief.back);
+    XChangeWindowAttributes (dpy, t->Parent, valuemask, &attributes);
+  }
+}
 
 void
 DrawButton_trench (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
@@ -2543,6 +2604,19 @@ RelieveIconPixmap_trench (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 /*
  * GTK style theme specific routines
  */
+
+void
+SetInnerBorder_gtk (XfwmWindow * t, Bool onoroff)
+{
+  XSetWindowAttributes attributes;
+  unsigned long valuemask;
+  if (t->bw)
+  {
+    valuemask = CWBorderPixel;
+    attributes.border_pixel = BlackPixel (dpy, Scr.screen);
+    XChangeWindowAttributes (dpy, t->Parent, valuemask, &attributes);
+  }
+}
 
 void
 DrawButton_gtk (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)

@@ -175,15 +175,7 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
     }
   }
 #ifndef OLD_STYLE
-  if (t->bw)
-  {
-    valuemask = CWBorderPixel;
-    if (onoroff)
-      attributes.border_pixel = BlackPixel (dpy, Scr.screen);
-    else
-      attributes.border_pixel = GetDecor (t, LoRelief.back);
-    XChangeWindowAttributes (dpy, t->Parent, valuemask, &attributes);
-  }
+  SetInnerBorder (t, onoroff);
 #endif
 }
 
