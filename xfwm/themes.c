@@ -3714,13 +3714,13 @@ void
 DrawTrianglePattern_gtk (Window w, XRectangle *area, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
   int m;
-  XPoint points[3];
+  XPoint points[5];
 
   m = (t + b) >> 1;
 
-  points[0].x = l;
+  points[0].x = l + 2;
   points[0].y = t;
-  points[1].x = l;
+  points[1].x = l + 2;
   points[1].y = b;
   points[2].x = r;
   points[2].y = m;
