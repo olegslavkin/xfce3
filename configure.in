@@ -446,9 +446,9 @@ AC_OUTPUT(Makefile libs/Makefile xfce/Makefile xfwm/Makefile \
 	xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile \
 	xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile \
 	gdm/Makefile po/Makefile.in other/Makefile.in backdrops/Makefile.in \
-	icons/Makefile.in palettes/Makefile.in fonts/Makefile.in \
-	sounds/Makefile.in docs/Makefile.in textures/Makefile.in \
-	xfce_theme/Makefile)
+	icons/Makefile.in palettes/Makefile.in sounds/Makefile.in\
+	docs/Makefile.in textures/Makefile.in xfce_theme/Makefile \
+	cursors/Makefile.in fonts/Makefile.in)
 dnl
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade])
@@ -479,5 +479,6 @@ AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r textures/DISTFILES.in" textures/Makef
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r icons/DISTFILES.in" icons/Makefile.in > icons/Makefile])
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r palettes/DISTFILES.in" palettes/Makefile.in > palettes/Makefile])
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r fonts/DISTFILES.in" fonts/Makefile.in > fonts/Makefile])
+AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r cursors/DISTFILES.in" cursors/Makefile.in > cursors/Makefile])
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r sounds/DISTFILES.in" sounds/Makefile.in > sounds/Makefile])
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r docs/DISTFILES.in" docs/Makefile.in > docs/Makefile])

@@ -1089,7 +1089,7 @@ HandleUnmapNotify ()
     return;
   }
 
-  if (!(Tmp_win->flags & (MAPPED | MAP_PENDING | ICONIFIED)))
+  if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): win !mapped & !iconified\n");

@@ -367,11 +367,7 @@ cb_new_window (GtkWidget * widget, GtkCTree * ctree)
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
       if (!(en->type & FT_DIR))
       {
-	node = GTK_CTREE_ROW (node)->parent;
-	if (!node)
-	{
-	  continue;
-	}
+	continue;
       }
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
       new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
@@ -1563,15 +1559,11 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     {
       node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (preferences & DOUBLE_CLICK_GOTO) {
+      if (EN_IS_DIR (en) && ((event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)) || (preferences & DOUBLE_CLICK_GOTO)))
+      {
+        /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
 	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
 	return (TRUE);
-      } else {
-        if (EN_IS_DIR (en) && (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)))
-        {/* Alt or Ctrl button is pressed, it's the same as _go_to().. */
- 	 go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
-	 return (TRUE);
-	}
       }
     }
     if (!count_selection (GTK_CTREE (ctree), &node))

@@ -10885,9 +10885,9 @@ trap 'rm -fr `echo "Makefile libs/Makefile xfce/Makefile xfwm/Makefile \
 	xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile \
 	xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile \
 	gdm/Makefile po/Makefile.in other/Makefile.in backdrops/Makefile.in \
-	icons/Makefile.in palettes/Makefile.in fonts/Makefile.in \
-	sounds/Makefile.in docs/Makefile.in textures/Makefile.in \
-	xfce_theme/Makefile config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
+	icons/Makefile.in palettes/Makefile.in sounds/Makefile.in\
+	docs/Makefile.in textures/Makefile.in xfce_theme/Makefile \
+	cursors/Makefile.in fonts/Makefile.in config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
 cat >> $CONFIG_STATUS <<EOF
 
@@ -11056,9 +11056,9 @@ CONFIG_FILES=\${CONFIG_FILES-"Makefile libs/Makefile xfce/Makefile xfwm/Makefile
 	xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile \
 	xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile \
 	gdm/Makefile po/Makefile.in other/Makefile.in backdrops/Makefile.in \
-	icons/Makefile.in palettes/Makefile.in fonts/Makefile.in \
-	sounds/Makefile.in docs/Makefile.in textures/Makefile.in \
-	xfce_theme/Makefile"}
+	icons/Makefile.in palettes/Makefile.in sounds/Makefile.in\
+	docs/Makefile.in textures/Makefile.in xfce_theme/Makefile \
+	cursors/Makefile.in fonts/Makefile.in"}
 EOF
 cat >> $CONFIG_STATUS <<\EOF
 for ac_file in .. $CONFIG_FILES; do if test "x$ac_file" != x..; then
@@ -11314,6 +11314,7 @@ test "$no_create" = yes || ${CONFIG_SHELL-/bin/sh} $CONFIG_STATUS || exit 1
 
 
 
+
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp
@@ -11343,8 +11344,10 @@ sed -e "/DISTFILES =/r textures/DISTFILES.in" textures/Makefile.in > textures/Ma
 sed -e "/DISTFILES =/r icons/DISTFILES.in" icons/Makefile.in > icons/Makefile
 sed -e "/DISTFILES =/r palettes/DISTFILES.in" palettes/Makefile.in > palettes/Makefile
 sed -e "/DISTFILES =/r fonts/DISTFILES.in" fonts/Makefile.in > fonts/Makefile
+sed -e "/DISTFILES =/r cursors/DISTFILES.in" cursors/Makefile.in > cursors/Makefile
 sed -e "/DISTFILES =/r sounds/DISTFILES.in" sounds/Makefile.in > sounds/Makefile
 sed -e "/DISTFILES =/r docs/DISTFILES.in" docs/Makefile.in > docs/Makefile
+
 
 
 
