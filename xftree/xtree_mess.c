@@ -917,10 +917,12 @@ xf_dirent *xf_closedir(xf_dirent *diren){
 	     
 char *xf_readdir(xf_dirent *diren,GtkWidget *ctree){
       cfg *win;
+      if (!diren) return NULL;
       
       win = gtk_object_get_user_data (GTK_OBJECT (ctree));
       if (!(win->preferences & FILTER_OPTION)){ /* no filtering */
         struct dirent *de;
+        if (!diren->dir) return NULL;
 	de = readdir (diren->dir);
 	if (!de) return NULL; else return (de->d_name);
       } else {

@@ -404,7 +404,9 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
   else if (en->type & FT_FILE)/* letter modified here */
   {
     pix->pixmask=gPIM[PIM_PAGE];
-    if (en->type & FT_LINK) pix->pixmap=gPIX[PIX_PAGE_LNK]; 
+    if (en->type & FT_LINK) {
+	    pix->pixmap=gPIX[PIX_PAGE_LNK]; 
+    }
     else {
       pix->pixmap=gPIX[PIX_PAGE]; /* default */
       if (strcmp(en->label,"core")==0) pix->pixmap=gPIX[PIX_CORE];
@@ -444,10 +446,15 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
   }
   else if (en->type & FT_DIR){
     isleaf=FALSE;
-    if (en->type & FT_LINK) pix->pixmap=gPIX[PIX_DIR_CLOSE_LNK];
-    else pix->pixmap=gPIX[PIX_DIR_CLOSE];
-    pix->pixmask=gPIM[PIM_DIR_CLOSE];
-    pix->open=gPIX[PIX_DIR_OPEN],pix->openmask=gPIM[PIM_DIR_OPEN];
+    if (en->type & FT_LINK) {
+	    pix->pixmap=gPIX[PIX_DIR_CLOSE_LNK];
+	    pix->open=gPIX[PIX_DIR_OPEN_LNK]; 
+    }
+    else {
+	    pix->pixmap=gPIX[PIX_DIR_CLOSE];
+            pix->open=gPIX[PIX_DIR_OPEN];
+    }
+    pix->pixmask=gPIM[PIM_DIR_CLOSE],pix->openmask=gPIM[PIM_DIR_OPEN];
   }
   else if (en->type & FT_CHAR_DEV){pix->pixmap=gPIX[PIX_CHAR_DEV],pix->pixmask=gPIM[PIM_CHAR_DEV];}
   else if (en->type & FT_BLOCK_DEV){pix->pixmap=gPIX[PIX_BLOCK_DEV],pix->pixmask=gPIM[PIM_BLOCK_DEV];}
