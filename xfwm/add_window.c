@@ -467,6 +467,7 @@ AddWindow (Window w)
     }
   }
 
+  XSync (dpy, 0);
   /* Shortcut : If the newly created window is about to be destroyed, remove it right away */
   if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy_event) ||
       XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy_event))
@@ -475,6 +476,7 @@ AddWindow (Window w)
     fprintf (stderr, "xfwm : AddWindow () : Shortcut, removing window\n");
 #endif
     Destroy (tmp_win);
+    MyXUngrabServer (dpy);
     return (NULL);
   }
 
@@ -489,7 +491,6 @@ AddWindow (Window w)
     tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
   InstallWindowColormaps (colormap_win);
 
-  XSync (dpy, 0);
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);
