@@ -78,11 +78,6 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse, Bool force)
     return;
   }
   
-  if (force)
-  {
-    Scr.Focus = NULL;
-  }
-  
   if ((FocusByMouse) && (Fw) && (Fw != Scr.Focus) && (Fw != &Scr.XfwmRoot))
   {
     XfwmWindow *tmp_win1, *tmp_win2;
@@ -134,6 +129,11 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse, Bool force)
     }
   }
 
+  if ((Fw) && (force))
+  {
+    Scr.Focus = NULL;
+  }
+  
   if ((Fw) && (Fw->Desk != Scr.CurrentDesk))
   {
     Fw = NULL;

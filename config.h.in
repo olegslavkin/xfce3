@@ -61,6 +61,9 @@
 #undef HAVE_LC_MESSAGES
 #undef HAVE_STPCPY
 #undef HAVE_SCANDIR
+#undef HAVE_MEMCPY
+#undef HAVE_MEMMOVE
+#undef HAVE_MEMSET
 #undef HAVE_X11_EXTENSIONS_XINERAMA_H
 #undef HAVE_X11_XFT_XFT_H
 #undef HAVE_SYS_SOUNDCARD_H
@@ -103,6 +106,9 @@
 
 /* Define if you have the memmove function.  */
 #undef HAVE_MEMMOVE
+
+/* Define if you have the memset function.  */
+#undef HAVE_MEMSET
 
 /* Define if you have the munmap function.  */
 #undef HAVE_MUNMAP

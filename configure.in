@@ -70,7 +70,7 @@ AC_TYPE_SIGNAL
 
 AC_CHECK_FUNCS(wait3 wait4 waitpid)
 AC_CHECK_FUNCS(snprintf vsnprintf strcasecmp strncasecmp)
-AC_CHECK_FUNCS(sendmsg memcpy memmove)
+AC_CHECK_FUNCS(sendmsg memcpy memmove memset)
 AC_CHECK_FUNCS(sigaction siginterrupt)
 AC_CHECK_FUNC(scandir, AC_DEFINE(HAVE_SCANDIR),)
 

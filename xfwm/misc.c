@@ -286,7 +286,7 @@ RevertFocus (XfwmWindow * tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Setting focus\n");
 #endif
-    SetFocus (Win->w, Win, False, False);
+    SetFocus (Win->w, Win, True, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -298,7 +298,7 @@ RevertFocus (XfwmWindow * tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself\n");
 #endif
-    SetFocus (tmp_win->w, tmp_win, False, False);
+    SetFocus (tmp_win->w, tmp_win, True, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -457,6 +457,7 @@ Destroy (XfwmWindow * tmp_win)
   free_window_names (tmp_win, True, True);
   if (tmp_win->wmhints)
     XFree (tmp_win->wmhints);
+/*
   if (tmp_win->class.res_name && tmp_win->class.res_name != NoResource)
     XFree (tmp_win->class.res_name);
   if (tmp_win->class.res_class && tmp_win->class.res_class != NoClass)
@@ -465,6 +466,7 @@ Destroy (XfwmWindow * tmp_win)
     XFree (tmp_win->mwm_hints);
   if (tmp_win->cmap_windows)
     XFree (tmp_win->cmap_windows);
+ */
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
 #endif

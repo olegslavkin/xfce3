@@ -64,6 +64,7 @@ typedef struct _match
   char **wm_command;
   int x, y, w, h, icon_x, icon_y;
   int desktop;
+  int focusdesk;
   unsigned long flags;
   int used;
 }
@@ -397,6 +398,7 @@ SaveWindowStates (FILE * f)
     }
 
     fprintf (f, "  [GEOMETRY] %i %i %i %i %i %i\n", tmp_win->orig_x, tmp_win->orig_y, tmp_win->orig_wd - 2 * (tmp_win->boundary_width + tmp_win->bw), tmp_win->orig_ht - 2 * (tmp_win->boundary_width + tmp_win->bw) - tmp_win->title_height, tmp_win->icon_x_loc, tmp_win->icon_y_loc);
+    fprintf (f, "  [FOCUSDESK] %i\n", tmp_win->FocusDesk);
     fprintf (f, "  [DESK] %i\n", ((tmp_win->flags & (STICKY)) ? 0 : tmp_win->Desk));
     fprintf (f, "  [FLAGS] %li\n", (tmp_win->flags & (STICKY | ICONIFIED | ICON_MOVED | SHADED | WM_NAME_CHANGED)));
   }
@@ -440,6 +442,7 @@ LoadWindowStates (char *filename)
 	matches[num_match - 1].icon_x = 0;
 	matches[num_match - 1].icon_y = 0;
 	matches[num_match - 1].desktop = 0;
+	matches[num_match - 1].focusdesk = 0;
 	matches[num_match - 1].used = 0;
 	matches[num_match - 1].flags = 0;
       }
@@ -450,6 +453,10 @@ LoadWindowStates (char *filename)
       else if (!strcmp (s1, "[DESK]"))
       {
 	sscanf (s, "%*s %i", &(matches[num_match - 1].desktop));
+      }
+      else if (!strcmp (s1, "[FOCUSDESK]"))
+      {
+	sscanf (s, "%*s %i", &(matches[num_match - 1].focusdesk));
       }
       else if (!strcmp (s1, "[CLIENT_LEADER]"))
       {
@@ -639,6 +646,7 @@ MatchWinToSM (XfwmWindow * tmp_win)
       tmp_win->icon_x_loc = matches[i].icon_x;
       tmp_win->icon_y_loc = matches[i].icon_y;
       tmp_win->Desk = matches[i].desktop;
+      tmp_win->FocusDesk = matches[i].focusdesk;
       tmp_win->flags |= (matches[i].flags & (STICKY | ICON_MOVED | SHADED));
       if (matches[i].flags & ICONIFIED)
       {

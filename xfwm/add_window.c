@@ -135,7 +135,7 @@ AddWindow (Window w)
   extern XfwmWindow *colormap_win;
 
   /* allocate space for the xfwm window */
-  tmp_win = (XfwmWindow *) calloc (1, sizeof (XfwmWindow));
+  tmp_win = (XfwmWindow *) safemalloc (sizeof (XfwmWindow));
   if (!tmp_win)
   {
     return NULL;
@@ -634,8 +634,9 @@ GetWindowSizeHints (XfwmWindow * tmp)
     return;
 
   if (!XGetWMNormalHints (dpy, tmp->w, &tmp->hints, &supplied))
+  {
     tmp->hints.flags = 0;
-
+  }
   /* Beat up our copy of the hints, so that all important field are
    * filled in! */
   if (tmp->hints.flags & PResizeInc)

@@ -1,4 +1,8 @@
+#include "configure.h"
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,5 +32,18 @@ safemalloc (int length)
     fprintf (stderr, "malloc of %d bytes failed. Exiting\n", length);
     exit (1);
   }
+#ifdef HAVE_MEMSET
+  memset (ptr, 0, length);
+#else
+  {
+    int i;
+    char *ptr2 = ptr;
+    for (i = 0; i < length; i++)
+    {
+      *ptr2 = 0;
+      ptr2++;
+    }
+  }
+#endif
   return ptr;
 }

@@ -69,8 +69,8 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
 {
 
   int oldDesk;
-  static XfwmWindow *StickyWin = 0;
-  XfwmWindow *FocusWin = 0, *MouseWin, *t;
+  static XfwmWindow *StickyWin = NULL;
+  XfwmWindow *FocusWin = NULL, *MouseWin, *t;
   XfwmWindowList *wl;
   Window w;
 
@@ -181,7 +181,7 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
     else if ((FocusWin) && AcceptInput(FocusWin))
       SetFocus (FocusWin->w, FocusWin, True, False);
     else if ((StickyWin) && AcceptInput(StickyWin) && (StickyWin->flags & STICKY))
-      SetFocus (StickyWin->w, StickyWin, True, False);
+      SetFocus (StickyWin->w, StickyWin, False, False);
     else
       SetFocus (Scr.NoFocusWin, NULL, False, False);
   }

@@ -415,6 +415,7 @@ HandleFocusIn ()
   fprintf (stderr, "xfwm : Entering HandleFocusIn ()\n");
 #endif
   w = Event.xany.window;
+
   while (XCheckTypedEvent (dpy, FocusIn, &d))
   {
 #ifdef REQUIRES_STASHEVENT
@@ -430,9 +431,15 @@ HandleFocusIn ()
     }
 #endif
   }
+
   if (w == None)
   {
     return;
+  }
+
+  if (XFindContext(dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+  {
+    Tmp_win = NULL;
   }
 
   if (!Tmp_win)
@@ -750,13 +757,6 @@ HandlePropertyNotify ()
       FetchWmColormapWindows (Tmp_win);	/* frees old data */
       ReInstallActiveColormap ();
     }
-    else if (Event.xproperty.atom == _XA_WM_STATE)
-    {
-      if ((Tmp_win) && (Tmp_win == Scr.Focus) && AcceptInput(Tmp_win))
-      {
-	SetFocus (Tmp_win->w, Tmp_win, True, True);
-      }
-    }
     else if (Event.xproperty.atom == _XA_WIN_LAYER)
     {
       if ((Tmp_win) && (GetWindowLayer (Tmp_win)))
@@ -931,6 +931,8 @@ HandleMapRequest ()
     case NormalState:
     case InactiveState:
     default:
+      XSync (dpy, 0);
+      MyXGrabServer (dpy);
       if (Tmp_win->Desk == Scr.CurrentDesk)
       {
 	Tmp_win->flags |= MAP_PENDING;
@@ -938,6 +940,8 @@ HandleMapRequest ()
       }
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
+      SetMapStateProp (Tmp_win, NormalState);
+      MyXUngrabServer (dpy);
       break;
     }
   }
@@ -1074,7 +1078,7 @@ HandleUnmapNotify ()
     return;
   }
 
-  if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
+  if (!(Tmp_win->flags & (MAPPED | MAP_PENDING | ICONIFIED)))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): win !mapped & !iconified\n");
