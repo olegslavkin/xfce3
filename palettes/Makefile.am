@@ -33,6 +33,7 @@ palettes_DATA=\
  Craters \
  DarkMetal \
  Default \
+ DefaultGrey \
  Defcon \
  Desert \
  Dolly \
