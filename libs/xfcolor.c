@@ -980,7 +980,9 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "widget       \"*gxfce_color6*\"     style \"xfce_6\"\n");        
       fprintf (f, "widget       \"*gxfce_color7*\"     style \"xfce_7\"\n");        
       fprintf (f, "widget       \"gtk-tooltips\"       style \"tooltips-style\"\n");
+#ifndef OLD_STYLE
       fprintf (f, "widget       \"*task_active*\"             style \"xfcebar_taskbar4\"\n");        
+#endif      
       fclose (f);
     }
   }
