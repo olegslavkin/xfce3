@@ -842,6 +842,14 @@ HandleDestroyNotify ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering DestroyNotify ()\n");
 #endif
+  if ((Event.xdestroywindow.event != Event.xdestroywindow.window) && (Event.xdestroywindow.event != Scr.Root || !Event.xdestroywindow.send_event))
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : Leaving HandleDestroyNotify (): Event ignored\n");
+#endif
+    return;
+  }
+
   if (Tmp_win)
   {
 #ifdef DEBUG
