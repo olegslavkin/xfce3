@@ -1,3 +1,21 @@
+2001-10-07  xfce
+
+	* xfwm/: builtins.c, events.c, icons.c, misc.c, move.c, virtual.c:
+	Improve focus management
+
+2001-10-06  huysmans
+
+	* po/: nl.gmo, nl.po: Updated Dutch translation
+
+2001-10-05  xfce
+
+	* po/xfce.pot, xfwm/builtins.c: Add no input windows to circulate
+	window functions
+
+2001-10-05  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-10-05  xfce
 
 	* xfwm/: builtins.c, windows.c: Skip non-input windows from Alt-Tab

@@ -321,6 +321,7 @@ Destroy (XfwmWindow * Tmp_win)
   if (!Tmp_win)
     return;
 
+  XSelectInput (dpy, Tmp_win->w, NoEventMask);
   if (Tmp_win->prev != NULL)
     Tmp_win->prev->next = Tmp_win->next;
   if (Tmp_win->next != NULL)

@@ -200,6 +200,7 @@ flush_expose (Window w)
   XEvent dummy;
   int i = 0;
 
+  XSync(dpy, 0);
   while (XCheckTypedWindowEvent (dpy, w, Expose, &dummy))
     i++;
   return i;
@@ -208,10 +209,27 @@ flush_expose (Window w)
 void
 fast_process_expose (void)
 {
+  XSync(dpy, 0);
   while (XCheckMaskEvent (dpy, (ExposureMask | VisibilityChangeMask), &Event))
   {
     DispatchEvent ();
   }
+}
+
+int discard_events(long event_mask)
+{
+  XEvent e;
+  int count;
+
+  XSync(dpy, 0);
+  for (count = 0; XCheckMaskEvent(dpy, event_mask, &e); count++)
+  {
+#ifdef REQUIRES_STASHEVENT
+    StashEventTime(&e);
+#endif
+  }
+
+  return count;
 }
 
 void
@@ -241,6 +259,7 @@ InitEventHandlerJumpTable (void)
   EventHandlerJumpTable[VisibilityNotify] = HandleVisibilityNotify;
   EventHandlerJumpTable[ColormapNotify] = HandleColormapNotify;
   EventHandlerJumpTable[MotionNotify] = HandleMotionNotify;
+  EventHandlerJumpTable[ReparentNotify] = HandleReparentNotify;
   if (ShapesSupported)
     EventHandlerJumpTable[ShapeEventBase + ShapeNotify] = HandleShapeNotify;
 }
@@ -985,7 +1004,6 @@ HandleUnmapNotify ()
 {
   int dstx, dsty;
   Window dumwin;
-  XEvent dummy;
   int weMustUnmap;
 
 #ifdef DEBUG
@@ -1054,18 +1072,12 @@ HandleUnmapNotify ()
 #endif
     return;
   }
-  MyXGrabServer (dpy);
-  if (XCheckTypedWindowEvent (dpy, Event.xunmap.window, DestroyNotify, &dummy))
-  {
-#ifdef REQUIRES_STASHEVENT
-    StashEventTime (&dummy);
-#endif
-    Destroy (Tmp_win);
-  }
-  else if (XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
+  if (XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
   {
     XEvent ev;
     Bool reparented;
+
+    MyXGrabServer (dpy);
     reparented = XCheckTypedWindowEvent (dpy, Event.xunmap.window, ReparentNotify, &ev);
     SetMapStateProp (Tmp_win, WithdrawnState);
     if (reparented)
@@ -1081,14 +1093,41 @@ HandleUnmapNotify ()
     }
     XRemoveFromSaveSet (dpy, Event.xunmap.window);
     XSelectInput (dpy, Event.xunmap.window, NoEventMask);
-    Destroy (Tmp_win);		/* do not need to mash event before */
+    XSync (dpy, 0);
+    MyXUngrabServer (dpy);
   }
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
+  Destroy (Tmp_win);
   fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif
+}
+
+/***********************************************************************
+ *
+ *  Procedure:
+ *	HandleReparentNotify - ReparentNotify event handler
+ *
+ ************************************************************************/
+void HandleReparentNotify(void)
+{
+  if (!Tmp_win)
+    return;
+
+  if (Event.xreparent.parent == Scr.Root)
+  {
+    return;
+  }
+  if (Event.xreparent.parent != Tmp_win->frame)
+  {
+    SetMapStateProp(Tmp_win, WithdrawnState);
+    XRemoveFromSaveSet(dpy, Event.xreparent.window);
+    XSelectInput (dpy, Event.xreparent.window, NoEventMask);
+    discard_events(SubstructureRedirectMask | VisibilityChangeMask);
+    Destroy(Tmp_win);
+  }
+
+  return;
 }
 
 /***********************************************************************
