@@ -1,3 +1,131 @@
+2002-11-10  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-11-10  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Backport latest changes from
+	gtk-xfce-engine-2.x
+
+2002-11-10  xfce
+
+	* Makefile.in, aclocal.m4, configure, backdrops/Makefile.in,
+	cursors/Makefile.in, docs/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, dt/Makefile.in, fonts/Makefile.in,
+	gdm/Makefile.in, icons/Makefile.in, libs/Makefile.in,
+	other/Makefile.in, palettes/Makefile.in, po/xfce.pot,
+	scripts/Makefile.in, sounds/Makefile.in, textures/Makefile.in,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfdiff/icons/Makefile.in,
+	xfglob/Makefile.in, xfglob/icons/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfskin/Makefile.in, xfsound/Makefile.in, xftree/Makefile.in,
+	xftree/icons/Makefile.in, xfumed/Makefile.in,
+	xfumed/icons/Makefile.in, xfwm/Makefile.in: Checkpoint.
+
+2002-10-31  edscott
+
+	* xfsamba/xfsamba.h: - update version
+
+2002-10-31  edscott
+
+	* xfsamba/TODO: - notes on the pending bugs for cyrillic
+	characters.
+
+2002-10-30  edscott
+
+	* xfsamba/: xfsamba.h, xfsamba_download.c, xfsamba_list.c,
+	xfsamba_masterresolve.c, xfsamba_mem.c, xfsamba_mkdir.c,
+	xfsamba_rm.c, xfsamba_upload.c: - bug fixes for the dos codepage
+	bug workaround
+
+2002-10-23  xfce
+
+	* palettes/Redmond: [no log message]
+
+2002-10-15  huysmans
+
+	* po/: nl.gmo, nl.po: Small (tiny) update to Dutch translation
+
+2002-10-15  edscott
+
+	* xftree/icons/: dir_open_dot.xpm, dir_open_hidden.xpm,
+	dir_ro_open_dot.xpm, dir_ro_open_hidden.xpm: - fixed color code for
+	hidden files
+
+2002-10-15  edscott
+
+	* xftree/icons/: dir_open_dot.xpm, dir_open_hidden.xpm,
+	dir_ro_open_dot.xpm, dir_ro_open_hidden.xpm: - better color code
+	for hidden files
+
+2002-10-15  edscott
+
+	* xfglob/xfglob.c: - fixed about text
+
+2002-10-15  edscott
+
+	* xftree/TODO: - some ideas for xftree2
+
+2002-10-12  xfce
+
+	* po/es.gmo: [no log message]
+
+2002-10-12  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Fix backport problem.
+
+2002-10-12  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Fix a compilation problem with old
+	style enabled.
+
+2002-10-05  xfce
+
+	* xfce_theme/xfce_theme_main.c: [no log message]
+
+2002-10-05  xfce
+
+	* xfce_theme/: xfce_theme_draw.c, xfce_theme_main.c: Remove frame
+	in trough
+
+2002-10-05  xfce
+
+	* xfce_theme/xfce_theme_draw.c: BAckport gtk-xfce-engine 2.x
+	drawing routine.
+
+2002-09-30  edscott
+
+	* po/es.po: Fixes by Diego.
+
+2002-09-26  edscott
+
+	* other/: xfce3rc.bg, xfce3rc.es, xfce3rc.es.in, xinitrc: - spanish
+	(from spain) translations
+
+2002-09-26  edscott
+
+	* po/es.po: - corrections to po file (up to date to 3.8.16)
+
+2002-09-26  mstaszyszyn
+
+	* libs/xfcolor.c: gtkrc error for old-style fixed
+
+2002-09-26  mstaszyszyn
+
+	* docs/taskbar.txt, xfce/taskbar.c: option HidePanel added
+
+2002-09-26  mstaszyszyn
+
+	* other/taskbarrc, xfce/taskbar.c: option HidePanel added
+
+2002-09-12  xfce
+
+	* ChangeLog, xfce-3.8.18.lsm, libs/xfcolor.c, other/COPYING.in,
+	palettes/Default: Minor fixes before release.
+
 2002-09-11  xfce
 
 	* libs/xfcolor.c, palettes/Default: [no log message]
