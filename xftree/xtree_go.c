@@ -184,8 +184,7 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   for (i = 0; i < COLUMNS; i++)
   {
     if (i == COL_NAME)
-      label[i] = (win->preferences&ABREVIATE_PATHS)?
-	      abreviate(uri_clear_path (en->path)):uri_clear_path (en->path);   
+      label[i] = (win->preferences&ABREVIATE_PATHS)? abreviate(en->path):en->path;   
     else if (i==COL_MODE) label[i] = mode_txt(en->st.st_mode); 
     else if (i==COL_UID) label[i] = (pw)? pw->pw_name : _("unknown"); 
     else if (i==COL_GID) label[i] = (gr)? gr->gr_name : _("unknown"); 
@@ -205,12 +204,12 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
     en->type |= FT_ISROOT;
   }    
   gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
-  add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
+  add_subtree (ctree, root, en->path, 2, en->flags);
   reset_icon(ctree, root);
   gtk_ctree_select (GTK_CTREE (ctree), root);
   
   ctree_thaw (ctree);
-  set_title_ctree (GTK_WIDGET (ctree), uri_clear_path (en->path));
+  set_title_ctree (GTK_WIDGET (ctree), en->path);
   icon_name = strrchr (en->path, '/');
   if ((icon_name) && (!(*(++icon_name)))) icon_name = NULL;
   gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, (icon_name ? icon_name : "/"));
@@ -225,7 +224,8 @@ void regen_ctree(GtkCTree *ctree){
   root = find_root((GtkCTree *)ctree);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
 /*  gtk_clist_set_column_title((GtkCList *)ctree,COL_SIZE,
-	(win->preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)"));*/	  internal_go_to (ctree, root,en->path, en->flags);
+	(win->preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)"));*/	  
+  internal_go_to (ctree, root,en->path, en->flags);
   return;
 }
 

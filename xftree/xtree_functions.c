@@ -483,11 +483,8 @@ void reset_icon(GtkCTree * ctree, GtkCTreeNode * node){
   isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
     /*printf("dbg: updating %s\n",en->label);*/
   
-  //gtk_signal_disconnect_by_func (GTK_OBJECT (ctree),GTK_SIGNAL_FUNC (on_expand),NULL);
-  gtk_ctree_set_node_info (ctree,node,(win->preferences&ABREVIATE_PATHS)? abreviate(en->label):en->label, 
+  gtk_ctree_set_node_info (ctree,node,(win->preferences&ABREVIATE_PATHS)?abreviate(en->path):en->path, 
 		 SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, TRUE);
-  //while (gtk_events_pending()) gtk_main_iteration();	     
-  //gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), NULL);
 } 
 	
 

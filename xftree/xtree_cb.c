@@ -185,11 +185,12 @@ cb_select (GtkWidget * item, GtkCTree * ctree)
   GtkCTreeNode *node;
 
   num = count_selection (ctree, &node);
-  if (!GTK_CTREE_ROW (node)->expanded)
-    node = GTK_CTREE_ROW (node)->parent;
+  if (!GTK_CTREE_ROW (node)->expanded) node = GTK_CTREE_ROW (node)->parent;
   gtk_ctree_select_recursive (ctree, node);
   gtk_ctree_unselect (ctree, node);
   gtk_ctree_pre_recursive (ctree, node, node_unselect_by_type, (gpointer) ((long) FT_DIR_UP));
+  gtk_ctree_pre_recursive (ctree, node, node_unselect_by_type, (gpointer) ((long) FT_RPMCHILD));
+  gtk_ctree_pre_recursive (ctree, node, node_unselect_by_type, (gpointer) ((long) FT_TARCHILD));
 }
 
 void
@@ -413,40 +414,44 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     return;
   }
   selection = GTK_CLIST (ctree)->selection;
-  
-  /*freezeit */
-  ctree_freeze (ctree);
-  
-     
+      
   if (fname) g_free(fname);
   if (mname) g_free(mname);
   fnamelen=strlen("/tmp/xftree.XXXXXX")+1;
   fname = (char *)malloc(sizeof(char)*(fnamelen));
   mname = (char *)malloc(sizeof(char)*(fnamelen)); 
-  if (!fname) return ; if (!mname) return ;
+  if ((!fname)|| (!mname)) return ;
+  
   strcpy(fname,"/tmp/xftree.XXXXXX");
   strcpy(mname,"/tmp/xftree.XXXXXX");
   close(mkstemp(fname));
   close(mkstemp(mname));
-  /*fprintf(stderr,"dbg:fname=%s,mname=%s",fname,mname);*/
+  /*fprintf(stderr,"dbg:fname=%s,mname=%s, num=%d\n",fname,mname,num);*/
   
   if ((tmpfile=fopen(fname,"w"))==NULL) return ;
   if ((movefile=fopen(mname,"w"))==NULL){
 	  fclose(tmpfile); 
 	  unlink(fname);
+          /*printf("dbg:returning on failure to open tmp files\n");*/
 	  return ;
   }
+  /*freezeit */
+  ctree_freeze (ctree);
 
   for (i = 0; (i < num)&&(selection!=NULL); i++,selection=selection->next){
     gboolean zap,tar_entry;
     zap=FALSE;
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
-    if (!en) continue;
+    if (!en) {
+            /*printf("dbg:continuing on null entry\n");*/
+	    continue;
+    }
     tar_entry=(strncmp(en->path,"tar:",strlen("tar:")))?FALSE:TRUE;
     if (!io_is_valid (en->label) || (en->type & FT_DIR_UP) || (tar_entry && (en->type & FT_DIR))) {
       /* we do not process ".." */
       gtk_ctree_unselect (ctree, node);
+           /* printf("dbg:continuing on ignorable entry\n");*/
       continue;
     }
     if (tar_entry) zap=TRUE;
@@ -505,9 +510,10 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
       }
     }
   }
-  
+  /*printf("dbg:selection=%ld\n",selection);*/
   fclose (tmpfile);
   fclose (movefile);
+  /*printf("dbg:done creating tmpfiles\n");*/
 
   if (moveitems) DirectTransfer((GtkWidget *)ctree,TR_MOVE,mname);
 

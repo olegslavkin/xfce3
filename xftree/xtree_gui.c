@@ -1341,16 +1341,19 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 /* first pixmap appearance */
   
   
-  en = entry_new_by_path_and_label (path, path);
+  en = entry_new_by_path_and_label (path, (preferences&ABREVIATE_PATHS)?abreviate(path):path);
   if (!en)
   {
     cleanup_tmpfiles();
     exit (1);
   }
   en->flags = flags;
+  en->type |= FT_ISROOT;
 
-  if (preferences&ABREVIATE_PATHS) label[COL_NAME] = abreviate(path);
-  else label[COL_NAME] = path; 
+  if (preferences & ABREVIATE_PATHS) {
+	  label[COL_NAME] = abreviate(path);
+  } else label[COL_NAME] = path; 
+  
   label[COL_SIZE] = "";
   label[COL_DATE] = "";
   
@@ -1359,15 +1362,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_UID] = (pw)? pw->pw_name : _("unknown");
   gr=getgrgid (en->st.st_gid); 
   label[COL_GID] = (gr)? gr->gr_name : _("unknown");
-  {
-    icon_pix pix;
-    set_icon_pix(&pix,en->type,en->label,en->flags);   
-    root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
-		  pix.pixmap,pix.pixmask,
-		  pix.open,pix.openmask,
+  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
+		  NULL, NULL,NULL, NULL,
 		  FALSE, TRUE);  
-    en->type |= FT_ISROOT;
-  } 
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
   reset_icon(GTK_CTREE (ctree), root); 
@@ -1444,8 +1441,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   }
   
   icon_name = strrchr (path, '/');
-  if ((icon_name) && (!(*(++icon_name))))
-    icon_name = NULL;
+  if ((icon_name) && (!(*(++icon_name)))) icon_name = NULL;
 
   set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
 
