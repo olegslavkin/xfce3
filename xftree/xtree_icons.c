@@ -384,7 +384,12 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
    PIXid[1]=PIXid[3]=PIM_PD;
   }
   /* directories: no icon flag applied */
-  if (type & FT_DIR){
+ if (type & FT_DIR_UP){
+      PIXid[0]=PIX_DIR_UP;
+      PIXid[1]=PIM_DIR_CLOSE;
+      goto icon_identified;
+ } 
+ if (type & FT_DIR){
      PIXid[1]=PIM_DIR_CLOSE;
      PIXid[3]=PIM_DIR_OPEN;
      isleaf=FALSE;   
@@ -418,12 +423,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
        else PIXid[2]=PIX_DIR_RO_OPEN_DOT;
       }
       goto icon_identified;
-  } else if (type & FT_DIR_UP){
-      PIXid[0]=PIX_DIR_UP;
-      PIXid[1]=PIM_DIR_CLOSE;
-      goto icon_identified;
-  } 
-  /* whatever it is, it's not a directory */
+  }   /* whatever it is, it's not a directory */
 
   /* special files : */
   if (type & FT_CHAR_DEV){ PIXid[0]=PIX_CHAR_DEV,PIXid[1]=PIM_CHAR_DEV; }
