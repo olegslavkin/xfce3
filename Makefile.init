@@ -1,6 +1,7 @@
 all:
-	aclocal
+	libtoolize --copy --force
+	aclocal --verbose
 	autoheader
-	automake -a -c -i --foreign
+	automake --add-missing --copy --include-deps --foreign --gnu --verbose
 	autoconf
 	@echo System ready for compilation. Now run ./configure and make to build XFce

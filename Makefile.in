@@ -123,6 +123,8 @@ GDK_PIXBUF_LIBS = @GDK_PIXBUF_LIBS@
 DMALLOC_LIB = @DMALLOC_LIB@
 GTK_ENGINE_DIR = @GTK_ENGINE_DIR@
 
+LIBTOOL_DEPS = @LIBTOOL_DEPS@
+
 SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock 	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts 	other backdrops icons palettes fonts textures sounds docs po dt
 
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -142,7 +144,7 @@ GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-	cd $(top_srcdir) && $(AUTOMAKE) --foreign --include-deps Makefile
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
@@ -314,7 +316,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
@@ -408,6 +410,8 @@ maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
 @SET_MAKE@
+libtool: $(LIBTOOL_DEPS)
+	$(SHELL) ./config.status --recheck
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

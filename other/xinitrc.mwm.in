@@ -28,3 +28,4 @@ xfbd&
 xfmouse&
 # And at last, start "xfce"
 xfce
+xsetroot -solid black

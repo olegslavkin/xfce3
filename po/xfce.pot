@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-07-31 21:55+0200\n"
+"POT-Creation-Date: 2001-08-03 15:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
-#: xfce/setup.c:1584 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
+#: xfce/setup.c:1585 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
 #: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
 #: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
 #: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
@@ -90,7 +90,7 @@ msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
-#: xfce/setup.c:1608 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
+#: xfce/setup.c:1609 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
 #: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
 #: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
 msgid "Cancel"
@@ -130,42 +130,42 @@ msgstr ""
 msgid "Cannot create file"
 msgstr ""
 
-#: xfce/configfile.c:347
+#: xfce/configfile.c:350
 msgid "Cannot reset configuration file"
 msgstr ""
 
-#: xfce/configfile.c:350
+#: xfce/configfile.c:353
 msgid "Creating new config file...\n"
 msgstr ""
 
-#: xfce/configfile.c:561 xfce/configfile.c:570 xfce/configfile.c:578
+#: xfce/configfile.c:564 xfce/configfile.c:573 xfce/configfile.c:581
 #, c-format
 msgid "XFce : %s File not found.\n"
 msgstr ""
 
-#: xfce/configfile.c:577 xfce/configfile.c:584
+#: xfce/configfile.c:580 xfce/configfile.c:587
 msgid "Cannot open configuration file"
 msgstr ""
 
-#: xfce/configfile.c:590
+#: xfce/configfile.c:593
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr ""
 
-#: xfce/configfile.c:592
+#: xfce/configfile.c:595
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
 msgstr ""
 
-#: xfce/configfile.c:602
+#: xfce/configfile.c:605
 msgid "Cannot open new config, Giving up..."
 msgstr ""
 
-#: xfce/configfile.c:603
+#: xfce/configfile.c:606
 msgid "Cannot load configuration file"
 msgstr ""
 
-#: xfce/configfile.c:610
+#: xfce/configfile.c:613
 msgid "Cannot use old version of XFce configuration files"
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: xfce/setup.c:585 xfce/setup.c:1174
+#: xfce/setup.c:585 xfce/setup.c:1175
 msgid "Top"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 msgid "Font style"
 msgstr ""
 
-#: xfce/setup.c:918 xfce/setup.c:1375 xfce/setup.c:1389 xfce/setup.c:1403
+#: xfce/setup.c:918 xfce/setup.c:1376 xfce/setup.c:1390 xfce/setup.c:1404
 msgid "Browse..."
 msgstr ""
 
@@ -464,83 +464,83 @@ msgstr ""
 msgid "Window border style : "
 msgstr ""
 
-#: xfce/setup.c:1118
+#: xfce/setup.c:1119
 msgid "Window snapping size (0 disable) : "
 msgstr ""
 
-#: xfce/setup.c:1157
+#: xfce/setup.c:1158
 msgid "Icon position"
 msgstr ""
 
-#: xfce/setup.c:1189 xfmouse/xfmouse.c:209
+#: xfce/setup.c:1190 xfmouse/xfmouse.c:209
 msgid "Left"
 msgstr ""
 
-#: xfce/setup.c:1204
+#: xfce/setup.c:1205
 msgid "bottom"
 msgstr ""
 
-#: xfce/setup.c:1219 xfmouse/xfmouse.c:220
+#: xfce/setup.c:1220 xfmouse/xfmouse.c:220
 msgid "Right"
 msgstr ""
 
-#: xfce/setup.c:1335
+#: xfce/setup.c:1336
 msgid "Title font :"
 msgstr ""
 
-#: xfce/setup.c:1348
+#: xfce/setup.c:1349
 msgid "Icon font :"
 msgstr ""
 
-#: xfce/setup.c:1361
+#: xfce/setup.c:1362
 msgid "Menu font :"
 msgstr ""
 
-#: xfce/setup.c:1439
+#: xfce/setup.c:1440
 msgid "Sound module (xfsound)"
 msgstr ""
 
-#: xfce/setup.c:1453
+#: xfce/setup.c:1454
 msgid "Mouse settings (xfmouse)"
 msgstr ""
 
-#: xfce/setup.c:1467
+#: xfce/setup.c:1468
 msgid "Backdrop settings (xfbd)"
 msgstr ""
 
-#: xfce/setup.c:1481
+#: xfce/setup.c:1482
 msgid "Pager (xfpager)"
 msgstr ""
 
-#: xfce/setup.c:1495
+#: xfce/setup.c:1496
 msgid "GNOME (xfgnome)"
 msgstr ""
 
-#: xfce/setup.c:1509
+#: xfce/setup.c:1510
 msgid "GNOME menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1523
+#: xfce/setup.c:1524
 msgid "KDE menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1536
+#: xfce/setup.c:1537
 msgid "Palette"
 msgstr ""
 
-#: xfce/setup.c:1544
+#: xfce/setup.c:1545
 msgid "XFce"
 msgstr ""
 
-#: xfce/setup.c:1552
+#: xfce/setup.c:1553
 msgid "Windows"
 msgstr ""
 
-#: xfce/setup.c:1560 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1561 xfce/startup.c:60 xfsound/xfsound.c:92
 msgid "Startup"
 msgstr ""
 
-#: xfbd/xfbd.c:560 xfce/setup.c:1596 xfmouse/xfmouse.c:322
+#: xfbd/xfbd.c:560 xfce/setup.c:1597 xfmouse/xfmouse.c:322
 #: xfsound/xfsound.c:572
 msgid "Apply"
 msgstr ""
@@ -749,7 +749,7 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr ""
 
-#: xfce/xfwm.c:441 xfwm/xfwm.c:878 xfwm/xfwm.c:879 xfwm/xfwm.c:880
+#: xfce/xfwm.c:451 xfwm/xfwm.c:878 xfwm/xfwm.c:879 xfwm/xfwm.c:880
 #: xfwm/xfwm.c:881 xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884
 #: xfwm/xfwm.c:885 xfwm/xfwm.c:886 xfwm/xfwm.c:887
 msgid "Workspace"

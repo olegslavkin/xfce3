@@ -2006,7 +2006,7 @@ DrawTrianglePattern_mofit (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l,
     seg[i].x1 = l + 1;
     seg[i].y1 = t + 1;
     seg[i].x2 = r - 1;
-    seg[i++].y2 = m - 1;
+    seg[i++].y2 = m;
     XDrawSegments (dpy, w, ReliefGC, seg, i);
     i = 0;
     seg[i].x1 = l;
@@ -2016,7 +2016,7 @@ DrawTrianglePattern_mofit (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l,
     seg[i].x1 = l + 1;
     seg[i].y1 = b - 1;
     seg[i].x2 = r - 1;
-    seg[i++].y2 = m - 1;
+    seg[i++].y2 = m;
     XDrawSegments (dpy, w, ShadowGC, seg, i);
 }
 
@@ -2657,7 +2657,7 @@ DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l
     seg[i].x1 = l + 1;
     seg[i].y1 = b - 1;
     seg[i].x2 = r - 1;
-    seg[i++].y2 = m - 1;
+    seg[i++].y2 = m;
     XDrawSegments (dpy, w, Scr.MenuShadowGC, seg, i);
     i = 0;
     seg[i].x1 = l;
@@ -2671,7 +2671,7 @@ DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l
     seg[i].x1 = l + 1;
     seg[i].y1 = t + 1;
     seg[i].x2 = r - 1;
-    seg[i++].y2 = m - 1;
+    seg[i++].y2 = m;
     XDrawSegments (dpy, w, Scr.MenuReliefGC, seg, i);
 }
 
