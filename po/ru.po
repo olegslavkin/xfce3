@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-04-28 15:15+0200\n"
+"POT-Creation-Date: 2002-09-01 01:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: George Verbitsky╤ <george@paging.odessa.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,17 +90,17 @@ msgstr "Просмотр..."
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:254 xfsamba/xfsamba_gui.c:596
-#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:420
-#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
+#: xfsamba/xfsamba.c:272 xfsamba/xfsamba_gui.c:596
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:422
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:188 xftree/gtk_prop.c:214
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "OK"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
-#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:189 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:860 xftree/xtree_cpy.c:1324 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -108,7 +108,7 @@ msgstr "Отмена"
 msgid "You must provide the command to execute !"
 msgstr "Вы должны ввести команду для исполнения!"
 
-#: xfce/configfile.c:61
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
@@ -117,7 +117,7 @@ msgstr ""
 "XFce : Синтаксическая ошибка в конфигурационном файле\n"
 "(%s)\n"
 
-#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -125,7 +125,7 @@ msgstr ""
 "Синтаксическая ошибка в конфигурационном файле\n"
 "Прекращение"
 
-#: xfce/configfile.c:69
+#: xfce/configfile.c:77
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
@@ -134,7 +134,7 @@ msgstr ""
 "XFce : Неправильные данные в конфигурационном файле\n"
 "(%s)\n"
 
-#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:78 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -142,27 +142,27 @@ msgstr ""
 "Неправильные данные в конфигурационном файле\n"
 "Прекращение"
 
-#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:237 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "Не могу создать файл"
 
-#: xfce/configfile.c:380
+#: xfce/configfile.c:393
 msgid "Cannot reset configuration file"
 msgstr "Не могу сбросить конфигурационный файл"
 
-#: xfce/configfile.c:383
+#: xfce/configfile.c:396
 msgid "Creating new config file...\n"
 msgstr "Создаю новый конфигурационный файл...\n"
 
-#: xfce/configfile.c:558 xfce/configfile.c:568
+#: xfce/configfile.c:497 xfce/configfile.c:507
 msgid "Cannot open configuration file"
 msgstr "Не могу открыть конфигурационный файл"
 
-#: xfce/configfile.c:574
+#: xfce/configfile.c:513
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Не похоже на XFce 3 конфигурационный файл!"
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:514
 #, fuzzy
 msgid ""
 "Do you want to reset the configuration file ?\n"
@@ -171,15 +171,15 @@ msgstr ""
 "Вы хотите сбросить конфигурационный файл ?\n"
 " \t(Предыдущий файл будет сохранен  с расширением \".orig\")"
 
-#: xfce/configfile.c:586
+#: xfce/configfile.c:525
 msgid "Cannot open new config, Giving up..."
 msgstr "Не могу открыть новый конфигурационный файл, выхожу..."
 
-#: xfce/configfile.c:587
+#: xfce/configfile.c:526
 msgid "Cannot load configuration file"
 msgstr "Не могу прочитать конфигурационный файл"
 
-#: xfce/configfile.c:593
+#: xfce/configfile.c:532
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Не могу использовать конфигурационный файл XFce старой версии"
 
@@ -188,12 +188,12 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:927
 msgid "Clear"
 msgstr "Очистить"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:921
+#: xftree/xtree_mess.c:932
 msgid "Dismiss"
 msgstr ""
 
@@ -202,9 +202,9 @@ msgid "Info ..."
 msgstr "Информация..."
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
-#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
-#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
-#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:202 xfce/xfce.c:242
+#: xfce/xfce.c:521 xfce/xfce.c:552 xfce/xfce.c:649 xfce/xfce.c:670
+#: xfce/xfce.c:703 xfce/xfce.c:718 xfce/xfce.c:776 xfce/xfce.c:797
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "Не могу создать pixmap"
@@ -585,104 +585,104 @@ msgstr "Применить"
 msgid "Please wait, XFce is loading..."
 msgstr "Пожалуйста подождите, XFce грузится..."
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "One"
 msgstr "Один"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Two"
 msgstr "Два"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Three"
 msgstr "Три"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Four"
 msgstr "Четыре"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Five"
 msgstr "Пять"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Six"
 msgstr "Шесть"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Seven"
 msgstr "Семь"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Eight"
 msgstr "Восемь"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Nine"
 msgstr "Девять"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Ten"
 msgstr "Десять"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Eleven"
 msgstr "Одиннадцать"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Twelve"
 msgstr "Двенадцать"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Thirteen"
 msgstr "Тринадцать"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fourteen"
 msgstr "Четырнадцать"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fifteen"
 msgstr "Пятнадцать"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Sixteen"
 msgstr "Шестнадцать"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Seventeen"
 msgstr "Семнадцать"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Eighteen"
 msgstr "Восемнадцать"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Nineteen"
 msgstr "Девятнадцать"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Twenty"
 msgstr "Двадцать"
 
-#: xfce/xfce.c:103 xfclock/xfclock_menus.c:112
+#: xfce/xfce.c:107 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
 msgstr "Цифровой режим"
 
-#: xfce/xfce.c:111
+#: xfce/xfce.c:115
 #, fuzzy
 msgid "24 hours mode"
 msgstr "24-х часовой"
 
-#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:665 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "Инфо..."
 
-#: xfce/xfce.c:676
+#: xfce/xfce.c:698
 msgid "Setup..."
 msgstr "Установка..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:725 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Выход"
@@ -780,11 +780,11 @@ msgstr ""
 "Выбраный рабочий стол сейчас\n"
 "не видит с панели XFce."
 
-#: xfce/xfwm.c:81
+#: xfce/xfwm.c:94
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFce: Коммуникационный канал закрыт. Выход...\n"
 
-#: xfce/xfwm.c:455 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
+#: xfce/xfwm.c:471 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
 #: xfwm/xfwm.c:868 xfwm/xfwm.c:869 xfwm/xfwm.c:870 xfwm/xfwm.c:871
 #: xfwm/xfwm.c:872 xfwm/xfwm.c:873 xfwm/xfwm.c:874
 msgid "Workspace"
@@ -836,31 +836,31 @@ msgstr "Все"
 msgid "_Close"
 msgstr "Закрыть"
 
-#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
+#: xftree/gtk_exec.c:166 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
 msgstr "Открыть с..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:170 xftree/xtree_gui.c:219
 #: xfwm/xfwm.c:900
 msgid "Run program ..."
 msgstr "Выполнить программу..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:220
 msgid "Open in terminal"
 msgstr "Открыть в терминале"
 
-#: xftree/gtk_exec.c:220
+#: xftree/gtk_exec.c:225
 msgid "Remember application"
 msgstr ""
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:244
+#: xftree/gtk_exec.c:249
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Критическая ошибка в %s в %d\n"
 
-#: xftree/gtk_exec.c:251 xftree/reg.c:662
+#: xftree/gtk_exec.c:256 xftree/reg.c:667
 msgid "Can't find in PATH"
 msgstr ""
 
@@ -964,46 +964,46 @@ msgstr "неизвестный"
 msgid "RPM info"
 msgstr ""
 
-#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
-#: xftree/xtree_cpy.c:1374
+#: xftree/reg.c:610 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1375
 msgid "This function is not available for the contents of tar files"
 msgstr ""
 
-#: xftree/reg.c:613
+#: xftree/reg.c:618
 #, fuzzy, c-format
 msgid "Register program for directory \"%s\""
 msgstr "Регистрация программы для файла \"%s\""
 
-#: xftree/reg.c:620
+#: xftree/reg.c:625
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Не могу найти суффикс в имени файла, используйте полное имя"
 
-#: xftree/reg.c:627
+#: xftree/reg.c:632
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Регистрация программы для файла \"%s\""
 
-#: xftree/reg.c:631
+#: xftree/reg.c:636
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Регистрация программы для суффикса \"%s\""
 
-#: xftree/xtree.c:223
+#: xftree/xtree.c:236
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, на основе XTree Версии %s\n"
 
-#: xftree/xtree.c:224
+#: xftree/xtree.c:237
 #, c-format
 msgid "directory: %s\n"
 msgstr "каталог: %s\n"
 
-#: xftree/xtree.c:231 xftree/xtree.c:270
+#: xftree/xtree.c:244 xftree/xtree.c:283
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "создание директории: %s\n"
 
-#: xftree/xtree.c:287
+#: xftree/xtree.c:300
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "геометрия: %dx%d+%d+%d\n"
@@ -1048,7 +1048,7 @@ msgstr "Новый каталог"
 msgid "New_File"
 msgstr "Новый каталог"
 
-#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1486
 #, fuzzy
 msgid "File exists !"
 msgstr "Файл существует! Переписать?"
@@ -1061,7 +1061,7 @@ msgstr "Ни одного объекта не выделено!"
 msgid "Rename to : "
 msgstr "Переименовать в:"
 
-#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1464
 msgid "Character not allowed in filename"
 msgstr "Знак не допустим в имени файла"
 
@@ -1109,68 +1109,68 @@ msgstr ""
 msgid "Error deleting"
 msgstr ""
 
-#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:509
 msgid "Can't copy FIFO"
 msgstr "Не могу копировать FIFO"
 
-#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:512
 msgid "Can't copy device file"
 msgstr "Не могу копировать файл устройства"
 
-#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:515
 msgid "Can't copy socket"
 msgstr "Не могу копировать SOCKET"
 
-#: xftree/xtree_cpy.c:853
+#: xftree/xtree_cpy.c:854
 #, fuzzy
 msgid "Counting files"
 msgstr "Перемещаю файл...\n"
 
-#: xftree/xtree_cpy.c:1225
+#: xftree/xtree_cpy.c:1226
 #, c-format
 msgid "%d / %d"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1301
+#: xftree/xtree_cpy.c:1302
 msgid "Source: "
 msgstr "Источник: "
 
-#: xftree/xtree_cpy.c:1308
+#: xftree/xtree_cpy.c:1309
 msgid "Target: "
 msgstr "Приемник: "
 
-#: xftree/xtree_cpy.c:1315
+#: xftree/xtree_cpy.c:1316
 msgid "beginning copy operation"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1330
+#: xftree/xtree_cpy.c:1331
 msgid "XFTree: Copy"
 msgstr "XFTree: Копирование"
 
-#: xftree/xtree_cpy.c:1331
+#: xftree/xtree_cpy.c:1332
 msgid "XFTree: Move"
 msgstr "XFTree: Перемещение"
 
-#: xftree/xtree_cpy.c:1332
+#: xftree/xtree_cpy.c:1333
 #, fuzzy
 msgid "XFTree: Link"
 msgstr "XFTree: Копирование"
 
-#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
+#: xftree/xtree_cpy.c:1437 xftree/xtree_cpy.c:1525
 #, fuzzy
 msgid "No file or directory selected!"
 msgstr "каталог: %s\n"
 
-#: xftree/xtree_cpy.c:1439
+#: xftree/xtree_cpy.c:1440
 #, fuzzy
 msgid "Only one file or directory can be selected!"
 msgstr "каталог: %s\n"
 
-#: xftree/xtree_cpy.c:1445
+#: xftree/xtree_cpy.c:1446
 msgid "This function is not available for the contents of tar/rpm files"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1455
+#: xftree/xtree_cpy.c:1456
 #, fuzzy
 msgid "Symlink name : "
 msgstr "Имя файла: "
@@ -1241,7 +1241,7 @@ msgstr "Открыть в новом окне"
 msgid "Open terminal view"
 msgstr "Открыть в терминале"
 
-#: xfsamba/xfsamba_mkdir.c:200 xftree/xtree_gui.c:158
+#: xfsamba/xfsamba_mkdir.c:202 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
 #, fuzzy
 msgid "New Folder"
@@ -1600,42 +1600,42 @@ msgstr ""
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
 #: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
-#: xftree/xtree_mess.c:108
+#: xftree/xtree_mess.c:109
 msgid "Could not load specified font\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:452
+#: xftree/xtree_mess.c:453
 msgid "Override ?"
 msgstr "Перезаписать?"
 
-#: xftree/xtree_mess.c:453
+#: xftree/xtree_mess.c:454
 msgid "with"
 msgstr ""
 
-#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
-#: xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:533 xftree/xtree_mess.c:534 xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:551
 msgid "Default xftreerc file cannot be created\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:586
+#: xftree/xtree_mess.c:588
 msgid "Default xftreerc file cannot be read\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:800
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
 "and press a keyboard key to create the shortcut."
 msgstr ""
 
-#: xftree/xtree_mess.c:798
+#: xftree/xtree_mess.c:809
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
 "installed\n"
 "separately from XFCE. A ROX-filer specific for XFCE will soon be available."
 msgstr ""
 
-#: xftree/xtree_mess.c:807
+#: xftree/xtree_mess.c:818
 msgid ""
 "Xftree allows you to drag and drop to/from\n"
 "xftree windows running on different hosts.\n"
@@ -1648,7 +1648,7 @@ msgid ""
 "filemanagers running on different hosts.\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:823
+#: xftree/xtree_mess.c:834
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1657,7 +1657,7 @@ msgid ""
 " please look at ~/.xfce/xtree.reg."
 msgstr ""
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:843
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1671,15 +1671,15 @@ msgid ""
 "is available on the first click after a GOTO or REGEN.\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:850
+#: xftree/xtree_mess.c:861
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 
-#: xftree/xtree_mess.c:894
+#: xftree/xtree_mess.c:905
 msgid "Xftree results"
 msgstr ""
 
-#: xftree/xtree_mess.c:1147
+#: xftree/xtree_mess.c:1158
 #, fuzzy
 msgid "Home directory : "
 msgstr "каталог: %s\n"
@@ -3249,33 +3249,33 @@ msgstr ""
 msgid "xfwm terminated: "
 msgstr ""
 
-#: xfsamba/xfsamba.c:242
+#: xfsamba/xfsamba.c:260
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr ""
 
-#: xfsamba/xfsamba.c:250
+#: xfsamba/xfsamba.c:268
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr ""
 
-#: xfsamba/xfsamba_download.c:87
+#: xfsamba/xfsamba_download.c:86
 msgid "File download failed. See diagnostics for reason."
 msgstr ""
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:91
+#: xfsamba/xfsamba_download.c:90
 msgid "Download done."
 msgstr ""
 
-#: xfsamba/xfsamba_download.c:127
+#: xfsamba/xfsamba_download.c:126
 #, fuzzy
 msgid "Downloading file..."
 msgstr "Перемещаю файл...\n"
 
-#: xfsamba/xfsamba_download.c:140
+#: xfsamba/xfsamba_download.c:139
 msgid "File download cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_download.c:148
+#: xfsamba/xfsamba_download.c:147
 #, fuzzy
 msgid "Download failed."
 msgstr "Звуковой файл: "
@@ -3408,7 +3408,7 @@ msgstr "Новый каталог..."
 msgid "Delete..."
 msgstr "Удалить..."
 
-#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:443
 #, fuzzy
 msgid "Tar..."
 msgstr "Загрузка..."
@@ -3628,19 +3628,19 @@ msgstr ""
 #. no jalo para arreglar directorios:
 #. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
 #.
-#: xfsamba/xfsamba_list.c:233
+#: xfsamba/xfsamba_list.c:236
 msgid "Retrieve done."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:238 xfsamba/xfsamba_smblookup.c:175
+#: xfsamba/xfsamba_list.c:241 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:281
+#: xfsamba/xfsamba_list.c:284
 msgid "List failed."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:300
+#: xfsamba/xfsamba_list.c:303
 msgid "Retreiving..."
 msgstr ""
 
@@ -3675,7 +3675,7 @@ msgstr ""
 msgid "Query failed. Machine may be down."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:340
+#: xfsamba/xfsamba_smblookup.c:354
 #, fuzzy
 msgid "Querying"
 msgstr "Вопрос"
@@ -3722,32 +3722,32 @@ msgstr ""
 msgid "Resolving"
 msgstr "Удалить"
 
-#: xfsamba/xfsamba_mkdir.c:91
+#: xfsamba/xfsamba_mkdir.c:93
 msgid "Directory creation failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:100
+#: xfsamba/xfsamba_mkdir.c:102
 #, fuzzy
 msgid "Directory created."
 msgstr "каталог: %s\n"
 
-#: xfsamba/xfsamba_mkdir.c:149
+#: xfsamba/xfsamba_mkdir.c:151
 #, fuzzy
 msgid "Create directory cancelled."
 msgstr "создание директории: %s\n"
 
-#: xfsamba/xfsamba_mkdir.c:160
+#: xfsamba/xfsamba_mkdir.c:162
 #, fuzzy
 msgid "Create directory failed."
 msgstr "создание директории: %s\n"
 
-#: xfsamba/xfsamba_mkdir.c:185
+#: xfsamba/xfsamba_mkdir.c:187
 #, fuzzy
 msgid "Creating dir..."
 msgstr "Перемещаю файл...\n"
 
 #. here, dialog to ask new dir name
-#: xfsamba/xfsamba_mkdir.c:200
+#: xfsamba/xfsamba_mkdir.c:202
 #, fuzzy
 msgid "New directory name:"
 msgstr "каталог: %s\n"
@@ -3756,127 +3756,127 @@ msgstr "каталог: %s\n"
 msgid "Really delete remote items?"
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:187
+#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:189
 msgid "Remove cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:135
+#: xfsamba/xfsamba_rm.c:137
 msgid "Remove failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:150
+#: xfsamba/xfsamba_rm.c:152
 msgid "Remove complete."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:177
+#: xfsamba/xfsamba_rm.c:179
 #, fuzzy
 msgid "Removing..."
 msgstr "Удалить"
 
-#: xfsamba/xfsamba_rm.c:184
+#: xfsamba/xfsamba_rm.c:186
 msgid "Sorry, top level shares cannot be removed."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:121
+#: xfsamba/xfsamba_tar.c:123
 msgid "Tar failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:126
+#: xfsamba/xfsamba_tar.c:128
 msgid "Tar extraction has completed"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:131
+#: xfsamba/xfsamba_tar.c:133
 msgid "Tar command complete."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:153
+#: xfsamba/xfsamba_tar.c:155
 msgid "Please select input tarfile next."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:157
+#: xfsamba/xfsamba_tar.c:159
 msgid "Please select the output tarfile next."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
+#: xfsamba/xfsamba_tar.c:193 xfsamba/xfsamba_tar.c:234
 msgid "Tar cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:203
+#: xfsamba/xfsamba_tar.c:205
 #, fuzzy
 msgid "Cannot open tar file"
 msgstr ""
 "Ошибка\n"
 "Не могу открыть файл"
 
-#: xfsamba/xfsamba_tar.c:214
+#: xfsamba/xfsamba_tar.c:216
 #, fuzzy
 msgid "Cannot create tar file"
 msgstr "Не могу создать файл"
 
-#: xfsamba/xfsamba_tar.c:325
+#: xfsamba/xfsamba_tar.c:327
 msgid "create"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:328
+#: xfsamba/xfsamba_tar.c:330
 msgid "extract"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:371
+#: xfsamba/xfsamba_tar.c:373
 msgid "full"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:374
+#: xfsamba/xfsamba_tar.c:376
 #, fuzzy
 msgid "incremental"
 msgstr "Соглашение"
 
-#: xfsamba/xfsamba_tar.c:397
+#: xfsamba/xfsamba_tar.c:399
 msgid "do not reset archive bit"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:400
+#: xfsamba/xfsamba_tar.c:402
 msgid "reset archive bit"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:412
+#: xfsamba/xfsamba_tar.c:414
 msgid "Options"
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:104
+#: xfsamba/xfsamba_upload.c:106
 msgid "Uploaded file."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:136
+#: xfsamba/xfsamba_upload.c:138
 msgid "File upload failed. See diagnostics for reason."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:282
+#: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:284
 msgid "Upload done."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:168
+#: xfsamba/xfsamba_upload.c:170
 #, fuzzy
 msgid "Uploading file..."
 msgstr "Перемещаю файл...\n"
 
-#: xfsamba/xfsamba_upload.c:174
+#: xfsamba/xfsamba_upload.c:176
 msgid "File upload cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:184
+#: xfsamba/xfsamba_upload.c:186
 msgid "Specified file does not exist"
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:185 xfsamba/xfsamba_upload.c:199
+#: xfsamba/xfsamba_upload.c:187 xfsamba/xfsamba_upload.c:201
 #, fuzzy
 msgid "Upload failed."
 msgstr "Перемещаю файл...\n"
 
-#: xfsamba/xfsamba_upload.c:252
+#: xfsamba/xfsamba_upload.c:254
 msgid "Upload produced errors. See diagnostics for reason."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:359
+#: xfsamba/xfsamba_upload.c:361
 #, fuzzy
 msgid "Uploading files..."
 msgstr "Перемещаю файл...\n"

@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-#SUBDIRS = icons
+SUBDIRS = icons
 
 EXTRA_DIST = Changelog $(xfdiff_distcvs)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-04-28 15:15+0200\n"
+"POT-Creation-Date: 2002-09-01 01:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Joakim Andreasson <joakim.andreasson@gmx.net>\n"
 "Language-Team: Yours Truly <joakim.andreasson@gmx.net>\n"
@@ -89,17 +89,17 @@ msgstr "Bläddra..."
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:254 xfsamba/xfsamba_gui.c:596
-#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:420
-#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
+#: xfsamba/xfsamba.c:272 xfsamba/xfsamba_gui.c:596
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:422
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:188 xftree/gtk_prop.c:214
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
-#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:189 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:860 xftree/xtree_cpy.c:1324 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -107,7 +107,7 @@ msgstr "Avbryt"
 msgid "You must provide the command to execute !"
 msgstr "Du måste ange ett kommando att utföra!"
 
-#: xfce/configfile.c:61
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
@@ -116,7 +116,7 @@ msgstr ""
 "XFce: Syntaktiskt fel i konfigurationsfilen\n"
 "(%s)\n"
 
-#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -124,7 +124,7 @@ msgstr ""
 "Syntaktiskt fel i konfigurationsfilen\n"
 "Avbryter"
 
-#: xfce/configfile.c:69
+#: xfce/configfile.c:77
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
@@ -133,7 +133,7 @@ msgstr ""
 "XFce: Data mismatch error in configuration file\n"
 "(%s)\n"
 
-#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:78 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -141,27 +141,27 @@ msgstr ""
 "Dataöverensstämmelsefel i konfigurationsfilen\n"
 "Avbryter"
 
-#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:237 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "Kan ej skapa fil"
 
-#: xfce/configfile.c:380
+#: xfce/configfile.c:393
 msgid "Cannot reset configuration file"
 msgstr "Kan ej återställa konfigurationsfilen"
 
-#: xfce/configfile.c:383
+#: xfce/configfile.c:396
 msgid "Creating new config file...\n"
 msgstr "Skapar ny konfigurationsfil...\n"
 
-#: xfce/configfile.c:558 xfce/configfile.c:568
+#: xfce/configfile.c:497 xfce/configfile.c:507
 msgid "Cannot open configuration file"
 msgstr "Kan ej öppna konfigurationsfilen"
 
-#: xfce/configfile.c:574
+#: xfce/configfile.c:513
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Verkar inte vara en XFce 3-konfigurationsfil!"
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:514
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
@@ -169,15 +169,15 @@ msgstr ""
 "Vill du återställa konfigurationsfilen?\n"
 " \t(Den gamla filen kommer att sparas med filslutet \".orig\")"
 
-#: xfce/configfile.c:586
+#: xfce/configfile.c:525
 msgid "Cannot open new config, Giving up..."
 msgstr "Kan ej öpna ny konfiguration, ger upp..."
 
-#: xfce/configfile.c:587
+#: xfce/configfile.c:526
 msgid "Cannot load configuration file"
 msgstr "Kan ej öppna konfigurationsfil"
 
-#: xfce/configfile.c:593
+#: xfce/configfile.c:532
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Kan ej använda äldre XFce-versioners konfigurationsfiler"
 
@@ -186,12 +186,12 @@ msgid "Subprocess diagnostic"
 msgstr "Underprocessdiagnostik"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:927
 msgid "Clear"
 msgstr "Rensa"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:921
+#: xftree/xtree_mess.c:932
 msgid "Dismiss"
 msgstr "Avfärda"
 
@@ -200,9 +200,9 @@ msgid "Info ..."
 msgstr "Info..."
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
-#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
-#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
-#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:202 xfce/xfce.c:242
+#: xfce/xfce.c:521 xfce/xfce.c:552 xfce/xfce.c:649 xfce/xfce.c:670
+#: xfce/xfce.c:703 xfce/xfce.c:718 xfce/xfce.c:776 xfce/xfce.c:797
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "Kunde ej skapa pixmap"
@@ -576,103 +576,103 @@ msgstr "Verkställ"
 msgid "Please wait, XFce is loading..."
 msgstr "Startar XFce, var god vänta..."
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "One"
 msgstr "Ett"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Two"
 msgstr "Två"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Three"
 msgstr "Tre"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Four"
 msgstr "Fyra"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Five"
 msgstr "Fem"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Six"
 msgstr "Sex"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Seven"
 msgstr "Sju"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Eight"
 msgstr "Åtta"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Nine"
 msgstr "Nio"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Ten"
 msgstr "Tio"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Eleven"
 msgstr "Elva"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Twelve"
 msgstr "Tolv"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Thirteen"
 msgstr "Tretton"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fourteen"
 msgstr "Fjorton"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fifteen"
 msgstr "Femton"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Sixteen"
 msgstr "Sexton"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Seventeen"
 msgstr "Sjutton"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Eighteen"
 msgstr "Arton"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Nineteen"
 msgstr "Nitton"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Twenty"
 msgstr "Tjugo"
 
-#: xfce/xfce.c:103 xfclock/xfclock_menus.c:112
+#: xfce/xfce.c:107 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
 msgstr "Digitalt läge"
 
-#: xfce/xfce.c:111
+#: xfce/xfce.c:115
 msgid "24 hours mode"
 msgstr "24-timmarsläge"
 
-#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:665 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "Om..."
 
-#: xfce/xfce.c:676
+#: xfce/xfce.c:698
 msgid "Setup..."
 msgstr "Inställningar..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:725 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Stäng"
@@ -770,11 +770,11 @@ msgstr ""
 "Du har valt ett skrivbord som för närvarande ej\n"
 "är synligt på XFCE-panelen."
 
-#: xfce/xfwm.c:81
+#: xfce/xfwm.c:94
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Kommunikationsrör stängt. Avslutar...\n"
 
-#: xfce/xfwm.c:455 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
+#: xfce/xfwm.c:471 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
 #: xfwm/xfwm.c:868 xfwm/xfwm.c:869 xfwm/xfwm.c:870 xfwm/xfwm.c:871
 #: xfwm/xfwm.c:872 xfwm/xfwm.c:873 xfwm/xfwm.c:874
 msgid "Workspace"
@@ -819,31 +819,31 @@ msgstr "_Alla"
 msgid "_Close"
 msgstr "_Stäng"
 
-#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
+#: xftree/gtk_exec.c:166 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
 msgstr "Öppna med..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:170 xftree/xtree_gui.c:219
 #: xfwm/xfwm.c:900
 msgid "Run program ..."
 msgstr "Kör program..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:220
 msgid "Open in terminal"
 msgstr "Öppna i terminal"
 
-#: xftree/gtk_exec.c:220
+#: xftree/gtk_exec.c:225
 msgid "Remember application"
 msgstr "Kom ihåg applikation"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:244
+#: xftree/gtk_exec.c:249
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Fatalt fel i %s vid %d\n"
 
-#: xftree/gtk_exec.c:251 xftree/reg.c:662
+#: xftree/gtk_exec.c:256 xftree/reg.c:667
 msgid "Can't find in PATH"
 msgstr "Finst inte i PATH"
 
@@ -946,46 +946,46 @@ msgstr "okänd"
 msgid "RPM info"
 msgstr "RPM-info"
 
-#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
-#: xftree/xtree_cpy.c:1374
+#: xftree/reg.c:610 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1375
 msgid "This function is not available for the contents of tar files"
 msgstr "Denna funktion är inte tillgänglig för innehåll i tarfiler"
 
-#: xftree/reg.c:613
+#: xftree/reg.c:618
 #, c-format
 msgid "Register program for directory \"%s\""
 msgstr "Registrera program för katalogen \"%s\""
 
-#: xftree/reg.c:620
+#: xftree/reg.c:625
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Kan ej finna extension i filnamn, använder fullständigt filnamn"
 
-#: xftree/reg.c:627
+#: xftree/reg.c:632
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Registrera program för fil \"%s\""
 
-#: xftree/reg.c:631
+#: xftree/reg.c:636
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Registrera program för extension \"%s\""
 
-#: xftree/xtree.c:223
+#: xftree/xtree.c:236
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, baserat på XTree version %s\n"
 
-#: xftree/xtree.c:224
+#: xftree/xtree.c:237
 #, c-format
 msgid "directory: %s\n"
 msgstr "katalog: %s\n"
 
-#: xftree/xtree.c:231 xftree/xtree.c:270
+#: xftree/xtree.c:244 xftree/xtree.c:283
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "skapar katalog: %s\n"
 
-#: xftree/xtree.c:287
+#: xftree/xtree.c:300
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometri %dx%d+%d+%d\n"
@@ -1033,7 +1033,7 @@ msgstr "Ny_Katalog"
 msgid "New_File"
 msgstr "Ny_fil"
 
-#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1486
 msgid "File exists !"
 msgstr "Filen finns!"
 
@@ -1045,7 +1045,7 @@ msgstr "Inga objekt markerade!"
 msgid "Rename to : "
 msgstr "Byt namn till:"
 
-#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1464
 msgid "Character not allowed in filename"
 msgstr "Tecken ej tillåtet i filnamn"
 
@@ -1085,64 +1085,64 @@ msgstr "Filstängningsfel"
 msgid "Error deleting"
 msgstr "Fel vid radering"
 
-#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:509
 msgid "Can't copy FIFO"
 msgstr "Kan ej kopiera FIFO"
 
-#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:512
 msgid "Can't copy device file"
 msgstr "Kan ej kopiera enhetsfil"
 
-#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:515
 msgid "Can't copy socket"
 msgstr "Kan ej kopiera socket"
 
-#: xftree/xtree_cpy.c:853
+#: xftree/xtree_cpy.c:854
 msgid "Counting files"
 msgstr "Räknar filer"
 
-#: xftree/xtree_cpy.c:1225
+#: xftree/xtree_cpy.c:1226
 #, c-format
 msgid "%d / %d"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1301
+#: xftree/xtree_cpy.c:1302
 msgid "Source: "
 msgstr "Ursprung:"
 
-#: xftree/xtree_cpy.c:1308
+#: xftree/xtree_cpy.c:1309
 msgid "Target: "
 msgstr "Destination:"
 
-#: xftree/xtree_cpy.c:1315
+#: xftree/xtree_cpy.c:1316
 msgid "beginning copy operation"
 msgstr "påbörjar kopiering"
 
-#: xftree/xtree_cpy.c:1330
+#: xftree/xtree_cpy.c:1331
 msgid "XFTree: Copy"
 msgstr "XFTree: Kopiera"
 
-#: xftree/xtree_cpy.c:1331
+#: xftree/xtree_cpy.c:1332
 msgid "XFTree: Move"
 msgstr "XFTree: Flytta"
 
-#: xftree/xtree_cpy.c:1332
+#: xftree/xtree_cpy.c:1333
 msgid "XFTree: Link"
 msgstr "XFTree: Länka"
 
-#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
+#: xftree/xtree_cpy.c:1437 xftree/xtree_cpy.c:1525
 msgid "No file or directory selected!"
 msgstr "Ingen fil eller katalog markerad!"
 
-#: xftree/xtree_cpy.c:1439
+#: xftree/xtree_cpy.c:1440
 msgid "Only one file or directory can be selected!"
 msgstr "Endast en fil eller katalog kan väljas!"
 
-#: xftree/xtree_cpy.c:1445
+#: xftree/xtree_cpy.c:1446
 msgid "This function is not available for the contents of tar/rpm files"
 msgstr "Denna funktion är inte tillgänglig för innehåll i tar- och rpmfiler"
 
-#: xftree/xtree_cpy.c:1455
+#: xftree/xtree_cpy.c:1456
 msgid "Symlink name : "
 msgstr "Symlänkens namn:"
 
@@ -1207,7 +1207,7 @@ msgstr "Öppna trädvy"
 msgid "Open terminal view"
 msgstr "Öppna i terminal"
 
-#: xfsamba/xfsamba_mkdir.c:200 xftree/xtree_gui.c:158
+#: xfsamba/xfsamba_mkdir.c:202 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
 msgid "New Folder"
 msgstr "Ny katalog"
@@ -1537,28 +1537,28 @@ msgstr "Visa huvudmenyn"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
 #: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
-#: xftree/xtree_mess.c:108
+#: xftree/xtree_mess.c:109
 msgid "Could not load specified font\n"
 msgstr "Kunde ej läsa in specificerat typsnitt\n"
 
-#: xftree/xtree_mess.c:452
+#: xftree/xtree_mess.c:453
 msgid "Override ?"
 msgstr "Skriv över?"
 
-#: xftree/xtree_mess.c:453
+#: xftree/xtree_mess.c:454
 msgid "with"
 msgstr "med"
 
-#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
-#: xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:533 xftree/xtree_mess.c:534 xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:551
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Ursprunglig xftreerc-fil kan inte skapas\n"
 
-#: xftree/xtree_mess.c:586
+#: xftree/xtree_mess.c:588
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Ursprunglig xftreerc-fil kan inte läsas\n"
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:800
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1568,7 +1568,7 @@ msgstr ""
 "Med detta menas, att du kan öppna en meny, markera ett fält\n"
 "och trycka en tangent för att skapa en bindning."
 
-#: xftree/xtree_mess.c:798
+#: xftree/xtree_mess.c:809
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
 "installed\n"
@@ -1577,7 +1577,7 @@ msgstr ""
 "Xftrees ikonvy är ROX-filer. För närvarande måste denna vara installerad\n"
 "separat från XFce. En XFce-specifik ROX-filer kommer snart att vara tillgänglig."
 
-#: xftree/xtree_mess.c:807
+#: xftree/xtree_mess.c:818
 msgid ""
 "Xftree allows you to drag and drop to/from\n"
 "xftree windows running on different hosts.\n"
@@ -1599,7 +1599,7 @@ msgstr ""
 "Xftree tillåter även nedsläpp från andra\n"
 "filhanterare som körs på olika värdar.\n"
 
-#: xftree/xtree_mess.c:823
+#: xftree/xtree_mess.c:834
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1613,7 +1613,7 @@ msgstr ""
 "Vill du ändra redan registrerade applikationer, vänligen titta på\n"
 " ~/.xfce/xtree.reg."
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:843
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1637,15 +1637,15 @@ msgstr ""
 "tillgängligt vid det första musklicket efter en\n"
 "GÅ TILL- eller REGENERERA-operation.\n"
 
-#: xftree/xtree_mess.c:850
+#: xftree/xtree_mess.c:861
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr "Tangentbindningar är en snabb väg för åtkomst av menyfunktioner."
 
-#: xftree/xtree_mess.c:894
+#: xftree/xtree_mess.c:905
 msgid "Xftree results"
 msgstr "XFTree: resultat"
 
-#: xftree/xtree_mess.c:1147
+#: xftree/xtree_mess.c:1158
 msgid "Home directory : "
 msgstr "Hemkatalog: "
 
@@ -3233,32 +3233,32 @@ msgstr "&Horisontellt"
 msgid "xfwm terminated: "
 msgstr "xfwm avslutad: "
 
-#: xfsamba/xfsamba.c:242
+#: xfsamba/xfsamba.c:260
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Sambafel! Xfsamba kunde inte finna fil:"
 
-#: xfsamba/xfsamba.c:250
+#: xfsamba/xfsamba.c:268
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr "(vänligen installera Samba eller korrigera miljövariabeln PATH)"
 
-#: xfsamba/xfsamba_download.c:87
+#: xfsamba/xfsamba_download.c:86
 msgid "File download failed. See diagnostics for reason."
 msgstr "Filnerladdning misslyckades. Se diagnostik för anledning"
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:91
+#: xfsamba/xfsamba_download.c:90
 msgid "Download done."
 msgstr "Nerladdning färdig."
 
-#: xfsamba/xfsamba_download.c:127
+#: xfsamba/xfsamba_download.c:126
 msgid "Downloading file..."
 msgstr "Laddar ner fil..."
 
-#: xfsamba/xfsamba_download.c:140
+#: xfsamba/xfsamba_download.c:139
 msgid "File download cancelled."
 msgstr "Filnerladdning avbruten."
 
-#: xfsamba/xfsamba_download.c:148
+#: xfsamba/xfsamba_download.c:147
 msgid "Download failed."
 msgstr "Nerladdning misslyckades."
 
@@ -3407,7 +3407,7 @@ msgstr "Ny katalog..."
 msgid "Delete..."
 msgstr "Radera..."
 
-#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:443
 msgid "Tar..."
 msgstr ""
 
@@ -3598,19 +3598,19 @@ msgstr "Välkommen till xfsamba."
 #. no jalo para arreglar directorios:
 #. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
 #.
-#: xfsamba/xfsamba_list.c:233
+#: xfsamba/xfsamba_list.c:236
 msgid "Retrieve done."
 msgstr "Hämtning färdig."
 
-#: xfsamba/xfsamba_list.c:238 xfsamba/xfsamba_smblookup.c:175
+#: xfsamba/xfsamba_list.c:241 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
 msgstr "Sökningslösenord har efterfrågats."
 
-#: xfsamba/xfsamba_list.c:281
+#: xfsamba/xfsamba_list.c:284
 msgid "List failed."
 msgstr "Lista misslyckades."
 
-#: xfsamba/xfsamba_list.c:300
+#: xfsamba/xfsamba_list.c:303
 msgid "Retreiving..."
 msgstr "Hämtar..."
 
@@ -3643,7 +3643,7 @@ msgstr "Sökning färdrig."
 msgid "Query failed. Machine may be down."
 msgstr "Sökning misslyckades. Maskinen kanske är nere."
 
-#: xfsamba/xfsamba_smblookup.c:340
+#: xfsamba/xfsamba_smblookup.c:354
 msgid "Querying"
 msgstr "Söker"
 
@@ -3692,29 +3692,29 @@ msgstr ""
 msgid "Resolving"
 msgstr "Analyserar"
 
-#: xfsamba/xfsamba_mkdir.c:91
+#: xfsamba/xfsamba_mkdir.c:93
 msgid "Directory creation failed. See diagnostics for details."
 msgstr "Skapelse av katalog misslyckades. Se diagnostik för detaljer"
 
-#: xfsamba/xfsamba_mkdir.c:100
+#: xfsamba/xfsamba_mkdir.c:102
 msgid "Directory created."
 msgstr "Katalog skapad."
 
-#: xfsamba/xfsamba_mkdir.c:149
+#: xfsamba/xfsamba_mkdir.c:151
 msgid "Create directory cancelled."
 msgstr "Skapelse av katalog avbruten."
 
 # xfsamba/xfsamba_mkdir.c:212y
-#: xfsamba/xfsamba_mkdir.c:160
+#: xfsamba/xfsamba_mkdir.c:162
 msgid "Create directory failed."
 msgstr "Skapelse av katalog misslyckades."
 
-#: xfsamba/xfsamba_mkdir.c:185
+#: xfsamba/xfsamba_mkdir.c:187
 msgid "Creating dir..."
 msgstr "Skapar katalog..."
 
 #. here, dialog to ask new dir name
-#: xfsamba/xfsamba_mkdir.c:200
+#: xfsamba/xfsamba_mkdir.c:202
 msgid "New directory name:"
 msgstr "Namn på ny katalog:"
 
@@ -3722,120 +3722,120 @@ msgstr "Namn på ny katalog:"
 msgid "Really delete remote items?"
 msgstr "Vill du verkligen radera objekten?"
 
-#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:187
+#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:189
 msgid "Remove cancelled."
 msgstr "Borttagning avbruten."
 
-#: xfsamba/xfsamba_rm.c:135
+#: xfsamba/xfsamba_rm.c:137
 msgid "Remove failed. See diagnostics for details."
 msgstr "Borttagning misslyckades. Se diagnostik för detaljer."
 
-#: xfsamba/xfsamba_rm.c:150
+#: xfsamba/xfsamba_rm.c:152
 msgid "Remove complete."
 msgstr "Borttagning färdig."
 
-#: xfsamba/xfsamba_rm.c:177
+#: xfsamba/xfsamba_rm.c:179
 msgid "Removing..."
 msgstr "Tar bort..."
 
-#: xfsamba/xfsamba_rm.c:184
+#: xfsamba/xfsamba_rm.c:186
 msgid "Sorry, top level shares cannot be removed."
 msgstr "Tyvärr, den högsta nivåns andelar kan ej tas bort."
 
-#: xfsamba/xfsamba_tar.c:121
+#: xfsamba/xfsamba_tar.c:123
 msgid "Tar failed. See diagnostics for details."
 msgstr "Tar misslyckades. Se diagnostik för detaljer."
 
-#: xfsamba/xfsamba_tar.c:126
+#: xfsamba/xfsamba_tar.c:128
 msgid "Tar extraction has completed"
 msgstr "Extrahering av tar är färdig"
 
-#: xfsamba/xfsamba_tar.c:131
+#: xfsamba/xfsamba_tar.c:133
 msgid "Tar command complete."
 msgstr "Tarkomandot färdigt."
 
-#: xfsamba/xfsamba_tar.c:153
+#: xfsamba/xfsamba_tar.c:155
 msgid "Please select input tarfile next."
 msgstr "Vänligen välj det i nästa dialog."
 
-#: xfsamba/xfsamba_tar.c:157
+#: xfsamba/xfsamba_tar.c:159
 msgid "Please select the output tarfile next."
 msgstr "Vänligen välj skapad tarfil härnäst."
 
-#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
+#: xfsamba/xfsamba_tar.c:193 xfsamba/xfsamba_tar.c:234
 msgid "Tar cancelled."
 msgstr "Tar avbruten."
 
-#: xfsamba/xfsamba_tar.c:203
+#: xfsamba/xfsamba_tar.c:205
 msgid "Cannot open tar file"
 msgstr "Ka ej öppna tarfil"
 
-#: xfsamba/xfsamba_tar.c:214
+#: xfsamba/xfsamba_tar.c:216
 msgid "Cannot create tar file"
 msgstr "Kan ej skapa tarfil"
 
-#: xfsamba/xfsamba_tar.c:325
+#: xfsamba/xfsamba_tar.c:327
 msgid "create"
 msgstr "skapa"
 
-#: xfsamba/xfsamba_tar.c:328
+#: xfsamba/xfsamba_tar.c:330
 msgid "extract"
 msgstr "extrahera"
 
-#: xfsamba/xfsamba_tar.c:371
+#: xfsamba/xfsamba_tar.c:373
 msgid "full"
 msgstr ""
 
 # xfsamba/xfsamba_tar.c:291y
-#: xfsamba/xfsamba_tar.c:374
+#: xfsamba/xfsamba_tar.c:376
 msgid "incremental"
 msgstr "inkrementell"
 
-#: xfsamba/xfsamba_tar.c:397
+#: xfsamba/xfsamba_tar.c:399
 msgid "do not reset archive bit"
 msgstr "återställ inte arkivbiten"
 
-#: xfsamba/xfsamba_tar.c:400
+#: xfsamba/xfsamba_tar.c:402
 msgid "reset archive bit"
 msgstr "återställ arkivbiten"
 
-#: xfsamba/xfsamba_tar.c:412
+#: xfsamba/xfsamba_tar.c:414
 msgid "Options"
 msgstr "Alternativ"
 
-#: xfsamba/xfsamba_upload.c:104
+#: xfsamba/xfsamba_upload.c:106
 msgid "Uploaded file."
 msgstr "Laddade upp fil."
 
-#: xfsamba/xfsamba_upload.c:136
+#: xfsamba/xfsamba_upload.c:138
 msgid "File upload failed. See diagnostics for reason."
 msgstr "Filuppladdning misslyckades. Se diagnostik för detaljer."
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:282
+#: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:284
 msgid "Upload done."
 msgstr "Uppladdning färdig"
 
-#: xfsamba/xfsamba_upload.c:168
+#: xfsamba/xfsamba_upload.c:170
 msgid "Uploading file..."
 msgstr "Laddar upp fil..."
 
-#: xfsamba/xfsamba_upload.c:174
+#: xfsamba/xfsamba_upload.c:176
 msgid "File upload cancelled."
 msgstr "Filuppladdning avbruten."
 
-#: xfsamba/xfsamba_upload.c:184
+#: xfsamba/xfsamba_upload.c:186
 msgid "Specified file does not exist"
 msgstr "Den specificerade filen finns inte"
 
-#: xfsamba/xfsamba_upload.c:185 xfsamba/xfsamba_upload.c:199
+#: xfsamba/xfsamba_upload.c:187 xfsamba/xfsamba_upload.c:201
 msgid "Upload failed."
 msgstr "Uppladdning misslyckades."
 
-#: xfsamba/xfsamba_upload.c:252
+#: xfsamba/xfsamba_upload.c:254
 msgid "Upload produced errors. See diagnostics for reason."
 msgstr "Filuppladdning resulterade i fel. Se diagnostik för detaljer."
 
-#: xfsamba/xfsamba_upload.c:359
+#: xfsamba/xfsamba_upload.c:361
 msgid "Uploading files..."
 msgstr "Laddar upp filer..."
 

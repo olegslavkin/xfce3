@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.8.14c\n"
-"POT-Creation-Date: 2002-04-28 15:15+0200\n"
+"POT-Creation-Date: 2002-09-01 01:01+0200\n"
 "PO-Revision-Date: 2002-03-29 13:58+0900\n"
 "Last-Translator: Yosuke Nakajima <ynakajim@janis.or.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,17 +90,17 @@ msgstr "参照 ..."
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:254 xfsamba/xfsamba_gui.c:596
-#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:420
-#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
+#: xfsamba/xfsamba.c:272 xfsamba/xfsamba_gui.c:596
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:422
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:188 xftree/gtk_prop.c:214
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "OK"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
-#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:189 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:860 xftree/xtree_cpy.c:1324 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -108,7 +108,7 @@ msgstr "キャンセル"
 msgid "You must provide the command to execute !"
 msgstr "実行するコマンドを用意してください"
 
-#: xfce/configfile.c:61
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
@@ -117,7 +117,7 @@ msgstr ""
 "XFce : 設定ファイルの文法エラーです\n"
 "(%s)\n"
 
-#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -125,7 +125,7 @@ msgstr ""
 "設定ファイルの文法エラーです\n"
 "中止します"
 
-#: xfce/configfile.c:69
+#: xfce/configfile.c:77
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
@@ -134,7 +134,7 @@ msgstr ""
 "XFce : 設定ファイルのデータが不適当です\n"
 "(%s)\n"
 
-#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:78 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -142,27 +142,27 @@ msgstr ""
 "設定ファイルのデータが不適当です\n"
 "中止します"
 
-#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:237 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "ファイルが作成できません"
 
-#: xfce/configfile.c:380
+#: xfce/configfile.c:393
 msgid "Cannot reset configuration file"
 msgstr "設定ファイルを作成し直せません"
 
-#: xfce/configfile.c:383
+#: xfce/configfile.c:396
 msgid "Creating new config file...\n"
 msgstr "新しい設定ファイルを作成しています...\n"
 
-#: xfce/configfile.c:558 xfce/configfile.c:568
+#: xfce/configfile.c:497 xfce/configfile.c:507
 msgid "Cannot open configuration file"
 msgstr "設定ファイルを開けません"
 
-#: xfce/configfile.c:574
+#: xfce/configfile.c:513
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "XFce3の設定ファイルではないようです！"
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:514
 #, fuzzy
 msgid ""
 "Do you want to reset the configuration file ?\n"
@@ -171,15 +171,15 @@ msgstr ""
 "設定ファイルを作成し直しますか？\n"
 "\t(現在の設定ファイルは \".orig\" という拡張子をつけられて保存されます)"
 
-#: xfce/configfile.c:586
+#: xfce/configfile.c:525
 msgid "Cannot open new config, Giving up..."
 msgstr "新たな設定ファイルを開けません あきらめます..."
 
-#: xfce/configfile.c:587
+#: xfce/configfile.c:526
 msgid "Cannot load configuration file"
 msgstr "設定ファイルがロードできません"
 
-#: xfce/configfile.c:593
+#: xfce/configfile.c:532
 msgid "Cannot use old version of XFce configuration files"
 msgstr "古いバージョンのXFceの設定ファイルは使用できません"
 
@@ -188,12 +188,12 @@ msgid "Subprocess diagnostic"
 msgstr "サブプロセスの診断"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:927
 msgid "Clear"
 msgstr "クリア"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:921
+#: xftree/xtree_mess.c:932
 msgid "Dismiss"
 msgstr "やめる"
 
@@ -202,9 +202,9 @@ msgid "Info ..."
 msgstr "情報 ..."
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
-#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
-#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
-#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:202 xfce/xfce.c:242
+#: xfce/xfce.c:521 xfce/xfce.c:552 xfce/xfce.c:649 xfce/xfce.c:670
+#: xfce/xfce.c:703 xfce/xfce.c:718 xfce/xfce.c:776 xfce/xfce.c:797
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "pixmapを作成できません"
@@ -588,103 +588,103 @@ msgstr "適用"
 msgid "Please wait, XFce is loading..."
 msgstr "XFce をロードしています..."
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "One"
 msgstr "1"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Two"
 msgstr "2"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Three"
 msgstr "3"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Four"
 msgstr "4"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Five"
 msgstr "5"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Six"
 msgstr "6"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Seven"
 msgstr "7"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Eight"
 msgstr "8"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Nine"
 msgstr "9"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Ten"
 msgstr "10"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Eleven"
 msgstr "11"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Twelve"
 msgstr "12"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Thirteen"
 msgstr "13"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fourteen"
 msgstr "14"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fifteen"
 msgstr "15"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Sixteen"
 msgstr "16"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Seventeen"
 msgstr "17"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Eighteen"
 msgstr "18"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Nineteen"
 msgstr "19"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Twenty"
 msgstr "20"
 
-#: xfce/xfce.c:103 xfclock/xfclock_menus.c:112
+#: xfce/xfce.c:107 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
 msgstr "デジタルモード"
 
-#: xfce/xfce.c:111
+#: xfce/xfce.c:115
 msgid "24 hours mode"
 msgstr "24時間モード"
 
-#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:665 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "このアプリケーションについて..."
 
-#: xfce/xfce.c:676
+#: xfce/xfce.c:698
 msgid "Setup..."
 msgstr "セットアップ..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:725 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "終了"
@@ -780,11 +780,11 @@ msgid ""
 "visible in XFce panel."
 msgstr "現在XFceパネルからは認識できないデスクトップが選択されました。"
 
-#: xfce/xfwm.c:81
+#: xfce/xfwm.c:94
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: 通信パイプが切断されました。終了します...\n"
 
-#: xfce/xfwm.c:455 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
+#: xfce/xfwm.c:471 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
 #: xfwm/xfwm.c:868 xfwm/xfwm.c:869 xfwm/xfwm.c:870 xfwm/xfwm.c:871
 #: xfwm/xfwm.c:872 xfwm/xfwm.c:873 xfwm/xfwm.c:874
 msgid "Workspace"
@@ -836,31 +836,31 @@ msgstr "全て"
 msgid "_Close"
 msgstr "閉じる"
 
-#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
+#: xftree/gtk_exec.c:166 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
 msgstr "関連して開く ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:170 xftree/xtree_gui.c:219
 #: xfwm/xfwm.c:900
 msgid "Run program ..."
 msgstr "プログラムの実行 ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:220
 msgid "Open in terminal"
 msgstr "ターミナルで開く"
 
-#: xftree/gtk_exec.c:220
+#: xftree/gtk_exec.c:225
 msgid "Remember application"
 msgstr "アプリケーションの登録"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:244
+#: xftree/gtk_exec.c:249
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "致命的なエラー %s が %d で発生しました\n"
 
-#: xftree/gtk_exec.c:251 xftree/reg.c:662
+#: xftree/gtk_exec.c:256 xftree/reg.c:667
 msgid "Can't find in PATH"
 msgstr ""
 
@@ -964,46 +964,46 @@ msgstr "不明"
 msgid "RPM info"
 msgstr ""
 
-#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
-#: xftree/xtree_cpy.c:1374
+#: xftree/reg.c:610 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1375
 msgid "This function is not available for the contents of tar files"
 msgstr "この機能は tar ファイルの中には利用できません"
 
-#: xftree/reg.c:613
+#: xftree/reg.c:618
 #, fuzzy, c-format
 msgid "Register program for directory \"%s\""
 msgstr "ファイル \"%s\" 用にプログラムを登録する"
 
-#: xftree/reg.c:620
+#: xftree/reg.c:625
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "ファイルの拡張子がみつかりません ファイル名全体を使用します"
 
-#: xftree/reg.c:627
+#: xftree/reg.c:632
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "ファイル \"%s\" 用にプログラムを登録する"
 
-#: xftree/reg.c:631
+#: xftree/reg.c:636
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "拡張子 \"%s\" 用にプログラムを登録する"
 
-#: xftree/xtree.c:223
+#: xftree/xtree.c:236
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, XTreeバージョン %s を元にしています\n"
 
-#: xftree/xtree.c:224
+#: xftree/xtree.c:237
 #, c-format
 msgid "directory: %s\n"
 msgstr "ディレクトリ: %s\n"
 
-#: xftree/xtree.c:231 xftree/xtree.c:270
+#: xftree/xtree.c:244 xftree/xtree.c:283
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "ディレクトリを作成しています: %s\n"
 
-#: xftree/xtree.c:287
+#: xftree/xtree.c:300
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "寸法: %dx%d+%d+%d\n"
@@ -1055,7 +1055,7 @@ msgstr "新しいフォルダ"
 msgid "New_File"
 msgstr "新しいファイル"
 
-#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1486
 #, fuzzy
 msgid "File exists !"
 msgstr "ファイルが存在します！"
@@ -1068,7 +1068,7 @@ msgstr "項目が一つも選択されていません！"
 msgid "Rename to : "
 msgstr "名前の変更 : "
 
-#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1464
 msgid "Character not allowed in filename"
 msgstr "ファイル名には使用できない文字です"
 
@@ -1112,69 +1112,69 @@ msgstr "エラー ファイルを閉じます"
 msgid "Error deleting"
 msgstr "削除エラー"
 
-#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:509
 msgid "Can't copy FIFO"
 msgstr "FIFO はコピーできません"
 
-#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:512
 msgid "Can't copy device file"
 msgstr "デバイスファイルはコピーできません"
 
-#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:515
 msgid "Can't copy socket"
 msgstr "ソケットはコピーできません"
 
-#: xftree/xtree_cpy.c:853
+#: xftree/xtree_cpy.c:854
 #, fuzzy
 msgid "Counting files"
 msgstr "ファイルをカウントしています"
 
-#: xftree/xtree_cpy.c:1225
+#: xftree/xtree_cpy.c:1226
 #, c-format
 msgid "%d / %d"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1301
+#: xftree/xtree_cpy.c:1302
 msgid "Source: "
 msgstr "元: "
 
-#: xftree/xtree_cpy.c:1308
+#: xftree/xtree_cpy.c:1309
 msgid "Target: "
 msgstr "先: "
 
-#: xftree/xtree_cpy.c:1315
+#: xftree/xtree_cpy.c:1316
 msgid "beginning copy operation"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1330
+#: xftree/xtree_cpy.c:1331
 msgid "XFTree: Copy"
 msgstr "XFTree: コピー"
 
-#: xftree/xtree_cpy.c:1331
+#: xftree/xtree_cpy.c:1332
 msgid "XFTree: Move"
 msgstr "XFTree: 移動"
 
-#: xftree/xtree_cpy.c:1332
+#: xftree/xtree_cpy.c:1333
 #, fuzzy
 msgid "XFTree: Link"
 msgstr "XFTree: リンク"
 
-#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
+#: xftree/xtree_cpy.c:1437 xftree/xtree_cpy.c:1525
 #, fuzzy
 msgid "No file or directory selected!"
 msgstr "ディレクトリが選択されていません！"
 
-#: xftree/xtree_cpy.c:1439
+#: xftree/xtree_cpy.c:1440
 #, fuzzy
 msgid "Only one file or directory can be selected!"
 msgstr "ディレクトリを選択してください！"
 
-#: xftree/xtree_cpy.c:1445
+#: xftree/xtree_cpy.c:1446
 #, fuzzy
 msgid "This function is not available for the contents of tar/rpm files"
 msgstr "この機能は tar ファイルの中には利用できません"
 
-#: xftree/xtree_cpy.c:1455
+#: xftree/xtree_cpy.c:1456
 #, fuzzy
 msgid "Symlink name : "
 msgstr "シンボリックリンクの名前 : "
@@ -1246,7 +1246,7 @@ msgstr "新しいウィンドウで開く"
 msgid "Open terminal view"
 msgstr "ターミナルで開く"
 
-#: xfsamba/xfsamba_mkdir.c:200 xftree/xtree_gui.c:158
+#: xfsamba/xfsamba_mkdir.c:202 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
 #, fuzzy
 msgid "New Folder"
@@ -1606,28 +1606,28 @@ msgstr "メインメニューの表示"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
 #: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
-#: xftree/xtree_mess.c:108
+#: xftree/xtree_mess.c:109
 msgid "Could not load specified font\n"
 msgstr "特定のフォントがロードできません\n"
 
-#: xftree/xtree_mess.c:452
+#: xftree/xtree_mess.c:453
 msgid "Override ?"
 msgstr "上書きしますか？"
 
-#: xftree/xtree_mess.c:453
+#: xftree/xtree_mess.c:454
 msgid "with"
 msgstr "以下のファイルで。"
 
-#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
-#: xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:533 xftree/xtree_mess.c:534 xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:551
 msgid "Default xftreerc file cannot be created\n"
 msgstr "デフォルト（初期）の xftreerc が作成できません\n"
 
-#: xftree/xtree_mess.c:586
+#: xftree/xtree_mess.c:588
 msgid "Default xftreerc file cannot be read\n"
 msgstr "デフォルト（初期）の xftreerc がロードできません\n"
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:800
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1637,14 +1637,14 @@ msgstr ""
 "これはエントリーをハイライトさせ、キーを押すだけで\n"
 "ショートカットが作れるということです。"
 
-#: xftree/xtree_mess.c:798
+#: xftree/xtree_mess.c:809
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
 "installed\n"
 "separately from XFCE. A ROX-filer specific for XFCE will soon be available."
 msgstr ""
 
-#: xftree/xtree_mess.c:807
+#: xftree/xtree_mess.c:818
 msgid ""
 "Xftree allows you to drag and drop to/from\n"
 "xftree windows running on different hosts.\n"
@@ -1657,7 +1657,7 @@ msgid ""
 "filemanagers running on different hosts.\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:823
+#: xftree/xtree_mess.c:834
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1670,7 +1670,7 @@ msgstr ""
 "ファイル名またはファイルタイプでアプリケーションを登録できます。\n"
 "もし、すでに登録していたら、 ~/.xfce/xtree.reg を見てください。"
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:843
 #, fuzzy
 msgid ""
 "Xftree handles drag and drop the following way:\n"
@@ -1692,16 +1692,16 @@ msgstr ""
 "好みのメニューに変えることができます。\n"
 "複数のファイルをドラッグするには、中ボタンを使って下さい。\n"
 
-#: xftree/xtree_mess.c:850
+#: xftree/xtree_mess.c:861
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 "キーボードショートカットはメニューの機能にアクセスする一番早い方法です。"
 
-#: xftree/xtree_mess.c:894
+#: xftree/xtree_mess.c:905
 msgid "Xftree results"
 msgstr "Xftree の結果"
 
-#: xftree/xtree_mess.c:1147
+#: xftree/xtree_mess.c:1158
 #, fuzzy
 msgid "Home directory : "
 msgstr "ホームディレクトリ: "
@@ -3344,33 +3344,33 @@ msgstr "水平線(&H)"
 msgid "xfwm terminated: "
 msgstr "強制終了: "
 
-#: xfsamba/xfsamba.c:242
+#: xfsamba/xfsamba.c:260
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Samba失敗！ Xfsambaは次のファイルを見つけられません:"
 
-#: xfsamba/xfsamba.c:250
+#: xfsamba/xfsamba.c:268
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr "（Sambaをインストールまたはパスを選択してください）"
 
-#: xfsamba/xfsamba_download.c:87
+#: xfsamba/xfsamba_download.c:86
 msgid "File download failed. See diagnostics for reason."
 msgstr "ファイルのダウンロードに失敗しました。理由は診断を見てください。"
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:91
+#: xfsamba/xfsamba_download.c:90
 msgid "Download done."
 msgstr "ダウンロード完了。"
 
-#: xfsamba/xfsamba_download.c:127
+#: xfsamba/xfsamba_download.c:126
 #, fuzzy
 msgid "Downloading file..."
 msgstr "ファイルをダウンロードしています..."
 
-#: xfsamba/xfsamba_download.c:140
+#: xfsamba/xfsamba_download.c:139
 msgid "File download cancelled."
 msgstr "ファイルのダウンロードがキャンセルされました。"
 
-#: xfsamba/xfsamba_download.c:148
+#: xfsamba/xfsamba_download.c:147
 #, fuzzy
 msgid "Download failed."
 msgstr "ダウンロード失敗しました。"
@@ -3510,7 +3510,7 @@ msgstr "新しいフォルダ..."
 msgid "Delete..."
 msgstr "削除..."
 
-#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:443
 msgid "Tar..."
 msgstr ""
 
@@ -3729,19 +3729,19 @@ msgstr "xfsamba にようこそ。"
 #. no jalo para arreglar directorios:
 #. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
 #.
-#: xfsamba/xfsamba_list.c:233
+#: xfsamba/xfsamba_list.c:236
 msgid "Retrieve done."
 msgstr "回収(Retrieve)しました。"
 
-#: xfsamba/xfsamba_list.c:238 xfsamba/xfsamba_smblookup.c:175
+#: xfsamba/xfsamba_list.c:241 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
 msgstr "質問(Query)パスワードはリクエストしました。"
 
-#: xfsamba/xfsamba_list.c:281
+#: xfsamba/xfsamba_list.c:284
 msgid "List failed."
 msgstr "リスト失敗しました。"
 
-#: xfsamba/xfsamba_list.c:300
+#: xfsamba/xfsamba_list.c:303
 msgid "Retreiving..."
 msgstr ""
 
@@ -3776,7 +3776,7 @@ msgstr "質問(Query)しました。"
 msgid "Query failed. Machine may be down."
 msgstr "質問(Query)失敗。おそらくマシンはダウンしています。"
 
-#: xfsamba/xfsamba_smblookup.c:340
+#: xfsamba/xfsamba_smblookup.c:354
 #, fuzzy
 msgid "Querying"
 msgstr "質問(Querying)"
@@ -3829,32 +3829,32 @@ msgstr ""
 msgid "Resolving"
 msgstr "解決しました"
 
-#: xfsamba/xfsamba_mkdir.c:91
+#: xfsamba/xfsamba_mkdir.c:93
 msgid "Directory creation failed. See diagnostics for details."
 msgstr "ディレクトリ作成失敗。詳細は診断を見てください。"
 
-#: xfsamba/xfsamba_mkdir.c:100
+#: xfsamba/xfsamba_mkdir.c:102
 #, fuzzy
 msgid "Directory created."
 msgstr "ディレクトリを作成しました。"
 
-#: xfsamba/xfsamba_mkdir.c:149
+#: xfsamba/xfsamba_mkdir.c:151
 #, fuzzy
 msgid "Create directory cancelled."
 msgstr "ディレクトリの作成を中止しました。"
 
-#: xfsamba/xfsamba_mkdir.c:160
+#: xfsamba/xfsamba_mkdir.c:162
 #, fuzzy
 msgid "Create directory failed."
 msgstr "ディレクトリの作成に失敗しました。"
 
-#: xfsamba/xfsamba_mkdir.c:185
+#: xfsamba/xfsamba_mkdir.c:187
 #, fuzzy
 msgid "Creating dir..."
 msgstr "ディレクトリを作成しています..."
 
 #. here, dialog to ask new dir name
-#: xfsamba/xfsamba_mkdir.c:200
+#: xfsamba/xfsamba_mkdir.c:202
 #, fuzzy
 msgid "New directory name:"
 msgstr "ホームディレクトリ: "
@@ -3863,126 +3863,126 @@ msgstr "ホームディレクトリ: "
 msgid "Really delete remote items?"
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:187
+#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:189
 msgid "Remove cancelled."
 msgstr "削除を中止しました。"
 
-#: xfsamba/xfsamba_rm.c:135
+#: xfsamba/xfsamba_rm.c:137
 msgid "Remove failed. See diagnostics for details."
 msgstr "削除失敗。詳細は診断を見てください。"
 
-#: xfsamba/xfsamba_rm.c:150
+#: xfsamba/xfsamba_rm.c:152
 msgid "Remove complete."
 msgstr "削除完了。"
 
-#: xfsamba/xfsamba_rm.c:177
+#: xfsamba/xfsamba_rm.c:179
 #, fuzzy
 msgid "Removing..."
 msgstr "削除しています..."
 
-#: xfsamba/xfsamba_rm.c:184
+#: xfsamba/xfsamba_rm.c:186
 msgid "Sorry, top level shares cannot be removed."
 msgstr "すみません。トップレベル割り当ての削除ができませんでした。"
 
-#: xfsamba/xfsamba_tar.c:121
+#: xfsamba/xfsamba_tar.c:123
 msgid "Tar failed. See diagnostics for details."
 msgstr "tar 失敗。詳細は診断を見てください。"
 
-#: xfsamba/xfsamba_tar.c:126
+#: xfsamba/xfsamba_tar.c:128
 msgid "Tar extraction has completed"
 msgstr "tar 抽出完了"
 
-#: xfsamba/xfsamba_tar.c:131
+#: xfsamba/xfsamba_tar.c:133
 msgid "Tar command complete."
 msgstr "tar コマンド完了。"
 
-#: xfsamba/xfsamba_tar.c:153
+#: xfsamba/xfsamba_tar.c:155
 msgid "Please select input tarfile next."
 msgstr "次に入力tarファイルを選んでください。"
 
-#: xfsamba/xfsamba_tar.c:157
+#: xfsamba/xfsamba_tar.c:159
 msgid "Please select the output tarfile next."
 msgstr "次に出力tarファイルを選んでください。"
 
-#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
+#: xfsamba/xfsamba_tar.c:193 xfsamba/xfsamba_tar.c:234
 msgid "Tar cancelled."
 msgstr "tarキャンセルしました。"
 
-#: xfsamba/xfsamba_tar.c:203
+#: xfsamba/xfsamba_tar.c:205
 #, fuzzy
 msgid "Cannot open tar file"
 msgstr "tarファイルが開けません"
 
-#: xfsamba/xfsamba_tar.c:214
+#: xfsamba/xfsamba_tar.c:216
 #, fuzzy
 msgid "Cannot create tar file"
 msgstr "tarファイルが作成できません"
 
-#: xfsamba/xfsamba_tar.c:325
+#: xfsamba/xfsamba_tar.c:327
 msgid "create"
 msgstr "作成"
 
-#: xfsamba/xfsamba_tar.c:328
+#: xfsamba/xfsamba_tar.c:330
 msgid "extract"
 msgstr "抜粋"
 
-#: xfsamba/xfsamba_tar.c:371
+#: xfsamba/xfsamba_tar.c:373
 msgid "full"
 msgstr "完全"
 
-#: xfsamba/xfsamba_tar.c:374
+#: xfsamba/xfsamba_tar.c:376
 #, fuzzy
 msgid "incremental"
 msgstr "増加"
 
-#: xfsamba/xfsamba_tar.c:397
+#: xfsamba/xfsamba_tar.c:399
 msgid "do not reset archive bit"
 msgstr "アーカイブをリセットしない"
 
-#: xfsamba/xfsamba_tar.c:400
+#: xfsamba/xfsamba_tar.c:402
 msgid "reset archive bit"
 msgstr "アーカイブをリセット"
 
-#: xfsamba/xfsamba_tar.c:412
+#: xfsamba/xfsamba_tar.c:414
 msgid "Options"
 msgstr "オプション"
 
-#: xfsamba/xfsamba_upload.c:104
+#: xfsamba/xfsamba_upload.c:106
 msgid "Uploaded file."
 msgstr "ファイルをアップロードしました。"
 
-#: xfsamba/xfsamba_upload.c:136
+#: xfsamba/xfsamba_upload.c:138
 msgid "File upload failed. See diagnostics for reason."
 msgstr "すべてアップロード失敗。詳細は診断を見てください。"
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:282
+#: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:284
 msgid "Upload done."
 msgstr "アップロードしました。"
 
-#: xfsamba/xfsamba_upload.c:168
+#: xfsamba/xfsamba_upload.c:170
 #, fuzzy
 msgid "Uploading file..."
 msgstr "ファイルをアップロードしています..."
 
-#: xfsamba/xfsamba_upload.c:174
+#: xfsamba/xfsamba_upload.c:176
 msgid "File upload cancelled."
 msgstr "ファイルのアップロードは中止されました。"
 
-#: xfsamba/xfsamba_upload.c:184
+#: xfsamba/xfsamba_upload.c:186
 msgid "Specified file does not exist"
 msgstr "特定のファイルが存在しません"
 
-#: xfsamba/xfsamba_upload.c:185 xfsamba/xfsamba_upload.c:199
+#: xfsamba/xfsamba_upload.c:187 xfsamba/xfsamba_upload.c:201
 #, fuzzy
 msgid "Upload failed."
 msgstr "アップロードに失敗しました。"
 
-#: xfsamba/xfsamba_upload.c:252
+#: xfsamba/xfsamba_upload.c:254
 #, fuzzy
 msgid "Upload produced errors. See diagnostics for reason."
 msgstr "すべてアップロード失敗。詳細は診断を見てください。"
 
-#: xfsamba/xfsamba_upload.c:359
+#: xfsamba/xfsamba_upload.c:361
 #, fuzzy
 msgid "Uploading files..."
 msgstr "ファイルをアップロードしています..."

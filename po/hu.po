@@ -10,9 +10,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE 3\n"
-"POT-Creation-Date: 2002-04-28 15:15+0200\n"
+"POT-Creation-Date: 2002-09-01 01:01+0200\n"
 "PO-Revision-Date: 2002-05-24 17:10+0100\n"
-"Last-Translator: Horn Gábor <Horn.Gabor@aktiv.co.hu>, Gergely Nagy <algernon@madhouse.lonyay.edu.hu>\n"
+"Last-Translator: Horn Gábor <Horn.Gabor@aktiv.co.hu>, Gergely Nagy "
+"<algernon@madhouse.lonyay.edu.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
@@ -89,17 +90,17 @@ msgstr "Tallózás ..."
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:254 xfsamba/xfsamba_gui.c:596
-#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:420
-#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
+#: xfsamba/xfsamba.c:272 xfsamba/xfsamba_gui.c:596
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:422
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:188 xftree/gtk_prop.c:214
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "OK"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
-#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:189 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:860 xftree/xtree_cpy.c:1324 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Mégsem"
 
@@ -107,7 +108,7 @@ msgstr "Mégsem"
 msgid "You must provide the command to execute !"
 msgstr "Meg kell adnia a végrehajtandó parancsot !"
 
-#: xfce/configfile.c:61
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
@@ -116,7 +117,7 @@ msgstr ""
 "XFce: Szintaktikus hiba a konfigurációs állományban\n"
 "(%s)\n"
 
-#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -124,7 +125,7 @@ msgstr ""
 "Szintaktikus hiba a konfigurációs állományban\n"
 "Leállok"
 
-#: xfce/configfile.c:69
+#: xfce/configfile.c:77
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
@@ -133,7 +134,7 @@ msgstr ""
 "XFce: Hibás adat a konfigurációs állományban\n"
 "(%s)\n"
 
-#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:78 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -141,27 +142,27 @@ msgstr ""
 "Hibás adat a konfigurációs állományban\n"
 "Leállok"
 
-#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:237 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "Az állományt nem lehet létrehozni"
 
-#: xfce/configfile.c:380
+#: xfce/configfile.c:393
 msgid "Cannot reset configuration file"
 msgstr "A konfigurációs állományt nem lehet visszaállítani"
 
-#: xfce/configfile.c:383
+#: xfce/configfile.c:396
 msgid "Creating new config file...\n"
 msgstr "Új konfigurációs állomány létrehozása...\n"
 
-#: xfce/configfile.c:558 xfce/configfile.c:568
+#: xfce/configfile.c:497 xfce/configfile.c:507
 msgid "Cannot open configuration file"
 msgstr "A konfigurációs állomány nem megnyitható"
 
-#: xfce/configfile.c:574
+#: xfce/configfile.c:513
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Nem úgy néz ki, mint egy XFce 3 konfigurációs állomány !"
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:514
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
@@ -169,15 +170,15 @@ msgstr ""
 "Vissza akarja állítani a konfigurációs állományt ?\n"
 " \t(Az elõzõ állomány \".orig\" kiterjesztéssel el lesz mentve)"
 
-#: xfce/configfile.c:586
+#: xfce/configfile.c:525
 msgid "Cannot open new config, Giving up..."
 msgstr "Nem lehet megnyitni az új konfigurációt, feladom..."
 
-#: xfce/configfile.c:587
+#: xfce/configfile.c:526
 msgid "Cannot load configuration file"
 msgstr "Nem lehet betölteni a konfigurációs állományt"
 
-#: xfce/configfile.c:593
+#: xfce/configfile.c:532
 msgid "Cannot use old version of XFce configuration files"
 msgstr "A régebbi verziójú XFce konfigurációs állományokat nem lehet használni"
 
@@ -186,12 +187,12 @@ msgid "Subprocess diagnostic"
 msgstr "Alfolyamat diagnosztika"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:927
 msgid "Clear"
 msgstr "Törlés"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:921
+#: xftree/xtree_mess.c:932
 msgid "Dismiss"
 msgstr "Bezárás"
 
@@ -200,9 +201,9 @@ msgid "Info ..."
 msgstr "Információ ..."
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
-#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
-#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
-#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:202 xfce/xfce.c:242
+#: xfce/xfce.c:521 xfce/xfce.c:552 xfce/xfce.c:649 xfce/xfce.c:670
+#: xfce/xfce.c:703 xfce/xfce.c:718 xfce/xfce.c:776 xfce/xfce.c:797
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "Nem tudtam létrehozni egy pixmap-ot"
@@ -576,103 +577,103 @@ msgstr "Alkalmaz"
 msgid "Please wait, XFce is loading..."
 msgstr "Kérem várjon, az XFce töltõdik..."
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "One"
 msgstr "Egy"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Two"
 msgstr "Kettõ"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Three"
 msgstr "Három"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Four"
 msgstr "Négy"
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:67
 msgid "Five"
 msgstr "Öt"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Six"
 msgstr "Hat"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Seven"
 msgstr "Hét"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Eight"
 msgstr "Nyolc"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Nine"
 msgstr "Kilenc"
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:68
 msgid "Ten"
 msgstr "Tíz"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Eleven"
 msgstr "Tizenegy"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Twelve"
 msgstr "Tizenkettõ"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Thirteen"
 msgstr "Tizenhárom"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fourteen"
 msgstr "Tizennégy"
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:69
 msgid "Fifteen"
 msgstr "Tizenöt"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Sixteen"
 msgstr "Tizenhat"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Seventeen"
 msgstr "Tizenhét"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Eighteen"
 msgstr "Tizennyolc"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Nineteen"
 msgstr "Tizenkilenc"
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:70
 msgid "Twenty"
 msgstr "Húsz"
 
-#: xfce/xfce.c:103 xfclock/xfclock_menus.c:112
+#: xfce/xfce.c:107 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
 msgstr "Digitális mód"
 
-#: xfce/xfce.c:111
+#: xfce/xfce.c:115
 msgid "24 hours mode"
 msgstr "24 órás mód"
 
-#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:665 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "Névjegy..."
 
-#: xfce/xfce.c:676
+#: xfce/xfce.c:698
 msgid "Setup..."
 msgstr "Beállítások..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:725 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Kilépés"
@@ -770,11 +771,11 @@ msgstr ""
 "Olyan munkaasztalt választott, mely pillanatnyilag\n"
 "nem látható az XFce panelen."
 
-#: xfce/xfwm.c:81
+#: xfce/xfwm.c:94
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFce: Kommunikációs csatorna bezárult. Kilépek...\n"
 
-#: xfce/xfwm.c:455 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
+#: xfce/xfwm.c:471 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
 #: xfwm/xfwm.c:868 xfwm/xfwm.c:869 xfwm/xfwm.c:870 xfwm/xfwm.c:871
 #: xfwm/xfwm.c:872 xfwm/xfwm.c:873 xfwm/xfwm.c:874
 msgid "Workspace"
@@ -826,31 +827,31 @@ msgstr "Mindet"
 msgid "_Close"
 msgstr "Bezárás"
 
-#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
+#: xftree/gtk_exec.c:166 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
 msgstr "Megnyitás programmal ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:170 xftree/xtree_gui.c:219
 #: xfwm/xfwm.c:900
 msgid "Run program ..."
 msgstr "Futtatás ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:220
 msgid "Open in terminal"
 msgstr "Megnyitás terminálban"
 
-#: xftree/gtk_exec.c:220
+#: xftree/gtk_exec.c:225
 msgid "Remember application"
 msgstr "Alkalmazás megjegyzése"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:244
+#: xftree/gtk_exec.c:249
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Végzetes hiba %s-ben a %d címen\n"
 
-#: xftree/gtk_exec.c:251 xftree/reg.c:662
+#: xftree/gtk_exec.c:256 xftree/reg.c:667
 msgid "Can't find in PATH"
 msgstr "Nem található a PATH változóban"
 
@@ -953,46 +954,46 @@ msgstr "ismeretlen"
 msgid "RPM info"
 msgstr "RPM információ"
 
-#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
-#: xftree/xtree_cpy.c:1374
+#: xftree/reg.c:610 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1375
 msgid "This function is not available for the contents of tar files"
 msgstr "Ez a mûvelet tar-olt fájlokra nem alkalmazható"
 
-#: xftree/reg.c:613
+#: xftree/reg.c:618
 #, c-format
 msgid "Register program for directory \"%s\""
 msgstr "Program regisztrálása a(z) \"%s\" könyvtárhoz"
 
-#: xftree/reg.c:620
+#: xftree/reg.c:625
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Nem található kiterjesztés az állománynévben, a teljes használata"
 
-#: xftree/reg.c:627
+#: xftree/reg.c:632
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Program regisztrálása a(z) \"%s\" fájlhoz"
 
-#: xftree/reg.c:631
+#: xftree/reg.c:636
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Program regisztrálása a(z) \"%s\" kiterjesztéshez"
 
-#: xftree/xtree.c:223
+#: xftree/xtree.c:236
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, az XTree version %s alapján\n"
 
-#: xftree/xtree.c:224
+#: xftree/xtree.c:237
 #, c-format
 msgid "directory: %s\n"
 msgstr "könyvtár: %s\n"
 
-#: xftree/xtree.c:231 xftree/xtree.c:270
+#: xftree/xtree.c:244 xftree/xtree.c:283
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "könyvtár létrehozása: %s\n"
 
-#: xftree/xtree.c:287
+#: xftree/xtree.c:300
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometria: %dx%d+%d+%d\n"
@@ -1040,7 +1041,7 @@ msgstr "Új_Könyvtár"
 msgid "New_File"
 msgstr "Új_Fájl"
 
-#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1486
 msgid "File exists !"
 msgstr "Az állomány létezik !"
 
@@ -1052,7 +1053,7 @@ msgstr "Egy elem sincs kijelölve !"
 msgid "Rename to : "
 msgstr "Átnevezés : "
 
-#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1464
 msgid "Character not allowed in filename"
 msgstr "Tiltott karakter az állománynévben"
 
@@ -1092,65 +1093,65 @@ msgstr "Hiba az állomány bezárásánál"
 msgid "Error deleting"
 msgstr "hiba a törlésnél"
 
-#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:509
 msgid "Can't copy FIFO"
 msgstr "FIFO-t nem tudok másolni"
 
-#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:512
 msgid "Can't copy device file"
 msgstr "Eszköz állományt nem tudok másolni"
 
-#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:515
 msgid "Can't copy socket"
 msgstr "SOCKET-et nem tudok másolni"
 
-#: xftree/xtree_cpy.c:853
+#: xftree/xtree_cpy.c:854
 #, fuzzy
 msgid "Counting files"
 msgstr "Fájlok számolása"
 
-#: xftree/xtree_cpy.c:1225
+#: xftree/xtree_cpy.c:1226
 #, c-format
 msgid "%d / %d"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1301
+#: xftree/xtree_cpy.c:1302
 msgid "Source: "
 msgstr "Forrás:"
 
-#: xftree/xtree_cpy.c:1308
+#: xftree/xtree_cpy.c:1309
 msgid "Target: "
 msgstr "Cél:"
 
-#: xftree/xtree_cpy.c:1315
+#: xftree/xtree_cpy.c:1316
 msgid "beginning copy operation"
 msgstr "másolás kezdete"
 
-#: xftree/xtree_cpy.c:1330
+#: xftree/xtree_cpy.c:1331
 msgid "XFTree: Copy"
 msgstr "XFTree: Másolás"
 
-#: xftree/xtree_cpy.c:1331
+#: xftree/xtree_cpy.c:1332
 msgid "XFTree: Move"
 msgstr "XFTree: Áthelyezés"
 
-#: xftree/xtree_cpy.c:1332
+#: xftree/xtree_cpy.c:1333
 msgid "XFTree: Link"
 msgstr "XFTree: Link"
 
-#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
+#: xftree/xtree_cpy.c:1437 xftree/xtree_cpy.c:1525
 msgid "No file or directory selected!"
 msgstr "Nem jelölt ki egy fájlt vagy könyvtárat sem!"
 
-#: xftree/xtree_cpy.c:1439
+#: xftree/xtree_cpy.c:1440
 msgid "Only one file or directory can be selected!"
 msgstr "Egyszerre csak egy fájl vagy könyvtár lehet kijelölve"
 
-#: xftree/xtree_cpy.c:1445
+#: xftree/xtree_cpy.c:1446
 msgid "This function is not available for the contents of tar/rpm files"
 msgstr "Ez a parancs nem alkalmazható tar/rpm fájlok tartalmára"
 
-#: xftree/xtree_cpy.c:1455
+#: xftree/xtree_cpy.c:1456
 msgid "Symlink name : "
 msgstr "Szimbólikus link neve : "
 
@@ -1214,7 +1215,7 @@ msgstr "Fa nézet megnyitása"
 msgid "Open terminal view"
 msgstr "Terminál nézet megnyitása"
 
-#: xfsamba/xfsamba_mkdir.c:200 xftree/xtree_gui.c:158
+#: xfsamba/xfsamba_mkdir.c:202 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
 #, fuzzy
 msgid "New Folder"
@@ -1225,7 +1226,6 @@ msgid "New file"
 msgstr "Új fájl"
 
 #: xftree/xtree_gui.c:163
-#, fuzzy
 msgid "Touch ..."
 msgstr ""
 
@@ -1546,28 +1546,28 @@ msgstr "Fõmenü mutatása"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
 #: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
-#: xftree/xtree_mess.c:108
+#: xftree/xtree_mess.c:109
 msgid "Could not load specified font\n"
 msgstr "A megadott betûkészlet nem található\n"
 
-#: xftree/xtree_mess.c:452
+#: xftree/xtree_mess.c:453
 msgid "Override ?"
 msgstr "Felülbirálja ?"
 
-#: xftree/xtree_mess.c:453
+#: xftree/xtree_mess.c:454
 msgid "with"
 msgstr ""
 
-#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
-#: xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:533 xftree/xtree_mess.c:534 xftree/xtree_mess.c:550
+#: xftree/xtree_mess.c:551
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Az alapértelmezett xftreerc fájlt nem tudom létrehozni\n"
 
-#: xftree/xtree_mess.c:586
+#: xftree/xtree_mess.c:588
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Az alapértelmezett xftreerc fájl nem olvasható\n"
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:800
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1577,17 +1577,17 @@ msgstr ""
 "Ez azt jelenti, hogy amikor egy menüben kiválaszt egy elemet,\n"
 "akkor egy mozdulattal gyorsbillentyût rendelhet hozzá."
 
-#: xftree/xtree_mess.c:798
+#: xftree/xtree_mess.c:809
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
 "installed\n"
 "separately from XFCE. A ROX-filer specific for XFCE will soon be available."
 msgstr ""
-"Az Xftree ikon nézete a ROX-filer program. Jelenleg"
-"ezt a programot az XFCE-tõl függetlenül külön telepíteni kell.\n"
+"Az Xftree ikon nézete a ROX-filer program. Jelenlegezt a programot az XFCE-"
+"tõl függetlenül külön telepíteni kell.\n"
 "Hamarosan az XFCE tartalmazni fogja ezt a programot."
 
-#: xftree/xtree_mess.c:807
+#: xftree/xtree_mess.c:818
 msgid ""
 "Xftree allows you to drag and drop to/from\n"
 "xftree windows running on different hosts.\n"
@@ -1609,7 +1609,7 @@ msgstr ""
 "Az Xftree másik gépen futó másik fájlkezelõtõl\n"
 "is tud fájlokat fogadni.\n"
 
-#: xftree/xtree_mess.c:823
+#: xftree/xtree_mess.c:834
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1623,7 +1623,7 @@ msgstr ""
 "A már rögzített regisztrálásokat \n"
 "az ~/.xfce/xtree.reg fájlban módosíthatja."
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:843
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1636,7 +1636,8 @@ msgid ""
 "Multiple selection by button 1 click-and-drag\n"
 "is available on the first click after a GOTO or REGEN.\n"
 msgstr ""
-"Az Xftree programban a húzd és ejtsd módszert az alábbiak szerint használhatja:\n"
+"Az Xftree programban a húzd és ejtsd módszert az alábbiak szerint "
+"használhatja:\n"
 "SHIFT --> áthelyezés\n"
 "CTRL --> másolás\n"
 "SHIFT-CTRL --> link\n"
@@ -1647,15 +1648,15 @@ msgstr ""
 "\n"
 "\n"
 
-#: xftree/xtree_mess.c:850
+#: xftree/xtree_mess.c:861
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr "A gyorsbillentyûk segítségével egyszerûen elérheti a menüpontokat"
 
-#: xftree/xtree_mess.c:894
+#: xftree/xtree_mess.c:905
 msgid "Xftree results"
 msgstr "Xftree eredmények"
 
-#: xftree/xtree_mess.c:1147
+#: xftree/xtree_mess.c:1158
 msgid "Home directory : "
 msgstr "Saját könyvtár: "
 
@@ -1733,7 +1734,6 @@ msgid "Large icons. "
 msgstr "Nagy ikonok. "
 
 #: xftree/xtree_toolbar.c:342
-#, fuzzy
 msgid "Regen"
 msgstr ""
 
@@ -1885,7 +1885,8 @@ msgstr ""
 
 #: xfdiff/xfdiff.c:1458
 msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
-msgstr "-p : A bal oldali fájl egy patch könyvtár, a jobb oldali egy patch fájl.\n"
+msgstr ""
+"-p : A bal oldali fájl egy patch könyvtár, a jobb oldali egy patch fájl.\n"
 
 #: xfdiff/xfdiff.c:1459
 msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
@@ -1909,14 +1910,17 @@ msgstr ""
 
 #: xfdiff/xfdiff.c:1463
 msgid "xfdiff (c) Edscott Wilson Garcia 2001, under GNU-GPL\n"
-msgstr "xfdiff (c) készítette Edscott Wilson Garcia 2001. A program a GNU-GPL licensz hatálya alá tartozik.\n"
+msgstr ""
+"xfdiff (c) készítette Edscott Wilson Garcia 2001. A program a GNU-GPL "
+"licensz hatálya alá tartozik.\n"
 
 #: xfdiff/xfdiff.c:1464
 msgid ""
 "XFCE modules copyright Olivier Fourdan 1999-2001, under GNU-GPL\n"
 "\n"
 msgstr ""
-"XFCE modulok, készítette Olivier Fourdan 1999-2001. A programok a GNU-GPL licensz hatálya alá tartoznak.\n"
+"XFCE modulok, készítette Olivier Fourdan 1999-2001. A programok a GNU-GPL "
+"licensz hatálya alá tartoznak.\n"
 "\n"
 
 #: xfdiff/xfdiff_diag.c:135
@@ -1946,7 +1950,8 @@ msgid ""
 "Diff will be working"
 msgstr ""
 "Az XFdiff most elinditja a diff programot.\n"
-"Kérem várjon türelmesen (lehet hogy az xfdiff látszólag nem fog válaszolni).\n"
+"Kérem várjon türelmesen (lehet hogy az xfdiff látszólag nem fog "
+"válaszolni).\n"
 "A Diff program rendeltetésszerûen futni fog"
 
 #: xfdiff/xfdiff_gui.c:228
@@ -2045,7 +2050,8 @@ msgid ""
 "XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
 msgstr ""
 "\n"
-"Készítette Edscott Wilson Garcia. A program a GNU GPL licensz hatálya alá tartozik.\n"
+"Készítette Edscott Wilson Garcia. A program a GNU GPL licensz hatálya alá "
+"tartozik.\n"
 "Az XFCE modulokat Olivier Fourdan készítette. http://www.xfce.org/"
 
 #: xfdiff/xfdiff_gui.c:845
@@ -2325,7 +2331,8 @@ msgstr "Keresés leállítva!\n"
 
 #: xfglob/xfglob.c:495 xfglob/xfglob.c:525
 msgid "Glob run must finish or be cancelled first."
-msgstr "A Glob futásának elöször be kell fejezõdnie vagy meg kell azt szakítani."
+msgstr ""
+"A Glob futásának elöször be kell fejezõdnie vagy meg kell azt szakítani."
 
 #: xfglob/xfglob.c:508
 #, fuzzy
@@ -2715,7 +2722,8 @@ msgstr "Csak teljes sorok egyezésénél"
 #: xfglob/xfglob.c:1887
 #, fuzzy
 msgid "Output files where no match is found"
-msgstr "Azon fájlok megjelenítése, melyek nem felelnek meg a keresése feltételeknek"
+msgstr ""
+"Azon fájlok megjelenítése, melyek nem felelnek meg a keresése feltételeknek"
 
 #: xfglob/xfglob.c:1916
 msgid "Filter options"
@@ -2754,7 +2762,6 @@ msgid "lines"
 msgstr "sor"
 
 #: xfglob/xfglob.c:2145
-#, fuzzy
 msgid "unable to stat:"
 msgstr ""
 
@@ -3084,7 +3091,6 @@ msgstr ""
 "   -d: megjelenítés, konfiguráció beolvasása és kilépés (alapértelmezett)\n"
 
 #: xfbd/xfbdmgr.c:89
-#, fuzzy
 msgid "xfbdmgr - XFCE List Manager"
 msgstr ""
 
@@ -3208,32 +3214,34 @@ msgstr "Vízszintes"
 msgid "xfwm terminated: "
 msgstr "xfvm leállítva: "
 
-#: xfsamba/xfsamba.c:242
+#: xfsamba/xfsamba.c:260
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Samba hiba! Az Xfsamba nem találja a következõ fájlt: "
 
-#: xfsamba/xfsamba.c:250
+#: xfsamba/xfsamba.c:268
 msgid "(please install Samba or else correct the PATH environment variable)"
-msgstr "(kérem telepítse a Sambát vagy állítsa be helyesen a PATH környezeti változót)"
+msgstr ""
+"(kérem telepítse a Sambát vagy állítsa be helyesen a PATH környezeti "
+"változót)"
 
-#: xfsamba/xfsamba_download.c:87
+#: xfsamba/xfsamba_download.c:86
 msgid "File download failed. See diagnostics for reason."
 msgstr "A fájl letöltése nem sikerült. Nézze meg a részleteket az okokért."
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:91
+#: xfsamba/xfsamba_download.c:90
 msgid "Download done."
 msgstr "Letöltés befejezõdött."
 
-#: xfsamba/xfsamba_download.c:127
+#: xfsamba/xfsamba_download.c:126
 msgid "Downloading file..."
 msgstr "Fájl letöltése..."
 
-#: xfsamba/xfsamba_download.c:140
+#: xfsamba/xfsamba_download.c:139
 msgid "File download cancelled."
 msgstr "Fájl letöltés megszakítva."
 
-#: xfsamba/xfsamba_download.c:148
+#: xfsamba/xfsamba_download.c:147
 msgid "Download failed."
 msgstr "Letöltés nem sikerült."
 
@@ -3246,7 +3254,8 @@ msgid ""
 "for changes to take effect. Otherwise,\n"
 "you must type in the node to be browsed and hit RETURN.\n"
 msgstr ""
-"Ha a hálózatban windows 95-ös rendszerek vannak, elképzelhetõ hogy az xfsamba nem talál\n"
+"Ha a hálózatban windows 95-ös rendszerek vannak, elképzelhetõ hogy az "
+"xfsamba nem talál\n"
 "mester kiszolgálót. Ha a linuxos gépen smb szolgáltatást indít,\n"
 "akkor a probléma elhárul a windows 95-ös gépek\n"
 "újraindításáig... Az eljárás a szokásos\n"
@@ -3272,7 +3281,8 @@ msgid ""
 "$ chmod u+s smbmount smbumount\n"
 "(This option is not available in FreeBSD4.4)"
 msgstr ""
-"SMB megosztások csatlakoztatásához a következõ samba fájlokat suid-root jogúvá kell tenni:\n"
+"SMB megosztások csatlakoztatásához a következõ samba fájlokat suid-root "
+"jogúvá kell tenni:\n"
 "- smbmnt\n"
 "- smbumount\n"
 "ezek a fájlok általában az /usr/bin könyvtárban vannak, és a rendszergazda\n"
@@ -3304,7 +3314,6 @@ msgid "This is XFSamba "
 msgstr "Ez az XFSamba program "
 
 #: xfsamba/xfsamba_gui.c:358
-#, fuzzy
 msgid ""
 "\n"
 "(c) Edscott Wilson Garcia under GNU GPL"
@@ -3315,7 +3324,6 @@ msgid "Please provide information for server "
 msgstr "Kérem adja meg a szerveradatokat "
 
 #: xfsamba/xfsamba_gui.c:544
-#, fuzzy
 msgid "Please provide browsing preferences "
 msgstr ""
 
@@ -3346,17 +3354,14 @@ msgid "Only elements from a single share may be selected!"
 msgstr "Csak egy megosztásban szereplõ elemeket választhat ki!"
 
 #: xfsamba/xfsamba_gui.c:1041
-#, fuzzy
 msgid "Going to master browser..."
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1051
-#, fuzzy
 msgid "Going back..."
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1063
-#, fuzzy
 msgid "Going forward..."
 msgstr ""
 
@@ -3385,7 +3390,7 @@ msgstr "Új könyvtár ..."
 msgid "Delete..."
 msgstr "Törlés ..."
 
-#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:443
 msgid "Tar..."
 msgstr "Tar..."
 
@@ -3463,7 +3468,6 @@ msgid "Differences"
 msgstr "Különbségek"
 
 #: xfsamba/xfsamba_gui.c:1316
-#, fuzzy
 msgid "Master browsers"
 msgstr ""
 
@@ -3577,31 +3581,28 @@ msgstr "Üdvözlöm!"
 #. no jalo para arreglar directorios:
 #. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
 #.
-#: xfsamba/xfsamba_list.c:233
+#: xfsamba/xfsamba_list.c:236
 msgid "Retrieve done."
 msgstr "Letöltés befejezõdött."
 
-#: xfsamba/xfsamba_list.c:238 xfsamba/xfsamba_smblookup.c:175
-#, fuzzy
+#: xfsamba/xfsamba_list.c:241 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:281
+#: xfsamba/xfsamba_list.c:284
 msgid "List failed."
 msgstr "Listázás nem sikerült."
 
-#: xfsamba/xfsamba_list.c:300
+#: xfsamba/xfsamba_list.c:303
 msgid "Retreiving..."
 msgstr "Letöltés..."
 
 #: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
 #: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
-#, fuzzy
 msgid "Resolved"
 msgstr ""
 
 #: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
-#, fuzzy
 msgid "Resolving for"
 msgstr ""
 
@@ -3625,13 +3626,14 @@ msgstr "Lekérdezés befejezõdött."
 msgid "Query failed. Machine may be down."
 msgstr "Sikertelen lekérdezés, a gép nem elérhetõ."
 
-#: xfsamba/xfsamba_smblookup.c:340
+#: xfsamba/xfsamba_smblookup.c:354
 msgid "Querying"
 msgstr "Lekérdezés"
 
 #: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
-msgstr "Nem találok mester kiszolgálót. Részletekért tekintse meg a diagnosztikát."
+msgstr ""
+"Nem találok mester kiszolgálót. Részletekért tekintse meg a diagnosztikát."
 
 #: xfsamba/xfsamba_masterlookup.c:78
 msgid ""
@@ -3674,28 +3676,29 @@ msgstr ""
 msgid "Resolving"
 msgstr "Feloldás"
 
-#: xfsamba/xfsamba_mkdir.c:91
+#: xfsamba/xfsamba_mkdir.c:93
 msgid "Directory creation failed. See diagnostics for details."
-msgstr "Könyvtár létrehozás nem sikerült. Részletekért tekintse meg a diagnosztikát."
+msgstr ""
+"Könyvtár létrehozás nem sikerült. Részletekért tekintse meg a diagnosztikát."
 
-#: xfsamba/xfsamba_mkdir.c:100
+#: xfsamba/xfsamba_mkdir.c:102
 msgid "Directory created."
 msgstr "Könyvtár létrehozva."
 
-#: xfsamba/xfsamba_mkdir.c:149
+#: xfsamba/xfsamba_mkdir.c:151
 msgid "Create directory cancelled."
 msgstr "Könyvtár létrehozás megszakítva."
 
-#: xfsamba/xfsamba_mkdir.c:160
+#: xfsamba/xfsamba_mkdir.c:162
 msgid "Create directory failed."
 msgstr "Sikertelen könyvtárlétrehozás."
 
-#: xfsamba/xfsamba_mkdir.c:185
+#: xfsamba/xfsamba_mkdir.c:187
 msgid "Creating dir..."
 msgstr "Könyvtár létrehozás..."
 
 #. here, dialog to ask new dir name
-#: xfsamba/xfsamba_mkdir.c:200
+#: xfsamba/xfsamba_mkdir.c:202
 msgid "New directory name:"
 msgstr "Új könyvtár neve:"
 
@@ -3703,119 +3706,120 @@ msgstr "Új könyvtár neve:"
 msgid "Really delete remote items?"
 msgstr "Valóban törölni kívánja a távoli elemeket?"
 
-#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:187
+#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:189
 msgid "Remove cancelled."
 msgstr "Törlés megszakítva."
 
-#: xfsamba/xfsamba_rm.c:135
+#: xfsamba/xfsamba_rm.c:137
 msgid "Remove failed. See diagnostics for details."
 msgstr "Sikertelen törlés. A részletekért tekintse meg a diagnosztikát."
 
-#: xfsamba/xfsamba_rm.c:150
+#: xfsamba/xfsamba_rm.c:152
 msgid "Remove complete."
 msgstr "Törlés befejezõdött."
 
-#: xfsamba/xfsamba_rm.c:177
+#: xfsamba/xfsamba_rm.c:179
 msgid "Removing..."
 msgstr "Törlés..."
 
-#: xfsamba/xfsamba_rm.c:184
+#: xfsamba/xfsamba_rm.c:186
 msgid "Sorry, top level shares cannot be removed."
 msgstr "A legfelsõ szintû megosztásokat nem lehet törölni."
 
-#: xfsamba/xfsamba_tar.c:121
+#: xfsamba/xfsamba_tar.c:123
 msgid "Tar failed. See diagnostics for details."
-msgstr "A Tar parancs nem sikerült. Tekintse meg a diagnosztikát a részletekért."
+msgstr ""
+"A Tar parancs nem sikerült. Tekintse meg a diagnosztikát a részletekért."
 
-#: xfsamba/xfsamba_tar.c:126
+#: xfsamba/xfsamba_tar.c:128
 msgid "Tar extraction has completed"
 msgstr "Tar fájl kibontása befejezõdött."
 
-#: xfsamba/xfsamba_tar.c:131
+#: xfsamba/xfsamba_tar.c:133
 msgid "Tar command complete."
 msgstr "A tar parancs futása befejezõdött."
 
-#: xfsamba/xfsamba_tar.c:153
+#: xfsamba/xfsamba_tar.c:155
 msgid "Please select input tarfile next."
 msgstr "Kérem válassza ki a bementi tar fájlt."
 
-#: xfsamba/xfsamba_tar.c:157
+#: xfsamba/xfsamba_tar.c:159
 msgid "Please select the output tarfile next."
 msgstr "Kérem válassza ki a kimeneti tar fájlt."
 
-#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
+#: xfsamba/xfsamba_tar.c:193 xfsamba/xfsamba_tar.c:234
 msgid "Tar cancelled."
 msgstr "A tar parancs futása leállítva."
 
-#: xfsamba/xfsamba_tar.c:203
+#: xfsamba/xfsamba_tar.c:205
 msgid "Cannot open tar file"
 msgstr "A tar állomány nem nyitható meg"
 
-#: xfsamba/xfsamba_tar.c:214
+#: xfsamba/xfsamba_tar.c:216
 msgid "Cannot create tar file"
 msgstr "A tar állományt nem lehet létrehozni"
 
-#: xfsamba/xfsamba_tar.c:325
+#: xfsamba/xfsamba_tar.c:327
 msgid "create"
 msgstr "létrehozás"
 
-#: xfsamba/xfsamba_tar.c:328
+#: xfsamba/xfsamba_tar.c:330
 msgid "extract"
 msgstr "kibontás"
 
-#: xfsamba/xfsamba_tar.c:371
+#: xfsamba/xfsamba_tar.c:373
 msgid "full"
 msgstr "teljes"
 
-#: xfsamba/xfsamba_tar.c:374
+#: xfsamba/xfsamba_tar.c:376
 msgid "incremental"
 msgstr "növekvõ"
 
-#: xfsamba/xfsamba_tar.c:397
+#: xfsamba/xfsamba_tar.c:399
 msgid "do not reset archive bit"
 msgstr "ne állítsa vissza az archív bitet"
 
-#: xfsamba/xfsamba_tar.c:400
+#: xfsamba/xfsamba_tar.c:402
 msgid "reset archive bit"
 msgstr "állítsa vissza az archív bitet"
 
-#: xfsamba/xfsamba_tar.c:412
+#: xfsamba/xfsamba_tar.c:414
 msgid "Options"
 msgstr "Beállítások"
 
-#: xfsamba/xfsamba_upload.c:104
+#: xfsamba/xfsamba_upload.c:106
 msgid "Uploaded file."
 msgstr "Feltöltött fájl."
 
-#: xfsamba/xfsamba_upload.c:136
+#: xfsamba/xfsamba_upload.c:138
 msgid "File upload failed. See diagnostics for reason."
 msgstr "Sikertelen fájlfeltöltés. Tekintse meg a diagnosztikát a részletekért."
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:282
+#: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:284
 msgid "Upload done."
 msgstr "Feltöltés befejezõdött."
 
-#: xfsamba/xfsamba_upload.c:168
+#: xfsamba/xfsamba_upload.c:170
 msgid "Uploading file..."
 msgstr "Fájl feltöltése..."
 
-#: xfsamba/xfsamba_upload.c:174
+#: xfsamba/xfsamba_upload.c:176
 msgid "File upload cancelled."
 msgstr "Fájlfeltöltés megszakítva."
 
-#: xfsamba/xfsamba_upload.c:184
+#: xfsamba/xfsamba_upload.c:186
 msgid "Specified file does not exist"
 msgstr "A megadott fájl nem létezik."
 
-#: xfsamba/xfsamba_upload.c:185 xfsamba/xfsamba_upload.c:199
+#: xfsamba/xfsamba_upload.c:187 xfsamba/xfsamba_upload.c:201
 msgid "Upload failed."
 msgstr "Sikertelen feltöltés."
 
-#: xfsamba/xfsamba_upload.c:252
+#: xfsamba/xfsamba_upload.c:254
 msgid "Upload produced errors. See diagnostics for reason."
 msgstr "Sikertelen feltöltés. Tekintse meg a diagnosztikát a részletekért."
 
-#: xfsamba/xfsamba_upload.c:359
+#: xfsamba/xfsamba_upload.c:361
 msgid "Uploading files..."
 msgstr "Fájlok feltöltése..."
 
@@ -3860,7 +3864,6 @@ msgid "Save"
 msgstr "Mentés"
 
 #: xfumed/xfumed_gui.c:164
-#, fuzzy
 msgid "Reset"
 msgstr ""
 
