@@ -131,7 +131,7 @@ GetWMName (XfwmWindow * t)
   }
   for (cp = t->name; *cp; cp++)
   {
-    if (*cp < ' ') *cp = ' ';
+    if ((*cp == '\n') || (*cp == '\r')) *cp = ' ';
   }
 }
 
@@ -184,7 +184,7 @@ GetWMIconName (XfwmWindow * t)
   }
   for (cp = t->name; *cp; cp++)
   {
-    if (*cp < ' ') *cp = ' ';
+    if ((*cp == '\n') || (*cp == '\r')) *cp = ' ';
   }
 }
 
