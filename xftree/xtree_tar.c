@@ -119,6 +119,14 @@ static tar_dir *push_tar_dir(GtkCTreeNode *node,char *name){
 	return headTar;	
 }
 
+static int
+compare_node_path (gconstpointer ptr1, gconstpointer ptr2)
+{
+  entry *en1 = (entry *) ptr1, *en2 = (entry *) ptr2;
+
+  return strcmp (en1->path, en2->path);
+}
+
 static GtkCTreeNode *find_tar_dir(char *name){
 	struct tar_dir *p;
 	p=headTar;
@@ -267,9 +275,10 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       g_free(cmd);
       if (pipe) {
               icon_pix pix;  
-	      char *p,*d,*u;
+	      char *p,*d,*u,*t;
 	      char line[256];
 	      while (!feof(pipe) && fgets (line, 255, pipe)){
+		      char *l;
       		      if ((d_en = entry_new ())==NULL) {
 			      pclose (pipe);
 			      return NULL;
@@ -318,11 +327,26 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 		  	sprintf (text[COL_SIZE], " %llu%s", tama,tag);
 		      }
 		      /* date */
-		      strcpy(text[COL_DATE],strtok(NULL," "));
-		      strcat(text[COL_DATE]," ");
-		      strcat(text[COL_DATE],strtok(NULL," "));
+		      t=strtok(NULL,"\n");
+		      /*printf("dbg:tp=%s\n",t);*/
 		      /* name */
-		      p=strtok(NULL,"\n");
+		      /* symlink */
+		      if ((l=strstr(t," ->"))!=NULL){
+			     d_en->type|=FT_LINK;
+			     l=strstr(t," ->");
+			     l[0]=0;l++; 
+			     /*printf("dbg:symlink %s\n",l);*/
+		      }
+		       
+		      p=strrchr(t,' '); 
+		      if (l) t=l;
+		      if (!p) p="?";
+		      else {p[0]=0;p++;}
+		      while (*p ==' ' || *p=='\t') p++;
+		
+		      /*printf("dbg:t=%s\n",t);printf("dbg:p=%s\n",p);*/
+		      strcpy(text[COL_DATE],t);
+		      
 		      if ((p[strlen(p)-1]=='/')||(p[strlen(p)-1]=='\\'))  d_en->type |=  FT_DIR;
 		      else d_en->type |=  FT_FILE;
 		      d_en->path =(char *)malloc(strlen("tar:")+strlen(p_en->path)+1+strlen(p)+1);
@@ -364,14 +388,20 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      
 		      }
 		      if (!(d_en->type &  FT_DIR)) {
-	      	        set_icon_pix(&pix,d_en->type,d_en->label,d_en->flags);
-		        s_item=gtk_ctree_insert_node (ctree,p_node, NULL, text, SPACING, 
+			/* check if already in */	
+			s_item=gtk_ctree_find_by_row_data_custom (ctree, 
+				find_root((GtkCTree *)ctree), 
+			        d_en, compare_node_path);
+			if (!s_item)	{      
+	      	          set_icon_pix(&pix,d_en->type,d_en->label,d_en->flags);
+		          s_item=gtk_ctree_insert_node (ctree,p_node, NULL, text, SPACING, 
 		  		pix.pixmap,pix.pixmask,pix.open,pix.openmask,
 				(d_en->type &  FT_DIR)?FALSE:TRUE,FALSE);
-		        if (s_item) {
-		          if (d_en->type &  FT_DIR) headTar=push_tar_dir(s_item,p);
-		          gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
-			  /*fprintf(stderr,"subitem inserted\n");*/
+		          if (s_item) {
+		            if (d_en->type &  FT_DIR) headTar=push_tar_dir(s_item,p);
+		            gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
+			    /*fprintf(stderr,"subitem inserted\n");*/
+		          }
 		        }
 		      }
 	      }
@@ -504,14 +534,6 @@ static void rwForkOverE (pid_t pid)
   update_timer (tar_ctree);
 }
 
-
-static int
-compare_node_path (gconstpointer ptr1, gconstpointer ptr2)
-{
-  entry *en1 = (entry *) ptr1, *en2 = (entry *) ptr2;
-
-  return strcmp (en1->path, en2->path);
-}
 
 static int inner_tar_delete(GtkCTree *ctree,char *path){
 	char *tar_file,*tar_entry;

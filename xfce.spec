@@ -1,6 +1,6 @@
 %define 	name	xfce
 %define 	version	3.8.16
-%define		release	1
+%define		release	2
 %define		prefix 	/usr
 %define		datadir /usr/share
 %define		confdir /etc/X11
