@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-18 22:17+0100\n"
+"POT-Creation-Date: 2002-01-19 00:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -908,8 +908,8 @@ msgid "Owner"
 msgstr ""
 
 #: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
-#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:841
-#: xftree/xtree_functions.c:843 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:842
+#: xftree/xtree_functions.c:844 xftree/xtree_go.c:180 xftree/xtree_go.c:181
 #: xftree/xtree_gui.c:1309 xftree/xtree_gui.c:1311
 msgid "unknown"
 msgstr ""
@@ -1481,7 +1481,7 @@ msgstr ""
 msgid "Xftree results"
 msgstr ""
 
-#: xftree/xtree_mess.c:1048
+#: xftree/xtree_mess.c:1060
 msgid "Home directory : "
 msgstr ""
 
