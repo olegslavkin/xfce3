@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -130,15 +130,21 @@ l = @l@
 
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
-INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ \
+-DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
+-DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 
 bin_PROGRAMS = xfumed 
 
-xfumed_SOURCES = xfumed.c xfumed.h 				xfumed_gui.c xfumed_gui.h 				xfumed_gui_cb.c xfumed_gui_cb.h 
+xfumed_SOURCES = xfumed.c xfumed.h \
+				xfumed_gui.c xfumed_gui.h \
+				xfumed_gui_cb.c xfumed_gui_cb.h 
 
 
-xfumed_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
+xfumed_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
+@GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \
+${X_LIBS} ${X_PRE_LIBS} -lXpm
 
 
 xfumed_DEPENDENCIES = ../libs/libxfcecore.la
@@ -341,7 +347,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \

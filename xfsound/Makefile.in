@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -130,16 +130,25 @@ l = @l@
 
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
-INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ @AUDIOFILE_CFLAGS@ @ARTS_CFLAGS@ -I../ -I../libs/ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
+@AUDIOFILE_CFLAGS@ @ARTS_CFLAGS@ -I../ -I../libs/ \
+-DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
+-DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 
 bin_PROGRAMS = xfsound
 bin_SCRIPTS = xfplay
 
-xfsound_SOURCES =  	xfsound_cb.c xfsound_cb.h 	xfsound.c xfsound.h 	xfdsp.c xfdsp.h
+xfsound_SOURCES = \
+	xfsound_cb.c xfsound_cb.h \
+	xfsound.c xfsound.h \
+	xfdsp.c xfdsp.h
 
 
-xfsound_LDADD = ../libs/libxfcecore.la ../libs/libxfwmcore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @AUDIOFILE_LIBS@ @ARTS_LIBS@ @INTLLIBS@ @LIBS@ ../libs/libxfwmcore.la ${X_LIBS} ${X_PRE_LIBS} -lXpm @XFT_LIBS@
+xfsound_LDADD = ../libs/libxfcecore.la ../libs/libxfwmcore.la \
+@DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ \
+@AUDIOFILE_LIBS@ @ARTS_LIBS@ @INTLLIBS@ @LIBS@ ../libs/libxfwmcore.la \
+${X_LIBS} ${X_PRE_LIBS} -lXpm @XFT_LIBS@
 
 
 xfsound_DEPENDENCIES = ../libs/libxfcecore.la ../libs/libxfwmcore.la
@@ -363,7 +372,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \

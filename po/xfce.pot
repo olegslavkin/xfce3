@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-25 21:35+0100\n"
+"POT-Creation-Date: 2001-12-09 14:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: libs/colorselect.c:91 xfclock/xfclock_colorsel.c:77
 #: xfdiff/xfdiff_colorsel.c:85
@@ -27,30 +27,30 @@ msgstr ""
 msgid "Font Selection"
 msgstr ""
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
+#: libs/xfce-common.c:268 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
 #: xfdiff/xfdiff_misc.c:136
 msgid "OK"
 msgstr ""
 
-#: libs/xfce-common.c:266
+#: libs/xfce-common.c:278
 msgid "Message"
 msgstr ""
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:74
+#: libs/xfce-common.c:391 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:74
 #: xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr ""
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
+#: libs/xfce-common.c:392 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
 #: xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr ""
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:242
+#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:258
 msgid "Question"
 msgstr ""
 
-#: libs/xfce-common.c:603
+#: libs/xfce-common.c:632
 msgid "Terminated: "
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1144 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_get.c:138
-#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:889 xfumed/xfumed_gui.c:359
+#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:909 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr ""
 
@@ -171,12 +171,12 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:321
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:587
 msgid "Clear"
 msgstr ""
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
-#: xftree/xtree_mess.c:326
+#: xftree/xtree_mess.c:592
 msgid "Dismiss"
 msgstr ""
 
@@ -648,7 +648,7 @@ msgid "Setup..."
 msgstr ""
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2395
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:1211
 #: xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr ""
@@ -752,71 +752,72 @@ msgstr ""
 msgid "Workspace"
 msgstr ""
 
-#: xftree/gtk_dlg.c:247
+#: xftree/gtk_dlg.c:263
 msgid "Information"
 msgstr ""
 
-#: xftree/gtk_dlg.c:252
+#: xftree/gtk_dlg.c:268
 msgid "Error"
 msgstr ""
 
-#: xftree/gtk_dlg.c:257
+#: xftree/gtk_dlg.c:273
 msgid "Warning"
 msgstr ""
 
-#: xftree/gtk_dlg.c:261
+#: xftree/gtk_dlg.c:277
 msgid "Dialog"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:280
+#: xftree/gtk_dlg.c:296
 msgid "_Ok"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:285
+#: xftree/gtk_dlg.c:301
 msgid "_Yes"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:290
+#: xftree/gtk_dlg.c:306
 msgid "_Continue"
 msgstr ""
 
-#: xftree/gtk_dlg.c:300 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:325 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:311
+#: xftree/gtk_dlg.c:336
 msgid "_Cancel"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:316
+#: xftree/gtk_dlg.c:341
 msgid "_No"
 msgstr ""
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:327
+#: xftree/gtk_dlg.c:353
 msgid "_All"
 msgstr ""
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:337
+#: xftree/gtk_dlg.c:363
 msgid "_Close"
 msgstr ""
 
-#: xftree/gtk_exec.c:142
+#: xftree/gtk_exec.c:142 xftree/xtree_gui.c:1656
 msgid "Open with ..."
 msgstr ""
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:146 xftree/xtree_gui.c:2480
-#: xfwm/xfwm.c:889
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:146 xftree/xtree_gui.c:1296
+#: xftree/xtree_gui.c:1687 xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr ""
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:2361
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:1177
+#: xftree/xtree_gui.c:1642
 msgid "Open in terminal"
 msgstr ""
 
@@ -848,7 +849,7 @@ msgstr ""
 msgid "%d bytes received (%d bps)"
 msgstr ""
 
-#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2320
+#: xftree/gtk_prop.c:182
 msgid "Properties"
 msgstr ""
 
@@ -941,16 +942,16 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: xftree/reg.c:545
+#: xftree/reg.c:548
 msgid "Can't find suffix in filename, using complete filename"
 msgstr ""
 
-#: xftree/reg.c:552
+#: xftree/reg.c:555
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr ""
 
-#: xftree/reg.c:556
+#: xftree/reg.c:559
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr ""
@@ -975,68 +976,68 @@ msgstr ""
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr ""
 
-#: xftree/xtree_cpy.c:130
+#: xftree/xtree_cpy.c:131
 msgid "Insufficient system memory"
 msgstr ""
 
-#: xftree/xtree_cpy.c:146
+#: xftree/xtree_cpy.c:147
 msgid "Too few bytes transferred ! Device full ?"
 msgstr ""
 
-#: xftree/xtree_cpy.c:150
+#: xftree/xtree_cpy.c:151
 msgid "Too many bytes transferred !?"
 msgstr ""
 
-#: xftree/xtree_cpy.c:154 xftree/xtree_cpy.c:158
+#: xftree/xtree_cpy.c:155 xftree/xtree_cpy.c:159
 msgid "Can't stat() file"
 msgstr ""
 
-#: xftree/xtree_cpy.c:162 xftree/xtree_cpy.c:166
+#: xftree/xtree_cpy.c:163 xftree/xtree_cpy.c:167
 msgid "Error closing file"
 msgstr ""
 
-#: xftree/xtree_cpy.c:170
+#: xftree/xtree_cpy.c:171
 msgid "Error deleting"
 msgstr ""
 
-#: xftree/xtree_cpy.c:174 xftree/xtree_cpy.c:337
+#: xftree/xtree_cpy.c:175 xftree/xtree_cpy.c:344
 msgid "Can't copy FIFO"
 msgstr ""
 
-#: xftree/xtree_cpy.c:178 xftree/xtree_cpy.c:340
+#: xftree/xtree_cpy.c:179 xftree/xtree_cpy.c:347
 msgid "Can't copy device file"
 msgstr ""
 
-#: xftree/xtree_cpy.c:182 xftree/xtree_cpy.c:343
+#: xftree/xtree_cpy.c:183 xftree/xtree_cpy.c:350
 msgid "Can't copy socket"
 msgstr ""
 
-#: xftree/xtree_cpy.c:792
+#: xftree/xtree_cpy.c:812
 #, c-format
 msgid "%d bytes"
 msgstr ""
 
-#: xftree/xtree_cpy.c:867
+#: xftree/xtree_cpy.c:887
 msgid "Source: "
 msgstr ""
 
-#: xftree/xtree_cpy.c:874
+#: xftree/xtree_cpy.c:894
 msgid "Target: "
 msgstr ""
 
-#: xftree/xtree_cpy.c:881
+#: xftree/xtree_cpy.c:901
 msgid "file x of x"
 msgstr ""
 
-#: xftree/xtree_cpy.c:896
+#: xftree/xtree_cpy.c:916
 msgid "XFTree: Copy"
 msgstr ""
 
-#: xftree/xtree_cpy.c:897
+#: xftree/xtree_cpy.c:917
 msgid "XFTree: Move"
 msgstr ""
 
-#: xftree/xtree_cpy.c:898
+#: xftree/xtree_cpy.c:918
 msgid "XFTree: Link"
 msgstr ""
 
@@ -1048,285 +1049,359 @@ msgstr ""
 msgid "Disk usage:"
 msgstr ""
 
-#: xftree/xtree_go.c:167
+#: xftree/xtree_go.c:157
 msgid "Cannot find path"
 msgstr ""
 
-#: xftree/xtree_go.c:250
+#: xftree/xtree_go.c:246 xftree/xtree_gui.c:1676
 msgid "Go to"
 msgstr ""
 
-#: xftree/xtree_gui.c:182
+#: xftree/xtree_gui.c:160
 #, c-format
 msgid "dbg:malloc error in %s at line %d\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:336
+#: xftree/xtree_gui.c:338
 msgid "menu_detach()\n"
-msgstr ""
-
-#: xftree/xtree_gui.c:879
-msgid "error deleting file"
-msgstr ""
-
-#: xftree/xtree_gui.c:977
-msgid "Can't copy device, fifo and socket files as regular files!\n"
-msgstr ""
-
-#: xftree/xtree_gui.c:1105
-msgid "move_dir() recursive failed\n"
-msgstr ""
-
-#: xftree/xtree_gui.c:1113
-msgid "move_dir() move_file() failed\n"
-msgstr ""
-
-#. nothing to delete
-#: xftree/xtree_gui.c:1223 xftree/xtree_gui.c:1966
-msgid "No files marked !"
-msgstr ""
-
-#: xftree/xtree_gui.c:1247 xftree/xtree_gui.c:1249
-msgid "Delete item ?"
-msgstr ""
-
-#: xftree/xtree_gui.c:1284 xftree/xtree_gui.c:1286
-msgid "Can't move file to trash, hard delete ?"
-msgstr ""
-
-#: xftree/xtree_gui.c:1328
-msgid ""
-"This is XFTree (C) under GNU GPL\n"
-"with code contributed by:\n"
-"Rasca, Berlin\n"
-"Olivier Fourdan\n"
-"Edscott Wilson Garcia\n"
-msgstr ""
-
-#: xftree/xtree_gui.c:1722
-msgid "New_Folder"
-msgstr ""
-
-#. if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
-#: xftree/xtree_gui.c:1773 xftree/xtree_gui.c:1910
-msgid "File exists !"
-msgstr ""
-
-#: xftree/xtree_gui.c:1782
-msgid "Can't create : "
-msgstr ""
-
-#: xftree/xtree_gui.c:1881
-msgid "No item marked !"
-msgstr ""
-
-#: xftree/xtree_gui.c:1892
-msgid "Rename to : "
-msgstr ""
-
-#: xftree/xtree_gui.c:1897
-msgid "Character not allowed in filename"
-msgstr ""
-
-#: xftree/xtree_gui.c:2299 xftree/xtree_gui.c:2356
-msgid "New window"
-msgstr ""
-
-#: xftree/xtree_gui.c:2301 xftree/xtree_gui.c:2390
-msgid "Close window"
-msgstr ""
-
-#: xftree/xtree_gui.c:2305
-msgid "Go back ..."
-msgstr ""
-
-#: xftree/xtree_gui.c:2307 xftree/xtree_gui.c:2527
-msgid "Go to ..."
-msgstr ""
-
-#: xftree/xtree_gui.c:2310 xftree/xtree_gui.c:2522
-msgid "Go up"
-msgstr ""
-
-#: xftree/xtree_gui.c:2312 xftree/xtree_gui.c:2512
-msgid "Go home"
-msgstr ""
-
-#: xftree/xtree_gui.c:2316
-msgid "New Folder"
-msgstr ""
-
-#: xftree/xtree_gui.c:2318 xftree/xtree_gui.c:2375
-msgid "New file ..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2324 xftree/xtree_gui.c:2380
-msgid "Delete ..."
-msgstr ""
-
-#: xftree/xtree_gui.c:2326 xftree/xtree_gui.c:2461
-msgid "Open Trash"
-msgstr ""
-
-#: xftree/xtree_gui.c:2328 xftree/xtree_gui.c:2466
-msgid "Empty Trash"
-msgstr ""
-
-#: xftree/xtree_gui.c:2332 xftree/xtree_gui.c:2452
-msgid "Toggle Dotfiles"
 msgstr ""
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2349
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:1165
 msgid "File"
 msgstr ""
 
-#: xftree/xtree_gui.c:2370
+#: xftree/xtree_gui.c:1172
+msgid "New window"
+msgstr ""
+
+#: xftree/xtree_gui.c:1186
 msgid "New Folder ..."
 msgstr ""
 
+#: xftree/xtree_gui.c:1191
+msgid "New file ..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:1196 xftree/xtree_gui.c:1667
+msgid "Delete ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:1206 xftree/xtree_gui.c:1690
+msgid "Close window"
+msgstr ""
+
 #. Create "Edit" menu
-#: xftree/xtree_gui.c:2403 xfumed/xfumed_gui.c:129
+#: xftree/xtree_gui.c:1219 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr ""
 
-#: xftree/xtree_gui.c:2409
+#: xftree/xtree_gui.c:1225 xftree/xtree_gui.c:1646
 msgid "Copy to pasteboard"
 msgstr ""
 
-#: xftree/xtree_gui.c:2416
+#: xftree/xtree_gui.c:1232 xftree/xtree_gui.c:1647
 msgid "Insert from pasteboard"
 msgstr ""
 
-#: xftree/xtree_gui.c:2423
+#: xftree/xtree_gui.c:1239 xftree/xtree_gui.c:1648
 msgid "List pasteboard contents"
 msgstr ""
 
-#: xftree/xtree_gui.c:2430
+#: xftree/xtree_gui.c:1246 xftree/xtree_gui.c:1649
 msgid "Clear pasteboard"
 msgstr ""
 
-#: xftree/xtree_gui.c:2442
+#: xftree/xtree_gui.c:1258 xftree/xtree_gui.c:1681
 msgid "Select all"
 msgstr ""
 
-#: xftree/xtree_gui.c:2447
+#: xftree/xtree_gui.c:1263 xftree/xtree_gui.c:1682
 msgid "Unselect"
 msgstr ""
 
+#: xftree/xtree_gui.c:1268 xftree/xtree_gui.c:1683
+msgid "Toggle Dotfiles"
+msgstr ""
+
+#: xftree/xtree_gui.c:1277 xftree/xtree_gui.c:1688
+msgid "Open Trash"
+msgstr ""
+
+#: xftree/xtree_gui.c:1282 xftree/xtree_gui.c:1689
+msgid "Empty Trash"
+msgstr ""
+
 #. Create "Tools" menu
-#: xftree/xtree_gui.c:2474
+#: xftree/xtree_gui.c:1290
 msgid "Tools"
 msgstr ""
 
-#: xftree/xtree_gui.c:2485
+#: xftree/xtree_gui.c:1301 xftree/xtree_gui.c:1672
 msgid "Find ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2490
+#: xftree/xtree_gui.c:1306 xftree/xtree_gui.c:1665
 msgid "Properties ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2496
+#: xftree/xtree_gui.c:1312
 msgid "Differences ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:2501
+#: xftree/xtree_gui.c:1317
 msgid "Patch viewer ..."
 msgstr ""
 
 #. Create "Go To" menu
-#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2506
+#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:1322
 msgid "Go"
 msgstr ""
 
-#: xftree/xtree_gui.c:2517
+#: xftree/xtree_gui.c:1328 xftree/xtree_gui.c:1673
+msgid "Go home"
+msgstr ""
+
+#: xftree/xtree_gui.c:1333 xftree/xtree_gui.c:1674
 msgid "Go back"
+msgstr ""
+
+#: xftree/xtree_gui.c:1338 xftree/xtree_gui.c:1675
+msgid "Go up"
+msgstr ""
+
+#: xftree/xtree_gui.c:1343
+msgid "Go to ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:1348
+msgid "Update ..."
 msgstr ""
 
 #. menuitem = gtk_menu_item_new ();
 #. gtk_menu_append (GTK_MENU (menu), menuitem);
 #. gtk_widget_show (menuitem);
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2538
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:1358
 msgid "Preferences"
 msgstr ""
 
-#: xftree/xtree_gui.c:2544
+#. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
+#: xftree/xtree_gui.c:1364 xftree/xtree_gui.c:1695
+msgid "Subsort by file type"
+msgstr ""
+
+#: xftree/xtree_gui.c:1373
 msgid "Save geometry on exit"
 msgstr ""
 
-#: xftree/xtree_gui.c:2546
+#: xftree/xtree_gui.c:1375
 msgid "Double click does GOTO"
 msgstr ""
 
-#: xftree/xtree_gui.c:2548
+#: xftree/xtree_gui.c:1377
 msgid "Short titles"
 msgstr ""
 
-#: xftree/xtree_gui.c:2550
+#: xftree/xtree_gui.c:1379
 msgid "Drag does copy"
+msgstr ""
+
+#: xftree/xtree_gui.c:1382
+msgid "Set background color"
+msgstr ""
+
+#: xftree/xtree_gui.c:1387
+msgid "Set font"
+msgstr ""
+
+#: xftree/xtree_gui.c:1392
+msgid "Hide menu"
+msgstr ""
+
+#. hidden element (already in configuration dialog)
+#: xftree/xtree_gui.c:1402
+msgid "Hide toolbar"
+msgstr ""
+
+#: xftree/xtree_gui.c:1411
+msgid "Hide titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:1421
+msgid "Hide dates"
+msgstr ""
+
+#: xftree/xtree_gui.c:1431
+msgid "Hide sizes"
+msgstr ""
+
+#: xftree/xtree_gui.c:1441
+msgid "Configure toolbar"
 msgstr ""
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2555
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:1447
 msgid "Help"
 msgstr ""
 
-#: xftree/xtree_gui.c:2562
+#: xftree/xtree_gui.c:1454
+msgid "Drag and drop"
+msgstr ""
+
+#: xftree/xtree_gui.c:1460
 msgid "Default shortcut keys"
 msgstr ""
 
-#: xftree/xtree_gui.c:2567
+#: xftree/xtree_gui.c:1465
 msgid "Custom shortcut keys"
 msgstr ""
 
-#: xftree/xtree_gui.c:2572
+#: xftree/xtree_gui.c:1470
 msgid "About ..."
 msgstr ""
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2737
+#. keyboard shortcuts used to be bugged because of conflicting entries.
+#. * these macros should make it easier to avoid conflicting entries.
+#. * Please place any duplicate entries as a macro. (since all entries
+#. * duplicate at least with help menu, all should be here).
+#. *
+#. * All should appear in help menu, if not, something is wrong
+#. * (delete is the only exception).
+#. *
+#. * note: "unselect all" was eliminated since the function call was identical
+#. * to plain unselect.
+#. *
+#: xftree/xtree_gui.c:1641
+msgid "Open in new"
+msgstr ""
+
+#: xftree/xtree_gui.c:1653
+msgid "Go to marked"
+msgstr ""
+
+#: xftree/xtree_gui.c:1657
+msgid "Register ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:1658
+msgid "Duplicate"
+msgstr ""
+
+#: xftree/xtree_gui.c:1661
+msgid "New Folder"
+msgstr ""
+
+#: xftree/xtree_gui.c:1662
+msgid "New file"
+msgstr ""
+
+#: xftree/xtree_gui.c:1666
+msgid "Rename ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:1668
+msgid "Show disk usage ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:1677
+msgid "Update"
+msgstr ""
+
+#: xftree/xtree_gui.c:1696
+msgid "Sort by file name"
+msgstr ""
+
+#: xftree/xtree_gui.c:1697
+msgid "Sort by file size"
+msgstr ""
+
+#: xftree/xtree_gui.c:1698
+msgid "Sort by file date"
+msgstr ""
+
+#: xftree/xtree_gui.c:1700
+msgid "Hide/show menu"
+msgstr ""
+
+#: xftree/xtree_gui.c:1701
+msgid "Hide/show toolbar"
+msgstr ""
+
+#: xftree/xtree_gui.c:1702
+msgid "Hide/show titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:1703
+msgid "Hide/show dates"
+msgstr ""
+
+#: xftree/xtree_gui.c:1704
+msgid "Hide/show sizes"
+msgstr ""
+
+#: xftree/xtree_gui.c:1706
+msgid "Quit ..."
+msgstr ""
+
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:1776
 msgid "Name"
 msgstr ""
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2738
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:1777
 msgid "Size (bytes)"
 msgstr ""
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2739
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1778
 msgid "Last changed"
 msgstr ""
 
-#: xftree/xtree_mess.c:84
+#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:96
+msgid "Could not load specified font\n"
+msgstr ""
+
+#: xftree/xtree_mess.c:296
 msgid "Override ?"
 msgstr ""
 
-#: xftree/xtree_mess.c:85
+#: xftree/xtree_mess.c:297
 msgid "with"
 msgstr ""
 
-#: xftree/xtree_mess.c:161 xftree/xtree_mess.c:178
+#: xftree/xtree_mess.c:373 xftree/xtree_mess.c:390
 msgid "Default xftreerc file cannot be created\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:199
+#: xftree/xtree_mess.c:422
 msgid "Default xftreerc file cannot be read\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:250
+#: xftree/xtree_mess.c:502
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
 "and press a keyboard key to create the shortcut."
 msgstr ""
 
-#: xftree/xtree_mess.c:260
+#: xftree/xtree_mess.c:511
+msgid ""
+"Xftree handles drag and drop the following way:\n"
+"SHIFT drag+drop --> move\n"
+"CTRL drag+drop --> copy\n"
+"SHIFT-CTRL drag+drop --> link\n"
+"The default drag+drop action is move,\n"
+"but can be changed in the preferences menu.\n"
+"To drag multiple files, use the middle button.\n"
+msgstr ""
+
+#: xftree/xtree_mess.c:526
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 
-#: xftree/xtree_mess.c:300
+#: xftree/xtree_mess.c:566
 msgid "Xftree results"
 msgstr ""
 
@@ -1383,6 +1458,7 @@ msgstr ""
 msgid "****Empty file****\n"
 msgstr ""
 
+#. missing color attribute
 #: xfdiff/xfdiff.c:314 xfdiff/xfdiff.c:320
 msgid "****Binary data****\n"
 msgstr ""
@@ -1564,11 +1640,6 @@ msgstr ""
 msgid "Font selection"
 msgstr ""
 
-#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
-msgid "Could not load specified font\n"
-msgstr ""
-
 #: xfdiff/xfdiff_gui.c:585
 msgid "Select highlight background color"
 msgstr ""
@@ -1595,6 +1666,13 @@ msgstr ""
 
 #: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
+msgstr ""
+
+#: xfdiff/xfdiff_gui.c:826
+msgid ""
+"\n"
+"(c) by Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:845
@@ -1839,6 +1917,7 @@ msgstr ""
 msgid "couldn't allocate color"
 msgstr ""
 
+#. font color!
 #: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr ""
@@ -2729,6 +2808,13 @@ msgstr ""
 msgid "This is XFSamba "
 msgstr ""
 
+#: xfsamba/xfsamba_gui.c:151
+msgid ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
+
 #: xfsamba/xfsamba_gui.c:337
 msgid "Please provide information for server "
 msgstr ""
@@ -3245,4 +3331,16 @@ msgid ""
 "submenus will also be deleted.\n"
 "\n"
 "Do you want to delete this submenu ?"
+msgstr ""
+
+#: xfumed/xfumed.h:10
+msgid "Item"
+msgstr ""
+
+#: xfumed/xfumed.h:11
+msgid "Submenu"
+msgstr ""
+
+#: xfumed/xfumed.h:12
+msgid "Separator"
 msgstr ""

@@ -25,9 +25,6 @@
 /* Define to `long' if <sys/types.h> doesn't define.  */
 #undef off_t
 
-/* Define if you need to in order for stat and other things to work.  */
-#undef _POSIX_SOURCE
-
 /* Define as the return type of signal handlers (int or void).  */
 #undef RETSIGTYPE
 
@@ -205,6 +202,9 @@
 /* Define if you have the <nl_types.h> header file.  */
 #undef HAVE_NL_TYPES_H
 
+/* Define if you have the <stdlib.h> header file.  */
+#undef HAVE_STDLIB_H
+
 /* Define if you have the <string.h> header file.  */
 #undef HAVE_STRING_H
 
@@ -219,6 +219,12 @@
 
 /* Define if you have the <sys/soundcard.h> header file.  */
 #undef HAVE_SYS_SOUNDCARD_H
+
+/* Define if you have the <sys/stat.h> header file.  */
+#undef HAVE_SYS_STAT_H
+
+/* Define if you have the <sys/types.h> header file.  */
+#undef HAVE_SYS_TYPES_H
 
 /* Define if you have the <unistd.h> header file.  */
 #undef HAVE_UNISTD_H

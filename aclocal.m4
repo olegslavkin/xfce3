@@ -1,6 +1,6 @@
-dnl aclocal.m4 generated automatically by aclocal 1.4
+dnl aclocal.m4 generated automatically by aclocal 1.4-p5
 
-dnl Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+dnl Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 dnl This file is free software; the Free Software Foundation
 dnl gives unlimited permission to copy and/or distribute it,
 dnl with or without modifications, as long as this notice is preserved.
@@ -3719,9 +3719,27 @@ AC_DEFUN([AM_PROG_NM],        [AC_PROG_NM])
 # This is just to silence aclocal about the macro not being used
 ifelse([AC_DISABLE_FAST_INSTALL])
 
+#serial 1
+# This test replaces the one in autoconf.
+# Currently this macro should have the same name as the autoconf macro
+# because gettext's gettext.m4 (distributed in the automake package)
+# still uses it.  Otherwise, the use in gettext.m4 makes autoheader
+# give these diagnostics:
+#   configure.in:556: AC_TRY_COMPILE was called before AC_ISC_POSIX
+#   configure.in:556: AC_TRY_RUN was called before AC_ISC_POSIX
+
+undefine([AC_ISC_POSIX])
+
+AC_DEFUN([AC_ISC_POSIX],
+  [
+    dnl This test replaces the obsolescent AC_ISC_POSIX kludge.
+    AC_CHECK_LIB(cposix, strerror, [LIBS="$LIBS -lcposix"])
+  ]
+)
+
 # Like AC_CONFIG_HEADER, but automatically create stamp file.
 
-AC_DEFUN(AM_CONFIG_HEADER,
+AC_DEFUN([AM_CONFIG_HEADER],
 [AC_PREREQ([2.12])
 AC_CONFIG_HEADER([$1])
 dnl When config.status generates a header, we must update the stamp-h file.
@@ -3751,7 +3769,7 @@ changequote([,]))])
 dnl Usage:
 dnl AM_INIT_AUTOMAKE(package,version, [no-define])
 
-AC_DEFUN(AM_INIT_AUTOMAKE,
+AC_DEFUN([AM_INIT_AUTOMAKE],
 [AC_REQUIRE([AC_PROG_INSTALL])
 PACKAGE=[$1]
 AC_SUBST(PACKAGE)
@@ -3779,7 +3797,7 @@ AC_REQUIRE([AC_PROG_MAKE_SET])])
 # Check to make sure that the build environment is sane.
 #
 
-AC_DEFUN(AM_SANITY_CHECK,
+AC_DEFUN([AM_SANITY_CHECK],
 [AC_MSG_CHECKING([whether build environment is sane])
 # Just in case
 sleep 1
@@ -3820,7 +3838,7 @@ AC_MSG_RESULT(yes)])
 
 dnl AM_MISSING_PROG(NAME, PROGRAM, DIRECTORY)
 dnl The program must properly implement --version.
-AC_DEFUN(AM_MISSING_PROG,
+AC_DEFUN([AM_MISSING_PROG],
 [AC_MSG_CHECKING(for working $2)
 # Run test in a subshell; some versions of sh will print an error if
 # an executable is not found, even if stderr is redirected.
@@ -3852,7 +3870,7 @@ AC_SUBST($1)])
 # program @code{ansi2knr}, which comes with Ghostscript.
 # @end defmac
 
-AC_DEFUN(AM_PROG_CC_STDC,
+AC_DEFUN([AM_PROG_CC_STDC],
 [AC_REQUIRE([AC_PROG_CC])
 AC_BEFORE([$0], [AC_C_INLINE])
 AC_BEFORE([$0], [AC_C_CONST])
