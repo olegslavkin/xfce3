@@ -56,7 +56,10 @@
 [Screens]
 	4
 [Tooltips]
-	250
+        250
+[Clock]
+        Digital
+        24hrs
 [Sizes]
 	SmallPanelIcons
 	SmallMenuIcons
