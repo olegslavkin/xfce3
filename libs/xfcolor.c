@@ -734,19 +734,19 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
       fprintf (f, "}\n\n");
       fprintf (f, "class        \"*\"                  style \"xfce_7\"\n");
-      fprintf (f, "widget_class \"Gtk*Progress*\"      style \"xfce_1\"\n");
-      fprintf (f, "widget_class \"Gtk*List*\"          style \"xfce_4\"\n");
-      fprintf (f, "widget_class \"Gtk*Tree*\"          style \"xfce_4\"\n");
-      fprintf (f, "widget_class \"Gtk*Text*\"          style \"xfce_5\"\n");
-      fprintf (f, "widget_class \"Gtk*Entry*\"         style \"xfce_5\"\n");
-      fprintf (f, "widget_class \"Gtk*Spin*\"          style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Progress*\"      style \"xfce_1\"\n");
+      fprintf (f, "widget_class \"*List*\"	    style \"xfce_4\"\n");
+      fprintf (f, "widget_class \"*Tree*\"	    style \"xfce_4\"\n");
+      fprintf (f, "widget_class \"*Text*\"	    style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Entry*\"	    style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Spin*\"	    style \"xfce_5\"\n");
 #ifndef OLD_STYLE
-      fprintf (f, "widget_class \"Gtk*Menu*\"          style \"xfcebar_7\"\n");
-      fprintf (f, "widget_class \"Gtk*Button*\"        style \"xfcebar_7\"\n");
-      fprintf (f, "widget_class \"Gtk*ToggleButton*\"  style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*Menu*\"	    style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*Button*\"	    style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*ToggleButton*\"  style \"xfcebar_7\"\n");
 #endif
-      fprintf (f, "widget_class \"Gtk*CheckButton*\"   style \"xfce_7\"\n");
-      fprintf (f, "widget_class \"Gtk*RadioButton*\"   style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*CheckButton*\"   style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*RadioButton*\"   style \"xfce_7\"\n");
       fprintf (f, "widget       \"*gxfce_color1*\"     style \"xfce_1\"\n");        
       fprintf (f, "widget       \"*gxfce_color2*\"     style \"xfce_2\"\n");        
       fprintf (f, "widget       \"*gxfce_color3*\"     style \"xfce_3\"\n");        
