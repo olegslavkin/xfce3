@@ -1549,17 +1549,13 @@ HandleConfigureRequest ()
   {
     Tmp_win->old_bw = cre->border_width;
   }
-  if (cre->value_mask & (CWX | CWY))
-  {
-    GetGravityOffsets (Tmp_win);
-  }
   if (cre->value_mask & CWX)
   {
-    x = cre->x + Tmp_win->gravx;
+    x = cre->x - (Tmp_win->boundary_width + Tmp_win->bw - Tmp_win->old_bw);
   }
   if (cre->value_mask & CWY)
   {
-    y = cre->y + Tmp_win->gravy;
+    y = cre->y - (Tmp_win->boundary_width + Tmp_win->bw - Tmp_win->old_bw) - Tmp_win->title_height;
   }
   if (cre->value_mask & CWWidth)
   {
