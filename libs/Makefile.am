@@ -6,8 +6,8 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ 
 -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
 -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
-lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
-# noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
+# lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
+noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 
 libxfcecore_la_SOURCES = \
 	colorselect.c colorselect.h \
@@ -28,8 +28,8 @@ libxfcecore_la_SOURCES = \
 	xfcolor.c xfcolor.h \
 	xpmext.c xpmext.h
 libxfcecore_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(X_EXTRA_LIBS)
-libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) \
-	-export-dynamic -rpath "@prefix@/lib"
+# libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) \
+# 	-export-dynamic -rpath "@prefix@/lib"
 
 libxfwmcore_la_SOURCES = \
 	ClientMsg.c \
@@ -53,5 +53,5 @@ libxfwmcore_la_SOURCES = \
 	wild.c
 
 libxfwmcore_la_LIBADD = $(X_LIBS) $(X_EXTRA_LIBS) @XFT_LIBS@
-libxfwmcore_la_LDFLAGS = -version-info $(LIBVERSION) \
-	-export-dynamic -rpath "@prefix@/lib"
+# libxfwmcore_la_LDFLAGS = -version-info $(LIBVERSION) \
+# 	-export-dynamic -rpath "@prefix@/lib"

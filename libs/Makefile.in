@@ -124,25 +124,23 @@ CLEANFILES = *~ *.bak core *.core *.o .depend .deps/*
 INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 
-lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
-# noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
+# lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
+noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 
 libxfcecore_la_SOURCES =  	colorselect.c colorselect.h 	constant.h 	empty.h 	my_intl.h 	fileselect.c fileselect.h 	fileutil.c fileutil.h 	fontselection.c fontselection.h 	gnome_protocol.c gnome_protocol.h 	lightdark.h 	my_string.c my_string.h 	my_tooltips.c my_tooltips.h 	mygtkclock.c mygtkclock.h 	sendinfo.c sendinfo.h 	snprintf.c snprintf.h 	xfce-common.c xfce-common.h 	xfcolor.c xfcolor.h 	xpmext.c xpmext.h
 
 libxfcecore_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(X_EXTRA_LIBS)
-libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) 	-export-dynamic -rpath "@prefix@/lib"
-
+# libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) \
+# 	-export-dynamic -rpath "@prefix@/lib"
 
 libxfwmcore_la_SOURCES =  	ClientMsg.c 	GetFont.c 	Grab.c 	Module.c 	Parse.c 	Picture.c 	Strings.c 	System.c 	alpha_header.h 	configure.h 	envvar.c  	module.h         my_scandir.c 	safemalloc.c 	sleep.c 	snprintf.c snprintf.h 	sun_headers.h 	utils.h 	wild.c
 
 
 libxfwmcore_la_LIBADD = $(X_LIBS) $(X_EXTRA_LIBS) @XFT_LIBS@
-libxfwmcore_la_LDFLAGS = -version-info $(LIBVERSION) 	-export-dynamic -rpath "@prefix@/lib"
-
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
-LTLIBRARIES =  $(lib_LTLIBRARIES)
+LTLIBRARIES =  $(noinst_LTLIBRARIES)
 
 
 DEFS = @DEFS@ -I. -I$(srcdir) -I..
@@ -153,11 +151,13 @@ X_CFLAGS = @X_CFLAGS@
 X_LIBS = @X_LIBS@
 X_EXTRA_LIBS = @X_EXTRA_LIBS@
 X_PRE_LIBS = @X_PRE_LIBS@
+libxfcecore_la_LDFLAGS = 
 libxfcecore_la_DEPENDENCIES = 
 libxfcecore_la_OBJECTS =  colorselect.lo fileselect.lo fileutil.lo \
 fontselection.lo gnome_protocol.lo my_string.lo my_tooltips.lo \
 mygtkclock.lo sendinfo.lo snprintf.lo xfce-common.lo xfcolor.lo \
 xpmext.lo
+libxfwmcore_la_LDFLAGS = 
 libxfwmcore_la_DEPENDENCIES = 
 libxfwmcore_la_OBJECTS =  ClientMsg.lo GetFont.lo Grab.lo Module.lo \
 Parse.lo Picture.lo Strings.lo System.lo envvar.lo my_scandir.lo \
@@ -188,30 +188,14 @@ Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 
-mostlyclean-libLTLIBRARIES:
+mostlyclean-noinstLTLIBRARIES:
 
-clean-libLTLIBRARIES:
-	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
 
-distclean-libLTLIBRARIES:
+distclean-noinstLTLIBRARIES:
 
-maintainer-clean-libLTLIBRARIES:
-
-install-libLTLIBRARIES: $(lib_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(libdir)
-	@list='$(lib_LTLIBRARIES)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    echo "$(LIBTOOL)  --mode=install $(INSTALL) $$p $(DESTDIR)$(libdir)/$$p"; \
-	    $(LIBTOOL)  --mode=install $(INSTALL) $$p $(DESTDIR)$(libdir)/$$p; \
-	  else :; fi; \
-	done
-
-uninstall-libLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	list='$(lib_LTLIBRARIES)'; for p in $$list; do \
-	  $(LIBTOOL)  --mode=uninstall rm -f $(DESTDIR)$(libdir)/$$p; \
-	done
+maintainer-clean-noinstLTLIBRARIES:
 
 .c.o:
 	$(COMPILE) -c $<
@@ -258,10 +242,10 @@ distclean-libtool:
 maintainer-clean-libtool:
 
 libxfcecore.la: $(libxfcecore_la_OBJECTS) $(libxfcecore_la_DEPENDENCIES)
-	$(LINK) -rpath $(libdir) $(libxfcecore_la_LDFLAGS) $(libxfcecore_la_OBJECTS) $(libxfcecore_la_LIBADD) $(LIBS)
+	$(LINK)  $(libxfcecore_la_LDFLAGS) $(libxfcecore_la_OBJECTS) $(libxfcecore_la_LIBADD) $(LIBS)
 
 libxfwmcore.la: $(libxfwmcore_la_OBJECTS) $(libxfwmcore_la_DEPENDENCIES)
-	$(LINK) -rpath $(libdir) $(libxfwmcore_la_LDFLAGS) $(libxfwmcore_la_OBJECTS) $(libxfwmcore_la_LIBADD) $(LIBS)
+	$(LINK)  $(libxfwmcore_la_LDFLAGS) $(libxfwmcore_la_OBJECTS) $(libxfwmcore_la_LIBADD) $(LIBS)
 
 tags: TAGS
 
@@ -315,7 +299,7 @@ check-am: all-am
 check: check-am
 installcheck-am:
 installcheck: installcheck-am
-install-exec-am: install-libLTLIBRARIES
+install-exec-am:
 install-exec: install-exec-am
 
 install-data-am:
@@ -324,14 +308,13 @@ install-data: install-data-am
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-libLTLIBRARIES
+uninstall-am:
 uninstall: uninstall-am
 all-am: Makefile $(LTLIBRARIES)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
 installdirs:
-	$(mkinstalldirs)  $(DESTDIR)$(libdir)
 
 
 mostlyclean-generic:
@@ -344,25 +327,25 @@ distclean-generic:
 	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
 
 maintainer-clean-generic:
-mostlyclean-am:  mostlyclean-libLTLIBRARIES mostlyclean-compile \
+mostlyclean-am:  mostlyclean-noinstLTLIBRARIES mostlyclean-compile \
 		mostlyclean-libtool mostlyclean-tags \
 		mostlyclean-generic
 
 mostlyclean: mostlyclean-am
 
-clean-am:  clean-libLTLIBRARIES clean-compile clean-libtool clean-tags \
-		clean-generic mostlyclean-am
+clean-am:  clean-noinstLTLIBRARIES clean-compile clean-libtool \
+		clean-tags clean-generic mostlyclean-am
 
 clean: clean-am
 
-distclean-am:  distclean-libLTLIBRARIES distclean-compile \
+distclean-am:  distclean-noinstLTLIBRARIES distclean-compile \
 		distclean-libtool distclean-tags distclean-generic \
 		clean-am
 	-rm -f libtool
 
 distclean: distclean-am
 
-maintainer-clean-am:  maintainer-clean-libLTLIBRARIES \
+maintainer-clean-am:  maintainer-clean-noinstLTLIBRARIES \
 		maintainer-clean-compile maintainer-clean-libtool \
 		maintainer-clean-tags maintainer-clean-generic \
 		distclean-am
@@ -371,19 +354,20 @@ maintainer-clean-am:  maintainer-clean-libLTLIBRARIES \
 
 maintainer-clean: maintainer-clean-am
 
-.PHONY: mostlyclean-libLTLIBRARIES distclean-libLTLIBRARIES \
-clean-libLTLIBRARIES maintainer-clean-libLTLIBRARIES \
-uninstall-libLTLIBRARIES install-libLTLIBRARIES mostlyclean-compile \
-distclean-compile clean-compile maintainer-clean-compile \
-mostlyclean-libtool distclean-libtool clean-libtool \
-maintainer-clean-libtool tags mostlyclean-tags distclean-tags \
-clean-tags maintainer-clean-tags distdir info-am info dvi-am dvi check \
-check-am installcheck-am installcheck install-exec-am install-exec \
-install-data-am install-data install-am install uninstall-am uninstall \
-all-redirect all-am all installdirs mostlyclean-generic \
-distclean-generic clean-generic maintainer-clean-generic clean \
-mostlyclean distclean maintainer-clean
+.PHONY: mostlyclean-noinstLTLIBRARIES distclean-noinstLTLIBRARIES \
+clean-noinstLTLIBRARIES maintainer-clean-noinstLTLIBRARIES \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile mostlyclean-libtool distclean-libtool \
+clean-libtool maintainer-clean-libtool tags mostlyclean-tags \
+distclean-tags clean-tags maintainer-clean-tags distdir info-am info \
+dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
+install-exec install-data-am install-data install-am install \
+uninstall-am uninstall all-redirect all-am all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
+# libxfwmcore_la_LDFLAGS = -version-info $(LIBVERSION) \
+# 	-export-dynamic -rpath "@prefix@/lib"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
