@@ -138,7 +138,7 @@ global exitinst
   set sysname [string tolower [exec uname]]
   switch $sysname \
   "sunos" { set uid [exec sh -c "id |cut -f 2 -d =|cut -f 1 -d \\("]
-            set pid [string trim [ exec ps -ae -o pid,comm | grep xfwm ]]} \
+            set pid [string trim [ exec ps -ae -U $uid -o pid,comm | grep xfwm ]]} \
   "linux" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
   "freebsd" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
   default { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]}
@@ -1073,8 +1073,9 @@ global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_
   menu $m -tearoff 0 -border 1
   .menu add cascade -label "info" -menu $m -underline 0
   $m add command -label "author" -command {"put_info"}  
-  $m add command -label "resources" -command {"get_skin"}
-
+  if {$tst_skin >0} { 
+    $m add command -label "resources" -command {"get_skin"}
+  }
   #--
   . configure -menu .menu
 }
