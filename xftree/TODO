@@ -1,6 +1,10 @@
+- incorporate hostnames for dnd so rcp works with rox. Add the rsync option
+  with choice for rsh, ssh ssh2.
+- incorporate root level entries for roxy pinboards
+- incorporate xfglob results as main level tree entries
 - recursive chown, chmod, chgrp in setting properties.
 - In xtree_tar.c, when determining "mode", do a search of all open xfree
-  windows until the extracted file is found (tar_extract()).
+  windows until the extracted file is found (tar_extract()) (what ?)
 - Toolbar icon + menu elements for "print"
 - Use the conventional Xpasteboard and provide compatibility with
   other file managers and programs for cut+paste (also for the
@@ -11,24 +15,12 @@
   the changing of the X pasteboard should cause a update_tree (because of
   the icon story).i.e., changing the Xpastboard caused an update of the
   linked lists cut/copy, which in turn, when changed, causes an update_tree
-  event.
-- add rsync by d+d between two xftrees running on two different
+  event. (what ?)
+- (see above) add rsync by d+d between two xftrees running on two different
   hosts, but on the same X display or something equivalent like adding rsync 
   nodes at the root level.
-- Enable "open with" from the innards of tar files. This implies extracting
-  to /tmp first, then calling cb_open_with. It requires cleanup of temporary
-  files on exit of xftree (all), and thus requires capture of sigint,
-  sigsegv, sigkill, sigusr and any other that causes program termination.
-  create global push_tmp_file(char *path), clean_tmp_files(gboolean verbose),
-  and on extracting to a temp file, don't lose the extension so registered 
-  programs will keep working.
 - Enable .deb expansion. (I need a debian box to do the testing first).
-- Figure out Prasad's bug in solaris.
-- Add code necesary to d+d files to/from xfsamba. 
-  (most of this happens in xfsamba).
-- add an application to open a gdk_pixmap canvas to paint thumbtack
-  previews of all .jpg, .png, .gif, .xpm in selected directory.
-  This should be separate code from xftree, like xfglob.
+- Add code necesary to d+d files from xfsamba. 
 - gtk-2
 
 Maybe (only if repeatedly requested):
@@ -39,8 +31,6 @@ Maybe (only if repeatedly requested):
     (this implies enabling d+d to the root window)
 
 BUGS to fix:
-- dialogs should open in the same screen as the xftree window
-  when dealing with xinerama, or atleast center located.
 
 ****************************************************************
 ****************************************************************
