@@ -1345,6 +1345,10 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
+  menuitem = gtk_menu_item_new_with_label (_("Update ..."));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_refresh), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
 
 /*  menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -1651,7 +1655,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 #define COMMON_HELP_2 \
      {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
      {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},\
-     {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_d,GDK_MOD1_MASK} 
+     {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_c,GDK_MOD1_MASK} 
      
 #define COMMON_MENU_NEW \
     {N_("New Folder"), (gpointer) cb_new_subdir, 0, GDK_n,GDK_MOD1_MASK},\
@@ -1670,6 +1674,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Go back"), (gpointer) cb_go_back, 0,GDK_b,GDK_CONTROL_MASK},\
     {N_("Go up"), (gpointer) cb_go_up, 0,GDK_a,GDK_CONTROL_MASK},\
     {N_("Go to"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
+    {N_("Update"), (gpointer) cb_refresh, 0,GDK_u,GDK_MOD1_MASK},\
     {NULL, NULL, 0}
     
 #define COMMON_MENU_SELECT \
