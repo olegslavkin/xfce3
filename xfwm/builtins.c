@@ -1604,15 +1604,16 @@ SetMenuFont (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     fprintf (stderr, "[SetMenuFont]: Error -- Couldn't load NULL font\n");
     return;
   }
-  if (Scr.StdFont.font)
-  {
-    XFreeFont (dpy, Scr.StdFont.font);
-    Scr.StdFont.font = NULL;
-  }
   if (Scr.StdFont.fontset)
   {
     XFreeFontSet (dpy, Scr.StdFont.fontset);
     Scr.StdFont.fontset = NULL;
+    Scr.StdFont.font = NULL;
+  }
+  if (Scr.StdFont.font)
+  {
+    XFreeFont(dpy,Scr.StdFont.font);
+    Scr.StdFont.font = NULL;
   }
 #ifdef HAVE_X11_XFT_XFT_H
   if (Scr.StdFont.xftfont)
@@ -1739,15 +1740,16 @@ LoadIconFont (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
     fprintf (stderr, "[LoadIconFont]: Error -- Couldn't load NULL font\n");
     return;
   }
-  if (Scr.StdFont.font)
-  {
-    XFreeFont (dpy, Scr.IconFont.font);
-    Scr.IconFont.font = NULL;
-  }
   if (Scr.IconFont.fontset)
   {
     XFreeFontSet (dpy, Scr.IconFont.fontset);
     Scr.IconFont.fontset = NULL;
+    Scr.IconFont.font = NULL;
+  }
+  if (Scr.IconFont.font)
+  {
+    XFreeFont(dpy, Scr.IconFont.font);
+    Scr.IconFont.font = NULL;
   }
 #ifdef HAVE_X11_XFT_XFT_H
   if (Scr.IconFont.xftfont)
@@ -1824,15 +1826,16 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
     fprintf (stderr, "[LoadWindowFont]: Error -- Couldn't load NULL font\n");
     return;
   }
-  if (fl->WindowFont.font)
-  {
-    XFreeFont (dpy, fl->WindowFont.font);
-    fl->WindowFont.font = NULL;
-  }
   if (fl->WindowFont.fontset)
   {
     XFreeFontSet (dpy, fl->WindowFont.fontset);
     fl->WindowFont.fontset = NULL;
+    fl->WindowFont.font = NULL;
+  }
+  if (fl->WindowFont.font)
+  {
+    XFreeFont (dpy, fl->WindowFont.font);
+    fl->WindowFont.font = NULL;
   }
 #ifdef HAVE_X11_XFT_XFT_H
   if (fl->WindowFont.xftfont)
