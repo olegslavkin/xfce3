@@ -619,7 +619,6 @@ WaitForButtonsUp ()
   /* Dummy var for XQueryPointer */
   Window dummy_root, dummy_child;
   int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
-  unsigned int dummy_mask;
 
   while (!AllUp)
   {

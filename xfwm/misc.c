@@ -78,8 +78,6 @@
 #define MAX_ICON_LEN 80
 #endif
 
-#define DEBUG
-
 char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
 char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
@@ -267,11 +265,6 @@ void
 RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 {
   XfwmWindow *Win;
-  Window mw;
-  /* Dummy var for XQueryPointer */
-  Window dummy_root;
-  int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
-  unsigned int dummy_mask;
 
   if ((!Tmp_win) || (Scr.Focus != Tmp_win))
     return;
@@ -280,31 +273,13 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   fprintf (stderr, "xfwm : RevertFocus () : Entering routine\n");
 #endif
 
-  XSync (dpy, 0);
-  XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
-  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &Win) == XCNOENT)
-  {
-    Win = NULL;
-  }
-  if ((Win) && (Win != Tmp_win) && (Win !=&Scr.XfwmRoot) && AcceptInput(Win))
-  {
-#ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
-#endif
-    SetFocus (Win->w, Win, False, False);
-#ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
-#endif
-    return;
-  }
-
   Win = Tmp_win->next;
   while (Win && (!AcceptInput(Win) || (Win == Tmp_win) || (Win->flags & ICONIFIED) || (Tmp_win->Desk != Win->Desk)))
   {
     Win = Win->next;
   }
  
-  if ((Win) && (Win !=&Scr.XfwmRoot))
+  if ((Win) && (Win != &Scr.XfwmRoot))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Setting focus to '%s'\n", Win->name);
@@ -410,11 +385,6 @@ Destroy (XfwmWindow * Tmp_win)
     Scr.Hilite = NULL;
   }
 
-  if (Scr.Focus == Tmp_win)
-  {
-    RevertFocus (Tmp_win, False);
-  }
-
   if (Tmp_win->icon_w != None)
   {
     XDeleteContext (dpy, Tmp_win->icon_w, XfwmContext);
@@ -479,6 +449,11 @@ Destroy (XfwmWindow * Tmp_win)
 #endif
   XDestroyWindow (dpy, Tmp_win->frame);
   XSync (dpy, 0);
+
+  if (Scr.Focus == Tmp_win)
+  {
+    RevertFocus (Tmp_win, False);
+  }
 
   free_window_names (Tmp_win, True, True);
   if (Tmp_win->wmhints)
@@ -796,6 +771,10 @@ void
 UngrabEm (void)
 {
   Window w;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
 
   XSync (dpy, 0);
   XUngrabPointer (dpy, CurrentTime);
@@ -811,7 +790,7 @@ UngrabEm (void)
     }
     
     /* if the window still exists, focus on it */
-    if (w)
+    if (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0)
     {
 #ifdef DEBUG
       fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);

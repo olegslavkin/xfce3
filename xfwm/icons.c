@@ -723,12 +723,12 @@ DeIconify (XfwmWindow * tmp_win)
       }
       XMapWindow (dpy, t->Parent);
       XMapWindow (dpy, t->w);
-      SetMapStateProp (t, NormalState);
       t->flags &= ~ICONIFIED;
       t->flags &= ~ICON_UNMAPPED;
       t->flags &= ~STARTICONIC;
       RaiseWindow (t);
       XSelectInput (dpy, t->w, eventMask);
+      SetMapStateProp (t, NormalState);
 #if 0
       XSync (dpy, 0);
 #endif
