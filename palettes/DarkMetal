@@ -6,6 +6,6 @@
 156 173 171
 30 89 107
 127 126 127
-engine=xfce
+engine=gtk
 -adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1
 textures/DarkMetal.xpm
