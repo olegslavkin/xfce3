@@ -1,3 +1,68 @@
+2001-10-04  xfce
+
+	* palettes/Metal: Small change in Metal palette
+
+2001-10-04  xfce
+
+	* libs/mygtkclock.c, po/xfce.pot: Add GPL license to digits bitmap
+
+2001-10-04  xfce
+
+	* libs/mygtkclock.c: Improve medium digits
+
+2001-10-04  xfce
+
+	* xfce/modify.h: [no log message]
+
+2001-10-04  xfce
+
+	* xfce/modify.c: [no log message]
+
+2001-10-04  xfce
+
+	* po/cat-id-tbl.c, po/cs.gmo, po/da.gmo, po/de.gmo, po/en_GB.gmo,
+	po/es.gmo, po/fr.gmo, po/gl.gmo, po/hu.gmo, po/nl.gmo,
+	po/pt_BR.gmo, po/ro.gmo, po/sr.gmo, po/xfce.pot, po/zh.gmo,
+	po/zh_CN.gmo, scripts/xfhelp, scripts/xfhelp.in, xfumed/xfumed.c,
+	xfumed/xfumed.h, xfumed/xfumed_gui.c, xfumed/xfumed_gui.h,
+	xfumed/xfumed_gui_cb.c, xfumed/xfumed_gui_cb.h: Include Jasper's
+	new xfumed implementation slightly modified
+
+2001-10-04  xfce
+
+	* xfumed/xfumed.c: [no log message]
+
+2001-10-04  xfce
+
+	* po/POTFILES.in, po/ca.po, po/cs.po, po/da.po, po/de.po,
+	po/en_GB.po, po/es.po, po/et.po, po/fi.po, po/fr.po, po/gl.po,
+	po/hu.po, po/it.po, po/ja.po, po/nl.po, po/pl.po, po/pt_BR.po,
+	po/ro.po, po/ru.po, po/sk.po, po/sr.po, po/sv.po, po/xfce.pot,
+	po/zh.po, po/zh_CN.po, xfumed/Changelog, xfumed/Makefile.am,
+	xfumed/Makefile.in, xfumed/README, xfumed/callbacks.c,
+	xfumed/callbacks.h, xfumed/clistmenu.c, xfumed/clistmenu.h,
+	xfumed/interface.c, xfumed/interface.h, xfumed/main.c,
+	xfumed/usermenu.c, xfumed/usermenu.h, xfumed/xfumed.h,
+	xfumed/xfumed_gui.c, xfumed/xfumed_gui.h, xfumed/xfumed_gui_cb.c,
+	xfumed/xfumed_gui_cb.h, xfumed/icons/dir_close.xpm,
+	xfumed/icons/dir_open.xpm, xfumed/icons/exe.xpm: Include Jasper's
+	new xfumed
+
+2001-10-04  xfce
+
+	* xfwm/: builtins.c, events.c, focus.c, misc.c, misc.h, move.c,
+	virtual.c: Improve Input hint handling
+
+2001-10-04  xfce
+
+	* xfwm/: focus.c, icons.c, misc.c, misc.h: [no log message]
+
+2001-10-03  xfce
+
+	* ChangeLog, backdrops/Blue.list, backdrops/Toulouse.list,
+	other/xinitrc, other/xinitrc.mwm, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp: Update ChangeLog
+
 2001-10-03  xfce
 
 	* xfwm/events.c: [no log message]
