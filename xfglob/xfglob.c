@@ -205,6 +205,7 @@ enum
 
 static GtkTargetEntry target_table[] = {
   {"text/uri-list", 0, TARGET_URI_LIST},
+  {"text/plain", 0, TARGET_PLAIN},
   {"STRING", 0, TARGET_STRING}
 };
 #define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
