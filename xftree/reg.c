@@ -335,7 +335,7 @@ reg_add_suffix (GList * g_reg, char *sfx, char *program, char *args)
   while (g_tmp)
   {
     prg = g_tmp->data;
-    if ((!my_strcasecmp (prg->sfx, sfx)) && (!my_strcasecmp (prg->arg, args)))
+    if (!my_strcasecmp (prg->sfx, sfx))
     {
       found = 1;
       break;
@@ -345,10 +345,11 @@ reg_add_suffix (GList * g_reg, char *sfx, char *program, char *args)
   if (found)
   {
     g_free (prg->app);
+    g_free (prg->arg);
     prg->app = g_strdup (program);
+    prg->arg = NULL;
     if (args)
     {
-      g_free (prg->arg);
       prg->arg = g_strdup (args);
     }
   }

@@ -2649,7 +2649,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_quit), (gpointer) top);
   gtk_menu_set_accel_group (GTK_MENU (menu), accel);
-  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_c,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_q,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   
   /* Create "Edit" menu */
   menuitem = gtk_menu_item_new_with_label (_("Edit"));

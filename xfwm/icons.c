@@ -738,6 +738,7 @@ DeIconify (XfwmWindow * tmp_win)
     {
       XGetWindowAttributes (dpy, t->w, &winattrs);
       eventMask = winattrs.your_event_mask;
+      MyXGrabServer (dpy);
       XSelectInput (dpy, t->w, (eventMask & ~StructureNotifyMask));
       if (t->Desk == Scr.CurrentDesk)
       {
@@ -746,9 +747,10 @@ DeIconify (XfwmWindow * tmp_win)
       XMapWindow (dpy, t->Parent);
       XMapWindow (dpy, t->w);
       SetMapStateProp (t, NormalState);
+      XSelectInput (dpy, t->w, eventMask);
+      MyXUngrabServer (dpy);
       t->flags &= ~(ICONIFIED | ICON_UNMAPPED | STARTICONIC);
       t->flags |= MAPPED;
-      XSelectInput (dpy, t->w, eventMask);
       if (t->icon_w)
 	XUnmapWindow (dpy, t->icon_w);
       if (t->icon_pixmap_w)
@@ -756,13 +758,13 @@ DeIconify (XfwmWindow * tmp_win)
       Broadcast (XFCE_M_DEICONIFY, 3, t->w, t->frame, (unsigned long) t, 0, 0, 0, 0);
     }
   }
-
   RaiseWindow (tmp_win);
   if ((tmp_win->Desk == Scr.CurrentDesk) && AcceptInput (tmp_win))
   {
     SetFocus (tmp_win->w, tmp_win, True, False);
   }
-
+  XSync (dpy, 0);
+  
   return;
 }
 
@@ -837,10 +839,12 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
       t->flags &= ~MAPPED;
       XGetWindowAttributes (dpy, t->w, &winattrs);
       eventMask = winattrs.your_event_mask;
+      MyXGrabServer (dpy);
       XSelectInput (dpy, t->w, eventMask & ~StructureNotifyMask);
       XUnmapWindow (dpy, t->w);
       XUnmapWindow (dpy, t->frame);
       XSelectInput (dpy, t->w, eventMask);
+      MyXUngrabServer (dpy);
       t->DeIconifyDesk = t->Desk;
       if (t->icon_w)
 	XUnmapWindow (dpy, t->icon_w);
