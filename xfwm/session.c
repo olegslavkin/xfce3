@@ -1054,7 +1054,7 @@ builtin_session_startup (void)
 	sleep_a_little (Scr.sessionwait * 1000000);
 	if (execvp (matches[i].wm_command[0], matches[i].wm_command) == -1)
 	{
-	  xfwm_msg (WARN, "builtin_session_startup", "Startup of %s failed", matches[num_match].wm_command);
+	  xfwm_msg (WARN, "builtin_session_startup", "Startup of \"%s\" failed", matches[i].wm_command[0]);
 	  exit (100);
 	}
 	break;
