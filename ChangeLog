@@ -1,3 +1,25 @@
+2001-10-29  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2001-10-29  xfce
+
+	* xfwm/: events.c, icons.c, misc.c, xfwm.h: Fix a bug in focus
+	management when deiconifying windows
+
+2001-10-28  edscott
+
+	* po/POTFILES.in: po file changes for xfsamba
+
+2001-10-28  edscott
+
+	* xfsamba/: ChangeLog, Makefile.am, xfsamba.c, xfsamba.h,
+	xfsamba_download.c, xfsamba_list.c, xfsamba_lookup.c,
+	xfsamba_masterlookup.c, xfsamba_masterresolve.c, xfsamba_mkdir.c,
+	xfsamba_nmblookup.c, xfsamba_rm.c, xfsamba_smblookup.c,
+	xfsamba_tar.c, xfsamba_upload.c:  modules restructured for
+	efficient compile (long due)
+
 2001-10-27  xfce
 
 	* acconfig.h, config.h.in, configure, configure.in, xfwm/xfwm.c:
