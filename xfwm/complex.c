@@ -116,6 +116,10 @@ ComplexFunction (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
   XEvent d, *ev;
   MenuRoot *mr;
   extern Bool desperate;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
   mr = FindPopup (action);
   if (mr == NULL)
@@ -197,7 +201,7 @@ ComplexFunction (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 	free (arguments[i]);
     return;
   }
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &x, &y, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &x, &y, &dummy_win_x, &dummy_win_y, &dummy_mask);
 
 
   /* Wait and see if we have a click, or a move */

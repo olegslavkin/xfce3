@@ -86,6 +86,9 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
   int center_x;
   int center_y;
   XGCValues gcv;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  unsigned int dummy_bw, dummy_depth;
 
 
   if (DeferExecution (eventp, &w, &tmp_win, &context, MOVE, ButtonPress))
@@ -151,7 +154,7 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
   }
   else
   {
-    XGetGeometry (dpy, (Drawable) ResizeWindow, &JunkRoot, &dragx, &dragy, (unsigned int *) &dragWidth, (unsigned int *) &dragHeight, &JunkBW, &JunkDepth);
+    XGetGeometry (dpy, (Drawable) ResizeWindow, &dummy_root, &dragx, &dragy, (unsigned int *) &dragWidth, (unsigned int *) &dragHeight, &dummy_bw, &dummy_depth);
     initHeight = dragHeight;
   }
   origx = dragx;

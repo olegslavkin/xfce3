@@ -149,6 +149,7 @@ AddWindow (Window w)
     return NULL;
   }
 
+  XSync (dpy, 0);
   MyXGrabServer(dpy);
   if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
   {
@@ -491,6 +492,7 @@ AddWindow (Window w)
     tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
   InstallWindowColormaps (colormap_win);
 
+  XSync (dpy, 0);
   /* If for some reason the windows will come out, just destroy it and give up */
   if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy) || XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
   {

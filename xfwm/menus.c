@@ -104,6 +104,10 @@ do_menu (MenuRoot * menu, int style)
   MenuItem *PrevActiveItem = 0;
   int retval = MENU_NOP;
   int x, y;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
 
   /* this condition could get ugly */
@@ -113,7 +117,8 @@ do_menu (MenuRoot * menu, int style)
   /* In case we wind up with a move from a menu which is
    * from a window border, we'll return to here to start
    * the move */
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &x, &y, &JunkX, &JunkY, &JunkMask);
+  XSync (dpy, 0);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &x, &y, &dummy_win_x, &dummy_win_y, &dummy_mask);
 
   if (menu_on)
   {
@@ -219,9 +224,13 @@ FindEntry (void)
   int PrevPrevY;
   int x, y, ChildY;
   Window Child;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_x;
+  unsigned int dummy_mask;
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &Child, &JunkX, &ChildY, &x, &y, &JunkMask);
-  XQueryPointer (dpy, ActiveMenu->w, &JunkRoot, &JunkChild, &JunkX, &ChildY, &x, &y, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &Child, &dummy_x, &ChildY, &x, &y, &dummy_mask);
+  XQueryPointer (dpy, ActiveMenu->w, &dummy_root, &dummy_child, &dummy_x, &ChildY, &x, &y, &dummy_mask);
 
   /* look for the entry that the mouse is in */
   for (mi = ActiveMenu->first; mi; mi = mi->next)
@@ -379,8 +388,12 @@ UpdateMenu (int sticks)
   MenuItem *InitialMI;
   MenuRoot *actual_mr;
   int x_init, y_init, x, y;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_x, dummy_y;
+  unsigned int dummy_mask;
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &JunkX, &JunkY, &x_init, &y_init, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &dummy_x, &dummy_y, &x_init, &y_init, &dummy_mask);
 
   FindEntry ();
   InitialMI = ActiveItem;
@@ -420,8 +433,8 @@ UpdateMenu (int sticks)
       if (!ActiveItem && (menu_on > 1))
       {
 	int x, y;
-	XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &JunkX, &JunkY, &x, &y, &JunkMask);
-	if ((XFindContext (dpy, JunkChild, MenuContext, (caddr_t *) & actual_mr) != XCNOENT) && (actual_mr != ActiveMenu))
+	XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &dummy_x, &dummy_y, &x, &y, &dummy_mask);
+	if ((XFindContext (dpy, dummy_child, MenuContext, (caddr_t *) & actual_mr) != XCNOENT) && (actual_mr != ActiveMenu))
 	{
 	  done = 1;
 	  break;
@@ -445,7 +458,7 @@ UpdateMenu (int sticks)
       break;
 
     case MotionNotify:
-      XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &JunkX, &JunkY, &x, &y, &JunkMask);
+      XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &dummy_x, &dummy_y, &x, &y, &dummy_mask);
       if (((x - x_init > 3) || (x_init - x > 3)) && ((y - y_init > 3) || (y_init - y > 3)))
 	mouse_moved = 1;
       done = 1;
@@ -603,11 +616,15 @@ WaitForButtonsUp ()
   Bool AllUp = False;
   XEvent JunkEvent;
   unsigned int mask;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
   while (!AllUp)
   {
     XAllowEvents (dpy, ReplayPointer, CurrentTime);
-    XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &JunkX, &JunkY, &JunkX, &JunkY, &mask);
+    XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &mask);
 
     if ((mask & (Button1Mask | Button2Mask | Button3Mask | Button4Mask | Button5Mask)) == 0)
       AllUp = True;

@@ -190,10 +190,6 @@ static void version (void);
 XContext XfwmContext;		/* context for xfwm windows */
 XContext MenuContext;		/* context for xfwm menus */
 
-int JunkX = 0, JunkY = 0;
-Window JunkRoot, JunkChild;	/* junk window */
-unsigned int JunkWidth, JunkHeight, JunkBW, JunkDepth, JunkMask;
-
 Bool PPosOverride, Blackout = False;
 
 unsigned int KeyMask;

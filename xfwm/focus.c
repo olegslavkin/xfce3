@@ -109,8 +109,13 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse, Bool force)
 
   if (Scr.NumberOfScreens > 1)
   {
-    XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-    if (JunkRoot != Scr.Root)
+    /* Dummy var for XQueryPointer */
+    Window dummy_root, dummy_child;
+    int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
+    unsigned int dummy_mask;
+
+    XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
+    if (dummy_root != Scr.Root)
     {
       if (Scr.Focus != NULL)
       {

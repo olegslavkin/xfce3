@@ -160,12 +160,17 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
 
   if (handle_focus)
   {
+    /* Dummy var for XQueryPointer */
+    Window dummy_root;
+    int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
+    unsigned int dummy_mask;
+
     XSync (dpy, 0);
     MouseWin = NULL;
     if (!(Scr.Options & ClickToFocus))
     {
-      XQueryPointer (dpy, Scr.Root, &JunkRoot, &w, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-      if (XFindContext (dpy, w, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
+      XQueryPointer (dpy, Scr.Root, &dummy_root, &w, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
+      if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &MouseWin) == XCNOENT)
       {
 	MouseWin = NULL;
       }

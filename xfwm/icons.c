@@ -620,14 +620,19 @@ GetXPMFile (XfwmWindow * tmp_win)
 void
 GetIconWindow (XfwmWindow * tmp_win)
 {
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_bw, dummy_depth;
+
   /* We are guaranteed that wmhints is non-null when calling this
    * routine */
-  if (XGetGeometry (dpy, tmp_win->wmhints->icon_window, &JunkRoot, &JunkX, &JunkY, (unsigned int *) &tmp_win->icon_p_width, (unsigned int *) &tmp_win->icon_p_height, &JunkBW, &JunkDepth) == 0)
+  if (XGetGeometry (dpy, tmp_win->wmhints->icon_window, &dummy_root, &dummy_x, &dummy_y, (unsigned int *) &tmp_win->icon_p_width, (unsigned int *) &tmp_win->icon_p_height, &dummy_bw, &dummy_depth) == 0)
   {
     xfwm_msg (ERR, "GetIconWindow", "Help! Bad Icon Window!");
   }
-  tmp_win->icon_p_width += JunkBW << 1;
-  tmp_win->icon_p_height += JunkBW << 1;
+  tmp_win->icon_p_width += dummy_bw << 1;
+  tmp_win->icon_p_height += dummy_bw << 1;
   /*
    * Now make the new window the icon window for this window,
    * and set it up to work as such (select for key presses
@@ -658,11 +663,16 @@ GetIconWindow (XfwmWindow * tmp_win)
 void
 GetIconBitmap (XfwmWindow * tmp_win)
 {
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_bw, dummy_depth;
+
   /* We are guaranteed that wmhints is non-null when calling this
    * routine */
-  XGetGeometry (dpy, tmp_win->wmhints->icon_pixmap, &JunkRoot, &JunkX, &JunkY, (unsigned int *) &tmp_win->icon_p_width, (unsigned int *) &tmp_win->icon_p_height, &JunkBW, &JunkDepth);
+  XGetGeometry (dpy, tmp_win->wmhints->icon_pixmap, &dummy_root, &dummy_x, &dummy_y, (unsigned int *) &tmp_win->icon_p_width, (unsigned int *) &tmp_win->icon_p_height, &dummy_bw, &dummy_depth);
   tmp_win->iconPixmap = tmp_win->wmhints->icon_pixmap;
-  tmp_win->iconDepth = JunkDepth;
+  tmp_win->iconDepth = dummy_depth;
   if (ShapesSupported)
   {
     if (tmp_win->wmhints->flags & IconMaskHint)

@@ -123,8 +123,12 @@ ShowMeMouse (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long c
   XGCValues gcv;
   int xl, yt;
   int i;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &xl, &yt, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &xl, &yt, &dummy_win_x, &dummy_win_y, &dummy_mask);
 
   gcv.line_width = 5;
 
@@ -656,8 +660,12 @@ movecursor (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long conte
   int x, y;
   int val1, val2, val1_unit, val2_unit, n;
   int warpx, warpy;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &x, &y, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &x, &y, &dummy_win_x, &dummy_win_y, &dummy_mask);
   n = GetTwoArguments (action, &val1, &val2, &val1_unit, &val2_unit, x, y);
   warpx = x + val1 * val1_unit / 100;
   warpy = y + val2 * val2_unit / 100;
@@ -724,6 +732,10 @@ lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
 {
   XfwmWindow *MouseWin;
   Window mw;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root;
+  int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
   if (DeferExecution (eventp, &w, &tmp_win, &context, SELECT, ButtonRelease))
     return;
@@ -733,7 +745,7 @@ lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
     LowerWindow (tmp_win);
   }
   /* Now handle focus transition */
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
   if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
   {
     MouseWin = NULL;
@@ -747,10 +759,15 @@ lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
 void
 destroy_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
+
   if (DeferExecution (eventp, &w, &tmp_win, &context, DESTROY, ButtonRelease))
     return;
 
-  if (XGetGeometry (dpy, tmp_win->w, &JunkRoot, &JunkX, &JunkY, &JunkWidth, &JunkHeight, &JunkBW, &JunkDepth) == 0)
+  if (XGetGeometry (dpy, tmp_win->w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0)
   {
     Destroy (tmp_win);
     tmp_win = NULL;
@@ -781,6 +798,11 @@ delete_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 void
 close_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
+
   if (DeferExecution (eventp, &w, &tmp_win, &context, DESTROY, ButtonRelease))
     return;
 
@@ -789,7 +811,7 @@ close_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
     delete_function (eventp, w, tmp_win, context, action, Module);
     return;
   }
-  else if (XGetGeometry (dpy, tmp_win->w, &JunkRoot, &JunkX, &JunkY, &JunkWidth, &JunkHeight, &JunkBW, &JunkDepth) == 0)
+  else if (XGetGeometry (dpy, tmp_win->w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0)
   {
     Destroy (tmp_win);
     tmp_win = NULL;
@@ -1145,6 +1167,10 @@ raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 {
   XfwmWindow *MouseWin;
   Window mw;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root;
+  int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
   if (DeferExecution (eventp, &w, &tmp_win, &context, SELECT, ButtonRelease))
     return;
@@ -1160,7 +1186,7 @@ raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
     RaiseWindow (tmp_win);
   }
   /* Now handle focus transition */
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
   if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
   {
     MouseWin = NULL;
@@ -2478,9 +2504,14 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
   int mousex, mousey;
   int wx, wy;
   int countw;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
+
   extern XContext MenuContext;
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &mousex, &mousey, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &mousex, &mousey, &dummy_win_x, &dummy_win_y, &dummy_mask);
 
   /* Count how many windows we have */
   countw = 0;

@@ -584,6 +584,11 @@ HandleKeyPress ()
 void
 HandlePropertyNotify ()
 {
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
+
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandlePropertyNotify ()\n");
 #endif
@@ -613,7 +618,7 @@ HandlePropertyNotify ()
     return;
   }
 
-  if ((!Tmp_win) || (XGetGeometry (dpy, Tmp_win->w, &JunkRoot, &JunkX, &JunkY, &JunkWidth, &JunkHeight, &JunkBW, &JunkDepth) == 0))
+  if ((!Tmp_win) || (XGetGeometry (dpy, Tmp_win->w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandlePropertyNotify ()\n");
@@ -775,7 +780,12 @@ HandleClientMessage ()
   if ((Event.xclient.message_type == _XA_WM_CHANGE_STATE) && (Tmp_win) && (Event.xclient.data.l[0] == IconicState) && !(Tmp_win->flags & TRANSIENT) && !(Tmp_win->flags & ICONIFIED))
   {
     XEvent button;
-    XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &(button.xmotion.x_root), &(button.xmotion.y_root), &JunkX, &JunkY, &JunkMask);
+    /* Dummy var for XQueryPointer */
+    Window dummy_root, dummy_child;
+    int dummy_win_x, dummy_win_y;
+    unsigned int dummy_mask;
+
+    XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &(button.xmotion.x_root), &(button.xmotion.y_root), &dummy_win_x, &dummy_win_y, &dummy_mask);
     button.type = 0;
     ExecuteFunction ("Iconify", Tmp_win, &button, C_FRAME, -1);
   }
@@ -1145,6 +1155,10 @@ HandleButtonPress ()
   Window x, eventw;
   int LocalContext;
   Bool HandledInternaly;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
 
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleButtonPress ()\n");
@@ -1173,7 +1187,7 @@ HandleButtonPress ()
     eventw = Event.xany.window;
   }
 
-  if (!XGetGeometry (dpy, eventw, &JunkRoot, &JunkX, &JunkY, &JunkWidth, &JunkHeight, &JunkBW, &JunkDepth))
+  if (!XGetGeometry (dpy, eventw, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth))
   {
     XSync (dpy, 0);
     XAllowEvents (dpy, ReplayPointer, CurrentTime);
@@ -1776,9 +1790,6 @@ My_XNextEvent (Display * dpy, XEvent * event)
 
   ReapChildren ();
 
-#ifdef REQUIRES_XSYNC
-  XFlush (dpy);
-#endif
   if (XPending (dpy))
   {
     XNextEvent (dpy, event);

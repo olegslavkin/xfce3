@@ -78,6 +78,8 @@
 #define MAX_ICON_LEN 80
 #endif
 
+#define DEBUG
+
 char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
 char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
@@ -266,6 +268,10 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 {
   XfwmWindow *Win;
   Window mw;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root;
+  int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
   if ((!Tmp_win) || (Scr.Focus != Tmp_win))
     return;
@@ -274,27 +280,26 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   fprintf (stderr, "xfwm : RevertFocus () : Entering routine\n");
 #endif
 
-  if (fallback_to_itself)
+  XSync (dpy, 0);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
+  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &Win) == XCNOENT)
   {
-    XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-    if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &Win) == XCNOENT)
-    {
-      Win = NULL;
-    }
-    if ((Win) && (Win != Tmp_win) && (Win !=&Scr.XfwmRoot) && AcceptInput(Win))
-    {
-#ifdef DEBUG
-      fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
-#endif
-      SetFocus (Win->w, Win, False, True);
-#ifdef DEBUG
-      fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
-#endif
-      return;
-    }
+    Win = NULL;
   }
+  if ((Win) && (Win != Tmp_win) && (Win !=&Scr.XfwmRoot) && AcceptInput(Win))
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
+#endif
+    SetFocus (Win->w, Win, False, False);
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+#endif
+    return;
+  }
+
   Win = Tmp_win->next;
-  while (Win && !(AcceptInput(Win) && !(Win->flags & ICONIFIED) && (Tmp_win->Desk == Win->Desk)))
+  while (Win && (!AcceptInput(Win) || (Win == Tmp_win) || (Win->flags & ICONIFIED) || (Tmp_win->Desk != Win->Desk)))
   {
     Win = Win->next;
   }
@@ -304,7 +309,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Setting focus to '%s'\n", Win->name);
 #endif
-    SetFocus (Win->w, Win, False, True);
+    SetFocus (Win->w, Win, False, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -316,17 +321,17 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself='%s'\n", Tmp_win->name);
 #endif
-    SetFocus (Tmp_win->w, Tmp_win, False, True);
+    SetFocus (Tmp_win->w, Tmp_win, False, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
     return;
   }
-  XBell (dpy, Scr.screen);
+
 #ifdef DEBUG
   fprintf (stderr, "xfwm : RevertFocus () : Setting focus to NoFocusWin\n");
 #endif
-  SetFocus (Scr.NoFocusWin, NULL, False, True);
+  SetFocus (Scr.NoFocusWin, NULL, False, False);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -509,13 +514,16 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
   int a, b, w2, h2;
   unsigned int bw, mask;
   XWindowChanges xwc;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root, dummy_child;
+  unsigned int dummy_width, dummy_height, dummy_depth;
 
   if (!tmp)
     return;
 
-  if (XGetGeometry (dpy, tmp->w, &JunkRoot, &xwc.x, &xwc.y, &JunkWidth, &JunkHeight, &bw, &JunkDepth))
+  if (XGetGeometry (dpy, tmp->w, &dummy_root, &xwc.x, &xwc.y, &dummy_width, &dummy_height, &bw, &dummy_depth))
   {
-    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, xwc.x, xwc.y, &a, &b, &JunkChild);
+    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, xwc.x, xwc.y, &a, &b, &dummy_child);
     xwc.x = a;
     xwc.y = b;
     xwc.border_width = tmp->old_bw;

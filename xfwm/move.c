@@ -172,8 +172,12 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
   int xl, yt;
   int olddesk = tmp_win->Desk;
   int newdesk = tmp_win->Desk;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &xl, &yt, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &xl, &yt, &dummy_win_x, &dummy_win_y, &dummy_mask);
   *FinalX = xl += XOffset;
   *FinalY = yt += YOffset;
 
@@ -339,6 +343,9 @@ Keyboard_shortcuts (XEvent * Event, int ReturnEvent)
   int x, y, x_root, y_root;
   int move_size, x_move, y_move;
   KeySym keysym;
+  /* Dummy var for XQueryPointer */
+  Window dummy_root;
+  unsigned int dummy_mask;
 
   /* Pick the size of the cursor movement */
   move_size = Scr.EntryHeight;
@@ -387,7 +394,7 @@ Keyboard_shortcuts (XEvent * Event, int ReturnEvent)
   default:
     break;
   }
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &Event->xany.window, &x_root, &y_root, &x, &y, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &Event->xany.window, &x_root, &y_root, &x, &y, &dummy_mask);
 
   if ((x_move != 0) || (y_move != 0))
   {
@@ -414,6 +421,9 @@ Bool InteractiveMove (Window * win, XfwmWindow * tmp_win, int *FinalX, int *Fina
   int XOffset, YOffset;
   Window w;
   Bool window_deleted = False, iconified;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  unsigned int dummy_bw, dummy_depth;
 
   w = *win;
 
@@ -432,10 +442,10 @@ Bool InteractiveMove (Window * win, XfwmWindow * tmp_win, int *FinalX, int *Fina
     return False;
   }
 
-  XGetGeometry (dpy, w, &JunkRoot, &origDragX, &origDragY, (unsigned int *) &DragWidth, (unsigned int *) &DragHeight, &JunkBW, &JunkDepth);
+  XGetGeometry (dpy, w, &dummy_root, &origDragX, &origDragY, (unsigned int *) &DragWidth, (unsigned int *) &DragHeight, &dummy_bw, &dummy_depth);
 
-  DragWidth += JunkBW;
-  DragHeight += JunkBW;
+  DragWidth += dummy_bw;
+  DragHeight += dummy_bw;
   XOffset = origDragX - DragX;
   YOffset = origDragY - DragY;
   iconified = tmp_win->flags & ICONIFIED;

@@ -188,6 +188,11 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
   extern Bool PPosOverride;
   int xl, yt;
 
+  /* Dummy var for XQueryPointer */
+  Window dummy_root, dummy_child;
+  int dummy_win_x, dummy_win_y;
+  unsigned int dummy_mask;
+
 #if defined(HAVE_X11_EXTENSIONS_XINERAMA_H) || defined(EMULATE_XINERAMA)
   extern XineramaScreenInfo *xinerama_infos;
   extern int xinerama_heads;
@@ -196,7 +201,7 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
 #endif
 
   GetGravityOffsets (tmp_win, &gravx, &gravy);
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &xl, &yt, &JunkX, &JunkY, &JunkMask);
+  XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &xl, &yt, &dummy_win_x, &dummy_win_y, &dummy_mask);
 
 
   /* Select a desk to put the window on (in list of priority):
