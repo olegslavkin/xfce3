@@ -100,6 +100,7 @@
   {_("Delete ..."),	delete_xpm,	cb_delete}, \
   {_("Find ..."), 	tb_find_xpm,	cb_find}, \
   {_("Differences ..."),tb_vsplit_xpm,	cb_diff}, \
+  {_("Browse SMB network ..."),wg1_xpm,	cb_samba}, \
   {_("New Folder"),	new_dir_xpm,	cb_new_subdir}, \
   {_("New file ..."),	new_file_xpm,	cb_new_file}, \
   {_("Properties"),	appinfo_xpm,	cb_props}, \
