@@ -3,6 +3,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <string.h>
 
 #include "xfumed.h"
 #include "xfumed_gui_cb.h"

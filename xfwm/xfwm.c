@@ -41,7 +41,6 @@
 #include <pwd.h>
 #include <sys/types.h>
 
-#include "UTF8.h"
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
@@ -204,7 +203,9 @@ unsigned int CapsLockMask;
 unsigned int SuperMask;
 unsigned int HyperMask;
 
+#if 0
 char *charset = NULL;
+#endif
 char **g_argv;
 int g_argc;
 
@@ -1764,7 +1765,7 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
-  Scr.engine = XFCE_ENGINE;
+  Scr.engine = LINEA_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;
@@ -1850,8 +1851,10 @@ InitVariables (void)
       Scr.Margin[i] = 0;
     }
   }
+#if 0
   charset = get_charset_from_lang();
   xfwm_msg (INFO, "Init", "Charset set to \"%s\"", charset);
+#endif
   return;
 }
 

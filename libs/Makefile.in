@@ -170,7 +170,6 @@ libxfwmcore_la_SOURCES = \
 	Picture.c \
 	Strings.c \
 	System.c \
-	UTF8.c \
 	alpha_header.h \
 	configure.h \
 	envvar.c  \
@@ -208,8 +207,8 @@ xpmext.lo
 libxfwmcore_la_LDFLAGS = 
 libxfwmcore_la_DEPENDENCIES = 
 libxfwmcore_la_OBJECTS =  ClientMsg.lo GetFont.lo Grab.lo Module.lo \
-Parse.lo Picture.lo Strings.lo System.lo UTF8.lo envvar.lo \
-my_scandir.lo safemalloc.lo sleep.lo snprintf.lo wild.lo
+Parse.lo Picture.lo Strings.lo System.lo envvar.lo my_scandir.lo \
+safemalloc.lo sleep.lo snprintf.lo wild.lo
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)

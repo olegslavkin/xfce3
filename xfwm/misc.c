@@ -48,7 +48,6 @@
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 
-#include "UTF8.h"
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
@@ -79,7 +78,9 @@
 #define MAX_ICON_LEN 80
 #endif
 
+#if 0
 extern char *charset;
+#endif
 char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
 char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
@@ -109,26 +110,8 @@ char *
 bound_name (char *s, int max_len)
 {
   char *res;
-  int length;
+  int length = strlen (s);
   
-#if 0
-  int l = strlen (s);
-  if (strlen (s))
-  {
-    size_t lg;
-    if (iconv_string (charset, "autodetect_utf8", s, s + l, &tmp, &lg) < 0)
-      perror ("iconv_string");
-    *(tmp + lg) = '\0';
-  }
-  else
-  {
-    res = (char *) safemalloc (1);
-    *res = '\0';
-    return (res);
-  }
-  length = strlen (tmp);
-#endif
-  length = strlen (s);
   if (length > max_len)
   {
     res = (char *) safemalloc (max_len + 5);
@@ -140,6 +123,7 @@ bound_name (char *s, int max_len)
     res = (char *) safemalloc (length + 1);
     strcpy (res, s);
   }
+  
   return (res);
 }
 
