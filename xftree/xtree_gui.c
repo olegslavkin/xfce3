@@ -316,9 +316,9 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       if (prg)
       {
 	if (prg->arg)
-	  sprintf (cmd, "\"%s\" %s \"%s\" ", prg->app, prg->arg, en->path);
+	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
 	else
-	  sprintf (cmd, "\"%s\" \"%s\" ", prg->app, en->path);
+	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
 	io_system (cmd,FALSE,win->top); /* open by shell */
       }
       else
