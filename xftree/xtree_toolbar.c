@@ -89,7 +89,7 @@
   {_("Terminal"),	comp1_xpm,	cb_term},	\
   {_("Close window"),	closewin_xpm,	cb_destroy}, \
   {_("Run ..."), 	tb_macro_xpm,	cb_exec}, \
-  {_("Reload ..."), 	reload_xpm,	cb_refresh}, \
+  {_("Update ..."), 	reload_xpm,	cb_refresh}, \
   {_("Go back ..."), 	go_back_xpm,	cb_go_back}, \
   {_("Go to ..."), 	go_to_xpm,	cb_go_to}, \
   {_("Go up"), 		go_up_xpm,	cb_go_up}, \
