@@ -47,15 +47,20 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <ctype.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include "constant.h"
 
 #if defined(HAVE_AUDIOFILE)
 #include <audiofile.h>
 #endif
 
-#if defined(HAVE_ARTSD)
+#if defined(HAVE_ARTS)
 #include <artsc.h>
 #else
 #if defined(linux) || defined(__FreeBSD__)
@@ -73,9 +78,26 @@
 #  include "dmalloc.h"
 #endif
 
-#if defined(linux) || defined(__FreeBSD__)  || defined(HAVE_ARTSD)
+void
+sound_init (void)
+{
+#if defined(HAVE_ARTS)
+  switch (fork ())
+  {
+    case 0:
+      execl (DEFAULT_SHELL, DEFAULT_SHELL, "-c", ARTSD_CMD, NULL);
+    case -1:
+      fprintf (stderr, "xfsound : cannot execute fork()\n");
+      break;
+    default:
+      break;
+  }
+#endif
+}
 
-#if !defined(HAVE_ARTSD)
+#if defined(linux) || defined(__FreeBSD__)  || defined(HAVE_ARTS)
+
+#if !defined(HAVE_ARTS)
 int masterfd;
 #endif
 
@@ -95,7 +117,7 @@ i_play (char *soundfile)
   int fp;
   int framesRead;
 #endif
-#if defined(HAVE_ARTSD)
+#if defined(HAVE_ARTS)
   arts_stream_t 	stream;
   int errorcode;
 
@@ -118,13 +140,13 @@ i_play (char *soundfile)
   if ((fp = open (soundfile, O_RDONLY, 0)) == -1)
 #endif
   {
-#if !defined(HAVE_ARTSD)
+#if !defined(HAVE_ARTS)
     close (masterfd);
 #endif
 #ifdef DEBUG
     perror ("open");
 #endif
-    return (-1);
+    return -1;
   }
 
 #if defined(HAVE_AUDIOFILE)
@@ -148,7 +170,7 @@ i_play (char *soundfile)
   curr[2] = 8000;
 #endif
 
-#if defined(HAVE_ARTSD)
+#if defined(HAVE_ARTS)
   stream = arts_play_stream(frameRate, sampleWidth, channelCount, "linuxtest");
 #else
   cardctl (masterfd, curr);
@@ -163,7 +185,7 @@ i_play (char *soundfile)
 #endif
   while (framesRead > 0)
   {
-#if defined(HAVE_ARTSD)
+#if defined(HAVE_ARTS)
 #if defined(HAVE_AUDIOFILE)
     arts_write(stream, buffer, framesRead * frameSize);
 #else
@@ -183,7 +205,7 @@ i_play (char *soundfile)
 #endif
   }
 
-#if defined(HAVE_ARTSD)
+#if defined(HAVE_ARTS)
   arts_close_stream(stream);
   arts_free();
 #else
@@ -202,20 +224,23 @@ i_play (char *soundfile)
 int
 setcard (void)
 {
+#if !defined(HAVE_ARTS)
   if ((masterfd = open (DSP_NAME, O_WRONLY, 0)) == -1)
   {
 #ifdef DEBUG
     perror ("open");
 #endif
-    return (-1);
+    return -1;
   }
+#endif
 
-  return (0);
+  return 0;
 }
 
 void
 cardctl (int fp, ST_CONFIG parm)
 {
+#if !defined(HAVE_ARTS)
   int format, frequency, channels;
   
   format = parm[0];
@@ -240,24 +265,25 @@ cardctl (int fp, ST_CONFIG parm)
     perror ("ioctl");
 #endif
   }
+#endif
 }
 #else
 int
 i_play (char *soundfile)
 {
-  return (-1);
+  return -1;
 }
 
 int
 setcard (void)
 {
-  return (-1);
+  return -1;
 }
 
 void
 cardctl (int fp, ST_CONFIG parm)
 {
-  return (NULL);
+  return NULL;
 }
 
 #endif

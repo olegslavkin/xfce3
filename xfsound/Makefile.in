@@ -59,6 +59,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+ARTS_CFLAGS = @ARTS_CFLAGS@
+ARTS_LIBS = @ARTS_LIBS@
 AS = @AS@
 AUDIOFILE_CFLAGS = @AUDIOFILE_CFLAGS@
 AUDIOFILE_LIBS = @AUDIOFILE_LIBS@
@@ -87,6 +89,7 @@ GTK_ENGINE_DIR = @GTK_ENGINE_DIR@
 GTK_LIBS = @GTK_LIBS@
 GT_NO = @GT_NO@
 GT_YES = @GT_YES@
+HAVE_ARTS = @HAVE_ARTS@
 HAVE_AUDIOFILE = @HAVE_AUDIOFILE@
 HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
@@ -125,7 +128,7 @@ l = @l@
 
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
-INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ @AUDIOFILE_CFLAGS@ -I../ -I../libs/ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ @AUDIOFILE_CFLAGS@ @ARTS_CFLAGS@ -I../ -I../libs/ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 
 bin_PROGRAMS = xfsound
@@ -134,7 +137,7 @@ bin_SCRIPTS = xfplay
 xfsound_SOURCES =  	xfsound_cb.c xfsound_cb.h 	xfsound.c xfsound.h 	xfdsp.c xfdsp.h
 
 
-xfsound_LDADD = ../libs/libxfcecore.la ../libs/libxfwmcore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @AUDIOFILE_LIBS@ @INTLLIBS@ @LIBS@ ../libs/libxfwmcore.la ${X_LIBS} ${X_PRE_LIBS} -lXpm @XFT_LIBS@
+xfsound_LDADD = ../libs/libxfcecore.la ../libs/libxfwmcore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @AUDIOFILE_LIBS@ @ARTS_LIBS@ @INTLLIBS@ @LIBS@ ../libs/libxfwmcore.la ${X_LIBS} ${X_PRE_LIBS} -lXpm @XFT_LIBS@
 
 
 xfsound_DEPENDENCIES = ../libs/libxfcecore.la ../libs/libxfwmcore.la

@@ -683,6 +683,7 @@ main (int argc, char *argv[])
   allocXFSound (&sndcfg);
   loadcfg (&sndcfg);
   signal (SIGCHLD, reap);
+  sound_init ();
 
   if ((argc != 6) && (argc != 7))
   {

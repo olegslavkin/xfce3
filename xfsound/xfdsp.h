@@ -23,10 +23,12 @@
 #define XF_IND		1
 #define ST_GET		0
 #define DSP_NAME	"/dev/dsp"
+#define ARTSD_CMD       "exec artsd"
 
 typedef int ST_CONFIG[3];
 
-int i_play (char *);		/* internal player */
+void sound_init (void);
+int i_play (char *);
 int setcard (void);
 void cardctl (int, ST_CONFIG);
 
