@@ -155,7 +155,10 @@ main (int argc, char *argv[])
   }
 
   if (arg_display) {
-	  setenv("DISPLAY",arg_display,TRUE);
+	  char e[256];
+	  sprintf(e,"DISPLAY=%d",arg_display);
+	  putenv(e);
+	  /*setenv("DISPLAY",arg_display,TRUE);*/
 	  /*printf("display is %s\n",getenv("DISPLAY"));*/
   }
 
