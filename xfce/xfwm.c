@@ -16,6 +16,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -59,10 +63,19 @@ static guint watchpipe_tmout = -1;
 static gint input_id;
 #endif
 
+
+#ifdef XFCE_TASKBAR
+ #include "taskbar.h"  
+#endif
+
+
 void
 assume_event (unsigned long type, unsigned long *body)
 {
   int i;
+#ifdef XFCE_TASKBAR
+  taskbar_check_events(type,body);
+#endif
   switch (type)
   {
   case XFCE_M_NEW_DESK:
@@ -195,6 +208,9 @@ init_watchpipe (void)
     watchpipe_tmout = gtk_timeout_add (50, (GtkFunction) watchpipe, 0);
 #else
     input_id = gdk_input_add (fd_internal_pipe[1], GDK_INPUT_READ | GDK_INPUT_EXCEPTION, (GdkInputFunction) process_xfwm_messages, (gpointer) ((long) fd_internal_pipe[1]));
+#endif
+#ifdef XFCE_TASKBAR
+  taskbar_xfwm_init();
 #endif
 }
 

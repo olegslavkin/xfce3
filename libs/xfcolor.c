@@ -939,6 +939,7 @@ create_gtkrc_file (XFCE_palette * p, char *name)
         write_style_to_gtkrc_file (f, p, i, i, 4, "xfce_", (i == 7));
 #ifndef OLD_STYLE
       write_style_to_gtkrc_file (f, p, 7, 2, 4, "xfcebar_", TRUE);
+      write_style_to_gtkrc_file (f, p, 4, 2, 7, "xfcebar_taskbar", TRUE);
 #endif
       fprintf (f, "style \"tooltips-style\" {\n");
       fprintf (f, "  bg[NORMAL] = \"#ffffc0\"\n");
@@ -967,6 +968,7 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "widget       \"*gxfce_color6*\"     style \"xfce_6\"\n");        
       fprintf (f, "widget       \"*gxfce_color7*\"     style \"xfce_7\"\n");        
       fprintf (f, "widget       \"gtk-tooltips\"       style \"tooltips-style\"\n");
+      fprintf (f, "widget       \"*task_active*\"             style \"xfcebar_taskbar4\"\n");        
       fclose (f);
     }
   }

@@ -57,6 +57,10 @@
 #  include "dmalloc.h"
 #endif
 
+#ifdef XFCE_TASKBAR
+ #include "taskbar.h"  
+#endif
+
 #define PANEL_ICON_SIZE ((current_config.select_icon_size == 0) ? SMALL_PANEL_ICONS : \
                            ((current_config.select_icon_size == 2) ? LARGE_PANEL_ICONS : MEDIUM_PANEL_ICONS))
 
@@ -438,6 +442,11 @@ create_gxfce (XFCE_palette * pal)
   GtkWidget *gxfce_iconify_button;
   GtkWidget *gxfce_iconify_pixmap;
 
+#ifdef XFCE_TASKBAR
+  GtkWidget *gxfce_taskbar;
+  GtkWidget *gxfce_taskbar_hbox0;
+#endif
+  
   gint i;
   gint nbselects = NBSELECTS;
 
@@ -460,9 +469,21 @@ create_gxfce (XFCE_palette * pal)
   gtk_widget_set_name (gxfce_hbox1, "gxfce_hbox1");
   gtk_object_set_data (GTK_OBJECT (gxfce), "gxfce_hbox1", gxfce_hbox1);
   gtk_widget_show (gxfce_hbox1);
+
+#ifndef XFCE_TASKBAR
   gtk_container_add (GTK_CONTAINER (gxfce_mainframe), gxfce_hbox1);
+#endif
   gtk_widget_set_usize (gxfce_hbox1, 0, 0);
   gtk_container_border_width (GTK_CONTAINER (gxfce_hbox1), 0);
+
+#ifdef XFCE_TASKBAR
+  gxfce_taskbar_hbox0=gtk_vbox_new(FALSE,0);
+  gtk_widget_show (gxfce_taskbar_hbox0);
+  gtk_container_add (GTK_CONTAINER (gxfce_mainframe), gxfce_taskbar_hbox0);
+  gtk_box_pack_start(GTK_BOX(gxfce_taskbar_hbox0),gxfce_hbox1,TRUE,TRUE,0);
+  gxfce_taskbar=taskbar_create_gxfce_with_taskbar(gxfce_taskbar_hbox0,gxfce_hbox1,gxfce);
+  gtk_box_pack_start(GTK_BOX(gxfce_taskbar_hbox0),gxfce_taskbar,TRUE,TRUE,0);
+#endif
 
   gxfce_hbox2 = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (gxfce_hbox2, "gxfce_hbox2");

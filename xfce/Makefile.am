@@ -33,7 +33,8 @@ xfce_SOURCES = \
 	xfce_cb.c xfce_cb.h \
 	xfce_main.c xfce_main.h \
 	xfwm.c xfwm.h \
-	configtree.c configtree.h 
+	configtree.c configtree.h \
+	taskbar.c taskbar.h
 
 # _distcvs - files being CVS but not listed anywhere. forgotten? _obsolete_?
 xfce_distcvs =  \

@@ -470,6 +470,11 @@ AC_ARG_ENABLE(old_style,
   AC_DEFINE(OLD_STYLE)
 ],)
 
+AC_ARG_ENABLE(taskbar,
+[  --enable-taskbar  Enable taskbar at the bottom of xfce panel  [default=no]],[
+  AC_DEFINE(XFCE_TASKBAR)
+],)
+
 AC_ARG_ENABLE(manage-overrides,
 [  --enable-manage-overrides Enable management of overrides windows in XFwm [default=no]],[
   AC_DEFINE(MANAGE_OVERRIDES)

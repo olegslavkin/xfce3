@@ -165,7 +165,8 @@ xfce_SOURCES = \
 	xfce_cb.c xfce_cb.h \
 	xfce_main.c xfce_main.h \
 	xfwm.c xfwm.h \
-	configtree.c configtree.h 
+	configtree.c configtree.h \
+	taskbar.c taskbar.h
 
 
 # _distcvs - files being CVS but not listed anywhere. forgotten? _obsolete_?
@@ -229,7 +230,7 @@ modify.$(OBJEXT) modify_cb.$(OBJEXT) move.$(OBJEXT) popup.$(OBJEXT) \
 popup_cb.$(OBJEXT) screen.$(OBJEXT) screen_cb.$(OBJEXT) \
 selects.$(OBJEXT) session.$(OBJEXT) setup.$(OBJEXT) setup_cb.$(OBJEXT) \
 startup.$(OBJEXT) xfce.$(OBJEXT) xfce_cb.$(OBJEXT) xfce_main.$(OBJEXT) \
-xfwm.$(OBJEXT) configtree.$(OBJEXT)
+xfwm.$(OBJEXT) configtree.$(OBJEXT) taskbar.$(OBJEXT)
 xfce_LDFLAGS = 
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
