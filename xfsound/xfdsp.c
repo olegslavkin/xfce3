@@ -276,7 +276,20 @@ cardctl (int fp, ST_CONFIG *parm)
   frequency = (*parm)[2];
 
 #if !defined(HAVE_ARTS)
-    
+  /* Reset device... */    
+  if (ioctl(fp, SNDCTL_DSP_SYNC, 0) == -1)
+  {
+#ifdef DEBUG
+    perror ("ioctl");
+#endif
+  }
+  if (ioctl(fp, SNDCTL_DSP_RESET, 0) == -1)
+  {
+#ifdef DEBUG
+    perror ("ioctl");
+#endif
+  }
+  /* ...then change params */    
   if (ioctl (fp, SNDCTL_DSP_SETFMT, &format) == -1)
   {
 #ifdef DEBUG
