@@ -948,7 +948,7 @@ static gen_pixmap_list gen_pixmaps[]={
 	{gPIX+PIX_PAGE_F,	NULL,	page_xpm,	"f",	0},
 	{gPIX+PIX_PAGE_O,	NULL,	page_xpm,	"o",	3},
 	{gPIX+PIX_MAIL,		NULL,	page_xpm,	"@",	4},
-	{gPIX+PIX_WORD,		NULL,	page_word_xpm,	"W",	1},
+	{gPIX+PIX_WORD,		NULL,	page_xpm,	"W",	1},
 	{gPIX+PIX_DUP,		NULL,	page_xpm,	"*",	3},
 	{gPIX+PIX_TAR_TABLE,	NULL,	dir_close_xpm,	".",	0},
 	{gPIX+PIX_TAR_EXP,	NULL,	dir_open_xpm,	".",	0},
