@@ -588,7 +588,7 @@ initpal (XFCE_palette * p)
 }
 
 void
-write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j, char *template, gboolean textured)
+write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected, int base, char *template, gboolean textured)
 {
   int c1_howbright, c1_howbrightSel;
   int c2_howbright, c2_howbrightSel;
@@ -602,12 +602,12 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j, char *templ
     texture = nobgpixmap;
 
 
-  c1_howbright = brightness (p->r[i], p->g[i], p->b[i]);
-  c1_howbrightSel = brightness (((short int) p->r[i]) ^ 255, ((short int) p->g[i]) ^ 128, ((short int) p->b[i]) ^ 64);
-  c2_howbright = brightness (p->r[j], p->g[j], p->b[j]);
-  c2_howbrightSel = brightness (((short int) p->r[j]) ^ 255, ((short int) p->g[j]) ^ 128, ((short int) p->b[j]) ^ 64);
+  c1_howbright = brightness (p->r[normal], p->g[normal], p->b[normal]);
+  c1_howbrightSel = brightness (((short int) p->r[normal]) ^ 255, ((short int) p->g[normal]) ^ 128, ((short int) p->b[normal]) ^ 64);
+  c2_howbright = brightness (p->r[selected], p->g[selected], p->b[selected]);
+  c2_howbrightSel = brightness (((short int) p->r[selected]) ^ 255, ((short int) p->g[selected]) ^ 128, ((short int) p->b[selected]) ^ 64);
 
-  fprintf (f, "style \"%s%u\"\n", template, i);
+  fprintf (f, "style \"%s%u\"\n", template, normal);
   fprintf (f, "{\n");
   if ((p->fnt) && strlen (p->fnt))
     fprintf (f, "  font              = \"%s\"\n", p->fnt);
@@ -616,8 +616,8 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j, char *templ
   {
     fprintf (f, "  bg_pixmap[NORMAL] = \"%s\"\n", texture);
     fprintf (f, "  bg_pixmap[ACTIVE] = \"%s\"\n", nobgpixmap);
-    fprintf (f, "  bg_pixmap[INSENSITIVE] = \"%s\"\n", (i == j) ? texture : nobgpixmap);
-    fprintf (f, "  bg_pixmap[PRELIGHT] = \"%s\"\n", (i == j) ? texture : nobgpixmap);
+    fprintf (f, "  bg_pixmap[INSENSITIVE] = \"%s\"\n", (normal == selected) ? texture : nobgpixmap);
+    fprintf (f, "  bg_pixmap[PRELIGHT] = \"%s\"\n", (normal == selected) ? texture : nobgpixmap);
   }
   else
   {
@@ -667,30 +667,30 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j, char *templ
     fprintf (f, "  text[SELECTED]    = \"#000000\"\n");
   }
 
-  fprintf (f, "  bg[NORMAL]        = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  bg[NORMAL]        = \"#%02X%02X%02X\"\n", (short int) p->r[normal], (short int) p->g[normal], (short int) p->b[normal]);
 
-  fprintf (f, "  base[NORMAL]      = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  base[NORMAL]      = \"#%02X%02X%02X\"\n", (short int) p->r[base], (short int) p->g[base], (short int) p->b[base]);
 
-  fprintf (f, "  bg[ACTIVE]        = \"#%02X%02X%02X\"\n", (short int) shift (p->r[j], DARK), (short int) shift (p->g[j], DARK), (short int) shift (p->b[j], DARK));
+  fprintf (f, "  bg[ACTIVE]        = \"#%02X%02X%02X\"\n", (short int) shift (p->r[selected], DARK), (short int) shift (p->g[selected], DARK), (short int) shift (p->b[selected], DARK));
 
-  fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[j], DARK), (short int) shift (p->g[j], DARK), (short int) shift (p->b[j], DARK));
+  fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[base], DARK), (short int) shift (p->g[base], DARK), (short int) shift (p->b[base], DARK));
 
-  if (i == j)
+  if (normal == selected)
   {
-    fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[i], LIGHT), (short int) shift (p->g[i], LIGHT), (short int) shift (p->b[i], LIGHT));
+    fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[normal], LIGHT), (short int) shift (p->g[normal], LIGHT), (short int) shift (p->b[normal], LIGHT));
   }
   else
   {
-    fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[j], (short int) p->g[j], (short int) p->b[j]);
+    fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[selected], (short int) p->g[selected], (short int) p->b[selected]);
   }
 
-  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[j], (short int) p->g[j], (short int) p->b[j]);
+  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[base], (short int) p->g[base], (short int) p->b[base]);
 
-  fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((short int) p->r[j]) ^ 255, ((short int) p->g[j]) ^ 128, ((short int) p->b[j]) ^ 64);
+  fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((short int) p->r[selected]) ^ 255, ((short int) p->g[selected]) ^ 128, ((short int) p->b[selected]) ^ 64);
 
-  fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (short int) p->r[normal], (short int) p->g[normal], (short int) p->b[normal]);
 
-  fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n", (short int) p->r[normal], (short int) p->g[normal], (short int) p->b[normal]);
 #ifndef WIN32
   if ((p->engine) && (strlen (p->engine)) && my_strncasecmp (p->engine, "gtk", 3))
     fprintf (f, "  engine \"%s\" {}\n", p->engine);
@@ -726,9 +726,9 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "%s\n\n", XFCE3GTKRC);
       fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
       for (i = 1; i < 8; i++)   /* Color 0 is used for the mouse pointer only */
-        write_style_to_gtkrc_file (f, p, i, i, "xfce_", (i == 7));
+        write_style_to_gtkrc_file (f, p, i, i, 4, "xfce_", (i == 7));
 #ifndef OLD_STYLE
-      write_style_to_gtkrc_file (f, p, 7, 2, "xfcebar_", TRUE);
+      write_style_to_gtkrc_file (f, p, 7, 2, 4, "xfcebar_", TRUE);
 #endif
       fprintf (f, "style \"tooltips-style\" {\n");
       fprintf (f, "  bg[NORMAL] = \"#ffffc0\"\n");
@@ -775,7 +775,7 @@ create_temp_gtkrc_file (XFCE_palette * p)
     fprintf (f, "%s\n\n", XFCE3GTKRC);
     fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
     for (i = 0; i < 8; i++)
-      write_style_to_gtkrc_file (f, p, i, i, "temp_xfce_", FALSE);
+      write_style_to_gtkrc_file (f, p, i, i, 4, "temp_xfce_", FALSE);
     fprintf (f, "widget       \"*temp_color0*\"  style \"temp_xfce_0\"\n");
     fprintf (f, "widget       \"*temp_color1*\"  style \"temp_xfce_1\"\n");
     fprintf (f, "widget       \"*temp_color2*\"  style \"temp_xfce_2\"\n");
