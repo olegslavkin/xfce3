@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-11 19:40+0200\n"
+"POT-Creation-Date: 2001-09-12 21:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgid "Icon Style :"
 msgstr ""
 
 #: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:202
-#: xfce/modify.c:210 xfsound/xfsound.c:491
+#: xfce/modify.c:210 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr ""
 
@@ -84,14 +84,14 @@ msgstr ""
 #: xfce/setup.c:1128 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
-#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:588
+#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
 #: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
 msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
 #: xfce/setup.c:1145 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:609 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 msgid "Cancel"
 msgstr ""
@@ -536,7 +536,7 @@ msgid "Startup"
 msgstr ""
 
 #: xfbd/xfbd.c:541 xfce/setup.c:1137 xfmouse/xfmouse.c:299
-#: xfsound/xfsound.c:601
+#: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr ""
 
@@ -2444,35 +2444,35 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: xfsound/xfsound.c:424
+#: xfsound/xfsound.c:442
 msgid "XFSound - XFce Sound Manager"
 msgstr ""
 
-#: xfsound/xfsound.c:471
+#: xfsound/xfsound.c:489
 msgid "Event : "
 msgstr ""
 
-#: xfsound/xfsound.c:478
+#: xfsound/xfsound.c:496
 msgid "Sound file : "
 msgstr ""
 
-#: xfsound/xfsound.c:485
+#: xfsound/xfsound.c:503
 msgid "Test"
 msgstr ""
 
-#: xfsound/xfsound.c:525
+#: xfsound/xfsound.c:543
 msgid "Play Sound"
 msgstr ""
 
-#: xfsound/xfsound.c:533 xfumed/interface.c:265
+#: xfsound/xfsound.c:551 xfumed/interface.c:265
 msgid "Command : "
 msgstr ""
 
-#: xfsound/xfsound.c:557
+#: xfsound/xfsound.c:575
 msgid "Internal"
 msgstr ""
 
-#: xfsound/xfsound.c:563
+#: xfsound/xfsound.c:581
 msgid "External"
 msgstr ""
 

@@ -235,15 +235,18 @@ int
 setcard (void)
 {
 #if !defined(HAVE_ARTS)
-  if ((masterfd = open (DSP_NAME, O_WRONLY | O_NONBLOCK, 0)) == -1)
+  int mode = O_WRONLY | O_NONBLOCK;
+  if ((masterfd = open (DSP_NAME, mode, 0)) == -1)
   {
 #ifdef DEBUG
     perror ("open");
 #endif
     return -1;
   }
+  mode = fcntl(masterfd, F_GETFL);
+  mode &= ~O_NONBLOCK;
+  fcntl(masterfd, F_SETFL, mode);
 #endif
-
   return 0;
 }
 
