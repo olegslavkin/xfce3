@@ -103,4 +103,10 @@ alphasort (struct dirent *a, struct dirent *b)
   return strcmp (((struct dirent *) a)->d_name, ((struct dirent *) b)->d_name);
 }
 
+#else
+ /* keep compilers happy about empty files */
+void
+dummy_scandir (void)
+{
+}
 #endif /* !HAVE_SCANDIR */

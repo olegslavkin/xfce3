@@ -503,12 +503,22 @@ void
 freepal (XFCE_palette * p)
 {
   if (p->fnt)
+  {
     g_free (p->fnt);
+    p->fnt = NULL;
+  }
   if (p->texture)
+  {
     g_free (p->texture);
+    p->texture = NULL;
+  }
   if (p->engine)
+  {
     g_free (p->engine);
+    p->engine = NULL;
+  }
   g_free (p);
+  p = NULL;
 }
 
 XFCE_palette *
