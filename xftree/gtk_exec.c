@@ -98,6 +98,7 @@ on_ok (GtkWidget * ok, gpointer data)
 {
   char *temp;
   static char *last_temp=NULL;
+  char *last_args=NULL;
 
   temp = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (dl.combo)->entry));
   if (last_temp) g_free(last_temp);
@@ -106,9 +107,12 @@ on_ok (GtkWidget * ok, gpointer data)
 
   if (strlen (last_temp))
   {
-    	  
     dl.cmd = g_strdup (last_temp);
-
+    if (strchr(last_temp,' ')) {
+	    last_temp = strtok(last_temp," ");
+	    last_args = last_temp + strlen(last_temp) +1;
+    }	    
+	  
     dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
     gtk_widget_destroy (dl.top);
     dl.result = (int) ((long) data);
@@ -124,7 +128,8 @@ on_ok (GtkWidget * ok, gpointer data)
 	      if (sfx) sfx++;
       }
       if (sfx) {
-	     dl.win->reg = reg_add_suffix (dl.win->reg, sfx, last_temp, NULL);
+	     
+	     dl.win->reg = reg_add_suffix (dl.win->reg, sfx, last_temp,last_args);
 	     reg_save (dl.win->reg);
       }
 	    

@@ -70,6 +70,7 @@ GtkWidget *io_parent=NULL;
 char *arg_hostname=NULL;
 char *arg_display=NULL;
 
+#if 0
 static gint open_warning(gpointer data){
 	  FILE *mess;
 	  char line[256];
@@ -84,16 +85,21 @@ static gint open_warning(gpointer data){
 	  }
 	  return FALSE;
 }
+#endif
 
 static void
 finishit (int sig)
 {
+#if 0
+	   /* this is not very portable */
   if (sig == SIGUSR1) {
           /*while (gtk_events_pending()) gtk_main_iteration();*/
 	  /* must do it this way to avoid threads fighting for gtk_main loop */
           gtk_timeout_add (260, (GtkFunction) open_warning, NULL);
 	  return;
-  } else {
+  } else
+#endif 
+  {
     fprintf(stderr,"xftree: signal %d received. Cleaning up before exiting\n",sig);
     cleanup_tmpfiles();
     /*on_signal(sig);*/
@@ -156,7 +162,7 @@ main (int argc, char *argv[])
 
   if (arg_display) {
 	  char e[256];
-	  sprintf(e,"DISPLAY=%d",arg_display);
+	  sprintf(e,"DISPLAY=%s",arg_display);
 	  putenv(e);
 	  /*setenv("DISPLAY",arg_display,TRUE);*/
 	  /*printf("display is %s\n",getenv("DISPLAY"));*/

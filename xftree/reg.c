@@ -271,14 +271,14 @@ reg_build_list (char *file)
       if (*(prg->sfx)=='/'){
 	      struct stat s;
 	      if (stat(prg->sfx,&s)<0)       {
-	         fprintf (stderr, "xftree:removing nonexitant %s from xtree.reg\n",prg->sfx);
+	         fprintf (stderr, "xftree:removing %s from xtree.reg\n",prg->sfx);
 		 reg_free_reg (prg);
 		 continue;
 	      }
       }
       /* does the application exist? glob the path */
       if (!sane(prg->app)){
-          fprintf (stderr, "xftree:removing nonexitant %s application from xtree.reg\n",prg->app);
+          fprintf (stderr, "xftree:removing %s application from xtree.reg\n",prg->app);
 	  reg_free_reg (prg);
 	  continue;      
       }
@@ -441,7 +441,7 @@ reg_add_suffix (GList * g_reg, char *sfx, char *program, char *args)
     }
     g_reg = g_list_append (g_reg, prg);
   }
-  g_reg = g_list_sort (g_reg, (GCompareFunc) compare_sfx);
+  if (g_reg) g_reg = g_list_sort (g_reg, (GCompareFunc) compare_sfx);
   return g_reg;
 }
 
@@ -531,7 +531,7 @@ reg_app_list (GList * g_reg)
     }
     g_reg = g_reg->next;
   }
-  g_apps = g_list_sort (g_apps, (GCompareFunc) my_strcasecmp);
+  if (g_apps) g_apps = g_list_sort (g_apps, (GCompareFunc) my_strcasecmp);
   /* remove dupes */
   g_tmp = g_apps;
   while (g_tmp)
@@ -547,7 +547,8 @@ reg_app_list (GList * g_reg)
 	continue;
       }
     }
-    g_tmp = g_tmp->next;
+    if (!g_tmp) break;
+    else g_tmp = g_tmp->next;
   }
   return (g_apps);
 }
@@ -565,7 +566,8 @@ reg_app_list_free (GList * g_apps)
 	    g_tmp = g_apps = g_list_remove (g_apps, rem);
 	    g_free(rem);
     }
-    g_tmp = g_tmp->next;
+    if (!g_tmp) break;
+    else g_tmp = g_tmp->next;
   }
   return (g_tmp);
 }

@@ -1169,8 +1169,9 @@ void cleanup_tmpfiles(void){
 gboolean
 sane (char *bin)
 {
-  char *spath, *path, *globstring;
+  char *spath[52], *path, globstring[256],*b,*c;
   glob_t dirlist;
+  int i;
 
   /* printf("getenv=%s\n",getenv("PATH")); */
   if (getenv ("PATH"))
@@ -1185,31 +1186,34 @@ sane (char *bin)
     strcpy (path, "./:");
   }
 
-  globstring = (char *) malloc (strlen (path) + strlen (bin) + 1);
+  /*globstring = (char *) malloc (strlen (path) + strlen (bin) + 1);*/
 
-/* printf("path=%s\n",path);*/
 
-  if (strstr (path, ":"))
-    spath = strtok (path, ":");
-  else
-    spath = path;
+  spath[0] = strtok (path, ":");
+  for (i=1;i<52;i++) {
+	spath[i] = strtok (NULL, ":");
+ 	if (spath[i] == NULL) break;
+  }
 
-  while (spath)
-  {
-    sprintf (globstring, "%s/%s", spath, bin);
+  for (i=1;i<52 && spath[i]!=NULL;i++) {
+        /* printf("spath=%s\n",spath[i]);*/
+    b=g_strdup(bin);
+    if (strchr(b,' ')) c=strtok(b," "); else c=b; 
+    sprintf (globstring, "%s/%s", spath[i], c);
+        /*printf("dbg: globstring=%s\n",globstring);*/
+    g_free(b);
 /*	 printf("checking for %s...\n",globstring);*/
     if (glob (globstring, GLOB_ERR, NULL, &dirlist) == 0)
     {
-      /*       printf("found at %s\n",globstring); */
-      free (globstring);
+             /*printf("found at %s\n",globstring); */
+      /*free (globstring);*/
       globfree (&dirlist);
       free (path);
       return TRUE;
     }
     globfree (&dirlist);
-    spath = strtok (NULL, ":");
   }
-  free (globstring);
+  /*free (globstring);*/
   free(path);
   return FALSE;
 }

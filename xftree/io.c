@@ -144,7 +144,7 @@ io_system (char **argv,GtkWidget *parent)
   pid = fork ();
   if (pid == -1) return (-1);
   if (pid==0) { /* child process */
-    /*printf("dbg:%s %s %s %s\n",argv[0],argv[1],argv[2],argv[3]);*/
+    printf("dbg:[1]%s [2]%s [3]%s [4]%s\n",argv[0],argv[1],argv[2],argv[3]);
     /* The following is to avoid X locking when executing 
        terminal based application that requires user input */
     if ((nulldev = open ("/dev/null", O_RDWR)))
@@ -168,6 +168,8 @@ io_system (char **argv,GtkWidget *parent)
        if (execve (argv[0], argv, environ) == -1) {
            FILE *mess;
 	   if (errno != ENOEXEC) execvp (argv[0], argv); 
+#if 0
+	   /* this is not very portable */
 	   mess=fopen("/tmp/xftree.USR1","w");
 	   if (mess){
 	       fprintf(mess,"%s: %s\n",argv[0],strerror(errno));
@@ -175,6 +177,7 @@ io_system (char **argv,GtkWidget *parent)
 	       kill(io_pid,SIGUSR1);
 	   }
 	   usleep(50000);
+#endif
 	   /*perror (argv[0]);*/
        }
     }
