@@ -76,6 +76,8 @@ entry;
 #define FT_RPM			(1<<20)
 #define FT_RPMCHILD		(1<<21)
 #define FT_RPM_DUMMY		(1<<22)
+#define FT_DIR_RO		(1<<23)
+#define FT_PD			(1<<24)
 
 
 

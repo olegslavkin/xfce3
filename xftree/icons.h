@@ -27,4 +27,7 @@
 #include "icons/exe.xpm"
 #include "icons/exe_file.xpm"
 #include "icons/stale_lnk.xpm"
+#include "icons/dir_ro.xpm"
+#include "icons/dir_ro_open.xpm"
+#include "icons/pd.xpm"
 #endif
