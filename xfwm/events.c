@@ -1642,9 +1642,9 @@ sendclient_event (XfwmWindow * tmp_win, int x, int y, int w, int h)
   client_event.xconfigure.height = h - 2 * (tmp_win->boundary_width + tmp_win->bw) - tmp_win->title_height;
 
   client_event.xconfigure.border_width = 0;
-  client_event.xconfigure.above = tmp_win->frame;
+  client_event.xconfigure.above = 0x0;
   client_event.xconfigure.override_redirect = False;
-  XSendEvent (dpy, tmp_win->w, True, StructureNotifyMask, &client_event);
+  XSendEvent (dpy, tmp_win->w, False, StructureNotifyMask, &client_event);
   XSync (dpy, 0);
 }
 

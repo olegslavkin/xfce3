@@ -310,15 +310,15 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
     else
     {
       if (gravx > 0)
-	tmp_win->attr.x -= 2 * tmp_win->boundary_width;
+	tmp_win->attr.x -= 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
       if (gravy > 0)
-	tmp_win->attr.y -= 2 * tmp_win->boundary_width + tmp_win->title_height;
+	tmp_win->attr.y -= 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
     }
 #else
     if (gravx > 0)
-      tmp_win->attr.x -= 2 * tmp_win->boundary_width;
+      tmp_win->attr.x -= 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
     if (gravy > 0)
-      tmp_win->attr.y -= 2 * tmp_win->boundary_width + tmp_win->title_height;
+      tmp_win->attr.y -= 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
 #endif
   }
   tmp_win->xdiff = tmp_win->boundary_width + tmp_win->bw;
