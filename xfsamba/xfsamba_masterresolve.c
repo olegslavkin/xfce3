@@ -186,7 +186,7 @@ ask4master (void)
 static void
 NMBmastersResolveOver (void)
 {
-  static gboolean NMBmastersResolve (nmb_list * currentN);
+  gboolean NMBmastersResolve (nmb_list * currentN);
   char *message;
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);
