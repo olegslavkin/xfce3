@@ -820,8 +820,9 @@ show_cat (char *message)
   if (cat != NULL)
   {
     gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, message, strlen (message));
-    if (!GTK_WIDGET_VISIBLE (cat))
-      gtk_widget_show (cat);
+    if (!GTK_WIDGET_VISIBLE (cat)) gtk_widget_show (cat);
+    gdk_window_raise (cat->window);
+    
     return;
   }
 
