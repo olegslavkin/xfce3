@@ -2850,7 +2850,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Properties ..."), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
     {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
     {N_("Delete ..."), (gpointer) cb_delete, 0},\
-    {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
+    {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_v,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
     
 #define COMMON_MENU_GOTO \
@@ -2863,7 +2863,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     
 #define COMMON_MENU_SELECT \
     {N_("Select all"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
-    {N_("Unselect"), (gpointer) cb_unselect, 0,GDK_q,GDK_CONTROL_MASK},\
+    {N_("Unselect"), (gpointer) cb_unselect, 0,GDK_u,GDK_CONTROL_MASK},\
     {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
     
@@ -2875,7 +2875,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 /* quit only on main menu now, so that default geometry is saved correctly with cb_quit.*/
     
 #define COMMON_HELP_3 \
-    {N_("Quit ..."), NULL, 0, GDK_c,GDK_CONTROL_MASK}
+    {N_("Quit ..."), NULL, 0, GDK_q,GDK_CONTROL_MASK}
 
   menu_entry dir_mlist[] = {
     COMMON_MENU_1,
