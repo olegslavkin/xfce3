@@ -31,7 +31,7 @@ else
   HELP_DIR="XFCE_DIR/help"
 fi
 
-# Look first in ne location then in old location
+# Look first in new location then in old location
 if [ -r "$HELP_DIR/html.$LANG/help.html" ]
 then
   HELP_FILE="$HELP_DIR/html.$LANG/help.html"
@@ -43,6 +43,15 @@ then
   HELP_FILE="$HELP_DIR/help.$LANG.html"
 else 
   HELP_FILE="$HELP_DIR/help.html"
+fi
+
+# Look if any arguments are given
+if [ ! "x$1" = "x" ]
+then
+  if [ -r "`dirname $HELP_FILE`/$1" ]
+  then
+    HELP_FILE="`dirname $HELP_FILE`/$1"
+  fi
 fi
 
 # netscape and mozilla require this command
