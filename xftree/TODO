@@ -1,6 +1,9 @@
 - Add code necesary to d+d files to/from xfsamba. 
   (most of this happens in xfsamba).
 - gtk-2
+- add an application to open a gdk_pixmap canvas to paint thumbtack
+  previews of all .jpg, .png, .gif, .xpm in selected directory.
+  This should be separate code from xftree, like xfglob.
 
 Maybe (only if repeatedly requested):
 - The pasteboard should communicate to other application via the normal
