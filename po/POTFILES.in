@@ -73,7 +73,8 @@ xfsamba/xfsamba.c
 xfsamba/xfsamba_download.c
 xfsamba/xfsamba_gui.c
 xfsamba/xfsamba_list.c
-xfsamba/xfsamba_lookup.c
+xfsamba/xfsamba_nmblookup.c
+xfsamba/xfsamba_smblookup.c
 xfsamba/xfsamba_masterlookup.c
 xfsamba/xfsamba_masterresolve.c
 xfsamba/xfsamba_mem.c
