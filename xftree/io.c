@@ -7,7 +7,7 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
- * Edscott Wilson Garcia Copywrite 2001 for Xfce project.
+ * Edscott Wilson Garcia Copywrite 2001-2002 for Xfce project.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
+#include <unistd.h>
+#include <signal.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -128,44 +129,82 @@ io_can_write_to_parent (char *file)
 
 /*
  */
+
+pid_t io_pid;
+extern GtkWidget *io_parent;
 int
-io_system (char *cmd)
+io_system (char *cmd,int ejecutable,GtkWidget *parent)
 {
   int pid, status;
   int nulldev;
 
   if (cmd == NULL)
     return (1);
+  io_pid=getpid();
+  io_parent=parent;
   pid = fork ();
   if (pid == -1)
     return (-1);
   if (pid == 0)
   {
     char *argv[4];
+    if (ejecutable) {
+	    if (strstr(cmd," ")) {
+		    argv[0]=strtok(cmd," ");
+		    argv[1]=argv[0]+strlen(argv[0])+1;
+		    argv[2]=argv[3]=0;
+		    
+	    }
+	    else {argv[0]=cmd,argv[1]=argv[2]=argv[3]=0;}
+    } else {
     /* child */
-    argv[0] = "sh";
-    argv[1] = "-c";
-    argv[2] = cmd;
-    argv[3] = NULL;
+     argv[0] = "sh";
+     argv[1] = "-c";
+     argv[2] = cmd;
+     argv[3] = NULL;
+    }
 
+    /*printf("dbg:exec=%d, %s %s %s %s\n",ejecutable,argv[0],argv[1],argv[2],argv[3]);*/
     /* The following is to avoid X locking when executing 
        terminal based application that requires user input */
     if ((nulldev = open ("/dev/null", O_RDWR)))
     {
       close (0);
       dup (nulldev);
+#if 0
+      /* keep stdout and stderr open for diagnostics */
       close (1);
       dup (nulldev);
       close (2);
       dup (nulldev);
-    }
+#endif
+    } else _exit (127);
 
-    if (execve ("/bin/sh", argv, environ) == -1)
-      perror ("/bin/sh");
+    if (ejecutable) {
+	    if (fork ()==0) {
+		       /*printf("dbg:by direct...\n");*/
+	       if (execve (argv[0], argv, environ) == -1) {
+		   if (errno != ENOEXEC) execvp (argv[0], argv); 
+		   {
+		       FILE *mess;
+		       mess=fopen("/tmp/xftree.USR1","w");
+		       if (mess){
+			       fprintf(mess,"%s: %s\n",argv[0],strerror(errno));
+			       fclose(mess);
+			       kill(io_pid,SIGUSR1);
+		       }
+		       /*perror (argv[0]);*/
+		   }
+	       }
+	    }
+	    _exit (127);
+    } else {
+		       /*printf("dbg:by shell...\n");*/
+	    if (execve ("/bin/sh", argv, environ) == -1) perror ("/bin/sh");
+    }
     _exit (127);
   }
-  do
-  {
+  while (1){
     if (waitpid (pid, &status, 0) == -1)
     {
       if (errno != EINTR)
@@ -174,7 +213,6 @@ io_system (char *cmd)
     else
       return status;
   }
-  while (1);
 }
 
 /*

@@ -27,11 +27,12 @@
 #ifndef __IO_H__
 #define __IO_H__
 #include <glob.h>
+#include <gtk/gtk.h>
 
 int io_is_exec (char *file);
 int io_can_exec (char *file);
 int io_can_write_to_parent (char *file);
-int io_system (char *cmd);
+int io_system (char *cmd,int ejecutable,GtkWidget *parent);
 int io_system_var (char **cmd, int len);
 int io_is_directory (char *path);
 int io_is_file (char *file);

@@ -228,11 +228,14 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
       cleanup_tmpfiles();
       exit (1);
     }
+#if 0
+    /* now taken care of in io.c */
     else if (!sane(dl.cmd)){
        xf_dlg_error (win->top,_("Can't find in PATH"),dl.cmd);
        g_free (dl.cmd);
        goto cmd_over;      
     }
+#endif
     chdir(path);
     if (dl.in_terminal)
     {
@@ -245,22 +248,23 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
       {
 	sprintf (cmd, "%s -e %s &", TERMINAL, dl.cmd);
       }
+      io_system (cmd,FALSE,win->top); /* open by shell (xfterm is a shell script anyways) */
     }
     else
     {
       if (dl.file)
       {
-	sprintf (cmd, "%s \"%s\" &", dl.cmd, dl.file);
+	sprintf (cmd, "%s %s", dl.cmd, dl.file);
       }
       else
       {
-	sprintf (cmd, "%s &",dl.cmd);
+	sprintf (cmd, "%s",dl.cmd);
       }
+      io_system (cmd,TRUE,win->top); /* direct open */
     }
     g_free (dl.cmd);
-    io_system (cmd);
   }
-cmd_over:
+/*cmd_over:*/
   update_timer((GtkCTree *)ctree);
   if (dl.file) g_free(dl.file);
   return (dl.result);

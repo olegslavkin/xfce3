@@ -200,7 +200,7 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
   int num;
   GtkCTreeNode *node;
   char *command;
-  entry *en_1,*en_2;
+  entry *en_1;  /*,*en_2;*/
   GList *selection;
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -218,33 +218,31 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
   num = count_selection (ctree, &node);
   
   if (!num) {
-    io_system ("xfdiff&");
+    io_system ("xfdiff",TRUE,win->top);
     return;
   }
-  /* take first 2 */
-/*  if (num > 2) {
-    if (xf_dlg_continue (win->top,_("Proceed with the first 2 selections?"),NULL)==DLG_RC_CANCEL)
-	    return;
-  }*/
   
   selection = GTK_CLIST (ctree)->selection;
   node = selection->data;
   en_1 = gtk_ctree_node_get_row_data (ctree, node);
-  if (en_1->type & FT_TARCHILD){io_system ("xfdiff&"); return;}
+  if (en_1->type & FT_TARCHILD){io_system ("xfdiff",TRUE,win->top); return;}
+#if 0
   selection=selection->next;
   if (selection){
 	node = selection->data;
 	en_2 = gtk_ctree_node_get_row_data (ctree, node);
-        if (en_2->type & FT_TARCHILD){io_system ("xfdiff&"); return;} 
+        if (en_2->type & FT_TARCHILD){io_system ("xfdiff",TRUE,win->top); return;} 
 	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+6);
   	if (!command) return;
-  	sprintf(command,"xfdiff %s %s&",en_1->path,en_2->path);
-  } else {
+  	sprintf(command,"xfdiff %s %s",en_1->path,en_2->path);
+  } else
+#endif
+  {
   	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+4);
   	if (!command) return;
-  	sprintf(command,"xfdiff %s&",en_1->path);
+  	sprintf(command,"xfdiff %s",en_1->path);
   }
-  io_system (command);
+  io_system (command,TRUE,win->top);
   free(command);
 }
 
@@ -252,12 +250,14 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
 void
 cb_patch (GtkWidget * widget,  GtkCTree * ctree)
 {
+  cfg *win;
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   /* use:
    * prompting for left and right files: xfdiff [left file] [right file]
    * without prompting for files:        xfdiff -n  
    * prompting for patch dir and file:   xfdiff -p [directory] [patch file]
    * */
-    io_system ("xfdiff -p&");
+    io_system ("xfdiff -p",TRUE,win->top);
 }
 
 
@@ -547,11 +547,14 @@ void
 cb_find (GtkWidget * item, GtkWidget * ctree)
 {
   char *cmd,*path;
+  cfg *win;
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   path=valid_path((GtkCTree *)ctree,TRUE);
   cmd=(char *)malloc(strlen(path)+1+10);
   if (!cmd) return;
-  sprintf (cmd, "xfglob %s&",path);
-  io_system (cmd);  free(cmd);  
+  sprintf (cmd, "xfglob %s",path);
+  io_system (cmd,TRUE,win->top);  
+  free(cmd);  
 }
 
 void
@@ -984,13 +987,15 @@ void
 cb_term (GtkWidget * item, GtkWidget * ctree)
 {
   char *path,*cmd;
+  cfg *win;
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   path=valid_path((GtkCTree *)ctree,FALSE);
   if (!path) return;
   cmd=(char *)malloc(strlen(path)+13);
   if (!cmd) return;
-  sprintf (cmd, "xfterm \"%s\" &", path);
-  io_system (cmd);
+  sprintf (cmd, "xfterm \"%s\"& ", path);
+  io_system (cmd,FALSE,win->top); /* keep at false, its a shell script */
   free(cmd);
 }
 
@@ -1005,7 +1010,9 @@ cb_exec (GtkWidget * top,GtkWidget * ctree)
 void
 cb_samba (GtkWidget * top,GtkWidget * ctree)
 {
-  io_system ("xfsamba&");  
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  io_system ("xfsamba",TRUE,win->top);  
 }
 
 extern GtkWidget *autotype_C;
@@ -1116,11 +1123,12 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   prg = reg_prog_by_file (win->reg, en->path);
   if (prg) {
         char cmd[(PATH_MAX + 3) * 2];
+	
 	if (prg->arg)
 	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
 	else
 	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
-	io_system (cmd);
+	io_system (cmd,FALSE,win->top);
 	goto end_autotype;
   }     
   

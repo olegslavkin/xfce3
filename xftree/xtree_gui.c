@@ -301,11 +301,13 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
     cursor_wait (GTK_WIDGET (ctree));
     chdir (up->path);
     if (en->type & FT_EXE) { /*io_can_exec (en->path)) */
-      if (mod_mask & GDK_MOD1_MASK)
+      if (mod_mask & GDK_MOD1_MASK){
 	sprintf (cmd, "%s -e \"%s\" &", TERMINAL, en->path);
-      else
-	sprintf (cmd, "\"%s\" &", en->path);
-      io_system (cmd);
+        io_system (cmd,FALSE,win->top); /* open by shell */
+      } else {
+	sprintf (cmd, "./%s", en->label);
+        io_system (cmd,TRUE,win->top); /* open directly */ 
+      }
     }
     else
     {
@@ -314,10 +316,10 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       if (prg)
       {
 	if (prg->arg)
-	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
+	  sprintf (cmd, "\"%s\" %s \"%s\" ", prg->app, prg->arg, en->path);
 	else
-	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
-	io_system (cmd);
+	  sprintf (cmd, "\"%s\" \"%s\" ", prg->app, en->path);
+	io_system (cmd,FALSE,win->top); /* open by shell */
       }
       else
       {
@@ -372,57 +374,6 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
 
     return startit(ctree,en,event->state, node);
   }
-#if 0
-    /* disable openwith on FT_TARCHILD */
-    if (en->type & FT_RPMCHILD) return TRUE;
-    if (en->type & FT_TARCHILD) {
-	    cb_tar_open_with(NULL,GTK_CTREE (ctree));
-	    return TRUE;
-    }
-
-    if (en->type & FT_DIR_UP)
-    {
-      cb_go_up(NULL,GTK_CTREE (ctree)); 	    
-      return (TRUE);
-    }
-    if (!(en->type & FT_FILE))
-      return (FALSE);
-    up = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), GTK_CTREE_ROW (node)->parent);
-    cursor_wait (GTK_WIDGET (ctree));
-
-    wd = getcwd (NULL, PATH_MAX);
-    chdir (up->path);
-    if (en->type & FT_EXE)
-    {				/*io_can_exec (en->path)) */
-      if (event->state & GDK_MOD1_MASK)
-	sprintf (cmd, "%s -e \"%s\" &", TERMINAL, en->path);
-      else
-	sprintf (cmd, "\"%s\" &", en->path);
-      io_system (cmd);
-    }
-    else
-    {
-      /* call open with dialog */
-      prg = reg_prog_by_file (win->reg, en->path);
-      if (prg)
-      {
-	if (prg->arg)
-	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
-	else
-	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
-	io_system (cmd);
-      }
-      else
-      {
-	xf_dlg_open_with (ctree,win->xap, "", en->path);
-      }
-    }
-    chdir (wd);
-    free (wd);
-    cursor_reset (GTK_WIDGET (ctree));
-    return (TRUE);
-  }
-#endif
   return (FALSE);
 }
 

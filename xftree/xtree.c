@@ -46,6 +46,7 @@
 #include "xtree_gui.h"
 #include "xtree_mess.h"
 #include "xtree_cfg.h"
+#include "gtk_dlg.h"
 #include "uri.h"
 #include "xfce-common.h"
 
@@ -63,14 +64,37 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+GtkWidget *io_parent=NULL;
+
+static gint open_warning(gpointer data){
+	  FILE *mess;
+	  char line[256];
+	  mess=fopen("/tmp/xftree.USR1","r");
+	  if (mess) {
+		  fgets(line,255,mess);
+		  line[255]=0;
+		  fclose(mess);
+		  unlink("/tmp/xftree.USR1");
+		  /*printf("dgb:parent got %s",line);*/
+		  xf_dlg_error(io_parent,line,NULL);
+	  }
+	  return FALSE;
+}
 
 static void
 finishit (int sig)
 {
-  fprintf(stderr,"xftree: signal %d received. Cleaning up before exiting\n",sig);
-  cleanup_tmpfiles();
-  on_signal(sig);
-  exit(1);
+  if (sig == SIGUSR1) {
+          /*while (gtk_events_pending()) gtk_main_iteration();*/
+	  /* must do it this way to avoid threads fighting for gtk_main loop */
+          gtk_timeout_add (260, (GtkFunction) open_warning, NULL);
+	  return;
+  } else {
+    fprintf(stderr,"xftree: signal %d received. Cleaning up before exiting\n",sig);
+    cleanup_tmpfiles();
+    on_signal(sig);
+    exit(1);
+  }
 }
 
 int
