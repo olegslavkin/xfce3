@@ -1251,6 +1251,7 @@ draw_handle (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
   xthick = style->klass->xthickness;
   ythick = style->klass->ythickness;
 
+  gtk_draw_box (style, window, state_type, GTK_SHADOW_OUT, x, y, width, height);
   dest.x = x + xthick;
   dest.y = y + ythick;
   dest.width = width - (xthick * 2);
@@ -1259,15 +1260,27 @@ draw_handle (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
   gdk_gc_set_clip_rectangle (light_gc, &dest);
   gdk_gc_set_clip_rectangle (dark_gc, &dest);
 
-  yy = y + ythick;
-  for (xx = x + xthick; xx < (x + width - xthick); xx += 8)
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
   {
-    gdk_draw_line (window, dark_gc, xx, yy, xx, yy + height - ythick);
-    gdk_draw_line (window, light_gc, xx + 1, yy, xx + 1, yy + height - ythick);
-
-    gdk_draw_line (window, dark_gc, xx + 4, yy, xx + 4, yy + height - ythick);
-    gdk_draw_line (window, light_gc, xx + 5, yy, xx + 5, yy + height - ythick);
+    gint delta = xthick + (width / 2) - 7;
+    yy = y + ythick;
+    for (xx = 0; xx < 10; xx += 2)
+    {
+      gdk_draw_line (window, dark_gc, xx + delta, yy, xx + delta, yy + height - ythick);
+      gdk_draw_line (window, light_gc, xx + delta + 1, yy, xx + delta + 1, yy + height - ythick);
+    }
   }
+  else
+  {
+    gint delta = ythick + height / 2 - 7;
+    xx = x + xthick;
+    for (yy = 0; yy < 10; yy += 2)
+    {
+      gdk_draw_line (window, dark_gc, xx, yy + delta, xx + width - xthick, yy + delta);
+      gdk_draw_line (window, light_gc, xx, yy + delta + 1, xx + width - xthick, yy + delta + 1);
+    }
+  }
+  
   gdk_gc_set_clip_rectangle (light_gc, NULL);
   gdk_gc_set_clip_rectangle (dark_gc, NULL);
 }
