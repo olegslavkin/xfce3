@@ -737,6 +737,11 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
 	if (io_is_current (name))  continue;
 	strcpy (label, name);
+	if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
+	      int i;
+	      label[8]='~';
+	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
+	}
 	if (!node_has_child (ctree, node, label))
 	{
 	  if (io_is_root (label)) sprintf (compl, "%s%s", en->path, label);
@@ -744,11 +749,6 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	  type = 0;
 	  new_child = NULL;
 	  if (!io_is_current (label) && label){
-            if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
-	      int i;
-	      label[8]='~';
-	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
-	    }
 	    new_child = add_node (ctree, node, NULL, label, compl, &type, en->flags);
 	  }
 	  
