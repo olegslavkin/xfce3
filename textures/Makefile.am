@@ -19,6 +19,7 @@ textures_DATA=\
  Power2.xpm \
  Smooth.xpm \
  SmoothBW.xpm \
+ Ultrafina.xpm \
  Xfcemetal.xpm \
  bronze.xpm \
  cheese.xpm \

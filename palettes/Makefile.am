@@ -114,6 +114,7 @@ palettes_DATA=\
  Tradition2 \
  Troica \
  Typhoon \
+ Ultrafina \
  Vanadium \
  Win \
  Win2 \
