@@ -1433,11 +1433,12 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
+#if 0
   menuitem = gtk_menu_item_new_with_label (_("Change toolbar size"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_change_toolbar), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-
+#endif
   /* Create "Help" menu */
   menuitem = gtk_menu_item_new_with_label (_("Help"));
   gtk_menu_item_right_justify (GTK_MENU_ITEM (menuitem));
