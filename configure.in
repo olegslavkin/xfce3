@@ -20,12 +20,20 @@ LIB_TINY=14
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
 XFCE_VERSION=3.8.14d
+AC_MSG_CHECKING(versioncode $XFCE_VERSION in xfce.spec)
 xfce_version=`grep version xfce.spec | grep define | sed -e 's,^[[^0-9.]]*,,g'`
 case `echo $xfce_version | sed -e "s,$XFCE_VERSION,DEVELOPMENTVERSION,"` in
   DEVELOPMENTVERSION.*) 
-     AC_MSG_RESULT(:changed $XFCE_VERSION into $xfce_version as in xfce.spec) 
-     XFCE_VERSION=$xfce_version ;;
-  *) AC_MSG_RESULT(... seen $xfce_version in xfce.spec but did not do anything)     ;;
+     AC_MSG_RESULT(override: $xfce_version) 
+     XFCE_VERSION=$xfce_version 
+  ;;
+  DEVELOPMENTVERSION)
+     AC_MSG_RESULT(identical)
+  ;;
+  *) AC_MSG_RESULT(disagree)
+     AC_MSG_WARN([xfce.spec version code has been changed to $xfce_version ])
+     AC_MSG_WARN([configure.in has a incompatible version of $XFCE_VERSION ])
+  ;;
 esac
 
 AC_SUBST(VERSION, $XFCE_VERSION)
