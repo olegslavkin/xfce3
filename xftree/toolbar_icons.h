@@ -3,6 +3,7 @@
 #include "icons/new_file.xpm"
 #include "icons/new_dir.xpm"
 #include "icons/new_win.xpm"
+#include "icons/new_rox.xpm"
 #include "icons/appinfo.xpm"
 #include "icons/closewin.xpm"
 #include "icons/delete.xpm"

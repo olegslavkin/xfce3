@@ -85,8 +85,9 @@
 #include "xtree_pasteboard.h"
 /* only 32 elements allowed in TOOLBARICONS */
 #define TOOLBARICONS \
-  {_("New window"),	new_win_xpm,	cb_new_window},	\
-  {_("Terminal"),	comp1_xpm,	cb_term},	\
+  {_("New icon view"),	new_rox_xpm,	cb_rox},	\
+  {_("New tree view"),	new_win_xpm,	cb_new_window},	\
+  {_("New terminal"),	comp1_xpm,	cb_term},	\
   {_("Close window"),	closewin_xpm,	cb_destroy}, \
   {_("Run ..."), 	tb_macro_xpm,	cb_exec}, \
   {_("Update ..."), 	reload_xpm,	cb_reload}, \
