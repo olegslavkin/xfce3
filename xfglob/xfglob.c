@@ -33,7 +33,7 @@ to do content searching using regular expresions.\n\
 Please note: if you do not have grep in your $PATH, you will\n\
 not be able to search the content of files.\n\
 \n\
- Copyright (C) 2000-2001 Edscott Wilson García \n\
+ Copyright (C) 2000-2001 Edscott Wilson Garcia \n\
  Distributed under GNU General Public License"
 
 /* todo: 0.5.0:
@@ -1897,7 +1897,7 @@ create_find (char *path)
 	{
 	  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 	  set_widget (ADD, SCROLLED, "scrolled_window4", scrolled_window, find_notebook, find, 5, NULL);
-	  label = gtk_label_new (_(COPYRIGHT));
+	  label = gtk_label_new (COPYRIGHT);
 	  gtk_scrolled_window_add_with_viewport ((GtkScrolledWindow *) scrolled_window, label);
 	  gtk_widget_show (label);
 
