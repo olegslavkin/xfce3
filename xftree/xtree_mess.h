@@ -11,6 +11,8 @@
 #define HIDE_MENU		0x400
 #define HIDE_TITLES		0x800
 #define SUBSORT_BY_FILETYPE	0x1000
+#define FILTER_OPTION		0x2000
+#define ABREVIATE_PATHS		0x4000
 
 #define XFTREE_CONFIG_FILE "xftreerc"
 
@@ -27,6 +29,19 @@ extern GtkWidget *Awin;
 extern char *Apath;
 extern GdkColor ctree_color;
 #endif /* XTREE_MESS_MAIN */
+
+#ifndef __XTREE_MESS_H__
+#define __XTREE_MESS_H__
+#include <sys/types.h>
+#include <dirent.h>
+#include <glob.h>
+typedef struct xf_dirent {
+	DIR *dir;
+	char *globstring;
+	glob_t dirlist;
+	int glob_count;
+}xf_dirent;
+
 
 void read_defaults(void);
 void save_defaults(GtkWidget *parent);
@@ -48,4 +63,11 @@ void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
 void cb_hide_menu (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_titles (GtkWidget * widget, GtkWidget *ctree);
 void cb_subsort(GtkWidget * widget, GtkWidget *ctree);
+void cb_filter(GtkWidget * widget, GtkWidget *ctree);
+void cb_abreviate(GtkWidget * widget, GtkWidget *ctree);
+xf_dirent *xf_opendir(char *path,GtkWidget *ctree);
+xf_dirent *xf_closedir(xf_dirent *diren);
+char *xf_readdir(xf_dirent *diren);
+char *abreviate(char *path);
 
+#endif

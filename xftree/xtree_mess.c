@@ -35,6 +35,7 @@
 #include <X11/Xproto.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#include <glob.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "my_string.h"
@@ -221,6 +222,24 @@ void cb_subsort(GtkWidget * widget, GtkWidget *ctree)
   return;
 
 }
+void cb_filter(GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  preferences ^= FILTER_OPTION;
+  if (preferences & FILTER_OPTION){
+	if (!GTK_WIDGET_VISIBLE(win->filter->parent->parent))
+		gtk_widget_show(win->filter->parent->parent);
+  } else {
+	if (GTK_WIDGET_VISIBLE(win->filter->parent->parent))
+		gtk_widget_hide(win->filter->parent->parent);	  
+  }
+  cb_reload(widget, (gpointer) ctree);
+  save_defaults(NULL);
+  return;
+
+}
+
 void
 cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
 {
@@ -262,6 +281,18 @@ cb_hide_menu (GtkWidget * widget, GtkWidget *ctree)
 	  if (!GTK_WIDGET_VISIBLE(win->menu->parent)) gtk_widget_show(win->menu->parent);
   }
   save_defaults(NULL);
+  return;
+}
+
+void
+cb_abreviate (GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  preferences ^= ABREVIATE_PATHS;
+  save_defaults(NULL);
+  cb_reload(widget,(gpointer) ctree);
   return;
 }
 
@@ -604,4 +635,77 @@ show_cat (char *message)
 
 }
 
+xf_dirent *xf_opendir(char *path,GtkWidget *ctree){
+      cfg *win;
+      xf_dirent *diren;
+      
+      win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+      diren=(xf_dirent *)malloc(sizeof(xf_dirent));
+      if (!diren) return NULL;
+      diren->dir = NULL;
+      diren->globstring= NULL;
+      diren->glob_count=0;
+     if (!(preferences & FILTER_OPTION)){ /* no filtering */
+          diren->dir = opendir (path);
+      } else {
+       char *name;
+    
+       name=gtk_entry_get_text (GTK_ENTRY (win->filter));
+       if ((name)&&(strlen(name)==0)) name="*";
+       diren->globstring=(char *)malloc(strlen(name)+strlen(path)+2);
+       if (!diren->globstring) {
+	       free(diren);
+	       diren=NULL;
+	       return diren;
+       }
+             
+       strcpy(diren->globstring,path);
+       if (path[strlen(path)-1] != '/') strcat(diren->globstring,"/");
+       strcat(diren->globstring,name);
+       /*fprintf(stderr,"dbg:globbing %s\n",diren->globstring);*/
+       if (glob (diren->globstring, GLOB_ERR | GLOB_TILDE, NULL, &(diren->dirlist)) != 0){
+          /* fprintf(stderr,"dbg:empty dir\n");fflush(NULL);*/
+       }
+      }
+      return diren;	      
+}
+xf_dirent *xf_closedir(xf_dirent *diren){
+       /*fprintf(stderr,"dbg:at xf_closedir (%d)\n",(int)diren->dir);*/
+      if (!diren) return NULL;
+      if (diren->globstring) free(diren->globstring);
+      if (diren->dir) closedir (diren->dir);
+      free (diren);
+      diren=NULL;
+      return diren;
+}
+	     
+char *xf_readdir(xf_dirent *diren){
+      if (!(preferences & FILTER_OPTION)){ /* no filtering */
+        struct dirent *de;
+	de = readdir (diren->dir);
+	if (!de) return NULL; else return (de->d_name);
+      } else {
+        char *name;
+	if (!diren) return NULL;
+       /*fprintf(stderr,"dbg:at xf_readdir (%d)\n",(int)diren->dirlist.gl_pathc);*/
+	if (diren->glob_count >= diren->dirlist.gl_pathc) return NULL;
+	name=strrchr(diren->dirlist.gl_pathv[diren->glob_count++],'/');
+	if (name == NULL) return NULL;
+	return name+1;
+      }
+
+}
+
+char *abreviate(char *path)
+{
+    static char *shortpath=NULL,*w;
+    if (shortpath) free(shortpath);
+    shortpath=(char *)malloc(strlen(path)+4);
+    if (!shortpath) return path;
+    w=strrchr(path,'/');
+    if (w==path) return path;
+    shortpath=(char *)malloc(strlen(path)+4);
+    sprintf(shortpath,"...%s",w);
+    return shortpath;
+}
 

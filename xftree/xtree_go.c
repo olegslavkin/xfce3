@@ -168,7 +168,8 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   for (i = 0; i < COLUMNS; i++)
   {
     if (i == COL_NAME)
-      label[i] = uri_clear_path (en->path);
+      label[i] = (preferences&ABREVIATE_PATHS)?
+	      abreviate(uri_clear_path (en->path)):uri_clear_path (en->path);
     else
       label[i] = "";
   }

@@ -654,7 +654,27 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 		  (gpointer)((long)(SHORT_TITLES)) );
   shortcut_menu (menu, _("Drag does copy"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(DRAG_DOES_COPY)) );
-  
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Filter option"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (FILTER_OPTION & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_filter), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, 
+		  GDK_f,GDK_MOD1_MASK|GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Abreviate paths"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (ABREVIATE_PATHS & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_abreviate), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, 
+		  GDK_a,GDK_MOD1_MASK|GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    
   menuitem = gtk_menu_item_new_with_label (_("Set background color"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_colors), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -824,6 +844,17 @@ static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 
 }
 
+static gint on_filter (GtkWidget * widget, GdkEventKey * event, GtkWidget *ctree)
+{
+  if (event->keyval == GDK_Return)
+  {
+    cb_reload(widget, (gpointer) ctree);
+    return (TRUE);
+  }
+  return (FALSE);
+}
+
+
 void create_pixmaps(int h,GtkWidget *ctree){
   GtkStyle  *style;
   static GdkColormap *colormap=NULL;
@@ -883,10 +914,8 @@ void create_pixmaps(int h,GtkWidget *ctree){
 cfg *
 new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags)
 {
-  GtkWidget *vbox;
-  GtkWidget *handlebox1;
-  GtkWidget *handlebox2;
-  GtkWidget *handlebox4;
+  GtkWidget *vbox,*widget;
+  GtkWidget *handlebox[4];
   GtkWidget *menutop;
   GtkWidget *scrolled;
   GtkWidget *toolbar;
@@ -972,6 +1001,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Sort by file name"), NULL, 0, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Sort by file size"), NULL, 0, GDK_s,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Sort by file date"), NULL, 0, GDK_d,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Toggle filter option"), NULL, 0, GDK_f,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
     {N_("Hide/show menu"), NULL, 0, GDK_m,GDK_MOD1_MASK}, \
     {N_("Hide/show toolbar"), NULL, 0, GDK_t,GDK_MOD1_MASK}, \
@@ -1052,9 +1082,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   titles[COL_NAME] = _("Name");
   titles[COL_SIZE] = _("Size (bytes)");
   titles[COL_DATE] = _("Last changed");
-  label[COL_NAME] = path;
+  if (preferences&ABREVIATE_PATHS) label[COL_NAME] = abreviate(path);
+  else label[COL_NAME] = path; 
   label[COL_SIZE] = "";
   label[COL_DATE] = "";
+ 
   win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_policy ((GtkWindow *)win->top,FALSE,TRUE,FALSE);
   gtk_widget_realize (win->top);
@@ -1066,24 +1098,38 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_container_add (GTK_CONTAINER (win->top), vbox);
   gtk_widget_show (vbox);
 
-  handlebox1 = gtk_handle_box_new ();
-  gtk_container_border_width (GTK_CONTAINER (handlebox1), 2);
-  gtk_box_pack_start (GTK_BOX (vbox), handlebox1, FALSE, FALSE, 0);
-  gtk_widget_show (handlebox1);
-
-  handlebox2 = gtk_handle_box_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), handlebox2, FALSE, FALSE, 0);
-  gtk_widget_show (handlebox2);
-  
-  handlebox4 = gtk_handle_box_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), handlebox4, FALSE, FALSE, 0);
-  gtk_widget_show (handlebox4);
+  for (i=0;i<4;i++) {
+	  handlebox[i] = gtk_handle_box_new ();
+	  gtk_container_border_width (GTK_CONTAINER (handlebox[i]), 2);
+	  gtk_box_pack_start (GTK_BOX (vbox), handlebox[i], FALSE, FALSE, 0);
+	  gtk_widget_show (handlebox[i]);
+  }
 
   scrolled = gtk_scrolled_window_new (NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), scrolled, TRUE, TRUE, 0);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
+  
   ctree = gtk_ctree_new_with_titles (COLUMNS, 0, titles);
+
+  {
+	GtkWidget *box;
+  	box=gtk_hbox_new (FALSE, 0);
+  	gtk_container_add (GTK_CONTAINER (handlebox[3]),box );
+  	gtk_widget_show (box); 	
+	widget=gtk_label_new(_("Filter:"));
+  	gtk_box_pack_start (GTK_BOX (box),widget, FALSE, FALSE, 0);
+  	gtk_widget_show (widget); 
+	win->filter=gtk_entry_new();	
+	gtk_entry_set_text ((GtkEntry *)win->filter,"*");
+
+  	gtk_box_pack_start (GTK_BOX (box),win->filter, TRUE,TRUE, 0);
+  	gtk_widget_show (win->filter); 
+        gtk_signal_connect (GTK_OBJECT (win->filter), "key_press_event",
+		       GTK_SIGNAL_FUNC (on_filter), (gpointer) ctree);
+ }
+
+  
   gtk_clist_set_auto_sort (GTK_CLIST (ctree), FALSE);
   gtk_signal_connect (GTK_OBJECT (ctree), "tree-expand", GTK_SIGNAL_FUNC (tree_unselect),ctree);
   gtk_signal_connect (GTK_OBJECT (ctree), "tree-collapse", GTK_SIGNAL_FUNC (tree_unselect),ctree);
@@ -1293,30 +1339,37 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 	  
   menutop = create_menu (win->top, ctree, win, menu[MN_HLP]);
-  gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
+  gtk_container_add (GTK_CONTAINER (handlebox[0]), menutop);
   gtk_widget_show (menutop);
   win->menu = menutop;
 
   
   toolbar = create_toolbar (win->top, ctree, win,FALSE);
-  gtk_container_add (GTK_CONTAINER (handlebox2), toolbar);
+  gtk_container_add (GTK_CONTAINER (handlebox[1]), toolbar);
   gtk_widget_show (toolbar);
   win->toolbar=toolbar;
   
   toolbar = create_toolbar (win->top, ctree, win,TRUE);
-  gtk_container_add (GTK_CONTAINER (handlebox4), toolbar);
+  gtk_container_add (GTK_CONTAINER (handlebox[2]), toolbar);
   gtk_widget_show (toolbar);
   win->toolbarO=toolbar;
 
   gtk_widget_show_all (win->top);
 
   /* hide what must be hidden */
+  if (!(preferences & FILTER_OPTION)) {
+	if (GTK_WIDGET_VISIBLE(win->filter->parent->parent))
+		  gtk_widget_hide(win->filter->parent->parent);		  
+  }
   if (preferences & HIDE_TOOLBAR) {
 	  if (GTK_WIDGET_VISIBLE(win->toolbar->parent))
 		  gtk_widget_hide(win->toolbar->parent);
 	  if (GTK_WIDGET_VISIBLE(win->toolbarO->parent))
 		  gtk_widget_hide(win->toolbarO->parent);
-  }
+  }  
+  else if (preferences & LARGE_TOOLBAR) gtk_widget_hide((win->toolbar)->parent);
+  else gtk_widget_hide((win->toolbarO)->parent);
+
   if (preferences & HIDE_MENU) {
 	  if (GTK_WIDGET_VISIBLE(win->menu->parent))
 		  gtk_widget_hide(win->menu->parent);
@@ -1332,13 +1385,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     icon_name = NULL;
 
   set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
-  if (preferences & HIDE_TOOLBAR) gtk_widget_hide(handlebox2);
 
   gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
   gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
   
-  if (preferences & LARGE_TOOLBAR) gtk_widget_hide((win->toolbar)->parent);
-  else gtk_widget_hide((win->toolbarO)->parent);
   
   return (win);
 }

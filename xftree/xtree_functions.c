@@ -38,6 +38,7 @@
 #include <string.h>
 #include <errno.h>
 #include <dirent.h>
+#include <glob.h>
 #include <sys/stat.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
@@ -84,6 +85,11 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+
+#ifndef GLOB_TILDE
+#define GLOB_TILDE 0
+#endif
+
 int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
 /*
  * check if a node is a directory and is visible and expanded
@@ -129,8 +135,8 @@ gint update_timer (GtkCTree * ctree)
 {
   GList *list = NULL, *tmp;
   GtkCTreeNode *node;
-  cfg *win;
   gboolean manage_timeout;
+  cfg *win;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   manage_timeout = (win->timer != 0);
@@ -417,10 +423,10 @@ update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
 void
 add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
 {
-  DIR *dir;
-  struct dirent *de;
+  xf_dirent *diren;
   GtkCTreeNode *item = NULL, *first = NULL;
   char *base;
+  /* FIXME: use malloc() and free() calls instead of static memory size */
   gchar complete[PATH_MAX + NAME_MAX + 1];
   gchar label[NAME_MAX + 1];
   int add_slash = no, len, d_len;
@@ -459,32 +465,47 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
     g_free (base);
     return;
   }
-  dir = opendir (path);
-  if (!dir)
   {
+   char *name;
+   /* ../ is usually not filtered in, so add it */
+   if (preferences&FILTER_OPTION) {
+     type=FT_DIR_UP;
+     sprintf (complete, "%s..", base);
+     add_node (GTK_CTREE (ctree), root, NULL, "..",complete , &type, flags);
+   }
+   diren = xf_opendir (path,(GtkWidget *)ctree);
+   if (!diren) {
+       /*fprintf(stderr,"dbg:add_subtree() xf_opendir failed\n");*/
     g_free (base);
     return;
-  }
-  while ((de = readdir (dir)) != NULL)
-  {
+   }
+   while ((name = xf_readdir (diren)) != NULL) {
     type = 0;
     item = NULL;
-    d_len = strlen (de->d_name);
-    if (io_is_dirup (de->d_name))
-      type |= FT_DIR_UP | FT_DIR;
-    else if ((*de->d_name == '.') && ((flags & IGNORE_HIDDEN) && (d_len >= 1)))
+    d_len = strlen (name);
+	/*fprintf(stderr,"dbg:%s\n",name);*/
+    if (io_is_dirup (name)) type |= FT_DIR_UP | FT_DIR;
+    else if ((*name == '.') && ((flags & IGNORE_HIDDEN) && (d_len >= 1)))
       continue;
-    sprintf (complete, "%s%s", base, de->d_name);
-    strcpy (label, de->d_name);
-    if ((!io_is_current (de->d_name)))
+    sprintf (complete, "%s%s", base, name);
+    strcpy (label, name);
+    if ((!io_is_current (name))){
+      if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
+	      int i;
+	      label[8]='~';
+	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
+      }
       item = add_node (GTK_CTREE (ctree), root, first, label, complete, &type, flags);
-    if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (de->d_name)) && item)
+    }
+    if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (name)) && item){
       add_subtree (ctree, item, complete, depth - 1, flags);
+    }
     else if (!first)
       first = item;
-  }
+   }
+   diren=xf_closedir (diren);
+  } 
   g_free (base);
-  closedir (dir);
   gtk_ctree_sort_node (ctree, root);
 }
 
@@ -606,6 +627,7 @@ node_has_child (GtkCTree * ctree, GtkCTreeNode * node, char *label)
   while (child)
   {
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), child);
+       /*fprintf(stderr,"dbg:nhc() %s <--> %s\n",en->label, label);fflush(NULL);*/
     if (strcmp (en->label, label) == 0)
     {
       return (1);
@@ -625,8 +647,6 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 {
   GtkCTreeNode *child = NULL, *new_child = NULL, *next;
   entry *en, *child_en;
-  struct dirent *de;
-  DIR *dir;
   char compl[PATH_MAX + 1];
   char label[NAME_MAX + 1];
   int type, p_len, changed, tree_updated, root_changed;
@@ -666,8 +686,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     }
     node = next;
   }
-  child = GTK_CTREE_ROW (node)->children;
-  while (child)
+  for (child=GTK_CTREE_ROW (node)->children;child!=NULL;child = GTK_CTREE_ROW (child)->sibling)
   {
     child_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), child);
     if ((changed = entry_update (child_en)) == ERROR)
@@ -681,7 +700,9 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     else if (changed == TRUE)
     {
       /* update the labels */
-      sprintf (date, "%02d-%02d-%02d  %02d:%02d", child_en->date.year, child_en->date.month, child_en->date.day, child_en->date.hour, child_en->date.min);
+      sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
+		      child_en->date.year, child_en->date.month, 
+		      child_en->date.day, child_en->date.hour, child_en->date.min);
       sprintf (size, "%10d", (int) child_en->size);
       gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
       gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
@@ -693,41 +714,44 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     }
     if (!(GTK_CTREE_ROW (child)->children) && (io_is_valid (child_en->label)) && !(child_en->type & FT_DIR_UP) && !(child_en->type & FT_DIR_PD) && (child_en->type & FT_DIR))
       add_subtree (GTK_CTREE (ctree), child, child_en->path, 1, child_en->flags);
-    child = GTK_CTREE_ROW (child)->sibling;
-  }
+  } /* end for child */
 
   if ((root_changed || tree_updated) && (en->type & FT_DIR))
   {
     if (GTK_CTREE_ROW (node)->expanded)
     {
+      char *name;	    
+      xf_dirent *diren;
       /* may be there are new files */
-      dir = opendir (en->path);
-      if (!dir)
-      {
-	if (manage_timeout)
-	{
+       /*fprintf(stderr,"dbg:update_tree()...\n");fflush(NULL);*/
+       
+       diren = xf_opendir (en->path,(GtkWidget *)ctree);
+       if (!diren) {
+	if (manage_timeout) {
 	  win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
 	}
 	return TRUE;
-      }
-      p_len = strlen (en->path);
-      while ((de = readdir (dir)) != NULL)
-      {
-	if (io_is_hidden (de->d_name) && (en->flags & IGNORE_HIDDEN))
-	  continue;
-	if (io_is_current (de->d_name))
-	  continue;
-	strcpy (label, de->d_name);
-	if (!node_has_child (ctree, node, label) && !(io_is_current (label)))
+       }
+       p_len = strlen (en->path);
+       while ((name = xf_readdir (diren)) != NULL) {
+	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
+	if (io_is_current (name))  continue;
+	strcpy (label, name);
+	if (!node_has_child (ctree, node, label))
 	{
-	  if (io_is_root (label))
-	    sprintf (compl, "%s%s", en->path, label);
-	  else
-	    sprintf (compl, "%s/%s", en->path, label);
+	  if (io_is_root (label)) sprintf (compl, "%s%s", en->path, label);
+	  else   sprintf (compl, "%s/%s", en->path, label);
 	  type = 0;
 	  new_child = NULL;
-	  if (!io_is_current (label) && label)
+	  if (!io_is_current (label) && label){
+            if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
+	      int i;
+	      label[8]='~';
+	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
+	    }
 	    new_child = add_node (ctree, node, NULL, label, compl, &type, en->flags);
+	  }
+	  
 	  if ((type & FT_DIR) && (io_is_valid (label)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
 	    add_subtree (ctree, new_child, compl, 1, en->flags);
 	  if (entry_type_update (en) == TRUE)
@@ -735,8 +759,9 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	  entry_update (en);
 	  tree_updated = TRUE;
 	}
-      }
-      closedir (dir);
+	/*else {fprintf(stderr,"dbg:update_tree()...node has child\n");fflush(NULL);}*/
+       } /* end while */
+       diren = xf_closedir (diren);  
     }
     else if ((GTK_CTREE_ROW (node)->children) && (io_is_valid (en->label)) && !(en->type & FT_DIR_UP) && !(en->type & FT_DIR_PD))
     {
