@@ -222,6 +222,7 @@ void cb_subsort(GtkWidget * widget, GtkWidget *ctree)
   return;
 
 }
+
 void cb_filter(GtkWidget * widget, GtkWidget *ctree)
 {
   cfg *win;
@@ -239,6 +240,34 @@ void cb_filter(GtkWidget * widget, GtkWidget *ctree)
   return;
 
 }
+
+static void filter_reload(GtkWidget * widget, GtkWidget *ctree){
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));  
+  if (!(win->filterOpts)) preferences &= (FILTER_OPTION^0xffffffff);
+  else preferences |= FILTER_OPTION;
+  cb_reload(widget, (gpointer) ctree);
+  return;
+}
+void cb_filter_dirs(GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->filterOpts ^= FILTER_DIRS;
+  filter_reload(widget,ctree);
+  return;
+
+}
+void cb_filter_files(GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->filterOpts ^= FILTER_FILES;
+  filter_reload(widget,ctree);
+  return;
+
+}
+
 
 void
 cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
@@ -401,8 +430,8 @@ void save_defaults (GtkWidget *parent)
   homedir = (char *) malloc ((len) * sizeof (char));
   if (!homedir) {
 failed:
-    my_show_message (_("Default xftreerc file cannot be created\n"));
-    /*if (parent) xf_dlg_error(parent,strerror(errno),_("Default xftreerc file cannot be created\n"));*/
+    if (parent) xf_dlg_error(parent,strerror(errno),_("Default xftreerc file cannot be created\n"));
+    else my_show_message (_("Default xftreerc file cannot be created\n"));
     return;
   }
   /* if .xfce directory isnot there, create it. */
@@ -418,7 +447,8 @@ failed:
 
   if (!defaults)
   {
-    my_show_message (_("Default xftreerc file cannot be created\n"));
+    if (parent) xf_dlg_error(parent,strerror(errno),_("Default xftreerc file cannot be created\n"));
+    else my_show_message (_("Default xftreerc file cannot be created\n"));
     return;
   }
   fprintf (defaults, "# file created by xftree, if removed xftree returns to defaults.\n");
@@ -426,6 +456,7 @@ failed:
   fprintf (defaults, "smallTB : %d\n",stateTB[0] );
   fprintf (defaults, "largeTB : %d\n",stateTB[1] );
   fprintf (defaults, "custom_font :%s\n",(custom_font)?custom_font:"fixed");
+  if (custom_home_dir) fprintf (defaults, "custom_home :%s\n",custom_home_dir);
   if (preferences & SAVE_GEOMETRY) {
 	  /*printf("dbg:x=%d,y=%d\n",geometryX,geometryY);*/
 	  fprintf (defaults, "geometry : %d,%d\n",geometryX,geometryY);
@@ -447,6 +478,7 @@ void read_defaults(void){
   /*stateTB[0] = 0x1fff;*/
   stateTB[0] = 0xffffffff;
   stateTB[1] = 0x801e1;
+  
   len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFTREE_CONFIG_FILE) + 1;
   homedir = (char *) malloc ((len) * sizeof (char));
   if (!homedir) {
@@ -458,6 +490,9 @@ void read_defaults(void){
   free (homedir);
 
   if (!defaults) return;
+  
+  if (custom_home_dir) free(custom_home_dir);
+  custom_home_dir=NULL;
 
   homedir = (char *)malloc(256);
   while (!feof(defaults)){
@@ -495,7 +530,13 @@ void read_defaults(void){
 		custom_font=(char *)malloc(strlen(word)+1);
 		if (custom_font) strcpy(custom_font,word);
 	}
-	if (strstr(homedir,"ctree_color :")){
+	if (strstr(homedir,"custom_home :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");if (!word) break;
+		custom_home_dir=(char *)malloc(strlen(word)+1);
+		if (custom_home_dir) strcpy(custom_home_dir,word);
+	}
+if (strstr(homedir,"ctree_color :")){
 		strtok(homedir,":");
 		word=strtok(NULL,",");if (!word) break;
 		ctree_color.red=atoi(word);
@@ -513,6 +554,22 @@ void read_defaults(void){
 /* from xtree_gui.c: */
 void set_title (GtkWidget * w, const char *path);
 
+void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  entry *en;
+  GtkCTreeNode *root;
+  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
+  preferences ^= SHORT_TITLES;
+  save_defaults (NULL);
+  set_title(win->top,en->path);
+}
+
 void
 cb_toggle_preferences (GtkWidget * widget, gpointer data)
 {
@@ -520,10 +577,6 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
   toggler = (long)(data);
   preferences ^= toggler;
   save_defaults (NULL);
-  if (toggler&SHORT_TITLES) {
-	  if (Apath&&Awin) set_title(Awin,Apath);
-  }
-  save_defaults(NULL);
 }
 			  
 void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
@@ -559,12 +612,14 @@ void cb_default_SCK(GtkWidget * item,  GtkWidget * ctree)
 }
 
 static GtkWidget *cat=NULL,*text;
-static void
-on_clear (GtkWidget * widget, gpointer data)
+
+void clear_cat (GtkWidget * widget, gpointer data)
 {
   guint lg;
-  lg = gtk_text_get_length (GTK_TEXT (text));
-  gtk_text_backward_delete (GTK_TEXT (text), lg);
+  if (text != NULL) {
+	  lg = gtk_text_get_length (GTK_TEXT (text));
+	  gtk_text_backward_delete (GTK_TEXT (text), lg);
+  }
 }
 
 static void
@@ -592,10 +647,12 @@ show_cat (char *message)
 
   cat = gtk_dialog_new ();
   gtk_container_border_width (GTK_CONTAINER (cat), 5);
+  gtk_widget_set_usize(cat,350,200);
 
   gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (cat),_("Xftree results"));
   gtk_widget_realize (cat);
+  gdk_window_set_decorations (cat->window,GDK_DECOR_BORDER);
 
 
   scrolled = gtk_scrolled_window_new (NULL, NULL);
@@ -618,7 +675,7 @@ show_cat (char *message)
   button = gtk_button_new_with_label (_("Clear"));
   gtk_box_pack_end (GTK_BOX (bbox), button, FALSE, FALSE, 0);
   gtk_widget_show (button);
-  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (on_clear), (gpointer) GTK_WIDGET (cat));
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (clear_cat), (gpointer) GTK_WIDGET (cat));
 
   button = gtk_button_new_with_label (_("Dismiss"));
   gtk_box_pack_end (GTK_BOX (bbox), button, FALSE, FALSE, 0);
@@ -647,35 +704,91 @@ xf_dirent *xf_opendir(char *path,GtkWidget *ctree){
       diren->glob_count=0;
      if (!(preferences & FILTER_OPTION)){ /* no filtering */
           diren->dir = opendir (path);
-      } else {
-       char *name;
+     } else {
+       char *name=NULL;
     
        name=gtk_entry_get_text (GTK_ENTRY (win->filter));
        if ((name)&&(strlen(name)==0)) name="*";
+       
        diren->globstring=(char *)malloc(strlen(name)+strlen(path)+2);
+       diren->globstar=(char *)malloc(strlen("*")+strlen(path)+2);
        if (!diren->globstring) {
+	       free(diren);
+	       diren=NULL;
+	       return diren;
+       }
+       diren->globstar=(char *)malloc(strlen("/*")+strlen(path)+1);
+       if (!diren->globstring) {
+	       free(diren->globstring);
 	       free(diren);
 	       diren=NULL;
 	       return diren;
        }
              
        strcpy(diren->globstring,path);
-       if (path[strlen(path)-1] != '/') strcat(diren->globstring,"/");
-       strcat(diren->globstring,name);
-       /*fprintf(stderr,"dbg:globbing %s\n",diren->globstring);*/
-       if (glob (diren->globstring, GLOB_ERR | GLOB_TILDE, NULL, &(diren->dirlist)) != 0){
-          /* fprintf(stderr,"dbg:empty dir\n");fflush(NULL);*/
+       strcpy(diren->globstar,path);
+       if (path[strlen(path)-1] != '/') {
+	       strcat(diren->globstring,"/");
+	       strcat(diren->globstar,"/");
        }
+       strcat(diren->globstring,name);
+       strcat(diren->globstar,"*");
+       /*fprintf(stderr,"dbg:globbing %s\n",diren->globstring);*/
+       /* if GLOB_PERIOD not in C compiler, then a fallback is
+	* taken into consideration in io.h */
+#ifndef GLOB_PERIOD
+#endif
+       /* if glob constants not defined (as in a very outdated C compiler),
+	*  then both directories and files will be filtered */
+#ifndef GLOB_ONLYDIR
+#define GLOB_ONLYDIR 0
+       win->filterOpts = (FILTER_DIRS|FILTER_FILES);
+#endif
+#ifndef GLOB_MARK
+#define GLOB_MARK 0
+       win->filterOpts = (FILTER_DIRS|FILTER_FILES);
+#endif   
+#ifndef GLOB_APPEND
+#define GLOB_APPEND 0
+       win->filterOpts = (FILTER_DIRS|FILTER_FILES);
+#endif  
+       
+       if (win->filterOpts == (FILTER_DIRS|FILTER_FILES)) {
+          /*fprintf(stderr,"dbg:dirandfiles....(%d)**********\n",win->filterOpts);*/
+	       /* both files and dirs are filtered */
+	       glob (diren->globstring, GLOB_ERR | GLOB_PERIOD, NULL, &(diren->dirlist));
+       } else if (win->filterOpts == FILTER_FILES){
+          /*fprintf(stderr,"dbg:only files....**********\n");*/
+	       /* only files are filtered. duplicate directories zapped at xf_readdir() */
+	       glob (diren->globstar, GLOB_ERR | GLOB_PERIOD | GLOB_ONLYDIR, 
+		      NULL, &(diren->dirlist));
+	       glob (diren->globstring,
+		      GLOB_ERR | GLOB_PERIOD | GLOB_APPEND | GLOB_MARK, 
+		      NULL, &(diren->dirlist));	       	       
+       } 
+       else { 
+	       /* only directories are filtered */
+          /*fprintf(stderr,"dbg:dirs....**********\n");*/
+ 	       glob (diren->globstring, GLOB_ERR | GLOB_PERIOD | GLOB_ONLYDIR , 
+		      NULL, &(diren->dirlist));
+	       glob (diren->globstar,
+		      GLOB_ERR | GLOB_PERIOD | GLOB_APPEND |  GLOB_MARK, 
+		      NULL, &(diren->dirlist));
       }
-      return diren;	      
+     } /* end if filtered by glob */
+     return diren;	      
 }
 xf_dirent *xf_closedir(xf_dirent *diren){
        /*fprintf(stderr,"dbg:at xf_closedir (%d)\n",(int)diren->dir);*/
       if (!diren) return NULL;
-      if (diren->globstring) free(diren->globstring);
+      if (diren->globstring) {
+	      free(diren->globstring);
+      	      globfree(&(diren->dirlist));
+      }
       if (diren->dir) closedir (diren->dir);
       free (diren);
       diren=NULL;
+      
       return diren;
 }
 	     
@@ -687,10 +800,24 @@ char *xf_readdir(xf_dirent *diren){
       } else {
         char *name;
 	if (!diren) return NULL;
+skip_it:
        /*fprintf(stderr,"dbg:at xf_readdir (%d)\n",(int)diren->dirlist.gl_pathc);*/
+	
 	if (diren->glob_count >= diren->dirlist.gl_pathc) return NULL;
+        /*fprintf(stderr,"dbg:%s\n",diren->dirlist.gl_pathv[diren->glob_count]);*/
+	if ((strlen(diren->dirlist.gl_pathv[diren->glob_count])>1)
+		&&
+	    (diren->dirlist.gl_pathv[diren->glob_count][strlen(diren->dirlist.gl_pathv[diren->glob_count])-1] == '/')){ /* eliminate directories that are GLOB_MARKED */
+		diren->glob_count++;
+		goto skip_it;
+	}
+
+	
 	name=strrchr(diren->dirlist.gl_pathv[diren->glob_count++],'/');
+	
 	if (name == NULL) return NULL;
+	/*printf("name=%s\n",name);*/
+	if (strcmp(name,"/..")==0) goto skip_it;
 	return name+1;
       }
 
@@ -709,3 +836,19 @@ char *abreviate(char *path)
     return shortpath;
 }
 
+void cb_custom_home(GtkWidget *widget,gpointer ctree){
+  cfg *win;
+  char *entry_return;	
+  if (custom_home_dir) free(custom_home_dir); 
+  custom_home_dir=NULL;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  entry_return = (char *)xf_dlg_string (win->top,_("Home directory : "),getenv ("HOME"));
+  if (!entry_return || !strlen(entry_return)){
+	return;
+  }
+  custom_home_dir=(char *)malloc(strlen(entry_return)+1);
+  if (!custom_home_dir) return;
+  strcpy(custom_home_dir,entry_return);
+  save_defaults(win->top);
+  return;
+}

@@ -279,7 +279,9 @@ cb_go_home (GtkWidget * item, GtkCTree * ctree)
 {
   GtkCTreeNode *root;
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  go_to (ctree, root, getenv ("HOME"), IGNORE_HIDDEN);
+  go_to (ctree, root, 
+	  (custom_home_dir)?custom_home_dir:getenv ("HOME"), 
+	  IGNORE_HIDDEN);
 }
 
 

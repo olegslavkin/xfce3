@@ -13,20 +13,25 @@
 #define SUBSORT_BY_FILETYPE	0x1000
 #define FILTER_OPTION		0x2000
 #define ABREVIATE_PATHS		0x4000
+#define SORT_SIZE		0x8000
+#define SORT_DATE		0x10000
+#define SORT_NAME		0x20000
+
+#define UNSORT_MASK		(0x38000 ^ 0xffffffff)
+#define FILTER_DIRS		0x01
+#define FILTER_FILES		0x02
 
 #define XFTREE_CONFIG_FILE "xftreerc"
 
 #ifdef XTREE_MESS_MAIN  
 unsigned int preferences,stateTB[2];
 int geometryX,geometryY;
-GtkWidget *Awin;
-char *Apath;
+char *custom_home_dir=NULL;
 GdkColor ctree_color;
 #else /* XTREE_MESS_MAIN */
 extern unsigned int preferences,stateTB[2];
 extern int geometryX,geometryY;
-extern GtkWidget *Awin;
-extern char *Apath;
+extern char *custom_home_dir;
 extern GdkColor ctree_color;
 #endif /* XTREE_MESS_MAIN */
 
@@ -35,9 +40,15 @@ extern GdkColor ctree_color;
 #include <sys/types.h>
 #include <dirent.h>
 #include <glob.h>
+#ifndef GLOB_PERIOD
+#define GLOB_PERIOD 0
+#endif
+
+
 typedef struct xf_dirent {
 	DIR *dir;
 	char *globstring;
+	char *globstar;
 	glob_t dirlist;
 	int glob_count;
 }xf_dirent;
@@ -63,11 +74,16 @@ void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
 void cb_hide_menu (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_titles (GtkWidget * widget, GtkWidget *ctree);
 void cb_subsort(GtkWidget * widget, GtkWidget *ctree);
+void cb_short_titles(GtkWidget * widget, GtkWidget *ctree);
 void cb_filter(GtkWidget * widget, GtkWidget *ctree);
+void cb_filter_dirs(GtkWidget * widget, GtkWidget *ctree);
+void cb_filter_files(GtkWidget * widget, GtkWidget *ctree);
 void cb_abreviate(GtkWidget * widget, GtkWidget *ctree);
 xf_dirent *xf_opendir(char *path,GtkWidget *ctree);
 xf_dirent *xf_closedir(xf_dirent *diren);
 char *xf_readdir(xf_dirent *diren);
 char *abreviate(char *path);
+void clear_cat (GtkWidget * widget, gpointer data);
+void cb_custom_home(GtkWidget *widget,gpointer data);
 
 #endif

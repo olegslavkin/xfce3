@@ -20,5 +20,6 @@
 #include "icons/tb_macro.xpm"
 #include "icons/tb_paste.xpm"
 #include "icons/tb_vsplit.xpm"
+#include "icons/tb_cut.xpm"
 
 

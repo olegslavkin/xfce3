@@ -95,6 +95,7 @@
   {_("Go to ..."), 	go_to_xpm,	cb_go_to}, \
   {_("Go up"), 		go_up_xpm,	cb_go_up}, \
   {_("Go home"),	home_xpm,	cb_go_home}, \
+  {_("Cut ..."), 	tb_cut_xpm,	cb_cut}, \
   {_("Copy ..."), 	tb_copy_xpm,	cb_copy}, \
   {_("Paste ..."), 	tb_paste_xpm,	cb_paste}, \
   {_("Delete ..."),	delete_xpm,	cb_delete}, \

@@ -58,6 +58,8 @@
 #include "../xfsamba/tubo.h"
 #include "xtree_pasteboard.h"
 #include "xtree_cpy.h"
+#include "xtree_functions.h"
+#include "xtree_mess.h"
 
 
 #ifdef HAVE_GDK_IMLIB
@@ -112,7 +114,7 @@ void cb_clean_pasteboard(GtkWidget * widget, GtkCTree * ctree){
   return;
 }
 
-void cb_copy(GtkWidget * widget, GtkCTree * ctree)
+static void copy_cut(GtkWidget * widget, GtkCTree * ctree,gboolean cut)
 {
   GtkCTreeNode *node;
   GList *selection;
@@ -132,6 +134,8 @@ void cb_copy(GtkWidget * widget, GtkCTree * ctree)
        xf_dlg_error(win->top,strerror(errno),pasteboard);
        return;
   }
+  
+  fprintf(pastefile,"*** %s ***\n",(cut)?"cut":"copy");
  
   if (!(g_list_length (GTK_CLIST (ctree)->selection))) return;
   
@@ -148,15 +152,24 @@ void cb_copy(GtkWidget * widget, GtkCTree * ctree)
   gtk_ctree_unselect_recursive (GTK_CTREE (ctree), NULL);
 }
 
+void cb_copy(GtkWidget * widget, GtkCTree * ctree){
+   copy_cut(widget,ctree,FALSE);
+}
+
+void cb_cut(GtkWidget * widget, GtkCTree * ctree){
+   copy_cut(widget,ctree,TRUE);
+}
+
 /* this is equivalent to copying by dnd */
 void cb_paste(GtkWidget * widget, GtkCTree * ctree){
   FILE *pastefile;
-  char *tmpfile,*texto;
+  char *tmpfile,*texto,*word;
   cfg *win;
   struct stat f_stat;
   entry *t_en;
   int i,num;
   GList *list;
+  gboolean cut;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (!pasteboard) pasteboard=define_pasteboard(win->top);
@@ -178,7 +191,8 @@ invalid_paste:
   }
   
   if (!(pastefile=fopen(pasteboard,"r"))) {
-	  xf_dlg_error(win->top,_("The pasteboard is currently empty."),NULL);
+pasteboard_is_empty:
+	  xf_dlg_info(win->top,_("The pasteboard is currently empty."));
 	  return;
   }
 
@@ -199,9 +213,20 @@ invalid_paste:
   fclose(pastefile);
   
   texto[f_stat.st_size]=0;
+  word=strtok(texto,"\n");
+  if (!word) {
+  	fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");
+	return; 
+  }
+  if (strstr(word,"*** cut ***")) cut=TRUE; else cut=FALSE;
+  word=word+strlen(word)+1;
+  if (!strlen(word)){
+	 free(texto);
+	 goto pasteboard_is_empty;
+  }
 	 
   /* create list to send to CreateTmpList */
-  i = uri_parse_list (texto, &list);
+  i = uri_parse_list (word, &list);
   free(texto);
   if (!i) return;
   /* create a tmpfile */
@@ -212,9 +237,11 @@ invalid_paste:
   /*fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
 
    if (tmpfile) {
-	  IndirectTransfer((GtkWidget *)ctree,TR_COPY,tmpfile);
+	  IndirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
 	  unlink(tmpfile);  
   }
+  if (cut) unlink(pasteboard);
+  update_timer(ctree);
   return;
 }
 
@@ -233,7 +260,7 @@ void cb_paste_show(GtkWidget * widget, GtkCTree * ctree){
   }
   
   if (!(pastefile=fopen(pasteboard,"r"))) {
-	  xf_dlg_error(win->top,_("The pasteboard is currently empty."),NULL);
+	  xf_dlg_info(win->top,_("The pasteboard is currently empty."));
 	  return;
   }
 
@@ -252,9 +279,12 @@ void cb_paste_show(GtkWidget * widget, GtkCTree * ctree){
   fclose(pastefile);
   texto[f_stat.st_size]=0;
   for (i=0;i<strlen(texto);i++) if (texto[i]=='\r') texto[i]=' ';
-	 
-  
-  xf_dlg_new(win->top,texto,NULL,NULL,DLG_OK);
+
+  clear_cat(widget,ctree);
+  show_cat( _("Pasteboard contents:\n"));
+  show_cat(texto);
+  /*xf_dlg_new(win->top,_("Pasteboard contents:\n"),
+                  texto,NULL,DLG_INFO|DLG_OK);*/
   free(texto);
   return;
 }

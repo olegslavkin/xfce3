@@ -485,7 +485,7 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
     d_len = strlen (name);
 	/*fprintf(stderr,"dbg:%s\n",name);*/
     if (io_is_dirup (name)) type |= FT_DIR_UP | FT_DIR;
-    else if ((*name == '.') && ((flags & IGNORE_HIDDEN) && (d_len >= 1)))
+    else if ((d_len >= 1) && io_is_hidden (name) && ((flags & IGNORE_HIDDEN)))
       continue;
     sprintf (complete, "%s%s", base, name);
     strcpy (label, name);
@@ -604,14 +604,6 @@ set_title (GtkWidget * w, const char *path)
   gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (w)), title);
   free(title);
 
-  Awin=w;
-  {
-    char *tmp_path;
-    tmp_path=(char *)malloc((strlen(path)+1)*sizeof(char));
-    if (tmp_path) strcpy(tmp_path,path);
-    if (Apath) free(Apath);
-    Apath=tmp_path;
-  }
 }
 
 

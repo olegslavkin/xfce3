@@ -53,6 +53,7 @@
 #include "xfce-common.h"
 #include "../xfsamba/tubo.h"
 #include "xtree_mess.h"
+#include "xtree_functions.h"
 
 
 #ifdef HAVE_GDK_IMLIB
@@ -132,13 +133,22 @@ cb_du (GtkWidget * item, GtkCTree * ctree)
 {
   GtkCTreeNode *node;
   entry *en;
+  int num;
 
   first=TRUE;
   
 	/* here a fork (tubo) to du, capturing output to the window,
 	*  above cancel button will close the window and kill the
 	*  du if still running. */ 
-    node = GTK_CLIST (ctree)->selection->data;
+  num = count_selection (ctree, &node);
+  if (!num)
+  {
+    cfg *win;
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+    xf_dlg_warning (win->top,_("No directory selected !"));
+    return;
+  }
+/*    node = GTK_CLIST (ctree)->selection->data;*/
     en = gtk_ctree_node_get_row_data (ctree, node);
     
     if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))

@@ -50,6 +50,7 @@ typedef struct
   GtkWidget *menu;
   GtkWidget *filter;
   golist *gogo;
+  int filterOpts;
 }
 cfg, cfg_t;
 

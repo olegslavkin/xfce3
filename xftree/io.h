@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia Copywrite 2001 for Xfce project.
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -24,6 +26,7 @@
 
 #ifndef __IO_H__
 #define __IO_H__
+#include <glob.h>
 
 int io_is_exec (char *file);
 int io_can_exec (char *file);
@@ -35,7 +38,12 @@ int io_is_file (char *file);
 int io_item_exists (char *file);
 
 #define io_is_root(s)	 (s && (s[0] == '/') && (s[1] == '\0'))
-#define io_is_hidden(s)	 (s && (s[0] == '.') ? TRUE : FALSE)
+#ifdef GLOB_PERIOD 
+#define io_is_hidden(s)	  ((s && (s[0] == '.'))?TRUE:FALSE) 
+#else
+/* fall back method */
+#define io_is_hidden(s)	 ( (!(preferences&FILTER_OPTION)) && ((s && (s[0] == '.'))?TRUE:FALSE) )
+#endif
 #define io_is_current(s) (s && (s[0]=='.') && (s[1]=='\0') ? TRUE : FALSE)
 #define io_is_dirup(s)	 (s && (s[0]=='.') && (s[1]=='.') && (s[2]=='\0')? TRUE:FALSE)
 #define io_is_valid(s)   (!io_is_current(s) && !io_is_dirup(s))

@@ -38,6 +38,7 @@
 #include "constant.h"
 #include "my_intl.h"
 #include "xtree_gui.h"
+#include "xtree_mess.h"
 #include "xtree_cfg.h"
 #include "uri.h"
 #include "xfce-common.h"
@@ -77,7 +78,8 @@ main (int argc, char *argv[])
 
   sprintf (rc, "%s/%s/%s", path, BASE_DIR, "xtree.rc");
 
-  strcpy (path, getenv ("HOME"));
+  read_defaults();
+  strcpy (path,(custom_home_dir)?custom_home_dir: getenv ("HOME"));
 
   while ((c = getopt (argc, argv, "vg:i:")) != EOF)
   {

@@ -271,10 +271,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
 
   /* what kind of pixmap do we want to use..?
    */
-  if (type & DLG_MASK_QUESTION){
-	  pix = MyCreateGdkPixmapFromData (question_xpm, dl.top, &pim, FALSE);
-  } 
-  else if (type & DLG_INFO){
+  if (type & DLG_INFO){
 	  pix = MyCreateGdkPixmapFromData (info_xpm, dl.top, &pim, FALSE);
   }
   else if (type & DLG_ERROR){
@@ -282,8 +279,9 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   }
   else if (type & DLG_WARN) {
 	  pix = MyCreateGdkPixmapFromData (warning_xpm, dl.top, &pim, FALSE);
-  }
-  else pix=NULL;
+  } else if (type & DLG_MASK_QUESTION){
+	  pix = MyCreateGdkPixmapFromData (question_xpm, dl.top, &pim, FALSE);
+  } else pix=NULL;
   if (pix)
   {
     icon = gtk_pixmap_new (pix, pim);

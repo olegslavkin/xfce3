@@ -1,3 +1,6 @@
+#ifndef __XTREE_CB_H__
+#define __XTREE_CB_H__
+
 void 
 cb_open_trash (GtkWidget * item, GtkCTree *ctree);
 void
@@ -46,3 +49,4 @@ cb_refresh (GtkWidget * item, GtkCTree * ctree);
 void 
 cb_du (GtkWidget * item, GtkCTree * ctree);
 
+#endif

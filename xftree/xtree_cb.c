@@ -856,6 +856,11 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   ctree_freeze (ctree);
   selection = g_list_copy (GTK_CLIST (ctree)->selection);
+  if (!selection) {
+	  xf_dlg_error(win->top,_("Nothing selected !"),NULL);
+	ctree_thaw (ctree);
+	  return;
+  }
 
   while (selection)
   {
