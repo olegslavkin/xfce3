@@ -144,6 +144,9 @@ autotype_t autotype[]= {
 #define AUTOTAR_MENU \
     {"", (gpointer) cb_autotar, 0,}
     
+#define MAINF_ICON_VIEW \
+    {N_("Open icon view"), (gpointer) cb_rox, 0}
+    
 #define MAINF_DIRECTORY_MENU \
     {N_("Open tree view"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open terminal view"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK}, \
@@ -682,6 +685,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
   {
     menu_entry mlist[] = {
+      MAINF_ICON_VIEW,
       MAINF_DIRECTORY_MENU,
       MAINF_MENU,
       DIR_OR_FILE_MENU,

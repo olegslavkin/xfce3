@@ -1111,6 +1111,31 @@ int autotype_tubo(GtkWidget *parent){
 	return 0;
 }
 
+void cb_rox (GtkWidget * top,GtkWidget * ctree){
+  /*FILE *pipe;*/
+  char cmd[(PATH_MAX + 3) * 2];
+  GtkCTreeNode *node;
+  int num;
+  entry *en;
+  cfg *win;
+
+  num = count_selection ((GtkCTree *)ctree, &node);
+       
+  ctree_freeze ((GtkCTree *)ctree);
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
+  /*sprintf (cmd, "%s %s","xfrox",en->path);*/
+  if (!sane("rox")){
+     xf_dlg_error(win->top,_("Not found:"),"Rox-filer");
+     ctree_thaw ((GtkCTree *)ctree);
+     return;
+  } else {
+    sprintf (cmd, "%s %s","rox",en->path);
+    io_system (cmd,TRUE,win->top);
+  }
+  ctree_thaw ((GtkCTree *)ctree);
+}
+
 void
 cb_autotype (GtkWidget * top,GtkWidget * ctree)
 {
@@ -1145,9 +1170,15 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   if (S_ISDIR(en->st.st_mode)) {
      char cmd[(PATH_MAX + 3) * 2];
      /*sprintf (cmd, "%s %s","xfrox",en->path);*/
-     sprintf (cmd, "%s %s","rox",en->path);
-     io_system (cmd,TRUE,win->top);
-     goto end_autotype;
+     if (!sane("rox")){
+	     xf_dlg_error(win->top,_("Not found"),"Rox-filer");
+             ctree_thaw ((GtkCTree *)ctree);
+	     return;
+     } else {
+      sprintf (cmd, "%s %s","rox",en->path);
+      io_system (cmd,TRUE,win->top);
+      goto end_autotype;
+     }
   }
   loc=strrchr(en->path,'.');
   if (loc) for (i=0;1;i++){

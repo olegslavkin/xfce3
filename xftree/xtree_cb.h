@@ -1,6 +1,7 @@
 #ifndef __XTREE_CB_H__
 #define __XTREE_CB_H__
 
+void cb_rox (GtkWidget * top,GtkWidget * ctree);
 void 
 cb_open_trash (GtkWidget * item, GtkCTree *ctree);
 void
