@@ -4,7 +4,7 @@
  *              some of Rasca's ideas remain, and the input/output is
  *              enhanced (ewg).
  * 
- * copywrite 1999-2001 under GNU/GPL
+ * copywrite 1999-2002 under GNU/GPL
  * Edscott Wilson Garcia, 
  * Olivier Fourdan, 
  * Rasca, Berlin
@@ -152,8 +152,25 @@ int rsync(GtkCTree *ctree,char *src,char *tgt){
 
       win = gtk_object_get_user_data (GTK_OBJECT (ctree));
       
-      if (win->preferences & USE_RSYNC) c = "rsync -av --rsh=ssh";
-      else c = "scp -pvr";
+      if (!sane("ssh")) {
+	      xf_dlg_error(win->top,"Not found","ssh");
+	      return FALSE;
+      }
+      
+      if (win->preferences & USE_RSYNC) {
+	      if (!sane("rsync")) {
+		      xf_dlg_error(win->top,"Not found","rsync");
+		      return FALSE;
+	      }
+	      c = "rsync -av --rsh=ssh";
+      } else {
+	      if (!sane("scp")){
+		      xf_dlg_error(win->top,"Not found","scp");
+		      return FALSE;
+	      }
+	      c = "scp -pvr";
+      }
+      
       cmd=(char *)malloc(strlen("echo \"%%\";")
 		      +2*strlen(src_host)+2*strlen(src)+2*strlen(tgt)
 		       +2*strlen(c)+2*strlen("%% %%:%% %%")+1);
