@@ -255,9 +255,18 @@ xf_dlg_prop (GtkWidget *ctree,char *path, fprop * prop, int flags)
     }
   }
 
-  if ((win->preferences & SIZE_IN_KB) && (prop->size >= 1024)) 
+    {
+      char *tag="bytes";
+      unsigned long long tama;
+      tama =  prop->size;
+      if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag="Gbytes";}
+      else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag="Mbytes";}
+      else if (tama >= 1024*10) {tama /= 1024; tag="Kbytes";}
+      sprintf (buf, " %llu %s", tama,tag);
+    }
+/*  if ((win->preferences & SIZE_IN_KB) && (prop->size >= 1024)) 
 	  sprintf (buf, _("%lld KBytes"), (long long) ((unsigned long long) prop->size/1024));
-  else sprintf (buf, _("%lld Bytes"), (long long) prop->size);
+  else sprintf (buf, _("%lld Bytes"), (long long) prop->size);*/
   info[n + 1] = label_new (buf, GTK_JUSTIFY_LEFT);
   info[n] = label_new (_("Size :"), GTK_JUSTIFY_RIGHT);
   gtk_table_attach (GTK_TABLE (table), info[n], 0, 1, n, n + 1, TBL_XOPT, 0, X_PAD, Y_PAD);

@@ -30,7 +30,7 @@
 #define HIDE_UID		0x800000
 /* BYTE 4 */
 #define HIDE_GID		0x1000000
-#define SIZE_IN_KB		0x2000000
+/* no more #define SIZE_IN_KB		0x2000000*/
 
 
 

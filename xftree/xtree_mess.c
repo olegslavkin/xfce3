@@ -707,7 +707,7 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
   preferences ^= toggler;
   save_defaults (NULL);
 }
-#endif
+
 
 void
 cb_sizeKB (GtkWidget * widget, gpointer ctree)
@@ -719,7 +719,7 @@ cb_sizeKB (GtkWidget * widget, gpointer ctree)
   save_defaults (NULL);
   regen_ctree((GtkCTree *)ctree);  
 }
-
+#endif
 void
 cb_save_geo (GtkWidget * widget, gpointer ctree)
 {

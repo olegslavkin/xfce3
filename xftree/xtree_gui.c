@@ -227,7 +227,6 @@ autotype_t autotype[]= {
     {N_("Status box"),cb_show_status, SHOW_STATUS, GDK_m,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Status titles"),cb_status_follows_expand,STATUS_FOLLOWS_EXPAND, GDK_y,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Short titles"),cb_short_titles,SHORT_TITLES, GDK_w,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
-    {N_("Size in Kb"),cb_sizeKB,SIZE_IN_KB, GDK_k,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
     {N_("Hide toolbar"),toggle_toolbar, HIDE_TOOLBAR, GDK_t,GDK_MOD1_MASK}, \
     {N_("Hide titles"), cb_hide_titles, HIDE_TITLES, GDK_h,GDK_MOD1_MASK}, \
@@ -1164,7 +1163,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->filterOpts=FILTER_DIRS|FILTER_FILES;
   menu = g_malloc (sizeof (GtkWidget) * MENUS);
   titles[COL_NAME] = _("Name");
-  titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
+  /*titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");*/
+  titles[COL_SIZE] = _("Size");
   titles[COL_DATE] = _("Last changed");
   titles[COL_MODE] = _("Mode");
   titles[COL_UID] = _("Owner");

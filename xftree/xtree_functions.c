@@ -555,12 +555,17 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
 		  if (strstr(en->label,".tar.bz2")) en->type |= (FT_TAR|FT_TAR_DUMMY);
 	  }
     }
-
-    sprintf (date, "%02d-%02d-%02d  %02d:%02d", en->date.year, en->date.month, en->date.day, en->date.hour, en->date.min);
-    sprintf (size, " %lld", (win->preferences & SIZE_IN_KB)?
-		    (long long)((long long unsigned) en->st.st_size/1024):
-		    (long long) en->st.st_size);
+    {
+      char *tag="";
+      unsigned long long tama;
+      tama =  en->st.st_size;
+      if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag="G";}
+      else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag="M";}
+      else if (tama >= 1024*10) {tama /= 1024; tag="K";}
+      sprintf (size, " %6llu%s", tama,tag);
+    }
   }
+  sprintf (date, "%02d-%02d-%02d  %02d:%02d", en->date.year, en->date.month, en->date.day, en->date.hour, en->date.min);
   if (win->preferences&ABREVIATE_PATHS) text[COL_NAME] = abreviateP(en->label); else 
   text[COL_NAME] = en->label;
   text[COL_DATE] = date;
@@ -1008,12 +1013,19 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
      struct passwd *pw;
      struct group *gr;
      /*fprintf(stderr,"dbg: doing update for %s\n",en->label);*/
-     sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
+      {
+       char *tag="b";
+       unsigned long long tama;
+       tama =  child_en->st.st_size;
+       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag="Gb";}
+       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag="Mb";}
+       else if (tama >= 1024*10) {tama /= 1024; tag="Kb";}
+       sprintf (size, " %6llu %s", tama,tag);
+      }
+     
+      sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
 		      child_en->date.year, child_en->date.month, 
 		      child_en->date.day, child_en->date.hour, child_en->date.min);
-      sprintf (size, " %lld",(win->preferences & SIZE_IN_KB)?
-		    (long long)((long long unsigned) child_en->st.st_size/1024):
-		    (long long) child_en->st.st_size); 
       gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
       gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
       gtk_ctree_node_set_text (ctree, child, COL_MODE, mode_txt(en->st.st_mode));

@@ -209,8 +209,8 @@ void regen_ctree(GtkCTree *ctree){
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
-  gtk_clist_set_column_title((GtkCList *)ctree,COL_SIZE,
-	(win->preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)"));	  internal_go_to (ctree, root,en->path, en->flags);
+/*  gtk_clist_set_column_title((GtkCList *)ctree,COL_SIZE,
+	(win->preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)"));*/	  internal_go_to (ctree, root,en->path, en->flags);
   return;
 }
 
