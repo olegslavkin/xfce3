@@ -365,7 +365,6 @@ Shade (XfwmWindow * tmp_win)
   tmp_win->shade_y = tmp_win->frame_y;
   tmp_win->shade_width = tmp_win->frame_width;
   tmp_win->shade_height = tmp_win->title_height + 2 * tmp_win->boundary_width;
-  /* XUnmapWindow (dpy, tmp_win->Parent); */
 
   SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, True, True);
   SetBorder (tmp_win, (Scr.Hilite == tmp_win), True, True, None);
@@ -2585,7 +2584,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
       namechanged = False;
     }
     /* block until there is an event */
-    XMaskEvent (dpy, ExposureMask | KeyPressMask | KeyReleaseMask | VisibilityChangeMask, &Event);
+    XMaskEvent (dpy, ExposureMask | KeyPressMask | KeyReleaseMask | VisibilityChangeMask | EnterWindowMask | LeaveWindowMask, &Event);
 
 #ifdef REQUIRES_STASHEVENT
     StashEventTime (&Event);
@@ -2626,6 +2625,9 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
 	abort = False;
       }
       break;
+    case EnterNotify:
+    case LeaveNotify:
+      break;
     default:
       if ((XFindContext (dpy, Event.xany.window, MenuContext, (caddr_t *) &dumb) != XCNOENT))
       {
@@ -2643,11 +2645,11 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     XDeleteContext (dpy, taskw, MenuContext);
     XUnmapWindow (dpy, taskw);
     XDestroyWindow (dpy, taskw);
+    discard_events (EnterWindowMask | LeaveWindowMask);  
   }
 
   UninstallRootColormap ();
   UngrabEm ();
-  discard_events (EnterWindowMask | LeaveWindowMask);  
 
   if ((!abort) && (t != NULL))
   {

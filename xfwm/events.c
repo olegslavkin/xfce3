@@ -211,6 +211,7 @@ fast_process_expose (void)
   XEvent old_event;
 
   mymemcpy((char *) &old_event, (char *) &Event, sizeof(XEvent));
+  XSync(dpy, 0);
   while (XCheckMaskEvent (dpy, ExposureMask, &Event))
   {
     DispatchEvent ();
