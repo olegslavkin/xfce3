@@ -749,6 +749,7 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
        if (win->preferences & STATUS_FOLLOWS_EXPAND)
             set_title_ctree((GtkWidget *)ctree,en->path);
        update_status(node,ctree);
+       update_timer(ctree);
        return;
   }
   en->type ^= FT_HAS_DUMMY;
@@ -1014,8 +1015,14 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 		  free(p_del);
 	  }
   }
-  
-
+#if 10
+  if ((GTK_CTREE_ROW (node)->children == NULL)&&(win->preferences&HIDE_DD)) {
+	  /* everything is gone, so add DD as dummy */
+     int type;
+     type=FT_DIR_UP;
+     add_node (GTK_CTREE (ctree), node, NULL, "..",en->path,&type, 0);
+  }
+#endif
     /*fprintf(stderr,"dbg:(%s)rc=%d,tu=%d, isdir=%d\n",en->path,root_changed,tree_updated,en->type & FT_DIR);fflush(NULL);*/
   /*if ((root_changed || tree_updated) && (en->type & FT_DIR))*/
   if (root_changed && (en->type & FT_DIR) && !(en->type & (FT_TARCHILD|FT_TAR|FT_RPMCHILD|FT_RPM))){
