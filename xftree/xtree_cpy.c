@@ -107,7 +107,7 @@
 
 
 #define CHILD_FILE_LENGTH 64
-#define MAX_LINE_SIZE (sizeof(char)*256)
+#define MAX_LINE_SIZE (sizeof(char)*1024)
 static char child_file[CHILD_FILE_LENGTH];
 static int  child_mode;
 static int total_files=0;
