@@ -21,6 +21,7 @@
 #include "icons/page_po.xpm"
 #include "icons/page_backup.xpm"
 #include "icons/page_adobe.xpm"
+#include "icons/page_movie.xpm"
 #include "icons/package_green.xpm"
 #include "icons/link_flag.xpm"
 #include "icons/exe.xpm"

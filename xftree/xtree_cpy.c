@@ -801,7 +801,7 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 			o_src=g_strdup(source);
 			/* strtoks down the line... */
 			if (strncmp(source,"tar:",strlen("tar:"))!=0) continue;
-			tar_extract(ctree,target,source);
+			tar_extract((GtkCTree *)ctree,target,source);
 			if (mode==TR_MOVE) tar_delete((GtkCTree *)ctree,o_src);
 			g_free (o_src);
 		} else {/* moveit */

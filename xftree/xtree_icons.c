@@ -71,6 +71,7 @@ enum
   PIX_LINKFLAG, 
   PIX_EXEFLAG, 
   PIX_PAGE_HTML, 
+  PIX_PAGE_MOVIE, 
   PIX_CHAR_DEV,
   PIX_FIFO,
   PIX_SOCKET,
@@ -96,6 +97,7 @@ enum
   PIM_SOCKET,
   PIM_BLOCK_DEV,
   PIM_EXE,
+  PIM_CORE,
   PIM_EXE_FILE,
   PIM_STALE_LNK,
   LAST_PIM
@@ -114,6 +116,7 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_PACKAGE,	gPIM+PIM_PACKAGE,	package_green_xpm},
 	{gPIX+PIX_LINKFLAG,	gPIM+PIM_LINKFLAG,	link_flag_xpm},
 	{gPIX+PIX_EXEFLAG,	gPIM+PIM_EXEFLAG,	exe_xpm},
+	{gPIX+PIX_PAGE_MOVIE,	NULL,			page_movie_xpm},
 	{gPIX+PIX_PAGE_AUDIO,	NULL,			page_audio_xpm},
 	{gPIX+PIX_TEXT,		NULL,			page_text_xpm},
 	{gPIX+PIX_COMPRESSED,	NULL,			page_compressed_xpm},
@@ -125,7 +128,7 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
 	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
 	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
-	{gPIX+PIX_CORE,		NULL,			page_core_xpm},
+	{gPIX+PIX_CORE,		gPIM+PIM_CORE,		page_core_xpm},
 	{gPIX+PIX_CHAR_DEV,	gPIM+PIM_CHAR_DEV,	char_dev_xpm},
 	{gPIX+PIX_BLOCK_DEV,	gPIM+PIM_BLOCK_DEV,	block_dev_xpm},
 	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
@@ -165,7 +168,7 @@ static gboolean image_type(char *loc){
 	  ".jpg",".JPG",".gif",".GIF",".png",".PNG",
 	  ".JPEG",".jpeg",".TIFF",".tiff",".xbm","XBM",
 	  ".XPM",".xpm",".XCF",".xcf",".PCX",".pcx",
-	  ".BMP",".bmp",
+	  ".BMP",".bmp",".tif",".TIF",
 	  NULL
   };
   return checkif_type(Type,loc);			  
@@ -176,26 +179,29 @@ static gboolean text_type(char *loc){
 	  ".doc",".DOC",
 	  ".readme",".README",
 	  ".pl",".sh",".csh",".py",".tsh",
+	  ".sgml",".wml",".wmls",".etx",
+	  ".xml",".asc",".rtf",".rtx",
 	  NULL
   };
   return checkif_type(Type,loc);			    
 }
-/*
-static gboolean word_type(char *loc){
+
+static gboolean movie_type(char *loc){
   char *Type[]={
-	  ".doc",".DOC",
+	  ".avi",".AVI",".movie",
+	  ".qt",".mov",".mpeg",".mpg",".mpe",
 	  NULL
   };
   return checkif_type(Type,loc);			    
-}*/
+}
 
 static gboolean compressed_type(char *loc){
   char *Type[]={
 	  ".gz",".tgz",".bz2",".Z",
-	  ".zip",
-	  ".ZIP",
-	  ".arj",".ARJ",
-	  ".lha",".LHA",
+	  ".zip",".taz",".lzh",".z",
+	  ".ZIP",".bz",".tz",
+	  ".arj",
+	  ".lha",
 	  NULL
   };
   return checkif_type(Type,loc);			    
@@ -204,7 +210,6 @@ static gboolean compressed_type(char *loc){
 static gboolean www_type(char *loc){
   char *Type[]={
 	  ".html",".htm",".HTM",".HTML",
-	  ".sgml",".SGML",
 	  NULL
   };
   return checkif_type(Type,loc);			    
@@ -260,7 +265,7 @@ static gboolean ps_type(char *loc){
 }
 static gboolean packed_type(char *loc){
   char *Type[]={
-	  ".deb",".rpm",
+	  ".deb",".rpm",".cpio",
 	  NULL
   };
   return checkif_type(Type,loc);			    
@@ -408,6 +413,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
 
    if (strcmp(label,"core")==0) {
        PIXid[0]=PIX_CORE;
+       PIXid[1]=PIM_CORE;
        goto icon_identified;       
    }
    
@@ -424,6 +430,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
    else if (compressed_type(loc)) {PIXid[0]=PIX_COMPRESSED,PIXid[2]=PIX_COMPRESSED,PIXid[3]=PIM_PAGE;}
    else if (www_type(loc)) {PIXid[0]=PIX_PAGE_HTML,PIXid[1]=PIM_PAGE_HTML;}
    else if (audio_type(loc))PIXid[0]= PIX_PAGE_AUDIO;
+   else if (movie_type(loc))PIXid[0]= PIX_PAGE_AUDIO;
    else if (strcmp(loc,".po")==0) PIXid[0]=PIX_PO;
    else if (strcmp(loc,".tar")==0){PIXid[0]=PIX_TAR;PIXid[2]=PIX_TAR;PIXid[3]=PIM_PAGE;}
    else if (strlen(loc)==2) switch (loc[1]){
