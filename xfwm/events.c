@@ -411,7 +411,8 @@ HandleFocusIn ()
 #ifdef REQUIRES_STASHEVENT
     StashEventTime (&d);
 #endif
-    w = d.xany.window;
+    if ((w = d.xany.window) == None)
+      continue;
 #ifdef DEBUG
     fprintf (stderr, "xfwm : HandleFocusIn () : Skipping event...\n");
     if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) != XCNOENT)
@@ -1036,7 +1037,7 @@ HandleUnmapNotify ()
   }
 #endif
 
-  if (Event.xunmap.event != Event.xunmap.window)
+  if ((!Tmp_win) || (Event.xunmap.event != Event.xunmap.window))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Event ignored\n");
@@ -1044,13 +1045,6 @@ HandleUnmapNotify ()
     return;
   }
 
-  if (!Tmp_win)
-  {
-#ifdef DEBUG
-    fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Tmp_win == NULL\n");
-#endif
-    return;
-  }
   if (weMustUnmap)
   {
 #ifdef DEBUG

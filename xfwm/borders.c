@@ -134,9 +134,7 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
     return;
   }
 
-  attributes.background_pixel = BackColor;
-  valuemask = CWBackPixel;
-
+  valuemask = 0;
   if (t->flags & TITLE)
   {
     RedrawLeftButtons (t, onoroff, NewColor, expose_win);

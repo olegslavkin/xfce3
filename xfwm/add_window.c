@@ -360,7 +360,7 @@ AddWindow (Window w)
   attributes.event_mask = (ButtonPressMask | ButtonReleaseMask | ExposureMask);
 
   tmp_win->title_x = tmp_win->title_y = 0;
-  tmp_win->title_w = 0;
+  tmp_win->title_w = None;
   tmp_win->title_width = tmp_win->frame_width - 2 * tmp_win->corner_width;
   if (tmp_win->title_width < 1)
     tmp_win->title_width = 1;
