@@ -490,9 +490,8 @@ Destroy (XfwmWindow * tmp_win)
 void
 RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 {
-  int a, b;
-  unsigned int bw, mask;
-  XWindowChanges xwc;
+  int a, b, x, y;
+  unsigned int bw;
   /* Dummy var for XGetGeometry */
   Window dummy_root, dummy_child;
   unsigned int dummy_width, dummy_height, dummy_depth;
@@ -500,19 +499,10 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
   if (!tmp)
     return;
 
-  if (XGetGeometry (dpy, tmp->w, &dummy_root, &xwc.x, &xwc.y, &dummy_width, &dummy_height, &bw, &dummy_depth))
+  if (XGetGeometry (dpy, tmp->w, &dummy_root, &x, &y, &dummy_width, &dummy_height, &bw, &dummy_depth))
   {
-    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, xwc.x, xwc.y, &a, &b, &dummy_child);
-    xwc.x = a;
-    xwc.y = b;
-    xwc.border_width = tmp->old_bw;
-    mask = (CWX | CWY | CWBorderWidth);
-    if (!restart)
-    {
-	xwc.x -= tmp->old_bw;
-	xwc.y -= tmp->old_bw;
-    }
-    XReparentWindow (dpy, tmp->w, Scr.Root, xwc.x, xwc.y);
+    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, x, y, &a, &b, &dummy_child);
+    XReparentWindow (dpy, tmp->w, Scr.Root, a, b);
 
     if ((tmp->flags & ICONIFIED) && (!(tmp->flags & SUPPRESSICON)))
     {
@@ -522,7 +512,17 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 	XUnmapWindow (dpy, tmp->icon_pixmap_w);
     }
 
-    XConfigureWindow (dpy, tmp->w, mask, &xwc);
+    if (restart)
+    {
+      unsigned int mask = 0;
+      XWindowChanges xwc;
+
+      mask = (CWX | CWY | CWBorderWidth);
+      xwc.x = a;
+      xwc.y = b;
+      xwc.border_width = tmp->old_bw;
+      XConfigureWindow (dpy, tmp->w, mask, &xwc);
+    }
     XSync (dpy, 0);
   }
 }

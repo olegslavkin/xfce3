@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-25 09:41+0100\n"
+"POT-Creation-Date: 2001-11-25 21:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:229
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:242
 msgid "Question"
 msgstr ""
 
@@ -752,58 +752,58 @@ msgstr ""
 msgid "Workspace"
 msgstr ""
 
-#: xftree/gtk_dlg.c:234
+#: xftree/gtk_dlg.c:247
 msgid "Information"
 msgstr ""
 
-#: xftree/gtk_dlg.c:239
+#: xftree/gtk_dlg.c:252
 msgid "Error"
 msgstr ""
 
-#: xftree/gtk_dlg.c:244
+#: xftree/gtk_dlg.c:257
 msgid "Warning"
 msgstr ""
 
-#: xftree/gtk_dlg.c:248
+#: xftree/gtk_dlg.c:261
 msgid "Dialog"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:267
+#: xftree/gtk_dlg.c:280
 msgid "_Ok"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:272
+#: xftree/gtk_dlg.c:285
 msgid "_Yes"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:277
+#: xftree/gtk_dlg.c:290
 msgid "_Continue"
 msgstr ""
 
-#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:300 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:298
+#: xftree/gtk_dlg.c:311
 msgid "_Cancel"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:303
+#: xftree/gtk_dlg.c:316
 msgid "_No"
 msgstr ""
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:314
+#: xftree/gtk_dlg.c:327
 msgid "_All"
 msgstr ""
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:324
+#: xftree/gtk_dlg.c:337
 msgid "_Close"
 msgstr ""
 
@@ -1048,11 +1048,11 @@ msgstr ""
 msgid "Disk usage:"
 msgstr ""
 
-#: xftree/xtree_go.c:163
+#: xftree/xtree_go.c:167
 msgid "Cannot find path"
 msgstr ""
 
-#: xftree/xtree_go.c:244
+#: xftree/xtree_go.c:250
 msgid "Go to"
 msgstr ""
 

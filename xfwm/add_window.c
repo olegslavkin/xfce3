@@ -99,19 +99,6 @@ extern void GetMwmHints (XfwmWindow *);
 extern void GetExtHints (XfwmWindow *);
 extern void GetKDEHints (XfwmWindow *);
 
-/***********************************************************************
- *
- *  Procedure:
- *	AddWindow - add a new window to the xfwm list
- *
- *  Returned Value:
- *	(XfwmWindow *) - pointer to the XfwmWindow structure
- *
- *  Inputs:
- *	w	- the window id of the window to add
- *	iconm	- flag to tell if this is an icon manager window
- *
- ***********************************************************************/
 XfwmWindow *
 AddWindow (Window w)
 {
@@ -152,22 +139,17 @@ AddWindow (Window w)
 
   tmp_win->old_bw = tmp_win->attr.border_width;
   XSetWindowBorderWidth (dpy, w, 0);
-
   tmp_win->flags = 0;
   tmp_win->w = w;
   tmp_win->icon_arranged = False;
   tmp_win->triggered = False;
   tmp_win->deleted = False;
   tmp_win->mwm_hints = NULL;
-
   tmp_win->cmap_windows = (Window *) NULL;
-
   tmp_win->name = NULL;
   GetWMName (tmp_win);
   tmp_win->icon_name = NULL;
   GetWMIconName (tmp_win);
-
-  /* removing NoClass change for now... */
   tmp_win->class.res_name = NoResource;
   tmp_win->class.res_class = NoClass;
   XGetClassHint (dpy, w, &tmp_win->class);
@@ -402,8 +384,8 @@ AddWindow (Window w)
     }
   }
 
-  XReparentWindow (dpy, w, tmp_win->Parent, 0, 0);
   XRaiseWindow (dpy, tmp_win->Parent);
+  XReparentWindow (dpy, w, tmp_win->Parent, 0, 0);
   valuemask = (CWEventMask | CWDontPropagate);
   attributes.event_mask = (StructureNotifyMask | PropertyChangeMask | ColormapChangeMask | EnterWindowMask | LeaveWindowMask | FocusChangeMask);
 
@@ -478,8 +460,6 @@ AddWindow (Window w)
   height = tmp_win->frame_height;
   tmp_win->frame_height = 0;
   SetupFrame (tmp_win, x, y, width, height, True, True);
-
-  XSync (dpy, 0);
   MyXUngrabServer (dpy);
   
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
