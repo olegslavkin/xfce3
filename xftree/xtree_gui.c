@@ -1112,8 +1112,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
 
   gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 0, TRUE);
-  gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 1, TRUE);
-  gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 2, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 1, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 2, TRUE);
+  /*gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 1, TRUE);*/
+  /*gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 2, TRUE);*/
   gtk_clist_set_column_width (GTK_CLIST (ctree), 2, 115);
 
   gtk_clist_set_selection_mode (GTK_CLIST (ctree), GTK_SELECTION_EXTENDED);

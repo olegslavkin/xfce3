@@ -473,7 +473,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   entry *en;
   GtkCTreeNode *item;
   gchar *text[COLUMNS];
-  gchar size[16] = { "" };
+  gchar size[32] = { "" };
   gchar date[32] = { "" };
   icon_pix pix;  
   gboolean isleaf;
@@ -495,6 +495,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
     en = entry_new_by_path_and_label (path, label);
     if (!en)
     {
+	   /* fprintf(stderr,"dbg:can't do %s\n",path);*/
       return 0;
     }
     en->flags = flags;
