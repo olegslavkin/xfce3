@@ -3272,8 +3272,7 @@ RelieveIconTitle_trench (Window win, XRectangle *area, int w, int h, GC ReliefGC
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
   }
 
-  RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, ReliefGC);
-  RelieveRectangle (win, NULL, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
+  RelieveRectangle (win, NULL, 0, 0, w, h, ReliefGC, ShadowGC);
 
   if (area)
   {
@@ -3291,8 +3290,7 @@ RelieveIconPixmap_trench (Window win, XRectangle *area, int w, int h, GC ReliefG
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
   }
 
-  RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, ReliefGC);
-  RelieveRectangle (win, NULL, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
+  RelieveRectangle (win, NULL, 0, 0, w, h, ReliefGC, ShadowGC);
 
   if (area)
   {
