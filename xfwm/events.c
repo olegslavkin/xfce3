@@ -868,20 +868,24 @@ HandleMapRequest ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleMapRequest ()\n");
 #endif
-  XFlush (dpy);
   Event.xany.window = Event.xmaprequest.window;
 
   if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleMapRequest : Context not found, new window ?\n");
+#endif
     Tmp_win = NULL;
   }
 
   if (!Tmp_win)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleMapRequest : Calling AddWindow ()\n");
+#endif
     Tmp_win = AddWindow (Event.xany.window);
     if (Tmp_win == NULL)
     {
-      MyXUngrabServer (dpy);
 #ifdef DEBUG
       fprintf (stderr, "xfwm : Leaving HandleMapRequest ()\n");
 #endif
@@ -920,7 +924,6 @@ HandleMapRequest ()
     case NormalState:
     case InactiveState:
     default:
-      MyXGrabServer (dpy);
       if (Tmp_win->Desk == Scr.CurrentDesk)
       {
 	Tmp_win->flags |= MAP_PENDING;
@@ -928,7 +931,6 @@ HandleMapRequest ()
       }
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
-      MyXUngrabServer(dpy);
       break;
     }
   }
@@ -936,7 +938,6 @@ HandleMapRequest ()
   {
     DeIconify (Tmp_win);
   }
-  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapRequest ()\n");
 #endif
@@ -1003,7 +1004,6 @@ HandleMapNotify ()
     SetFocus (Tmp_win->w, Tmp_win, True, False);
   }
 
-  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapNotify ()\n");
 #endif
@@ -1022,8 +1022,8 @@ HandleUnmapNotify ()
   int dstx, dsty;
   Window dumwin;
   XEvent dummy;
-  int weMustUnmap;
-
+  Bool weMustUnmap = False;
+  
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleUnmapNotify ()\n");
 #endif
@@ -1034,7 +1034,6 @@ HandleUnmapNotify ()
     Scr.overrides = RemoveFromWindowList (Scr.overrides, Event.xunmap.window);
   }
 #endif
-
   /*
    * Don't ignore events as described below.
    */
@@ -1046,16 +1045,18 @@ HandleUnmapNotify ()
     return;
   }
 
-  weMustUnmap = 0;
   if (!Tmp_win)
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : HandleUnmapNotify (): Tmp_win undefined. Trying to find out from context\n");
 #endif
     Event.xany.window = Event.xunmap.window;
-    weMustUnmap = 1;
+    weMustUnmap = True;
     if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
     {
+#ifdef DEBUG
+      fprintf (stderr, "xfwm : HandleUnmapNotify (): Context not found\n");
+#endif
       Tmp_win = NULL;
     }
   }
@@ -1069,12 +1070,10 @@ HandleUnmapNotify ()
   }
   if (weMustUnmap)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleUnmapNotify (): Unmapping window\n");
+#endif
     XUnmapWindow (dpy, Event.xunmap.window);
-  }
-
-  if(Tmp_win ==  Scr.Hilite)
-  {
-    Scr.Hilite = NULL;
   }
 
 #ifdef DEBUG
@@ -1089,7 +1088,8 @@ HandleUnmapNotify ()
     return;
   }
 
-  if (!XCheckTypedWindowEvent (dpy, Event.xunmap.window, DestroyNotify, &dummy) && XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
+  if (!(XCheckTypedWindowEvent (dpy, Event.xunmap.window, DestroyNotify, &dummy)) &&
+      (XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin)))
   {
     XEvent ev;
     Bool reparented;
@@ -1109,12 +1109,9 @@ HandleUnmapNotify ()
       RestoreWithdrawnLocation (Tmp_win, False);
     }
     XRemoveFromSaveSet (dpy, Event.xunmap.window);
-    XSelectInput (dpy, Event.xunmap.window, NoEventMask);
-    XSync (dpy, 0);
     MyXUngrabServer (dpy);
   }
   Destroy (Tmp_win);
-  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif
@@ -1842,15 +1839,6 @@ My_XNextEvent (Display * dpy, XEvent * event)
   if ((!alarmed) && (sm_fd >= 0) && (FD_ISSET (sm_fd, &in_fdset)))
     ProcessICEMsgs ();
 #endif
-
-  if (XPending (dpy))
-  {
-    XNextEvent (dpy, event);
-#ifdef REQUIRES_STASHEVENT
-    StashEventTime (event);
-#endif
-    return 1;
-  }
 
   return 0;
 }

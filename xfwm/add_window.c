@@ -133,7 +133,6 @@ AddWindow (Window w)
   XrmValue rm_value;
   Atom atype;
   XEvent dummy_event;
-
   extern XfwmWindow *colormap_win;
 
   /* allocate space for the xfwm window */
@@ -144,11 +143,11 @@ AddWindow (Window w)
   }
 
   XSync (dpy, 0);
-  MyXGrabServer(dpy);
+  MyXGrabServer (dpy);
   if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
   {
     free (tmp_win);
-    MyXUngrabServer(dpy);
+    MyXUngrabServer (dpy);
     return NULL;
   }
 
@@ -470,8 +469,26 @@ AddWindow (Window w)
 
   MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
   MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
+  MyXUngrabServer (dpy);
 
-  MyXUngrabServer(dpy);
+  FetchWmProtocols (tmp_win);
+  FetchWmColormapWindows (tmp_win);
+  if (tmp_win->attr.colormap == None)
+    tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
+  InstallWindowColormaps (colormap_win);
+
+  XSync (dpy, 0);
+  /* Shortcut : If the newly created window is about to be destroyed, remove it right away */
+  if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy_event) ||
+      XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy_event))
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : AddWindow () : Shortcut, removing window\n");
+#endif
+    Destroy (tmp_win);
+    return (NULL);
+  }
+
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);
@@ -480,19 +497,6 @@ AddWindow (Window w)
     BroadcastName (XFCE_M_ICON_FILE, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->icon_bitmap_file);
   BroadcastName (XFCE_M_RES_CLASS, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->class.res_class);
   BroadcastName (XFCE_M_RES_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->class.res_name);
-
-  FetchWmProtocols (tmp_win);
-  FetchWmColormapWindows (tmp_win);
-  if (tmp_win->attr.colormap == None)
-    tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
-  InstallWindowColormaps (colormap_win);
-
-  /* Shortcut : If the newly created window is about to be destroyed, remove it right away */
-  if (XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy_event) || XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy_event))
-  {
-    Destroy (tmp_win);
-    return (NULL);
-  }
 
   /* When we're all clear, map window */
   XMapSubwindows (dpy, tmp_win->frame);

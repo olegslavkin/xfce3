@@ -264,19 +264,19 @@ free_window_names (XfwmWindow * tmp, Bool nukename, Bool nukeicon)
 }
 
 void
-RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
+RevertFocus (XfwmWindow * tmp_win, Bool fallback_to_itself)
 {
   XfwmWindow *Win;
 
-  if ((!Tmp_win) || (Scr.Focus != Tmp_win))
+  if ((!tmp_win) || (Scr.Focus != tmp_win))
     return;
   
 #ifdef DEBUG
   fprintf (stderr, "xfwm : RevertFocus () : Entering routine\n");
 #endif
 
-  Win = Tmp_win->next;
-  while (Win && (!AcceptInput(Win) || (Win == Tmp_win) || (Win->flags & ICONIFIED) || (Tmp_win->Desk != Win->Desk)))
+  Win = tmp_win->next;
+  while (Win && (!AcceptInput(Win) || (Win == tmp_win) || (Win->flags & ICONIFIED) || (tmp_win->Desk != Win->Desk)))
   {
     Win = Win->next;
   }
@@ -293,12 +293,12 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
     return;
   }
 
-  if ((fallback_to_itself) && AcceptInput(Tmp_win))
+  if ((fallback_to_itself) && AcceptInput(tmp_win))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself\n");
 #endif
-    SetFocus (Tmp_win->w, Tmp_win, False, False);
+    SetFocus (tmp_win->w, tmp_win, False, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -319,7 +319,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
  *
  ****************************************************************************/
 void
-Destroy (XfwmWindow * Tmp_win)
+Destroy (XfwmWindow * tmp_win)
 {
   int i;
   extern XfwmWindow *ButtonWindow;
@@ -329,150 +329,162 @@ Destroy (XfwmWindow * Tmp_win)
   fprintf (stderr, "xfwm : Destroy () : Entering routine\n");
 #endif
 
-  if (!Tmp_win)
+  if (!tmp_win)
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : Destroy () : Tmp_win == NULL : Leaving routine\n");
+    fprintf (stderr, "xfwm : Destroy () : tmp_win == NULL : Leaving routine\n");
 #endif
     return;
   }
 
-  /* Remove contexts */
-  XDeleteContext (dpy, Tmp_win->w, XfwmContext);
-  XDeleteContext (dpy, Tmp_win->Parent, XfwmContext);
-  XDeleteContext (dpy, Tmp_win->frame, XfwmContext);
+  /* Blocking events on windows */ 
+  XSelectInput (dpy, tmp_win->w, NoEventMask);
+  XSelectInput (dpy, tmp_win->Parent, NoEventMask);
+  XSelectInput (dpy, tmp_win->frame, NoEventMask);
 
-  if (Tmp_win->prev != NULL)
-    Tmp_win->prev->next = Tmp_win->next;
-  if (Tmp_win->next != NULL)
-    Tmp_win->next->prev = Tmp_win->prev;
-  Scr.stacklist = RemoveFromXfwmWindowList (Scr.stacklist, Tmp_win);
+  /* Removing window from internal window stack */
+  if (tmp_win->prev != NULL)
+    tmp_win->prev->next = tmp_win->next;
+  if (tmp_win->next != NULL)
+    tmp_win->next->prev = tmp_win->prev;
+  Scr.stacklist = RemoveFromXfwmWindowList (Scr.stacklist, tmp_win);
 
-  if (Scr.PreviousFocus == Tmp_win)
-  {
-    Scr.PreviousFocus = NULL;
-  }
-
-  if (ButtonWindow == Tmp_win)
-  {
-    ButtonWindow = NULL;
-  }
-
-  if (Scr.pushed_window == Tmp_win)
-  {
-    Scr.pushed_window = NULL;
-  }
-
-  if (Tmp_win == colormap_win)
-  {
-    colormap_win = NULL;
-  }
-
-  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
-
-  if (Scr.LastWindowRaised == Tmp_win)
+  if (Scr.LastWindowRaised == tmp_win)
   {
     Scr.LastWindowRaised = NULL;
   }
 
-  if (Scr.LastWindowLowered == Tmp_win)
+  if (Scr.LastWindowLowered == tmp_win)
   {
     Scr.LastWindowLowered = NULL;
   }
 
-  if (Scr.Hilite == Tmp_win)
+  if (Scr.Hilite == tmp_win)
   {
     Scr.Hilite = NULL;
   }
 
-  if (Scr.Focus == Tmp_win)
+  if (Scr.PreviousFocus == tmp_win)
   {
-    RevertFocus (Tmp_win, False);
+    Scr.PreviousFocus = NULL;
   }
 
-  if (Tmp_win->icon_w != None)
+  if (ButtonWindow == tmp_win)
   {
-    XDeleteContext (dpy, Tmp_win->icon_w, XfwmContext);
-    XDestroyWindow (dpy, Tmp_win->icon_w);
+    ButtonWindow = NULL;
   }
-  if (Tmp_win->icon_pixmap_w != None)
+
+  if (Scr.pushed_window == tmp_win)
   {
-    XDeleteContext (dpy, Tmp_win->icon_pixmap_w, XfwmContext);
-    if (Tmp_win->flags & ICON_OURS)
+    Scr.pushed_window = NULL;
+  }
+
+  if (tmp_win == colormap_win)
+  {
+    colormap_win = NULL;
+  }
+
+  Broadcast (XFCE_M_DESTROY_WINDOW, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
+
+  if (Scr.Focus == tmp_win)
+  {
+    RevertFocus (tmp_win, False);
+  }
+
+  if (tmp_win->icon_pixmap_w != None)
+  {
+    XDeleteContext (dpy, tmp_win->icon_pixmap_w, XfwmContext);
+    if (tmp_win->flags & ICON_OURS)
     {
-      XDestroyWindow (dpy, Tmp_win->icon_pixmap_w);
+      XDestroyWindow (dpy, tmp_win->icon_pixmap_w);
     }
   }
-  if ((Tmp_win->icon_w) && (Tmp_win->flags & PIXMAP_OURS))
+  if ((tmp_win->icon_w) && (tmp_win->flags & PIXMAP_OURS))
   {
 #ifdef HAVE_IMLIB
-    Imlib_free_pixmap (imlib_id, Tmp_win->iconPixmap);
+    Imlib_free_pixmap (imlib_id, tmp_win->iconPixmap);
 #else
-    XFreePixmap (dpy, Tmp_win->iconPixmap);
+    XFreePixmap (dpy, tmp_win->iconPixmap);
 #endif
   }
-  if (Tmp_win->flags & TITLE)
+  if (tmp_win->icon_w != None)
+  {
+    XDeleteContext (dpy, tmp_win->icon_w, XfwmContext);
+    XDestroyWindow (dpy, tmp_win->icon_w);
+  }
+  if (tmp_win->flags & TITLE)
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Destroy () : Destroying title_w\n");
 #endif
-    XDeleteContext (dpy, Tmp_win->title_w, XfwmContext);
+    XDeleteContext (dpy, tmp_win->title_w, XfwmContext);
+    XDestroyWindow (dpy, tmp_win->title_w);
     for (i = 0; i < Scr.nr_left_buttons; i++)
-      if (Tmp_win->left_w[i] != None)
+      if (tmp_win->left_w[i] != None)
       {
 #ifdef DEBUG
         fprintf (stderr, "xfwm : Destroy () : Destroying left_w[%i]\n", i);
 #endif
-	XDeleteContext (dpy, Tmp_win->left_w[i], XfwmContext);
-	Tmp_win->left_w[i] = None;
+	XDeleteContext (dpy, tmp_win->left_w[i], XfwmContext);
+	XDestroyWindow (dpy, tmp_win->left_w[i]);
+	tmp_win->left_w[i] = None;
       }
     for (i = 0; i < Scr.nr_right_buttons; i++)
-      if (Tmp_win->right_w[i] != None)
+      if (tmp_win->right_w[i] != None)
       {
 #ifdef DEBUG
         fprintf (stderr, "xfwm : Destroy () : Destroying right_w[%i]\n", i);
 #endif
-	XDeleteContext (dpy, Tmp_win->right_w[i], XfwmContext);
+	XDeleteContext (dpy, tmp_win->right_w[i], XfwmContext);
+	XDestroyWindow (dpy, tmp_win->right_w[i]);
+	tmp_win->right_w[i] = None;
       }
   }
-  if (Tmp_win->flags & BORDER)
+  if (tmp_win->flags & BORDER)
   {
     for (i = 0; i < 4; i++)
     {
 #ifdef DEBUG
       fprintf (stderr, "xfwm : Destroy () : Destroying sides[%i]\n", i);
 #endif
-      XDeleteContext (dpy, Tmp_win->sides[i], XfwmContext);
+      XDeleteContext (dpy, tmp_win->sides[i], XfwmContext);
+      XDestroyWindow (dpy, tmp_win->sides[i]);
+      tmp_win->sides[i] = None;
+
 #ifdef DEBUG
       fprintf (stderr, "xfwm : Destroy () : Destroying corners[%i]\n", i);
 #endif
-      XDeleteContext (dpy, Tmp_win->corners[i], XfwmContext);
+      XDeleteContext (dpy, tmp_win->corners[i], XfwmContext);
+      XDestroyWindow (dpy, tmp_win->corners[i]);
+      tmp_win->corners[i] = None;
     }
   }
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Freeing data\n");
 #endif
 
-  free_window_names (Tmp_win, True, True);
-  if (Tmp_win->wmhints)
-    XFree (Tmp_win->wmhints);
-  if (Tmp_win->class.res_name && Tmp_win->class.res_name != NoResource)
-    XFree (Tmp_win->class.res_name);
-  if (Tmp_win->class.res_class && Tmp_win->class.res_class != NoClass)
-    XFree (Tmp_win->class.res_class);
-  if (Tmp_win->mwm_hints)
-    XFree (Tmp_win->mwm_hints);
+  free_window_names (tmp_win, True, True);
+  if (tmp_win->wmhints)
+    XFree (tmp_win->wmhints);
+  if (tmp_win->class.res_name && tmp_win->class.res_name != NoResource)
+    XFree (tmp_win->class.res_name);
+  if (tmp_win->class.res_class && tmp_win->class.res_class != NoClass)
+    XFree (tmp_win->class.res_class);
+  if (tmp_win->mwm_hints)
+    XFree (tmp_win->mwm_hints);
 
-  if (Tmp_win->cmap_windows)
-    XFree (Tmp_win->cmap_windows);
+  if (tmp_win->cmap_windows)
+    XFree (tmp_win->cmap_windows);
 
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
 #endif
-  XDestroyWindow (dpy, Tmp_win->frame);
-  XSync (dpy, 0);
-
-  free (Tmp_win);
+  XDeleteContext (dpy, tmp_win->w, XfwmContext);
+  XDeleteContext (dpy, tmp_win->Parent, XfwmContext);
+  XDestroyWindow (dpy, tmp_win->Parent);
+  XDeleteContext (dpy, tmp_win->frame, XfwmContext);
+  XDestroyWindow (dpy, tmp_win->frame);
+  free (tmp_win);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Leaving routine\n");
 #endif
