@@ -70,7 +70,7 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
 
   int oldDesk;
   static XfwmWindow *StickyWin = NULL;
-  XfwmWindow *FocusWin = NULL, *MouseWin, *t;
+  XfwmWindow *FocusWin = NULL, *MouseWin = NULL, *t;
   XfwmWindowList *wl;
   Window w;
 

@@ -134,23 +134,26 @@ on_drag_data_received (GtkWidget * entry, GdkDragContext * context, gint x, gint
   g_free (text);
 }
 
-// -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
-// Changes for dialog button accelerators
-// SJB
-
-// Type used to pass additional args to the callback
+/* -----------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
+ * Changes for dialog button accelerators
+ * SJB
+ */
+ 
+/* Type used to pass additional args to the callback */
 typedef struct
 {
-	GtkWidget 	  *bttn;		// the button we are adding the accelerator to.
-	GtkAccelGroup *accelgrp;    // the accelerator group for the new accelerator.
+	GtkWidget 	  *bttn;    /* the button we are adding the accelerator	to. */
+	GtkAccelGroup *accelgrp;    /* the accelerator group for the new accelerator. */
 } AccelBttnInfo;
 
-// -----------------------------------------------------------------------------
-// Adds an accelerator to the supplied button using the text in the label widget.
-// If the label text contains an underscore, the subsequent character in the label
-// becomes the accelerator key for the button. The label is altered so that the
-// accelerator is underlined.
+/* -----------------------------------------------------------------------------
+ * Adds an accelerator to the supplied button using the text in the label widget.
+ * If the label text contains an underscore, the subsequent character in the label
+ * becomes the accelerator key for the button. The label is altered so that the
+ * accelerator is underlined.
+ */
+ 
 static void make_accel_callback(GtkWidget *labelwidget, gpointer bttndata)
 {
 	AccelBttnInfo *data = bttndata;
@@ -164,9 +167,11 @@ static void make_accel_callback(GtkWidget *labelwidget, gpointer bttndata)
 		gtk_widget_add_accelerator(data->bttn, "clicked", data->accelgrp, key, 0, 0);
 }
 
-// -----------------------------------------------------------------------------
-// Create a button with an associated accelerator key, generated from the text
-// in the label. The accelerator is added to the given accelgrp.
+/* -----------------------------------------------------------------------------
+ * Create a button with an associated accelerator key, generated from the text
+ * in the label. The accelerator is added to the given accelgrp.
+ */
+ 
 static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
 {
 	AccelBttnInfo bttninfo;
@@ -184,8 +189,9 @@ static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
 
 	return bttn;
 }
-// SJB
-// -----------------------------------------------------------------------------
+/* SJB
+ * -----------------------------------------------------------------------------
+ */
 
 /*
  * create a modal dialog and handle it
@@ -211,7 +217,7 @@ gint dlg_new (char *labelval, char *defval, void *data, int type)
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE, 0);
   gtk_widget_realize (dl.top);
 
-  // SJB
+  /* SJB */
 	accelgrp = gtk_accel_group_new();
 	gtk_window_add_accel_group(GTK_WINDOW(dl.top), accelgrp);
 
@@ -257,18 +263,18 @@ gint dlg_new (char *labelval, char *defval, void *data, int type)
   {
     if (type & DLG_OK)
     {
-      // SJB ok = gtk_button_new_with_label (_("Ok"));
-			ok = make_button_with_accel("_Ok", accelgrp);
+      /* SJB ok = gtk_button_new_with_label (_("Ok")); */
+      ok = make_button_with_accel(_("_Ok"), accelgrp);
     }
     else if (type & DLG_YES)
     {
-      // SJB ok = gtk_button_new_with_label (_("Yes"));
-			ok = make_button_with_accel("_Yes", accelgrp);
+      /* SJB ok = gtk_button_new_with_label (_("Yes")); */
+      ok = make_button_with_accel(_("_Yes"), accelgrp);
     }
     else
     {
-      // SJB ok = gtk_button_new_with_label (_("Continue"));
-			ok = make_button_with_accel("_Continue", accelgrp);
+      /* SJB ok = gtk_button_new_with_label (_("Continue")); */
+      ok = make_button_with_accel(_("_Continue"), accelgrp);
     }
     GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), ok, TRUE, FALSE, 0);
@@ -288,13 +294,13 @@ gint dlg_new (char *labelval, char *defval, void *data, int type)
   {
     if (type & DLG_CANCEL)
     {
-      // SJB cancel = gtk_button_new_with_label (_("Cancel"));
-			cancel = make_button_with_accel("_Cancel", accelgrp);
+      /* SJB cancel = gtk_button_new_with_label (_("Cancel")); */
+      cancel = make_button_with_accel(_("_Cancel"), accelgrp);
     }
     else
     {
-      // SJB cancel = gtk_button_new_with_label (_("No"));
-      cancel = make_button_with_accel("_No", accelgrp);
+      /* SJB cancel = gtk_button_new_with_label (_("No")); */
+      cancel = make_button_with_accel(_("_No"), accelgrp);
     }
     GTK_WIDGET_SET_FLAGS (cancel, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), cancel, TRUE, FALSE, 0);
@@ -304,8 +310,8 @@ gint dlg_new (char *labelval, char *defval, void *data, int type)
   }
   if (type & DLG_ALL)
   {
-    // SJB all = gtk_button_new_with_label (_("All"));
-    all = make_button_with_accel("_All", accelgrp);
+    /* SJB all = gtk_button_new_with_label (_("All")); */
+    all = make_button_with_accel(_("_All"), accelgrp);
     
     GTK_WIDGET_SET_FLAGS (all, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), all, TRUE, FALSE, 0);
@@ -314,8 +320,8 @@ gint dlg_new (char *labelval, char *defval, void *data, int type)
   }
   if (type & DLG_CLOSE)
   {
-    // SJB close = gtk_button_new_with_label (_("Close"));
-    close = make_button_with_accel("_Close", accelgrp);
+    /* SJB close = gtk_button_new_with_label (_("Close")); */
+    close = make_button_with_accel(_("_Close"), accelgrp);
     
     GTK_WIDGET_SET_FLAGS (close, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), close, TRUE, FALSE, 0);
