@@ -2031,15 +2031,19 @@ DrawStripes_trench (XfwmWindow * t, Window win, int x, int y, int w, int h, Bool
   rh = ((h - 2) >> 1) << 1;
   for (i = 0; i < rh; i++)
   {
-    if ((i % 2) == 0)
+    if ((i % 3) == 0)
     {
       XDrawPoint (dpy, win, BackGC, x + w - 1, y + i);
       XDrawLine (dpy, win, ReliefGC, x, y + i, x + w - 2, y + i);
     }
-    else
+    else if((i % 3) == 1)
     {
       XDrawPoint (dpy, win, BackGC, x, y + i);
       XDrawLine (dpy, win, ShadowGC, x + 1, y + i, x + w, y + i);
+    }
+    else
+    {
+      XDrawLine (dpy, win, BackGC, x, y + i, x + w, y + i);
     }
   }
   for (i = rh; i < h; i++)
