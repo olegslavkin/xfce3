@@ -17,7 +17,7 @@
  */
 
 /* xfmenu
- * version 2.0-pre3
+ * version 2.0
  *
  * Generates an xfwm menu structure from GNOME or KDE
  * "*.desktop" (or "*.kdelnk") files.
@@ -211,9 +211,9 @@ init_nls (void)
   if (temp)
     {
       char *end;
-      lcmessages=g_strndup (temp, 5);
-      lcmessages_base = g_strdup (lcmessages);
-      if ((end = strchr (lcmessages_base, '_')))
+      lang=g_strndup (temp, 5);
+      lang_base = g_strdup (lang);
+      if ((end = strchr (lang_base, '_')))
         {
           *end = '\0';
         }
