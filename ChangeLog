@@ -1,5 +1,22 @@
 2001-11-17  xfce
 
+	* ChangeLog: Update ChangeLog
+
+2001-11-17  xfce
+
+	* xfwm/builtins.c: Greatly improve the speed of the "iconify_all()"
+	function
+
+2001-11-17  xfce
+
+	* xfwm/stack.c: Fix a small problem in stack handling
+
+2001-11-17  xfce
+
+	* ChangeLog, xfce-3.8.12.lsm, po/xfce.pot: Update ChangeLog
+
+2001-11-17  xfce
+
 	* other/xfwmrc.in, xfwm/borders.c, xfwm/themes.c, xfwm/xfwm.c:
 	Improve shaped icons option
 
