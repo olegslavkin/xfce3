@@ -1,97 +1,20 @@
+- Add code necesary to d+d files to/from xfsamba. 
+  (most of this happens in xfsamba).
+- gtk-2
 
-One big one (mainly in xfsamba):
-7- Add code necesary to d+d files to/from xfsamba.
-fix: The pasteboard should also communicate to other application via the normal
- X pasteboard.
-bug (cb_exec): 
-Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
-the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
-
-
-complicated:
-4- gtk-2 
-
-unknown:
-14- add "save user shortcutkeys to config options:
-    does gtk store the custom values in the associated accel?
-    if so, how do you retrieve the values?
-17- desktop icons
+Maybe (only if repeatedly requested):
+- The pasteboard should communicate to other application via the normal
+  X pasteboard.
+- add "save user shortcutkeys" to config options:
+    (does gtk store the custom values in the associated accel?
+    if so, how do you retrieve the values?)
+- open a "goto desktop", to open the ROX desktop. 
+    (this implies enabling d+d to the root window)
 
 BUGS to fix:
-   -information dialogs can get lost beneath 
-             * need to check behavior of dlg_prop(),
-               dlg_open_with(),dlg_execute() called in xtre_gui
-             * need to check other files
-                    all over yet)
-	     * merge static dialog structures with those from
-  		gtk_dlg.c to avoid wasting memory "a lo buey".
+- dialogs should open in the same screen as the xftree window
+  when dealing with xinerama.
+
 ****************************************************************
 ****************************************************************
-done:
-6.- MC style opening of packed files: Click on files and you see the internal
-structure as if it wasn't packed. Makes it very easy to copy and move content
-from these files straight to where you want it.
-easy:
-16,16b- Config option: Default "open with" program, also add an option to register
-    a program type when the open with dialog pops up.
-a *must* do:
-Once the copy/move has gone recursive, on errors it must query continue/cancel
-instead of just cancelling. 
 
-bugrtic behavior when the top open folder gets moved away by
-             another process, must fail gracefully.
-      this also can be seen if you rename the root dir of the
-      ctree to something else. This should be an easy thing to fix.
- fixed
-  -shift-ctrl to link: put in help and fix the directory symlink
-     bug. It is symlinking the entire contents of the directory
-     and not the directory itself.
-
-Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
-the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
-
-  -goback function loses some history elements: check create/destroy
-    algorithm.
-
-gtk_dlg.c memory leak in entry_edit and combo fixed.
-18- different type icons for different documents and configurable icon sizes.
-
-19- much more configurable (file open actons ...)
-21- Config table for toolbar icons (both large and small)
-20- Config option: fonts
-3- Debug the "goto" option (seems the "fork" may lose variables at times).
-  nope: was a memory allocation error involving glists. That g_list_free
-  is not very good since it is a void function. ideally it should return
-  NULL cast as a (GList *)
-15- Add "copy" and "insert" keyboard shortcuts and functions
-12- Add a "Go Back" function. (do while debugging goto option)
-    goto has been debugged. 
-+ useful dialog by copying multiple files (repeats #10)
-
-10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place, also faster than opening and closing dialogs).
-(with new xtree_cpy.c routines)
-
--modal dialog bug fixed throughout
--fixed a small bug in cb_exec
-
-bug: information dialogs can get lost beneath 
-	- fixed for all gtk_dlg.
-13- add help for creating custom shortcut keys, and default defined shorcut keys
-1- Some configuration options --> 
-    save geometry on exit, 
-    double click does goto, 
-    short-titles
-8- Add ctrl-T for keyboard shortcut to open terminal. Probably keyboard shorcuts
- for all menu items. --- This was already there, but it was bugged. It has been 
- fixed and reorganized to make for easier maintainance.
-11- make a tree refresh inmediate after "duplicate file" and other actions that don't respond quickly (which others? New file was a bit bugged, since the new file was not put in the correct tree location)
-9- Override file dialog should lstat both new and old file and show info 
-  so user can decide whether or not to override. Also, on non-confirm 
-  copy operation, if file will be overwritten, ask for confirmation, 
-  please. --Also fixed "cancel" button on override and added "all" button.
-2- An "all" button when doing hard deletes.
-5.- Somehow be able to show the total size of a folder including all it's
-content, sub-folders and their content.
-->  ctrl-u or select from right button menu over folders gives diskusage
-
-And yes. XFtree is a marvel. Fast, always there, and always in use.
