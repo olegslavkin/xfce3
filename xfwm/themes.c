@@ -3759,6 +3759,14 @@ RelieveWindow_linea (XfwmWindow * t, Window win, int x, int y, int w, int h, GC 
       seg[i].y1 = y + 1;
       seg[i].x2 = w + x;
       seg[i++].y2 = y + 1;
+      seg[i].x1 = x + 2;
+      seg[i].y1 = y + 2;
+      seg[i].x2 = x + 2;
+      seg[i++].y2 = x + 4;
+      seg[i].x1 = x + 2;
+      seg[i].y1 = y + 2;
+      seg[i].x2 = x + 4;
+      seg[i++].y2 = y + 2;
       XDrawSegments (dpy, win, HiGC, seg, i);
       break;
 
@@ -3770,6 +3778,14 @@ RelieveWindow_linea (XfwmWindow * t, Window win, int x, int y, int w, int h, GC 
       seg[i].y1 = y + 1;
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = y + 1;
+      seg[i].x1 = w + x - 5;
+      seg[i].y1 = y + 2;
+      seg[i].x2 = w + x - 2;
+      seg[i++].y2 = y + 2;
+      seg[i].x1 = w + x - 3;
+      seg[i].y1 = y + 3;
+      seg[i].x2 = w + x - 3;
+      seg[i++].y2 = y + 4;
       XDrawSegments (dpy, win, HiGC, seg, i);
       i = 0;
       seg[i].x1 = w + x - 2;
@@ -3798,6 +3814,14 @@ RelieveWindow_linea (XfwmWindow * t, Window win, int x, int y, int w, int h, GC 
       seg[i].y1 = y;
       seg[i].x2 = x + 1;
       seg[i++].y2 = h + y - 1;
+      seg[i].x1 = x + 2;
+      seg[i].y1 = y + h - 5;
+      seg[i].x2 = x + 2;
+      seg[i++].y2 = h + y - 2;
+      seg[i].x1 = x + 3;
+      seg[i].y1 = h + y - 3;
+      seg[i].x2 = x + 4;
+      seg[i++].y2 = h + y - 3;
       XDrawSegments (dpy, win, ReliefGC, seg, i);
       i = 0;
       seg[i].x1 = x;
@@ -3840,6 +3864,14 @@ RelieveWindow_linea (XfwmWindow * t, Window win, int x, int y, int w, int h, GC 
       seg[i].y1 = h + y - 2;
       seg[i].x2 = w + x - 2;
       seg[i++].y2 = h + y - 2;
+      seg[i].x1 = w + x - 3;
+      seg[i].y1 = y + h - 5;
+      seg[i].x2 = w + x - 3;
+      seg[i++].y2 = h + y - 2;
+      seg[i].x1 = x + w - 5;
+      seg[i].y1 = h + y - 3;
+      seg[i].x2 = w + x - 3;
+      seg[i++].y2 = h + y - 3;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
 
