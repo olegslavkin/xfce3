@@ -173,7 +173,8 @@ xftree_SOURCES = \
 	xtree_tar.c xtree_tar.h \
 	xtree_rpm.c xtree_rpm.h \
 	xtree_colorsel.c xfdiff_colorsel.h \
-	xtree_icons.c xtree_icons.h
+	xtree_icons.c xtree_icons.h \
+	xtree_smb.c
 
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
@@ -206,7 +207,8 @@ xtree_functions.$(OBJEXT) xtree_gui.$(OBJEXT) xtree_cb.$(OBJEXT) \
 xtree_go.$(OBJEXT) xtree_misc.$(OBJEXT) xtree_du.$(OBJEXT) \
 tubo.$(OBJEXT) xtree_mess.$(OBJEXT) xtree_cpy.$(OBJEXT) \
 xtree_pasteboard.$(OBJEXT) xtree_toolbar.$(OBJEXT) xtree_tar.$(OBJEXT) \
-xtree_rpm.$(OBJEXT) xtree_colorsel.$(OBJEXT) xtree_icons.$(OBJEXT)
+xtree_rpm.$(OBJEXT) xtree_colorsel.$(OBJEXT) xtree_icons.$(OBJEXT) \
+xtree_smb.$(OBJEXT)
 xftree_LDFLAGS = 
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
