@@ -69,7 +69,7 @@
 GtkWidget *io_parent=NULL;
 char *arg_hostname=NULL;
 char *arg_display=NULL;
-int pixmap_level=3;
+extern int pixmap_level;
 
 #if 0
 static gint open_warning(gpointer data){
