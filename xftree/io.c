@@ -144,7 +144,7 @@ io_system (char **argv,GtkWidget *parent)
   pid = fork ();
   if (pid == -1) return (-1);
   if (pid==0) { /* child process */
-    printf("dbg:[1]%s [2]%s [3]%s [4]%s\n",argv[0],argv[1],argv[2],argv[3]);
+    /*printf("dbg:[1]%s [2]%s [3]%s [4]%s\n",argv[0],argv[1],argv[2],argv[3]);*/
     /* The following is to avoid X locking when executing 
        terminal based application that requires user input */
     if ((nulldev = open ("/dev/null", O_RDWR)))
