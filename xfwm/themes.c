@@ -4509,7 +4509,7 @@ DrawSelectedEntry_linea (Window win, XRectangle *area, int x, int y, int w, int 
   RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.BlackGC, Scr.MenuShadowGC);
 #else
   XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
-  RelieveRectangle (win, NULL, x, y, w, h, Scr.BlackGC,  Scr.BlackGC);
+  RelieveRectangle (win, NULL, x, y, w, h, Scr.ScratchGC1,  Scr.BlackGC);
   RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
 #endif
   if (area)
