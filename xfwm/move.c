@@ -187,7 +187,7 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
 
   if (!opaque_move)
   {
-    gcv.line_width = 5;
+    gcv.line_width = 2;
     XChangeGC (dpy, Scr.DrawGC, GCLineWidth, &gcv);
 
     MoveOutline (tmp_win, xl, yt, Width, Height);

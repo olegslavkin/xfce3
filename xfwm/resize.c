@@ -114,7 +114,7 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
 
   if (!(Scr.Options & ResizeOpaqueWin))
   {
-    gcv.line_width = 5;
+    gcv.line_width = 2;
     XChangeGC (dpy, Scr.DrawGC, GCLineWidth, &gcv);
   }
 

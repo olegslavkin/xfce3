@@ -96,7 +96,7 @@ Animate (int o_x, int o_y, int o_w, int o_h, int f_x, int f_y, int f_w, int f_h)
 
   if (Scr.Options & AnimateWin)
   {
-    gcv.line_width = 3;
+    gcv.line_width = 2;
 
     XChangeGC (dpy, Scr.DrawGC, GCLineWidth, &gcv);
 
