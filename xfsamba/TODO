@@ -1,7 +1,6 @@
 -check and eliminate need for latin1 translation routines (no longer necesary
 on later versions of samba)
--print by DnD
+-print by DnD (as a confirm, ask for text or binary)
 -cut,copy and paste options
--check old routines for proper working now that multiple file selection is enabled.
 
 --- in xftree: enable recursive downloading when a directory is dropped there.
