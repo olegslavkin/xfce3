@@ -18,6 +18,10 @@
 
 
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <string.h>
 #include <ctype.h>
 #include "my_string.h"
@@ -32,20 +36,54 @@ char hexnum[] = {
 };
 
 char *
-my_memmove (char *dst, char *src, int size)
+my_memcpy (char *dst, char *src, int size)
 {
+#ifndef HAVE_MEMCPY
   char *psrc = NULL;
   char *pdst = NULL;
-  short int forward = 1;
   int ptr;
-  
+#endif
   if (!src)
     return NULL;
   if (!dst)
     return NULL;
   if (!size)
     return dst;
-  
+#ifdef HAVE_MEMCPY
+  return ((char *) memcpy (dst, src, (size_t) size));
+#else
+  psrc = src;
+  pdst = dst;
+  ptr = size;
+  while (ptr)
+  {
+    *pdst = *psrc;
+    psrc++;
+    pdst++;
+    ptr--;
+  }
+  return dst;
+#endif
+}
+
+char *
+my_memmove (char *dst, char *src, int size)
+{
+#ifndef HAVE_MEMMOVE
+  char *psrc = NULL;
+  char *pdst = NULL;
+  short int forward = 1;
+  int ptr;
+#endif
+  if (!src)
+    return NULL;
+  if (!dst)
+    return NULL;
+  if (!size)
+    return dst;
+#ifdef HAVE_MEMMOVE
+  return ((char *) memmove (dst, src, (size_t) size));
+#else
   if (src > dst)
   {
     psrc = src;
@@ -75,6 +113,7 @@ my_memmove (char *dst, char *src, int size)
     ptr--;
   }
   return dst;
+#endif
 }
 
 char *

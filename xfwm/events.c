@@ -79,6 +79,7 @@
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 
+#include "utils.h"
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
@@ -209,11 +210,15 @@ flush_expose (Window w)
 void
 fast_process_expose (void)
 {
-  XSync(dpy, 0);
-  while (XCheckMaskEvent (dpy, (ExposureMask | VisibilityChangeMask), &Event))
+  XEvent old_event;
+
+  memcpy(&old_event, &Event, sizeof(XEvent));
+  XPending(dpy);
+  while (XCheckMaskEvent (dpy, (ExposureMask), &Event))
   {
     DispatchEvent ();
   }
+  memcpy(&Event, &old_event, sizeof(XEvent));
 }
 
 int discard_events(long event_mask)
@@ -933,6 +938,7 @@ HandleMapRequest ()
   {
     DeIconify (Tmp_win);
   }
+  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapRequest ()\n");
 #endif
@@ -998,6 +1004,7 @@ HandleMapNotify ()
     SetFocus (Tmp_win->w, Tmp_win, True, False);
   }
 
+  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapNotify ()\n");
 #endif
@@ -1108,6 +1115,7 @@ HandleUnmapNotify ()
     MyXUngrabServer (dpy);
   }
   Destroy (Tmp_win);
+  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif

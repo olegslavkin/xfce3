@@ -742,6 +742,7 @@ DeIconify (XfwmWindow * tmp_win)
 
   RaiseWindow (tmp_win);
   FocusOn (tmp_win, False);
+  fast_process_expose ();
   return;
 }
 
@@ -834,6 +835,7 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
 	Broadcast (XFCE_M_ICONIFY, 7, t->w, t->frame, (unsigned long) t, -10000, -10000, t->icon_w_width, t->icon_w_height + t->icon_p_height);
 	BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, t);
       }
+      fast_process_expose ();
     }
   }
   tmp_win->flags |= ICONIFIED;
@@ -861,6 +863,7 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
       RevertFocus (tmp_win, True);
     }
   }
+  fast_process_expose ();
   return;
 }
 

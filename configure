@@ -8956,7 +8956,7 @@ else
 fi
 done
 
-for ac_func in sendmsg
+for ac_func in sendmsg memcpy memmove
 do
 echo $ac_n "checking for $ac_func""... $ac_c" 1>&6
 echo "configure:8963: checking for $ac_func" >&5

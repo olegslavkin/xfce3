@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4 from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -59,7 +59,11 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+ARTS_CFLAGS = @ARTS_CFLAGS@
+ARTS_LIBS = @ARTS_LIBS@
 AS = @AS@
+AUDIOFILE_CFLAGS = @AUDIOFILE_CFLAGS@
+AUDIOFILE_LIBS = @AUDIOFILE_LIBS@
 CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 CC = @CC@
@@ -73,6 +77,7 @@ GDK_IMLIB_CFLAGS = @GDK_IMLIB_CFLAGS@
 GDK_IMLIB_LIBS = @GDK_IMLIB_LIBS@
 GDK_PIXBUF_CFLAGS = @GDK_PIXBUF_CFLAGS@
 GDK_PIXBUF_LIBS = @GDK_PIXBUF_LIBS@
+GDM_PREFIX = @GDM_PREFIX@
 GENCAT = @GENCAT@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_CONFIG = @GLIB_CONFIG@
@@ -85,6 +90,8 @@ GTK_ENGINE_DIR = @GTK_ENGINE_DIR@
 GTK_LIBS = @GTK_LIBS@
 GT_NO = @GT_NO@
 GT_YES = @GT_YES@
+HAVE_ARTS = @HAVE_ARTS@
+HAVE_AUDIOFILE = @HAVE_AUDIOFILE@
 HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
@@ -96,6 +103,7 @@ INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
 LIBTOOL = @LIBTOOL@
+LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LIBVERSION = @LIBVERSION@
 LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
@@ -109,6 +117,7 @@ POSUB = @POSUB@
 RANLIB = @RANLIB@
 STRIP = @STRIP@
 USE_DT = @USE_DT@
+USE_GDM = @USE_GDM@
 USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -156,12 +165,12 @@ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CF
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
-DIST_COMMON =  Makefile.am Makefile.in
+DIST_COMMON =  COPYING Makefile.am Makefile.in
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 SOURCES = $(xfumed_SOURCES)
 OBJECTS = $(xfumed_OBJECTS)
@@ -287,7 +296,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$d/$$file $(distdir)/$$file; \
+	    cp -pr $$/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \

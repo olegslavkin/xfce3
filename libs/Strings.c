@@ -4,6 +4,10 @@
  * ** Strings.c: various routines for dealing with strings
  */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,6 +18,87 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+
+char *
+mymemcpy (char *dst, char *src, int size)
+{
+#ifndef HAVE_MEMCPY
+  char *psrc = NULL;
+  char *pdst = NULL;
+  int ptr;
+#endif
+  if (!src)
+    return NULL;
+  if (!dst)
+    return NULL;
+  if (!size)
+    return dst;
+#ifdef HAVE_MEMCPY
+  return ((char *) memcpy (dst, src, (size_t) size));
+#else
+  psrc = src;
+  pdst = dst;
+  ptr = size;
+  while (ptr)
+  {
+    *pdst = *psrc;
+    psrc++;
+    pdst++;
+    ptr--;
+  }
+  return dst;
+#endif
+}
+
+char *
+mymemmove (char *dst, char *src, int size)
+{
+#ifndef HAVE_MEMMOVE
+  char *psrc = NULL;
+  char *pdst = NULL;
+  short int forward = 1;
+  int ptr;
+#endif
+  if (!src)
+    return NULL;
+  if (!dst)
+    return NULL;
+  if (!size)
+    return dst;
+#ifdef HAVE_MEMMOVE
+  return ((char *) memmove (dst, src, (size_t) size));
+#else
+  if (src > dst)
+  {
+    psrc = src;
+    pdst = dst;
+    forward = 1;
+  }
+  else
+  {
+    psrc = src + size;
+    pdst = dst + size;
+    forward = 0; 
+  }
+  ptr = size;
+  while (ptr)
+  {
+    *pdst = *psrc;
+    if (forward)
+    {
+      psrc++;
+      pdst++;
+    }
+    else
+    {
+      psrc--;
+      pdst--;
+    }
+    ptr--;
+  }
+  return dst;
+#endif
+}
 
 /************************************************************************
  *
