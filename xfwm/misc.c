@@ -281,12 +281,12 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
     {
       Win = NULL;
     }
-    if ((Win) && (Win != Tmp_win) && AcceptInput(Win))
+    if ((Win) && (Win != Tmp_win) && (Win !=&Scr.XfwmRoot) && AcceptInput(Win))
     {
 #ifdef DEBUG
       fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
 #endif
-      SetFocus (Win->w, Win, False, False);
+      SetFocus (Win->w, Win, False, True);
 #ifdef DEBUG
       fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -299,12 +299,12 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
     Win = Win->next;
   }
  
-  if (Win)
+  if ((Win) && (Win !=&Scr.XfwmRoot))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Setting focus to '%s'\n", Win->name);
 #endif
-    SetFocus (Win->w, Win, False, False);
+    SetFocus (Win->w, Win, False, True);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -314,9 +314,9 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   if ((fallback_to_itself) && AcceptInput(Tmp_win))
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself='%s'\n", Win->name);
+    fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself='%s'\n", Tmp_win->name);
 #endif
-    SetFocus (Tmp_win->w, Tmp_win, False, False);
+    SetFocus (Tmp_win->w, Tmp_win, False, True);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -326,7 +326,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
   fprintf (stderr, "xfwm : RevertFocus () : Setting focus to NoFocusWin\n");
 #endif
-  SetFocus (Scr.NoFocusWin, NULL, False, False);
+  SetFocus (Scr.NoFocusWin, NULL, False, True);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
