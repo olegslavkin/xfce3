@@ -300,7 +300,17 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 		      /* uid/gid */
 		      u=strtok(NULL," ");
 		      /* size */
-		      strcpy(text[COL_SIZE],strtok(NULL," "));
+ 		      {
+			char *tag="  ";
+			unsigned long long tama;
+			tama =  atol(strtok(NULL," "));
+			if (tama >= (long long)1024*1024*1024*10){
+				tama /= (long long)1024*1024*1024; tag=" Gb";
+			}
+		  	else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
+		  	else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+		  	sprintf (text[COL_SIZE], " %llu%s", tama,tag);
+		      }
 		      /* date */
 		      strcpy(text[COL_DATE],strtok(NULL," "));
 		      strcat(text[COL_DATE]," ");
