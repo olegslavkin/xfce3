@@ -3028,8 +3028,14 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   new_win = new_top (path, xap_path, trash, reg, geo->width, geo->height, flags);
   if (geo->x > -1 && geo->y > -1)
   {
+    gint x,y;
     gtk_widget_set_uposition (new_win, geo->x, geo->y);
+    gdk_window_get_root_origin (new_win->window, &x, &y);
+    gtk_widget_set_uposition (new_win,geo->x+(geo->x-x), geo->y+(geo->y-y) );
+    gdk_flush();
+    /*fprintf(stderr,"root: x=%d,y=%d\n",x,y);*/
   }
+  /*gtk_widget_show_all (top);*/
 
   gtk_main ();
   save_defaults(top);

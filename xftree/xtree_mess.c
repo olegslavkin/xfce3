@@ -123,15 +123,17 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
   cfg *win;
    /* FIXME: must add the xfwm border width and title bar.
    * for now using 5 and 30, WFM */
-  int wm_offsetX=8,wm_offsetY=40;
+  gint wm_offsetX=8,wm_offsetY=40;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if ((geometry=(char *)malloc(64))==NULL) return;
+  gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &wm_offsetX, &wm_offsetY);
+  /*fprintf(stderr,"exiting: x=%d,y=%d\n",wm_offsetX, wm_offsetY);*/
   sprintf(geometry,"%dx%d+%d+%d",
 		  win->top->allocation.width,
 		  win->top->allocation.height,
-		  win->top->allocation.x+wm_offsetX,
-		  win->top->allocation.y+wm_offsetY);
+		  wm_offsetX,
+		  wm_offsetY);
 
   colors[0] = ((gdouble) ctree_color.red) / COLOR_GDK;
   colors[1] = ((gdouble) ctree_color.green) / COLOR_GDK;
