@@ -63,6 +63,12 @@
 [Sizes]
 	SmallPanelIcons
 	SmallMenuIcons
+[XColors]
+        Ignore
+[Diagnostic]
+        Ignore
+[Layer]
+        6
 [Commands]
 	xftree
 	xfrun
