@@ -193,6 +193,8 @@ palettes_DATA = \
  Jazza2 \
  KDE \
  Kdetheme \
+ KStyle2 \
+ KXfce \
  Liquid \
  Liquid2 \
  LightBulb \
@@ -206,6 +208,7 @@ palettes_DATA = \
  Military \
  Modern \
  Modern2 \
+ Monkey \
  Moz9 \
  Moz9-2 \
  Nature \

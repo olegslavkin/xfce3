@@ -75,6 +75,7 @@ palettes_DATA=\
  Military \
  Modern \
  Modern2 \
+ Monkey \
  Moz9 \
  Moz9-2 \
  Nature \
