@@ -116,7 +116,7 @@ static void copy_cut(GtkWidget * widget, GtkCTree * ctree,gboolean cut)
   zap_old_pasteboard();  
   if (!(g_list_length (GTK_CLIST (ctree)->selection))) return;
   len=1+strlen("#xfvalid_buffer:copy:%%:\n");
-  len += strlen(our_host_name());
+  len += strlen(our_host_name((GtkWidget *)ctree));
   for (selection=GTK_CLIST (ctree)->selection;selection;selection=selection->next){
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
@@ -128,7 +128,7 @@ static void copy_cut(GtkWidget * widget, GtkCTree * ctree,gboolean cut)
 	  fprintf(stderr,"xftree: unable to allocate paste buffer\n");
 	  return;
   }
-  sprintf(buffer,"#xfvalid_buffer:%s:%s:\n",(cut)?"cut":"copy",our_host_name());
+  sprintf(buffer,"#xfvalid_buffer:%s:%s:\n",(cut)?"cut":"copy",our_host_name((GtkWidget *)ctree));
   for (selection=GTK_CLIST (ctree)->selection;selection;selection=selection->next){
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
@@ -205,7 +205,7 @@ void cb_paste(GtkWidget * widget, GtkCTree * ctree){
 	    extern void SMBGetFile (GtkCTree *,char *,GList *);
 	    /*fprintf(stderr,"dbg: SMB type received.\n");*/
 	    SMBGetFile ((GtkCTree *)ctree,t_en->path,list);
-  } else if (strcmp(src_host,our_host_name()) != 0) {
+  } else if (strcmp(src_host,our_host_name((GtkWidget *)ctree)) != 0) {
      for (;list!=NULL;list=list->next){
         u = list->data;
         if (!rsync((GtkCTree *)ctree,u->url,t_en->path)) break;

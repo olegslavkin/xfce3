@@ -106,11 +106,11 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
 	      src_host=g_strdup(property_data);
 	      XFree(property_data);
       } else {
-	      src_host=g_strdup(our_host_name());
+	      src_host=g_strdup(our_host_name(ctree));
 	      /*printf("dbg: failed property get\n"); */
       } 
     
-  } else src_host=g_strdup(our_host_name());
+  } else src_host=g_strdup(our_host_name(ctree));
 		  
 #ifdef DISABLE_DND
   return;
@@ -204,7 +204,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
 	    break;
     } else uri_remove_file_prefix_from_list (list);
     
-    if (strcmp(src_host,our_host_name()) != 0) {
+    if (strcmp(src_host,our_host_name(ctree)) != 0) {
 	    /*printf("dbg: drag received from remote window (%s)\n",src_host);*/
             for (;list!=NULL;list=list->next){
               u = list->data;

@@ -54,6 +54,6 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
 void set_title_ctree (GtkWidget * w, const char *path);
 gint update_timer (GtkCTree * ctree);
 void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
-char *our_host_name(void);
+char *our_host_name(GtkWidget *top);
 void reset_icon(GtkCTree * ctree, GtkCTreeNode * node);
 #endif

@@ -101,28 +101,31 @@
 static void update_status(GtkCTreeNode * node,GtkCTree * ctree);
 static int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
 
-/* Return our complete host name, unconditionally 
- * (Credit for this routine is to Thomas Leonard
- *  from the rox-filer)*/
-char *our_host_name(void)
+char *our_host_name(GtkWidget *ctree)
 {
- static char *name = NULL;
- if (!name){
-	char buffer[256];
-	if (gethostname(buffer, 255) == 0)
-	{
-	  /* gethostname doesn't always return the full name... */
-	  struct hostent *ent;
-	  buffer[255] = '\0';
-	  ent = gethostbyname(buffer);
-	  name = g_strdup(ent ? ent->h_name : buffer);
-	}
-	else
-	{
-	  g_warning("gethostname() failed - using localhost\n");
-	  name = g_strdup("localhost");
-	}
- }
+  static char *name = NULL;
+  GdkAtom atomo;
+  if (name) return name;
+  atomo=gdk_atom_intern("WM_CLIENT_MACHINE",FALSE);
+ 
+  if (atomo  == GDK_NONE) name=g_strdup("localhost");
+  else {
+      unsigned char *property_data;
+      unsigned long items,remaining;
+      int actual_format;
+      Atom actual_atom;
+      if (XGetWindowProperty(GDK_DISPLAY(),
+		      ((GdkWindowPrivate*) gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window)->xwindow,
+		      /*((GdkWindowPrivate*) context->source_window)->xwindow,*/
+		      atomo,0,255,FALSE,
+		      XA_STRING,&actual_atom,
+		      &actual_format,&items,
+		      &remaining,&property_data)==Success){
+	      /*printf("dbg: property_data=%s\n",property_data);*/
+	      name=g_strdup(property_data);
+	      XFree(property_data);
+      } else  name=g_strdup("localhost");
+  }
  return name;
 }
 
@@ -132,7 +135,7 @@ gboolean check_hostname(char *host){
 	if (host[0]==':') return TRUE;	
 	testv="localhost";	
 	if (strncmp(host,testv,strlen(testv))==0) return TRUE;
-	testv="localhost.localnet";	
+	testv="localhost.localdomain";	
 	if (strncmp(host,testv,strlen(testv))==0) return TRUE;
 	if (gethostname(buffer, 256) == 0)
 	{
@@ -815,7 +818,7 @@ set_title_ctree (GtkWidget * ctree, const char *path)
   entry *en;
   GtkCTreeNode *root;
   
-  hostname=our_host_name();
+  hostname=our_host_name(ctree);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   title = (char *)malloc((strlen("XFTree: ")+strlen(hostname)+strlen(path)+1)*sizeof(char));
   if (win->iconname) g_free(win->iconname);

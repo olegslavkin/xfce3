@@ -1149,6 +1149,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
                   (guchar *)"xftree",  
 		  strlen("xftree")+1);  
   
+#if 0
   atomo=gdk_atom_intern("WM_CLIENT_MACHINE",FALSE);
   gdk_property_change (gtk_widget_get_parent_window(vbox),
 		  atomo,
@@ -1157,7 +1158,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
  	      	  GDK_PROP_MODE_REPLACE,
                   (guchar *)our_host_name(),  
 		  strlen(our_host_name())+1);  
- 
+#endif 
   atomo=gdk_atom_intern("WM_CLIENT_LEADER",TRUE);
   if (atomo != GDK_NONE) {
 	  gdk_property_delete (gtk_widget_get_parent_window(vbox),atomo);
