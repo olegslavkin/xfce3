@@ -27,7 +27,7 @@ if {([file exists [file join $env(HOME) ".xfce"]])&&([file isdirectory [file joi
   set xfcerc	".xfce3rc"
 
 }
-set xfce_share "/usr/local/share/xfce"
+set xfce_share "XFCE_DIR"
 #------------------------------------------------------------------------------
 #--gui--
 set version		"0.2.2"
