@@ -1348,7 +1348,6 @@ HandleEnterNotify ()
     return;
   }
   if (AcceptInput(Tmp_win) && !(Scr.Options & ClickToFocus) && !(e->focus) && ((e->x_root != old_x_root) || (e->y_root != old_y_root) || (Scr.Options & ForceFocus)) && (e->mode == NotifyNormal))
-
   {
     SetFocus (Tmp_win->w, Tmp_win, True, False);
 
