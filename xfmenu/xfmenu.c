@@ -439,11 +439,18 @@ get_menu_dirs (MenuType mtype)
       menupath = g_strconcat ("/opt/kde2", KMENUPATH, NULL);
       kdedirs = g_list_append (kdedirs, menupath);
     }
+    if (!(kdedir) || (strcmp ("/opt/kde3", kdedir) != 0))
+    {
+      menupath = g_strconcat ("/opt/kde3", KMENUPATH, NULL);
+      kdedirs = g_list_append (kdedirs, menupath);
+    }
     if (home)
     {
       menupath = g_strconcat (home, "/.kde/applnk", NULL);
       kdedirs = g_list_append (kdedirs, menupath);
       menupath = g_strconcat (home, "/.kde2/applnk", NULL);
+      kdedirs = g_list_append (kdedirs, menupath);
+      menupath = g_strconcat (home, "/.kde3/applnk", NULL);
       kdedirs = g_list_append (kdedirs, menupath);
     }
     kdedirs = g_list_append (kdedirs, SYSPATH);
