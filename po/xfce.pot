@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-08 21:47+0100\n"
+"POT-Creation-Date: 2002-01-10 23:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -903,8 +903,8 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_go.c:180
-#: xftree/xtree_go.c:181 xftree/xtree_gui.c:1472 xftree/xtree_gui.c:1474
+#: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_go.c:179
+#: xftree/xtree_go.c:180 xftree/xtree_gui.c:1476 xftree/xtree_gui.c:1478
 msgid "unknown"
 msgstr ""
 
@@ -1032,7 +1032,7 @@ msgid "Cannot find path"
 msgstr ""
 
 #. Create "Goto" menu
-#: xftree/xtree_go.c:265 xftree/xtree_gui.c:712
+#: xftree/xtree_go.c:263 xftree/xtree_gui.c:712
 msgid "Go to"
 msgstr ""
 
@@ -1314,8 +1314,8 @@ msgid "Name"
 msgstr ""
 
 #. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
-#: xfsamba/xfsamba_gui.c:1196 xftree/xtree_gui.c:1167
-msgid "Size"
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1167
+msgid "Size (bytes)"
 msgstr ""
 
 #: xfglob/xfglob.c:609 xftree/xtree_gui.c:1168
@@ -1330,19 +1330,19 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: xftree/xtree_gui.c:1210
+#: xftree/xtree_gui.c:1214
 msgid "Filter:"
 msgstr ""
 
-#: xftree/xtree_gui.c:1221
+#: xftree/xtree_gui.c:1225
 msgid "dirs"
 msgstr ""
 
-#: xftree/xtree_gui.c:1227
+#: xftree/xtree_gui.c:1231
 msgid "files"
 msgstr ""
 
-#: xftree/xtree_gui.c:1333
+#: xftree/xtree_gui.c:1337
 msgid "Show main menu"
 msgstr ""
 
@@ -1958,10 +1958,6 @@ msgstr ""
 
 #: xfglob/xfglob.c:607 xfglob/xfglob.c:1362
 msgid "Directory"
-msgstr ""
-
-#: xfglob/xfglob.c:608
-msgid "Size (bytes)"
 msgstr ""
 
 #: xfglob/xfglob.c:1032
@@ -3002,6 +2998,10 @@ msgstr ""
 #. location shares
 #: xfsamba/xfsamba_gui.c:1181
 msgid "Location shares : "
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1196
+msgid "Size"
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1197
