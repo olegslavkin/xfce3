@@ -131,16 +131,9 @@ AddWindow (Window w)
   XSetWindowAttributes attributes;	/* attributes for create windows */
   Bool status;
   XrmValue rm_value;
-  XEvent dummy;
   Atom atype;
 
   extern XfwmWindow *colormap_win;
-
-  /* Is the window gonna be removed already ? */
-  if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy) || XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
-  {
-    return (NULL);
-  }
 
   /* allocate space for the xfwm window */
   tmp_win = (XfwmWindow *) calloc (1, sizeof (XfwmWindow));
@@ -491,14 +484,6 @@ AddWindow (Window w)
   if (tmp_win->attr.colormap == None)
     tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
   InstallWindowColormaps (colormap_win);
-
-  XSync (dpy, 0);
-  /* If for some reason the windows will come out, just destroy it and give up */
-  if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy) || XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
-  {
-    Destroy (tmp_win);
-    return (NULL);
-  }
 
   /* When we're all clear, map window */
   XMapSubwindows (dpy, tmp_win->frame);
