@@ -92,6 +92,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     return;
   }
   
+  /*printf("dbg:on_drag_data\n");*/
   clist = GTK_CLIST (ctree);
   set_override(FALSE);
 
@@ -239,6 +240,10 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
   gchar *files;
   cfg *win = (cfg *) data;
 
+#ifdef DISABLE_DND
+  return;
+#endif
+  /*printf("dbg:on_drag_data_get\n");*/
   if (!ctree){
 	 /*fprintf(stderr,"dbg: return 1 from oddg()\n");*/
 	 return;

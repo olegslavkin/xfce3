@@ -662,7 +662,9 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   en = gtk_ctree_node_get_row_data (ctree, node);
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  
+  gtk_drag_source_unset ((GtkWidget *)ctree);
+
+
   
   if (en->type & (FT_TAR|FT_TARCHILD|FT_RPM|FT_RPMCHILD)) {	 
       if  (en->type & (FT_HAS_DUMMY)){
@@ -720,6 +722,8 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   cfg *win;
   entry *en;
   GtkCTreeNode *child,*parent;
+
+  gtk_drag_source_unset ((GtkWidget *)ctree);
   
   /* unselect all children */
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));

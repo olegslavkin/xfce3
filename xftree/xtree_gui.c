@@ -356,6 +356,12 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
   gint row, col;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
     /*fprintf(stderr,"dbg:  click detected\n"); */
+  if ( (event->button == 1)){
+     gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, 
+		  target_table, NUM_TARGETS, 
+		  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+  }
+
   if ((event->type == GDK_2BUTTON_PRESS) && (event->button == 1))
   {
     /*fprintf(stderr,"dbg: double click detected\n"); */
@@ -1400,8 +1406,19 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   }
 
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
-  gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
-  gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+  
+  /*
+   * DO NOT put gtk_drag_source_set here. It is very buggy if you do.
+   * Instead set at first mouse click and unset on expand+contract
+   * (inherent GtkCTree bug workaround)
+   * gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, 
+		  target_table, NUM_TARGETS, 
+		  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);*/
+  
+  gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, 
+		  target_table, NUM_TARGETS, 
+		  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+		  
 	  
   menutop = create_menu (win->top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox[0]), menutop);

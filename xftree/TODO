@@ -3,11 +3,6 @@
 - enable directory drop
 - enable copy + paste, must use X clipboard by now.
 
-- MUST FIX A WORKAROUND: 
-  Damn gtk bug of mistaking a drag from another widget with a drag initiation
-  on the same widget (only on first drag)
-
-
 - incorporate hostnames for dnd so rcp works with rox. Add the rsync option
   with choice for rsh, ssh ssh2.
 - incorporate root level entries for roxy pinboards
