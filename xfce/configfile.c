@@ -48,6 +48,9 @@ char *rcfile = "xfce3rc";
 int nl = 0;
 int buffersize = 127;
 
+#define my_strnSTARTS(__s,__m) \
+   (!  g_strncasecmp ((__s),(__m),strlen(__m)))
+
 void
 syntax_error (char *s)
 {
@@ -100,7 +103,7 @@ initconfig (config * newconf)
      "y" or "1", xfce won't read/modify or even save the user config...
    */
   value = getenv ("DISABLE_XFCE_USER_CONFIG");
-  if (value && (!my_strncasecmp (value, "1", 1) || !my_strncasecmp (value, "y", 1)))
+  if (value && (my_strnSTARTS (value, "1") || my_strnSTARTS (value, "y")))
   {
     newconf->disable_user_config = TRUE;
   }
@@ -551,7 +554,7 @@ readconfig (void)
   else
   {
     p = nextline (configfile, lineread);
-    if (my_strncasecmp (p, XFCE3SIG, strlen (XFCE3SIG)))
+    if (! my_strnSTARTS (p, XFCE3SIG))
     {
       my_alert (_("Does not looks like an XFce 3 configuration file !"));
       if (my_yesno_dialog (_("Do you want to reset the configuration file ?\n \
@@ -575,29 +578,30 @@ readconfig (void)
 	syntax_error (_("Cannot use old version of XFce configuration files"));
     }
     p = nextline (configfile, lineread);
-    if (my_strncasecmp (p, "[Coords]", strlen ("[Coords]")))
+    if (!my_strnSTARTS (p, "[Coords]"))
       syntax_error (p);
     p = nextline (configfile, lineread);
     current_config.panel_x = atoi (p);
     p = nextline (configfile, lineread);
     current_config.panel_y = atoi (p);
     p = nextline (configfile, lineread);
-    if (my_strncasecmp (p, "[ButtonLabels]", strlen ("[ButtonLabels]")))
+    if (! my_strnSTARTS (p, "[ButtonLabels]"))
       syntax_error (p);
     i = 0;
     p = nextline (configfile, lineread);
-    while ((i < NBSCREENS) && (my_strncasecmp (p, "[External_Icons]", strlen ("[External_Icons]"))))
+    while ((i < NBSCREENS) && (!my_strnSTARTS (p, "[External_Icons]")))
     {
       set_gxfce_screen_label (i, p);
       p = nextline (configfile, lineread);
       i++;
     }
-    if (!my_strncasecmp (p, "[External_Icons]", strlen ("[External_Icons]")))
+    if (my_strnSTARTS (p, "[External_Icons]"))
     {
       for (i = 0; i < NBSELECTS + 1; i++)
       {
 	p = nextline (configfile, lineread);
-	if ((my_strncasecmp (p, "[Icons]", strlen ("[Icons]"))) && (my_strncasecmp (p, "[Popups]", strlen ("[Popups]"))))
+	if ((!my_strnSTARTS (p, "[Icons]")) && 
+	    (!my_strnSTARTS (p, "[Popups]")))
 	{
 	  set_exticon_str (i, p);
 	}
@@ -607,7 +611,7 @@ readconfig (void)
 	}
       }
     }
-    if (!my_strncasecmp (p, "[Popups]", strlen ("[Popups]")))
+    if (my_strnSTARTS (p, "[Popups]"))
     {
       p = nextline (configfile, lineread);
       current_config.visible_popup = atoi (p);
@@ -615,7 +619,7 @@ readconfig (void)
 	current_config.visible_popup = NBPOPUPS;
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Icons]", strlen ("[Icons]")))
+    if (my_strnSTARTS (p, "[Icons]"))
     {
       p = nextline (configfile, lineread);
       load_icon_str (p);
@@ -625,53 +629,54 @@ readconfig (void)
     {
       default_icon_str ();
     }
-    if (!my_strncasecmp (p, "[WorkSpace]", strlen ("[WorkSpace]")))
+    if (my_strnSTARTS (p, "[WorkSpace]"))
     {
       p = nextline (configfile, lineread);
-      current_config.colorize_root = (my_strncasecmp (p, "Repaint", strlen ("Repaint")) == 0);
+      current_config.colorize_root = my_strnSTARTS (p, "Repaint");
       p = nextline (configfile, lineread);
-      current_config.gradient_root = (my_strncasecmp (p, "Gradient", strlen ("Gradient")) == 0);
+      current_config.gradient_root = my_strnSTARTS (p, "Gradient");
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Lock]", strlen ("[Lock]")))
+    if (my_strnSTARTS (p, "[Lock]"))
     {
       p = nextline (configfile, lineread);
       set_command (NBSELECTS, p);
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[MenuOption]", strlen ("[MenuOption]")))
+    if (my_strnSTARTS (p, "[MenuOption]"))
     {
       p = nextline (configfile, lineread);
-      current_config.detach_menu = (my_strncasecmp (p, "Detach", strlen ("Detach")) == 0);
+      current_config.detach_menu = my_strnSTARTS (p, "Detach");
       p = nextline (configfile, lineread);
     }
     if (!my_strncasecmp (p, "[XFwmOption]", strlen ("[XFwmOption]")))
     {
       p = nextline (configfile, lineread);
-      current_config.clicktofocus = (my_strncasecmp (p, "ClickToFocus", strlen ("ClickToFocus")) == 0);
+      current_config.clicktofocus = my_strnSTARTS (p, "ClickToFocus");
       p = nextline (configfile, lineread);
-      current_config.opaquemove = (my_strncasecmp (p, "OpaqueMove", strlen ("OpaqueMove")) == 0);
+      current_config.opaquemove = my_strnSTARTS (p, "OpaqueMove");
       p = nextline (configfile, lineread);
-      if ((!my_strncasecmp (p, "OpaqueResize", strlen ("OpaqueResize"))) || (!my_strncasecmp (p, "NoOpaqueResize", strlen ("NoOpaqueResize"))))
+      if ((my_strnSTARTS (p, "OpaqueResize")) || 
+	  (my_strnSTARTS (p, "NoOpaqueResize")))
       {
-	current_config.opaqueresize = (my_strncasecmp (p, "OpaqueResize", strlen ("OpaqueResize")) == 0);
+	current_config.opaqueresize = my_strnSTARTS (p, "OpaqueResize");
 	p = nextline (configfile, lineread);
 	current_config.snapsize = atoi (p);
 	p = nextline (configfile, lineread);
 	current_config.startup_flags = atoi (p);
 	p = nextline (configfile, lineread);
       }
-      current_config.autoraise = (my_strncasecmp (p, "AutoRaise", strlen ("AutoRaise")) == 0);
+      current_config.autoraise = my_strnSTARTS (p, "AutoRaise");
       p = nextline (configfile, lineread);
-      current_config.gradient_active_title = (my_strncasecmp (p, "GradientActive", strlen ("GradientActive")) == 0);
+      current_config.gradient_active_title = my_strnSTARTS (p, "GradientActive");
       p = nextline (configfile, lineread);
-      current_config.gradient_inactive_title = (my_strncasecmp (p, "GradientInactive", strlen ("GradientInactive")) == 0);
+      current_config.gradient_inactive_title = my_strnSTARTS (p, "GradientInactive");
       p = nextline (configfile, lineread);
-      if (!my_strncasecmp (p, "IconsOnLeft", strlen ("IconsOnLeft")))
+      if (my_strnSTARTS (p, "IconsOnLeft"))
 	current_config.iconpos = 1;
-      else if (!my_strncasecmp (p, "IconsOnBottom", strlen ("IconsOnBottom")))
+      else if (my_strnSTARTS (p, "IconsOnBottom"))
 	current_config.iconpos = 2;
-      else if (!my_strncasecmp (p, "IconsOnRight", strlen ("IconsOnRight")))
+      else if (my_strnSTARTS (p, "IconsOnRight"))
 	current_config.iconpos = 3;
       else
 	current_config.iconpos = 0;
@@ -691,42 +696,42 @@ readconfig (void)
       current_config.fonts[2] = (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
       strcpy (current_config.fonts[2], p);
       p = nextline (configfile, lineread);
-      if (!my_strncasecmp (p, "MapFocus", strlen ("MapFocus")))
+      if (my_strnSTARTS (p, "MapFocus"))
       {
 	current_config.mapfocus = TRUE;
 	p = nextline (configfile, lineread);
       }
-      else if (!my_strncasecmp (p, "NoMapFocus", strlen ("NoMapFocus")))
+      else if (my_strnSTARTS (p, "NoMapFocus"))
       {
 	current_config.mapfocus = FALSE;
 	p = nextline (configfile, lineread);
       }
-      if (!my_strncasecmp (p, "X", strlen ("X")))
+      if (my_strnSTARTS (p, "X"))
       {
 	current_config.xfwm_engine = XFCE_ENGINE;
 	p = nextline (configfile, lineread);
       }
-      else if (!my_strncasecmp (p, "M", strlen ("M")))
+      else if (my_strnSTARTS (p, "M"))
       {
 	current_config.xfwm_engine = MOFIT_ENGINE;
 	p = nextline (configfile, lineread);
       }
-      else if (!my_strncasecmp (p, "T", strlen ("T")))
+      else if (my_strnSTARTS (p, "T"))
       {
 	current_config.xfwm_engine = TRENCH_ENGINE;
 	p = nextline (configfile, lineread);
       }
-      else if (!my_strncasecmp (p, "G", strlen ("G")))
+      else if (my_strnSTARTS (p, "G"))
       {
 	current_config.xfwm_engine = GTK_ENGINE;
 	p = nextline (configfile, lineread);
       }
-      else if (!my_strncasecmp (p, "L", strlen ("L")))
+      else if (my_strnSTARTS (p, "L"))
       {
 	current_config.xfwm_engine = LINEA_ENGINE;
 	p = nextline (configfile, lineread);
       }
-      else if (my_strncasecmp (p, "[", strlen ("[")))
+      else if (!my_strnSTARTS (p, "["))
       {
 	/*
 	 * Need to read a new line in case the theme is something else...
@@ -734,64 +739,64 @@ readconfig (void)
 	p = nextline (configfile, lineread);
       }
     }
-    if (!my_strncasecmp (p, "[Screens]", strlen ("[Screens]")))
+    if (my_strnSTARTS (p, "[Screens]"))
     {
       p = nextline (configfile, lineread);
       current_config.visible_screen = atoi (p);
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Tooltips]", strlen ("[Tooltips]")))
+    if (my_strnSTARTS (p, "[Tooltips]"))
     {
       p = nextline (configfile, lineread);
       current_config.tooltipsdelay = atoi (p);
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Clock]", strlen ("[Clock]")))
+    if (my_strnSTARTS (p, "[Clock]"))
     {
       p = nextline (configfile, lineread);
-      current_config.digital_clock = (my_strncasecmp (p, "Digital", strlen ("Digital")) == 0);
+      current_config.digital_clock = my_strnSTARTS (p, "Digital");
       p = nextline (configfile, lineread);
-      current_config.hrs_mode = (my_strncasecmp (p, "24hrs", strlen ("24hrs")) == 0);
+      current_config.hrs_mode = my_strnSTARTS (p, "24hrs");
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Sizes]", strlen ("[Sizes]")))
+    if (my_strnSTARTS (p, "[Sizes]"))
     {
       p = nextline (configfile, lineread);
-      if (!my_strncasecmp (p, "SmallPanelIcons", strlen ("SmallPanelIcons")))
+      if (my_strnSTARTS (p, "SmallPanelIcons"))
 	current_config.select_icon_size = 0;
-      else if (!my_strncasecmp (p, "LargePanelIcons", strlen ("LargePanelIcons")))
+      else if (my_strnSTARTS (p, "LargePanelIcons"))
 	current_config.select_icon_size = 2;
       else
 	current_config.select_icon_size = 1;
       p = nextline (configfile, lineread);
-      if (!my_strncasecmp (p, "SmallMenuIcons", strlen ("SmallMenuIcons")))
+      if (my_strnSTARTS (p, "SmallMenuIcons"))
 	current_config.popup_icon_size = 0;
-      else if (!my_strncasecmp (p, "LargeMenuIcons", strlen ("LargeMenuIcons")))
+      else if (my_strnSTARTS (p, "LargeMenuIcons"))
 	current_config.popup_icon_size = 2;
       else
 	current_config.popup_icon_size = 1;
       update_popup_size ();
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[XColors]", strlen ("[XColors]")))
+    if (my_strnSTARTS (p, "[XColors]"))
     {
       p = nextline (configfile, lineread);
-      current_config.apply_xcolors = (my_strncasecmp (p, "Apply", strlen ("Apply")) == 0);
+      current_config.apply_xcolors = my_strnSTARTS (p, "Apply");
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Diagnostic]", strlen ("[Diagnostic]")))
+    if (my_strnSTARTS (p, "[Diagnostic]"))
     {
       p = nextline (configfile, lineread);
-      current_config.show_diagnostic = (my_strncasecmp (p, "Show", strlen ("Show")) == 0);
+      current_config.show_diagnostic = my_strnSTARTS (p, "Show");
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Layer]", strlen ("[Layer]")))
+    if (my_strnSTARTS (p, "[Layer]"))
     {
       p = nextline (configfile, lineread);
       current_config.panel_layer = atoi (p);
       p = nextline (configfile, lineread);
     }
-    if (!my_strncasecmp (p, "[Commands]", strlen ("[Commands]")))
+    if (my_strnSTARTS (p, "[Commands]"))
     {
       p = nextline (configfile, lineread);
       if (p)
@@ -805,12 +810,12 @@ readconfig (void)
     }
     i = 0;
     sprintf (dummy, "[Menu%u]", i + 1);
-    while ((p) && (!my_strncasecmp (p, dummy, strlen (dummy))) && (i++ < NBPOPUPS))
+    while ((p) && (my_strnSTARTS (p, dummy)) && (i++ < NBPOPUPS))
     {
       sprintf (dummy, "[Menu%u]", i + 1);
       p = nextline (configfile, lineread);
       j = 0;
-      while ((p) && (my_strncasecmp (p, dummy, strlen (dummy))))
+      while ((p) && (!my_strnSTARTS (p, dummy)))
       {
         label = g_malloc ((strlen (p ? p : "None") + 1) * sizeof (char));
 	strcpy (label, (p ? p : "None"));
