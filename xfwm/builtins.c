@@ -730,8 +730,8 @@ raise_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
 void
 lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
-  XfwmWindow *MouseWin;
-  Window mw;
+  XfwmWindow *MouseWin = NULL;
+  Window mw = None;
   /* Dummy var for XQueryPointer */
   Window dummy_root;
   int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
@@ -745,8 +745,8 @@ lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
     LowerWindow (tmp_win);
   }
   /* Now handle focus transition */
-  XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
-  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
+  MouseWin = NULL;
+  if ((XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask) && (mw != None) && (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &MouseWin) == XCNOENT)))
   {
     MouseWin = NULL;
   }
@@ -1165,8 +1165,8 @@ echo_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long contex
 void
 raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
-  XfwmWindow *MouseWin;
-  Window mw;
+  XfwmWindow *MouseWin = NULL;
+  Window mw = None;
   /* Dummy var for XQueryPointer */
   Window dummy_root;
   int dummy_x, dummy_y, dummy_win_x, dummy_win_y;
@@ -1186,8 +1186,8 @@ raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
     RaiseWindow (tmp_win);
   }
   /* Now handle focus transition */
-  XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask);
-  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & MouseWin) == XCNOENT)
+  MouseWin = NULL;
+  if ((XQueryPointer (dpy, Scr.Root, &dummy_root, &mw, &dummy_x, &dummy_y, &dummy_win_x, &dummy_win_y, &dummy_mask) && (mw != None) && (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &MouseWin) == XCNOENT)))
   {
     MouseWin = NULL;
   }
@@ -2582,7 +2582,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
 	attributes.cursor = Scr.XfwmCursors[MENU];
 	attributes.save_under = True;
 	taskw = XCreateWindow (dpy, Scr.Root, wx, wy, width, height, 0, CopyFromParent, InputOutput, (Visual *) CopyFromParent, valuemask, &attributes);
-	XSaveContext (dpy, taskw, MenuContext, (caddr_t) 0);
+	XSaveContext (dpy, taskw, MenuContext, (caddr_t) taskw);
 	XMapRaised (dpy, taskw);
       }
       RedrawSwitchWindow (taskw, t->name, width, height);
@@ -2631,7 +2631,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
       }
       break;
     default:
-      if ((XFindContext (dpy, Event.xany.window, MenuContext, (caddr_t *) & dumb) != XCNOENT))
+      if ((XFindContext (dpy, Event.xany.window, MenuContext, (caddr_t *) &dumb) != XCNOENT))
       {
 	RedrawSwitchWindow (taskw, t->name, width, height);
       }
