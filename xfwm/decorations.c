@@ -192,20 +192,11 @@ SelectDecor (XfwmWindow * t, unsigned long tflags, int border_width)
 {
   int decor, i;
   PropMwmHints *prop;
-#ifdef OLD_STYLE
   int bw = 0;
-#else
-  int bw = 1;
-#endif
 
   if (!(tflags & BW_FLAG))
   {
     border_width = Scr.NoBoundaryWidth;
-  }
-
-  if (!border_width)
-  {
-    bw = 0;
   }
 
   for (i = 0; i < 3; i++)

@@ -160,12 +160,13 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
 	rgc = ReliefGC;
 	sgc = ShadowGC;
 	RelieveWindow (t, t->corners[i], 0, 0, t->corner_width, t->corner_width, rgc, sgc, corners[i]);
-
       }
     }
   }
+#if 0
 #ifndef OLD_STYLE
   SetInnerBorder (t, onoroff);
+#endif
 #endif
 }
 
