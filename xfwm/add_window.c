@@ -467,17 +467,6 @@ AddWindow (Window w)
     }
   }
 
-  MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
-  MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
-  MyXUngrabServer (dpy);
-
-  FetchWmProtocols (tmp_win);
-  FetchWmColormapWindows (tmp_win);
-  if (tmp_win->attr.colormap == None)
-    tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
-  InstallWindowColormaps (colormap_win);
-
-  XSync (dpy, 0);
   /* Shortcut : If the newly created window is about to be destroyed, remove it right away */
   if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy_event) ||
       XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy_event))
@@ -489,6 +478,18 @@ AddWindow (Window w)
     return (NULL);
   }
 
+  MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
+  MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
+
+  MyXUngrabServer (dpy);
+
+  FetchWmProtocols (tmp_win);
+  FetchWmColormapWindows (tmp_win);
+  if (tmp_win->attr.colormap == None)
+    tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
+  InstallWindowColormaps (colormap_win);
+
+  XSync (dpy, 0);
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);
