@@ -147,15 +147,8 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     nitems = uri_parse_list ((const char *) data->data, &list);
     if (!nitems) break; /* of course */
     u = list->data;
-    if (u->type == URI_SMB){
-	    extern void SMBGetFile (char *);
-	    fprintf(stderr,"dbg: SMB type received.\n");
-	    SMBGetFile (u->url);
-	    break;
-    } else uri_remove_file_prefix_from_list (list);
     node = gtk_ctree_node_nth (GTK_CTREE (ctree), win->dnd_row);
     t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-    
     /* this garantees that target will always be a directory
      * and thus no need to check further down
      * */
@@ -173,6 +166,16 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
       /*gtk_drag_finish (context, FALSE, (mode == TR_MOVE), time);
       return;*/
     }
+    
+    if (u->type == URI_SMB){
+	    extern void SMBGetFile (GtkCTree *,char *,char *);
+	    /*fprintf(stderr,"dbg: SMB type received.\n");*/
+	    if (strchr(u->url,'\n')) u->url=strtok(u->url,"\n");
+	    if (strchr(u->url,'\r')) u->url=strtok(u->url,"\r");
+	    SMBGetFile ((GtkCTree *)ctree,t_en->path,u->url);
+	    break;
+    } else uri_remove_file_prefix_from_list (list);
+    
     
     /* tmpfile ==NULL means drop cancelled*/
     /* above: u = list->data;*/
