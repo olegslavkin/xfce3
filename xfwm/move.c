@@ -128,7 +128,7 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     if (startDesk != Scr.CurrentDesk)
     {
       MapIt (tmp_win);
-      SetFocus (tmp_win->w, tmp_win, 0);
+      SetFocus (tmp_win->w, tmp_win, False, False);
     }
   }
   else

@@ -269,28 +269,28 @@ RevertFocus (XfwmWindow * Tmp_win)
     return;
     
   t = Tmp_win->next;
-  while (t && (t->wmhints) && (t->wmhints->flags & InputHint) && !(t->wmhints->input))
+  while (t && !AcceptInput (t))
   {
     t = t->next;
   }
   if (t)
   {
-    SetFocus (t->w, t, 1);
+    SetFocus (t->w, t, True, False);
     return;
   }
 
   t = Tmp_win->prev;
-  while (t && (t->wmhints) && (t->wmhints->flags & InputHint) && !(t->wmhints->input))
+  while (t && !AcceptInput (t))
   {
     t = t->prev;
   }
   if (t)
   {
-    SetFocus (t->w, t, 1);
+    SetFocus (t->w, t, True, False);
     return;
   }
 
-  SetFocus (Scr.NoFocusWin, NULL, 0);
+  SetFocus (Scr.NoFocusWin, NULL, False, False);
 }
 /***************************************************************************
  *
@@ -690,7 +690,6 @@ Bool GrabEm (int cursor)
 #else
   XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, CurrentTime);
 #endif
-  /* SetFocus (Scr.NoFocusWin, NULL, 0); */
   mask = ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask;
   while ((i < 1000) && (val = XGrabPointer (dpy, Scr.Root, True, mask, GrabModeAsync, GrabModeAsync, Scr.Root, vs, CurrentTime) != GrabSuccess))
   {
@@ -744,7 +743,6 @@ UngrabEm (void)
 #else
       XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
 #endif
-      /* SetFocus (w, Scr.PreviousFocus, 0); */
     }
     Scr.PreviousFocus = NULL;
   }

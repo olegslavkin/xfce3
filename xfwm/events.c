@@ -715,8 +715,7 @@ HandlePropertyNotify ()
     {
       if ((Tmp_win != NULL) && (Tmp_win == Scr.Focus))
       {
-	Scr.Focus = NULL;
-	SetFocus (Tmp_win->w, Tmp_win, 1);
+	SetFocus (Tmp_win->w, Tmp_win, True, True);
       }
     }
     else if (Event.xproperty.atom == _XA_WIN_LAYER)
@@ -955,7 +954,7 @@ HandleMapNotify ()
 
   if ((Tmp_win->Desk == Scr.CurrentDesk) && (Scr.Options & MapFocus))
   {
-    SetFocus (Tmp_win->w, Tmp_win, 1);
+    SetFocus (Tmp_win->w, Tmp_win, True, False);
   }
 
   if (Tmp_win->flags & ICONIFIED)
@@ -1014,7 +1013,7 @@ HandleUnmapNotify ()
 #ifdef DEBUG
       fprintf (stderr, "xfwm : HandleUnmapNotify () Forcing focus\n");
 #endif
-      SetFocus (Scr.NoFocusWin, NULL, 0);
+      SetFocus (Scr.NoFocusWin, NULL, False, False);
     }
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Event ignored\n");
@@ -1150,7 +1149,7 @@ HandleButtonPress ()
     if (!(Tmp_win->triggered) || (Event.xbutton.window == Tmp_win->frame))
     {
       if (Tmp_win != Scr.Focus)
-	SetFocus (Tmp_win->w, Tmp_win, 1);
+	SetFocus (Tmp_win->w, Tmp_win, True, False);
       Context = GetContext (Tmp_win, &Event, &PressedW);
       if ((Event.xbutton.button == 1) && ((Scr.Options & AutoRaiseWin) || (Scr.Options & ClickToFocus) || (Scr.Options & ClickRaise) || (!(Tmp_win->flags & TITLE)) || (Context != C_WINDOW)))
       {
@@ -1300,7 +1299,7 @@ HandleEnterNotify ()
   if (!(Scr.Options & ClickToFocus) && !(e->focus) && ((e->x_root != old_x_root) || (e->y_root != old_y_root) || (Scr.Options & ForceFocus)) && (e->mode == NotifyNormal))
 
   {
-    SetFocus (Tmp_win->w, Tmp_win, 1);
+    SetFocus (Tmp_win->w, Tmp_win, True, False);
 
     if (((Scr.Options & AutoRaiseWin) && (Scr.AutoRaiseDelay > 0)) && (!(Tmp_win->flags & ICONIFIED) && !(Tmp_win->flags & RAISEDWIN)))
       SetTimer (Scr.AutoRaiseDelay);
@@ -1346,7 +1345,7 @@ HandleLeaveNotify ()
       if (Event.xcrossing.detail != NotifyInferior)
       {
 	if (Scr.Focus != NULL)
-	  SetFocus (Scr.NoFocusWin, NULL, 0);
+	  SetFocus (Scr.NoFocusWin, NULL, False, False);
 	if (Scr.Hilite != NULL)
 	  SetBorder (Scr.Hilite, False, False, True, None);
       }

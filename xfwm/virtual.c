@@ -171,14 +171,14 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
       }
     }
 
-    if ((MouseWin) && !(Scr.Options & ClickToFocus))
-      SetFocus (MouseWin->w, MouseWin, 0);
+    if ((MouseWin) && !(Scr.Options & ClickToFocus) && AcceptInput (MouseWin))
+      SetFocus (MouseWin->w, MouseWin, True, False);
     else if (FocusWin)
-      SetFocus (FocusWin->w, FocusWin, 0);
+      SetFocus (FocusWin->w, FocusWin, True, False);
     else if (StickyWin && (StickyWin->flags & STICKY))
-      SetFocus (StickyWin->w, StickyWin, 1);
+      SetFocus (StickyWin->w, StickyWin, True, False);
     else
-      SetFocus (Scr.NoFocusWin, NULL, 1);
+      SetFocus (Scr.NoFocusWin, NULL, False, False);
   }
   if (grab)
     MyXUngrabServer (dpy);

@@ -59,7 +59,7 @@
  **********************************************************************/
 
 void
-SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
+SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse, Bool force)
 {
 #ifdef REQUIRES_STASHEVENT
   extern Time lastTimestamp;
@@ -76,6 +76,11 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
     fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
 #endif
     return;
+  }
+  
+  if (force)
+  {
+    Scr.Focus = NULL;
   }
   
   if ((FocusByMouse) && (Fw) && (Fw != Scr.Focus) && (Fw != &Scr.XfwmRoot))

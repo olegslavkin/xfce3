@@ -279,7 +279,7 @@ FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
       sendWindowsDesk (Scr.CurrentDesk, t);
   }
 
-  SetFocus (t->w, t, 1);
+  SetFocus (t->w, t, True, False);
 
   /* Make sure UngrabEm () won't return focus to previous window ! */
   Scr.PreviousFocus = NULL;
@@ -738,9 +738,9 @@ lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
   {
     MouseWin = NULL;
   }
-  if (MouseWin)
+  if ((MouseWin) && AcceptInput (MouseWin))
   {
-    SetFocus (MouseWin->w, MouseWin, 0);
+    SetFocus (MouseWin->w, MouseWin, False, False);
   }
 }
 
@@ -1163,9 +1163,9 @@ raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
   {
     MouseWin = NULL;
   }
-  if (MouseWin)
+  if ((MouseWin) && AcceptInput (MouseWin))
   {
-    SetFocus (MouseWin->w, MouseWin, 0);
+    SetFocus (MouseWin->w, MouseWin, False, False);
   }
 }
 
