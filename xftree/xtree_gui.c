@@ -919,6 +919,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   menu_entry file_mlist[] = {
      FILE_MENU,
      DIR_FILE_MENU,
+     MAINF_MENU,
      DIR_OR_FILE_MENU,
      NONE_MENU
   };
@@ -926,6 +927,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   menu_entry mixed_mlist[] = {
      DIR_FILE_MENU,
+     MAINF_MENU,
      NONE_MENU
    };
 #define LAST_MIXED_MENU_ENTRY (sizeof(mixed_mlist)/sizeof(menu_entry))
