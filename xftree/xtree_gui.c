@@ -1528,14 +1528,15 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       gtk_clist_column_titles_hide((GtkCList *)ctree);
   }
   
-  win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+/*  win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
   if (win->iconname) {
    if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
      sprintf(win->iconname,"~%s",path+strlen(getenv ("HOME")));
    } else sprintf (win->iconname, "%s", (path)?path:"/");
    gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, 
 		  win->iconname);
-  } 
+  } */
+  win->iconname = NULL;
   set_icon (win->top,win->iconname, xftree_icon_xpm);
   set_title_ctree (ctree, en->path);
   
