@@ -340,7 +340,6 @@ Destroy (XfwmWindow * tmp_win)
   XDeleteContext (dpy, tmp_win->w,      XfwmContext);
   XDeleteContext (dpy, tmp_win->Parent, XfwmContext);
   XDeleteContext (dpy, tmp_win->frame,  XfwmContext);
-  XSync (dpy, 0);
   
   Broadcast (XFCE_M_DESTROY_WINDOW, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
 
@@ -469,7 +468,6 @@ Destroy (XfwmWindow * tmp_win)
   fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
 #endif
   XDestroyWindow (dpy, tmp_win->frame);
-  XSync (dpy, 0);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Freeing data\n");
 #endif
@@ -854,7 +852,6 @@ UngrabEm (void)
 #else
       XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
 #endif
-      XSync (dpy, 0);
       Scr.PreviousFocus = NULL;
     }
     MyXUngrabServer (dpy);

@@ -199,7 +199,6 @@ flush_expose (Window w)
   XEvent dummy;
   int i = 0;
 
-  XSync(dpy, 0);
   while (XCheckTypedWindowEvent (dpy, w, Expose, &dummy))
     i++;
   return i;
@@ -211,7 +210,6 @@ fast_process_expose (void)
   XEvent old_event;
 
   mymemcpy((char *) &old_event, (char *) &Event, sizeof(XEvent));
-  XSync(dpy, 0);
   while (XCheckMaskEvent (dpy, ExposureMask, &Event))
   {
     DispatchEvent ();
@@ -224,7 +222,6 @@ int discard_events(long event_mask)
   XEvent e;
   int count;
 
-  XSync(dpy, 0);
   for (count = 0; XCheckMaskEvent(dpy, event_mask, &e); count++)
   {
 #ifdef REQUIRES_STASHEVENT
@@ -240,7 +237,6 @@ int discard_window_events(Window w, long event_mask)
   XEvent e;
   int count;
 
-  XSync(dpy, 0);
   for (count = 0; XCheckWindowEvent(dpy, w, event_mask, &e); count++)
   {
 #ifdef REQUIRES_STASHEVENT
@@ -527,7 +523,6 @@ HandleFocusOut ()
     fprintf (stderr, "xfwm : HandleFocusOut () Forcing focus\n");
 #endif
     XSetInputFocus (dpy, Scr.Focus->w, RevertToParent, CurrentTime);
-    XSync (dpy, 0);
   }
 #endif
 
@@ -1002,6 +997,7 @@ HandleMapNotify ()
 #endif
     return;
   }
+  XSync (dpy, 0);
   MyXGrabServer (dpy);
   if (Tmp_win->icon_w)
     XUnmapWindow (dpy, Tmp_win->icon_w);

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-23 23:40+0100\n"
+"POT-Creation-Date: 2001-11-24 12:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1117,10 +1117,11 @@ msgstr ""
 
 #: xftree/xtree_gui.c:1340
 msgid ""
-"This is XFTree, based on 'XTree' \n"
-"(c) by Rasca\n"
-"published under GNU GPL\n"
-"http://home.pages.de/~rasca/xap/"
+"This is XFTree (C) under GNU GPL\n"
+"with code contributed by:\n"
+"Rasca, Berlin\n"
+"Olivier Fourdan\n"
+"Edscott Wilson Garcia\n"
 msgstr ""
 
 #: xftree/xtree_gui.c:1385
@@ -1308,17 +1309,8 @@ msgstr ""
 msgid "Last changed"
 msgstr ""
 
-#: xftree/xtree_dnd.c:124
+#: xftree/xtree_dnd.c:137
 msgid "Unknown action !"
-msgstr ""
-
-#: xftree/xtree_dnd.c:139
-msgid "Target must be a directory !"
-msgstr ""
-
-#: xftree/xtree_dnd.c:172
-#, c-format
-msgid "Type not supported.. (%d)\n"
 msgstr ""
 
 #. convenience location of duplicate dialog texts

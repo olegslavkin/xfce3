@@ -96,9 +96,9 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
   if (Scr.CurrentDesk == oldDesk)
     return;
 
-  XSync (dpy, 0);
   if (grab)
   {
+    XSync (dpy, 0);
     MyXGrabServer (dpy);
   }
   if (broadcast)
@@ -188,9 +188,9 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
     else
       SetFocus (Scr.NoFocusWin, NULL, False, False);
   }
-  XSync (dpy, 0);
   if (grab)
   {
+    XSync (dpy, 0);
     MyXUngrabServer (dpy);
   }
 }

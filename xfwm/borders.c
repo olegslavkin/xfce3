@@ -524,10 +524,8 @@ SetupFrame (XfwmWindow * tmp_win, int x, int y, int w, int h, Bool sendEvent, Bo
   }
   if (sendEvent)
   {
-    XSync(dpy,0);
     sendclient_event (tmp_win, x, y, w, horig);
   }
-  XSync(dpy,0);
   if (broadcast)
     BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, tmp_win);
 }
