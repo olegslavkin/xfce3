@@ -50,7 +50,9 @@
 #include <glib.h>
 
 #include <string.h>
+#ifdef HAVE_ICONV
 #include <iconv.h>
+#endif /* HAVE_ICONV */
 
 #include "utils.h"
 #include "module.h"
@@ -67,12 +69,13 @@
 #define GMENUPATH "/share/gnome/apps"
 #define KMENUPATH "/share/applnk"
 #define DEFAULT_CHARSET "ISO-8859-1"
+#ifdef HAVE_ICONV
 #define F 0   /* character never appears in text */
 #define T 1   /* character appears in plain ASCII text */
 #define I 2   /* character appears in ISO-8859 text */
 #define X 3   /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
 #define OUTBUF_SIZE	4096
-
+#endif /* HAVE_ICONV */
 
 /*------------------*
  * typedefs 
@@ -137,7 +140,7 @@ char *charset = NULL;
  * functions 
  *------------------*/
 
-
+#ifdef HAVE_ICONV
 static unsigned int isUtf8(const char *buf) {
   int i, n;
   register char c;
@@ -244,6 +247,7 @@ char *convert_code (char *fromcode)
   outbuf[outlen] = '\0';
   return outbuf;
 }
+#endif /* HAVE_ICONV */
 
 /* initialization and 
  * communication with xfwm */
@@ -332,7 +336,7 @@ init_nls (void)
     if ((!charset) && (dot = strrchr (lcmessages , '.')))
     {
       dot++;
-      charset = (char *) safemalloc (strlen (dot) + 1);
+      charset = (char *) g_malloc (strlen (dot) + 1);
       strcpy (charset, dot);
     }
 
@@ -358,7 +362,7 @@ init_nls (void)
     if ((!charset) && (dot = strrchr (lang , '.')))
     {
       dot++;
-      charset = (char *) safemalloc (strlen (dot) + 1);
+      charset = (char *) g_malloc (strlen (dot) + 1);
       strcpy (charset, dot);
     }
 
@@ -370,7 +374,7 @@ init_nls (void)
 
   if (!charset)
   {
-    charset = (char *) safemalloc (strlen (DEFAULT_CHARSET) + 1);
+    charset = (char *) g_malloc (strlen (DEFAULT_CHARSET) + 1);
     strcpy (charset, DEFAULT_CHARSET);
   }
 }
@@ -1023,17 +1027,22 @@ add_entry_to_menu (char *menu_name, MenuEntry * entry, MenuType mtype)
 {
   char buffer[MAXSTRLEN];
   char buf[4096];
+#ifdef HAVE_ICONV
   unsigned int utf8;
+#endif /* HAVE_ICONV */
 
   if (!(entry) || !(entry->name))
     return;
 
+#ifdef HAVE_ICONV
   utf8 = isUtf8(entry->name);
   if(utf8) { 
-	 memset(buf, 0, 4096);
+	 mymemset(buf, 0, 4096);
 	 strcpy(buf, convert_code(entry->name));
+	 entry->name = g_realloc (entry->name, (size_t) ((strlen (buf) + 1) * sizeof(char)));
 	 strcpy(entry->name, buf);
   }
+#endif /* HAVE_ICONV */
 
   if (entry->type == ITEM && is_executable (entry->cmd))
   {
