@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-05 00:07+0200\n"
+"POT-Creation-Date: 2001-09-08 22:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2660,7 +2660,7 @@ msgstr ""
 msgid "&Horizontal"
 msgstr ""
 
-#: xfwm/xfwm.c:1225
+#: xfwm/xfwm.c:1224
 msgid "xfwm terminated: "
 msgstr ""
 

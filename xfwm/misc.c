@@ -634,7 +634,12 @@ Bool GrabEm (int cursor)
    * to the windows */
   if (Scr.PreviousFocus == NULL)
     Scr.PreviousFocus = Scr.Focus;
-  SetFocus (Scr.NoFocusWin, NULL, 0);
+#ifdef REQUIRES_STASHEVENT
+  XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, lastTimestamp);
+#else
+  XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, CurrentTime);
+#endif
+  /* SetFocus (Scr.NoFocusWin, NULL, 0); */
   mask = ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask;
   while ((i < 1000) && (val = XGrabPointer (dpy, Scr.Root, True, mask, GrabModeAsync, GrabModeAsync, Scr.Root, vs, CurrentTime) != GrabSuccess))
   {
@@ -676,7 +681,12 @@ UngrabEm (void)
 #ifdef DEBUG
       fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
 #endif
-      SetFocus (w, Scr.PreviousFocus, 0);
+#ifdef REQUIRES_STASHEVENT
+      XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
+#else
+      XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
+#endif
+      /* SetFocus (w, Scr.PreviousFocus, 0); */
     }
     Scr.PreviousFocus = NULL;
   }

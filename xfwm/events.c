@@ -387,6 +387,13 @@ HandleFocusIn ()
     StashEventTime (&d);
 #endif
     w = d.xany.window;
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleFocusIn () : Skipping event...\n");
+    if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) != XCNOENT)
+    {
+       fprintf (stderr, "xfwm : HandleFocusIn () : ... FocusIn on \"%s\"\n", Tmp_win->name);
+    }
+#endif
   }
   if (w == None)
   {
@@ -394,17 +401,26 @@ HandleFocusIn ()
   }
   if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleFocusIn () : context not found\n");
+#endif
     Tmp_win = NULL;
   }
 
   if (!Tmp_win)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleFocusIn () : Tmp_win not set\n");
+#endif
     if (w != Scr.NoFocusWin)
     {
       Scr.UnknownWinFocused = w;
     }
     else
     {
+#ifdef DEBUG
+      fprintf (stderr, "xfwm : HandleFocusIn () : Unsetting focus from Scr.Hilite (if any)\n");
+#endif
       Scr.Focus = NULL;
       SetBorder (Scr.Hilite, False, True, True, None);
       Broadcast (XFCE_M_FOCUS_CHANGE, 5, 0, 0, 0, Scr.DefaultDecor.HiColors.fore, Scr.DefaultDecor.HiColors.back, 0, 0);
@@ -441,6 +457,12 @@ HandleFocusIn ()
       }
     }
   }
+#ifdef DEBUG
+  else
+  {
+    fprintf (stderr, "xfwm : HandleFocusIn () : No change because Tmp_win == Scr.Hilite (ie \"%s\")\n", Tmp_win->name);
+  }
+#endif
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleFocusIn ()\n");
 #endif

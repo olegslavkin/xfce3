@@ -927,8 +927,8 @@ SetRCDefaults ()
     "+ \"I\" Prev [!Iconic CurrentDesk] Focus",
 
     "AddToFunc \"__builtin_focus_raise__\"",
-    "+ \"I\" Focus",
     "+ \"I\" Raise",
+    "+ \"I\" Focus",
 
     "AddToFunc \"__builtin_iconify_and_focus__" "+ \"I\" Iconify",
     "+ \"I\" Current [Iconic] __builtin_Focus_Prev__",
