@@ -41,7 +41,7 @@
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
 static void
-NMBLookupForkOver (void)
+NMBLookupForkOver (pid_t pid)
 {
   char *message;
   cursor_reset (GTK_WIDGET (smb_nav));

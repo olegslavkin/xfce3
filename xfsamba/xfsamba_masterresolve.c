@@ -184,7 +184,7 @@ ask4master (void)
 
 
 static void
-NMBmastersResolveOver (void)
+NMBmastersResolveOver (pid_t pid)
 {
   gboolean NMBmastersResolve (nmb_list * currentN);
   char *message;
@@ -324,6 +324,7 @@ NMBmastersResolve (nmb_list * currentN)
     }
   }
 
-  fork_obj = Tubo (NMBmastersResolveFork, NMBmastersResolveOver, FALSE, NMBparseMastersResolve, parse_stderr);
+  /* fork_obj = */
+  Tubo (NMBmastersResolveFork, NMBmastersResolveOver, FALSE, NMBparseMastersResolve, parse_stderr);
   return FALSE;
 }

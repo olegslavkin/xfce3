@@ -110,7 +110,7 @@ SMBtarStdout (int n, void *data)
 }
 
 static void
-SMBtarForkOver (void)
+SMBtarForkOver (pid_t pid)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);

@@ -43,7 +43,7 @@
 
 
 static void
-NMBmastersForkOver (void)
+NMBmastersForkOver (pid_t pid)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);
@@ -132,6 +132,7 @@ NMBmastersLookup (gpointer data)
   cursor_wait (GTK_WIDGET (smb_nav));
   animation (TRUE);
   print_status (_("Looking for master browsers..."));
-  fork_obj = Tubo (NMBmastersFork, NMBmastersForkOver, FALSE, NMBmastersParseLookup, parse_stderr);
+  /*fork_obj = */
+  Tubo (NMBmastersFork, NMBmastersForkOver, FALSE, NMBmastersParseLookup, parse_stderr);
   return FALSE;
 }

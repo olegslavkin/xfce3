@@ -67,9 +67,13 @@
 
 int preferences=0x0;
 
+extern void clean_smbmnt (void);
+
 void cleanup_tmpfiles(void){
    glob_t dirlist;
    int i;
+   /* unmount any shares mounted by xfsamba */
+   clean_smbmnt();
    rmdir("/tmp/xfsamba");
    if (glob ("/tmp/xfsamba*", GLOB_ERR ,NULL, &dirlist) != 0) {
 		  /*fprintf (stderr, "dbg:%s: no match\n", globstring);*/

@@ -1,9 +1,9 @@
 
-/*   tubo.c (0.20) */
+/*   tubo.c (0.21) */
 
 /*  A program independent forking object module for gtk based programs.
  *  
- *  Copyright (C)  Edscott Wilson Garcia under GNU GPL
+ *  Copyright 2000-2002(C)  Edscott Wilson Garcia under GNU GPL
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,11 +72,12 @@ MEMCPY (void *dest, const void *src, size_t n)
 
 typedef struct fork_structure
 {
-  int childPID;
+  pid_t childPID;
+  pid_t PID;
   int tubo[3][3];
   /* user fork function: */
   void (*fork_function) (void);
-  void (*fork_finished_function) (void);
+  void (*fork_finished_function) (pid_t);
   /* user parse functions: */
   int operate_stdin;
   int (*operate_stdout) (int, void *);
@@ -162,13 +163,14 @@ TuboInput (gpointer data, gint src, GdkInputCondition condition)
 static gint
 TuboWaitDone (gpointer fork_object)
 {
-  void (*user_end_function) (void);
+  pid_t PID;
+  void (*user_end_function) (pid_t);
   fork_struct *forkO;
   forkO = (fork_struct *) ((long) fork_object);
+  PID=forkO->PID;
   user_end_function = forkO->fork_finished_function;
   /*      printf("wait timeoutdone childpid=%d\n",forkO->childPID); */
-  if (forkO->childPID)
-    return TRUE;
+  if (forkO->childPID) return TRUE;
 #ifdef DEBUG_RUN
 /* printf("wait timeoutdone childpid=%d\n",forkO->childPID); */
   {
@@ -188,8 +190,7 @@ TuboWaitDone (gpointer fork_object)
   }
 #endif
   TuboChupoFaros (forkO);
-  if (user_end_function)
-    (*user_end_function) ();
+  if (user_end_function) (*user_end_function) (PID);
   return FALSE;
 }
 
@@ -230,7 +231,7 @@ TuboSemaforo (int sig)
 
 
 void *
-Tubo (void (*fork_function) (void), void (*fork_finished_function) (void), int operate_stdin, int (*operate_stdout) (int, void *), int (*operate_stderr) (int, void *))
+Tubo (void (*fork_function) (void), void (*fork_finished_function) (pid_t), int operate_stdin, int (*operate_stdout) (int, void *), int (*operate_stderr) (int, void *))
 {
   int i;
   fork_struct tmpfork, *newfork = NULL;
@@ -261,7 +262,7 @@ Tubo (void (*fork_function) (void), void (*fork_finished_function) (void), int o
   /* signal(SIGUSR1) has to be done before fork, to avoid race */
 
   signal (SIGUSR1, TuboSemaforo);
-  tmpfork.childPID = fork ();
+  tmpfork.PID = tmpfork.childPID =fork ();
   if (tmpfork.childPID)
   {				/* the parent */
     /* INPUT PIPES *************** */
@@ -420,3 +421,12 @@ TuboCancel (void *forkObject, void (*cleanup) (void))
   /*note: fork object freed by TuboWaitDone() function */
   return NULL;
 }
+
+pid_t
+TuboPID (gpointer fork_object)
+{
+  fork_struct *forkO;
+  forkO = (fork_struct *) ((long) fork_object);
+  return (forkO->PID);
+}
+

@@ -153,7 +153,7 @@ SMBprint (nmb_list * currentN)
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
 static void
-SMBForkOver (void)
+SMBForkOver (pid_t pid)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);
@@ -292,6 +292,7 @@ void
 SMBLookup (unsigned char *servidor, int reload)
 {
   char message[256];
+  /*static gboolean first=TRUE;*/
   if (fork_obj)
   {
     print_diagnostics ("DBG:fork object not NULL!\n");
@@ -358,10 +359,14 @@ SMBLookup (unsigned char *servidor, int reload)
       thisN->shares = clean_cache (thisN->shares);
       thisN->servers = clean_cache (thisN->servers);
       thisN->workgroups = clean_cache (thisN->workgroups);
-      fork_obj = Tubo (SMBFork, SMBForkOver, FALSE, SMBparseLookup, parse_stderr);
+      /*if (first) {
+	      Tubo (SMBFork, SMBForkOver, FALSE, SMBparseLookup, parse_stderr);
+	      first=FALSE;
+      } else
+	      fork_obj =*/ Tubo (SMBFork, SMBForkOver, FALSE, SMBparseLookup, parse_stderr);
     }
     else
-      SMBForkOver ();		/* load from cache  instead */
+      SMBForkOver (1);		/* load from cache  instead */
   }
 
 
@@ -395,7 +400,7 @@ SMBrefresh (unsigned char *servidor, int reload)
     else
     {
       SMBprintTitles ();
-      SMBForkOver ();
+      SMBForkOver (1);
     }
     break;
   case FORCERELOAD:

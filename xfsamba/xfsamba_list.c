@@ -231,7 +231,7 @@ SMBListStdout (int n, void *data)
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
 static void
-SMBListForkOver (void)
+SMBListForkOver (pid_t pid)
 {
   /* no jalo para arreglar directorios: 
      gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);

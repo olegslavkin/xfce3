@@ -77,7 +77,7 @@ SMBGetStdout (int n, void *data)
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
 static void
-SMBGetForkOver (void)
+SMBGetForkOver (pid_t pid)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);

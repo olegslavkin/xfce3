@@ -22,8 +22,10 @@
 
 /* Tubo() returns void pointer to tubo object 
 *  usage: see example below */
+#include <sys/types.h>
+#include <unistd.h>
 
-void *Tubo (void (*fork_function) (void), void (*fork_finished_function) (void), int operate_stdin, int (*operate_stdout) (int, void *), int (*operate_stderr) (int, void *));
+void *Tubo (void (*fork_function) (void), void (*fork_finished_function) (pid_t), int operate_stdin, int (*operate_stdout) (int, void *), int (*operate_stderr) (int, void *));
 
 /* TuboCancel() terminates a running fork. Called
 *  with the pointer returned from Tubo()  */
@@ -34,6 +36,9 @@ void *TuboCancel (void *forkObject, void (*cleanup) (void));
 *  pointer returned by Tubo on fork creation */
 
 int TuboWrite (void *forkObject, void *data, int n);
+
+/* this returns the pid of child */
+pid_t TuboPID (void *forkObject);
 
 /* EXAMPLES for calling Tubo()****************************/
 /* ref. xfsamba.c */

@@ -188,7 +188,7 @@ SMBmkdirStdout (int n, void *data)
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
 static void
-SMBmkdirForkOver (void)
+SMBmkdirForkOver (pid_t pid)
 {
   GtkCTreeNode *node;
   cursor_reset (GTK_WIDGET (smb_nav));

@@ -125,7 +125,7 @@ static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
 *  and all data in pipe has been read : */
 
 static void
-SMBPutForkOver (void)
+SMBPutForkOver (pid_t pid)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);
@@ -239,7 +239,7 @@ static char *upload_tmpfile;
 GtkCTreeNode *DropNode=NULL;
 
 static void
-SMBDropForkOver (void)
+SMBDropForkOver (pid_t pid)
 {
   while (gtk_events_pending()) gtk_main_iteration();
   gdk_flush();

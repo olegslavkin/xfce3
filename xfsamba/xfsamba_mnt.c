@@ -58,28 +58,151 @@
 
 /*********************************************************/
 /**** mount stuff ***********/
-static char *mnt_point=NULL;
+typedef struct smbmnt_t{
+	pid_t pid;
+	char *mnt_point;
+	gboolean mounted;
+	struct smbmnt_t *next;
+}smbmnt_t;
+static smbmnt_t *headM=NULL;
+
+gboolean check_mnt(char *mount_point){
+  FILE *mtab;
+  mtab = fopen ("/etc/mtab", "r");
+  if (mtab){
+      char line[256];
+      while (fgets(line,255,mtab)){
+	line[255]=0;
+	/*printf("dbg:%s",line);*/
+	if (strstr(line,"smbfs") && strstr(line,mount_point)){
+		fclose(mtab);
+		return TRUE;
+	}  
+      }
+      fclose (mtab);
+  }
+  return FALSE; 	
+}
+
+void
+clean_smbmnt (void)
+{
+  smbmnt_t *last;
+  while (headM) {
+    if (headM->mnt_point) {
+	    strcpy(NMBcommand,headM->mnt_point);
+	    /*printf("dbg:unmounting %s\n",headM->mnt_point);*/
+	    if (!fork()){
+		  execlp("smbumount","smbumount",NMBcommand,(char *)0);
+		  _exit(123); 
+	    }
+	    usleep(50000);
+	    rmdir(headM->mnt_point);
+	    g_free (headM->mnt_point);
+    }
+    last = headM;
+    headM = headM->next;
+    g_free (last);
+  }
+  return;
+}
+
+static smbmnt_t *
+push_smbmnt (char *mnt_point,pid_t pid)
+{
+  smbmnt_t *currentM;
+  currentM = headM;
+  /*printf("dbg: pushing %s, pid=%d\n",mnt_point,pid);*/
+  if (!currentM) {
+    headM = currentM = (smbmnt_t *) malloc (sizeof (smbmnt_t));
+  }
+  else  {
+    while (currentM->next) currentM = currentM->next;
+    currentM->next = (smbmnt_t *) malloc (sizeof (smbmnt_t));
+    currentM = currentM->next;
+  }
+  if (mnt_point)
+  {
+    currentM->mnt_point = (char *) malloc (strlen (mnt_point) + 1);
+    strcpy (currentM->mnt_point, mnt_point);
+  } else currentM->mnt_point=NULL;
+  currentM->pid=pid;
+  currentM->next = NULL;
+  /*printf("dbg:  %s, pid=%d is pushed\n",mnt_point,pid);*/
+  return headM;
+}
+
+
+static char *
+find_smbmnt (pid_t pid,char *mnt_point){
+  smbmnt_t *currentM;
+  currentM = headM;
+  /*printf("dbg: finding pid=%d\n",pid);*/
+  while (currentM) {
+     /*printf("dbg: %d ?= %d (%s)\n",pid,currentM->pid,currentM->mnt_point);*/
+    if (pid && (pid==currentM->pid)) {
+            /*if (currentM->mnt_point) printf("dbg: found %s\n",currentM->mnt_point);*/
+	    return currentM->mnt_point;
+    }
+    if (mnt_point && (strcmp(mnt_point,currentM->mnt_point)==0)){
+	    return currentM->mnt_point;
+    }
+    currentM = currentM->next;
+  }
+  return NULL;
+}
+
+static smbmnt_t *
+pop_smbmnt (pid_t pid){
+  smbmnt_t *currentM, *lastM = NULL;
+  /*printf("dbg: poping pid=%d\n",pid);*/
+  if (!pid) return headM;
+  currentM = headM;
+  while (currentM) {
+    if (pid==currentM->pid) {
+	    if (lastM) lastM->next=currentM->next;
+	    else headM=currentM->next;
+	    if (currentM->mnt_point) g_free(currentM->mnt_point);
+	    /*printf("dbg:smbmnt popped\n");*/
+	    return headM;
+    }
+    lastM=currentM;
+    currentM = currentM->next;
+  }
+  return headM;
+}
+
+
 static void *mnt_fork=NULL;
 static int
 mount_stderr (int n, void *data)
 {
+
   char *line;
-  if (n) return TRUE;/* this would mean binary data */
+  if (n) return TRUE;
   line = (char *) data;
   print_diagnostics (line);
   xf_dlg_warning(smb_nav,line);
   return TRUE;
 }
 
-/* FIXME: each smbmount must keep track of it's mount point */
-/* FIXME: clean up routine must smbunmount all mounted stuff */
 static void
-unmountForkOver (void)
+unmountForkOver (pid_t pid)
 {
-/* do a check to verify if unmounted and warn otherwise. */
-	/* cat /etc/mtab | grep $mount_point */
-	/* if output, sent it with a warning */
-   return;
+  char *mount_path;
+  /* do a check to verify if unmounted and warn otherwise. */
+
+  mount_path=find_smbmnt(pid,NULL);
+  if (mount_path) {
+	  if (!check_mnt(mount_path)) rmdir(mount_path); 
+	  else {
+	   xf_dlg_error(smb_nav,_("Could not unmount"),mount_path);
+	   return;
+	  }
+  }
+  /* mount point can be eliminated from records now */
+  headM = pop_smbmnt(pid);		
+  return;
 }
 static void
 unmountFork (void){
@@ -88,10 +211,18 @@ unmountFork (void){
 }
 
 static void
-mount_xftree_ForkOver (void)
+mount_xftree_ForkOver (pid_t pid)
 {
-  /* mount point at NMBcommand */
-  Tubo(unmountFork,unmountForkOver,TRUE,parse_stderr,mount_stderr);
+  void *fo;
+  char *mount_path;
+  /*printf("dbg:  fork2 is over\n");*/
+  mount_path=find_smbmnt(pid,NULL);
+  if (mount_path) {
+   strcpy(NMBcommand,mount_path);
+   headM = pop_smbmnt(pid);	
+   fo=Tubo(unmountFork,unmountForkOver,TRUE,parse_stderr,mount_stderr);
+   headM=push_smbmnt (NMBcommand,TuboPID(fo));
+  }   
   return;
 }
 static void
@@ -100,10 +231,28 @@ mount_xftree_Fork (void){
   fprintf(stderr,_("Cannot execute xftree\n"));
 }
 static void
-mountForkOver (void)
+mountForkOver (pid_t pid)
 {
-  /* mount point at NMBcommand */
-  Tubo(mount_xftree_Fork,mount_xftree_ForkOver,TRUE,parse_stderr,parse_stderr); 
+  void *fo;
+  char *mount_path;
+  /*printf("dbg:  fork1 is over\n");*/
+  mount_path=find_smbmnt(pid,NULL);
+  /*printf("dbg: mount_path=%s \n",mount_path);*/
+  if (mount_path) {
+   strcpy(NMBcommand,mount_path);
+  /* check /etc/mtab for mount success */
+   if (!check_mnt(mount_path)){
+	   mnt_fork=NULL;
+           headM = pop_smbmnt(pid);  
+	   xf_dlg_error(smb_nav,_("Could not mount"),mount_path);
+	   return;
+   }
+   headM = pop_smbmnt(pid);  
+   fo=Tubo(mount_xftree_Fork,mount_xftree_ForkOver,TRUE,parse_stderr,parse_stderr);
+   headM=push_smbmnt (NMBcommand,TuboPID(fo));
+  }   
+  mnt_fork=NULL; /* free resource for next mnt */ 
+  
   return;
 }
 
@@ -124,13 +273,13 @@ cb_mount (GtkWidget * item, GtkWidget * ctree){
 
 	/* check if a share is selected */
   if ( g_list_length (GTK_CLIST (shares)->selection)==0){
-	xf_dlg_error(smb_nav,_("Error"),_("No top level share selected"));
+	xf_dlg_error(smb_nav,_("Error"),_("No share selected"));
 	return;
   }
   s = GTK_CLIST (shares)->selection;
   en = gtk_ctree_node_get_row_data ((GtkCTree *)shares, s->data);
   if (!(en->type & S_T_SHARE)){
-	xf_dlg_error(smb_nav,_("Error"),_("No top level share selected"));
+	xf_dlg_error(smb_nav,_("Error"),_("No share selected"));
 	return;
   }
 	
@@ -152,14 +301,9 @@ cb_mount (GtkWidget * item, GtkWidget * ctree){
 	}
 	/* query for mountpoint. default is to create a dir at /tmp/whatever */
 
-	mount_point=(char *)xf_dlg_string(smb_nav,_("Mount point"),"/tmp/xfsamba");
+	/* entry_return should not be freed! */
+	mount_point=(char *)xf_dlg_string(smb_nav,_("Mount point /tmp/xfsamba/"),en->share);
 	if (!mount_point) return;
-	if (mnt_point) g_free(mnt_point);
-	mnt_point=g_strdup(mount_point);
-	if ((mkdir(mount_point, 0xFFFF)<0)&&(errno != EEXIST)){
-		xf_dlg_error(smb_nav,strerror(errno),mount_point);
-		return;
-	}
 	/* do the smb mount, if error return */
 	
   while (mnt_fork){
@@ -173,8 +317,23 @@ cb_mount (GtkWidget * item, GtkWidget * ctree){
   NMBshare[XFSAMBA_MAX_STRING] = 0;
 
   sprintf (NMBpassword,"username=%s", thisN->password);
-  sprintf(NMBcommand,"%s",mount_point);
-  mnt_fork=Tubo(mountFork, mountForkOver, TRUE, parse_stderr,mount_stderr);
+  sprintf(NMBcommand,"/tmp/xfsamba/%s",mount_point);
+  
+	if ((mkdir("/tmp/xfsamba", 0xFFFF)<0)&&(errno != EEXIST)){
+		xf_dlg_error(smb_nav,strerror(errno),"/tmp/xfsamba");
+		return;
+	}
+	if ((mkdir(NMBcommand, 0xFFFF)<0)&&(errno != EEXIST)){
+		xf_dlg_error(smb_nav,strerror(errno),NMBcommand);
+		return;
+	}
+  if (find_smbmnt(0,NMBcommand)){
+    /* smbunmount has trouble unmounting multiple mounts (kernel 2.4 stuff) */
+    xf_dlg_error(smb_nav,_("Already mounted"),NMBcommand);
+  } else {
+    mnt_fork=Tubo(mountFork, mountForkOver, TRUE, parse_stderr,mount_stderr);
+    headM=push_smbmnt (NMBcommand,TuboPID(mnt_fork));	
+  }
   return;
 }
 
