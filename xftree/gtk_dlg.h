@@ -46,12 +46,12 @@
 #define DLG_ERROR		(1<<13)
 #define DLG_QUESTION	(1<<14)
 
-#define DLG_RC_CANCEL	0
+#define DLG_RC_CANCEL		0
 #define DLG_RC_OK		1
 #define DLG_RC_ALL		2
-#define DLG_RC_CONTINUE	3
+#define DLG_RC_CONTINUE		3
 #define DLG_RC_SKIP		4
-#define DLG_RC_DESTROY	5
+#define DLG_RC_DESTROY		5
 
 #define DLG_MAX		1024
 
@@ -81,7 +81,7 @@
 #define xf_dlg_combo(p,a,b,c) \
 			xf_dlg_new(p,a,b,c,DLG_OK_CANCEL|DLG_COMBO)
 
-int xf_dlg_new (GtkWidget *parent,char *label, char *defval, void *data, int flags);
+long xf_dlg_new (GtkWidget *parent,const char *label, char *defval, void *data, int flags);
 
 
 /* deprecated calls (because they are not transient): */

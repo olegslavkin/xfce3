@@ -208,6 +208,7 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   int count;
   cfg *win;
   golist *thisgo;
+  char *entry_return;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (list != NULL) list = free_list (list);
@@ -237,9 +238,11 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
 skipit:;
     }
     strcpy(path,"/");
-    if (xf_dlg_combo (win->top,_("Go to"), path, list) != DLG_RC_OK) {
-      return;
-    }
+    entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), path, list);
+    if (!entry_return) return;
+    free(path);
+    path=entry_return;
+    
   }
   go_to (ctree, root, path, en->flags);
 }

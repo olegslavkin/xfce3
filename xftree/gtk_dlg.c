@@ -51,15 +51,23 @@ typedef struct
   GtkWidget *top;
   GtkWidget *entry;
   void *data;
+  void *return_data;
   int result;
   int type;
 }
 dlg;
 
-static dlg dl;
+static dlg dl={
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	DLG_RC_CANCEL,
+	0
+};
 
 static GtkTargetEntry target_table[] = {
-  {"STRING", 0, TARGET_STRING},
+  {"STRING", 0, TARGET_STRING}
 #	define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
 };
 
@@ -79,31 +87,35 @@ on_cancel (GtkWidget * btn, gpointer * data)
 
 /*
  * called if user presses ok button
+ * keep combo+entryedit separate. 
  */
 
-/* FIXME: THERE IS NO GARANTEE dl.data HAS SIZE ENOUGH
- * TO RECEIVE gtk_entry_get_text (GTK_ENTRY (dl.entry) 
- * make sure all calls have at least PATH_MAX + NAME_MAX + 1
- * of preallocated memory;
- * */
+/* noneditable entry, simple ok: */
 static void
 on_ok (GtkWidget * ok, gpointer * data)
 {
-  if (dl.entry)
-  {
-    if (dl.data) {
-      char *a;
-      a=(char *)dl.data;
-      strncpy(a,gtk_entry_get_text (GTK_ENTRY (dl.entry)),
-		      PATH_MAX + NAME_MAX );
-      a[PATH_MAX + NAME_MAX]=0;
-    }
-  }
   gtk_widget_destroy (dl.top);
-
   dl.result = (int) ((long) data);
   gtk_main_quit ();
 }
+
+
+/* entry,combo  ok:*/
+static void
+on_ok_combo (GtkWidget * ok, gpointer * data)
+{
+  if (dl.return_data) free(dl.return_data);
+  dl.return_data=NULL; /* return value of false for fails */
+  if (!(dl.entry)) return;
+  if (dl.return_data) free(dl.return_data);
+  dl.return_data = (void *)malloc(1+strlen(gtk_entry_get_text (GTK_ENTRY (dl.entry) )) ); 
+  if (!(dl.return_data)) return;
+  strcpy((char *)dl.return_data,gtk_entry_get_text (GTK_ENTRY (dl.entry)));
+  gtk_widget_destroy (dl.top);
+  dl.result = 0; /* value not used */
+  gtk_main_quit ();
+}
+
 
 /*
  * call on_ok if user presses RETURN in entry widget
@@ -209,7 +221,9 @@ static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
 /*
  * create a modal dialog and handle it
  */
-gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int type)
+
+
+long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *data, int type)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *all = NULL, *skip = NULL, *close = NULL, *icon = NULL, *combo = NULL, *label, *box, *button_box;
   char title[DLG_MAX];
@@ -217,6 +231,8 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
   GdkPixmap *pix = NULL, *pim;
   GtkAccelGroup *accelgrp;
 
+  /*fprintf(stderr,"dbg1:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
+  
   dl.result = 0;
   dl.type = type;
   dl.entry = NULL;
@@ -291,11 +307,20 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
     }
     GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), ok, TRUE, FALSE, 0);
-    gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
     gtk_widget_set_usize (ok, B_WIDTH, B_HEIGHT);
-    gtk_signal_connect (GTK_OBJECT (ok), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
+    
+    if (type &(DLG_ENTRY_EDIT | DLG_COMBO)) {
+      	    gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok_combo), 
+			    (gpointer) ((long) DLG_RC_OK));
+    } else {
+       	    gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), 
+			    (gpointer) ((long) DLG_RC_OK));
+    }
+    /* tie escape to cancel: */ 
+    gtk_signal_connect (GTK_OBJECT (ok), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), 
+	    (gpointer) cancel);
   }
-  if (type & DLG_SKIP)
+  if ((type & DLG_SKIP) && !(type & (DLG_ENTRY_EDIT | DLG_COMBO )))
   {
     skip = gtk_button_new_with_label (_("Skip"));
     GTK_WIDGET_SET_FLAGS (skip, GTK_CAN_DEFAULT);
@@ -321,7 +346,8 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
     gtk_widget_set_usize (cancel, B_WIDTH, B_HEIGHT);
     gtk_widget_grab_default (cancel);
   }
-  if (type & DLG_ALL)
+  if ((type & DLG_ALL) && !(type & (DLG_ENTRY_EDIT | DLG_COMBO )))
+
   {
     /* SJB all = gtk_button_new_with_label (_("All")); */
     all = make_button_with_accel(_("_All"), accelgrp);
@@ -350,6 +376,7 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
   }
   else if (type & DLG_ENTRY_EDIT)
   {
+    /*fprintf(stderr,"dbg2:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
     dl.entry = gtk_entry_new_with_max_length (DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
@@ -371,13 +398,16 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
   {
     if (defval)
     {
+      /*fprintf(stderr,"dbg3:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
       longlabel = g_malloc (strlen (labelval) + strlen (defval) + 5);
       sprintf (longlabel, "%s: %s", labelval, (char *) defval);
-      labelval = longlabel;
     }
   }
+  /*fprintf(stderr,"dbg4:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
 
-  label = gtk_label_new (labelval);
+  if (longlabel) label = gtk_label_new (longlabel);
+  else label = gtk_label_new (labelval);
+  
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 3);
 
   if (dl.entry)
@@ -407,16 +437,11 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
   gtk_signal_connect (GTK_OBJECT (dl.top), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
   gtk_widget_show_all (dl.top);
 
-  /*The missing instruction is: 
-  gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent));
-  the problem is that in the original routine we donot have 
-  the parent widget address.
-  */
   if (parent) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent)); 
   gtk_main ();
-  if (longlabel)
-    g_free (longlabel);
-  return (dl.result);
+  if (longlabel) g_free (longlabel);
+  if (type & (DLG_ENTRY_EDIT|DLG_COMBO)) return (long)(dl.return_data);
+  return (long)(dl.result);
 }
 
 /* function for deprecated calls: */

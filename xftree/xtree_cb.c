@@ -737,14 +737,13 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
 {
   entry *en;
   GtkCTreeNode *node;
-  char path[PATH_MAX + 1];
-  char label[PATH_MAX + 1];
-  char compl[PATH_MAX + 1];
+  char *path, *label, *entry_return, *fullpath;
   cfg *win;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   count_selection (GTK_CTREE (ctree), &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  /* fprintf (stderr,"en->path=%s\n", en->path);*/
   if (!(en->type & FT_DIR))
   {
     node = GTK_CTREE_ROW (node)->parent;
@@ -752,21 +751,45 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
   }
 
   if (!GTK_CTREE_ROW (node)->expanded)
-    gtk_ctree_expand (GTK_CTREE (ctree), node);
+	 gtk_ctree_expand (GTK_CTREE (ctree), node);
 
-  if (en->path[strlen (en->path) - 1] == '/')
-    sprintf (path, "%s", en->path);
-  else
-    sprintf (path, "%s/", en->path);
-  strcpy (label, _("New_Folder"));
-  if (xf_dlg_string (win->top,path, label) == DLG_RC_OK)
-  {
-    sprintf (compl, "%s%s", path, label);
-    if (mkdir (compl, 0xFFFF) != -1)
-      update_tree (GTK_CTREE (ctree), node);
-    else
-      xf_dlg_error (win->top,compl, strerror (errno));
+  path=(char *)malloc(2+strlen(en->path));
+  if (!path) return;
+  label=(char *)malloc(2+strlen(_("New_Folder")));
+  if (!label){
+	 free(path);
+	 return;
   }
+  
+  if (en->path[strlen (en->path) - 1] == '/') sprintf (path, "%s", en->path);
+  else sprintf (path, "%s/", en->path);
+  strcpy (label, _("New_Folder"));
+  /*  fprintf (stderr,"path=%s\n",path); fprintf (stderr,"label=%s\n", label);*/
+  entry_return = (char *)xf_dlg_string (win->top,path, label);
+  if (!entry_return) {
+	 free(path); free(label); 
+	 return; /* cancelled button pressed */
+  }
+  
+  fullpath = (char *)malloc(strlen(path)+strlen(entry_return)+2);
+  if (!fullpath){
+	 xf_dlg_error(win->top,"dbg:malloc error",NULL);
+	 free(path);
+         free(label); 
+	 return;
+  }
+  sprintf(fullpath,"%s%s",path,entry_return);
+#if 0
+    fprintf (stderr,"2path=%s\n",path); 
+    fprintf (stderr,"2label=%s\n", label); 
+    fprintf (stderr,"fullpath=%s\n", fullpath);
+#endif
+  if (mkdir (fullpath, 0xFFFF) != -1)
+      update_tree (GTK_CTREE (ctree), node);
+  else
+      xf_dlg_error (win->top,fullpath, strerror (errno));
+  free(path); free(fullpath);  free(label);
+  return;
 }
 
 /*
@@ -777,10 +800,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
 {
   entry *en;
   GtkCTreeNode *node;
-  char path[PATH_MAX + 1];
-  char label[PATH_MAX + 1];
-  char compl[PATH_MAX + 1];
-  int exists = 0;
+  char *path, *label, *entry_return, *fullpath;
   struct stat st;
   FILE *fp;
   cfg *win;
@@ -795,45 +815,51 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   }
 
-  if (!GTK_CTREE_ROW (node)->expanded)
-    gtk_ctree_expand (GTK_CTREE (ctree), node);
-
-  if (en->path[strlen (en->path) - 1] == '/')
-    sprintf (path, "%s", en->path);
-  else
-    sprintf (path, "%s/", en->path);
-  strcpy (label, "New_File.c");
-  if ((xf_dlg_string (win->top,path, label) == DLG_RC_OK) && strlen (label) && io_is_valid (label))
-  {
-    sprintf (compl, "%s%s", path, label);
-    if (stat (compl, &st) != -1)
-    {
-      /*if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)*/
-      if (xf_dlg_new(win->top,override_txt(compl,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
-      {
-	return;
-      }
-      exists = 1;
-    }
-    fp = fopen (compl, "w");
-    if (!fp)
-    {
-      xf_dlg_error (win->top,_("Can't create : "), compl);
-      return;
-    }
-    fclose (fp);
-#if 0
-    /* this puts the node out of place within the ordering scheme and is lost to user.
-     * use update timer instead. It will be fast since the directory info is cached
-     * in memory by now.*/
-    if (!exists){
-     int tmp = 0; 
-     add_node (GTK_CTREE (ctree), node, NULL, label, compl, &tmp, en->flags);
-    }
-#endif
-    update_timer (GTK_CTREE(ctree));
-    
+  if (!GTK_CTREE_ROW (node)->expanded) gtk_ctree_expand (GTK_CTREE (ctree), node);
+  
+  path=(char *)malloc(2+strlen(en->path));
+  if (!path) return;
+  label=(char *)malloc(2+strlen(_("New_File")));
+  if (!label){
+	 free(path);
+	 return;
   }
+
+  if (en->path[strlen (en->path) - 1] == '/')  sprintf (path, "%s", en->path);
+  else    sprintf (path, "%s/", en->path);
+  strcpy (label, _("New_File"));
+  entry_return = (char *)xf_dlg_string (win->top,path, label);
+  
+  if (!entry_return || !strlen(entry_return) || !io_is_valid (entry_return)){
+	free(path); free(label); 
+	return;
+  }
+  fullpath = (char *)malloc(strlen(path)+strlen(entry_return)+2);
+  if (!fullpath){
+	 xf_dlg_error(win->top,"dbg:malloc error",NULL);
+	 free(path);
+         free(label); 
+	 return;
+  }
+  
+
+  sprintf (fullpath, "%s%s", path, label);
+  if (stat (fullpath, &st) != -1) {
+      /*if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)*/
+      if (xf_dlg_new(win->top,override_txt(fullpath,NULL),
+			      _("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK) {
+	 free(path);free(fullpath); free(label); 
+ 	 return;
+      }
+  }
+  fp = fopen (fullpath, "w");
+  if (!fp)    {
+     xf_dlg_error (win->top,fullpath,strerror(errno));
+     free(path);free(fullpath); free(label); 
+     return;
+  }
+  fclose (fp);
+  update_timer (GTK_CTREE(ctree));
 }
 
 
@@ -905,12 +931,7 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
 {
   entry *en;
   GtkCTreeNode *node;
-  GdkPixmap *pix, *pim;
-  guint8 spacing;
-  gboolean existing_file = FALSE;
-  char ofile[PATH_MAX + NAME_MAX + 1];
-  char nfile[PATH_MAX + NAME_MAX + 1];
-  char *p;
+  char *ofile,*nfile,*p,*entry_return,*label;
   cfg *win;
   struct stat st;
 
@@ -921,71 +942,58 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
     return;
   }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
-    return;
-  if (strchr (en->label, '/'))
-    return;
+  if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) return;
+  if (strchr (en->label, '/'))  return;
 
-  ctree_freeze (ctree);
-  sprintf (nfile, "%s", en->label);
-  if ((xf_dlg_string (win->top,_("Rename to : "), nfile) == DLG_RC_OK) && strlen (nfile) && io_is_valid (nfile))
-  {
-    if ((p = strchr (nfile, '/')) != NULL)
-    {
+  label = (char *)malloc(strlen(en->label)+1);
+  if (!label) return;
+  strcpy(label,en->label);
+  entry_return = (char *)xf_dlg_string (win->top,_("Rename to : "),label);
+  
+  if (!entry_return || !strlen(entry_return) || !io_is_valid (entry_return)){
+	return;
+  }
+
+  if ((p = strchr (entry_return, '/')) != NULL) {
       p[1] = '\0';
       xf_dlg_error (win->top,_("Character not allowed in filename"), p);
-      ctree_thaw (ctree);
       return;
-    }
-    sprintf (ofile, "%s", en->path);
-    p = strrchr (ofile, '/');
-    p++;
-    sprintf (p, "%s", nfile);
-    strcpy (nfile, ofile);
-    strcpy (ofile, en->path);
-    if (lstat (nfile, &st) != ERROR)
-    {
-      /*if (dlg_question (_("Override ?"), nfile) != DLG_RC_OK)*/
+  }
+
+  ofile = (char *)malloc(strlen(en->path)+1);
+  if (!ofile){
+	  return;
+  }	  
+  strcpy(ofile,en->path);
+  
+  nfile = (char *)malloc(strlen(en->path)+strlen(entry_return)+1);
+  if (!nfile) {
+	  free(ofile);
+	  return;
+  }
+  strcpy (nfile,ofile);
+  p=strrchr(nfile,'/');
+  p[1]=0;
+  strcat(nfile,entry_return);
+
+  /*fprintf(stderr,"dbg: rename %s->%s\n",ofile,nfile);*/
+
+  if (lstat (nfile, &st) != ERROR)  {
       if (xf_dlg_new(win->top,override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
-	ctree_thaw (ctree);
+	free(ofile); free(nfile);
 	return;
       }
-      existing_file = TRUE;
-    }
-    if (rename (ofile, nfile) == -1)
-    {
-      xf_dlg_error (win->top,nfile, strerror (errno));
-    }
-    else
-    {
-      if (existing_file)
-      {
-	/* If the user choosed to overwrite an existing file, the node already
-	   exists, thus we need to remove the current node (otherwise we'll
-	   get the same file twice, and the update process won't remove it
-	   since the file exists !).
-	 */
-	gtk_ctree_remove_node (ctree, node);
-      }
-      else
-      {
-	/* If the file did not exist previously, just the name of the node
-	   according to the given name
-	 */
-	g_free (en->path);
-	g_free (en->label);
-	en->path = g_strdup (nfile);
-	p = strrchr (nfile, '/');
-	p++;
-	en->label = g_strdup (p);
-	gtk_ctree_get_node_info (ctree, node, NULL, &spacing, &pix, &pim, NULL, NULL, NULL, NULL);
-	gtk_ctree_node_set_pixtext (ctree, node, 0, p, spacing, pix, pim);
-	update_tree (ctree, node);
-      }
-    }
   }
-  ctree_thaw (ctree);
+  if (rename (ofile, nfile) == -1)  {
+      xf_dlg_error (win->top,nfile, strerror (errno));
+      free(ofile); free(nfile);
+      return;
+  }
+  update_timer (GTK_CTREE(ctree));
+  free(ofile); free(nfile);
+  return;
+  
 }
 
 /*

@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia 2001 for xfce project.
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -525,6 +527,7 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   GtkCTreeNode *node;
   char label[PATH_MAX + 1];
   char path[PATH_MAX + 1];
+  char *entry_return;
   char *sfx, *arg;
   entry *en;
   cfg *win;
@@ -570,17 +573,18 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   else
     strcpy (path, DEF_APP);
   apps = reg_app_list (win->reg);
-  if (xf_dlg_combo (win->top,label, path, apps) == DLG_RC_OK)
+  entry_return = (char *) xf_dlg_combo (win->top,label, path, apps);
+  if (entry_return)
   {
-    if (*path)
+    if (strlen(entry_return))
     {
-      if ((arg = strchr (path, ' ')) != NULL)
+      if ((arg = strchr (entry_return, ' ')) != NULL)
       {
 	*arg++ = '\0';
 	if (!*arg)
 	  arg = NULL;
       }
-      win->reg = reg_add_suffix (win->reg, sfx, path, arg);
+      win->reg = reg_add_suffix (win->reg, sfx, entry_return, arg);
       reg_save (win->reg);
     }
   }
