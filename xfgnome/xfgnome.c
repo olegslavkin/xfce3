@@ -520,8 +520,6 @@ DeadPipe (int sig)
     case SIGINT:
       fprintf (stderr, "User abort, exiting\n");
       exit (-1);
-    case SIGPIPE:
-      fprintf (stderr, "pipe\n");
     default:
       break;
     }

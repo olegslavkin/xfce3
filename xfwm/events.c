@@ -724,28 +724,6 @@ HandlePropertyNotify ()
                 RaiseWindow (Tmp_win);
             }
         }
-        else if (Event.xproperty.atom == _XA_WIN_STATE)
-        {
-            unsigned long state = 0L;
-            if (GetWindowState (Tmp_win, &state))
-            {
-                unsigned long old_flags = Tmp_win->flags;
-                if (state & WIN_STATE_STICKY)
-                {
-                    Tmp_win->flags |= STICKY;
-                }
-                else
-                {
-                    Tmp_win->flags &= ~STICKY;
-                }
-		if (Tmp_win->flags != old_flags)
-		{
-                    RedrawRightButtons (Tmp_win, (Scr.Hilite == Tmp_win), True, None);
-                    RedrawLeftButtons (Tmp_win, (Scr.Hilite == Tmp_win), True, None);
-                    BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, Tmp_win);
-		}
-            }
-        }
         break;
     }
 #ifdef DEBUG
@@ -763,21 +741,54 @@ HandlePropertyNotify ()
 void
 HandleClientMessage ()
 {
-    XEvent button;
-
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : Leaving HandleClientMessage ()\n");
+    fprintf (stderr, "xfwm : Entering HandleClientMessage ()\n");
 #endif
     if ((Event.xclient.message_type == _XA_WM_CHANGE_STATE) &&
             (Tmp_win) && (Event.xclient.data.l[0] == IconicState) &&
             !(Tmp_win->flags & TRANSIENT) && !(Tmp_win->flags & ICONIFIED))
     {
+        XEvent button;
         XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild,
                        &(button.xmotion.x_root),
                        &(button.xmotion.y_root), &JunkX, &JunkY, &JunkMask);
         button.type = 0;
         ExecuteFunction ("Iconify", Tmp_win, &button, C_FRAME, -1);
     }
+    else if (Event.xclient.message_type == _XA_WIN_STATE)
+    {
+        unsigned long old_flags = Tmp_win->flags;
+        unsigned long new_members = Event.xclient.data.l[0];
+	unsigned long change_mask = Event.xclient.data.l[1];
+
+        if (new_members & WIN_STATE_STICKY)
+        {
+	    if (!(Tmp_win->flags & STICKY))
+	    {
+                Tmp_win->flags |= STICKY;
+#ifdef DEBUG
+		fprintf (stderr, "HandleClientMessage: setting state sticky for win %s\n", Tmp_win->name);
+#endif
+            }
+	}
+        else if (change_mask & WIN_STATE_STICKY)
+        {
+	    if (Tmp_win->flags & STICKY)
+	    {
+                Tmp_win->flags &= ~STICKY;
+#ifdef DEBUG
+                fprintf (stderr, "HandleClientMessage: removing state sticky for win %s\n", Tmp_win->name);
+#endif
+            }
+	}
+	if (Tmp_win->flags != old_flags)
+	{
+            RedrawRightButtons (Tmp_win, (Scr.Hilite == Tmp_win), True, None);
+            RedrawLeftButtons (Tmp_win, (Scr.Hilite == Tmp_win), True, None);
+            BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, Tmp_win);
+	}
+    }
+
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleClientMessage ()\n");
 #endif

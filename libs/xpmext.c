@@ -442,7 +442,7 @@ MyCreateGdkPixmapFromFile (char *filename, GtkWidget * widget,
     {
       fprintf (stderr, _("*** WARNING ***: Cannot load image file %s\n"),
 	       filename);
-      source = gdk_pixbuf_new_from_xpm_data (empty);
+      source = gdk_pixbuf_new_from_xpm_data ((const char **) empty);
     }
   if (source)
     {
@@ -543,9 +543,9 @@ MyCreateGdkPixmapFromData (char **data, GtkWidget * widget, GdkBitmap ** mask, g
     }
 #else /* without HAVE_GDK_IMLIB */
 #ifdef HAVE_GDK_PIXBUF
-  source = gdk_pixbuf_new_from_xpm_data (data);
+  source = gdk_pixbuf_new_from_xpm_data ((const char **)data);
   if (!source)
-    source = gdk_pixbuf_new_from_xpm_data (empty);
+    source = gdk_pixbuf_new_from_xpm_data ((const char **)empty);
   if (source)
     {
       gtk_widget_size_request ((GtkWidget *) widget, &requisition);

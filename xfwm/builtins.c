@@ -840,15 +840,7 @@ delete_function (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 
     if (tmp_win->flags & DoesWmDeleteWindow)
     {
-        if (!(tmp_win->deleted))
-        {
-            send_clientmessage (dpy, tmp_win->w, _XA_WM_DELETE_WINDOW, CurrentTime);
-            tmp_win->deleted = True;
-        }
-        else
-        {
-            XKillClient (dpy, tmp_win->w);
-        }
+        send_clientmessage (dpy, tmp_win->w, _XA_WM_DELETE_WINDOW, CurrentTime);
         return;
     }
     else
@@ -875,7 +867,9 @@ close_function (XEvent * eventp, Window w, XfwmWindow * tmp_win,
         Destroy (tmp_win);
     }
     else
+    {
         XKillClient (dpy, tmp_win->w);
+    }
 }
 
 void
@@ -1036,22 +1030,34 @@ stick_function (XEvent * eventp, Window w, XfwmWindow * tmp_win,
             (mystrncasecmp (mode, "1", 1) == 0))
     {
         tmp_win->flags |= STICKY;
+#ifdef DEBUG
+        fprintf (stderr, "stick_function: setting state sticky for win %s\n", tmp_win->name);
+#endif
     }
     else if ((mystrncasecmp (mode, "Of", 2) == 0) ||
              (mystrncasecmp (mode, "N", 1) == 0) ||
              (mystrncasecmp (mode, "0", 1) == 0))
     {
         tmp_win->flags &= ~STICKY;
+#ifdef DEBUG
+        fprintf (stderr, "stick_function: removing state sticky for win %s\n", tmp_win->name);
+#endif
     }
     else
     {
 	if (tmp_win->flags & STICKY)
 	{
             tmp_win->flags &= ~STICKY;
+#ifdef DEBUG
+            fprintf (stderr, "stick_function: toggle off state sticky for win %s\n", tmp_win->name);
+#endif
 	}
 	else
 	{
             tmp_win->flags |= STICKY;
+#ifdef DEBUG
+            fprintf (stderr, "stick_function: toggle on state sticky for win %s\n", tmp_win->name);
+#endif
 	}
     }
     free (mode);
