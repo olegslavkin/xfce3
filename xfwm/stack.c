@@ -222,6 +222,7 @@ LowerIcons (void)
   }
 #endif
 
+  Scr.LastWindowLowered = NULL;
   for (j = MAX_LAYERS; j >= 0; j--)
   {
     /* Put regular windows on top */
@@ -229,6 +230,7 @@ LowerIcons (void)
     {
       if ((!((t->win)->flags & ICONIFIED) || ((t->win)->flags & (SUPPRESSICON | ICON_UNMAPPED))) && ((t->win)->layer == j))
       {
+        Scr.LastWindowRaised  = t;
 	wins[i++] = (t->win)->frame;
 	newstack = AddToXfwmWindowList (newstack, t->win);
       }
@@ -240,6 +242,8 @@ LowerIcons (void)
       {
 	newstack = AddToXfwmWindowList (newstack, t->win);
 	wins[i++] = (t->win)->icon_w;
+        if (!Scr.LastWindowLowered)
+	  Scr.LastWindowLowered = t;
 	if ((t->win)->icon_pixmap_w)
 	  wins[i++] = (t->win)->icon_pixmap_w;
       }
@@ -255,6 +259,7 @@ LowerIcons (void)
     XRestackWindows (dpy, wins, i);
   }
   free (wins);
+  
   Broadcast (XFCE_M_RESTACK, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
