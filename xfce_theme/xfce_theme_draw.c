@@ -965,10 +965,10 @@ draw_tab (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkShad
   g_return_if_fail (window != NULL);
 
   x += (width - OPTION_INDICATOR_WIDTH) / 2;
-  y += (height - 13) / 2 - 1;
+  y += (height - PART_SIZE) / 2 - 1;
 
   draw_varrow (window, style->text_gc[state_type], shadow_type, area, GTK_ARROW_UP, x, y, OPTION_INDICATOR_WIDTH, 5);
-  draw_varrow (window, style->text_gc[state_type], shadow_type, area, GTK_ARROW_DOWN, x, y + 8, OPTION_INDICATOR_WIDTH, 5);
+  draw_varrow (window, style->text_gc[state_type], shadow_type, area, GTK_ARROW_DOWN, x, y + OPTION_INDICATOR_WIDTH + 1, OPTION_INDICATOR_WIDTH, 5);
 }
 
 static void

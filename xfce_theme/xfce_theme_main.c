@@ -19,7 +19,12 @@
 #include <gtk/gtk.h>
 #include <gmodule.h>
 
-#define SCROLLBAR_WIDTH 14
+#define SCROLLBAR_WIDTH 15
+
+static gint range_slider_width;
+static gint range_min_slider_size;
+static gint range_stepper_size;
+static gint range_stepper_slider_spacing;
 
 /* Theme functions to export */
 void theme_init (GtkThemeEngine * engine);
@@ -113,14 +118,33 @@ theme_init (GtkThemeEngine * engine)
 
   /* Make scrollbars wider */
   rangeclass = (GtkRangeClass *) gtk_type_class (gtk_range_get_type ());
+ 
+  /* Save old values */
+  range_slider_width = rangeclass->slider_width;
+  range_min_slider_size = rangeclass->min_slider_size;
+  range_stepper_size = rangeclass->stepper_size;
+  range_stepper_slider_spacing = rangeclass->stepper_slider_spacing;
+
+  /* Set new values */
   rangeclass->slider_width = SCROLLBAR_WIDTH;
   rangeclass->min_slider_size = SCROLLBAR_WIDTH;
   rangeclass->stepper_size = SCROLLBAR_WIDTH;
+  rangeclass->stepper_slider_spacing = 0;
 }
 
 void
 theme_exit (void)
 {
+   GtkRangeClass *rangeclass;
+   GtkScaleClass *scaleclass;
+
+   rangeclass = (GtkRangeClass *)gtk_type_class(gtk_range_get_type());
+   scaleclass = (GtkScaleClass *)gtk_type_class(gtk_scale_get_type());
+
+   rangeclass->slider_width = range_slider_width;
+   rangeclass->min_slider_size = range_min_slider_size;
+   rangeclass->stepper_size = range_stepper_size;
+   rangeclass->stepper_slider_spacing = range_stepper_slider_spacing;
 }
 
 /* The following function will be called by GTK+ when the module
