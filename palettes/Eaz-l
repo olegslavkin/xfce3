@@ -1,10 +1,10 @@
 255 255 255
-81 130 130
-81 130 130
+245 243 245
+245 243 245
 186 184 186
 245 243 245
 245 243 245
 81 130 130
 221 221 221
-engine=gtk
--adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1
+engine=xfce
+-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-15
