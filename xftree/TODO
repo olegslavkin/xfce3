@@ -1,7 +1,5 @@
 easy:
-15- Add "copy" and "insert" keyboard shortcuts and functions
-12- Add a "Go Back" function. (do while debugging goto option)
-16- Config option: Default open with program
+16- Config option: Default "open with" program
 
 complicated:
 6.- MC style opening of packed files: Click on files and you see the internal
@@ -11,23 +9,33 @@ from these files straight to where you want it.
 7- Add code necesary to d+d files to/from xfsamba.
 
 unknown:
-3- Debug the "goto" option (seems the "fork" may lose variables at times).
 14- add "save user shortcutkeys to config options:
     does gtk store the custom values in the associated accel?
     if so, how do you retrieve the values?
-bugs to fix: information dialogs can get lost beneath 
+17- desktop icons
+18- different type documents have different pixmapped icons
+19- much more configurable (file open actons ...)
+
+bugs to fix:
+  -goback function loses some history elements: check create/destroy
+    algorithm. 
+  -information dialogs can get lost beneath 
              * need to check behavior of dlg_prop(),
                dlg_open_with(),dlg_execute() called in xtre_gui
              * need to check other files
                     all over yet)
-             erratic behavior when the top open folder gets moved away by 
-             another process.
-+ desktop icons
-+ different type documents have different pixmapped icons
-+ much more configurable (file open actons ...)
+  -erratic behavior when the top open folder gets moved away by 
+             another process, must fail gracefully.
 
 ****************************************************************
 done:
+3- Debug the "goto" option (seems the "fork" may lose variables at times).
+  nope: was a memory allocation error involving glists. That g_list_free
+  is not very good since it is a void function. ideally it should return
+  NULL cast as a (GList *)
+15- Add "copy" and "insert" keyboard shortcuts and functions
+12- Add a "Go Back" function. (do while debugging goto option)
+    goto has been debugged. 
 + useful dialog by copying multiple files (repeats #10)
 
 10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place, also faster than opening and closing dialogs).
