@@ -1,3 +1,90 @@
+2001-10-15  xfce
+
+	* xfwm/: add_window.c, borders.c, events.c: Optimize window title
+	drawing, Clean-up code in events.c
+
+2001-10-15  xfce
+
+	* xfwm/events.c: Remove stuff that I don't understand !!
+
+2001-10-15  xfce
+
+	* xfwm/events.c: Improve DestroyNotify() handler
+
+2001-10-15  xfce
+
+	* xfwm/misc.c: Add another Sync right after blocking events in
+	Destroy ()
+
+2001-10-15  xfce
+
+	* xfwm/misc.c: Add xync in Destroy to avoid race cond.
+
+2001-10-15  xfce
+
+	* xfwm/add_window.c: Remove the shortcut
+
+2001-10-15  xfce
+
+	* xfwm/add_window.c: Forgot to ungrab server
+
+2001-10-15  xfce
+
+	* xfwm/add_window.c: Moved the shortcut inside the portion under
+	server grab
+
+2001-10-15  xfce
+
+	* xfwm/: add_window.c, events.c, icons.c, misc.c: Chasing bugs
+
+2001-10-13  xfce
+
+	* xfwm/add_window.c: This one passes all the tests
+
+2001-10-13  xfce
+
+	* xfwm/: add_window.c, events.c, icons.c, misc.c, misc.h: Various
+	changes
+
+2001-10-12  xfce
+
+	* xfwm/events.c: Set NormalState in MapNotify, not in MapRequest
+
+2001-10-12  xfce
+
+	* xfwm/misc.c: Add improvement/optimization to GrabEm()/UngrabEm()
+	routines
+
+2001-10-12  xfce
+
+	* xfwm/: events.c, icons.c, misc.c: Optimize de-iconify function
+
+2001-10-11  xfce
+
+	* xfwm/misc.c: Reverting UngrabEm ()
+
+2001-10-11  xfce
+
+	* xfwm/: builtins.c, events.c, icons.c: Various changes
+
+2001-10-11  xfce
+
+	* xfwm/add_window.c: Remove some newly added optimizations in
+	add_window ()
+
+2001-10-11  xfce
+
+	* xfwm/style.c: Forgot to modify the string length after changing
+	some style options
+
+2001-10-11  xfce
+
+	* backdrops/: DISTFILES.in, WipeBlue.png: Add new backdrop
+
+2001-10-10  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-10-10  xfce
 
 	* config.h.in, configure, configure.in, libs/Strings.c,
