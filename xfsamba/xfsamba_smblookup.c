@@ -36,7 +36,6 @@
 #include "fileselect.h"
 
 /* local xfsamba includes : */
-#define XFSAMBA_MAIN
 #include "tubo.h"
 #include "xfsamba.h"
 #endif
