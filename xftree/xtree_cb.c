@@ -406,8 +406,15 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   if (!fname) return ; if (!mname) return ;
   sprintf(fname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
   sprintf(mname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
+  
+  /*fprintf(stderr,"dbg:fname=%s,mname=%s",fname,mname);*/
+  
   if ((tmpfile=fopen(fname,"w"))==NULL) return ;
-  if ((movefile=fopen(mname,"w"))==NULL) return ;
+  if ((movefile=fopen(mname,"w"))==NULL){
+	  fclose(tmpfile); 
+	  unlink(fname);
+	  return ;
+  }
 
   for (i = 0; (i < num)&&(selection!=NULL); i++,selection=selection->next){
     gboolean zap;
@@ -477,11 +484,14 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   fclose (movefile);
 
   if (moveitems) DirectTransfer((GtkWidget *)ctree,TR_MOVE,mname);
-  else unlink(mname);
 
   if (zapitems) {
     char line[256];
-    if ((tmpfile=fopen(fname,"r"))==NULL) return;
+    if ((tmpfile=fopen(fname,"r"))==NULL) {
+     unlink(mname);
+     unlink(fname);
+     return;
+    }
     while (!feof(tmpfile)&&fgets(line,255,tmpfile)){
 	    char *word;
 	    word=strtok(line,":"); if (!word) continue;
@@ -490,10 +500,12 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     }
     fclose(tmpfile);
   }
-  unlink(fname);
   
   /* immediate refresh */
-delete_done:  
+delete_done: 
+  unlink(mname);
+  unlink(fname);
+  
   ctree_thaw (ctree);
   update_timer (ctree);
 }

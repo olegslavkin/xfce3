@@ -1,3 +1,8 @@
+a *must* do:
+Once the copy/move has gone recursive, on errors it must query continue/cancel
+instead of just cancelling. Maybe a redflag.tmpcode in /tmp, which if unlinked
+is green light, otherwise, parent will kill child before greenlight comes.
+
 Two big ones:
 7- Add code necesary to d+d files to/from xfsamba.
 6.- MC style opening of packed files: Click on files and you see the internal
