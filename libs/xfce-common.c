@@ -690,6 +690,9 @@ signal_setup (void)
 void
 xfce_init (int *argc, char **argv[])
 {
+#ifdef HAVE_GDK_IMLIB
+  int pixmaps, images;
+#endif
   signal_setup ();
 
   gtk_set_locale ();
@@ -701,6 +704,15 @@ xfce_init (int *argc, char **argv[])
 /* Get gdk to use imlib's visual and colormap */
   gtk_widget_push_visual (gdk_imlib_get_visual ());
   gtk_widget_push_colormap (gdk_imlib_get_colormap ());
+			
+  /*
+   * Taken from gnome-libs where it is explained.
+   */
+  gdk_imlib_get_cache_info (&pixmaps, &images);
+  if (!((pixmaps == -1) || (images == -1)))
+  {
+    gdk_imlib_set_cache_info (0, images);
+  }
 #endif
   init_xfce_rcfile();
 }
