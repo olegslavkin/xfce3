@@ -1306,7 +1306,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = x;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
       i = 0;
       seg[i].x1 = x + 1;
       seg[i].y1 = y;
@@ -1338,7 +1338,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = w + x;
       seg[i++].y2 = y;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y + 1;
@@ -1443,7 +1443,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = h + y - 2;
       seg[i].x2 = x + w - t->boundary_width + 1;
       seg[i++].y2 = h + y - 2;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
       XDrawPoint (dpy, win, BlGC, x + w - t->boundary_width, y + h - 1);
 #endif
       break;
@@ -1462,7 +1462,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y + h - t->boundary_width;
       seg[i].x2 = x + w;
       seg[i++].y2 = y + h - t->boundary_width;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
 #endif
       i = 0;
       seg[i].x1 = x + 1;
@@ -1524,7 +1524,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = x + w - t->boundary_width;
       seg[i++].y2 = y + h - t->boundary_width;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
 #endif
       i = 0;
       seg[i].x1 = w + x - 1;
