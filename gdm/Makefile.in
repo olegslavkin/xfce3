@@ -46,13 +46,13 @@ install-data-no: all
 
 install-data-yes: all
 	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(INSTALL_SCRIPT) $(srcdir)/XFce $(gdm_prefix)/XFce; \
+	  $(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
 	fi
 
 installcheck:
 
 uninstall:
-	rm -f $(gdm_prefix)/XFce
+	rm -f $(DESTDIR)$(gdm_prefix)/XFce
 
 check: all
 

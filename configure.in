@@ -316,10 +316,9 @@ AC_SUBST(USE_GDM)
 GDM_PREFIX=/etc/X11/gdm/Sessions
 AC_MSG_CHECKING(where GDM keeps session files)
 AC_ARG_WITH(gdm-prefix,
-[  --gdm-session-prefix=STR  [default=/etc/X11/gdm/Sessions] where GDM
-keeps session files],[
-      GDM_PREFIX="$withval", GDM_PREFIX=/etc/X11/gdm/Sessions
-])
+	[  --with-gdm-prefix=STR        where GDM keeps session files (default=/etc/X11/gdm/Sessions)],
+	[ GDM_PREFIX="$withval", GDM_PREFIX=/etc/X11/gdm/Sessions]
+)
 AC_MSG_RESULT($GDM_PREFIX)
 AC_SUBST(GDM_PREFIX)
 

@@ -5,6 +5,7 @@
 %define		datadir /usr/share
 %define		confdir /etc/X11
 %define		gtkengines /usr/lib/gtk/themes/engines
+%define		gdmdata /etc/X11/gdm/Sessions
 
 Summary:	A Powerfull X Environment, with Toolbar and Window Manager
 Name:		%{name}
@@ -36,13 +37,15 @@ environment for Linux and various Unices...
 
 %build
 ./configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
---disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft --enable-gdm
+--disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft \
+--enable-gdm --with-gdm-prefix=%{gdmdata}
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT mandir=%{_mandir}
 mkdir -p $RPM_BUILD_ROOT/usr/share/icons
+mkdir -p $RPM_BUILD_ROOT%{gdmdata}
 mkdir -p $RPM_BUILD_ROOT%{gtkengines}
 
 (
@@ -68,6 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{confdir}/xfce/*
 %{gtkengines}/libxfce.*
+%{gdmdata}/XFce
 
 # %files libs
 # %defattr(-, root, root)
