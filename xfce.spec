@@ -1,5 +1,5 @@
 %define 	name	xfce
-%define 	version	3.8.15.11
+%define 	version	3.8.15.12
 %define		release	1
 %define		prefix 	/usr
 %define		datadir /usr/share
