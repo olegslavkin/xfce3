@@ -78,6 +78,7 @@ entry;
 #define FT_RPM_DUMMY		(1<<22)
 #define FT_DIR_RO		(1<<23)
 #define FT_PD			(1<<24)
+#define FT_ISROOT		(1<<25)
 
 
 

@@ -522,7 +522,7 @@ static int inner_tar_delete(GtkCTree *ctree,char *path){
 	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 	check.path=g_strdup(path);
 	tar_node=gtk_ctree_find_by_row_data_custom (ctree, 
-			GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), 
+			find_root((GtkCTree *)ctree), 
 			&check, compare_node_path);
 
 	if (strncmp(check.path,"tar:",strlen("tar:"))!=0) {errno=EFAULT;return -1;}
@@ -659,7 +659,7 @@ int tar_extract(GtkCTree *ctree,char *tgt,char *o_src){
  *        this is not the case with a "delete" command */
 	check.path=g_strdup(src);
 	tar_node=gtk_ctree_find_by_row_data_custom (ctree, 
-			GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), 
+			find_root((GtkCTree *)ctree), 
 			&check, compare_node_path);
         en = gtk_ctree_node_get_row_data (GTK_CTREE (tar_ctree), tar_node);
 	if (en && (en->st.st_mode)) mode= en->st.st_mode;

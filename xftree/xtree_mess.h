@@ -117,4 +117,5 @@ void cb_doubleC_goto (GtkWidget * widget, gpointer ctree);
 void cb_save_geo (GtkWidget * widget, gpointer ctree);
 void cb_sizeKB (GtkWidget * widget, gpointer ctree);
 void cleanup_tmpfiles(void);
+GtkCTreeNode *find_root(GtkCTree * ctree);
 #endif

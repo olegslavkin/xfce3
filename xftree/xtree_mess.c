@@ -84,6 +84,18 @@
 static GdkFont *the_font; 
 static char *custom_font=NULL;
 
+GtkCTreeNode *find_root(GtkCTree * ctree){
+	GtkCTreeNode *node;
+	entry *en;
+	node=gtk_ctree_node_nth (ctree,0);
+	while (node){
+		en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+		if (en->type & FT_ISROOT) return node;
+		node = GTK_CTREE_ROW (node)->sibling;
+	}
+	if (!node) return NULL;
+}
+
 int set_fontT(GtkWidget * ctree){
 	GtkStyle  *Ostyle,*style;
 	Ostyle=gtk_widget_get_style (ctree);
@@ -634,7 +646,7 @@ void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree)
   cfg *win;
   entry *en;
   GtkCTreeNode *root;
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  root = find_root((GtkCTree *)ctree);
 
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
 
@@ -657,7 +669,7 @@ void cb_show_status(GtkWidget * widget, GtkWidget *ctree)
   entry *en;
   GtkCTreeNode *root;
 
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  root = find_root((GtkCTree *)ctree);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
@@ -684,8 +696,7 @@ void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
   cfg *win;
   entry *en;
   GtkCTreeNode *root;
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-
+  root = find_root((GtkCTree *)ctree);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree)); 
   win->preferences ^= SHORT_TITLES;
   preferences = win->preferences;

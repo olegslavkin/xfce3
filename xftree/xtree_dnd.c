@@ -334,7 +334,7 @@ on_drag_end (GtkWidget * ctree, GdkDragContext * context, gpointer data)
   if (win->dnd_data){g_free(win->dnd_data);win->dnd_data=NULL;}
   num = g_list_length (GTK_CLIST (ctree)->selection);
   if (!num)
-    node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+    node = find_root((GtkCTree *)ctree);
   else
   {
     node = GTK_CTREE_ROW (GTK_CLIST (ctree)->selection->data)->parent;

@@ -255,6 +255,7 @@ int entry_update (entry * en)
   /* don't do updates on internal tar-rpm entries */
   if (strncmp(en->path,"tar:",strlen("tar:")) == 0) return (0);
   if (strncmp(en->path,"rpm:",strlen("rpm:")) == 0) return (0);
+  if (en->type & FT_ISROOT) tipo |= FT_ISROOT;
 
   if (lstat (en->path, &s) == -1) {
 	  return (-1); /* its gone */

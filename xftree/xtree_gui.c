@@ -299,7 +299,7 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
         /* disable goto on FT_TARCHILD */
         if (en->type & (FT_RPMCHILD|FT_TARCHILD)) return TRUE;
         /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
-	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
+	go_to (GTK_CTREE (ctree), find_root((GtkCTree *)ctree), en->path, en->flags);
 	return (TRUE);
       }
     }
@@ -322,8 +322,6 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     if (en->type & FT_DIR_UP)
     {
       cb_go_up(NULL,GTK_CTREE (ctree)); 	    
-   /*   node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-      go_to (GTK_CTREE (ctree), node, uri_clear_path (en->path), en->flags);*/
       return (TRUE);
     }
     if (!(en->type & FT_FILE))
@@ -433,7 +431,7 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
       }
     }
     gtk_widget_hide(win->autotype_C);
-    if (node== GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list))
+    if (node==find_root((GtkCTree *)ctree))
 	    gtk_widget_hide(win->autotar_C);
     else gtk_widget_show(win->autotar_C);
     en = gtk_ctree_node_get_row_data (ctree, node); 
@@ -505,7 +503,7 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
     return (TRUE);
     break;
   case GDK_Return:
-    num = g_list_length (GTK_CLIST (ctree)->row_list);
+    num = g_list_length (GTK_CLIST(find_root((GtkCTree *)ctree))->row_list);
     for (i = 0; i < num; i++)
     {
       if (GTK_CLIST (ctree)->focus_row == i)
@@ -517,7 +515,7 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
 	  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
 	  {
 	    /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
-	    go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
+	    go_to (GTK_CTREE (ctree), find_root((GtkCTree *)ctree), en->path, en->flags);
 	    return (TRUE);
 	    break;
 	  }
@@ -540,7 +538,8 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
   default:
     if ((event->keyval >= GDK_A) && (event->keyval <= GDK_z) && (event->state <= GDK_SHIFT_MASK))
     {
-      num = g_list_length (GTK_CLIST (ctree)->row_list);
+      num = g_list_length (GTK_CLIST(find_root((GtkCTree *)ctree))->row_list);
+      /*(GTK_CLIST (ctree)->row_list);*/
       for (i = 0; i < num; i++)
       {
 	node = gtk_ctree_node_nth (GTK_CTREE (ctree), i);
@@ -1330,6 +1329,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 		  pix.pixmap,pix.pixmask,
 		  pix.open,pix.openmask,
 		  FALSE, TRUE);  
+    en->type |= FT_ISROOT;
   } 
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);

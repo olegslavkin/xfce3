@@ -154,7 +154,7 @@ gint update_timer (GtkCTree * ctree)
     entry *en;
     glob_t dirlist;
     GtkCTreeNode *root;
-    root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+    root = find_root((GtkCTree *)ctree);
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree),root); 
     if (glob (en->path, GLOB_ERR, NULL, &dirlist) != 0){
 	    fprintf(stderr,"xftree: xftree root has vanished. Now going home.\n");
@@ -177,8 +177,7 @@ gint update_timer (GtkCTree * ctree)
 
   /* get a list of directories we have to check
    */
-  gtk_ctree_post_recursive (ctree, 
-		  GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), 
+  gtk_ctree_post_recursive (ctree,find_root(ctree), 
 		  get_visible_or_parent, &list);
 
   gtk_clist_freeze (GTK_CLIST (ctree));
@@ -212,8 +211,8 @@ count_selection (GtkCTree * ctree, GtkCTreeNode ** first)
   int num = 0;
   GList *list;
 
-  *first = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-
+  *first = find_root(ctree);
+  
   list = GTK_CLIST (ctree)->selection;
   num = g_list_length (list);
   if (num <= 0)
@@ -247,7 +246,7 @@ selection_type (GtkCTree * ctree, GtkCTreeNode ** first)
 
   list = GTK_CLIST (ctree)->selection;
 
-  *first = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  *first = find_root((GtkCTree *)ctree);
   if (g_list_length (list) <= 0)
     return (0);
 
@@ -422,7 +421,7 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
    status_inf.howmany=0;
    status_inf.howmuch=0;
    /* is the status node still there? */
-   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+   root = find_root(ctree);
    if (!root) printf("dbg: root is null!!!\n");
    if (!gtk_ctree_find (ctree,root,node)){
 	   /*fprintf(stderr,"dbg:status node gone away.\n");*/
@@ -678,7 +677,7 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   /* unselect all children */
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   child = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->children);
-  if (node==GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list)) parent=node;
+  if (node==find_root(ctree)) parent=node;
   else parent = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->parent);
   while (child)  {
     gtk_ctree_unselect (ctree, child);

@@ -163,7 +163,7 @@ cb_new_window (GtkWidget * widget, GtkCTree * ctree)
   char *path;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  en = gtk_ctree_node_get_row_data (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list));
+  en = gtk_ctree_node_get_row_data (ctree, find_root(ctree));
   path=valid_path((GtkCTree *)ctree,FALSE);
   new_top (path, win->xap, win->trash, win->reg, win->width, win->height, en->flags); 
 }
@@ -348,7 +348,7 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
   if (!win)
     return;
   /* check if the trash dir is open, so we have to update */
-  gtk_ctree_pre_recursive (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), node_is_open, &check);
+  gtk_ctree_pre_recursive (ctree, find_root(ctree), node_is_open, &check);
   dir = opendir (win->trash);
   if (!dir)
     return;
@@ -365,7 +365,7 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
     {
       /* remove node */
       check.path = complete;
-      node = gtk_ctree_find_by_row_data_custom (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), &check, compare_node_path);
+      node = gtk_ctree_find_by_row_data_custom (ctree, find_root(ctree), &check, compare_node_path);
       if (node)
       {
 	gtk_ctree_remove_node (ctree, node);

@@ -202,6 +202,7 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
 		  pix.pixmap,pix.pixmask,
 		  pix.open,pix.openmask,
 		  FALSE, TRUE);  
+    en->type |= FT_ISROOT;
   }    
   gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
   add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
@@ -221,7 +222,7 @@ void regen_ctree(GtkCTree *ctree){
   entry *en;
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  root = find_root((GtkCTree *)ctree);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
 /*  gtk_clist_set_column_title((GtkCList *)ctree,COL_SIZE,
 	(win->preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)"));*/	  internal_go_to (ctree, root,en->path, en->flags);
@@ -254,7 +255,7 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (list != NULL) list = free_list (list);
   
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  root = find_root((GtkCTree *)ctree);
   /* count selection returns root-node when count==0 ;-) */
   /* therefore, en != NULL */
   count = count_selection (ctree, &node); 
@@ -291,7 +292,7 @@ void cb_go_back (GtkWidget * item, GtkCTree * ctree){
   }
   if ((win->gogo) && (win->gogo->previous)) {
     win->gogo=popgo (win->gogo); 
-    root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+    root = find_root((GtkCTree *)ctree);
     internal_go_to (ctree, root, win->gogo->path, IGNORE_HIDDEN);
     gtk_object_set_user_data (GTK_OBJECT (ctree),win);
   }
@@ -304,7 +305,7 @@ void
 cb_go_home (GtkWidget * item, GtkCTree * ctree)
 {
   GtkCTreeNode *root;
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  root = find_root((GtkCTree *)ctree);
   go_to (ctree, root, 
 	  (custom_home_dir)?custom_home_dir:getenv ("HOME"), 
 	  IGNORE_HIDDEN);
@@ -322,7 +323,7 @@ cb_go_up (GtkWidget * item, GtkCTree * ctree)
   char *p;
   GtkCTreeNode *root;
 
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  root = find_root((GtkCTree *)ctree);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
   if (!en) return;
   if (path) free(path);
