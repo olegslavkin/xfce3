@@ -30,7 +30,7 @@ if {([file exists [file join $env(HOME) ".xfce"]])&&([file isdirectory [file joi
 set xfce_share "/usr/local/share/xfce"
 #------------------------------------------------------------------------------
 #--gui--
-set version		"0.2.2"
+set version		"0.2.3"
 wm title . 		"xfskin ($version)"
 wm iconname .		"xfskin ($version)"
 set fixedfont		"-*-lucidatypewriter-medium-r-normal-*-12-*-*-*-m-*-*-*"
@@ -38,6 +38,7 @@ set sel_color		#306090
 #set sel_color		SeaGreen
 set exitinst		1
 set opback		1
+set opengine		1
 set opfonts		1
 set opicons		1
 set oppalet		1
@@ -97,6 +98,7 @@ set snd_conf(15)	"shutdown=";	set snd_conf(16)	"unknown="
 
 proc initvals {} {
   .inst.val.back select
+  .inst.val.engine select  
   .inst.val.fonts select
   .inst.val.icons select
   .inst.val.palette select
@@ -455,7 +457,7 @@ global skin_root sounds snd_conf
 #--write skin to configs
 
 proc put_config {} {
-global conf_dir bdrc colrc sndrc xfcerc tst_skin skin_root opback opfonts opicons oppalet opsounds
+global conf_dir bdrc colrc sndrc xfcerc tst_skin skin_root opback oppalet opsounds
   set tst_skin 0
   if {[string length [.inst.skins.list get active]] >0} {  
     get_skin
@@ -515,7 +517,7 @@ global colrc conf_dir palet opfonts env
 #put_conf_palet
 
 proc put_conf_rc {} {
-global conf_dir backdrop clock def_icon fonts gradient winengine icons opback opfonts opicons xfcerc
+global conf_dir backdrop clock def_icon fonts gradient winengine icons opback opengine opfonts opicons xfcerc
   set rcfile [file join $conf_dir $xfcerc]
 
   if {[file exists $rcfile]} {
@@ -579,7 +581,7 @@ global conf_dir backdrop clock def_icon fonts gradient winengine icons opback op
 	}
 	gets $ifile line
 	puts $ofile $line
-	if {[string length $winengine] > 0} {
+	if {([string length $winengine] > 0)&&($opengine)} {
 	  gets $ifile line
           puts $ofile "        $winengine"
 	}		
@@ -1022,7 +1024,7 @@ global version
 #ask_info
 
 proc buildscreen {} {
-global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_skin tst_conf
+global exitinst opback opengine opfonts opicons oppalet opsounds fixedfont sel_color tst_skin tst_conf
   
   frame .inst -border 1
   frame .inst.val
@@ -1032,6 +1034,7 @@ global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_
   #--check buttons & listbox
   checkbutton .inst.val.back    -border 1 -selectcolor $sel_color -justify left -anchor w -text " install backdrop  " -onvalue 1 -offvalue 0 -variable opback
   checkbutton .inst.val.fonts   -border 1 -selectcolor $sel_color -justify left -anchor w -text " install fonts" -onvalue 1 -offvalue 0 -variable opfonts
+  checkbutton .inst.val.engine  -border 1 -selectcolor $sel_color -justify left -anchor w -text " install borderstyle" -onvalue 1 -offvalue 0 -variable opengine
   checkbutton .inst.val.icons   -border 1 -selectcolor $sel_color -justify left -anchor w -text " install icons" -onvalue 1 -offvalue 0 -variable opicons
   checkbutton .inst.val.palette -border 1 -selectcolor $sel_color -justify left -anchor w -text " install palette" -onvalue 1 -offvalue 0 -variable oppalet
   checkbutton .inst.val.sounds  -border 1 -selectcolor $sel_color -justify left -anchor w -text " install sounds" -onvalue 1 -offvalue 0 -variable opsounds
@@ -1040,8 +1043,8 @@ global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_
   -width 20 -height 10 -selectbackground $sel_color
 
   
-  pack .inst.val.label .inst.val.back .inst.val.fonts \
-       .inst.val.icons .inst.val.palette .inst.val.sounds -fill x
+  pack .inst.val.label .inst.val.back .inst.val.engine .inst.val.fonts \
+       .inst.val.icons .inst.val.palette .inst.val.sounds -fill x -padx 5
 
   pack .inst.skins.scroll -side right -fill y
   pack .inst.skins.list -side left -fill both -expand yes

@@ -1,3 +1,5 @@
+0.2.3
+- added checkbutton to enable/disable window-engine (border style)
 0.2.2
 - added support for window-engine (win-engine variable)
   (backward compatible)
