@@ -7,7 +7,7 @@
 %define		gtkengines /usr/lib/gtk/themes/engines
 %define		gdmdata /etc/X11/gdm/Sessions
 
-Summary:	A Powerfull X Environment, with Toolbar and Window Manager
+Summary:	A Powerful X Environment, with Toolbar and Window Manager
 Name:		%{name}
 Version: 	%{version}
 Release: 	%{release}
@@ -36,7 +36,7 @@ environment for Linux and various Unices...
 %setup -q -n %{name}-%{version}
 
 %build
-./configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
+%configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
 --disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft \
 --enable-gdm --with-gdm-prefix=%{gdmdata}
 make
@@ -59,19 +59,20 @@ strip -s $RPM_BUILD_ROOT%{prefix}/bin/* || :
 strip -s $RPM_BUILD_ROOT%{gtkengines}/* || :
 gzip $RPM_BUILD_ROOT%{_mandir}/man1/* || :
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc INSTALL ChangeLog AUTHORS COPYING README.UPGRADE-3.*
 %{_bindir}/*
 %{_datadir}/xfce/*
-%{_datadir}/locale/*
 %{_mandir}/man1/*
-%{confdir}/xfce/*
+%config(noreplace) %{confdir}/xfce/*
 %{gtkengines}/libxfce.*
-%{gdmdata}/XFce
+%config(noreplace) %{gdmdata}/XFce
 
 # %files libs
 # %defattr(-, root, root)
