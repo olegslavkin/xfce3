@@ -406,6 +406,7 @@ HandleFocusIn ()
     else
     {
       SetBorder (Scr.Hilite, False, True, True, None);
+      Scr.Focus = NULL;
       Broadcast (XFCE_M_FOCUS_CHANGE, 5, 0, 0, 0, Scr.DefaultDecor.HiColors.fore, Scr.DefaultDecor.HiColors.back, 0, 0);
       if (Scr.ColormapFocus == COLORMAP_FOLLOWS_FOCUS)
       {
@@ -418,13 +419,13 @@ HandleFocusIn ()
 	  InstallWindowColormaps (NULL);
 	}
       }
-
     }
   }
   else if (Tmp_win != Scr.Hilite)
   {
     SetBorder (Tmp_win, True, True, True, None);
     Broadcast (XFCE_M_FOCUS_CHANGE, 5, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, GetDecor (Tmp_win, HiColors.fore), GetDecor (Tmp_win, HiColors.back), 0, 0);
+    Scr.Focus = Tmp_win;
     if (Scr.ColormapFocus == COLORMAP_FOLLOWS_FOCUS)
     {
       if ((Scr.Hilite) && (!(Scr.Hilite->flags & ICONIFIED)))
@@ -778,6 +779,9 @@ HandleDestroyNotify ()
 #endif
   if (Tmp_win)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleDestroyNotify (): Destroying %s\n", Tmp_win->name);
+#endif
     Destroy (Tmp_win);
   }
 #ifdef DEBUG

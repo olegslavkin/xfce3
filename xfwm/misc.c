@@ -664,9 +664,8 @@ UngrabEm (void)
 {
   Window w;
 
-  XFlush (dpy);
+  XSync (dpy, 0);
   XUngrabPointer (dpy, CurrentTime);
-
   if (Scr.PreviousFocus != NULL)
   {
     w = Scr.PreviousFocus->w;

@@ -431,6 +431,7 @@ UpdateMenu (int sticks)
       if (ActiveItem)
       {
 	done = 1;
+        XSync (dpy, 0);
 	ExecuteFunction (ActiveItem->action, ButtonWindow, &Event, Context, -1);
       }
       ActiveItem = NULL;

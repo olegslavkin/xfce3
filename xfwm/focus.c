@@ -52,7 +52,6 @@
 #  include "dmalloc.h"
 #endif
 
-
 /********************************************************************
  *
  * Sets the input focus to the indicated window.
@@ -139,6 +138,8 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
   Scr.UnknownWinFocused = None;
 
 #ifdef DEBUG
+  if (Fw)
+    fprintf (stderr, "xfwm : SetFocus now set to %s\n", Fw->name);
   fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
 #endif
 }
