@@ -27,5 +27,5 @@
 
 int list_from_selection (GtkCTree * ctree, GList ** list);
 int entry_list_from_selection (GtkCTree * ctree, GList ** list, int *state);
-int entry_list_free (GList * list);
+GList *entry_list_free (GList * list);
 #endif

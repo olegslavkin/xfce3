@@ -24,6 +24,7 @@ xftree_SOURCES = \
 	xtree_cfg.h \
 	xtree_dnd.c xtree_dnd.h \
 	xtree_gui.c xtree_gui.h \
+	xtree_go.c xtree_go.h \
 	xtree_misc.c xtree_misc.h \
 	xtree_du.c tubo.c tubo.h \
 	xtree_mess.c xtree_mess.h \

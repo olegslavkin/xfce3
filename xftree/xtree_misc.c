@@ -84,17 +84,17 @@ entry_list_from_selection (GtkCTree * ctree, GList ** list, int *state)
 
 /*
  */
-int
+GList *
 entry_list_free (GList * list)
 {
   GList *t = list;
   if (!list)
-    return (0);
+    return (NULL);
   while (t)
   {
     entry_free ((entry *) t->data);
     t = t->next;
   }
   g_list_free (list);
-  return (1);
+  return (NULL);
 }

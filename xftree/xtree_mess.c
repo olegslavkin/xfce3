@@ -158,7 +158,8 @@ void save_defaults (GtkWidget *parent)
   homedir = (char *) malloc ((len) * sizeof (char));
   if (!homedir) {
 failed:
-    if (parent) xf_dlg_error(parent,strerror(errno),_("Default xftreerc file cannot be created\n"));
+    my_show_message (_("Default xftreerc file cannot be created\n"));
+    /*if (parent) xf_dlg_error(parent,strerror(errno),_("Default xftreerc file cannot be created\n"));*/
     return;
   }
   /* if .xfce directory isnot there, create it. */

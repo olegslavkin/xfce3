@@ -71,6 +71,7 @@
 #include "icons/home.xpm"
 #include "icons/empty_trash.xpm"
 #include "icons/trash.xpm"
+#include "icons/go_back.xpm"
 #include "icons/go_to.xpm"
 #include "icons/go_up.xpm"
 #include "icons/page.xpm"
@@ -92,6 +93,7 @@
 
 #include "xtree_mess.h"
 #include "xtree_pasteboard.h"
+#include "xtree_go.h"
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -106,23 +108,6 @@
 #endif
 
 
-enum
-{
-  MN_NONE = 0,
-  MN_DIR = 1,
-  MN_FILE = 2,
-  MN_MIXED = 3,
-  MN_HLP = 4,
-  MENUS
-};
-
-enum
-{
-  COL_NAME,
-  COL_SIZE,
-  COL_DATE,
-  COLUMNS			/* number of columns */
-};
 
 #define SPACING 	5
 /* moved to reg.h: #define DEF_APP		"netscape"*/
@@ -154,11 +139,12 @@ typedef struct
 }
 menu_entry;
 
+GdkPixmap  *gPIX_dir_close,  *gPIX_dir_open;
+GdkBitmap *gPIM_dir_close, *gPIM_dir_open;
 
+static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_up, *gPIX_char_dev, *gPIX_fifo, *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
 
-static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_open, *gPIX_dir_up, *gPIX_char_dev, *gPIX_fifo, *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
-
-static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_open, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
+static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
 
 static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg, int width, int height, int flags);
 int move_dir (char *source, char *label, char *target, int trash);
@@ -233,22 +219,11 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   return strcmp (en1->label, en2->label);
 }
 
-
-/*
- * called if a node will be destroyed
- * so free all private data
- */
-void
-node_destroy (gpointer p)
-{
-  entry *en = (entry *) p;
-  entry_free (en);
-}
-
 /*
  * count the number of  selected nodes, if there are no nodes selected
  * in "first" the root node is returned
  */
+
 int
 count_selection (GtkCTree * ctree, GtkCTreeNode ** first)
 {
@@ -265,6 +240,18 @@ count_selection (GtkCTree * ctree, GtkCTreeNode ** first)
   }
   *first = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
   return (num);
+}
+
+
+/*
+ * called if a node will be destroyed
+ * so free all private data
+ */
+void
+node_destroy (gpointer p)
+{
+  entry *en = (entry *) p;
+  entry_free (en);
 }
 
 
@@ -497,14 +484,14 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
   return FALSE;
 }
 
-static void
+void
 ctree_freeze (GtkCTree * ctree)
 {
   cursor_wait (GTK_WIDGET (ctree));
   gtk_clist_freeze (GTK_CLIST (ctree));
 }
 
-static void
+void
 ctree_thaw (GtkCTree * ctree)
 {
   gtk_clist_thaw (GTK_CLIST (ctree));
@@ -1370,182 +1357,9 @@ set_title (GtkWidget * w, const char *path)
   }
 }
 
-/*
- */
-static void
-go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
-{
-  entry *en;
-  int i;
-  char *label[COLUMNS];
-  char *icon_name;
-
-  en = entry_new_by_path_and_label (path, path);
-  if (!en)
-  {
-    printf (_("Can't find row data\n"));
-    return;
-  }
-  if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
-    return;
-  en->flags = flags;
-
-  for (i = 0; i < COLUMNS; i++)
-  {
-    if (i == COL_NAME)
-      label[i] = uri_clear_path (en->path);
-    else
-      label[i] = "";
-  }
-  ctree_freeze (ctree);
-  gtk_ctree_remove_node (ctree, root);
-
-  root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
-  gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
-  add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
-  ctree_thaw (ctree);
-  set_title (GTK_WIDGET (ctree), uri_clear_path (en->path));
-  icon_name = strrchr (en->path, '/');
-  if ((icon_name) && (!(*(++icon_name))))
-    icon_name = NULL;
-  gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, (icon_name ? icon_name : "/"));
-}
-
-/*
- */
-static void
-free_list (GList * list)
-{
-  GList *t = list;
-
-  while (t)
-  {
-    g_free (t->data);
-    t = t->next;
-  }
-  g_list_free (list);
-}
 
 /* at xtree_du.c: */
 void cb_du (GtkWidget * item, GtkCTree * ctree);
-
-/*
- */
-void
-cb_go_to (GtkWidget * item, GtkCTree * ctree)
-{
-  GtkCTreeNode *node, *root;
-  entry *en;
-  char path[PATH_MAX + 1], *p;
-  GList *list;
-  int count;
-  cfg *win;
-
-  
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  count = count_selection (ctree, &node);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
-  if ((!count) || (count > 1) || (en && (!(en->type & FT_DIR))))
-  {
-    list = NULL;
-    if (en)
-    {
-      strcpy (path, en->path);
-      p = path;
-      while ((p = strrchr (path, '/')) != NULL)
-      {
-	if (p == path)
-	{
-	  *(p + 1) = '\0';
-	  list = g_list_append (list, g_strdup (path));
-	  break;
-	}
-	*p = '\0';
-	list = g_list_append (list, g_strdup (path));
-      }
-      if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
-      {
-	strcpy (path, en->path);
-      }
-      else
-      {
-	p = strrchr (en->path, '/');
-	if (p)
-	{
-	  strncpy (path, en->path, p - en->path);
-	  path[p - en->path] = '\0';
-	}
-	else
-	{
-	  strcpy (path, en->path);
-	}
-      }
-    }
-    else
-    {
-      list = g_list_append (list, "/");
-      list = g_list_append (list, "/usr");
-      list = g_list_append (list, "/home");
-      strcpy (path, "/");
-    }
-    if (xf_dlg_combo (win->top,_("Go to"), path, list) != DLG_RC_OK)
-    {
-      free_list (list);
-      return;
-    }
-    free_list (list);
-  }
-  else
-  {
-    if (en)
-      strcpy (path, en->path);
-  }
-  if (en)
-    go_to (ctree, root, path, en->flags);
-}
-
-/*
- */
-void
-cb_go_home (GtkWidget * item, GtkCTree * ctree)
-{
-  GtkCTreeNode *root;
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  go_to (ctree, root, getenv ("HOME"), IGNORE_HIDDEN);
-}
-
-
-/*
- * change root and go one directory up
- */
-void
-cb_go_up (GtkWidget * item, GtkCTree * ctree)
-{
-  entry *en;
-  char path[PATH_MAX + 1], *p;
-  GtkCTreeNode *root;
-
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
-  if (!en)
-  {
-    return;
-  }
-
-  strcpy (path, en->path);
-  p = strrchr (path, '/');
-  if (p == path)
-  {
-    if (!*(p + 1))
-      return;
-    *(p + 1) = '\0';
-  }
-  else
-    *p = '\0';
-  go_to (ctree, root, path, en->flags);
-}
 
 /*
  * start the marked program on double click
@@ -1592,8 +1406,9 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
 
     if (en->type & FT_DIR_UP)
     {
-      node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-      go_to (GTK_CTREE (ctree), node, uri_clear_path (en->path), en->flags);
+      cb_go_up(NULL,GTK_CTREE (ctree)); 	    
+   /*   node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+      go_to (GTK_CTREE (ctree), node, uri_clear_path (en->path), en->flags);*/
       return (TRUE);
     }
     if (!(en->type & FT_FILE))
@@ -2487,7 +2302,10 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 
   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go back ..."), _("Go back ..."), _("Go back ..."), MyCreateFromPixmapData (toolbar, go_back_xpm), GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);
+ 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go to ..."), _("Go to ..."), _("Go to ..."), MyCreateFromPixmapData (toolbar, go_to_xpm), GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
+
 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go up"), _("Go up"), _("Go up"), MyCreateFromPixmapData (toolbar, go_up_xpm), GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
 
@@ -2696,9 +2514,8 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
-  /* TODO #12:*/
   menuitem = gtk_menu_item_new_with_label (_("Go back"));
-/*  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);*/
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
@@ -2828,7 +2645,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 #define COMMON_MENU_GOTO \
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
     {N_("Go home"), (gpointer) cb_go_home, 0,GDK_h,GDK_CONTROL_MASK},\
-    {N_("Go back"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\
+    {N_("Go back"), (gpointer) cb_go_back, 0,GDK_b,GDK_CONTROL_MASK},\
     {N_("Go up"), (gpointer) cb_go_up, 0,GDK_a,GDK_CONTROL_MASK},\
     {N_("Go to"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
@@ -2915,6 +2732,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win = g_malloc (sizeof (cfg));
   win->dnd_row = -1;
   win->dnd_has_drag = 0;
+  win->gogo =NULL;
   menu = g_malloc (sizeof (GtkWidget) * MENUS);
   titles[COL_NAME] = _("Name");
   titles[COL_SIZE] = _("Size (bytes)");
@@ -2923,6 +2741,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_SIZE] = "";
   label[COL_DATE] = "";
   win->top = top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  win->gogo = pushgo(path,win->gogo);
 
   gtk_signal_connect (GTK_OBJECT (top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) win);
   gtk_signal_connect (GTK_OBJECT (top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) win);

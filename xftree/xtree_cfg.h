@@ -44,6 +44,7 @@ typedef struct
   int width;
   int height;
   GtkWidget *top;
+  void *gogo;
 }
 cfg, cfg_t;
 

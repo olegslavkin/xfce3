@@ -24,6 +24,7 @@
 
 #ifndef __XTREE_GUI_H__
 #define __XTREE_GUI_H__
+#include <gtk/gtk.h>
 
 typedef struct
 {
@@ -33,6 +34,32 @@ typedef struct
   int height;
 }
 wgeo_t;
+
+enum
+{
+  MN_NONE = 0,
+  MN_DIR = 1,
+  MN_FILE = 2,
+  MN_MIXED = 3,
+  MN_HLP = 4,
+  MENUS
+};
+
+enum
+{
+  COL_NAME,
+  COL_SIZE,
+  COL_DATE,
+  COLUMNS			/* number of columns */
+};
+
+int count_selection (GtkCTree * ctree, GtkCTreeNode ** first);
+void node_destroy (gpointer p);
+void ctree_thaw (GtkCTree * ctree);
+void ctree_freeze (GtkCTree * ctree);
+void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags);
+void set_title (GtkWidget * w, const char *path);
+
 
 void gui_main (char *path, char *xap, char *trash, char *reg, wgeo_t *, int);
 #endif

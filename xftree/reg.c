@@ -433,6 +433,7 @@ reg_destroy_list (GList * list)
     g_tmp = g_tmp->next;
   }
   g_list_free (list);
+  list=NULL;
 }
 
 
@@ -527,7 +528,7 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   char *sfx, *arg;
   entry *en;
   cfg *win;
-  GList *apps;
+  GList *apps=NULL;
   reg_t *prog;
 
   if (!GTK_CLIST (ctree)->selection)

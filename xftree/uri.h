@@ -51,6 +51,6 @@ char *uri_to_quoted_list (GList *);
 int uri_parse_list (const char *, GList **);
 int uri_remove_file_prefix (char *, int);
 int uri_remove_file_prefix_from_list (GList *);
-void uri_free_list (GList *);
+GList * uri_free_list (GList *);
 char *uri_basename (const char *);
 #endif

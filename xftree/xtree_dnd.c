@@ -70,7 +70,7 @@ void
 on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, void *client)
 {
   cfg *win = (cfg *) client;
-  GList *list;
+  GList *list=NULL;
   entry *t_en, *s_en;
   GtkCTreeNode *node = NULL;
   uri *u;
@@ -181,7 +181,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     
     unlink(tmpfile);
     
-    uri_free_list (list);
+    list=uri_free_list (list);
     cursor_reset (GTK_WIDGET (ctree));    
     
     break;

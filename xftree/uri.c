@@ -6,6 +6,8 @@
  *
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
+ * 
+ * Edscott Wilson Garcia 2001, for xfce project
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +25,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include <glib.h>
@@ -97,17 +100,18 @@ uri_remove_file_prefix_from_list (GList * list)
 char *
 uri_clear_path (const char *org_path)
 {
-  static char path[PATH_MAX + 1];
+  static char *path;
   char *p, *ld;
   int len;
 
-  if (!path)
-  {
-    return (NULL);
-  }
+  if (!org_path) return (NULL);
+  if (path) free(path);
+  path=(char *)malloc(strlen(org_path)+1);
+  if (!path) return (NULL);
   strcpy (path, org_path);
-  /* remove ".."
-   */
+  /* remove ".." */
+    /*fprintf (stderr,"dbg:uri:%s\n",path);*/
+  
   p = path + 1;
   ld = path;
   while (*p)
@@ -254,7 +258,7 @@ uri_parse_list (const char *text, GList ** list)
 
 /*
  */
-void
+GList *
 uri_free_list (GList * list)
 {
   GList *t = list;
@@ -265,6 +269,7 @@ uri_free_list (GList * list)
     t = t->next;
   }
   g_list_free (list);
+  return NULL;
 }
 
 /*

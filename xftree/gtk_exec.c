@@ -55,7 +55,7 @@ static GList *list = NULL;
 
 /*
  */
-void
+GList *
 free_app_list (void)
 {
   GList *g_tmp;
@@ -71,6 +71,7 @@ free_app_list (void)
     }
     g_list_free (list);
   }
+  return NULL;
 }
 
 /*

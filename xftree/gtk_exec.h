@@ -28,7 +28,7 @@
 int xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file);
 /* depredated (use xf_dlg_open_with instead): */
 int dlg_open_with (char *xap, char *defval, char *file);
-void free_app_list (void);
+GList *free_app_list (void);
 /* deprected: #define dlg_execute(x,d) dlg_open_with(x, d, NULL)*/
 #define xf_dlg_execute(p,x,d) xf_dlg_open_with(p,x, d, NULL)
 #endif
