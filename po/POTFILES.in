@@ -53,6 +53,7 @@ xftree/xtree_misc.c
 xftree/xtree_pasteboard.c
 xftree/xtree_tar.c
 xftree/xtree_toolbar.c
+xftree/xtree_smb.c
 # XFDiff source files
 xfdiff/globber.c
 xfdiff/xfdiff.c
@@ -99,6 +100,7 @@ xfsamba/xfsamba_mkdir.c
 xfsamba/xfsamba_rm.c
 xfsamba/xfsamba_tar.c
 xfsamba/xfsamba_upload.c
+xfsamba/xfsamba_dnd.c
 #XFumed source files
 xfumed/xfumed.c
 xfumed/xfumed_gui.c
