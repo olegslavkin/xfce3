@@ -50,7 +50,7 @@ install-data-yes: all
 	else \
 	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(gdm_prefix); \
 	fi
-        $(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
+	$(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
 
 installcheck:
 
