@@ -28,14 +28,25 @@ xfce/xfce.c
 xfce/xfce_cb.c
 xfce/xfwm.c
 # XFTree source files
-xftree/gtk_cpy.c
+xftree/entry.c
 xftree/gtk_dlg.c
 xftree/gtk_exec.c
 xftree/gtk_get.c
 xftree/gtk_prop.c
+xftree/io.c
+xftree/reg.c
+xftree/top.c
+xftree/tubo.c
+xftree/uri.c
 xftree/xtree.c
-xftree/xtree_gui.c
+xftree/xtree_cpy.c
 xftree/xtree_dnd.c
+xftree/xtree_du.c
+xftree/xtree_go.c
+xftree/xtree_gui.c
+xftree/xtree_mess.c
+xftree/xtree_misc.c
+xftree/xtree_pasteboard.c
 # XFDiff source files
 xfdiff/globber.c
 xfdiff/xfdiff.c

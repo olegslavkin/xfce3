@@ -279,7 +279,7 @@ void
 cb_go_up (GtkWidget * item, GtkCTree * ctree)
 {
   entry *en;
-  static char *path=NULL;;
+  static char *path=NULL;
   char *p;
   GtkCTreeNode *root;
 
