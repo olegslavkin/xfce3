@@ -228,6 +228,7 @@ exec_comm (char *comm, int wm)
 	    close (diag[0]);
 	    close (diag[1]);
 	  }
+          signal (SIGCHLD, SIG_DFL);
 	  execl (DEFAULT_SHELL, DEFAULT_SHELL, "-c", command, NULL);
 	  perror ("exec failed");
 	  _exit (0);

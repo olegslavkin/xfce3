@@ -877,6 +877,7 @@ exec_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
       close (0);
       dup (nulldev);
     }
+    signal (SIGCHLD, SIG_DFL);
     if (execl (exec_shell_name, exec_shell_name, "-c", cmd, NULL) == -1)
     {
       xfwm_msg (ERR, "exec_function", "execl failed (%s)", strerror (errno));
