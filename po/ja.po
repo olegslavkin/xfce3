@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-19 00:06+0100\n"
+"POT-Creation-Date: 2002-01-20 20:06+0100\n"
 "PO-Revision-Date: 1999-09-28 14:36+0900\n"
 "Last-Translator: Yamahata Kenichiro <mogutan@din.or.jp>\n"
 "Language-Team: Japanese <mogutan@din.or.jp>\n"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.13\n"
-"POT-Creation-Date: 2002-01-19 00:06+0100\n"
+"POT-Creation-Date: 2002-01-20 20:06+0100\n"
 "PO-Revision-Date: 2002-01-17 18:31+0200\n"
 "Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
