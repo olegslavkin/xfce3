@@ -52,7 +52,7 @@
 	-*-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-ksc5601.1987-0
 	-*-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-ksc5601.1987-0
 	MapFocus
-	Linea_engine
+	Xfce_engine
 [Screens]
 	4
 [Tooltips]
