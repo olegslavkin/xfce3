@@ -132,7 +132,9 @@ AddWindow (Window w)
   Bool status;
   XrmValue rm_value;
   Atom atype;
+#if 0
   XEvent dummy_event;
+#endif
   extern XfwmWindow *colormap_win;
 
   /* allocate space for the xfwm window */
@@ -413,6 +415,7 @@ AddWindow (Window w)
   tmp_win->frame_height = 0;
   SetupFrame (tmp_win, x, y, width, height, True, True);
 
+  XSelectInput (dpy, tmp_win->w, NoEventMask);
   XReparentWindow (dpy, w, tmp_win->Parent, 0, 0);
   valuemask = (CWEventMask | CWDontPropagate);
   attributes.event_mask = (StructureNotifyMask | PropertyChangeMask | ColormapChangeMask | EnterWindowMask | LeaveWindowMask | FocusChangeMask);
@@ -467,6 +470,7 @@ AddWindow (Window w)
     }
   }
 
+#if 0
   XSync (dpy, 0);
   /* Shortcut : If the newly created window is about to be destroyed, remove it right away */
   if (XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy_event) ||
@@ -479,10 +483,12 @@ AddWindow (Window w)
     MyXUngrabServer (dpy);
     return (NULL);
   }
+#endif
 
   MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
   MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
 
+  XSync (dpy, 0);
   MyXUngrabServer (dpy);
 
   FetchWmProtocols (tmp_win);
