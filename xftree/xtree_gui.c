@@ -564,6 +564,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   entry *en1, *en2;
   char *loc1=NULL,*loc2=NULL;
   int type1, type2;
+  gboolean omit_subsort=FALSE;
     cfg *win;
     win = gtk_object_get_user_data (GTK_OBJECT (clist));
 
@@ -578,6 +579,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
     return (type1 < type2 ? -1 : 1);
   }
 
+  if ((en1->type & FT_DIR)||(en2->type & FT_DIR)) omit_subsort=TRUE;
   
 /* subsort by filetype */
   if (win->preferences&SUBSORT_BY_FILETYPE) {
@@ -591,7 +593,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
     /* please don't compare numbers as strings! */
     GtkCListCompareFunc compare;
     compare = (GtkCListCompareFunc) win->compare;
-    if (win->preferences&SUBSORT_BY_FILETYPE) {
+    if ((win->preferences&SUBSORT_BY_FILETYPE)&&(!omit_subsort)) {
 	  if ((!loc1)&&(!loc2)) { /* subsorted */
 	     if (clist->sort_column == COL_DATE){
 	       return en1->st.st_mtime - en2->st.st_mtime;
@@ -619,7 +621,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   }
   
   /* special case, sorting by column name */
-  if (win->preferences&SUBSORT_BY_FILETYPE) {
+  if ((win->preferences&SUBSORT_BY_FILETYPE)&&(!omit_subsort)) {
     if ((!loc1)&&(!loc2)) return strcmp (en1->label, en2->label);
     if ((!loc1)&&(loc2)) return strcmp (".",loc2);
     if ((loc1)&&(!loc2)) return strcmp (loc1,".");

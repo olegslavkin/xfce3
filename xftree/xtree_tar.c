@@ -168,49 +168,55 @@ GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
    gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);
    return (item);   
 }
-#if 0
+#if 10
 /* preliminary bug fix for non gnu generated tar file expansion */
-static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_level){
+static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_level,int type){
 	GtkCTreeNode *Tnode,*s_item;
 	char *c,*N_path;
 	entry *d_en;
 	gchar *text[COLUMNS];
         icon_pix pix;  
 	
+	/*fprintf(stderr,"dbg: looking for %s\n",path);*/
 	text[COL_DATE]=text[COL_SIZE]=text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
 	Tnode=find_tar_dir(path);
 	if (!Tnode) {
+ 	  /*fprintf(stderr,"dbg: %s not found\n",path);*/
+	  if ((d_en = entry_new ())==NULL){
+		fprintf(stderr,"xftree: cannot continue xtree_tar.c\n");
+		exit(1);
+	  }
+	  d_en->type =  FT_TARCHILD|FT_DIR;
+	  d_en->label=g_strdup(path); /* FIXME */
+	  d_en->path=g_strdup(path);
+	  text[COL_NAME] = d_en->label;
+	  set_icon_pix(&pix,FT_TARCHILD|FT_DIR|type,path);
+  
 	  N_path=g_strdup(path);
 	  if (strstr(N_path,"/")) c=strrchr(N_path,'/');else c=strrchr(N_path,'\\');
-	  *c=0;
-  	  if ((strlen(N_path))&&(strstr(N_path,"/")||strstr(N_path,"\\"))){
+	  if (c) *c=0;
+  	  if ((strlen(N_path))&&(strstr(N_path,"/")||strstr(N_path,"\\"))){  
 		if (strstr(N_path,"/")) c=strrchr(N_path,'/');
 		else c=strrchr(N_path,'\\');
 		c[1]=0;
-		Tnode=parent_node(ctree,N_path,top_level);
-		if ((d_en = entry_new ())==NULL){
-			fprintf(stderr,"xftree: cannot continue xtree_tar.c\n");
-			exit(1);
-		}
-		d_en->type =  FT_TARCHILD|FT_DIR;
-		d_en->label=g_strdup(N_path);
-		d_en->path=g_strdup(N_path);
-		
-		if (!Tnode) Tnode=parent_node(ctree,N_path,top_level);
-		text[COL_NAME] = d_en->label;
-		set_icon_pix(&pix,FT_TARCHILD|FT_DIR,N_path);
-		s_item=gtk_ctree_insert_node (ctree,Tnode, NULL, text, SPACING, 
-			pix.pixmap,pix.pixmask,pix.open,pix.openmask,
-			FALSE,FALSE);
-		if (s_item) {
-		        headTar=push_tar_dir(s_item,N_path);
-		        gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
-		       /*fprintf(stderr,"subitem inserted\n");*/
-			return s_item;
-		}
-	  } else Tnode=top_level;	       	
+
+		if (!Tnode) Tnode=parent_node(ctree,N_path,top_level,type);
+	  } else Tnode=top_level;
+ 	  
+	  /*fprintf(stderr,"dbg:inserting %s \n",path);*/
+	  s_item=gtk_ctree_insert_node (ctree,Tnode, NULL, text, SPACING, 
+		pix.pixmap,pix.pixmask,pix.open,pix.openmask,
+		FALSE,FALSE);
+	  if (s_item) {
+	        headTar=push_tar_dir(s_item,path);
+	        gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
+	       /*fprintf(stderr,"subitem inserted\n");*/
+		return s_item;
+	  }
+	  
           g_free(N_path);
 	} 
+	/*else fprintf(stderr,"dbg: %s present!\n",path);*/
 	return Tnode;
 }
 #endif
@@ -321,13 +327,9 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      if (strstr(P_path,"/")) d=strrchr(P_path,'/');
 			      else if (strstr(P_path,"\\")) d=strrchr(P_path,'\\');
 			      if (d) d[1]=0;
-#if 0
 			      /* non gnu tar generated view fix, preliminary */
-			      p_node=parent_node(ctree,P_path,parent);
-#else
-			      p_node=find_tar_dir(P_path);
-			      if (!p_node) p_node=parent;
-#endif
+			      p_node=parent_node(ctree,P_path,parent,p_en->type&(FT_COMPRESS|FT_BZ2|FT_GZ));
+			      if (!p_node) p_node=parent; /* error fallback */
 			      g_free(P_path);
 			      
 		      }

@@ -1120,7 +1120,7 @@ GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode)
   info[1] = gtk_entry_new ();
   gtk_table_attach (GTK_TABLE (table), info[1], 1, 2, 1, 2, X_OPT, 0, 0, 0);
 
-  info[2] = gtk_label_new (_("file x of x"));
+  info[2] = gtk_label_new (_("beginning copy operation"));
   gtk_box_pack_start (GTK_BOX (box), info[2], TRUE, TRUE, 0);
 
   progress = gtk_progress_bar_new();
