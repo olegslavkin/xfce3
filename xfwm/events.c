@@ -928,7 +928,6 @@ HandleMapRequest ()
       }
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
-      SetMapStateProp (Tmp_win, NormalState);
       MyXUngrabServer(dpy);
       break;
     }
