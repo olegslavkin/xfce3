@@ -82,7 +82,7 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     return;
 
   /* Undecorated managed windows should not be moved */
-  if (!(tmp_win->flags & (TITLE | BORDER)))
+  if (!(tmp_win->flags & (TITLE | BORDER | ICONIFIED)))
     return;
     
   center_x = tmp_win->frame_x + (tmp_win->frame_width / 2);
