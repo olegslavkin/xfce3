@@ -38,18 +38,19 @@ typedef struct
   char *xap;			/* xap home-dir, default: $HOME/.xap */
   GList *reg;			/* registered programs */
   int dnd_row;
-  void *dnd_menu;
   char *dnd_data;
-  int dnd_has_drag;
   int timer;
   /* geometry */
   int width;
   int height;
+  GtkWidget *restore_menu;
   GtkWidget *top;
   GtkWidget *toolbar;
   GtkWidget *toolbarO;
   GtkWidget *menu;
   GtkWidget *filter;
+  GtkWidget *status;
+  GtkCTreeNode *status_node;
   golist *gogo;
   int filterOpts;
   unsigned int preferences;

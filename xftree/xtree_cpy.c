@@ -327,7 +327,6 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 		case DLG_RC_CANCEL:  /* dnd cancelled */
 			/*fprintf(stderr,"dbg:cancelled %s\n",s_en->path);*/
 			 entry_free(s_en); 
-			 //cancel_drop(TRUE); 
     			 fclose (tmpfile);
 			 unlink (fname);
 			 return NULL;
@@ -938,11 +937,7 @@ static void rwForkOver (void)
 #ifdef TIME_IT
   fprintf(stderr,"seconds to copy=%lu\n",time(NULL)-tiempo);
 #endif
-  //if(tmp_ctree){
-	 // update_tree(GTK_CTREE(tmp_ctree),GTK_CTREE_NODE (GTK_CLIST (tmp_ctree)->row_list));
-	//  tmp_ctree=NULL;
- // }
-	 /* regen_ctree(GTK_CTREE(tmp_ctree));*/}
+}
 
 
 /* function to set source and target strings

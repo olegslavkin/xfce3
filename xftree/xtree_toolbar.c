@@ -64,7 +64,7 @@
 #include "../xfdiff/xfdiff_colorsel.h"
 #include "xtree_go.h"
 #include "xtree_cb.h"
-#include "icons.h"
+#include "toolbar_icons.h"
 #include "xpmext.h"
 
 #ifdef HAVE_GDK_PIXBUF

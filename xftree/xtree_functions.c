@@ -68,6 +68,7 @@
 #include "xtree_go.h"
 #include "xtree_cb.h"
 #include "xtree_toolbar.h"
+#include "xtree_functions.h"
 
 #ifdef HAVE_GDK_PIXBUF
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -90,7 +91,8 @@
 #define GLOB_TILDE 0
 #endif
 
-int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
+static void update_status(GtkCTreeNode * node,GtkCTree * ctree);
+static int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
 /*
  * check if a node is a directory and is visible and expanded
  * will be called for every node
@@ -134,11 +136,12 @@ get_visible_or_parent (GtkCTree * ctree, GtkCTreeNode * node, gpointer data)
 gint update_timer (GtkCTree * ctree)
 {
   GList *list = NULL, *tmp;
-  GtkCTreeNode *node;
+  GtkCTreeNode *node,*status_node;
   gboolean manage_timeout;
   cfg *win;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  status_node=win->status_node;
   manage_timeout = (win->timer != 0);
 
   if (manage_timeout)
@@ -158,8 +161,7 @@ gint update_timer (GtkCTree * ctree)
   while (tmp)
   {
     node = tmp->data;
-    if (update_tree (ctree, node) == TRUE)
-    {
+    if (update_tree (ctree, node) != TRUE) {
       break;
     }
     tmp = tmp->next;
@@ -169,6 +171,7 @@ gint update_timer (GtkCTree * ctree)
   {
     win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   }
+  update_status(status_node,ctree);
   return (TRUE);
 }
 
@@ -276,19 +279,81 @@ typedef struct icon_pix {
 	GdkBitmap *openmask;
 } icon_pix;
 
+static gboolean checkif_type(char **Type,char *loc){
+  int i;
+  for (i=0;Type[i]!=NULL;i++) 
+	  if (strcmp(loc,Type[i])==0) return TRUE;
+  return FALSE;
+}
+
+static gboolean image_type(char *loc){
+  char *Type[]={
+	  ".jpg",".JPG",".gif",".GIF",".png",".PNG",
+	  ".JPEG",".jpeg",".TIFF",".tiff",".xbm","XBM",
+	  ".XPM",".xpm",".XCF",".xcf",".PCX",".pcx",
+	  ".BMP",".bmp",
+	  NULL
+  };
+  return checkif_type(Type,loc);			  
+}
+static gboolean text_type(char *loc){
+  char *Type[]={
+	  ".txt",".TXT",".tex",".TEX",
+	  ".doc",".DOC",
+	  ".readme",".README",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+static gboolean compressed_type(char *loc){
+  char *Type[]={
+	  ".gz",".tgz",".bz2",".zip",
+	  ".ZIP",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+static gboolean packed_type(char *loc){
+  char *Type[]={
+	  ".tar",".deb",".rpm",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+static gboolean www_type(char *loc){
+  char *Type[]={
+	  ".html",".htm",".HTM",".HTML",
+	  ".sgml",".SGML",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+static gboolean script_type(char *loc){
+  char *Type[]={
+	  ".pl",".sh",".csh",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+
+
 static gboolean set_icon_pix(icon_pix *pix,entry *en) {
+  char *loc;
   gboolean isleaf=TRUE;
   pix->open=pix->openmask=NULL;
   if (en->type & FT_EXE) {
     if (en->type & FT_LINK) pix->pixmap=gPIX_exe_lnk; 
     else pix->pixmap=gPIX_exe;
+    if ( (loc=strrchr(en->path,'.')) != NULL ){
+    	if (script_type(loc)) pix->pixmap=gPIX_exe_script;
+    }
     pix->pixmask=gPIM_exe;    
   }
   else if (en->type & FT_FILE)/* letter modified here */
   {
+    pix->pixmask=gPIM_page;
     if (en->type & FT_LINK) pix->pixmap=gPIX_page_lnk; 
     else {
-      char *loc;
       pix->pixmap=gPIX_page; /* default */
       if (strcmp(en->label,"core")==0) pix->pixmap=gPIX_core;
       if ( (loc=strrchr(en->path,'.')) != NULL ){
@@ -298,29 +363,16 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
 		      case 'f': pix->pixmap=gPIX_pageF; break;
 		      default: break;				      
 	      }
-	      else if ((strcmp(loc,".txt")==0) ||
-	               (strcmp(loc,".doc")==0) ||
-	               (strcmp(loc,".tex")==0)) pix->pixmap=gPIX_text;
-	      
-	      else if ((strcmp(loc,".jpg")==0) ||
-	               (strcmp(loc,".gif")==0) ||
-	       	       (strcmp(loc,".png")==0) ||
-	               (strcmp(loc,".jpeg")==0)||
-	               (strcmp(loc,".tiff")==0)||
-	               (strcmp(loc,".xbm")==0) ||
-	               (strcmp(loc,".xpm")==0) ||
-	               (strcmp(loc,".xcf")==0) ||
-	               (strcmp(loc,".pcx")==0)) pix->pixmap=gPIX_image;
-	      
-	      else if ((strcmp(loc,".gz")==0)  || 
-	               (strcmp(loc,".tgz")==0) || 
-	               (strcmp(loc,".bz2")==0) || 
-	               (strcmp(loc,".zip")==0)) pix->pixmap=gPIX_compressed;
-	      
-	      else if (strcmp(loc,".tar")==0) pix->pixmap=gPIX_tar;
+	      else if (image_type(loc)) 	pix->pixmap=gPIX_image;
+	      else if (text_type(loc))  	pix->pixmap=gPIX_text;
+	      else if (compressed_type(loc)) 	pix->pixmap=gPIX_compressed;
+	      else if (www_type(loc)) {
+		           pix->pixmap=gPIX_page_html;
+	                   pix->pixmask=gPIM_page_html;
+	      }
+    	      else if (packed_type(loc)) 	pix->pixmap=gPIX_tar;
       }
     }  
-    pix->pixmask=gPIM_page;
   }
   else if (en->type & FT_DIR_UP) {pix->pixmap=gPIX_dir_up,pix->pixmask=gPIM_dir_close;}
   else if (en->type & FT_DIR_PD) {
@@ -421,10 +473,41 @@ update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
   
 }
 
-/*
- */
-void
-add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
+static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
+   GtkCTreeNode *child;
+   entry *en,*p_en;
+   status_info status_inf;
+   cfg * win;
+   char *texto;
+   
+   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+   status_inf.howmany=0;
+   status_inf.howmuch=0;
+   p_en = gtk_ctree_node_get_row_data (ctree, node); 
+   
+  for (child=GTK_CTREE_ROW (node)->children;child!=NULL;child = GTK_CTREE_ROW (child)->sibling){
+      en = gtk_ctree_node_get_row_data (ctree, child); 
+      status_inf.howmany++;
+      status_inf.howmuch += en->size;
+  }
+   status_inf.howmuch *= 0.0009765625; /* value in Kb */ 
+   texto=(char *)malloc(128+strlen(p_en->path));
+   if (!texto) return;
+   sprintf(texto,"%s: %d %s, %d Kb.",
+		   p_en->path, /* FIXME: use abbreviated path if configured */
+		   status_inf.howmany,
+		   _("files"),
+		   status_inf.howmuch);
+   gtk_label_set_text ((GtkLabel *)win->status,texto);
+
+   /*fprintf(stderr,"dbg:%s\n",texto);*/
+   free(texto);
+   win->status_node=node;
+	
+}
+
+
+void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
 {
   xf_dirent *diren;
   GtkCTreeNode *item = NULL, *first = NULL;
@@ -435,14 +518,11 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
   int add_slash = no, len, d_len;
   int type = 0;
 
-  if (depth == 0)
-    return;
+  if (depth == 0) return ;
 
-  if (!path)
-    return;
+  if (!path) return ;
   len = strlen (path);
-  if (!len)
-    return;
+  if (!len)  return ;
   if (path[len - 1] != '/')
   {
     add_slash = yes;
@@ -466,7 +546,7 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
     type = FT_DUMMY;
     add_node (GTK_CTREE (ctree), root, NULL, ".", complete, &type, flags);
     g_free (base);
-    return;
+    return ;
   }
   {
    char *name;
@@ -480,7 +560,7 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
    if (!diren) {
        /*fprintf(stderr,"dbg:add_subtree() xf_opendir failed\n");*/
     g_free (base);
-    return;
+    return ;
    }
    while ((name = xf_readdir (diren)) != NULL) {
     type = 0;
@@ -493,17 +573,22 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
     sprintf (complete, "%s%s", base, name);
     strcpy (label, name);
     if ((!io_is_current (name))){
+      entry *en;
       item = add_node (GTK_CTREE (ctree), root, first, label, complete, &type, flags);
+      en = gtk_ctree_node_get_row_data (ctree, item); 
     }
     if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (name)) && item){
+	    /* this is just to get the necesary expanders on startup */
       add_subtree (ctree, item, complete, depth - 1, flags);
     }
     else if (!first) first = item;
    }
    diren=xf_closedir (diren);
+   update_status(root,ctree);
   } 
   g_free (base);
   gtk_ctree_sort_node (ctree, root);
+  return ;
 }
 
 /*
@@ -551,8 +636,10 @@ void
 on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 {
   GtkCTreeNode *child;
+  cfg *win;
   entry *en;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   ctree_freeze (ctree);
   child = GTK_CTREE_ROW (node)->children;
   while (child)
@@ -563,6 +650,11 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   en = gtk_ctree_node_get_row_data (ctree, node);
   add_subtree (ctree, node, en->path, 2, en->flags);
   ctree_thaw (ctree);
+  if (preferences & STATUS_FOLLOWS_EXPAND){
+   cfg *win;
+   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+   set_title(win->top,en->path);
+  }
 }
 
 /*
@@ -571,14 +663,24 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 void
 on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 {
-  GtkCTreeNode *child;
+  GtkCTreeNode *child,*parent;
   /* unselect all children */
   child = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->children);
+  if (node==GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list)) parent=node;
+  else parent = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->parent);
   while (child)
   {
     gtk_ctree_unselect (ctree, child);
     child = GTK_CTREE_ROW (child)->sibling;
   }
+  if (preferences & STATUS_FOLLOWS_EXPAND){
+   cfg *win;
+   entry *en;
+   en = gtk_ctree_node_get_row_data (ctree, parent);
+   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+   set_title(win->top,en->path);
+  }
+  update_status(parent,ctree);
 }
 
 
@@ -594,7 +696,7 @@ set_title (GtkWidget * w, const char *path)
 	  if (word) sprintf(title,"%s",(word[1]==0)?word:word+1);
 	  else  sprintf(title,"XFTree");	  
   }
-  else sprintf (title, "XFTree: %s", path);
+  else sprintf (title, "%s", path);
   gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (w)), title);
   free(title);
 
@@ -767,7 +869,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   {
     win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   }
-  return (tree_updated);
+  return (TRUE);
 }
 
 

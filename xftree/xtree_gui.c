@@ -70,27 +70,7 @@
 #include "xtree_go.h"
 #include "xtree_cb.h"
 #include "xtree_toolbar.h"
-#include "icons/page.xpm"
-#include "icons/page_lnk.xpm"
-#include "icons/dir_close.xpm"
-#include "icons/dir_pd.xpm"
-#include "icons/dir_close_lnk.xpm"
-#include "icons/dir_open.xpm"
-#include "icons/dir_open_lnk.xpm"
-#include "icons/dir_up.xpm"
-#include "icons/exe.xpm"
-#include "icons/exe_lnk.xpm"
-#include "icons/char_dev.xpm"
-#include "icons/fifo.xpm"
-#include "icons/socket.xpm"
-#include "icons/block_dev.xpm"
-#include "icons/stale_lnk.xpm"
-#include "icons/xftree_icon.xpm"
-#include "icons/tar.xpm"
-#include "icons/compressed.xpm"
-#include "icons/text.xpm"
-#include "icons/image.xpm"
-#include "icons/core.xpm"
+#include "icons.h"
 
 #ifdef HAVE_GDK_PIXBUF
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -215,12 +195,14 @@ static GtkAccelGroup *accel;
 /* quit only on main menu now, so that default geometry is saved correctly with cb_quit.*/
     
 #define VIEW_MENU \
+    {N_("Subsort by file type"),cb_subsort, SUBSORT_BY_FILETYPE, GDK_t, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Enable filter"),cb_filter,FILTER_OPTION, GDK_f,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Abbreviate paths"),cb_abreviate,ABREVIATE_PATHS, GDK_a,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
-    {N_("Short titles"),cb_short_titles,SHORT_TITLES, GDK_w,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
-    {N_("Subsort by file type"),cb_subsort, SUBSORT_BY_FILETYPE, GDK_t, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
-    {N_("Hide menu"), cb_hide_menu, HIDE_MENU, GDK_m,GDK_MOD1_MASK}, \
+    {N_("Status box"),cb_show_status, SHOW_STATUS, GDK_t,GDK_MOD1_MASK}, \
+    {N_("Status titles"),cb_status_follows_expand,STATUS_FOLLOWS_EXPAND, GDK_y,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Short titles"),cb_short_titles,SHORT_TITLES, GDK_w,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {NULL, NULL, 0}, \
     {N_("Hide toolbar"),toggle_toolbar, HIDE_TOOLBAR, GDK_t,GDK_MOD1_MASK}, \
     {N_("Hide titles"), cb_hide_titles, HIDE_TITLES, GDK_h,GDK_MOD1_MASK}, \
     {N_("Hide dates"),cb_hide_date, HIDE_DATE, GDK_d,GDK_MOD1_MASK}, \
@@ -683,6 +665,14 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 
+  menuitem = gtk_menu_item_new_with_label (_("Hide main menu"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", 
+		  GTK_SIGNAL_FUNC (cb_hide_menu),(gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu),menuitem);
+  gtk_widget_add_accelerator (menuitem, "activate", accel,
+		   GDK_m,GDK_MOD1_MASK,GTK_ACCEL_VISIBLE );
+  gtk_widget_show (menuitem);
+  
   shortcut_menu (menu, _("Save geometry on exit"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(SAVE_GEOMETRY)) );
   shortcut_menu (menu, _("Double click does GOTO"), (gpointer) cb_toggle_preferences, 
@@ -776,11 +766,13 @@ static pixmap_list pixmaps[]={
 	{&gPIX_dir_up,		NULL,			dir_up_xpm},
 	{&gPIX_exe,		&gPIM_exe,		exe_xpm},
 	{&gPIX_exe_lnk,		NULL,			exe_lnk_xpm},
+	{&gPIX_exe_script,	NULL,			exe_script_xpm},
 	{&gPIX_char_dev,	&gPIM_char_dev,		char_dev_xpm},
 	{&gPIX_block_dev,	&gPIM_block_dev,	block_dev_xpm},
 	{&gPIX_fifo,		&gPIM_fifo,		fifo_xpm},
 	{&gPIX_socket,		&gPIM_socket,		socket_xpm},
 	{&gPIX_stale_lnk,	&gPIM_stale_lnk,	stale_lnk_xpm},
+	{&gPIX_page_html,	&gPIM_page_html,	page_html_xpm},
 	{NULL,NULL,NULL}
 };
 
@@ -874,7 +866,7 @@ void create_pixmaps(int h,GtkWidget *ctree){
   	/*fprintf(stderr,"dbg: drawing...ch=%d, y=%d, pixH=%d\n",ch,y,h);*/
 	/*gdk_draw_line ((GdkDrawable *)(*(pixmaps[i].pixmap)),gc,0,0,30,30);*/
 	gdk_draw_text ((GdkDrawable *)(*(gen_pixmaps[i].pixmap)),style->font,gc,
-				x,y,gen_pixmaps[i].c,1);
+				x,y,gen_pixmaps[i].c,strlen(gen_pixmaps[i].c));
 	  
   }
    
@@ -959,7 +951,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   win = g_malloc (sizeof (cfg));
   win->dnd_row = -1;
-  win->dnd_has_drag = 0;
+  win->dnd_data = NULL;
   win->gogo =NULL;
   win->preferences = preferences;
   win->filterOpts=FILTER_DIRS|FILTER_FILES;
@@ -994,6 +986,13 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_box_pack_start (GTK_BOX (vbox), scrolled, TRUE, TRUE, 0);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
+  widget = gtk_hbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox),widget, FALSE, FALSE, 0);
+  gtk_widget_show (widget);
+  
+  win->status = gtk_label_new("");
+  gtk_box_pack_start (GTK_BOX (widget), win->status, FALSE, FALSE, 0);
+  gtk_widget_show (win->status); 
   
   ctree = gtk_ctree_new_with_titles (COLUMNS, 0, titles);
 
@@ -1118,6 +1117,18 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     gtk_menu_append (GTK_MENU (menu[MN_DIR]), menu_item);
     gtk_widget_show (menu_item);
   }
+  
+  win->restore_menu = gtk_menu_item_new_with_label (_("Show main menu"));
+  gtk_signal_connect (GTK_OBJECT (win->restore_menu), "activate", 
+		  GTK_SIGNAL_FUNC (cb_hide_menu),(gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu[MN_DIR]),win->restore_menu);
+  gtk_widget_add_accelerator (win->restore_menu, "activate", accel,
+		   GDK_m,GDK_MOD1_MASK,GTK_ACCEL_VISIBLE );
+  if (preferences & HIDE_MENU) 
+	  gtk_widget_show (win->restore_menu);
+  
+  
+ 
   gtk_menu_attach_to_widget (GTK_MENU (menu[MN_DIR]), ctree, (GtkMenuDetachFunc) menu_detach);
 
 /**** file list ...  */  
@@ -1203,7 +1214,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
 /* first pixmap appearance */
   
-  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
+  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
+		  gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);   
+  
   en = entry_new_by_path_and_label (path, path);
   if (!en)
   {
@@ -1225,6 +1238,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_signal_connect (GTK_OBJECT (ctree), "drag_data_get", GTK_SIGNAL_FUNC (on_drag_data_get), win);
   gtk_signal_connect (GTK_OBJECT (ctree), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
   gtk_signal_connect (GTK_OBJECT (ctree), "drag_end", GTK_SIGNAL_FUNC (on_drag_end), win);
+
+                              
+
 
   set_title (win->top, en->path);
   if (win->width > 0 && win->height > 0)
@@ -1255,6 +1271,12 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_widget_show_all (win->top);
 
   /* hide what must be hidden */
+  if (!(preferences & SHOW_STATUS)) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (win->status->parent))){ 
+	      gtk_widget_hide(GTK_WIDGET (win->status->parent));
+	  } 
+  }
+  if (preferences&HIDE_MENU) gtk_widget_show(win->restore_menu);
   if (!(preferences & FILTER_OPTION)) {
 	if (GTK_WIDGET_VISIBLE(win->filter->parent->parent))
 		  gtk_widget_hide(win->filter->parent->parent);		  
@@ -1287,7 +1309,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
   gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
   
-  
+      
   return (win);
 }
 

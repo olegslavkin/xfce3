@@ -53,8 +53,9 @@
 #  include "dmalloc.h"
 #endif
 
+extern gint update_timer (GtkCTree * ctree);
 
-extern int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
+
 static gboolean drop_cancelled=FALSE;
 
 void cancel_drop(gboolean state)
@@ -80,16 +81,15 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   GtkCList *clist;
   char *tmpfile=NULL;
 
-  if (!ctree)
-    return;
+  while (gtk_events_pending()) gtk_main_iteration();
 
-  clist = GTK_CLIST (ctree);
-
-  if ((data->length < 0) || (data->format != 8))
+  if ((!ctree) || (data->length < 0) || (data->format != 8))
   {
     gtk_drag_finish (context, FALSE, FALSE, time);
     return;
   }
+  
+  clist = GTK_CLIST (ctree);
   set_override(FALSE);
 
   action = context->action <= GDK_ACTION_DEFAULT ? GDK_ACTION_COPY : context->action;
@@ -196,7 +196,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   /* set cpy over*/
   /*fprintf(stderr,"dbg:parent:runOver\n");*/
   gtk_drag_finish (context, TRUE, TRUE, time);
-  update_tree (GTK_CTREE (ctree), node);
+  update_timer (GTK_CTREE (ctree));
 }
 
 /*
@@ -252,6 +252,7 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
       files += slen + 5 + 2;
       selection = selection->next;
     }
+    /*printf("gdkatom=%lu(%s)\n",selection_data->target,gdk_atom_name(selection_data->target));*/
     gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) win->dnd_data, len);
     break;
   }
@@ -260,15 +261,26 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
 gboolean
 on_drag_motion (GtkWidget * widget, GdkDragContext * dc, gint x, gint y, guint t, gpointer data)
 {
-  gboolean same;
-  GtkWidget *source_widget;
   GdkDragAction action;
 
   /* Get source widget and check if it is the same as the
    * destination widget. 
-   */
+   *  ...and then do nothing with the result. */
+#if 0
+ {
+  gboolean same;
+  GtkWidget *source_widget;
   source_widget = gtk_drag_get_source_widget (dc);
   same = ((source_widget == widget) ? TRUE : FALSE);
+  if (same){
+	  printf("same widget for dnd motion\n");
+	  return FALSE;
+  } else {
+	  printf("different widget for dnd motion\n");
+	  return FALSE;
+  }
+ }
+#endif
 
   /* Insert code to get our default action here. */
   if (preferences & DRAG_DOES_COPY) action = GDK_ACTION_COPY;
@@ -281,30 +293,28 @@ on_drag_motion (GtkWidget * widget, GdkDragContext * dc, gint x, gint y, guint t
    * If no valid actions are listed then we respond with 0.
    */
 
-  /* Only move? */
-  if (dc->actions == GDK_ACTION_MOVE)
-    gdk_drag_status (dc, GDK_ACTION_MOVE, t);
-  else if (dc->actions == GDK_ACTION_COPY)
-    gdk_drag_status (dc, GDK_ACTION_COPY, t);
-  else if (dc->actions == GDK_ACTION_LINK)
-    gdk_drag_status (dc, GDK_ACTION_LINK, t);
-  else if (dc->actions & action)
-    gdk_drag_status (dc, action, t);
-  else
-    gdk_drag_status (dc, 0, t);
+
+
+  if (dc->actions == GDK_ACTION_MOVE)			gdk_drag_status (dc, GDK_ACTION_MOVE, t);
+  else if (dc->actions == GDK_ACTION_COPY)		gdk_drag_status (dc, GDK_ACTION_COPY, t);
+  else if (dc->actions == GDK_ACTION_LINK)		gdk_drag_status (dc, GDK_ACTION_LINK, t);  
+  else if (dc->actions & action)			gdk_drag_status (dc, action, t);
+  else							gdk_drag_status (dc, 0, t);
 
   return (TRUE);
 }
 
 void
-on_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data)
+on_drag_end (GtkWidget * ctree, GdkDragContext * context, gpointer data)
 {
   GtkCTreeNode *node = NULL;
-  GtkCTree *ctree = GTK_CTREE (widget);
   int num;
+  cfg *win;
+  
+  if (!ctree) return;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
-  if (!ctree)
-    return;
+  if (win->dnd_data){g_free(win->dnd_data);win->dnd_data=NULL;}
   num = g_list_length (GTK_CLIST (ctree)->selection);
   if (!num)
     node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
@@ -312,6 +322,7 @@ on_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data)
   {
     node = GTK_CTREE_ROW (GTK_CLIST (ctree)->selection->data)->parent;
   }
-  update_tree (GTK_CTREE (ctree), node);
+  update_timer (GTK_CTREE (ctree));
+  
   return;
 }

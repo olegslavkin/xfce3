@@ -58,6 +58,7 @@
 #include "../xfdiff/xfdiff_colorsel.h"
 #include "xtree_go.h"
 #include "xtree_cb.h"
+#include "xtree_functions.h"
 #include "fontselection.h"
 
 #ifdef HAVE_GDK_IMLIB
@@ -305,14 +306,19 @@ cb_hide_menu (GtkWidget * widget, GtkWidget *ctree)
 
   preferences ^= HIDE_MENU;
   if (preferences & HIDE_MENU) {
-	  if (GTK_WIDGET_VISIBLE(win->menu->parent)) gtk_widget_hide(win->menu->parent);
+	  if (GTK_WIDGET_VISIBLE(win->menu->parent)) {
+		  gtk_widget_show(win->restore_menu);
+		  gtk_widget_hide(win->menu->parent);
+	  }
   } else {
-	  if (!GTK_WIDGET_VISIBLE(win->menu->parent)) gtk_widget_show(win->menu->parent);
+	  if (!GTK_WIDGET_VISIBLE(win->menu->parent)){
+		  gtk_widget_show(win->menu->parent);
+		  gtk_widget_hide(win->restore_menu);
+	  }
   }
   save_defaults(NULL);
   return;
 }
-
 void
 cb_abreviate (GtkWidget * widget, GtkWidget *ctree)
 {
@@ -553,10 +559,7 @@ if (strstr(homedir,"ctree_color :")){
   
 }
 
-/* from xtree_gui.c: */
-void set_title (GtkWidget * w, const char *path);
-
-void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
+void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree)
 {
   cfg *win;
   entry *en;
@@ -567,8 +570,60 @@ void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
+  preferences ^= STATUS_FOLLOWS_EXPAND;
+  save_defaults (NULL);
+  if (preferences & STATUS_FOLLOWS_EXPAND){
+  	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), win->status_node);
+  } else {
+  	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
+  }
+  set_title(win->top,en->path);
+}
+
+void cb_show_status(GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  entry *en;
+  GtkCTreeNode *root;
+
+  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
+  preferences ^= SHOW_STATUS;
+  if (preferences & SHOW_STATUS) {
+	  if (!GTK_WIDGET_VISIBLE(GTK_WIDGET (win->status->parent))){ 
+	      gtk_widget_show(GTK_WIDGET (win->status->parent));
+	  } 
+  } else {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (win->status->parent))){ 
+	      gtk_widget_hide(GTK_WIDGET (win->status->parent));
+	  } 
+  }
+  save_defaults (NULL);
+
+  set_title(win->top,en->path);
+}
+
+
+
+void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  entry *en;
+  GtkCTreeNode *root;
+  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree)); 
   preferences ^= SHORT_TITLES;
   save_defaults (NULL);
+  
+  if (preferences & STATUS_FOLLOWS_EXPAND){
+  	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), win->status_node);
+  } else {
+  	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
+  }
+  
   set_title(win->top,en->path);
 }
 

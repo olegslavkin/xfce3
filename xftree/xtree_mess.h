@@ -16,6 +16,9 @@
 #define SORT_SIZE		0x8000
 #define SORT_DATE		0x10000
 #define SORT_NAME		0x20000
+#define STATUS_FOLLOWS_EXPAND	0x40000
+#define SHOW_STATUS		0x80000
+
 
 #define UNSORT_MASK		(0x38000 ^ 0xffffffff)
 #define FILTER_DIRS		0x01
@@ -71,6 +74,7 @@ void cb_hide_size (GtkWidget * widget, GtkWidget * ctree);
 void set_colors(GtkWidget * ctree);
 int set_fontT(GtkWidget * ctree);
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
+void cb_show_status (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_menu (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_titles (GtkWidget * widget, GtkWidget *ctree);
 void cb_subsort(GtkWidget * widget, GtkWidget *ctree);
@@ -86,5 +90,6 @@ char *abreviate(char *path);
 char *abreviateP(char *path);
 void clear_cat (GtkWidget * widget, gpointer data);
 void cb_custom_home(GtkWidget *widget,gpointer data);
+void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree);
 
 #endif

@@ -531,14 +531,25 @@ void
 cb_find (GtkWidget * item, GtkWidget * ctree)
 {
   GtkCTreeNode *node;
-  char path[PATH_MAX + 1];
+  char *path;
   entry *en;
 
   count_selection (GTK_CTREE (ctree), &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
+  path=(char *)malloc(strlen(en->path)+1+10);
+  if (!path) return;
   sprintf (path, "xfglob %s&", en->path);
+  
+  if (!(en->type & FT_DIR)){
+	  if (strstr(path,"/")) {
+		  *(strrchr(path,'/')+1)=0;
+		  *strrchr(path,'/')='&';
+	  }
+  }
+
   io_system (path);
+  free(path);
+  
 }
 
 void
@@ -605,7 +616,7 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
     fprintf (stderr,"fullpath=%s\n", fullpath);
 #endif
   if (mkdir (fullpath, 0xFFFF) != -1)
-      update_tree (GTK_CTREE (ctree), node);
+      update_timer (GTK_CTREE (ctree));
   else
       xf_dlg_error (win->top,fullpath, strerror (errno));
   free(path); free(fullpath);  free(label);

@@ -29,6 +29,10 @@
 #include <gtk/gtk.h>
 #include "xtree_cfg.h"
 #include "xtree_gui.h"
+typedef struct status_info {
+	int howmany;
+	int howmuch;
+} status_info;
 
 
 int count_selection (GtkCTree * ctree, GtkCTreeNode ** first);
@@ -36,26 +40,17 @@ int selection_type (GtkCTree * ctree, GtkCTreeNode ** first);
 XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event);
 void tree_unselect  (GtkCTree *ctree,GList *node,gpointer user_data);
 gint on_delete (GtkWidget * w, GdkEvent * event, gpointer data);
-void
-on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path);
-void
-on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path);
+void on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path);
+void on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path);
 void menu_detach (void);
 
 void node_destroy (gpointer p);
-
 void ctree_thaw (GtkCTree * ctree);
-
 void ctree_freeze (GtkCTree * ctree);
-
 void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags);
 
 void set_title (GtkWidget * w, const char *path);
-
-int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
-
 gint update_timer (GtkCTree * ctree);
-
 void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
 
 #endif
