@@ -34,6 +34,7 @@ palettes_DATA=\
  Craters \
  DarkMetal \
  Default \
+ DefaultTextured \
  Defcon \
  Desert \
  Dolly \
