@@ -201,7 +201,7 @@ noinst_DATA = \
  shade_pressed.xbm \
  shade.xbm \
  stick_pressed.xbm \
- stick.xbm \
+ stick.xbm 
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h

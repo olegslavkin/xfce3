@@ -67,4 +67,4 @@ noinst_DATA = \
  shade_pressed.xbm \
  shade.xbm \
  stick_pressed.xbm \
- stick.xbm \
+ stick.xbm 

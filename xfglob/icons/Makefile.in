@@ -147,7 +147,7 @@ noinst_DATA = \
  page.xpm \
  sexe.xpm  \
  socket.xpm \
- xfglob_icon.xpm \
+ xfglob_icon.xpm 
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h

@@ -14,4 +14,4 @@ noinst_DATA = \
  page.xpm \
  sexe.xpm  \
  socket.xpm \
- xfglob_icon.xpm \
+ xfglob_icon.xpm 

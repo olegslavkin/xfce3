@@ -1,5 +1,5 @@
 EXTRA_DIST = $(images_DATA)
-imagesdir = $(XFCE_DIR)/help/html/images
+imagesdir = $(XFCE_DIR)/help/images
 images_DATA = \
  xfdiff.jpg \
  xfce_setup1.jpg \
