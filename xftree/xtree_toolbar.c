@@ -190,8 +190,9 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win,gboolean large)
   GdkPixmap *pixmap=NULL;
   GdkBitmap *pixmask=NULL;
   GtkWidget *widget;
-  int i;
+  int i,k;
   unsigned int mask;
+  gboolean do_sep=FALSE;
   GtkWidget *toolbar;
   boton_icono toolbarIcon[]={TOOLBARICONS};
 
@@ -202,9 +203,13 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win,gboolean large)
   gtk_widget_realize(top);
   if (large) mask=stateTB[1]; else mask=stateTB[0];
 
-  for (i=0;(toolbarIcon[i].text != NULL)&&(i<32);i++) {
-     if (toolbarIcon[i].icon==NULL) gtk_toolbar_append_space ((GtkToolbar *)toolbar);
-     else if (mask & (0x01<<i)) {
+  for (k=i=0;toolbarIcon[i].text != NULL;i++) {
+     if (toolbarIcon[i].icon==NULL) {
+	  if (do_sep) gtk_toolbar_append_space ((GtkToolbar *)toolbar);
+	  do_sep=FALSE;
+     }
+     else {
+      if (mask & (0x01<<k)) {
         if (large) {
 		pixmap=duplicate_xpm(top,toolbarIcon[i].icon,&pixmask);
 		widget = gtk_pixmap_new (pixmap, pixmask);
@@ -215,6 +220,9 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win,gboolean large)
 	widget, 
 	GTK_SIGNAL_FUNC (toolbarIcon[i].function),
 	(gpointer) ctree);
+       do_sep=TRUE;
+      }
+      k++;
      }
   }
   for (i=0;i<2;i++) win->stateTB[i]=stateTB[i];
@@ -322,7 +330,7 @@ void toggle_toolbar(GtkWidget * widget, GtkWidget *ctree){
 
 static GtkWidget *toolbar_config(GtkWidget *ctree){
   GtkWidget *scrolledwindow,*table,*viewport,*widget,*hbox;
-  int i;
+  int i,k;
   cfg *win;
   boton_icono toolbarIcon[]={TOOLBARICONS};
   char *labels[]={
@@ -381,17 +389,18 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
   }
   
   /* table entries */
-  for (i=0;toolbarIcon[i].text != NULL;i++) {
+  for (k=i=0;toolbarIcon[i].text != NULL;i++) {
      int j;
      gpointer toolbar_func[]={
 	     toggle_toolbars0,
 	     toggle_toolbars1
      };
+     if (!toolbarIcon[i].icon) continue; /* skip separators */
      widget = MyCreateFromPixmapData (config_toolbar_dialog, toolbarIcon[i].icon); 
      gtk_widget_show (widget);
      gtk_table_attach (GTK_TABLE (table), 
 		     widget, 
-		     0,1,i+1, i+2,
+		     0,1,k+1, k+2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
      
@@ -399,26 +408,26 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
      gtk_widget_show (widget);
      gtk_table_attach (GTK_TABLE (table), 
 		     widget, 
-		     1,2, i+1, i+2,
+		     1,2, k+1, k+2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
      for (j=0;j<2;j++) {
        widget=gtk_check_button_new ();
-       if (stateTB[j] & (1<<i)) gtk_toggle_button_set_active ((GtkToggleButton *)widget,TRUE);
+       if (stateTB[j] & (1<<k)) gtk_toggle_button_set_active ((GtkToggleButton *)widget,TRUE);
        gtk_widget_show (widget);
        gtk_signal_connect (GTK_OBJECT (widget), "toggled", GTK_SIGNAL_FUNC (toolbar_func[j]), 
-		     (gpointer)((long) (1 << i)));
+		     (gpointer)((long) (1 << k)));
        gtk_signal_connect (GTK_OBJECT (widget), "clicked", GTK_SIGNAL_FUNC (regen_toolbar),
 		   (gpointer) ctree);
        gtk_table_attach (GTK_TABLE (table), 
 		     widget, 
-		     j+2,j+3, i+1, i+2,
+		     j+2,j+3, k+1, k+2,
                     (GtkAttachOptions) (GTK_FILL),
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
      }
-     
-   }
-
+     k++;
+  }
+   
   /* hide show toolbar */
   hbox=gtk_hbox_new(TRUE,5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (config_toolbar_dialog)->vbox), hbox, FALSE, FALSE, 0);
