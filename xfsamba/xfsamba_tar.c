@@ -1,9 +1,6 @@
 /* (c) 2001 Edscott Wilson Garcia GNU/GPL
-* this file is included by xfsamba.c
-* please see xfsamba.c for copyright notice 
-* (touch xfsamba.c if modified) */
+ */
 
-#define INCLUDED_BY_XFSAMBA_C
 #ifndef INCLUDED_BY_XFSAMBA_C
 #include <unistd.h>
 #include <stdarg.h>
@@ -24,10 +21,20 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+/* for _( definition, it also includes config.h : */
+#include "my_intl.h"
+#include "constant.h"
+/* for pixmap creation routines : */
+#include "xfce-common.h"
+#include "fileselect.h"
+
+#include "tubo.h"
+#include "xfsamba.h"
 #endif
 
 static int tar_options;
 static char *tarO = NULL;
+static GtkWidget *dialog;
 
 static void
 SMBtarFork (void)

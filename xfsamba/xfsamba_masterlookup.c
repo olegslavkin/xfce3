@@ -1,9 +1,6 @@
 /* (c) 2001 Edscott Wilson Garcia GNU/GPL
-* this file is included by xfsamba.c
-* please see xfsamba.c for copyright notice 
-* (touch xfsamba.c if modified) */
+*  */
 
-#define INCLUDED_BY_XFSAMBA_C
 #ifndef INCLUDED_BY_XFSAMBA_C
 #include <unistd.h>
 #include <stdarg.h>
@@ -24,6 +21,17 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+
+/* for _( definition, it also includes config.h : */
+#include "my_intl.h"
+#include "constant.h"
+/* for pixmap creation routines : */
+#include "xfce-common.h"
+#include "fileselect.h"
+
+#include "tubo.h"
+#include "xfsamba.h"
+
 #endif
 
 /* functions to use tubo.c for master browsere lookup */
@@ -34,7 +42,7 @@
 *  and all data in pipe has been read : */
 
 
-void
+static void
 NMBmastersForkOver (void)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
@@ -72,7 +80,7 @@ NMBmastersForkOver (void)
 }
 
 /* function to process stdout produced by child */
-int
+static int
 NMBmastersParseLookup (int n, void *data)
 {
   char *line, *buffer;
@@ -97,7 +105,7 @@ NMBmastersParseLookup (int n, void *data)
 
 /* function executed by child after all pipes
 *  timeouts and inputs have been set up */
-void
+static void
 NMBmastersFork (void)
 {
 #ifdef DBG_XFSAMBA

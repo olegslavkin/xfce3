@@ -1,9 +1,6 @@
 /* (c) 2001 Edscott Wilson Garcia GNU/GPL
-* this file is included by xfsamba.c
-* please see xfsamba.c for copyright notice 
-* (touch xfsamba.c if modified) */
+ */
 
-#define INCLUDED_BY_XFSAMBA_C
 #ifndef INCLUDED_BY_XFSAMBA_C
 #include <unistd.h>
 #include <stdarg.h>
@@ -24,12 +21,38 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+/* for _( definition, it also includes config.h : */
+#include "my_intl.h"
+#include "constant.h"
+/* for pixmap creation routines : */
+#include "xfce-common.h"
+#include "fileselect.h"
+
+#include "tubo.h"
+#include "xfsamba.h"
 #endif
 
-/* functions to use tubo.c for mkdir and rmdir */
+/* functions to use tubo.c for rm and rmdir */
 
-/*******SMBmkdir******************/
+/*******SMBrmdir******************/
 
+static GtkWidget *dialog;
+/* function executed after all pipes
+*  timeouts and inputs have been set up */
+static void
+SMBrmFork (void)
+{
+  char *the_netbios;
+  the_netbios = (char *) malloc (strlen ((char *) NMBnetbios) + strlen ((char *) NMBshare) + 1 + 3);
+  sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
+#ifdef DBG_XFSAMBA
+  fprintf (stderr, "DBG:smbclient %s -c \"%s\"\n", the_netbios, NMBcommand);
+  fflush (NULL);
+  sleep (1);
+#endif
+
+  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c", NMBcommand, (char *) 0);
+}
 
 
 /* function to process stdout produced by child */
@@ -155,7 +178,7 @@ proceed_rm (GtkWidget * widget, gpointer data)
   ok = (int) ((long) data);
   if (ok)
   {
-    fork_obj = Tubo (SMBClientFork, SMBrmForkOver, TRUE, SMBrmStdout, parse_stderr);
+    fork_obj = Tubo (SMBrmFork, SMBrmForkOver, TRUE, SMBrmStdout, parse_stderr);
   }
   else
   {

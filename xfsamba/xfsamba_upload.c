@@ -1,13 +1,11 @@
 /* (c) 2001 Edscott Wilson Garcia GNU/GPL
-* this file is included by xfsamba.c
-* please see xfsamba.c for copyright notice 
-* (touch xfsamba.c if modified) */
+ */
 
 /* functions to use tubo.c for uploading SMB files */
 
 /*******SMBPut******************/
 /* function to process stdout produced by child */
-#define INCLUDED_BY_XFSAMBA_C
+
 #ifndef INCLUDED_BY_XFSAMBA_C
 #include <unistd.h>
 #include <stdarg.h>
@@ -15,6 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <sys/stat.h>
+#include <glob.h>
+#include <time.h>
 #include "constant.h"
 
 #ifdef HAVE_CONFIG_H
@@ -28,7 +29,36 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+/* for _( definition, it also includes config.h : */
+#include "my_intl.h"
+#include "constant.h"
+/* for pixmap creation routines : */
+#include "xfce-common.h"
+#include "fileselect.h"
+
+#include "tubo.h"
+#include "xfsamba.h"
 #endif
+
+static char *fileUp;
+
+/* function executed after all pipes
+*  timeouts and inputs have been set up */
+static void
+SMBPutFork (void)
+{
+  char *the_netbios;
+  the_netbios = (char *) malloc (strlen ((char *) NMBnetbios) + strlen ((char *) NMBshare) + 1 + 3);
+  sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
+#ifdef DBG_XFSAMBA
+  fprintf (stderr, "DBG:smbclient %s -c \"%s\"\n", the_netbios, NMBcommand);
+  fflush (NULL);
+  sleep (1);
+#endif
+
+  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c", NMBcommand, (char *) 0);
+}
+
 
 static int
 SMBPutStdout (int n, void *data)
@@ -49,7 +79,6 @@ SMBPutStdout (int n, void *data)
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
 
-static char *fileUp;
 static void
 SMBPutForkOver (void)
 {
@@ -186,6 +215,6 @@ SMBPutFile (void)
   strncpy (NMBpassword, thisN->password, XFSAMBA_MAX_STRING);
   NMBpassword[XFSAMBA_MAX_STRING] = 0;
 
-  fork_obj = Tubo (SMBClientFork, SMBPutForkOver, TRUE, SMBPutStdout, parse_stderr);
+  fork_obj = Tubo (SMBPutFork, SMBPutForkOver, TRUE, SMBPutStdout, parse_stderr);
   return;
 }

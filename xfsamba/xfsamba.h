@@ -2,9 +2,24 @@
  * copyright 2001 Edscott Wilson Garcia under GNU/GPL
  * */
 
-#define XFSAMBA_VERSION "0.32"
-/*#define DBG_XFSAMBA*/
+/********** defines ***************/
 
+#ifndef XFSAMBA_VERSION
+#define XFSAMBA_VERSION "0.33.2"
+#endif
+
+#ifdef XFSAMBA_MAIN
+#define EXTERN
+#else
+#define EXTERN extern
+#endif
+
+
+#define LOCATION_SHARES      1
+#define LOCATION_SERVERS     2
+#define LOCATION_WORKGROUPS  3
+
+/*#define DBG_XFSAMBA*/
 
 /* defines used for exiting : */
 /*
@@ -12,7 +27,6 @@
 #define E_MALLOC   1
 #define E_FILE     2
 #define E_SEGV     3
-
 #define dlg_inf(a)   my_show_message (a)
 */
 
@@ -51,6 +65,8 @@
 
 #define WINDOW_WIDTH  400
 #define XFSAMBA_MAX_STRING 255
+
+/******************* structures ****************/
 
 
 typedef struct nmb_cache
@@ -109,24 +125,42 @@ typedef struct selected_struc
 }
 selected_struc;
 
-/* main prototypes : */
 
+/********** function prototypes ***************/
+
+/* xfsamba prototypes : */
+
+gboolean not_unique (void *object);
+int parse_stderr (int n, void *data);
 void print_diagnostics (char *message);
 void print_status (char *message);
 void xfsamba_abort (int why);
 void SMBCleanLevel2 (void);
-void SMBrefresh (unsigned char *servidor, int reload);
-void NMBLookup (GtkWidget * widget, gpointer data);
 
-/* lonely modules */
-void SMBList (void);
+/** modules **/
+/* xfsamba_download: */
 void SMBGetFile (void);
+/* xfsamba_upload: */
 void SMBPutFile (void);
+/* xfsamba_mkdir: */
 void SMBmkdir (void);
+/* xfsamba_rm: */
 void SMBrm (void);
+/* xfsamba_tar: */
 void SMBtar (void);
+/* xfsamba_nmblookup: */
+void NMBLookup (GtkWidget * widget, gpointer data);
+/* xfsamba_masterlookup; */
+gboolean NMBmastersLookup (gpointer data);
+/* xfsamba_masterresolve; */
+gboolean NMBmastersResolve (nmb_list * currentN);
+/* xfsamba_list; */
+void SMBList (void);
+/* xfsamba_smblookup: */
+void SMBrefresh (unsigned char *servidor, int reload);
+void SMBLookup (unsigned char *servidor, int reload);
 
-
+/* mem prototypes: */
 void eliminate2_cache (nmb_cache * the_cache, char *entry);
 void pop_cache (nmb_cache * cache);
 void smoke_nmb_cache (nmb_cache * fromC);
@@ -147,18 +181,15 @@ void latin_1_unreadable (char *the_char);
 void latin_1_readable (char *the_char);
 
 
-/* gui prototypes : */
+/* gui prototypes: */
 GtkWidget *passwd_dialog (int caso);
 GtkWidget *create_smb_window (void);
 void animation (gboolean state);
 void node_destroy (gpointer p);
 
-#ifdef XFSAMBA_MAIN
-#define EXTERN
-#else
-#define EXTERN extern
-#endif
-/* public variables from main : */
+/************public variables *******************/
+
+/* xfsamba modules: */
 
 EXTERN selected_struc selected;
 EXTERN nmb_list *thisN, *headN;
@@ -168,9 +199,19 @@ EXTERN int SMBResult;
 EXTERN char *default_user;
 EXTERN gboolean stopcleanup, nonstop;
 
+
+/* global memory data, not to be jeopardized on forks: */
+EXTERN unsigned char NMBpassword[XFSAMBA_MAX_STRING + 1];
+EXTERN unsigned char NMBnetbios[XFSAMBA_MAX_STRING + 1];
+EXTERN unsigned char NMBshare[XFSAMBA_MAX_STRING + 1];
+EXTERN unsigned char NMBcommand[XFSAMBA_MAX_STRING + 1];
+EXTERN char NMBserverIP[XFSAMBA_MAX_STRING + 1];
+
+
+
 /* public variables from gui : */
 
-EXTERN GdkPixmap * gPIX_page, *gPIX_rpage, *gPIX_dir_close, *gPIX_dir_open, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_comp1, *gPIX_comp2, *gPIX_wg1, *gPIX_wg2, *gPIX_reload, *gPIX_dotfile, *gPIX_delete, *gPIX_new_dir, *gPIX_rdotfile, *gPIX_view1, *gPIX_view2, *gPIX_view3, *gPIX_tar, *gPIX_print, *gPIX_help, *gPIX_ip, *gPIX_download, *gPIX_upload;
+EXTERN GdkPixmap *gPIX_page, *gPIX_rpage, *gPIX_dir_close, *gPIX_dir_open, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_comp1, *gPIX_comp2, *gPIX_wg1, *gPIX_wg2, *gPIX_reload, *gPIX_dotfile, *gPIX_delete, *gPIX_new_dir, *gPIX_rdotfile, *gPIX_view1, *gPIX_view2, *gPIX_view3, *gPIX_tar, *gPIX_print, *gPIX_help, *gPIX_ip, *gPIX_download, *gPIX_upload;
 
 EXTERN GdkBitmap * gPIM_page, *gPIM_rpage, *gPIM_dir_close, *gPIM_dir_open, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_comp1, *gPIM_comp2, *gPIM_wg1, *gPIM_wg2, *gPIM_reload, *gPIM_dotfile, *gPIM_delete, *gPIM_new_dir, *gPIM_rdotfile, *gPIM_view1, *gPIM_view2, *gPIM_view3, *gPIM_tar, *gPIM_print, *gPIM_help, *gPIM_ip, *gPIM_download, *gPIM_upload;
 

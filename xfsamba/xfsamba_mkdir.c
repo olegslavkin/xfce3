@@ -1,9 +1,6 @@
 /* (c) 2001 Edscott Wilson Garcia GNU/GPL
-* this file is included by xfsamba.c
-* please see xfsamba.c for copyright notice 
-* (touch xfsamba.c if modified) */
+ */
 
-#define INCLUDED_BY_XFSAMBA_C
 #ifndef INCLUDED_BY_XFSAMBA_C
 #include <unistd.h>
 #include <stdarg.h>
@@ -11,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <time.h>
+#include <gdk/gdkkeysyms.h>
 #include "constant.h"
 
 #ifdef HAVE_CONFIG_H
@@ -24,13 +23,42 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+/* for _( definition, it also includes config.h : */
+#include "my_intl.h"
+#include "constant.h"
+/* for pixmap creation routines : */
+#include "xfce-common.h"
+#include "fileselect.h"
+
+#include "tubo.h"
+#include "xfsamba.h"
 #endif
 
-/* functions to use tubo.c for mkdir and rmdir */
+/* functions to use tubo.c for mkdir */
 
 /*******SMBmkdir******************/
+static GtkWidget *dialog;
 
 static char *new_dir = NULL;
+static GtkWidget *dir_name_entry;
+
+/* function executed after all pipes
+*  timeouts and inputs have been set up */
+static void
+SMBmkdirFork (void)
+{
+  char *the_netbios;
+  the_netbios = (char *) malloc (strlen ((char *) NMBnetbios) + strlen ((char *) NMBshare) + 1 + 3);
+  sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
+#ifdef DBG_XFSAMBA
+  fprintf (stderr, "DBG:smbclient %s -c \"%s\"\n", the_netbios, NMBcommand);
+  fflush (NULL);
+  sleep (1);
+#endif
+
+  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c", NMBcommand, (char *) 0);
+}
+
 static void
 proceed_dir_name (GtkWidget * widget, gpointer data)
 {
@@ -244,7 +272,7 @@ SMBmkdir_with_name (void)
   print_diagnostics ("\n");
 
 
-  fork_obj = Tubo (SMBClientFork, SMBmkdirForkOver, TRUE, SMBmkdirStdout, parse_stderr);
+  fork_obj = Tubo (SMBmkdirFork, SMBmkdirForkOver, TRUE, SMBmkdirStdout, parse_stderr);
 }
 
 void

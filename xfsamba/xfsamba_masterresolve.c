@@ -1,12 +1,9 @@
 /* (c) 2001 Edscott Wilson Garcia GNU/GPL
-* this file is included by xfsamba.c
-* please see xfsamba.c for copyright notice 
-* (touch xfsamba.c if modified) */
+ */
 
 /* functions to use tubo.c for resolving master
 *  browser IP address into a netbios name  */
 
-#define INCLUDED_BY_XFSAMBA_C
 #ifndef INCLUDED_BY_XFSAMBA_C
 #include <unistd.h>
 #include <stdarg.h>
@@ -14,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include "constant.h"
 
 #ifdef HAVE_CONFIG_H
@@ -27,21 +25,36 @@
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
+
+/* for _( definition, it also includes config.h : */
+#include "my_intl.h"
+#include "constant.h"
+/* for pixmap creation routines : */
+#include "xfce-common.h"
+#include "fileselect.h"
+
+#include "tubo.h"
+#include "xfsamba.h"
+
 #endif
+
+static GtkWidget *master;
+static int NMBfirst = 1;
+static GtkWidget *dialog;
+static GList *items = NULL;
 
 
 /* function to be run by parent after child has exited
 *  and all data in pipe has been read : */
-static GtkWidget *master;
 
-void
+static void
 destroy_dialog_master (GtkWidget * widget, gpointer data)
 {
   gtk_main_quit ();
   gtk_widget_destroy (dialog);
 }
 
-void
+static void
 ok_dialog_master (GtkWidget * widget, gpointer data)
 {
   FILE *archie;
@@ -66,7 +79,7 @@ ok_dialog_master (GtkWidget * widget, gpointer data)
 }
 
 
-void
+static void
 entry_keypress_master (GtkWidget * entry, GdkEventKey * event, gpointer data)
 {
   if (event->keyval == GDK_Return)
@@ -77,7 +90,7 @@ entry_keypress_master (GtkWidget * entry, GdkEventKey * event, gpointer data)
 
 }
 
-GtkWidget *
+static GtkWidget *
 master_dialog (char *ip)
 {
   GtkWidget *button, *hbox, *label;
@@ -127,7 +140,7 @@ master_dialog (char *ip)
   return dialog;
 }
 
-void
+static void
 ask4master (void)
 {
   FILE *archie;
@@ -170,7 +183,7 @@ ask4master (void)
 }
 
 
-void
+static void
 NMBmastersResolveOver (void)
 {
   static gboolean NMBmastersResolve (nmb_list * currentN);
@@ -240,7 +253,7 @@ again_master:
 }
 
 /* function to process stdout produced by child */
-int
+static int
 NMBparseMastersResolve (int n, void *data)
 {
   char *line;
@@ -262,7 +275,7 @@ NMBparseMastersResolve (int n, void *data)
 
 /* function executed by child after all pipes
 *  timeouts and inputs have been set up */
-void
+static void
 NMBmastersResolveFork (void)
 {
 #ifdef DBG_XFSAMBA

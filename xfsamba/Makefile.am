@@ -11,7 +11,18 @@ bin_PROGRAMS = xfsamba
 xfsamba_SOURCES = tubo.h tubo.c \
                 xfsamba.h xfsamba.c \
                 xfsamba_gui.c \
-                xfsamba_mem.c
+                xfsamba_mem.c \
+		xfsamba_nmblookup.c \
+		xfsamba_masterlookup.c \
+		xfsamba_masterresolve.c \
+		xfsamba_list.c \
+		xfsamba_download.c \
+		xfsamba_upload.c \
+		xfsamba_mkdir.c \
+		xfsamba_rm.c \
+		xfsamba_tar.c \
+		xfsamba_smblookup.c
+
 
 xfsamba_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \
