@@ -326,6 +326,18 @@ cb_dnd (GtkWidget * item, GtkWidget * ctree)
 			  "work with other file browsers"));
 }
 static void
+cb_mountH (GtkWidget * item, GtkWidget * ctree)
+{
+  xf_dlg_warning (smb_nav,_("In order to mount SMB share, the following samba files must be suid-root:\n"
+			  "- smbmnt\n"
+			  "- smbumount\n"
+			  "these file are usually in /usr/bin, and root must perform:\n"
+			  "$ chmod u+s smbmount smbumount\n"
+	  		  "(This option is not available in FreeBSD4.4)"
+			  ));
+}
+
+static void
 cb_search (GtkWidget * item, GtkWidget * ctree)
 {
   xf_dlg_warning (smb_nav,_("To search for files on remote SMB shares\n"
@@ -1289,6 +1301,7 @@ static void make_menu(GtkWidget *handlebox){
 
 	menu = shortcut_menu (RIGHT_MENU, menubar, _("Help"), NULL, NULL);
 	submenu = shortcut_menu (SUBMENU, menu, _("Drag and drop"), GTK_SIGNAL_FUNC (cb_dnd), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Mounting SMB shares"), GTK_SIGNAL_FUNC (cb_mountH), NULL);
 	submenu = shortcut_menu (SUBMENU, menu, _("Searching"), GTK_SIGNAL_FUNC (cb_search), NULL);
 	submenu = shortcut_menu (SUBMENU, menu, _("Differences"), GTK_SIGNAL_FUNC (cb_diff), NULL);
 	submenu = shortcut_menu (SUBMENU, menu, _("Master browsers"), GTK_SIGNAL_FUNC (cb_master), NULL);

@@ -1,3 +1,4 @@
+CRASH! when pressing copy button in FreeBSD. FIXME.
 - buggy when mixed files and directories are dropped or pasted.
 -check and eliminate need for latin1 translation routines (no longer necesary
 on later versions of samba)
