@@ -1039,7 +1039,7 @@ defpal (XFCE_palette * p)
   p->b[6] =  94;
   p->r[7] = 215;
   p->g[7] = 215;
-  p->b[7] = 113;
+  p->b[7] = 213;
   p->texture = g_realloc (p->texture, sizeof (char) * (strlen (DEFAULTTEXTURE) + 1));
   strcpy (p->texture, DEFAULTTEXTURE);
 }
