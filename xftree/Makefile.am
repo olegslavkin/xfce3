@@ -39,7 +39,7 @@ xftree_SOURCES = \
 	xtree_toolbar.c xtree_toolbar.h \
 	xtree_tar.c xtree_tar.h \
 	xtree_rpm.c xtree_rpm.h \
-	xtree_colorsel.c xfdiff_colorsel.h \
+	xtree_colorsel.c  \
 	xtree_icons.c xtree_icons.h \
 	xtree_smb.c
 
