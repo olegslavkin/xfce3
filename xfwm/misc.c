@@ -108,15 +108,17 @@ check_existfile (char *filename)
 char *
 bound_name (char *s, int max_len)
 {
-  char *tmp = NULL;
   char *res;
   int length;
   
-  
+#if 0
+  int l = strlen (s);
   if (strlen (s))
   {
-    if (iconv_string (charset, "autodetect_utf8", s, s + strlen (s), &tmp, NULL) < 0)
+    size_t lg;
+    if (iconv_string (charset, "autodetect_utf8", s, s + l, &tmp, &lg) < 0)
       perror ("iconv_string");
+    *(tmp + lg) = '\0';
   }
   else
   {
@@ -125,18 +127,19 @@ bound_name (char *s, int max_len)
     return (res);
   }
   length = strlen (tmp);
+#endif
+  length = strlen (s);
   if (length > max_len)
   {
     res = (char *) safemalloc (max_len + 5);
-    snprintf (res, max_len, "%s", tmp);
+    snprintf (res, max_len, "%s", s);
     strcat (res, "...");
   }
   else
   {
     res = (char *) safemalloc (length + 1);
-    strcpy (res, tmp);
+    strcpy (res, s);
   }
-  free (tmp);
   return (res);
 }
 

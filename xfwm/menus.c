@@ -927,6 +927,18 @@ AddToMenu (MenuRoot * menu, char *item, char *action)
   end = item;
   while ((*end != '\t') && (*end != 0))
     end++;
+#if 0
+  if (end - start > 0)
+  {
+    size_t lg;
+    tmp->item = NULL;
+    if (iconv_string (charset, "autodetect_utf8", start, end, &tmp->item, &lg) < 0)
+      perror ("iconv_string");
+    *(tmp->item + lg) = '\0';
+    fprintf (stderr, "tmp->item=\"%s\"\n", tmp->item);
+  }
+  else
+#endif
   tmp->item = safemalloc (end - start + 1);
   strncpy (tmp->item, start, end - start);
   tmp->item[end - start] = 0;

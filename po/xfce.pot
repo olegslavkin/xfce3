@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-11 21:17+0100\n"
+"POT-Creation-Date: 2001-12-13 23:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:279
+#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133
 msgid "Question"
 msgstr ""
 
@@ -746,64 +746,48 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr ""
 
-#: xfce/xfwm.c:430 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
-#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
-#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
+#: xfce/xfwm.c:430 xfwm/xfwm.c:856 xfwm/xfwm.c:857 xfwm/xfwm.c:858
+#: xfwm/xfwm.c:859 xfwm/xfwm.c:860 xfwm/xfwm.c:861 xfwm/xfwm.c:862
+#: xfwm/xfwm.c:863 xfwm/xfwm.c:864 xfwm/xfwm.c:865
 msgid "Workspace"
 msgstr ""
 
-#: xftree/gtk_dlg.c:284
-msgid "Information"
-msgstr ""
-
-#: xftree/gtk_dlg.c:289
-msgid "Error"
-msgstr ""
-
-#: xftree/gtk_dlg.c:294
-msgid "Warning"
-msgstr ""
-
-#: xftree/gtk_dlg.c:298
-msgid "Dialog"
-msgstr ""
-
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:317
+#: xftree/gtk_dlg.c:302
 msgid "_Ok"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:322
+#: xftree/gtk_dlg.c:307
 msgid "_Yes"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:327
+#: xftree/gtk_dlg.c:312
 msgid "_Continue"
 msgstr ""
 
-#: xftree/gtk_dlg.c:346 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:331 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:357
+#: xftree/gtk_dlg.c:342
 msgid "_Cancel"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:362
+#: xftree/gtk_dlg.c:347
 msgid "_No"
 msgstr ""
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:374
+#: xftree/gtk_dlg.c:359
 msgid "_All"
 msgstr ""
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:384
+#: xftree/gtk_dlg.c:369
 msgid "_Close"
 msgstr ""
 
@@ -812,7 +796,7 @@ msgid "Open with ..."
 msgstr ""
 
 #: xfrun/xfrun.c:203 xftree/gtk_exec.c:146 xftree/xtree_gui.c:572
-#: xftree/xtree_gui.c:963 xfwm/xfwm.c:889
+#: xftree/xtree_gui.c:963 xfwm/xfwm.c:891
 msgid "Run program ..."
 msgstr ""
 
@@ -2357,7 +2341,7 @@ msgid "Hide/show calendar"
 msgstr ""
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:881
+#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:883
 msgid "Settings"
 msgstr ""
 
@@ -2640,119 +2624,119 @@ msgstr ""
 msgid "File not found.\n"
 msgstr ""
 
-#: xfwm/xfwm.c:851
+#: xfwm/xfwm.c:853
 msgid "&Restart"
 msgstr ""
 
-#: xfwm/xfwm.c:852
+#: xfwm/xfwm.c:854
 msgid "&Quit"
 msgstr ""
 
-#: xfwm/xfwm.c:865
+#: xfwm/xfwm.c:867
 msgid "&Move"
 msgstr ""
 
-#: xfwm/xfwm.c:866
+#: xfwm/xfwm.c:868
 msgid "&Resize"
 msgstr ""
 
-#: xfwm/xfwm.c:867
+#: xfwm/xfwm.c:869
 msgid "(De)&Iconify"
 msgstr ""
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:870
 msgid "(Un)&Stick"
 msgstr ""
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:871
 msgid "(Un)S&hade"
 msgstr ""
 
-#: xfwm/xfwm.c:870
+#: xfwm/xfwm.c:872
 msgid "(Un)Ma&ximize"
 msgstr ""
 
-#: xfwm/xfwm.c:872
+#: xfwm/xfwm.c:874
 msgid "Se&nd to..."
 msgstr ""
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:875
 msgid "S&witch to..."
 msgstr ""
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:877
 msgid "&Close"
 msgstr ""
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:879
 msgid "User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:880
 msgid "Edit menu..."
 msgstr ""
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:884
 msgid "&Mouse..."
 msgstr ""
 
-#: xfwm/xfwm.c:883
+#: xfwm/xfwm.c:885
 msgid "&Backdrop..."
 msgstr ""
 
-#: xfwm/xfwm.c:884
+#: xfwm/xfwm.c:886
 msgid "&Sound..."
 msgstr ""
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:888
 msgid "&New window"
 msgstr ""
 
-#: xfwm/xfwm.c:887
+#: xfwm/xfwm.c:889
 msgid "&User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:893
 msgid "&Arrange icons"
 msgstr ""
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:894
 msgid "&Iconify all"
 msgstr ""
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:895
 msgid "&Refresh"
 msgstr ""
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:896
 msgid "Shuffle &Up"
 msgstr ""
 
-#: xfwm/xfwm.c:895
+#: xfwm/xfwm.c:897
 msgid "Shuffle &Down"
 msgstr ""
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:899
 msgid "&Settings"
 msgstr ""
 
-#: xfwm/xfwm.c:899
+#: xfwm/xfwm.c:901
 msgid "&Quit XFwm"
 msgstr ""
 
-#: xfwm/xfwm.c:901
+#: xfwm/xfwm.c:903
 msgid "&Full Screen"
 msgstr ""
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:904
 msgid "&Vertical"
 msgstr ""
 
-#: xfwm/xfwm.c:903
+#: xfwm/xfwm.c:905
 msgid "&Horizontal"
 msgstr ""
 
-#: xfwm/xfwm.c:1233
+#: xfwm/xfwm.c:1235
 msgid "xfwm terminated: "
 msgstr ""
 

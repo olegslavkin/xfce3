@@ -103,7 +103,7 @@ int iconv_string (const char* tocode, const char* fromcode,
   /* Determine the length we need. */
   {
     size_t count = 0;
-    char tmpbuf[__ICONV_BUFSIZE__];
+    char tmpbuf[__ICONV_BUFSIZE__ + 1];
     const char* inptr = start;
     size_t insize = end-start;
     while (insize > 0) {
