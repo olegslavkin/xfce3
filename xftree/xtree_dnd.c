@@ -166,6 +166,10 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     /* tmpfile ==NULL means drop cancelled*/
     u = list->data;
     s_en = entry_new_by_path (u->url);
+    if (!s_en) {
+      xf_dlg_error (win->top,_("URL type not yet enabled"),u->url);
+      return;
+    }
     if (strcmp(s_en->path,t_en->path)==0){
 	    /*fprintf(stderr,"dbg:nonsense input\n");*/
 	    break;
