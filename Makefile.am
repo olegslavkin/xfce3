@@ -31,3 +31,12 @@ SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock \
 	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts \
 	other backdrops icons palettes textures sounds docs po dt gdm \
 	fonts cursors
+
+EXTRA_DIST = \
+ README.UPGRADE-3.2.0 \
+ README.UPGRADE-3.5.0 \
+ autogen.sh \
+ xfce.spec \
+ Makefile.init
+
+

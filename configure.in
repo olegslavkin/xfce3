@@ -462,6 +462,7 @@ libs/Makefile \
 xfce/Makefile \
 xfwm/Makefile \
 xftree/Makefile \
+xftree/icons/Makefile \
 xfpager/Makefile \
 xfmouse/Makefile \
 xfrun/Makefile \
@@ -471,9 +472,13 @@ xfsound/Makefile \
 xfgnome/Makefile \
 xfmenu/Makefile \
 xfdiff/Makefile \
+xfdiff/icons/Makefile \
 xfglob/Makefile \
+xfglob/icons/Makefile \
 xfsamba/Makefile \
+xfsamba/icons/Makefile \
 xfumed/Makefile \
+xfumed/icons/Makefile \
 scripts/Makefile \
 intl/Makefile \
 dt/Makefile \
@@ -487,6 +492,7 @@ palettes/Makefile \
 sounds/Makefile \
 docs/Makefile \
 docs/images/Makefile \
+docs/sgml/Makefile \
 docs/html/Makefile \
 docs/html/stylesheet-images/Makefile \
 textures/Makefile \

@@ -128,6 +128,7 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
+EXTRA_DIST = $(man_MANS)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = -I../ -I../libs/ @X_CFLAGS@ -DXFCE_DIR=\"@XFCE_DIR@\" \

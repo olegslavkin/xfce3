@@ -1,13 +1,17 @@
 ## Process this file with automake to produce Makefile.in
+SUBDIRS = icons
 
-CLEANFILES=*~ *.bak core *.core *.o .depend .deps/* 
+EXTRA_DIST = $(man_MANS) $(xftree_distcvs) 
+CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
-INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ \
--DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
--DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
+ -I../ -I../libs/ \
+ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
+ -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 bin_PROGRAMS = xftree 
 
+xftree_distcvs = dlg_icons.h toolbar_icons.h # part of xftree? or _obsolete_?
 xftree_SOURCES = \
 	entry.c entry.h \
 	gtk_dlg.c gtk_dlg.h \
@@ -42,6 +46,5 @@ xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 ${X_LIBS} ${X_PRE_LIBS} -lXpm
 
 xftree_DEPENDENCIES = ../libs/libxfcecore.la
-
 
 man_MANS=xftree.1

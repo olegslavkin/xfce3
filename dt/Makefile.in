@@ -1,20 +1,44 @@
-PACKAGE = @PACKAGE@
-VERSION = @VERSION@
-XFCE_CONFDIR = @XFCE_CONFDIR@
-DT_SUFFIX = @DT_SUFFIX@
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-SHELL = /bin/sh
-@SET_MAKE@
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = @SHELL@
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
-
 prefix = @prefix@
 exec_prefix = @exec_prefix@
+
 bindir = @bindir@
-dtconfdir = /etc/dt/config
-subdir = dt
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
 
 ACLOCAL = @ACLOCAL@
 AUTOCONF = @AUTOCONF@
@@ -25,79 +49,227 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
 
-MKINSTALLDIRS = $(top_srcdir)/@MKINSTALLDIRS@
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+ARTS_CFLAGS = @ARTS_CFLAGS@
+ARTS_LIBS = @ARTS_LIBS@
+AS = @AS@
+AUDIOFILE_CFLAGS = @AUDIOFILE_CFLAGS@
+AUDIOFILE_LIBS = @AUDIOFILE_LIBS@
+BUILD_INCLUDED_LIBINTL = @BUILD_INCLUDED_LIBINTL@
+CATALOGS = @CATALOGS@
+CATOBJEXT = @CATOBJEXT@
+CC = @CC@
+DATADIRNAME = @DATADIRNAME@
+DLLTOOL = @DLLTOOL@
+DMALLOC_LIB = @DMALLOC_LIB@
+DT_SUFFIX = @DT_SUFFIX@
+ECHO = @ECHO@
+EXEEXT = @EXEEXT@
+GDK_IMLIB_CFLAGS = @GDK_IMLIB_CFLAGS@
+GDK_IMLIB_LIBS = @GDK_IMLIB_LIBS@
+GDK_PIXBUF_CFLAGS = @GDK_PIXBUF_CFLAGS@
+GDK_PIXBUF_LIBS = @GDK_PIXBUF_LIBS@
+GDM_PREFIX = @GDM_PREFIX@
+GENCAT = @GENCAT@
+GLIBC21 = @GLIBC21@
+GLIB_CFLAGS = @GLIB_CFLAGS@
+GLIB_CONFIG = @GLIB_CONFIG@
+GLIB_LIBS = @GLIB_LIBS@
+GMOFILES = @GMOFILES@
+GMSGFMT = @GMSGFMT@
+GTK_CFLAGS = @GTK_CFLAGS@
+GTK_CONFIG = @GTK_CONFIG@
+GTK_ENGINE_DIR = @GTK_ENGINE_DIR@
+GTK_LIBS = @GTK_LIBS@
+HAVE_ARTS = @HAVE_ARTS@
+HAVE_AUDIOFILE = @HAVE_AUDIOFILE@
+HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
+HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
+HAVE_IMLIB = @HAVE_IMLIB@
+IMLIB_CFLAGS = @IMLIB_CFLAGS@
+IMLIB_LIBS = @IMLIB_LIBS@
+INSTOBJEXT = @INSTOBJEXT@
+INTLBISON = @INTLBISON@
+INTLLIBS = @INTLLIBS@
+INTLOBJS = @INTLOBJS@
+INTL_LIBTOOL_SUFFIX_PREFIX = @INTL_LIBTOOL_SUFFIX_PREFIX@
+LIBICONV = @LIBICONV@
+LIBTOOL = @LIBTOOL@
+LIBTOOL_DEPS = @LIBTOOL_DEPS@
+LIBVERSION = @LIBVERSION@
+LN_S = @LN_S@
+MAKEINFO = @MAKEINFO@
+MKINSTALLDIRS = @MKINSTALLDIRS@
+MSGFMT = @MSGFMT@
+OBJDUMP = @OBJDUMP@
+OBJEXT = @OBJEXT@
+PACKAGE = @PACKAGE@
+POFILES = @POFILES@
+POSUB = @POSUB@
+RANLIB = @RANLIB@
+STRIP = @STRIP@
+USE_DT = @USE_DT@
+USE_GDM = @USE_GDM@
+USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
+USE_NLS = @USE_NLS@
+VERSION = @VERSION@
+XFCE_CONFDIR = @XFCE_CONFDIR@
+XFCE_DIR = @XFCE_DIR@
+XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
+XFT_LIBS = @XFT_LIBS@
+XINERAMA_LIBS = @XINERAMA_LIBS@
 
-DEFS = @DEFS@
+dtconfdir = /etc/dt/config
 
-DISTFILES = Makefile.in Xinitrc.xfce.in Xsession.xfce Xresources.xfce.in
+xfce_SOURC = Xinitrc.xfce.in Xsession.xfce.in Xresources.xfce.in
+xfce_FILES = Xinitrc.xfce    Xsession.xfce    Xresources.xfce
+EXTRA_DIST = $(xfce_SOURC)
+DISTCLEANFILES = $(xfce_FILES)
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES = 
+DIST_COMMON =  Makefile.am Makefile.in
 
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = gtar
+GZIP_ENV = --best
+all: all-redirect
 .SUFFIXES:
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps dt/Makefile
 
-all: Xinitrc.xfce Xresources.xfce Xsession.xfce
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
-Xinitrc.xfce:
+tags: TAGS
+TAGS:
+
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = dt
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am:
+install-exec: install-exec-am
+
+install-data-am: install-data-local
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-local
+uninstall: uninstall-am
+all-am: Makefile
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+installdirs:
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-generic clean-am
+	-rm -f libtool
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-generic distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: tags distdir info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-local install-data-am install-data install-am install \
+uninstall-local uninstall-am uninstall all-redirect all-am all \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+Xinitrc.xfce:     $(srcdir)/Xinitrc.xfce.in
 	@sed -e "s%XFCE_CONFDIR%$(XFCE_CONFDIR)%g" \
-	-e "s%BIN_DIR%$(bindir)%g" \
-	$(srcdir)/Xinitrc.xfce.in > $(srcdir)/Xinitrc.xfce
+	     -e "s%BIN_DIR%$(bindir)%g" \
+					$(srcdir)/Xinitrc.xfce.in > $@
 
-Xresources.xfce:
+Xresources.xfce:  $(srcdir)/Xresources.xfce.in
 	@sed -e "s%BIN_DIR%$(bindir)%g" \
-	-e "s%DT_CONFDIR%$(dtconfdir)%g" \
-	-e "s%DT_SUFFIX%$(DT_SUFFIX)%g" \
-	$(srcdir)/Xresources.xfce.in > $(srcdir)/Xresources.xfce
+	     -e "s%DT_CONFDIR%$(dtconfdir)%g" \
+	     -e "s%DT_SUFFIX%$(DT_SUFFIX)%g" \
+					$(srcdir)/Xresources.xfce.in > $@
 
-Xsession.xfce:
+Xsession.xfce:     $(srcdir)/Xsession.xfce.in
 	@sed -e "s%DT_CONFDIR%$(dtconfdir)%g" \
-	-e "s%DT_SUFFIX%$(DT_SUFFIX)%g" \
-	$(srcdir)/Xsession.xfce.in > $(srcdir)/Xsession.xfce
+	     -e "s%DT_SUFFIX%$(DT_SUFFIX)%g" \
+					$(srcdir)/Xsession.xfce.in > $@
 
-install: install-exec install-data
-install-exec:
-install-data: install-data-@USE_DT@
-install-data-no: all
+install-data-local:
+	test @USE_DT@ = "no" || $(MAKE) install-dt
 
-install-data-yes: all
-	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(MKINSTALLDIRS) $(DESTDIR)$(dtconfdir)/C/Xresources.d/; \
-	else \
-	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(dtconfdir)/C/Xresources.d/; \
-	fi
-	$(INSTALL_SCRIPT) $(srcdir)/Xinitrc.xfce \
-			$(DESTDIR)$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
-	$(INSTALL_SCRIPT) $(srcdir)/Xsession.xfce \
-			$(DESTDIR)$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
-	$(INSTALL_DATA) $(srcdir)/Xresources.xfce \
-		  	$(DESTDIR)$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
+install-dt: $(xfce_FILES)
+	$(mkinstalldirs) $(DESTDIR)$(dtconfdir)/C/Xresources.d/
+	$(INSTALL_SCRIPT) Xinitrc.xfce \
+	 $(DESTDIR)$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
+	$(INSTALL_SCRIPT) Xsession.xfce \
+	 $(DESTDIR)$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
+	$(INSTALL_DATA) Xresources.xfce \
+	 $(DESTDIR)$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
 
-# Define this as empty until I found a useful application.
-installcheck:
+uninstall-local: uninstall-dt
 
-uninstall:
+uninstall-dt:
 	rm -f $(DESTDIR)$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
 	rm -f $(DESTDIR)$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
 	rm -f $(DESTDIR)$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
 
-check: all
-
-dvi info tags TAGS ID:
-
-mostlyclean:
-	rm -f core core.*
-	rm -fr *.bak
-
-clean: mostlyclean
-
-distclean: clean
-	rm -f Makefile
-	rm -f Xinitrc.xfce
-	rm -f Xresources.xfce
-	rm -f Xsession.xfce
-
-maintainer-clean: distclean
-
-Makefile:
-
-# Tell versions [3.59,3.63) of GNU make not to export all variables.
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

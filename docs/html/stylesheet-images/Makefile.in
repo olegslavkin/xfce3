@@ -128,20 +128,21 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-stylesheetimagesdir = @XFCE_DIR@/help/html/stylesheet-images
+EXTRA_DIST = $(stylesheetimages_DATA)
+stylesheetimagesdir = $(XFCE_DIR)/help/html/stylesheet-images
 stylesheetimages_DATA = \
-warning.gif \
-toc-blank.gif \
-note.gif \
-toc-plus.gif \
-important.gif \
-tip.gif \
-home.gif \
-toc-minus.gif \
-prev.gif \
-up.gif \
-next.gif \
-caution.gif
+ warning.gif \
+ toc-blank.gif \
+ note.gif \
+ toc-plus.gif \
+ important.gif \
+ tip.gif \
+ home.gif \
+ toc-minus.gif \
+ prev.gif \
+ up.gif \
+ next.gif \
+ caution.gif
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../../config.h

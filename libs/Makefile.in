@@ -128,15 +128,20 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
+EXTRA_DIST = $(extras_distcvs)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
-INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ \
--DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
--DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
+ -I../ -I../libs/ \
+ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
+ -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 
 # lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
+
+# _distcvs - files in CVS but not used anywhere. forgotten? _obsolete_?
+extras_distcvs = UTF8.c UTF8.h defaulticon.h my_scandir.h 
 
 libxfcecore_la_SOURCES = \
 	colorselect.c colorselect.h \

@@ -13542,7 +13542,7 @@ echo "${ECHO_T}XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&6
 echo "$as_me:13542: result: XFCE_CONFDIR set to $XFCE_CONFDIR" >&5
 echo "${ECHO_T}XFCE_CONFDIR set to $XFCE_CONFDIR" >&6
 
-ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
+ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xftree/icons/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfdiff/icons/Makefile xfglob/Makefile xfglob/icons/Makefile xfsamba/Makefile xfsamba/icons/Makefile xfumed/Makefile xfumed/icons/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/sgml/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -13867,6 +13867,7 @@ do
   "xfce/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfce/Makefile" ;;
   "xfwm/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfwm/Makefile" ;;
   "xftree/Makefile" ) CONFIG_FILES="$CONFIG_FILES xftree/Makefile" ;;
+  "xftree/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xftree/icons/Makefile" ;;
   "xfpager/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfpager/Makefile" ;;
   "xfmouse/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfmouse/Makefile" ;;
   "xfrun/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfrun/Makefile" ;;
@@ -13876,9 +13877,13 @@ do
   "xfgnome/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfgnome/Makefile" ;;
   "xfmenu/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfmenu/Makefile" ;;
   "xfdiff/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfdiff/Makefile" ;;
+  "xfdiff/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfdiff/icons/Makefile" ;;
   "xfglob/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfglob/Makefile" ;;
+  "xfglob/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfglob/icons/Makefile" ;;
   "xfsamba/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfsamba/Makefile" ;;
+  "xfsamba/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfsamba/icons/Makefile" ;;
   "xfumed/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfumed/Makefile" ;;
+  "xfumed/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfumed/icons/Makefile" ;;
   "scripts/Makefile" ) CONFIG_FILES="$CONFIG_FILES scripts/Makefile" ;;
   "intl/Makefile" ) CONFIG_FILES="$CONFIG_FILES intl/Makefile" ;;
   "dt/Makefile" ) CONFIG_FILES="$CONFIG_FILES dt/Makefile" ;;
@@ -13892,6 +13897,7 @@ do
   "sounds/Makefile" ) CONFIG_FILES="$CONFIG_FILES sounds/Makefile" ;;
   "docs/Makefile" ) CONFIG_FILES="$CONFIG_FILES docs/Makefile" ;;
   "docs/images/Makefile" ) CONFIG_FILES="$CONFIG_FILES docs/images/Makefile" ;;
+  "docs/sgml/Makefile" ) CONFIG_FILES="$CONFIG_FILES docs/sgml/Makefile" ;;
   "docs/html/Makefile" ) CONFIG_FILES="$CONFIG_FILES docs/html/Makefile" ;;
   "docs/html/stylesheet-images/Makefile" ) CONFIG_FILES="$CONFIG_FILES docs/html/stylesheet-images/Makefile" ;;
   "textures/Makefile" ) CONFIG_FILES="$CONFIG_FILES textures/Makefile" ;;
@@ -13902,7 +13908,7 @@ do
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "default-2" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-2" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
-  *) { { echo "$as_me:13905: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:13911: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -14193,7 +14199,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:14196: creating $ac_file" >&5
+    { echo "$as_me:14202: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -14211,7 +14217,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:14214: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:14220: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -14224,7 +14230,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:14227: error: cannot find input file: $f" >&5
+           { { echo "$as_me:14233: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -14285,7 +14291,7 @@ for ac_file in : $CONFIG_HEADERS; do test "x$ac_file" = x: && continue
   * )   ac_file_in=$ac_file.in ;;
   esac
 
-  test x"$ac_file" != x- && { echo "$as_me:14288: creating $ac_file" >&5
+  test x"$ac_file" != x- && { echo "$as_me:14294: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
 
   # First look for the input files in the build tree, otherwise in the
@@ -14296,7 +14302,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:14299: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:14305: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -14309,7 +14315,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:14312: error: cannot find input file: $f" >&5
+           { { echo "$as_me:14318: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -14426,7 +14432,7 @@ cat >>$CONFIG_STATUS <<\EOF
   rm -f $tmp/in
   if test x"$ac_file" != x-; then
     if cmp -s $ac_file $tmp/config.h 2>/dev/null; then
-      { echo "$as_me:14429: $ac_file is unchanged" >&5
+      { echo "$as_me:14435: $ac_file is unchanged" >&5
 echo "$as_me: $ac_file is unchanged" >&6;}
     else
       ac_dir=`$as_expr X"$ac_file" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
@@ -14477,11 +14483,11 @@ for ac_file in : $CONFIG_LINKS; do test "x$ac_file" = x: && continue
   ac_dest=`echo "$ac_file" | sed 's,:.*,,'`
   ac_source=`echo "$ac_file" | sed 's,[^:]*:,,'`
 
-  { echo "$as_me:14480: linking $srcdir/$ac_source to $ac_dest" >&5
+  { echo "$as_me:14486: linking $srcdir/$ac_source to $ac_dest" >&5
 echo "$as_me: linking $srcdir/$ac_source to $ac_dest" >&6;}
 
   if test ! -r $srcdir/$ac_source; then
-    { { echo "$as_me:14484: error: $srcdir/$ac_source: File not found" >&5
+    { { echo "$as_me:14490: error: $srcdir/$ac_source: File not found" >&5
 echo "$as_me: error: $srcdir/$ac_source: File not found" >&2;}
    { (exit 1); exit 1; }; }
   fi
@@ -14531,7 +14537,7 @@ done; }
   # Make a symlink if possible; otherwise try a hard link.
   ln -s $ac_rel_source $ac_dest 2>/dev/null ||
     ln $srcdir/$ac_source $ac_dest ||
-    { { echo "$as_me:14534: error: cannot link $ac_dest to $srcdir/$ac_source" >&5
+    { { echo "$as_me:14540: error: cannot link $ac_dest to $srcdir/$ac_source" >&5
 echo "$as_me: error: cannot link $ac_dest to $srcdir/$ac_source" >&2;}
    { (exit 1); exit 1; }; }
 done

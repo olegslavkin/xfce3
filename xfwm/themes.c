@@ -197,6 +197,11 @@ DrawSeparator (Window w, XRectangle *area, GC TopGC, GC BottomGC, int x1, int y1
 void
 DrawIconPixmap(XfwmWindow * tmp_win, XRectangle *area, GC gc, int tx, int ty)
 {
+  if (!area)
+  {
+    flush_expose (tmp_win->icon_pixmap_w);
+  }
+
   if (tmp_win->iconDepth == 1)
   {
     XCopyPlane(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, gc, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty, 1);
@@ -239,6 +244,11 @@ RedoIconName (XfwmWindow * Tmp_win, XRectangle *area)
 
   if (Tmp_win->icon_w == (int) NULL)
     return;
+
+  if (!area)
+  {
+    flush_expose (Tmp_win->icon_w);
+  }
 
   if (fontset)
   {
@@ -644,6 +654,11 @@ SetInnerBorder (XfwmWindow * t, Bool onoroff)
 void
 DrawButton (XfwmWindow * t, Window win, XRectangle *area, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
 {
+  if (!area)
+  {
+    flush_expose (win);
+  }
+
   if (Scr.engine == XFCE_ENGINE)
     DrawButton_xfce (t, win, area, w, h, bf, ReliefGC, ShadowGC, inverted, stateflags);
   else if (Scr.engine == TRENCH_ENGINE)
@@ -674,6 +689,11 @@ RedrawTitleOnButtonPress (void)
 void
 SetTitleBar (XfwmWindow * t, XRectangle *area, Bool onoroff)
 {
+  if (!area)
+  {
+    flush_expose (t->title_w);
+  }
+
   if (Scr.engine == XFCE_ENGINE)
     SetTitleBar_xfce (t, area, onoroff);
   else if (Scr.engine == TRENCH_ENGINE)
@@ -689,6 +709,11 @@ SetTitleBar (XfwmWindow * t, XRectangle *area, Bool onoroff)
 void
 RelieveWindow (XfwmWindow * t, Window win, XRectangle *area, int x, int y, int w, int h, GC ReliefGC, GC ShadowGC, int hilite)
 {
+  if (!area)
+  {
+    flush_expose (win);
+  }
+
   if (Scr.engine == XFCE_ENGINE)
     RelieveWindow_xfce (t, win, area, x, y, w, h, ReliefGC, ShadowGC, hilite);
   else if (Scr.engine == TRENCH_ENGINE)

@@ -1,6 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
-CLEANFILES=*~ *.bak core *.core *.o .depend .deps/* 
+EXTRA_DIST = $(man_MANS)
+CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = -I../ -I../libs/ @X_CFLAGS@ -DXFCE_DIR=\"@XFCE_DIR@\" \
 -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\"
@@ -15,3 +16,4 @@ xfgnome_LDADD= ../libs/libxfwmcore.la @DMALLOC_LIB@ ${X_LIBS} ${X_PRE_LIBS} \
 xfgnome_DEPENDENCIES = ../libs/libxfwmcore.la
 
 man_MANS=xfgnome.1
+

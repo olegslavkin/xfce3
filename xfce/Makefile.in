@@ -128,11 +128,13 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
+EXTRA_DIST = $(man_MANS) $(xfce_distcvs)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
-INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ \
--DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
--DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
+ -I../ -I../libs/ \
+ -DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
+ -DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
 
 
 bin_PROGRAMS = xfce
@@ -161,8 +163,42 @@ xfce_SOURCES = \
 	xfwm.c xfwm.h
 
 
+# _distcvs - files being CVS but not listed anywhere. forgotten? _obsolete_?
+xfce_distcvs = \
+  addiconpix.h \
+  closepix.h \
+  configtree.c \
+  configtree.h \
+  diagicon.h \
+  edit.h \
+  file1.h \
+  file2.h \
+  games.h \
+  handle.h \
+  iconify.h \
+  mail.h \
+  man.h \
+  menu_icon.h \
+  minbutdn.h \
+  minbutup.h \
+  minilock.h \
+  mininf.h \
+  minipnt.h \
+  minpower.h \
+  multimedia.h \
+  network.h \
+  nomail.h \
+  oldmail.h \
+  paint.h \
+  print.h \
+  schedule.h \
+  sound.h \
+  terminal.h \
+  xfce_icon.h
+
+
 xfce_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ \
-@GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
+ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
 
 
 xfce_DEPENDENCIES = ../libs/libxfcecore.la

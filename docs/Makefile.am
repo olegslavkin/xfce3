@@ -1,1 +1,1 @@
-SUBDIRS=images html
+SUBDIRS=images html sgml

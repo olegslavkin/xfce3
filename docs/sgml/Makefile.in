@@ -38,7 +38,7 @@ pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
 
-top_builddir = ..
+top_builddir = ../..
 
 ACLOCAL = @ACLOCAL@
 AUTOCONF = @AUTOCONF@
@@ -128,17 +128,36 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-gdm_prefix = @GDM_PREFIX@
-switchdesk_prefix = "/usr/share/apps/switchdesk"
-wmsession_prefix = "/etc/X11/wmsession.d"
+EXTRA_DIST = $(noinst_DATA)
+noinst_DATA = \
+ GPL.sgml \
+ license.sgml \
+ preface.sgml \
+ userman.sgml \
+ xfce-help.sgml \
+ advanced-xfwm.sgml \
+ ch-fileman.sgml \
+ ch-install.sgml \
+ ch-overview.sgml \
+ ch-panel.sgml \
+ ch-resources.sgml \
+ ch-setup.sgml \
+ ch-utilities.sgml \
+ ch-wm-appearance.sgml \
+ ch-wm-bindings.sgml \
+ ch-wm-commands.sgml \
+ ch-wm-defaults.sgml \
+ ch-wm-examples.sgml \
+ ch-wm-general.sgml \
+ ch-wm-management.sgml \
+ ch-wm-menus.sgml \
+ ch-wm.sgml \
+ ch-wm-style.sgml \
+ ch-wm-xresources.sgml \
+ copyright.sgml
 
-noinst_DATA = $(xfce_FILES)
-xfce_SOURC = XFce.in Xclients.xfce.in 10XFce.in
-xfce_FILES = XFce Xclients.xfce 10XFce
-EXTRA_DIST = $(xfce_SOURC)
-DISTCLEANFILES = $(xfce_FILES)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-CONFIG_HEADER = ../config.h
+CONFIG_HEADER = ../../config.h
 CONFIG_CLEAN_FILES = 
 DATA =  $(noinst_DATA)
 
@@ -152,7 +171,7 @@ GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps gdm/Makefile
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps docs/sgml/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
@@ -164,7 +183,7 @@ TAGS:
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
-subdir = gdm
+subdir = docs/sgml
 
 distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
@@ -188,13 +207,13 @@ installcheck: installcheck-am
 install-exec-am:
 install-exec: install-exec-am
 
-install-data-am: install-data-local
+install-data-am:
 install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-local
+uninstall-am:
 uninstall: uninstall-am
 all-am: Makefile $(DATA)
 all-redirect: all-am
@@ -210,7 +229,6 @@ clean-generic:
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)
 	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
-	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 mostlyclean-am:  mostlyclean-generic
@@ -234,41 +252,11 @@ maintainer-clean: maintainer-clean-am
 
 .PHONY: tags distdir info-am info dvi-am dvi check check-am \
 installcheck-am installcheck install-exec-am install-exec \
-install-data-local install-data-am install-data install-am install \
-uninstall-local uninstall-am uninstall all-redirect all-am all \
-installdirs mostlyclean-generic distclean-generic clean-generic \
-maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
 
-
-XFce : $(srcdir)/XFce.in
-	@sed -e "s%BIN_DIR%$(bindir)%g"     $(srcdir)/XFce.in > $@
-
-10XFce : $(srcdir)/10XFce.in
-	@sed -e "s%BIN_DIR%$(bindir)%g"     $(srcdir)/10XFce.in > $@
-
-Xclients.xfce : $(srcdir)/Xclients.xfce.in
-	@sed -e "s%BIN_DIR%$(bindir)%g"     $(srcdir)/Xclients.xfce.in > $@
-
-install-data-local :
-	test no = @USE_GDM@ || $(MAKE) install-gdm
-
-install-gdm: $(xfce_FILES)
-	$(mkinstalldirs) $(DESTDIR)$(gdm_prefix)
-	$(mkinstalldirs) $(DESTDIR)$(switchdesk_prefix)
-	$(mkinstalldirs) $(DESTDIR)$(wmsession_prefix)
-	$(INSTALL_SCRIPT) XFce \
-	 $(DESTDIR)$(gdm_prefix)/XFce
-	$(INSTALL_SCRIPT) Xclients.xfce \
-	 $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce
-	$(INSTALL_SCRIPT) 10XFce \
-	 $(DESTDIR)$(wmsession_prefix)/10XFce
-
-uninstall-local: uninstall-gdm
-
-uninstall-gdm:
-	rm -f $(DESTDIR)$(gdm_prefix)/XFce
-	rm -f $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce
-	rm -f $(DESTDIR)$(wmsession_prefix)/10XFce
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

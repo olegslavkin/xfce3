@@ -138,6 +138,14 @@ SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock \
 	other backdrops icons palettes textures sounds docs po dt gdm \
 	fonts cursors
 
+
+EXTRA_DIST = \
+ README.UPGRADE-3.2.0 \
+ README.UPGRADE-3.5.0 \
+ autogen.sh \
+ xfce.spec \
+ Makefile.init
+
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
