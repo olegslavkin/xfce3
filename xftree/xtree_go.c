@@ -205,6 +205,11 @@ void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags){
   internal_go_to (ctree,root,path,flags);
 }
 
+void cb_reload(GtkWidget * item, GtkCTree * ctree){
+	regen_ctree(ctree);
+}
+
+
     /* A big bug was found and fixed at cb_go_to: Freeing memory twice
      * and appending glist elements to an already freed glist. */
 void

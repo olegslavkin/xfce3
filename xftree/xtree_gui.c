@@ -1346,7 +1346,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Update ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_refresh), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_reload), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
@@ -1674,7 +1674,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Go back"), (gpointer) cb_go_back, 0,GDK_b,GDK_CONTROL_MASK},\
     {N_("Go up"), (gpointer) cb_go_up, 0,GDK_a,GDK_CONTROL_MASK},\
     {N_("Go to"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
-    {N_("Update"), (gpointer) cb_refresh, 0,GDK_u,GDK_MOD1_MASK},\
+    {N_("Update"), (gpointer) cb_reload, 0,GDK_u,GDK_MOD1_MASK},\
     {NULL, NULL, 0}
     
 #define COMMON_MENU_SELECT \

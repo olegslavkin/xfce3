@@ -438,7 +438,9 @@ static gboolean SubChildTransfer(char *target,char *source){
 		/* create target dir */
 		if (mkdir(target,(s_stat.st_mode|0700))<0){
 			targetdir=target;
-			return process_error(RW_ERROR_WRITING_DIR);/* user intervention */
+			process_error(RW_ERROR_WRITING_DIR);/* user intervention */
+			/* if function returns, it means continue */
+			/*return process_error(RW_ERROR_WRITING_DIR);*/
 			/*fprintf(stdout,"child:%s %s\n",strerror(errno),target);*/
 		}
 	  	/*fprintf(stderr,"dbg:dir created: %s\n",target);*/
@@ -469,7 +471,8 @@ static gboolean SubChildTransfer(char *target,char *source){
 		
 		/* remove old directory (rmdir should fail if any interior move failed) */
 		if ((child_mode & TR_MOVE) && (rmdir(source)<0)){
-			return process_error(RW_ERROR_WRITING_TGT); /* user intervention */
+			process_error(RW_ERROR_WRITING_TGT); /* user intervention */
+			/*return process_error(RW_ERROR_WRITING_TGT); */
 			/*return FALSE;*/
 		}
 		return TRUE;		
@@ -497,7 +500,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 	 *  in the popup are the same thing for the time being) */	
         if (!rc) return FALSE; /* user intervention */	
 	 
-	if (rc == RW_OK) { /* NO ERRORS */
+	if (!(rc & (RW_ERROR_WRITING_TGT|RW_ERROR_OPENING_TGT))) { /* NO ERRORS */
 	  if ((child_mode & TR_MOVE) && (unlink(source) < 0)) {
 	   return process_error(RW_ERROR_WRITING_SRC);/* user intervention */
 	  }
