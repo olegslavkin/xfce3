@@ -1463,7 +1463,7 @@ HandleConfigureRequest ()
     height = cre->height + Tmp_win->title_height + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
 
   /* Remove the MAXIMIZED flag */
-  tmp_win->flags &= ~MAXIMIZED;
+  Tmp_win->flags &= ~MAXIMIZED;
 
   SetupFrame (Tmp_win, x, y, width, height, False, True);
 #ifdef DEBUG
