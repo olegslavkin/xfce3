@@ -1,3 +1,252 @@
+2001-09-15  xfce
+
+	* libs/my_string.c: Fix a small bug ;-)
+
+2001-09-15  xfce
+
+	* Makefile.am, Makefile.in, acconfig.h, config.h.in,
+	libs/my_string.c, libs/my_string.h: Improve configure scripts and
+	add my_memmove to my_string.c
+
+2001-09-15  xfce
+
+	* palettes/Defcon: iChange font in palette "defcon"
+
+2001-09-14  xfce
+
+	* palettes/: DISTFILES.in, Defcon, PruneDark: Add new palettes
+
+2001-09-14  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, libs/constant.h,
+	other/xfce3rc.cs.in, other/xfce3rc.de.in, other/xfce3rc.fr.in,
+	other/xfce3rc.hu.in, other/xfce3rc.in, other/xfce3rc.ja.in,
+	other/xfce3rc.ko.in, other/xfce3rc.nl.in, other/xfce3rc.sr.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	other/xinitrc, other/xinitrc.mwm, palettes/Default, po/xfce.pot,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfhelp, xfwm/xfwm.c:
+	Change various defaults
+
+2001-09-13  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, other/xinitrc,
+	other/xinitrc.mwm, scripts/startxfce, scripts/xfce_setup,
+	scripts/xfhelp: Regenerate Makefiles
+
+2001-09-13  xfce
+
+	* palettes/: BeHappy4, DISTFILES.in: [no log message]
+
+2001-09-13  xfce
+
+	* palettes/: Win, Win: [no log message]
+
+2001-09-13  xfce
+
+	* other/xfsoundrc.in: [no log message]
+
+2001-09-13  xfce
+
+	* xfsound/xfdsp.c: [no log message]
+
+2001-09-12  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, other/xinitrc,
+	other/xinitrc.mwm, po/xfce.pot, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfsound/xfdsp.c: Fix
+	non-blocking open on /dev/dsp
+
+2001-09-12  xfce
+
+	* palettes/DISTFILES.in, palettes/Pinky, xfsound/xfdsp.c,
+	xfsound/xfdsp.h, xfsound/xfsound.c: [no log message]
+
+2001-09-11  xfce
+
+	* Makefile.in, backdrops/Blue.list, backdrops/Toulouse.list,
+	libs/Makefile.in, other/xfce3rc.cs.in, other/xfce3rc.de.in,
+	other/xfce3rc.fr.in, other/xfce3rc.hu.in, other/xfce3rc.in,
+	other/xfce3rc.ja.in, other/xfce3rc.ko.in, other/xfce3rc.nl.in,
+	other/xfce3rc.sr.in, other/xfce3rc.zh_CN.GB2312.in,
+	other/xfce3rc.zh_TW.Big5.in, other/xfsoundrc.in, other/xinitrc,
+	other/xinitrc.mwm, po/xfce.pot, scripts/Makefile.in,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfhelp,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfpager/Makefile.in, xfrun/Makefile.in, xfsamba/Makefile.in,
+	xfsound/Makefile.in, xfsound/xfdsp.c, xfsound/xfdsp.h,
+	xftree/Makefile.in, xfumed/Makefile.in, xfwm/Makefile.in: Add
+	support for audiofile (default optionnal) and aRtsd (optionnal)
+
+2001-09-11  xfce
+
+	* Makefile.in, acconfig.h, config.h.in, configure, configure.in,
+	libs/Makefile.in, scripts/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfglob/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsound/Makefile.am,
+	xfsound/Makefile.in, xfsound/xfdsp.c, xfsound/xfdsp.h,
+	xfsound/xfsound.c, xftree/Makefile.in, xfumed/Makefile.in,
+	xfwm/Makefile.in: [no log message]
+
+2001-09-11  xfce
+
+	* Makefile.in, acconfig.h, config.h.in, configure, configure.in,
+	libs/Makefile.in, po/xfce.pot, scripts/Makefile.in,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfpager/Makefile.in, xfrun/Makefile.in, xfsamba/Makefile.in,
+	xfsound/Makefile.am, xfsound/Makefile.in, xfsound/xfsound.c,
+	xftree/Makefile.in, xfumed/Makefile.in, xfwm/Makefile.in: [no log
+	message]
+
+2001-09-11  xfce
+
+	* xfsound/: xfdsp.c, xfdsp.h: [no log message]
+
+2001-09-11  xfce
+
+	* xfsound/xfsound.c: [no log message]
+
+2001-09-10  xfce
+
+	* libs/fileutil.c, po/xfce.pot, xfce/xfce_main.c, xfsound/xfdsp.c,
+	xfsound/xfsound.c: Rewritting xfsound with audiofile and aRts
+	support (optionnal)
+
+2001-09-10  xfce
+
+	* palettes/: DISTFILES.in, Thinice: Ann new palette
+
+2001-09-10  xfce
+
+	* palettes/: DISTFILES.in, Eaz-l: Add new palette
+
+2001-09-09  xfce
+
+	* other/xfce3rc.cs.in, other/xfce3rc.de.in, other/xfce3rc.fr.in,
+	other/xfce3rc.hu.in, other/xfce3rc.in, other/xfce3rc.ja.in,
+	other/xfce3rc.ko.in, other/xfce3rc.nl.in, other/xfce3rc.sr.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	xfsound/xfsound.c, xfwm/misc.c: Fix and improve focus handling
+	Change default config files so xfsound module doesn't get started
+	by default
+
+2001-09-08  xfce
+
+	* po/xfce.pot, xfsound/xfdsp.c, xfwm/events.c, xfwm/focus.c,
+	xfwm/misc.c, xfwm/xfwm.c: Fix and improve focus handling
+
+2001-09-08  xfce
+
+	* xfwm/: builtins.c, events.c, menus.c, misc.c: Improve focus
+	change from xfwm menu (ie fix a race cond)
+
+2001-09-07  xfce
+
+	* libs/lightdark.h: [no log message]
+
+2001-09-07  xfce
+
+	* xfwm/: builtins.c, events.c, menus.c: [no log message]
+
+2001-09-07  xfce
+
+	* xfwm/: events.c, menus.c, xfwm.c: [no log message]
+
+2001-09-06  xfce
+
+	* xfwm/: events.c, menus.c: Fix more focus oddities
+
+2001-09-06  xfce
+
+	* xfwm/xfwm.c: [no log message]
+
+2001-09-06  xfce
+
+	* xfwm/: events.c, focus.c, menus.c, misc.c: Fix some oddities in
+	focus handling
+
+2001-09-06  xfce
+
+	* xfwm/: builtins.c, focus.c: Fix race condition in alt-tab task
+	switching
+
+2001-09-05  xfce
+
+	* po/xfce.pot, xfwm/add_window.c, xfwm/bindings.c, xfwm/borders.c,
+	xfwm/builtins.c, xfwm/colormaps.c, xfwm/colors.c, xfwm/complex.c,
+	xfwm/decorations.c, xfwm/focus.c, xfwm/functions.c, xfwm/module.c,
+	xfwm/move.c, xfwm/placement.c, xfwm/read.c, xfwm/resize.c,
+	xfwm/session.c, xfwm/style.c, xfwm/virtual.c: Fix a race condition
+	in Alt+Tab switching and cleanup various stuff in xfwm
+
+2001-09-04  xfce
+
+	* other/xsession: Use /bin/sh instead of /bin/bash in xsession as
+	suggested by Chris Fuhrman
+
+2001-09-04  xfce
+
+	* Makefile.in, libs/Makefile.in, libs/constant.h, libs/xfcolor.c,
+	palettes/DISTFILES.in, palettes/Default, scripts/Makefile.in,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfpager/Makefile.in, xfrun/Makefile.in, xfsamba/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xfumed/Makefile.in,
+	xfwm/Makefile.in, xfwm/xfwm.c, palettes/LightBulb: [no log message]
+
+2001-09-04  xfce
+
+	* backdrops/Default.xpm, palettes/Default: Fix a mixup between
+	palette and backdrop
+
+2001-09-04  xfce
+
+	* palettes/Default: Updating default wallpaper
+
+2001-09-03  xfce
+
+	* xfce/setup_cb.c: [no log message]
+
+2001-09-03  xfce
+
+	* palettes/Default, libs/xfcolor.c: [no log message]
+
+2001-09-02  xfce
+
+	* palettes/Tradition, xfwm/session.c: Improve session management
+
+2001-09-01  xfce
+
+	* palettes/Stellar: Change "Stellar" palette
+
+2001-09-01  xfce
+
+	* xfce/setup_cb.c: Close opened popup menus when changing icon size
+
+2001-08-31  xfce
+
+	* configure, configure.in, xfce-3.8.7.lsm, xfce-3.8.8.lsm,
+	xfce.spec, other/CONFFILES.in, other/Makefile.in.in,
+	other/xfce3rc.de.in, po/xfce.pot, xfce/minpower.h, xfce/setup.c,
+	xfce/setup_cb.c: Made setup popup non-modal Add default german
+	localized config Change version number to 3.8.8
+
+2001-08-31  xfce
+
+	* backdrops/DISTFILES.in, backdrops/XfceStellar.xpm,
+	palettes/DISTFILES.in, palettes/Stellar2, xfce/xfce.c: Add a new
+	backdrop and a palette
+
+2001-08-26  xfce
+
+	* ChangeLog, po/xfce.pot: Update ChangeLog
+
 2001-08-26  xfce
 
 	* xfce/xfce.c: Change default panel location
