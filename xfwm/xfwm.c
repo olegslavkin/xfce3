@@ -815,12 +815,12 @@ SetRCDefaults ()
   char *defaults[] = {
     "XORValue 0",
     "ModulePath $PATH",
-    "ActiveColor white #CCCACC",
-    "InactiveColor black #CCCACC",
-    "TitleStyle Active Solid #5F6077",
-    "TitleStyle Inactive Solid #C2C0C2",
-    "MenuColor black #CCCACC white #5F6077",
-    "CursorColor white black",
+    "ActiveColor white #DFDBD7",
+    "InactiveColor black #DFDBD7",
+    "TitleStyle Active Solid #4F5FDE",
+    "TitleStyle Inactive Solid #8094AF",
+    "MenuColor black #DFDBD7 white #4F5FDE",
+    "CursorColor #FF0000 black",
     "FocusMode Click",
     "AnimateWin Off",
     "OpaqueMove On",
@@ -1753,8 +1753,8 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus);
-  Scr.engine = GTK_ENGINE;
-  Scr.AutoRaiseDelay = 200;
+  Scr.engine = LINEA_ENGINE;
+  Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;
   Scr.StdFont.fontset = NULL;
@@ -2180,31 +2180,49 @@ version (void)
   fprintf (stderr, "\nXfwm Version %s compiled on %s at %s\n\n", VERSION, __DATE__, __TIME__);
   fprintf (stderr, "  Build options\n");
   fprintf (stderr, "  =============\n");
-  fprintf (stderr, "  Xft support......: ");
+  fprintf (stderr, "  Xft support........: ");
 #ifdef HAVE_X11_XFT_XFT_H
   fprintf (stderr, "enabled\n");
 #else
   fprintf (stderr, "disabled\n");
 #endif
-  fprintf (stderr, "  Xinerama support.: ");
+  fprintf (stderr, "  Xinerama support...: ");
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
   fprintf (stderr, "enabled\n");
 #else
   fprintf (stderr, "disabled\n");
 #endif
-  fprintf (stderr, "  XSM support......: ");
+  fprintf (stderr, "  XSM support........: ");
 #ifdef HAVE_SESSION
   fprintf (stderr, "enabled\n");
 #else
   fprintf (stderr, "disabled\n");
 #endif
-  fprintf (stderr, "  Imlib support....: ");
+  fprintf (stderr, "  Imlib support......: ");
 #ifdef HAVE_IMLIB
   fprintf (stderr, "enabled\n");
 #else
   fprintf (stderr, "disabled\n");
 #endif
-  fprintf (stderr, "  Old style........: ");
+  fprintf (stderr, "  gdk-pixbuf support.: ");
+#ifdef HAVE_GDK_PIXBUF
+  fprintf (stderr, "enabled\n");
+#else
+  fprintf (stderr, "disabled\n");
+#endif
+  fprintf (stderr, "  Audiofile support..: ");
+#ifdef HAVE_AUDIOFILE
+  fprintf (stderr, "enabled\n");
+#else
+  fprintf (stderr, "disabled\n");
+#endif
+  fprintf (stderr, "  aRts support.......: ");
+#ifdef HAVE_ARTS
+  fprintf (stderr, "enabled\n");
+#else
+  fprintf (stderr, "disabled\n");
+#endif
+  fprintf (stderr, "  Old style..........: ");
 #ifdef OLD_STYLE
   fprintf (stderr, "enabled\n");
 #else
