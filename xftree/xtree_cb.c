@@ -1042,7 +1042,7 @@ static int rwStderr (int n, void *data){
   
   if (n) return TRUE; /* this would mean binary data */
   line = (char *) data;
-  show_cat(_("** command error:\n"));
+  /*show_cat(_("** command error:\n"));*/
   show_cat(line);
   /*fprintf(stderr,"dbg (child):%s\n",line);*/
   /*rpm_cmd_error=TRUE;
