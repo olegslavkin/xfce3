@@ -1,3 +1,13 @@
+2001-09-16  xfce
+
+	* acconfig.h, config.h.in, configure, configure.in,
+	xfsound/xfdsp.c: Use [sys|linux|machine]/soundcard.h and compile
+	xfsound based on the result
+
+2001-09-16  xfce
+
+	* xfce-3.8.8.lsm: Update ChangeLog & lsm
+
 2001-09-15  xfce
 
 	* libs/my_string.c: Fix a small bug ;-)
