@@ -614,10 +614,8 @@ void read_defaults(void){
 		if (!word) break;
 		lpl=atoi(word);
   		/* the default pixmap_level */
-		printf("apl=%d\n",pixmap_level);
   		if (pixmap_level > 3) 
 		pixmap_level=lpl;
-		printf("pl=%d\n",pixmap_level);
 	}
 	if (strstr(homedir,"smallTB :")){
 		strtok(homedir,":");
