@@ -41,7 +41,7 @@ fi
 # fi
 
 # Launch xscreensaver (if available)
-xscreensaver -no-splash -lock-mode &
+xscreensaver -no-splash &
 
 # Finally, launch XFce window manager
 exec xfwm

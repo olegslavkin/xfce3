@@ -99,7 +99,12 @@ ProcessNewStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
     switch (tolower (restofline[0]))
     {
     case 'a':
-      if (mystrncasecmp (restofline, "authorize_translate", 19) == 0)
+      if (mystrncasecmp (restofline, "allowfreemove", 13) == 0)
+      {
+	restofline += 13;
+	off_flags |= ALLOWFREEMOVE_FLAG;
+      }
+      else if (mystrncasecmp (restofline, "authorize_translate", 19) == 0)
       {
 	restofline += 19;
 	off_flags |= TRANSLATE_FLAG;

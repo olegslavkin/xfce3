@@ -67,7 +67,8 @@ HonorWMFocusHint     Yes
 
 # Style used for some known applications :
 Style "*"			BorderWidth 5
-# Style "xfce"			StayOnTop
+# Style "xfce"			StayOnTop, AllowFreeMove
+Style "xfce"                    AllowFreeMove
 Style "Alert"			Sticky, StayOnTop
 Style "Question"		Sticky, StayOnTop
 Style "Message"			Sticky, StayOnTop

@@ -244,9 +244,12 @@ AddWindow (Window w)
     db = NULL;
     XFreeStringList (client_argv);
   }
+  if (tflag & ALLOWFREEMOVE_FLAG)
+  {
+      tmp_win->flags |= FREEMOVE;
+  }
 
   tmp_win->flags |= tflag & ALL_COMMON_FLAGS;
-
   /* If restarting, retrieve parameters saved as Atoms */
   if ((XGetWindowProperty (dpy, w, _XA_XFWM_FLAGS, 0L, 1L, True, _XA_XFWM_FLAGS, &atype, &aformat, &nitems, &bytes_remain, &prop)) == Success)
   {

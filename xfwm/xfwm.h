@@ -289,6 +289,7 @@ WindowList;
 #define WM_NAME_CHANGED         (1L<<24)
 #define RECAPTURE               (1L<<25)
 #define MAP_PENDING             (1L<<26)
+#define FREEMOVE                (1L<<27)
 
 
 /* options flags (apply to all windows) */
