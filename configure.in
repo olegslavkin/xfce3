@@ -27,9 +27,18 @@ AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
-AC_PROG_MAKE_SET
 AC_PROG_INSTALL
+AC_PROG_MAKE_SET
 AM_PROG_LIBTOOL
+
+# Taken from Jamie Zawinski's configure script for xscreensaver :
+#
+# By default, autoconf sets INSTALL_SCRIPT to '${INSTALL_PROGRAM}'.
+# That's wrong: it should be set to '${INSTALL}', so that one can
+# implement the "install-strip" target properly (strip executables,
+# but do not try to strip scripts.)
+#
+INSTALL_SCRIPT='${INSTALL}'
 
 ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv zh zh_CN"
 AM_GNU_GETTEXT
