@@ -424,13 +424,6 @@ HandleFocusIn ()
   {
     return;
   }
-  if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
-  {
-#ifdef DEBUG
-    fprintf (stderr, "xfwm : HandleFocusIn () : context not found\n");
-#endif
-    Tmp_win = NULL;
-  }
 
   if (!Tmp_win)
   {
@@ -842,7 +835,7 @@ HandleDestroyNotify ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering DestroyNotify ()\n");
 #endif
-  if ((Event.xdestroywindow.event != Event.xdestroywindow.window) && (Event.xdestroywindow.event != Scr.Root || !Event.xdestroywindow.send_event))
+  if (Event.xdestroywindow.event != Event.xdestroywindow.window)
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleDestroyNotify (): Event ignored\n");
@@ -1042,31 +1035,13 @@ HandleUnmapNotify ()
     Scr.overrides = RemoveFromWindowList (Scr.overrides, Event.xunmap.window);
   }
 #endif
-  /*
-   * Don't ignore events as described below.
-   */
-  if ((Event.xunmap.event != Event.xunmap.window) && (Event.xunmap.event != Scr.Root || !Event.xunmap.send_event))
+
+  if (Event.xunmap.event != Event.xunmap.window)
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Event ignored\n");
 #endif
     return;
-  }
-
-  if (!Tmp_win)
-  {
-#ifdef DEBUG
-    fprintf (stderr, "xfwm : HandleUnmapNotify (): Tmp_win undefined. Trying to find out from context\n");
-#endif
-    Event.xany.window = Event.xunmap.window;
-    weMustUnmap = True;
-    if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
-    {
-#ifdef DEBUG
-      fprintf (stderr, "xfwm : HandleUnmapNotify (): Context not found\n");
-#endif
-      Tmp_win = NULL;
-    }
   }
 
   if (!Tmp_win)
