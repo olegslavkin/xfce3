@@ -398,10 +398,6 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 	  loc2=strrchr(en2->label,'.');
   }
  
-  /* this would make the last sort method sticky: */
-  /*gtk_clist_set_sort_column ((GtkCList *)ctree,clist->sort_column);*/
-
- 
   if (clist->sort_column != COL_NAME)
   {
     /* use default compare function which we have saved before  */
@@ -428,7 +424,8 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 }
 
 
-/* FIXME: this routine should me a loop to reduce code size */
+/* FIXME: this routine should me a loop to reduce excessive lines of code 
+ * (make for easier maintaince) */
 GtkWidget *
 create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 {
@@ -1124,6 +1121,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_clist_set_reorderable (GTK_CLIST (ctree), FALSE);
   gtk_container_add (GTK_CONTAINER (scrolled), ctree);
 
+  
+/* FIXME: these menus should be created in a loop, to reduce excessive lines of code */
+  
  /**** help menu, non operation, for displaying default kyeboard shortcuts */
   menu[MN_HLP] = gtk_menu_new ();
   inner_accel = gtk_accel_group_new ();
