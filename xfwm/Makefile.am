@@ -1,8 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-PACKAGE = @PACKAGE@
-VERSION = @VERSION@
-
+EXTRA_DIST= $(man_MANS) $(man_dist) $(noinst_DATA)
 CLEANFILES=*~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = -I../ -I../libs/ @X_CFLAGS@ @IMLIB_CFLAGS@ \
@@ -56,4 +54,17 @@ xfwm_LDADD = ../libs/libxfwmcore.la @INTLLIBS@ @LIBS@ @IMLIB_LIBS@ \
 
 xfwm_DEPENDENCIES = ../libs/libxfwmcore.la 
 
+man_dist=xfwm.man  # _obsolete_?
 man_MANS=xfwm.1
+
+# really _noinst_?
+noinst_DATA = \
+ close.xbm \
+ iconify.xbm \
+ maximize_pressed.xbm \
+ maximize.xbm \
+ menu.xbm \
+ shade_pressed.xbm \
+ shade.xbm \
+ stick_pressed.xbm \
+ stick.xbm \

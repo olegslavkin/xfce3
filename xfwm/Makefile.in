@@ -95,6 +95,7 @@ HAVE_AUDIOFILE = @HAVE_AUDIOFILE@
 HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
+HAVE_LIBXML2 = @HAVE_LIBXML2@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
 INSTOBJEXT = @INSTOBJEXT@
@@ -106,12 +107,15 @@ LIBICONV = @LIBICONV@
 LIBTOOL = @LIBTOOL@
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LIBVERSION = @LIBVERSION@
+LIBXML2_CFLAGS = @LIBXML2_CFLAGS@
+LIBXML2_LIBS = @LIBXML2_LIBS@
 LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+PACKAGE = @PACKAGE@
 POFILES = @POFILES@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
@@ -120,15 +124,14 @@ USE_DT = @USE_DT@
 USE_GDM = @USE_GDM@
 USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
 USE_NLS = @USE_NLS@
+VERSION = @VERSION@
 XFCE_CONFDIR = @XFCE_CONFDIR@
 XFCE_DIR = @XFCE_DIR@
 XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-PACKAGE = @PACKAGE@
-VERSION = @VERSION@
-
+EXTRA_DIST = $(man_MANS) $(man_dist) $(noinst_DATA)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = -I../ -I../libs/ @X_CFLAGS@ @IMLIB_CFLAGS@ \
@@ -185,7 +188,21 @@ xfwm_LDADD = ../libs/libxfwmcore.la @INTLLIBS@ @LIBS@ @IMLIB_LIBS@ \
 
 xfwm_DEPENDENCIES = ../libs/libxfwmcore.la 
 
+man_dist = xfwm.man  # _obsolete_?
 man_MANS = xfwm.1
+
+# really _noinst_?
+noinst_DATA = \
+ close.xbm \
+ iconify.xbm \
+ maximize_pressed.xbm \
+ maximize.xbm \
+ menu.xbm \
+ shade_pressed.xbm \
+ shade.xbm \
+ stick_pressed.xbm \
+ stick.xbm \
+
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -219,6 +236,8 @@ man1dir = $(mandir)/man1
 MANS = $(man_MANS)
 
 NROFF = nroff
+DATA =  $(noinst_DATA)
+
 DIST_COMMON =  Makefile.am Makefile.in
 
 
@@ -415,7 +434,7 @@ install-am: all-am
 install: install-am
 uninstall-am: uninstall-binPROGRAMS uninstall-man
 uninstall: uninstall-am
-all-am: Makefile $(PROGRAMS) $(MANS)
+all-am: Makefile $(PROGRAMS) $(MANS) $(DATA)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-13 21:51+0100\n"
+"POT-Creation-Date: 2002-01-14 22:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,12 +54,12 @@ msgstr ""
 msgid "Terminated: "
 msgstr ""
 
-#: libs/xpmext.c:377 libs/xpmext.c:398
+#: libs/xpmext.c:377 libs/xpmext.c:404
 #, c-format
 msgid "*** WARNING ***: Cannot load image file %s\n"
 msgstr ""
 
-#: libs/xpmext.c:419
+#: libs/xpmext.c:425
 #, c-format
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
 msgstr ""
@@ -102,67 +102,67 @@ msgstr ""
 msgid "You must provide the command to execute !"
 msgstr ""
 
-#: xfce/configfile.c:54
+#: xfce/configfile.c:57
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
 "(%s)\n"
 msgstr ""
 
-#: xfce/configfile.c:55 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:58 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
 msgstr ""
 
-#: xfce/configfile.c:62
+#: xfce/configfile.c:65
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
 "(%s)\n"
 msgstr ""
 
-#: xfce/configfile.c:63 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:66 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
 msgstr ""
 
-#: xfce/configfile.c:206 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:209 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr ""
 
-#: xfce/configfile.c:353
+#: xfce/configfile.c:356
 msgid "Cannot reset configuration file"
 msgstr ""
 
-#: xfce/configfile.c:356
+#: xfce/configfile.c:359
 msgid "Creating new config file...\n"
 msgstr ""
 
-#: xfce/configfile.c:540 xfce/configfile.c:550
+#: xfce/configfile.c:530 xfce/configfile.c:540
 msgid "Cannot open configuration file"
 msgstr ""
 
-#: xfce/configfile.c:556
+#: xfce/configfile.c:546
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr ""
 
-#: xfce/configfile.c:557
+#: xfce/configfile.c:547
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
 msgstr ""
 
-#: xfce/configfile.c:568
+#: xfce/configfile.c:558
 msgid "Cannot open new config, Giving up..."
 msgstr ""
 
-#: xfce/configfile.c:569
+#: xfce/configfile.c:559
 msgid "Cannot load configuration file"
 msgstr ""
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:565
 msgid "Cannot use old version of XFce configuration files"
 msgstr ""
 

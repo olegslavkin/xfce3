@@ -1,6 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-EXTRA_DIST = $(extras_distcvs)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
@@ -10,9 +9,6 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
 
 # lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
-
-# _distcvs - files in CVS but not used anywhere. forgotten? _obsolete_?
-extras_distcvs = UTF8.c UTF8.h defaulticon.h my_scandir.h 
 
 libxfcecore_la_SOURCES = \
 	colorselect.c colorselect.h \
@@ -31,7 +27,8 @@ libxfcecore_la_SOURCES = \
 	snprintf.c snprintf.h \
 	xfce-common.c xfce-common.h \
 	xfcolor.c xfcolor.h \
-	xpmext.c xpmext.h
+	xpmext.c xpmext.h \
+	defaulticon.h my_scandir.h
 libxfcecore_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(X_EXTRA_LIBS)
 # libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) \
 # 	-export-dynamic -rpath "@prefix@/lib"

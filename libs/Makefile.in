@@ -95,6 +95,7 @@ HAVE_AUDIOFILE = @HAVE_AUDIOFILE@
 HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
+HAVE_LIBXML2 = @HAVE_LIBXML2@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
 INSTOBJEXT = @INSTOBJEXT@
@@ -106,6 +107,8 @@ LIBICONV = @LIBICONV@
 LIBTOOL = @LIBTOOL@
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LIBVERSION = @LIBVERSION@
+LIBXML2_CFLAGS = @LIBXML2_CFLAGS@
+LIBXML2_LIBS = @LIBXML2_LIBS@
 LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
@@ -128,7 +131,6 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-EXTRA_DIST = $(extras_distcvs)
 CLEANFILES = *~ *.bak core *.core *.o .depend .deps/* 
 
 INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
@@ -139,9 +141,6 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
 
 # lib_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
-
-# _distcvs - files in CVS but not used anywhere. forgotten? _obsolete_?
-extras_distcvs = UTF8.c UTF8.h defaulticon.h my_scandir.h 
 
 libxfcecore_la_SOURCES = \
 	colorselect.c colorselect.h \
@@ -160,7 +159,8 @@ libxfcecore_la_SOURCES = \
 	snprintf.c snprintf.h \
 	xfce-common.c xfce-common.h \
 	xfcolor.c xfcolor.h \
-	xpmext.c xpmext.h
+	xpmext.c xpmext.h \
+	defaulticon.h my_scandir.h
 
 libxfcecore_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(X_EXTRA_LIBS)
 # libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) \
