@@ -234,6 +234,7 @@ audio_play (short code, short backgnd)
 	if (my_strncasecmp (sndcfg.playcmd, INTERNAL_PLAYER, strlen (INTERNAL_PLAYER)) == 0)
 	{
 	  i_play (sndcfg.datafiles[code]);
+          _exit (0);
 	}
 	else
 	{
