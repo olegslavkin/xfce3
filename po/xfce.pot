@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-18 07:23+0100\n"
+"POT-Creation-Date: 2001-12-18 23:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,11 +171,11 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:677
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:677
 msgid "Clear"
 msgstr ""
 
-#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
+#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
 #: xftree/xtree_mess.c:682
 msgid "Dismiss"
 msgstr ""
@@ -188,7 +188,7 @@ msgstr ""
 #: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr ""
 
@@ -648,7 +648,7 @@ msgid "Setup..."
 msgstr ""
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xfumed/xfumed_gui.c:171
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr ""
 
@@ -877,42 +877,42 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
+#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
 msgid "Owner :"
 msgstr ""
 
-#: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
+#: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
 #: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
 msgid "Read"
 msgstr ""
 
-#: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
+#: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
 #: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
 msgid "Write"
 msgstr ""
 
-#: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
+#: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
 #: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
 msgid "Execute"
 msgstr ""
 
-#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:299
+#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:299
 msgid "Set UID"
 msgstr ""
 
-#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
+#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
 msgid "Group :"
 msgstr ""
 
-#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:323
+#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:323
 msgid "Set GID"
 msgstr ""
 
-#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:333
+#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:333
 msgid "Other :"
 msgstr ""
 
-#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:346
+#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:346
 msgid "Sticky"
 msgstr ""
 
@@ -1300,15 +1300,15 @@ msgstr ""
 msgid "About ..."
 msgstr ""
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:967
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:967
 msgid "Name"
 msgstr ""
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:968
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:968
 msgid "Size (bytes)"
 msgstr ""
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:969
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:969
 msgid "Last changed"
 msgstr ""
 
@@ -1372,7 +1372,7 @@ msgstr ""
 msgid "Xftree results"
 msgstr ""
 
-#: xftree/xtree_mess.c:847
+#: xftree/xtree_mess.c:862
 msgid "Home directory : "
 msgstr ""
 
@@ -1793,7 +1793,7 @@ msgstr ""
 msgid "Undo patch to Hard Drive"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1922
 msgid "About"
 msgstr ""
 
@@ -1905,112 +1905,112 @@ msgstr ""
 msgid "Press OK to see patch diffs"
 msgstr ""
 
-#: xfglob/xfglob.c:459 xfglob/xfglob.c:460
+#: xfglob/xfglob.c:460 xfglob/xfglob.c:461
 msgid "Results limit reached"
 msgstr ""
 
-#: xfglob/xfglob.c:468
+#: xfglob/xfglob.c:469
 msgid "Cancelled"
 msgstr ""
 
-#: xfglob/xfglob.c:469
+#: xfglob/xfglob.c:470
 msgid "Search canceled!\n"
 msgstr ""
 
-#: xfglob/xfglob.c:494 xfglob/xfglob.c:524
+#: xfglob/xfglob.c:495 xfglob/xfglob.c:525
 msgid "Glob run must finish or be cancelled first."
 msgstr ""
 
-#: xfglob/xfglob.c:507
+#: xfglob/xfglob.c:508
 msgid "Find results.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:587 xfglob/xfglob.c:679
+#: xfglob/xfglob.c:588 xfglob/xfglob.c:680
 msgid "Find results..."
 msgstr ""
 
-#: xfglob/xfglob.c:606 xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:607 xfglob/xfglob.c:1362
 msgid "Directory"
 msgstr ""
 
-#: xfglob/xfglob.c:609
+#: xfglob/xfglob.c:610
 msgid "Mode"
 msgstr ""
 
-#: xfglob/xfglob.c:1031
+#: xfglob/xfglob.c:1032
 msgid "Incoherent size considerations!"
 msgstr ""
 
 #. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
-#: xfglob/xfglob.c:1201
+#: xfglob/xfglob.c:1202
 msgid "Result of "
 msgstr ""
 
-#: xfglob/xfglob.c:1212 xfglob/xfglob.c:1555
+#: xfglob/xfglob.c:1213 xfglob/xfglob.c:1556
 msgid "File type :"
 msgstr ""
 
-#: xfglob/xfglob.c:1284
+#: xfglob/xfglob.c:1285
 msgid "Anyone"
 msgstr ""
 
 #. translation of filetypes
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Any kind"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Regular"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Symlink"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Socket"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Block device"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Character device"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "FIFO"
 msgstr ""
 
-#: xfglob/xfglob.c:1371
+#: xfglob/xfglob.c:1372
 msgid "Xfglob"
 msgstr ""
 
 #. *******************************
 #. show the notebook pages:
 #. fourth circle : notebook tabs stuff
-#: xfglob/xfglob.c:1422 xfglob/xfglob.c:1912 xfglob/xfglob.c:1940
+#: xfglob/xfglob.c:1423 xfglob/xfglob.c:1913 xfglob/xfglob.c:1941
 msgid "Find"
 msgstr ""
 
-#: xfglob/xfglob.c:1434
+#: xfglob/xfglob.c:1435
 msgid "Path : "
 msgstr ""
 
-#: xfglob/xfglob.c:1443
+#: xfglob/xfglob.c:1444
 msgid "Browse"
 msgstr ""
 
-#: xfglob/xfglob.c:1452
+#: xfglob/xfglob.c:1453
 msgid "File filter : "
 msgstr ""
 
-#: xfglob/xfglob.c:1460
+#: xfglob/xfglob.c:1461
 msgid "What's a file filter?"
 msgstr ""
 
-#: xfglob/xfglob.c:1467
+#: xfglob/xfglob.c:1468
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -2018,35 +2018,35 @@ msgid ""
 "?  Will match any character exactly one time\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1473
+#: xfglob/xfglob.c:1474
 msgid "Search subdirectories too"
 msgstr ""
 
-#: xfglob/xfglob.c:1475
+#: xfglob/xfglob.c:1476
 msgid "Limit results to first : "
 msgstr ""
 
-#: xfglob/xfglob.c:1488
+#: xfglob/xfglob.c:1489
 msgid "Content search"
 msgstr ""
 
-#: xfglob/xfglob.c:1500
+#: xfglob/xfglob.c:1501
 msgid "Containing : "
 msgstr ""
 
-#: xfglob/xfglob.c:1511
+#: xfglob/xfglob.c:1512
 msgid "Case sensitive search"
 msgstr ""
 
-#: xfglob/xfglob.c:1512
+#: xfglob/xfglob.c:1513
 msgid "Extended regexp"
 msgstr ""
 
-#: xfglob/xfglob.c:1515
+#: xfglob/xfglob.c:1516
 msgid "What's a regexp?"
 msgstr ""
 
-#: xfglob/xfglob.c:1521
+#: xfglob/xfglob.c:1522
 msgid ""
 "Reserved characters for extended regexp are\n"
 ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
@@ -2087,19 +2087,19 @@ msgid ""
 "       at the command prompt.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1542
+#: xfglob/xfglob.c:1543
 msgid "File considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1566
+#: xfglob/xfglob.c:1567
 msgid "Stay on single filesystem"
 msgstr ""
 
-#: xfglob/xfglob.c:1567
+#: xfglob/xfglob.c:1568
 msgid "What's a single filesystem?"
 msgstr ""
 
-#: xfglob/xfglob.c:1571
+#: xfglob/xfglob.c:1572
 msgid ""
 "Staying on a single filesystem will hinder\n"
 "searching on different physical disk partitions.\n"
@@ -2107,15 +2107,15 @@ msgid ""
 "to search into nfs or smb mounts.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1593
+#: xfglob/xfglob.c:1594
 msgid "Permission considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1597
+#: xfglob/xfglob.c:1598
 msgid "How does permission filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1601
+#: xfglob/xfglob.c:1602
 msgid ""
 "When permission filtering is active:\n"
 "-If a file has one of the chosen permission bits,\n"
@@ -2124,15 +2124,15 @@ msgid ""
 "  no set permission bits will match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1697
+#: xfglob/xfglob.c:1698
 msgid "User/group considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1701
+#: xfglob/xfglob.c:1702
 msgid "How does user/group filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1705
+#: xfglob/xfglob.c:1706
 msgid ""
 "If user and group are both set to any \n"
 "value other than anyone:\n"
@@ -2140,23 +2140,23 @@ msgid ""
 "  to match\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1716
+#: xfglob/xfglob.c:1717
 msgid "User ID: "
 msgstr ""
 
-#: xfglob/xfglob.c:1727
+#: xfglob/xfglob.c:1728
 msgid "Group ID: "
 msgstr ""
 
-#: xfglob/xfglob.c:1742
+#: xfglob/xfglob.c:1743
 msgid "Size considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1746
+#: xfglob/xfglob.c:1747
 msgid "How does size filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1750
+#: xfglob/xfglob.c:1751
 msgid ""
 "-If a size of 0 (zero) is specified for \n"
 " size-less-than, this will be ignored.\n"
@@ -2165,23 +2165,23 @@ msgid ""
 " in order for a file to match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1762
+#: xfglob/xfglob.c:1763
 msgid "Size greater than (KB): "
 msgstr ""
 
-#: xfglob/xfglob.c:1777
+#: xfglob/xfglob.c:1778
 msgid "Size less than (KB): "
 msgstr ""
 
-#: xfglob/xfglob.c:1797
+#: xfglob/xfglob.c:1798
 msgid "Time considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1801
+#: xfglob/xfglob.c:1802
 msgid "How does time filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1805
+#: xfglob/xfglob.c:1806
 msgid ""
 "Three different time modes may be selected:\n"
 "*modified:\n"
@@ -2208,103 +2208,103 @@ msgid ""
 "runs will not produce identical results.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1817
+#: xfglob/xfglob.c:1818
 msgid "Modified"
 msgstr ""
 
-#: xfglob/xfglob.c:1818
+#: xfglob/xfglob.c:1819
 msgid "Changed"
 msgstr ""
 
-#: xfglob/xfglob.c:1819
+#: xfglob/xfglob.c:1820
 msgid "Accessed"
 msgstr ""
 
-#: xfglob/xfglob.c:1825
+#: xfglob/xfglob.c:1826
 msgid "In the previous : "
 msgstr ""
 
-#: xfglob/xfglob.c:1835
+#: xfglob/xfglob.c:1836
 msgid "Minutes"
 msgstr ""
 
-#: xfglob/xfglob.c:1836
+#: xfglob/xfglob.c:1837
 msgid "Hours"
 msgstr ""
 
-#: xfglob/xfglob.c:1837
+#: xfglob/xfglob.c:1838
 msgid "Days"
 msgstr ""
 
-#: xfglob/xfglob.c:1838
+#: xfglob/xfglob.c:1839
 msgid "Months"
 msgstr ""
 
-#: xfglob/xfglob.c:1869
+#: xfglob/xfglob.c:1870
 msgid "General considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1879
+#: xfglob/xfglob.c:1880
 msgid "Do not look into binary files"
 msgstr ""
 
-#: xfglob/xfglob.c:1881
+#: xfglob/xfglob.c:1882
 msgid "Output count of matching lines"
 msgstr ""
 
-#: xfglob/xfglob.c:1883
+#: xfglob/xfglob.c:1884
 msgid "Match anywhere"
 msgstr ""
 
-#: xfglob/xfglob.c:1884
+#: xfglob/xfglob.c:1885
 msgid "Match whole words only"
 msgstr ""
 
-#: xfglob/xfglob.c:1885
+#: xfglob/xfglob.c:1886
 msgid "Match whole lines only"
 msgstr ""
 
-#: xfglob/xfglob.c:1886
+#: xfglob/xfglob.c:1887
 msgid "Output files where no match is found"
 msgstr ""
 
-#: xfglob/xfglob.c:1915
+#: xfglob/xfglob.c:1916
 msgid "Filter options"
 msgstr ""
 
-#: xfglob/xfglob.c:1918
+#: xfglob/xfglob.c:1919
 msgid "Content options"
 msgstr ""
 
-#: xfglob/xfglob.c:1946
+#: xfglob/xfglob.c:1947
 msgid "Results"
 msgstr ""
 
-#: xfglob/xfglob.c:1961
+#: xfglob/xfglob.c:1962
 msgid "working..."
 msgstr ""
 
-#: xfglob/xfglob.c:1964
+#: xfglob/xfglob.c:1965
 msgid "Cancel Search"
 msgstr ""
 
-#: xfglob/xfglob.c:2013
+#: xfglob/xfglob.c:2014
 msgid "Nothing found...\n"
 msgstr ""
 
-#: xfglob/xfglob.c:2021
+#: xfglob/xfglob.c:2022
 msgid "Files found="
 msgstr ""
 
-#: xfglob/xfglob.c:2024
+#: xfglob/xfglob.c:2025
 msgid "(interrupted because limit exceded)"
 msgstr ""
 
-#: xfglob/xfglob.c:2078
+#: xfglob/xfglob.c:2079
 msgid "lines"
 msgstr ""
 
-#: xfglob/xfglob.c:2144
+#: xfglob/xfglob.c:2145
 msgid "unable to stat:"
 msgstr ""
 

@@ -243,7 +243,6 @@ char *convert_code (char *fromcode)
   }
   outbuf[outlen] = '\0';
   return outbuf;
-     
 }
 
 /* initialization and 
@@ -319,6 +318,7 @@ init_nls (void)
   {
     charset = g_strdup (temp);
   }
+  
   /* these are global variables so they can be used easily in many places */
   temp = g_getenv ("LC_MESSAGES");
   if (temp)
@@ -355,7 +355,7 @@ init_nls (void)
     lang = g_strndup (temp, 5);
     lang_base = g_strdup (lang);
 
-    if ((!charset) && (dot = strrchr (lcmessages , '.')))
+    if ((!charset) && (dot = strrchr (lang , '.')))
     {
       dot++;
       charset = (char *) safemalloc (strlen (dot) + 1);
