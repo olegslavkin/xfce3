@@ -563,7 +563,7 @@ check_patch_dir (void)
     char texto[16];
     strip = go_figure_strip ();
     /*printf("using strip level=%d\n",strip); */
-    show_diag (strip_set_to);
+    show_diag (_(strip_set_to));
     sprintf (texto, "%d (-p%d)\n", strip, strip);
     show_diag (texto);
   }
@@ -955,7 +955,7 @@ update_titlesP (void)
       clear_text_buffer (what_dir);
       if (!fileP)
       {
-	utf8_insert (what_dir, no_patch, -1);
+	utf8_insert (what_dir, _(no_patch), -1);
       }
       else
       {
@@ -966,7 +966,7 @@ update_titlesP (void)
       utf8_insert (what_dir, _(" applied at: "), -1);
       if (!fileD)
       {
-	utf8_insert (what_dir, no_patch_dir, -1);
+	utf8_insert (what_dir, _(no_patch_dir), -1);
       }
       else
       {
@@ -979,7 +979,7 @@ update_titlesP (void)
     if (!fileP)
     {
       if (what_dir)
-	gtk_text_insert (GTK_TEXT (what_dir), NULL, &filefg, &filebg, no_patch, strlen (no_patch));
+	gtk_text_insert (GTK_TEXT (what_dir), NULL, &filefg, &filebg, _(no_patch), strlen (_(no_patch)));
     }
     else
     {
@@ -993,7 +993,7 @@ update_titlesP (void)
     if (!fileD)
     {
       if (what_dir)
-	gtk_text_insert (GTK_TEXT (what_dir), NULL, &filefg, &filebg, no_patch_dir, strlen (no_patch_dir));
+	gtk_text_insert (GTK_TEXT (what_dir), NULL, &filefg, &filebg, _(no_patch_dir), strlen (_(no_patch_dir)));
     }
     else
     {
@@ -1009,7 +1009,7 @@ update_titlesP (void)
       if (!fileD)
 	texto = no_patch_dir;
       else
-	texto = (_("Press OK to see patch diffs"));
+	texto = (N_("Press OK to see patch diffs"));
     }
   }
   else
@@ -1026,10 +1026,10 @@ update_titlesP (void)
   {
 #ifdef __GTK_2_0
     clear_text_buffer (titleP);
-    utf8_file_insert (titleP, texto, -1);
+    utf8_file_insert (titleP, _(texto), -1);
 #else
     gtk_text_backward_delete (GTK_TEXT (titleP), gtk_text_get_length (GTK_TEXT (titleP)));
-    gtk_text_insert (GTK_TEXT (titleP), NULL, NULL, NULL, texto, strlen (texto));
+    gtk_text_insert (GTK_TEXT (titleP), NULL, NULL, NULL, _(texto), strlen (_(texto)));
 #endif
   }
 
@@ -1063,7 +1063,7 @@ update_titlesP (void)
       else
 	texto = no_left_path;
     }
-    items = g_list_append (items, texto);
+    items = g_list_append (items, _(texto));
     if (titleP)
       gtk_combo_set_popdown_strings (GTK_COMBO (titleD), items);
   }

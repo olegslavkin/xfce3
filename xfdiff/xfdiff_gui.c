@@ -212,9 +212,9 @@ cb_patchmake (GtkWidget * widget, gpointer data)
     fileR = assign (fileR, fileRD);
 
   if (!fileL)
-    fileL = prompt_path (no_left_path, fileL);
+    fileL = prompt_path (_(no_left_path), fileL);
   if ((fileL) && (!fileR))
-    fileR = prompt_path (no_right_path, fileR);
+    fileR = prompt_path (_(no_right_path), fileR);
   if ((!fileL) || (!fileR))
     goto exit_patchmake;
 
@@ -268,7 +268,7 @@ cb_radio_strip (GtkWidget * widget, gpointer data)
   strip = ((int) ((long) data));
   if (strip != laststrip)
   {
-    show_diag (strip_set_to);
+    show_diag (_(strip_set_to));
     sprintf (texto, "%d (-p%d)\n", strip, strip);
     show_diag (texto);
     laststrip = strip;

@@ -113,16 +113,16 @@ xfdiff_init (void)
 {
 /* convenience location of duplicate dialog texts  */
   /* non-static */
-  strip_set_to = _("Strip level now set to ");
-  no_patch = _("No patch file has been selected.");
-  no_patch_dir = _("No directory to apply patch has been selected.");
-  no_left_path = _("No left path has been selected.");
-  no_right_path = _("No right path has been selected.");
+  strip_set_to = N_("Strip level now set to ");
+  no_patch = N_("No patch file has been selected.");
+  no_patch_dir = N_("No directory to apply patch has been selected.");
+  no_left_path = N_("No left path has been selected.");
+  no_right_path = N_("No right path has been selected.");
   /* static */
-  cannot_read_patch_file = _("Patch file can not be opened for read!");
-  identical_files = _("Files are identical\n(or binary files that may or may not differ)");
-  patch_file_error = _("Patch file is not in unified format");
-  empty_file = _("****Empty file****\n");
+  cannot_read_patch_file = N_("Patch file can not be opened for read!");
+  identical_files = N_("Files are identical\n(or binary files that may or may not differ)");
+  patch_file_error = N_("Patch file is not in unified format");
+  empty_file = N_("****Empty file****\n");
 /* initial sizes for text files, sizes in line numbers and average char length */
   sizeR = 30, sizeL = 30, sizeH = 30;
   head = NULL, current = NULL;
@@ -329,7 +329,7 @@ writeout (GtkTextBuffer * text_location, char *file)
   fileH = open (file, O_RDONLY);
   if (fileH == -1)
   {
-    utf8_insert (text_location, empty_file, -1);
+    utf8_insert (text_location, _(empty_file), -1);
 #else
 static void
 writeout (GtkWidget * text_location, char *file)
@@ -338,7 +338,7 @@ writeout (GtkWidget * text_location, char *file)
   fileH = open (file, O_RDONLY);
   if (fileH == -1)
   {
-    gtk_text_insert (GTK_TEXT (text_location), style->font, &filefg, &filebg, empty_file, strlen (empty_file));
+    gtk_text_insert (GTK_TEXT (text_location), style->font, &filefg, &filebg, _(empty_file), strlen (_(empty_file)));
 #endif
   }
   else
@@ -379,7 +379,7 @@ pre_diff ()
 {
   if (!fileL)
   {
-    fileL = prompt_path (no_left_path, fileL);
+    fileL = prompt_path (_(no_left_path), fileL);
     if (!fileL)
       return FALSE;
     fileLD = assign (fileLD, checkdir (fileL) ? fileL : NULL);
@@ -387,7 +387,7 @@ pre_diff ()
   }
   if (!fileR)
   {
-    fileR = prompt_path (no_right_path, fileR);
+    fileR = prompt_path (_(no_right_path), fileR);
     if (!fileR)
       return FALSE;
     fileRD = assign (fileRD, checkdir (fileR) ? fileR : NULL);
@@ -495,7 +495,7 @@ post_diff (int diffC)
       free (texto);
     }
     else
-      show_diag (identical_files);
+      show_diag (_(identical_files));
     show_diag ("\n******************************\n");
   }
 }
@@ -858,7 +858,7 @@ do_diff (void)
   if (!patchO)
   {
     if (!first_diff ())
-      my_show_message (identical_files);
+      my_show_message (_(identical_files));
     if (!patching)
       update_titlesP ();
   }
@@ -895,7 +895,7 @@ build_tmpL (char *infile)
 
   if (fileH == -1)
   {				/* a new file! */
-    write (fileHI, (void *) empty_file, strlen (empty_file));
+    write (fileHI, (void *) _(empty_file), strlen (_(empty_file)));
   }
   else
   {
@@ -1183,7 +1183,7 @@ parse_patchfile (void)
   Pfile = fopen (fileP, "r");
   if (!Pfile)
   {
-    my_show_message (cannot_read_patch_file);
+    my_show_message (_(cannot_read_patch_file));
     return FALSE;
   }
 
@@ -1276,7 +1276,7 @@ parse_patchfile (void)
 /*	printf("line=%s",line);*/
        if (!currentF)
 	{
-	  my_show_message (patch_file_error);/* not unified format (--- comes first) */
+	  my_show_message (_(patch_file_error));/* not unified format (--- comes first) */
 	}
        
 	if ((currentF)&& (!last_is_pushed))
@@ -1339,7 +1339,7 @@ parse_patchfile (void)
   }
   else
   {
-    my_show_message (patch_file_error);
+    my_show_message (_(patch_file_error));
     free (line);
     fclose (Pfile);
     return FALSE;
@@ -1363,13 +1363,13 @@ do_patch (void)
   cleanT ();			/* clean display area. */
   if (!fileP)
   {
-    fileP = prompt_path (no_patch, fileP);
+    fileP = prompt_path (_(no_patch), fileP);
     if (!fileP)
       return FALSE;
   }
   if (!fileD)
   {
-    fileD = prompt_path (no_patch_dir, fileD);
+    fileD = prompt_path (_(no_patch_dir), fileD);
     if (checknotdir (fileD))
       fileD = assign (fileD, NULL);
     if (!fileD)
@@ -1379,7 +1379,7 @@ do_patch (void)
   fileH = open (fileP, O_RDONLY);
   if (fileH == -1)
   {
-    my_show_message (cannot_read_patch_file);
+    my_show_message (_(cannot_read_patch_file));
     return FALSE;
   }
   else
