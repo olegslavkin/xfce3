@@ -889,6 +889,7 @@ my_gtk_clock_draw_leds (GtkWidget * widget)
   guint c_height = 0;
   guint len, i;
   gchar ampm[2] = "A";
+  gchar separator[2] = ":";
   gchar time_buf[24];
   
   g_return_if_fail (widget != NULL);
@@ -905,6 +906,11 @@ my_gtk_clock_draw_leds (GtkWidget * widget)
   if (h >= 12)
     ampm[0] = 'P';
 
+  if (s & 1)
+    separator[0] = ':';
+  else
+    separator[0] = ' ';
+  
   if (!(clock->military_time))
   {
     if (h > 12)
@@ -916,25 +922,25 @@ my_gtk_clock_draw_leds (GtkWidget * widget)
   if (clock->military_time)
   {
     if (clock->display_secs)
-      sprintf (time_buf, "%02d:%02d:%02d", h, m, s);
+      sprintf (time_buf, "%02d%s%02d%s%02d", h, separator, m, separator, s);
     else
-      sprintf (time_buf, "%02d:%02d", h, m);
+      sprintf (time_buf, "%02d%s%02d", h, separator, m);
   }
   else
   {
     if (clock->display_am_pm)
     {
       if (clock->display_secs)
-	sprintf (time_buf, "%02d:%02d:%02d%s", h, m, s, ampm);
+	sprintf (time_buf, "%02d%s%02d%s%02d%s", h, separator, m, separator, s, ampm);
       else
-	sprintf (time_buf, "%02d:%02d%s", h, m, ampm);
+	sprintf (time_buf, "%02d%s%02d%s", h, separator, m, ampm);
     }
     else
     {
       if (clock->display_secs)
-	sprintf (time_buf, "%02d:%02d:%02d", h, m, s);
+	sprintf (time_buf, "%02d%s%02d%s%02d", h, separator, m, separator, s);
       else
-	sprintf (time_buf, "%02d:%02d", h, m);
+	sprintf (time_buf, "%02d%s%02d", h, separator, m);
     }
   }
 
@@ -1068,7 +1074,7 @@ my_gtk_clock_timer (MyGtkClock * clock)
   h = tm->tm_hour;
   m = tm->tm_min;
   s = tm->tm_sec;
-  if (!(((!(clock->display_secs)) || (s == os)) && (m == om) && (h == oh)))
+  if (!(((!((clock->display_secs) || (clock->mode == MY_GTK_CLOCK_LEDS))) || (s == os)) && (m == om) && (h == oh)))
   {
     os = s;
     om = m;
