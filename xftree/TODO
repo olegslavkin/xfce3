@@ -1,14 +1,17 @@
 1- Some configuration options  
-done: 2- An "all" button when doing hard deletes
 3- Debug the "goto" option (seems the "fork" may lose variables at times).
 4- gtk-2 
-5.- Somehow be able to show the total size of a folder including all it's
-content, sub-folders and their content.
 6.- MC style opening of packed files: Click on files and you see the internal
 structure as if it wasn't packed. Makes it very easy to copy and move content
 from these files straight to where you want it.
 7- Add code necesary to d+d files to/from xfsamba.
 8- Add ctrl-T for keyboard shortcut to open terminal. Probably keyboard shorcuts for all menu items, toggled from config file.
 9- Override file dialog should lstat both new and old file and show info so user can decide whether or not to override.
+
+done:
+ 2- An "all" button when doing hard deletes.
+ 5.- Somehow be able to show the total size of a folder including all it's
+content, sub-folders and their content.
+->  ctrl-u or select from right button menu over folders gives diskusage
 
 And yes. XFtree is a marvel. Fast, always there, and always in use.

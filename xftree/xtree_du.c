@@ -18,6 +18,7 @@
 #  include <config.h>
 #endif
 
+/* probably overkill with all these includes: */
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
@@ -65,15 +66,90 @@
 #  include "dmalloc.h"
 #endif
 
+static void *fork_obj;
+static char path[PATH_MAX + 1];
+static gboolean first;
+
+
+/* function to process stdout produced by child */
+static int
+duStdout (int n, void *data)
+{
+  char *line;
+  char *texto;
+  char *du_txt=_("Disk usage:");
+  int i;
+  
+  if (n) return TRUE; /* this would mean binary data */
+  if (!first) return TRUE; /* bug avoider, since we can only create a single instance of dlg_new at a time*/
+  first=FALSE;
+
+  line = (char *) data;
+
+  /* tabs don't show up well in gtk-1.2 */
+  for (i=0;i<strlen(line);i++) if (line[i]=='\t') line[i]=' ';
+  
+ 
+  texto = (char *) malloc(strlen(line)+strlen(du_txt)+3);
+  if (!texto) return TRUE; /*unprobable memory allocation trouble */
+  sprintf(texto,"%s\n%s",du_txt,line); 
+  /* this should be a text box, to avoid "first" variable and process several paths at once...*/
+  dlg_new(texto,NULL,NULL,DLG_CANCEL);
+  /*fprintf(stdout,"%s\n",line);*/
+  free(texto);
+  return TRUE;
+}
+
+
+/* function to be run by parent after child has exited
+*  and all data in pipe has been read : */
+static void
+duForkOver (void)
+{
+/*  cursor_reset (GTK_WIDGET (smb_nav));*/
+  fork_obj = 0;
+ /* fprintf(stderr,"forkover\n");*/
+}
+
+/* function executed by child after all pipes
+*  timeouts and inputs have been set up */
+static void
+duFork (void)
+{
+/*  fprintf(stderr,"childfork: du -s %s\n",path);*/
+  fflush (NULL);
+  execlp ("du", "du", "-s","-b", path,(char *) 0);
+  fprintf (stderr,"error: du\n");
+  _exit (127);
+}
+
+
 void 
 cb_du (GtkWidget * item, GtkCTree * ctree)
 {
-	static char path[PATH_MAX + 1];
-	dlg_new(_("This option is not enabled yet..."),NULL,NULL,DLG_CANCEL);
-//	dlg_new(_("Querying disk usage..."),NULL,NULL,DLG_CANCEL);
+  GtkCTreeNode *node;
+  entry *en;
 
+  first=TRUE;
+  
 	/* here a fork (tubo) to du, capturing output to the window,
 	*  above cancel button will close the window and kill the
 	*  du if still running. */ 
+    node = GTK_CLIST (ctree)->selection->data;
+    en = gtk_ctree_node_get_row_data (ctree, node);
+    
+    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
+    {
+      /* we do not process ".." */
+      gtk_ctree_unselect (ctree, node);
+      return;
+    }
+    /* could use a non-blocking dialog window with cancel option.
+     * to terminate the fork operation here. Easy to put in if necesary */
+
+  memcpy(path,en->path,strlen(en->path)+1);
+
+  fork_obj = Tubo (duFork, duForkOver, TRUE, duStdout, NULL);
+  return;
 }
 

@@ -1387,6 +1387,9 @@ free_list (GList * list)
   g_list_free (list);
 }
 
+/* at xtree_du.c: */
+void cb_du (GtkWidget * item, GtkCTree * ctree);
+
 /*
  */
 void
@@ -2697,6 +2700,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,
      GDK_MOD1_MASK},
     {N_("Delete ..."), (gpointer) cb_delete, 0, GDK_x,
+     GDK_CONTROL_MASK},
+    {N_("Show disk usage..."), (gpointer) cb_du, 0, GDK_u,
      GDK_CONTROL_MASK},
     {NULL, NULL, 0},
     {N_("Go to ..."), (gpointer) cb_go_to, 0},
