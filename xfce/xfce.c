@@ -84,9 +84,8 @@ enum
 };
 
 static GtkTargetEntry select_target_table[] = {
-  {"STRING", 0, TARGET_STRING},
-  {"text/plain", 0, TARGET_STRING},
   {"text/uri-list", 0, TARGET_URL},
+  {"STRING", 0, TARGET_STRING}
 };
 
 static guint n_select_targets = sizeof (select_target_table) / sizeof (select_target_table[0]);

@@ -102,7 +102,6 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   {
   case TARGET_XTREE_WIDGET:
   case TARGET_XTREE_WINDOW:
-  case TARGET_PLAIN:
   case TARGET_STRING:
   case TARGET_URI_LIST:
     if (action == GDK_ACTION_MOVE)
