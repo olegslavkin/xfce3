@@ -1597,11 +1597,12 @@ DrawSelectedEntry_xfce (Window win, XRectangle *area, int x, int y, int w, int h
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
 #ifndef OLD_STYLE
+  XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
   RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuSelShadowGC,  Scr.MenuSelReliefGC);
   RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.BlackGC, Scr.MenuSelShadowGC);
 #else
+  XFillRectangle (dpy, win, Scr.ScratchGC1, x + 1, y + 1, w - 2, h - 2);
   RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuSelShadowGC, Scr.MenuSelReliefGC);
 #endif
 
