@@ -338,7 +338,7 @@ open_modify (GtkWidget * modify, gint menu, gint item)
     gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), "");
     gtk_entry_set_text (GTK_ENTRY (modify_displayed_entry), "");
     gtk_adjustment_clamp_page (GTK_ADJUSTMENT (modify_pos_adj), 1, get_popup_menu_entries(menu) + 1);
-    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), get_popup_menu_entries(menu) + 1);
+    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), 1);
     my_set_adjustment_bounds (GTK_ADJUSTMENT (modify_pos_adj), 1.0, (gfloat) (get_popup_menu_entries(menu) + 1));
     pixmap = MyCreateGdkPixmapFromData (empty, modify_preview_frame, &mask, TRUE);
     gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);

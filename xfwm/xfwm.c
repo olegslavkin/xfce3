@@ -1291,8 +1291,8 @@ CreateCursors (void)
   Scr.XfwmCursors[MOVE] = XCreateFontCursor (dpy, XC_fleur);
   Scr.XfwmCursors[MENU] = XCreateFontCursor (dpy, MENU_CURS);
   Scr.XfwmCursors[WAIT] = XCreateFontCursor (dpy, XC_watch);
-  Scr.XfwmCursors[SELECT] = XCreateFontCursor (dpy, XC_plus);
-  Scr.XfwmCursors[DESTROY] = XCreateFontCursor (dpy, XC_plus);
+  Scr.XfwmCursors[SELECT] = XCreateFontCursor (dpy, XC_center_ptr);
+  Scr.XfwmCursors[DESTROY] = XCreateFontCursor (dpy, XC_center_ptr);
   Scr.XfwmCursors[LEFT] = XCreateFontCursor (dpy, XC_left_side);
   Scr.XfwmCursors[RIGHT] = XCreateFontCursor (dpy, XC_right_side);
   Scr.XfwmCursors[TOP] = XCreateFontCursor (dpy, XC_top_side);
