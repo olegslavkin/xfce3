@@ -7,5 +7,7 @@ content, sub-folders and their content.
 6.- MC style opening of packed files: Click on files and you see the internal
 structure as if it wasn't packed. Makes it very easy to copy and move content
 from these files straight to where you want it.
+7- Add code necesary to d+d files to/from xfsamba.
+
 
 And yes. XFtree is a marvel. Fast, always there, and always in use.
