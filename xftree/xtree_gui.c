@@ -91,6 +91,7 @@
 #include "icons/xftree_icon.xpm"
 
 #include "xtree_mess.h"
+#include "xtree_pasteboard.h"
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -2587,6 +2588,39 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 
+  menuitem = gtk_menu_item_new_with_label (_("Copy to pasteboard"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_copy), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_c,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+
+  menuitem = gtk_menu_item_new_with_label (_("Insert from pasteboard"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_paste), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_i,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+
+  menuitem = gtk_menu_item_new_with_label (_("List pasteboard contents"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_paste_show), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_l,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  
+  menuitem = gtk_menu_item_new_with_label (_("Clear pasteboard"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_clean_pasteboard), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_k,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+
+
+  menuitem = gtk_menu_item_new ();
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
   menuitem = gtk_menu_item_new_with_label (_("Select all"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2764,10 +2798,17 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
-    
+
+#define COMMON_HELP_0 \
+    {N_("Copy to pasteboard"), (gpointer) cb_copy, 0, GDK_c,GDK_CONTROL_MASK},\
+    {N_("Insert from pasteboard"), (gpointer) cb_paste, 0, GDK_i,GDK_CONTROL_MASK},\
+    {N_("List pasteboard contents"), (gpointer) cb_paste_show, 0, GDK_l,GDK_CONTROL_MASK},\
+    {N_("Clear pasteboard"), (gpointer) cb_clean_pasteboard, 0, GDK_k,GDK_CONTROL_MASK},\
+    {NULL, NULL, 0}
+      
 #define COMMON_HELP_1 \
     {N_("Go to marked"), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK}    
-    
+   
 #define COMMON_HELP_2 \
      {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
      {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},\
@@ -2848,6 +2889,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 #define LAST_NONE_MENU_ENTRY (sizeof(none_mlist)/sizeof(menu_entry))
   menu_entry help_mlist[] = {
     COMMON_MENU_1,
+    COMMON_HELP_0,
     COMMON_MENU_NEW,
     {NULL, NULL, 0},
     COMMON_HELP_2,
