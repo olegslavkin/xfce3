@@ -1068,6 +1068,11 @@ HandleUnmapNotify ()
     XUnmapWindow (dpy, Event.xunmap.window);
   }
 
+  if(Tmp_win ==  Scr.Hilite)
+  {
+    Scr.Hilite = NULL;
+  }
+
   if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
   {
 #ifdef DEBUG

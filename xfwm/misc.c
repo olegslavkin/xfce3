@@ -294,16 +294,15 @@ RevertFocus (XfwmWindow * Tmp_win)
   }
 
   t = Tmp_win->prev;
-  while ((t != &Scr.XfwmRoot) && (!AcceptInput(t) || (t->flags & ICONIFIED) || (Tmp_win->Desk != t->Desk)))
+  while ((t) && (t != &Scr.XfwmRoot) && (!AcceptInput(t) || (t->flags & ICONIFIED) || (Tmp_win->Desk != t->Desk)))
   {
     t = t->prev;
   }
-  if (t != &Scr.XfwmRoot)
+  if ((t) && (t != &Scr.XfwmRoot))
   {
     SetFocus (t->w, t, True, False);
     return;
   }
-  XBell (dpy, 0);
   SetFocus (Scr.NoFocusWin, NULL, False, False);
 }
 /***************************************************************************
