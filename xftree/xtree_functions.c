@@ -660,6 +660,7 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 
   en = gtk_ctree_node_get_row_data (ctree, node);
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
   
   if (en->type & (FT_TAR|FT_TARCHILD|FT_RPM|FT_RPMCHILD)) {	 
@@ -684,10 +685,14 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
       return;
   }
 
-  if (!(en->type & FT_HAS_DUMMY)) return;
+  if (!(en->type & FT_HAS_DUMMY)) {
+       if (win->preferences & STATUS_FOLLOWS_EXPAND)
+            set_title_ctree((GtkWidget *)ctree,en->path);
+       update_status(node,ctree);
+       return;
+  }
   en->type ^= FT_HAS_DUMMY;
   
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   ctree_freeze (ctree);
   child = GTK_CTREE_ROW (node)->children;
   while (child)
@@ -701,8 +706,6 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   reset_icon(ctree, node);
   ctree_thaw (ctree);
   if (win->preferences & STATUS_FOLLOWS_EXPAND){
-   cfg *win;
-   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
    set_title_ctree((GtkWidget *)ctree,en->path);
   }
 }
