@@ -2486,7 +2486,19 @@ DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l
 {
   int m, i;
   XSegment seg[10];
+  GC MenuReliefGC = NULL;
+  GC MenuShadowGC = NULL;
 
+  if (state)
+  {
+    MenuReliefGC = Scr.MenuSelReliefGC;
+    MenuShadowGC = Scr.MenuSelShadowGC;
+  }
+  else
+  {
+    MenuReliefGC = Scr.MenuReliefGC;
+    MenuShadowGC = Scr.MenuShadowGC;
+  }
   m = (t + b) >> 1;
 
   i = 0;
@@ -2502,7 +2514,7 @@ DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l
   seg[i].y1 = b - 1;
   seg[i].x2 = r - 1;
   seg[i++].y2 = m;
-  XDrawSegments (dpy, w, Scr.MenuShadowGC, seg, i);
+  XDrawSegments (dpy, w, MenuShadowGC, seg, i);
   i = 0;
   seg[i].x1 = l;
   seg[i].y1 = b;
@@ -2516,7 +2528,7 @@ DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l
   seg[i].y1 = t + 1;
   seg[i].x2 = r - 1;
   seg[i++].y2 = m;
-  XDrawSegments (dpy, w, Scr.MenuReliefGC, seg, i);
+  XDrawSegments (dpy, w, MenuReliefGC, seg, i);
 }
 
 void

@@ -146,7 +146,7 @@ load_icon_str (char *str)
 char *
 save_icon_str (void)
 {
-  static char str[NBSELECTS * 4 + 1];
+  static char str[(NBSELECTS + 2) * 3 + 1];
   char *temp;
   int i;
 
