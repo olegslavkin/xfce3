@@ -827,7 +827,7 @@ SetRCDefaults ()
   char *defaults[] = {
     "XORValue 0",
     "ModulePath $PATH",
-    "ActiveColor white #C7C1C0",
+    "ActiveColor white #067CA6",
     "InactiveColor black #C7C1C0",
     "TitleStyle Active Solid #067CA6",
     "TitleStyle Inactive Solid #9EA2AA",
