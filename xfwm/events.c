@@ -259,7 +259,7 @@ DispatchEvent ()
 #ifdef REQUIRES_STASHEVENT
   StashEventTime (&Event);
 #endif
-  if (XFindContext (dpy, w, XfwmContext, (caddr_t *) & Tmp_win) == XCNOENT)
+  if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
     Tmp_win = NULL;
   last_event_type = Event.type;
   last_event_window = w;
@@ -392,7 +392,7 @@ HandleFocusIn ()
   {
     return;
   }
-  if (XFindContext (dpy, w, XfwmContext, (caddr_t *) & Tmp_win) == XCNOENT)
+  if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
   {
     Tmp_win = NULL;
   }
@@ -808,7 +808,7 @@ HandleMapRequest ()
   MyXGrabServer (dpy);
   Event.xany.window = Event.xmaprequest.window;
 
-  if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) & Tmp_win) == XCNOENT)
+  if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
   {
     Tmp_win = NULL;
   }
@@ -1001,9 +1001,12 @@ HandleUnmapNotify ()
   weMustUnmap = 0;
   if (!Tmp_win)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleUnmapNotify (): Tmp_win undefined. Trying to find out from context\n");
+#endif
     Event.xany.window = Event.xunmap.window;
     weMustUnmap = 1;
-    if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) & Tmp_win) == XCNOENT)
+    if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
     {
       Tmp_win = NULL;
     }
@@ -1388,7 +1391,7 @@ HandleConfigureRequest ()
 #endif
   Event.xany.window = cre->window;	/* mash parent field */
 
-  if (XFindContext (dpy, cre->window, XfwmContext, (caddr_t *) & Tmp_win) == XCNOENT)
+  if (XFindContext (dpy, cre->window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
     Tmp_win = NULL;
 
   if (!Tmp_win || (Tmp_win->icon_w == cre->window))

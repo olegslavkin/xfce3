@@ -169,15 +169,6 @@ do_menu (MenuRoot * menu, int style)
   {
     UngrabEm ();
     WaitForButtonsUp ();
-    XSync (dpy, 0);
-#ifdef REQUIRES_STASHEVENT
-    while (XCheckTypedEvent (dpy, EnterNotify, &Event))
-    {
-      StashEventTime (&Event);
-    }
-#else
-    while (XCheckTypedEvent (dpy, EnterNotify, &Event));
-#endif
   }
 #ifdef REQUIRES_STASHEVENT
   if (((lastTimestamp - t0) < 3 * Scr.ClickTime) && (mouse_moved == 0))
@@ -440,7 +431,6 @@ UpdateMenu (int sticks)
       if (ActiveItem)
       {
 	done = 1;
-        XSync (dpy, 0);
 	ExecuteFunction (ActiveItem->action, ButtonWindow, &Event, Context, -1);
       }
       ActiveItem = NULL;
@@ -566,6 +556,8 @@ Bool PopUpMenu (MenuRoot * menu, int x, int y)
 void
 PopDownMenu ()
 {
+  XEvent JunkEvent;
+
   if (ActiveMenu == NULL)
     return;
 
@@ -575,6 +567,15 @@ PopDownMenu ()
     ActiveItem->state = 0;
 
   XUnmapWindow (dpy, ActiveMenu->w);
+  XSync (dpy, 0);
+#ifdef REQUIRES_STASHEVENT
+  while (XCheckMaskEvent (dpy, EnterWindowMask | LeaveWindowMask, &JunkEvent))
+  {
+    StashEventTime (&JunkEvent);
+  }
+#else
+  while (XCheckMaskEvent (dpy, EnterWindowMask | LeaveWindowMask, &JunkEvent))
+#endif
 
   UninstallRootColormap ();
   if (!menu_on)
@@ -612,6 +613,7 @@ WaitForButtonsUp ()
     if ((mask & (Button1Mask | Button2Mask | Button3Mask | Button4Mask | Button5Mask)) == 0)
       AllUp = True;
   }
+  XSync (dpy, 0);
   while (XCheckMaskEvent (dpy, ButtonPressMask | ButtonReleaseMask | ButtonMotionMask, &JunkEvent))
   {
 #ifdef REQUIRES_STASHEVENT
@@ -619,7 +621,6 @@ WaitForButtonsUp ()
 #endif
     XAllowEvents (dpy, ReplayPointer, CurrentTime);
   }
-
 }
 
 void
@@ -829,8 +830,10 @@ MakeMenu (MenuRoot * mr)
   attributes.cursor = Scr.XfwmCursors[MENU];
   attributes.save_under = TRUE;
   if (mr->w != None)
+  {
     XDestroyWindow (dpy, mr->w);
-
+    XDeleteContext (dpy, mr->w, MenuContext);
+  }
   mr->width = mr->width + mr->width2;
   mr->w = XCreateWindow (dpy, Scr.Root, 0, 0, (unsigned int) (mr->width), (unsigned int) mr->height, (unsigned int) 0, CopyFromParent, (unsigned int) InputOutput, (Visual *) CopyFromParent, valuemask, &attributes);
   XSaveContext (dpy, mr->w, MenuContext, (caddr_t) mr);

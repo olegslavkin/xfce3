@@ -894,7 +894,6 @@ SetRCDefaults ()
     "AddToMenu \"__Maximize_menu__\" \"" N_("&Horizontal") "\" Maximize 100   0",
 
     "AddToFunc WindowListFunc \"I\" WindowId $0 Iconify -1",
-    "+ \"I\" WindowId $0 WarpToWindow 50 50",
     "+ \"I\" WindowId $0 Raise",
     "+ \"I\" WindowId $0 Focus",
 
