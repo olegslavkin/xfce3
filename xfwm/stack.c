@@ -230,7 +230,7 @@ LowerIcons (void)
     {
       if ((!((t->win)->flags & ICONIFIED) || ((t->win)->flags & (SUPPRESSICON | ICON_UNMAPPED))) && ((t->win)->layer == j))
       {
-        Scr.LastWindowRaised  = t;
+        Scr.LastWindowRaised  = t->win;
 	wins[i++] = (t->win)->frame;
 	newstack = AddToXfwmWindowList (newstack, t->win);
       }
@@ -243,7 +243,7 @@ LowerIcons (void)
 	newstack = AddToXfwmWindowList (newstack, t->win);
 	wins[i++] = (t->win)->icon_w;
         if (!Scr.LastWindowLowered)
-	  Scr.LastWindowLowered = t;
+	  Scr.LastWindowLowered = t->win;
 	if ((t->win)->icon_pixmap_w)
 	  wins[i++] = (t->win)->icon_pixmap_w;
       }
