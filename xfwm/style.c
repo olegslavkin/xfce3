@@ -111,9 +111,9 @@ ProcessNewStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 	restofline += 11;
 	off_flags |= BW_FLAG;
 	sscanf (restofline, "%d", &bw);
-	/* Avoid border width = 1 or 2, use 0 or > 2 */
-	if ((bw > 0) && (bw < 3))
-	  bw = 3;
+	/* Avoid border width = 1, 2 or 3, use 0 or > 3 */
+	if ((bw > 0) && (bw < 4))
+	  bw = 4;
 	while (isspace (*restofline))
 	  restofline++;
 	while ((!isspace (*restofline)) && (*restofline != 0) && (*restofline != ',') && (*restofline != '\n'))
