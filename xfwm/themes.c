@@ -1216,57 +1216,6 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, int x, int y, int w, int h, GC R
       break;
 
     }
-    return;
-  }
-
-  if (!edge)
-  {
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x;
-    seg[i++].y2 = h + y - 1;
-
-    XDrawSegments (dpy, win, ReliefGC, seg, i);
-
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y + h - 1;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y + h - 1;
-
-    seg[i].x1 = x + w - 1;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x + w - 1;
-    seg[i++].y2 = y + h - 1;
-
-    XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-    i = 0;
-
-    seg[i].x1 = x + 2;
-    seg[i].y1 = y + h - 2;
-
-    seg[i].x2 = w + x - 2;
-    seg[i++].y2 = y + h - 2;
-
-    seg[i].x1 = x + w - 2;
-    seg[i].y1 = y + 2;
-
-    seg[i].x2 = x + w - 2;
-    seg[i++].y2 = y + h - 2;
-
-    XDrawSegments (dpy, win, ShadowGC, seg, i);
   }
 }
 
@@ -1836,59 +1785,7 @@ RelieveWindow_mofit (XfwmWindow * t, Window win, int x, int y, int w, int h, GC 
       seg[i++].y2 = h + y - 2;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
-
     }
-    return;
-  }
-
-  if (!edge)
-  {
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x;
-    seg[i++].y2 = h + y - 1;
-
-    XDrawSegments (dpy, win, ReliefGC, seg, i);
-
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y + h - 1;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y + h - 1;
-
-    seg[i].x1 = x + w - 1;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x + w - 1;
-    seg[i++].y2 = y + h - 1;
-
-    XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-    i = 0;
-
-    seg[i].x1 = x + 2;
-    seg[i].y1 = y + h - 2;
-
-    seg[i].x2 = w + x - 2;
-    seg[i++].y2 = y + h - 2;
-
-    seg[i].x1 = x + w - 2;
-    seg[i].y1 = y + 2;
-
-    seg[i].x2 = x + w - 2;
-    seg[i++].y2 = y + h - 2;
-
-    XDrawSegments (dpy, win, ShadowGC, seg, i);
   }
 }
 
@@ -2514,59 +2411,7 @@ RelieveWindow_trench (XfwmWindow * t, Window win, int x, int y, int w, int h, GC
       seg[i++].y2 = h + y - 2;
       XDrawSegments (dpy, win, LoGC2, seg, i);
       break;
-
     }
-    return;
-  }
-
-  if (!edge)
-  {
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x;
-    seg[i++].y2 = h + y - 1;
-
-    XDrawSegments (dpy, win, HiGC2, seg, i);
-
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y + h - 1;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y + h - 1;
-
-    seg[i].x1 = x + w - 1;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x + w - 1;
-    seg[i++].y2 = y + h - 1;
-
-    XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-    i = 0;
-
-    seg[i].x1 = x + 2;
-    seg[i].y1 = y + h - 2;
-
-    seg[i].x2 = w + x - 2;
-    seg[i++].y2 = y + h - 2;
-
-    seg[i].x1 = x + w - 2;
-    seg[i].y1 = y + 2;
-
-    seg[i].x2 = x + w - 2;
-    seg[i++].y2 = y + h - 2;
-
-    XDrawSegments (dpy, win, LoGC2, seg, i);
   }
 }
 
@@ -3007,7 +2852,6 @@ RelieveWindow_gtk (XfwmWindow * t, Window win, int x, int y, int w, int h, GC Re
       seg[i++].y2 = h + y - 2;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
-
     }
     return;
   }
@@ -3154,59 +2998,7 @@ RelieveWindow_gtk (XfwmWindow * t, Window win, int x, int y, int w, int h, GC Re
       seg[i++].y2 = h + y - 2;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
-
     }
-    return;
-  }
-
-  if (!edge)
-  {
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x;
-    seg[i++].y2 = h + y - 1;
-
-    XDrawSegments (dpy, win, ReliefGC, seg, i);
-
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y + h - 1;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y + h - 1;
-
-    seg[i].x1 = x + w - 1;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x + w - 1;
-    seg[i++].y2 = y + h - 1;
-
-    XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-    i = 0;
-
-    seg[i].x1 = x + 2;
-    seg[i].y1 = y + h - 2;
-
-    seg[i].x2 = w + x - 2;
-    seg[i++].y2 = y + h - 2;
-
-    seg[i].x1 = x + w - 2;
-    seg[i].y1 = y + 2;
-
-    seg[i].x2 = x + w - 2;
-    seg[i++].y2 = y + h - 2;
-
-    XDrawSegments (dpy, win, ShadowGC, seg, i);
   }
 }
 
@@ -3874,59 +3666,7 @@ RelieveWindow_linea (XfwmWindow * t, Window win, int x, int y, int w, int h, GC 
       seg[i++].y2 = h + y - 3;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
-
     }
-    return;
-  }
-
-  if (!edge)
-  {
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x;
-    seg[i++].y2 = h + y - 1;
-
-    XDrawSegments (dpy, win, ReliefGC, seg, i);
-
-    i = 0;
-
-    seg[i].x1 = x;
-    seg[i].y1 = y + h - 1;
-
-    seg[i].x2 = w + x - 1;
-    seg[i++].y2 = y + h - 1;
-
-    seg[i].x1 = x + w - 1;
-    seg[i].y1 = y;
-
-    seg[i].x2 = x + w - 1;
-    seg[i++].y2 = y + h - 1;
-
-    XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-    i = 0;
-
-    seg[i].x1 = x + 2;
-    seg[i].y1 = y + h - 2;
-
-    seg[i].x2 = w + x - 2;
-    seg[i++].y2 = y + h - 2;
-
-    seg[i].x1 = x + w - 2;
-    seg[i].y1 = y + 2;
-
-    seg[i].x2 = x + w - 2;
-    seg[i++].y2 = y + h - 2;
-
-    XDrawSegments (dpy, win, ShadowGC, seg, i);
   }
 }
 

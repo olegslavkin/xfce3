@@ -824,6 +824,7 @@ HandleExpose ()
 
   if (Tmp_win)
   {
+#if 0
     XRectangle rect;
 
     /* Retrieve clipping from event */
@@ -831,7 +832,7 @@ HandleExpose ()
     rect.y      = Event.xexpose.y;
     rect.width  = Event.xexpose.width;
     rect.height = Event.xexpose.height;
-
+#endif    
     if ((Event.xany.window == Tmp_win->title_w))
     {
       SetTitleBar (Tmp_win, (Scr.Hilite == Tmp_win));
