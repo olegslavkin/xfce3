@@ -94,6 +94,8 @@ void
 GetWMName (XfwmWindow * t)
 {
   XTextProperty text_prop;
+  char *cp;
+
   if (XGetWMName (dpy, t->w, &text_prop) != 0)
   {
     if (text_prop.format == 8)
@@ -127,12 +129,18 @@ GetWMName (XfwmWindow * t)
     t->name = (char *) safemalloc (strlen (NoName) + 1);
     strcpy (t->name, NoName);
   }
+  for (cp = t->name; *cp; cp++)
+  {
+    if (*cp < ' ') *cp = ' ';
+  }
 }
 
 void
 GetWMIconName (XfwmWindow * t)
 {
   XTextProperty text_prop;
+  char *cp;
+  
   if (XGetWMIconName (dpy, t->w, &text_prop) != 0)
   {
     if (text_prop.format == 8)
@@ -173,6 +181,10 @@ GetWMIconName (XfwmWindow * t)
       t->name = (char *) safemalloc (strlen (NoName) + 1);
       strcpy (t->name, NoName);
     }
+  }
+  for (cp = t->name; *cp; cp++)
+  {
+    if (*cp < ' ') *cp = ' ';
   }
 }
 
