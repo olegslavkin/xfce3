@@ -461,7 +461,11 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
 		   (long long)status_inf.howmany,
 		   _("files"),tama,tag);
   }
+#ifdef STATUS_LABEL   
    gtk_label_set_text ((GtkLabel *)win->status,texto);
+#else
+   gtk_entry_set_text ((GtkEntry *)win->status,texto);
+#endif  
 
    /*fprintf(stderr,"dbg:%s\n",texto);*/
    free(texto);

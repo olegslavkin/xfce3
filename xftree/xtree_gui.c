@@ -161,7 +161,7 @@ autotype_t autotype[]= {
     {N_("Delete ..."), (gpointer) cb_delete, 0}
     
 #define INSERT_MENU \
-    {N_("Insert"), (gpointer) cb_paste, 0, GDK_i,GDK_CONTROL_MASK}
+    {N_("Paste"), (gpointer) cb_paste, 0, GDK_i,GDK_CONTROL_MASK}
     
 #define DIRECTORY_MENU \
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
@@ -1078,8 +1078,15 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_box_pack_start (GTK_BOX (vbox),widget, FALSE, FALSE, 0);
   gtk_widget_show (widget);
   
+#ifdef STATUS_LABEL
   win->status = gtk_label_new("");
   gtk_box_pack_start (GTK_BOX (widget), win->status, FALSE, FALSE, 0);
+#else
+  win->status = gtk_entry_new();
+  gtk_entry_set_editable((GtkEntry *)win->status,FALSE);
+  gtk_entry_set_max_length ((GtkEntry *)win->status,256);
+  gtk_box_pack_start (GTK_BOX (widget), win->status, TRUE, TRUE, 0);
+#endif  
   gtk_widget_show (win->status); 
   
   ctree = gtk_ctree_new_with_titles (COLUMNS, 0, titles);

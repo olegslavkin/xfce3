@@ -1,3 +1,13 @@
+> 2) One thing I quite like about Nautilus (though not enough to use it
+> day-to-day) is the use of file manager scripts.  Since it looks like a
+> lot of this functionality is now being built right into XFTree, I was
+> wondering if perhaps just having these scripts would be a more flexible
+> way to do it?  In fact, it'd be great if XFtree was able to make use of
+> the Nautilus scripts directly.  (I like the scp_to_host one, and there
+> are plenty of other useful things there too.)
+
+- tar extraction should open dialog defaulting to current directory so the
+  autotype function can be directed.
 - incorporate hostnames for dnd so rcp works with rox. Add the rsync option
   with choice for rsh, ssh ssh2.
 - incorporate root level entries for roxy pinboards
