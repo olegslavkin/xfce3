@@ -57,6 +57,7 @@ void ClearArea (Window, XRectangle *);
 void RelieveRoundedRectangle (Window, XRectangle *, int, int, int, int, GC, GC);
 void DrawLinePattern (Window, XRectangle *, GC, GC, struct vector_coords *, int, int);
 void RelieveRectangle (Window, XRectangle *, int, int, int, int, GC, GC);
+void RelieveRectangleGtk (Window, XRectangle *, int, int, int, int, GC, GC);
 void DrawUnderline (Window, XRectangle *, GC, int, int, char *, int);
 void DrawSeparator (Window, XRectangle *, GC, GC, int, int, int, int, int);
 void DrawIconPixmap(XfwmWindow *, XRectangle *, GC, int, int);

@@ -141,6 +141,28 @@ RelieveRectangle (Window win, XRectangle *area, int x, int y, int w, int h, GC H
   XDrawLine (dpy, win, Hilite, x, y, w + x - 1, y);
   XDrawLine (dpy, win, Hilite, x, y, x, h + y - 1);
 
+  XDrawLine (dpy, win, Shadow, x + 1, h + y - 1, w + x - 1, h + y - 1);
+  XDrawLine (dpy, win, Shadow, w + x - 1, y + 1, w + x - 1, h + y - 1);
+
+  if (area)
+  {
+    XSetClipMask(dpy, Hilite, None);
+    XSetClipMask(dpy, Shadow, None);
+  }
+}
+
+void
+RelieveRectangleGtk (Window win, XRectangle *area, int x, int y, int w, int h, GC Hilite, GC Shadow)
+{
+  if (area)
+  {
+    XSetClipRectangles(dpy, Hilite, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Shadow, 0, 0, area, 1, Unsorted);
+  }
+
+  XDrawLine (dpy, win, Hilite, x, y, w + x - 1, y);
+  XDrawLine (dpy, win, Hilite, x, y, x, h + y - 1);
+
   XDrawLine (dpy, win, Shadow, x, h + y - 1, w + x - 1, h + y - 1);
   XDrawLine (dpy, win, Shadow, w + x - 1, y, w + x - 1, h + y - 1);
 
@@ -3095,7 +3117,7 @@ DrawButton_gtk (XfwmWindow * t, Window win, XRectangle *area, int w, int h, Butt
   }
   else
   {
-    RelieveRectangle (win, NULL, 0, 0, w, h, HiGC, Scr.BlackGC);
+    RelieveRectangleGtk (win, NULL, 0, 0, w, h, HiGC, Scr.BlackGC);
     XDrawLine (dpy, win, LoGC, 2, h - 2, w - 3, h - 2);
     XDrawLine (dpy, win, LoGC, w - 2, 2, w - 2, h - 2);
   }
@@ -3570,7 +3592,7 @@ DrawSelectedEntry_gtk (Window win, XRectangle *area, int x, int y, int w, int h,
   }
 
   XFillRectangle (dpy, win, Scr.ScratchGC1, x, y, w, h);
-  RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuSelReliefGC, Scr.BlackGC);
+  RelieveRectangleGtk (win, NULL, x, y, w, h, Scr.MenuSelReliefGC, Scr.BlackGC);
   XDrawLine (dpy, win, Scr.MenuSelShadowGC, x + 2, y + h - 2, x + w - 3, y + h - 2);
   XDrawLine (dpy, win, Scr.MenuSelShadowGC, x + w - 2, y + 2, x + w - 2, y + h - 2);
 
@@ -3632,7 +3654,7 @@ RelieveIconTitle_gtk (Window win, XRectangle *area, int w, int h, GC ReliefGC, G
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  RelieveRectangle (win, NULL, 0, 0, w, h, ReliefGC, Scr.BlackGC);
+  RelieveRectangleGtk (win, NULL, 0, 0, w, h, ReliefGC, Scr.BlackGC);
   XDrawLine (dpy, win, ShadowGC, 2, h - 2, w - 3, h - 2);
   XDrawLine (dpy, win, ShadowGC, w - 2, 2, w - 2, h - 2);
 
@@ -3654,7 +3676,7 @@ RelieveIconPixmap_gtk (Window win, XRectangle *area, int w, int h, GC ReliefGC, 
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  RelieveRectangle (win, NULL, 0, 0, w, h, ReliefGC, Scr.BlackGC);
+  RelieveRectangleGtk (win, NULL, 0, 0, w, h, ReliefGC, Scr.BlackGC);
   XDrawLine (dpy, win, ShadowGC, 2, h - 2, w - 3, h - 2);
   XDrawLine (dpy, win, ShadowGC, w - 2, 2, w - 2, h - 2);
 
