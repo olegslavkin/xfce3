@@ -828,7 +828,15 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
     fprintf (f, "  text[NORMAL]      = \"#000000\"\n");
     fprintf (f, "  text[INSENSITIVE] = \"#000000\"\n");
   }
-  fprintf (f, "  fg[INSENSITIVE]   = \"#000000\"\n");
+  /* Init temp colors */
+  red   = (unsigned short) p->r[normal];
+  green = (unsigned short) p->g[normal];
+  blue  = (unsigned short) p->b[normal];
+
+  /* Compute shadow color */
+  color_shade (&red, &green, &blue, .5);
+
+  fprintf (f, "  fg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (unsigned short) red, (unsigned short) green, (unsigned short) blue);
 
   if (c2_howbright < fadeblack)
   {
