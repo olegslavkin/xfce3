@@ -879,9 +879,6 @@ HandleMapRequest ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleMapRequest ()\n");
 #endif
-  /* From now, until the window gets mapped, we wanna be alone */
-  XSync (dpy, 0);
-  MyXGrabServer (dpy);
   Event.xany.window = Event.xmaprequest.window;
 
   if (Event.xany.window == None)
@@ -889,7 +886,6 @@ HandleMapRequest ()
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleMapRequest () : Mapping 'None' window !\n");
 #endif
-    MyXUngrabServer (dpy);
     return;
   }
   if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
@@ -911,7 +907,6 @@ HandleMapRequest ()
 #ifdef DEBUG
       fprintf (stderr, "xfwm : Leaving HandleMapRequest ()\n");
 #endif
-      MyXUngrabServer (dpy);
       return;
     }
   }
@@ -948,6 +943,7 @@ HandleMapRequest ()
     case InactiveState:
     default:
       XSync (dpy, 0);
+      MyXGrabServer (dpy);
       if (Tmp_win->Desk == Scr.CurrentDesk)
       {
 	XMapWindow (dpy, Tmp_win->frame);
@@ -956,6 +952,8 @@ HandleMapRequest ()
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
       SetMapStateProp (Tmp_win, NormalState);
+      XSync (dpy, 0);
+      MyXUngrabServer (dpy);
       break;
     }
   }
@@ -963,8 +961,6 @@ HandleMapRequest ()
   {
     DeIconify (Tmp_win);
   }
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapRequest ()\n");
 #endif

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-10 21:56+0100\n"
+"POT-Creation-Date: 2001-12-11 21:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:258
+#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:279
 msgid "Question"
 msgstr ""
 
@@ -752,58 +752,58 @@ msgstr ""
 msgid "Workspace"
 msgstr ""
 
-#: xftree/gtk_dlg.c:263
+#: xftree/gtk_dlg.c:284
 msgid "Information"
 msgstr ""
 
-#: xftree/gtk_dlg.c:268
+#: xftree/gtk_dlg.c:289
 msgid "Error"
 msgstr ""
 
-#: xftree/gtk_dlg.c:273
+#: xftree/gtk_dlg.c:294
 msgid "Warning"
 msgstr ""
 
-#: xftree/gtk_dlg.c:277
+#: xftree/gtk_dlg.c:298
 msgid "Dialog"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:296
+#: xftree/gtk_dlg.c:317
 msgid "_Ok"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:301
+#: xftree/gtk_dlg.c:322
 msgid "_Yes"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:306
+#: xftree/gtk_dlg.c:327
 msgid "_Continue"
 msgstr ""
 
-#: xftree/gtk_dlg.c:325 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:346 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:336
+#: xftree/gtk_dlg.c:357
 msgid "_Cancel"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:341
+#: xftree/gtk_dlg.c:362
 msgid "_No"
 msgstr ""
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:353
+#: xftree/gtk_dlg.c:374
 msgid "_All"
 msgstr ""
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:363
+#: xftree/gtk_dlg.c:384
 msgid "_Close"
 msgstr ""
 

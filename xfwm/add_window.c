@@ -133,10 +133,16 @@ AddWindow (Window w)
     return NULL;
   }
 
+  /* Give some CPU to the application in case it wants to update its attributes */
+  sleep_a_little (20000);
+  /* And grab the server so the window doesn't go away while we're capturing it */
+  XSync (dpy, 0);
+  MyXGrabServer (dpy);
   if ((XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0) ||
       (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0))
   {
     free (tmp_win);
+    MyXUngrabServer (dpy);
     return NULL;
   }
 
@@ -468,6 +474,9 @@ AddWindow (Window w)
   tmp_win->frame_height = 0;
   SetupFrame (tmp_win, x, y, width, height, True, True);
 
+  XSync (dpy, 0);
+  MyXUngrabServer (dpy);
+  
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);
