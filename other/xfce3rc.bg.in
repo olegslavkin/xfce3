@@ -93,7 +93,7 @@
 	SMB Браузър...
 	XFCE_DIR/icons/xfsamba.xpm
 	xfsamba
-	Турсене на файл...
+	Търсене на файл...
 	XFCE_DIR/icons/MagnifyGlas.xpm
 	xfglob
 	Монтирай CD
@@ -115,7 +115,7 @@
 	Diff tool (xfdiff)
 	XFCE_DIR/icons/ForwardBackwardPagesBook.xpm
 	xfdiff
-	Увеличител
+	Лупа
 	XFCE_DIR/icons/MagnifyGlas.xpm
 	xmag
 	Debugger
@@ -124,7 +124,7 @@
 	GNU Emacs
 	XFCE_DIR/icons/Edit.xpm
 	emacs
-	Панел GNOME
+	Панел на GNOME
 	XFCE_DIR/icons/Gnome-panel.xpm
 	panel
 [Menu3]
@@ -141,10 +141,10 @@
 	XFPager
 	XFCE_DIR/icons/RayTracedGear.xpm
 	Module xfpager
-	Настройка на мишка
+	Настройка на мишката
 	XFCE_DIR/icons/Mouse.xpm
 	xfmouse -i
-	Настройка на звук
+	Настройка на звука
 	XFCE_DIR/icons/MicroPhonePro.xpm
 	xfsound -i
 	Декорация
@@ -152,7 +152,7 @@
 	xfbd -i
 	XFGnome
 	XFCE_DIR/icons/Gnome-logo.xpm
-	Модул xfgnome
+	Module xfgnome
 	Gfx. Configuration
 	XFCE_DIR/icons/BWwidgets.xpm
 	imlib_config
@@ -160,10 +160,10 @@
 	XFCE_DIR/icons/KeysOnChain.xpm
 	xscreensaver-demo
 [Menu5]
-	Netscape Browser
+	Netscape браузър
 	XFCE_DIR/icons/Netscape3.xpm
 	netscape
-	Netscape Мейл
+	Електронна поща
 	XFCE_DIR/icons/News.xpm
 	netscape -mail
 [Menu6]
@@ -178,7 +178,7 @@
 	XFCE_DIR/icons/Book.xpm
 	nedit
 [Menu8]
-	Боклук
+	Кошче за боклук
 	XFCE_DIR/icons/RecycleLogo.xpm
 	xftrash
 [Menu9]
