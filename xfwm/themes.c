@@ -2066,35 +2066,38 @@ DrawButton_trench (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC
     return;
 
   BackGC = ((Scr.Hilite == t) ? GetDecor (t, HiBackGC) : GetDecor (t, LoBackGC));
-  FrameGC = ((Scr.Hilite == t) ? Scr.BlackGC : GetDecor (t, LoBackGC));
+  FrameGC = Scr.BlackGC;
 
   flush_expose (win);
   switch (type)
   {
   case VectorButton:
     XFillRectangle (dpy, win, BackGC, 0, 0, w, h);
-    if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
+    if (Scr.Hilite == t)
     {
-      XSetClipOrigin (dpy, BackGC, (w - 16) / 2, (h - 16) / 2);
-      XCopyPlane (dpy, bf->bitmap_pressed, win, BackGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
-    }
-    else
-    {
-      XSetClipOrigin (dpy, BackGC, (w - 16) / 2, (h - 16) / 2);
-      XCopyPlane (dpy, bf->bitmap, win, BackGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
-    }
-    RelieveRectangle (win, 0, 0, w, h, ShadowGC, ReliefGC);
-    XDrawLine (dpy, win, FrameGC, 1, 1, w - 2, 1);
-    XDrawLine (dpy, win, FrameGC, w - 2, 1, w - 2, h - 2);
-    XDrawLine (dpy, win, FrameGC, w - 2, h - 2, 1, h - 2);
-    XDrawLine (dpy, win, FrameGC, 1, h - 2, 1, 1);
+      if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
+      {
+	XSetClipOrigin (dpy, BackGC, (w - 16) / 2, (h - 16) / 2);
+	XCopyPlane (dpy, bf->bitmap_pressed, win, BackGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      }
+      else
+      {
+	XSetClipOrigin (dpy, BackGC, (w - 16) / 2, (h - 16) / 2);
+	XCopyPlane (dpy, bf->bitmap, win, BackGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      }
+      RelieveRectangle (win, 0, 0, w, h, ShadowGC, ReliefGC);
+      XDrawLine (dpy, win, FrameGC, 1, 1, w - 2, 1);
+      XDrawLine (dpy, win, FrameGC, w - 2, 1, w - 2, h - 2);
+      XDrawLine (dpy, win, FrameGC, w - 2, h - 2, 1, h - 2);
+      XDrawLine (dpy, win, FrameGC, 1, h - 2, 1, 1);
 
-    if (inverted)
-      RelieveRectangle (win, 2, 2, w - 4, h - 4, ShadowGC, ReliefGC);
-    else
-      RelieveRectangle (win, 2, 2, w - 4, h - 4, ReliefGC, ShadowGC);
+      if (inverted)
+	RelieveRectangle (win, 2, 2, w - 4, h - 4, ShadowGC, ReliefGC);
+      else
+	RelieveRectangle (win, 2, 2, w - 4, h - 4, ReliefGC, ShadowGC);
+    }
     break;
-
+   
   default:
     {
       DrawStripes_trench (t, win, 0, 0, w, h, (Scr.Hilite == t));
