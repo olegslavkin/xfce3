@@ -680,7 +680,7 @@ draw_box (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkShad
       orientation = GTK_ORIENTATION_HORIZONTAL;
     xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
   }
-#if 1
+#ifdef OLD_STYLE
   if ((detail) && (!strcmp ("menuitem", detail)) && (state_type == GTK_STATE_PRELIGHT))
     gtk_paint_shadow (style, window, state_type, GTK_SHADOW_IN, area, widget, detail, x, y, width, height);
   else

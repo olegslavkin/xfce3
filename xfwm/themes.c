@@ -1601,9 +1601,15 @@ DrawSelectedEntry_xfce (Window win, XRectangle *area, int x, int y, int w, int h
   }
 
 #ifndef OLD_STYLE
+#if 0
   XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
   RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuSelShadowGC,  Scr.MenuSelReliefGC);
   RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.BlackGC, Scr.MenuSelShadowGC);
+#else
+  XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
+  RelieveRectangle (win, NULL, x, y, w, h, Scr.BlackGC,  Scr.BlackGC);
+  RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
+#endif
 #else
   XFillRectangle (dpy, win, Scr.ScratchGC1, x + 1, y + 1, w - 2, h - 2);
   RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuSelShadowGC, Scr.MenuSelReliefGC);
@@ -4497,10 +4503,15 @@ DrawSelectedEntry_linea (Window win, XRectangle *area, int x, int y, int w, int 
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
+#if 0
   XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
   RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuShadowGC,  Scr.MenuReliefGC);
   RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.BlackGC, Scr.MenuShadowGC);
-
+#else
+  XFillRectangle (dpy, win, Scr.ScratchGC1, x + 2, y + 2, w - 4, h - 4);
+  RelieveRectangle (win, NULL, x, y, w, h, Scr.BlackGC,  Scr.BlackGC);
+  RelieveRectangle (win, NULL, x + 1, y + 1, w - 2, h - 2, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
+#endif
   if (area)
   {
     XSetClipMask(dpy, Scr.MenuShadowGC, None);
