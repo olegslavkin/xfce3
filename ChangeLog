@@ -1,3 +1,53 @@
+2002-04-28  edscott
+
+	* xftree/xtree_functions.c: - Previous bug fix was somehow undone.
+	Causes sigsegv on startup.
+
+2002-04-28  xfce
+
+	* configure, configure.in, xfce-3.8.16.lsm, xfce-3.8.18.lsm,
+	xfce.spec, other/COPYING.in, po/bg.gmo, po/bg.po, po/ca.gmo,
+	po/ca.po, po/cs.gmo, po/cs.po, po/da.gmo, po/da.po, po/de.gmo,
+	po/de.po, po/en_GB.gmo, po/en_GB.po, po/es.gmo, po/es.po,
+	po/et.gmo, po/et.po, po/fi.gmo, po/fi.po, po/fr.gmo, po/fr.po,
+	po/gl.gmo, po/gl.po, po/hu.gmo, po/hu.po, po/it.gmo, po/it.po,
+	po/ja.po, po/ms.gmo, po/ms.po, po/nl.gmo, po/nl.po, po/pl.gmo,
+	po/pl.po, po/pt_BR.gmo, po/pt_BR.po, po/ro.gmo, po/ro.po,
+	po/ru.gmo, po/ru.po, po/sk.gmo, po/sk.po, po/sr.gmo, po/sr.po,
+	po/sv.gmo, po/sv.po, po/uk.gmo, po/uk.po, po/xfce.pot, po/zh.gmo,
+	po/zh.po, po/zh_CN.gmo, po/zh_CN.po, po/zh_TW.Big5.gmo,
+	po/zh_TW.Big5.po, xfce/info.c, xfclock/xfclock_cb.c: Update
+	copyright date
+
+2002-04-27  edscott
+
+	* xftree/xtree_gui.h: - version update
+
+2002-04-26  edscott
+
+	* xfce.spec, xftree/xtree_tar.c: - fixed some bugs on tar expansion
+	for xftree
+
+2002-04-23  edscott
+
+	* xfsamba/: xfsamba.h, xfsamba_gui.c, xfsamba_mem.c: - fixed the
+	segv bug when selecting with keyboard arrows.
+
+2002-04-18  edscott
+
+	* xftree/xtree.c: getenv/putenv chagnes
+
+2002-04-17  xfce
+
+	* xfce-3.8.16.lsm, po/sv.gmo, po/sv.po: Update Swedish xtion by
+	Joakim Andreasson <joakim.andreasson@gmx.net>
+
+2002-04-15  xfce
+
+	* ChangeLog, configure, configure.in, xfce-3.8.14.lsm,
+	xfce-3.8.16.lsm, xfce.spec, other/Makefile.in, po/ms.gmo, po/ms.po,
+	po/xfce.pot: Prepare for 3.8.16 release
+
 2002-04-15  xfce
 
 	* xfce/xfce.c: Put back colored screen buttons when "old-style" is
