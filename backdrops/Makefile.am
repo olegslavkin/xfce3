@@ -29,7 +29,6 @@ Compute.xpm \
 Concrete.xpm \
 Darkblue2.xpm \
 Default.xpm \
-Default.jpg \
 Desert2.xpm \
 Dry.xpm \
 Eyes.xpm \
@@ -58,6 +57,7 @@ Linea.xpm \
 Marbled.xpm \
 Master-Plan.jpg \
 Maze.xpm \
+MiceBlue.jpg \
 Notes.xpm \
 Nebula.xpm \
 Overdriven.jpg \

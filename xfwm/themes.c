@@ -3988,6 +3988,14 @@ void
 RelieveIconTitle_linea (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
   RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
+  XDrawLine (dpy, win, ReliefGC, 2, 2, 4, 2);
+  XDrawLine (dpy, win, ReliefGC, 2, 2, 2, 4);
+  XDrawLine (dpy, win, ReliefGC, w - 5, 2, w - 3, 2);
+  XDrawLine (dpy, win, ReliefGC, w - 3, 2, w - 3, 4);
+  XDrawLine (dpy, win, ReliefGC, 2, h - 3, 4, h - 3);
+  XDrawLine (dpy, win, ReliefGC, 2, h - 3, 2, h - 5);
+  XDrawLine (dpy, win, ShadowGC, w - 3, h - 3,w - 5, h - 3);
+  XDrawLine (dpy, win, ShadowGC, w - 3, h - 3, w - 3, h - 5);
   XDrawLine (dpy, win, Scr.BlackGC, 0, h - 1, w - 1, h - 1);
   XDrawLine (dpy, win, Scr.BlackGC, w - 1, 0, w - 1, h - 1);
 }
@@ -3996,6 +4004,14 @@ void
 RelieveIconPixmap_linea (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
   RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
+  XDrawLine (dpy, win, ReliefGC, 2, 2, 4, 2);
+  XDrawLine (dpy, win, ReliefGC, 2, 2, 2, 4);
+  XDrawLine (dpy, win, ReliefGC, w - 5, 2, w - 3, 2);
+  XDrawLine (dpy, win, ReliefGC, w - 3, 2, w - 3, 4);
+  XDrawLine (dpy, win, ReliefGC, 2, h - 3, 4, h - 3);
+  XDrawLine (dpy, win, ReliefGC, 2, h - 3, 2, h - 5);
+  XDrawLine (dpy, win, ShadowGC, w - 3, h - 3, w - 5, h - 3);
+  XDrawLine (dpy, win, ShadowGC, w - 3, h - 3, w - 3, h - 5);
   XDrawLine (dpy, win, Scr.BlackGC, 0, h - 1, w - 1, h - 1);
   XDrawLine (dpy, win, Scr.BlackGC, w - 1, 0, w - 1, h - 1);
 }
