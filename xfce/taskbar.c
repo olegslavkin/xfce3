@@ -94,6 +94,7 @@ typedef struct _taskbar_window {
 #define TASKBAR_FLAG_PROC_LOAD         0x00000004L
 #define TASKBAR_FLAG_OPENED            0x00000008L
 #define TASKBAR_FLAG_WINLISTSKIP       0x00000010L
+#define TASKBAR_FLAG_HIDE_XFCE_PANEL     0x00000020L
 #define TASKBAR_FLAG_CONFIG_READ       0x80000000L
 
 typedef struct _taskbar_xfce {
@@ -1045,6 +1046,10 @@ void taskbar_set_standalone_state()
     y=g_xfce_taskbar.gtk_standalone_y>=0 ? g_xfce_taskbar.gtk_standalone_y : gdk_screen_height()-(g_xfce_taskbar.base_height+8);
     gtk_widget_set_uposition(g_xfce_taskbar.gtk_stand_alone,x,y);
 
+    if(g_xfce_taskbar.flags&TASKBAR_FLAG_HIDE_XFCE_PANEL) {
+      gtk_widget_hide(g_xfce_taskbar.gtk_xfce_toplevel);
+    }
+
   } else {
     if (g_xfce_taskbar.gtk_stand_alone) {
       gdk_window_get_position(g_xfce_taskbar.gtk_stand_alone->window,
@@ -1062,6 +1067,8 @@ void taskbar_set_standalone_state()
     }
     gtk_widget_set_usize(tb_hbox1,g_xfce_taskbar.base_width,g_xfce_taskbar.base_height);
     gtk_widget_set_usize(tb_hrule,g_xfce_taskbar.base_width,2); 
+    
+    gtk_widget_show(g_xfce_taskbar.gtk_xfce_toplevel);
   }
 }
 void taskbar_on_mcheck_standalone_toggled(GtkWidget *w, gpointer user_data)
@@ -1338,6 +1345,8 @@ taskbar_read_taskbarrc()
         g_xfce_taskbar.flags&=~TASKBAR_FLAG_WINLISTSKIP;
       } else if(strcasecmp(token,"WindowListSkip")==0) {
         g_xfce_taskbar.flags|=TASKBAR_FLAG_WINLISTSKIP;
+      } else if(strcasecmp(token,"HidePanel")==0) {
+        g_xfce_taskbar.flags|=TASKBAR_FLAG_HIDE_XFCE_PANEL;
       }
 
     }

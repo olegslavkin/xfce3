@@ -21,11 +21,14 @@ Menu "Put in TaskJar" TASKJAR
 # Taskjar mstasz*
 # Taskjar xterm*
 
-# after 'Option' option put various taskbar options. The only one currently
-#  valid is 'WindowListSkip' or 'NO_WindowListSkip' which turn on/off 
+# after 'Option' option put various taskbar options. Currently available
+#  are: 
+#  -- 'WindowListSkip' or 'NO_WindowListSkip' - turns on/off 
 #  respect for WindowListSkip XFWM flag
+#  -- HidePanel - hides XFCE panel when taskbar is in 'Stand alone' mode
 
 Option WindowListSkip
+#Option HidePanel
 
 
 
