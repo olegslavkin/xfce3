@@ -29,4 +29,9 @@ noinst_DATA = \
  warning.xpm \
  wg1.xpm \
  wg2.xpm \
+ mount.xpm \
+ tb_paste.xpm \
+ tb_cut.xpm \
+ tb_copy.xpm \
+ new_win.xpm \
  xfsamba.xpm
