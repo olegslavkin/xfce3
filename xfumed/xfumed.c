@@ -163,7 +163,6 @@ read_menu (XFMENU * xfmenu)
 	g_error ("xfumed: Couldn't open file %s\n", filename);
     }
 
-  g_free (home);
   g_free (filename);
 
   if (xfmenu->ctree)
@@ -476,7 +475,6 @@ write_menu (XFMENU * xfmenu)
 
   home = g_getenv ("HOME");
   filename = g_strconcat (home, "/", RCFILE, NULL);
-  g_free (home);
   backup = g_strconcat (filename, ".bak", NULL);
 
   if ((backup_fp = fopen (backup, "w")) && (fp = fopen (filename, "r")))
