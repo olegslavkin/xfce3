@@ -129,7 +129,7 @@ XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
 SUBDIRS = stylesheet-images
-htmldir = $(datadir)/html
+htmldir = @XFCE_DIR@/help/html
 html_DATA = \
 utils-xfrun.html \
 utils-xfmouse.html \

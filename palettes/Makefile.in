@@ -128,7 +128,7 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-palettesdir = $(datadir)/palettes
+palettesdir = @XFCE_DIR@/palettes
 palettes_DATA = \
 Alpine \
 Altxfce \

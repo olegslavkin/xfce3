@@ -1,5 +1,5 @@
 SUBDIRS=stylesheet-images
-htmldir=$(datadir)/html
+htmldir=@XFCE_DIR@/help/html
 html_DATA=\
 utils-xfrun.html \
 utils-xfmouse.html \

@@ -1,4 +1,8 @@
-backdropsdir=$(datadir)/backdrops
+CLEANFILES=\
+Toulouse.list \
+Blue.list
+
+backdropsdir=@XFCE_DIR@/backdrops
 backdrops_DATA=\
 A-Little-Exercise.jpg \
 A-Little-Exercise-3.jpg \

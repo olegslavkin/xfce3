@@ -128,7 +128,7 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-imagesdir = $(datadir)/html/images
+imagesdir = @XFCE_DIR@/help/html/images
 images_DATA = \
 xfdiff.jpg \
 xfce_setup1.jpg \

@@ -1,4 +1,4 @@
-palettesdir=$(datadir)/palettes
+palettesdir=@XFCE_DIR@/palettes
 palettes_DATA=\
 Alpine \
 Altxfce \

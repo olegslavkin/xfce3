@@ -128,6 +128,13 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
+CLEANFILES = \
+xfce_setup \
+xfce_upgrade \
+xfhelp \
+startxfce
+
+
 bin_SCRIPTS = xfhelp xfprint xftrash xfterm xflock xfce_setup \
  xfce_remove startxfce xfmountdev CDE2Xfcepal xfce_upgrade
 
@@ -265,6 +272,7 @@ installdirs:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)

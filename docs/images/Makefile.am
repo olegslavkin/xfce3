@@ -1,4 +1,4 @@
-imagesdir=$(datadir)/html/images
+imagesdir=@XFCE_DIR@/help/html/images
 images_DATA=\
 xfdiff.jpg \
 xfce_setup1.jpg \

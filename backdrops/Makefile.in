@@ -128,7 +128,12 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-backdropsdir = $(datadir)/backdrops
+CLEANFILES = \
+Toulouse.list \
+Blue.list
+
+
+backdropsdir = @XFCE_DIR@/backdrops
 backdrops_DATA = \
 A-Little-Exercise.jpg \
 A-Little-Exercise-3.jpg \
@@ -340,6 +345,7 @@ installdirs:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)

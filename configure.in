@@ -493,36 +493,27 @@ textures/Makefile \
 fonts/Makefile \
 po/Makefile.in po/Makefile)
 
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/startxfce.in > scripts/startxfce])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%DEFAULT_IMAGE_TYPE%$DEFAULT_IMAGE_TYPE%g" other/xfbdrc.in >  other/xfbdrc])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfsoundrc.in > other/xfsoundrc])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.in >  other/xfce3rc])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ja.in >  other/xfce3rc.ja])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.cs.in >  other/xfce3rc.cs])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.de.in >  other/xfce3rc.de])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.uk.in >  other/xfce3rc.uk])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.fr.in >  other/xfce3rc.fr])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.sr.in >  other/xfce3rc.sr])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_CN.GB2312.in >  other/xfce3rc.zh_CN.GB2312])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_TW.Big5.in >  other/xfce3rc.zh_TW.Big5])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.in >  other/xinitrc])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.mwm.in >  other/xinitrc.mwm])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Blue.list.in >  backdrops/Blue.list])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Toulouse.list.in >  backdrops/Toulouse.list])
-AC_OUTPUT_COMMANDS([sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r other/DISTFILES.in" -e "/CONFFILES =/r other/CONFFILES.in" other/Makefile.in > other/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r backdrops/DISTFILES.in" backdrops/Makefile.in > backdrops/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r textures/DISTFILES.in" textures/Makefile.in > textures/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r icons/DISTFILES.in" icons/Makefile.in > icons/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r palettes/DISTFILES.in" palettes/Makefile.in > palettes/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r fonts/DISTFILES.in" fonts/Makefile.in > fonts/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r cursors/DISTFILES.in" cursors/Makefile.in > cursors/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r sounds/DISTFILES.in" sounds/Makefile.in > sounds/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r docs/DISTFILES.in" docs/Makefile.in > docs/Makefile])
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/startxfce.in > scripts/startxfce
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%DEFAULT_IMAGE_TYPE%$DEFAULT_IMAGE_TYPE%g" other/xfbdrc.in > other/xfbdrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfsoundrc.in > other/xfsoundrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.in >  other/xfce3rc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ja.in >  other/xfce3rc.ja
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.cs.in >  other/xfce3rc.cs
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.de.in >  other/xfce3rc.de
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.uk.in >  other/xfce3rc.uk
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.fr.in >  other/xfce3rc.fr
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.sr.in >  other/xfce3rc.sr
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_CN.GB2312.in >  other/xfce3rc.zh_CN.GB2312
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_TW.Big5.in >  other/xfce3rc.zh_TW.Big5
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.in >  other/xinitrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.mwm.in >  other/xinitrc.mwm
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Blue.list.in >  backdrops/Blue.list
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Toulouse.list.in >  backdrops/Toulouse.list
+sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile

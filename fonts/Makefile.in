@@ -128,7 +128,7 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-fontsdir = $(datadir)/fonts
+fontsdir = @XFCE_DIR@/fonts
 fonts_DATA = \
 uniread-variable-05-b-i-ISO8859-1.pcf.gz \
 uniread-variable-05-b-i.pcf.gz \

@@ -1,4 +1,4 @@
-texturesdir=$(datadir)/textures
+texturesdir=@XFCE_DIR@/textures
 textures_DATA=\
 Aluminium.xpm \
 BlueX.xpm \

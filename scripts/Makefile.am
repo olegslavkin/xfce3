@@ -1,5 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
+CLEANFILES=\
+xfce_setup \
+xfce_upgrade \
+xfhelp \
+startxfce
+
 bin_SCRIPTS  = xfhelp xfprint xftrash xfterm xflock xfce_setup \
  xfce_remove startxfce xfmountdev CDE2Xfcepal xfce_upgrade
 

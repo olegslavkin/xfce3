@@ -128,7 +128,7 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-cursorsdir = $(datadir)/cursors
+cursorsdir = @XFCE_DIR@/cursors
 cursors_DATA = cursor2.pcf fonts.dir
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h

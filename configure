@@ -14605,69 +14605,27 @@ if test "$no_create" != yes; then
   $ac_cs_success || { (exit 1); exit 1; }
 fi
 
-ac_config_commands="$ac_config_commands default-3"
-
-ac_config_commands="$ac_config_commands default-4"
-
-ac_config_commands="$ac_config_commands default-5"
-
-ac_config_commands="$ac_config_commands default-6"
-
-ac_config_commands="$ac_config_commands default-7"
-
-ac_config_commands="$ac_config_commands default-8"
-
-ac_config_commands="$ac_config_commands default-9"
-
-ac_config_commands="$ac_config_commands default-10"
-
-ac_config_commands="$ac_config_commands default-11"
-
-ac_config_commands="$ac_config_commands default-12"
-
-ac_config_commands="$ac_config_commands default-13"
-
-ac_config_commands="$ac_config_commands default-14"
-
-ac_config_commands="$ac_config_commands default-15"
-
-ac_config_commands="$ac_config_commands default-16"
-
-ac_config_commands="$ac_config_commands default-17"
-
-ac_config_commands="$ac_config_commands default-18"
-
-ac_config_commands="$ac_config_commands default-19"
-
-ac_config_commands="$ac_config_commands default-20"
-
-ac_config_commands="$ac_config_commands default-21"
-
-ac_config_commands="$ac_config_commands default-22"
-
-ac_config_commands="$ac_config_commands default-23"
-
-ac_config_commands="$ac_config_commands default-24"
-
-ac_config_commands="$ac_config_commands default-25"
-
-ac_config_commands="$ac_config_commands default-26"
-
-ac_config_commands="$ac_config_commands default-27"
-
-ac_config_commands="$ac_config_commands default-28"
-
-ac_config_commands="$ac_config_commands default-29"
-
-ac_config_commands="$ac_config_commands default-30"
-
-ac_config_commands="$ac_config_commands default-31"
-
-ac_config_commands="$ac_config_commands default-32"
-
-ac_config_commands="$ac_config_commands default-33"
-
-ac_config_commands="$ac_config_commands default-34"
-
-ac_config_commands="$ac_config_commands default-35"
-
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/startxfce.in > scripts/startxfce
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%DEFAULT_IMAGE_TYPE%$DEFAULT_IMAGE_TYPE%g" other/xfbdrc.in > other/xfbdrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfsoundrc.in > other/xfsoundrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.in >  other/xfce3rc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ja.in >  other/xfce3rc.ja
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.cs.in >  other/xfce3rc.cs
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.de.in >  other/xfce3rc.de
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.uk.in >  other/xfce3rc.uk
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.fr.in >  other/xfce3rc.fr
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.sr.in >  other/xfce3rc.sr
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_CN.GB2312.in >  other/xfce3rc.zh_CN.GB2312
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_TW.Big5.in >  other/xfce3rc.zh_TW.Big5
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.in >  other/xinitrc
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.mwm.in >  other/xinitrc.mwm
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Blue.list.in >  backdrops/Blue.list
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Toulouse.list.in >  backdrops/Toulouse.list
+sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile

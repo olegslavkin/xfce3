@@ -1,4 +1,23 @@
-conffilesdir=$(xfcedir)
+CLEANFILES=\
+xfbdrc \
+xfce3rc \
+xfce3rc.cs \
+xfce3rc.de \
+xfce3rc.fr \
+xfce3rc.hu \
+xfce3rc.ja \
+xfce3rc.ko \
+xfce3rc.nl \
+xfce3rc.sr \
+xfce3rc.uk \
+xfce3rc.zh_CN.GB2312 \
+xfce3rc.zh_TW.Big5 \
+xfsoundrc \
+xfwmrc \
+xinitrc.mwm \
+xinitrc
+
+conffilesdir=@XFCE_CONFDIR@
 conffiles_DATA=\
 Xclients \
 fvwm2rc \
@@ -25,7 +44,7 @@ xinitrc \
 xsession \
 xtree.reg
 
-sysfilesdir=$(xfceconfdir)
+sysfilesdir=@XFCE_DIR@
 sysfiles_DATA=\
 COPYING \
 XFce3.logo

@@ -1,5 +1,5 @@
-sourndsdir=$(datadir)/sournds
-sournds_DATA=\
+soundsdir=@XFCE_DIR@/sounds
+sounds_DATA=\
 alert01.wav \
 beep01.wav \
 beep02.wav \

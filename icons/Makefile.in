@@ -128,7 +128,7 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-iconsdir = $(datadir)/icons
+iconsdir = @XFCE_DIR@/icons
 icons_DATA = \
 3dpaint.xpm \
 ABC.xpm \

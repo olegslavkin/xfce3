@@ -1,4 +1,4 @@
-iconsdir=$(datadir)/icons
+iconsdir=@XFCE_DIR@/icons
 icons_DATA=\
 3dpaint.xpm \
 ABC.xpm \

@@ -128,8 +128,8 @@ XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
-sourndsdir = $(datadir)/sournds
-sournds_DATA = \
+soundsdir = @XFCE_DIR@/sounds
+sounds_DATA = \
 alert01.wav \
 beep01.wav \
 beep02.wav \
@@ -185,7 +185,7 @@ zap04.wav
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
-DATA =  $(sournds_DATA)
+DATA =  $(sounds_DATA)
 
 DIST_COMMON =  Makefile.am Makefile.in
 
@@ -204,23 +204,23 @@ Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 
-install-sourndsDATA: $(sournds_DATA)
+install-soundsDATA: $(sounds_DATA)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(sourndsdir)
-	@list='$(sournds_DATA)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(soundsdir)
+	@list='$(sounds_DATA)'; for p in $$list; do \
 	  if test -f $(srcdir)/$$p; then \
-	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(sourndsdir)/$$p"; \
-	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(sourndsdir)/$$p; \
+	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(soundsdir)/$$p"; \
+	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(soundsdir)/$$p; \
 	  else if test -f $$p; then \
-	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(sourndsdir)/$$p"; \
-	    $(INSTALL_DATA) $$p $(DESTDIR)$(sourndsdir)/$$p; \
+	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(soundsdir)/$$p"; \
+	    $(INSTALL_DATA) $$p $(DESTDIR)$(soundsdir)/$$p; \
 	  fi; fi; \
 	done
 
-uninstall-sourndsDATA:
+uninstall-soundsDATA:
 	@$(NORMAL_UNINSTALL)
-	list='$(sournds_DATA)'; for p in $$list; do \
-	  rm -f $(DESTDIR)$(sourndsdir)/$$p; \
+	list='$(sounds_DATA)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(soundsdir)/$$p; \
 	done
 tags: TAGS
 TAGS:
@@ -252,20 +252,20 @@ installcheck: installcheck-am
 install-exec-am:
 install-exec: install-exec-am
 
-install-data-am: install-sourndsDATA
+install-data-am: install-soundsDATA
 install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-sourndsDATA
+uninstall-am: uninstall-soundsDATA
 uninstall: uninstall-am
 all-am: Makefile $(DATA)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
 installdirs:
-	$(mkinstalldirs)  $(DESTDIR)$(sourndsdir)
+	$(mkinstalldirs)  $(DESTDIR)$(soundsdir)
 
 
 mostlyclean-generic:
@@ -296,7 +296,7 @@ maintainer-clean-am:  maintainer-clean-generic distclean-am
 
 maintainer-clean: maintainer-clean-am
 
-.PHONY: uninstall-sourndsDATA install-sourndsDATA tags distdir info-am \
+.PHONY: uninstall-soundsDATA install-soundsDATA tags distdir info-am \
 info dvi-am dvi check check-am installcheck-am installcheck \
 install-exec-am install-exec install-data-am install-data install-am \
 install uninstall-am uninstall all-redirect all-am all installdirs \
