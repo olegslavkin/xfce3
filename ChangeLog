@@ -1,3 +1,34 @@
+2001-10-16  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2001-10-16  xfce
+
+	* xfwm/borders.c: Cleanup
+
+2001-10-16  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, libs/snprintf.h,
+	other/xinitrc, other/xinitrc.mwm, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp: Fix a typo in libs/snprintf.h
+	that caused the compilation to fail on Solaris 8/x86
+
+2001-10-15  xfce
+
+	* backdrops/Makefile.in.in, docs/Makefile.in.in,
+	fonts/Makefile.in.in, icons/Makefile.in.in, other/Makefile.in.in,
+	palettes/Makefile.in.in, po/Makefile.in.in, sounds/Makefile.in.in,
+	textures/Makefile.in.in: Update Makefiles to remove / after
+	$(DESTDIR)
+
+2001-10-15  xfce
+
+	* xfce-3.8.9.lsm: Update lsm
+
+2001-10-15  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-10-15  xfce
 
 	* xfwm/: add_window.c, borders.c, events.c: Optimize window title
