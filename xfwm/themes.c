@@ -220,7 +220,7 @@ DrawIconWindow (XfwmWindow * Tmp_win)
       Shadow = GetDecor (Tmp_win, HiShadowGC);
     }
     TextColor = GetDecor (Tmp_win, HiColors.fore);
-    BackColor = GetDecor (Tmp_win, HiColors.back);
+    BackColor = GetDecor (Tmp_win, titlebar.state[Active].u.back);
     if (Tmp_win->icon_w != None)
     {
       XSetWindowBackground (dpy, Tmp_win->icon_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
