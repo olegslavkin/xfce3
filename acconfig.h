@@ -22,6 +22,7 @@
 #undef HAVE_SESSION
 #undef HAVE_AUDIOFILE
 #undef HAVE_ARTS
+#undef HAVE_LIBXML2
 #undef HAVE_GDK_PIXBUF
 #undef GTK_ENGINE_DIR
 #undef DMALLOC

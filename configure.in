@@ -1,4 +1,4 @@
-dnl Process this file with autoconf to produce a configure script.
+dnl Process this file with autoconf to produce a configure -*- sh -*- script.
 
 dnl ---------------------------------------------------------------------------
 dnl Initialize automake now
@@ -19,7 +19,7 @@ LIB_TINY=14
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.14
+XFCE_VERSION=3.8.14.020112
 
 AC_SUBST(VERSION, $XFCE_VERSION)
 AC_SUBST(LIBVERSION)
@@ -293,6 +293,45 @@ AC_ARG_ENABLE(arts,
 AC_SUBST(HAVE_ARTS)
 AC_SUBST(ARTS_LIBS)
 AC_SUBST(ARTS_CFLAGS)
+
+dnl
+dnl Check for libxml2 library
+dnl
+AC_ARG_ENABLE(libxml2,
+[  --enable-libxml2=PFX  prefix where libxml2 is installed (optional)],
+  [
+    if test "$enableval" != "no"; then
+      if test -x "$enableval/bin/xml2-config"; then
+        LIBXML2_CONFIG=$enableval/bin/xml2-config
+      else
+        LIBXML2_CONFIG=xml2-config
+      fi
+
+      LIBXML2_LIBS=`$LIBXML2_CONFIG --libs`
+      LIBXML2_CFLAGS=`$LIBXML2_CONFIG --cflags`
+
+      save_LIBS=$LIBS ; LIBS=""
+      AC_CHECK_LIB(xml2, xmlParseDoc, AC_DEFINE(HAVE_LIBXML2), ,
+      [$LIBXML2_LIBS])
+      LIBS=$save_LIBS
+    fi
+  ],
+  [
+    LIBXML2_CONFIG=xml2-config
+
+    LIBXML2_LIBS=`$LIBXML2_CONFIG --libs`
+    LIBXML2_CFLAGS=`$LIBXML2_CONFIG --cflags`
+
+    save_LIBS=$LIBS ; LIBS=""
+    AC_CHECK_LIB(xml2, xmlParseDoc, AC_DEFINE(HAVE_LIBXML2), ,
+      [$LIBXML2_LIBS])
+    LIBS=$save_LIBS
+  ]
+)
+
+AC_SUBST(HAVE_LIBXML2)
+AC_SUBST(LIBXML2_LIBS)
+AC_SUBST(LIBXML2_CFLAGS)
 
 dnl enable CDE-specific startup files?
 AC_MSG_CHECKING(whether to install CDE specific files)
