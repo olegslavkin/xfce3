@@ -303,7 +303,7 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
   }
     if (isdir){
       fprintf(tmpfile,
-	"lcd \"%s\";cd \"/%s\";cd ..;prompt;recurse; mget %s;recurse;prompt;",target,file,filename);
+	"lcd \"%s\";cd \"/%s\";cd ..;prompt;recurse; mget %s;recurse;prompt;cd /;",target,file,filename);
     }
     else 
 	    fprintf(tmpfile,"lcd \"%s\";get \"%s\" \"%s\";",target,file,filename);
