@@ -1,3 +1,32 @@
+2001-10-05  xfce
+
+	* xfwm/: builtins.c, windows.c: Skip non-input windows from Alt-Tab
+	switching and task list
+
+2001-10-05  xfce
+
+	* xfwm/focus.c: [no log message]
+
+2001-10-05  xfce
+
+	* palettes/DISTFILES.in, palettes/DarkMetal, textures/DISTFILES.in,
+	textures/DarkMetal.xpm, palettes/DarkMetal: [no log message]
+
+2001-10-05  xfce
+
+	* libs/mygtkclock.c: [no log message]
+
+2001-10-04  xfce
+
+	* libs/mygtkclock.c, po/fr.gmo, po/fr.po, po/xfce.pot, xfce/xfce.c,
+	xfce/xfce_cb.c, xfclock/xfclock_cb.c, xfclock/xfclock_config.h:
+	Change my_gtk_clock_toggle_mode () to include "leds" mode Disable
+	"leds" mode on panel clock when configured with --enable-old-style
+
+2001-10-04  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-10-04  xfce
 
 	* palettes/Metal: Small change in Metal palette
