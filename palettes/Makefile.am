@@ -40,6 +40,7 @@ GTK+Default2 \
 Glass \
 Golden \
 GoldenBoy \
+GoldenBoy2 \
 Grayscale \
 GreySlate \
 GreenIron \
