@@ -225,14 +225,24 @@ info_cb (GtkWidget * widget, gpointer data)
 void
 clock_digital_cb (GtkWidget * widget, gpointer data)
 {
+  MyGtkClockMode mode;
   MyGtkClock *clock;
 
   clock = MY_GTK_CLOCK (data);
-  if (my_gtk_clock_get_mode (clock) == MY_GTK_CLOCK_LEDS)
+  mode = my_gtk_clock_get_mode (clock);
+#ifdef OLD_STYLE
+  if (mode == MY_GTK_CLOCK_DIGITAL)
+#else
+  if (mode == MY_GTK_CLOCK_LEDS)
+#endif
     my_gtk_clock_set_mode (clock, MY_GTK_CLOCK_ANALOG);
   else
+#ifdef OLD_STYLE
+    my_gtk_clock_set_mode (clock, MY_GTK_CLOCK_DIGITAL);
+#else
     my_gtk_clock_set_mode (clock, MY_GTK_CLOCK_LEDS);
-  current_config.digital_clock = (my_gtk_clock_get_mode (clock) == MY_GTK_CLOCK_LEDS);
+#endif
+  current_config.digital_clock = (mode == MY_GTK_CLOCK_ANALOG);
   writeconfig ();
 }
 
@@ -263,11 +273,18 @@ gxfce_clock_show_popup_cb (GtkWidget * widget, GdkEventButton * event, gpointer 
 
   mode = my_gtk_clock_get_mode (clock);
 
+#ifdef OLD_STYLE
+  GTK_CHECK_MENU_ITEM (gxfce_clock_digital_mode)->active = (mode == MY_GTK_CLOCK_DIGITAL);
+#else
   GTK_CHECK_MENU_ITEM (gxfce_clock_digital_mode)->active = (mode == MY_GTK_CLOCK_LEDS);
-
+#endif
   GTK_CHECK_MENU_ITEM (gxfce_clock_hrs_mode)->active = my_gtk_clock_military_shown (clock);
 
+#ifdef OLD_STYLE
+  gtk_widget_set_sensitive (GTK_WIDGET (gxfce_clock_hrs_mode), (mode == MY_GTK_CLOCK_DIGITAL));
+#else
   gtk_widget_set_sensitive (GTK_WIDGET (gxfce_clock_hrs_mode), (mode == MY_GTK_CLOCK_LEDS));
+#endif
 
   gtk_menu_popup (GTK_MENU (gxfce_clock_popup_menu), NULL, NULL, NULL, NULL, event->button, event->time);
   return (TRUE);

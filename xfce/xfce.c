@@ -121,7 +121,11 @@ gxfce_clock_make_popup (MyGtkClock * clock)
 void
 update_gxfce_clock (void)
 {
+#ifdef OLD_STYLE
+  my_gtk_clock_set_mode (MY_GTK_CLOCK (gxfce_clock), current_config.digital_clock ? MY_GTK_CLOCK_DIGITAL : MY_GTK_CLOCK_ANALOG);
+#else
   my_gtk_clock_set_mode (MY_GTK_CLOCK (gxfce_clock), current_config.digital_clock ? MY_GTK_CLOCK_LEDS : MY_GTK_CLOCK_ANALOG);
+#endif
   my_gtk_clock_show_military (MY_GTK_CLOCK (gxfce_clock), current_config.hrs_mode);
 }
 

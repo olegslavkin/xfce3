@@ -559,10 +559,18 @@ my_gtk_clock_toggle_mode (MyGtkClock * clock)
 {
   g_return_if_fail (clock != NULL);
   g_return_if_fail (GTK_IS_MY_CLOCK (clock));
-  if (clock->mode == MY_GTK_CLOCK_ANALOG)
-    clock->mode = MY_GTK_CLOCK_DIGITAL;
-  else
-    clock->mode = MY_GTK_CLOCK_ANALOG;
+  switch (clock->mode)
+  {
+    case MY_GTK_CLOCK_ANALOG:
+      clock->mode = MY_GTK_CLOCK_DIGITAL;
+      break;
+    case MY_GTK_CLOCK_DIGITAL:
+      clock->mode = MY_GTK_CLOCK_LEDS;
+      break;
+    case MY_GTK_CLOCK_LEDS:
+    default:
+      clock->mode = MY_GTK_CLOCK_ANALOG;
+  }
   if (GTK_WIDGET_REALIZED (GTK_WIDGET (clock)))
     my_gtk_clock_draw (GTK_WIDGET (clock), NULL);
 }

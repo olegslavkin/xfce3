@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-10-04 19:08+0200\n"
+"POT-Creation-Date: 2001-10-04 22:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,9 +186,9 @@ msgid "Info ..."
 msgstr ""
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
-#: xfce/xfce.c:495 xfce/xfce.c:526 xfce/xfce.c:623 xfce/xfce.c:644
-#: xfce/xfce.c:677 xfce/xfce.c:692 xfce/xfce.c:750 xfce/xfce.c:771
+#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
+#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
 #: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr ""
@@ -640,15 +640,15 @@ msgstr ""
 msgid "24 hours mode"
 msgstr ""
 
-#: xfce/xfce.c:639 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr ""
 
-#: xfce/xfce.c:672
+#: xfce/xfce.c:676
 msgid "Setup..."
 msgstr ""
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:699 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
 #: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
@@ -2249,7 +2249,7 @@ msgstr ""
 msgid "XFClock - XFce Clock & Calendar"
 msgstr ""
 
-#: xfclock/xfclock_cb.c:211
+#: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
 "(c) 1997-2000 Olivier Fourdan"

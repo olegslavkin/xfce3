@@ -31,7 +31,7 @@ typedef struct
   int h;
   gboolean calendar;
   gboolean menubar;
-  gboolean digital;
+  gint digital;
   gboolean seconds;
   gboolean ampm;
   gboolean military;

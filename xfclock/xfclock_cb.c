@@ -180,8 +180,14 @@ toggle_calendar_cb (GtkWidget * widget, gpointer data)
 void
 toggle_digital_cb (GtkWidget * widget, gpointer data)
 {
-  my_gtk_clock_toggle_mode (MY_GTK_CLOCK (data));
-  current_config.digital = (my_gtk_clock_get_mode (MY_GTK_CLOCK (data)) == MY_GTK_CLOCK_DIGITAL);
+  MyGtkClockMode mode;
+  
+  mode = my_gtk_clock_get_mode (MY_GTK_CLOCK (data));
+  if (mode == MY_GTK_CLOCK_ANALOG)
+    my_gtk_clock_set_mode (MY_GTK_CLOCK (data), MY_GTK_CLOCK_DIGITAL);
+  else
+    my_gtk_clock_set_mode (MY_GTK_CLOCK (data), MY_GTK_CLOCK_ANALOG);
+  current_config.digital = (mode == MY_GTK_CLOCK_ANALOG);
 }
 
 void
