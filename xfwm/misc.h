@@ -53,9 +53,10 @@
 #define my_abs(a)   ((a > 0) ? a : -a)
 
 #define AcceptInput(t)  (t && \
+                        (!(Scr.Options & HonorWMFocusHint) || \
 			(!(t->wmhints) || \
                         ((t->wmhints) && !(t->wmhints->flags & InputHint)) || \
-                        ((t->wmhints) && (t->wmhints->flags & InputHint) && (t->wmhints->input))))
+                        ((t->wmhints) && (t->wmhints->flags & InputHint) && (t->wmhints->input)))))
 
 #define ICON_HEIGHT (Scr.IconFont.height + 6)
 
@@ -348,6 +349,7 @@ void SetClickRaise (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned lo
 void SetForceFocus (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 void SetMapFocus (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 void SetMargin (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
+void SetHonorWMFocusHint (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 
 int check_existfile (char *filename);
 /*

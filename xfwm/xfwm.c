@@ -1759,7 +1759,7 @@ InitVariables (void)
   Scr.CornerWidth = CORNER_WIDTH;
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
-  Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus);
+  Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
   Scr.engine = LINEA_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;

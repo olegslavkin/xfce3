@@ -3184,3 +3184,23 @@ SetMargin (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long con
 
   Scr.Margin[where] = val1;
 }
+
+void
+SetHonorWMFocusHint (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
+{
+  char *style = NULL;
+
+  action = GetNextToken (action, &style);
+
+  if ((mystrncasecmp (style, "On", 2) == 0) || (mystrncasecmp (style, "Y", 1) == 0) || (mystrncasecmp (style, "1", 1) == 0))
+    Scr.Options |= HonorWMFocusHint;
+  else if ((mystrncasecmp (style, "Of", 2) == 0) || (mystrncasecmp (style, "N", 1) == 0) || (mystrncasecmp (style, "0", 1) == 0))
+    Scr.Options &= ~HonorWMFocusHint;
+  else
+  {
+    xfwm_msg (ERR, "SetHonorWMFocusHint", "Unknown parameter, using HonorWMFocusHint On");
+    Scr.Options |= HonorWMFocusHint;
+  }
+  free (style);
+}
+

@@ -56,6 +56,12 @@ Margin Left    0
 Margin Right   0
 Margin Bottom 50
 
+# Xfwm now honors the WM_HINT "Input" and acts accordingly. If you don't want
+# this feature, use the following parameter to disable it (Some applications
+# wrongly set input hint to false and therefore will never get focus unless 
+# "HonorWMFocusHint" is set to "No") :
+HonorWMFocusHint     Yes
+
 # Style used for some known applications :
 Style "*"			BorderWidth 6
 # Style "xfce"			StayOnTop

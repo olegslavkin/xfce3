@@ -95,6 +95,7 @@ static struct functions func_config[] = {
   {"FocusMode", SetFocusMode, F_SETFOCUSMODE, FUNC_NO_WINDOW},
   {"ForceFocus", SetForceFocus, F_SETFORCEFOCUS, FUNC_NO_WINDOW},
   {"Function", ComplexFunction, F_FUNCTION, FUNC_NO_WINDOW},
+  {"HonorWMFocusHint", SetHonorWMFocusHint, F_SETHONORWMFOCUSHINT, FUNC_NO_WINDOW},
   {"IconFont", LoadIconFont, F_ICONFONT, FUNC_NO_WINDOW},
   {"IconGrid", SetIconGrid, F_ICONGRID, FUNC_NO_WINDOW},
   {"Iconify", iconify_function, F_ICONIFY, FUNC_NEEDS_WINDOW},
