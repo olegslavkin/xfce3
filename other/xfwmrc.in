@@ -96,6 +96,7 @@ Style "Netscape"      		Authorize_Translate
 
 # Default icons for most common apps
 Style "*term*"      icon "XFCE_DIR/icons/CheckMarkMonitor.xpm"
+Style "*TERM*"      icon "XFCE_DIR/icons/CheckMarkMonitor.xpm"
 Style "Term*"       icon "XFCE_DIR/icons/CheckMarkMonitor.xpm"
 Style "rxvt*"       icon "XFCE_DIR/icons/CheckMarkMonitor.xpm"
 Style "xmag"        icon "XFCE_DIR/icons/MagnifyGlas.xpm"
@@ -123,6 +124,7 @@ Style "*Gnome*"     icon "XFCE_DIR/icons/Gnome-apps.xpm"
 Style "*GNOME*"     icon "XFCE_DIR/icons/Gnome-apps.xpm"
 Style "xfskin*"     icon "XFCE_DIR/icons/xfskin.xpm"
 Style "sylpheed"    icon "XFCE_DIR/icons/Mail.xpm"
+Style "xclipboard"  icon "XFCE_DIR/icons/ArtFolderFull.xpm"
 
 
 # Common init and restart functions
