@@ -1,4 +1,4 @@
-/* (c) 2001 Edscott Wilson Garcia GNU/GPL
+/* (c) 2001-2002 Edscott Wilson Garcia GNU/GPL
  */
 
 /* functions to use tubo.c for listing contents of SMB shares */
@@ -34,6 +34,8 @@
 
 #include "tubo.h"
 #include "xfsamba.h"
+#include "../xftree/ft_types.h"
+#include "../xftree/xtree_icons.h"
 
 #endif
 
@@ -65,54 +67,46 @@ smb_entry *smb_entry_new (void)
 
 GtkCTreeNode *add_node(smb_entry *en,char **textos,GtkCTreeNode *nodo){
   GtkCTreeNode *node;
-  GdkPixmap *gPIXo=NULL,*gPIXc;
-  GdkBitmap *gPIMo=NULL,*gPIMc;
+  icon_pix pix;  
   gboolean isleaf;
   if (en->type & S_T_DIRECTORY) { 
      if (textos[SHARE_SIZE_COLUMN]) 
 	en->i[0] = atoi (textos[SHARE_SIZE_COLUMN]);
      else en->i[0] = 0;
-     gPIXc=gPIX_dir_close, gPIMc=gPIM_dir_close, 
-     gPIXo=gPIX_dir_open, gPIMo=gPIM_dir_open,
+     set_icon_pix(&pix,FT_DIR,en->label,0);
      isleaf=FALSE;
   } else if (en->type & S_T_PRINTER){
       isleaf=TRUE;
       en->i[0] =  0;
-      gPIXc = gPIXo = gPIX_print;
-      gPIMc = gPIMo = gPIM_print;
+      set_icon_pix(&pix,FT_SMB|FT_PRINT,en->label,0);
   } else if (en->type & S_T_SHARE) {
      isleaf=FALSE;
       en->i[0] =  0;
-      gPIXo = gPIX_dir_open_lnk;
-      gPIXc = gPIX_dir_close_lnk;
-      gPIMo = gPIM_dir_open_lnk;
-      gPIMc = gPIM_dir_close_lnk;
+      set_icon_pix(&pix,FT_DIR|FT_EXE,en->label,0);
   } else if (en->type & S_T_IPC) {
       isleaf=TRUE;
       en->i[0] =  0;
-      gPIXc = gPIX_dotfile;
-      gPIMc = gPIM_dotfile; 
+      set_icon_pix(&pix,FT_FILE|FT_HIDDEN,en->label,0);
   } else {
 	isleaf=TRUE;
         if (textos[SHARE_SIZE_COLUMN]) 
 	   en->i[0] = atoi (textos[SHARE_SIZE_COLUMN]);
         else en->i[0] = 0;
-        gPIXc = gPIX_page;
-        gPIMc = gPIM_page;
+        set_icon_pix(&pix,FT_FILE,textos[SHARE_NAME_COLUMN],0);
+	  /*FIXME: FT_READONLY nor FT_HIDDEN are not used at xtree_icons.c */
 	if ((en->type & S_T_READONLY)&&(en->type & S_T_HIDDEN)){
-	  gPIXc = gPIX_rdotfile;
-	  gPIMc = gPIM_rdotfile;
+          set_icon_pix(&pix,FT_FILE|FT_READONLY|FT_HIDDEN,textos[SHARE_NAME_COLUMN],0);
 	} else if (en->type & S_T_READONLY){
-          gPIXc = gPIX_rpage;
-          gPIMc = gPIM_rpage;
+          set_icon_pix(&pix,FT_FILE|FT_READONLY,textos[SHARE_NAME_COLUMN],0);
 	} else if (en->type & S_T_HIDDEN) {
-	  gPIXc = gPIX_dotfile;
-	  gPIMc = gPIM_dotfile;
+          set_icon_pix(&pix,FT_FILE|FT_HIDDEN,textos[SHARE_NAME_COLUMN],0);
 	}
   }
   node = gtk_ctree_insert_node ((GtkCTree *) shares, 
 		  nodo, NULL, textos, 
-		  SHARE_COLUMNS, gPIXc, gPIMc, gPIXo, gPIMo, isleaf, FALSE); 
+		  SHARE_COLUMNS, 
+		  pix.pixmap,pix.pixmask, pix.open,pix.openmask,
+		  isleaf, FALSE); 
   en->i[1] = 0; /* to have date sorting work, must parse date into a time_t number */
 
   /* subsorting order */

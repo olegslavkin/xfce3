@@ -38,6 +38,9 @@
 /* local xfsamba includes : */
 #include "tubo.h"
 #include "xfsamba.h"
+#include "../xftree/ft_types.h"
+#include "../xftree/xtree_icons.h"
+
 #endif
 
 static int cual_chingao;
@@ -92,6 +95,7 @@ SMBprintTitles (void)
 static void
 SMBprint (nmb_list * currentN)
 {
+  icon_pix pix;  
   nmb_cache *cache;
   GtkCTreeNode *node;
   smb_entry *data;
@@ -126,7 +130,11 @@ SMBprint (nmb_list * currentN)
   {
     gint row;
     row = gtk_clist_append ((GtkCList *) servers, cache->textos);
-    gtk_clist_set_pixmap ((GtkCList *) servers, row, 0, (cache->visited) ? gPIX_comp2 : gPIX_comp1, (cache->visited) ? gPIM_comp2 : gPIM_comp1);
+    if (cache->visited) set_icon_pix(&pix,FT_COMP2|FT_SMB,"",0);
+    else set_icon_pix(&pix,FT_COMP1|FT_SMB,"",0);
+    
+    gtk_clist_set_pixmap ((GtkCList *) servers, row, 0, 
+		    pix.pixmap,pix.pixmask);
     cache = cache->next;
   }
   cache = currentN->workgroups;
@@ -134,7 +142,10 @@ SMBprint (nmb_list * currentN)
   {
     gint row;
     row = gtk_clist_append ((GtkCList *) workgroups, cache->textos);
-    gtk_clist_set_pixmap ((GtkCList *) workgroups, row, 0, (cache->visited) ? gPIX_wg2 : gPIX_wg1, (cache->visited) ? gPIM_wg2 : gPIM_wg1);
+    if (cache->visited) set_icon_pix(&pix,FT_WG2|FT_SMB,"",0);
+    else set_icon_pix(&pix,FT_WG1|FT_SMB,"",0);
+    gtk_clist_set_pixmap ((GtkCList *) workgroups, row, 0, 
+		    pix.pixmap,pix.pixmask);
     cache = cache->next;
   }
   if (SMBResult == SUCCESS){

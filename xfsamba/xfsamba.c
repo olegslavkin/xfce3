@@ -65,9 +65,7 @@
 #include "icons/warning.xpm"
 #include "icons/xfsamba.xpm"
 
-int preferences=0x0;
 
-extern void clean_smbmnt (void);
 
 void cleanup_tmpfiles(void){
    glob_t dirlist;
@@ -81,6 +79,7 @@ void cleanup_tmpfiles(void){
    } else for (i = 0; i < dirlist.gl_pathc; i++) {
 	   unlink(dirlist.gl_pathv[i]);
    }
+   save_defaults();
 }
 
 void
@@ -288,7 +287,6 @@ finishit (int sig)
 int
 main (int argc, char *argv[])
 {
-	char *homedir;
   headN = thisN = NULL;
   thisH = NULL;
   fork_obj = NULL;
@@ -298,22 +296,7 @@ main (int argc, char *argv[])
   default_user = (char *) malloc (strlen ("Guest%") + 1);
   strcpy (default_user, "Guest%");
 
-  /* if .xfce directory isnot there, create it. */
-  {
-   struct stat h_stat;
-   homedir=(char *)malloc(strlen(getenv ("HOME"))+1+strlen("%%/.xfce"));
-   sprintf (homedir, "%s/.xfce", (char *) getenv ("HOME"));
-   if (stat(homedir,&h_stat) < 0){
-	if (errno!=ENOENT) {
-		printf("xfsamba: cannot open %s\n",homedir);
-		exit(1);
-	}
-	if (mkdir(homedir,0770) < 0) {
-		printf("xfsamba: cannot create %s\n",homedir);
-		exit(1);
-	}
-   }
-  }
+  read_defaults();
 
   xfce_init (&argc, &argv);
 

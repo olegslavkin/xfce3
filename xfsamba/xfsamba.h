@@ -5,9 +5,11 @@
 /********** defines ***************/
 #include "gtk_dlg.h"
 #include "io.h"
+#include "fontselection.h"
+#include "xfdiff_colorsel.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.42"
+#define XFSAMBA_VERSION "0.43"
 #endif
 
 #ifdef XFSAMBA_MAIN
@@ -72,6 +74,16 @@
 
 #define WINDOW_WIDTH  400
 #define XFSAMBA_MAX_STRING 255
+#define XFSAMBA_CONFIG_FILE "xfsambarc"
+
+#define CUSTOM_COLORS		0x10
+#define CUSTOM_FONT		0x80
+#define VIEW_1			0x100
+#define VIEW_2			0x200
+#define VIEW_3			0x400
+#define VIEW_4			0x800
+#define SMALL_DIALOGS		0x100000
+#define FONT_STATE		0x200000
 
 #define S_T_FILE		0x01
 #define S_T_READONLY		0x02
@@ -213,6 +225,9 @@ void smb_entry_free (smb_entry *data);
 smb_entry *smb_entry_new (void);
 GtkCTreeNode *add_node(smb_entry *en,char **textos,GtkCTreeNode *nodo);
 gboolean sane (char *bin);
+void read_defaults(void);
+void save_defaults (void);
+void clean_smbmnt (void);
 
 
 /************public variables *******************/
@@ -227,6 +242,7 @@ EXTERN int SMBResult;
 EXTERN int SMBabortdrop;
 EXTERN char *default_user;
 EXTERN gboolean stopcleanup, nonstop;
+EXTERN int preferences;
 
 
 /* global memory data, not to be jeopardized on forks: */
@@ -239,9 +255,14 @@ EXTERN char NMBserverIP[XFSAMBA_MAX_STRING + 1];
 
 
 /* public variables from gui : */
-
+#if 0
 EXTERN GdkPixmap *gPIX_page, *gPIX_rpage, *gPIX_dir_close, *gPIX_dir_open, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_comp1, *gPIX_comp2, *gPIX_wg1, *gPIX_wg2, *gPIX_reload, *gPIX_dotfile, *gPIX_delete, *gPIX_new_dir, *gPIX_rdotfile, *gPIX_view1, *gPIX_view2, *gPIX_view3, *gPIX_tar, *gPIX_print, *gPIX_help, *gPIX_ip, *gPIX_download, *gPIX_upload;
 
 EXTERN GdkBitmap * gPIM_page, *gPIM_rpage, *gPIM_dir_close, *gPIM_dir_open, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_comp1, *gPIM_comp2, *gPIM_wg1, *gPIM_wg2, *gPIM_reload, *gPIM_dotfile, *gPIM_delete, *gPIM_new_dir, *gPIM_rdotfile, *gPIM_view1, *gPIM_view2, *gPIM_view3, *gPIM_tar, *gPIM_print, *gPIM_help, *gPIM_ip, *gPIM_download, *gPIM_upload;
+#endif
+
+EXTERN GdkPixmap  *gPIX_reload,*gPIX_delete, *gPIX_new_dir,  *gPIX_view1, *gPIX_view2, *gPIX_view3, *gPIX_tar,  *gPIX_help, *gPIX_ip, *gPIX_download, *gPIX_upload;
+
+EXTERN GdkBitmap  *gPIM_reload,  *gPIM_delete, *gPIM_new_dir, *gPIM_view1, *gPIM_view2, *gPIM_view3, *gPIM_tar, *gPIM_help, *gPIM_ip, *gPIM_download, *gPIM_upload;
 
 EXTERN GtkWidget * smb_nav, *location, *locationIP, *shares, *servers, *workgroups, *diagnostics, *statusline, *sharesL, *serversL, *workgroupsL, *progress;

@@ -54,6 +54,7 @@
 #undef XFSAMBA_MAIN
 #include "xfsamba.h"
 #include "xfsamba_dnd.h"
+#include "../xftree/xtree_icons.h"
 #include "tubo.h"
 
 static GtkTargetEntry target_table[] = {
@@ -69,6 +70,138 @@ static GtkWidget *vpaned, *hpaned, *vpaned2, *show_links, *hide_links, *show_dia
 int view_toggle = 0x10;
 static GtkWidget * user, *passwd, *dialog;
 static nmb_cache *current_cache;
+static GdkFont *the_font; 
+static char *custom_font=NULL;
+GdkColor ctree_color;
+
+int set_fontT(GtkWidget * ctree){
+	GtkStyle  *Ostyle,*style;
+	Ostyle=gtk_widget_get_style (ctree);
+    	style = gtk_style_copy (Ostyle);
+	if ((preferences & CUSTOM_FONT)&&(custom_font)) {
+	  the_font = gdk_font_load (custom_font);
+          if (the_font == NULL) {
+           xf_dlg_error(smb_nav,_("Could not load specified font\n"),NULL);
+           preferences &= (CUSTOM_FONT ^ 0xffffffff);
+           return -1;
+          }
+	  style->font=the_font;
+	}
+	if (!(preferences & CUSTOM_FONT)) style->font=Ostyle->font;
+	gtk_widget_set_style (ctree,style);gtk_widget_ensure_style (ctree);
+	gtk_widget_set_style (workgroups,style);gtk_widget_ensure_style (workgroups);
+	gtk_widget_set_style (servers,style);gtk_widget_ensure_style (servers);
+   	return (style->font->ascent + style->font->descent + 5);	
+}
+
+
+void set_colors(GtkWidget * ctree){
+	GtkStyle *Ostyle,*style;
+	int red,green,blue;
+	int Nred,Ngreen,Nblue;
+
+	red = ctree_color.red & 0xffff;
+	green = ctree_color.green & 0xffff;
+	blue = ctree_color.blue & 0xffff;
+	Ostyle=gtk_widget_get_style (ctree);
+    	style = gtk_style_copy (Ostyle);
+
+	if (!(preferences & CUSTOM_COLORS)){
+		gtk_widget_set_style (ctree,style);gtk_widget_ensure_style (ctree);
+		gtk_widget_set_style (workgroups,style);gtk_widget_ensure_style (workgroups);
+		gtk_widget_set_style (servers,style);gtk_widget_ensure_style (servers);
+		return;
+	}
+	
+	style->base[GTK_STATE_ACTIVE].red=red;
+	style->base[GTK_STATE_ACTIVE].green=green;
+	style->base[GTK_STATE_ACTIVE].blue=blue;
+	  
+	style->base[GTK_STATE_NORMAL].red=red;
+	style->base[GTK_STATE_NORMAL].green=green;
+	style->base[GTK_STATE_NORMAL].blue=blue;
+	  
+	style->bg[GTK_STATE_NORMAL].red=red;
+	style->bg[GTK_STATE_NORMAL].green=green;
+	style->bg[GTK_STATE_NORMAL].blue=blue;
+	  
+	style->fg[GTK_STATE_SELECTED].red=red;
+	style->fg[GTK_STATE_SELECTED].green=green;
+	style->fg[GTK_STATE_SELECTED].blue=blue;
+	  /* foregrounds */
+	
+	Nred=(red^0xffff)&(0xffff);
+	Ngreen=(green^0xffff)&(0xffff);
+	Nblue=(blue^0xffff)&(0xffff);
+
+	
+	if (red + green + blue < 3*32768) Nred=Ngreen=Nblue=65535;
+	else Nred=Ngreen=Nblue=0;
+	
+	style->fg[GTK_STATE_NORMAL].red=Nred;
+	style->fg[GTK_STATE_NORMAL].green=Ngreen;
+	style->fg[GTK_STATE_NORMAL].blue=Nblue;
+	  
+	style->bg[GTK_STATE_SELECTED].red=Nred;
+	style->bg[GTK_STATE_SELECTED].green=Ngreen;
+	style->bg[GTK_STATE_SELECTED].blue=Nblue;
+	
+	gtk_widget_set_style (ctree,style);gtk_widget_ensure_style (ctree);
+	gtk_widget_set_style (workgroups,style);gtk_widget_ensure_style (workgroups);
+	gtk_widget_set_style (servers,style);gtk_widget_ensure_style (servers);
+	return;
+}
+
+ 
+void
+cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
+{
+  gdouble colors[4];
+  gdouble *newcolor;
+
+  colors[0] = ((gdouble) ctree_color.red) / COLOR_GDK;
+  colors[1] = ((gdouble) ctree_color.green) / COLOR_GDK;
+  colors[2] = ((gdouble) ctree_color.blue) / COLOR_GDK;
+  
+  newcolor=xfdiff_colorselect (colors);
+  if (newcolor){
+      ctree_color.red   = ((guint) (newcolor[0] * COLOR_GDK));
+      ctree_color.green = ((guint) (newcolor[1] * COLOR_GDK));
+      ctree_color.blue  = ((guint) (newcolor[2] * COLOR_GDK));
+      preferences |= CUSTOM_COLORS;
+  } else {
+      preferences &= (CUSTOM_COLORS ^ 0xffffffff);
+  }
+  set_colors(shares);
+  set_colors(workgroups);
+  set_colors(servers);
+  save_defaults ();  
+  return;
+}
+
+
+void
+cb_select_font (GtkWidget * widget, GtkWidget *ctree)
+{
+  char *font_selected;
+  void go_reload (GtkWidget * widget, gpointer data);
+  font_selected = open_fontselection ("fixed");
+  preferences ^= FONT_STATE;
+  if (!font_selected) {
+	  preferences &= (CUSTOM_FONT ^ 0xffffffff);
+  } else  {
+	preferences |= CUSTOM_FONT;
+  	if (custom_font) free(custom_font);
+	custom_font=(char *)malloc(strlen(font_selected)+1);
+	if (custom_font) strcpy(custom_font,font_selected);
+	else preferences &= (CUSTOM_FONT ^ 0xffffffff);
+  }
+  create_pixmaps(set_fontT(shares),shares);
+  save_defaults ();
+  go_reload(NULL,NULL);
+  return;
+}
+
 
 void
 node_destroy (gpointer p)
@@ -245,17 +378,19 @@ cb_view (GtkWidget * widget, gpointer data)
 {
   int caso;
   caso = (int) ((long) data);
+  preferences &= (0xffffffff ^ (VIEW_1|VIEW_2|VIEW_3|VIEW_4));
   if (caso & 0xf00)
   {
     switch (caso)
     {
-     case 0x100: view_toggle = 0x0; break;
-     case 0x200: view_toggle = 0x10; break;
-     case 0x400: view_toggle = 0x11; break;
-     case 0x800: view_toggle = 0x01; break;
+     case 0x100: view_toggle = 0x0;  preferences |= VIEW_1; break;
+     case 0x200: view_toggle = 0x10; preferences |= VIEW_2; break;
+     case 0x400: view_toggle = 0x11; preferences |= VIEW_3; break;
+     case 0x800: view_toggle = 0x01; preferences |= VIEW_4; break;
     }
   }
   else view_toggle ^= caso;
+  save_defaults();
   
   if (view_toggle & 0x01)
   {
@@ -1039,26 +1174,33 @@ newbox (gboolean pack, int vertical, GtkWidget * parent, gboolean expand, gboole
   return box;
 }
 
+/*FIXME: zap these from CVS */
+#if 0
 #include "icons/page.xpm"
+#include "icons/dir_close_lnk.xpm"
+#include "icons/dir_open_lnk.xpm"
+#include "icons/dir_close.xpm"
+#include "icons/dir_open.xpm"
+#include "icons/dotfile.xpm"
+#include "icons/rdotfile.xpm"
+#endif
+/*FIXME: but leave these on CVS */
+#if 0
 #include "icons/rpage.xpm"
+#include "icons/comp1.xpm"
+#include "icons/comp2.xpm"
+#include "icons/wg1.xpm"
+#include "icons/wg2.xpm"
+#include "icons/print.xpm"
+#endif
+
 #include "icons/go_to.xpm"
 #include "icons/go_back.xpm"
 #include "icons/home.xpm"
 #if 0
 #include "icons/stop.xpm"
 #endif
-#include "icons/dir_close_lnk.xpm"
-#include "icons/dir_open_lnk.xpm"
-#include "icons/dir_close.xpm"
-#include "icons/dir_open.xpm"
-#include "icons/comp1.xpm"
-#include "icons/comp2.xpm"
-#include "icons/wg1.xpm"
-#include "icons/wg2.xpm"
 #include "icons/reload.xpm"
-#include "icons/dotfile.xpm"
-#include "icons/rdotfile.xpm"
-#include "icons/print.xpm"
 #include "icons/help.xpm"
 #include "icons/ip.xpm"
 #include "icons/download.xpm"
@@ -1147,6 +1289,8 @@ static void make_menu(GtkWidget *handlebox){
 			GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x10));
 /* PREFERENCES */
 	menu = shortcut_menu (MENUBAR, menubar, _("Preferences"), NULL, NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Set background color"), GTK_SIGNAL_FUNC (cb_select_colors), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Set font"), GTK_SIGNAL_FUNC (cb_select_font), NULL);
 	submenu = shortcut_menu (SUBMENU, menu, _("Browse as..."), GTK_SIGNAL_FUNC (select_user), NULL);
 
 /* HELP */
@@ -1202,7 +1346,11 @@ static void make_toolbar(GtkWidget *handlebox){
   int i;
   /* other pixmaps */
   GtkWidget *toolbar,*button;
+  gPIX_ip = MyCreateGdkPixmapFromData (ip_xpm, smb_nav, &gPIM_ip, FALSE);
+
+#if 0  
   gPIX_page = MyCreateGdkPixmapFromData (page_xpm, smb_nav, &gPIM_page, FALSE);
+  /* FIXME: read only icon missing in xtree_icons.c */
   gPIX_rpage = MyCreateGdkPixmapFromData (rpage_xpm, smb_nav, &gPIM_rpage, FALSE);
   gPIX_dir_open = MyCreateGdkPixmapFromData (dir_open_xpm, smb_nav, &gPIM_dir_open, FALSE);
   gPIX_dir_close = MyCreateGdkPixmapFromData (dir_close_xpm, smb_nav, &gPIM_dir_close, FALSE);
@@ -1215,7 +1363,7 @@ static void make_toolbar(GtkWidget *handlebox){
   gPIX_dotfile = MyCreateGdkPixmapFromData (dotfile_xpm, smb_nav, &gPIM_dotfile, FALSE);
   gPIX_rdotfile = MyCreateGdkPixmapFromData (rdotfile_xpm, smb_nav, &gPIM_rdotfile, FALSE);
   gPIX_print = MyCreateGdkPixmapFromData (print_xpm, smb_nav, &gPIM_print, FALSE);
-  gPIX_ip = MyCreateGdkPixmapFromData (ip_xpm, smb_nav, &gPIM_ip, FALSE);
+#endif
   
   toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
   gtk_toolbar_set_space_style ((GtkToolbar *) toolbar, GTK_TOOLBAR_SPACE_LINE);
@@ -1471,8 +1619,17 @@ create_smb_window (void)
     }
   }
   /* gtk_widget_set_usize (smb_nav, 640, 480); */
+  if (preferences & CUSTOM_COLORS) set_colors(shares); 
+  if (preferences & CUSTOM_FONT) create_pixmaps(set_fontT(shares),shares);
+  else create_pixmaps(-1,shares);
+#if 0
+  set_fontT(shares);
+#endif
   gtk_widget_show (smb_nav);
-  cb_view (NULL, (gpointer) ((long) 0x0));
+  if (preferences & VIEW_1) cb_view (NULL, (gpointer) ((long) 0x100));
+  if (preferences & VIEW_2) cb_view (NULL, (gpointer) ((long) 0x200));
+  if (preferences & VIEW_3) cb_view (NULL, (gpointer) ((long) 0x400));
+  if (preferences & VIEW_4) cb_view (NULL, (gpointer) ((long) 0x800));
   return smb_nav;
 }
 
@@ -1564,6 +1721,99 @@ gboolean sane (char *bin)
   free (globstring);
   free(path);
   return FALSE;
+}
+
+void save_defaults (void)
+{
+  FILE *defaults;
+  char *homedir;
+  int len;
+  struct stat h_stat;
+
+  len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFSAMBA_CONFIG_FILE) + 1;
+  homedir = (char *) malloc ((len) * sizeof (char));
+  if (!homedir) {
+failed_rc:
+    fprintf(stderr,"xfsamba: xfsambarc file cannot be created\n");
+    return;
+  }
+  snprintf (homedir, len, "%s/.xfce", (char *) getenv ("HOME"));
+  if (stat(homedir,&h_stat) < 0){
+	if (errno!=ENOENT) goto failed_rc;
+	if (mkdir(homedir,0770) < 0) goto failed_rc;
+  }
+
+  snprintf (homedir, len, "%s/.xfce/%s", (char *) getenv ("HOME"), XFSAMBA_CONFIG_FILE);
+  defaults = fopen (homedir, "w");
+  free (homedir);
+
+  if (!defaults)goto failed_rc;
+  fprintf (defaults, "# file created by xfsamba, if removed xfsamba returns to defaults.\n");
+  fprintf (defaults, "# do a bitwise or for preferences with %u (0x%x) to enable smaller dialogs.\n",
+		  (unsigned int)SMALL_DIALOGS,SMALL_DIALOGS);
+  
+  fprintf (defaults, "preferences : %d\n", preferences);
+  fprintf (defaults, "custom_font :%s\n",(custom_font)?custom_font:"fixed");
+  fprintf (defaults, "ctree_color : %d,%d,%d\n",ctree_color.red,ctree_color.green,ctree_color.blue);
+  
+  fclose (defaults);
+  return;
+}
+
+void read_defaults(void){
+  FILE *defaults;
+  char *homedir,*word;
+  int len;
+
+  /* default custom colors: */
+  ctree_color.red = ctree_color.green = ctree_color.blue = 10000;
+  
+  len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFSAMBA_CONFIG_FILE) + 1;
+  homedir = (char *) malloc ((len) * sizeof (char));
+  if (!homedir) {
+    fprintf(stderr,"xfsamba: xfsambarc file cannot be read\n");
+    return;
+  }
+  snprintf (homedir, len, "%s/.xfce/%s", (char *) getenv ("HOME"),XFSAMBA_CONFIG_FILE );
+  defaults = fopen (homedir, "r");
+  free (homedir);
+
+  if (!defaults) {
+          /* default view for first run to set initial rc file: */
+	  preferences = VIEW_1;
+	  return;
+  }
+  
+  homedir = (char *)malloc(256);
+  while (!feof(defaults)){
+	fgets(homedir,255,defaults);
+	if (feof(defaults))break;
+	if (strstr(homedir,"preferences :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");
+		if (!word) break;
+		preferences=atoi(word);
+	}
+	if (strstr(homedir,"custom_font :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");if (!word) break;
+		if (custom_font) free(custom_font);
+		custom_font=(char *)malloc(strlen(word)+1);
+		if (custom_font) strcpy(custom_font,word);
+	}
+	if (strstr(homedir,"ctree_color :")){
+		strtok(homedir,":");
+		word=strtok(NULL,",");if (!word) break;
+		ctree_color.red=atoi(word);
+		word=strtok(NULL,",");if (!word) break;
+		ctree_color.green=atoi(word);
+		word=strtok(NULL,"\n");if (!word) break;
+		ctree_color.blue=atoi(word);
+	}
+  }
+  free(homedir);
+  fclose(defaults);  
+ 
 }
 
 
