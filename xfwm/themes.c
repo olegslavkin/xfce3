@@ -3278,14 +3278,16 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
 
   flush_expose (win);
 
-  XFillRectangle (dpy, win, Scr.TransMaskGC, 0, 0, w, h - 2);
+  XFillRectangle (dpy, win, Scr.TransMaskGC, 0, 0, w, h);
 
   switch (type)
   {
   case SolidButton:
   case GradButton:
+    /*
     XDrawLine (dpy, win, LoGC, 0, h - 2, w, h - 2);
     XDrawLine (dpy, win, HiGC, 0, h - 1, w, h - 1);
+     */
     break;
   case VectorButton:
     XFillRectangle (dpy, win, Scr.TransMaskGC, 0, 0, w, h);
@@ -3300,22 +3302,15 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
       XCopyPlane (dpy, bf->bitmap, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
     }
 
-    /*
-    RelieveRectangle (win, 0, 0, w, h, LoGC, HiGC);
-    if (inverted)
-      RelieveRectangle (win, 1, 1, w - 2, h - 2, LoGC, HiGC);
-    else
-      RelieveRectangle (win, 1, 1, w - 2, h - 2, HiGC, LoGC);
-     */
     if (inverted)
     {
-      RelieveRectangle (win, 0, 0, w, h, Scr.BlackGC, HiGC);
-      RelieveRectangle (win, 1, 1, w - 2, h - 2, LoGC, Scr.TransMaskGC);
+      RelieveRectangle (win, 0, 0, w, h, LoGC, HiGC);
+      RelieveRectangle (win, 1, 1, w - 2, h - 2, Scr.BlackGC, Scr.TransMaskGC);
     }
     else
     {
-      XDrawLine (dpy, win, LoGC, 0, h - 2, w, h - 2);
-      XDrawLine (dpy, win, HiGC, 0, h - 1, w, h - 1);
+      RelieveRectangle (win, 0, 0, w, h, LoGC, HiGC);
+      RelieveRectangle (win, 1, 1, w - 2, h - 2, HiGC, LoGC);
     }
     break;
 
@@ -3388,7 +3383,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
   title_state = GetButtonState (t->title_w);
   tb_style = GetDecor (t, titlebar.state[title_state].style);
   tb_flags = GetDecor (t, titlebar.flags);
-  hor_off = 3;
+  hor_off = 5;
 
   if (GetDecor (t, WindowFont.font))
   {
