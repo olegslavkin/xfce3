@@ -247,8 +247,12 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
     for (;list!=NULL;list=list->next){
 	struct stat s_stat,t_stat;
         u = list->data;
+	/*fprintf(stderr,"dbg:url=%s\n",u->url);*/
 	s_en = entry_new_by_path (u->url);
-	if (!s_en) continue;
+	if (!s_en) {
+		/*fprintf(stderr,"dbg:s_en is NULL\n");*/
+		continue;
+	}
 	target=mktgpath(t_en,s_en);
 	
 	if (stat(target,&t_stat)<0){  /* follow link stat() */
@@ -269,9 +273,12 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 
 	/*fprintf(stderr,"dbg:target=%s\n",target);*/
 	switch (ok_input(parent,target,s_en)){
-		case DLG_RC_SKIP:  
+		case DLG_RC_SKIP:
+			/*fprintf(stderr,"dbg:skipping %s\n",s_en->path);*/
+		      		
 			  break;
 		case DLG_RC_CANCEL:  /* dnd cancelled */
+			/*fprintf(stderr,"dbg:cancelled %s\n",s_en->path);*/
 			 entry_free(s_en); 
 			 //cancel_drop(TRUE); 
     			 fclose (tmpfile);
@@ -287,6 +294,7 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 	entry_free(s_en); 	
     }
     fclose (tmpfile);
+    /*fprintf(stderr,"dbg:nitems = %d\n",nitems);*/
     if (!nitems) {
 	    unlink(fname);
 	    return NULL;
@@ -306,7 +314,7 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
   source=s_en->path;
 	/* check for valid source */
        /* fprintf(stderr,"dbg:at okinput %s->%s\n",s_en->path,target);*/
-  if (EN_IS_DIRUP (s_en) || !io_is_valid (s_en->label)) return 0;
+  if (EN_IS_DIRUP (s_en) || !io_is_valid (s_en->label)) return DLG_RC_CANCEL;
         /*fprintf(stderr,"dbg:at okinput 1 \n");*/
   if (stat (target, &t_stat) < 0) {
 	if (errno != ENOENT) return xf_dlg_error_continue (parent,target, strerror (errno));
@@ -320,9 +328,9 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
   
   /*fprintf(stderr,"dbg:at okinput 2 \n");*/
   /* target and source are the same */
-  if (t_stat.st_ino == s_stat.st_ino) {
+  if ((target_exists) && (t_stat.st_ino == s_stat.st_ino)) {
 	  /*fprintf(stderr,"dbg:nonsense imput\n");*/
-	  return 0;  
+	  return DLG_RC_CANCEL;  
   }
 
   if (S_ISFIFO(s_stat.st_mode)){
