@@ -70,8 +70,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(-, root, root)
-%{prefix}/lib/lib*.so*
-%{prefix}/lib/*a
+%{_libdir}/lib*.so*
+%{_libdir}/lib*.a
 
 %post
 /sbin/ldconfig
