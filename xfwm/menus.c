@@ -558,6 +558,7 @@ Bool PopUpMenu (MenuRoot * menu, int x, int y)
   XMoveWindow (dpy, menu->w, x, y);
   XMapRaised (dpy, menu->w);
   menu->in_use = True;
+  UninstallRootColormap ();
   return True;
 }
 
