@@ -120,6 +120,11 @@ AddWindow (Window w)
   XrmValue rm_value;
   Atom atype;
   extern XfwmWindow *colormap_win;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_depth, dummy_bw;
+
 
   /* allocate space for the xfwm window */
   tmp_win = (XfwmWindow *) safemalloc (sizeof (XfwmWindow));
@@ -130,16 +135,18 @@ AddWindow (Window w)
 
   XSync (dpy, 0);
   MyXGrabServer (dpy);
-  if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
+  if ((XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0) ||
+      (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0))
   {
     free (tmp_win);
     MyXUngrabServer (dpy);
     return NULL;
   }
 
-  tmp_win->old_bw = tmp_win->attr.border_width;
   XSetWindowBorderWidth (dpy, w, 0);
+
   tmp_win->flags = 0;
+  tmp_win->old_bw = tmp_win->attr.border_width;
   tmp_win->w = w;
   tmp_win->icon_arranged = False;
   tmp_win->triggered = False;
@@ -147,6 +154,7 @@ AddWindow (Window w)
   tmp_win->mwm_hints = NULL;
   tmp_win->cmap_windows = (Window *) NULL;
   tmp_win->name = NULL;
+
   GetWMName (tmp_win);
   tmp_win->icon_name = NULL;
   GetWMIconName (tmp_win);

@@ -490,20 +490,17 @@ Destroy (XfwmWindow * tmp_win)
 void
 RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 {
-  int a, b, x, y;
-  unsigned int bw;
+  int x, y, px, py;
   /* Dummy var for XGetGeometry */
   Window dummy_root, dummy_child;
-  unsigned int dummy_width, dummy_height, dummy_depth;
+  unsigned int dummy_width, dummy_height, dummy_depth, dummy_bw;
 
   if (!tmp)
     return;
 
-  if (XGetGeometry (dpy, tmp->w, &dummy_root, &x, &y, &dummy_width, &dummy_height, &bw, &dummy_depth))
+  if (XGetGeometry (dpy, tmp->w, &dummy_root, &x, &y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth))
   {
-    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, x, y, &a, &b, &dummy_child);
-    XReparentWindow (dpy, tmp->w, Scr.Root, a, b);
-
+    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, x, y, &px, &py, &dummy_child);
     if ((tmp->flags & ICONIFIED) && (!(tmp->flags & SUPPRESSICON)))
     {
       if (tmp->icon_w)
@@ -512,17 +509,9 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 	XUnmapWindow (dpy, tmp->icon_pixmap_w);
     }
 
-    if (restart)
-    {
-      unsigned int mask = 0;
-      XWindowChanges xwc;
-
-      mask = (CWX | CWY | CWBorderWidth);
-      xwc.x = a;
-      xwc.y = b;
-      xwc.border_width = tmp->old_bw;
-      XConfigureWindow (dpy, tmp->w, mask, &xwc);
-    }
+    GetGravityOffsets (tmp);
+    XReparentWindow (dpy, tmp->w, Scr.Root, px - tmp->gravx, py - tmp->gravy);
+    XSetWindowBorderWidth (dpy, tmp->w, tmp->old_bw);
     XSync (dpy, 0);
   }
 }
