@@ -161,7 +161,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   if (file) dl.file=g_strdup(file);
   else dl.file=NULL;
   dl.top = gtk_dialog_new ();
-  gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_MOUSE);
   gtk_window_set_title (GTK_WINDOW (dl.top), title);
   gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);

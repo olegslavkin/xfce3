@@ -263,7 +263,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   dl.data = defval;
 
   dl.top = gtk_dialog_new ();
-  gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_MOUSE);
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
   box = gtk_hbox_new (FALSE, FALSE);
   gtk_container_set_border_width (GTK_CONTAINER (box), 5);

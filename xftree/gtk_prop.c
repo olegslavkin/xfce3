@@ -201,6 +201,7 @@ xf_dlg_prop (GtkWidget *ctree,char *path, fprop * prop, int flags)
   dl.result = 0;
   dl.prop = prop;
   dl.top = gtk_dialog_new ();
+  gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_MOUSE);
   gtk_window_set_title (GTK_WINDOW (dl.top), _("Properties"));
   gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
