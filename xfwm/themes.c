@@ -4047,6 +4047,15 @@ RelieveWindow_linea (XfwmWindow * t, Window win, XRectangle *area, int x, int y,
   {
     XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
+    if (HiGC != ReliefGC)
+    {
+      XSetClipRectangles(dpy, HiGC, 0, 0, area, 1, Unsorted);
+    }
+    if (LoGC != ShadowGC)
+    {
+      XSetClipRectangles(dpy, LoGC, 0, 0, area, 1, Unsorted);
+    }
+    XSetClipRectangles(dpy, LoGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, Scr.TransMaskGC, 0, 0, area, 1, Unsorted);
   }
@@ -4297,6 +4306,14 @@ RelieveWindow_linea (XfwmWindow * t, Window win, XRectangle *area, int x, int y,
   {
     XSetClipMask(dpy, ReliefGC, None);
     XSetClipMask(dpy, ShadowGC, None);
+    if (HiGC != ReliefGC)
+    {
+      XSetClipMask(dpy, HiGC, None);
+    }
+    if (LoGC != ShadowGC)
+    {
+      XSetClipMask(dpy, LoGC, None);
+    }
     XSetClipMask(dpy, BackGC, None);
     XSetClipMask(dpy, Scr.TransMaskGC, None);
   }
