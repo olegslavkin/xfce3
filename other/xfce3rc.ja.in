@@ -134,6 +134,7 @@
 [Menu4]
 	XFSkin
 	XFCE_DIR/icons/xfskin.xpm
+	xfskin
 	XFPager
 	XFCE_DIR/icons/RayTracedGear.xpm
 	Module xfpager

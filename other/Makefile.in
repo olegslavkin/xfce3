@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -135,59 +135,15 @@ XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(conffiles_DATA) $(sysfiles_DATA) *.in
 
-CLEANFILES = \
- COPYING \
- xfbdrc \
- xfce3rc \
- xfce3rc.cs \
- xfce3rc.de \
- xfce3rc.fr \
- xfce3rc.hu \
- xfce3rc.ja \
- xfce3rc.ko \
- xfce3rc.nl \
- xfce3rc.sr \
- xfce3rc.uk \
- xfce3rc.zh_CN.GB2312 \
- xfce3rc.zh_TW.Big5 \
- xfsoundrc \
- xfwmrc \
- xinitrc.mwm \
- xinitrc
+CLEANFILES =   COPYING  xfbdrc  xfce3rc  xfce3rc.cs  xfce3rc.de  xfce3rc.fr  xfce3rc.hu  xfce3rc.ja  xfce3rc.ko  xfce3rc.nl  xfce3rc.sr  xfce3rc.uk  xfce3rc.zh_CN.GB2312  xfce3rc.zh_TW.Big5  xfsoundrc  xfwmrc  xinitrc.mwm  xinitrc
 
 
 conffilesdir = @XFCE_CONFDIR@
-conffiles_DATA = \
- Xclients \
- fvwm2rc \
- fvwmrc \
- xfbdrc \
- xfce3rc \
- xfce3rc.cs \
- xfce3rc.de \
- xfce3rc.fr \
- xfce3rc.hu \
- xfce3rc.ja \
- xfce3rc.ko \
- xfce3rc.nl \
- xfce3rc.sr \
- xfce3rc.uk \
- xfce3rc.zh_CN.GB2312 \
- xfce3rc.zh_TW.Big5 \
- xfclockrc \
- xfmouserc \
- xfsoundrc \
- xfwmrc \
- xinitrc.mwm \
- xinitrc \
- xsession \
- xtree.reg
+conffiles_DATA =   Xclients  fvwm2rc  fvwmrc  xfbdrc  xfce3rc  xfce3rc.cs  xfce3rc.de  xfce3rc.fr  xfce3rc.hu  xfce3rc.ja  xfce3rc.ko  xfce3rc.nl  xfce3rc.sr  xfce3rc.uk  xfce3rc.zh_CN.GB2312  xfce3rc.zh_TW.Big5  xfclockrc  xfmouserc  xfsoundrc  xfwmrc  xinitrc.mwm  xinitrc  xsession  xtree.reg
 
 
 sysfilesdir = @XFCE_DIR@
-sysfiles_DATA = \
- COPYING \
- XFce3.logo
+sysfiles_DATA =   COPYING  XFce3.logo
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
@@ -199,7 +155,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = gtar
+TAR = tar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
