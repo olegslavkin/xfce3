@@ -821,8 +821,17 @@ HandleExpose ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleExpose ()\n");
 #endif
+
   if (Tmp_win)
   {
+    XRectangle rect;
+
+    /* Retrieve clipping from event */
+    rect.x      = Event.xexpose.x;
+    rect.y      = Event.xexpose.y;
+    rect.width  = Event.xexpose.width;
+    rect.height = Event.xexpose.height;
+
     if ((Event.xany.window == Tmp_win->title_w))
     {
       SetTitleBar (Tmp_win, (Scr.Hilite == Tmp_win));
