@@ -108,4 +108,16 @@ void DrawTrianglePattern_trench (Window, GC, GC, GC, int, int, int, int);
 void RelieveIconTitle_trench (Window, int, int, GC, GC);
 void RelieveIconPixmap_trench (Window, int, int, GC, GC);
 
+void DrawButton_gtk (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Boolean, int);
+void DrawStripes_gtk (XfwmWindow *, Window, int, int, int, int, Bool);
+void SetTitleBar_gtk (XfwmWindow *, Bool);
+void RelieveWindow_gtk (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
+void RelieveHalfRectangle_gtk (Window, int, int, int, int, GC, GC, int);
+void DrawSelectedEntry_gtk (Window, int, int, int, int, GC *);
+void DrawTopMenu_gtk (Window, int, GC, GC);
+void DrawBottomMenu_gtk (Window, int, int, int, int, GC, GC);
+void DrawTrianglePattern_gtk (Window, GC, GC, GC, int, int, int, int);
+void RelieveIconTitle_gtk (Window, int, int, GC, GC);
+void RelieveIconPixmap_gtk (Window, int, int, GC, GC);
+
 #endif

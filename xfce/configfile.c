@@ -266,6 +266,9 @@ writeconfig (void)
 	case TRENCH_ENGINE:
 	  fprintf (configfile, "\tTrench_engine\n");
 	  break;
+	case GTK_ENGINE:
+	  fprintf (configfile, "\tGtk_engine\n");
+	  break;
 	default:
 	  fprintf (configfile, "\tXfce_engine\n");
 	  break;
@@ -776,6 +779,11 @@ readconfig (void)
           else if (!my_strncasecmp (p, "T", strlen ("T")))
             {
 	      current_config.xfwm_engine = TRENCH_ENGINE;
+	      p = nextline (configfile, lineread);
+            }
+          else if (!my_strncasecmp (p, "G", strlen ("G")))
+            {
+	      current_config.xfwm_engine = GTK_ENGINE;
 	      p = nextline (configfile, lineread);
             }
           else if (my_strncasecmp (p, "[", strlen ("[")))

@@ -35,7 +35,8 @@ typedef enum
 {
   XFCE_ENGINE,
   MOFIT_ENGINE,
-  TRENCH_ENGINE
+  TRENCH_ENGINE,
+  GTK_ENGINE
 }
 EngineType;
 

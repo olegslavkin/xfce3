@@ -76,6 +76,7 @@
 #define ENGINE_XFCE_CMD	    "Engine Xfce"
 #define ENGINE_MOFIT_CMD    "Engine Mofit"
 #define ENGINE_TRENCH_CMD   "Engine Trench"
+#define ENGINE_GTK_CMD      "Engine Gtk"
 
 void assume_event (unsigned long type, unsigned long *body);
 

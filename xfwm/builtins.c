@@ -3150,6 +3150,8 @@ engine_func (XEvent * eventp, Window w, XfwmWindow * tmp_win,
         Scr.engine = MOFIT_ENGINE;
     else if (mystrncasecmp (style, "T", 1) == 0)
         Scr.engine = TRENCH_ENGINE;
+    else if (mystrncasecmp (style, "G", 1) == 0)
+        Scr.engine = GTK_ENGINE;
     else
     {
         xfwm_msg (ERR, "Engine",

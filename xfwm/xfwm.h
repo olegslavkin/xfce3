@@ -86,7 +86,7 @@
 #define BOUNDARY_WIDTH 7	/* border width */
 #define CORNER_WIDTH 16		/* border width */
 
-#define HEIGHT_EXTRA 4		/* Extra height for texts in popus */
+#define HEIGHT_EXTRA 6		/* Extra height for texts in popus */
 #define HEIGHT_EXTRA_TITLE 4	/* Extra height for underlining title */
 #define HEIGHT_SEPARATOR 4	/* Height of separator lines */
 

@@ -1084,6 +1084,7 @@ create_setup (XFCE_palette * pal)
   xfwm_engines = g_list_append(xfwm_engines, "Xfce");
   xfwm_engines = g_list_append(xfwm_engines, "Mofit");
   xfwm_engines = g_list_append(xfwm_engines, "Trench");
+  xfwm_engines = g_list_append(xfwm_engines, "Gtk");
   setup_options.setup_xfwm_engine_combo = gtk_combo_new ();
   gtk_combo_set_popdown_strings (GTK_COMBO (setup_options.setup_xfwm_engine_combo), xfwm_engines);
   gtk_widget_set_name (setup_options.setup_xfwm_engine_combo, "setup_xfwm_engine_combo");
@@ -1841,6 +1842,10 @@ show_setup (XFCE_palette * pal)
       gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), 
                           "Trench");
       break;
+    case GTK_ENGINE:
+      gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), 
+                          "Gtk");
+      break;
     default:
       gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), 
                           "Xfce");
@@ -1855,6 +1860,10 @@ show_setup (XFCE_palette * pal)
     case TRENCH_ENGINE:
       gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), 
                       "Trench");
+      break;
+    case GTK_ENGINE:
+      gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), 
+                      "Gtk");
       break;
     default:
       gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), 
@@ -2020,6 +2029,8 @@ get_setup_values (void)
     current_config.xfwm_engine = XFCE_ENGINE;
   else if (!g_strncasecmp (xfwm_engine, "t", 1))
     current_config.xfwm_engine = TRENCH_ENGINE;
+  else if (!g_strncasecmp (xfwm_engine, "g", 1))
+    current_config.xfwm_engine = GTK_ENGINE;
   else
     current_config.xfwm_engine = MOFIT_ENGINE;
 
