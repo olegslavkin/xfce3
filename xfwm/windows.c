@@ -185,6 +185,10 @@ do_windowList (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
   {
     if (((u->win->Desk == desk) || (flags & SHOW_ALLDESKS)) && (!(u->win->flags & WINDOWLISTSKIP)))
     {
+      if (!(AcceptInput (u->win)))
+      {
+	continue;
+      }
       if (!(flags & SHOW_ICONIC) && (u->win->flags & ICONIFIED))
       {
 	continue;		/* don't want icons - skip */

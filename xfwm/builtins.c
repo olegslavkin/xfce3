@@ -2485,7 +2485,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
   t = NULL;
   for (tp = Scr.XfwmRoot.next; tp != NULL; tp = tp->next)
   {
-    if (!(tp->flags & CirculateSkip) && !((tp->flags & CirculateSkipIcon) && (tp->flags & ICONIFIED)))
+    if (AcceptInput (tp) && !(tp->flags & CirculateSkip) && !((tp->flags & CirculateSkipIcon) && (tp->flags & ICONIFIED)))
     {
       countw++;
       /* Select the second window in the list */
@@ -2576,7 +2576,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
 	    t = Scr.XfwmRoot.next;
 	  }
 	}
-	while ((t->flags & CirculateSkip) || ((t->flags & CirculateSkipIcon) && (t->flags & ICONIFIED)));
+	while (!AcceptInput(t) || (t->flags & CirculateSkip) || ((t->flags & CirculateSkipIcon) && (t->flags & ICONIFIED)));
       }
       else if (keysym == XK_space)
       {
