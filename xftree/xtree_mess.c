@@ -711,7 +711,7 @@ show_cat (char *message)
   gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (cat),_("Xftree results"));
   gtk_widget_realize (cat);
-  gdk_window_set_decorations (cat->window,GDK_DECOR_BORDER);
+  /* gdk_window_set_decorations (cat->window,GDK_DECOR_BORDER); */
 
 
   scrolled = gtk_scrolled_window_new (NULL, NULL);

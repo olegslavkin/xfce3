@@ -667,7 +667,7 @@ static void count_window(GtkWidget *parent){
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->action_area), count_label, TRUE, TRUE, 3);
   gtk_widget_show(count_label);
   gtk_widget_realize (countW);
-  gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER);
+  /* gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER); */
   if (parent) gtk_window_set_transient_for (GTK_WINDOW (countW), GTK_WINDOW (parent)); 
   gtk_widget_show_all(countW);
   gdk_flush();
