@@ -94,7 +94,7 @@ distclean: clean
 	rm -f Makefile Makefile.in xfbdrc xfce3rc xfsoundrc \
 	      xfwmrc system.xfwmrc COPYING xfce3rc.ja xfce3rc.ko \
 	      xfce3rc.zh_CN.GB2312 xfce3rc.zh_TW.Big5 xfce3rc.hu \
-              xfce3rc.nl xfce3rc.cs
+              xfce3rc.nl xfce3rc.cs xfce3rc.sr
 
 maintainer-clean: distclean
 
