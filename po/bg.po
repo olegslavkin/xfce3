@@ -2,10 +2,15 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: xfsamba/xfsamba_gui.c:1322 xfsamba/xfsamba_gui.c:1327
+#: xfsamba/xfsamba_gui.c:1333 xfsamba/xfsamba_gui.c:1338
+#: xfsamba/xfsamba_gui.c:1343 xftree/xtree_toolbar.c:93
+#: xftree/xtree_toolbar.c:99 xftree/xtree_toolbar.c:104
+#: xftree/xtree_toolbar.c:108 xftree/xtree_toolbar.c:112
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-20 20:06+0100\n"
+"POT-Creation-Date: 2002-03-29 12:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rumen G. Bogdanovski <rbogdanovski@yahoo.com>\n"
 "Language-Team: LANGUAGE\n"
@@ -28,7 +33,7 @@ msgstr "Избор на шрифт"
 
 #. this is an invisible button
 #: libs/xfce-common.c:268 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
-#: xfdiff/xfdiff_misc.c:136 xftree/xtree_toolbar.c:328
+#: xfdiff/xfdiff_misc.c:136 xftree/xtree_toolbar.c:343
 msgid "OK"
 msgstr "Добре"
 
@@ -83,18 +88,18 @@ msgstr "Разлисти..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
-#: xfce/setup.c:1162 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
-#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
-#: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:160 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
+#: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfsamba/xfsamba.c:254 xfsamba/xfsamba_gui.c:596
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:420
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
+#: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Добре"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
-#: xfce/setup.c:1179 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_prop.c:201
-#: xftree/xtree_cpy.c:1131 xfumed/xfumed_gui.c:359
+#: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Отказ"
 
@@ -181,12 +186,12 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:855
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
 msgid "Clear"
 msgstr "Изчисти"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:860
+#: xftree/xtree_mess.c:921
 msgid "Dismiss"
 msgstr "Отказ"
 
@@ -198,7 +203,7 @@ msgstr "Информация ..."
 #: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1243
 msgid "Couldn't create pixmap"
 msgstr "Не мога да създам pixmap"
 
@@ -542,23 +547,28 @@ msgstr "GNOME меню (xfmenu)"
 msgid "KDE menu (xfmenu)"
 msgstr "KDE меню (xfmenu)"
 
-#: xfce/setup.c:1125
+#: xfce/setup.c:1126
+#, fuzzy
+msgid "Debian menu (xfmenu)"
+msgstr "KDE меню (xfmenu)"
+
+#: xfce/setup.c:1138
 msgid "Palette"
 msgstr "Палитра"
 
-#: xfce/setup.c:1131
+#: xfce/setup.c:1144
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1137
+#: xfce/setup.c:1150
 msgid "Windows"
 msgstr "Прозорци"
 
-#: xfce/setup.c:1143 xfce/startup.c:60 xfsound/xfsound.c:88
+#: xfce/setup.c:1156 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
 msgstr "Стартиране"
 
-#: xfbd/xfbd.c:541 xfce/setup.c:1171 xfmouse/xfmouse.c:299
+#: xfbd/xfbd.c:541 xfce/setup.c:1184 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr "Приложи"
@@ -765,342 +775,379 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFce: Конуникационния канал затворен. Излизам...\n"
 
-#: xfce/xfwm.c:455 xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859
-#: xfwm/xfwm.c:860 xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
-#: xfwm/xfwm.c:864 xfwm/xfwm.c:865 xfwm/xfwm.c:866
+#: xfce/xfwm.c:455 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
+#: xfwm/xfwm.c:868 xfwm/xfwm.c:869 xfwm/xfwm.c:870 xfwm/xfwm.c:871
+#: xfwm/xfwm.c:872 xfwm/xfwm.c:873 xfwm/xfwm.c:874
 msgid "Workspace"
 msgstr "Екран"
 
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:302
+#: xftree/gtk_dlg.c:318
 msgid "_Ok"
 msgstr "_Добре"
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:307
+#: xftree/gtk_dlg.c:323
 msgid "_Yes"
 msgstr "_Да"
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:312
+#: xftree/gtk_dlg.c:328
 msgid "_Continue"
 msgstr "_Продължи"
 
-#: xftree/gtk_dlg.c:331 xftree/gtk_prop.c:215
-msgid "Skip"
-msgstr "Пропусни"
-
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:342
+#: xftree/gtk_dlg.c:351
 msgid "_Cancel"
 msgstr "_Отказ"
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:347
+#: xftree/gtk_dlg.c:356
 msgid "_No"
 msgstr "_Не"
 
+#: xftree/gtk_dlg.c:366 xftree/gtk_prop.c:229
+msgid "Skip"
+msgstr "Пропусни"
+
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:359
+#: xftree/gtk_dlg.c:376
 msgid "_All"
 msgstr "_Всички"
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:369
+#: xftree/gtk_dlg.c:386
 msgid "_Close"
 msgstr "_Затвори"
 
-#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:189
+#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
 msgstr "Отвори с..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:203
-#: xfwm/xfwm.c:892
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
+#: xfwm/xfwm.c:900
 msgid "Run program ..."
 msgstr "Стартирай с ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:189 xftree/xtree_gui.c:146
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
 msgid "Open in terminal"
 msgstr "Отвори в терминал"
 
-#: xftree/gtk_exec.c:193
+#: xftree/gtk_exec.c:220
 msgid "Remember application"
 msgstr "Запомни приложението"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:212
+#: xftree/gtk_exec.c:244
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Фатална грешка в %s на %d\n"
+
+#: xftree/gtk_exec.c:251 xftree/reg.c:662
+msgid "Can't find in PATH"
+msgstr ""
 
 #: xftree/gtk_get.c:96
 msgid " bytes received"
 msgstr " получени байта"
 
-#: xftree/gtk_prop.c:191 xftree/xtree_toolbar.c:106
+#: xftree/gtk_prop.c:205 xftree/xtree_toolbar.c:111
 msgid "Properties"
 msgstr "Параметри"
 
-#: xftree/gtk_prop.c:216
+#: xftree/gtk_prop.c:230
 msgid "All"
 msgstr "Всички"
 
 #. date and size page
-#: xftree/gtk_prop.c:227
+#: xftree/gtk_prop.c:241
 msgid "Info"
 msgstr "Информация"
 
-#: xftree/gtk_prop.c:232
+#: xftree/gtk_prop.c:246
 msgid "Name :"
 msgstr "Име :"
 
-#: xftree/gtk_prop.c:251
+#: xftree/gtk_prop.c:265
 msgid "Type :"
 msgstr "Тип :"
 
-#: xftree/gtk_prop.c:271
+#: xftree/gtk_prop.c:285
 msgid "Size :"
 msgstr "Размер : "
 
-#: xftree/gtk_prop.c:279
+#: xftree/gtk_prop.c:293
 msgid "Creation Time :"
 msgstr "Създаден на : "
 
-#: xftree/gtk_prop.c:287
+#: xftree/gtk_prop.c:301
 msgid "Modification Time :"
 msgstr "Променен на : "
 
-#: xftree/gtk_prop.c:295
+#: xftree/gtk_prop.c:309
 msgid "Access Time :"
 msgstr "Пследен Достъп : "
 
-#: xftree/gtk_prop.c:303
+#: xftree/gtk_prop.c:317
 msgid "Permissions"
 msgstr "Достъп"
 
-#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:307 xftree/gtk_prop.c:404
+#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:321 xftree/gtk_prop.c:418
 msgid "Owner :"
 msgstr "Собственик :"
 
 #: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
-#: xftree/gtk_prop.c:308 xftree/gtk_prop.c:332 xftree/gtk_prop.c:355
+#: xftree/gtk_prop.c:322 xftree/gtk_prop.c:346 xftree/gtk_prop.c:369
 msgid "Read"
 msgstr "Четене"
 
 #: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
-#: xftree/gtk_prop.c:312 xftree/gtk_prop.c:336 xftree/gtk_prop.c:359
+#: xftree/gtk_prop.c:326 xftree/gtk_prop.c:350 xftree/gtk_prop.c:373
 msgid "Write"
 msgstr "Запис"
 
 #: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
-#: xftree/gtk_prop.c:316 xftree/gtk_prop.c:340 xftree/gtk_prop.c:363
+#: xftree/gtk_prop.c:330 xftree/gtk_prop.c:354 xftree/gtk_prop.c:377
 msgid "Execute"
 msgstr "Изпълнение"
 
-#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:320
+#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:334
 msgid "Set UID"
 msgstr "UID"
 
-#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:331 xftree/gtk_prop.c:415
+#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:345 xftree/gtk_prop.c:429
 msgid "Group :"
 msgstr "Група :"
 
-#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:344
+#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:358
 msgid "Set GID"
 msgstr "GID"
 
-#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:354
+#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:368
 msgid "Other :"
 msgstr "Други :"
 
-#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:367
+#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:381
 msgid "Sticky"
 msgstr "Лепкав"
 
-#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1003
+#: xftree/gtk_prop.c:407 xftree/xtree_gui.c:1132
 msgid "Owner"
 msgstr "Собственик"
 
-#: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
-#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:842
-#: xftree/xtree_functions.c:844 xftree/xtree_go.c:180 xftree/xtree_go.c:181
-#: xftree/xtree_gui.c:1309 xftree/xtree_gui.c:1311
+#: xftree/gtk_prop.c:412 xftree/gtk_prop.c:423 xftree/xtree_functions.c:407
+#: xftree/xtree_functions.c:409 xftree/xtree_functions.c:455
+#: xftree/xtree_functions.c:457 xftree/xtree_go.c:188 xftree/xtree_go.c:189
+#: xftree/xtree_gui.c:1474 xftree/xtree_gui.c:1476
 msgid "unknown"
 msgstr "непознат"
 
-#: xftree/reg.c:545 xftree/xtree_cb.c:688 xftree/xtree_cb.c:805
-#: xftree/xtree_cpy.c:1184 xftree/xtree_cpy.c:1254
+#: xftree/gtk_prop.c:450
+msgid "RPM info"
+msgstr ""
+
+#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1374
 msgid "This function is not available for the contents of tar files"
 msgstr "Тази функция не е достъпна за съдържанието на tar файлове"
 
-#: xftree/reg.c:554
+#: xftree/reg.c:613
+#, fuzzy, c-format
+msgid "Register program for directory \"%s\""
+msgstr "Регистрирай програмата за фаил \"%s\""
+
+#: xftree/reg.c:620
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Не откривам разширение в името на файла, използвам пълното име"
 
-#: xftree/reg.c:561
+#: xftree/reg.c:627
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Регистрирай програмата за фаил \"%s\""
 
-#: xftree/reg.c:565
+#: xftree/reg.c:631
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Регистрирай програмата за разширение \"%s\""
 
-#: xftree/xtree.c:119
+#: xftree/xtree.c:220
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, на базата на XTree Версия %s\n"
 
-#: xftree/xtree.c:120
+#: xftree/xtree.c:221
 #, c-format
 msgid "directory: %s\n"
 msgstr "директория: %s\n"
 
-#: xftree/xtree.c:127 xftree/xtree.c:166
+#: xftree/xtree.c:228 xftree/xtree.c:267
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "създавам директория: %s\n"
 
-#: xftree/xtree.c:183
+#: xftree/xtree.c:284
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "геометрия: %dx%d+%d+%d\n"
 
-#: xftree/xtree_cb.c:320
+#: xftree/xtree_cb.c:327
 msgid "error deleting file"
 msgstr "Грешка при изтриване на файла"
 
 #. nothing to delete
-#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:763
+#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:753
 msgid "No files marked !"
 msgstr "Няма маркирани файлове!"
 
-#: xftree/xtree_cb.c:464 xftree/xtree_cb.c:466
+#: xftree/xtree_cb.c:475 xftree/xtree_cb.c:477
 msgid "Delete item ?"
 msgstr "Да изтрия ли ?"
 
-#: xftree/xtree_cb.c:476 xftree/xtree_cb.c:480
+#: xftree/xtree_cb.c:487 xftree/xtree_cb.c:491
 msgid "Can't move file to trash, hard delete ?"
 msgstr "Не мога да прехвърля файла в боклука, да го изтрия ?"
 
-#: xftree/xtree_cb.c:558
+#: xftree/xtree_cb.c:573
+msgid "This is XFTree "
+msgstr ""
+
+#: xftree/xtree_cb.c:573
 msgid ""
-"This is XFTree (C) under GNU GPL\n"
+" (C) under GNU GPL\n"
 "with code contributed by:\n"
 "Rasca, Berlin\n"
 "Olivier Fourdan\n"
 "Edscott Wilson Garcia\n"
 msgstr ""
 
-#: xftree/xtree_cb.c:576 xftree/xtree_cb.c:587
+#: xftree/xtree_cb.c:591 xftree/xtree_cb.c:602
 msgid "New_Folder"
 msgstr ""
 
-#: xftree/xtree_cb.c:625 xftree/xtree_cb.c:633
+#: xftree/xtree_cb.c:642 xftree/xtree_cb.c:650
 msgid "New_File"
 msgstr ""
 
-#: xftree/xtree_cb.c:653 xftree/xtree_cb.c:729 xftree/xtree_cpy.c:1295
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
 #, fuzzy
 msgid "File exists !"
 msgstr "Файлът съществува!"
 
-#: xftree/xtree_cb.c:682
+#: xftree/xtree_cb.c:699
 msgid "No item marked !"
 msgstr "Няма нищо маркирано!"
 
-#: xftree/xtree_cb.c:698
+#: xftree/xtree_cb.c:715
 msgid "Rename to : "
 msgstr "Преименувай на: "
 
-#: xftree/xtree_cb.c:706 xftree/xtree_cpy.c:1273
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
 msgid "Character not allowed in filename"
 msgstr "Неразрешен символ в името на файла"
 
-#: xftree/xtree_cb.c:790
+#: xftree/xtree_cb.c:807
 msgid "Nothing selected !"
 msgstr "Няма нищо избрано !"
 
-#: xftree/xtree_cb.c:1099
+#: xftree/xtree_cb.c:1069
+#, fuzzy
+msgid "command finished\n"
+msgstr "Команден Ред :"
+
+#: xftree/xtree_cb.c:1294
 msgid "Override?"
 msgstr "Да продължа?"
 
-#: xftree/xtree_cpy.c:158
+#: xftree/xtree_cpy.c:228
 msgid "Insufficient system memory"
 msgstr "Няма памет"
 
-#: xftree/xtree_cpy.c:178
+#: xftree/xtree_cpy.c:249
 msgid "Too few bytes transferred ! Device full ?"
 msgstr "Твърде малко байтове прехвърлени! Пълен диск ?"
 
-#: xftree/xtree_cpy.c:182
+#: xftree/xtree_cpy.c:253
 msgid "Too many bytes transferred !?"
 msgstr "Твърде много байтове прехвърлени ?!"
 
-#: xftree/xtree_cpy.c:186 xftree/xtree_cpy.c:190
+#: xftree/xtree_cpy.c:257 xftree/xtree_cpy.c:261
 msgid "Can't stat() file"
 msgstr "Не мога да изпълня stat() за фаила"
 
-#: xftree/xtree_cpy.c:194 xftree/xtree_cpy.c:198
+#: xftree/xtree_cpy.c:265 xftree/xtree_cpy.c:269
 msgid "Error closing file"
 msgstr "Грешка при затваряне на файла"
 
-#: xftree/xtree_cpy.c:202
+#: xftree/xtree_cpy.c:273
 msgid "Error deleting"
 msgstr "Грешка при изтриване"
 
-#: xftree/xtree_cpy.c:206 xftree/xtree_cpy.c:414
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
 msgid "Can't copy FIFO"
 msgstr "Не мога да копирам FIFO"
 
-#: xftree/xtree_cpy.c:210 xftree/xtree_cpy.c:417
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
 msgid "Can't copy device file"
 msgstr "Не мога да копирам фаил на устройство"
 
-#: xftree/xtree_cpy.c:214 xftree/xtree_cpy.c:420
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
 msgid "Can't copy socket"
 msgstr "Не мога да копирам SOCKET"
 
-#: xftree/xtree_cpy.c:715
+#: xftree/xtree_cpy.c:853
 msgid "Counting files"
 msgstr "Броя файлове"
 
-#: xftree/xtree_cpy.c:1034
+#: xftree/xtree_cpy.c:1225
 #, c-format
 msgid "%d / %d"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1109
+#: xftree/xtree_cpy.c:1301
 msgid "Source: "
 msgstr "Източник: "
 
-#: xftree/xtree_cpy.c:1116
+#: xftree/xtree_cpy.c:1308
 msgid "Target: "
 msgstr "Цел: "
 
-#: xftree/xtree_cpy.c:1123
-msgid "file x of x"
+#: xftree/xtree_cpy.c:1315
+msgid "beginning copy operation"
 msgstr ""
 
-#: xftree/xtree_cpy.c:1138
+#: xftree/xtree_cpy.c:1330
 msgid "XFTree: Copy"
 msgstr "XFTree: Копиране"
 
-#: xftree/xtree_cpy.c:1139
+#: xftree/xtree_cpy.c:1331
 msgid "XFTree: Move"
 msgstr "XFTree: Преместване"
 
-#: xftree/xtree_cpy.c:1140
+#: xftree/xtree_cpy.c:1332
 msgid "XFTree: Link"
 msgstr "XFTree: Връзване"
 
-#: xftree/xtree_cpy.c:1265
+#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
+#, fuzzy
+msgid "No file or directory selected!"
+msgstr "Няма избрана директория !"
+
+#: xftree/xtree_cpy.c:1439
+#, fuzzy
+msgid "Only one file or directory can be selected!"
+msgstr "Няма избрана директория !"
+
+#: xftree/xtree_cpy.c:1445
+#, fuzzy
+msgid "This function is not available for the contents of tar/rpm files"
+msgstr "Тази функция не е достъпна за съдържанието на tar файлове"
+
+#: xftree/xtree_cpy.c:1455
 msgid "Symlink name : "
 msgstr "Име на символната връзка: "
 
-#: xftree/xtree_dnd.c:141
+#: xftree/xtree_dnd.c:169
 msgid "Unknown action !"
 msgstr "Непознато действие!"
 
@@ -1112,358 +1159,413 @@ msgstr "Използване на диска:"
 msgid "No directory selected !"
 msgstr "Няма избрана директория !"
 
-#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1064
+#: xftree/xtree_functions.c:518 xftree/xtree_gui.c:1224
 msgid "files"
 msgstr "файл(а)"
 
-#: xftree/xtree_functions.c:495
+#: xftree/xtree_functions.c:581
 msgid "internal malloc error:"
 msgstr ""
 
-#: xftree/xtree_go.c:162
+#: xftree/xtree_go.c:171
 msgid "Cannot find path"
 msgstr "Не откривам пътя"
 
-#. Create "Goto" menu
-#: xftree/xtree_go.c:269 xftree/xtree_gui.c:706
+#. entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), "/", list);
+#: xftree/xtree_go.c:294 xftree/xtree_gui.c:810
 msgid "Go to"
 msgstr "Отиди"
 
-#: xftree/xtree_gui.c:145
-msgid "Open in new"
+#: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
+#: xftree/xtree_gui.c:123
+msgid "Extract files from"
+msgstr ""
+
+#: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
+#: xftree/xtree_gui.c:123
+msgid "Extract into"
+msgstr ""
+
+#: xftree/xtree_gui.c:120 xftree/xtree_gui.c:124 xftree/xtree_gui.c:125
+#: xftree/xtree_gui.c:126 xftree/xtree_gui.c:127
+msgid "Uncompress"
+msgstr ""
+
+#: xftree/xtree_gui.c:128 xftree/xtree_gui.c:129
+msgid "Install/update"
+msgstr ""
+
+#: xftree/xtree_gui.c:152 xftree/xtree_gui.c:564 xftree/xtree_gui.c:566
+#, fuzzy
+msgid "Open icon view"
 msgstr "Отвори в нов..."
 
-#: xftree/xtree_gui.c:148 xftree/xtree_toolbar.c:104
+#: xftree/xtree_gui.c:155
+#, fuzzy
+msgid "Open tree view"
+msgstr "Отвори в нов..."
+
+#: xftree/xtree_gui.c:156
+#, fuzzy
+msgid "Open terminal view"
+msgstr "Отвори в терминал"
+
+#: xfsamba/xfsamba_mkdir.c:200 xftree/xtree_gui.c:158
+#: xftree/xtree_toolbar.c:109
 msgid "New Folder"
 msgstr "Нова Папка"
 
-#: xftree/xtree_gui.c:149
+#: xftree/xtree_gui.c:159
 msgid "New file"
 msgstr "Нов Файл"
 
-#: xftree/xtree_gui.c:153
+#: xftree/xtree_gui.c:163
+#, fuzzy
+msgid "Touch ..."
+msgstr "Иди нагоре..."
+
+#: xftree/xtree_gui.c:164
 msgid "Symlink ..."
 msgstr "Символна връзка..."
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:154
-#: xftree/xtree_toolbar.c:100
+#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_gui.c:165
+#: xftree/xtree_toolbar.c:103
 msgid "Delete ..."
 msgstr "Изтрий..."
 
-#: xftree/xtree_gui.c:157
-msgid "Insert from pasteboard"
-msgstr "Вкарай от pasteboard"
+#: xftree/xtree_gui.c:168
+#, fuzzy
+msgid "Paste"
+msgstr "Постави..."
 
-#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:101
+#: xftree/xtree_gui.c:171 xftree/xtree_gui.c:220 xftree/xtree_toolbar.c:105
 msgid "Find ..."
 msgstr "Намери..."
 
-#: xftree/xtree_gui.c:161 xftree/xtree_gui.c:208
+#: xftree/xtree_gui.c:172 xftree/xtree_gui.c:224
 msgid "Show disk usage ..."
 msgstr "Покажи \"du\"..."
 
-#: xftree/xtree_gui.c:164
+#: xftree/xtree_gui.c:175
 #, fuzzy
-msgid "Cut to pasteboard"
-msgstr "Отрежи в pasteboard"
+msgid "Cut"
+msgstr "Отрежи..."
 
-#: xftree/xtree_gui.c:165
-msgid "Copy to pasteboard"
-msgstr "Копирай в pasteboard"
+#: xftree/xtree_gui.c:176
+msgid "Copy"
+msgstr "Копирай"
 
-#: xftree/xtree_gui.c:168
+#: xftree/xtree_gui.c:179
 msgid "List pasteboard contents"
 msgstr "Съдържание на pasteboard"
 
-#: xftree/xtree_gui.c:169
+#: xftree/xtree_gui.c:180
 msgid "Clear pasteboard"
 msgstr "Изчисти pasteboard"
 
-#: xftree/xtree_gui.c:171
+#: xftree/xtree_gui.c:182
 msgid "Select all"
 msgstr "Избери всичко"
 
-#: xftree/xtree_gui.c:172
+#: xftree/xtree_gui.c:183
 msgid "Unselect"
 msgstr "Откажи избора"
 
-#: xftree/xtree_gui.c:173 xftree/xtree_toolbar.c:109
+#: xftree/xtree_gui.c:184 xftree/xtree_toolbar.c:115
 msgid "Toggle Dotfiles"
 msgstr "Покажи/скрий .файловете"
 
-#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:107
+#: xftree/xtree_gui.c:186 xftree/xtree_toolbar.c:113
 msgid "Open Trash"
 msgstr "Отвори Боклука"
 
-#: xftree/xtree_gui.c:176 xftree/xtree_toolbar.c:108
+#: xftree/xtree_gui.c:187 xftree/xtree_toolbar.c:114
 msgid "Empty Trash"
 msgstr "Изхвърли Боклука"
 
-#: xftree/xtree_gui.c:180
+#: xftree/xtree_gui.c:191
 msgid "Duplicate"
 msgstr "Дублирай"
 
-#: xftree/xtree_gui.c:181
+#: xftree/xtree_gui.c:192
 msgid "Rename ..."
 msgstr "Преименувай..."
 
-#: xftree/xtree_gui.c:182
+#: xftree/xtree_gui.c:193
 msgid "Properties ..."
 msgstr "Свойства..."
 
-#: xftree/xtree_gui.c:186 xftree/xtree_gui.c:193 xftree/xtree_toolbar.c:94
+#: xftree/xtree_gui.c:197 xftree/xtree_gui.c:209 xftree/xtree_toolbar.c:96
 msgid "Go to ..."
 msgstr "Отиди в..."
 
-#: xftree/xtree_gui.c:190
+#: xftree/xtree_gui.c:206
 msgid "Register ..."
 msgstr "Регистрирай..."
 
-#: xftree/xtree_gui.c:196 xftree/xtree_toolbar.c:96
+#: xftree/xtree_gui.c:212 xftree/xtree_toolbar.c:98
 msgid "Go home"
 msgstr "Отиди в home"
 
-#: xftree/xtree_gui.c:197
+#: xftree/xtree_gui.c:213
 msgid "Go back"
 msgstr "Върни се"
 
-#: xftree/xtree_gui.c:198 xftree/xtree_toolbar.c:95
+#: xftree/xtree_gui.c:214 xftree/xtree_toolbar.c:97
 msgid "Go up"
 msgstr "Отиди нагоре"
 
-#: xftree/xtree_gui.c:199
+#: xftree/xtree_gui.c:215
 msgid "Update"
 msgstr "Осъвремени"
 
-#: xftree/xtree_gui.c:205 xftree/xtree_toolbar.c:102
+#: xftree/xtree_gui.c:221 xftree/xtree_toolbar.c:106
 msgid "Differences ..."
 msgstr "Разлики..."
 
-#: xftree/xtree_gui.c:206
+#: xftree/xtree_gui.c:222
 msgid "Patch viewer ..."
 msgstr ""
 
-#: xftree/xtree_gui.c:207 xftree/xtree_toolbar.c:103
+#: xftree/xtree_gui.c:223 xftree/xtree_toolbar.c:107
 msgid "Browse SMB network ..."
 msgstr "Раслисти SMB мрежата..."
 
-#: xftree/xtree_gui.c:211 xftree/xtree_toolbar.c:90
+#: xftree/xtree_gui.c:227 xftree/xtree_toolbar.c:91
 msgid "Close window"
 msgstr "Затвори прозореца"
 
-#: xftree/xtree_gui.c:212
+#: xftree/xtree_gui.c:228
 msgid "Quit ..."
 msgstr "Напусни..."
 
 #. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
-#: xftree/xtree_gui.c:217
+#: xftree/xtree_gui.c:233
 msgid "Subsort by file type"
 msgstr "Сортирай по тип"
 
-#: xftree/xtree_gui.c:218
+#: xftree/xtree_gui.c:234
 msgid "Enable filter"
 msgstr "Включи филтър"
 
-#: xftree/xtree_gui.c:219
+#: xftree/xtree_gui.c:235
 msgid "Abbreviate paths"
 msgstr "Съкратени пътища"
 
-#: xftree/xtree_gui.c:221
+#: xftree/xtree_gui.c:237
 msgid "Status box"
 msgstr "Статус линия"
 
-#: xftree/xtree_gui.c:222
+#: xftree/xtree_gui.c:238
 msgid "Status titles"
 msgstr "Заглавия на статуса"
 
-#: xftree/xtree_gui.c:223
+#: xftree/xtree_gui.c:239
 msgid "Short titles"
 msgstr "Съкратени имена"
 
-#: xftree/xtree_gui.c:225 xftree/xtree_toolbar.c:420
+#: xftree/xtree_gui.c:241 xftree/xtree_toolbar.c:436
 msgid "Hide toolbar"
 msgstr "Скрий инструментите"
 
-#: xftree/xtree_gui.c:226
+#: xftree/xtree_gui.c:242
 msgid "Hide titles"
 msgstr "Скрий антетката"
 
-#: xftree/xtree_gui.c:227
+#: xftree/xtree_gui.c:243
 msgid "Hide sizes"
 msgstr "Скрий размерите"
 
-#: xftree/xtree_gui.c:228
+#: xftree/xtree_gui.c:244
 msgid "Hide dates"
 msgstr "Скрий датите"
 
-#: xftree/xtree_gui.c:229
+#: xftree/xtree_gui.c:245
 msgid "Hide owner"
 msgstr "Сќрий собственика"
 
-#: xftree/xtree_gui.c:230
+#: xftree/xtree_gui.c:246
 msgid "Hide group"
 msgstr "Сќрий групата"
 
-#: xftree/xtree_gui.c:231
+#: xftree/xtree_gui.c:247
 msgid "Hide mode"
 msgstr "Сќрий режима"
 
-#: xftree/xtree_gui.c:234
+#: xftree/xtree_gui.c:248
+msgid "Hide ../ "
+msgstr ""
+
+#: xftree/xtree_gui.c:251
 msgid "Sort by file name"
 msgstr "Сортирай по име"
 
-#: xftree/xtree_gui.c:235
+#: xftree/xtree_gui.c:252
 msgid "Sort by file size"
 msgstr "Сортирай по размер"
 
-#: xftree/xtree_gui.c:236
+#: xftree/xtree_gui.c:253
 msgid "Sort by file date"
 msgstr "Сорћирай по дата"
 
-#: xftree/xtree_gui.c:465 xftree/xtree_gui.c:467
+#: xftree/xtree_gui.c:577 xftree/xtree_gui.c:579
 msgid "Create"
 msgstr "Създай"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:648
+#: xfsamba/xfsamba_gui.c:1262 xftree/xtree_gui.c:750
 msgid "File"
 msgstr "Файл"
 
 #. Create "Edit" menu
-#: xftree/xtree_gui.c:677 xfumed/xfumed_gui.c:129
+#: xfsamba/xfsamba_gui.c:1273 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr "Редакция"
 
 #. Create "Tools" menu
-#: xftree/xtree_gui.c:731
+#: xfsamba/xfsamba_gui.c:1285 xftree/xtree_gui.c:835
 msgid "Tools"
 msgstr "Инструменти"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:755
+#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:859
 msgid "View"
 msgstr "Изглед"
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:785
+#: xfsamba/xfsamba_gui.c:1300 xftree/xtree_gui.c:889
 msgid "Preferences"
 msgstr "Предпочитания..."
 
-#: xftree/xtree_gui.c:791
+#: xftree/xtree_gui.c:895
 msgid "Hide main menu"
 msgstr "Скрий главното меню"
 
-#: xftree/xtree_gui.c:799 xftree/xtree_gui.c:822
+#: xftree/xtree_gui.c:903 xftree/xtree_gui.c:933
 msgid "Save geometry on exit"
 msgstr "Запомни размерите при излизане"
 
-#: xftree/xtree_gui.c:806 xftree/xtree_gui.c:824
+#: xftree/xtree_gui.c:910 xftree/xtree_gui.c:935
 msgid "Double click does GOTO"
 msgstr "Двойно килкане прави GOTO"
 
-#: xftree/xtree_gui.c:814 xftree/xtree_gui.c:826
+#: xftree/xtree_gui.c:918 xftree/xtree_gui.c:937
 msgid "Drag does copy"
 msgstr "Влаченето копира"
 
-#: xftree/xtree_gui.c:830
+#: xftree/xtree_gui.c:925
+msgid "Use rsync instead of scp"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1301 xftree/xtree_gui.c:941
 msgid "Set background color"
 msgstr "Цвят на фона..."
 
-#: xftree/xtree_gui.c:835
+#: xfsamba/xfsamba_gui.c:1302 xftree/xtree_gui.c:946
 msgid "Set font"
 msgstr "Шрифт..."
 
-#: xftree/xtree_gui.c:841 xftree/xtree_toolbar.c:339
+#: xftree/xtree_gui.c:952 xftree/xtree_toolbar.c:354
 msgid "Configure toolbar"
 msgstr "Конфигурирай линията с интрументи"
 
-#: xftree/xtree_gui.c:846
+#: xftree/xtree_gui.c:957
 msgid "Redefine home directory"
 msgstr "Предефинирай home директорията"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:852
+#: xfsamba/xfsamba_gui.c:1307 xftree/xtree_gui.c:963
 msgid "Help"
 msgstr "Помощ"
 
-#: xftree/xtree_gui.c:859
+#: xftree/xtree_gui.c:970
+#, fuzzy
+msgid "Icon view"
+msgstr "Икона :"
+
+#: xfsamba/xfsamba_gui.c:1308 xftree/xtree_gui.c:975
 msgid "Drag and drop"
 msgstr "Влачене и пускане"
 
-#: xftree/xtree_gui.c:865
+#: xftree/xtree_gui.c:980
+msgid "Rsync and scp"
+msgstr ""
+
+#: xftree/xtree_gui.c:987
 msgid "Unlisted shortcut keys"
 msgstr "Непокзани бързи клавиши"
 
-#: xftree/xtree_gui.c:870
+#: xftree/xtree_gui.c:992
 msgid "Custom shortcut keys"
 msgstr "Поребилтелски бързи клавиши"
 
-#: xftree/xtree_gui.c:875
+#: xftree/xtree_gui.c:997
 msgid "Registered applications"
 msgstr "Регистрирани приложения"
 
-#: xftree/xtree_gui.c:881
+#: xftree/xtree_gui.c:1003
 msgid "About ..."
 msgstr "За..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:998
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1482 xftree/xtree_gui.c:1127
 msgid "Name"
 msgstr "Име"
 
 #. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1000
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1129
 msgid "Size (bytes)"
 msgstr "Размер (байтове)"
 
-#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1001
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1130
 msgid "Last changed"
 msgstr "Последна промяна"
 
-#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1002
+#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1131
 msgid "Mode"
 msgstr "Режим"
 
-#: xftree/xtree_gui.c:1004
+#: xftree/xtree_gui.c:1133
 msgid "Group"
 msgstr "Група"
 
-#: xftree/xtree_gui.c:1047
+#: xftree/xtree_gui.c:1207
 msgid "Filter:"
 msgstr "Филтър:"
 
-#: xftree/xtree_gui.c:1058
+#: xftree/xtree_gui.c:1218
 msgid "dirs"
 msgstr "директории"
 
-#: xftree/xtree_gui.c:1170
+#: xftree/xtree_gui.c:1331
 msgid "Show main menu"
 msgstr "Покажи главното меню"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:96
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
+#: xftree/xtree_mess.c:108
 msgid "Could not load specified font\n"
 msgstr "Не мога да заредя указаният шрифт\n"
 
-#: xftree/xtree_mess.c:429
+#: xftree/xtree_mess.c:452
 msgid "Override ?"
 msgstr "Да продължа?"
 
-#: xftree/xtree_mess.c:430
+#: xftree/xtree_mess.c:453
 msgid "with"
 msgstr "с"
 
-#: xftree/xtree_mess.c:509 xftree/xtree_mess.c:510 xftree/xtree_mess.c:526
-#: xftree/xtree_mess.c:527
+#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
+#: xftree/xtree_mess.c:550
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Главният xftreerc файл не може да бъде създаден\n"
 
-#: xftree/xtree_mess.c:563
+#: xftree/xtree_mess.c:586
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Главният xftreerc файл не може да бъде прочетен\n"
 
-#: xftree/xtree_mess.c:757
+#: xftree/xtree_mess.c:789
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1474,8 +1576,27 @@ msgstr ""
 "го засветите и натиснете клавиш за да го\n"
 "превърнете в бърз."
 
+#: xftree/xtree_mess.c:798
+msgid ""
+"The Xftree icon view is the ROX-filer. At the moment this has to be "
+"installed\n"
+"separately from XFCE. A ROX-filer specific for XFCE will soon be available."
+msgstr ""
 
-#: xftree/xtree_mess.c:766
+#: xftree/xtree_mess.c:807
+msgid ""
+"Xftree allows you to drag and drop to/from\n"
+"xftree windows running on different hosts.\n"
+"You may use either scp or rsync for the copying.\n"
+"User authentication is done by ssh.\n"
+"See \"man ssh\" if you desire host based\n"
+"instead of password based authentication.\n"
+"\n"
+"Xftree will also accept drops from other\n"
+"filemanagers running on different hosts.\n"
+msgstr ""
+
+#: xftree/xtree_mess.c:823
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1490,7 +1611,8 @@ msgstr ""
 "Ако искате да промените регистрираните приложения разгледайте\n"
 "файл ~/.xfce/xtree.reg."
 
-#: xftree/xtree_mess.c:775
+#: xftree/xtree_mess.c:832
+#, fuzzy
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1499,6 +1621,9 @@ msgid ""
 "The default drag+drop action is move,\n"
 "but can be changed in the preferences menu.\n"
 "To drag multiple files, use the middle button.\n"
+"Also:\n"
+"Multiple selection by button 1 click-and-drag\n"
+"is available on the first click after a GOTO or REGEN.\n"
 msgstr ""
 "Xftree поддържа влачене и пускане по следния начин:\n"
 "SHIFT влачене+пускане --> премества\n"
@@ -1508,87 +1633,138 @@ msgstr ""
 "но може да се промени от менюто \"Предпочитания\".\n"
 "За влачене на много файлове, използвайте средния бутон.\n"
 
-
-#: xftree/xtree_mess.c:790
+#: xftree/xtree_mess.c:850
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr "Бързите клавиши са начин за бърз достъп до функциите на менюто."
 
-#: xftree/xtree_mess.c:833
+#: xftree/xtree_mess.c:894
 msgid "Xftree results"
 msgstr "Xftree резултати"
 
-#: xftree/xtree_mess.c:1060
+#: xftree/xtree_mess.c:1147
 msgid "Home directory : "
 msgstr "Home директория : "
 
-#: xftree/xtree_pasteboard.c:96
-msgid "Cannot create pasteboard\n"
-msgstr "Не мога да създам pasteboard\n"
-
-#: xftree/xtree_pasteboard.c:189 xftree/xtree_pasteboard.c:262
+#: xfsamba/xfsamba_dnd.c:528 xftree/xtree_pasteboard.c:166
 msgid "The pasteboard is currently empty."
 msgstr "Pasteboard е празен."
 
-#: xftree/xtree_pasteboard.c:283
-msgid "Pasteboard contents:\n"
-msgstr "Съсържание на pasteboard:\n"
+#: xfsamba/xfsamba_dnd.c:535 xftree/xtree_pasteboard.c:173
+msgid "Not a valid file transfer pasteboard."
+msgstr ""
+
+#: xftree/xtree_pasteboard.c:244
+#, fuzzy
+msgid "The pasteboard is currently empty.\n"
+msgstr "Pasteboard е празен."
+
+#: xftree/xtree_pasteboard.c:246
+msgid "No pasteboard available."
+msgstr ""
+
+#: xftree/xtree_tar.c:387
+msgid "tar: execution error"
+msgstr ""
 
 #. only 32 elements allowed in TOOLBARICONS
 #: xftree/xtree_toolbar.c:88
-msgid "New window"
+#, fuzzy
+msgid "New icon view"
 msgstr "Нов прозорец"
 
 #: xftree/xtree_toolbar.c:89
-msgid "Terminal"
-msgstr "Терминал"
+msgid "New tree view"
+msgstr ""
 
-#: xftree/xtree_toolbar.c:91
+#: xftree/xtree_toolbar.c:90
+#, fuzzy
+msgid "New terminal"
+msgstr "Отвори в терминал"
+
+#: xftree/xtree_toolbar.c:92
 msgid "Run ..."
 msgstr "Стартирай..."
 
-#: xftree/xtree_toolbar.c:92
+#: xftree/xtree_toolbar.c:94
 msgid "Update ..."
 msgstr "Осъвремени..."
 
-#: xftree/xtree_toolbar.c:93
+#: xftree/xtree_toolbar.c:95
 msgid "Go back ..."
 msgstr "Върни се..."
 
-#: xftree/xtree_toolbar.c:97
+#: xfsamba/xfsamba_gui.c:1328 xftree/xtree_toolbar.c:100
 msgid "Cut ..."
 msgstr "Отрежи..."
 
-#: xftree/xtree_toolbar.c:98
+#: xfsamba/xfsamba_gui.c:1329 xftree/xtree_toolbar.c:101
 msgid "Copy ..."
 msgstr "Копирай..."
 
-#: xftree/xtree_toolbar.c:99
+#: xfsamba/xfsamba_gui.c:1330 xftree/xtree_toolbar.c:102
 msgid "Paste ..."
 msgstr "Постави..."
 
-#: xftree/xtree_toolbar.c:105
+#: xftree/xtree_toolbar.c:110
 msgid "New file ..."
 msgstr "Нов файл..."
 
-#: xftree/xtree_toolbar.c:322
+#: xftree/xtree_toolbar.c:337
 msgid "Action"
 msgstr "Действие"
 
-#: xftree/xtree_toolbar.c:323
+#: xftree/xtree_toolbar.c:338
 msgid "Small icons. "
 msgstr "Малки икони. "
 
-#: xftree/xtree_toolbar.c:324
+#: xftree/xtree_toolbar.c:339
 msgid "Large icons. "
 msgstr "Големи икони. "
 
-#: xftree/xtree_toolbar.c:327
+#: xftree/xtree_toolbar.c:342
 msgid "Regen"
 msgstr "Върни"
 
-#: xftree/xtree_toolbar.c:427
+#: xftree/xtree_toolbar.c:443
 msgid "Large buttons"
 msgstr "Големи бутони"
+
+#. printf("dbg:%s\n",_("File download failed."));
+#: xftree/xtree_smb.c:175
+#, fuzzy
+msgid "File download failed."
+msgstr "Изтегли файл"
+
+#: xftree/xtree_smb.c:199
+#, fuzzy
+msgid "Downloading files from "
+msgstr "Изтегли файл"
+
+#: xftree/xtree_smb.c:232
+msgid ""
+"SMB downloads disabled.\n"
+"Command not found"
+msgstr ""
+
+#: xftree/xtree_smb.c:238
+#, fuzzy
+msgid "Cannot open"
+msgstr ""
+"Грешка\n"
+"Не мога да отворя фаила"
+
+#: xftree/xtree_smb.c:263
+#, fuzzy
+msgid "DnD error"
+msgstr "фатална грешка"
+
+#: xftree/xtree_smb.c:263
+msgid "Incorrect DnD specification"
+msgstr ""
+
+#: xftree/xtree_smb.c:307
+msgid "Only drops from a single share are allowed"
+msgstr ""
 
 #. convenience location of duplicate dialog texts
 #. non-static
@@ -1660,7 +1836,6 @@ msgid "Include subdirectories?"
 msgstr ""
 
 #: xfdiff/xfdiff.c:583
-#, fuzzy
 msgid "Working diff...\n"
 msgstr ""
 
@@ -1816,7 +1991,6 @@ msgid "Font selection"
 msgstr "Избор на шрифт"
 
 #: xfdiff/xfdiff_gui.c:585
-#, fuzzy
 msgid "Select highlight background color"
 msgstr ""
 
@@ -1873,22 +2047,18 @@ msgstr ""
 
 #. only spot where directories for input is not OK:
 #: xfdiff/xfdiff_gui.c:984
-#, fuzzy
 msgid "That is a directory (or symlink)"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1169
-#, fuzzy
 msgid "Select left file"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1170
-#, fuzzy
 msgid "Select right file"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1171
-#, fuzzy
 msgid "Select patch file"
 msgstr ""
 
@@ -1905,21 +2075,18 @@ msgid "Switch to diff mode"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
-#: xfsamba/xfsamba_gui.c:1022
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1270
 msgid "Exit"
 msgstr ""
 
 #. Create "Settings" menu
 #: xfdiff/xfdiff_gui.c:1186
-#, fuzzy
 msgid "Diff Settings"
 msgstr ""
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
 #: xfdiff/xfdiff_gui.c:1189
-#, fuzzy
 msgid "Font"
 msgstr ""
 
@@ -1928,7 +2095,6 @@ msgid "Highlight text color"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1191
-#, fuzzy
 msgid "Highlight background color"
 msgstr ""
 
@@ -1949,7 +2115,6 @@ msgid "Save settings as default"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1203
-#, fuzzy
 msgid "Patch Settings"
 msgstr ""
 
@@ -1976,7 +2141,6 @@ msgid "Actions"
 msgstr "Действие"
 
 #: xfdiff/xfdiff_gui.c:1244
-#, fuzzy
 msgid "View differences"
 msgstr ""
 
@@ -1993,12 +2157,10 @@ msgid "View patch created differences in new"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1255
-#, fuzzy
 msgid "Create patch file"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1262
-#, fuzzy
 msgid "Apply patch to Hard Drive"
 msgstr ""
 
@@ -2007,7 +2169,6 @@ msgid "Undo patch to Hard Drive"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1922
-#, fuzzy
 msgid "About"
 msgstr ""
 
@@ -2019,22 +2180,18 @@ msgstr ""
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
 #: xfdiff/xfdiff_gui.c:1603
-#, fuzzy
 msgid "Next difference"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1606
-#, fuzzy
 msgid "Prev difference"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1607
-#, fuzzy
 msgid "Next file"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1608
-#, fuzzy
 msgid "Previous file"
 msgstr ""
 
@@ -2043,17 +2200,14 @@ msgid "Could not set selected font"
 msgstr ""
 
 #: xfdiff/xfdiff_misc.c:130
-#, fuzzy
 msgid "Confirm"
 msgstr ""
 
 #: xfdiff/xfdiff_misc.c:130
-#, fuzzy
 msgid "Abort"
 msgstr ""
 
 #: xfdiff/xfdiff_misc.c:136
-#, fuzzy
 msgid "Alert"
 msgstr ""
 
@@ -2102,17 +2256,14 @@ msgid "Please select it in the next dialog."
 msgstr ""
 
 #: xfdiff/xfdiff_misc.c:738
-#, fuzzy
 msgid "File exists, overwrite?"
 msgstr ""
 
 #: xfdiff/xfdiff_misc.c:742
-#, fuzzy
 msgid "Cannot open file for write\n"
 msgstr ""
 
 #: xfdiff/xfdiff_misc.c:924 xfdiff/xfdiff_misc.c:929
-#, fuzzy
 msgid "couldn't allocate color"
 msgstr ""
 
@@ -2567,7 +2718,7 @@ msgid "Hide/show calendar"
 msgstr "Сќрий/поќажи календара"
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:884
+#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:892
 msgid "Settings"
 msgstr "Настройки"
 
@@ -2867,128 +3018,128 @@ msgstr ""
 msgid "File not found.\n"
 msgstr "XFce : %s файл не е открит.\n"
 
-#: xfwm/xfwm.c:854
+#: xfwm/xfwm.c:862
 msgid "&Restart"
 msgstr "&Рестарт"
 
-#: xfwm/xfwm.c:855
+#: xfwm/xfwm.c:863
 msgid "&Quit"
 msgstr "&Изход"
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:876
 msgid "&Move"
 msgstr "&Премести"
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:877
 msgid "&Resize"
 msgstr "&Размер"
 
-#: xfwm/xfwm.c:870
+#: xfwm/xfwm.c:878
 msgid "(De)&Iconify"
 msgstr "(Де)&Иконизиране"
 
-#: xfwm/xfwm.c:871
+#: xfwm/xfwm.c:879
 msgid "(Un)&Stick"
 msgstr "&Залепяне/Отлепяне"
 
-#: xfwm/xfwm.c:872
+#: xfwm/xfwm.c:880
 msgid "(Un)S&hade"
 msgstr "Свиване/Разтягане"
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:881
 msgid "(Un)Ma&ximize"
 msgstr "(Де)&Максимизиране"
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:883
 msgid "Se&nd to..."
 msgstr "&Изпрати на..."
 
-#: xfwm/xfwm.c:876
+#: xfwm/xfwm.c:884
 msgid "S&witch to..."
 msgstr "Прехвърли &на..."
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:886
 msgid "&Close"
 msgstr "&Затвори"
 
-#: xfwm/xfwm.c:880
+#: xfwm/xfwm.c:888
 msgid "User Menu"
 msgstr "Потребителско меню"
 
-#: xfwm/xfwm.c:881
+#: xfwm/xfwm.c:889
 msgid "Edit menu..."
 msgstr "Редактирай менюто..."
 
-#: xfwm/xfwm.c:885
+#: xfwm/xfwm.c:893
 msgid "&Mouse..."
 msgstr "&Мишка..."
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:894
 msgid "&Backdrop..."
 msgstr "&Декорация..."
 
-#: xfwm/xfwm.c:887
+#: xfwm/xfwm.c:895
 msgid "&Sound..."
 msgstr "&Звук"
 
-#: xfwm/xfwm.c:889
+#: xfwm/xfwm.c:897
 msgid "&New window"
 msgstr "&Нов прозорец"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:898
 msgid "&User Menu"
 msgstr "Потребителско меню"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:902
 msgid "&Arrange icons"
 msgstr "Подреди &иконите"
 
-#: xfwm/xfwm.c:895
+#: xfwm/xfwm.c:903
 msgid "&Iconify all"
 msgstr "Иконизирай всички"
 
-#: xfwm/xfwm.c:896
+#: xfwm/xfwm.c:904
 msgid "&Refresh"
 msgstr "&Обнови"
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:905
 msgid "Shuffle &Up"
 msgstr "Превърти На&горе"
 
-#: xfwm/xfwm.c:898
+#: xfwm/xfwm.c:906
 msgid "Shuffle &Down"
 msgstr "Превърти На&долу"
 
-#: xfwm/xfwm.c:900
+#: xfwm/xfwm.c:908
 msgid "&Settings"
 msgstr "&Настройки"
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:910
 msgid "&Quit XFwm"
 msgstr "&Напусни XFwm"
 
-#: xfwm/xfwm.c:904
+#: xfwm/xfwm.c:912
 #, fuzzy
 msgid "&Full Screen"
 msgstr "Цял Екран"
 
-#: xfwm/xfwm.c:905
+#: xfwm/xfwm.c:913
 msgid "&Vertical"
 msgstr "Вертикално"
 
-#: xfwm/xfwm.c:906
+#: xfwm/xfwm.c:914
 msgid "&Horizontal"
 msgstr "Хоризонтално"
 
-#: xfwm/xfwm.c:1236
+#: xfwm/xfwm.c:1244
 msgid "xfwm terminated: "
 msgstr "xfwm прекъсна: "
 
-#: xfsamba/xfsamba.c:223
+#: xfsamba/xfsamba.c:242
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr ""
 
-#: xfsamba/xfsamba.c:231
+#: xfsamba/xfsamba.c:250
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr ""
 
@@ -3002,7 +3153,6 @@ msgid "Download done."
 msgstr ""
 
 #: xfsamba/xfsamba_download.c:127
-#, fuzzy
 msgid "Downloading file..."
 msgstr ""
 
@@ -3011,11 +3161,10 @@ msgid "File download cancelled."
 msgstr ""
 
 #: xfsamba/xfsamba_download.c:148
-#, fuzzy
 msgid "Download failed."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:145
+#: xfsamba/xfsamba_gui.c:319
 msgid ""
 "If you have win95 nodes on your network, xfsamba might not find\n"
 "a master browser. If you start smb services on your linux box,\n"
@@ -3025,274 +3174,339 @@ msgid ""
 "you must type in the node to be browsed and hit RETURN.\n"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:151
+#: xfsamba/xfsamba_gui.c:324
+msgid ""
+"Full drag and drop capability is provided between xfsamba and\n"
+"the companion file browser \"xftree\". Drag and drop may or not\n"
+"work with other file browsers"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:331
+msgid ""
+"In order to mount SMB share, the following samba files must be suid-root:\n"
+"- smbmnt\n"
+"- smbumount\n"
+"these file are usually in /usr/bin, and root must perform:\n"
+"$ chmod u+s smbmount smbumount\n"
+"(This option is not available in FreeBSD4.4)"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:343
+msgid ""
+"To search for files on remote SMB shares\n"
+"first mount the share with the mount tool\n"
+"and then use the xftree search utility to do the search\n"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:350
+msgid ""
+"To view differences on a remote SMB share\n"
+"first mount the share with the mount tool\n"
+"and then use the xftree diff utility to display the differences.\n"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:358
 msgid "This is XFSamba "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:151
+#: xfsamba/xfsamba_gui.c:358
 msgid ""
 "\n"
-"(c) Edscott Wilson Garcia under GNU GPL\n"
-"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+"(c) Edscott Wilson Garcia under GNU GPL"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:337
+#: xfsamba/xfsamba_gui.c:542
 msgid "Please provide information for server "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:339
+#: xfsamba/xfsamba_gui.c:544
 msgid "Please provide browsing preferences "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:356
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:561
 msgid "Username : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:376
+#: xfsamba/xfsamba_gui.c:585
 msgid "Password  : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:414
-msgid "A file must be selected!"
+#: xfsamba/xfsamba_gui.c:625 xfsamba/xfsamba_gui.c:631
+msgid "A single file can be selected!"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:423 xfsamba/xfsamba_gui.c:432
-#: xfsamba/xfsamba_gui.c:455
-msgid "A directory must be selected!"
-msgstr ""
+#: xfsamba/xfsamba_gui.c:644 xfsamba/xfsamba_gui.c:650
+#: xfsamba/xfsamba_gui.c:663 xfsamba/xfsamba_gui.c:669
+#: xfsamba/xfsamba_gui.c:719 xfsamba/xfsamba_gui.c:725
+#, fuzzy
+msgid "A single directory must be selected!"
+msgstr "Няма избрана директория !"
 
-#: xfsamba/xfsamba_gui.c:442
+#: xfsamba/xfsamba_gui.c:683 xfsamba/xfsamba_gui.c:706
 msgid "Something to be deleted must be selected!"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:756
-msgid "Going to master browser..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:766
-msgid "Going back..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:778
-msgid "Going forward..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:794
-msgid "Attempting to stop query..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:798
-msgid "Query stopped."
-msgstr ""
-
-#. (s): multiple file upload/download to be enabled in future
-#: xfsamba/xfsamba_gui.c:1016
-#, fuzzy
-msgid "Download..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1017
-#, fuzzy
-msgid "Upload..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1019
-#, fuzzy
-msgid "New folder..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1020
-#, fuzzy
-msgid "Delete..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:441
-#, fuzzy
-msgid "Tar..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1025
-#, fuzzy
-msgid "Browse as..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1029
-msgid "Show diagnostics"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1030
-msgid "Hide diagnostics"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1031
-msgid "Show browser links"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1032
-msgid "Hide browser links"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1034
-msgid "Go"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1035
-#, fuzzy
-msgid "Home..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1036
-#, fuzzy
-msgid "Reload..."
+#: xfsamba/xfsamba_gui.c:694
+msgid "Only elements from a single share may be selected!"
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1037
+msgid "Going to master browser..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1047
+msgid "Going back..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1059
+msgid "Going forward..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1075
+msgid "Attempting to stop query..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1079
+msgid "Query stopped."
+msgstr ""
+
+#. (s): multiple file upload/download enabled by DnD mostly
+#: xfsamba/xfsamba_gui.c:1264
+msgid "Download..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1265
+msgid "Upload..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1267
+msgid "New folder..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1268
+msgid "Delete..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1269 xfsamba/xfsamba_tar.c:441
+msgid "Tar..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1274
 #, fuzzy
+msgid "Paste..."
+msgstr "Постави..."
+
+#: xfsamba/xfsamba_gui.c:1275
+#, fuzzy
+msgid "Cut..."
+msgstr "Отрежи..."
+
+#: xfsamba/xfsamba_gui.c:1276
+#, fuzzy
+msgid "Copy..."
+msgstr "Копирай..."
+
+#. GOTO
+#: xfsamba/xfsamba_gui.c:1279
+msgid "Go"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1280
+msgid "Home..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1281
+msgid "Reload..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1282
 msgid "Forward..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1038
+#: xfsamba/xfsamba_gui.c:1283
 #, fuzzy
 msgid "Back..."
 msgstr "&Backdrop..."
 
-#: xfsamba/xfsamba_gui.c:1040
-msgid "About master browser..."
+#: xfsamba/xfsamba_gui.c:1286
+msgid "Local file browser"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1041
+#: xfsamba/xfsamba_gui.c:1287
+msgid "Mount remote share"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1291
+msgid "Show diagnostics"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1293
+msgid "Hide diagnostics"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1295
+msgid "Show browser links"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1297
+msgid "Hide browser links"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1303
+msgid "Browse as..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1309
 #, fuzzy
-msgid "About xfsamba..."
+msgid "Mounting SMB shares"
+msgstr "Броя файлове"
+
+#: xfsamba/xfsamba_gui.c:1310
+#, fuzzy
+msgid "Searching"
+msgstr "Предупреждение"
+
+#: xfsamba/xfsamba_gui.c:1311
+#, fuzzy
+msgid "Differences"
+msgstr "Разлики..."
+
+#: xfsamba/xfsamba_gui.c:1312
+#, fuzzy
+msgid "Master browsers"
+msgstr "Пощенска кутия/Браузър"
+
+#: xfsamba/xfsamba_gui.c:1313
+msgid "About xfsamba"
 msgstr ""
 
-#.
-#. hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{
-#.
-#. icon bar
-#: xfsamba/xfsamba_gui.c:1050
+#: xfsamba/xfsamba_gui.c:1317
+msgid "Stop ..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1321
+#, fuzzy
+msgid "Xftree ..."
+msgstr "Разлики..."
+
+#: xfsamba/xfsamba_gui.c:1323
 #, fuzzy
 msgid "Back ..."
 msgstr "&Backdrop..."
 
-#: xfsamba/xfsamba_gui.c:1054
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1324
 msgid "Forward ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1058
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1325
 msgid "Reload ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1063
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1326
 msgid "Home ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1067
-#, fuzzy
-msgid "Stop ..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1076
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1331
 msgid "New folder ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1090
+#: xfsamba/xfsamba_gui.c:1334
 #, fuzzy
+msgid "Mount ..."
+msgstr "За..."
+
+#: xfsamba/xfsamba_gui.c:1335
 msgid "Download ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1095
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1336
 msgid "Upload ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1101
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1337
 msgid "Tar ..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1111
-#, fuzzy
-msgid "Help ..."
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1120
-msgid "Set View 3"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1125
-msgid "Set View 2"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1130
+#: xfsamba/xfsamba_gui.c:1339
 msgid "Set View 1"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1141
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1340
+msgid "Set View 2"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1341
+msgid "Set View 3"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1342
+msgid "Set View 4"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1344
+msgid "Help ..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1428
 msgid "Location : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1155
+#: xfsamba/xfsamba_gui.c:1442
 msgid "Show IP"
 msgstr ""
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1181
+#: xfsamba/xfsamba_gui.c:1468
 msgid "Location shares : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1196
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1483
 msgid "Size"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1197
-#, fuzzy
+#: xfsamba/xfsamba_gui.c:1484
 msgid "Date"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1198
+#: xfsamba/xfsamba_gui.c:1485
 msgid "Comment"
 msgstr ""
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1239
+#: xfsamba/xfsamba_gui.c:1534
 msgid "Location known servers : "
 msgstr ""
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1267
+#: xfsamba/xfsamba_gui.c:1562
 msgid "Location known workgroups : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1325
+#: xfsamba/xfsamba_gui.c:1624
 msgid "Welcome to xfsamba."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:188
+#. no jalo para arreglar directorios:
+#. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
+#.
+#: xfsamba/xfsamba_list.c:233
 msgid "Retrieve done."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:159
+#: xfsamba/xfsamba_list.c:238 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:232
+#: xfsamba/xfsamba_list.c:281
 msgid "List failed."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:251
+#: xfsamba/xfsamba_list.c:300
 msgid "Retreiving..."
 msgstr ""
 
 #: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
 #: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
-#, fuzzy
 msgid "Resolved"
 msgstr ""
 
@@ -3300,29 +3514,27 @@ msgstr ""
 msgid "Resolving for"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:83
-#, fuzzy
+#: xfsamba/xfsamba_smblookup.c:86
 msgid "Shares"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:85
+#: xfsamba/xfsamba_smblookup.c:88
 msgid "Links to other servers"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:87
+#: xfsamba/xfsamba_smblookup.c:90
 msgid "Links to other workgroups"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:142
+#: xfsamba/xfsamba_smblookup.c:154
 msgid "Query done."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:144
+#: xfsamba/xfsamba_smblookup.c:160
 msgid "Query failed. Machine may be down."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:323
-#, fuzzy
+#: xfsamba/xfsamba_smblookup.c:340
 msgid "Querying"
 msgstr ""
 
@@ -3364,61 +3576,57 @@ msgid ""
 msgstr ""
 
 #: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
-#, fuzzy
 msgid "Resolving"
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:102
-msgid "Please provide a name for the new directory at"
-msgstr ""
-
-#: xfsamba/xfsamba_mkdir.c:200
+#: xfsamba/xfsamba_mkdir.c:91
 msgid "Directory creation failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:209
-#, fuzzy
+#: xfsamba/xfsamba_mkdir.c:100
 msgid "Directory created."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:250
-#, fuzzy
+#: xfsamba/xfsamba_mkdir.c:149
 msgid "Create directory cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:261
-#, fuzzy
+#: xfsamba/xfsamba_mkdir.c:160
 msgid "Create directory failed."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:292
-#, fuzzy
+#: xfsamba/xfsamba_mkdir.c:185
 msgid "Creating dir..."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:86
-msgid "Remove failed. See diagnostics for details."
-msgstr ""
-
-#: xfsamba/xfsamba_rm.c:92
-msgid "Remove complete."
-msgstr ""
-
-#: xfsamba/xfsamba_rm.c:126
+#. here, dialog to ask new dir name
+#: xfsamba/xfsamba_mkdir.c:200
 #, fuzzy
-msgid "Removing..."
+msgid "New directory name:"
+msgstr "Home директория : "
+
+#: xfsamba/xfsamba_rm.c:48
+msgid "Really delete remote items?"
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:131
-msgid "Sorry, top level shares cannot be removed."
-msgstr ""
-
-#: xfsamba/xfsamba_rm.c:134 xfsamba/xfsamba_rm.c:187
+#: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:187
 msgid "Remove cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:221
-msgid "Confirm remove?"
+#: xfsamba/xfsamba_rm.c:135
+msgid "Remove failed. See diagnostics for details."
+msgstr ""
+
+#: xfsamba/xfsamba_rm.c:150
+msgid "Remove complete."
+msgstr ""
+
+#: xfsamba/xfsamba_rm.c:177
+msgid "Removing..."
+msgstr ""
+
+#: xfsamba/xfsamba_rm.c:184
+msgid "Sorry, top level shares cannot be removed."
 msgstr ""
 
 #: xfsamba/xfsamba_tar.c:121
@@ -3446,12 +3654,10 @@ msgid "Tar cancelled."
 msgstr ""
 
 #: xfsamba/xfsamba_tar.c:203
-#, fuzzy
 msgid "Cannot open tar file"
 msgstr ""
 
 #: xfsamba/xfsamba_tar.c:214
-#, fuzzy
 msgid "Cannot create tar file"
 msgstr ""
 
@@ -3468,7 +3674,6 @@ msgid "full"
 msgstr ""
 
 #: xfsamba/xfsamba_tar.c:374
-#, fuzzy
 msgid "incremental"
 msgstr ""
 
@@ -3484,34 +3689,55 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:91
-msgid "File upload failed. See diagnostics for reason."
-msgstr ""
-
-#: xfsamba/xfsamba_upload.c:101
-msgid "Upload done."
-msgstr ""
-
-#: xfsamba/xfsamba_upload.c:119
+#: xfsamba/xfsamba_upload.c:104
 msgid "Uploaded file."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:153
-#, fuzzy
+#: xfsamba/xfsamba_upload.c:136
+msgid "File upload failed. See diagnostics for reason."
+msgstr ""
+
+#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:282
+msgid "Upload done."
+msgstr ""
+
+#: xfsamba/xfsamba_upload.c:168
 msgid "Uploading file..."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:159
+#: xfsamba/xfsamba_upload.c:174
 msgid "File upload cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:169
+#: xfsamba/xfsamba_upload.c:184
 msgid "Specified file does not exist"
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:170 xfsamba/xfsamba_upload.c:184
-#, fuzzy
+#: xfsamba/xfsamba_upload.c:185 xfsamba/xfsamba_upload.c:199
 msgid "Upload failed."
+msgstr ""
+
+#: xfsamba/xfsamba_upload.c:252
+msgid "Upload produced errors. See diagnostics for reason."
+msgstr ""
+
+#: xfsamba/xfsamba_upload.c:359
+#, fuzzy
+msgid "Uploading files..."
+msgstr "Броя файлове"
+
+#: xfsamba/xfsamba_dnd.c:502
+#, fuzzy
+msgid "No target selected!"
+msgstr "Няма избрана директория !"
+
+#: xfsamba/xfsamba_dnd.c:507
+#, fuzzy
+msgid "More than one target selected!"
+msgstr "Няма нищо избрано !"
+
+#: xfsamba/xfsamba_dnd.c:545
+msgid "Files are on a remote host"
 msgstr ""
 
 #: xfumed/xfumed_gui.c:47
@@ -3612,18 +3838,30 @@ msgstr "Подменю"
 msgid "Separator"
 msgstr "Разделител"
 
+#~ msgid "Insert from pasteboard"
+#~ msgstr "Вкарай от pasteboard"
+
 #, fuzzy
-#~ msgid "child:bytes:%d bytes received (%d bps)"
-#~ msgstr ""
+#~ msgid "Cut to pasteboard"
+#~ msgstr "Отрежи в pasteboard"
+
+#~ msgid "Copy to pasteboard"
+#~ msgstr "Копирай в pasteboard"
+
+#~ msgid "Cannot create pasteboard\n"
+#~ msgstr "Не мога да създам pasteboard\n"
+
+#~ msgid "Pasteboard contents:\n"
+#~ msgstr "Съсържание на pasteboard:\n"
+
+#~ msgid "Terminal"
+#~ msgstr "Терминал"
 
 #~ msgid "Information"
 #~ msgstr "Информация"
 
 #~ msgid "Error"
 #~ msgstr "Грешка"
-
-#~ msgid "Warning"
-#~ msgstr "Предупреждение"
 
 #~ msgid "Dialog"
 #~ msgstr "Диалог"
@@ -3643,15 +3881,12 @@ msgstr "Разделител"
 #~ msgid "%d bytes"
 #~ msgstr "%d байта"
 
-#, fuzzy
-#~ msgid "dbg:malloc error in %s at line %d\n"
-#~ msgstr ""
-
 #~ msgid "menu_detach()\n"
 #~ msgstr "menu_detach()\n"
 
 #~ msgid "Can't copy device, fifo and socket files as regular files!\n"
-#~ msgstr "Не мога да кпирам файл на устройство, fifo и socket в обикновен файл!\n"
+#~ msgstr ""
+#~ "Не мога да кпирам файл на устройство, fifo и socket в обикновен файл!\n"
 
 #~ msgid "move_dir() recursive failed\n"
 #~ msgstr "move_dir() рекурсивно пропадна\n"
@@ -3696,9 +3931,6 @@ msgstr "Разделител"
 #~ msgid "transfer()"
 #~ msgstr "transfer()"
 
-#~ msgid "fatal error"
-#~ msgstr "фатална грешка"
-
 #~ msgid "Error getting info from"
 #~ msgstr "Грешка при получаване на информация от"
 
@@ -3741,10 +3973,6 @@ msgstr "Разделител"
 
 #~ msgid "Override file ?"
 #~ msgstr "Да припокрия файла?"
-
-#, fuzzy
-#~ msgid "Go up ..."
-#~ msgstr "Иди нагоре..."
 
 #~ msgid "Go to marked"
 #~ msgstr "Иди на маркитаното"
@@ -3790,14 +4018,10 @@ msgstr "Разделител"
 #, fuzzy
 #~ msgid "Permissions :"
 #~ msgstr "Достъп :"
- 
+
 #, fuzzy
 #~ msgid "Executable"
 #~ msgstr "Изпълним"
-
-#, fuzzy
-#~ msgid "Download file"
-#~ msgstr "Изтегли файл"
 
 #, fuzzy
 #~ msgid "Reload"
@@ -3809,10 +4033,6 @@ msgstr "Разделител"
 
 #~ msgid "&Cancel"
 #~ msgstr "&Отказ"
-
-#, fuzzy
-#~ msgid "Do patch in new"
-#~ msgstr ""
 
 #~ msgid "Fatal error %s:%d\n"
 #~ msgstr "Фатална грешка %s:%d\n"
@@ -3837,9 +4057,6 @@ msgstr "Разделител"
 
 #~ msgid "Are you sure you want to quit ?"
 #~ msgstr "Наистина ли искаш да излезеш?"
-
-#~ msgid "Copy"
-#~ msgstr "Копирай"
 
 #~ msgid " Starting XFTree ... "
 #~ msgstr "Стартирам XFTree..."
