@@ -43,8 +43,8 @@ void set_show_cpy(char *target,char *source);
 void set_show_cpy_bar(int item,int nitems);
 char *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en);
 gboolean DeleteTmpList(char *tmpfile);
-gboolean IndirectTransfer(GtkWidget *parent,int mode,char *tmpfile);
-gboolean DirectTransfer(GtkWidget *parent,int mode,char *tmpfile);
+gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile);
+gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile);
 void set_override(gboolean state);
 gboolean on_same_device(void);
 

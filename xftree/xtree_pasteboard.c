@@ -212,7 +212,7 @@ invalid_paste:
   /*fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
 
    if (tmpfile) {
-	  IndirectTransfer(win->top,TR_COPY,tmpfile);
+	  IndirectTransfer((GtkWidget *)ctree,TR_COPY,tmpfile);
 	  unlink(tmpfile);  
   }
   return;

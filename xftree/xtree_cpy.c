@@ -101,6 +101,7 @@ static void *rw_fork_obj;
 static GtkWidget *cat,*info[3],*progress;
 static gboolean I_am_child=FALSE,incomplete_target=FALSE;
 static char *fork_target,*fork_source;
+static int child_file_number,child_path_number;
 
 
 static int ok_input(GtkWidget *parent,char *target,entry *s_en);
@@ -367,16 +368,16 @@ static int  child_mode;
 static gboolean SubChildTransfer(char *target,char *source){
 	struct stat s_stat,t_stat;
 	int i,rc;
-	
 	if (stat(target,&t_stat)<0){  /* follow link stat() */
 		char *route,*end;
-		route=(char *)malloc(strlen(target+1));
+		route=(char *)malloc(strlen(target)+1);
 		if (route) {
 		  strcpy(route,target);
-		  end=strrchr(route,'/');
-		  if (end==route) end[1]=0; /* root directory */
-		  else end[0]=0;
-		  stat(route,&t_stat);
+		  if ((end=strrchr(route,'/'))!=NULL) {
+		    if (end==route) end[1]=0; /* root directory */
+		    else end[0]=0;
+		    stat(route,&t_stat);
+		  }
 		  free(route);
 		}
 	}
@@ -391,8 +392,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 	if (S_ISDIR(s_stat.st_mode)) { /* directories fall in here, going recursive */
   		glob_t dirlist;
 		char *globstring,*newtarget,*src;
-		
-		
+			
 		globstring = (char *)malloc(strlen(source)+3);
 		if (!globstring) return FALSE;
 		sprintf(globstring,"%s/*",source);
@@ -490,7 +490,7 @@ void finish (int sig)
 static void ChildTransfer(void){
 	FILE *tfile;
 	char *line,*source,*target;
-	int type,i;
+	int type;
 	
 	I_am_child=TRUE;
 	signal(SIGTERM,finish);
@@ -505,7 +505,7 @@ static void ChildTransfer(void){
 		process_error(RW_ERRNO);
 		_exit(123);
 	}
-	i=0;
+	child_path_number=0;
 	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile)){
 		/*fprintf(stderr,"dbg:%s\n",line);*/
 		type=atoi(strtok(line,":"));
@@ -514,7 +514,8 @@ static void ChildTransfer(void){
 		
 		/*fprintf(stderr,"dbg:(%d)%s->%s\n",type,source,target);*/
 		fprintf(stdout,"child:tgt-src:%s:%s\n",target,source);
-		fprintf(stdout,"child:item:%d\n",i++);
+		fprintf(stdout,"child:item:%d\n",child_path_number++);
+		child_file_number=0;
 		if (!SubChildTransfer(target,source)) break;
 
 		/* child version of copy will cancel operation if
@@ -537,42 +538,50 @@ static void ChildTransfer(void){
 	_exit(123);
 }
 
-gboolean IndirectTransfer(GtkWidget *parent,int mode,char *tmpfile) {
-    GtkWidget *cpy_dlg=NULL;
-    if (CHILD_FILE_LENGTH < strlen("/tmp/xftree.9999.tmp")+1){
+gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
+        GtkWidget *cpy_dlg=NULL;
+	cfg *win;
+
+	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+        if (CHILD_FILE_LENGTH < strlen("/tmp/xftree.9999.tmp")+1){
 		fprintf(stderr,"dbg:This is a serious mistake, I need %d bytes\n",
 				strlen("/tmp/xftree.9999.tmp")+1);
 	}		
 	strncpy(child_file,tmpfile,CHILD_FILE_LENGTH);
 	child_file[CHILD_FILE_LENGTH-1]=(char)0;
 	child_mode = mode;
-  	if (!cpy_dlg) cpy_dlg=show_cpy(parent,TRUE,mode);
+  	if (!cpy_dlg) cpy_dlg=show_cpy(win->top,TRUE,mode);
         set_show_cpy_bar(0,nitems);
         /*fprintf(stderr,"dbg:about to fork with %s\n",tmpfile);*/
+	gtk_timeout_remove(win->timer);
+	fflush(NULL);
         rw_fork_obj = Tubo (ChildTransfer, rwForkOver, TRUE, rwStdout, rwStderr);
+	/* only parent continues from here */
+        win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);	
 	/*fprintf(stderr,"dbg:call to innerloop from IndirectTransfer()\n");*/
 	set_innerloop(TRUE);
        if (cpy_dlg) set_show_cpy_bar(nitems,nitems);
-       show_cpy(parent,FALSE,mode);
+       show_cpy(win->top,FALSE,mode);
        return TRUE;
 }
 
 /* function for non forked move on same device */
-gboolean DirectTransfer(GtkWidget *parent,int mode,char *tmpfile) {
+gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	FILE *tfile;
 	char *line,*source,*target;
 	int type,i;
-	
+	cfg *win;
     	/*fprintf(stderr,"dbg: at DirectTransfer\n");*/
-	
+        
+	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 	line=(char *)malloc(MAX_LINE_SIZE);
 	if (!line) {
-		xf_dlg_error(parent,strerror(errno),NULL);
+		xf_dlg_error(win->top,strerror(errno),NULL);
 		return FALSE;
 	}
 	tfile=fopen(tmpfile,"r");
 	if (!tfile) {
-		xf_dlg_error(parent,strerror(errno),tmpfile);
+		xf_dlg_error(win->top,strerror(errno),tmpfile);
 		return FALSE;
 	}
 	i=0;
@@ -584,7 +593,7 @@ gboolean DirectTransfer(GtkWidget *parent,int mode,char *tmpfile) {
 		
 		/* moveit */
 	        if (rename (source, target) < 0){
-		  if (xf_dlg_error_continue(parent,strerror(errno),target)==DLG_RC_CANCEL)
+		  if (xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL)
 	          	return FALSE;
 		}
 	}
@@ -604,6 +613,7 @@ static int internal_rw_file(char *target,char *source,long int size){
 	char *buffer;
 	gboolean too_few=FALSE,too_many=FALSE;
 
+	
 	fork_target=target;
 	fork_source=source;
 	buffer=(char *)malloc(BUFFER_SIZE);
@@ -612,7 +622,7 @@ static int internal_rw_file(char *target,char *source,long int size){
 	/* open source */
 	source_file=open(source,O_RDONLY);
 	if (source_file < 0) {
-		free(buffer);
+	free(buffer);
 		return (RW_ERROR_OPENING_SRC);
 	}
 	/* open target */
@@ -631,12 +641,14 @@ static int internal_rw_file(char *target,char *source,long int size){
 	 * Closing the source file is not necesary 
 	 * because the child process will terminate, closing it then. 
 	 * */
+	child_file_number++;
 	while ((i = read (source_file,buffer,BUFFER_SIZE)) > 0){
 		if ((j=write(target_file,buffer,i)) < 0) break;
 		if (i > j){ too_few=TRUE; break;}
 		if (i < j){ too_many=TRUE; break;}
 		total_size += j;
-		fprintf(stdout,"child:bytes:%d bytes\n",total_size);fflush(NULL);
+		fprintf(stdout,"child:bytes:path %d, file %d -> %d bytes\n",
+				child_path_number,child_file_number,total_size);fflush(NULL);
 		/* don't hog cpu: */
 		usleep(5000);
 	}

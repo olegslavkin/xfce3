@@ -176,8 +176,8 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     // acording to tmpfile name, do a direct move, here, and break.
     cursor_wait (GTK_WIDGET (ctree));
     /* FIXME: links on same device should also be a DirectTransfer() */
-    if (on_same_device() && (mode == TR_MOVE)) DirectTransfer(win->top,mode,tmpfile);
-    else IndirectTransfer(win->top,mode,tmpfile);
+    if (on_same_device() && (mode == TR_MOVE)) DirectTransfer(ctree,mode,tmpfile);
+    else IndirectTransfer(ctree,mode,tmpfile);
     
     unlink(tmpfile);
     
