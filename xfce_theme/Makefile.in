@@ -96,7 +96,6 @@ HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
 HAVE_LIBXML2 = @HAVE_LIBXML2@
-ICONV_LIBS = @ICONV_LIBS@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
 INSTOBJEXT = @INSTOBJEXT@
@@ -137,9 +136,7 @@ LIBS = $(GTK_LIBS)
 enginedir = @GTK_ENGINE_DIR@
 
 engine_LTLIBRARIES = libxfce.la
-libxfce_la_SOURCES = \
-	xfce_theme_draw.c	\
-	xfce_theme_main.c
+libxfce_la_SOURCES =  	xfce_theme_draw.c		xfce_theme_main.c
 
 
 libxfce_la_LDFLAGS = -module -avoid-version

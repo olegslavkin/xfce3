@@ -96,7 +96,6 @@ HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
 HAVE_LIBXML2 = @HAVE_LIBXML2@
-ICONV_LIBS = @ICONV_LIBS@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
 INSTOBJEXT = @INSTOBJEXT@
@@ -133,10 +132,7 @@ XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(noinst_DATA)
-noinst_DATA = \
-	dir_close.xpm \
-	dir_open.xpm \
-	exe.xpm
+noinst_DATA =  	dir_close.xpm 	dir_open.xpm 	exe.xpm
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h

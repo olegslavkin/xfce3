@@ -67,7 +67,7 @@ xfce_distcvs =  \
   xfce_icon.h
 
 xfce_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ \
- @GDK_PIXBUF_LIBS@ @ICONV_LIBS@ ${LIBXML2_LIBS} \
+ @GDK_PIXBUF_LIBS@ ${LIBXML2_LIBS} \
  @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
 
 xfce_DEPENDENCIES = ../libs/libxfcecore.la

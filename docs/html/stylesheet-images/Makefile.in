@@ -96,7 +96,6 @@ HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
 HAVE_LIBXML2 = @HAVE_LIBXML2@
-ICONV_LIBS = @ICONV_LIBS@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
 INSTOBJEXT = @INSTOBJEXT@
@@ -134,19 +133,7 @@ XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(stylesheetimages_DATA)
 stylesheetimagesdir = $(XFCE_DIR)/help/html/stylesheet-images
-stylesheetimages_DATA = \
- warning.gif \
- toc-blank.gif \
- note.gif \
- toc-plus.gif \
- important.gif \
- tip.gif \
- home.gif \
- toc-minus.gif \
- prev.gif \
- up.gif \
- next.gif \
- caution.gif
+stylesheetimages_DATA =   warning.gif  toc-blank.gif  note.gif  toc-plus.gif  important.gif  tip.gif  home.gif  toc-minus.gif  prev.gif  up.gif  next.gif  caution.gif
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../../config.h

@@ -96,7 +96,6 @@ HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
 HAVE_GDK_PIXBUF = @HAVE_GDK_PIXBUF@
 HAVE_IMLIB = @HAVE_IMLIB@
 HAVE_LIBXML2 = @HAVE_LIBXML2@
-ICONV_LIBS = @ICONV_LIBS@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
 INSTOBJEXT = @INSTOBJEXT@
@@ -133,32 +132,7 @@ XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(noinst_DATA)
-noinst_DATA = \
- GPL.sgml \
- license.sgml \
- preface.sgml \
- userman.sgml \
- xfce-help.sgml \
- advanced-xfwm.sgml \
- ch-fileman.sgml \
- ch-install.sgml \
- ch-overview.sgml \
- ch-panel.sgml \
- ch-resources.sgml \
- ch-setup.sgml \
- ch-utilities.sgml \
- ch-wm-appearance.sgml \
- ch-wm-bindings.sgml \
- ch-wm-commands.sgml \
- ch-wm-defaults.sgml \
- ch-wm-examples.sgml \
- ch-wm-general.sgml \
- ch-wm-management.sgml \
- ch-wm-menus.sgml \
- ch-wm.sgml \
- ch-wm-style.sgml \
- ch-wm-xresources.sgml \
- copyright.sgml
+noinst_DATA =   GPL.sgml  license.sgml  preface.sgml  userman.sgml  xfce-help.sgml  advanced-xfwm.sgml  ch-fileman.sgml  ch-install.sgml  ch-overview.sgml  ch-panel.sgml  ch-resources.sgml  ch-setup.sgml  ch-utilities.sgml  ch-wm-appearance.sgml  ch-wm-bindings.sgml  ch-wm-commands.sgml  ch-wm-defaults.sgml  ch-wm-examples.sgml  ch-wm-general.sgml  ch-wm-management.sgml  ch-wm-menus.sgml  ch-wm.sgml  ch-wm-style.sgml  ch-wm-xresources.sgml  copyright.sgml
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h

@@ -128,7 +128,6 @@ GDK_PIXBUF_CFLAGS = @GDK_PIXBUF_CFLAGS@
 DMALLOC_LIB = @DMALLOC_LIB@
 GTK_ENGINE_DIR = @GTK_ENGINE_DIR@
 XINERAMA_LIBS = @XINERAMA_LIBS@
-ICONV_LIBS = @ICONV_LIBS@
 XFT_LIBS = @XFT_LIBS@
 AUDIOFILE_LIBS = @AUDIOFILE_LIBS@
 AUDIOFILE_CFLAGS = @AUDIOFILE_CFLAGS@
@@ -137,18 +136,10 @@ ARTS_CFLAGS = @ARTS_CFLAGS@
 
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 
-SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock \
-	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts \
-	other backdrops icons palettes textures sounds docs po dt gdm \
-	fonts cursors
+SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock 	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts 	other backdrops icons palettes textures sounds docs po dt gdm 	fonts cursors
 
 
-EXTRA_DIST = \
- README.UPGRADE-3.2.0 \
- README.UPGRADE-3.5.0 \
- autogen.sh \
- xfce.spec \
- Makefile.init
+EXTRA_DIST =   README.UPGRADE-3.2.0  README.UPGRADE-3.5.0  autogen.sh  xfce.spec  Makefile.init
 
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
