@@ -13,6 +13,7 @@ dir_up.xpm \
 dotfile.xpm \
 empty_trash.xpm \
 error.xpm \
+exe_file.xpm \
 exe.xpm \
 fifo.xpm \
 go_back.xpm \
@@ -53,4 +54,4 @@ text.xpm \
 trash.xpm \
 warning.xpm \
 wg1.xpm \
-xftree_icon.xpm \
+xftree_icon.xpm
