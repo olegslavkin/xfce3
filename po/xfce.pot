@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-11 10:14+0100\n"
+"POT-Creation-Date: 2001-11-11 22:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,14 +87,14 @@ msgstr ""
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:155 xftree/gtk_prop.c:183 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:191 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:530 xftree/gtk_exec.c:156
-#: xftree/gtk_get.c:138 xftree/gtk_prop.c:184 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:530 xftree/gtk_exec.c:160
+#: xftree/gtk_get.c:138 xftree/gtk_prop.c:192 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr ""
 
@@ -768,50 +768,50 @@ msgstr ""
 msgid "link"
 msgstr ""
 
-#: xftree/gtk_cpy.c:149 xftree/gtk_cpy.c:278
+#: xftree/gtk_cpy.c:149 xftree/gtk_cpy.c:277
 #, c-format
 msgid "%d bytes"
 msgstr ""
 
-#: xftree/gtk_cpy.c:174 xftree/gtk_cpy.c:179 xftree/gtk_cpy.c:356
-#: xftree/gtk_cpy.c:360 xftree/xtree_gui.c:1255 xftree/xtree_gui.c:1262
+#: xftree/gtk_cpy.c:173 xftree/gtk_cpy.c:178 xftree/gtk_cpy.c:355
+#: xftree/gtk_cpy.c:359 xftree/xtree_gui.c:1255 xftree/xtree_gui.c:1262
 msgid "Can't stat() file"
 msgstr ""
 
-#: xftree/gtk_cpy.c:186
+#: xftree/gtk_cpy.c:185
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr ""
 
-#: xftree/gtk_cpy.c:228
+#: xftree/gtk_cpy.c:227
 msgid "readlink()"
 msgstr ""
 
-#: xftree/gtk_cpy.c:248
+#: xftree/gtk_cpy.c:247
 msgid "Can't copy device file"
 msgstr ""
 
-#: xftree/gtk_cpy.c:253
+#: xftree/gtk_cpy.c:252
 msgid "Can't copy FIFO"
 msgstr ""
 
-#: xftree/gtk_cpy.c:257
+#: xftree/gtk_cpy.c:256
 msgid "Can't copy socket"
 msgstr ""
 
-#: xftree/gtk_cpy.c:292
+#: xftree/gtk_cpy.c:291
 msgid "Too few bytes transferred ! Device full ?"
 msgstr ""
 
-#: xftree/gtk_cpy.c:296
+#: xftree/gtk_cpy.c:295
 msgid "Too many bytes transferred !?"
 msgstr ""
 
-#: xftree/gtk_cpy.c:342
+#: xftree/gtk_cpy.c:341
 msgid "Source and Target directories are the same"
 msgstr ""
 
-#: xftree/gtk_cpy.c:393
+#: xftree/gtk_cpy.c:392
 msgid "exists and is not a directory"
 msgstr ""
 
@@ -899,7 +899,7 @@ msgstr ""
 msgid "_Continue"
 msgstr ""
 
-#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:198
+#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr ""
 
@@ -923,22 +923,22 @@ msgstr ""
 msgid "_Close"
 msgstr ""
 
-#: xftree/gtk_exec.c:139
+#: xftree/gtk_exec.c:141
 msgid "Open with ..."
 msgstr ""
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2699
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:145 xftree/xtree_gui.c:2699
 #: xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr ""
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:183 xftree/xtree_gui.c:2613
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:187 xftree/xtree_gui.c:2613
 msgid "Open in terminal"
 msgstr ""
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:201
+#: xftree/gtk_exec.c:205
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr ""
@@ -964,96 +964,96 @@ msgstr ""
 msgid "%d bytes received (%d bps)"
 msgstr ""
 
-#: xftree/gtk_prop.c:175 xftree/xtree_gui.c:2572
+#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2572
 msgid "Properties"
 msgstr ""
 
-#: xftree/gtk_prop.c:199
+#: xftree/gtk_prop.c:207
 msgid "All"
 msgstr ""
 
 #. date and size page
-#: xftree/gtk_prop.c:210
+#: xftree/gtk_prop.c:218
 msgid "Info"
 msgstr ""
 
-#: xftree/gtk_prop.c:215
+#: xftree/gtk_prop.c:223
 msgid "Name :"
 msgstr ""
 
-#: xftree/gtk_prop.c:234
+#: xftree/gtk_prop.c:242
 msgid "Type :"
 msgstr ""
 
-#: xftree/gtk_prop.c:240
+#: xftree/gtk_prop.c:248
 #, c-format
 msgid "%ld Bytes"
 msgstr ""
 
-#: xftree/gtk_prop.c:242
+#: xftree/gtk_prop.c:250
 msgid "Size :"
 msgstr ""
 
-#: xftree/gtk_prop.c:250
+#: xftree/gtk_prop.c:258
 msgid "Creation Time :"
 msgstr ""
 
-#: xftree/gtk_prop.c:258
+#: xftree/gtk_prop.c:266
 msgid "Modification Time :"
 msgstr ""
 
-#: xftree/gtk_prop.c:266
+#: xftree/gtk_prop.c:274
 msgid "Access Time :"
 msgstr ""
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:282
 msgid "Permissions"
 msgstr ""
 
-#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:278 xftree/gtk_prop.c:375
+#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
 msgid "Owner :"
 msgstr ""
 
 #: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
-#: xftree/gtk_prop.c:279 xftree/gtk_prop.c:303 xftree/gtk_prop.c:326
+#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
 msgid "Read"
 msgstr ""
 
 #: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
-#: xftree/gtk_prop.c:283 xftree/gtk_prop.c:307 xftree/gtk_prop.c:330
+#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
 msgid "Write"
 msgstr ""
 
 #: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
-#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
+#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
 msgid "Execute"
 msgstr ""
 
-#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:291
+#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:299
 msgid "Set UID"
 msgstr ""
 
-#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:302 xftree/gtk_prop.c:386
+#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
 msgid "Group :"
 msgstr ""
 
-#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:315
+#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:323
 msgid "Set GID"
 msgstr ""
 
-#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:325
+#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:333
 msgid "Other :"
 msgstr ""
 
-#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:338
+#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:346
 msgid "Sticky"
 msgstr ""
 
-#: xftree/gtk_prop.c:364
+#: xftree/gtk_prop.c:372
 msgid "Owner"
 msgstr ""
 
-#: xftree/gtk_prop.c:369 xftree/gtk_prop.c:380
+#: xftree/gtk_prop.c:377 xftree/gtk_prop.c:388
 msgid "unknown"
 msgstr ""
 

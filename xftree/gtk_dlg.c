@@ -333,7 +333,7 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
     dl.entry = gtk_entry_new_with_max_length (DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     gtk_entry_set_editable (GTK_ENTRY (dl.entry), FALSE);
-    gtk_widget_set_sensitive (dl.entry, FALSE);
+    /* gtk_widget_set_sensitive (dl.entry, FALSE); */
   }
   else if (type & DLG_ENTRY_EDIT)
   {
