@@ -888,7 +888,7 @@ UnmapIt (XfwmWindow * t)
     if (t->icon_w != None)
       XUnmapWindow (dpy, t->icon_w);
   }
-  else if (t->flags & MAPPED)
+  else if (t->flags & (MAPPED | MAP_PENDING))
   {
     XUnmapWindow (dpy, t->w);
     XUnmapWindow (dpy, t->frame);

@@ -633,14 +633,16 @@ main (int argc, char **argv)
   {
     ExecuteFunction ("Module xfce", NULL, &Event, C_ROOT, -1);
   }
-
-  UnBlackoutScreen ();		/* if we need to remove blackout window */
+  UnBlackoutScreen ();
   if (Scr.Options & SessionMgt)
+  {
     LoadWindowStates (restore_filename);
+  }
   SessionInit (client_id);
   SetRunLevel (XFWM_RUNNING);
   /* The restart procedure is now over, no we can safely turn Restarting to False */
   Restarting = False;
+  XSync (dpy, 0);
   HandleEvents ();
   switch (runlevel)
   {
@@ -785,9 +787,9 @@ CaptureAllWindows (void)
 	XChangeProperty (dpy, tmp->w, _XA_XFWM_ICONPOS_X, _XA_XFWM_ICONPOS_X, 32, PropModeReplace, (unsigned char *) data, 1);
 	data[0] = (unsigned long) tmp->icon_y_loc;
 	XChangeProperty (dpy, tmp->w, _XA_XFWM_ICONPOS_Y, _XA_XFWM_ICONPOS_Y, 32, PropModeReplace, (unsigned char *) data, 1);
-	XSelectInput (dpy, tmp->w, 0);
+	XSelectInput (dpy, tmp->w, NoEventMask);
 	w = tmp->w;
-	XUnmapWindow (dpy, w);
+	XUnmapWindow (dpy, tmp->w);
 	XUnmapWindow (dpy, tmp->frame);
 	RestoreWithdrawnLocation (tmp, True);
 	Destroy (tmp);
@@ -1867,6 +1869,7 @@ Reborder (void)
   InstallWindowColormaps (&Scr.XfwmRoot);	/* force reinstall */
   for (tmp = Scr.XfwmRoot.next; tmp != NULL; tmp = tmp->next)
   {
+    XSelectInput (dpy, tmp->w, NoEventMask);
     RestoreWithdrawnLocation (tmp, True);
     XUnmapWindow (dpy, tmp->frame);
     XDestroyWindow (dpy, tmp->frame);

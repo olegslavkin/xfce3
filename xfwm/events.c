@@ -946,6 +946,7 @@ HandleMapRequest ()
       if (Tmp_win->Desk == Scr.CurrentDesk)
       {
 	XMapWindow (dpy, Tmp_win->frame);
+        Tmp_win->flags |= MAP_PENDING;
       }
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
@@ -1012,7 +1013,7 @@ HandleMapNotify ()
   MyXUngrabServer (dpy);
 
   Tmp_win->flags |= MAPPED;
-  Tmp_win->flags &= ~(ICONIFIED | ICON_UNMAPPED);
+  Tmp_win->flags &= ~(MAP_PENDING | ICONIFIED | ICON_UNMAPPED);
 
   if (Tmp_win->flags & ICONIFIED)
     Broadcast (XFCE_M_DEICONIFY, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
@@ -1087,7 +1088,7 @@ HandleUnmapNotify ()
     return;
   }
 
-  if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
+  if (!(Tmp_win->flags & (MAPPED | MAP_PENDING | ICONIFIED)))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): win !mapped & !iconified\n");
