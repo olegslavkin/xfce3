@@ -235,6 +235,8 @@ typedef struct XfwmWindow
   Pixel BackPixel;
   unsigned long buttons;
   int layer;
+  int gravx;			/* Gravity stuff */
+  int gravy;			/* Gravity stuff */
 }
 XfwmWindow;
 

@@ -184,7 +184,6 @@ bestplace (XfwmWindow * tmp_win, int px, int py)
 Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
 {
   XfwmWindow *t;
-  int gravx, gravy;
   extern Bool PPosOverride;
   int xl, yt;
 
@@ -200,7 +199,7 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
   int center_x, center_y;
 #endif
 
-  GetGravityOffsets (tmp_win, &gravx, &gravy);
+  GetGravityOffsets (tmp_win, &tmp_win->gravx, &tmp_win->gravy);
   XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &xl, &yt, &dummy_win_x, &dummy_win_y, &dummy_mask);
 
 
@@ -309,16 +308,20 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
     }
     else
     {
-      if (gravx > 0)
+      if (tmp_win->gravx > 0)
         tmp_win->attr.x -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
-      if (gravy > 0)
+      if (tmp_win->gravy > 0)
         tmp_win->attr.y -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
     }
 #else
-    if (gravx > 0)
+    if (tmp_win->gravx > 0)
       tmp_win->attr.x -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
-    if (gravy > 0)
+    else if (tmp_win->gravx < 0)
+      tmp_win->attr.x +=  tmp_win->old_bw - tmp_win->bw;
+    if (tmp_win->gravy > 0)
       tmp_win->attr.y -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
+    else if (tmp_win->gravy < 0)
+      tmp_win->attr.y +=  tmp_win->old_bw - tmp_win->bw;
 #endif
   }
   tmp_win->xdiff = tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw;

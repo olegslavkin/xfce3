@@ -1426,6 +1426,7 @@ HandleConfigureRequest ()
   unsigned long xwcm;
   int x, y, width, height;
   XConfigureRequestEvent *cre = &Event.xconfigurerequest;
+  XEvent otherEvent;
   /*
    * Event.xany.window is Event.xconfigurerequest.parent, so Tmp_win will
    * be wrong
@@ -1442,6 +1443,20 @@ HandleConfigureRequest ()
     fprintf (stderr, "xfwm : Leaving HandleConfigureRequest () : Window is 'None'\n");
 #endif
     return;
+  }
+
+  /* compress configure requests (Shamely stolen to kwin 2.2) */
+  while (XCheckTypedWindowEvent (dpy, cre->window, ConfigureRequest, &otherEvent) ) 
+  {
+    if (otherEvent.xconfigurerequest.value_mask == cre->value_mask)
+    {
+       cre = &otherEvent.xconfigurerequest;
+    }
+    else 
+    {
+       XPutBackEvent(dpy, &otherEvent);
+       break;
+    }
   }
   
   if (XFindContext (dpy, cre->window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
@@ -1519,9 +1534,17 @@ HandleConfigureRequest ()
     Tmp_win->old_bw = cre->border_width;
 
   if (cre->value_mask & CWX)
+  {
     x = cre->x - (Tmp_win->boundary_width + Tmp_win->bw);
+    if (Tmp_win->gravx > 0)
+      x -=  Tmp_win->bw - Tmp_win->old_bw;
+  }
   if (cre->value_mask & CWY)
+  {
     y = cre->y - (Tmp_win->title_height + Tmp_win->boundary_width + Tmp_win->bw);
+    if (Tmp_win->gravy > 0)
+      y -=  Tmp_win->bw - Tmp_win->old_bw;
+  }
   if (cre->value_mask & CWWidth)
     width = cre->width + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
   if (cre->value_mask & CWHeight)
