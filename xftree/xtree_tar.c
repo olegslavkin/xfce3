@@ -164,7 +164,8 @@ GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
 		  pix.pixmap,pix.pixmask,
 		  pix.open,pix.openmask,
 		  TRUE,FALSE);
-   gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);   
+   gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);
+   return (item);   
 }
 
 GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){

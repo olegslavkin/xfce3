@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-25 09:41+0100\n"
+"POT-Creation-Date: 2002-01-17 10:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Joakim Andreasson <karanne@flashback.net>\n"
 "Language-Team: Yours Truly <karanne@flashback.net>\n"
@@ -27,39 +27,40 @@ msgstr "Välj fil"
 msgid "Font Selection"
 msgstr "Typsnittsval"
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
-#: xfdiff/xfdiff_misc.c:136
+#. this is an invisible button
+#: libs/xfce-common.c:268 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
+#: xfdiff/xfdiff_misc.c:136 xftree/xtree_toolbar.c:328
 msgid "OK"
 msgstr "OK"
 
-#: libs/xfce-common.c:266
+#: libs/xfce-common.c:278
 msgid "Message"
 msgstr "Meddelande"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:74
-#: xfumed/xfumed_gui_cb.c:125
+#: libs/xfce-common.c:391 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
+#: xfumed/xfumed_gui_cb.c:126
 msgid "Yes"
 msgstr "Ja"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
-#: xfumed/xfumed_gui_cb.c:126
+#: libs/xfce-common.c:392 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:76
+#: xfumed/xfumed_gui_cb.c:127
 msgid "No"
 msgstr "Nej"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:229
+#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133
 msgid "Question"
 msgstr "Fråga"
 
-#: libs/xfce-common.c:603
+#: libs/xfce-common.c:632
 msgid "Terminated: "
 msgstr "Avslutad: "
 
-#: libs/xpmext.c:377 libs/xpmext.c:398
+#: libs/xpmext.c:377 libs/xpmext.c:404
 #, c-format
 msgid "*** WARNING ***: Cannot load image file %s\n"
 msgstr "*** VARNING ***: Kan ej öppna bildfil %s\n"
 
-#: libs/xpmext.c:419
+#: libs/xpmext.c:425
 #, c-format
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
 msgstr "*** VARNING ***: Kan ej öppna pixmap-fil %s\n"
@@ -83,18 +84,18 @@ msgstr "Bläddra ..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
-#: xfce/setup.c:1127 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfce/setup.c:1162 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:160 xftree/gtk_prop.c:191 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
-#: xfce/setup.c:1144 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_get.c:138
-#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:889 xfumed/xfumed_gui.c:359
+#: xfce/setup.c:1179 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:160 xftree/gtk_prop.c:201
+#: xftree/xtree_cpy.c:1131 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -102,7 +103,7 @@ msgstr "Avbryt"
 msgid "You must provide the command to execute !"
 msgstr "Du måste ange ett kommando att utföra !"
 
-#: xfce/configfile.c:54
+#: xfce/configfile.c:61
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
@@ -111,7 +112,7 @@ msgstr ""
 "XFce : Syntaktiskt fel i konfigurationsfilen\n"
 "(%s)\n"
 
-#: xfce/configfile.c:55 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -119,7 +120,7 @@ msgstr ""
 "Syntaktiskt fel i konfigurationsfilen\n"
 "Avbryter"
 
-#: xfce/configfile.c:62
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
@@ -128,7 +129,7 @@ msgstr ""
 "Data mismatch error in configuration file\n"
 "(%s)\n"
 
-#: xfce/configfile.c:63 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -136,41 +137,41 @@ msgstr ""
 "Dataöverensstämmelsefel i konfigurationsfilen\n"
 "Avbryter"
 
-#: xfce/configfile.c:206 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "Kan ej skapa fil"
 
-#: xfce/configfile.c:353
+#: xfce/configfile.c:380
 msgid "Cannot reset configuration file"
 msgstr "Kan ej återställa konfigurationsfilen"
 
-#: xfce/configfile.c:356
+#: xfce/configfile.c:383
 msgid "Creating new config file...\n"
 msgstr "Skapar ny konfigurationsfil...\n"
 
-#: xfce/configfile.c:540 xfce/configfile.c:550
+#: xfce/configfile.c:558 xfce/configfile.c:568
 msgid "Cannot open configuration file"
 msgstr "Kan ej öppna konfigurationsfilen"
 
-#: xfce/configfile.c:556
+#: xfce/configfile.c:574
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Verkar inte vara en XFce 3-konfigurationsfil !"
 
-#: xfce/configfile.c:557
+#: xfce/configfile.c:575
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
 msgstr ""
 
-#: xfce/configfile.c:568
+#: xfce/configfile.c:586
 msgid "Cannot open new config, Giving up..."
 msgstr "Kan ej öpna ny konfiguration, ger upp..."
 
-#: xfce/configfile.c:569
+#: xfce/configfile.c:587
 msgid "Cannot load configuration file"
 msgstr "Kan ej öppna konfigurationsfil"
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:593
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Kan ej använd äldre XFce-versioners konfigurationsfiler"
 
@@ -179,12 +180,12 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:321
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:854
 msgid "Clear"
 msgstr "Rensa"
 
-#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
-#: xftree/xtree_mess.c:326
+#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
+#: xftree/xtree_mess.c:859
 msgid "Dismiss"
 msgstr ""
 
@@ -196,7 +197,7 @@ msgstr "Info ..."
 #: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr "Kunde ej skapa pixmap"
 
@@ -329,236 +330,240 @@ msgstr "Ljud"
 msgid "External..."
 msgstr "Extern..."
 
-#: xfce/setup.c:280
+#: xfce/setup.c:283
 msgid "Setup"
 msgstr "Inställningar"
 
-#: xfce/setup.c:359
+#: xfce/setup.c:362
 msgid "GTK theme engine : "
 msgstr ""
 
-#: xfce/setup.c:381
+#: xfce/setup.c:384
 msgid "Apply colors to all applications"
 msgstr ""
 
-#: xfbd/xfbdmgr.c:167 xfce/setup.c:401
+#: xfbd/xfbdmgr.c:167 xfce/setup.c:404
 msgid "Load ..."
 msgstr "Öppna ..."
 
-#: xfbd/xfbdmgr.c:161 xfce/setup.c:409
+#: xfbd/xfbdmgr.c:161 xfce/setup.c:412
 msgid "Save ..."
 msgstr "Spara ..."
 
-#: xfce/setup.c:417
+#: xfce/setup.c:420
 msgid "Default"
 msgstr "Inbyggd"
 
-#: xfce/setup.c:439
+#: xfce/setup.c:442
 msgid "Repaint root window of workspace"
 msgstr "Rita om arbetsytans rotfönster"
 
-#: xfce/setup.c:446
+#: xfce/setup.c:449
 msgid "Use gradient color as wallpaper"
 msgstr "Anväd tonad förg som bakgrund"
 
-#: xfce/setup.c:453
+#: xfce/setup.c:456
 msgid "Use tear-off menus"
 msgstr "Använd löstagbara menyer"
 
-#: xfce/setup.c:460
+#: xfce/setup.c:463
 msgid "Show subprocess diagnostic dialog"
 msgstr ""
 
-#: xfce/setup.c:467
+#: xfce/setup.c:470
 msgid "Panel layer"
 msgstr ""
 
-#: xfce/setup.c:481
+#: xfce/setup.c:484
 #, fuzzy
 msgid "Bottom"
 msgstr "Nederst"
 
-#: xfce/setup.c:499 xfce/setup.c:876
+#: xfce/setup.c:502 xfce/setup.c:911
 msgid "Top"
 msgstr "Överst"
 
-#: xfce/setup.c:506
+#: xfce/setup.c:509
 msgid "Clock"
 msgstr "Klocka"
 
-#: xfce/setup.c:520
+#: xfce/setup.c:523
 msgid "Use digital clock on panel"
 msgstr "Använd digital klocka på panelen"
 
-#: xfce/setup.c:527
+#: xfce/setup.c:530
 msgid "Use military time (24 hours)"
 msgstr "Använd militär tid (24 timmar)"
 
-#: xfce/setup.c:534
+#: xfce/setup.c:537
 msgid "Tooltips"
 msgstr "Verktygstips"
 
-#: xfce/setup.c:548
+#: xfce/setup.c:551
 msgid "Tooltips delay (ms.) : "
 msgstr "Tipsfördröjning (ms.) : "
 
-#: xfce/setup.c:563
+#: xfce/setup.c:566
 msgid "Virtual Screens"
 msgstr "Virtuella skärmar"
 
-#: xfce/setup.c:577
+#: xfce/setup.c:587
 msgid "Number of virtual desktops : "
 msgstr "Antal virtuella skrivbord : "
 
-#: xfce/setup.c:591
+#: xfce/setup.c:608
+msgid "switch desktop at screen border, fixed factor 4: "
+msgstr ""
+
+#: xfce/setup.c:626
 msgid "Popups & Icons"
 msgstr "Menyer & ikoner"
 
-#: xfce/setup.c:605
+#: xfce/setup.c:640
 msgid "Number of popup menus : "
 msgstr "Antal menyer : "
 
-#: xfce/setup.c:619
+#: xfce/setup.c:654
 msgid "Size of icons on panel"
 msgstr "Storlek på panelens ikoner"
 
-#: xfce/setup.c:633 xfce/setup.c:668
+#: xfce/setup.c:668 xfce/setup.c:703
 msgid "Large"
 msgstr "Stora"
 
-#: xfce/setup.c:640 xfce/setup.c:675
+#: xfce/setup.c:675 xfce/setup.c:710
 msgid "Medium"
 msgstr ""
 
-#: xfce/setup.c:647 xfce/setup.c:682
+#: xfce/setup.c:682 xfce/setup.c:717
 msgid "Small"
 msgstr "Små"
 
-#: xfce/setup.c:654
+#: xfce/setup.c:689
 msgid "Size of icons on pop-up menus"
 msgstr "Storlek på menyernas ikoner"
 
-#: xfce/setup.c:689
+#: xfce/setup.c:724
 msgid "Font style"
 msgstr "Typsnittsstil"
 
-#: xfce/setup.c:710 xfce/setup.c:1003 xfce/setup.c:1010 xfce/setup.c:1017
+#: xfce/setup.c:745 xfce/setup.c:1038 xfce/setup.c:1045 xfce/setup.c:1052
 msgid "Browse..."
 msgstr "Bläddra..."
 
-#: xfce/setup.c:734
+#: xfce/setup.c:769
 msgid "Click to focus windows"
 msgstr "Klicka för att fokusera fönster"
 
-#: xfce/setup.c:741
+#: xfce/setup.c:776
 msgid "Automatically focus on new window"
 msgstr ""
 
-#: xfce/setup.c:748
+#: xfce/setup.c:783
 msgid "Auto raise windows"
 msgstr "Höj fönster automatiskt"
 
-#: xfce/setup.c:755
+#: xfce/setup.c:790
 #, fuzzy
 msgid "Show contents of window while moving"
 msgstr "Visa fönsterinnehåll vid flyttning"
 
-#: xfce/setup.c:762
+#: xfce/setup.c:797
 #, fuzzy
 msgid "Show contents of window while resizing"
 msgstr "Visa fönsterinnehåll vid storleksändring"
 
-#: xfce/setup.c:769
+#: xfce/setup.c:804
 #, fuzzy
 msgid "Use gradient color for the active window"
 msgstr "Använd tonad färg på aktivt fönster"
 
-#: xfce/setup.c:776
+#: xfce/setup.c:811
 #, fuzzy
 msgid "Use gradient color for inactive windows"
 msgstr "Använd tonad färg på inaktivt fönster"
 
-#: xfce/setup.c:799
+#: xfce/setup.c:834
 msgid "Window border style : "
 msgstr ""
 
-#: xfce/setup.c:837
+#: xfce/setup.c:872
 msgid "Window snapping size (0 disable) : "
 msgstr "Fönsteravgränsningsstorlek (0 inaktiverar) : "
 
-#: xfce/setup.c:864
+#: xfce/setup.c:899
 msgid "Icon position"
 msgstr "Ikonplacering"
 
-#: xfce/setup.c:883 xfmouse/xfmouse.c:206
+#: xfce/setup.c:918 xfmouse/xfmouse.c:206
 msgid "Left"
 msgstr "Vänster"
 
-#: xfce/setup.c:890
+#: xfce/setup.c:925
 msgid "bottom"
 msgstr "Nederst"
 
-#: xfce/setup.c:897 xfmouse/xfmouse.c:216
+#: xfce/setup.c:932 xfmouse/xfmouse.c:216
 msgid "Right"
 msgstr "Höger"
 
-#: xfce/setup.c:976
+#: xfce/setup.c:1011
 msgid "Title font :"
 msgstr "Titeltypsnitt :"
 
-#: xfce/setup.c:985
+#: xfce/setup.c:1020
 msgid "Icon font :"
 msgstr "Ikontypsnitt :"
 
-#: xfce/setup.c:994
+#: xfce/setup.c:1029
 msgid "Menu font :"
 msgstr "Menytypsnitt :"
 
-#: xfce/setup.c:1041
+#: xfce/setup.c:1076
 msgid "Sound module (xfsound)"
 msgstr "Ljudmodul (xfsound)"
 
-#: xfce/setup.c:1048
+#: xfce/setup.c:1083
 msgid "Mouse settings (xfmouse)"
 msgstr "Musinställningar (xfmouse)"
 
-#: xfce/setup.c:1055
+#: xfce/setup.c:1090
 msgid "Backdrop settings (xfbd)"
 msgstr "Bakgrundsinställningar (xfbd)"
 
-#: xfce/setup.c:1062
+#: xfce/setup.c:1097
 msgid "Pager (xfpager)"
 msgstr "Bläddrare (xfpager)"
 
-#: xfce/setup.c:1069
+#: xfce/setup.c:1104
 msgid "GNOME (xfgnome)"
 msgstr ""
 
-#: xfce/setup.c:1076
+#: xfce/setup.c:1111
 msgid "GNOME menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1083
+#: xfce/setup.c:1118
 msgid "KDE menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1090
+#: xfce/setup.c:1125
 msgid "Palette"
 msgstr "Palett"
 
-#: xfce/setup.c:1096
+#: xfce/setup.c:1131
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1102
+#: xfce/setup.c:1137
 msgid "Windows"
 msgstr "Fönster"
 
-#: xfce/setup.c:1108 xfce/startup.c:60 xfsound/xfsound.c:88
+#: xfce/setup.c:1143 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
 msgstr "Starta"
 
-#: xfbd/xfbd.c:541 xfce/setup.c:1136 xfmouse/xfmouse.c:299
+#: xfbd/xfbd.c:541 xfce/setup.c:1171 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr "Verkställ"
@@ -666,8 +671,7 @@ msgid "Setup..."
 msgstr "Inställningar..."
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2395
-#: xfumed/xfumed_gui.c:171
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Stäng"
 
@@ -768,370 +772,236 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Kommunikationsrör stängt. Avslutar...\n"
 
-#: xfce/xfwm.c:430 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
-#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
-#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
+#: xfce/xfwm.c:455 xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859
+#: xfwm/xfwm.c:860 xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
+#: xfwm/xfwm.c:864 xfwm/xfwm.c:865 xfwm/xfwm.c:866
 msgid "Workspace"
 msgstr "Arbetsyta"
 
-#: xftree/gtk_dlg.c:234
-msgid "Information"
-msgstr ""
-
-#: xftree/gtk_dlg.c:239
-msgid "Error"
-msgstr "Fel"
-
-#: xftree/gtk_dlg.c:244
-msgid "Warning"
-msgstr "Varning"
-
-#: xftree/gtk_dlg.c:248
-msgid "Dialog"
-msgstr ""
-
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:267
+#: xftree/gtk_dlg.c:302
 #, fuzzy
 msgid "_Ok"
 msgstr "Ok"
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:272
+#: xftree/gtk_dlg.c:307
 #, fuzzy
 msgid "_Yes"
 msgstr "Ja"
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:277
+#: xftree/gtk_dlg.c:312
 #, fuzzy
 msgid "_Continue"
 msgstr "Fortsätt"
 
-#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:331 xftree/gtk_prop.c:215
 msgid "Skip"
 msgstr "Hoppa över"
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:298
+#: xftree/gtk_dlg.c:342
 #, fuzzy
 msgid "_Cancel"
 msgstr "Avbryt"
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:303
+#: xftree/gtk_dlg.c:347
 #, fuzzy
 msgid "_No"
 msgstr "Nej"
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:314
+#: xftree/gtk_dlg.c:359
 #, fuzzy
 msgid "_All"
 msgstr "Alla"
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:324
+#: xftree/gtk_dlg.c:369
 #, fuzzy
 msgid "_Close"
 msgstr "Stäng"
 
-#: xftree/gtk_exec.c:142
+#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:188
 msgid "Open with ..."
 msgstr "Öppna med ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:146 xftree/xtree_gui.c:2480
-#: xfwm/xfwm.c:889
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:142 xftree/xtree_gui.c:202
+#: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr "Kör program ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:2361
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:146
 msgid "Open in terminal"
 msgstr "Öppna i terminal"
 
+#: xftree/gtk_exec.c:192
+msgid "Remember application"
+msgstr ""
+
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:206
+#: xftree/gtk_exec.c:211
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Fatalt fel i %s vid %d\n"
 
-#: xftree/gtk_get.c:121
-msgid "Source : "
-msgstr "Ursprung : "
-
-#: xftree/gtk_get.c:128
-msgid "Target : "
-msgstr "Destination : "
-
-#: xftree/gtk_get.c:135
-msgid "0 bytes received"
-msgstr "0 bytes mottagna"
-
-#: xftree/gtk_get.c:142
-msgid "XFTree: Download"
-msgstr "XFTree: Laddar ned"
-
-#: xftree/gtk_get.c:168
-#, c-format
-msgid "%d bytes received (%d bps)"
+#: xftree/gtk_get.c:95
+#, fuzzy, c-format
+msgid "child:bytes:%d bytes received (%d bps)"
 msgstr "%d bytes mottagna (%d bps)"
 
-#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2320
+#: xftree/gtk_prop.c:191 xftree/xtree_toolbar.c:106
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: xftree/gtk_prop.c:207
+#: xftree/gtk_prop.c:216
 msgid "All"
 msgstr "Alla"
 
 #. date and size page
-#: xftree/gtk_prop.c:218
+#: xftree/gtk_prop.c:227
 msgid "Info"
 msgstr "Info"
 
-#: xftree/gtk_prop.c:223
+#: xftree/gtk_prop.c:232
 msgid "Name :"
 msgstr "Namn :"
 
-#: xftree/gtk_prop.c:242
+#: xftree/gtk_prop.c:251
 msgid "Type :"
 msgstr "Typ :"
 
-#: xftree/gtk_prop.c:248
-#, c-format
-msgid "%ld Bytes"
-msgstr "%ld bytes"
-
-#: xftree/gtk_prop.c:250
+#: xftree/gtk_prop.c:271
 msgid "Size :"
 msgstr "Storlek :"
 
-#: xftree/gtk_prop.c:258
+#: xftree/gtk_prop.c:279
 msgid "Creation Time :"
 msgstr "Skapad :"
 
-#: xftree/gtk_prop.c:266
+#: xftree/gtk_prop.c:287
 msgid "Modification Time :"
 msgstr "Senast ändrad :"
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:295
 msgid "Access Time :"
 msgstr "Senast använd :"
 
-#: xftree/gtk_prop.c:282
+#: xftree/gtk_prop.c:303
 msgid "Permissions"
 msgstr "Rättigheter"
 
-#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
+#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:307 xftree/gtk_prop.c:404
 msgid "Owner :"
 msgstr "Ägare :"
 
-#: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
-#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
+#: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
+#: xftree/gtk_prop.c:308 xftree/gtk_prop.c:332 xftree/gtk_prop.c:355
 msgid "Read"
 msgstr "Läsa"
 
-#: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
-#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
+#: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
+#: xftree/gtk_prop.c:312 xftree/gtk_prop.c:336 xftree/gtk_prop.c:359
 msgid "Write"
 msgstr "Skriva"
 
-#: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
-#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
+#: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
+#: xftree/gtk_prop.c:316 xftree/gtk_prop.c:340 xftree/gtk_prop.c:363
 msgid "Execute"
 msgstr "Exekvera"
 
-#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:299
+#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:320
 msgid "Set UID"
 msgstr "Sätt UID"
 
-#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
+#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:331 xftree/gtk_prop.c:415
 msgid "Group :"
 msgstr "Grupp :"
 
-#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:323
+#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:344
 msgid "Set GID"
 msgstr "Sätt GID"
 
-#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:333
+#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:354
 msgid "Other :"
 msgstr "Övriga :"
 
-#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:346
+#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:367
 msgid "Sticky"
 msgstr "Klistrig"
 
-#: xftree/gtk_prop.c:372
+#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1002
 msgid "Owner"
 msgstr "Ägare"
 
-#: xftree/gtk_prop.c:377 xftree/gtk_prop.c:388
+#: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:834
+#: xftree/xtree_functions.c:836 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_gui.c:1308 xftree/xtree_gui.c:1310
 msgid "unknown"
 msgstr "okänd"
 
-#: xftree/reg.c:545
+#: xftree/reg.c:545 xftree/xtree_cb.c:692 xftree/xtree_cb.c:809
+#: xftree/xtree_cpy.c:1184
+msgid "This function is not available for the contents of tar files"
+msgstr ""
+
+#: xftree/reg.c:554
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Kan ej finna extension i filnamn, använder fullständigt filnamn"
 
-#: xftree/reg.c:552
+#: xftree/reg.c:561
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Registrera program för fil \"%s\""
 
-#: xftree/reg.c:556
+#: xftree/reg.c:565
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Registrera program för fil \"%s\""
 
-#: xftree/xtree.c:112
+#: xftree/xtree.c:119
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, baserat på XTree version %s\n"
 
-#: xftree/xtree.c:113
+#: xftree/xtree.c:120
 #, c-format
 msgid "directory: %s\n"
 msgstr "katalog: %s\n"
 
-#: xftree/xtree.c:120 xftree/xtree.c:159
+#: xftree/xtree.c:127 xftree/xtree.c:166
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "skapar katalog: %s\n"
 
-#: xftree/xtree.c:176
+#: xftree/xtree.c:183
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometri %dx%d+%d+%d\n"
 
-#: xftree/xtree_cpy.c:130
-msgid "Insufficient system memory"
-msgstr ""
-
-#: xftree/xtree_cpy.c:146
-#, fuzzy
-msgid "Too few bytes transferred ! Device full ?"
-msgstr "För få bytes flyttade ! Är enheten full ?"
-
-#: xftree/xtree_cpy.c:150
-#, fuzzy
-msgid "Too many bytes transferred !?"
-msgstr "För många bytes flyttade !?"
-
-#: xftree/xtree_cpy.c:154 xftree/xtree_cpy.c:158
-msgid "Can't stat() file"
-msgstr "Kan ej stat():a filen"
-
-#: xftree/xtree_cpy.c:162 xftree/xtree_cpy.c:166
-#, fuzzy
-msgid "Error closing file"
-msgstr ""
-"Fel\n"
-"Kan ej öppna fil"
-
-#: xftree/xtree_cpy.c:170
-msgid "Error deleting"
-msgstr ""
-
-#: xftree/xtree_cpy.c:174 xftree/xtree_cpy.c:337
-msgid "Can't copy FIFO"
-msgstr "Kan ej kopiera FIFO"
-
-#: xftree/xtree_cpy.c:178 xftree/xtree_cpy.c:340
-msgid "Can't copy device file"
-msgstr "Kan ej kopiera enhetsfil"
-
-#: xftree/xtree_cpy.c:182 xftree/xtree_cpy.c:343
-msgid "Can't copy socket"
-msgstr "Kan ej kopiera SOCKET"
-
-#: xftree/xtree_cpy.c:792
-#, c-format
-msgid "%d bytes"
-msgstr ""
-
-#: xftree/xtree_cpy.c:867
-msgid "Source: "
-msgstr "Ursprung:"
-
-#: xftree/xtree_cpy.c:874
-msgid "Target: "
-msgstr "Destination:"
-
-#: xftree/xtree_cpy.c:881
-msgid "file x of x"
-msgstr ""
-
-#: xftree/xtree_cpy.c:896
-msgid "XFTree: Copy"
-msgstr "XFTree: Kopiera"
-
-#: xftree/xtree_cpy.c:897
-msgid "XFTree: Move"
-msgstr "XFTree: Flytta"
-
-#: xftree/xtree_cpy.c:898
-#, fuzzy
-msgid "XFTree: Link"
-msgstr "XFTree: Kopiera"
-
-#: xftree/xtree_dnd.c:137
-msgid "Unknown action !"
-msgstr "Okänd aktivitet !"
-
-#: xftree/xtree_du.c:81
-msgid "Disk usage:"
-msgstr ""
-
-#: xftree/xtree_go.c:163
-#, fuzzy
-msgid "Cannot find path"
-msgstr "Kan ej finna raddata\n"
-
-#: xftree/xtree_go.c:244
-msgid "Go to"
-msgstr "Gå till"
-
-#: xftree/xtree_gui.c:182
-#, fuzzy, c-format
-msgid "dbg:malloc error in %s at line %d\n"
-msgstr "Fatalt fel i %s vid %d\n"
-
-#: xftree/xtree_gui.c:336
-msgid "menu_detach()\n"
-msgstr ""
-
-#: xftree/xtree_gui.c:879
+#: xftree/xtree_cb.c:320
 #, fuzzy
 msgid "error deleting file"
 msgstr "Välj fil"
 
-#: xftree/xtree_gui.c:977
-msgid "Can't copy device, fifo and socket files as regular files!\n"
-msgstr "Kan ej kopiera enhets-, fifo- ock socketfiler som vanliga filer!\n"
-
-#: xftree/xtree_gui.c:1105
-msgid "move_dir() recursive failed\n"
-msgstr "move_dir() rekursivt misslyckades\n"
-
-#: xftree/xtree_gui.c:1113
-msgid "move_dir() move_file() failed\n"
-msgstr "move_dir() move_file() misslyckades\n"
-
 #. nothing to delete
-#: xftree/xtree_gui.c:1223 xftree/xtree_gui.c:1966
+#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:767
 msgid "No files marked !"
 msgstr "Inga filer markerade !"
 
-#: xftree/xtree_gui.c:1247 xftree/xtree_gui.c:1249
+#: xftree/xtree_cb.c:464 xftree/xtree_cb.c:466
 msgid "Delete item ?"
 msgstr "Radera objekt ?"
 
-#: xftree/xtree_gui.c:1284 xftree/xtree_gui.c:1286
+#: xftree/xtree_cb.c:476 xftree/xtree_cb.c:480
 msgid "Can't move file to trash, hard delete ?"
 msgstr "Kan ej flytta filer till papperskorgen, radera permanent ?"
 
-#: xftree/xtree_gui.c:1328
+#: xftree/xtree_cb.c:558
 msgid ""
 "This is XFTree (C) under GNU GPL\n"
 "with code contributed by:\n"
@@ -1140,252 +1010,621 @@ msgid ""
 "Edscott Wilson Garcia\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:1722
+#: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
 msgid "New_Folder"
 msgstr "Ny_Katalog"
 
-#. if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
-#: xftree/xtree_gui.c:1773 xftree/xtree_gui.c:1910
+#: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
+#, fuzzy
+msgid "New_File"
+msgstr "Ny_Katalog"
+
+#: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733
 #, fuzzy
 msgid "File exists !"
 msgstr "Filen finns! Skriv över?"
 
-#: xftree/xtree_gui.c:1782
-msgid "Can't create : "
-msgstr "Kan ej skapa : "
-
-#: xftree/xtree_gui.c:1881
+#: xftree/xtree_cb.c:686
 msgid "No item marked !"
 msgstr "Inga objekt markerade !"
 
-#: xftree/xtree_gui.c:1892
+#: xftree/xtree_cb.c:702
 msgid "Rename to : "
 msgstr "Byt namn till :"
 
-#: xftree/xtree_gui.c:1897
+#: xftree/xtree_cb.c:710
 msgid "Character not allowed in filename"
 msgstr "Tecken ej tillåtet i filnamn"
 
-#: xftree/xtree_gui.c:2299 xftree/xtree_gui.c:2356
-msgid "New window"
-msgstr "Nytt fönster"
+#: xftree/xtree_cb.c:794
+msgid "Nothing selected !"
+msgstr ""
 
-#: xftree/xtree_gui.c:2301 xftree/xtree_gui.c:2390
-msgid "Close window"
-msgstr "Stäng fönster"
-
-#: xftree/xtree_gui.c:2305
+#: xftree/xtree_cb.c:1105
 #, fuzzy
-msgid "Go back ..."
-msgstr "&Bakgrund..."
+msgid "Override?"
+msgstr "Skriv över ?"
 
-#: xftree/xtree_gui.c:2307 xftree/xtree_gui.c:2527
-msgid "Go to ..."
-msgstr "Gå till ..."
+#: xftree/xtree_cpy.c:158
+msgid "Insufficient system memory"
+msgstr ""
 
-#: xftree/xtree_gui.c:2310 xftree/xtree_gui.c:2522
-msgid "Go up"
-msgstr "Gå upp"
+#: xftree/xtree_cpy.c:178
+#, fuzzy
+msgid "Too few bytes transferred ! Device full ?"
+msgstr "För få bytes flyttade ! Är enheten full ?"
 
-#: xftree/xtree_gui.c:2312 xftree/xtree_gui.c:2512
-msgid "Go home"
-msgstr "Gå hem"
+#: xftree/xtree_cpy.c:182
+#, fuzzy
+msgid "Too many bytes transferred !?"
+msgstr "För många bytes flyttade !?"
 
-#: xftree/xtree_gui.c:2316
+#: xftree/xtree_cpy.c:186 xftree/xtree_cpy.c:190
+msgid "Can't stat() file"
+msgstr "Kan ej stat():a filen"
+
+#: xftree/xtree_cpy.c:194 xftree/xtree_cpy.c:198
+#, fuzzy
+msgid "Error closing file"
+msgstr ""
+"Fel\n"
+"Kan ej öppna fil"
+
+#: xftree/xtree_cpy.c:202
+msgid "Error deleting"
+msgstr ""
+
+#: xftree/xtree_cpy.c:206 xftree/xtree_cpy.c:414
+msgid "Can't copy FIFO"
+msgstr "Kan ej kopiera FIFO"
+
+#: xftree/xtree_cpy.c:210 xftree/xtree_cpy.c:417
+msgid "Can't copy device file"
+msgstr "Kan ej kopiera enhetsfil"
+
+#: xftree/xtree_cpy.c:214 xftree/xtree_cpy.c:420
+msgid "Can't copy socket"
+msgstr "Kan ej kopiera SOCKET"
+
+#: xftree/xtree_cpy.c:715
+#, fuzzy
+msgid "Counting files"
+msgstr "Flyttar fil..\n"
+
+#: xftree/xtree_cpy.c:1034
+#, c-format
+msgid "%d / %d"
+msgstr ""
+
+#: xftree/xtree_cpy.c:1109
+msgid "Source: "
+msgstr "Ursprung:"
+
+#: xftree/xtree_cpy.c:1116
+msgid "Target: "
+msgstr "Destination:"
+
+#: xftree/xtree_cpy.c:1123
+msgid "file x of x"
+msgstr ""
+
+#: xftree/xtree_cpy.c:1138
+msgid "XFTree: Copy"
+msgstr "XFTree: Kopiera"
+
+#: xftree/xtree_cpy.c:1139
+msgid "XFTree: Move"
+msgstr "XFTree: Flytta"
+
+#: xftree/xtree_cpy.c:1140
+#, fuzzy
+msgid "XFTree: Link"
+msgstr "XFTree: Kopiera"
+
+#: xftree/xtree_dnd.c:141
+msgid "Unknown action !"
+msgstr "Okänd aktivitet !"
+
+#: xftree/xtree_du.c:82
+msgid "Disk usage:"
+msgstr ""
+
+#: xftree/xtree_du.c:148
+#, fuzzy
+msgid "No directory selected !"
+msgstr "katalog: %s\n"
+
+#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1063
+#, fuzzy
+msgid "files"
+msgstr "Arkiv"
+
+#: xftree/xtree_functions.c:494
+msgid "internal malloc error:"
+msgstr ""
+
+#: xftree/xtree_go.c:162
+#, fuzzy
+msgid "Cannot find path"
+msgstr "Kan ej finna raddata\n"
+
+#. Create "Goto" menu
+#: xftree/xtree_go.c:269 xftree/xtree_gui.c:705
+msgid "Go to"
+msgstr "Gå till"
+
+#: xftree/xtree_gui.c:145
+msgid "Open in new"
+msgstr "Öppna i ny"
+
+#: xftree/xtree_gui.c:148 xftree/xtree_toolbar.c:104
 #, fuzzy
 msgid "New Folder"
 msgstr "Ny_Katalog"
 
-#: xftree/xtree_gui.c:2318 xftree/xtree_gui.c:2375
-msgid "New file ..."
+#: xftree/xtree_gui.c:149
+#, fuzzy
+msgid "New file"
 msgstr "Ny fil ..."
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2324 xftree/xtree_gui.c:2380
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:153
+#: xftree/xtree_toolbar.c:100
 msgid "Delete ..."
 msgstr "Radera ..."
 
-#: xftree/xtree_gui.c:2326 xftree/xtree_gui.c:2461
-msgid "Open Trash"
-msgstr "Öppna papperskorgen"
-
-#: xftree/xtree_gui.c:2328 xftree/xtree_gui.c:2466
-msgid "Empty Trash"
-msgstr "Töm papperskorgen"
-
-#: xftree/xtree_gui.c:2332 xftree/xtree_gui.c:2452
-msgid "Toggle Dotfiles"
-msgstr "Växla punktfiler"
-
-#. Create "File" menu
-#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2349
-msgid "File"
-msgstr "Arkiv"
-
-#: xftree/xtree_gui.c:2370
-msgid "New Folder ..."
-msgstr "Ny katalog ..."
-
-#. Create "Edit" menu
-#: xftree/xtree_gui.c:2403 xfumed/xfumed_gui.c:129
-#, fuzzy
-msgid "Edit"
-msgstr "Åtta"
-
-#: xftree/xtree_gui.c:2409
-msgid "Copy to pasteboard"
-msgstr ""
-
-#: xftree/xtree_gui.c:2416
+#: xftree/xtree_gui.c:156
 msgid "Insert from pasteboard"
 msgstr ""
 
-#: xftree/xtree_gui.c:2423
-msgid "List pasteboard contents"
-msgstr ""
-
-#: xftree/xtree_gui.c:2430
-msgid "Clear pasteboard"
-msgstr ""
-
-#: xftree/xtree_gui.c:2442
-msgid "Select all"
-msgstr "Markera alla"
-
-#: xftree/xtree_gui.c:2447
-msgid "Unselect"
-msgstr "Avmarkera"
-
-#. Create "Tools" menu
-#: xftree/xtree_gui.c:2474
-#, fuzzy
-msgid "Tools"
-msgstr "Verktygstips"
-
-#: xftree/xtree_gui.c:2485
+#: xftree/xtree_gui.c:159 xftree/xtree_gui.c:203 xftree/xtree_toolbar.c:101
 msgid "Find ..."
 msgstr "Sök ..."
 
-#: xftree/xtree_gui.c:2490
+#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:207
+msgid "Show disk usage ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:163
+#, fuzzy
+msgid "Cut to pasteboard"
+msgstr "Kan ej skapa fil"
+
+#: xftree/xtree_gui.c:164
+msgid "Copy to pasteboard"
+msgstr ""
+
+#: xftree/xtree_gui.c:167
+msgid "List pasteboard contents"
+msgstr ""
+
+#: xftree/xtree_gui.c:168
+msgid "Clear pasteboard"
+msgstr ""
+
+#: xftree/xtree_gui.c:170
+msgid "Select all"
+msgstr "Markera alla"
+
+#: xftree/xtree_gui.c:171
+msgid "Unselect"
+msgstr "Avmarkera"
+
+#: xftree/xtree_gui.c:172 xftree/xtree_toolbar.c:109
+msgid "Toggle Dotfiles"
+msgstr "Växla punktfiler"
+
+#: xftree/xtree_gui.c:174 xftree/xtree_toolbar.c:107
+msgid "Open Trash"
+msgstr "Öppna papperskorgen"
+
+#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:108
+msgid "Empty Trash"
+msgstr "Töm papperskorgen"
+
+#: xftree/xtree_gui.c:179
+msgid "Duplicate"
+msgstr "Duplicera"
+
+#: xftree/xtree_gui.c:180
+msgid "Rename ..."
+msgstr "Byt namn ..."
+
+#: xftree/xtree_gui.c:181
 msgid "Properties ..."
 msgstr "Egenskaper ..."
 
-#: xftree/xtree_gui.c:2496
+#: xftree/xtree_gui.c:185 xftree/xtree_gui.c:192 xftree/xtree_toolbar.c:94
+msgid "Go to ..."
+msgstr "Gå till ..."
+
+#: xftree/xtree_gui.c:189
+msgid "Register ..."
+msgstr "Registrera ..."
+
+#: xftree/xtree_gui.c:195 xftree/xtree_toolbar.c:96
+msgid "Go home"
+msgstr "Gå hem"
+
+#: xftree/xtree_gui.c:196
+msgid "Go back"
+msgstr ""
+
+#: xftree/xtree_gui.c:197 xftree/xtree_toolbar.c:95
+msgid "Go up"
+msgstr "Gå upp"
+
+#: xftree/xtree_gui.c:198
+#, fuzzy
+msgid "Update"
+msgstr "Duplicera"
+
+#: xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:102
 #, fuzzy
 msgid "Differences ..."
 msgstr "Radera ..."
 
-#: xftree/xtree_gui.c:2501
+#: xftree/xtree_gui.c:205
 msgid "Patch viewer ..."
 msgstr ""
 
-#. Create "Go To" menu
-#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2506
-msgid "Go"
+#: xftree/xtree_gui.c:206 xftree/xtree_toolbar.c:103
+#, fuzzy
+msgid "Browse SMB network ..."
+msgstr "Bläddra ..."
+
+#: xftree/xtree_gui.c:210 xftree/xtree_toolbar.c:90
+msgid "Close window"
+msgstr "Stäng fönster"
+
+#: xftree/xtree_gui.c:211
+#, fuzzy
+msgid "Quit ..."
+msgstr "Om ..."
+
+#. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
+#: xftree/xtree_gui.c:216
+msgid "Subsort by file type"
 msgstr ""
 
-#: xftree/xtree_gui.c:2517
-msgid "Go back"
+#: xftree/xtree_gui.c:217
+#, fuzzy
+msgid "Enable filter"
+msgstr "Filnamn : "
+
+#: xftree/xtree_gui.c:218
+#, fuzzy
+msgid "Abbreviate paths"
+msgstr "Kan ej stat():a filen"
+
+#: xftree/xtree_gui.c:220
+msgid "Status box"
 msgstr ""
 
-#. menuitem = gtk_menu_item_new ();
-#. gtk_menu_append (GTK_MENU (menu), menuitem);
-#. gtk_widget_show (menuitem);
+#: xftree/xtree_gui.c:221
+msgid "Status titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:222
+msgid "Short titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:224 xftree/xtree_toolbar.c:420
+#, fuzzy
+msgid "Hide toolbar"
+msgstr "Göm menyer"
+
+#: xftree/xtree_gui.c:225
+msgid "Hide titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:226
+msgid "Hide sizes"
+msgstr ""
+
+#: xftree/xtree_gui.c:227
+msgid "Hide dates"
+msgstr ""
+
+#: xftree/xtree_gui.c:228
+#, fuzzy
+msgid "Hide owner"
+msgstr "Göm menyer"
+
+#: xftree/xtree_gui.c:229
+msgid "Hide group"
+msgstr ""
+
+#: xftree/xtree_gui.c:230
+#, fuzzy
+msgid "Hide mode"
+msgstr "Göm menyer"
+
+#: xftree/xtree_gui.c:233
+msgid "Sort by file name"
+msgstr ""
+
+#: xftree/xtree_gui.c:234
+msgid "Sort by file size"
+msgstr ""
+
+#: xftree/xtree_gui.c:235
+msgid "Sort by file date"
+msgstr ""
+
+#: xftree/xtree_gui.c:464 xftree/xtree_gui.c:466
+#, fuzzy
+msgid "Create"
+msgstr "Duplicera"
+
+#. Create "File" menu
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:647
+msgid "File"
+msgstr "Arkiv"
+
+#. Create "Edit" menu
+#: xftree/xtree_gui.c:676 xfumed/xfumed_gui.c:129
+#, fuzzy
+msgid "Edit"
+msgstr "Åtta"
+
+#. Create "Tools" menu
+#: xftree/xtree_gui.c:730
+#, fuzzy
+msgid "Tools"
+msgstr "Verktygstips"
+
+#. Create "View" menu
+#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:754
+msgid "View"
+msgstr ""
+
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2538
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:784
 #, fuzzy
 msgid "Preferences"
 msgstr "Radera ..."
 
-#: xftree/xtree_gui.c:2544
+#: xftree/xtree_gui.c:790
+#, fuzzy
+msgid "Hide main menu"
+msgstr "Göm menyer"
+
+#: xftree/xtree_gui.c:798 xftree/xtree_gui.c:821
 msgid "Save geometry on exit"
 msgstr ""
 
-#: xftree/xtree_gui.c:2546
+#: xftree/xtree_gui.c:805 xftree/xtree_gui.c:823
 msgid "Double click does GOTO"
 msgstr ""
 
-#: xftree/xtree_gui.c:2548
-msgid "Short titles"
-msgstr ""
-
-#: xftree/xtree_gui.c:2550
+#: xftree/xtree_gui.c:813 xftree/xtree_gui.c:825
 msgid "Drag does copy"
 msgstr ""
 
+#: xftree/xtree_gui.c:829
+#, fuzzy
+msgid "Set background color"
+msgstr "Bakgrundsfärg..."
+
+#: xftree/xtree_gui.c:834
+#, fuzzy
+msgid "Set font"
+msgstr "Menytypsnitt :"
+
+#: xftree/xtree_gui.c:840 xftree/xtree_toolbar.c:339
+#, fuzzy
+msgid "Configure toolbar"
+msgstr "Konfigurera fönster"
+
+#: xftree/xtree_gui.c:845
+#, fuzzy
+msgid "Redefine home directory"
+msgstr "Destinationen måste vara en katalog !"
+
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2555
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:851
 msgid "Help"
 msgstr "Hjälp"
 
-#: xftree/xtree_gui.c:2562
-msgid "Default shortcut keys"
+#: xftree/xtree_gui.c:858
+msgid "Drag and drop"
 msgstr ""
 
-#: xftree/xtree_gui.c:2567
+#: xftree/xtree_gui.c:864
+msgid "Unlisted shortcut keys"
+msgstr ""
+
+#: xftree/xtree_gui.c:869
 msgid "Custom shortcut keys"
 msgstr ""
 
-#: xftree/xtree_gui.c:2572
+#: xftree/xtree_gui.c:874
+msgid "Registered applications"
+msgstr ""
+
+#: xftree/xtree_gui.c:880
 msgid "About ..."
 msgstr "Om ..."
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2737
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:997
 msgid "Name"
 msgstr "Namn"
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2738
+#. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:999
 msgid "Size (bytes)"
 msgstr "Storlek (bytes)"
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2739
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1000
 #, fuzzy
 msgid "Last changed"
 msgstr "Senast ändrade (Å-M-D tt:mm)"
 
-#: xftree/xtree_mess.c:84
+#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1001
+#, fuzzy
+msgid "Mode"
+msgstr "&Flytta"
+
+#: xftree/xtree_gui.c:1003
+#, fuzzy
+msgid "Group"
+msgstr "Grupp :"
+
+#: xftree/xtree_gui.c:1046
+#, fuzzy
+msgid "Filter:"
+msgstr "Arkiv"
+
+#: xftree/xtree_gui.c:1057
+msgid "dirs"
+msgstr ""
+
+#: xftree/xtree_gui.c:1169
+msgid "Show main menu"
+msgstr ""
+
+#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:95
+msgid "Could not load specified font\n"
+msgstr ""
+
+#: xftree/xtree_mess.c:428
 msgid "Override ?"
 msgstr "Skriv över ?"
 
-#: xftree/xtree_mess.c:85
+#: xftree/xtree_mess.c:429
 msgid "with"
 msgstr ""
 
-#: xftree/xtree_mess.c:161 xftree/xtree_mess.c:178
+#: xftree/xtree_mess.c:508 xftree/xtree_mess.c:509 xftree/xtree_mess.c:525
+#: xftree/xtree_mess.c:526
 msgid "Default xftreerc file cannot be created\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:199
+#: xftree/xtree_mess.c:562
 msgid "Default xftreerc file cannot be read\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:250
+#: xftree/xtree_mess.c:756
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
 "and press a keyboard key to create the shortcut."
 msgstr ""
 
-#: xftree/xtree_mess.c:260
+#: xftree/xtree_mess.c:765
+msgid ""
+"Xftree can register applications by filename or filetype\n"
+"by selecting \"Register\" from one of the menus or by selecting\n"
+"\"Register application\" on mouse double-click.\n"
+"If you wish to edit the applications that are already registered,\n"
+" please look at ~/.xfce/xtree.reg."
+msgstr ""
+
+#: xftree/xtree_mess.c:774
+msgid ""
+"Xftree handles drag and drop the following way:\n"
+"SHIFT drag+drop --> move\n"
+"CTRL drag+drop --> copy\n"
+"SHIFT-CTRL drag+drop --> link\n"
+"The default drag+drop action is move,\n"
+"but can be changed in the preferences menu.\n"
+"To drag multiple files, use the middle button.\n"
+msgstr ""
+
+#: xftree/xtree_mess.c:789
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 
-#: xftree/xtree_mess.c:300
+#: xftree/xtree_mess.c:832
 msgid "Xftree results"
 msgstr ""
 
-#: xftree/xtree_pasteboard.c:92
+#: xftree/xtree_mess.c:1047
+#, fuzzy
+msgid "Home directory : "
+msgstr "katalog: %s\n"
+
+#: xftree/xtree_pasteboard.c:96
 #, fuzzy
 msgid "Cannot create pasteboard\n"
 msgstr "Kan ej skapa fil"
 
-#: xftree/xtree_pasteboard.c:176
-msgid "Please select exactly one directory to insert the pasteboard contents."
+#: xftree/xtree_pasteboard.c:189 xftree/xtree_pasteboard.c:262
+msgid "The pasteboard is currently empty."
 msgstr ""
 
-#: xftree/xtree_pasteboard.c:181 xftree/xtree_pasteboard.c:236
-msgid "The pasteboard is currently empty."
+#: xftree/xtree_pasteboard.c:283
+msgid "Pasteboard contents:\n"
+msgstr ""
+
+#. only 32 elements allowed in TOOLBARICONS
+#: xftree/xtree_toolbar.c:88
+msgid "New window"
+msgstr "Nytt fönster"
+
+#: xftree/xtree_toolbar.c:89
+#, fuzzy
+msgid "Terminal"
+msgstr "Avslutad: "
+
+#: xftree/xtree_toolbar.c:91
+#, fuzzy
+msgid "Run ..."
+msgstr "Byt namn ..."
+
+#: xftree/xtree_toolbar.c:92
+#, fuzzy
+msgid "Update ..."
+msgstr "Öppna ..."
+
+#: xftree/xtree_toolbar.c:93
+#, fuzzy
+msgid "Go back ..."
+msgstr "&Bakgrund..."
+
+#: xftree/xtree_toolbar.c:97
+#, fuzzy
+msgid "Cut ..."
+msgstr "Om ..."
+
+#: xftree/xtree_toolbar.c:98
+#, fuzzy
+msgid "Copy ..."
+msgstr "Inställningar..."
+
+#: xftree/xtree_toolbar.c:99
+#, fuzzy
+msgid "Paste ..."
+msgstr "Spara ..."
+
+#: xftree/xtree_toolbar.c:105
+msgid "New file ..."
+msgstr "Ny fil ..."
+
+#: xftree/xtree_toolbar.c:322
+#, fuzzy
+msgid "Action"
+msgstr "Konfiguration"
+
+#: xftree/xtree_toolbar.c:323
+msgid "Small icons. "
+msgstr ""
+
+#: xftree/xtree_toolbar.c:324
+#, fuzzy
+msgid "Large icons. "
+msgstr "&Arrangera ikoner"
+
+#: xftree/xtree_toolbar.c:327
+#, fuzzy
+msgid "Regen"
+msgstr "Testa"
+
+#: xftree/xtree_toolbar.c:427
+msgid "Large buttons"
 msgstr ""
 
 #. convenience location of duplicate dialog texts
@@ -1429,6 +1668,7 @@ msgstr ""
 msgid "****Empty file****\n"
 msgstr ""
 
+#. missing color attribute
 #: xfdiff/xfdiff.c:314 xfdiff/xfdiff.c:320
 msgid "****Binary data****\n"
 msgstr ""
@@ -1612,11 +1852,6 @@ msgstr ""
 msgid "Font selection"
 msgstr "Typsnittsval"
 
-#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
-msgid "Could not load specified font\n"
-msgstr ""
-
 #: xfdiff/xfdiff_gui.c:585
 #, fuzzy
 msgid "Select highlight background color"
@@ -1644,6 +1879,13 @@ msgstr ""
 
 #: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
+msgstr ""
+
+#: xfdiff/xfdiff_gui.c:826
+msgid ""
+"\n"
+"(c) by Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:845
@@ -1801,7 +2043,7 @@ msgstr "Verkställ"
 msgid "Undo patch to Hard Drive"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1922
 #, fuzzy
 msgid "About"
 msgstr "Om..."
@@ -1915,6 +2157,7 @@ msgstr ""
 "Fel\n"
 "Kan ej allokera färger"
 
+#. font color!
 #: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr ""
@@ -1927,122 +2170,117 @@ msgstr ""
 msgid "Press OK to see patch diffs"
 msgstr ""
 
-#: xfglob/xfglob.c:459 xfglob/xfglob.c:460
+#: xfglob/xfglob.c:460 xfglob/xfglob.c:461
 msgid "Results limit reached"
 msgstr ""
 
-#: xfglob/xfglob.c:468
+#: xfglob/xfglob.c:469
 #, fuzzy
 msgid "Cancelled"
 msgstr "Avbryt"
 
-#: xfglob/xfglob.c:469
+#: xfglob/xfglob.c:470
 msgid "Search canceled!\n"
 msgstr ""
 
-#: xfglob/xfglob.c:494 xfglob/xfglob.c:524
+#: xfglob/xfglob.c:495 xfglob/xfglob.c:525
 msgid "Glob run must finish or be cancelled first."
 msgstr ""
 
-#: xfglob/xfglob.c:507
+#: xfglob/xfglob.c:508
 #, fuzzy
 msgid "Find results.\n"
 msgstr "Sök ..."
 
-#: xfglob/xfglob.c:587 xfglob/xfglob.c:679
+#: xfglob/xfglob.c:588 xfglob/xfglob.c:680
 #, fuzzy
 msgid "Find results..."
 msgstr "Sök ..."
 
-#: xfglob/xfglob.c:606 xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:607 xfglob/xfglob.c:1362
 #, fuzzy
 msgid "Directory"
 msgstr "katalog: %s\n"
 
-#: xfglob/xfglob.c:609
-#, fuzzy
-msgid "Mode"
-msgstr "&Flytta"
-
-#: xfglob/xfglob.c:1031
+#: xfglob/xfglob.c:1032
 msgid "Incoherent size considerations!"
 msgstr ""
 
 #. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
-#: xfglob/xfglob.c:1201
+#: xfglob/xfglob.c:1202
 msgid "Result of "
 msgstr ""
 
-#: xfglob/xfglob.c:1212 xfglob/xfglob.c:1555
+#: xfglob/xfglob.c:1213 xfglob/xfglob.c:1556
 #, fuzzy
 msgid "File type :"
 msgstr "Filnamn : "
 
-#: xfglob/xfglob.c:1284
+#: xfglob/xfglob.c:1285
 msgid "Anyone"
 msgstr ""
 
 #. translation of filetypes
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Any kind"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Regular"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Symlink"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Socket"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Block device"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Character device"
 msgstr ""
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "FIFO"
 msgstr ""
 
-#: xfglob/xfglob.c:1371
+#: xfglob/xfglob.c:1372
 msgid "Xfglob"
 msgstr ""
 
 #. *******************************
 #. show the notebook pages:
 #. fourth circle : notebook tabs stuff
-#: xfglob/xfglob.c:1422 xfglob/xfglob.c:1912 xfglob/xfglob.c:1940
+#: xfglob/xfglob.c:1423 xfglob/xfglob.c:1913 xfglob/xfglob.c:1941
 #, fuzzy
 msgid "Find"
 msgstr "Sök ..."
 
-#: xfglob/xfglob.c:1434
+#: xfglob/xfglob.c:1435
 #, fuzzy
 msgid "Path : "
 msgstr "Destination : "
 
-#: xfglob/xfglob.c:1443
+#: xfglob/xfglob.c:1444
 #, fuzzy
 msgid "Browse"
 msgstr "Bläddra..."
 
-#: xfglob/xfglob.c:1452
+#: xfglob/xfglob.c:1453
 #, fuzzy
 msgid "File filter : "
 msgstr "Filnamn : "
 
-#: xfglob/xfglob.c:1460
+#: xfglob/xfglob.c:1461
 msgid "What's a file filter?"
 msgstr ""
 
-#: xfglob/xfglob.c:1467
+#: xfglob/xfglob.c:1468
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -2050,37 +2288,37 @@ msgid ""
 "?  Will match any character exactly one time\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1473
+#: xfglob/xfglob.c:1474
 msgid "Search subdirectories too"
 msgstr ""
 
-#: xfglob/xfglob.c:1475
+#: xfglob/xfglob.c:1476
 msgid "Limit results to first : "
 msgstr ""
 
-#: xfglob/xfglob.c:1488
+#: xfglob/xfglob.c:1489
 #, fuzzy
 msgid "Content search"
 msgstr "Avbryt"
 
-#: xfglob/xfglob.c:1500
+#: xfglob/xfglob.c:1501
 #, fuzzy
 msgid "Containing : "
 msgstr "Kommando : "
 
-#: xfglob/xfglob.c:1511
+#: xfglob/xfglob.c:1512
 msgid "Case sensitive search"
 msgstr ""
 
-#: xfglob/xfglob.c:1512
+#: xfglob/xfglob.c:1513
 msgid "Extended regexp"
 msgstr ""
 
-#: xfglob/xfglob.c:1515
+#: xfglob/xfglob.c:1516
 msgid "What's a regexp?"
 msgstr ""
 
-#: xfglob/xfglob.c:1521
+#: xfglob/xfglob.c:1522
 msgid ""
 "Reserved characters for extended regexp are\n"
 ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
@@ -2121,19 +2359,19 @@ msgid ""
 "       at the command prompt.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1542
+#: xfglob/xfglob.c:1543
 msgid "File considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1566
+#: xfglob/xfglob.c:1567
 msgid "Stay on single filesystem"
 msgstr ""
 
-#: xfglob/xfglob.c:1567
+#: xfglob/xfglob.c:1568
 msgid "What's a single filesystem?"
 msgstr ""
 
-#: xfglob/xfglob.c:1571
+#: xfglob/xfglob.c:1572
 msgid ""
 "Staying on a single filesystem will hinder\n"
 "searching on different physical disk partitions.\n"
@@ -2141,16 +2379,16 @@ msgid ""
 "to search into nfs or smb mounts.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1593
+#: xfglob/xfglob.c:1594
 #, fuzzy
 msgid "Permission considerations"
 msgstr "Rättigheter"
 
-#: xfglob/xfglob.c:1597
+#: xfglob/xfglob.c:1598
 msgid "How does permission filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1601
+#: xfglob/xfglob.c:1602
 msgid ""
 "When permission filtering is active:\n"
 "-If a file has one of the chosen permission bits,\n"
@@ -2159,15 +2397,15 @@ msgid ""
 "  no set permission bits will match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1697
+#: xfglob/xfglob.c:1698
 msgid "User/group considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1701
+#: xfglob/xfglob.c:1702
 msgid "How does user/group filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1705
+#: xfglob/xfglob.c:1706
 msgid ""
 "If user and group are both set to any \n"
 "value other than anyone:\n"
@@ -2175,25 +2413,25 @@ msgid ""
 "  to match\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1716
+#: xfglob/xfglob.c:1717
 #, fuzzy
 msgid "User ID: "
 msgstr "Filnamn : "
 
-#: xfglob/xfglob.c:1727
+#: xfglob/xfglob.c:1728
 #, fuzzy
 msgid "Group ID: "
 msgstr "Grupp :"
 
-#: xfglob/xfglob.c:1742
+#: xfglob/xfglob.c:1743
 msgid "Size considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1746
+#: xfglob/xfglob.c:1747
 msgid "How does size filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1750
+#: xfglob/xfglob.c:1751
 msgid ""
 "-If a size of 0 (zero) is specified for \n"
 " size-less-than, this will be ignored.\n"
@@ -2202,23 +2440,23 @@ msgid ""
 " in order for a file to match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1762
+#: xfglob/xfglob.c:1763
 msgid "Size greater than (KB): "
 msgstr ""
 
-#: xfglob/xfglob.c:1777
+#: xfglob/xfglob.c:1778
 msgid "Size less than (KB): "
 msgstr ""
 
-#: xfglob/xfglob.c:1797
+#: xfglob/xfglob.c:1798
 msgid "Time considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1801
+#: xfglob/xfglob.c:1802
 msgid "How does time filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1805
+#: xfglob/xfglob.c:1806
 msgid ""
 "Three different time modes may be selected:\n"
 "*modified:\n"
@@ -2245,116 +2483,116 @@ msgid ""
 "runs will not produce identical results.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1817
+#: xfglob/xfglob.c:1818
 #, fuzzy
 msgid "Modified"
 msgstr "&Flytta"
 
-#: xfglob/xfglob.c:1818
+#: xfglob/xfglob.c:1819
 #, fuzzy
 msgid "Changed"
 msgstr "Senast ändrade (Å-M-D tt:mm)"
 
-#: xfglob/xfglob.c:1819
+#: xfglob/xfglob.c:1820
 #, fuzzy
 msgid "Accessed"
 msgstr "Senast använd :"
 
-#: xfglob/xfglob.c:1825
+#: xfglob/xfglob.c:1826
 msgid "In the previous : "
 msgstr ""
 
-#: xfglob/xfglob.c:1835
+#: xfglob/xfglob.c:1836
 #, fuzzy
 msgid "Minutes"
 msgstr "Nio"
 
-#: xfglob/xfglob.c:1836
+#: xfglob/xfglob.c:1837
 #, fuzzy
 msgid "Hours"
 msgstr "Fyra"
 
-#: xfglob/xfglob.c:1837
+#: xfglob/xfglob.c:1838
 #, fuzzy
 msgid "Days"
 msgstr "Söndag"
 
-#: xfglob/xfglob.c:1838
+#: xfglob/xfglob.c:1839
 #, fuzzy
 msgid "Months"
 msgstr "Typsnitt..."
 
-#: xfglob/xfglob.c:1869
+#: xfglob/xfglob.c:1870
 msgid "General considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1879
+#: xfglob/xfglob.c:1880
 msgid "Do not look into binary files"
 msgstr ""
 
-#: xfglob/xfglob.c:1881
+#: xfglob/xfglob.c:1882
 msgid "Output count of matching lines"
 msgstr ""
 
-#: xfglob/xfglob.c:1883
+#: xfglob/xfglob.c:1884
 msgid "Match anywhere"
 msgstr ""
 
-#: xfglob/xfglob.c:1884
+#: xfglob/xfglob.c:1885
 msgid "Match whole words only"
 msgstr ""
 
-#: xfglob/xfglob.c:1885
+#: xfglob/xfglob.c:1886
 msgid "Match whole lines only"
 msgstr ""
 
-#: xfglob/xfglob.c:1886
+#: xfglob/xfglob.c:1887
 msgid "Output files where no match is found"
 msgstr ""
 
-#: xfglob/xfglob.c:1915
+#: xfglob/xfglob.c:1916
 #, fuzzy
 msgid "Filter options"
 msgstr "XFce : %s Fil saknas.\n"
 
-#: xfglob/xfglob.c:1918
+#: xfglob/xfglob.c:1919
 msgid "Content options"
 msgstr ""
 
-#: xfglob/xfglob.c:1946
+#: xfglob/xfglob.c:1947
 #, fuzzy
 msgid "Results"
 msgstr "Testa"
 
-#: xfglob/xfglob.c:1961
+#: xfglob/xfglob.c:1962
 msgid "working..."
 msgstr ""
 
-#: xfglob/xfglob.c:1964
+#: xfglob/xfglob.c:1965
 #, fuzzy
 msgid "Cancel Search"
 msgstr "Avbryt"
 
-#: xfglob/xfglob.c:2013
+#: xfglob/xfglob.c:2014
 #, fuzzy
 msgid "Nothing found...\n"
 msgstr "Flyttar fil..\n"
 
-#: xfglob/xfglob.c:2021
+#: xfglob/xfglob.c:2022
 #, fuzzy
 msgid "Files found="
 msgstr "XFce : %s Fil saknas.\n"
 
-#: xfglob/xfglob.c:2024
+#: xfglob/xfglob.c:2025
 msgid "(interrupted because limit exceded)"
 msgstr ""
 
-#: xfglob/xfglob.c:2078
+#: xfglob/xfglob.c:2079
 #, fuzzy
 msgid "lines"
 msgstr "Nio"
 
-#: xfglob/xfglob.c:2144
+#: xfglob/xfglob.c:2145
 msgid "unable to stat:"
 msgstr ""
 
@@ -2395,7 +2633,7 @@ msgid "Hide/show calendar"
 msgstr "Göm/visa kalender"
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:881
+#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:884
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -2703,123 +2941,123 @@ msgstr ""
 msgid "File not found.\n"
 msgstr "XFce : %s Fil saknas.\n"
 
-#: xfwm/xfwm.c:851
+#: xfwm/xfwm.c:854
 msgid "&Restart"
 msgstr "Sta&rta om"
 
-#: xfwm/xfwm.c:852
+#: xfwm/xfwm.c:855
 msgid "&Quit"
 msgstr "&Avsluta"
 
-#: xfwm/xfwm.c:865
+#: xfwm/xfwm.c:868
 msgid "&Move"
 msgstr "&Flytta"
 
-#: xfwm/xfwm.c:866
+#: xfwm/xfwm.c:869
 msgid "&Resize"
 msgstr "Sto&rlek"
 
-#: xfwm/xfwm.c:867
+#: xfwm/xfwm.c:870
 msgid "(De)&Iconify"
 msgstr "(Av)&ikonifiera"
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:871
 msgid "(Un)&Stick"
 msgstr "(O)&klistrigt"
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:872
 msgid "(Un)S&hade"
 msgstr "(Av)Sk&ugga"
 
-#: xfwm/xfwm.c:870
+#: xfwm/xfwm.c:873
 msgid "(Un)Ma&ximize"
 msgstr "(Av)ma&ximera"
 
-#: xfwm/xfwm.c:872
+#: xfwm/xfwm.c:875
 msgid "Se&nd to..."
 msgstr "Skicka ti&ll..."
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:876
 msgid "S&witch to..."
 msgstr "B&yt till..."
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:878
 msgid "&Close"
 msgstr "&Stäng"
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:880
 msgid "User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:881
 #, fuzzy
 msgid "Edit menu..."
 msgstr "Extern..."
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:885
 msgid "&Mouse..."
 msgstr "&Musen"
 
-#: xfwm/xfwm.c:883
+#: xfwm/xfwm.c:886
 msgid "&Backdrop..."
 msgstr "&Bakgrund..."
 
-#: xfwm/xfwm.c:884
+#: xfwm/xfwm.c:887
 msgid "&Sound..."
 msgstr "&Ljud..."
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:889
 msgid "&New window"
 msgstr "&Nytt fönster"
 
-#: xfwm/xfwm.c:887
+#: xfwm/xfwm.c:890
 msgid "&User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:894
 msgid "&Arrange icons"
 msgstr "&Arrangera ikoner"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:895
 #, fuzzy
 msgid "&Iconify all"
 msgstr "Ikonifiera"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:896
 msgid "&Refresh"
 msgstr "&Rita om"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:897
 msgid "Shuffle &Up"
 msgstr "Skyffla &upp"
 
-#: xfwm/xfwm.c:895
+#: xfwm/xfwm.c:898
 msgid "Shuffle &Down"
 msgstr "Skyffla n&er"
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:900
 #, fuzzy
 msgid "&Settings"
 msgstr "Inställningar"
 
-#: xfwm/xfwm.c:899
+#: xfwm/xfwm.c:902
 msgid "&Quit XFwm"
 msgstr "&Avsluta XFwm"
 
-#: xfwm/xfwm.c:901
+#: xfwm/xfwm.c:904
 #, fuzzy
 msgid "&Full Screen"
 msgstr "Virtuella skärmar"
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:905
 msgid "&Vertical"
 msgstr ""
 
-#: xfwm/xfwm.c:903
+#: xfwm/xfwm.c:906
 msgid "&Horizontal"
 msgstr ""
 
-#: xfwm/xfwm.c:1233
+#: xfwm/xfwm.c:1236
 #, fuzzy
 msgid "xfwm terminated: "
 msgstr "Avslutad: "
@@ -2867,6 +3105,13 @@ msgstr ""
 
 #: xfsamba/xfsamba_gui.c:151
 msgid "This is XFSamba "
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:151
+msgid ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:337
@@ -2950,10 +3195,6 @@ msgstr "Öppna ..."
 msgid "Browse as..."
 msgstr "Bläddra ..."
 
-#: xfsamba/xfsamba_gui.c:1027
-msgid "View"
-msgstr ""
-
 #: xfsamba/xfsamba_gui.c:1029
 msgid "Show diagnostics"
 msgstr ""
@@ -2968,6 +3209,10 @@ msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1032
 msgid "Hide browser links"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:1034
+msgid "Go"
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1035
@@ -3409,33 +3654,86 @@ msgstr "Acceleration : "
 msgid "Command: "
 msgstr "Kommando : "
 
-#: xfumed/xfumed_gui_cb.c:23
+#: xfumed/xfumed_gui_cb.c:24
 msgid "Your changes will take effect on next startup"
 msgstr ""
 
-#: xfumed/xfumed_gui_cb.c:69
+#: xfumed/xfumed_gui_cb.c:70
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
 "Do you want to save the changes ?"
 msgstr ""
 
-#: xfumed/xfumed_gui_cb.c:76
+#: xfumed/xfumed_gui_cb.c:77
 msgid "Don't Quit"
 msgstr ""
 
-#: xfumed/xfumed_gui_cb.c:121
+#: xfumed/xfumed_gui_cb.c:122
 #, fuzzy
 msgid "Do you want to delete this entry ?"
 msgstr "Är du säker på att du vill ta bort detta objekt ?"
 
-#: xfumed/xfumed_gui_cb.c:123
+#: xfumed/xfumed_gui_cb.c:124
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
+
+#: xfumed/xfumed.h:10
+msgid "Item"
+msgstr ""
+
+#: xfumed/xfumed.h:11
+#, fuzzy
+msgid "Submenu"
+msgstr "Gå till markerad"
+
+#: xfumed/xfumed.h:12
+msgid "Separator"
+msgstr ""
+
+#~ msgid "Error"
+#~ msgstr "Fel"
+
+#~ msgid "Warning"
+#~ msgstr "Varning"
+
+#~ msgid "Source : "
+#~ msgstr "Ursprung : "
+
+#~ msgid "Target : "
+#~ msgstr "Destination : "
+
+#~ msgid "0 bytes received"
+#~ msgstr "0 bytes mottagna"
+
+#~ msgid "XFTree: Download"
+#~ msgstr "XFTree: Laddar ned"
+
+#~ msgid "%ld Bytes"
+#~ msgstr "%ld bytes"
+
+#, fuzzy
+#~ msgid "dbg:malloc error in %s at line %d\n"
+#~ msgstr "Fatalt fel i %s vid %d\n"
+
+#~ msgid "Can't copy device, fifo and socket files as regular files!\n"
+#~ msgstr "Kan ej kopiera enhets-, fifo- ock socketfiler som vanliga filer!\n"
+
+#~ msgid "move_dir() recursive failed\n"
+#~ msgstr "move_dir() rekursivt misslyckades\n"
+
+#~ msgid "move_dir() move_file() failed\n"
+#~ msgstr "move_dir() move_file() misslyckades\n"
+
+#~ msgid "Can't create : "
+#~ msgstr "Kan ej skapa : "
+
+#~ msgid "New Folder ..."
+#~ msgstr "Ny katalog ..."
 
 #~ msgid "move"
 #~ msgstr "flytta"
@@ -3473,9 +3771,6 @@ msgstr ""
 #~ msgid "Can't transfer a directory to a file"
 #~ msgstr "Kan ej överföra en katalog till en fil"
 
-#~ msgid "Moving file..\n"
-#~ msgstr "Flyttar fil..\n"
-
 #~ msgid "Move to trash failed"
 #~ msgstr "Flytt till papperskorgen misslyckades"
 
@@ -3506,23 +3801,11 @@ msgstr ""
 #~ msgid "Go up ..."
 #~ msgstr "Gå till ..."
 
-#~ msgid "Open in new"
-#~ msgstr "Öppna i ny"
-
-#~ msgid "Rename ..."
-#~ msgstr "Byt namn ..."
-
 #~ msgid "Go to marked"
 #~ msgstr "Gå till markerad"
 
 #~ msgid "Unselect all"
 #~ msgstr "Avmarkera alla"
-
-#~ msgid "Duplicate"
-#~ msgstr "Duplicera"
-
-#~ msgid "Register ..."
-#~ msgstr "Registrera ..."
 
 #~ msgid "New windows"
 #~ msgstr "Nya fönster"
@@ -3549,10 +3832,6 @@ msgstr ""
 #~ msgid "Whoooops !"
 #~ msgstr "Whoooops !"
 
-#, fuzzy
-#~ msgid "Submenu"
-#~ msgstr "Gå till markerad"
-
 #~ msgid "Source and Target are the same"
 #~ msgstr "Ursprung och destination är desamma"
 
@@ -3574,10 +3853,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Download file"
 #~ msgstr "Ljudfil : "
-
-#, fuzzy
-#~ msgid "Tar a file or directory"
-#~ msgstr "Destinationen måste vara en katalog !"
 
 #, fuzzy
 #~ msgid "Reload"

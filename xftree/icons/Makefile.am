@@ -36,6 +36,7 @@ page_movie.xpm \
 page_po.xpm \
 page_ps.xpm \
 page_spreadsheet.xpm \
+page_tar.xpm \
 page_text.xpm \
 page.xpm \
 question.xpm \
@@ -51,4 +52,4 @@ text.xpm \
 trash.xpm \
 warning.xpm \
 wg1.xpm \
-xftree_icon.xpm
+xftree_icon.xpm \

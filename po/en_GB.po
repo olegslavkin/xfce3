@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.8.5\n"
-"POT-Creation-Date: 2001-11-25 09:41+0100\n"
+"POT-Creation-Date: 2002-01-17 10:59+0100\n"
 "PO-Revision-Date: 2001-06-20 12:21+0100\n"
 "Last-Translator: Alan Cox <alan@redhat.com>\n"
 "Language-Team: LANGUAGE <alan@redhat.com>\n"
@@ -27,39 +27,40 @@ msgstr "Select File"
 msgid "Font Selection"
 msgstr "Font Selection"
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
-#: xfdiff/xfdiff_misc.c:136
+#. this is an invisible button
+#: libs/xfce-common.c:268 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
+#: xfdiff/xfdiff_misc.c:136 xftree/xtree_toolbar.c:328
 msgid "OK"
 msgstr "OK"
 
-#: libs/xfce-common.c:266
+#: libs/xfce-common.c:278
 msgid "Message"
 msgstr "Message"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:74
-#: xfumed/xfumed_gui_cb.c:125
+#: libs/xfce-common.c:391 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
+#: xfumed/xfumed_gui_cb.c:126
 msgid "Yes"
 msgstr "Yes"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
-#: xfumed/xfumed_gui_cb.c:126
+#: libs/xfce-common.c:392 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:76
+#: xfumed/xfumed_gui_cb.c:127
 msgid "No"
 msgstr "No"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:229
+#: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133
 msgid "Question"
 msgstr "Question"
 
-#: libs/xfce-common.c:603
+#: libs/xfce-common.c:632
 msgid "Terminated: "
 msgstr "Terminated: "
 
-#: libs/xpmext.c:377 libs/xpmext.c:398
+#: libs/xpmext.c:377 libs/xpmext.c:404
 #, c-format
 msgid "*** WARNING ***: Cannot load image file %s\n"
 msgstr "*** WARNING ***: Cannot load image file %s\n"
 
-#: libs/xpmext.c:419
+#: libs/xpmext.c:425
 #, c-format
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
 msgstr "*** WARNING ***: Cannot load pixmap file %s\n"
@@ -83,18 +84,18 @@ msgstr "Browse ..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
-#: xfce/setup.c:1127 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfce/setup.c:1162 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:160 xftree/gtk_prop.c:191 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
-#: xfce/setup.c:1144 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_get.c:138
-#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:889 xfumed/xfumed_gui.c:359
+#: xfce/setup.c:1179 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:160 xftree/gtk_prop.c:201
+#: xftree/xtree_cpy.c:1131 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -102,7 +103,7 @@ msgstr "Cancel"
 msgid "You must provide the command to execute !"
 msgstr "You must provide the command to execute."
 
-#: xfce/configfile.c:54
+#: xfce/configfile.c:61
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
@@ -111,7 +112,7 @@ msgstr ""
 "XFce : Syntax error in configuration file\n"
 "(%s)\n"
 
-#: xfce/configfile.c:55 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -119,7 +120,7 @@ msgstr ""
 "Syntax error in configuration file\n"
 "Aborting"
 
-#: xfce/configfile.c:62
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
@@ -128,7 +129,7 @@ msgstr ""
 "XFce : Data mismatch error in config file\n"
 "(%s)\n"
 
-#: xfce/configfile.c:63 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -136,27 +137,27 @@ msgstr ""
 "Data mismatch error in configuration file\n"
 "Aborting"
 
-#: xfce/configfile.c:206 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "Cannot create file"
 
-#: xfce/configfile.c:353
+#: xfce/configfile.c:380
 msgid "Cannot reset configuration file"
 msgstr "Cannot reset configuration file"
 
-#: xfce/configfile.c:356
+#: xfce/configfile.c:383
 msgid "Creating new config file...\n"
 msgstr "Creating new config file...\n"
 
-#: xfce/configfile.c:540 xfce/configfile.c:550
+#: xfce/configfile.c:558 xfce/configfile.c:568
 msgid "Cannot open configuration file"
 msgstr "Cannot open configuration file"
 
-#: xfce/configfile.c:556
+#: xfce/configfile.c:574
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Does not look like an XFce 3 configuration file !"
 
-#: xfce/configfile.c:557
+#: xfce/configfile.c:575
 #, fuzzy
 msgid ""
 "Do you want to reset the configuration file ?\n"
@@ -165,15 +166,15 @@ msgstr ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with \".orig\" extension)"
 
-#: xfce/configfile.c:568
+#: xfce/configfile.c:586
 msgid "Cannot open new config, Giving up..."
 msgstr "Cannot open new config, Giving up..."
 
-#: xfce/configfile.c:569
+#: xfce/configfile.c:587
 msgid "Cannot load configuration file"
 msgstr "Cannot load configuration file"
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:593
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Cannot use old version of XFce configuration files"
 
@@ -182,12 +183,12 @@ msgid "Subprocess diagnostic"
 msgstr "Subprocess diagnostic"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:321
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:854
 msgid "Clear"
 msgstr "Clear"
 
-#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
-#: xftree/xtree_mess.c:326
+#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
+#: xftree/xtree_mess.c:859
 msgid "Dismiss"
 msgstr "Dismiss"
 
@@ -199,7 +200,7 @@ msgstr "Info ..."
 #: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr "Couldn't create pixmap"
 
@@ -332,235 +333,239 @@ msgstr "Sound"
 msgid "External..."
 msgstr "External..."
 
-#: xfce/setup.c:280
+#: xfce/setup.c:283
 msgid "Setup"
 msgstr "Setup"
 
-#: xfce/setup.c:359
+#: xfce/setup.c:362
 msgid "GTK theme engine : "
 msgstr "GTK theme engine : "
 
-#: xfce/setup.c:381
+#: xfce/setup.c:384
 msgid "Apply colors to all applications"
 msgstr "Apply colours to all applications"
 
-#: xfbd/xfbdmgr.c:167 xfce/setup.c:401
+#: xfbd/xfbdmgr.c:167 xfce/setup.c:404
 msgid "Load ..."
 msgstr "Load ..."
 
-#: xfbd/xfbdmgr.c:161 xfce/setup.c:409
+#: xfbd/xfbdmgr.c:161 xfce/setup.c:412
 msgid "Save ..."
 msgstr "Save ..."
 
-#: xfce/setup.c:417
+#: xfce/setup.c:420
 msgid "Default"
 msgstr "Default"
 
-#: xfce/setup.c:439
+#: xfce/setup.c:442
 msgid "Repaint root window of workspace"
 msgstr "Repaint root window of workspace"
 
-#: xfce/setup.c:446
+#: xfce/setup.c:449
 msgid "Use gradient color as wallpaper"
 msgstr "Use gradient colour as wallpaper"
 
-#: xfce/setup.c:453
+#: xfce/setup.c:456
 msgid "Use tear-off menus"
 msgstr "Use tear-off menus"
 
-#: xfce/setup.c:460
+#: xfce/setup.c:463
 msgid "Show subprocess diagnostic dialog"
 msgstr "Show subprocess diagnostic dialog"
 
-#: xfce/setup.c:467
+#: xfce/setup.c:470
 msgid "Panel layer"
 msgstr "Panel layer"
 
-#: xfce/setup.c:481
+#: xfce/setup.c:484
 msgid "Bottom"
 msgstr "Bottom"
 
-#: xfce/setup.c:499 xfce/setup.c:876
+#: xfce/setup.c:502 xfce/setup.c:911
 msgid "Top"
 msgstr "Top"
 
-#: xfce/setup.c:506
+#: xfce/setup.c:509
 msgid "Clock"
 msgstr "Clock"
 
-#: xfce/setup.c:520
+#: xfce/setup.c:523
 msgid "Use digital clock on panel"
 msgstr "Use digital clock on panel"
 
-#: xfce/setup.c:527
+#: xfce/setup.c:530
 msgid "Use military time (24 hours)"
 msgstr "Use 24 hour clock format"
 
-#: xfce/setup.c:534
+#: xfce/setup.c:537
 msgid "Tooltips"
 msgstr "Tooltips"
 
-#: xfce/setup.c:548
+#: xfce/setup.c:551
 msgid "Tooltips delay (ms.) : "
 msgstr "Tooltips delay (ms.) : "
 
-#: xfce/setup.c:563
+#: xfce/setup.c:566
 msgid "Virtual Screens"
 msgstr "Virtual screens"
 
-#: xfce/setup.c:577
+#: xfce/setup.c:587
 msgid "Number of virtual desktops : "
 msgstr "Number of virtual desktops : "
 
-#: xfce/setup.c:591
+#: xfce/setup.c:608
+msgid "switch desktop at screen border, fixed factor 4: "
+msgstr ""
+
+#: xfce/setup.c:626
 msgid "Popups & Icons"
 msgstr "Popups & Icons"
 
-#: xfce/setup.c:605
+#: xfce/setup.c:640
 msgid "Number of popup menus : "
 msgstr "Number of popup menus : "
 
-#: xfce/setup.c:619
+#: xfce/setup.c:654
 msgid "Size of icons on panel"
 msgstr "Size of icons on panel"
 
-#: xfce/setup.c:633 xfce/setup.c:668
+#: xfce/setup.c:668 xfce/setup.c:703
 msgid "Large"
 msgstr "Large"
 
-#: xfce/setup.c:640 xfce/setup.c:675
+#: xfce/setup.c:675 xfce/setup.c:710
 msgid "Medium"
 msgstr "Medium"
 
-#: xfce/setup.c:647 xfce/setup.c:682
+#: xfce/setup.c:682 xfce/setup.c:717
 msgid "Small"
 msgstr "Small"
 
-#: xfce/setup.c:654
+#: xfce/setup.c:689
 msgid "Size of icons on pop-up menus"
 msgstr "Size of icons on popup menus"
 
-#: xfce/setup.c:689
+#: xfce/setup.c:724
 msgid "Font style"
 msgstr "Font style"
 
-#: xfce/setup.c:710 xfce/setup.c:1003 xfce/setup.c:1010 xfce/setup.c:1017
+#: xfce/setup.c:745 xfce/setup.c:1038 xfce/setup.c:1045 xfce/setup.c:1052
 msgid "Browse..."
 msgstr "Browse..."
 
-#: xfce/setup.c:734
+#: xfce/setup.c:769
 msgid "Click to focus windows"
 msgstr "Click to focus windows"
 
-#: xfce/setup.c:741
+#: xfce/setup.c:776
 msgid "Automatically focus on new window"
 msgstr "Automatically focus on new window"
 
-#: xfce/setup.c:748
+#: xfce/setup.c:783
 msgid "Auto raise windows"
 msgstr "Auto raise windows"
 
-#: xfce/setup.c:755
+#: xfce/setup.c:790
 #, fuzzy
 msgid "Show contents of window while moving"
 msgstr "Show window contents while moving"
 
-#: xfce/setup.c:762
+#: xfce/setup.c:797
 #, fuzzy
 msgid "Show contents of window while resizing"
 msgstr "Show window contents wile resizing"
 
-#: xfce/setup.c:769
+#: xfce/setup.c:804
 #, fuzzy
 msgid "Use gradient color for the active window"
 msgstr "Use gradient colour for the active window"
 
-#: xfce/setup.c:776
+#: xfce/setup.c:811
 #, fuzzy
 msgid "Use gradient color for inactive windows"
 msgstr "Use gradient colour for inactive windows"
 
-#: xfce/setup.c:799
+#: xfce/setup.c:834
 msgid "Window border style : "
 msgstr "Window border style : "
 
-#: xfce/setup.c:837
+#: xfce/setup.c:872
 msgid "Window snapping size (0 disable) : "
 msgstr "Window snapping size (0 disable) : "
 
-#: xfce/setup.c:864
+#: xfce/setup.c:899
 msgid "Icon position"
 msgstr "Icon position"
 
-#: xfce/setup.c:883 xfmouse/xfmouse.c:206
+#: xfce/setup.c:918 xfmouse/xfmouse.c:206
 msgid "Left"
 msgstr "Left"
 
-#: xfce/setup.c:890
+#: xfce/setup.c:925
 msgid "bottom"
 msgstr "bottom"
 
-#: xfce/setup.c:897 xfmouse/xfmouse.c:216
+#: xfce/setup.c:932 xfmouse/xfmouse.c:216
 msgid "Right"
 msgstr "Right"
 
-#: xfce/setup.c:976
+#: xfce/setup.c:1011
 msgid "Title font :"
 msgstr "Title font :"
 
-#: xfce/setup.c:985
+#: xfce/setup.c:1020
 msgid "Icon font :"
 msgstr "Icon font :"
 
-#: xfce/setup.c:994
+#: xfce/setup.c:1029
 msgid "Menu font :"
 msgstr "Menu font :"
 
-#: xfce/setup.c:1041
+#: xfce/setup.c:1076
 msgid "Sound module (xfsound)"
 msgstr "Sound module (xfsound)"
 
-#: xfce/setup.c:1048
+#: xfce/setup.c:1083
 msgid "Mouse settings (xfmouse)"
 msgstr "Mouse settings (xfmouse)"
 
-#: xfce/setup.c:1055
+#: xfce/setup.c:1090
 msgid "Backdrop settings (xfbd)"
 msgstr "Backdrop settings (xfbd)"
 
-#: xfce/setup.c:1062
+#: xfce/setup.c:1097
 msgid "Pager (xfpager)"
 msgstr "Pager (xfpager)"
 
-#: xfce/setup.c:1069
+#: xfce/setup.c:1104
 msgid "GNOME (xfgnome)"
 msgstr "GNOME (xfgnome)"
 
-#: xfce/setup.c:1076
+#: xfce/setup.c:1111
 msgid "GNOME menu (xfmenu)"
 msgstr "GNOME menu (xfmenu)"
 
-#: xfce/setup.c:1083
+#: xfce/setup.c:1118
 msgid "KDE menu (xfmenu)"
 msgstr "KDE menu (xfmenu)"
 
-#: xfce/setup.c:1090
+#: xfce/setup.c:1125
 msgid "Palette"
 msgstr "Palette"
 
-#: xfce/setup.c:1096
+#: xfce/setup.c:1131
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1102
+#: xfce/setup.c:1137
 msgid "Windows"
 msgstr "Windows"
 
-#: xfce/setup.c:1108 xfce/startup.c:60 xfsound/xfsound.c:88
+#: xfce/setup.c:1143 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
 msgstr "Startup"
 
-#: xfbd/xfbd.c:541 xfce/setup.c:1136 xfmouse/xfmouse.c:299
+#: xfbd/xfbd.c:541 xfce/setup.c:1171 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr "Apply"
@@ -668,8 +673,7 @@ msgid "Setup..."
 msgstr "Setup..."
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2395
-#: xfumed/xfumed_gui.c:171
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Quit"
 
@@ -770,369 +774,236 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Communication pipe closed. Exiting...\n"
 
-#: xfce/xfwm.c:430 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
-#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
-#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
+#: xfce/xfwm.c:455 xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859
+#: xfwm/xfwm.c:860 xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
+#: xfwm/xfwm.c:864 xfwm/xfwm.c:865 xfwm/xfwm.c:866
 msgid "Workspace"
 msgstr "Workspace"
 
-#: xftree/gtk_dlg.c:234
-msgid "Information"
-msgstr "Information"
-
-#: xftree/gtk_dlg.c:239
-msgid "Error"
-msgstr "Error"
-
-#: xftree/gtk_dlg.c:244
-msgid "Warning"
-msgstr "Warning"
-
-#: xftree/gtk_dlg.c:248
-msgid "Dialog"
-msgstr "Dialog"
-
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:267
+#: xftree/gtk_dlg.c:302
 #, fuzzy
 msgid "_Ok"
 msgstr "Ok"
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:272
+#: xftree/gtk_dlg.c:307
 #, fuzzy
 msgid "_Yes"
 msgstr "Yes"
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:277
+#: xftree/gtk_dlg.c:312
 #, fuzzy
 msgid "_Continue"
 msgstr "Continue"
 
-#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:331 xftree/gtk_prop.c:215
 msgid "Skip"
 msgstr "Skip"
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:298
+#: xftree/gtk_dlg.c:342
 #, fuzzy
 msgid "_Cancel"
 msgstr "Cancel"
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:303
+#: xftree/gtk_dlg.c:347
 #, fuzzy
 msgid "_No"
 msgstr "No"
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:314
+#: xftree/gtk_dlg.c:359
 #, fuzzy
 msgid "_All"
 msgstr "All"
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:324
+#: xftree/gtk_dlg.c:369
 #, fuzzy
 msgid "_Close"
 msgstr "Close"
 
-#: xftree/gtk_exec.c:142
+#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:188
 msgid "Open with ..."
 msgstr "Open with ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:146 xftree/xtree_gui.c:2480
-#: xfwm/xfwm.c:889
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:142 xftree/xtree_gui.c:202
+#: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr "Run program ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:2361
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:146
 msgid "Open in terminal"
 msgstr "Open in terminal"
 
+#: xftree/gtk_exec.c:192
+msgid "Remember application"
+msgstr ""
+
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:206
+#: xftree/gtk_exec.c:211
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Fatal error in %s at %d\n"
 
-#: xftree/gtk_get.c:121
-msgid "Source : "
-msgstr "Source : "
-
-#: xftree/gtk_get.c:128
-msgid "Target : "
-msgstr "Target : "
-
-#: xftree/gtk_get.c:135
-msgid "0 bytes received"
-msgstr "0 bytes received"
-
-#: xftree/gtk_get.c:142
-msgid "XFTree: Download"
-msgstr "XFTree: Download"
-
-#: xftree/gtk_get.c:168
-#, c-format
-msgid "%d bytes received (%d bps)"
+#: xftree/gtk_get.c:95
+#, fuzzy, c-format
+msgid "child:bytes:%d bytes received (%d bps)"
 msgstr "%d bytes received (%d bps)"
 
-#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2320
+#: xftree/gtk_prop.c:191 xftree/xtree_toolbar.c:106
 msgid "Properties"
 msgstr "Properties"
 
-#: xftree/gtk_prop.c:207
+#: xftree/gtk_prop.c:216
 msgid "All"
 msgstr "All"
 
 #. date and size page
-#: xftree/gtk_prop.c:218
+#: xftree/gtk_prop.c:227
 msgid "Info"
 msgstr "Info"
 
-#: xftree/gtk_prop.c:223
+#: xftree/gtk_prop.c:232
 msgid "Name :"
 msgstr "Name :"
 
-#: xftree/gtk_prop.c:242
+#: xftree/gtk_prop.c:251
 msgid "Type :"
 msgstr "Type :"
 
-#: xftree/gtk_prop.c:248
-#, c-format
-msgid "%ld Bytes"
-msgstr "%ld bytes"
-
-#: xftree/gtk_prop.c:250
+#: xftree/gtk_prop.c:271
 msgid "Size :"
 msgstr "Size :"
 
-#: xftree/gtk_prop.c:258
+#: xftree/gtk_prop.c:279
 msgid "Creation Time :"
 msgstr "Creation time :"
 
-#: xftree/gtk_prop.c:266
+#: xftree/gtk_prop.c:287
 msgid "Modification Time :"
 msgstr "Modification time :"
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:295
 msgid "Access Time :"
 msgstr "Access time :"
 
-#: xftree/gtk_prop.c:282
+#: xftree/gtk_prop.c:303
 msgid "Permissions"
 msgstr "Permissions"
 
-#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
+#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:307 xftree/gtk_prop.c:404
 msgid "Owner :"
 msgstr "Owner :"
 
-#: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
-#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
+#: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
+#: xftree/gtk_prop.c:308 xftree/gtk_prop.c:332 xftree/gtk_prop.c:355
 msgid "Read"
 msgstr "Read"
 
-#: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
-#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
+#: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
+#: xftree/gtk_prop.c:312 xftree/gtk_prop.c:336 xftree/gtk_prop.c:359
 msgid "Write"
 msgstr "Write"
 
-#: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
-#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
+#: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
+#: xftree/gtk_prop.c:316 xftree/gtk_prop.c:340 xftree/gtk_prop.c:363
 msgid "Execute"
 msgstr "Execute"
 
-#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:299
+#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:320
 msgid "Set UID"
 msgstr "Setuid"
 
-#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
+#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:331 xftree/gtk_prop.c:415
 msgid "Group :"
 msgstr "Group :"
 
-#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:323
+#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:344
 msgid "Set GID"
 msgstr "Setgid"
 
-#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:333
+#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:354
 msgid "Other :"
 msgstr "Other :"
 
-#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:346
+#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:367
 msgid "Sticky"
 msgstr "Sticky"
 
-#: xftree/gtk_prop.c:372
+#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1002
 msgid "Owner"
 msgstr "Owner"
 
-#: xftree/gtk_prop.c:377 xftree/gtk_prop.c:388
+#: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:834
+#: xftree/xtree_functions.c:836 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_gui.c:1308 xftree/xtree_gui.c:1310
 msgid "unknown"
 msgstr "unknown"
 
-#: xftree/reg.c:545
+#: xftree/reg.c:545 xftree/xtree_cb.c:692 xftree/xtree_cb.c:809
+#: xftree/xtree_cpy.c:1184
+msgid "This function is not available for the contents of tar files"
+msgstr ""
+
+#: xftree/reg.c:554
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Can't find suffix in filename, using complete filename"
 
-#: xftree/reg.c:552
+#: xftree/reg.c:561
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Register program for file \"%s\""
 
-#: xftree/reg.c:556
+#: xftree/reg.c:565
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Register program for suffix \"%s\""
 
-#: xftree/xtree.c:112
+#: xftree/xtree.c:119
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, based on XTree Version %s\n"
 
-#: xftree/xtree.c:113
+#: xftree/xtree.c:120
 #, c-format
 msgid "directory: %s\n"
 msgstr "directory: %s\n"
 
-#: xftree/xtree.c:120 xftree/xtree.c:159
+#: xftree/xtree.c:127 xftree/xtree.c:166
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "creating directory: %s\n"
 
-#: xftree/xtree.c:176
+#: xftree/xtree.c:183
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometry: %dx%d+%d+%d\n"
 
-#: xftree/xtree_cpy.c:130
-msgid "Insufficient system memory"
-msgstr ""
-
-#: xftree/xtree_cpy.c:146
-#, fuzzy
-msgid "Too few bytes transferred ! Device full ?"
-msgstr "Too few bytes transferred: Device full ?"
-
-#: xftree/xtree_cpy.c:150
-#, fuzzy
-msgid "Too many bytes transferred !?"
-msgstr "Too many bytes transferred ?"
-
-#: xftree/xtree_cpy.c:154 xftree/xtree_cpy.c:158
-msgid "Can't stat() file"
-msgstr "Can't stat() file"
-
-#: xftree/xtree_cpy.c:162 xftree/xtree_cpy.c:166
-#, fuzzy
-msgid "Error closing file"
-msgstr ""
-"Error\n"
-"Cannot open file"
-
-#: xftree/xtree_cpy.c:170
-msgid "Error deleting"
-msgstr ""
-
-#: xftree/xtree_cpy.c:174 xftree/xtree_cpy.c:337
-msgid "Can't copy FIFO"
-msgstr "Can't copy FIFO"
-
-#: xftree/xtree_cpy.c:178 xftree/xtree_cpy.c:340
-msgid "Can't copy device file"
-msgstr "Can't copy device file"
-
-#: xftree/xtree_cpy.c:182 xftree/xtree_cpy.c:343
-msgid "Can't copy socket"
-msgstr "Can't copy socket"
-
-#: xftree/xtree_cpy.c:792
-#, c-format
-msgid "%d bytes"
-msgstr "%d bytes"
-
-#: xftree/xtree_cpy.c:867
-msgid "Source: "
-msgstr "Source: "
-
-#: xftree/xtree_cpy.c:874
-msgid "Target: "
-msgstr "Target: "
-
-#: xftree/xtree_cpy.c:881
-msgid "file x of x"
-msgstr ""
-
-#: xftree/xtree_cpy.c:896
-msgid "XFTree: Copy"
-msgstr "XFTree: Copy"
-
-#: xftree/xtree_cpy.c:897
-msgid "XFTree: Move"
-msgstr "XFTree: Move"
-
-#: xftree/xtree_cpy.c:898
-msgid "XFTree: Link"
-msgstr "XFTree: Link"
-
-#: xftree/xtree_dnd.c:137
-msgid "Unknown action !"
-msgstr "Unknown action!"
-
-#: xftree/xtree_du.c:81
-msgid "Disk usage:"
-msgstr ""
-
-#: xftree/xtree_go.c:163
-#, fuzzy
-msgid "Cannot find path"
-msgstr "Can't find row data\n"
-
-#: xftree/xtree_go.c:244
-msgid "Go to"
-msgstr "Go to"
-
-#: xftree/xtree_gui.c:182
-#, fuzzy, c-format
-msgid "dbg:malloc error in %s at line %d\n"
-msgstr "malloc error in %s at line %d\n"
-
-#: xftree/xtree_gui.c:336
-msgid "menu_detach()\n"
-msgstr "menu_detach()\n"
-
-#: xftree/xtree_gui.c:879
+#: xftree/xtree_cb.c:320
 #, fuzzy
 msgid "error deleting file"
 msgstr "Select right file"
 
-#: xftree/xtree_gui.c:977
-msgid "Can't copy device, fifo and socket files as regular files!\n"
-msgstr "Can't copy device, fifo and socket files as regular files!\n"
-
-#: xftree/xtree_gui.c:1105
-msgid "move_dir() recursive failed\n"
-msgstr "move_dir() recursive failed\n"
-
-#: xftree/xtree_gui.c:1113
-msgid "move_dir() move_file() failed\n"
-msgstr "move_dir() move_file() failed\n"
-
 #. nothing to delete
-#: xftree/xtree_gui.c:1223 xftree/xtree_gui.c:1966
+#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:767
 msgid "No files marked !"
 msgstr "No files marked."
 
-#: xftree/xtree_gui.c:1247 xftree/xtree_gui.c:1249
+#: xftree/xtree_cb.c:464 xftree/xtree_cb.c:466
 msgid "Delete item ?"
 msgstr "Delete item ?"
 
-#: xftree/xtree_gui.c:1284 xftree/xtree_gui.c:1286
+#: xftree/xtree_cb.c:476 xftree/xtree_cb.c:480
 msgid "Can't move file to trash, hard delete ?"
 msgstr "Can't move file to trash, hard delete ?"
 
-#: xftree/xtree_gui.c:1328
+#: xftree/xtree_cb.c:558
 msgid ""
 "This is XFTree (C) under GNU GPL\n"
 "with code contributed by:\n"
@@ -1141,251 +1012,620 @@ msgid ""
 "Edscott Wilson Garcia\n"
 msgstr ""
 
-#: xftree/xtree_gui.c:1722
+#: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
 msgid "New_Folder"
 msgstr "New_Folder"
 
-#. if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
-#: xftree/xtree_gui.c:1773 xftree/xtree_gui.c:1910
+#: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
+#, fuzzy
+msgid "New_File"
+msgstr "New_Folder"
+
+#: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733
 #, fuzzy
 msgid "File exists !"
 msgstr "File exists - override ?"
 
-#: xftree/xtree_gui.c:1782
-msgid "Can't create : "
-msgstr "Can't create : "
-
-#: xftree/xtree_gui.c:1881
+#: xftree/xtree_cb.c:686
 msgid "No item marked !"
 msgstr "No item marked."
 
-#: xftree/xtree_gui.c:1892
+#: xftree/xtree_cb.c:702
 msgid "Rename to : "
 msgstr "Rename to : "
 
-#: xftree/xtree_gui.c:1897
+#: xftree/xtree_cb.c:710
 msgid "Character not allowed in filename"
 msgstr "Character not allowed in filename"
 
-#: xftree/xtree_gui.c:2299 xftree/xtree_gui.c:2356
-msgid "New window"
-msgstr "New window"
-
-#: xftree/xtree_gui.c:2301 xftree/xtree_gui.c:2390
-msgid "Close window"
-msgstr "Close window"
-
-#: xftree/xtree_gui.c:2305
+#: xftree/xtree_cb.c:794
 #, fuzzy
-msgid "Go back ..."
-msgstr "Going back..."
+msgid "Nothing selected !"
+msgstr "No patch file has been selected."
 
-#: xftree/xtree_gui.c:2307 xftree/xtree_gui.c:2527
-msgid "Go to ..."
-msgstr "Go to ..."
+#: xftree/xtree_cb.c:1105
+#, fuzzy
+msgid "Override?"
+msgstr "Override ?"
 
-#: xftree/xtree_gui.c:2310 xftree/xtree_gui.c:2522
-msgid "Go up"
-msgstr "Go up"
+#: xftree/xtree_cpy.c:158
+msgid "Insufficient system memory"
+msgstr ""
 
-#: xftree/xtree_gui.c:2312 xftree/xtree_gui.c:2512
-msgid "Go home"
-msgstr "Go home"
+#: xftree/xtree_cpy.c:178
+#, fuzzy
+msgid "Too few bytes transferred ! Device full ?"
+msgstr "Too few bytes transferred: Device full ?"
 
-#: xftree/xtree_gui.c:2316
+#: xftree/xtree_cpy.c:182
+#, fuzzy
+msgid "Too many bytes transferred !?"
+msgstr "Too many bytes transferred ?"
+
+#: xftree/xtree_cpy.c:186 xftree/xtree_cpy.c:190
+msgid "Can't stat() file"
+msgstr "Can't stat() file"
+
+#: xftree/xtree_cpy.c:194 xftree/xtree_cpy.c:198
+#, fuzzy
+msgid "Error closing file"
+msgstr ""
+"Error\n"
+"Cannot open file"
+
+#: xftree/xtree_cpy.c:202
+msgid "Error deleting"
+msgstr ""
+
+#: xftree/xtree_cpy.c:206 xftree/xtree_cpy.c:414
+msgid "Can't copy FIFO"
+msgstr "Can't copy FIFO"
+
+#: xftree/xtree_cpy.c:210 xftree/xtree_cpy.c:417
+msgid "Can't copy device file"
+msgstr "Can't copy device file"
+
+#: xftree/xtree_cpy.c:214 xftree/xtree_cpy.c:420
+msgid "Can't copy socket"
+msgstr "Can't copy socket"
+
+#: xftree/xtree_cpy.c:715
+#, fuzzy
+msgid "Counting files"
+msgstr "Moving file..\n"
+
+#: xftree/xtree_cpy.c:1034
+#, c-format
+msgid "%d / %d"
+msgstr ""
+
+#: xftree/xtree_cpy.c:1109
+msgid "Source: "
+msgstr "Source: "
+
+#: xftree/xtree_cpy.c:1116
+msgid "Target: "
+msgstr "Target: "
+
+#: xftree/xtree_cpy.c:1123
+msgid "file x of x"
+msgstr ""
+
+#: xftree/xtree_cpy.c:1138
+msgid "XFTree: Copy"
+msgstr "XFTree: Copy"
+
+#: xftree/xtree_cpy.c:1139
+msgid "XFTree: Move"
+msgstr "XFTree: Move"
+
+#: xftree/xtree_cpy.c:1140
+msgid "XFTree: Link"
+msgstr "XFTree: Link"
+
+#: xftree/xtree_dnd.c:141
+msgid "Unknown action !"
+msgstr "Unknown action!"
+
+#: xftree/xtree_du.c:82
+msgid "Disk usage:"
+msgstr ""
+
+#: xftree/xtree_du.c:148
+#, fuzzy
+msgid "No directory selected !"
+msgstr "No directory was selected!"
+
+#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1063
+#, fuzzy
+msgid "files"
+msgstr "File"
+
+#: xftree/xtree_functions.c:494
+msgid "internal malloc error:"
+msgstr ""
+
+#: xftree/xtree_go.c:162
+#, fuzzy
+msgid "Cannot find path"
+msgstr "Can't find row data\n"
+
+#. Create "Goto" menu
+#: xftree/xtree_go.c:269 xftree/xtree_gui.c:705
+msgid "Go to"
+msgstr "Go to"
+
+#: xftree/xtree_gui.c:145
+msgid "Open in new"
+msgstr "Open in new"
+
+#: xftree/xtree_gui.c:148 xftree/xtree_toolbar.c:104
 msgid "New Folder"
 msgstr "New Folder"
 
-#: xftree/xtree_gui.c:2318 xftree/xtree_gui.c:2375
-msgid "New file ..."
-msgstr "New file ..."
+#: xftree/xtree_gui.c:149
+#, fuzzy
+msgid "New file"
+msgstr "Next file"
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2324 xftree/xtree_gui.c:2380
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:153
+#: xftree/xtree_toolbar.c:100
 msgid "Delete ..."
 msgstr "Delete ..."
 
-#: xftree/xtree_gui.c:2326 xftree/xtree_gui.c:2461
-msgid "Open Trash"
-msgstr "Open Trash"
-
-#: xftree/xtree_gui.c:2328 xftree/xtree_gui.c:2466
-msgid "Empty Trash"
-msgstr "Empty Trash"
-
-#: xftree/xtree_gui.c:2332 xftree/xtree_gui.c:2452
-msgid "Toggle Dotfiles"
-msgstr "Toggle Dotfiles"
-
-#. Create "File" menu
-#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2349
-msgid "File"
-msgstr "File"
-
-#: xftree/xtree_gui.c:2370
-msgid "New Folder ..."
-msgstr "New Folder ..."
-
-#. Create "Edit" menu
-#: xftree/xtree_gui.c:2403 xfumed/xfumed_gui.c:129
-#, fuzzy
-msgid "Edit"
-msgstr "Exit"
-
-#: xftree/xtree_gui.c:2409
-msgid "Copy to pasteboard"
-msgstr ""
-
-#: xftree/xtree_gui.c:2416
+#: xftree/xtree_gui.c:156
 msgid "Insert from pasteboard"
 msgstr ""
 
-#: xftree/xtree_gui.c:2423
-msgid "List pasteboard contents"
-msgstr ""
-
-#: xftree/xtree_gui.c:2430
-msgid "Clear pasteboard"
-msgstr ""
-
-#: xftree/xtree_gui.c:2442
-msgid "Select all"
-msgstr "Select all"
-
-#: xftree/xtree_gui.c:2447
-msgid "Unselect"
-msgstr "Unselect"
-
-#. Create "Tools" menu
-#: xftree/xtree_gui.c:2474
-#, fuzzy
-msgid "Tools"
-msgstr "Tooltips"
-
-#: xftree/xtree_gui.c:2485
+#: xftree/xtree_gui.c:159 xftree/xtree_gui.c:203 xftree/xtree_toolbar.c:101
 msgid "Find ..."
 msgstr "Find ..."
 
-#: xftree/xtree_gui.c:2490
+#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:207
+msgid "Show disk usage ..."
+msgstr ""
+
+#: xftree/xtree_gui.c:163
+#, fuzzy
+msgid "Cut to pasteboard"
+msgstr "Cannot create tar file"
+
+#: xftree/xtree_gui.c:164
+msgid "Copy to pasteboard"
+msgstr ""
+
+#: xftree/xtree_gui.c:167
+msgid "List pasteboard contents"
+msgstr ""
+
+#: xftree/xtree_gui.c:168
+msgid "Clear pasteboard"
+msgstr ""
+
+#: xftree/xtree_gui.c:170
+msgid "Select all"
+msgstr "Select all"
+
+#: xftree/xtree_gui.c:171
+msgid "Unselect"
+msgstr "Unselect"
+
+#: xftree/xtree_gui.c:172 xftree/xtree_toolbar.c:109
+msgid "Toggle Dotfiles"
+msgstr "Toggle Dotfiles"
+
+#: xftree/xtree_gui.c:174 xftree/xtree_toolbar.c:107
+msgid "Open Trash"
+msgstr "Open Trash"
+
+#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:108
+msgid "Empty Trash"
+msgstr "Empty Trash"
+
+#: xftree/xtree_gui.c:179
+msgid "Duplicate"
+msgstr "Duplicate "
+
+#: xftree/xtree_gui.c:180
+msgid "Rename ..."
+msgstr "Rename ..."
+
+#: xftree/xtree_gui.c:181
 msgid "Properties ..."
 msgstr "Properties ..."
 
-#: xftree/xtree_gui.c:2496
-msgid "Differences ..."
-msgstr "Differences ..."
+#: xftree/xtree_gui.c:185 xftree/xtree_gui.c:192 xftree/xtree_toolbar.c:94
+msgid "Go to ..."
+msgstr "Go to ..."
 
-#: xftree/xtree_gui.c:2501
-msgid "Patch viewer ..."
-msgstr "Patch viewer ..."
+#: xftree/xtree_gui.c:189
+msgid "Register ..."
+msgstr "Register ..."
 
-#. Create "Go To" menu
-#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2506
-msgid "Go"
-msgstr "Go"
+#: xftree/xtree_gui.c:195 xftree/xtree_toolbar.c:96
+msgid "Go home"
+msgstr "Go home"
 
-#: xftree/xtree_gui.c:2517
+#: xftree/xtree_gui.c:196
 #, fuzzy
 msgid "Go back"
 msgstr "Going back..."
 
-#. menuitem = gtk_menu_item_new ();
-#. gtk_menu_append (GTK_MENU (menu), menuitem);
-#. gtk_widget_show (menuitem);
-#. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2538
-msgid "Preferences"
-msgstr "Preferences"
+#: xftree/xtree_gui.c:197 xftree/xtree_toolbar.c:95
+msgid "Go up"
+msgstr "Go up"
 
-#: xftree/xtree_gui.c:2544
-msgid "Save geometry on exit"
+#: xftree/xtree_gui.c:198
+msgid "Update"
+msgstr "Update"
+
+#: xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:102
+msgid "Differences ..."
+msgstr "Differences ..."
+
+#: xftree/xtree_gui.c:205
+msgid "Patch viewer ..."
+msgstr "Patch viewer ..."
+
+#: xftree/xtree_gui.c:206 xftree/xtree_toolbar.c:103
+#, fuzzy
+msgid "Browse SMB network ..."
+msgstr "Browse ..."
+
+#: xftree/xtree_gui.c:210 xftree/xtree_toolbar.c:90
+msgid "Close window"
+msgstr "Close window"
+
+#: xftree/xtree_gui.c:211
+#, fuzzy
+msgid "Quit ..."
+msgstr "About ..."
+
+#. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
+#: xftree/xtree_gui.c:216
+msgid "Subsort by file type"
 msgstr ""
 
-#: xftree/xtree_gui.c:2546
-msgid "Double click does GOTO"
+#: xftree/xtree_gui.c:217
+#, fuzzy
+msgid "Enable filter"
+msgstr "File filter : "
+
+#: xftree/xtree_gui.c:218
+#, fuzzy
+msgid "Abbreviate paths"
+msgstr "Create patch file"
+
+#: xftree/xtree_gui.c:220
+msgid "Status box"
 msgstr ""
 
-#: xftree/xtree_gui.c:2548
+#: xftree/xtree_gui.c:221
+msgid "Status titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:222
 msgid "Short titles"
 msgstr ""
 
-#: xftree/xtree_gui.c:2550
+#: xftree/xtree_gui.c:224 xftree/xtree_toolbar.c:420
+#, fuzzy
+msgid "Hide toolbar"
+msgstr "Hide menu bar"
+
+#: xftree/xtree_gui.c:225
+msgid "Hide titles"
+msgstr ""
+
+#: xftree/xtree_gui.c:226
+#, fuzzy
+msgid "Hide sizes"
+msgstr "Hide diagnostics"
+
+#: xftree/xtree_gui.c:227
+#, fuzzy
+msgid "Hide dates"
+msgstr "Hide diagnostics"
+
+#: xftree/xtree_gui.c:228
+#, fuzzy
+msgid "Hide owner"
+msgstr "Hide browser links"
+
+#: xftree/xtree_gui.c:229
+msgid "Hide group"
+msgstr ""
+
+#: xftree/xtree_gui.c:230
+#, fuzzy
+msgid "Hide mode"
+msgstr "Hide menu bar"
+
+#: xftree/xtree_gui.c:233
+msgid "Sort by file name"
+msgstr ""
+
+#: xftree/xtree_gui.c:234
+msgid "Sort by file size"
+msgstr ""
+
+#: xftree/xtree_gui.c:235
+msgid "Sort by file date"
+msgstr ""
+
+#: xftree/xtree_gui.c:464 xftree/xtree_gui.c:466
+#, fuzzy
+msgid "Create"
+msgstr "create"
+
+#. Create "File" menu
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:647
+msgid "File"
+msgstr "File"
+
+#. Create "Edit" menu
+#: xftree/xtree_gui.c:676 xfumed/xfumed_gui.c:129
+#, fuzzy
+msgid "Edit"
+msgstr "Exit"
+
+#. Create "Tools" menu
+#: xftree/xtree_gui.c:730
+#, fuzzy
+msgid "Tools"
+msgstr "Tooltips"
+
+#. Create "View" menu
+#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:754
+msgid "View"
+msgstr "View"
+
+#. Create "Preferences" menu
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:784
+msgid "Preferences"
+msgstr "Preferences"
+
+#: xftree/xtree_gui.c:790
+#, fuzzy
+msgid "Hide main menu"
+msgstr "Hide menu bar"
+
+#: xftree/xtree_gui.c:798 xftree/xtree_gui.c:821
+msgid "Save geometry on exit"
+msgstr ""
+
+#: xftree/xtree_gui.c:805 xftree/xtree_gui.c:823
+msgid "Double click does GOTO"
+msgstr ""
+
+#: xftree/xtree_gui.c:813 xftree/xtree_gui.c:825
 msgid "Drag does copy"
+msgstr ""
+
+#: xftree/xtree_gui.c:829
+#, fuzzy
+msgid "Set background color"
+msgstr "Highlight background colour"
+
+#: xftree/xtree_gui.c:834
+#, fuzzy
+msgid "Set font"
+msgstr "Menu font :"
+
+#: xftree/xtree_gui.c:840 xftree/xtree_toolbar.c:339
+#, fuzzy
+msgid "Configure toolbar"
+msgstr "Configure Window"
+
+#: xftree/xtree_gui.c:845
+msgid "Redefine home directory"
 msgstr ""
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2555
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:851
 msgid "Help"
 msgstr "Help"
 
-#: xftree/xtree_gui.c:2562
-msgid "Default shortcut keys"
+#: xftree/xtree_gui.c:858
+msgid "Drag and drop"
 msgstr ""
 
-#: xftree/xtree_gui.c:2567
+#: xftree/xtree_gui.c:864
+msgid "Unlisted shortcut keys"
+msgstr ""
+
+#: xftree/xtree_gui.c:869
 msgid "Custom shortcut keys"
 msgstr ""
 
-#: xftree/xtree_gui.c:2572
+#: xftree/xtree_gui.c:874
+msgid "Registered applications"
+msgstr ""
+
+#: xftree/xtree_gui.c:880
 msgid "About ..."
 msgstr "About ..."
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2737
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:997
 msgid "Name"
 msgstr "Name"
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2738
+#. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:999
 msgid "Size (bytes)"
 msgstr "Size (bytes)"
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2739
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1000
 msgid "Last changed"
 msgstr "Last changed"
 
-#: xftree/xtree_mess.c:84
+#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1001
+msgid "Mode"
+msgstr "Mode"
+
+#: xftree/xtree_gui.c:1003
+#, fuzzy
+msgid "Group"
+msgstr "Group :"
+
+#: xftree/xtree_gui.c:1046
+#, fuzzy
+msgid "Filter:"
+msgstr "File"
+
+#: xftree/xtree_gui.c:1057
+msgid "dirs"
+msgstr ""
+
+#: xftree/xtree_gui.c:1169
+#, fuzzy
+msgid "Show main menu"
+msgstr "Show line numbers"
+
+#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:95
+msgid "Could not load specified font\n"
+msgstr "Could not load specified font\n"
+
+#: xftree/xtree_mess.c:428
 msgid "Override ?"
 msgstr "Override ?"
 
-#: xftree/xtree_mess.c:85
+#: xftree/xtree_mess.c:429
 msgid "with"
 msgstr ""
 
-#: xftree/xtree_mess.c:161 xftree/xtree_mess.c:178
+#: xftree/xtree_mess.c:508 xftree/xtree_mess.c:509 xftree/xtree_mess.c:525
+#: xftree/xtree_mess.c:526
 #, fuzzy
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Default .xfdiffrc file cannot be created\n"
 
-#: xftree/xtree_mess.c:199
+#: xftree/xtree_mess.c:562
 #, fuzzy
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Default .xfdiffrc file cannot be created\n"
 
-#: xftree/xtree_mess.c:250
+#: xftree/xtree_mess.c:756
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
 "and press a keyboard key to create the shortcut."
 msgstr ""
 
-#: xftree/xtree_mess.c:260
+#: xftree/xtree_mess.c:765
+msgid ""
+"Xftree can register applications by filename or filetype\n"
+"by selecting \"Register\" from one of the menus or by selecting\n"
+"\"Register application\" on mouse double-click.\n"
+"If you wish to edit the applications that are already registered,\n"
+" please look at ~/.xfce/xtree.reg."
+msgstr ""
+
+#: xftree/xtree_mess.c:774
+msgid ""
+"Xftree handles drag and drop the following way:\n"
+"SHIFT drag+drop --> move\n"
+"CTRL drag+drop --> copy\n"
+"SHIFT-CTRL drag+drop --> link\n"
+"The default drag+drop action is move,\n"
+"but can be changed in the preferences menu.\n"
+"To drag multiple files, use the middle button.\n"
+msgstr ""
+
+#: xftree/xtree_mess.c:789
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 
-#: xftree/xtree_mess.c:300
+#: xftree/xtree_mess.c:832
 msgid "Xftree results"
 msgstr ""
 
-#: xftree/xtree_pasteboard.c:92
+#: xftree/xtree_mess.c:1047
+#, fuzzy
+msgid "Home directory : "
+msgstr "directory: %s\n"
+
+#: xftree/xtree_pasteboard.c:96
 #, fuzzy
 msgid "Cannot create pasteboard\n"
 msgstr "Cannot create tar file"
 
-#: xftree/xtree_pasteboard.c:176
-msgid "Please select exactly one directory to insert the pasteboard contents."
+#: xftree/xtree_pasteboard.c:189 xftree/xtree_pasteboard.c:262
+msgid "The pasteboard is currently empty."
 msgstr ""
 
-#: xftree/xtree_pasteboard.c:181 xftree/xtree_pasteboard.c:236
-msgid "The pasteboard is currently empty."
+#: xftree/xtree_pasteboard.c:283
+msgid "Pasteboard contents:\n"
+msgstr ""
+
+#. only 32 elements allowed in TOOLBARICONS
+#: xftree/xtree_toolbar.c:88
+msgid "New window"
+msgstr "New window"
+
+#: xftree/xtree_toolbar.c:89
+#, fuzzy
+msgid "Terminal"
+msgstr "Terminated: "
+
+#: xftree/xtree_toolbar.c:91
+#, fuzzy
+msgid "Run ..."
+msgstr "Rename ..."
+
+#: xftree/xtree_toolbar.c:92
+#, fuzzy
+msgid "Update ..."
+msgstr "Update"
+
+#: xftree/xtree_toolbar.c:93
+#, fuzzy
+msgid "Go back ..."
+msgstr "Going back..."
+
+#: xftree/xtree_toolbar.c:97
+#, fuzzy
+msgid "Cut ..."
+msgstr "About ..."
+
+#: xftree/xtree_toolbar.c:98
+#, fuzzy
+msgid "Copy ..."
+msgstr "Stop ..."
+
+#: xftree/xtree_toolbar.c:99
+#, fuzzy
+msgid "Paste ..."
+msgstr "Save ..."
+
+#: xftree/xtree_toolbar.c:105
+msgid "New file ..."
+msgstr "New file ..."
+
+#: xftree/xtree_toolbar.c:322
+#, fuzzy
+msgid "Action"
+msgstr "Actions"
+
+#: xftree/xtree_toolbar.c:323
+msgid "Small icons. "
+msgstr ""
+
+#: xftree/xtree_toolbar.c:324
+#, fuzzy
+msgid "Large icons. "
+msgstr "&Arrange icons"
+
+#: xftree/xtree_toolbar.c:327
+#, fuzzy
+msgid "Regen"
+msgstr "Reset"
+
+#: xftree/xtree_toolbar.c:427
+msgid "Large buttons"
 msgstr ""
 
 #. convenience location of duplicate dialog texts
@@ -1431,6 +1671,7 @@ msgstr "Patch file is not in unified diff format"
 msgid "****Empty file****\n"
 msgstr "****Empty file****\n"
 
+#. missing color attribute
 #: xfdiff/xfdiff.c:314 xfdiff/xfdiff.c:320
 msgid "****Binary data****\n"
 msgstr "****Binary data****\n"
@@ -1626,11 +1867,6 @@ msgstr "Patch will now be assumed *not* reversed.\n"
 msgid "Font selection"
 msgstr "Font selection"
 
-#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
-msgid "Could not load specified font\n"
-msgstr "Could not load specified font\n"
-
 #: xfdiff/xfdiff_gui.c:585
 msgid "Select highlight background color"
 msgstr "Select highlight background colour"
@@ -1658,6 +1894,13 @@ msgstr "Default configuration has been saved\n"
 #: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
 msgstr "This is XFDiff "
+
+#: xfdiff/xfdiff_gui.c:826
+msgid ""
+"\n"
+"(c) by Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
 
 #: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
@@ -1802,7 +2045,7 @@ msgstr "Apply patch to hard drive"
 msgid "Undo patch to Hard Drive"
 msgstr "Undo patch to Hard Drive"
 
-#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1922
 msgid "About"
 msgstr "About"
 
@@ -1908,6 +2151,7 @@ msgstr "Cannot open file for write\n"
 msgid "couldn't allocate color"
 msgstr "couldn't allocate colour"
 
+#. font color!
 #: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr "Patch: "
@@ -1920,87 +2164,83 @@ msgstr " applied at: "
 msgid "Press OK to see patch diffs"
 msgstr "Press OK to see patch diffs"
 
-#: xfglob/xfglob.c:459 xfglob/xfglob.c:460
+#: xfglob/xfglob.c:460 xfglob/xfglob.c:461
 msgid "Results limit reached"
 msgstr "Results limit reached"
 
-#: xfglob/xfglob.c:468
+#: xfglob/xfglob.c:469
 msgid "Cancelled"
 msgstr "Cancelled"
 
-#: xfglob/xfglob.c:469
+#: xfglob/xfglob.c:470
 msgid "Search canceled!\n"
 msgstr "Search cancelled!\n"
 
-#: xfglob/xfglob.c:494 xfglob/xfglob.c:524
+#: xfglob/xfglob.c:495 xfglob/xfglob.c:525
 msgid "Glob run must finish or be cancelled first."
 msgstr "Glob run must finish or be cancelled first."
 
-#: xfglob/xfglob.c:507
+#: xfglob/xfglob.c:508
 #, fuzzy
 msgid "Find results.\n"
 msgstr "Find results..."
 
-#: xfglob/xfglob.c:587 xfglob/xfglob.c:679
+#: xfglob/xfglob.c:588 xfglob/xfglob.c:680
 msgid "Find results..."
 msgstr "Find results..."
 
-#: xfglob/xfglob.c:606 xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:607 xfglob/xfglob.c:1362
 msgid "Directory"
 msgstr "Directory"
 
-#: xfglob/xfglob.c:609
-msgid "Mode"
-msgstr "Mode"
-
-#: xfglob/xfglob.c:1031
+#: xfglob/xfglob.c:1032
 #, fuzzy
 msgid "Incoherent size considerations!"
 msgstr "Size considerations"
 
 #. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
-#: xfglob/xfglob.c:1201
+#: xfglob/xfglob.c:1202
 msgid "Result of "
 msgstr "Result of "
 
-#: xfglob/xfglob.c:1212 xfglob/xfglob.c:1555
+#: xfglob/xfglob.c:1213 xfglob/xfglob.c:1556
 msgid "File type :"
 msgstr "File type :"
 
-#: xfglob/xfglob.c:1284
+#: xfglob/xfglob.c:1285
 msgid "Anyone"
 msgstr "Anyone"
 
 #. translation of filetypes
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Any kind"
 msgstr "Any kind"
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Regular"
 msgstr "Regular"
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Symlink"
 msgstr "Symlink"
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Socket"
 msgstr "Socket"
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Block device"
 msgstr "Block device"
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "Character device"
 msgstr "Character device"
 
-#: xfglob/xfglob.c:1361
+#: xfglob/xfglob.c:1362
 msgid "FIFO"
 msgstr "FIFO"
 
-#: xfglob/xfglob.c:1371
+#: xfglob/xfglob.c:1372
 #, fuzzy
 msgid "Xfglob"
 msgstr "XFglob"
@@ -2008,27 +2248,27 @@ msgstr "XFglob"
 #. *******************************
 #. show the notebook pages:
 #. fourth circle : notebook tabs stuff
-#: xfglob/xfglob.c:1422 xfglob/xfglob.c:1912 xfglob/xfglob.c:1940
+#: xfglob/xfglob.c:1423 xfglob/xfglob.c:1913 xfglob/xfglob.c:1941
 msgid "Find"
 msgstr "Find"
 
-#: xfglob/xfglob.c:1434
+#: xfglob/xfglob.c:1435
 msgid "Path : "
 msgstr "Path : "
 
-#: xfglob/xfglob.c:1443
+#: xfglob/xfglob.c:1444
 msgid "Browse"
 msgstr "Browse"
 
-#: xfglob/xfglob.c:1452
+#: xfglob/xfglob.c:1453
 msgid "File filter : "
 msgstr "File filter : "
 
-#: xfglob/xfglob.c:1460
+#: xfglob/xfglob.c:1461
 msgid "What's a file filter?"
 msgstr "What is a file filter ?"
 
-#: xfglob/xfglob.c:1467
+#: xfglob/xfglob.c:1468
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -2040,35 +2280,35 @@ msgstr ""
 "*  Will match any character zero or more times.\n"
 "?  Will match any character exactly one time\n"
 
-#: xfglob/xfglob.c:1473
+#: xfglob/xfglob.c:1474
 msgid "Search subdirectories too"
 msgstr "Search subdirectories too"
 
-#: xfglob/xfglob.c:1475
+#: xfglob/xfglob.c:1476
 msgid "Limit results to first : "
 msgstr "Limit results to first : "
 
-#: xfglob/xfglob.c:1488
+#: xfglob/xfglob.c:1489
 msgid "Content search"
 msgstr "Content search"
 
-#: xfglob/xfglob.c:1500
+#: xfglob/xfglob.c:1501
 msgid "Containing : "
 msgstr "Containing : "
 
-#: xfglob/xfglob.c:1511
+#: xfglob/xfglob.c:1512
 msgid "Case sensitive search"
 msgstr "Case sensitive search"
 
-#: xfglob/xfglob.c:1512
+#: xfglob/xfglob.c:1513
 msgid "Extended regexp"
 msgstr "Extended regexp"
 
-#: xfglob/xfglob.c:1515
+#: xfglob/xfglob.c:1516
 msgid "What's a regexp?"
 msgstr "What is a regexp ?"
 
-#: xfglob/xfglob.c:1521
+#: xfglob/xfglob.c:1522
 #, fuzzy
 msgid ""
 "Reserved characters for extended regexp are\n"
@@ -2139,20 +2379,20 @@ msgstr ""
 "\n"
 "More information is available by typing \"man grep\" at the command prompt.\n"
 
-#: xfglob/xfglob.c:1542
+#: xfglob/xfglob.c:1543
 msgid "File considerations"
 msgstr "File considerations"
 
-#: xfglob/xfglob.c:1566
+#: xfglob/xfglob.c:1567
 msgid "Stay on single filesystem"
 msgstr "Stay on single filesystem"
 
-#: xfglob/xfglob.c:1567
+#: xfglob/xfglob.c:1568
 #, fuzzy
 msgid "What's a single filesystem?"
 msgstr "What is a file filter ?"
 
-#: xfglob/xfglob.c:1571
+#: xfglob/xfglob.c:1572
 msgid ""
 "Staying on a single filesystem will hinder\n"
 "searching on different physical disk partitions.\n"
@@ -2160,16 +2400,16 @@ msgid ""
 "to search into nfs or smb mounts.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1593
+#: xfglob/xfglob.c:1594
 #, fuzzy
 msgid "Permission considerations"
 msgstr "File considerations"
 
-#: xfglob/xfglob.c:1597
+#: xfglob/xfglob.c:1598
 msgid "How does permission filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1601
+#: xfglob/xfglob.c:1602
 msgid ""
 "When permission filtering is active:\n"
 "-If a file has one of the chosen permission bits,\n"
@@ -2178,15 +2418,15 @@ msgid ""
 "  no set permission bits will match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1697
+#: xfglob/xfglob.c:1698
 msgid "User/group considerations"
 msgstr "User/group considerations"
 
-#: xfglob/xfglob.c:1701
+#: xfglob/xfglob.c:1702
 msgid "How does user/group filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1705
+#: xfglob/xfglob.c:1706
 msgid ""
 "If user and group are both set to any \n"
 "value other than anyone:\n"
@@ -2194,23 +2434,23 @@ msgid ""
 "  to match\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1716
+#: xfglob/xfglob.c:1717
 msgid "User ID: "
 msgstr "User ID: "
 
-#: xfglob/xfglob.c:1727
+#: xfglob/xfglob.c:1728
 msgid "Group ID: "
 msgstr "Group ID: "
 
-#: xfglob/xfglob.c:1742
+#: xfglob/xfglob.c:1743
 msgid "Size considerations"
 msgstr "Size considerations"
 
-#: xfglob/xfglob.c:1746
+#: xfglob/xfglob.c:1747
 msgid "How does size filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1750
+#: xfglob/xfglob.c:1751
 msgid ""
 "-If a size of 0 (zero) is specified for \n"
 " size-less-than, this will be ignored.\n"
@@ -2219,23 +2459,23 @@ msgid ""
 " in order for a file to match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1762
+#: xfglob/xfglob.c:1763
 msgid "Size greater than (KB): "
 msgstr "Size greater than (KB): "
 
-#: xfglob/xfglob.c:1777
+#: xfglob/xfglob.c:1778
 msgid "Size less than (KB): "
 msgstr "Size less than (KB): "
 
-#: xfglob/xfglob.c:1797
+#: xfglob/xfglob.c:1798
 msgid "Time considerations"
 msgstr "Time considerations"
 
-#: xfglob/xfglob.c:1801
+#: xfglob/xfglob.c:1802
 msgid "How does time filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1805
+#: xfglob/xfglob.c:1806
 msgid ""
 "Three different time modes may be selected:\n"
 "*modified:\n"
@@ -2262,112 +2502,112 @@ msgid ""
 "runs will not produce identical results.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1817
+#: xfglob/xfglob.c:1818
 #, fuzzy
 msgid "Modified"
 msgstr "Mode"
 
-#: xfglob/xfglob.c:1818
+#: xfglob/xfglob.c:1819
 #, fuzzy
 msgid "Changed"
 msgstr "Last changed"
 
-#: xfglob/xfglob.c:1819
+#: xfglob/xfglob.c:1820
 #, fuzzy
 msgid "Accessed"
 msgstr "Access time :"
 
-#: xfglob/xfglob.c:1825
+#: xfglob/xfglob.c:1826
 #, fuzzy
 msgid "In the previous : "
 msgstr "Created or modified in the previous : "
 
-#: xfglob/xfglob.c:1835
+#: xfglob/xfglob.c:1836
 #, fuzzy
 msgid "Minutes"
 msgstr "lines"
 
-#: xfglob/xfglob.c:1836
+#: xfglob/xfglob.c:1837
 #, fuzzy
 msgid "Hours"
 msgstr "hours"
 
-#: xfglob/xfglob.c:1837
+#: xfglob/xfglob.c:1838
 #, fuzzy
 msgid "Days"
 msgstr "days"
 
-#: xfglob/xfglob.c:1838
+#: xfglob/xfglob.c:1839
 #, fuzzy
 msgid "Months"
 msgstr "months"
 
-#: xfglob/xfglob.c:1869
+#: xfglob/xfglob.c:1870
 msgid "General considerations"
 msgstr "General considerations"
 
-#: xfglob/xfglob.c:1879
+#: xfglob/xfglob.c:1880
 msgid "Do not look into binary files"
 msgstr "Do not look into binary files"
 
-#: xfglob/xfglob.c:1881
+#: xfglob/xfglob.c:1882
 msgid "Output count of matching lines"
 msgstr "Output count of matching lines"
 
-#: xfglob/xfglob.c:1883
+#: xfglob/xfglob.c:1884
 msgid "Match anywhere"
 msgstr "Match anywhere"
 
-#: xfglob/xfglob.c:1884
+#: xfglob/xfglob.c:1885
 msgid "Match whole words only"
 msgstr "Match whole words only"
 
-#: xfglob/xfglob.c:1885
+#: xfglob/xfglob.c:1886
 msgid "Match whole lines only"
 msgstr "Match whole lines only"
 
-#: xfglob/xfglob.c:1886
+#: xfglob/xfglob.c:1887
 msgid "Output files where no match is found"
 msgstr "Output files where no match is found"
 
-#: xfglob/xfglob.c:1915
+#: xfglob/xfglob.c:1916
 msgid "Filter options"
 msgstr "Filter options"
 
-#: xfglob/xfglob.c:1918
+#: xfglob/xfglob.c:1919
 msgid "Content options"
 msgstr "Content options"
 
-#: xfglob/xfglob.c:1946
+#: xfglob/xfglob.c:1947
 #, fuzzy
 msgid "Results"
 msgstr "Result of "
 
-#: xfglob/xfglob.c:1961
+#: xfglob/xfglob.c:1962
 msgid "working..."
 msgstr "working..."
 
-#: xfglob/xfglob.c:1964
+#: xfglob/xfglob.c:1965
 msgid "Cancel Search"
 msgstr "Cancel search"
 
-#: xfglob/xfglob.c:2013
+#: xfglob/xfglob.c:2014
 msgid "Nothing found...\n"
 msgstr "Nothing found...\n"
 
-#: xfglob/xfglob.c:2021
+#: xfglob/xfglob.c:2022
 msgid "Files found="
 msgstr "Files found="
 
-#: xfglob/xfglob.c:2024
+#: xfglob/xfglob.c:2025
 msgid "(interrupted because limit exceded)"
 msgstr "(interrupted because limit exceeded)"
 
-#: xfglob/xfglob.c:2078
+#: xfglob/xfglob.c:2079
 msgid "lines"
 msgstr "lines"
 
-#: xfglob/xfglob.c:2144
+#: xfglob/xfglob.c:2145
 msgid "unable to stat:"
 msgstr "unable to stat:"
 
@@ -2410,7 +2650,7 @@ msgid "Hide/show calendar"
 msgstr "Hide/show calendar"
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:881
+#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:884
 msgid "Settings"
 msgstr "Settings"
 
@@ -2703,119 +2943,119 @@ msgstr "xfbdmgr - XFCE List Manager"
 msgid "File not found.\n"
 msgstr "File not found.\n"
 
-#: xfwm/xfwm.c:851
+#: xfwm/xfwm.c:854
 msgid "&Restart"
 msgstr "&Restart"
 
-#: xfwm/xfwm.c:852
+#: xfwm/xfwm.c:855
 msgid "&Quit"
 msgstr "&Quit"
 
-#: xfwm/xfwm.c:865
+#: xfwm/xfwm.c:868
 msgid "&Move"
 msgstr "&Move"
 
-#: xfwm/xfwm.c:866
+#: xfwm/xfwm.c:869
 msgid "&Resize"
 msgstr "&Resize"
 
-#: xfwm/xfwm.c:867
+#: xfwm/xfwm.c:870
 msgid "(De)&Iconify"
 msgstr "(De)&Iconify"
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:871
 msgid "(Un)&Stick"
 msgstr "(Un)&Stick"
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:872
 msgid "(Un)S&hade"
 msgstr "(Un)S&hade"
 
-#: xfwm/xfwm.c:870
+#: xfwm/xfwm.c:873
 msgid "(Un)Ma&ximize"
 msgstr "(Un)Ma&ximize"
 
-#: xfwm/xfwm.c:872
+#: xfwm/xfwm.c:875
 msgid "Se&nd to..."
 msgstr "Se&nd to..."
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:876
 msgid "S&witch to..."
 msgstr "S&witch to..."
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:878
 msgid "&Close"
 msgstr "&Close"
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:880
 msgid "User Menu"
 msgstr "User menu"
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:881
 msgid "Edit menu..."
 msgstr "Edit menu..."
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:885
 msgid "&Mouse..."
 msgstr "&Mouse..."
 
-#: xfwm/xfwm.c:883
+#: xfwm/xfwm.c:886
 msgid "&Backdrop..."
 msgstr "&Backdrop..."
 
-#: xfwm/xfwm.c:884
+#: xfwm/xfwm.c:887
 msgid "&Sound..."
 msgstr "&Sound..."
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:889
 msgid "&New window"
 msgstr "&New window"
 
-#: xfwm/xfwm.c:887
+#: xfwm/xfwm.c:890
 msgid "&User Menu"
 msgstr "&User Menu"
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:894
 msgid "&Arrange icons"
 msgstr "&Arrange icons"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:895
 msgid "&Iconify all"
 msgstr "&Iconify all"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:896
 msgid "&Refresh"
 msgstr "&Refresh"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:897
 msgid "Shuffle &Up"
 msgstr "Shuffle &Up"
 
-#: xfwm/xfwm.c:895
+#: xfwm/xfwm.c:898
 msgid "Shuffle &Down"
 msgstr "Shuffle &Down"
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:900
 msgid "&Settings"
 msgstr "&Settings"
 
-#: xfwm/xfwm.c:899
+#: xfwm/xfwm.c:902
 msgid "&Quit XFwm"
 msgstr "&Quit XFwm"
 
-#: xfwm/xfwm.c:901
+#: xfwm/xfwm.c:904
 msgid "&Full Screen"
 msgstr "&Full Screen"
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:905
 msgid "&Vertical"
 msgstr "&Vertical"
 
-#: xfwm/xfwm.c:903
+#: xfwm/xfwm.c:906
 msgid "&Horizontal"
 msgstr "&Horizontal"
 
-#: xfwm/xfwm.c:1233
+#: xfwm/xfwm.c:1236
 msgid "xfwm terminated: "
 msgstr "xfwm terminated: "
 
@@ -2867,6 +3107,13 @@ msgstr ""
 #: xfsamba/xfsamba_gui.c:151
 msgid "This is XFSamba "
 msgstr "This is XFSamba "
+
+#: xfsamba/xfsamba_gui.c:151
+msgid ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
 
 #: xfsamba/xfsamba_gui.c:337
 msgid "Please provide information for server "
@@ -2942,10 +3189,6 @@ msgstr "Tar..."
 msgid "Browse as..."
 msgstr "Browse as..."
 
-#: xfsamba/xfsamba_gui.c:1027
-msgid "View"
-msgstr "View"
-
 #: xfsamba/xfsamba_gui.c:1029
 msgid "Show diagnostics"
 msgstr "Show diagnostics"
@@ -2961,6 +3204,10 @@ msgstr "Show browser links"
 #: xfsamba/xfsamba_gui.c:1032
 msgid "Hide browser links"
 msgstr "Hide browser links"
+
+#: xfsamba/xfsamba_gui.c:1034
+msgid "Go"
+msgstr "Go"
 
 #: xfsamba/xfsamba_gui.c:1035
 msgid "Home..."
@@ -3369,11 +3616,11 @@ msgstr "Caption : "
 msgid "Command: "
 msgstr "Command : "
 
-#: xfumed/xfumed_gui_cb.c:23
+#: xfumed/xfumed_gui_cb.c:24
 msgid "Your changes will take effect on next startup"
 msgstr "Your changes will take effect on next startup"
 
-#: xfumed/xfumed_gui_cb.c:69
+#: xfumed/xfumed_gui_cb.c:70
 #, fuzzy
 msgid ""
 "There are unsaved changes to the menu.\n"
@@ -3384,22 +3631,87 @@ msgstr ""
 "\n"
 "Do you want to quit and lose the changes ?"
 
-#: xfumed/xfumed_gui_cb.c:76
+#: xfumed/xfumed_gui_cb.c:77
 msgid "Don't Quit"
 msgstr "Don't quit"
 
-#: xfumed/xfumed_gui_cb.c:121
+#: xfumed/xfumed_gui_cb.c:122
 #, fuzzy
 msgid "Do you want to delete this entry ?"
 msgstr "Are you sure you want to remove this entry ?"
 
-#: xfumed/xfumed_gui_cb.c:123
+#: xfumed/xfumed_gui_cb.c:124
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
+
+#: xfumed/xfumed.h:10
+msgid "Item"
+msgstr ""
+
+#: xfumed/xfumed.h:11
+#, fuzzy
+msgid "Submenu"
+msgstr "Go to submenu"
+
+#: xfumed/xfumed.h:12
+msgid "Separator"
+msgstr ""
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid "Error"
+#~ msgstr "Error"
+
+#~ msgid "Warning"
+#~ msgstr "Warning"
+
+#~ msgid "Dialog"
+#~ msgstr "Dialog"
+
+#~ msgid "Source : "
+#~ msgstr "Source : "
+
+#~ msgid "Target : "
+#~ msgstr "Target : "
+
+#~ msgid "0 bytes received"
+#~ msgstr "0 bytes received"
+
+#~ msgid "XFTree: Download"
+#~ msgstr "XFTree: Download"
+
+#~ msgid "%ld Bytes"
+#~ msgstr "%ld bytes"
+
+#~ msgid "%d bytes"
+#~ msgstr "%d bytes"
+
+#, fuzzy
+#~ msgid "dbg:malloc error in %s at line %d\n"
+#~ msgstr "malloc error in %s at line %d\n"
+
+#~ msgid "menu_detach()\n"
+#~ msgstr "menu_detach()\n"
+
+#~ msgid "Can't copy device, fifo and socket files as regular files!\n"
+#~ msgstr "Can't copy device, fifo and socket files as regular files!\n"
+
+#~ msgid "move_dir() recursive failed\n"
+#~ msgstr "move_dir() recursive failed\n"
+
+#~ msgid "move_dir() move_file() failed\n"
+#~ msgstr "move_dir() move_file() failed\n"
+
+#~ msgid "Can't create : "
+#~ msgstr "Can't create : "
+
+#~ msgid "New Folder ..."
+#~ msgstr "New Folder ..."
 
 #~ msgid "transfer_view() %d\n"
 #~ msgstr "transfer_view() %d\n"
@@ -3449,9 +3761,6 @@ msgstr ""
 #~ msgid "Can't transfer a directory to a file"
 #~ msgstr "Can't transfer a directory to a file"
 
-#~ msgid "Moving file..\n"
-#~ msgstr "Moving file..\n"
-
 #~ msgid "move_file()"
 #~ msgstr "move_file()"
 
@@ -3484,23 +3793,11 @@ msgstr ""
 #~ msgid "Go up ..."
 #~ msgstr "Go up ..."
 
-#~ msgid "Open in new"
-#~ msgstr "Open in new"
-
-#~ msgid "Rename ..."
-#~ msgstr "Rename ..."
-
 #~ msgid "Go to marked"
 #~ msgstr "Go to marked"
 
 #~ msgid "Unselect all"
 #~ msgstr "Unselect all"
-
-#~ msgid "Duplicate"
-#~ msgstr "Duplicate "
-
-#~ msgid "Register ..."
-#~ msgstr "Register ..."
 
 #~ msgid "New windows"
 #~ msgstr "New windows"
@@ -3523,9 +3820,6 @@ msgstr ""
 #~ msgid "Type"
 #~ msgstr "Type"
 
-#~ msgid "Update"
-#~ msgstr "Update"
-
 #~ msgid "Quit, don't save"
 #~ msgstr "Quit, don't save"
 
@@ -3534,10 +3828,6 @@ msgstr ""
 
 #~ msgid "Whoooops !"
 #~ msgstr "Whoooops !"
-
-#, fuzzy
-#~ msgid "Submenu"
-#~ msgstr "Go to submenu"
 
 #~ msgid "Source and Target are the same"
 #~ msgstr "Source and target are the same"
