@@ -400,10 +400,10 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
         gdk_draw_line(window, style->bg_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
         gdk_draw_line(window, style->bg_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
 
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x, y);
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x + width - 1, y);
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x, y + height - 1);
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x + width - 1, y + height - 1);
+        gdk_draw_point(window, style->mid_gc[state_type], x, y);
+        gdk_draw_point(window, style->mid_gc[state_type], x + width - 1, y);
+        gdk_draw_point(window, style->mid_gc[state_type], x, y + height - 1);
+        gdk_draw_point(window, style->mid_gc[state_type], x + width - 1, y + height - 1);
     }
 #endif
     break;
@@ -477,10 +477,10 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
         gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
         gdk_draw_line(window, style->mid_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
 
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x, y);
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x + width - 1, y);
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x, y + height - 1);
-        gdk_draw_point(window, style->mid_gc[GTK_STATE_NORMAL], x + width - 1, y + height - 1);
+        gdk_draw_point(window, style->mid_gc[state_type], x, y);
+        gdk_draw_point(window, style->mid_gc[state_type], x + width - 1, y);
+        gdk_draw_point(window, style->mid_gc[state_type], x, y + height - 1);
+        gdk_draw_point(window, style->mid_gc[state_type], x + width - 1, y + height - 1);
     }
 #endif
     break;
