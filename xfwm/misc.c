@@ -490,9 +490,9 @@ Destroy (XfwmWindow * tmp_win)
 void
 RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 {
-  int x, y, px, py;
+  int x, y;
   /* Dummy var for XGetGeometry */
-  Window dummy_root, dummy_child;
+  Window dummy_root;
   unsigned int dummy_width, dummy_height, dummy_depth, dummy_bw;
 
   if (!tmp)
@@ -500,7 +500,6 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 
   if (XGetGeometry (dpy, tmp->w, &dummy_root, &x, &y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth))
   {
-    XTranslateCoordinates (dpy, tmp->frame, Scr.Root, x, y, &px, &py, &dummy_child);
     if ((tmp->flags & ICONIFIED) && (!(tmp->flags & SUPPRESSICON)))
     {
       if (tmp->icon_w)
@@ -510,7 +509,7 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
     }
 
     GetGravityOffsets (tmp);
-    XReparentWindow (dpy, tmp->w, Scr.Root, px - tmp->gravx, py - tmp->gravy);
+    XReparentWindow (dpy, tmp->w, Scr.Root, tmp->frame_x - tmp->gravx, tmp->frame_y - tmp->gravy);
     XSetWindowBorderWidth (dpy, tmp->w, tmp->old_bw);
     XSync (dpy, 0);
   }

@@ -1906,8 +1906,9 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
       tmp = tmp->next;
       continue;
     }
+    GetGravityOffsets (tmp);
     x = tmp->frame_x;
-    y = tmp->frame_y;
+    y = tmp->frame_y - (tmp->grav_align_y * extra_height);
     w = tmp->frame_width;
     h = tmp->frame_height - extra_height;
     tmp->frame_x = 0;

@@ -237,6 +237,7 @@ typedef struct XfwmWindow
   int layer;
   int gravx;			/* Gravity stuff */
   int gravy;			/* Gravity stuff */
+  short grav_align_y;
 }
 XfwmWindow;
 
