@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia 2001, for xfce project
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -78,13 +80,24 @@ on_cancel (GtkWidget * btn, gpointer * data)
 /*
  * called if user presses ok button
  */
+
+/* FIXME: THERE IS NO GARANTEE dl.data HAS SIZE ENOUGH
+ * TO RECEIVE gtk_entry_get_text (GTK_ENTRY (dl.entry) 
+ * make sure all calls have at least PATH_MAX + NAME_MAX + 1
+ * of preallocated memory;
+ * */
 static void
 on_ok (GtkWidget * ok, gpointer * data)
 {
   if (dl.entry)
   {
-    if (dl.data)
-      sprintf (dl.data, "%s", gtk_entry_get_text (GTK_ENTRY (dl.entry)));
+    if (dl.data) {
+      char *a;
+      a=(char *)dl.data;
+      strncpy(a,gtk_entry_get_text (GTK_ENTRY (dl.entry)),
+		      PATH_MAX + NAME_MAX );
+      a[PATH_MAX + NAME_MAX]=0;
+    }
   }
   gtk_widget_destroy (dl.top);
 
@@ -333,7 +346,7 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
     dl.entry = gtk_entry_new_with_max_length (DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     gtk_entry_set_editable (GTK_ENTRY (dl.entry), FALSE);
-    /* gtk_widget_set_sensitive (dl.entry, FALSE); */
+    gtk_widget_set_sensitive (dl.entry, FALSE);
   }
   else if (type & DLG_ENTRY_EDIT)
   {
@@ -348,6 +361,7 @@ gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int
     combo = gtk_combo_new ();
     gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (combo)->entry), 0, -1);
     gtk_combo_disable_activate (GTK_COMBO (combo));
+    gtk_combo_set_case_sensitive (GTK_COMBO (combo), 1);
     dl.entry = GTK_COMBO (combo)->entry;
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
     gtk_signal_connect (GTK_OBJECT (dl.entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));

@@ -101,11 +101,9 @@ free_list (GList * list)
   return NULL;
 }
 
-
 void *pushgo(char *path,void *vgo){
 	golist *lastgo,*gogo;
 	gogo=(golist *)vgo;	
-	/*fprintf(stderr,"dbg: 1gogo path=%s\n",path);*/
 	lastgo=gogo;
 	gogo=(golist *)malloc(sizeof(golist));
 	if (!gogo){
@@ -120,8 +118,16 @@ void *pushgo(char *path,void *vgo){
 		return (void *)gogo;
 	}
 	strcpy(gogo->path,path);
-	/*fprintf(stderr,"dbg: 2gogo path=%s\n",path);*/
+	/*fprintf(stderr,"dbg: path pushed=%s\n",path);*/
 	return (void *)gogo;
+}
+
+static void pushpath(GtkCTree * ctree,char *path){
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->gogo=pushgo( path,win->gogo);
+  gtk_object_set_user_data (GTK_OBJECT (ctree),win);
+  return;
 }
 
 static void *popgo(void *vgo){
@@ -129,13 +135,16 @@ static void *popgo(void *vgo){
 	gogo=(golist *)vgo;	
 	if (!gogo) return (void *)gogo;
 	thisgo=gogo->previous;
-	if (gogo->path) free(gogo->path);
+	if (gogo->path) {
+		/*fprintf(stderr,"dbg: path popped=%s\n",gogo->path);*/
+		free(gogo->path);
+	}
 	free(gogo);
 	gogo=thisgo;
 	return (void *)gogo;
 }
 
-void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
+static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
 {
   int i;
   char *label[COLUMNS];
@@ -143,23 +152,18 @@ void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
   char *icon_name;
   cfg *win;
   
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-
 	/*fprintf(stderr,"dbg: go_to path=%s\n",path);*/
-	
-	
   if (strstr(path,"/..")) {
      if (strlen(path)<=3) return; /* no higher than root */
 	*(strrchr(path,'/'))=0;
 
 	*(strrchr(path,'/'))=0;
 	if (path[0]==0) strcpy(path,"/");
-   }
-       	
-	
+   }    		
   en = entry_new_by_path (path);
   if (!en)
   {
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
     xf_dlg_error(win->top,_("Cannot find path"),path);
     /*fprintf (stderr,"dbg:Can't find row data at go_to()\n");*/
     return;
@@ -181,7 +185,7 @@ void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
   
 	/*fprintf(stderr,"dbg: 3go_to path=%s\n",path);*/
   
-  win->gogo=pushgo(path,win->gogo);
+  //win->gogo=pushgo(path,win->gogo);
   gtk_ctree_remove_node (ctree, root);
   
 
@@ -197,6 +201,11 @@ void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
 
 }
 
+void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags){
+  pushpath(ctree,path);
+  internal_go_to (ctree,root,path,flags);
+}
+
     /* A big bug was found and fixed at cb_go_to: Freeing memory twice
      * and appending glist elements to an already freed glist. */
 void
@@ -205,7 +214,6 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   GtkCTreeNode *node, *root;
   entry *en;
   static char *path=NULL;
-  char *p;
   static GList *list=NULL;
   int count;
   cfg *win;
@@ -220,31 +228,29 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   /* therefore, en != NULL */
 
+  /* FIXME: (at GTK_DLG and all calls to new_dlg with
+   *         text entries)
+   *         needs this much memory because of design fault of gtk_dlg routines: */
+  if (strlen(en->path) > PATH_MAX + NAME_MAX ) return;
   if (path) free(path);
-  if (!(path=(char *)malloc(strlen(en->path)+1) ) ) return;
+  if (!(path=(char *)malloc(PATH_MAX + NAME_MAX + 1) ) ) return;
   
   strcpy (path, en->path);
   if ((count != 1) || !(en->type & FT_DIR)) { /* make combo box */
-    p = path;
-#if 0
-    if (preferences&SOMEOPTION) while ((p = strrchr (path, '/')) != NULL) {
-	if (p == path) { /* this puts / on the combo */
-	  *(p + 1) = '\0';
-	  list = g_list_append (list, g_strdup (path));
-	  break;
+    if (win->gogo) for (thisgo=((golist *)(win->gogo))->previous; thisgo!=NULL; thisgo=thisgo->previous){
+	golist *testgo;
+	for (testgo=thisgo->previous;testgo!=NULL;testgo=testgo->previous) {
+		/* if ahead in list, dont put it in now */
+		if (strcmp(testgo->path,thisgo->path)==0) goto skipit;
 	}
-	*p = '\0';
-	list = g_list_append (list, g_strdup (path));
-    } 
-    else 
-#endif
-    if (win->gogo) for (thisgo=((golist *)(win->gogo))->previous; thisgo!=NULL; thisgo=thisgo->previous)
-	       list = g_list_append (list,thisgo->path);
-  
+	list = g_list_prepend (list,thisgo->path);
+skipit:;
+    }
+    strcpy(path,"/");
     if (xf_dlg_combo (win->top,_("Go to"), path, list) != DLG_RC_OK) {
       return;
     }
-  } else strcpy(path,en->path);
+  }
   go_to (ctree, root, path, en->flags);
 }
 
@@ -252,12 +258,15 @@ void cb_go_back (GtkWidget * item, GtkCTree * ctree){
   GtkCTreeNode *root;
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  win->gogo=popgo(win->gogo);
-  if (!(win->gogo)) return;
-  root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  go_to (ctree, root, ((golist *)(win->gogo))->path, IGNORE_HIDDEN);
-  if ((win->gogo) && (((golist *)(win->gogo))->previous)) 
-	  win->gogo=popgo ((golist *)(win->gogo)); /* current dir */
+  if (!(win->gogo)) {
+	  fprintf(stderr,"dbg:This shouldn't happen. cb_go_back()\n");
+	  return; 
+  }
+  if ((win->gogo) && (((golist *)(win->gogo))->previous)) {
+    win->gogo=popgo ((golist *)(win->gogo)); 
+    root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+    internal_go_to (ctree, root, ((golist *)(win->gogo))->path, IGNORE_HIDDEN);
+  }
 }
 
 
