@@ -285,11 +285,11 @@ GtkCTreeNode *add_rpm_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			s=strtok(NULL," ");
 			sscanf(s,"%o",&modo);				
 		        text[COL_MODE]=mode_txt(modo);
+			d_en->st.st_mode=modo;
 		      }
-		      /*strcpy(text[COL_MODE],strtok(NULL," "));*/
 		      text[COL_UID]=strtok(NULL," ");
 		      text[COL_GID]=strtok(NULL," ");
-		      sscanf(text[COL_MODE],"%o",&(d_en->st.st_mode));
+		      /*sscanf(text[COL_MODE],"%o",&(d_en->st.st_mode));*/
 		      
 		      if (p[strlen(p)-1]=='/')  d_en->type |=  FT_DIR;
 		      else d_en->type |=  FT_FILE;

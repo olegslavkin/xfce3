@@ -166,7 +166,7 @@ io_system (char **argv,GtkWidget *parent)
     if (fork ()==0) { 
        /*printf("dbg:by direct...\n");*/
        if (execve (argv[0], argv, environ) == -1) {
-           FILE *mess;
+           /*FILE *mess;*/
 	   if (errno != ENOEXEC) execvp (argv[0], argv); 
 #if 0
 	   /* this is not very portable */
