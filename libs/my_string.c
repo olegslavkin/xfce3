@@ -128,14 +128,7 @@ cleanup (char *s)
   t = skiphead (s);
   skiptail (t);
   len = strlen (t); 
-  if (strlen (t))
-  {
-    my_memmove (s, t, len);
-  }
-  else
-  {
-    *s = '\0';
-  }  
+  my_memmove (s, t, len + 1);
   return (s);
 }
 
