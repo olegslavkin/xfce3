@@ -374,7 +374,6 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
     gdk_draw_line (window, style->dark_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
 #endif
     break;
-
     break;
   case GTK_SHADOW_OUT:
 #ifdef OLD_STYLE
