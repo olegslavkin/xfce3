@@ -12,7 +12,8 @@ the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_que
 
 
 easy:
-16- Config option: Default "open with" program
+16,16b- Config option: Default "open with" program, also add an option to register
+    a program type when the open with dialog pops up.
 
 complicated:
 4- gtk-2 
@@ -24,22 +25,31 @@ unknown:
 17- desktop icons
 
 BUGS to fix:
-
-Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
-the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
-
-  -goback function loses some history elements: check create/destroy
-    algorithm. 
+  -shift-ctrl to link: put in help and fix the directory symlink
+     bug. It is symlinking the entire contents of the directory
+     and not the directory itself.
   -information dialogs can get lost beneath 
              * need to check behavior of dlg_prop(),
                dlg_open_with(),dlg_execute() called in xtre_gui
              * need to check other files
                     all over yet)
+	     * merge static dialog structures with those from
+  		gtk_dlg.c to avoid wasting memory "a lo buey".
   -erratic behavior when the top open folder gets moved away by 
              another process, must fail gracefully.
+      this also can be seen if you rename the root dir of the 
+      ctree to something else. This should be an easy thing to fix.
 ****************************************************************
 ****************************************************************
 done:
+bugs fixed
+
+Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
+the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
+
+  -goback function loses some history elements: check create/destroy
+    algorithm.
+
 gtk_dlg.c memory leak in entry_edit and combo fixed.
 
 19- much more configurable (file open actons ...)
