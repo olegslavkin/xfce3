@@ -28,7 +28,8 @@ libxfcecore_la_SOURCES = \
 	xfcolor.c xfcolor.h \
 	xpmext.c xpmext.h
 libxfcecore_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(X_EXTRA_LIBS)
-libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION)
+libxfcecore_la_LDFLAGS = -version-info $(LIBVERSION) \
+	-export-dynamic -rpath "@prefix@/lib"
 
 libxfwmcore_la_SOURCES = \
 	ClientMsg.c \
@@ -52,4 +53,5 @@ libxfwmcore_la_SOURCES = \
 	wild.c
 
 libxfwmcore_la_LIBADD = $(X_LIBS) $(X_EXTRA_LIBS) @XFT_LIBS@
-libxfwmcore_la_LDFLAGS = -version-info $(LIBVERSION)
+libxfwmcore_la_LDFLAGS = -version-info $(LIBVERSION) \
+	-export-dynamic -rpath "@prefix@/lib"

@@ -193,8 +193,8 @@ XpmShapeToFit_dither (int newsizex, int newsizey, XpmImage * I,
   XColor *mycolor;
   int i, k, r, g, b, x, y;
 
-  mycolor = malloc (I->ncolors * sizeof (XColor));
-  myshape = malloc (I->ncolors * sizeof (int));
+  mycolor = g_malloc (I->ncolors * sizeof (XColor));
+  myshape = g_malloc (I->ncolors * sizeof (int));
 
   Imagedest->width = MIN (newsizex, I->width);
   Imagedest->height = MIN (newsizey, I->height);
@@ -203,10 +203,10 @@ XpmShapeToFit_dither (int newsizex, int newsizey, XpmImage * I,
   Imagedest->colorTable = malloc (Imagedest->ncolors * sizeof (XpmColor));
   Imagedest->data = malloc (newsizex * newsizey * sizeof (int));
 
-  shrinknumbers = malloc (newsizex * newsizey * sizeof (int));
-  shrinkred = malloc (newsizex * newsizey * sizeof (double));
-  shrinkgreen = malloc (newsizex * newsizey * sizeof (double));
-  shrinkblue = malloc (newsizex * newsizey * sizeof (double));
+  shrinknumbers = g_malloc (newsizex * newsizey * sizeof (int));
+  shrinkred = g_malloc (newsizex * newsizey * sizeof (double));
+  shrinkgreen = g_malloc (newsizex * newsizey * sizeof (double));
+  shrinkblue = g_malloc (newsizex * newsizey * sizeof (double));
 
   for (r = 0; r < 4; r++)
     {
@@ -288,12 +288,12 @@ XpmShapeToFit_dither (int newsizex, int newsizey, XpmImage * I,
 	  ((int) (shrinkblue[i] / shrinknumbers[i]) >> 14);
     }
 
-  free (mycolor);
-  free (myshape);
-  free (shrinknumbers);
-  free (shrinkred);
-  free (shrinkgreen);
-  free (shrinkblue);
+  g_free (mycolor);
+  g_free (myshape);
+  g_free (shrinknumbers);
+  g_free (shrinkred);
+  g_free (shrinkgreen);
+  g_free (shrinkblue);
 }
 
 /* This one is mine ;-) */

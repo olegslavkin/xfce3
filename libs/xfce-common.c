@@ -696,7 +696,7 @@ xfce_init (int *argc, char **argv[])
   gtk_init (argc, argv);
   init_xfce_rcfile();
 
-  #ifdef HAVE_GDK_IMLIB
+#ifdef HAVE_GDK_IMLIB
   gdk_imlib_init ();
 /* Get gdk to use imlib's visual and colormap */
   gtk_widget_push_visual (gdk_imlib_get_visual ());
@@ -710,5 +710,5 @@ xfce_end (gpointer data, int status)
   /* We'll be able to add more stuff here, but for the moment,
    * that's all we do here ...
    */
-  exit (status);
+  gdk_exit (status);
 }

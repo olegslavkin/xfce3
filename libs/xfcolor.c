@@ -373,7 +373,7 @@ void apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
   
   /* Once we've applied xfce colors, merge with user's defined settings */
   i = 0;
-  tempstr = (char *) malloc (sizeof (char) * MAXSTRLEN);
+  tempstr = (char *) g_malloc (sizeof (char) * MAXSTRLEN);
   while (xres [i])
     {
       snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), xres [i]);
@@ -384,7 +384,7 @@ void apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
         }
       i++;
     }
-  free (tempstr);
+  g_free (tempstr);
 }
 
 void
@@ -400,7 +400,7 @@ char *
 color_to_hex (char *s, const XFCE_palette * p, int index)
 {
   if (!s)
-    s = (char *) malloc (8 * sizeof (char));
+    s = (char *) g_malloc (8 * sizeof (char));
 
   if ((p) && (s) && (index >= 0) && (index < NB_XFCE_COLORS))
     {
@@ -452,7 +452,7 @@ newpal (void)
 {
   XFCE_palette *p;
 
-  p = (XFCE_palette *) malloc (sizeof (XFCE_palette));
+  p = (XFCE_palette *) g_malloc (sizeof (XFCE_palette));
   p->fnt = NULL;
   p->texture = NULL;
   p->engine  = NULL;
@@ -466,12 +466,12 @@ set_font (XFCE_palette * p, char *fnt)
 {
   if (fnt && (strlen (fnt)))
     {
-      p->fnt = realloc (p->fnt, (strlen (fnt) + 1) * sizeof (char));
+      p->fnt = g_realloc (p->fnt, (strlen (fnt) + 1) * sizeof (char));
       strcpy (p->fnt, fnt);
     }
   else
     {
-      p->fnt = realloc (p->fnt, sizeof (char));
+      p->fnt = g_realloc (p->fnt, sizeof (char));
       strcpy (p->fnt, "");
     }
 }
@@ -481,12 +481,12 @@ set_texture (XFCE_palette * p, char *texture)
 {
   if (texture && (strlen (texture)))
     {
-      p->texture = realloc (p->texture, (strlen (texture) + 1) * sizeof (char));
+      p->texture = g_realloc (p->texture, (strlen (texture) + 1) * sizeof (char));
       strcpy (p->texture, texture);
     }
   else
     {
-      p->texture = realloc (p->texture, sizeof (char));
+      p->texture = g_realloc (p->texture, sizeof (char));
       strcpy (p->texture, "");
     }
 }
@@ -496,12 +496,12 @@ set_engine (XFCE_palette * p, char *engine)
 {
   if (engine && (strlen (engine)))
     {
-      p->engine = realloc (p->engine, (strlen (engine) + 1) * sizeof (char));
+      p->engine = g_realloc (p->engine, (strlen (engine) + 1) * sizeof (char));
       strcpy (p->engine, engine);
     }
   else
     {
-      p->engine = realloc (p->engine, sizeof (char));
+      p->engine = g_realloc (p->engine, sizeof (char));
       strcpy (p->engine, "");
     }
 }
@@ -510,12 +510,12 @@ void
 freepal (XFCE_palette * p)
 {
   if (p->fnt)     
-    free (p->fnt);
+    g_free (p->fnt);
   if (p->texture) 
-    free (p->texture);
+    g_free (p->texture);
   if (p->engine)  
-    free (p->engine);
-  free (p);
+    g_free (p->engine);
+  g_free (p);
 }
 
 XFCE_palette *
@@ -531,9 +531,9 @@ copypal (XFCE_palette * d, const XFCE_palette * s)
 	  d->g[i] = s->g[i];
 	  d->b[i] = s->b[i];
 	}
-      d->fnt     = realloc (d->fnt,     (strlen (s->fnt) + 1) * sizeof (char));
-      d->texture = realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
-      d->engine  = realloc (d->engine,  (strlen (s->engine) + 1) * sizeof (char));
+      d->fnt     = g_realloc (d->fnt,     (strlen (s->fnt) + 1) * sizeof (char));
+      d->texture = g_realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
+      d->engine  = g_realloc (d->engine,  (strlen (s->engine) + 1) * sizeof (char));
       strcpy (d->fnt,     s->fnt);
       strcpy (d->texture, s->texture);
       strcpy (d->engine,  s->engine);
@@ -555,9 +555,9 @@ copyvaluepal (XFCE_palette * d, const XFCE_palette * s)
 	  d->g[i] = s->g[i];
 	  d->b[i] = s->b[i];
 	}
-      d->fnt     = realloc (d->fnt,     (strlen (s->fnt) + 1) * sizeof (char));
-      d->texture = realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
-      d->engine  = realloc (d->engine,  (strlen (s->engine) + 1) * sizeof (char));
+      d->fnt     = g_realloc (d->fnt,     (strlen (s->fnt) + 1) * sizeof (char));
+      d->texture = g_realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
+      d->engine  = g_realloc (d->engine,  (strlen (s->engine) + 1) * sizeof (char));
       strcpy (d->fnt,     s->fnt);
       strcpy (d->texture, s->texture);
       strcpy (d->engine,  s->engine);
@@ -571,9 +571,9 @@ initpal (XFCE_palette * p)
 {
   if (p)
     {
-      p->fnt     = realloc (p->fnt,     (strlen (DEFAULTFONT) + 1) * sizeof (char));
-      p->texture = realloc (p->texture, sizeof (char));
-      p->engine  = realloc (p->engine,  (strlen (DEFAULTENGINE) + 1) * sizeof (char));
+      p->fnt     = g_realloc (p->fnt,     (strlen (DEFAULTFONT) + 1) * sizeof (char));
+      p->texture = g_realloc (p->texture, sizeof (char));
+      p->engine  = g_realloc (p->engine,  (strlen (DEFAULTENGINE) + 1) * sizeof (char));
       strcpy (p->texture, "");
       strcpy (p->engine, DEFAULTENGINE);
       strcpy (p->fnt, DEFAULTFONT);
@@ -845,7 +845,7 @@ defpal (XFCE_palette * p)
   p->r[7] = 220;
   p->g[7] = 220;
   p->b[7] = 220;
-  p->texture = realloc (p->texture, sizeof (char) * (strlen (DEFAULTTEXTURE) + 1));
+  p->texture = g_realloc (p->texture, sizeof (char) * (strlen (DEFAULTTEXTURE) + 1));
   strcpy (p->texture, DEFAULTTEXTURE);
 }
 
@@ -878,7 +878,7 @@ loadnamepal (XFCE_palette * p, const char *name)
   int i, err = 0;
   gboolean font = FALSE;
   
-  lineread = (char *) malloc ((80) * sizeof (char));
+  lineread = (char *) g_malloc ((80) * sizeof (char));
 
   if ((f = fopen (name, "r")))
     {
@@ -912,25 +912,25 @@ loadnamepal (XFCE_palette * p, const char *name)
               if (!my_strncasecmp (lineread, "engine=", strlen ("engine=")))
                 {
                    char *s = &lineread[strlen ("engine=")];
-                   p->engine = realloc (p->engine, (strlen (s) + 1) * sizeof (char));
+                   p->engine = g_realloc (p->engine, (strlen (s) + 1) * sizeof (char));
 	           strcpy (p->engine, s);
                 }
               else if (!font)
                 {
-                   p->fnt = realloc (p->fnt, (strlen (lineread) + 1) * sizeof (char));
+                   p->fnt = g_realloc (p->fnt, (strlen (lineread) + 1) * sizeof (char));
 	           strcpy (p->fnt, lineread);
                    font = TRUE;
                 }
               else
 	        {
-                  p->texture = realloc (p->texture, (strlen (lineread) + 1) * sizeof (char));
+                  p->texture = g_realloc (p->texture, (strlen (lineread) + 1) * sizeof (char));
 	          strcpy (p->texture, lineread);
 	        }
             }
           }
       fclose (f);
     }
-  free (lineread);
+  g_free (lineread);
   return ((!err && (f != NULL)));
 }
 
@@ -940,10 +940,10 @@ savepal (XFCE_palette * p)
   char *tempstr;
   int x;
 
-  tempstr = (char *) malloc ((MAXSTRLEN + 1) * sizeof (char));
+  tempstr = (char *) g_malloc ((MAXSTRLEN + 1) * sizeof (char));
   snprintf (tempstr, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rccolor);
   x = savenamepal (p, tempstr);
-  free (tempstr);
+  g_free (tempstr);
   return (x);
 }
 
@@ -953,7 +953,7 @@ loadpal (XFCE_palette * p)
   char *tempstr;
   int x;
 
-  tempstr = (char *) malloc ((MAXSTRLEN + 1) * sizeof (char));
+  tempstr = (char *) g_malloc ((MAXSTRLEN + 1) * sizeof (char));
   snprintf (tempstr, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rccolor);
   x = loadnamepal (p, tempstr);
   if (!x)
@@ -961,7 +961,7 @@ loadpal (XFCE_palette * p)
       snprintf (tempstr, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rccolor);
       x = loadnamepal (p, tempstr);
     }
-  free (tempstr);
+  g_free (tempstr);
   return (x);
 }
 
