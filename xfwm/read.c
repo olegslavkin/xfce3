@@ -113,6 +113,8 @@ ReadSubFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long c
 
   if (piperead)
     fd = popen (filename, "r");
+  else
+    fd = fopen (filename, "r");
 
   if (!piperead)
   {

@@ -54,6 +54,9 @@
 #include <gdk_imlib.h>
 #endif
 
+#define empty_cursor_width 16
+#define empty_cursor_height 16
+
 static char *question[] = {
   "32 32 5 1",
   ". c none",
@@ -135,6 +138,15 @@ static char *warning[] = {
   "................................",
   "................................"
 };
+
+static unsigned char empty_cursor_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+static unsigned char empty_cursormask_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 GtkWidget *
 get_widget (GtkWidget * widget, gchar * widget_name)
@@ -567,6 +579,23 @@ void
 cursor_reset (GtkWidget * widget)
 {
   gdk_window_set_cursor (widget->window, NULL);
+}
+
+void
+cursor_hide(GtkWidget * widget)
+{
+  GdkCursor *cursor;
+  GdkPixmap *source, *mask;
+  GdkColor fg = { 0, 0, 0, 0 }; /* Transparent. */
+  GdkColor bg = { 0, 0, 0, 0 }; /* Transparent. */   
+
+  g_return_if_fail (widget->window != NULL);
+  source = gdk_bitmap_create_from_data (NULL, empty_cursor_bits, empty_cursor_width, empty_cursor_height);
+  mask = gdk_bitmap_create_from_data (NULL, empty_cursormask_bits, empty_cursor_width, empty_cursor_height);
+  cursor = gdk_cursor_new_from_pixmap (source, mask, &fg, &bg, 8, 8);
+  gdk_pixmap_unref (source);
+  gdk_pixmap_unref (mask);   
+  gdk_window_set_cursor (widget->window, cursor);
 }
 
 gint 
