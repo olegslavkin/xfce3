@@ -55,7 +55,7 @@ if [ -f $HOME/.xinitrc ]; then
 		>> $HOME/.xinitrc.xfce.tmp
 		echo "# Set up additionnal fonts that ship with Xfce (Change id38121117)" \
 		>> $HOME/.xinitrc.xfce.tmp
-		echo "xset fp+ \"/usr/share/xfce/fonts\"" \
+		echo "xset fp+ \"/usr/local/share/xfce/fonts\"" \
 		>> $HOME/.xinitrc.xfce.tmp
 		echo "### End of changes version 3.8.12 ###" \
 		>> $HOME/.xinitrc.xfce.tmp

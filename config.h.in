@@ -178,9 +178,6 @@
 /* Define if you have the <stddef.h> header file. */
 #undef HAVE_STDDEF_H
 
-/* Define if you have the <stdint.h> header file. */
-#undef HAVE_STDINT_H
-
 /* Define if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
 
@@ -219,12 +216,6 @@
 
 /* Define if you have the <sys/soundcard.h> header file. */
 #undef HAVE_SYS_SOUNDCARD_H
-
-/* Define if you have the <sys/stat.h> header file. */
-#undef HAVE_SYS_STAT_H
-
-/* Define if you have the <sys/types.h> header file. */
-#undef HAVE_SYS_TYPES_H
 
 /* Define if you have the `tsearch' function. */
 #undef HAVE_TSEARCH

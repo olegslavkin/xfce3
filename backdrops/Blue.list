@@ -1,6 +1,6 @@
 # xfce backdrop list
-/usr/share/xfce/backdrops/BlueSatin.xpm
-/usr/share/xfce/backdrops/BlueStucco.xpm
-/usr/share/xfce/backdrops/Compute.xpm
-/usr/share/xfce/backdrops/BlueSea.xpm
-/usr/share/xfce/backdrops/Pled.xpm
+/usr/local/share/xfce/backdrops/BlueSatin.xpm
+/usr/local/share/xfce/backdrops/BlueStucco.xpm
+/usr/local/share/xfce/backdrops/Compute.xpm
+/usr/local/share/xfce/backdrops/BlueSea.xpm
+/usr/local/share/xfce/backdrops/Pled.xpm

@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -135,9 +135,7 @@ EXTRA_DIST = $(man_MANS) $(bin_SCRIPTS) $(xfce_SOURC)
 
 CLEANFILES = xfce_setup    xfce_upgrade    xfhelp    startxfce
 xfce_SOURC = xfce_setup.in xfce_upgrade.in xfhelp.in startxfce.in
-bin_SCRIPTS = \
- xfhelp xfprint xftrash xfterm xflock xfce_setup \
- xfce_remove startxfce xfmountdev CDE2Xfcepal xfce_upgrade
+bin_SCRIPTS =   xfhelp xfprint xftrash xfterm xflock xfce_setup  xfce_remove startxfce xfmountdev CDE2Xfcepal xfce_upgrade
 
 
 man_MANS = xfhelp.1 xfprint.1 xftrash.1 xfterm.1 xflock.1 xfmountdev.1
@@ -155,7 +153,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = gtar
+TAR = tar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
