@@ -151,12 +151,22 @@ readstr (int i, char *str, FILE * f)
 void
 loadcfg (XFSound * s)
 {
+  static time_t last_ctime = (time_t) 0;
+  struct stat buf;
   int i;
   FILE *f = NULL;
 
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), RCFILE);
   if (existfile (homedir))
   {
+    if (stat (homedir, &buf))
+    {
+      if (buf.st_ctime > last_ctime)
+      {
+        last_ctime = buf.st_ctime;
+        return;
+      }
+    }
     f = fopen (homedir, "r");
   }
   else
@@ -164,6 +174,14 @@ loadcfg (XFSound * s)
     snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, RCFILE);
     if (existfile (homedir))
     {
+      if (stat (homedir, &buf))
+      {
+        if (buf.st_ctime > last_ctime)
+        {
+          last_ctime = buf.st_ctime;
+          return;
+        }
+      }
       f = fopen (homedir, "r");
     }
   }

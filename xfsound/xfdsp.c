@@ -235,7 +235,7 @@ int
 setcard (void)
 {
 #if !defined(HAVE_ARTS)
-  if ((masterfd = open (DSP_NAME, O_WRONLY, 0)) == -1)
+  if ((masterfd = open (DSP_NAME, O_WRONLY | O_NONBLOCK, 0)) == -1)
   {
 #ifdef DEBUG
     perror ("open");
@@ -281,6 +281,20 @@ cardctl (int fp, ST_CONFIG *parm)
   (*parm)[1] = channels;
   (*parm)[2] = frequency;
 }
+
+int
+cardbusy (void)
+{
+  int testfd;
+#if !defined(HAVE_ARTS)
+  if ((testfd = open (DSP_NAME, O_WRONLY | O_NONBLOCK, 0)) == -1)
+  {
+    return 1;
+  }
+#endif
+  close (testfd);
+  return 0;
+}
 #else
 int
 i_play (char *soundfile)
@@ -300,4 +314,9 @@ cardctl (int fp, ST_CONFIG * parm)
   ;
 }
 
+int
+cardbusy (void)
+{
+  return 0;
+}
 #endif

@@ -28,8 +28,9 @@
 typedef int ST_CONFIG[3];
 
 void sound_init (void);
-int i_play (char *);
-int setcard (void);
+int  i_play (char *);
+int  setcard (void);
 void cardctl (int, ST_CONFIG *);
+int  cardbusy (void);
 
 #endif
