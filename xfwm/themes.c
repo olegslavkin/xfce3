@@ -225,7 +225,7 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     {
       XSetWindowBackground (dpy, Tmp_win->icon_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
     }
-    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && (Scr.Options & UseShapedIcons))
+    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && !(Scr.Options & UseShapedIcons))
     {
       XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
       XClearWindow (dpy, Tmp_win->icon_pixmap_w);
@@ -262,7 +262,7 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     {
       XSetWindowBackground (dpy, Tmp_win->icon_w, BackColor);
     }
-    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && (Scr.Options & UseShapedIcons))
+    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && !(Scr.Options & UseShapedIcons))
     {
       XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, BackColor);
       XClearWindow (dpy, Tmp_win->icon_pixmap_w);

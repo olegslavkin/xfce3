@@ -21,6 +21,9 @@ SessionManagement   On
 # Delay session startup (in seconds) to reduce disk/cpu usage
 WaitSession         5
 
+# Enable/disable shaped icons :
+UseShapedIcons      Off
+
 # Icon placing stuff :
 IconGrid            10
 IconSpacing         5

@@ -76,7 +76,6 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
   Bool NewColor = False;
   unsigned long valuemask;
   static unsigned int corners[4];
-  Window w;
 
   corners[0] = TOP_HILITE | LEFT_HILITE;
   corners[1] = TOP_HILITE | RIGHT_HILITE;
@@ -100,13 +99,7 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
     if ((Scr.Hilite != t) && (Scr.Hilite != NULL))
       SetBorder (Scr.Hilite, False, False, True, None);
 
-    /* set the keyboard focus */
-    if ((Mapped) && (t->flags & MAPPED) && (Scr.Hilite != t))
-      w = t->w;
-    else if ((t->flags & ICONIFIED) && (Scr.Hilite != t) && (!(t->flags & SUPPRESSICON)))
-      w = t->icon_w;
     Scr.Hilite = t;
-
     TextColor = GetDecor (t, HiColors.fore);
     BackColor = GetDecor (t, HiColors.back);
     ReliefGC = GetDecor (t, HiReliefGC);
