@@ -2947,7 +2947,7 @@ RelieveWindow_gtk (XfwmWindow * t, Window win, int x, int y, int w, int h, GC Re
       break;
 
     case TOP_HILITE:
-      XFillRectangle (dpy, win, BackGC, x, y + 1, w + x - 1, y + h - 2);
+      XFillRectangle (dpy, win, BackGC, x, y + 1, w + x + 1, y + h - 2);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;

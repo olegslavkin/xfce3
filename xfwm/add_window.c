@@ -460,6 +460,18 @@ AddWindow (Window w)
   MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
   MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
 
+  XSync (dpy, 0);
+  MyXUngrabServer (dpy);
+
+  FetchWmProtocols (tmp_win);
+  FetchWmColormapWindows (tmp_win);
+  if (tmp_win->attr.colormap == None)
+    tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
+  InstallWindowColormaps (colormap_win);
+
+  /* When we're all clear, map window */
+  XMapSubwindows (dpy, tmp_win->frame);
+
   x = tmp_win->frame_x;
   tmp_win->frame_x = 0;
   y = tmp_win->frame_y;
@@ -470,15 +482,6 @@ AddWindow (Window w)
   tmp_win->frame_height = 0;
   SetupFrame (tmp_win, x, y, width, height, True, True);
 
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
-
-  FetchWmProtocols (tmp_win);
-  FetchWmColormapWindows (tmp_win);
-  if (tmp_win->attr.colormap == None)
-    tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
-  InstallWindowColormaps (colormap_win);
-
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);
@@ -487,9 +490,6 @@ AddWindow (Window w)
     BroadcastName (XFCE_M_ICON_FILE, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->icon_bitmap_file);
   BroadcastName (XFCE_M_RES_CLASS, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->class.res_class);
   BroadcastName (XFCE_M_RES_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->class.res_name);
-
-  /* When we're all clear, map window */
-  XMapSubwindows (dpy, tmp_win->frame);
 
   return (tmp_win);
 }
