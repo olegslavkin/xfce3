@@ -224,6 +224,7 @@ apply_wm_colors (const XFCE_palette * p)
     v = (char *) g_malloc (10 * sizeof (char));
 
     howbright = brightness_pal (p, 6);
+    
     if ((current_config.xfwm_engine == GTK_ENGINE) || (current_config.xfwm_engine == XFCE_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
     {
       howdark = brightness_pal (p, 3);
@@ -232,11 +233,15 @@ apply_wm_colors (const XFCE_palette * p)
     {
       howdark = brightness_pal (p, 7);
     }
+    
     if ((current_config.xfwm_engine == MOFIT_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
+    {
       color_to_hex (s, p, 6);
+    }
     else
+    {
       color_to_hex (s, p, 7);
-
+    }
     sprintf (u, ACTIVECOLOR_CMD, (howbright < fadeblack) ? "white" : "black", s);
     sendinfo (fd_internal_pipe, u, 0);
     color_to_hex (s, p, 7);

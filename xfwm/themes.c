@@ -221,15 +221,43 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     }
     TextColor = GetDecor (Tmp_win, HiColors.fore);
     BackColor = GetDecor (Tmp_win, titlebar.state[Active].u.back);
-    if (Tmp_win->icon_w != None)
+  }
+  else
+  {
+    ButtonFace *bf;
+    bf = &GetDecor (t, titlebar.state[Inactive]);
+    if (bf->u.ReliefGC)
     {
-      XSetWindowBackground (dpy, Tmp_win->icon_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
+      Relief = bf->u.ReliefGC;
     }
-    if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && !(Scr.Options & UseShapedIcons))
+    else
     {
-      XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, GetDecor (Tmp_win, titlebar.state[Active].u.back));
-      XClearWindow (dpy, Tmp_win->icon_pixmap_w);
+      Relief = GetDecor (Tmp_win, LoReliefGC);
     }
+    if (bf->u.ShadowGC)
+    {
+      Shadow = bf->u.ShadowGC;
+    }
+    else
+    {
+      Shadow = GetDecor (Tmp_win, LoShadowGC);
+    }
+    TextColor = GetDecor (Tmp_win, LoColors.fore);
+    BackColor = GetDecor (Tmp_win, titlebar.state[Inactive].u.back);
+  }
+   
+  if (Tmp_win->icon_w != None)
+  {
+    XSetWindowBackground (dpy, Tmp_win->icon_w, BackColor);
+  }
+  if ((Tmp_win->icon_pixmap_w != None) && (Tmp_win->flags & ICON_OURS) && !(Scr.Options & UseShapedIcons))
+  {
+    XSetWindowBackground (dpy, Tmp_win->icon_pixmap_w, BackColor);
+    XClearWindow (dpy, Tmp_win->icon_pixmap_w);
+  }
+
+  if (Scr.Hilite == Tmp_win)
+  {
     /* resize the icon name window */
     if (Tmp_win->icon_w != None)
     {
@@ -254,10 +282,6 @@ DrawIconWindow (XfwmWindow * Tmp_win)
   }
   else
   {
-    Relief = GetDecor (Tmp_win, LoReliefGC);
-    Shadow = GetDecor (Tmp_win, LoShadowGC);
-    TextColor = GetDecor (Tmp_win, LoColors.fore);
-    BackColor = GetDecor (Tmp_win, LoColors.back);
     if (Tmp_win->icon_w != None)
     {
       XSetWindowBackground (dpy, Tmp_win->icon_w, BackColor);
