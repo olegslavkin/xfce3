@@ -29,6 +29,8 @@
 #undef HAVE_GETHOSTNAME_PROTO
 #undef OLD_STYLE
 #undef MANAGE_OVERRIDES
+#undef _FILE_OFFSET_BITS
+#undef _LARGE_FILES
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
