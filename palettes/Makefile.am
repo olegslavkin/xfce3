@@ -20,6 +20,7 @@ BlueX \
 BlueX2 \
 BlueX3 \
 BlueX4 \
+CandyBox \
 Cheese \
 Chrome \
 Citrouille \

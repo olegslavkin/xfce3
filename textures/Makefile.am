@@ -4,6 +4,7 @@ Aluminium.xpm \
 BlueX.xpm \
 BlueX2.xpm \
 Bronze2.xpm \
+BWGrad.xpm \
 Chrome.xpm \
 DarkMetal.xpm \
 Glass.xpm \
