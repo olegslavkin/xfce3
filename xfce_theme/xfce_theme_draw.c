@@ -175,12 +175,12 @@ xfce_draw_handlers (GtkStyle * style, GdkWindow * window, GtkStateType state_typ
     GdkGC *light_gc, *dark_gc;
     GdkRectangle dest;
 
-    if((width == -1) && (height == -1))
-        gdk_drawable_get_size(window, &width, &height);
-    else if(width == -1)
-        gdk_drawable_get_size(window, &width, NULL);
-    else if(height == -1)
-        gdk_drawable_get_size(window, NULL, &height);
+    if ((width == -1) && (height == -1))
+      gdk_window_get_size (window, &width, &height);
+    else if (width == -1)
+      gdk_window_get_size (window, &width, NULL);
+    else if (height == -1)
+      gdk_window_get_size (window, NULL, &height);
 
     light_gc = style->light_gc[state_type];
     dark_gc = style->dark_gc[state_type];
