@@ -171,7 +171,7 @@ i_play (char *soundfile)
   {
 	  printf("xfsound: The audio file must contain integer data in two's complement or unsigned format.\n");
           afCloseFile (fp);
-          exit(-1);
+          _exit(-1);
   }
   curr[0] = sampleWidth;
   curr[1] = channelCount;
@@ -198,7 +198,7 @@ i_play (char *soundfile)
 #else  
     close (fp);
 #endif
-    exit(-1);
+    _exit(-1);
   }
 #endif
 
