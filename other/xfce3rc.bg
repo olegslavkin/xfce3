@@ -93,7 +93,7 @@
 	SMB Браузър...
 	/usr/local/share/xfce/icons/xfsamba.xpm
 	xfsamba
-	Турсене на файл...
+	Търсене на файл...
 	/usr/local/share/xfce/icons/MagnifyGlas.xpm
 	xfglob
 	Монтирай CD
@@ -115,7 +115,7 @@
 	Diff tool (xfdiff)
 	/usr/local/share/xfce/icons/ForwardBackwardPagesBook.xpm
 	xfdiff
-	Увеличител
+	Лупа
 	/usr/local/share/xfce/icons/MagnifyGlas.xpm
 	xmag
 	Debugger
@@ -124,7 +124,7 @@
 	GNU Emacs
 	/usr/local/share/xfce/icons/Edit.xpm
 	emacs
-	Панел GNOME
+	Панел на GNOME
 	/usr/local/share/xfce/icons/Gnome-panel.xpm
 	panel
 [Menu3]
@@ -141,10 +141,10 @@
 	XFPager
 	/usr/local/share/xfce/icons/RayTracedGear.xpm
 	Module xfpager
-	Настройка на мишка
+	Настройка на мишката
 	/usr/local/share/xfce/icons/Mouse.xpm
 	xfmouse -i
-	Настройка на звук
+	Настройка на звука
 	/usr/local/share/xfce/icons/MicroPhonePro.xpm
 	xfsound -i
 	Декорация
@@ -152,7 +152,7 @@
 	xfbd -i
 	XFGnome
 	/usr/local/share/xfce/icons/Gnome-logo.xpm
-	Модул xfgnome
+	Module xfgnome
 	Gfx. Configuration
 	/usr/local/share/xfce/icons/BWwidgets.xpm
 	imlib_config
@@ -160,10 +160,10 @@
 	/usr/local/share/xfce/icons/KeysOnChain.xpm
 	xscreensaver-demo
 [Menu5]
-	Netscape Browser
+	Netscape браузър
 	/usr/local/share/xfce/icons/Netscape3.xpm
 	netscape
-	Netscape Мейл
+	Електронна поща
 	/usr/local/share/xfce/icons/News.xpm
 	netscape -mail
 [Menu6]
@@ -178,7 +178,7 @@
 	/usr/local/share/xfce/icons/Book.xpm
 	nedit
 [Menu8]
-	Боклук
+	Кошче за боклук
 	/usr/local/share/xfce/icons/RecycleLogo.xpm
 	xftrash
 [Menu9]
