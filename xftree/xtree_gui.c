@@ -1407,11 +1407,19 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_widget_show (menutop);
   win->menu = menutop;
 
-  
   toolbar = create_toolbar (win->top, ctree, win,FALSE);
   gtk_container_add (GTK_CONTAINER (handlebox[1]), toolbar);
   gtk_widget_show (toolbar);
   win->toolbar=toolbar;
+  
+  {
+    GtkStyle *Ostyle,*style;
+    Ostyle=gtk_widget_get_style (toolbar);
+    style = gtk_style_copy (Ostyle);
+    gtk_widget_set_style (win->status,style);
+    gtk_widget_ensure_style (win->status);
+   
+  }
   
   toolbar = create_toolbar (win->top, ctree, win,TRUE);
   gtk_container_add (GTK_CONTAINER (handlebox[2]), toolbar);
