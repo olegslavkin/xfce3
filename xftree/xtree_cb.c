@@ -1019,7 +1019,7 @@ cb_exec (GtkWidget * top,GtkWidget * ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  xf_dlg_execute (win->top,win->xap, NULL);
+  xf_dlg_execute (ctree,win->xap, NULL);
 }
 
 

@@ -181,10 +181,11 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 
   dl.check = check = gtk_check_button_new_with_label (_("Open in terminal"));
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
-  
-  dl.reg = gtk_check_button_new_with_label (_("Remember application"));
-  gtk_box_pack_start (GTK_BOX (box), dl.reg, FALSE, FALSE, 0);
-
+ 
+  if (file) { 
+   dl.reg = gtk_check_button_new_with_label (_("Remember application"));
+   gtk_box_pack_start (GTK_BOX (box), dl.reg, FALSE, FALSE, 0);
+  }
 
   gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.combo)->entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));

@@ -710,7 +710,7 @@ void cb_registered(GtkWidget * item, GtkWidget * ctree)
 "If you wish to edit the applications that are already registered,\n please look at ~/.xfce/xtree.reg.")
 	    );
 }
-		  
+	  
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;

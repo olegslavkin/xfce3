@@ -912,6 +912,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
       add_subtree (GTK_CTREE (ctree), child, child_en->path, 1, child_en->flags);
   } /* end for child */
 
+    /*fprintf(stderr,"dbg:(%s)rc=%d,tu=%d, isdir=%d\n",en->path,root_changed,tree_updated,en->type & FT_DIR);fflush(NULL);*/
   if ((root_changed || tree_updated) && (en->type & FT_DIR))
   {
     /*fprintf(stderr,"dbg:rc=%d,tu=%d\n",root_changed,tree_updated);fflush(NULL);*/
