@@ -988,6 +988,7 @@ HandleMapNotify ()
   if (Tmp_win->Desk == Scr.CurrentDesk)
     XMapWindow (dpy, Tmp_win->frame);
   XMapWindow (dpy, Tmp_win->w);
+  SetMapStateProp (Tmp_win, NormalState);
   MyXUngrabServer (dpy);
 
   Tmp_win->flags |= MAPPED;

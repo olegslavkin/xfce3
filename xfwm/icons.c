@@ -701,41 +701,13 @@ DeIconify (XfwmWindow * tmp_win)
 
   if ((tmp_win->Desk == Scr.CurrentDesk) && !(tmp_win->flags & SUPPRESSICON))
     Animate (tmp_win->icon_x_loc, tmp_win->icon_y_loc, tmp_win->icon_w_width, tmp_win->icon_w_height, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->flags & SHADED ? tmp_win->title_height + 2 * tmp_win->boundary_width : tmp_win->frame_height);
-  /* now de-iconify transients */
   for (t = Scr.XfwmRoot.next; t != NULL; t = t->next)
   {
     if ((t == tmp_win) || ((t->flags & TRANSIENT) && (t->transientfor == tmp_win->w)))
     {
-      t->flags |= MAPPED;
-      if (Scr.Hilite == t)
-	SetBorder (t, False, True, True, None);
-
-      XGetWindowAttributes (dpy, t->w, &winattrs);
-      eventMask = winattrs.your_event_mask;
-      XSelectInput (dpy, t->w, (eventMask & ~StructureNotifyMask));
-      if (t->Desk == Scr.CurrentDesk)
-      {
-	XMapWindow (dpy, t->frame);
-	t->flags |= MAP_PENDING;
-      }
-      XMapWindow (dpy, t->Parent);
       XMapWindow (dpy, t->w);
-      t->flags &= ~ICONIFIED;
-      t->flags &= ~ICON_UNMAPPED;
-      t->flags &= ~STARTICONIC;
-      RaiseWindow (t);
-      XSelectInput (dpy, t->w, eventMask);
-      SetMapStateProp (t, NormalState);
-      if (t->icon_w)
-	XUnmapWindow (dpy, t->icon_w);
-      if (t->icon_pixmap_w)
-	XUnmapWindow (dpy, t->icon_pixmap_w);
-      XFlush (dpy);
-      Broadcast (XFCE_M_DEICONIFY, 3, t->w, t->frame, (unsigned long) t, 0, 0, 0, 0);
     }
   }
-  FocusOn (tmp_win, False);
-  fast_process_expose ();
   return;
 }
 

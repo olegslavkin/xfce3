@@ -731,7 +731,7 @@ Bool GrabEm (int cursor)
   unsigned int mask;
   Cursor vs = None;
 
-  XFlush (dpy);
+  XSync (dpy, 0);
   vs = ((cursor >= 0) ? Scr.XfwmCursors[cursor] : None);
   /* move the keyboard focus prior to grabbing the pointer to
    * eliminate the enterNotify and exitNotify events that go
@@ -743,6 +743,7 @@ Bool GrabEm (int cursor)
 #else
   XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, CurrentTime);
 #endif
+  XSync (dpy, 0);
   mask = ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask;
   while ((i < 1000) && (val = XGrabPointer (dpy, Scr.Root, True, mask, GrabModeAsync, GrabModeAsync, Scr.Root, vs, CurrentTime) != GrabSuccess))
   {
@@ -774,6 +775,7 @@ UngrabEm (void)
 
   XSync (dpy, 0);
   XUngrabPointer (dpy, CurrentTime);
+  XSync (dpy, 0);
   if (Scr.PreviousFocus != NULL)
   {
     if ((Scr.PreviousFocus->flags & ICONIFIED) && (Scr.PreviousFocus->icon_w))
@@ -784,18 +786,14 @@ UngrabEm (void)
     {
       w = Scr.PreviousFocus->w;
     }
-    
-    if (w)
-    {
 #ifdef DEBUG
-      fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
+    fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
 #endif
 #ifdef REQUIRES_STASHEVENT
-      XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
+    XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
 #else
-      XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
+    XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
 #endif
-    }
     Scr.PreviousFocus = NULL;
   }
 }
