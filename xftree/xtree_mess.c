@@ -460,7 +460,7 @@ failed:
     return;
   }
   fprintf (defaults, "# file created by xftree, if removed xftree returns to defaults.\n");
-  fprintf (defaults, "# do a bitwise or for preferences with 0x%x to enable smaller dialogs.\n",SMALL_DIALOGS);
+  fprintf (defaults, "# do a bitwise or for preferences with %u (0x%x) to enable smaller dialogs.\n",(unsigned int)SMALL_DIALOGS,SMALL_DIALOGS);
   
   fprintf (defaults, "preferences : %d\n", preferences);
   fprintf (defaults, "smallTB : %d\n",stateTB[0] );

@@ -142,8 +142,25 @@ gint update_timer (GtkCTree * ctree)
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   status_node=win->status_node;
-  manage_timeout = (win->timer != 0);
 
+  /* has root directory vanished ? */
+  {
+    entry *en;
+    glob_t dirlist;
+    //root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), 
+		  GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list));
+    if(glob (en->path, GLOB_ERR, NULL, &dirlist)){
+	    globfree(&dirlist);
+	    /* clean history (what else has vanished?)*/
+	    while (win->gogo) win->gogo=popgo(win->gogo);
+	    /* go home */
+	    cb_go_home (NULL, ctree);
+	    return (TRUE);
+    } else globfree(&dirlist);
+  }
+
+  manage_timeout = (win->timer != 0);
   if (manage_timeout)
   {
     gtk_timeout_remove (win->timer);
@@ -474,7 +491,7 @@ update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
 }
 
 static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
-   GtkCTreeNode *child;
+   GtkCTreeNode *root,*child;
    entry *en,*p_en;
    status_info status_inf;
    cfg * win;
@@ -483,6 +500,14 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
    status_inf.howmany=0;
    status_inf.howmuch=0;
+   /* is the status node still there? */
+   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+   if (!gtk_ctree_find (ctree,root,node)){
+	   /*fprintf(stderr,"dbg:status node gone away.\n");*/
+	   node=root;
+	   win->status_node=root;
+   }
+ 
    p_en = gtk_ctree_node_get_row_data (ctree, node); 
    
   for (child=GTK_CTREE_ROW (node)->children;child!=NULL;child = GTK_CTREE_ROW (child)->sibling){
