@@ -880,29 +880,32 @@ Please type a computer name at location and hit RETURN", 684},
   {"File upload cancelled.", 717},
   {"Specified file does not exist", 718},
   {"Upload failed.", 719},
-  {"   Menu: %s   Parent: %s", 720},
-  {"Toplevel", 721},
-  {"None", 722},
-  {"Your changes will take effect on next startup", 723},
-  {"XFce User Menu Editor", 724},
-  {"Go to parent menu", 725},
-  {"Go to submenu", 726},
-  {"Type", 727},
-  {"Caption", 728},
-  {"Command", 729},
-  {"Edit item", 730},
-  {"Type : ", 731},
-  {"Caption : ", 732},
-  {"Add", 733},
-  {"Update", 734},
-  {"Save", 735},
-  {"Reset", 736},
+  {"User Menu Editor", 720},
+  {"Caption", 721},
+  {"Command", 722},
+  {"Move Up", 723},
+  {"Move Down", 724},
+  {"Add", 725},
+  {"Edit", 726},
+  {"Save", 727},
+  {"Reset", 728},
+  {"Edit Entry", 729},
+  {"Add Entry", 730},
+  {"Type: ", 731},
+  {"Caption: ", 732},
+  {"Command: ", 733},
+  {"Your changes will take effect on next startup", 734},
   {"\
 There are unsaved changes to the menu.\n\
 \n\
-Do you want to quit and lose the changes ?", 737},
-  {"Don't Quit", 738},
-  {"Quit, don't save", 739},
+Do you want to save the changes ?", 735},
+  {"Don't Quit", 736},
+  {"Do you want to delete this entry ?", 737},
+  {"\
+If you delete a submenu, all its entries and \n\
+submenus will also be deleted.\n\
+\n\
+Do you want to delete this submenu ?", 738},
 };
 
-int _msg_tbl_length = 739;
+int _msg_tbl_length = 738;
