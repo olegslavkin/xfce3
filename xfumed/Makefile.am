@@ -17,3 +17,5 @@ xfumed_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 ${X_LIBS} ${X_PRE_LIBS} -lXpm
 
 xfumed_DEPENDENCIES = ../libs/libxfcecore.la
+
+man_MANS=xfumed.1

@@ -805,11 +805,11 @@ XFCE_PACKAGE=xfce
 
 LIB_MAJOR=1
 LIB_MINOR=38
-LIB_TINY=11
+LIB_TINY=12
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.11
+XFCE_VERSION=3.8.12
 
 
 
@@ -5670,7 +5670,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 #
 INSTALL_SCRIPT='${INSTALL}'
 
-ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv zh zh_CN"
+ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN"
 # Extract the first word of "ranlib", so it can be a program name with args.
 set dummy ranlib; ac_word=$2
 echo $ac_n "checking for $ac_word""... $ac_c" 1>&6
@@ -11308,6 +11308,7 @@ test "$no_create" = yes || ${CONFIG_SHELL-/bin/sh} $CONFIG_STATUS || exit 1
 
 
 
+
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp
@@ -11323,6 +11324,7 @@ sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3r
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.uk.in >  other/xfce3rc.uk
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_CN.GB2312.in >  other/xfce3rc.zh_CN.GB2312
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_TW.Big5.in >  other/xfce3rc.zh_TW.Big5
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
@@ -11339,6 +11341,7 @@ sed -e "/DISTFILES =/r palettes/DISTFILES.in" palettes/Makefile.in > palettes/Ma
 sed -e "/DISTFILES =/r fonts/DISTFILES.in" fonts/Makefile.in > fonts/Makefile
 sed -e "/DISTFILES =/r sounds/DISTFILES.in" sounds/Makefile.in > sounds/Makefile
 sed -e "/DISTFILES =/r docs/DISTFILES.in" docs/Makefile.in > docs/Makefile
+
 
 
 
