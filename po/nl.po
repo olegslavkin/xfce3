@@ -548,9 +548,8 @@ msgid "KDE menu (xfmenu)"
 msgstr "KDE menu (xfmenu)"
 
 #: xfce/setup.c:1126
-#, fuzzy
 msgid "Debian menu (xfmenu)"
-msgstr "KDE menu (xfmenu)"
+msgstr "Debian menu (xfmenu)"
 
 #: xfce/setup.c:1138
 msgid "Palette"
