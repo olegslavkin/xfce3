@@ -193,7 +193,7 @@ gint update_timer (GtkCTree * ctree)
   {
     win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   }
-  update_status(status_node,ctree);
+  /*update_status(status_node,ctree);*/
   gtk_clist_thaw (GTK_CLIST (ctree));
   
   return (TRUE);
@@ -957,6 +957,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   if (root_changed) {
       /*fprintf(stderr,"dbg:doing sort\n");fflush(NULL);*/
       reset_icon(GTK_CTREE (ctree), node);
+      update_status(win->status_node,GTK_CTREE (ctree));
       gtk_ctree_sort_node (GTK_CTREE (ctree), node);
   }
  
