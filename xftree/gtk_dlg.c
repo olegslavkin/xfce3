@@ -375,7 +375,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   if (type & DLG_ENTRY_VIEW)
   {
     dl.entry = gtk_entry_new ();
-    gtk_entry_set_max_length (dl.entry,DLG_MAX);
+    gtk_entry_set_max_length ((GtkEntry *)dl.entry,DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     gtk_entry_set_editable (GTK_ENTRY (dl.entry), FALSE);
     /* do not uncomment the following line. Some versions
@@ -386,7 +386,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   {
     /*fprintf(stderr,"dbg2:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
     dl.entry = gtk_entry_new ();
-    gtk_entry_set_max_length (dl.entry,DLG_MAX);
+    gtk_entry_set_max_length ((GtkEntry *)dl.entry,DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
