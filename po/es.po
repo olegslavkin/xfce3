@@ -1229,7 +1229,7 @@ msgstr "Tocar ..."
 
 #: xftree/xtree_gui.c:164
 msgid "Symlink ..."
-msgstr "Enlaces simbólico ..."
+msgstr "Enlace simbólico ..."
 
 #: xfsamba/xfsamba_gui.c:1332 xftree/xtree_gui.c:165
 #: xftree/xtree_toolbar.c:103
@@ -2374,7 +2374,7 @@ msgstr "Regular"
 
 #: xfglob/xfglob.c:1362
 msgid "Symlink"
-msgstr "Enlaces"
+msgstr "Enlace simbólico"
 
 #: xfglob/xfglob.c:1362
 msgid "Socket"
