@@ -96,22 +96,32 @@ free_list (GList * list)
 }
 
 golist *pushgo(char *path,golist *thisgo){
+	char *p;
 	golist *lastgo,*gogo;
 	gogo=thisgo;	
 	lastgo=gogo;
 	gogo=(golist *)malloc(sizeof(golist));
-	if (!gogo){
+	p=g_strdup(path);
+	if ((!gogo)||(!p)){
 		gogo=lastgo;
+		if (p) g_free(p);
 		return gogo;
 	}
 	gogo->previous=lastgo;
-	gogo->path=(char *)malloc(strlen(path)+1);
+	if (strcmp(p,"/..")==0) strcpy(p,"/");
+	if ((strlen(p)>3)&&(p[strlen(p)-1]=='.')&&(p[strlen(p)-2]=='.')&&(p[strlen(p)-3]=='/')){
+		p[strlen(p)-3]=0;
+		if (strrchr(p,'/')) *(strrchr(p,'/'))=0;	
+		if ((strlen(p)==0) || (!strrchr(p,'/')))  strcpy(p,"/");		  
+	}
+	gogo->path=g_strdup(p);
 	if (!(gogo->path)){
 		free(gogo);
+		g_free(p);
 		gogo=lastgo;
 		return gogo;
 	}
-	strcpy(gogo->path,path);
+	g_free(p);
 	/*fprintf(stderr,"dbg: path pushed=%s\n",path);*/
 	return gogo;
 }
