@@ -636,6 +636,7 @@ GetWindowSizeHints (XfwmWindow * tmp)
   if (!tmp)
     return;
 
+  XSync (dpy, 0);
   if (!XGetWMNormalHints (dpy, tmp->w, &tmp->hints, &supplied))
   {
     tmp->hints.flags = 0;
