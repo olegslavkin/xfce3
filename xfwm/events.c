@@ -1073,6 +1073,10 @@ HandleUnmapNotify ()
     Scr.Hilite = NULL;
   }
 
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : HandleUnmapNotify (): About to unmap/destroy '%s'\n", Tmp_win->name);
+#endif
+
   if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
   {
 #ifdef DEBUG

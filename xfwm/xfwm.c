@@ -2145,16 +2145,22 @@ XfwmErrorHandler (Display * dpy, XErrorEvent * event)
   extern int last_event_type;
   char buf[64];
 
+#ifdef DEBUG
+  fprintf (stderr, "XfwmErrorHandler (): Entering routine\n");
+#else
   /* some errors are acceptable, mostly they're caused by
    * trying to update a lost  window */
   if ((event->error_code == BadWindow) || (event->request_code == X_GetGeometry) || (event->error_code == BadDrawable) || (event->request_code == X_SetInputFocus) || (event->request_code == X_GrabButton) || (event->request_code == X_ChangeWindowAttributes) || (event->request_code == X_InstallColormap))
     return 0;
-
+#endif
 
   XGetErrorText (dpy, event->error_code, buf, 63);
   xfwm_msg (ERR, "XfwmErrorHandler", "*** internal error ***");
   xfwm_msg (ERR, "XfwmErrorHandler", "%s", buf);
   xfwm_msg (ERR, "XfwmErrorHandler", "Request %d, Error %d, EventType: %d", event->request_code, event->error_code, last_event_type);
+#ifdef DEBUG
+  fprintf (stderr, "XfwmErrorHandler (): Leaving routine\n");
+#endif
   return 0;
 }
 

@@ -2,6 +2,8 @@
 #  include <config.h>
 #endif
 
+#ifndef __CONFIGURE_H__
+#define __CONFIGURE_H__
 /***************************************************************************
  * Please translate the strings into the language which you use for 
  * your pop-up menus.
@@ -27,4 +29,5 @@
 #undef BROKEN_SUN_HEADERS
 #endif /* (__alpha) */
 
+#endif
 /* end of configure.h */
