@@ -42,6 +42,7 @@ page.xpm \
 question.xpm \
 reload.xpm \
 socket.xpm \
+stale_lnk.xpm \
 tb_copy.xpm \
 tb_cut.xpm \
 tb_find.xpm \
