@@ -120,7 +120,7 @@ initialize_pager (void)
   unsigned long gcm;
 
   wm_del_win = XInternAtom (dpy, "WM_DELETE_WINDOW", False);
-
+  
   /* load the font */
   if (!uselabel || ((font = XLoadQueryFont (dpy, font_string)) == NULL))
   {

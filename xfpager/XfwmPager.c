@@ -37,6 +37,7 @@
 #include <X11/Xatom.h>
 #include <X11/Intrinsic.h>
 
+#include "constant.h"
 #include "utils.h"
 #include "module.h"
 #include "../xfwm/xfwm.h"
@@ -116,13 +117,57 @@ main (int argc, char **argv)
     fprintf (stderr, "%s Version %s should only be executed by xfwm!\n", MyName, VERSION);
     exit (1);
   }
+
+  /* Initialize X connection */
+  if (!(dpy = XOpenDisplay (display_name)))
+  {
+    fprintf (stderr, "%s: can't open display %s", MyName, XDisplayName (display_name));
+    exit (1);
+  }
+  x_fd = XConnectionNumber (dpy);
+
+  Scr.screen = DefaultScreen (dpy);
+  Scr.Root = RootWindow (dpy, Scr.screen);
+
+  if (Scr.Root == None)
+  {
+    fprintf (stderr, "%s: Screen %d is not valid ", MyName, (int) Scr.screen);
+    exit (1);
+  }
+  Scr.d_depth = DefaultDepth (dpy, Scr.screen);
+
+  /* Check number of desks */
   if (argc > 7)
   {
     desk2 = atoi (argv[7]) - 1;
     if (desk2 < 1)
       desk2 = 1;
-    else if (desk2 > 32)
-      desk2 = 32;
+    else if (desk2 > NBSCREENS)
+      desk2 = NBSCREENS;
+  }
+  else
+  {
+    Atom atype;
+    int aformat;
+    unsigned long nitems, bytes_remain;
+    unsigned char *prop;
+    Atom wm_workspace_count = XInternAtom (dpy, "_WIN_WORKSPACE_COUNT", False);
+    if ((XGetWindowProperty (dpy, Scr.Root, wm_workspace_count, 0L, 1L, False, XA_CARDINAL, &atype, &aformat, &nitems, &bytes_remain, &prop)) == Success)
+    {
+      if (prop != NULL)
+      {
+	desk2 = *(unsigned long *) prop - 1;
+	if (desk2 < 1)
+	  desk2 = 1;
+	if (desk2 > NBSCREENS)
+	  desk2 = NBSCREENS;
+	XFree (prop);
+      }
+      else
+	desk2 = NBSCREENS;
+    }
+    else
+      desk2 = NBSCREENS;
   }
 
   /* Dead pipe == XFwm died */
@@ -142,24 +187,6 @@ main (int argc, char **argv)
     CopyString (&Desks[i].label, line);
     CopyString (&Desks[i].Dcolor, PagerBack);
   }
-
-  /* Initialize X connection */
-  if (!(dpy = XOpenDisplay (display_name)))
-  {
-    fprintf (stderr, "%s: can't open display %s", MyName, XDisplayName (display_name));
-    exit (1);
-  }
-  x_fd = XConnectionNumber (dpy);
-
-  Scr.screen = DefaultScreen (dpy);
-  Scr.Root = RootWindow (dpy, Scr.screen);
-
-  if (Scr.Root == None)
-  {
-    fprintf (stderr, "%s: Screen %d is not valid ", MyName, (int) Scr.screen);
-    exit (1);
-  }
-  Scr.d_depth = DefaultDepth (dpy, Scr.screen);
 
   SetMessageMask (fd, XFCE_M_ADD_WINDOW | XFCE_M_CONFIGURE_WINDOW | XFCE_M_DESTROY_WINDOW | XFCE_M_FOCUS_CHANGE | XFCE_M_NEW_DESK | XFCE_M_RAISE_WINDOW | XFCE_M_LOWER_WINDOW | XFCE_M_ICONIFY | XFCE_M_ICON_LOCATION | XFCE_M_DEICONIFY | XFCE_M_SHADE | XFCE_M_UNSHADE | XFCE_M_ICON_NAME | XFCE_M_CONFIG_INFO | XFCE_M_END_CONFIG_INFO | XFCE_M_END_WINDOWLIST | XFCE_M_RESTACK);
   window_w = 40 * ((desk2 + 1) / Rows);
