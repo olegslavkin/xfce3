@@ -591,8 +591,6 @@ HandleKeyPress ()
  *	HandlePropertyNotify - property notify event handler
  *
  ***********************************************************************/
-#define MAX_NAME_LEN 200L	/* truncate to this many */
-#define MAX_ICON_NAME_LEN 200L	/* ditto */
 
 void
 HandlePropertyNotify ()
@@ -634,7 +632,7 @@ HandlePropertyNotify ()
   if ((!Tmp_win) || (XGetGeometry (dpy, Tmp_win->w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0))
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : Leaving HandlePropertyNotify ()\n");
+    fprintf (stderr, "xfwm : Leaving HandlePropertyNotify () : Not one of our windows\n");
 #endif
     return;
   }
@@ -1003,9 +1001,9 @@ HandleMapNotify ()
     XUnmapWindow (dpy, Tmp_win->icon_w);
   if (Tmp_win->icon_pixmap_w != None)
     XUnmapWindow (dpy, Tmp_win->icon_pixmap_w);
-  XMapSubwindows (dpy, Tmp_win->frame);
   if (Tmp_win->Desk == Scr.CurrentDesk)
     XMapWindow (dpy, Tmp_win->frame);
+  XMapWindow (dpy, Tmp_win->Parent);
   XMapWindow (dpy, Tmp_win->w);
   SetMapStateProp (Tmp_win, NormalState);
   XSync (dpy, 0);
@@ -1448,25 +1446,31 @@ HandleConfigureRequest ()
     if (otherEvent.xconfigurerequest.value_mask == cre->value_mask)
     {
        cre = &otherEvent.xconfigurerequest;
+#ifdef DEBUG
+       fprintf (stderr, "xfwm : HandleConfigureRequest () : Skipping event\n");
+#endif
     }
     else 
     {
+#ifdef DEBUG
+       fprintf (stderr, "xfwm : HandleConfigureRequest () : Putting back event\n");
+#endif
        XPutBackEvent(dpy, &otherEvent);
        break;
     }
   }
   
-  if (XFindContext (dpy, cre->window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+  if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
   {
     Tmp_win = NULL;
   }
   
-  if (!Tmp_win || (Tmp_win->icon_w == cre->window))
+  if (!Tmp_win || (Tmp_win->icon_w == Event.xany.window))
   {
     xwcm = cre->value_mask & (CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
     xwc.x = cre->x;
     xwc.y = cre->y;
-    if ((Tmp_win) && ((Tmp_win->icon_w == cre->window)))
+    if ((Tmp_win) && ((Tmp_win->icon_w == Event.xany.window)))
     {
       Tmp_win->icon_xl_loc = cre->x;
       Tmp_win->icon_x_loc = cre->x + (Tmp_win->icon_w_width - Tmp_win->icon_p_width) / 2;

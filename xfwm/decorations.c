@@ -121,7 +121,7 @@ GetMwmHints (XfwmWindow * t)
   if (t->mwm_hints)
     XFree ((char *) t->mwm_hints);
   t->mwm_hints = NULL;
-  if (XGetWindowProperty (dpy, t->w, _XA_MwmAtom, 0L, 20L, False, _XA_MwmAtom, &actual_type, &actual_format, &nitems, &bytesafter, (unsigned char **) &t->mwm_hints) == Success && t->mwm_hints)
+  if ((XGetWindowProperty (dpy, t->w, _XA_MwmAtom, 0L, 20L, False, _XA_MwmAtom, &actual_type, &actual_format, &nitems, &bytesafter, (unsigned char **) &t->mwm_hints) == Success) && (t->mwm_hints))
   {
     if (nitems >= PROP_MOTIF_WM_HINTS_ELEMENTS)
       return;
