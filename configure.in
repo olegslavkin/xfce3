@@ -56,8 +56,12 @@ AC_PATH_X
 AC_PATH_XTRA
 
 dnl Include X libs in checks
+if test -n "$x_includes"; then
 CPPFLAGS="${CPPFLAGS} -I$x_includes"
+fi
+if test -n "$x_libraries"; then
 LDFLAGS="${LDFLAGS} -L$x_libraries"
+fi
 
 AC_TYPE_SIGNAL
 
