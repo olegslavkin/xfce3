@@ -83,8 +83,8 @@ create_popup_item (GtkWidget * toplevel, gint nbr_menu, gint nbr_item)
   popup_menus[nbr_menu].popup_buttons[nbr_item].command = NULL;
 
   popup_menus[nbr_menu].popup_buttons[nbr_item].item_button = gtk_button_new ();
-  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, "popup_button");
-  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_button", popup_menus[nbr_menu].popup_buttons[nbr_item].item_button);
+  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, "menuitem");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "menuitem", popup_menus[nbr_menu].popup_buttons[nbr_item].item_button);
   gtk_button_set_relief ((GtkButton *) popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, GTK_RELIEF_NONE);
   gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button);
 
