@@ -284,7 +284,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   if ((Win) && (Win != &Scr.XfwmRoot))
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to '%s'\n", Win->name);
+    fprintf (stderr, "xfwm : RevertFocus () : Setting focus\n");
 #endif
     SetFocus (Win->w, Win, False, False);
 #ifdef DEBUG
@@ -296,7 +296,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   if ((fallback_to_itself) && AcceptInput(Tmp_win))
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself='%s'\n", Tmp_win->name);
+    fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself\n");
 #endif
     SetFocus (Tmp_win->w, Tmp_win, False, False);
 #ifdef DEBUG
@@ -368,8 +368,6 @@ Destroy (XfwmWindow * Tmp_win)
     colormap_win = NULL;
   }
 
-  XUnmapWindow (dpy, Tmp_win->frame);
-  XSync (dpy, 0);
   Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
 
   if (Scr.LastWindowRaised == Tmp_win)
@@ -385,6 +383,11 @@ Destroy (XfwmWindow * Tmp_win)
   if (Scr.Hilite == Tmp_win)
   {
     Scr.Hilite = NULL;
+  }
+
+  if (Scr.Focus == Tmp_win)
+  {
+    RevertFocus (Tmp_win, False);
   }
 
   if (Tmp_win->icon_w != None)
@@ -447,15 +450,8 @@ Destroy (XfwmWindow * Tmp_win)
     }
   }
 #ifdef DEBUG
-  fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
+  fprintf (stderr, "xfwm : Destroy () : Freeing data\n");
 #endif
-  XDestroyWindow (dpy, Tmp_win->frame);
-  XSync (dpy, 0);
-
-  if (Scr.Focus == Tmp_win)
-  {
-    RevertFocus (Tmp_win, False);
-  }
 
   free_window_names (Tmp_win, True, True);
   if (Tmp_win->wmhints)
@@ -469,6 +465,12 @@ Destroy (XfwmWindow * Tmp_win)
 
   if (Tmp_win->cmap_windows)
     XFree (Tmp_win->cmap_windows);
+
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
+#endif
+  XDestroyWindow (dpy, Tmp_win->frame);
+  XSync (dpy, 0);
 
   free (Tmp_win);
 #ifdef DEBUG

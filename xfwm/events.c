@@ -664,7 +664,7 @@ HandlePropertyNotify ()
 
   case XA_WM_HINTS:
     if (Tmp_win->wmhints)
-      XFree ((char *) Tmp_win->wmhints);
+      XFree (Tmp_win->wmhints);
     Tmp_win->wmhints = XGetWMHints (dpy, Event.xany.window);
 
     if (Tmp_win->wmhints == NULL)

@@ -336,8 +336,9 @@ AddWindow (Window w)
   valuemask = CWCursor | CWEventMask;
   attributes.cursor = Scr.XfwmCursors[DEFAULT];
   attributes.event_mask = (SubstructureRedirectMask |
-			   /* ButtonPressMask | ButtonReleaseMask | */
-			   VisibilityChangeMask | EnterWindowMask | LeaveWindowMask | ExposureMask);
+			   VisibilityChangeMask | 
+			   EnterWindowMask | LeaveWindowMask | 
+			   ExposureMask);
 
   tmp_win->frame = XCreateWindow (dpy, Scr.Root, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, 0, CopyFromParent, InputOutput, CopyFromParent, valuemask, &attributes);
 

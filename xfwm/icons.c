@@ -693,8 +693,6 @@ void
 DeIconify (XfwmWindow * tmp_win)
 {
   XfwmWindow *t;
-  XWindowAttributes winattrs;
-  unsigned long eventMask;
 
   if (!tmp_win)
     return;
