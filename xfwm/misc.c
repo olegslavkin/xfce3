@@ -78,6 +78,8 @@
 #define MAX_ICON_LEN 80
 #endif
 
+#define DEBUG
+
 char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
 char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
@@ -270,14 +272,23 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   if ((!Tmp_win) || (Scr.Focus != Tmp_win))
     return;
   
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : RevertFocus () : Entering routine\n");
+#endif
   XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
   if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) & Win) == XCNOENT)
   {
     Win = NULL;
   }
-  if ((Win) && AcceptInput (Win))
+  if ((Win) && (Win != Tmp_win) && AcceptInput (Win))
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
+#endif
     SetFocus (Win->w, Win, False, False);
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+#endif
     return;
   }
 
@@ -289,17 +300,35 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
  
   if (Win)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to '%s'\n", Win->name);
+#endif
     SetFocus (Win->w, Win, True, False);
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+#endif
     return;
   }
 
   if ((fallback_to_itself) && AcceptInput(Tmp_win))
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself='%s'\n", Win->name);
+#endif
     SetFocus (Tmp_win->w, Tmp_win, True, False);
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+#endif
     return;
   }
-
+  XBell (dpy, Scr.screen);
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : RevertFocus () : Setting focus to NoFocusWin\n");
+#endif
   SetFocus (Scr.NoFocusWin, NULL, False, False);
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+#endif
 }
 /***************************************************************************
  *
@@ -316,7 +345,6 @@ Destroy (XfwmWindow * Tmp_win)
   if (!Tmp_win)
     return;
 
-  XSelectInput (dpy, Tmp_win->w, NoEventMask);
   if (Tmp_win->prev != NULL)
     Tmp_win->prev->next = Tmp_win->next;
   if (Tmp_win->next != NULL)
@@ -338,21 +366,29 @@ Destroy (XfwmWindow * Tmp_win)
     Scr.Hilite = NULL;
   }
 
+  if (Scr.PreviousFocus == Tmp_win)
+  {
+    Scr.PreviousFocus = NULL;
+  }
+
+  if (ButtonWindow == Tmp_win)
+  {
+    ButtonWindow = NULL;
+  }
+
+  if (Scr.pushed_window == Tmp_win)
+  {
+    Scr.pushed_window = NULL;
+  }
+
+  if (Tmp_win == colormap_win)
+  {
+    colormap_win = NULL;
+  }
+
   XUnmapWindow (dpy, Tmp_win->frame);
   XSync (dpy, 0);
   Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
-
-  if (Scr.PreviousFocus == Tmp_win)
-    Scr.PreviousFocus = NULL;
-
-  if (ButtonWindow == Tmp_win)
-    ButtonWindow = NULL;
-
-  if (Scr.pushed_window == Tmp_win)
-    Scr.pushed_window = NULL;
-
-  if (Tmp_win == colormap_win)
-    colormap_win = NULL;
 
   if (Scr.Focus == Tmp_win)
   {
@@ -430,6 +466,7 @@ Destroy (XfwmWindow * Tmp_win)
 
   if (Tmp_win->cmap_windows != (Window *) NULL)
     XFree (Tmp_win->cmap_windows);
+
   free (Tmp_win);
   XSync (dpy, 0);
   return;

@@ -269,9 +269,7 @@ int
 main (int argc, char **argv)
 {
   XSetWindowAttributes attributes;	/* attributes for create windows */
-  /*
-     XIconSize iconsize[1];
-   */
+  XIconSize *iconsize;
   void enterAlarm (int);
   int i;
   extern int x_fd;
@@ -590,13 +588,17 @@ main (int argc, char **argv)
   XChangeProperty (dpy, Scr.Root, _WIN_DESKTOP_BUTTON_PROXY, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &Scr.GnomeProxyWin, 1);
   XChangeProperty (dpy, Scr.GnomeProxyWin, _WIN_DESKTOP_BUTTON_PROXY, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &Scr.GnomeProxyWin, 1);
 
-  /* Causes some Java apps and Compupic to crash... Such a pity ! 
-     iconsize[0].min_width  = iconsize[0].max_width = 48;
-     iconsize[0].min_height = iconsize[0].max_height = 48;
-     iconsize[0].width_inc  = iconsize[0].height_inc = 1;
-     XSetIconSizes (dpy, Scr.Root, &iconsize[0], 1);
-   */
-
+  if ((iconsize = XAllocIconSize()) != NULL)
+  {
+    iconsize->min_width  = 48;
+    iconsize->max_width  = 50;
+    iconsize->min_height = 48;
+    iconsize->max_height = 50;
+    iconsize->width_inc  = 1;
+    iconsize->height_inc = 1;
+    XSetIconSizes (dpy, Scr.Root, iconsize, 1);
+    XFree (iconsize);
+  }
   CreateCursors ();
   InitVariables ();
   InitEventHandlerJumpTable ();
