@@ -127,5 +127,6 @@ palettes_DATA=\
  Win \
  Win2 \
  Win3 \
+ XLight \
  Xfce-1 \
  Xfce-2
