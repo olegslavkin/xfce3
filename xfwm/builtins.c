@@ -1863,14 +1863,14 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
     font_num = XFontsOfFontSet (fl->WindowFont.fontset, &fs_list, &fontset_namelist);
     fl->WindowFont.font = fs_list[0];
     for (i = 1; i < font_num; i++)
-      if (fl->WindowFont.font->ascent < fs_list[i]->ascent + 2)
-	fl->WindowFont.font->ascent = fs_list[i]->ascent + 2;
+      if (fl->WindowFont.font->ascent < fs_list[i]->ascent + 1)
+	fl->WindowFont.font->ascent = fs_list[i]->ascent + 1;
   }
 #ifdef HAVE_X11_XFT_XFT_H
   else if ((enable_xft) && (fl->WindowFont.xftfont))
   {
     fl->WindowFont.height = (fl->WindowFont.xftfont)->ascent + (fl->WindowFont.xftfont)->descent;
-    fl->WindowFont.y = (fl->WindowFont.xftfont)->ascent + 2;
+    fl->WindowFont.y = (fl->WindowFont.xftfont)->ascent + 1;
     extra_height = fl->TitleHeight;
     fl->TitleHeight = (fl->WindowFont.xftfont)->ascent + (fl->WindowFont.xftfont)->descent + 4;
   }
@@ -1878,14 +1878,14 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
   {
     fl->WindowFont.height = (fl->WindowFont.font)->ascent + (fl->WindowFont.font)->descent;
 
-    fl->WindowFont.y = (fl->WindowFont.font)->ascent + 2;
+    fl->WindowFont.y = (fl->WindowFont.font)->ascent + 1;
     extra_height = fl->TitleHeight;
     fl->TitleHeight = (fl->WindowFont.font)->ascent + (fl->WindowFont.font)->descent + 4;
   }
 #else
   fl->WindowFont.height = (fl->WindowFont.font)->ascent + (fl->WindowFont.font)->descent;
 
-  fl->WindowFont.y = (fl->WindowFont.font)->ascent + 2;
+  fl->WindowFont.y = (fl->WindowFont.font)->ascent + 1;
   extra_height = fl->TitleHeight;
   fl->TitleHeight = (fl->WindowFont.font)->ascent + (fl->WindowFont.font)->descent + 4;
 #endif

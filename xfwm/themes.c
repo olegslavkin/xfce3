@@ -3486,7 +3486,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
         {
           NewFontAndColor (0, BlackPixel (dpy, Scr.screen), BackColor);
         }
-        XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off + 1, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
+        XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off + 1, GetDecor (t, WindowFont.y) + 2, t->name, strlen (t->name));
       }
       if (GetDecor (t, WindowFont.font))
       {
@@ -3496,7 +3496,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
       {
         NewFontAndColor (0, Forecolor, BackColor);
       }
-      XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y), t->name, strlen (t->name));
+      XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
     }
 #ifdef HAVE_X11_XFT_XFT_H
     else if (enable_xft && GetDecor (t, WindowFont.xftfont))
@@ -3521,7 +3521,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
         color_fg.color.blue = dummyc.blue;
         color_fg.color.alpha = 0xffff;
         color_fg.pixel = Forecolor;
-        XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off + 1, GetDecor (t, WindowFont.y) + 1, (XftChar8 *) t->name, strlen (t->name));
+        XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off + 1, GetDecor (t, WindowFont.y) + 2, (XftChar8 *) t->name, strlen (t->name));
       }
       dummyc.pixel = Forecolor;
       XQueryColor (dpy, attributes.colormap, &dummyc);
@@ -3530,7 +3530,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
       color_fg.color.blue = dummyc.blue;
       color_fg.color.alpha = 0xffff;
       color_fg.pixel = Forecolor;
-      XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off, GetDecor (t, WindowFont.y), (XftChar8 *) t->name, strlen (t->name));
+      XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off, GetDecor (t, WindowFont.y) + 1, (XftChar8 *) t->name, strlen (t->name));
 
       XftDrawDestroy (xftdraw);
     }
@@ -3547,7 +3547,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
         {
           NewFontAndColor (0, BlackPixel (dpy, Scr.screen), BackColor);
         }
-        XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off + 1, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
+        XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off + 1, GetDecor (t, WindowFont.y) + 2, t->name, strlen (t->name));
       }
       if (GetDecor (t, WindowFont.font))
       {
@@ -3557,7 +3557,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
       {
         NewFontAndColor (0, Forecolor, BackColor);
       }
-      XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y), t->name, strlen (t->name));
+      XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
     }
   }
 }
