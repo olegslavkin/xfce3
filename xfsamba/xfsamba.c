@@ -64,7 +64,6 @@
 #include "icons/warning.xpm"
 #include "icons/xfsamba.xpm"
 
-int preferences=0x0;
 
 void
 xfsamba_abort (int why)
