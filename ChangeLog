@@ -4,6 +4,26 @@
 
 2001-11-17  xfce
 
+	* other/xinitrc, other/xinitrc.in, other/xinitrc.mwm,
+	other/xinitrc.mwm.in, palettes/Metal, palettes/Win, palettes/Win2,
+	scripts/xfce_upgrade, scripts/xfce_upgrade.in: Update xfce_upgrade
+	script Change gtk engine to default "gtk" in some palettes
+
+2001-11-17  xfce
+
+	* configure, configure.in, xfwm/themes.c: Improve trench theme Fix
+	install problem with Ukrainian xtion
+
+2001-11-17  xfce
+
+	* xfwm/themes.c: Set correct background color for bitmap icons
+
+2001-11-17  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2001-11-17  xfce
+
 	* xfwm/builtins.c: Greatly improve the speed of the "iconify_all()"
 	function
 
