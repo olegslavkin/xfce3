@@ -461,6 +461,7 @@ ok_dialog (GtkWidget * widget, gpointer data)
 
   s = gtk_entry_get_text (GTK_ENTRY (user));
   t = gtk_entry_get_text (GTK_ENTRY (passwd));
+  if (!strlen(s)) s="Guest";
 
   if (thisN)
   {
@@ -470,7 +471,7 @@ ok_dialog (GtkWidget * widget, gpointer data)
     if (strlen (t) > 0)
       sprintf (thisN->password, "%s%%%s", s, t);
     else
-      sprintf (thisN->password, "%s", s);
+      sprintf (thisN->password, "%s%%", s);
   }
 
   if (passwd_caso == 1)
@@ -497,7 +498,7 @@ ok_dialog (GtkWidget * widget, gpointer data)
     if (strlen (t) > 0)
       sprintf (default_user, "%s%%%s", s, t);
     else
-      sprintf (default_user, "%s", s);
+      sprintf (default_user, "%s%%", s);
     gtk_widget_destroy (dialog);
   }
 }
@@ -564,9 +565,13 @@ passwd_dialog (int caso)
   user = gtk_entry_new ();
   if ((thisN) && (thisN->password))
   {
-    strtok (thisN->password, "\%");
-    if (strstr (thisN->password, "Guest") == NULL)
-      gtk_entry_set_text ((GtkEntry *) user, thisN->password);
+    char *c;
+    c=g_strdup(thisN->password);
+    if (c){ 
+     strtok (c, "\%");
+     if (strstr (c, "Guest") == NULL) gtk_entry_set_text ((GtkEntry *) user, c);
+     g_free(c);
+    }
   }
   gtk_box_pack_start (GTK_BOX (hbox), user, EXPAND, NOFILL, 0);
   gtk_signal_connect (GTK_OBJECT (user), "key-press-event", GTK_SIGNAL_FUNC (entry_keypress), NULL);
