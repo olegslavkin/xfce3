@@ -198,7 +198,9 @@ autotype_t autotype[]= {
      {N_("Open with ..."), (gpointer) cb_tar_open_with, 0}
    
 #define FILE_MENU \
-     {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
+     {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK}
+
+#define REGISTER_MENU \
      {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK}
      
 #define SIMPLE_GOTO_MENU \
@@ -751,6 +753,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
     menu_entry mlist[] = {
       MAINF_ICON_VIEW,
       MAINF_DIRECTORY_MENU,
+      REGISTER_MENU,
       MAINF_MENU,
       DIR_OR_FILE_MENU,
       NONE_MENU
@@ -1044,6 +1047,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     AUTOTYPE_MENU,
     MAINF_DIRECTORY_MENU,
     FILE_MENU,
+    REGISTER_MENU,
     AUTOTAR_MENU,
     DIRECTORY_MENU,
     MAINF_MENU,
@@ -1069,6 +1073,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   menu_entry file_mlist[] = {
      AUTOTYPE_MENU,
      FILE_MENU,
+     REGISTER_MENU,
      DIR_FILE_MENU,
      MAINF_MENU,
      DIR_OR_FILE_MENU,

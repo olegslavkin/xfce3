@@ -1,4 +1,4 @@
-
+- allow for multiple programs to be registered for a single filetype 
 - incorporate xfglob results as main level tree entries (or extend
   xfglob to use stuff from xftree, this would be xfglob stuff then)
 - In xtree_tar.c, when determining "mode", do a search of all open xfree
