@@ -17,7 +17,7 @@
  */
 
 /* xfmenu
- * version 2.0-pre2
+ * version 2.0-pre3
  *
  * Generates an xfwm menu structure from GNOME or KDE
  * "*.desktop" (or "*.kdelnk") files.
@@ -103,33 +103,6 @@ int xfmenu (MenuOptions options);
 void quit_xfmenu (void);
 
 /*------------------*
- * main 
- *------------------*/
-int
-main (int argc, char **argv)
-{
-  MenuOptions options;
-  int n = 0;
-
-  /* initialize communication with xfwm */
-  init_xfmenu (argc, argv);
-
-  /* parse command line options */
-  options = get_options (argv);
-
-  /* native language support */
-  init_nls ();
-
-  /* generate the menu(s) */
-  n = xfmenu (options);
-
-  /* close communication with xfwm */
-  quit_xfmenu ();
-
-  return n;
-}
-
-/*------------------*
  * global variables 
  *------------------*/
 
@@ -144,8 +117,10 @@ char *current_menu_root = NULL;
 GList *menunames_list = NULL;
 
 /* used for translations */
-char *lcmessages;
-char *lang;
+char *lcmessages = NULL;
+char *lang = NULL;
+char *lcmessages_base = NULL;
+char *lang_base = NULL;
 
 /*------------------*
  * functions 
@@ -218,24 +193,30 @@ get_options (char **argv)
 void
 init_nls (void)
 {
+  char *temp;
+  
   /* these are global variables so they can be used easily in many places */
-  lcmessages = g_getenv ("LC_MESSAGES");
-  lang = g_getenv ("LANG");
-
-  if (lcmessages && !lang)
+  temp = g_getenv ("LC_MESSAGES");
+  if (temp)
     {
-      char temp[MAXSTRLEN];
       char *end;
-
-      strcpy (temp, lcmessages);
-
-      if ((end = strchr (temp, '_')))
-	{
-	  *end = '\0';
-	  lang = g_strdup (temp);
-	}
-      else
-	lang = lcmessages;
+      lcmessages=g_strndup (temp, 5);
+      lcmessages_base = g_strdup (lcmessages);
+      if ((end = strchr (lcmessages_base, '_')))
+        {
+          *end = '\0';
+        }
+    }
+  temp = g_getenv ("LANG");
+  if (temp)
+    {
+      char *end;
+      lcmessages=g_strndup (temp, 5);
+      lcmessages_base = g_strdup (lcmessages);
+      if ((end = strchr (lcmessages_base, '_')))
+        {
+          *end = '\0';
+        }
     }
 }
 
@@ -260,22 +241,22 @@ get_menu_dirs (MenuType mtype)
 	  menupath = g_strconcat (kdedir, KMENUPATH, NULL);
 	  kdedirs = g_list_append (kdedirs, menupath);
 	}
-      if (!(kdedir) || strcmp ("/usr", kdedir) != 0)
+      if (!(kdedir) || (strcmp ("/usr", kdedir) != 0))
 	{
 	  menupath = g_strconcat ("/usr", KMENUPATH, NULL);
 	  kdedirs = g_list_append (kdedirs, menupath);
 	}
-      if (!(kdedir) || strcmp ("/usr/local", kdedir) != 0)
+      if (!(kdedir) || (strcmp ("/usr/local", kdedir) != 0))
 	{
 	  menupath = g_strconcat ("/usr/local", KMENUPATH, NULL);
 	  kdedirs = g_list_append (kdedirs, menupath);
 	}
-      if (!(kdedir) || strcmp ("/opt/kde", kdedir) != 0)
+      if (!(kdedir) || (strcmp ("/opt/kde", kdedir) != 0))
 	{
 	  menupath = g_strconcat ("/opt/kde", KMENUPATH, NULL);
 	  kdedirs = g_list_append (kdedirs, menupath);
 	}
-      if (!(kdedir) || strcmp ("/opt/kde2", kdedir) != 0)
+      if (!(kdedir) || (strcmp ("/opt/kde2", kdedir) != 0))
 	{
 	  menupath = g_strconcat ("/opt/kde2", KMENUPATH, NULL);
 	  kdedirs = g_list_append (kdedirs, menupath);
@@ -301,17 +282,17 @@ get_menu_dirs (MenuType mtype)
 	  menupath = g_strconcat (gnomedir, GMENUPATH, NULL);
 	  gnomedirs = g_list_append (gnomedirs, menupath);
 	}
-      if (!(gnomedir) || strcmp ("/usr", gnomedir) != 0)
+      if (!(gnomedir) || (strcmp ("/usr", gnomedir) != 0))
 	{
 	  menupath = g_strconcat ("/usr", GMENUPATH, NULL);
 	  gnomedirs = g_list_append (gnomedirs, menupath);
 	}
-      if (!(gnomedir) || strcmp ("/usr/local", gnomedir) != 0)
+      if (!(gnomedir) || (strcmp ("/usr/local", gnomedir) != 0))
 	{
 	  menupath = g_strconcat ("/usr/local", GMENUPATH, NULL);
 	  gnomedirs = g_list_append (gnomedirs, menupath);
 	}
-      if (!(gnomedir) || strcmp ("/opt/gnome", gnomedir) != 0)
+      if (!(gnomedir) || (strcmp ("/opt/gnome", gnomedir) != 0))
 	{
 	  menupath = g_strconcat ("/opt/gnome", GMENUPATH, NULL);
 	  gnomedirs = g_list_append (gnomedirs, menupath);
@@ -332,14 +313,19 @@ select_subs (const struct dirent *dentry)
   struct stat filestat;
   char *name = dentry->d_name;
 
-  if (strcmp (name, ".") == 0 || strcmp (name, "..") == 0 ||
-      stat (name, &filestat) == -1)
-    return 0;
-
-  if (S_ISDIR (filestat.st_mode) && *name != '.')
-    return 1;
+  if ((strcmp (name, ".") == 0) || (strcmp (name, "..") == 0) ||
+      (stat (name, &filestat) == -1))
+    {
+      return 0;
+    }
+  if (S_ISDIR (filestat.st_mode) && (*name != '.'))
+    {
+      return 1;
+    }
   else
-    return 0;
+    {
+      return 0;
+    }
 }
 
 static int
@@ -478,10 +464,11 @@ new_menu_entry (EntryType etype)
 }
 
 int
-parse_line (const char *line, char key[], char value[])
+parse_line (const char *line, char **key, char **locale, char **value)
 {
   char *token = strchr (line, '=');
   char *temp;
+  char *bracket_open, *bracket_close;
 
   if (token == NULL)
     return 0;
@@ -489,14 +476,21 @@ parse_line (const char *line, char key[], char value[])
   temp = g_strndup (line, token - line);
   g_strstrip (temp);
 
-  strcpy (key, temp);
+  if ((bracket_open = strchr(temp, '[')) && (bracket_close = strchr(bracket_open, ']')))
+    {
+      *key = g_strndup (temp, bracket_open - temp);
+      bracket_open++;
+      *locale = g_strndup (bracket_open, MIN (bracket_close - bracket_open, 5));
+    }
+  else
+    {
+      *key = g_strdup (temp);
+      *locale = NULL;
+    }
   g_free (temp);
 
-  temp = g_strdup (token + 1);
-  g_strstrip (temp);
-
-  strcpy (value, temp);
-  g_free (temp);
+  *value = g_strdup (token + 1);
+  g_strstrip (*value);
 
   return 1;
 }
@@ -531,18 +525,20 @@ make_menu_entry (char *filename, MenuType etype)
 
   while (fgets (line, MAXSTRLEN - 1, fp))
     {
-      char key[MAXSTRLEN], value[MAXSTRLEN];
-      char *token, *end;
+      char *key, *value, *locale;
+      char *end;
 
       if ((end = strchr (line, '\n')) != NULL)
 	*end = '\0';
 
-      if (parse_line (line, key, value) == 0)
+      if (parse_line (line, &key, &locale, &value) == 0)
 	continue;
 
-      if (name == NULL && strcmp ("Name", key) == 0)
+      if ((!name) && (strcmp ("Name", key) == 0) && (!locale))
 	{
-	  name = g_strdup (value);
+	  name = value;
+	  g_free (key);
+	  g_free (locale);
 	  continue;
 	}
 
@@ -551,51 +547,80 @@ make_menu_entry (char *filename, MenuType etype)
        * if only Name[LANG] is found this will 
        * be used
        */
-      if (tname_lcmessages == NULL)
+      if ((strcmp ("Name", key) == 0) && (locale))
 	{
-	  if (lcmessages)
-	    {
-	      token = g_strconcat ("Name[", lcmessages, "]", NULL);
-	      if (strcmp (token, key) == 0)
-		{
-		  tname_lcmessages = g_strdup (value);
-		  g_free (token);
-		  continue;
-		}
-	      g_free (token);
-	    }
+          if (!tname_lcmessages)
+            {
+	      if (lcmessages)
+	        {
+	          if (strcmp (lcmessages, locale) == 0)
+		    {
+		      tname_lcmessages = value;
+		      g_free (key);
+                      g_free (locale);
+		      continue;
+		    }
+	        }
 
-	  if (lang)
-	    {
-	      token = g_strconcat ("Name[", lang, "]", NULL);
-	      if (strcmp (token, key) == 0)
-		{
-		  tname_lang = g_strdup (value);
-		  g_free (token);
-		  continue;
-		}
-	      g_free (token);
-	    }
+	      if (lcmessages_base)
+	        {
+	          if (strcmp (lcmessages_base, locale) == 0)
+		    {
+		      tname_lcmessages = value;
+		      g_free (key);
+                      g_free (locale);
+		      continue;
+		    }
+	        }
+            }
+          if (!tname_lang)
+            {
+	      if (lang)
+	        {
+	          if (strcmp (lang, locale) == 0)
+		    {
+		      tname_lang = value;
+		      g_free (key);
+                      g_free (locale);
+		      continue;
+		    }
+	        }
+
+	      if (lang_base)
+	        {
+	          if (strcmp (lang_base, locale) == 0)
+		    {
+		      tname_lang = value;
+		      g_free (key);
+                      g_free (locale);
+		      continue;
+		    }
+	        }
+           }
 	}
 
-      if (etype == ITEM && cmd == NULL && strcmp ("Exec", key) == 0)
+      if ((etype == ITEM) && (!cmd) && (strcmp ("Exec", key) == 0))
 	{
-	  cmd = g_strdup (value);
+	  cmd = value;
+	  if (key)    g_free (key);
+          if (locale) g_free (locale);
 	  continue;
 	}
 
-      if (etype == ITEM && terminal == NULL && strcmp ("Terminal", key) == 0)
+      if ((etype == ITEM) && (!terminal) && (strcmp ("Terminal", key) == 0))
 	{
-	  terminal = g_strdup (value);
+	  terminal = value;
+	  if (key)    g_free (key);
+          if (locale) g_free (locale);
 	  continue;
 	}
 
       /* are we there yet ? */
-      if (!(name == NULL || tname_lcmessages == NULL || tname_lang == NULL))
+      if ((name) && ((tname_lcmessages) || (tname_lang)))
 	{
 	  if (etype == SUB)
 	    break;
-	  else if (!(cmd == NULL || terminal == NULL))
+	  else if ((cmd) && (terminal))
 	    break;
 	}
     }
@@ -606,20 +631,24 @@ make_menu_entry (char *filename, MenuType etype)
   if (etype == SUB)
     {
       if (!(name) && !(tname_lcmessages) && !(tname_lang))
-	entry->name = g_strdup (g_basename (entry->dirname));
+        {
+	  entry->name = g_strdup (g_basename (entry->dirname));
+        }
       else if (tname_lcmessages)
 	{
 	  entry->name = tname_lcmessages;
-	  g_free (tname_lang);
-	  g_free (name);
+	  if (tname_lang) g_free (tname_lang);
+	  if (name)       g_free (name);
 	}
       else if (tname_lang)
 	{
 	  entry->name = tname_lang;
-	  g_free (name);
+	  if (name) g_free (name);
 	}
       else
-	entry->name = name;
+        {
+	  entry->name = name;
+	}
 
       return entry;
     }
@@ -633,13 +662,13 @@ make_menu_entry (char *filename, MenuType etype)
   if (tname_lcmessages)
     {
       entry->name = tname_lcmessages;
-      g_free (tname_lang);
-      g_free (name);
+      if (tname_lang) g_free (tname_lang);
+      if (name) g_free (name);
     }
   else if (tname_lang)
     {
       entry->name = tname_lang;
-      g_free (name);
+      if (name) g_free (name);
     }
   else
     entry->name = name;
@@ -647,7 +676,7 @@ make_menu_entry (char *filename, MenuType etype)
   entry->cmd = cmd;
 
   if (terminal &&
-      (strcmp (terminal, "0") == 1 || mystrcasecmp (terminal, "true") == 0))
+      ((strcmp (terminal, "0") == 1) || (mystrcasecmp (terminal, "true") == 0)))
     entry->term = 1;
   else
     entry->term = 0;
@@ -1022,6 +1051,38 @@ xfmenu (MenuOptions options)
     }
 
   return 0;
+}
+
+/*------------------*
+ * main 
+ *------------------*/
+int
+main (int argc, char **argv)
+{
+  MenuOptions options;
+  int n = 0;
+
+  /* initialize communication with xfwm */
+  init_xfmenu (argc, argv);
+
+  /* parse command line options */
+  options = get_options (argv);
+
+  /* native language support */
+  init_nls ();
+
+  /* generate the menu(s) */
+  n = xfmenu (options);
+
+  /* close communication with xfwm */
+  quit_xfmenu ();
+  
+  if (lcmessages) g_free (lcmessages);
+  if (lcmessages_base) g_free (lcmessages_base);
+  if (lang) g_free (lcmessages);
+  if (lang_base) g_free (lang_base);
+
+  return n;
 }
 
 /*------------------*
