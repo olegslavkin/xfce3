@@ -256,6 +256,7 @@ int entry_update (entry * en)
   struct stat s;
   struct tm *t;
   int rc = 0;
+  gboolean isdirlnk=FALSE;
   
   /* don't do updates on internal tar entries */
   if (strncmp(en->path,"tar:",strlen("tar:")) == 0) return (0);
@@ -270,6 +271,7 @@ int entry_update (entry * en)
      if (stat (en->path, &ss) == -1) return (-1); /* its gone */
      if (EN_IS_DIR (en) && S_ISLNK (s.st_mode)) {
 	     dup_stat(&s,&ss); 
+	     isdirlnk=TRUE;
      }
      else if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);
   }
@@ -291,8 +293,9 @@ int entry_update (entry * en)
     int rct;
     dup_stat(&(en->st),&s);
     set_time(&(en->date),&s);
-    rct=entry_type_update (en);
+    /*rct=entry_type_update (en);*/
     if ((rct=entry_type_update (en))!=0) return rct; 
+    if (isdirlnk) en->type |= (FT_LINK|FT_DIR);
   } else {  /* just check for stale links */
     if (S_ISLNK (s.st_mode)) { 
       if (stat (en->path, &s) == -1) {
