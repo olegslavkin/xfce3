@@ -36,11 +36,11 @@
 #include "xfce.h"
 #include "xfce_cb.h"
 #include "xfce-common.h"
+#include "configfile.h"
 #include "popup.h"
 #include "fileutil.h"
 #include "modify.h"
 #include "my_string.h"
-#include "configfile.h"
 
 #ifndef HAVE_SNPRINTF
 #include "snprintf.h"
@@ -69,6 +69,10 @@ popup_entry_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data
 {
   gint menu, item;
 
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+    return FALSE;
+    
   menu = ((gint) ((long) data)) / NBMAXITEMS;
   item = ((gint) ((long) data)) % NBMAXITEMS;
 

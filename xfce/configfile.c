@@ -90,8 +90,24 @@ nextline (FILE * f, char *lineread)
 config *
 initconfig (config * newconf)
 {
+  char *value;
   if (!newconf)
     newconf = (config *) g_malloc (sizeof (config) + 1);
+  /* 
+     The following is intended to help sysdmins who don't want users to
+     tweak their configuration (for building a set top box or a public
+     terminal, for example). If DISABLE_XFCE_USER_CONFIG is set to
+     "y" or "1", xfce won't read/modify or even save the user config...
+   */
+  value = getenv ("DISABLE_XFCE_USER_CONFIG");
+  if (value && (!my_strncasecmp (value, "1", 1) || !my_strncasecmp (value, "y", 1)))
+  {
+    newconf->disable_user_config = TRUE;
+  }
+  else
+  {
+    newconf->disable_user_config = FALSE;
+  }
   newconf->panel_x = -1;
   newconf->panel_y = -1;
   newconf->wm = 0;
@@ -138,7 +154,7 @@ backupconfig (char *extension)
   FILE *copyfile;
   FILE *backfile;
   int nb_read;
-
+  
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
   /*
      Backup any existing config file before creating a new one 
@@ -171,6 +187,12 @@ writeconfig (void)
   int i, j;
   gint x, y;
 
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+  {
+    return;
+  }
+  
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
   /*
      Backup any existing config file before creating a new one 
@@ -316,6 +338,12 @@ resetconfig (void)
   FILE *configfile;
   int i;
 
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+  {
+    return;
+  }
+  
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
   configfile = fopen (homedir, "w");
   if (!configfile)
@@ -452,62 +480,6 @@ localize_rcfilename (char *rcfile)
   }
 }
 
-char *
-get_first_ok (char *p)
-{
-  char *tok;
-  static char ret[MAXSTRLEN + 1];
-  int nb;
-  if (p == NULL)
-    return (p);
-  if (p == "")
-    return (p);
-  tok = strtok (p, ",");
-  while (tok != NULL)
-  {
-    tok = skiphead (tok);
-    if (strstr (tok, "Module"))
-    {
-      tok += 7;
-      nb = (int) (strcspn (tok, " "));
-      strncpy (ret, tok, nb);
-      ret[nb] = '\0';
-      if (existfile (ret))
-      {
-	tok -= 7;
-	strcpy (ret, tok);
-	skiptail (ret);
-	return (ret);
-      }
-    }
-    if (strstr (tok, "Term"))
-    {
-      tok += 5;
-      nb = (int) (strcspn (tok, " "));
-      strncpy (ret, tok, nb);
-      ret[nb] = '\0';
-      if (existfile (ret))
-      {
-	tok -= 5;
-	strcpy (ret, tok);
-	skiptail (ret);
-	return (ret);
-      }
-    }
-    nb = (int) (strcspn (tok, " "));
-    strncpy (ret, tok, nb);
-    ret[nb] = '\0';
-    if (existfile (ret))
-    {
-      strcpy (ret, tok);
-      skiptail (ret);
-      return (ret);
-    }
-    tok = strtok (NULL, ",");
-  }
-  return ("None");
-}
-
 void
 readconfig (void)
 {
@@ -518,30 +490,26 @@ readconfig (void)
   char label[256];
   char dummy[16];
   char *p;
+  int i, j;
   FILE *configfile = NULL;
 
-
-  int i, j;
-  int newconf = 0;
   nl = 0;
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
-  if (existfile (homedir))
+  if (!(current_config.disable_user_config) && (existfile (homedir)))
   {
     configfile = fopen (homedir, "r");
   }
   else
   {
-    fprintf (stderr, _("XFce : %s File not found.\n"), homedir);
     snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rcfile);
+    localize_rcfilename (homedir);
     if (existfile (homedir))
     {
       configfile = fopen (homedir, "r");
     }
     else
     {
-      newconf = 1;
-      fprintf (stderr, _("XFce : %s File not found.\n"), homedir);
-      localize_rcfilename (homedir);
+      snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rcfile);
       configfile = fopen (homedir, "r");
     }
   }
@@ -549,9 +517,12 @@ readconfig (void)
   {
     my_alert (_("Cannot open configuration file"));
     fprintf (stderr, _("XFce : %s File not found.\n"), homedir);
-    resetconfig ();
-    snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
-    configfile = fopen (homedir, "r");
+    if (!(current_config.disable_user_config))
+    {
+      resetconfig ();
+      snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
+      configfile = fopen (homedir, "r");
+    }
   }
   if (!configfile)
     my_alert (_("Cannot open configuration file"));
@@ -799,10 +770,7 @@ readconfig (void)
       {
 	for (i = 0; i < NBSELECTS; i++)
 	{
-	  if (newconf == 1)
-	    set_command (i, get_first_ok (p));
-	  else
-	    set_command (i, p);
+          set_command (i, p);
 	  p = nextline (configfile, lineread);
 	}
       }
@@ -820,8 +788,6 @@ readconfig (void)
 	p = nextline (configfile, lineread);
 	strcpy (pixfile, (p ? p : "Default icon"));
 	p = nextline (configfile, lineread);
-	if (newconf == 1)
-	  p = get_first_ok (p);
 	if (strcmp (p, "None"))
 	{
 	  strcpy (command, (p ? p : "None"));

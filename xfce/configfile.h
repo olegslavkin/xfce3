@@ -42,6 +42,7 @@ EngineType;
 
 typedef struct
 {
+  gboolean disable_user_config;
   int panel_x;
   int panel_y;
   int wm;

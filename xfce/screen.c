@@ -31,6 +31,7 @@
 #include "screen_cb.h"
 #include "xfce_main.h"
 #include "xfce-common.h"
+#include "configfile.h"
 #include "xfce.h"
 #include "gnome_protocol.h"
 
@@ -165,6 +166,10 @@ create_screen (void)
 void
 open_screen (GtkWidget * screen, gint scr_number)
 {
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+    return;
+    
   screen_signal_id = gtk_signal_connect (GTK_OBJECT (screen_ok_button), "clicked", GTK_SIGNAL_FUNC (screen_ok_cb), (gpointer) ((long) scr_number));
 
   gtk_entry_set_text (GTK_ENTRY (screen_displayed_entry), get_gxfce_screen_label (scr_number));

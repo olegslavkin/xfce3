@@ -29,6 +29,7 @@
 #include "my_intl.h"
 #include "xfce_main.h"
 #include "xfce-common.h"
+#include "configfile.h"
 #include "selects.h"
 #include "action.h"
 #include "action_cb.h"
@@ -243,6 +244,10 @@ action_set_choice_selected (gint index)
 void
 open_action (GtkWidget * action, gint nbr)
 {
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+    return;
+    
   if (!GTK_IS_WIDGET (action))
     action = create_action ();
 

@@ -65,8 +65,7 @@ enum
 
 static GtkTargetEntry popup_target_table[] = {
   {"STRING", 0, TARGET_STRING},
-  {"text/plain", 0, TARGET_STRING},
-  {"text/uri-list", 0, TARGET_URL},
+  {"text/uri-list", 0, TARGET_URL}
 };
 
 static guint n_popup_targets = sizeof (popup_target_table) / sizeof (popup_target_table[0]);
@@ -307,7 +306,7 @@ show_popup_menu (gint nbr, gint x, gint y, gboolean animation)
   else
     gtk_widget_hide (popup_menus[nbr].popup_detach);
 
-  if (popup_menus[nbr].entries == NBMAXITEMS)
+  if ((popup_menus[nbr].entries == NBMAXITEMS) || (current_config.disable_user_config))
   {
     gtk_widget_hide (popup_menus[nbr].popup_addicon_button);
     gtk_widget_hide (popup_menus[nbr].popup_addicon_separator);

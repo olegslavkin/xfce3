@@ -1192,6 +1192,10 @@ create_setup (XFCE_palette * pal)
 void
 show_setup (XFCE_palette * pal)
 {
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+    return;
+
   hide_current_popup_menu ();
   copyvaluepal (temp_pal, pal);
   apply_pal_colortable (temp_pal);

@@ -21,6 +21,8 @@
 #endif
 
 #include <stdio.h>
+#include <unistd.h>
+#include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
@@ -61,6 +63,10 @@
 #include "diagnostic.h"
 #include "my_tooltips.h"
 
+#ifndef HAVE_SNPRINTF
+#  include "snprintf.h"
+#endif
+
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
@@ -86,8 +92,17 @@ main (int argc, char *argv[])
 {
   char gtkrc_file[MAXSTRLEN + 1];
   static int dg;
+  char *homedir;
 
   xfce_init (&argc, &argv);
+
+  /* Build path to gtkrc file in user's home directory */
+  if (!(homedir = getenv ("HOME")))
+    {
+      fprintf (stderr, "Can't fetch $HOME. Aborting\n");
+      exit (-1);
+    }
+  snprintf (gtkrc_file, MAXSTRLEN, "%s/.gtkrc", (char *) homedir);
 
   signal (SIGCHLD, reap);
 
@@ -128,8 +143,8 @@ main (int argc, char *argv[])
   update_gxfce_screen_buttons (current_config.visible_screen);
   gnome_set_desk_count (current_config.visible_screen ? current_config.visible_screen : 1);
   update_gxfce_popup_buttons (current_config.visible_popup);
-  update_gxfce_coord (gxfce, &current_config.panel_x, &current_config.panel_y);
   update_gxfce_size ();
+  update_gxfce_coord (gxfce, &current_config.panel_x, &current_config.panel_y);
   update_delay_tooltips (current_config.tooltipsdelay);
   update_gxfce_clock ();
   gtk_widget_set_uposition (gxfce, current_config.panel_x, current_config.panel_y);
@@ -148,10 +163,6 @@ main (int argc, char *argv[])
 
   reg_xfce_app (gxfce, pal);
   close_startup (startup);
-
-  /* Build path to gtkrc file in user's home directory */
-  strcpy (gtkrc_file, (char *) getenv ("HOME"));
-  strcat (gtkrc_file, "/.gtkrc");
 
   /* Update all running GTK+ apps if ~/.gtkrc is not present */
 

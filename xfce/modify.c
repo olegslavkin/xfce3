@@ -33,6 +33,7 @@
 #include "my_intl.h"
 #include "xfce_main.h"
 #include "xfce-common.h"
+#include "configfile.h"
 #include "fileutil.h"
 #include "modify.h"
 #include "popup.h"
@@ -288,6 +289,10 @@ open_modify (GtkWidget * modify, gint menu, gint item)
   GdkBitmap *mask = NULL;
   char *pixfile;
 
+  /* Return if DISABLE_XFCE_USER_CONFIG was set */
+  if (current_config.disable_user_config)
+    return;
+    
   if (item < 0)
   {
     gtk_window_set_title (GTK_WINDOW (modify), _("Add Item ..."));

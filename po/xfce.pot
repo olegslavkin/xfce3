@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-08-24 09:30+0200\n"
+"POT-Creation-Date: 2001-08-24 20:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Font Selection"
 msgstr ""
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
+#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1400 xfdiff/xfdiff_misc.c:130
 #: xfdiff/xfdiff_misc.c:136
 msgid "OK"
 msgstr ""
@@ -174,11 +174,11 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659
+#: xfdiff/xfdiff_gui.c:1592 xfglob/xfglob.c:658
 msgid "Clear"
 msgstr ""
 
-#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
+#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
 msgid "Dismiss"
 msgstr ""
 
@@ -187,10 +187,10 @@ msgid "Info ..."
 msgstr ""
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:128 xfce/popup.c:116
-#: xfce/popup.c:214 xfce/startup.c:91 xfce/xfce.c:195 xfce/xfce.c:235
-#: xfce/xfce.c:500 xfce/xfce.c:531 xfce/xfce.c:628 xfce/xfce.c:649
-#: xfce/xfce.c:682 xfce/xfce.c:697 xfce/xfce.c:755 xfce/xfce.c:776
-#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
+#: xfce/popup.c:214 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
+#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
+#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
+#: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr ""
 
@@ -629,24 +629,24 @@ msgstr ""
 msgid "Twenty"
 msgstr ""
 
-#: xfce/xfce.c:104 xfclock/xfclock_menus.c:112
+#: xfce/xfce.c:103 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
 msgstr ""
 
-#: xfce/xfce.c:112
+#: xfce/xfce.c:111
 msgid "24 hours mode"
 msgstr ""
 
-#: xfce/xfce.c:644 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr ""
 
-#: xfce/xfce.c:677
+#: xfce/xfce.c:676
 msgid "Setup..."
 msgstr ""
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:704 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xftree/xtree_gui.c:2592
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
 #: xftree/xtree_gui.c:2845 xfumed/interface.c:372
 msgid "Quit"
@@ -993,42 +993,42 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:278 xftree/gtk_prop.c:375
+#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:278 xftree/gtk_prop.c:375
 msgid "Owner :"
 msgstr ""
 
-#: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
+#: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
 #: xftree/gtk_prop.c:279 xftree/gtk_prop.c:303 xftree/gtk_prop.c:326
 msgid "Read"
 msgstr ""
 
-#: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
+#: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
 #: xftree/gtk_prop.c:283 xftree/gtk_prop.c:307 xftree/gtk_prop.c:330
 msgid "Write"
 msgstr ""
 
-#: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
+#: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
 #: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
 msgid "Execute"
 msgstr ""
 
-#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:291
+#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:291
 msgid "Set UID"
 msgstr ""
 
-#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:302 xftree/gtk_prop.c:386
+#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:302 xftree/gtk_prop.c:386
 msgid "Group :"
 msgstr ""
 
-#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:315
+#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:315
 msgid "Set GID"
 msgstr ""
 
-#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:325
+#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:325
 msgid "Other :"
 msgstr ""
 
-#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:338
+#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:338
 msgid "Sticky"
 msgstr ""
 
@@ -1220,7 +1220,7 @@ msgid "Toggle Dotfiles"
 msgstr ""
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1167
 #: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
 msgid "File"
 msgstr ""
@@ -1257,7 +1257,7 @@ msgid "Go up"
 msgstr ""
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
+#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1269
 #: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
 msgid "Help"
 msgstr ""
@@ -1305,27 +1305,27 @@ msgstr ""
 msgid "New windows"
 msgstr ""
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2857
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2857
 msgid "Name"
 msgstr ""
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2858
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2858
 msgid "Size (bytes)"
 msgstr ""
 
-#: xfglob/xfglob.c:609 xftree/xtree_gui.c:2859
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2859
 msgid "Last changed"
 msgstr ""
 
-#: xftree/xtree_dnd.c:122
+#: xftree/xtree_dnd.c:121
 msgid "Unknown action !"
 msgstr ""
 
-#: xftree/xtree_dnd.c:137
+#: xftree/xtree_dnd.c:136
 msgid "Target must be a directory !"
 msgstr ""
 
-#: xftree/xtree_dnd.c:166
+#: xftree/xtree_dnd.c:165
 #, c-format
 msgid "Type not supported.. (%d)\n"
 msgstr ""
@@ -1468,267 +1468,267 @@ msgstr ""
 msgid "Xfdiff diagnostic"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:175
+#: xfdiff/xfdiff_gui.c:174
 msgid "A patch file and directory must be selected first!"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:187
+#: xfdiff/xfdiff_gui.c:186
 msgid "Patch has been undone."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:187
+#: xfdiff/xfdiff_gui.c:186
 msgid "Patch has been applied."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:202
+#: xfdiff/xfdiff_gui.c:201
 msgid "Please select a name for the patch file in the next dialog."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:221
+#: xfdiff/xfdiff_gui.c:220
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
 "Diff will be working"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:228
+#: xfdiff/xfdiff_gui.c:227
 msgid "Patch file could not be created"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:233 xfdiff/xfdiff_gui.c:238
+#: xfdiff/xfdiff_gui.c:232 xfdiff/xfdiff_gui.c:237
 msgid "Strip level for created patch file="
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:240
+#: xfdiff/xfdiff_gui.c:239
 msgid " has been created\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:254
+#: xfdiff/xfdiff_gui.c:253
 msgid "Patch file creation cancelled"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:404
+#: xfdiff/xfdiff_gui.c:403
 msgid "Line synchronization enabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:406
+#: xfdiff/xfdiff_gui.c:405
 msgid "Line synchronization disabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:443
+#: xfdiff/xfdiff_gui.c:442
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:445
+#: xfdiff/xfdiff_gui.c:444
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:464
+#: xfdiff/xfdiff_gui.c:463
 msgid "Line numbers enabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:466
+#: xfdiff/xfdiff_gui.c:465
 msgid "Line numbers disabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:478
+#: xfdiff/xfdiff_gui.c:477
 msgid "Polygons will now be filled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:480
+#: xfdiff/xfdiff_gui.c:479
 msgid "Polygons will now *not* be filled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:494
+#: xfdiff/xfdiff_gui.c:493
 msgid "Patch will now be assumed reversed.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:496
+#: xfdiff/xfdiff_gui.c:495
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr ""
 
 #.
-#: xfdiff/xfdiff_gui.c:517
+#: xfdiff/xfdiff_gui.c:516
 msgid "Font selection"
 msgstr ""
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:800
+#: xfdiff/xfdiff_gui.c:525 xfdiff/xfdiff_misc.c:800
 msgid "Could not load specified font\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:585
+#: xfdiff/xfdiff_gui.c:584
 msgid "Select highlight background color"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:588
+#: xfdiff/xfdiff_gui.c:587
 msgid "Select highlight text color"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:686 xfdiff/xfdiff_gui.c:687
+#: xfdiff/xfdiff_gui.c:685 xfdiff/xfdiff_gui.c:686
 msgid "Warning: cannot read from "
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:691 xfdiff/xfdiff_gui.c:692
+#: xfdiff/xfdiff_gui.c:690 xfdiff/xfdiff_gui.c:691
 msgid "is not in patch file."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:798
+#: xfdiff/xfdiff_gui.c:797
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:818
+#: xfdiff/xfdiff_gui.c:817
 msgid "Default configuration has been saved\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:826
+#: xfdiff/xfdiff_gui.c:825
 msgid "This is XFDiff "
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:845
+#: xfdiff/xfdiff_gui.c:844
 msgid "There is no next difference"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:854
+#: xfdiff/xfdiff_gui.c:853
 msgid "There is no previous difference"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:876
+#: xfdiff/xfdiff_gui.c:875
 msgid "There is no such file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:886
+#: xfdiff/xfdiff_gui.c:885
 msgid "There is no next file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:897
+#: xfdiff/xfdiff_gui.c:896
 msgid "There is no previous file"
 msgstr ""
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:984
+#: xfdiff/xfdiff_gui.c:983
 msgid "That is a directory (or symlink)"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1169
+#: xfdiff/xfdiff_gui.c:1168
 msgid "Select left file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1170
+#: xfdiff/xfdiff_gui.c:1169
 msgid "Select right file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1171
+#: xfdiff/xfdiff_gui.c:1170
 msgid "Select patch file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1172
+#: xfdiff/xfdiff_gui.c:1171
 msgid "Select directory where to apply patch"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1175
+#: xfdiff/xfdiff_gui.c:1174
 msgid "Switch to patch mode"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1178
+#: xfdiff/xfdiff_gui.c:1177
 msgid "Switch to diff mode"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
+#: xfdiff/xfdiff_gui.c:1182 xfdiff/xfdiff_gui.c:1609
 #: xfsamba/xfsamba_gui.c:1022
 msgid "Exit"
 msgstr ""
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:1186
+#: xfdiff/xfdiff_gui.c:1185
 msgid "Diff Settings"
 msgstr ""
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:1189
+#: xfdiff/xfdiff_gui.c:1188
 msgid "Font"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1190
+#: xfdiff/xfdiff_gui.c:1189
 msgid "Highlight text color"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1191
+#: xfdiff/xfdiff_gui.c:1190
 msgid "Highlight background color"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1192
+#: xfdiff/xfdiff_gui.c:1191
 msgid "Fill polygons"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1193
+#: xfdiff/xfdiff_gui.c:1192
 msgid "Show line numbers"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1195
+#: xfdiff/xfdiff_gui.c:1194
 msgid "Use line synchronization voids"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1201
+#: xfdiff/xfdiff_gui.c:1200
 msgid "Save settings as default"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1203
+#: xfdiff/xfdiff_gui.c:1202
 msgid "Patch Settings"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1205
+#: xfdiff/xfdiff_gui.c:1204
 msgid "Verbose patch diagnostics"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1207
+#: xfdiff/xfdiff_gui.c:1206
 msgid "Patch options only active in patch-mode"
 msgstr ""
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:1212
+#: xfdiff/xfdiff_gui.c:1211
 msgid "Assume patch is reversed"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1214
+#: xfdiff/xfdiff_gui.c:1213
 msgid "Auto strip level"
 msgstr ""
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1243
+#: xfdiff/xfdiff_gui.c:1242
 msgid "Actions"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1244
+#: xfdiff/xfdiff_gui.c:1243
 msgid "View differences"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1245
+#: xfdiff/xfdiff_gui.c:1244
 msgid "View differences in new"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1247
+#: xfdiff/xfdiff_gui.c:1246
 msgid "View patch created differences"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1250
+#: xfdiff/xfdiff_gui.c:1249
 msgid "View patch created differences in new"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1255
+#: xfdiff/xfdiff_gui.c:1254
 msgid "Create patch file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1262
+#: xfdiff/xfdiff_gui.c:1261
 msgid "Apply patch to Hard Drive"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1265
+#: xfdiff/xfdiff_gui.c:1264
 msgid "Undo patch to Hard Drive"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1922
+#: xfdiff/xfdiff_gui.c:1270 xfglob/xfglob.c:1921
 msgid "About"
 msgstr ""
 
@@ -1739,19 +1739,19 @@ msgstr ""
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1603
+#: xfdiff/xfdiff_gui.c:1602
 msgid "Next difference"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1606
+#: xfdiff/xfdiff_gui.c:1605
 msgid "Prev difference"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1607
+#: xfdiff/xfdiff_gui.c:1606
 msgid "Next file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1608
+#: xfdiff/xfdiff_gui.c:1607
 msgid "Previous file"
 msgstr ""
 
@@ -1839,112 +1839,112 @@ msgstr ""
 msgid "Press OK to see patch diffs"
 msgstr ""
 
-#: xfglob/xfglob.c:460 xfglob/xfglob.c:461
+#: xfglob/xfglob.c:459 xfglob/xfglob.c:460
 msgid "Results limit reached"
 msgstr ""
 
-#: xfglob/xfglob.c:469
+#: xfglob/xfglob.c:468
 msgid "Cancelled"
 msgstr ""
 
-#: xfglob/xfglob.c:470
+#: xfglob/xfglob.c:469
 msgid "Search canceled!\n"
 msgstr ""
 
-#: xfglob/xfglob.c:495 xfglob/xfglob.c:525
+#: xfglob/xfglob.c:494 xfglob/xfglob.c:524
 msgid "Glob run must finish or be cancelled first."
 msgstr ""
 
-#: xfglob/xfglob.c:508
+#: xfglob/xfglob.c:507
 msgid "Find results.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:588 xfglob/xfglob.c:680
+#: xfglob/xfglob.c:587 xfglob/xfglob.c:679
 msgid "Find results..."
 msgstr ""
 
-#: xfglob/xfglob.c:607 xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:606 xfglob/xfglob.c:1361
 msgid "Directory"
 msgstr ""
 
-#: xfglob/xfglob.c:610
+#: xfglob/xfglob.c:609
 msgid "Mode"
 msgstr ""
 
-#: xfglob/xfglob.c:1032
+#: xfglob/xfglob.c:1031
 msgid "Incoherent size considerations!"
 msgstr ""
 
 #. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
-#: xfglob/xfglob.c:1202
+#: xfglob/xfglob.c:1201
 msgid "Result of "
 msgstr ""
 
-#: xfglob/xfglob.c:1213 xfglob/xfglob.c:1556
+#: xfglob/xfglob.c:1212 xfglob/xfglob.c:1555
 msgid "File type :"
 msgstr ""
 
-#: xfglob/xfglob.c:1285
+#: xfglob/xfglob.c:1284
 msgid "Anyone"
 msgstr ""
 
 #. translation of filetypes
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "Any kind"
 msgstr ""
 
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "Regular"
 msgstr ""
 
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "Symlink"
 msgstr ""
 
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "Socket"
 msgstr ""
 
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "Block device"
 msgstr ""
 
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "Character device"
 msgstr ""
 
-#: xfglob/xfglob.c:1362
+#: xfglob/xfglob.c:1361
 msgid "FIFO"
 msgstr ""
 
-#: xfglob/xfglob.c:1372
+#: xfglob/xfglob.c:1371
 msgid "Xfglob"
 msgstr ""
 
 #. *******************************
 #. show the notebook pages:
 #. fourth circle : notebook tabs stuff
-#: xfglob/xfglob.c:1423 xfglob/xfglob.c:1913 xfglob/xfglob.c:1941
+#: xfglob/xfglob.c:1422 xfglob/xfglob.c:1912 xfglob/xfglob.c:1940
 msgid "Find"
 msgstr ""
 
-#: xfglob/xfglob.c:1435
+#: xfglob/xfglob.c:1434
 msgid "Path : "
 msgstr ""
 
-#: xfglob/xfglob.c:1444
+#: xfglob/xfglob.c:1443
 msgid "Browse"
 msgstr ""
 
-#: xfglob/xfglob.c:1453
+#: xfglob/xfglob.c:1452
 msgid "File filter : "
 msgstr ""
 
-#: xfglob/xfglob.c:1461
+#: xfglob/xfglob.c:1460
 msgid "What's a file filter?"
 msgstr ""
 
-#: xfglob/xfglob.c:1468
+#: xfglob/xfglob.c:1467
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -1952,35 +1952,35 @@ msgid ""
 "?  Will match any character exactly one time\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1474
+#: xfglob/xfglob.c:1473
 msgid "Search subdirectories too"
 msgstr ""
 
-#: xfglob/xfglob.c:1476
+#: xfglob/xfglob.c:1475
 msgid "Limit results to first : "
 msgstr ""
 
-#: xfglob/xfglob.c:1489
+#: xfglob/xfglob.c:1488
 msgid "Content search"
 msgstr ""
 
-#: xfglob/xfglob.c:1501
+#: xfglob/xfglob.c:1500
 msgid "Containing : "
 msgstr ""
 
-#: xfglob/xfglob.c:1512
+#: xfglob/xfglob.c:1511
 msgid "Case sensitive search"
 msgstr ""
 
-#: xfglob/xfglob.c:1513
+#: xfglob/xfglob.c:1512
 msgid "Extended regexp"
 msgstr ""
 
-#: xfglob/xfglob.c:1516
+#: xfglob/xfglob.c:1515
 msgid "What's a regexp?"
 msgstr ""
 
-#: xfglob/xfglob.c:1522
+#: xfglob/xfglob.c:1521
 msgid ""
 "Reserved characters for extended regexp are\n"
 ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
@@ -2021,19 +2021,19 @@ msgid ""
 "       at the command prompt.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1543
+#: xfglob/xfglob.c:1542
 msgid "File considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1567
+#: xfglob/xfglob.c:1566
 msgid "Stay on single filesystem"
 msgstr ""
 
-#: xfglob/xfglob.c:1568
+#: xfglob/xfglob.c:1567
 msgid "What's a single filesystem?"
 msgstr ""
 
-#: xfglob/xfglob.c:1572
+#: xfglob/xfglob.c:1571
 msgid ""
 "Staying on a single filesystem will hinder\n"
 "searching on different physical disk partitions.\n"
@@ -2041,15 +2041,15 @@ msgid ""
 "to search into nfs or smb mounts.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1594
+#: xfglob/xfglob.c:1593
 msgid "Permission considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1598
+#: xfglob/xfglob.c:1597
 msgid "How does permission filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1602
+#: xfglob/xfglob.c:1601
 msgid ""
 "When permission filtering is active:\n"
 "-If a file has one of the chosen permission bits,\n"
@@ -2058,15 +2058,15 @@ msgid ""
 "  no set permission bits will match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1698
+#: xfglob/xfglob.c:1697
 msgid "User/group considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1702
+#: xfglob/xfglob.c:1701
 msgid "How does user/group filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1706
+#: xfglob/xfglob.c:1705
 msgid ""
 "If user and group are both set to any \n"
 "value other than anyone:\n"
@@ -2074,23 +2074,23 @@ msgid ""
 "  to match\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1717
+#: xfglob/xfglob.c:1716
 msgid "User ID: "
 msgstr ""
 
-#: xfglob/xfglob.c:1728
+#: xfglob/xfglob.c:1727
 msgid "Group ID: "
 msgstr ""
 
-#: xfglob/xfglob.c:1743
+#: xfglob/xfglob.c:1742
 msgid "Size considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1747
+#: xfglob/xfglob.c:1746
 msgid "How does size filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1751
+#: xfglob/xfglob.c:1750
 msgid ""
 "-If a size of 0 (zero) is specified for \n"
 " size-less-than, this will be ignored.\n"
@@ -2099,23 +2099,23 @@ msgid ""
 " in order for a file to match.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1763
+#: xfglob/xfglob.c:1762
 msgid "Size greater than (KB): "
 msgstr ""
 
-#: xfglob/xfglob.c:1778
+#: xfglob/xfglob.c:1777
 msgid "Size less than (KB): "
 msgstr ""
 
-#: xfglob/xfglob.c:1798
+#: xfglob/xfglob.c:1797
 msgid "Time considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1802
+#: xfglob/xfglob.c:1801
 msgid "How does time filtering work?"
 msgstr ""
 
-#: xfglob/xfglob.c:1806
+#: xfglob/xfglob.c:1805
 msgid ""
 "Three different time modes may be selected:\n"
 "*modified:\n"
@@ -2142,103 +2142,103 @@ msgid ""
 "runs will not produce identical results.\n"
 msgstr ""
 
-#: xfglob/xfglob.c:1818
+#: xfglob/xfglob.c:1817
 msgid "Modified"
 msgstr ""
 
-#: xfglob/xfglob.c:1819
+#: xfglob/xfglob.c:1818
 msgid "Changed"
 msgstr ""
 
-#: xfglob/xfglob.c:1820
+#: xfglob/xfglob.c:1819
 msgid "Accessed"
 msgstr ""
 
-#: xfglob/xfglob.c:1826
+#: xfglob/xfglob.c:1825
 msgid "In the previous : "
 msgstr ""
 
-#: xfglob/xfglob.c:1836
+#: xfglob/xfglob.c:1835
 msgid "Minutes"
 msgstr ""
 
-#: xfglob/xfglob.c:1837
+#: xfglob/xfglob.c:1836
 msgid "Hours"
 msgstr ""
 
-#: xfglob/xfglob.c:1838
+#: xfglob/xfglob.c:1837
 msgid "Days"
 msgstr ""
 
-#: xfglob/xfglob.c:1839
+#: xfglob/xfglob.c:1838
 msgid "Months"
 msgstr ""
 
-#: xfglob/xfglob.c:1870
+#: xfglob/xfglob.c:1869
 msgid "General considerations"
 msgstr ""
 
-#: xfglob/xfglob.c:1880
+#: xfglob/xfglob.c:1879
 msgid "Do not look into binary files"
 msgstr ""
 
-#: xfglob/xfglob.c:1882
+#: xfglob/xfglob.c:1881
 msgid "Output count of matching lines"
 msgstr ""
 
-#: xfglob/xfglob.c:1884
+#: xfglob/xfglob.c:1883
 msgid "Match anywhere"
 msgstr ""
 
-#: xfglob/xfglob.c:1885
+#: xfglob/xfglob.c:1884
 msgid "Match whole words only"
 msgstr ""
 
-#: xfglob/xfglob.c:1886
+#: xfglob/xfglob.c:1885
 msgid "Match whole lines only"
 msgstr ""
 
-#: xfglob/xfglob.c:1887
+#: xfglob/xfglob.c:1886
 msgid "Output files where no match is found"
 msgstr ""
 
-#: xfglob/xfglob.c:1916
+#: xfglob/xfglob.c:1915
 msgid "Filter options"
 msgstr ""
 
-#: xfglob/xfglob.c:1919
+#: xfglob/xfglob.c:1918
 msgid "Content options"
 msgstr ""
 
-#: xfglob/xfglob.c:1947
+#: xfglob/xfglob.c:1946
 msgid "Results"
 msgstr ""
 
-#: xfglob/xfglob.c:1962
+#: xfglob/xfglob.c:1961
 msgid "working..."
 msgstr ""
 
-#: xfglob/xfglob.c:1965
+#: xfglob/xfglob.c:1964
 msgid "Cancel Search"
 msgstr ""
 
-#: xfglob/xfglob.c:2014
+#: xfglob/xfglob.c:2013
 msgid "Nothing found...\n"
 msgstr ""
 
-#: xfglob/xfglob.c:2022
+#: xfglob/xfglob.c:2021
 msgid "Files found="
 msgstr ""
 
-#: xfglob/xfglob.c:2025
+#: xfglob/xfglob.c:2024
 msgid "(interrupted because limit exceded)"
 msgstr ""
 
-#: xfglob/xfglob.c:2079
+#: xfglob/xfglob.c:2078
 msgid "lines"
 msgstr ""
 
-#: xfglob/xfglob.c:2145
+#: xfglob/xfglob.c:2144
 msgid "unable to stat:"
 msgstr ""
 
