@@ -3105,6 +3105,7 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
   Pixel Forecolor;
   GC HiGC = ReliefGC;
   GC LoGC = ShadowGC;
+  GC ButtonGC = ReliefGC;
   enum ButtonState title_state;
   ButtonFace *bftitle;
   Bool onoroff;
@@ -3127,10 +3128,12 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
   if (onoroff)
   {
     Forecolor = GetDecor (t, HiColors.fore);
+    ButtonGC = HiGC;
   }
   else
   {
     Forecolor = GetDecor (t, LoColors.fore);
+    ButtonGC = LoGC;
   }
 
   XSetForeground (dpy, Scr.TransMaskGC, bftitle->u.back);
@@ -3191,10 +3194,10 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
     }
     else
     {
-      XDrawLine (dpy, win, HiGC, 2, 1, w - 3, 1);
-      XDrawLine (dpy, win, HiGC, 1, 2, 1, h - 3);
-      XDrawLine (dpy, win, HiGC, 2, h - 2, w - 3, h - 2);
-      XDrawLine (dpy, win, HiGC, w - 2, 2, w - 2, h - 3);
+      XDrawLine (dpy, win, ButtonGC, 2, 1, w - 3, 1);
+      XDrawLine (dpy, win, ButtonGC, 1, 2, 1, h - 3);
+      XDrawLine (dpy, win, ButtonGC, 2, h - 2, w - 3, h - 2);
+      XDrawLine (dpy, win, ButtonGC, w - 2, 2, w - 2, h - 3);
     }
     break;
 
