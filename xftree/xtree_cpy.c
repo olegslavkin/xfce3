@@ -480,8 +480,11 @@ static gboolean SubChildTransfer(char *target,char *source){
 		sprintf(globstring,"%s/*",source);
 		/* create target dir */
 		if (mkdir(target,(s_stat.st_mode|0700))<0){
-			targetdir=target;
-			process_error(RW_ERROR_WRITING_DIR);/* user intervention */
+			/* dont process error if directory exists */
+			if (errno!=EEXIST){
+		 	   targetdir=target;
+			   process_error(RW_ERROR_WRITING_DIR);/* user intervention */
+			}
 			/* if function returns, it means continue */
 			/*return process_error(RW_ERROR_WRITING_DIR);*/
 			/*fprintf(stdout,"child:%s %s\n",strerror(errno),target);*/
