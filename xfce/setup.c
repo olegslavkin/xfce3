@@ -1707,15 +1707,11 @@ show_setup (XFCE_palette * pal)
 				(current_config.colorize_root != 0));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(setup_options.setup_gradient_checkbutton),
-				(((DEFAULT_DEPTH
-				   >= 16)
-				  && (current_config.colorize_root !=
-				      0)) ? (current_config.gradient_root !=
-					     0) : FALSE));
+				(((DEFAULT_DEPTH >= 16) && (current_config.colorize_root != 0)) 
+                                  ? (current_config.gradient_root != 0) : FALSE));
   gtk_widget_set_sensitive (GTK_WIDGET
 			    (setup_options.setup_gradient_checkbutton),
-			    ((DEFAULT_DEPTH >= 16)
-			     && (current_config.colorize_root)));
+			    ((DEFAULT_DEPTH >= 16) && (current_config.colorize_root != 0)));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(setup_options.setup_tearoff_checkbutton),
 				(current_config.detach_menu != 0));
@@ -1763,20 +1759,20 @@ show_setup (XFCE_palette * pal)
 				(current_config.opaqueresize != 0));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(setup_options.setup_gradient_activetitle),
-				((DEFAULT_DEPTH >= 8)
+				((DEFAULT_DEPTH >= 16)
 				 ? (current_config.gradient_active_title !=
 				    0) : FALSE));
   gtk_widget_set_sensitive (GTK_WIDGET
 			    (setup_options.setup_gradient_activetitle),
-			    (DEFAULT_DEPTH >= 8));
+			    (DEFAULT_DEPTH >= 16));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(setup_options.setup_gradient_inactivetitle),
-				((DEFAULT_DEPTH >= 8)
+				((DEFAULT_DEPTH >= 16)
 				 ? (current_config.gradient_inactive_title !=
 				    0) : FALSE));
   gtk_widget_set_sensitive (GTK_WIDGET
 			    (setup_options.setup_gradient_inactivetitle),
-			    (DEFAULT_DEPTH >= 8));
+			    (DEFAULT_DEPTH >= 16));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(setup_options.setup_iconpos_topbutton),
 				(current_config.iconpos == 0));

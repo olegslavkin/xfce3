@@ -255,14 +255,14 @@ apply_wm_colors (const XFCE_palette * p)
 
       color_to_hex (t, p, 6);
       color_to_hex (v, p, 5);
-      if ((DEFAULT_DEPTH > 8) && (current_config.gradient_active_title))
+      if ((DEFAULT_DEPTH >= 16) && (current_config.gradient_active_title))
 	sprintf (u, TITLESTYLE_CMD, ACTIVE, GRADIENT, t, v);
       else
 	sprintf (u, TITLESTYLE_CMD, ACTIVE, SOLID, t, "");
       sendinfo (fd_internal_pipe, u, 0);
 
       color_to_hex (t, p, 3);
-      if ((DEFAULT_DEPTH > 8) && (current_config.gradient_inactive_title))
+      if ((DEFAULT_DEPTH >= 16) && (current_config.gradient_inactive_title))
 	sprintf (u, TITLESTYLE_CMD, INACTIVE, GRADIENT, t, s);
       else
 	sprintf (u, TITLESTYLE_CMD, INACTIVE, SOLID, t, "");

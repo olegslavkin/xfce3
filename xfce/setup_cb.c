@@ -250,19 +250,16 @@ xfce_font_cb (GtkWidget * widget, gpointer data)
 void
 toggle_repaint_checkbutton_cb (GtkWidget * widget, gpointer data)
 {
-  if (!
-      (gtk_toggle_button_get_active
-       (GTK_TOGGLE_BUTTON (setup_options.setup_repaint_checkbutton))))
+  gboolean status;
+  status = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_repaint_checkbutton));
+  if (!status)
+  {
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				  (setup_options.setup_gradient_checkbutton),
 				  FALSE);
-  gtk_widget_set_sensitive (GTK_WIDGET
-			    (setup_options.setup_gradient_checkbutton),
-			    (DEFAULT_DEPTH >= 8)
-			    &&
-			    (gtk_toggle_button_get_active
-			     (GTK_TOGGLE_BUTTON
-			      (setup_options.setup_repaint_checkbutton))));
+  }
+  gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_gradient_checkbutton),
+			    (DEFAULT_DEPTH >= 16) && (status));
 }
 
 void
