@@ -1176,8 +1176,9 @@ parse_patchfile (void)
 {
   char *line, *input, *file;
   int lineL = 256, linecount = 0, linenumber = 0;
-  int offset = 0, where = 0, ricefound = 0;
+  int offset = 0, where = 0, ricefound = 0, last_is_pushed = 0;
   FILE *Pfile;
+  
   /* use buffered i/o so single byte reads doesn't hit performance */
   Pfile = fopen (fileP, "r");
   if (!Pfile)
@@ -1214,41 +1215,105 @@ parse_patchfile (void)
       }
       /* this may or may not be in patch file! */
       /* if (strncmp(line,"diff",4)==0) { } */
-      if (strncmp (line, "---", 3) == 0)
+      if (
+       (strncmp (line, "---", 3) == 0)
+       && 
+       (!strstr (line, "----"))/* not the line we're looking 4 */
+      )
       {
-	if (currentF)
+/*	printf("line=%s",line);*/
+	if ((currentF) && (!last_is_pushed))
 	{			/* not the first file */
 	  /*      currentF->length = (where - strlen(line)) - currentF->offset ; */
 	  currentF->length = (where - linecount) - currentF->offset;
 	}
 	/* currentF will be pushed with filename */
-	offset = where - linecount;	/* before we screw up line with strtok */
-	strtok (line, " ");
-	file = strtok (NULL, "\t");
+	if (!last_is_pushed) offset = where - linecount;	/* before we screw up line with strtok */
+	
+	/* new way, do strtok by either \t or space 
+	* (does \w for whitespace exist? must RTFM) */
+	{
+          char *tmpC;
+	  tmpC = strtok (line, " ");
+/*	printf("-1:tmpC=%s\n",tmpC);*/
+	  if (tmpC) tmpC += (strlen(tmpC) + 1); else continue;
+/*	printf("-2:tmpC=%s\n",tmpC);*/
+	  if (strchr(tmpC,'\t')) file = strtok (tmpC, "\t");
+	  else file = strtok (tmpC, " "); 
+/*	printf("-3:file=%s\n",file);*/
+	}
+	/* file = strtok (NULL, "\t"); old way after a strtok for space */
+	  
 	if (file)
 	{
-	  currentF = pushF (file, offset, 0);
+	  if (last_is_pushed) {
+	    currentF->newfile = (char *) malloc (strlen (file) + 1);
+	    if (!currentF->newfile)
+	      xfdiff_abort (E_MALLOC);
+	    strcpy (currentF->newfile, file);
+	    last_is_pushed=0;
+ /*   printf("added\n");	    */
+	  } else {
+  	    currentF = pushF (file, offset, 0);
+	    last_is_pushed=1;
+  /*  printf("pushed\n");	    */
+	  }
 	}
 	/*printf("%s: offset=%d, length=%d\n",
 	   currentF->file,offset,length); */
 
       }
-      if (strncmp (line, "+++", 3) == 0)
+      if (
+       (strncmp (line, "+++", 3) == 0) 
+       || 
+       (
+	(strncmp (line, "***", 3) == 0) 
+	&& 
+	(!strstr (line, "****"))/* not the line we're looking 4 */
+       ) 
+      )
       {
-	if (!currentF)
+/*	printf("line=%s",line);*/
+       if (!currentF)
 	{
-	  my_show_message (patch_file_error);
+	  my_show_message (patch_file_error);/* not unified format (--- comes first) */
 	}
-	else
+       
+	if ((currentF)&& (!last_is_pushed))
+	{			/* not the first file */
+	  /*      currentF->length = (where - strlen(line)) - currentF->offset ; */
+	  currentF->length = (where - linecount) - currentF->offset;
+	}
+        if (!last_is_pushed) offset = where - linecount;	/* before we screw up line with strtok */
+
+/*	else !currentF: let's process any way, fair warning has been given.*/ 
 	{
-	  strtok (line, " ");
-	  file = strtok (NULL, "\t");
+		/* new way, do strtok by either \t or space 
+		* (does \w for whitespace exist? must RTFM) */
+	  char *tmpC;
+
+	  tmpC = strtok (line, " ");
+/*	printf("1:tmpC=%s\n",tmpC);*/
+	  if (tmpC) tmpC += (strlen(tmpC) + 1); else continue;
+/*	printf("2:tmpC=%s\n",tmpC);*/
+	  if (strchr(tmpC,'\t')) file = strtok (tmpC, "\t");
+	  else file = strtok (tmpC, " "); 
+/*	printf("*3:file=%s\n",file);*/
+/*	  file = strtok (NULL, "\t");old way*/
 	  if (file)
 	  {
+	   if (last_is_pushed) {
 	    currentF->newfile = (char *) malloc (strlen (file) + 1);
 	    if (!currentF->newfile)
 	      xfdiff_abort (E_MALLOC);
 	    strcpy (currentF->newfile, file);
+	    last_is_pushed=0;	   
+ /*   printf("added\n");*/	    
+	   } else {
+	    currentF = pushF (file, offset, 0);
+	    last_is_pushed=1;	   
+ /*   printf("pushed\n");	    */
+	   }
 	  }
 	}
       }

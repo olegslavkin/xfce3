@@ -1,3 +1,7 @@
+* changes xfdiff 1.2.7:
+  modified the patch file parser to take non unified format,
+  in particular, Mosix patches to the kernel.
+
 * changes xfdiff 1.2.6:
 - Put in a vpane for diagnostics (xfdiff_diag.c no longer used)
 - Put in directive for gtk+2.0 : 

@@ -530,11 +530,12 @@ strip_it (char *file, int strip_level)
   int i;
   char *strip_file, *strip_try;
   strip_file = file;
+  if (!strip_level) { goto strip_error;}
   strip_try = strstr (file, "/");
-  if ((!strip_level) || (!strip_try))
+  if (!strip_try)
   {
   strip_error:			/* on strip exceeding maximum strip, strip all slashes */
-    /*my_show_message(_("Patch file cannot be stripped.\nPlease verify strip level")); */
+  /*  my_show_message(_("Patch file names cannot be processed.\nPatch file might not be in unified format\n or strip level may be set incorrectly.")); */
     return strip_file;
   }
   strip_file = ++strip_try;

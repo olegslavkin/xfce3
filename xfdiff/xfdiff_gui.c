@@ -27,6 +27,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include "constant.h"
+#include "xfce-common.h"
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
