@@ -39,7 +39,7 @@
 #include <gdk_imlib.h>
 #endif
 
-int pixmap_level=3;
+int pixmap_level=4;
 
 /* pixmap list */
 typedef struct pixmap_list {

@@ -81,6 +81,7 @@
 #include "xtree_mess.h"
 
 #define BYTES "bytes"
+extern int pixmap_level;
 static GdkFont *the_font; 
 static char *custom_font=NULL;
 
@@ -554,6 +555,7 @@ failed:
   fprintf (defaults, "# do a bitwise or for preferences with %u (0x%x) to enable smaller dialogs.\n",(unsigned int)SMALL_DIALOGS,SMALL_DIALOGS);
   
   fprintf (defaults, "preferences : %d\n", preferences);
+  fprintf (defaults, "pixmap_level : %d\n", pixmap_level);
   fprintf (defaults, "smallTB : %d\n",stateTB[0] );
   fprintf (defaults, "largeTB : %d\n",stateTB[1] );
   fprintf (defaults, "custom_font :%s\n",(custom_font)?custom_font:"fixed");
@@ -605,6 +607,18 @@ void read_defaults(void){
 		if (!word) break;
 		preferences=atoi(word);
 	}
+	if (strstr(homedir,"pixmap_level :")){
+		int lpl;
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");
+		if (!word) break;
+		lpl=atoi(word);
+  		/* the default pixmap_level */
+		printf("apl=%d\n",pixmap_level);
+  		if (pixmap_level > 3) 
+		pixmap_level=lpl;
+		printf("pl=%d\n",pixmap_level);
+	}
 	if (strstr(homedir,"smallTB :")){
 		strtok(homedir,":");
 		word=strtok(NULL,"\n");
@@ -649,7 +663,6 @@ if (strstr(homedir,"ctree_color :")){
   }
   free(homedir);
   fclose(defaults);  
-  
 }
 
 void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree)
