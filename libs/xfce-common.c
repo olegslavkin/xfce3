@@ -547,6 +547,7 @@ gnome_uri_list_extract_filenames (const gchar * uri_list)
 void
 my_flush_events (void)
 {
+  gdk_flush ();
   while (gtk_events_pending ())
     gtk_main_iteration_do (TRUE);
   gdk_flush ();
