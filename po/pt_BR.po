@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.5.0\n"
-"POT-Creation-Date: 2001-09-27 22:53+0200\n"
+"POT-Creation-Date: 2001-09-30 12:59+0200\n"
 "PO-Revision-Date: 2000-10-01 18:00+0200\n"
 "Last-Translator: Fernando M. Roxo da Motta <roxo@conectiva.com>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -48,7 +48,7 @@ msgstr "Não"
 msgid "Question"
 msgstr "Pergunta"
 
-#: libs/xfce-common.c:591
+#: libs/xfce-common.c:602
 msgid "Terminated: "
 msgstr "Terminada:"
 
@@ -66,7 +66,7 @@ msgstr "*** AVISO ***: impossível carregar arquivo de mapa de pixels %s\n"
 msgid "Define action ..."
 msgstr "Define ação ..."
 
-#: xfce/action.c:109 xfce/modify.c:157
+#: xfce/action.c:109 xfce/modify.c:161
 msgid "Command Line :"
 msgstr "Linha de Comando :"
 
@@ -74,13 +74,13 @@ msgstr "Linha de Comando :"
 msgid "Icon Style :"
 msgstr "Estilo de Ícone :"
 
-#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:202
-#: xfce/modify.c:210 xfsound/xfsound.c:509
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:233
+#: xfce/modify.c:241 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr "Navegar ..."
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:239 xfce/screen.c:134
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:277 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
@@ -89,7 +89,7 @@ msgstr "Navegar ..."
 msgid "Ok"
 msgstr "OK"
 
-#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:294 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
@@ -192,7 +192,7 @@ msgstr "Dispensar"
 msgid "Info ..."
 msgstr "Informações ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:129 xfce/popup.c:115
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:133 xfce/popup.c:115
 #: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
 #: xfce/xfce.c:495 xfce/xfce.c:526 xfce/xfce.c:623 xfce/xfce.c:644
 #: xfce/xfce.c:677 xfce/xfce.c:692 xfce/xfce.c:750 xfce/xfce.c:771
@@ -208,27 +208,32 @@ msgstr "Por Oliver Fourdan (c) 1997-2000"
 msgid "Accept"
 msgstr "Concordo"
 
-#: xfce/modify.c:71 xfce/modify.c:311
+#: xfce/modify.c:75 xfce/modify.c:352
 msgid "Modify Item ..."
 msgstr "Modificar Ítem ..."
 
-#: xfce/modify.c:135
+#: xfce/modify.c:139
 msgid "Preview Icon"
 msgstr "Prévia do Ícone "
 
-#: xfce/modify.c:166
+#: xfce/modify.c:170
 msgid "Icon File :"
 msgstr "Arquivo do Ícone :"
 
-#: xfce/modify.c:175
+#: xfce/modify.c:179
 msgid "Label :"
 msgstr "Rótulo :"
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:248 xfumed/interface.c:338
+#: xfce/modify.c:188
+#, fuzzy
+msgid "Position :"
+msgstr "Aceleração : "
+
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/interface.c:338
 msgid "Remove"
 msgstr "Remover"
 
-#: xfbd/xfbdmgr.c:173 xfce/modify.c:298
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:336
 msgid "Add Item ..."
 msgstr "Adicionar Ítem ..."
 
@@ -236,7 +241,7 @@ msgstr "Adicionar Ítem ..."
 msgid "Are you sure you want to remove this entry ?"
 msgstr "Você tem certeza de que quer remover esta entrada ?"
 
-#: xfce/modify_cb.c:151 xfce/modify_cb.c:179
+#: xfce/modify_cb.c:156 xfce/modify_cb.c:185
 msgid ""
 "You must provide the command\n"
 "and the label, at least !"

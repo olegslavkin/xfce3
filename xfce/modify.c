@@ -223,7 +223,7 @@ create_modify ()
   modify_pos_adj = gtk_adjustment_new (0, 1, 13, 1, 1, 1);
   modify_pos_hscale = gtk_hscale_new (GTK_ADJUSTMENT (modify_pos_adj));
   gtk_scale_set_digits (GTK_SCALE (modify_pos_hscale), 0);
-  gtk_scale_set_value_pos (GTK_SCALE (modify_pos_hscale), GTK_POS_RIGHT);
+  gtk_scale_set_value_pos (GTK_SCALE (modify_pos_hscale), GTK_POS_LEFT);
 
   gtk_widget_set_name (modify_pos_hscale, "modify_pos_hscale");
   gtk_object_set_data (GTK_OBJECT (modify), "modify_pos_hscale", modify_pos_hscale);

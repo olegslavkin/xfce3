@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-27 22:53+0200\n"
+"POT-Creation-Date: 2001-09-30 12:59+0200\n"
 "PO-Revision-Date: 1999-09-28 14:36+0900\n"
 "Last-Translator: Yamahata Kenichiro <mogutan@din.or.jp>\n"
 "Language-Team: Japanese <mogutan@din.or.jp>\n"
@@ -47,7 +47,7 @@ msgstr "いいえ"
 msgid "Question"
 msgstr "質問"
 
-#: libs/xfce-common.c:591
+#: libs/xfce-common.c:602
 msgid "Terminated: "
 msgstr "強制終了: "
 
@@ -65,7 +65,7 @@ msgstr "*** 警告 ***: pixmapファイル %s がロードできません\n"
 msgid "Define action ..."
 msgstr ""
 
-#: xfce/action.c:109 xfce/modify.c:157
+#: xfce/action.c:109 xfce/modify.c:161
 msgid "Command Line :"
 msgstr "コマンドライン : "
 
@@ -73,13 +73,13 @@ msgstr "コマンドライン : "
 msgid "Icon Style :"
 msgstr ""
 
-#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:202
-#: xfce/modify.c:210 xfsound/xfsound.c:509
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:233
+#: xfce/modify.c:241 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr "参照..."
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:239 xfce/screen.c:134
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:277 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
@@ -88,7 +88,7 @@ msgstr "参照..."
 msgid "Ok"
 msgstr "了解"
 
-#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:294 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
@@ -185,7 +185,7 @@ msgstr ""
 msgid "Info ..."
 msgstr "情報 ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:129 xfce/popup.c:115
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:133 xfce/popup.c:115
 #: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
 #: xfce/xfce.c:495 xfce/xfce.c:526 xfce/xfce.c:623 xfce/xfce.c:644
 #: xfce/xfce.c:677 xfce/xfce.c:692 xfce/xfce.c:750 xfce/xfce.c:771
@@ -201,27 +201,32 @@ msgstr ""
 msgid "Accept"
 msgstr "同意します"
 
-#: xfce/modify.c:71 xfce/modify.c:311
+#: xfce/modify.c:75 xfce/modify.c:352
 msgid "Modify Item ..."
 msgstr "項目の変更 ..."
 
-#: xfce/modify.c:135
+#: xfce/modify.c:139
 msgid "Preview Icon"
 msgstr "プレビュー"
 
-#: xfce/modify.c:166
+#: xfce/modify.c:170
 msgid "Icon File :"
 msgstr "アイコンファイル : "
 
-#: xfce/modify.c:175
+#: xfce/modify.c:179
 msgid "Label :"
 msgstr "名前 : "
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:248 xfumed/interface.c:338
+#: xfce/modify.c:188
+#, fuzzy
+msgid "Position :"
+msgstr "加速度"
+
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/interface.c:338
 msgid "Remove"
 msgstr "削除"
 
-#: xfbd/xfbdmgr.c:173 xfce/modify.c:298
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:336
 msgid "Add Item ..."
 msgstr "アイテムを追加 ..."
 
@@ -229,7 +234,7 @@ msgstr "アイテムを追加 ..."
 msgid "Are you sure you want to remove this entry ?"
 msgstr "この項目を削除してよろしいですか？"
 
-#: xfce/modify_cb.c:151 xfce/modify_cb.c:179
+#: xfce/modify_cb.c:156 xfce/modify_cb.c:185
 msgid ""
 "You must provide the command\n"
 "and the label, at least !"
