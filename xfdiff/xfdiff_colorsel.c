@@ -40,7 +40,7 @@
 	/*  */
 /* subroutines deprecated for linking with gtk+2.0 */
 #else
-#include "xfdiff_colorsel.h"
+#include "../xfdiff/xfdiff_colorsel.h"
 
 static GtkWidget *colorselect;
 static gdouble *return_value;
