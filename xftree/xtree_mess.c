@@ -1184,7 +1184,7 @@ sane (char *bin)
   glob_t dirlist;
   int i;
 
-  /* printf("getenv=%s\n",getenv("PATH")); */
+   /*printf("dbg:getenv=%s\n",getenv("PATH")); */
   if (getenv ("PATH"))
   {
     path = (char *) malloc (strlen (getenv ("PATH")) + 2);
@@ -1206,7 +1206,7 @@ sane (char *bin)
  	if (spath[i] == NULL) break;
   }
 
-  for (i=1;i<52 && spath[i]!=NULL;i++) {
+  for (i=0;i<52 && spath[i]!=NULL;i++) {
         /* printf("spath=%s\n",spath[i]);*/
     b=g_strdup(bin);
     if (strchr(b,' ')) c=strtok(b," "); else c=b; 
