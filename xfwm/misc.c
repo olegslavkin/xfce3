@@ -771,10 +771,6 @@ void
 UngrabEm (void)
 {
   Window w;
-  /* Dummy var for XGetGeometry */
-  Window dummy_root;
-  int dummy_x, dummy_y;
-  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
 
   XSync (dpy, 0);
   XUngrabPointer (dpy, CurrentTime);
@@ -789,8 +785,7 @@ UngrabEm (void)
       w = Scr.PreviousFocus->w;
     }
     
-    /* if the window still exists, focus on it */
-    if (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth))
+    if (w)
     {
 #ifdef DEBUG
       fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
