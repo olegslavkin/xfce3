@@ -2300,7 +2300,7 @@ on_destroy (GtkWidget * top, cfg * win)
 {
   geometryX = top->allocation.width;
   geometryY = top->allocation.height;
-  save_defaults();
+  save_defaults(win->top);
   top_delete (top);
   if (win->timer)
   {
@@ -2331,7 +2331,7 @@ cb_destroy (GtkWidget * top, gpointer data)
   root = (GtkWidget *)data;
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
-  save_defaults();
+  save_defaults(NULL);
   gtk_widget_destroy ((GtkWidget *) data);
 }
 static void 
@@ -2341,7 +2341,7 @@ cb_quit (GtkWidget * top, gpointer data)
   root = (GtkWidget *)data;
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
-  save_defaults();
+  save_defaults(NULL);
   gtk_main_quit();	
 }
 	
@@ -3165,6 +3165,6 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   }
 
   gtk_main ();
-  save_defaults();
+  save_defaults(top);
   exit (0);
 }

@@ -16,7 +16,7 @@ extern char *Apath;
 #endif /* XTREE_MESS_MAIN */
 
 void read_defaults(void);
-void save_defaults(void);
+void save_defaults(GtkWidget *parent);
 char * override_txt(char *new_file,char *old_file);
 GtkWidget *
  shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data);

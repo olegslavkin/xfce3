@@ -1,5 +1,7 @@
 /* copywrite 2001 edscott wilson garcia under GNU/GPL 
  * 
+ * xtree_mess.c: messages and configuration routines for xftree
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -145,18 +147,27 @@ shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data)
   return menuitem;
 }
 
-void save_defaults (void)
+void save_defaults (GtkWidget *parent)
 {
   FILE *defaults;
   char *homedir;
   int len;
+  struct stat h_stat;
 
   len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFTREE_CONFIG_FILE) + 1;
   homedir = (char *) malloc ((len) * sizeof (char));
   if (!homedir) {
-    my_show_message (_("Default xftreerc file cannot be created\n"));
+failed:
+    if (parent) xf_dlg_error(parent,strerror(errno),_("Default xftreerc file cannot be created\n"));
     return;
   }
+  /* if .xfce directory isnot there, create it. */
+  snprintf (homedir, len, "%s/.xfce", (char *) getenv ("HOME"));
+  if (stat(homedir,&h_stat) < 0){
+	if (errno!=ENOENT) goto failed;
+	if (mkdir(homedir,0770) < 0) goto failed;
+  }
+
   snprintf (homedir, len, "%s/.xfce/%s", (char *) getenv ("HOME"), XFTREE_CONFIG_FILE);
   defaults = fopen (homedir, "w");
   free (homedir);
@@ -225,7 +236,7 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
   int toggler;
   toggler = (long)(data);
   preferences ^= toggler;
-  save_defaults ();
+  save_defaults (NULL);
   if (toggler&SHORT_TITLES) {
 	  if (Apath&&Awin) set_title(Awin,Apath);
   }
