@@ -155,6 +155,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     if ((!(t_en->type & FT_DIR)) || (t_en->type & FT_DIR_UP) || (!io_is_valid (t_en->label))|| (EN_IS_DIRUP (t_en)))
     {
+	    /*fprintf(stderr,"dbg:nonsense input\n");*/
       break;
       /*gtk_drag_finish (context, FALSE, (mode == TR_MOVE), time);
       uri_free_list (list);
@@ -172,7 +173,11 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     /*fprintf(stderr,"dbg:at dnd 4\n");*/
     tmpfile=CreateTmpList(win->top,list,t_en);
     /*fprintf(stderr,"dbg:dnd, tmpfile=%s\n",tmpfile);*/
-    if (!tmpfile) break;
+    if (!tmpfile) {
+         /*fprintf(stderr,"dbg:null tmpfile\n");*/
+	    break;
+    }
+  
     // acording to tmpfile name, do a direct move, here, and break.
     cursor_wait (GTK_WIDGET (ctree));
     /* FIXME: links on same device should also be a DirectTransfer() */

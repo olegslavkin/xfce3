@@ -242,6 +242,7 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
     sprintf(fname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
     if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
 	/* create tmp file, unique name*/
+	/*fprintf(stderr,"dbg: %s\n",fname);*/
     
 /*    same_device=FALSE;*/
     same_device=TRUE;
@@ -297,6 +298,7 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
     fclose (tmpfile);
     /*fprintf(stderr,"dbg:nitems = %d\n",nitems);*/
     if (!nitems) {
+       /*fprintf(stderr,"dbg:nitems = %d\n",nitems);*/
 	    unlink(fname);
 	    return NULL;
     }
@@ -315,7 +317,11 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
   source=s_en->path;
 	/* check for valid source */
        /* fprintf(stderr,"dbg:at okinput %s->%s\n",s_en->path,target);*/
-  if (EN_IS_DIRUP (s_en) || !io_is_valid (s_en->label)) return DLG_RC_CANCEL;
+  if (EN_IS_DIRUP (s_en) || !io_is_valid (s_en->label)){ 
+        /*fprintf(stderr,"dbg:at okinput 1 \n");*/
+	  return DLG_RC_SKIP;
+  }
+
         /*fprintf(stderr,"dbg:at okinput 1 \n");*/
   if (stat (target, &t_stat) < 0) {
 	if (errno != ENOENT) return xf_dlg_error_continue (parent,target, strerror (errno));
