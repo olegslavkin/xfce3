@@ -1,0 +1,6 @@
+all:
+	aclocal
+	autoheader
+	automake -a -c -i --foreign
+	autoconf
+	@echo System ready for compilation. Now run ./configure and make to build XFce

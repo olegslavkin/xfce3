@@ -1,0 +1,11 @@
+xfce for Debian
+----------------------
+
+XFCE is a CDE clone based on gtk+ and works pretty nice. This package
+still doesn't really conform to the Debian filesystem layout and needs 
+to be heavily reworked.  I have replaced the upstream configuration
+scripts "xfce_setup" and "xfce_remove" with a generic startup script
+"xfce_start" which saves the user to setup XFCE by himself and which
+lets it exist along with other GUI's in a transparent manner.
+
+Paul Seelig <pseelig@debian.org>, Mon, 19 Jul 1999 18:31:54 +0200

@@ -1,0 +1,53 @@
+README xfumed
+
+XFce user menu editor
+---------------------
+Idea based on an earlier version by Alex Lambert <alex@penwing.uklinux.net>.
+The user interface was initially created using glade (ftp.gnome.org/pub/GNOME).
+
+The application shows one menulevel (starting with the root user menu). 
+Controls are available to go to a submenu and back to the parent menu and 
+the items can be moved up and down.
+
+In the 'Edit item' section new items, submenus and separators can be added 
+and existing entries can be updated or removed.
+
+The save button saves the menu to the user's .xfce/xfwm.user_menu file (an 
+existing version is backed up to *.old). Reset re-reads the file.
+
+Quit ends the application, with an iritating dialog to remind you to save 
+your changes.
+
+NB
+xfumed will NOT save comments in a user menu file!
+
+
+Programmer's information
+------------------------
+The complete user menu is stored in a combination of linked lists and 
+specialized data structures:
+
+GList *menulist  :  doubly linked list with all (sub)menus
+|
++->*data => RootMenu *menu  :  structure containing menu data
+         |
+         |-> gchar *name  :  internal menu name
+         |-> gchar *parent  :  optional name of parent menu
+         +-> GList *entries  :  items and submenus
+             |
+             +->*data => ItemData *item  : structure containing item data
+                      |
+                      |-> ItemType type  : ITEM, SUBMENU or NOP
+                      |-> gchar *name  :  internal name (for submenus)
+                      |-> gchar *caption  :  caption shown in menu
+                      +-> gchar *command  : command to execute (for items)
+
+The current menu is shown using a GtkCList (columned list). Changing to a 
+sub- or parent menu reads a menu from the above data system.
+
+License
+-------
+xfumed is licenced under th GNU General Public Licences revision 2
+
+(c) Alex Lambert <alex@penwing.uklinux.net>
+(c) Jasper Huijsmans <j.b.huijsmans@freeler.nl>

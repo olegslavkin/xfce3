@@ -1,0 +1,91 @@
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+XFCE_DIR = @XFCE_DIR@
+
+SHELL = /bin/sh
+@SET_MAKE@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+xfcedir = $(XFCE_DIR)
+subdir = icons
+
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+MKINSTALLDIRS = $(top_srcdir)/@MKINSTALLDIRS@
+
+CC = @CC@
+GENCAT = @GENCAT@
+GMSGFMT = PATH=../src:$$PATH @GMSGFMT@
+MSGFMT = @MSGFMT@
+XGETTEXT = PATH=../src:$$PATH @XGETTEXT@
+MSGMERGE = PATH=../src:$$PATH msgmerge
+
+DEFS = @DEFS@
+CFLAGS = @CFLAGS@
+CPPFLAGS = @CPPFLAGS@
+
+DISTFILES = \
+
+CATALOGS = @CATALOGS@
+CATOBJEXT = @CATOBJEXT@
+INSTOBJEXT = @INSTOBJEXT@
+
+.SUFFIXES:
+
+all:
+
+install: install-exec install-data
+install-exec:
+install-data:
+	if test -r "$(MKINSTALLDIRS)"; then \
+	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir)/$(subdir); \
+	else \
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir)/$(subdir); \
+	fi
+	@catalogs='$(DISTFILES)'; \
+	for cat in $$catalogs; do \
+	  $(INSTALL_DATA) $$cat $(DESTDIR)/$(xfcedir)/$(subdir); \
+	done
+
+# Define this as empty until I found a useful application.
+installcheck:
+
+uninstall:
+	@catalogs='$(DISTFILES)'; \
+	for cat in $$catalogs; do \
+	  rm -f $(xfcedir)/$(subdir)/$$cat; \
+	done
+
+check: all
+
+cat-id-tbl.o: ../intl/libgettext.h
+
+dvi info tags TAGS ID:
+
+mostlyclean:
+	rm -f core core.*
+	rm -fr *.o
+
+clean: mostlyclean
+
+distclean: clean
+	rm -f Makefile Makefile.in
+
+maintainer-clean: distclean
+
+distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
+dist distdir: 
+
+Makefile: Makefile.in.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@.in CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+
+# Tell versions [3.59,3.63) of GNU make not to export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,30 @@
+/* XPM */
+static char *dir_pd_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"    16    16        7            1",
+/* colors */
+". c none",
+"# c #ffe79c",
+"a c #c6864a",
+"b c #ffc78c",
+"c c #000000",
+"d c #ffffff",
+"e c #ff0000",
+/* pixels */
+"................",
+"................",
+"....###a........",
+"...b#bbba.......",
+"..bbbbbccbbbbb..",
+".bb##eeeeee###c.",
+".b#bbeeeeeebbac.",
+".b#beeeeeeeebac.",
+".b#beddddddebac.",
+".b#beeeeeeeebac.",
+".b#bbeeeeeebbac.",
+".b#bbeeeeeebbac.",
+".b#aaaaeeaaaaac.",
+"..ccccccccccccc.",
+"................",
+"................"
+};

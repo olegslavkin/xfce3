@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" -a -z "$2" ]; then
+  echo ""
+  echo "To use the XFce environment, run startxfce, or put in your ~/.xsession file."
+  echo ""
+fi
+
+if [ "$2" -a -d /usr/share/xfce/help -a ! -L /usr/share/xfce/help ]; then
+  rm -rf /usr/share/xfce/help && ln -s ../doc/xfce/html /usr/share/xfce/help
+fi
+
+#DEBHELPER#

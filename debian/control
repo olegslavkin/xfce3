@@ -1,0 +1,22 @@
+Source: xfce
+Section: x11
+Priority: optional
+Maintainer: Debian QA Group <debian-qa@lists.debian.org>
+Standards-Version: 3.1.1
+Build-Depends: debhelper, xlib6g-dev, libglib1.2-dev, libgtk1.2-dev, imlib-dev, gdk-imlib-dev, libxpm4-dev, libjpeg62-dev, libpng2-dev, libtiff3g-dev, libungif3g-dev, libz-dev
+
+Package: xfce
+Architecture: any
+Depends: ${shlibs:Depends}
+Conflicts: xfce-common
+Replaces: xfce-common
+Suggests: sox, lpr, xterm | x-terminal-emulator, xscreensaver | xlockmore
+Description: The Cholesterol Free Desktop Environment
+ XFce, previously known as XForms cool environment, is a desktop environment
+ reminiscent of CDE that uses the GTK+ library, and isn't resource-hungry.
+ XFce includes a window manager, tool bar, file manager, backdrop manager,
+ sound subsystem, clock and calendar, mouse configuration and pager module.
+ .
+ Also includes sounds, icons, backgrounds ans pixmaps used by the XFce
+ environment and window manager, along with systemwide configuration files
+ and HTML help files.

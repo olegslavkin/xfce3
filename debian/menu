@@ -1,0 +1,12 @@
+?package(xfce): needs=X11 section="Apps/Tools" command="xfce" \
+  title="XFce" longtitle="The Cholesterol Free Desktop Environment"
+?package(xfce): needs=wm section="WindowManagers" command="xfce_start" \
+  title="XFwm/XFce" longtitle="XFce Window Manager"
+?package(xfce): needs=X11 section="Apps/Tools" command="xfclock" \
+  title="XFClock" longtitle="XFce Clock & Calendar"
+?package(xfce): needs=X11 section="Apps/Tools" command="xfmouse -i" \
+  title="XFMouse" longtitle="XFce Mouse Configuration"
+?package(xfce): needs=X11 section="Apps/Tools" command="xftree" \
+  title="XFTree" longtitle="XFce File Manager"
+?package(xfce): needs=X11 section="Apps/Tools" command="xfbd -i" \
+  title="XFbd" longtitle="XFce Backdrop Manager"

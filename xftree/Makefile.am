@@ -1,0 +1,37 @@
+## Process this file with automake to produce Makefile.in
+
+CLEANFILES=*~ *.bak core *.core *.o .depend .deps/* 
+
+INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ \
+-DXFCE_DIR=\"@XFCE_DIR@\" -DXFCE_LOCALE_DIR=\"@XFCE_LOCALE_DIR@\" \
+-DXFCE_CONFDIR=\"@XFCE_CONFDIR@\"
+
+bin_PROGRAMS = xftree 
+
+xftree_SOURCES = \
+	entry.c entry.h \
+	gtk_cpy.c gtk_cpy.h \
+	gtk_dlg.c gtk_dlg.h \
+	gtk_dnd.h \
+	gtk_exec.c gtk_exec.h \
+	gtk_get.c gtk_get.h \
+	gtk_prop.c gtk_prop.h \
+	i18n.h \
+	io.c io.h \
+	reg.c reg.h \
+	top.c top.h \
+	uri.c uri.h \
+	xtree.c \
+	xtree_cfg.h \
+	xtree_dnd.c xtree_dnd.h \
+	xtree_gui.c xtree_gui.h \
+	xtree_misc.c xtree_misc.h
+
+xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
+@GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \
+${X_LIBS} ${X_PRE_LIBS} -lXpm
+
+xftree_DEPENDENCIES = ../libs/libxfcecore.la
+
+
+man_MANS=xftree.1

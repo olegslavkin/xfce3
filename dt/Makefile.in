@@ -1,0 +1,103 @@
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+XFCE_CONFDIR = @XFCE_CONFDIR@
+DT_SUFFIX = @DT_SUFFIX@
+
+SHELL = /bin/sh
+@SET_MAKE@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+dtconfdir = /etc/dt/config
+subdir = dt
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+
+MKINSTALLDIRS = $(top_srcdir)/@MKINSTALLDIRS@
+
+DEFS = @DEFS@
+
+DISTFILES = Makefile.in Xinitrc.xfce.in Xsession.xfce Xresources.xfce.in
+
+.SUFFIXES:
+
+all: Xinitrc.xfce Xresources.xfce Xsession.xfce
+
+Xinitrc.xfce:
+	@sed -e "s%XFCE_CONFDIR%$(XFCE_CONFDIR)%g" \
+	-e "s%BIN_DIR%$(bindir)%g" \
+	$(srcdir)/Xinitrc.xfce.in > $(srcdir)/Xinitrc.xfce
+
+Xresources.xfce:
+	@sed -e "s%BIN_DIR%$(bindir)%g" \
+	-e "s%DT_CONFDIR%$(dtconfdir)%g" \
+	-e "s%DT_SUFFIX%$(DT_SUFFIX)%g" \
+	$(srcdir)/Xresources.xfce.in > $(srcdir)/Xresources.xfce
+
+Xsession.xfce:
+	@sed -e "s%DT_CONFDIR%$(dtconfdir)%g" \
+	-e "s%DT_SUFFIX%$(DT_SUFFIX)%g" \
+	$(srcdir)/Xsession.xfce.in > $(srcdir)/Xsession.xfce
+
+install: install-exec install-data
+install-exec:
+install-data: install-data-@USE_DT@
+install-data-no: all
+
+install-data-yes: all
+	if test -r "$(MKINSTALLDIRS)"; then \
+	  $(MKINSTALLDIRS) $(dtconfdir)/C/Xresources.d/; \
+	else \
+	  $(SHELL) $(MKINSTALLDIRS) $(dtconfdir)/C/Xresources.d/; \
+	fi
+	$(INSTALL_SCRIPT) $(srcdir)/Xinitrc.xfce \
+			$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
+	$(INSTALL_SCRIPT) $(srcdir)/Xsession.xfce \
+			$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
+	$(INSTALL_DATA) $(srcdir)/Xresources.xfce \
+		  	$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
+
+# Define this as empty until I found a useful application.
+installcheck:
+
+uninstall:
+	rm -f $(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
+	rm -f $(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
+	rm -f $(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
+
+check: all
+
+dvi info tags TAGS ID:
+
+mostlyclean:
+	rm -f core core.*
+	rm -fr *.bak
+
+clean: mostlyclean
+
+distclean: clean
+	rm -f Makefile
+	rm -f Xinitrc.xfce
+	rm -f Xresources.xfce
+	rm -f Xsession.xfce
+
+maintainer-clean: distclean
+
+Makefile:
+
+# Tell versions [3.59,3.63) of GNU make not to export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

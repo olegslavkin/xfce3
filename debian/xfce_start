@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Configuration files
+
+XFCE_CONFFILES=".xfbdrc .xfce3rc .xfmouserc .xfcolors .xfsoundrc"
+XFCE_SYSCONFDIR=/etc/X11/xfce
+
+# Check existance of variable $XFCE_DATA
+
+if [ "x$XFCE_DATA" = "x" ]
+then
+  XFCE_DATA=/usr/share/xfce
+  echo Environment variable XFCE_DATA is not set. Using /usr/share/xfce instead
+fi
+
+# Copy necessary private configuration files into $HOME if 
+# they aren't already present
+
+for conffile in $XFCE_CONFFILES; do
+	if [ ! -f $HOME/$conffile ]; then
+		cp -f $XFCE_SYSCONFDIR/sample$conffile $HOME/$conffile
+		chmod -f u+x $HOME/$conffile
+	fi
+done
+
+# Start-up stuff from ~/Desktop/Autostart (as it seems to be the new standard)
+#
+for i in `ls ${HOME}/Desktop/Autostart/`; do
+  if test -x $HOME/Desktop/Autostart/$i; then
+     $HOME/Desktop/Autostart/$i &
+  fi
+done
+
+# And launch XFce window manager
+#
+exec xfwm

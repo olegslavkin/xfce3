@@ -1,0 +1,48 @@
+#!/usr/bin/make -f
+# Based on dh_make examples, written by Josip Rodin.
+
+export DH_COMPAT=1
+tmp = $(shell pwd)/debian/tmp
+
+build: stamp-build
+stamp-build:
+	dh_testdir
+	./configure --prefix=/usr --sysconfdir=/etc/X11 \
+                    --mandir='$${prefix}/share/man'
+	$(MAKE)
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f debian/sample.* debian/README.debian debian/dirs
+	[ ! -f Makefile ] || $(MAKE) distclean
+	dh_clean stamp-build
+
+install:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	$(MAKE) install DESTDIR=$(tmp)
+	dh_installdirs usr/share/doc/xfce
+	cd $(tmp)/usr/share && mv xfce/help doc/xfce/html && ln -s ../doc/xfce/html xfce/help
+	install -m644 debian/xfcolors $(tmp)/etc/X11/xfce
+	rm -f $(tmp)/usr/bin/xfce_* $(tmp)/usr/share/xfce/COPYING
+
+binary binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs AUTHORS
+	dh_installchangelogs ChangeLog
+	dh_undocumented startxfce.1 xfplay.1
+	dh_installmenu
+	dh_fixperms
+	dh_strip
+	dh_compress
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+.PHONY: build clean install binary binary-arch

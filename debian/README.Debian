@@ -1,0 +1,17 @@
+XFce for Debian
+---------------
+
+XFce is a CDE clone based on GTK+ and it works pretty nice.
+
+I have replaced the upstream configuration scripts "xfce_setup" and
+"xfce_remove" with a generic startup script "xfce_start" which sets up
+XFce automagically for the user, and which lets XFce exist along with
+other GUI's in a transparent manner.
+
+The script is started instead of xfwm in the menu entries.
+
+XFce was modified to look for all its system configuration files in
+/etc/X11/xfce directory instead of /usr/share/xfce.
+
+ -- Paul Seelig <pseelig@debian.org>,  Mon, 19 Jul 1999 18:31:54 +0200
+ -- Josip Rodin <jrodin@jagor.srce.hr>,  Fri, 14 Apr 2000 22:43:13 +0200
