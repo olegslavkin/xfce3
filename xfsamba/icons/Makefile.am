@@ -26,6 +26,7 @@ noinst_DATA = \
  view1.xpm \
  view2.xpm \
  view3.xpm \
+ view4.xpm \
  warning.xpm \
  wg1.xpm \
  wg2.xpm \
