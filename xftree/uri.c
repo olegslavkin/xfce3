@@ -204,6 +204,10 @@ uri_parse_list (const char *text, GList ** list)
 
   if (!text)
     return 0;
+  
+ 
+  /*fprintf(stderr,"uri:%s\n",text);*/
+
   *list = NULL;
   org_len = strlen (text);
   p = text;

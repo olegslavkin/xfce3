@@ -30,6 +30,7 @@
 #include "xfce-common.h"
 #include "xtree_cfg.h"
 #include "gtk_dlg.h"
+#include "uri.h"
 
 #include "tubo.h"
 #endif
@@ -212,10 +213,15 @@ static void download_window(GtkWidget *parent,char *host){
 
 
 void
-SMBGetFile (GtkCTree *ctree, char *target,char *dndS)
+SMBGetFile (GtkCTree *ctree, char *target,GList *list)
 {
-  char *host,*user,*share,*file,*filename=NULL;
+  char *dndS,*host=NULL,*user,*share,*file,*filename=NULL;
+  uri *u;
   cfg *win;
+  static char *fname;
+  FILE *tmpfile=NULL;
+  extern char *randomTmpName(char *);
+
   SMBctree=(GtkWidget *)ctree;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   SMBparent=win->top;
@@ -224,6 +230,17 @@ SMBGetFile (GtkCTree *ctree, char *target,char *dndS)
 	  return;
   }
 
+  if ((fname=randomTmpName(NULL))==NULL) return;
+    if ((tmpfile=fopen(fname,"w"))==NULL) {
+	xf_dlg_error(win->top,_("Cannot open"),(fname)?fname:"/tmp/?");
+	return;
+  }
+  
+ for (;list!=NULL;list=list->next){
+  u = list->data;
+  if (strchr(u->url,'\n')) u->url=strtok(u->url,"\n");
+  if (strchr(u->url,'\r')) u->url=strtok(u->url,"\r");
+  dndS=u->url;
   /*fprintf(stderr,"dbg: processing %s\n",dndS);*/
 /*
  * 1- parse file into NMBcommand
@@ -256,21 +273,13 @@ SMBGetFile (GtkCTree *ctree, char *target,char *dndS)
 /* 2.5- get drop target */  
   
 /* 3- download via tubo */ 
-  {
-    static char *fname;
-    FILE *tmpfile=NULL;
-    extern char *randomTmpName(char *);
-    if ((fname=randomTmpName(NULL))==NULL) return;
-    if ((tmpfile=fopen(fname,"w"))==NULL) {
-	xf_dlg_error(win->top,_("Cannot open"),(fname)?fname:"/tmp/?");
-	return;
-    }
     fprintf(tmpfile,"//%s/%s\n",host,share);
     fprintf(tmpfile,"%s\n",user);
     fprintf(tmpfile,"lcd \"%s\";get \"/%s\" \"%s\";",target,file,filename);
-    fclose(tmpfile);
-    strcpy(SMBtmpfile,fname); 
-  }
+  
+ } /* end for list elements */
+  fclose(tmpfile);
+  strcpy(SMBtmpfile,fname); 
   if (filename) g_free(filename);
   /* wait until OK to proceed */
   while (fork_obj) {

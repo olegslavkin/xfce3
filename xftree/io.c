@@ -46,7 +46,8 @@
 #  include "dmalloc.h"
 #endif
 
-void cleanup_tmpfiles(void);
+extern void cleanup_tmpfiles(void);
+extern GtkWidget *io_parent;
 
 extern char **environ;
 
@@ -131,7 +132,6 @@ io_can_write_to_parent (char *file)
  */
 
 pid_t io_pid;
-extern GtkWidget *io_parent;
 int
 io_system (char **argv,GtkWidget *parent)
 {

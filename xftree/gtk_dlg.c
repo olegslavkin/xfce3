@@ -28,6 +28,7 @@
 #  include <config.h>   
 #endif
 
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -47,6 +48,8 @@
 #define B_WIDTH		80
 #define B_HEIGHT	35
 #define E_WIDTH		260
+
+static gboolean dlgfree=TRUE;
 
 typedef struct
 {
@@ -81,6 +84,7 @@ on_cancel (GtkWidget * btn, gpointer * data)
 {
   if ((int) ((long) data) != DLG_RC_DESTROY)
   {
+    dlgfree=TRUE;
     gtk_widget_destroy (dl.top);
   }
   dl.result = DLG_RC_CANCEL;
@@ -91,6 +95,7 @@ on_cancel (GtkWidget * btn, gpointer * data)
 static void
 on_destroy (GtkWidget * btn, gpointer * data)
 {
+  dlgfree=TRUE;
   gtk_main_quit ();
 }
 
@@ -104,6 +109,7 @@ on_destroy (GtkWidget * btn, gpointer * data)
 static void
 on_ok (GtkWidget * ok, gpointer * data)
 {
+  dlgfree=TRUE;
   gtk_widget_destroy (dl.top);
   dl.result = (int) ((long) data);
 }
@@ -122,6 +128,7 @@ on_ok_combo (GtkWidget * ok, gpointer * data)
   /*fprintf(stderr,"dbg: at ok_combo:%s\n",gtk_entry_get_text (GTK_ENTRY (dl.entry)));*/
   strcpy((char *)dl.return_data,gtk_entry_get_text (GTK_ENTRY (dl.entry)));
   /*fprintf(stderr,"dbg: at ok_combo->%s\n",(char *)dl.return_data);*/
+  dlgfree=TRUE;
   gtk_widget_destroy (dl.top);
   dl.result = 0; /* value not used */
 }
@@ -257,12 +264,17 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
 
   /*fprintf(stderr,"dbg1:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
   
+  while (!dlgfree){
+  	while (gtk_events_pending()) gtk_main_iteration();
+	usleep(500);
+  }
   dl.result = 0;
   dl.type = type;
   dl.entry = NULL;
   dl.data = defval;
 
   dl.top = gtk_dialog_new ();
+  dlgfree=FALSE;
   gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_MOUSE);
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
   box = gtk_hbox_new (FALSE, FALSE);
