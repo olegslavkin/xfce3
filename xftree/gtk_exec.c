@@ -55,7 +55,7 @@ typedef struct
   GtkWidget *top;
   GtkWidget *combo;
   GtkWidget *check;
-  GtkWidget *remember;
+  GtkToggleButton *remember;
   cfg *win;
   char *cmd;
   char *file;
@@ -88,22 +88,23 @@ on_ok (GtkWidget * ok, gpointer data)
   static char *last_temp=NULL;
 
   temp = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (dl.combo)->entry));
-  if (last_temp) free(last_temp);
-  last_temp=(char *)malloc(strlen(temp)+1);
+  if (last_temp) g_free(last_temp);
+  last_temp=g_strdup(temp);
   if (!last_temp) on_cancel (ok, (gpointer) ((long) DLG_RC_CANCEL));
-  strcpy(last_temp,temp);	  
-
 
   if (strlen (last_temp))
   {
+    	  
     dl.cmd = g_strdup (last_temp);
 
     dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
     gtk_widget_destroy (dl.top);
     dl.result = (int) ((long) data);
+
+    
 #if 10
-    /*something wrong here, on first execution of instance.*/
-    if ((dl.remember!=NULL)&&(gtk_toggle_button_get_active((GtkToggleButton *)dl.remember))){
+/*    if ((dl.remember!=NULL)&&(gtk_toggle_button_get_active((GtkToggleButton *)dl.remember))){*/
+    if ((dl.remember!=NULL)&&(dl.remember->active)){
       char  *sfx;
       sfx = strrchr (dl.file, '.');
       if (!sfx) {
@@ -201,11 +202,10 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
  
 #if 10
- /*on first exec of dialog, something wrong with dl.remember */
   if (dl.file) { 
-   dl.remember = gtk_check_button_new_with_label (_("Remember application"));
-   gtk_toggle_button_set_active((GtkToggleButton *)dl.remember,FALSE);
-   gtk_box_pack_start (GTK_BOX (box), dl.remember, FALSE, FALSE, 0);
+   dl.remember = (GtkToggleButton *)gtk_check_button_new_with_label (_("Remember application"));
+   gtk_toggle_button_set_active(dl.remember,FALSE);
+   gtk_box_pack_start (GTK_BOX (box), (GtkWidget *)dl.remember, FALSE, FALSE, 0);
   }
 #endif
 
