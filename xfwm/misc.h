@@ -53,10 +53,11 @@
 #define my_abs(a)   ((a > 0) ? a : -a)
 
 #define AcceptInput(t)  (t && \
-                        (!(Scr.Options & HonorWMFocusHint) || \
-			(!(t->wmhints) || \
+                        ((t->flags & DoesWmTakeFocus) || \
+			 !(Scr.Options & HonorWMFocusHint) || \
+			 !(t->wmhints) || \
                         ((t->wmhints) && !(t->wmhints->flags & InputHint)) || \
-                        ((t->wmhints) && (t->wmhints->flags & InputHint) && (t->wmhints->input)))))
+                        ((t->wmhints) && (t->wmhints->flags & InputHint) && (t->wmhints->input))))
 
 #define ICON_HEIGHT (Scr.IconFont.height + 6)
 
