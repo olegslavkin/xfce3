@@ -28,7 +28,7 @@ if [ -d "$XFCE_DATA/help/" ]
 then 
   HELP_DIR="$XFCE_DATA/help"
 else 
-  HELP_DIR="/usr/share/xfce/help"
+  HELP_DIR="/etc/X11/xfce/help"
 fi
 
 # Look first in ne location then in old location
@@ -46,11 +46,9 @@ else
 fi
 
 # netscape and mozilla require this command
-if [ "x`basename $BROWSER`" = "xnetscape" -o "x`basename $BROWSER`" =
-"xmozilla" ]
+if [ "x`basename $BROWSER`" = "xnetscape" -o "x`basename $BROWSER`" = "xmozilla" ]
 then
-  $BROWSER -remote openurl\(file:///"$HELP_FILE"\) || $BROWSER
-"$HELP_FILE"
+  $BROWSER -remote openurl\(file:///"$HELP_FILE"\) || $BROWSER "$HELP_FILE"
 # opera requires this command
 elif [ "x`basename $BROWSER`" = "opera" ]
 then
