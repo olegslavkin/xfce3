@@ -823,7 +823,7 @@ readconfig (void)
           command = g_malloc ((strlen (p ? p : "None") + 1) * sizeof (char));
 	  strcpy (command, (p ? p : "None"));
 	  if (j++ < NBMAXITEMS)
-	    add_popup_entry (i - 1, label, pixfile, command);
+	    add_popup_entry (i - 1, label, pixfile, command, -1);
 	  g_free (command);
 	}
 	g_free (label);

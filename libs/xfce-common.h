@@ -88,6 +88,8 @@ void cursor_reset (GtkWidget * widget);
 
 gint my_get_adjustment_as_int (GtkAdjustment *);
 
+void my_set_adjustment_bounds (GtkAdjustment *, gfloat, gfloat);
+
 void terminate (char *fmt, ...);
 
 void on_signal (int sig_num);

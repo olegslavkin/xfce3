@@ -591,20 +591,14 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
 {
   GdkPixmap *pixmap = NULL;
   GdkBitmap *mask = NULL;
-  int l1, l2, l3;
   char defpix[] = "Default Icon";
   gboolean nullpix = False;
 
   if ((!popup_menus[menu_s].popup_buttons[entry_s].label) || (!popup_menus[menu_s].popup_buttons[entry_s].pixfile) || (!popup_menus[menu_s].popup_buttons[entry_s].command))
     return;
 
-  l1 = strlen (popup_menus[menu_s].popup_buttons[entry_s].label);
-  l2 = strlen (popup_menus[menu_s].popup_buttons[entry_s].pixfile);
-  l3 = strlen (popup_menus[menu_s].popup_buttons[entry_s].command);
-
-  if (l2 == 0)
+  if (strlen (popup_menus[menu_s].popup_buttons[entry_s].pixfile) == 0)
   {
-    l2 = strlen (defpix);
     nullpix = True;
   }
 
@@ -615,13 +609,9 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
   if (popup_menus[menu_d].popup_buttons[entry_d].command)
     g_free (popup_menus[menu_d].popup_buttons[entry_d].command);
 
-  popup_menus[menu_d].popup_buttons[entry_d].label = (char *) g_malloc (sizeof (char) * (l1 + 1));
-  popup_menus[menu_d].popup_buttons[entry_d].pixfile = (char *) g_malloc (sizeof (char) * (l2 + 1));
-  popup_menus[menu_d].popup_buttons[entry_d].command = (char *) g_malloc (sizeof (char) * (l3 + 1));
-
-  strcpy (popup_menus[menu_d].popup_buttons[entry_d].label, popup_menus[menu_s].popup_buttons[entry_s].label);
-  strcpy (popup_menus[menu_d].popup_buttons[entry_d].pixfile, (nullpix ? defpix : popup_menus[menu_s].popup_buttons[entry_s].pixfile));
-  strcpy (popup_menus[menu_d].popup_buttons[entry_d].command, popup_menus[menu_s].popup_buttons[entry_s].command);
+  popup_menus[menu_d].popup_buttons[entry_d].label   = g_strdup (popup_menus[menu_s].popup_buttons[entry_s].label);
+  popup_menus[menu_d].popup_buttons[entry_d].pixfile = g_strdup ((nullpix ? defpix : popup_menus[menu_s].popup_buttons[entry_s].pixfile));
+  popup_menus[menu_d].popup_buttons[entry_d].command = g_strdup (popup_menus[menu_s].popup_buttons[entry_s].command);
 
   gtk_pixmap_get (GTK_PIXMAP (popup_menus[menu_s].popup_buttons[entry_s].item_pixmap), &pixmap, &mask);
   gtk_pixmap_set (GTK_PIXMAP (popup_menus[menu_d].popup_buttons[entry_d].item_pixmap), pixmap, mask);
@@ -632,14 +622,81 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
 }
 
 void
-add_popup_entry (gint nbr, char *label, char *pixfile, char *command)
+add_popup_entry (gint nbr, char *label, char *pixfile, char *command, int position)
 {
   if ((popup_menus[nbr].entries < NBMAXITEMS) && label && pixfile && command)
   {
-    set_entry (nbr, popup_menus[nbr].entries, label, pixfile, command);
+    int where = position;
+    int i;
+
+    if ((where > popup_menus[nbr].entries) || (where < 0))
+    {
+      where = popup_menus[nbr].entries;
+    }
+    for (i = popup_menus[nbr].entries; i >= where ; i--)
+    {
+      set_like_entry (nbr, i - 1, nbr, i);
+    }
+    set_entry (nbr, where, label, pixfile, command);
     popup_menus[nbr].entries++;
   }
   update_popup_entries (nbr);
+}
+
+void
+move_popup_entry (gint menu, gint entry_s, gint entry_d)
+{
+  GdkPixmap *pixmap = NULL;
+  GdkBitmap *mask = NULL;
+  gchar *label, *pixfile, *command;
+  gint where = entry_d;
+  int i;
+  
+  if (entry_d > popup_menus[menu].entries - 1)
+  {
+    where = popup_menus[menu].entries - 1;
+  }
+  if (where == entry_s)
+  {
+    return;
+  }
+
+  label   = g_strdup (popup_menus[menu].popup_buttons[entry_s].label);
+  pixfile = g_strdup (popup_menus[menu].popup_buttons[entry_s].pixfile);
+  command = g_strdup (popup_menus[menu].popup_buttons[entry_s].command);
+  gtk_pixmap_get (GTK_PIXMAP (popup_menus[menu].popup_buttons[entry_s].item_pixmap), &pixmap, &mask);
+  
+  if (where < entry_s)
+  {
+    for (i = entry_s; i > where; i--)
+    {
+      set_like_entry (menu, i - 1, menu, i);
+    }
+  }
+  else
+  {
+    for (i = entry_s; i < where; i++)
+    {
+      set_like_entry (menu, i + 1, menu, i);
+    }
+  }
+  
+  
+  if (popup_menus[menu].popup_buttons[where].label)
+    g_free (popup_menus[menu].popup_buttons[where].label);
+  if (popup_menus[menu].popup_buttons[where].pixfile)
+    g_free (popup_menus[menu].popup_buttons[where].pixfile);
+  if (popup_menus[menu].popup_buttons[where].command)
+    g_free (popup_menus[menu].popup_buttons[where].command);
+
+  popup_menus[menu].popup_buttons[where].label   = label;
+  popup_menus[menu].popup_buttons[where].pixfile = pixfile;
+  popup_menus[menu].popup_buttons[where].command = command;
+  
+  gtk_pixmap_set (GTK_PIXMAP (popup_menus[menu].popup_buttons[where].item_pixmap), pixmap, mask);
+  gtk_label_set_text (GTK_LABEL (popup_menus[menu].popup_buttons[where].item_label), label);
+  gtk_tooltips_set_tip (popup_menus[menu].popup_buttons[where].item_tooltip, popup_menus[menu].popup_buttons[entry_d].item_button, command, "ContextHelp/buttons/?");
+  update_popup_entries (menu);
 }
 
 void

@@ -25,6 +25,7 @@ GtkWidget *modify_displayed_entry;
 GtkWidget *modify_preview_frame;
 GtkWidget *modify_preview_pixmap;
 GtkWidget *modify_ok_button;
+GtkObject *modify_pos_adj;
 GtkWidget *modify_cancel_button;
 GtkWidget *modify_remove_button;
 

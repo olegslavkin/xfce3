@@ -74,7 +74,9 @@ void update_popup_size (void);
 
 void set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d);
 
-void add_popup_entry (gint nbr, char *label, char *pixfile, char *command);
+void add_popup_entry (gint nbr, char *label, char *pixfile, char *command, int position);
+
+void move_popup_entry (gint menu, gint entry_s, gint entry_d);
 
 void remove_popup_entry (gint nbr_menu, gint entry);
 

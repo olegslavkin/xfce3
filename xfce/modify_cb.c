@@ -127,10 +127,11 @@ modify_change_cb (GtkWidget * widget, gpointer data)
 {
   char *s1, *s2, *s3;
   gint x1, x3;
-  gint menu, item;
+  gint menu, item, position;
 
   menu = ((gint) ((long) data)) / NBMAXITEMS;
   item = ((gint) ((long) data)) % NBMAXITEMS;
+  position = my_get_adjustment_as_int (GTK_ADJUSTMENT (modify_pos_adj)) - 1;
 
   s1 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_command_entry)));
   s2 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_icon_entry)));
@@ -140,6 +141,10 @@ modify_change_cb (GtkWidget * widget, gpointer data)
   if (x1 && x3)
   {
     set_entry (menu, item, s3, s2, s1);
+    if (item != position)
+    {
+      move_popup_entry (menu, item, position);
+    }
     gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
     gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
     gtk_main_quit ();
@@ -156,9 +161,10 @@ modify_add_cb (GtkWidget * widget, gpointer data)
 {
   char *s1, *s2, *s3;
   gint x1, x3;
-  gint menu;
+  gint menu, position;
 
   menu = ((gint) ((long) data)) / NBMAXITEMS;
+  position = my_get_adjustment_as_int (GTK_ADJUSTMENT (modify_pos_adj)) - 1;
 
   s1 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_command_entry)));
   s2 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_icon_entry)));
@@ -167,7 +173,7 @@ modify_add_cb (GtkWidget * widget, gpointer data)
   x3 = strlen (s3);
   if (x1 && x3)
   {
-    add_popup_entry (menu, s3, s2, s1);
+    add_popup_entry (menu, s3, s2, s1, position);
     gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
     gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
     gtk_main_quit ();

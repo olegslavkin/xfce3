@@ -57,10 +57,14 @@ create_modify ()
   GtkWidget *modify_table;
   GtkWidget *modify_command_label;
   GtkWidget *modify_icon_label;
+  GtkWidget *modify_pos_frame;
+  GtkWidget *modify_pos_hscale;
   GtkWidget *modify_displayed_label;
+  GtkWidget *modify_position_label;
   GtkWidget *modify_command_browse_button;
   GtkWidget *modify_icon_browse_button;
   GtkWidget *modify_packer;
+  GtkWidget *modify_packer2;
   GtkWidget *modify_bottomframe;
   GtkWidget *modify_hbuttonbox;
   GtkAccelGroup *accel_group;
@@ -148,7 +152,7 @@ create_modify ()
   gtk_box_pack_start (GTK_BOX (modify_hbox), modify_rightframe, TRUE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (modify_rightframe), 5);
 
-  modify_table = gtk_table_new (3, 3, FALSE);
+  modify_table = gtk_table_new (3, 4, FALSE);
   gtk_widget_set_name (modify_table, "modify_table");
   gtk_object_set_data (GTK_OBJECT (modify), "modify_table", modify_table);
   gtk_widget_show (modify_table);
@@ -181,6 +185,15 @@ create_modify ()
   gtk_misc_set_alignment (GTK_MISC (modify_displayed_label), 1, 0.5);
   gtk_misc_set_padding (GTK_MISC (modify_displayed_label), 10, 0);
 
+  modify_position_label = gtk_label_new (_("Position :"));
+  gtk_widget_set_name (modify_position_label, "modify_position_label");
+  gtk_object_set_data (GTK_OBJECT (modify), "modify_position_label", modify_position_label);
+  gtk_widget_show (modify_position_label);
+  gtk_table_attach (GTK_TABLE (modify_table), modify_position_label, 0, 1, 3, 4, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_label_set_justify (GTK_LABEL (modify_position_label), GTK_JUSTIFY_RIGHT);
+  gtk_misc_set_alignment (GTK_MISC (modify_position_label), 1, 0.5);
+  gtk_misc_set_padding (GTK_MISC (modify_position_label), 10, 0);
+
   modify_command_entry = gtk_entry_new ();
   gtk_widget_set_name (modify_command_entry, "modify_command_entry");
   gtk_object_set_data (GTK_OBJECT (modify), "modify_command_entry", modify_command_entry);
@@ -198,6 +211,24 @@ create_modify ()
   gtk_object_set_data (GTK_OBJECT (modify), "modify_displayed_entry", modify_displayed_entry);
   gtk_widget_show (modify_displayed_entry);
   gtk_table_attach (GTK_TABLE (modify_table), modify_displayed_entry, 1, 2, 2, 3, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+
+  modify_pos_frame = gtk_frame_new (NULL);
+  gtk_widget_set_name (modify_pos_frame, "modify_pos_frame");
+  gtk_object_set_data (GTK_OBJECT (modify), "modify_pos_frame", modify_pos_frame);
+  gtk_frame_set_shadow_type (GTK_FRAME (modify_pos_frame), GTK_SHADOW_NONE);
+  gtk_widget_show (modify_pos_frame);
+  gtk_container_border_width (GTK_CONTAINER (modify_pos_frame), 5);
+  gtk_table_attach (GTK_TABLE (modify_table), modify_pos_frame, 1, 2, 3, 4, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+
+  modify_pos_adj = gtk_adjustment_new (0, 1, 13, 1, 1, 1);
+  modify_pos_hscale = gtk_hscale_new (GTK_ADJUSTMENT (modify_pos_adj));
+  gtk_scale_set_digits (GTK_SCALE (modify_pos_hscale), 0);
+  gtk_scale_set_value_pos (GTK_SCALE (modify_pos_hscale), GTK_POS_RIGHT);
+
+  gtk_widget_set_name (modify_pos_hscale, "modify_pos_hscale");
+  gtk_object_set_data (GTK_OBJECT (modify), "modify_pos_hscale", modify_pos_hscale);
+  gtk_widget_show (modify_pos_hscale);
+  gtk_container_add (GTK_CONTAINER (modify_pos_frame), modify_pos_hscale);
 
   modify_command_browse_button = gtk_button_new_with_label (_("Browse ..."));
   gtk_widget_set_name (modify_command_browse_button, "modify_command_browse_button");
@@ -221,6 +252,13 @@ create_modify ()
   gtk_table_attach (GTK_TABLE (modify_table), modify_packer, 2, 3, 2, 3, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND, 0, 0);
   gtk_widget_set_usize (modify_packer, -2, 40);
   gtk_widget_set_sensitive (modify_packer, FALSE);
+
+  modify_packer2 = gtk_packer_new ();
+  gtk_widget_set_name (modify_packer2, "modify_packer2");
+  gtk_object_set_data (GTK_OBJECT (modify), "modify_packer2", modify_packer2);
+  gtk_table_attach (GTK_TABLE (modify_table), modify_packer2, 2, 3, 3, 4, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND, 0, 0);
+  gtk_widget_set_usize (modify_packer2, -2, 40);
+  gtk_widget_set_sensitive (modify_packer2, FALSE);
 
   modify_bottomframe = gtk_frame_new (NULL);
   gtk_widget_set_name (modify_bottomframe, "modify_bottomframe");
@@ -299,6 +337,9 @@ open_modify (GtkWidget * modify, gint menu, gint item)
     gtk_entry_set_text (GTK_ENTRY (modify_command_entry), "");
     gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), "");
     gtk_entry_set_text (GTK_ENTRY (modify_displayed_entry), "");
+    gtk_adjustment_clamp_page (GTK_ADJUSTMENT (modify_pos_adj), 1, get_popup_menu_entries(menu) + 1);
+    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), get_popup_menu_entries(menu) + 1);
+    my_set_adjustment_bounds (GTK_ADJUSTMENT (modify_pos_adj), 1.0, (gfloat) (get_popup_menu_entries(menu) + 1));
     pixmap = MyCreateGdkPixmapFromData (empty, modify_preview_frame, &mask, TRUE);
     gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);
     gtk_widget_hide (modify_remove_button);
@@ -311,6 +352,9 @@ open_modify (GtkWidget * modify, gint menu, gint item)
     gtk_window_set_title (GTK_WINDOW (modify), _("Modify Item ..."));
     gtk_entry_set_text (GTK_ENTRY (modify_command_entry), get_popup_entry_command (menu, item));
     gtk_entry_set_text (GTK_ENTRY (modify_displayed_entry), get_popup_entry_label (menu, item));
+    gtk_adjustment_clamp_page (GTK_ADJUSTMENT (modify_pos_adj), 1, get_popup_menu_entries(menu));
+    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), item + 1);
+    my_set_adjustment_bounds (GTK_ADJUSTMENT (modify_pos_adj), 1.0, (gfloat) (get_popup_menu_entries(menu)));
     pixfile = get_popup_entry_icon (menu, item);
     if (existfile (pixfile))
     {

@@ -184,7 +184,7 @@ popup_addicon_drag_data_received (GtkWidget * widget, GdkDragContext * context, 
       {
 	snprintf (label, MAXSTRLEN - 1, "%s", name);
 	*label = toupper (*label);
-	add_popup_entry (menu, label, "Default icon", cmd);
+	add_popup_entry (menu, label, "Default icon", cmd, -1);
 	writeconfig ();
       }
     }

@@ -568,7 +568,8 @@ cursor_reset (GtkWidget * widget)
   gdk_window_set_cursor (widget->window, NULL);
 }
 
-gint my_get_adjustment_as_int (GtkAdjustment * adjustment)
+gint 
+my_get_adjustment_as_int (GtkAdjustment * adjustment)
 {
   gfloat val;
 
@@ -580,6 +581,16 @@ gint my_get_adjustment_as_int (GtkAdjustment * adjustment)
     return floor (val);
   else
     return ceil (val);
+}
+
+void
+my_set_adjustment_bounds (GtkAdjustment * adjustment, gfloat lower, gfloat upper)
+{
+  g_return_val_if_fail (adjustment != NULL, 0);
+  g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0);
+
+  adjustment->lower = lower;
+  adjustment->upper = upper + 1.0;
 }
 
 void
