@@ -149,7 +149,7 @@ static GtkAccelGroup *accel;
     
 #define MAIN_EDIT_MENU \
     {N_("List pasteboard contents"), (gpointer) cb_paste_show, 0, GDK_l,GDK_CONTROL_MASK},\
-    {N_("Clear pasteboard"), (gpointer) cb_paste_show, 0, GDK_j,GDK_CONTROL_MASK},\
+    {N_("Clear pasteboard"), (gpointer) cb_clean_pasteboard, 0, GDK_j,GDK_CONTROL_MASK},\
     {NULL, NULL, 0},\
     {N_("Select all"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
     {N_("Unselect"), (gpointer) cb_unselect, 0,GDK_u,GDK_CONTROL_MASK},\
