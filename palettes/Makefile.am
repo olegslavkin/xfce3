@@ -95,6 +95,7 @@ palettes_DATA=\
  PruneDark \
  Quartz \
  Reader \
+ Redmond \
  Salmon \
  Salmon2 \
  Sand \
