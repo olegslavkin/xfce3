@@ -82,6 +82,10 @@ on_cancel (GtkWidget * btn, gpointer * data)
     gtk_widget_destroy (dl.top);
   }
   dl.result = DLG_RC_CANCEL;
+  /*fprintf(stderr,"dbg: at cancel\n");*/
+  /*FIXME: this should work, but doesn't. Goto is
+   * pusing current dir to history on cancel.
+   *   if (dl.return_data) free(dl.return_data);*/
   gtk_main_quit ();
 }
 
@@ -104,6 +108,7 @@ on_ok (GtkWidget * ok, gpointer * data)
 static void
 on_ok_combo (GtkWidget * ok, gpointer * data)
 {
+  /*fprintf(stderr,"dbg: at ok_combo\n");*/
   if (dl.return_data) free(dl.return_data);
   dl.return_data=NULL; /* return value of false for fails */
   if (!(dl.entry)) return;
@@ -126,6 +131,21 @@ on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer cancel)
   if (event->keyval == GDK_Escape)
   {
     on_cancel ((GtkWidget *) cancel, (gpointer) ((long) DLG_RC_CANCEL));
+    return (TRUE);
+  }
+  return (FALSE);
+}
+static gint
+on_key_pressCombo (GtkWidget * entry, GdkEventKey * event, gpointer ok)
+{
+  if (event->keyval == GDK_Return)
+  {
+    on_ok_combo ((GtkWidget *) ok, (gpointer) ((long) DLG_RC_OK));
+    return (TRUE);
+  }
+  if (event->keyval == GDK_Escape)
+  {
+    on_cancel ((GtkWidget *)ok, (gpointer) ((long) DLG_RC_CANCEL));
     return (TRUE);
   }
   return (FALSE);
@@ -383,6 +403,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
     gtk_signal_connect (GTK_OBJECT (dl.entry), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data_received), NULL);
+    gtk_widget_grab_focus (dl.entry);
   }
   else if (type & DLG_COMBO)
   {
@@ -391,9 +412,11 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     gtk_combo_disable_activate (GTK_COMBO (combo));
     gtk_combo_set_case_sensitive (GTK_COMBO (combo), 1);
     dl.entry = GTK_COMBO (combo)->entry;
+    GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
-    gtk_signal_connect (GTK_OBJECT (dl.entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
+    gtk_signal_connect (GTK_OBJECT (dl.entry), "activate", GTK_SIGNAL_FUNC (on_ok_combo), (gpointer) ((long) DLG_RC_OK));
     gtk_signal_connect (GTK_OBJECT (dl.entry), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data_received), NULL);
+    gtk_signal_connect (GTK_OBJECT (dl.entry), "key_press_event", GTK_SIGNAL_FUNC (on_key_pressCombo), (gpointer) ok);
   }
   else
   {
@@ -420,21 +443,19 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
 	gtk_combo_set_popdown_strings (GTK_COMBO (combo), (GList *) data);
       }
       gtk_box_pack_start (GTK_BOX (box), combo, TRUE, TRUE, 3);
-      gtk_signal_connect (GTK_OBJECT (dl.entry), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
     }
     else
     {
       gtk_box_pack_start (GTK_BOX (box), dl.entry, TRUE, TRUE, 3);
       gtk_signal_connect_object (GTK_OBJECT (dl.entry), "activate", GTK_SIGNAL_FUNC (gtk_button_clicked), GTK_OBJECT (ok));
       gtk_widget_grab_focus (dl.entry);
-      gtk_signal_connect (GTK_OBJECT (dl.entry), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
     }
     if (defval)
       gtk_entry_set_text (GTK_ENTRY (dl.entry), defval);
     if (type & DLG_ENTRY_EDIT)
       gtk_entry_select_region (GTK_ENTRY (dl.entry), 0, -1);
   }
-  gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
+  /*gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));*/
   gtk_signal_connect (GTK_OBJECT (dl.top), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
   gtk_widget_show_all (dl.top);
 
