@@ -691,8 +691,10 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j, char *templ
   fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
 
   fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+#ifndef WIN32
   if ((p->engine) && (strlen (p->engine)) && my_strncasecmp (p->engine, "gtk", 3))
     fprintf (f, "  engine \"%s\" {}\n", p->engine);
+#endif
   fprintf (f, "}\n");
 }
 
