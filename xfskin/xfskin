@@ -138,7 +138,7 @@ global exitinst
   set sysname [string tolower [exec uname]]
   switch $sysname \
   "sunos" { set uid [exec sh -c "id |cut -f 2 -d =|cut -f 1 -d \\("]
-            set pid [string trim [ exec ps -ae -U $uid -o pid,comm | grep xfwm ]]} \
+            set pid [string trim [ exec ps -U $uid -o pid,comm | grep xfwm ]]} \
   "linux" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
   "freebsd" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
   default { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]}
