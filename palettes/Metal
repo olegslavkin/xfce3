@@ -6,6 +6,6 @@
 240 241 240
 43 125 150
 204 205 204
-engine=xfce
+engine=gtk
 -adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1
 textures/metal.xpm

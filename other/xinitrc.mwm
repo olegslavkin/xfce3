@@ -13,7 +13,7 @@ xsetroot -solid black -cursor_name watch
 # Unselect the following line to get a BIG mouse cursor in Xfce :
 # xset +fp "/usr/share/xfce/cursors"
 
-# Set up additionnal fonts that ship with Xfce
+# Set up additionnal fonts that ship with Xfce (Change id38121117)
 xset fp+ "/usr/share/xfce/fonts"
 
 for i in `ls ${HOME}/Desktop/Autostart/`; do

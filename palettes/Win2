@@ -1,10 +1,10 @@
 255 255 255
 240 240 240
-192 192 192
+127 127 127
 192 192 192
 240 240 240
 240 240 240
-0 127 165
+0 127 127
 192 192 192
-engine=xfce
--b&h-lucida-medium-r-normal-*-12-*-*-*-p-*-iso8859-1
+engine=gtk
+-lfp-uniread variable-medium-r-normal-*-9-*-*-*-p-*-iso8859-1
