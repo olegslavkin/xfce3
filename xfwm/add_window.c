@@ -142,9 +142,11 @@ AddWindow (Window w)
     return NULL;
   }
 
+  MyXGrabServer(dpy);
   if (XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0)
   {
     free (tmp_win);
+    MyXUngrabServer(dpy);
     return NULL;
   }
 
@@ -466,6 +468,7 @@ AddWindow (Window w)
   MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
   MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
 
+  MyXUngrabServer(dpy);
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);
 
   BroadcastName (XFCE_M_WINDOW_NAME, w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->name);
@@ -484,10 +487,6 @@ AddWindow (Window w)
   /* When we're all clear, map window */
   XMapSubwindows (dpy, tmp_win->frame);
   XRaiseWindow (dpy, tmp_win->Parent);
-
-#ifdef REQUIRES_XSYNC
-  XSync (dpy, 0);
-#endif
   return (tmp_win);
 }
 

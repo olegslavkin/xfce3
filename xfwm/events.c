@@ -833,9 +833,7 @@ HandleDestroyNotify ()
 #ifdef DEBUG
     fprintf (stderr, "xfwm : HandleDestroyNotify (): Destroying %s\n", Tmp_win->name);
 #endif
-    XRemoveFromSaveSet (dpy, Tmp_win->w);
     Destroy (Tmp_win);
-    Tmp_win = NULL;
   }
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleDestroyNotify ()\n");
@@ -856,9 +854,7 @@ HandleMapRequest ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleMapRequest ()\n");
 #endif
-  /* From now, until the window gets mapped, we wanna be alone */
-  XSync (dpy, 0);
-  MyXGrabServer (dpy);
+  XFlush (dpy);
   Event.xany.window = Event.xmaprequest.window;
 
   if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
@@ -910,6 +906,7 @@ HandleMapRequest ()
     case NormalState:
     case InactiveState:
     default:
+      MyXGrabServer (dpy);
       if (Tmp_win->Desk == Scr.CurrentDesk)
       {
 	Tmp_win->flags |= MAP_PENDING;
@@ -918,6 +915,7 @@ HandleMapRequest ()
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
       SetMapStateProp (Tmp_win, NormalState);
+      MyXUngrabServer(dpy);
       break;
     }
   }
@@ -925,9 +923,6 @@ HandleMapRequest ()
   {
     DeIconify (Tmp_win);
   }
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
-  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapRequest ()\n");
 #endif
@@ -975,16 +970,10 @@ HandleMapNotify ()
   if (Tmp_win->icon_pixmap_w != None)
     XUnmapWindow (dpy, Tmp_win->icon_pixmap_w);
   XMapSubwindows (dpy, Tmp_win->frame);
-
   if (Tmp_win->Desk == Scr.CurrentDesk)
     XMapWindow (dpy, Tmp_win->frame);
-
   XMapWindow (dpy, Tmp_win->w);
-
-  if ((Tmp_win->Desk == Scr.CurrentDesk) && (Scr.Options & MapFocus) && AcceptInput (Tmp_win))
-  {
-    SetFocus (Tmp_win->w, Tmp_win, True, False);
-  }
+  MyXUngrabServer (dpy);
 
   if (Tmp_win->flags & ICONIFIED)
     Broadcast (XFCE_M_DEICONIFY, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
@@ -993,9 +982,12 @@ HandleMapNotify ()
 
   Tmp_win->flags |= MAPPED;
   Tmp_win->flags &= ~(MAP_PENDING | ICONIFIED | ICON_UNMAPPED);
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
-  fast_process_expose ();
+
+  if ((Tmp_win->Desk == Scr.CurrentDesk) && (Scr.Options & MapFocus) && AcceptInput (Tmp_win))
+  {
+    SetFocus (Tmp_win->w, Tmp_win, True, False);
+  }
+
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapNotify ()\n");
 #endif
@@ -1106,8 +1098,6 @@ HandleUnmapNotify ()
     MyXUngrabServer (dpy);
   }
   Destroy (Tmp_win);
-  Tmp_win = NULL;
-  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif

@@ -410,13 +410,6 @@ Destroy (XfwmWindow * Tmp_win)
     RevertFocus (Tmp_win, False);
   }
 
-  if ((Tmp_win->icon_w) && (Tmp_win->flags & PIXMAP_OURS))
-#ifdef HAVE_IMLIB
-    Imlib_free_pixmap (imlib_id, Tmp_win->iconPixmap);
-#else
-    XFreePixmap (dpy, Tmp_win->iconPixmap);
-#endif
-
   if (Tmp_win->icon_w != None)
   {
     XDeleteContext (dpy, Tmp_win->icon_w, XfwmContext);
@@ -429,6 +422,14 @@ Destroy (XfwmWindow * Tmp_win)
     {
       XDestroyWindow (dpy, Tmp_win->icon_pixmap_w);
     }
+  }
+  if ((Tmp_win->icon_w) && (Tmp_win->flags & PIXMAP_OURS))
+  {
+#ifdef HAVE_IMLIB
+    Imlib_free_pixmap (imlib_id, Tmp_win->iconPixmap);
+#else
+    XFreePixmap (dpy, Tmp_win->iconPixmap);
+#endif
   }
   if (Tmp_win->flags & TITLE)
   {
@@ -472,6 +473,7 @@ Destroy (XfwmWindow * Tmp_win)
   fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
 #endif
   XDestroyWindow (dpy, Tmp_win->frame);
+  XSync (dpy, 0);
 
   free_window_names (Tmp_win, True, True);
   if (Tmp_win->wmhints)
@@ -487,7 +489,6 @@ Destroy (XfwmWindow * Tmp_win)
     XFree (Tmp_win->cmap_windows);
 
   free (Tmp_win);
-  XSync (dpy, 0);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Leaving routine\n");
 #endif
@@ -847,7 +848,6 @@ UnmapIt (XfwmWindow * t)
     XUnmapWindow (dpy, t->frame);
   }
   XSelectInput (dpy, t->w, eventMask);
-  fast_process_expose ();
 }
 
 /**************************************************************************
@@ -882,7 +882,6 @@ MapIt (XfwmWindow * t)
     t->flags |= MAP_PENDING;
   }
   XSelectInput (dpy, t->w, eventMask);
-  fast_process_expose ();
 }
 
 /*
