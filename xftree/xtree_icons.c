@@ -116,22 +116,17 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_COMPRESSED,	NULL,			page_compressed_xpm},
 	{gPIX+PIX_IMAGE,	NULL,			page_image_xpm},
 	{gPIX+PIX_TAR,		NULL,			page_tar_xpm},
-	{gPIX+PIX_PAGE_LNK,	NULL,			page_link_xpm},
 	{gPIX+PIX_PO,		NULL,			page_po_xpm},
 	{gPIX+PIX_BAK,		NULL,			page_backup_xpm},
 	{gPIX+PIX_DIR_PD,	NULL,			dir_pd_xpm},
 	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
 	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
 	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
-	{gPIX+PIX_EXE,		gPIM+PIM_EXE,		page_exe_xpm},
-	{gPIX+PIX_EXE_LINK,	NULL,			page_exe_link_xpm},
-	{gPIX+PIX_EXE_SCRIPT,	NULL,			page_exe_script_xpm},
 	{gPIX+PIX_CORE,		NULL,			page_core_xpm},
 	{gPIX+PIX_CHAR_DEV,	gPIM+PIM_CHAR_DEV,	char_dev_xpm},
 	{gPIX+PIX_BLOCK_DEV,	gPIM+PIM_BLOCK_DEV,	block_dev_xpm},
 	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
 	{gPIX+PIX_SOCKET,	gPIM+PIM_SOCKET,	socket_xpm},
-	/*{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},*/
 	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
 	{NULL,NULL,NULL}
 };
