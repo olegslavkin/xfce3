@@ -1,3 +1,5 @@
+0.2.1
+- that restartXFCE keeps chasing me.... added catch, to report user
 0.2.0
 - added menubar with extra file - add option
 - replaced the info button -> refresh button

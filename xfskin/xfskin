@@ -30,7 +30,7 @@ if {([file exists [file join $env(HOME) ".xfce"]])&&([file isdirectory [file joi
 set xfce_share "/usr/local/share/xfce"
 #------------------------------------------------------------------------------
 #--gui--
-set version		"0.2.0"
+set version		"0.2.1"
 wm title . 		"xfskin ($version)"
 wm iconname .		"xfskin ($version)"
 set fixedfont		"-*-lucidatypewriter-medium-r-normal-*-12-*-*-*-m-*-*-*"
@@ -133,19 +133,27 @@ enjoy!
 }
 #get_skin_dir
 
-proc restartXFCE {} {
-global exitinst 
+proc get_xfwm_id {} {
   set sysname [string tolower [exec uname]]
   switch $sysname \
   "sunos" { set uid [exec sh -c "id |cut -f 2 -d =|cut -f 1 -d \\("]
             set pid [string trim [ exec ps -U $uid -o pid,comm | grep xfwm ]]} \
-  "linux" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
-  "freebsd" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
-  default { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]}
-  set pid [string range $pid 0 [expr [string first \  $pid] -1]]
-  exec kill -USR1 $pid
-  if {$exitinst} { 
-  exit
+  "linux" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} | grep -v grep ]]} \
+  "freebsd" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} | grep -v grep ]]} \
+  default { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} | grep -v grep ]]}
+  return [string range $pid 0 [expr [string first \  $pid] -1]]
+}
+#get_xfwm_id
+
+proc restartXFCE {} {
+global exitinst 
+  if {[catch {set pid [get_xfwm_id]}]} {
+    tk_messageBox -title "ERROR" -message "could not detect xfwm\nplease restart manual"
+  } else {
+    exec kill -USR1 $pid
+    if {$exitinst} { 
+      exit
+    }
   }
 }
 #restartXFCE
