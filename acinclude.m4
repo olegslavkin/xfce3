@@ -387,6 +387,90 @@ __argz_count __argz_stringify __argz_next])
 	< $srcdir/po/POTFILES.in > po/POTFILES
   ])
 
+
+# n          
+#
+# _AC_SYS_LARGEFILE_TEST_INCLUDES
+# -------------------------------
+m4_define([_AC_SYS_LARGEFILE_TEST_INCLUDES],
+[@%:@include <sys/types.h>
+ /* Check that off_t can represent 2**63 - 1 correctly.
+    We can't simply define LARGE_OFF_T to be 9223372036854775807,
+    since some C++ compilers masquerading as C compilers
+    incorrectly reject 9223372036854775807.  */
+@%:@define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
+  int off_t_is_large[[(LARGE_OFF_T % 2147483629 == 721
+		       && LARGE_OFF_T % 2147483647 == 1)
+		      ? 1 : -1]];[]dnl
+])
+
+
+# _AC_SYS_LARGEFILE_MACRO_VALUE(C-MACRO, VALUE,
+#                               CACHE-VAR,
+#                               DESCRIPTION,
+#                               [INCLUDES], [FUNCTION-BODY])
+# ----------------------------------------------------------
+m4_define([_AC_SYS_LARGEFILE_MACRO_VALUE],
+[AC_CACHE_CHECK([for $1 value needed for large files], [$3],
+[while :; do
+  $3=no
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([$5], [$6])],
+  		    [break])
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([@%:@define $1 $2
+$5], [$6])],
+  		    [$3=$2; break])
+  break
+done])
+if test "$$3" != no; then
+  AC_DEFINE_UNQUOTED([$1], [$$3], [$4])
+fi
+rm -f conftest*[]dnl
+])# _AC_SYS_LARGEFILE_MACRO_VALUE
+
+
+# AC_SYS_LARGEFILE
+# ----------------
+# By default, many hosts won't let programs access large files;
+# one must use special compiler options to get large-file access to work.
+# For more details about this brain damage please see:
+# http://www.sas.com/standards/large.file/x_open.20Mar96.html
+AC_DEFUN([AC_SYS_LARGEFILE],
+[AC_ARG_ENABLE(largefile,
+               [  --disable-largefile     omit support for large files])
+if test "$enable_largefile" != no; then
+
+  AC_CACHE_CHECK([for special C compiler options needed for large files],
+    ac_cv_sys_largefile_CC,
+    [ac_cv_sys_largefile_CC=no
+     if test "$GCC" != yes; then
+       ac_save_CC=$CC
+       while :; do
+     	 # IRIX 6.2 and later do not support large files by default,
+     	 # so use the C compiler's -n32 option if that helps.
+         AC_LANG_CONFTEST([AC_LANG_PROGRAM([_AC_SYS_LARGEFILE_TEST_INCLUDES])])
+     	 AC_COMPILE_IFELSE([], [break])
+     	 CC="$CC -n32"
+     	 AC_COMPILE_IFELSE([], [ac_cv_sys_largefile_CC=' -n32'; break])
+         break
+       done
+       CC=$ac_save_CC
+       rm -f conftest.$ac_ext
+    fi])
+  if test "$ac_cv_sys_largefile_CC" != no; then
+    CC=$CC$ac_cv_sys_largefile_CC
+  fi
+
+  _AC_SYS_LARGEFILE_MACRO_VALUE(_FILE_OFFSET_BITS, 64,
+    ac_cv_sys_file_offset_bits,
+    [Number of bits in a file offset, on hosts where this is settable.],
+    [_AC_SYS_LARGEFILE_TEST_INCLUDES])
+  _AC_SYS_LARGEFILE_MACRO_VALUE(_LARGE_FILES, 1,
+    ac_cv_sys_large_files,
+    [Define for large files, on AIX-style hosts.],
+    [_AC_SYS_LARGEFILE_TEST_INCLUDES])
+fi
+])# AC_SYS_LARGEFILE
+
 # Here follows a copy of libtool.m4 as advised in libtool documentation
 #
 # libtool.m4 - Configure libtool for the host system. -*-Shell-script-*-
