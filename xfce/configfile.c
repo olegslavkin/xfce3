@@ -772,7 +772,7 @@ readconfig (void)
         p = nextline (configfile, lineread);
         pixfile = g_strdup (p ? p : "Default icon");
         p = nextline (configfile, lineread);
-        if (strcmp (p, "None"))
+        if ((p) && strcmp (p, "None"))
         {
           command = g_strdup (p ? p : "None");
           if (j++ < NBMAXITEMS)
