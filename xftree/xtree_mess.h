@@ -83,6 +83,7 @@ xf_dirent *xf_opendir(char *path,GtkWidget *ctree);
 xf_dirent *xf_closedir(xf_dirent *diren);
 char *xf_readdir(xf_dirent *diren);
 char *abreviate(char *path);
+char *abreviateP(char *path);
 void clear_cat (GtkWidget * widget, gpointer data);
 void cb_custom_home(GtkWidget *widget,gpointer data);
 

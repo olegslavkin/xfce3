@@ -838,6 +838,21 @@ char *abreviate(char *path)
     return shortpath;
 }
 
+char *abreviateP(char *path)
+{
+    int i;
+    static char *label=NULL;
+    if (strlen(path)<=16) return path;
+    
+    if (label) free(label);
+    label=(char *)malloc(strlen(path)+1);
+    if (!label) return path;
+    strcpy (label,path);
+    label[8]='~';
+    for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
+    return label;
+}
+
 void cb_custom_home(GtkWidget *widget,gpointer ctree){
   cfg *win;
   char *entry_return;	

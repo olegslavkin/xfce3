@@ -386,6 +386,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
       sprintf (size, "%10d", (int) en->size);
     }
   }
+  if (preferences&ABREVIATE_PATHS) text[COL_NAME] = abreviateP(en->label); else 
   text[COL_NAME] = en->label;
   text[COL_DATE] = date;
   text[COL_SIZE] = size;
@@ -492,18 +493,12 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
     sprintf (complete, "%s%s", base, name);
     strcpy (label, name);
     if ((!io_is_current (name))){
-      if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
-	      int i;
-	      label[8]='~';
-	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
-      }
       item = add_node (GTK_CTREE (ctree), root, first, label, complete, &type, flags);
     }
     if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (name)) && item){
       add_subtree (ctree, item, complete, depth - 1, flags);
     }
-    else if (!first)
-      first = item;
+    else if (!first) first = item;
    }
    diren=xf_closedir (diren);
   } 
@@ -639,7 +634,6 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   GtkCTreeNode *child = NULL, *new_child = NULL, *next;
   entry *en, *child_en;
   char compl[PATH_MAX + 1];
-  char label[NAME_MAX + 1];
   int type, p_len, changed, tree_updated, root_changed;
   gchar size[16];
   gchar date[32];
@@ -716,6 +710,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 
   if ((root_changed || tree_updated) && (en->type & FT_DIR))
   {
+    /*fprintf(stderr,"dbg:rc=%d,tu=%d\n",root_changed,tree_updated);fflush(NULL);*/
     if (GTK_CTREE_ROW (node)->expanded)
     {
       char *name;	    
@@ -732,24 +727,18 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
        }
        p_len = strlen (en->path);
        while ((name = xf_readdir (diren)) != NULL) {
-	strcpy (label, name);
-	if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
-	      int i;
-	      label[8]='~';
-	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
-	}
 	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
 	if (io_is_current (name))  continue;
-	if (io_is_current (label))  continue;
 	if (!node_has_child (ctree, node, name))
 	{
 	  if (io_is_root (name)) sprintf (compl, "%s%s", en->path, name);
 	  else   sprintf (compl, "%s/%s", en->path, name);
 	  type = 0;
 	  new_child = NULL;
-	  if (name && !io_is_current (name) ){
-	    new_child = add_node (ctree, node, NULL, label, compl, &type, en->flags);
-	  }
+
+	  /*fprintf(stderr,"dbg:adding %s (%s)\n",label,name);fflush(NULL);*/
+
+	  new_child = add_node (ctree, node, NULL, name, compl, &type, en->flags);
 	  
 	  if ((type & FT_DIR) && (io_is_valid (name)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
 	    add_subtree (ctree, new_child, compl, 1, en->flags);
