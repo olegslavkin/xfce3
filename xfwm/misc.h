@@ -427,6 +427,8 @@ void ReadFile (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
                unsigned long context, char *action, int *Module);
 void PipeRead (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
                unsigned long context, char *action, int *Module);
+void ReadCfg (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
+               unsigned long context, char *action, int *Module);
 void module_zapper (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
                     unsigned long context, char *action, int *Module);
 char *expand (char *input, char *arguments[], XfwmWindow * tmp_win);

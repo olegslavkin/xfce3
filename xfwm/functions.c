@@ -122,6 +122,7 @@ static struct functions func_config[] = {
                                             {"Raise", raise_function, F_RAISE, FUNC_NEEDS_WINDOW},
                                             {"RaiseLower", raiselower_func, F_RAISELOWER, FUNC_NEEDS_WINDOW},
                                             {"Read", ReadFile, F_READ, FUNC_NO_WINDOW},
+                                            {"ReadCfg", ReadCfg, F_READCFG, FUNC_NO_WINDOW},
                                             {"Recapture", Recapture, F_RECAPTURE, FUNC_NO_WINDOW},
                                             {"Refresh", refresh_function, F_REFRESH, FUNC_NO_WINDOW},
                                             {"RefreshWindow", refresh_win_function, F_REFRESH, FUNC_NEEDS_WINDOW},

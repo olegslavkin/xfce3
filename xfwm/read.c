@@ -73,7 +73,7 @@ struct moduleInfoList *modlistroot = NULL;
 
 int numfilesread = 0;
 
-static int last_read_failed = 0;
+static int syscfg_read = 0;
 
 static const char *read_system_rc_cmd = "Read xfwmrc";
 
@@ -101,7 +101,6 @@ ReadSubFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
     if (ofilename == NULL)
     {
         xfwm_msg (ERR, piperead ? "PipeRead" : "Read", "missing parameter");
-        last_read_failed = 1;
         return;
     }
 
@@ -156,7 +155,6 @@ ReadSubFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
             free (ofilename);
             ofilename = NULL;
         }
-        last_read_failed = 1;
         return;
     }
     if ((ofilename != NULL) && (filename != ofilename))
@@ -190,40 +188,36 @@ ReadSubFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
         pclose (fd);
     else
         fclose (fd);
-    last_read_failed = 0;
 }
 
 void
 ReadFile (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
           unsigned long context, char *action, int *Module)
 {
-    int this_read = numfilesread;
-
     ReadSubFunc (eventp, junk, tmp_win, context, action, Module, 0);
-
-    if (last_read_failed && this_read == 0)
-    {
-        xfwm_msg (INFO, "Read", "trying to read system rc file");
-        ExecuteFunction ((char *) read_system_rc_cmd, NULL, &Event, C_ROOT, -1);
-    }
 }
 
 void
 PipeRead (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
           unsigned long context, char *action, int *Module)
 {
+    ReadSubFunc (eventp, junk, tmp_win, context, action, Module, 1);
+}
+
+void
+ReadCfg (XEvent * eventp, Window junk, XfwmWindow * tmp_win,
+          unsigned long context, char *action, int *Module)
+{
     int this_read = numfilesread;
 
-    ReadSubFunc (eventp, junk, tmp_win, context, action, Module, 1);
+    ReadSubFunc (eventp, junk, tmp_win, context, action, Module, 0);
 
-    if (last_read_failed && this_read == 0)
+    if (!syscfg_read && this_read == 0)
     {
-        xfwm_msg (INFO, "PipeRead", "trying to read system rc file");
+        xfwm_msg (INFO, "Read", "trying to read system rc file");
         ExecuteFunction ((char *) read_system_rc_cmd, NULL, &Event, C_ROOT, -1);
     }
-
-    if (this_read == 0)
-        StartupStuff ();
+    syscfg_read = 1;
 }
 
 void

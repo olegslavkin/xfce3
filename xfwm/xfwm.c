@@ -157,7 +157,7 @@ ImlibData *imlib_id;
 
 Window BlackoutWin = None;	/* window to hide window captures */
 
-char *default_config_command = "Read xfwmrc";
+char *default_config_command = "ReadCfg xfwmrc";
 char *user_menu_command      = "Read xfwm.user_menu";
 
 extern char *ModulePath;
@@ -348,8 +348,8 @@ main (int argc, char **argv)
             if (num_config_commands < MAX_CFG_CMDS)
             {
                 config_commands[num_config_commands] =
-                    (char *) safemalloc (6 + strlen (argv[i]));
-                strcpy (config_commands[num_config_commands], "Read ");
+                    (char *) safemalloc (9 + strlen (argv[i]));
+                strcpy (config_commands[num_config_commands], "ReadCfg ");
                 strcat (config_commands[num_config_commands], argv[i]);
                 num_config_commands++;
             }

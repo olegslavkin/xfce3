@@ -109,6 +109,7 @@
 #define F_SWITCHFUNC	        72
 #define F_SETMAPFOCUS	        73
 #define F_MARGIN	        74
+#define F_READCFG               75
 /* Functions which require a target window */
 #define F_RESIZE		100
 #define F_RAISE			101
