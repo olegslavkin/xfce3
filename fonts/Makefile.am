@@ -1,3 +1,5 @@
+fontsdir=$(datadir)/fonts
+fonts_DATA=\
 uniread-variable-05-b-i-ISO8859-1.pcf.gz \
 uniread-variable-05-b-i.pcf.gz \
 uniread-variable-05-b-r-ISO8859-1.pcf.gz \

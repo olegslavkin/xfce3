@@ -458,38 +458,41 @@ AC_MSG_RESULT(XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR)
 AC_MSG_RESULT(XFCE_CONFDIR set to $XFCE_CONFDIR)
 
 AC_OUTPUT(Makefile \
-	libs/Makefile \
-	xfce/Makefile \
-	xfwm/Makefile \
-	xftree/Makefile \
-	xfpager/Makefile \
-	xfmouse/Makefile \
-	xfrun/Makefile \
-	xfbd/Makefile \
-	xfclock/Makefile \
-	xfsound/Makefile \
-	xfgnome/Makefile \
-	xfmenu/Makefile \
-	xfdiff/Makefile \
-	xfglob/Makefile \
-	xfsamba/Makefile \
-	xfumed/Makefile \
-	scripts/Makefile \
-	intl/Makefile \
-	dt/Makefile \
-	gdm/Makefile \
-	xfce_theme/Makefile \
-	po/Makefile.in po/Makefile \
-	other/Makefile.in other/Makefile \
-	backdrops/Makefile.in backdrops/Makefile \
-	icons/Makefile.in icons/Makefile \
-	palettes/Makefile.in palettes/Makefile \
-	sounds/Makefile.in sounds/Makefile \
-	docs/Makefile.in docs/Makefile \
-	textures/Makefile.in textures/Makefile \
-	cursors/Makefile.in cursors/Makefile \
-	fonts/Makefile.in fonts/Makefile)
-dnl
+libs/Makefile \
+xfce/Makefile \
+xfwm/Makefile \
+xftree/Makefile \
+xfpager/Makefile \
+xfmouse/Makefile \
+xfrun/Makefile \
+xfbd/Makefile \
+xfclock/Makefile \
+xfsound/Makefile \
+xfgnome/Makefile \
+xfmenu/Makefile \
+xfdiff/Makefile \
+xfglob/Makefile \
+xfsamba/Makefile \
+xfumed/Makefile \
+scripts/Makefile \
+intl/Makefile \
+dt/Makefile \
+gdm/Makefile \
+xfce_theme/Makefile \
+cursors/Makefile \
+other/Makefile \
+backdrops/Makefile \
+icons/Makefile \
+palettes/Makefile \
+sounds/Makefile \
+docs/Makefile \
+docs/images/Makefile \
+docs/html/Makefile \
+docs/html/stylesheet-images/Makefile \
+textures/Makefile \
+fonts/Makefile \
+po/Makefile.in po/Makefile)
+
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp])

@@ -1,3 +1,5 @@
+palettesdir=$(datadir)/palettes
+palettes_DATA=\
 Alpine \
 Altxfce \
 Altxfce2 \

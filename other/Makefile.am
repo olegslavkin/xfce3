@@ -1,3 +1,5 @@
+conffilesdir=$(xfcedir)
+conffiles_DATA=\
 Xclients \
 fvwm2rc \
 fvwmrc \
@@ -22,3 +24,8 @@ xinitrc.mwm \
 xinitrc \
 xsession \
 xtree.reg
+
+sysfilesdir=$(xfceconfdir)
+sysfiles_DATA=\
+COPYING \
+XFce3.logo

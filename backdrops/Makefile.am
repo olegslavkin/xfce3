@@ -1,3 +1,5 @@
+backdropsdir=$(datadir)/backdrops
+backdrops_DATA=\
 A-Little-Exercise.jpg \
 A-Little-Exercise-3.jpg \
 Anneaux.xpm \
@@ -118,3 +120,4 @@ Xfce.xpm \
 XfceStellar.xpm \
 Xfcelogo.xpm \
 Xfcemice.jpg
+

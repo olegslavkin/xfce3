@@ -1,3 +1,5 @@
+texturesdir=$(datadir)/textures
+textures_DATA=\
 Aluminium.xpm \
 BlueX.xpm \
 BlueX2.xpm \

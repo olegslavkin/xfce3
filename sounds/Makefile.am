@@ -1,3 +1,5 @@
+sourndsdir=$(datadir)/sournds
+sournds_DATA=\
 alert01.wav \
 beep01.wav \
 beep02.wav \

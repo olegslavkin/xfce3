@@ -1,3 +1,5 @@
+iconsdir=$(datadir)/icons
+icons_DATA=\
 3dpaint.xpm \
 ABC.xpm \
 AZ.xpm \
