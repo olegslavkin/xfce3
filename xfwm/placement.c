@@ -76,17 +76,17 @@ GetGravityOffsets (XfwmWindow * tmp_win)
     case NorthWestGravity:
       tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
       tmp_win->gravy = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
-      tmp_win->grav_align_y = 0;
+      tmp_win->grav_align_y = -1 /* 0 */;
       break;
     case NorthGravity:
       tmp_win->gravx = tmp_win->bw - tmp_win->old_bw;
       tmp_win->gravy = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
-      tmp_win->grav_align_y = 0;
+      tmp_win->grav_align_y = -1 /* 0 */;
       break;
     case NorthEastGravity:
       tmp_win->gravx = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
       tmp_win->gravy = - (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
-      tmp_win->grav_align_y = 0;
+      tmp_win->grav_align_y = -1 /* 0 */;
       break;
     case WestGravity:
       tmp_win->gravx = tmp_win->bw - tmp_win->old_bw;
