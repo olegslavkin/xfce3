@@ -25,6 +25,8 @@
 #ifndef __XTREE_CFG_H__
 #define __XTREE_CFG_H__
 
+#include <gtk/gtk.h>
+
 #define IGNORE_HIDDEN 1
 
 typedef struct
