@@ -121,6 +121,7 @@ autotype_t autotype[]= {
 	{".ZIP","unzip",N_("Uncompress")},
 	{".zip","unzip",N_("Uncompress")},
 	{".rpm","rpm -U --percent",N_("Install/update")},
+	{".deb","dpkg -i",N_("Install/update")},
 	{NULL,NULL}
 };
 

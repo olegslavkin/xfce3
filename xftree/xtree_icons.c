@@ -266,7 +266,8 @@ static gboolean ps_type(char *loc){
 static gboolean packed_type(char *loc){
   char *Type[]={
 	  ".rpm",
-	  /*".deb",".cpio",*/
+	  ".deb",
+	  /* ".cpio",*/
 	  NULL
   };
   return checkif_type(Type,loc);			    
@@ -384,20 +385,16 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
         PIXid[1]=PIM_DIR_CLOSE;
         PIXid[3]=PIM_DIR_OPEN;
       }
+      if (type & FT_DIR_PD) {
+       PIXid[0]=PIX_DIR_PD;
+       PIXid[2]=PIX_DIR_OPEN;
+      }
       goto icon_identified;
   } else if (type & FT_DIR_UP){
       PIXid[0]=PIX_DIR_UP;
       PIXid[1]=PIM_DIR_CLOSE;
       goto icon_identified;
-  } else if (type & FT_DIR_PD) {
-      isleaf=FALSE;
-      PIXid[0]=PIX_DIR_PD;
-      PIXid[1]=PIM_DIR_CLOSE;
-      PIXid[2]=PIX_DIR_OPEN;
-      PIXid[3]=PIM_DIR_OPEN;
-      goto icon_identified;
-  }
-
+  } 
   /* whatever it is, it's not a directory */
 
   /* special files : */

@@ -103,8 +103,8 @@ void
 entry_free (entry * en)
 {
   if (en) {
-    g_free (en->path);
-    g_free (en->label);
+    if (en->path) g_free (en->path);
+    if (en->label) g_free (en->label);
     g_free (en);
   }
 }
@@ -275,6 +275,7 @@ int entry_update (entry * en)
      }
      if (S_ISDIR (ss.st_mode)) {
 	     tipo |= FT_DIR;
+             if (access (en->path, R_OK | X_OK) != 0) tipo |= FT_DIR_PD;
              dup_stat(&s,&ss);
      } 
      if ((ss.st_mode & S_IXUSR) || (ss.st_mode & S_IXGRP) || (ss.st_mode & S_IXOTH))
@@ -287,7 +288,10 @@ int entry_update (entry * en)
      else if (S_ISSOCK (ss.st_mode)) tipo |= FT_SOCKET;
      
   } else {
-     if (S_ISDIR (s.st_mode)) tipo |= FT_DIR;
+     if (S_ISDIR (s.st_mode)) {
+	     tipo |= FT_DIR;
+             if (access (en->path, R_OK | X_OK) != 0) tipo |= FT_DIR_PD;
+     }
      if (S_ISREG (s.st_mode)){
         tipo |= FT_FILE;
         if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))

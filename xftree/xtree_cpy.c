@@ -172,7 +172,8 @@ static int process_error(int code){
 	  case RW_ERROR_OPENING_TGT:
 		  txt=fork_target;
 		  message=strerror(errno); 
-		  break;
+		  return code; /* don't create any warning, just abort */
+		  /*break;*/
 	  case RW_ERROR_TOO_FEW:
 		  txt=fork_target;
 		  message=_("Too few bytes transferred ! Device full ?"); 
