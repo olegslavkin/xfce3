@@ -1369,12 +1369,13 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   } 
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
-  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
-		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
+  reset_icon(GTK_CTREE (ctree), root); 
+  /*for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
+		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));*/
 
 
-  gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), path);
-  gtk_signal_connect (GTK_OBJECT (ctree), "tree_collapse", GTK_SIGNAL_FUNC (on_collapse), path);
+  gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), NULL);
+  gtk_signal_connect (GTK_OBJECT (ctree), "tree_collapse", GTK_SIGNAL_FUNC (on_collapse), NULL);
   gtk_signal_connect (GTK_OBJECT (ctree), "click_column", GTK_SIGNAL_FUNC (on_click_column), en);
   gtk_signal_connect_after (GTK_OBJECT (ctree), "button_press_event", GTK_SIGNAL_FUNC (on_double_click), root);
   gtk_signal_connect (GTK_OBJECT (ctree), "button_press_event", GTK_SIGNAL_FUNC (on_button_press), menu);

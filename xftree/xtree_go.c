@@ -206,9 +206,10 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   }    
   gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
   add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
+  reset_icon(ctree, root);
   
-  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
-		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
+  /*for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
+		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));*/
   ctree_thaw (ctree);
   set_title_ctree (GTK_WIDGET (ctree), uri_clear_path (en->path));
   icon_name = strrchr (en->path, '/');

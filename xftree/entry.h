@@ -68,17 +68,16 @@ entry;
 
 #define FT_TAR			(1<<14)
 #define FT_TARCHILD		(1<<15)
-#define FT_TAR_DUMMY		(1<<16)
+#define FT_HAS_DUMMY		(1<<16)
 #define FT_GZ			(1<<17)
 #define FT_COMPRESS		(1<<18)
 #define FT_BZ2			(1<<19)
 
 #define FT_RPM			(1<<20)
 #define FT_RPMCHILD		(1<<21)
-#define FT_RPM_DUMMY		(1<<22)
-#define FT_DIR_RO		(1<<23)
-#define FT_PD			(1<<24)
-#define FT_ISROOT		(1<<25)
+#define FT_DIR_RO		(1<<22)
+#define FT_PD			(1<<23)
+#define FT_ISROOT		(1<<24)
 
 
 

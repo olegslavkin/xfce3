@@ -31,7 +31,11 @@
 #include "xtree_mess.h"
 #include "xtree_go.h"
 
-#define IGNORE_HIDDEN 1
+/* bitwise or for flags that should be inherited */
+#define INHERIT_FLAG_MASK	(IGNORE_HIDDEN)
+#define IGNORE_HIDDEN 		0x01
+#define HIDDEN_PRESENT 		0x02
+#define HAS_DUMMY 		0x04
 
 typedef struct
 {

@@ -330,7 +330,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
 	   /* fprintf(stderr,"dbg:can't do %s\n",path);*/
       return 0;
     }
-    en->flags = flags;
+    en->flags = (flags & INHERIT_FLAG_MASK);
     {
       char *tag="  ";
       unsigned long long tama;
@@ -469,6 +469,27 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
 	
 }
 
+void reset_icon(GtkCTree * ctree, GtkCTreeNode * node){
+  entry *en;
+  int i; 
+  icon_pix pix; 
+  gboolean isleaf;
+  cfg * win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  en = gtk_ctree_node_get_row_data (ctree, node);
+
+  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
+		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
+  isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
+    /*printf("dbg: updating %s\n",en->label);*/
+  
+  //gtk_signal_disconnect_by_func (GTK_OBJECT (ctree),GTK_SIGNAL_FUNC (on_expand),NULL);
+  gtk_ctree_set_node_info (ctree,node,(win->preferences&ABREVIATE_PATHS)? abreviate(en->label):en->label, 
+		 SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, TRUE);
+  //while (gtk_events_pending()) gtk_main_iteration();	     
+  //gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), NULL);
+} 
+	
 
 void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
 {
@@ -481,6 +502,10 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
   char *label;
   int add_slash = no, len, d_len;
   int type = 0;
+  entry *p_en;
+  
+  p_en = gtk_ctree_node_get_row_data (ctree, root);
+  p_en->flags &= (0xffffffff ^ HIDDEN_PRESENT);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   if (depth == 0) return ;
@@ -511,6 +536,7 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
     sprintf (complete, "%s.", base);
     type = FT_DUMMY;
     add_node (GTK_CTREE (ctree), root, NULL, ".", complete, &type, flags);
+    p_en->type |= FT_HAS_DUMMY;
     g_free (base);
     free(complete);
     return ;
@@ -538,25 +564,29 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
     d_len = strlen (name);
 	/*fprintf(stderr,"dbg:%s\n",name);*/
     if (io_is_dirup (name)) type |= FT_DIR_UP | FT_DIR;
-    else if ((d_len >= 1) && io_is_hidden (name) && ((flags & IGNORE_HIDDEN)))
+    else if ((d_len >= 1) && io_is_hidden (name) && ((flags & IGNORE_HIDDEN))){
+      if (d_len > 1) p_en->flags |= HIDDEN_PRESENT;	    
+      /*fprintf(stderr,"dbg:hidden, %s\n",name);*/
       continue;
+    }
     if ((complete=(char *)malloc(strlen(base)+strlen(name)+1))==NULL) continue;
     sprintf (complete, "%s%s", base, name);
     if ((label=(char *)malloc(strlen(name)+1))==NULL) continue;
     strcpy (label, name);
     if ((!io_is_current (name))){
-      entry *en;
       item = add_node (GTK_CTREE (ctree), root, first, label, complete, &type, flags);
-      en = gtk_ctree_node_get_row_data (ctree, item); 
     }
+    
     if ((++count % 512)==0){
         gtk_clist_thaw (GTK_CLIST (ctree));
         while (gtk_events_pending()) gtk_main_iteration();	     
         gtk_clist_freeze (GTK_CLIST (ctree));
     }
+    
     if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (name)) && item){
 	    /* this is just to get the necesary expanders on startup */
       add_subtree (ctree, item, complete, depth - 1, flags);
+      /* dont use reset_icon(ctree, item); here */
     }
     else {if (!first) {first = item;}}
     free(complete);
@@ -566,8 +596,10 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
    update_status(root,ctree);
   } 
   g_free (base);
-  /* do not autosort directories with more than 1024 entries */
-  if (count <= 1024)gtk_ctree_sort_node (ctree, root);
+  
+   /* do not autosort directories with more than 1024 entries */
+  if (count <= 1024) gtk_ctree_sort_node (ctree, root);
+  
   return ;
 }
 
@@ -578,7 +610,6 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
 {
   GtkCTreeNode *node, *child;
   entry *en;
-  int i;
   cfg *win;
 
   gtk_clist_freeze (GTK_CLIST (ctree));
@@ -608,19 +639,9 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
   }
   en->flags ^= IGNORE_HIDDEN;
   add_subtree (ctree, node, en->path, 2, en->flags);
-  gtk_ctree_expand (ctree, node);
-  {
-    icon_pix pix; 
-    gboolean isleaf; 
-    isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
-    /*printf("dbg: updating %s\n",en->label);*/
-    gtk_ctree_set_node_info (ctree,node, (win->preferences&ABREVIATE_PATHS)? abreviate(en->label):en->label, 
-		  SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, TRUE);
-  } 
+  reset_icon(ctree, node);
   /* select affected node to enable easy toggle on/off */
   gtk_ctree_select (ctree,node);
-  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
-		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
   gtk_clist_thaw (GTK_CLIST (ctree));
 }
 
@@ -635,9 +656,11 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   entry *en;
 
   en = gtk_ctree_node_get_row_data (ctree, node);
+
+  
   
   if (en->type & (FT_TAR|FT_TARCHILD|FT_RPM|FT_RPMCHILD)) {	 
-      if  (en->type & (FT_TAR_DUMMY|FT_RPM_DUMMY)){
+      if  (en->type & (FT_HAS_DUMMY)){
 	      /*printf("doingit\n");*/
 	      /* cursor wait */
               ctree_freeze (ctree);
@@ -647,8 +670,7 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
                 gtk_ctree_remove_node (ctree, child);
                 child = GTK_CTREE_ROW (node)->children;
               }
-	      if (en->type & FT_TAR_DUMMY) en->type ^= FT_TAR_DUMMY;
-	      if (en->type & FT_RPM_DUMMY) en->type ^= FT_RPM_DUMMY;
+	      if (en->type & FT_HAS_DUMMY) en->type ^= FT_HAS_DUMMY;
 	      /* add tar tree */
               if (en->type & (FT_RPM|FT_RPMCHILD)) add_rpm_tree(ctree,node,en);
               if (en->type & (FT_TAR|FT_TARCHILD)) add_tar_tree(ctree,node,en);
@@ -659,7 +681,8 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
       return;
   }
 
-  
+  if (!(en->type & FT_HAS_DUMMY)) return;
+  en->type ^= FT_HAS_DUMMY;
   
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   ctree_freeze (ctree);
@@ -671,6 +694,8 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   }
   en = gtk_ctree_node_get_row_data (ctree, node);
   add_subtree (ctree, node, en->path, 2, en->flags);
+  
+  reset_icon(ctree, node);
   ctree_thaw (ctree);
   if (win->preferences & STATUS_FOLLOWS_EXPAND){
    cfg *win;
@@ -840,33 +865,6 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     }
     else if (changed == TRUE)
     {
-#if 0
-      /* update the labels */
-     struct passwd *pw;
-     struct group *gr;
-     /*fprintf(stderr,"dbg: doing update for %s\n",en->label);*/
-      {
-       char *tag="  ";
-       unsigned long long tama;
-       tama =  child_en->st.st_size;
-       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" GB";}
-       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" MB";}
-       else if (tama >= 1024*10) {tama /= 1024; tag=" KB";}
-       sprintf (size, " %llu%s", tama,tag);
-      }
-     
-      sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
-		      child_en->date.year, child_en->date.month, 
-		      child_en->date.day, child_en->date.hour, child_en->date.min);
-      gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
-      gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
-      gtk_ctree_node_set_text (ctree, child, COL_MODE, mode_txt(en->st.st_mode));
-      pw=getpwuid(en->st.st_uid); 
-      gtk_ctree_node_set_text (ctree, child, COL_UID,(pw)? pw->pw_name : _("unknown") );
-      gr=getgrgid (en->st.st_gid); 
-      gtk_ctree_node_set_text (ctree, child, COL_GID,(gr)? gr->gr_name : _("unknown") );      
-      update_node (ctree, child, child_en->type, child_en->label); /* icon changes */
-#endif
       update_node (ctree, child, child_en); /* icon changes */
       /* skip sort if no files added tree_updated = TRUE;*/
     }
@@ -875,6 +873,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
      * the recursive tree function, methinks */
     if (!(GTK_CTREE_ROW (child)->children) && (io_is_valid (child_en->label)) && !(child_en->type & FT_DIR_UP) && !(child_en->type & FT_DIR_PD) && (child_en->type & FT_DIR)){
       add_subtree (GTK_CTREE (ctree), child, child_en->path, 1, child_en->flags);
+      reset_icon(GTK_CTREE (ctree),child);      
     }
   } /* end for child */
   
@@ -899,6 +898,8 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
       xf_dirent *diren;
       /* may be there are new files */
        /*fprintf(stderr,"dbg:update_tree()...\n");fflush(NULL);*/
+	
+       en->flags &= (0xffffffff ^ HIDDEN_PRESENT); /* hidden files may have dissappeared */
        
        diren = xf_opendir (en->path,(GtkWidget *)ctree);
        if (!diren) {
@@ -909,7 +910,13 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
        }
        p_len = strlen (en->path);
        while ((name = xf_readdir (diren,(GtkWidget *)ctree)) != NULL) {
-	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
+	if (io_is_hidden (name)){
+	  if ((strcmp(name,".")!=0)&&(strcmp(name,"..")!=0)) {
+		/*printf("flagging hidden because of %s\n",name);*/
+		en->flags |= HIDDEN_PRESENT; /* hidden files may have appeared */
+	  }
+	  if (en->flags & IGNORE_HIDDEN)  continue;
+	}
 	if (io_is_current (name))  continue;
 	if (!node_has_child (ctree, node, name))
 	{
@@ -923,6 +930,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	  new_child = add_node (ctree, node, NULL, name, compl, &type, en->flags);
 	  if ((type & FT_DIR) && (io_is_valid (name)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
 	    add_subtree (ctree, new_child, compl, 1, en->flags);
+            reset_icon(ctree, new_child);
 	  if (entry_update (en) > 0) update_node (ctree, node, en);
 /*	  if (entry_update (en) > 0) update_node (ctree, node, en->type, en->label);*/
 	  /* root is changed: tree_updated = TRUE;*/
@@ -934,6 +942,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     else if ((GTK_CTREE_ROW (node)->children) && (io_is_valid (en->label)) && !(en->type & (FT_DIR_UP|FT_DIR_PD)))
     {
       add_subtree (GTK_CTREE (ctree), node, en->path, 1, en->flags);
+      reset_icon(GTK_CTREE (ctree), node);
       /* icon changes after adding the node? not going to happen: */
       /*if (entry_update (en) > 0) update_node (ctree, node, en->type, en->label); */
     }
@@ -941,6 +950,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   /*if (tree_updated || root_changed) {*/
   if (root_changed) {
       /*fprintf(stderr,"dbg:doing sort\n");fflush(NULL);*/
+      reset_icon(GTK_CTREE (ctree), node);
       gtk_ctree_sort_node (GTK_CTREE (ctree), node);
   }
  
