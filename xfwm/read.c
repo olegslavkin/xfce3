@@ -146,6 +146,8 @@ ReadSubFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long c
       filename = home_file;
       fd = fopen (filename, "r");
     }
+    if ((fd == NULL) && (ofilename[0] == '/'))
+      fd = fopen (ofilename, "r");
   }
 
   if (fd == NULL)

@@ -25,6 +25,7 @@
  * Regognized options:
  * -gnome
  * -kde
+ * -debian
  * gnome is the default when no options are given. If both options are
  * given both menus are generated.
  * 
@@ -86,11 +87,12 @@ typedef struct menuoptions
 {
   int gnome_menu;
   int kde_menu;
+  int debian_menu;
 }
 MenuOptions;
 
 typedef enum menutypes
-{ GNOME, KDE }
+{ GNOME, KDE, DEBIAN }
 MenuType;
 
 typedef enum entrytypes
@@ -287,6 +289,7 @@ MenuOptions get_options (char **argv)
 
   options.gnome_menu = 0;
   options.kde_menu = 0;
+  options.debian_menu = 0;
 
   if (argv[7] && strlen (argv[7]) > 1)
   {
@@ -294,6 +297,8 @@ MenuOptions get_options (char **argv)
       options.gnome_menu = 1;
     else if (g_strncasecmp ("-k", argv[7], 2) == 0)
       options.kde_menu = 1;
+    else if (g_strncasecmp ("-d", argv[7], 2) == 0)
+      options.debian_menu = 1;
 
     if (argv[8] && strlen (argv[8]) > 1)
     {
@@ -301,12 +306,25 @@ MenuOptions get_options (char **argv)
 	options.gnome_menu = 1;
       else if (g_strncasecmp ("-k", argv[8], 2) == 0)
 	options.kde_menu = 1;
+      else if (g_strncasecmp ("-d", argv[8], 2) == 0)
+            options.debian_menu = 1;	
+      
+      if (argv[9] && strlen (argv[9]) > 1)
+	{
+	  if (g_strncasecmp ("-g", argv[9], 2) == 0)
+	    options.gnome_menu = 1;
+	  else if (g_strncasecmp ("-k", argv[9], 2) == 0)
+	    options.kde_menu = 1;
+	  else if (g_strncasecmp ("-d", argv[9], 2) == 0)
+	    options.debian_menu = 1;
+	}
     }
   }
   else
   {
-    /* default to only gnome menu */
-    options.gnome_menu = 1;
+    /* default to only debian menu */
+    options.debian_menu = 1;
+    options.gnome_menu = 0;
     options.kde_menu = 0;
   }
 
@@ -925,7 +943,20 @@ get_menu_name (const char *dirname, MenuType mtype)
   /* current_menu_root is a global variable */
   if (strcmp (dirname, current_menu_root) == 0)
   {
-    name = (mtype == GNOME) ? g_strdup ("__gnome_menu__") : g_strdup ("__kde_menu__");
+    switch (mtype)
+      {
+      case GNOME:
+        name = g_strdup ("__gnome_menu__");
+        break;
+      case KDE:
+        name = g_strdup ("__kde_menu__");
+        break;
+      case DEBIAN:
+        name = g_strdup ("__debian_menu__");
+        break;
+      default:
+        name = g_strdup ("__debian_menu__");	
+      }
     return name;
   }
 
@@ -940,7 +971,20 @@ get_menu_name (const char *dirname, MenuType mtype)
 
   if (strlen (s) == 0)
   {
-    name = (mtype == GNOME) ? g_strdup ("__gnome_menu__") : g_strdup ("__kde_menu__");
+    switch (mtype)
+      {
+      case GNOME:
+        name = g_strdup ("__gnome_menu__");
+        break;
+      case KDE:
+        name = g_strdup ("__kde_menu__");
+        break;
+      case DEBIAN:
+        name = g_strdup ("__debian_menu__");
+        break;
+      default:
+        name = g_strdup ("__debian_menu__");
+      }
     return name;
   }
 
@@ -950,7 +994,7 @@ get_menu_name (const char *dirname, MenuType mtype)
   g_strchomp (name);
   name = g_strdelimit (name, " /", '_');
 
-  g_snprintf (buffer, MAXSTRLEN - 1, "__%s_%s__", ((mtype == GNOME) ? "gnome" : "kde"), name);
+  g_snprintf (buffer, MAXSTRLEN - 1, "__%s_%s__", ((mtype == GNOME) ? "gnome" : ((mtype == KDE) ? "kde" : "debian" )), name);
 
   g_free (name);
   return g_strdup (buffer);
@@ -964,11 +1008,17 @@ add_to_user_menu (MenuType mtype)
     fprintf (stderr, "Loading KDE menus\n");
     SendInfo (fd, "AddToMenu \"user_menu\" KDE popup \"__kde_menu__\"\n", 0);
   }
-  else
+  else if (mtype == GNOME)
   {
     fprintf (stderr, "Loading GNOME menus\n");
     SendInfo (fd, "AddToMenu \"user_menu\" GNOME popup \"__gnome_menu__\"\n", 0);
   }
+  else
+    {
+      fprintf (stderr, "Loading DEBIAN menus\n");
+      SendInfo(fd, "Read \"/etc/X11/xfce/debian.menu\" Quiet\n", 0);
+      SendInfo (fd, "AddToMenu \"user_menu\" Debian popup \"__debian_menu__\"\n", 0);
+    }
 }
 
 int
@@ -1217,6 +1267,9 @@ xfmenu (MenuOptions options)
       add_to_user_menu (mtype);
   }
 
+  if (options.debian_menu)
+    add_to_user_menu(DEBIAN);
+  
   return 0;
 }
 

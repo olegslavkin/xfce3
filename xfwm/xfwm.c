@@ -281,6 +281,9 @@ main (int argc, char **argv)
   Bool launch_xfce = True;
   char *temp_path = NULL;
   struct passwd *pwd;
+/* ??? patch 3.8.12c
+  int ruid, euid, suid;
+ ??? patch 3.8.12c */
 
 #if defined(HAVE_X11_EXTENSIONS_XINERAMA_H)
   int xinerama_major, xinerama_minor;
@@ -299,6 +302,11 @@ main (int argc, char **argv)
   g_argv = argv;
   g_argc = argc;
 
+/* ??? patch 3.8.12c
+  getresuid(&ruid, &euid, &suid);
+  fprintf(stderr, "%d %d %d\n", ruid, euid, suid);
+ ??? patch 3.8.12c */
+  
   temp_path = getenv ("SM_SAVE_DIR");
   if (!temp_path)
   {

@@ -430,6 +430,11 @@ startup_wm_modules (void)
       strcpy (command, "Module xfmenu -kde");
       exec_comm (command, current_config.wm);
     }
+    if (current_config.startup_flags & F_DEBIANMENUMODULE)
+    {
+      strcpy (command, "Module xfmenu -debian");
+      exec_comm (command, current_config.wm);
+    }
     g_free (command);
   }
 }

@@ -30,6 +30,7 @@
 #define F_GNOMEMODULE        (1 << 4)
 #define F_GNOMEMENUMODULE    (1 << 5)
 #define F_KDEMENUMODULE      (1 << 6)
+#define F_DEBIANMENUMODULE   (1 << 7)
 
 typedef enum
 {

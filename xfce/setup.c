@@ -1122,6 +1122,19 @@ create_setup (XFCE_palette * pal)
   gtk_box_pack_start (GTK_BOX (setup_vbox5), setup_options.setup_kdemenumodule_checkbutton, FALSE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (setup_options.setup_kdemenumodule_checkbutton), 2);
 
+  setup_options.setup_debianmenumodule_checkbutton =
+    gtk_check_button_new_with_label (_("Debian menu (xfmenu)"));
+  gtk_widget_set_name (setup_options.setup_debianmenumodule_checkbutton,
+		       "setup_debianmenumodule_checkbutton");
+  gtk_object_set_data (GTK_OBJECT (setup), 
+		       "setup_debianmenumodule_checkbutton", 
+		       setup_options.setup_debianmenumodule_checkbutton);
+  gtk_widget_show (setup_options.setup_debianmenumodule_checkbutton);
+  gtk_box_pack_start (GTK_BOX (setup_vbox5),
+		      setup_options.setup_debianmenumodule_checkbutton, 
+		      FALSE, TRUE, 0);
+  gtk_container_border_width (GTK_CONTAINER (setup_options.setup_debianmenumodule_checkbutton), 2);
+
   setup_notebook_palette_label = gtk_label_new (_("Palette"));
   gtk_widget_set_name (setup_notebook_palette_label, "setup_notebook_palette_label");
   gtk_object_set_data (GTK_OBJECT (setup), "setup_notebook_palette_label", setup_notebook_palette_label);
@@ -1337,6 +1350,7 @@ show_setup (XFCE_palette * pal)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_gnomemodule_checkbutton), (current_config.startup_flags & F_GNOMEMODULE));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_gnomemenumodule_checkbutton), (current_config.startup_flags & F_GNOMEMENUMODULE));
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_kdemenumodule_checkbutton), (current_config.startup_flags & F_KDEMENUMODULE));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_debianmenumodule_checkbutton), (current_config.startup_flags & F_DEBIANMENUMODULE));
   gnome_sticky (setup->window);
   gtk_widget_show (setup);
 /*
@@ -1413,4 +1427,5 @@ get_setup_values (void)
   current_config.startup_flags |= (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_gnomemodule_checkbutton)) ? F_GNOMEMODULE : 0);
   current_config.startup_flags |= (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_gnomemenumodule_checkbutton)) ? F_GNOMEMENUMODULE : 0);
   current_config.startup_flags |= (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_kdemenumodule_checkbutton)) ? F_KDEMENUMODULE : 0);
+  current_config.startup_flags |= (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_debianmenumodule_checkbutton)) ? F_DEBIANMENUMODULE : 0);
 }

@@ -88,6 +88,7 @@ typedef struct
   GtkWidget *setup_gnomemodule_checkbutton;
   GtkWidget *setup_gnomemenumodule_checkbutton;
   GtkWidget *setup_kdemenumodule_checkbutton;
+  GtkWidget *setup_debianmenumodule_checkbutton;
   GtkObject *setup_switchdeskfactor_spinbutton_adj;
   GtkWidget *setup_switchdeskfactor_spinbutton;
 }

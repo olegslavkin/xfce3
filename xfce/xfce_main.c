@@ -92,6 +92,12 @@ main (int argc, char *argv[])
   char gtkrc_file[MAXSTRLEN + 1];
   static int dg;
   char *homedir;
+/* ??? patch 3.8.12c
+  int ruid, euid, suid;
+
+  getresgid(&ruid, &euid, &suid);
+  fprintf(stderr, "aaaa: %d %d %d\n", ruid, euid, suid);
+ ??? patch 3.8.12c */
 
   xfce_init (&argc, &argv);
 

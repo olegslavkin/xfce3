@@ -139,7 +139,7 @@ initconfig (config * newconf)
   newconf->startup_flags = (F_SOUNDMODULE | F_MOUSEMODULE | 
 			    F_BACKDROPMODULE | F_PAGERMODULE | 
 			    F_GNOMEMODULE | F_GNOMEMENUMODULE | 
-			    F_KDEMENUMODULE);
+			    F_KDEMENUMODULE | F_DEBIANMENUMODULE);
   newconf->iconpos = 0;		/* Top of screen */
   newconf->fonts[0] = (char *) g_strdup (XFWM_TITLEFONT);
   newconf->fonts[1] = (char *) g_strdup (XFWM_MENUFONT);
