@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.4\n"
-"POT-Creation-Date: 2001-07-11 22:25+0200\n"
-"PO-Revision-Date: 2001-07-11  12:00+0200\n"
+"POT-Creation-Date: 2001-08-05 10:43+0200\n"
+"PO-Revision-Date: 2001-08-05  12:00+0200\n"
 "Last-Translator: Rudolf Ulc <rudolf.ulc@oku-st.cz>\n"
 "Language-Team: CZ      <li@linux.cz>\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,7 @@ msgstr "Vybrat ..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
-#: xfce/setup.c:1583 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
+#: xfce/setup.c:1585 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
 #: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
 #: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
 #: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
@@ -90,7 +90,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
-#: xfce/setup.c:1607 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
+#: xfce/setup.c:1609 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
 #: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
 #: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
 msgid "Cancel"
@@ -138,28 +138,28 @@ msgstr ""
 msgid "Cannot create file"
 msgstr "Nemohu vytvoøit soubor"
 
-#: xfce/configfile.c:347
+#: xfce/configfile.c:350
 msgid "Cannot reset configuration file"
 msgstr "Nemohu resetovat konfiguraèní soubor"
 
-#: xfce/configfile.c:350
+#: xfce/configfile.c:353
 msgid "Creating new config file...\n"
 msgstr "Vytváøím nový konfiguraèní soubor...\n"
 
-#: xfce/configfile.c:561 xfce/configfile.c:570 xfce/configfile.c:578
+#: xfce/configfile.c:564 xfce/configfile.c:573 xfce/configfile.c:581
 #, c-format
 msgid "XFce : %s File not found.\n"
 msgstr "XFce :  %s Soubor nenalezen.\n"
 
-#: xfce/configfile.c:577 xfce/configfile.c:584
+#: xfce/configfile.c:580 xfce/configfile.c:587
 msgid "Cannot open configuration file"
 msgstr "Nemohu otevøít konfiguraèní soubor"
 
-#: xfce/configfile.c:590
+#: xfce/configfile.c:593
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Tohle nevypadá jako konfiguraèní soubor XFce 3 !"
 
-#: xfce/configfile.c:592
+#: xfce/configfile.c:595
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
@@ -167,15 +167,15 @@ msgstr ""
 "Chcete resetovat konfiguraèní soubor ?\n"
 " \t(Pøedcházející soubor bude ulo¾en s pøíponou \".orig\" )"
 
-#: xfce/configfile.c:602
+#: xfce/configfile.c:605
 msgid "Cannot open new config, Giving up..."
 msgstr "Nemohu otevøít nový konfiguraèní soubor, vzdávam to..."
 
-#: xfce/configfile.c:603
+#: xfce/configfile.c:606
 msgid "Cannot load configuration file"
 msgstr "Nemohu naèíst konfiguraèní soubor"
 
-#: xfce/configfile.c:610
+#: xfce/configfile.c:613
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Nemohu pou¾ít staré verze konfiguraèních souborù XFce"
 
@@ -328,231 +328,231 @@ msgstr "Zvuk"
 msgid "External..."
 msgstr "Externí"
 
-#: xfce/setup.c:283
+#: xfce/setup.c:284
 msgid "Setup"
 msgstr "Nastavení..."
 
-#: xfce/setup.c:374
+#: xfce/setup.c:375
 msgid "GTK theme engine : "
 msgstr "Výbìr GTK témat : "
 
-#: xfce/setup.c:403
+#: xfce/setup.c:404
 msgid "Apply colors to all applications"
 msgstr "Pou¾ít barvy do v¹ech aplikací"
 
-#: xfbd/xfbdmgr.c:166 xfce/setup.c:430
+#: xfbd/xfbdmgr.c:166 xfce/setup.c:431
 msgid "Load ..."
 msgstr "Naèíst ..."
 
-#: xfbd/xfbdmgr.c:160 xfce/setup.c:444
+#: xfbd/xfbdmgr.c:160 xfce/setup.c:445
 msgid "Save ..."
 msgstr "Ulo¾it ..."
 
-#: xfce/setup.c:458
+#: xfce/setup.c:459
 msgid "Default"
 msgstr "Standartnì"
 
-#: xfce/setup.c:492
+#: xfce/setup.c:493
 msgid "Repaint root window of workspace"
 msgstr "Pøekreslovat pozadí"
 
-#: xfce/setup.c:505
+#: xfce/setup.c:506
 msgid "Use gradient color as wallpaper"
 msgstr "Pou¾ít gradientní barvu jako podklad"
 
-#: xfce/setup.c:518
+#: xfce/setup.c:519
 msgid "Use tear-off menus"
 msgstr "Pou¾ít vysouvací nabídku"
 
-#: xfce/setup.c:531
+#: xfce/setup.c:532
 msgid "Show subprocess diagnostic dialog"
 msgstr "Zobrazovat diagnostický dialog subprocesù"
 
-#: xfce/setup.c:543
+#: xfce/setup.c:544
 msgid "Panel layer"
 msgstr "Vrstva panelu"
 
-#: xfce/setup.c:561
+#: xfce/setup.c:562
 msgid "Bottom"
 msgstr "Dole"
 
-#: xfce/setup.c:584 xfce/setup.c:1173
+#: xfce/setup.c:585 xfce/setup.c:1175
 msgid "Top"
 msgstr "Nahoøe"
 
-#: xfce/setup.c:594
+#: xfce/setup.c:595
 msgid "Clock"
 msgstr "Hodiny"
 
-#: xfce/setup.c:612
+#: xfce/setup.c:613
 msgid "Use digital clock on panel"
 msgstr "Na panelu pou¾ít digitální hodiny "
 
-#: xfce/setup.c:626
+#: xfce/setup.c:627
 msgid "Use military time (24 hours)"
 msgstr "Nastavit 24 hodinový èas"
 
-#: xfce/setup.c:638
+#: xfce/setup.c:639
 msgid "Tooltips"
 msgstr "Bublinková nápovìda"
 
-#: xfce/setup.c:657
+#: xfce/setup.c:658
 msgid "Tooltips delay (ms.) : "
 msgstr "Zpo¾dìní bublinkové nápovìdy v (ms.) : "
 
-#: xfce/setup.c:685
+#: xfce/setup.c:686
 msgid "Virtual Screens"
 msgstr "Virtuální obrazovky"
 
-#: xfce/setup.c:703
+#: xfce/setup.c:704
 msgid "Number of virtual desktops : "
 msgstr "Poèet virtuálních ploch : "
 
-#: xfce/setup.c:728
+#: xfce/setup.c:729
 msgid "Popups & Icons"
 msgstr "Nabídky a ikony"
 
-#: xfce/setup.c:746
+#: xfce/setup.c:747
 msgid "Number of popup menus : "
 msgstr "Poèet výsuvných nabídek : "
 
-#: xfce/setup.c:771
+#: xfce/setup.c:772
 msgid "Size of icons on panel"
 msgstr "Velikost ikon na panelu"
 
-#: xfce/setup.c:790 xfce/setup.c:848
+#: xfce/setup.c:791 xfce/setup.c:849
 msgid "Large"
 msgstr "Velké"
 
-#: xfce/setup.c:804 xfce/setup.c:862
+#: xfce/setup.c:805 xfce/setup.c:863
 msgid "Medium"
 msgstr "Støední"
 
-#: xfce/setup.c:817 xfce/setup.c:875
+#: xfce/setup.c:818 xfce/setup.c:876
 msgid "Small"
 msgstr "Malé"
 
-#: xfce/setup.c:829
+#: xfce/setup.c:830
 msgid "Size of icons on pop-up menus"
 msgstr "Velikost ikon na výsuvných menu"
 
-#: xfce/setup.c:887
+#: xfce/setup.c:888
 msgid "Font style"
 msgstr "Styl písma"
 
-#: xfce/setup.c:917 xfce/setup.c:1374 xfce/setup.c:1388 xfce/setup.c:1402
+#: xfce/setup.c:918 xfce/setup.c:1376 xfce/setup.c:1390 xfce/setup.c:1404
 msgid "Browse..."
 msgstr "Vybrat ..."
 
-#: xfce/setup.c:952
+#: xfce/setup.c:953
 msgid "Click to focus windows"
 msgstr "Klinutí pro aktivaci oken"
 
-#: xfce/setup.c:965
+#: xfce/setup.c:966
 msgid "Automatically focus on new window"
 msgstr "Automaticky pøesunout aktivaci na nové okno"
 
-#: xfce/setup.c:978
+#: xfce/setup.c:979
 msgid "Auto raise windows"
 msgstr "Automaticky vyzdvihnout okna"
 
-#: xfce/setup.c:992
+#: xfce/setup.c:993
 msgid "Show contents of window while moving"
 msgstr "Zobrazovat obsah oken bìhem pøesouvání"
 
-#: xfce/setup.c:1007
+#: xfce/setup.c:1008
 msgid "Show contents of window while resizing"
 msgstr "Zobrazovat obsah oken bìhem zmìny velikosti"
 
-#: xfce/setup.c:1022
+#: xfce/setup.c:1023
 msgid "Use gradient color for the active window"
 msgstr "Pou¾ít gradientní barvu pro aktivní okno"
 
-#: xfce/setup.c:1036
+#: xfce/setup.c:1037
 msgid "Use gradient color for inactive windows"
 msgstr "Pou¾ít gradientní barvu pro neaktivní okno"
 
-#: xfce/setup.c:1074
+#: xfce/setup.c:1075
 msgid "Window border style : "
 msgstr "Styl rámu okna : "
 
-#: xfce/setup.c:1117
+#: xfce/setup.c:1119
 msgid "Window snapping size (0 disable) : "
 msgstr "Plocha uchycení okna (0 vypnuto) :"
 
-#: xfce/setup.c:1156
+#: xfce/setup.c:1158
 msgid "Icon position"
 msgstr "Umístìní ikony"
 
-#: xfce/setup.c:1188 xfmouse/xfmouse.c:209
+#: xfce/setup.c:1190 xfmouse/xfmouse.c:209
 msgid "Left"
 msgstr "Vlevo"
 
-#: xfce/setup.c:1203
+#: xfce/setup.c:1205
 msgid "bottom"
 msgstr "Dole"
 
-#: xfce/setup.c:1218 xfmouse/xfmouse.c:220
+#: xfce/setup.c:1220 xfmouse/xfmouse.c:220
 msgid "Right"
 msgstr "Vpravo"
 
-#: xfce/setup.c:1334
+#: xfce/setup.c:1336
 msgid "Title font :"
 msgstr "Písmo titulkù :"
 
-#: xfce/setup.c:1347
+#: xfce/setup.c:1349
 msgid "Icon font :"
 msgstr "Písmo ikon :"
 
-#: xfce/setup.c:1360
+#: xfce/setup.c:1362
 msgid "Menu font :"
 msgstr "Písmo nabídek :"
 
-#: xfce/setup.c:1438
+#: xfce/setup.c:1440
 msgid "Sound module (xfsound)"
 msgstr "Zvukový modul (xfsound)"
 
-#: xfce/setup.c:1452
+#: xfce/setup.c:1454
 msgid "Mouse settings (xfmouse)"
 msgstr "Nastavení my¹i (xfmouse)"
 
-#: xfce/setup.c:1466
+#: xfce/setup.c:1468
 msgid "Backdrop settings (xfbd)"
 msgstr "Nastavení pozadí (xfbd)"
 
-#: xfce/setup.c:1480
+#: xfce/setup.c:1482
 msgid "Pager (xfpager)"
 msgstr "Pøepínaè ploch (xfpager)"
 
-#: xfce/setup.c:1494
+#: xfce/setup.c:1496
 msgid "GNOME (xfgnome)"
 msgstr "GNOME (xfgnome)"
 
-#: xfce/setup.c:1508
+#: xfce/setup.c:1510
 msgid "GNOME menu (xfmenu)"
 msgstr "GNOME menu (xfgnome)"
 
-#: xfce/setup.c:1522
+#: xfce/setup.c:1524
 msgid "KDE menu (xfmenu)"
 msgstr "KDE Menu (xfmenu)"
 
-#: xfce/setup.c:1535
+#: xfce/setup.c:1537
 msgid "Palette"
 msgstr "Paleta"
 
-#: xfce/setup.c:1543
+#: xfce/setup.c:1545
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1551
+#: xfce/setup.c:1553
 msgid "Windows"
 msgstr "Okna"
 
-#: xfce/setup.c:1559 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1561 xfce/startup.c:60 xfsound/xfsound.c:92
 msgid "Startup"
 msgstr "Spustit po startu"
 
-#: xfbd/xfbd.c:560 xfce/setup.c:1595 xfmouse/xfmouse.c:322
+#: xfbd/xfbd.c:560 xfce/setup.c:1597 xfmouse/xfmouse.c:322
 #: xfsound/xfsound.c:572
 msgid "Apply"
 msgstr "Pou¾ít"
@@ -765,9 +765,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Komunikaèní roura byla uzavøena. Ukonèuji..\n"
 
-#: xfce/xfwm.c:441 xfwm/xfwm.c:878 xfwm/xfwm.c:879 xfwm/xfwm.c:880
-#: xfwm/xfwm.c:881 xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884
-#: xfwm/xfwm.c:885 xfwm/xfwm.c:886 xfwm/xfwm.c:887
+#: xfce/xfwm.c:451 xfwm/xfwm.c:879 xfwm/xfwm.c:880 xfwm/xfwm.c:881
+#: xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884 xfwm/xfwm.c:885
+#: xfwm/xfwm.c:886 xfwm/xfwm.c:887 xfwm/xfwm.c:888
 msgid "Workspace"
 msgstr "Plocha"
 
@@ -930,7 +930,7 @@ msgstr "Otevøít pomocí ..."
 
 #: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
 #: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
-#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:913
+#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:914
 msgid "Run program ..."
 msgstr "Spustit program ..."
 
@@ -1278,7 +1278,7 @@ msgid "Patch viewer ..."
 msgstr "Prohlí¾eè patchù ..."
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:905
+#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:906
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -1404,7 +1404,6 @@ msgstr "Patch soubor nemá unifikovaný formát"
 msgid "****Empty file****\n"
 msgstr "*** Prázdný soubor ***\n"
 
-#. missing color attribute
 #: xfdiff/xfdiff.c:255 xfdiff/xfdiff.c:260 xfdiff/xfdiff.c:261
 msgid "****Binary data****\n"
 msgstr "***Binární data***\n"
@@ -1630,16 +1629,6 @@ msgstr "Byla ulo¾ena defaultní konfigurace\n"
 #: xfdiff/xfdiff_gui.c:647
 msgid "This is XFDiff "
 msgstr "To je XFDiff "
-
-#: xfdiff/xfdiff_gui.c:648
-msgid ""
-"\n"
-"(c) by Edscott Wilson Garcia under GNU GPL\n"
-"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
-msgstr ""
-"\n"
-"(c) Edscott Wilson Garcia pod GNU GPL\n"
-"XFCE moduly Olivier Fourdan http://www.xfce.org"
 
 #: xfdiff/xfdiff_gui.c:660
 msgid "There is no next difference"
@@ -1889,7 +1878,6 @@ msgstr "Nemohu otevøít soubor pro zápis\n"
 msgid "couldn't allocate color"
 msgstr "Nemohu alokovat barvy"
 
-#. font color!
 #: xfdiff/xfdiff_misc.c:793 xfdiff/xfdiff_misc.c:813
 msgid "Patch: "
 msgstr "Patch : "
@@ -2717,119 +2705,119 @@ msgstr "xfbdmgr - XFCE mana¾ér seznamu"
 msgid "File not found.\n"
 msgstr "Soubor nenalezen\n"
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:876
 msgid "&Restart"
 msgstr "&Restartovat"
 
-#: xfwm/xfwm.c:876
+#: xfwm/xfwm.c:877
 msgid "&Quit"
 msgstr "&Ukonèit"
 
-#: xfwm/xfwm.c:889
+#: xfwm/xfwm.c:890
 msgid "&Move"
 msgstr "&Pøesunout"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:891
 msgid "&Resize"
 msgstr "&Zmìnit velikost"
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:892
 msgid "(De)&Iconify"
 msgstr "(De)&Ikonifikovat"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:893
 msgid "(Un)&Stick"
 msgstr "(Od)&Lepit"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:894
 msgid "(Un)S&hade"
 msgstr "(Od)R&olovat"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:895
 msgid "(Un)Ma&ximize"
 msgstr "(Od)Ma&ximalizovat"
 
-#: xfwm/xfwm.c:896
+#: xfwm/xfwm.c:897
 msgid "Se&nd to..."
 msgstr "Po&slat do..."
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:898
 msgid "S&witch to..."
 msgstr "Pø&epnout na..."
 
-#: xfwm/xfwm.c:899
+#: xfwm/xfwm.c:900
 msgid "&Close"
 msgstr "&Zavøít"
 
-#: xfwm/xfwm.c:901
+#: xfwm/xfwm.c:902
 msgid "User Menu"
 msgstr "U¾ivatelské menu"
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:903
 msgid "Edit menu..."
 msgstr "Upravit menu ..."
 
-#: xfwm/xfwm.c:906
+#: xfwm/xfwm.c:907
 msgid "&Mouse..."
 msgstr "&My¹i"
 
-#: xfwm/xfwm.c:907
+#: xfwm/xfwm.c:908
 msgid "&Backdrop..."
 msgstr "&Pozadí..."
 
-#: xfwm/xfwm.c:908
+#: xfwm/xfwm.c:909
 msgid "&Sound..."
 msgstr "&Zvukù..."
 
-#: xfwm/xfwm.c:910
+#: xfwm/xfwm.c:911
 msgid "&New window"
 msgstr "&Nové okno"
 
-#: xfwm/xfwm.c:911
+#: xfwm/xfwm.c:912
 msgid "&User Menu"
 msgstr "&U¾ivatelské menu"
 
-#: xfwm/xfwm.c:915
+#: xfwm/xfwm.c:916
 msgid "&Arrange icons"
 msgstr "&Uspoøádat ikony"
 
-#: xfwm/xfwm.c:916
+#: xfwm/xfwm.c:917
 msgid "&Iconify all"
 msgstr "&Ikonifikovat v¹e"
 
-#: xfwm/xfwm.c:917
+#: xfwm/xfwm.c:918
 msgid "&Refresh"
 msgstr "&Obnovit"
 
-#: xfwm/xfwm.c:918
+#: xfwm/xfwm.c:919
 msgid "Shuffle &Up"
 msgstr "Pøepnout &Nahoøe"
 
-#: xfwm/xfwm.c:919
+#: xfwm/xfwm.c:920
 msgid "Shuffle &Down"
 msgstr "Pøepnout &Dole"
 
-#: xfwm/xfwm.c:921
+#: xfwm/xfwm.c:922
 msgid "&Settings"
 msgstr "&Nastavení"
 
-#: xfwm/xfwm.c:923
+#: xfwm/xfwm.c:924
 msgid "&Quit XFwm"
 msgstr "&Konec XFwm"
 
-#: xfwm/xfwm.c:925
+#: xfwm/xfwm.c:926
 msgid "&Full Screen"
 msgstr "&Celá obrazovka"
 
-#: xfwm/xfwm.c:926
+#: xfwm/xfwm.c:927
 msgid "&Vertical"
 msgstr "&Vertikálnì"
 
-#: xfwm/xfwm.c:927
+#: xfwm/xfwm.c:928
 msgid "&Horizontal"
 msgstr "&Horizontálnì"
 
-#: xfwm/xfwm.c:1264
+#: xfwm/xfwm.c:1265
 msgid "xfwm terminated: "
 msgstr "xfwm je ukonèeno: "
 
@@ -2910,16 +2898,6 @@ msgstr ""
 #: xfsamba/xfsamba_gui.c:150
 msgid "This is XFSamba "
 msgstr "To je XFSamba "
-
-#: xfsamba/xfsamba_gui.c:151
-msgid ""
-"\n"
-"(c) Edscott Wilson Garcia under GNU GPL\n"
-"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
-msgstr ""
-"\n"
-"(c) Edscott Wilson Garcia pod GNU GPL\n"
-"XFCE moduly (c) Olivier Fourdan http://www.xfce.org"
 
 #: xfsamba/xfsamba_gui.c:316
 msgid "Please provide information for server "
@@ -3421,33 +3399,48 @@ msgid ""
 "\n"
 "Do you want to quit and lose the changes ?"
 msgstr ""
-"Máte neulo¾ené znìny v menu.\n"
+"Máte neulo¾ené zmìny v menu.\n"
 "\n"
-"Chcete skonèit a znìny ztratit ?"
+"Chcete skonèit a zmìny ztratit ?"
 
 #: xfumed/interface.c:494
 msgid "Don't Quit"
-msgstr "Nekonèit"
+msgstr "Zpìt"
 
 #: xfumed/interface.c:494
 msgid "Quit, don't save"
-msgstr "Skonèit, neulo¾it"
+msgstr "Konec bez ulo¾ení"
 
-#: xfumed/interface.h:21
-msgid "Item"
-msgstr "Polo¾ka"
+#~ msgid ""
+#~ "\n"
+#~ "(c) by Edscott Wilson Garcia under GNU GPL\n"
+#~ "XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
+#~ msgstr ""
+#~ "\n"
+#~ "(c) Edscott Wilson Garcia pod GNU GPL\n"
+#~ "XFCE moduly Olivier Fourdan http://www.xfce.org"
 
-#: xfumed/interface.h:22
-msgid "Submenu"
-msgstr "Jít do submenu"
+#~ msgid ""
+#~ "\n"
+#~ "(c) Edscott Wilson Garcia under GNU GPL\n"
+#~ "XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+#~ msgstr ""
+#~ "\n"
+#~ "(c) Edscott Wilson Garcia pod GNU GPL\n"
+#~ "XFCE moduly (c) Olivier Fourdan http://www.xfce.org"
 
-#: xfumed/interface.h:23
-msgid "Separator"
-msgstr "Oddìlovaè"
+#~ msgid "Item"
+#~ msgstr "Polo¾ka"
 
-#: xfumed/usermenu.h:28
-msgid "# This file was generated by xfumed - XFce User Menu Editor"
-msgstr "Tento soubor byl vytvoøen programem xfumed - editorem u¾ivatelského menu XFce"
+#~ msgid "Submenu"
+#~ msgstr "Jít do submenu"
+
+#~ msgid "Separator"
+#~ msgstr "Oddìlovaè"
+
+#~ msgid "# This file was generated by xfumed - XFce User Menu Editor"
+#~ msgstr ""
+#~ "Tento soubor byl vytvoøen programem xfumed - editorem u¾ivatelského menu XFce"
 
 #~ msgid "Agreement"
 #~ msgstr "Ujednání"

@@ -51,6 +51,7 @@
 #include "closepix.h"
 #include "iconify.h"
 #include "minbutup.h"
+#include "minpower.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -516,7 +517,7 @@ create_gxfce (XFCE_palette *pal)
   GtkWidget *gxfce_setup_pixmap;
   GtkTooltips *gxfce_setup_tooltip;
   GtkWidget *gxfce_quit;
-  GtkWidget *gxfce_quit_label;
+  GtkWidget *gxfce_quit_pixmap;
   GtkTooltips *gxfce_quit_tooltip;
   GtkWidget *gxfce_hbox3;
   GtkWidget *gxfce_hbox_moveright;
@@ -855,26 +856,30 @@ create_gxfce (XFCE_palette *pal)
   gxfce_rightbuttons[1] = gxfce_quit = gtk_button_new ();
   gtk_widget_set_name (gxfce_quit, "gxfce_quit");
   gtk_object_set_data (GTK_OBJECT (gxfce), "gxfce_quit", gxfce_quit);
+  gtk_widget_set_usize (gxfce_quit, 35, 28);
   gtk_button_set_relief ((GtkButton *) gxfce_quit, GTK_RELIEF_NONE);
   gtk_widget_show (gxfce_quit);
+
+  gxfce_quit_pixmap = MyCreateFromPixmapData (gxfce_quit, minpower);
+  if (gxfce_quit_pixmap == NULL)
+    g_error (_("Couldn't create pixmap"));
+  gtk_widget_set_name (gxfce_quit_pixmap, "gxfce_quit_pixmap");
+  gtk_object_set_data (GTK_OBJECT (gxfce), "gxfce_quit_pixmap",
+		       gxfce_quit_pixmap);
+  gtk_widget_show (gxfce_quit_pixmap);
+  gtk_container_add (GTK_CONTAINER (gxfce_quit), gxfce_quit_pixmap);
+
+  gxfce_quit_tooltip = my_tooltips_new (current_config.tooltipsdelay);
+  gtk_tooltips_set_tip (gxfce_quit_tooltip, gxfce_quit, _("Quit"),
+			"ContextHelp/buttons/?");
+  gtk_object_set_data (GTK_OBJECT (gxfce), "tooltips", gxfce_quit_tooltip);
+
   gtk_table_attach (GTK_TABLE (gxfce_rightbuttons_table),
 		    gxfce_quit, 0, 1, 1, 2,
 		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 		    (GtkAttachOptions) GTK_EXPAND | GTK_SHRINK,
 		     0, 0);
   gtk_container_border_width (GTK_CONTAINER (gxfce_quit), 2);
-
-  gxfce_quit_tooltip = my_tooltips_new (current_config.tooltipsdelay);
-  gtk_tooltips_set_tip (gxfce_quit_tooltip, gxfce_quit, _("Whoooops !"),
-			"ContextHelp/buttons/?");
-  gtk_object_set_data (GTK_OBJECT (gxfce), "tooltips", gxfce_quit_tooltip);
-
-  gxfce_quit_label = gtk_accel_label_new (_("Quit"));
-  gtk_widget_set_name (gxfce_quit_label, "gxfce_quit_label");
-  gtk_object_set_data (GTK_OBJECT (gxfce), "gxfce_quit_label",
-		       gxfce_quit_label);
-  gtk_widget_show (gxfce_quit_label);
-  gtk_container_add (GTK_CONTAINER (gxfce_quit), gxfce_quit_label);
 
   gxfce_hbox3 = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (gxfce_hbox3, "gxfce_hbox3");

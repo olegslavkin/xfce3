@@ -548,7 +548,8 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
                                  mr->width - d - 8,
                                  y_offset + d - 1,
                                  mr->width - d - 1,
-                                 y_offset + d + 7);
+                                 y_offset + d + 7,
+				 mi->state);
         }
         else
         {
@@ -556,7 +557,8 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
                                  mr->width - d - 8,
                                  y_offset + d - 1,
                                  mr->width - d - 1,
-                                 y_offset + d + 7);
+                                 y_offset + d + 7,
+				 mi->state);
         }
     }
     return;
@@ -690,16 +692,16 @@ DrawBottomMenu (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawTrianglePattern (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b)
+DrawTrianglePattern (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
     if (Scr.engine == XFCE_ENGINE)
-        DrawTrianglePattern_xfce (w, ReliefGC, ShadowGC, BackGC, l, t, r, b);
+        DrawTrianglePattern_xfce (w, ReliefGC, ShadowGC, BackGC, l, t, r, b, state);
     else if (Scr.engine == TRENCH_ENGINE)
-        DrawTrianglePattern_trench (w, ReliefGC, ShadowGC, BackGC, l, t, r, b);
+        DrawTrianglePattern_trench (w, ReliefGC, ShadowGC, BackGC, l, t, r, b, state);
     else if (Scr.engine == GTK_ENGINE)
-        DrawTrianglePattern_gtk (w, ReliefGC, ShadowGC, BackGC, l, t, r, b);
+        DrawTrianglePattern_gtk (w, ReliefGC, ShadowGC, BackGC, l, t, r, b, state);
     else
-        DrawTrianglePattern_mofit (w, ReliefGC, ShadowGC, BackGC, l, t, r, b);
+        DrawTrianglePattern_mofit (w, ReliefGC, ShadowGC, BackGC, l, t, r, b, state);
 }
 
 /*
@@ -1371,7 +1373,7 @@ DrawBottomMenu_xfce (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawTrianglePattern_xfce (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b)
+DrawTrianglePattern_xfce (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
     int m;
     XPoint points[3];
@@ -1985,11 +1987,23 @@ DrawBottomMenu_mofit (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawTrianglePattern_mofit (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b)
+DrawTrianglePattern_mofit (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
     int m, i;
     XSegment seg[10];
-
+    GC MenuReliefGC = NULL;
+    GC MenuShadowGC = NULL;
+    
+    if (state)
+    {
+        MenuReliefGC = Scr.MenuReliefGC;
+        MenuShadowGC = Scr.MenuShadowGC;
+    }
+    else
+    {
+        MenuReliefGC = Scr.MenuShadowGC;
+        MenuShadowGC = Scr.MenuReliefGC;
+    }
     m = (t + b) >> 1;
 
     i = 0;
@@ -2009,7 +2023,7 @@ DrawTrianglePattern_mofit (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l,
     seg[i].y1 = t + 1;
     seg[i].x2 = r - 1;
     seg[i++].y2 = m;
-    XDrawSegments (dpy, w, ReliefGC, seg, i);
+    XDrawSegments (dpy, w, MenuShadowGC, seg, i);
     i = 0;
     seg[i].x1 = l;
     seg[i].y1 = b;
@@ -2019,7 +2033,7 @@ DrawTrianglePattern_mofit (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l,
     seg[i].y1 = b - 1;
     seg[i].x2 = r - 1;
     seg[i++].y2 = m;
-    XDrawSegments (dpy, w, ShadowGC, seg, i);
+    XDrawSegments (dpy, w, MenuReliefGC, seg, i);
 }
 
 void RelieveIconTitle_mofit (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
@@ -2640,7 +2654,7 @@ DrawBottomMenu_trench (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b)
+DrawTrianglePattern_trench (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
     int m, i;
     XSegment seg[10];
@@ -3252,7 +3266,7 @@ DrawBottomMenu_gtk (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawTrianglePattern_gtk (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b)
+DrawTrianglePattern_gtk (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
     int m, i;
     XSegment seg[10];

@@ -72,7 +72,7 @@ void RelieveHalfRectangle (Window, int, int, int, int, GC, GC, int);
 void DrawSelectedEntry (Window, int, int, int, int, GC *);
 void DrawTopMenu (Window, int, GC, GC);
 void DrawBottomMenu (Window, int, int, int, int, GC, GC);
-void DrawTrianglePattern (Window, GC, GC, GC, int, int, int, int);
+void DrawTrianglePattern (Window, GC, GC, GC, int, int, int, int, short);
 
 void DrawButton_xfce (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
 void SetTitleBar_xfce (XfwmWindow *, Bool);
@@ -81,7 +81,7 @@ void RelieveHalfRectangle_xfce (Window, int, int, int, int, GC, GC, int);
 void DrawSelectedEntry_xfce (Window, int, int, int, int, GC *);
 void DrawTopMenu_xfce (Window, int, GC, GC);
 void DrawBottomMenu_xfce (Window, int, int, int, int, GC, GC);
-void DrawTrianglePattern_xfce (Window, GC, GC, GC, int, int, int, int);
+void DrawTrianglePattern_xfce (Window, GC, GC, GC, int, int, int, int, short);
 void RelieveIconTitle_xfce (Window, int, int, GC, GC);
 void RelieveIconPixmap_xfce (Window, int, int, GC, GC);
 
@@ -92,7 +92,7 @@ void RelieveHalfRectangle_mofit (Window, int, int, int, int, GC, GC, int);
 void DrawSelectedEntry_mofit (Window, int, int, int, int, GC *);
 void DrawTopMenu_mofit (Window, int, GC, GC);
 void DrawBottomMenu_mofit (Window, int, int, int, int, GC, GC);
-void DrawTrianglePattern_mofit (Window, GC, GC, GC, int, int, int, int);
+void DrawTrianglePattern_mofit (Window, GC, GC, GC, int, int, int, int, short);
 void RelieveIconTitle_mofit (Window, int, int, GC, GC);
 void RelieveIconPixmap_mofit (Window, int, int, GC, GC);
 
@@ -104,7 +104,7 @@ void RelieveHalfRectangle_trench (Window, int, int, int, int, GC, GC, int);
 void DrawSelectedEntry_trench (Window, int, int, int, int, GC *);
 void DrawTopMenu_trench (Window, int, GC, GC);
 void DrawBottomMenu_trench (Window, int, int, int, int, GC, GC);
-void DrawTrianglePattern_trench (Window, GC, GC, GC, int, int, int, int);
+void DrawTrianglePattern_trench (Window, GC, GC, GC, int, int, int, int, short);
 void RelieveIconTitle_trench (Window, int, int, GC, GC);
 void RelieveIconPixmap_trench (Window, int, int, GC, GC);
 
@@ -116,7 +116,7 @@ void RelieveHalfRectangle_gtk (Window, int, int, int, int, GC, GC, int);
 void DrawSelectedEntry_gtk (Window, int, int, int, int, GC *);
 void DrawTopMenu_gtk (Window, int, GC, GC);
 void DrawBottomMenu_gtk (Window, int, int, int, int, GC, GC);
-void DrawTrianglePattern_gtk (Window, GC, GC, GC, int, int, int, int);
+void DrawTrianglePattern_gtk (Window, GC, GC, GC, int, int, int, int, short);
 void RelieveIconTitle_gtk (Window, int, int, GC, GC);
 void RelieveIconPixmap_gtk (Window, int, int, GC, GC);
 

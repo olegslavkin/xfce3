@@ -49,6 +49,9 @@
 #  include "dmalloc.h"
 #endif
 
+static GList *list_engines = NULL;
+static GList *xfwm_engines = NULL;
+
 void
 apply_pal_colortable (XFCE_palette * pal)
 {
@@ -194,6 +197,19 @@ find_gtk_engines (void)
    return list;  
 }
 
+void free_internals_setup (void)
+{
+    if (list_engines)
+    {
+        g_list_free (list_engines);
+    }
+    if (xfwm_engines)
+    {
+        g_list_free (xfwm_engines);
+    }
+}
+
+
 GtkWidget *
 create_setup (XFCE_palette * pal)
 {
@@ -268,15 +284,16 @@ create_setup (XFCE_palette * pal)
   GtkWidget *scrolled_window2;
   GtkWidget *scrolled_window3;
   GtkWidget *scrolled_window4;
-  GList *list_engines = NULL;
-  GList *xfwm_engines = NULL;
 
   GtkAccelGroup *accel_group;
 
   temp_pal = newpal ();
   copypal (temp_pal, pal);
 
-  list_engines = find_gtk_engines ();
+  if (!list_engines)
+  {
+      list_engines = find_gtk_engines ();
+  }
   
   setup = gtk_window_new (GTK_WINDOW_DIALOG);
   gtk_widget_set_name (setup, "setup");
@@ -390,7 +407,6 @@ create_setup (XFCE_palette * pal)
   gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (setup_options.setup_palette_engine_combo)->entry), 0,
 			      -1);
   gtk_box_pack_start (GTK_BOX (setup_engine_hbox), setup_options.setup_palette_engine_combo, FALSE, FALSE, 0);
-  g_list_free (list_engines);
 
   setup_xcolors_frame = gtk_frame_new (NULL);
   gtk_widget_set_name (setup_xcolors_frame, "setup_xcolors_frame");
@@ -1081,10 +1097,13 @@ create_setup (XFCE_palette * pal)
 		      FALSE, FALSE, 0);
   gtk_label_set_justify (GTK_LABEL (setup_xfwm_engine_label), GTK_JUSTIFY_RIGHT);
 
-  xfwm_engines = g_list_append(xfwm_engines, "Xfce");
-  xfwm_engines = g_list_append(xfwm_engines, "Mofit");
-  xfwm_engines = g_list_append(xfwm_engines, "Trench");
-  xfwm_engines = g_list_append(xfwm_engines, "Gtk");
+  if (!xfwm_engines)
+  {
+      xfwm_engines = g_list_append(xfwm_engines, "Gtk");
+      xfwm_engines = g_list_append(xfwm_engines, "Xfce");
+      xfwm_engines = g_list_append(xfwm_engines, "Mofit");
+      xfwm_engines = g_list_append(xfwm_engines, "Trench");
+  }
   setup_options.setup_xfwm_engine_combo = gtk_combo_new ();
   gtk_combo_set_popdown_strings (GTK_COMBO (setup_options.setup_xfwm_engine_combo), xfwm_engines);
   gtk_widget_set_name (setup_options.setup_xfwm_engine_combo, "setup_xfwm_engine_combo");
@@ -1095,7 +1114,6 @@ create_setup (XFCE_palette * pal)
   gtk_entry_set_editable (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry),
 			  FALSE);
   gtk_box_pack_start (GTK_BOX (setup_xfwm_engine_hbox), setup_options.setup_xfwm_engine_combo, FALSE, FALSE, 0);
-  g_list_free (xfwm_engines);
 
   setup_snapsize_frame = gtk_frame_new (NULL);
   gtk_widget_set_name (setup_snapsize_frame, "setup_snapsize_frame");

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-08-05 10:43+0200\n"
+"POT-Creation-Date: 2001-08-09 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,10 +187,10 @@ msgid "Info ..."
 msgstr ""
 
 #: xfbd/xfbd.c:447 xfce/info.c:108 xfce/modify.c:134 xfce/popup.c:147
-#: xfce/popup.c:315 xfce/startup.c:95 xfce/xfce.c:223 xfce/xfce.c:293
-#: xfce/xfce.c:595 xfce/xfce.c:634 xfce/xfce.c:777 xfce/xfce.c:806
-#: xfce/xfce.c:848 xfce/xfce.c:939 xfce/xfce.c:967 xfglob/xfglob.c:563
-#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:940
+#: xfce/popup.c:315 xfce/startup.c:95 xfce/xfce.c:224 xfce/xfce.c:294
+#: xfce/xfce.c:596 xfce/xfce.c:635 xfce/xfce.c:778 xfce/xfce.c:807
+#: xfce/xfce.c:849 xfce/xfce.c:865 xfce/xfce.c:944 xfce/xfce.c:972
+#: xfglob/xfglob.c:563 xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:940
 msgid "Couldn't create pixmap"
 msgstr ""
 
@@ -549,107 +549,103 @@ msgstr ""
 msgid "Please wait, XFce is loading..."
 msgstr ""
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:64
 msgid "One"
 msgstr ""
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:64
 msgid "Two"
 msgstr ""
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:64
 msgid "Three"
 msgstr ""
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:64
 msgid "Four"
 msgstr ""
 
-#: xfce/xfce.c:63
+#: xfce/xfce.c:64
 msgid "Five"
 msgstr ""
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:65
 msgid "Six"
 msgstr ""
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:65
 msgid "Seven"
 msgstr ""
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:65
 msgid "Eight"
 msgstr ""
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:65
 msgid "Nine"
 msgstr ""
 
-#: xfce/xfce.c:64
+#: xfce/xfce.c:65
 msgid "Ten"
 msgstr ""
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:66
 msgid "Eleven"
 msgstr ""
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:66
 msgid "Twelve"
 msgstr ""
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:66
 msgid "Thirteen"
 msgstr ""
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:66
 msgid "Fourteen"
 msgstr ""
 
-#: xfce/xfce.c:65
+#: xfce/xfce.c:66
 msgid "Fifteen"
 msgstr ""
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:67
 msgid "Sixteen"
 msgstr ""
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:67
 msgid "Seventeen"
 msgstr ""
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:67
 msgid "Eighteen"
 msgstr ""
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:67
 msgid "Nineteen"
 msgstr ""
 
-#: xfce/xfce.c:66
+#: xfce/xfce.c:67
 msgid "Twenty"
 msgstr ""
 
-#: xfce/xfce.c:106 xfclock/xfclock_menus.c:119
+#: xfce/xfce.c:107 xfclock/xfclock_menus.c:119
 msgid "Digital mode"
 msgstr ""
 
-#: xfce/xfce.c:118
+#: xfce/xfce.c:119
 msgid "24 hours mode"
 msgstr ""
 
-#: xfce/xfce.c:800 xfclock/xfclock_menus.c:269
+#: xfce/xfce.c:801 xfclock/xfclock_menus.c:269
 msgid "About..."
 msgstr ""
 
-#: xfce/xfce.c:842
+#: xfce/xfce.c:843
 msgid "Setup..."
 msgstr ""
 
-#: xfce/xfce.c:868
-msgid "Whoooops !"
-msgstr ""
-
-#: xfbd/xfbdmgr.c:184 xfce/xfce.c:872 xfclock/xfclock_menus.c:68
+#: xfbd/xfbdmgr.c:184 xfce/xfce.c:873 xfclock/xfclock_menus.c:68
 #: xfclock/xfclock_menus.c:95 xfglob/xfglob.c:2164 xftree/xtree_gui.c:2864
 #: xftree/xtree_gui.c:3000 xftree/xtree_gui.c:3046 xftree/xtree_gui.c:3088
 #: xftree/xtree_gui.c:3124 xfumed/interface.c:428
@@ -749,9 +745,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr ""
 
-#: xfce/xfwm.c:451 xfwm/xfwm.c:879 xfwm/xfwm.c:880 xfwm/xfwm.c:881
-#: xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884 xfwm/xfwm.c:885
-#: xfwm/xfwm.c:886 xfwm/xfwm.c:887 xfwm/xfwm.c:888
+#: xfce/xfwm.c:451 xfwm/xfwm.c:880 xfwm/xfwm.c:881 xfwm/xfwm.c:882
+#: xfwm/xfwm.c:883 xfwm/xfwm.c:884 xfwm/xfwm.c:885 xfwm/xfwm.c:886
+#: xfwm/xfwm.c:887 xfwm/xfwm.c:888 xfwm/xfwm.c:889
 msgid "Workspace"
 msgstr ""
 
@@ -914,7 +910,7 @@ msgstr ""
 
 #: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
 #: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
-#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:914
+#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:915
 msgid "Run program ..."
 msgstr ""
 
@@ -1257,7 +1253,7 @@ msgid "Patch viewer ..."
 msgstr ""
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:906
+#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:907
 msgid "Settings"
 msgstr ""
 
@@ -2562,119 +2558,119 @@ msgstr ""
 msgid "File not found.\n"
 msgstr ""
 
-#: xfwm/xfwm.c:876
+#: xfwm/xfwm.c:877
 msgid "&Restart"
 msgstr ""
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:878
 msgid "&Quit"
 msgstr ""
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:891
 msgid "&Move"
 msgstr ""
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:892
 msgid "&Resize"
 msgstr ""
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:893
 msgid "(De)&Iconify"
 msgstr ""
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:894
 msgid "(Un)&Stick"
 msgstr ""
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:895
 msgid "(Un)S&hade"
 msgstr ""
 
-#: xfwm/xfwm.c:895
+#: xfwm/xfwm.c:896
 msgid "(Un)Ma&ximize"
 msgstr ""
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:898
 msgid "Se&nd to..."
 msgstr ""
 
-#: xfwm/xfwm.c:898
+#: xfwm/xfwm.c:899
 msgid "S&witch to..."
 msgstr ""
 
-#: xfwm/xfwm.c:900
+#: xfwm/xfwm.c:901
 msgid "&Close"
 msgstr ""
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:903
 msgid "User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:903
+#: xfwm/xfwm.c:904
 msgid "Edit menu..."
 msgstr ""
 
-#: xfwm/xfwm.c:907
+#: xfwm/xfwm.c:908
 msgid "&Mouse..."
 msgstr ""
 
-#: xfwm/xfwm.c:908
+#: xfwm/xfwm.c:909
 msgid "&Backdrop..."
 msgstr ""
 
-#: xfwm/xfwm.c:909
+#: xfwm/xfwm.c:910
 msgid "&Sound..."
 msgstr ""
 
-#: xfwm/xfwm.c:911
+#: xfwm/xfwm.c:912
 msgid "&New window"
 msgstr ""
 
-#: xfwm/xfwm.c:912
+#: xfwm/xfwm.c:913
 msgid "&User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:916
+#: xfwm/xfwm.c:917
 msgid "&Arrange icons"
 msgstr ""
 
-#: xfwm/xfwm.c:917
+#: xfwm/xfwm.c:918
 msgid "&Iconify all"
 msgstr ""
 
-#: xfwm/xfwm.c:918
+#: xfwm/xfwm.c:919
 msgid "&Refresh"
 msgstr ""
 
-#: xfwm/xfwm.c:919
+#: xfwm/xfwm.c:920
 msgid "Shuffle &Up"
 msgstr ""
 
-#: xfwm/xfwm.c:920
+#: xfwm/xfwm.c:921
 msgid "Shuffle &Down"
 msgstr ""
 
-#: xfwm/xfwm.c:922
+#: xfwm/xfwm.c:923
 msgid "&Settings"
 msgstr ""
 
-#: xfwm/xfwm.c:924
+#: xfwm/xfwm.c:925
 msgid "&Quit XFwm"
 msgstr ""
 
-#: xfwm/xfwm.c:926
+#: xfwm/xfwm.c:927
 msgid "&Full Screen"
 msgstr ""
 
-#: xfwm/xfwm.c:927
+#: xfwm/xfwm.c:928
 msgid "&Vertical"
 msgstr ""
 
-#: xfwm/xfwm.c:928
+#: xfwm/xfwm.c:929
 msgid "&Horizontal"
 msgstr ""
 
-#: xfwm/xfwm.c:1265
+#: xfwm/xfwm.c:1266
 msgid "xfwm terminated: "
 msgstr ""
 

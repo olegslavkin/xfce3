@@ -197,6 +197,8 @@ main (int argc, char *argv[])
   signal (SIGCHLD, SIG_DFL);
   free_selects ();
   free_tooltips_list ();
+  free_internals_setup ();
+
   quit_wm ();
   FreeDrawGC ();
 

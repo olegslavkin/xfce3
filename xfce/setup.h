@@ -110,6 +110,8 @@ GtkWidget *create_setup_colortable (GtkWidget * toplevel, XFCE_palette * pal);
 
 GtkWidget *create_setup (XFCE_palette * pal);
 
+void free_internals_setup (void);
+
 void show_setup (XFCE_palette * pal);
 
 void get_setup_values (void);
