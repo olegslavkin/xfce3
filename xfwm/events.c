@@ -279,7 +279,9 @@ DispatchEvent ()
   StashEventTime (&Event);
 #endif
   if (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+  {
     Tmp_win = NULL;
+  }
   last_event_type = Event.type;
   last_event_window = w;
 
@@ -490,13 +492,16 @@ HandleFocusIn ()
 void
 HandleFocusOut ()
 {
+#if 0
   Window focusBug;
   int rt;
+#endif
 
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleFocusOut ()\n");
 #endif
 
+#if 0
   XGetInputFocus (dpy, &focusBug, &rt);
   if ((Tmp_win == NULL) && (Scr.Focus != NULL) && (focusBug == None))
   {
@@ -506,6 +511,7 @@ HandleFocusOut ()
     XSetInputFocus (dpy, Scr.Focus->w, RevertToParent, CurrentTime);
     XSync (dpy, 0);
   }
+#endif
 
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleFocusOut ()\n");
@@ -822,6 +828,7 @@ HandleDestroyNotify ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering DestroyNotify ()\n");
 #endif
+  MyXGrabServer (dpy);
   if (Tmp_win)
   {
 #ifdef DEBUG
@@ -830,6 +837,7 @@ HandleDestroyNotify ()
     Destroy (Tmp_win);
     Tmp_win = NULL;
   }
+  MyXUngrabServer (dpy);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleDestroyNotify ()\n");
 #endif
