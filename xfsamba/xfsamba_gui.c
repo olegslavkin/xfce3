@@ -1631,6 +1631,9 @@ create_smb_window (void)
   set_fontT(shares);
 #endif
   gtk_widget_show (smb_nav);
+  /* default: */
+  cb_view (NULL, (gpointer) ((long) 0x200));
+  
   if (preferences & VIEW_1) cb_view (NULL, (gpointer) ((long) 0x100));
   if (preferences & VIEW_2) cb_view (NULL, (gpointer) ((long) 0x200));
   if (preferences & VIEW_3) cb_view (NULL, (gpointer) ((long) 0x400));
