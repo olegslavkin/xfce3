@@ -155,9 +155,11 @@ backupconfig (char *extension)
 	fwrite (buffer, 1, nb_read, backfile);
       }
       fflush (backfile);
-      fclose (backfile);
-      fclose (copyfile);
     }
+    if (backfile)
+      fclose (backfile);
+    if (copyfile)
+      fclose (copyfile);
   }
 }
 
@@ -167,7 +169,7 @@ writeconfig (void)
   char homedir[MAXSTRLEN + 1];
   FILE *configfile = NULL;
   int i, j;
-  int x, y;
+  gint x, y;
 
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
   /*
@@ -197,7 +199,7 @@ writeconfig (void)
       else
 	fprintf (configfile, "\tNone\n");
     fprintf (configfile, "[Popups]\n");
-    fprintf (configfile, "\t%i\n", current_config.visible_popup);
+    fprintf (configfile, "\t%i\n", (int) current_config.visible_popup);
     fprintf (configfile, "[Icons]\n");
     fprintf (configfile, "\t%s\n", save_icon_str ());
     fprintf (configfile, "[WorkSpace]\n");
@@ -211,8 +213,8 @@ writeconfig (void)
     fprintf (configfile, current_config.clicktofocus ? "\tClickToFocus\n" : "\tFollowMouse\n");
     fprintf (configfile, current_config.opaquemove ? "\tOpaqueMove\n" : "\tNoOpaqueMove\n");
     fprintf (configfile, current_config.opaqueresize ? "\tOpaqueResize\n" : "\tNoOpaqueResize\n");
-    fprintf (configfile, "\t%i\n", current_config.snapsize);
-    fprintf (configfile, "\t%i\n", current_config.startup_flags);
+    fprintf (configfile, "\t%i\n", (int) current_config.snapsize);
+    fprintf (configfile, "\t%i\n", (int) current_config.startup_flags);
     fprintf (configfile, current_config.autoraise ? "\tAutoraise\n" : "\tNoAutoraise\n");
     fprintf (configfile, current_config.gradient_active_title ? "\tGradientActive\n" : "\tOpaqueActive\n");
     fprintf (configfile, current_config.gradient_inactive_title ? "\tGradientInactive\n" : "\tOpaqueInactive\n");
@@ -252,7 +254,7 @@ writeconfig (void)
     fprintf (configfile, "[Screens]\n");
     fprintf (configfile, "\t%i\n", current_config.visible_screen);
     fprintf (configfile, "[Tooltips]\n");
-    fprintf (configfile, "\t%i\n", current_config.tooltipsdelay);
+    fprintf (configfile, "\t%i\n", (int) current_config.tooltipsdelay);
     fprintf (configfile, "[Clock]\n");
     fprintf (configfile, current_config.digital_clock ? "\tDigital\n" : "\tAnalog\n");
     fprintf (configfile, current_config.hrs_mode ? "\t24hrs\n" : "\t12hrs\n");
@@ -296,8 +298,6 @@ writeconfig (void)
       fprintf (configfile, "[Menu%u]\n", i + 1);
       for (j = 0; j < get_popup_menu_entries (i); j++)
       {
-
-
 	fprintf (configfile, "\t%s\n", get_popup_entry_label (i, j));
 	fprintf (configfile, "\t%s\n", get_popup_entry_icon (i, j));
 	fprintf (configfile, "\t%s\n", get_popup_entry_command (i, j));
