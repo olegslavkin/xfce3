@@ -75,44 +75,31 @@
 #  include "dmalloc.h"
 #endif
 
+#define CUT_BUFFER 0
 
 extern gboolean tar_extraction;
 
-static char *pasteboard=NULL;
-
-static char *define_pasteboard(GtkWidget *parent){
-  static char *homedir=NULL;
+/* get rid of any old version pasteboard hanging around */
+static void zap_old_pasteboard(){
+  static gboolean zapped=FALSE;
+  char *oldpasteboard=NULL;
   int len;
-  struct stat h_stat;
 
-  if (homedir) free(homedir);
-  
+  XStoreBuffer(GDK_DISPLAY(),"",1,CUT_BUFFER); /* store a null string */
+  if (zapped) return;
+  zapped=TRUE;
   len = strlen ((char *) getenv ("HOME")) + 
 	  strlen ("/.xfce/") + strlen (XFTREE_PASTEBOARD) + 1;
-  homedir = (char *) malloc ((len) * sizeof (char));
-  if (!homedir) {
-failed:
-    if (parent) xf_dlg_error(parent,strerror(errno),
-		    _("Cannot create pasteboard\n"));
-    return NULL;
-  }
-  /* if .xfce directory isnot there, create it. */
-  snprintf (homedir, len, "%s/.xfce", (char *) getenv ("HOME"));
-  if (stat(homedir,&h_stat) < 0){
-	if (errno!=ENOENT) goto failed;
-	if (mkdir(homedir,0770) < 0) goto failed;
-  }
-
-  snprintf (homedir, len, "%s/.xfce/%s", 
-		  (char *) getenv ("HOME"), XFTREE_PASTEBOARD);
-  return homedir;
+  oldpasteboard = (char *) malloc ((len) * sizeof (char));
+  if (!oldpasteboard) return;
+  sprintf (oldpasteboard, "%s/.xfce/%s", (char *) getenv ("HOME"), XFTREE_PASTEBOARD);
+  unlink(oldpasteboard);
+  g_free(oldpasteboard);
+  return ;
 }
 
 void cb_clean_pasteboard(GtkWidget * widget, GtkCTree * ctree){
-  cfg *win;
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if (!pasteboard) pasteboard=define_pasteboard(win->top);
-  if (pasteboard) unlink(pasteboard);
+  XStoreBuffer(GDK_DISPLAY(),"",1,CUT_BUFFER); /* store a null string */
   return;
 }
 
@@ -121,109 +108,83 @@ static void copy_cut(GtkWidget * widget, GtkCTree * ctree,gboolean cut)
   GtkCTreeNode *node;
   GList *selection;
   entry *en;
-  FILE *pastefile;
-  int i=0;
 
-  cb_clean_pasteboard(widget, ctree);
-  if (!pasteboard){
-	  fprintf(stderr,"dbg: unable to define pasteboard\n");
-	  return;
-  }
+  int len;
+  char *buffer;
   
-  if ((pastefile=fopen(pasteboard,"w"))==NULL) {
-       cfg *win;
-       win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-       xf_dlg_error(win->top,strerror(errno),pasteboard);
-       return;
-  }
-  
-  fprintf(pastefile,"*** %s ***\n",(cut)?"cut":"copy");
- 
+  zap_old_pasteboard();  
   if (!(g_list_length (GTK_CLIST (ctree)->selection))) return;
-  
+  len=1+strlen("#xfvalid_buffer:copy:%%:\n");
+  len += strlen(our_host_name());
   for (selection=GTK_CLIST (ctree)->selection;selection;selection=selection->next){
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
     if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) continue;
-    i++;
-    /*fprintf(pastefile,"file:%s\r\n",en->path);*/
-    fprintf(pastefile,"%s\n",en->path);
+    len += (1+strlen(en->path));
   }
-  fclose(pastefile);
-  if (!i) unlink(pasteboard);
+  buffer=(char *)malloc(len+sizeof(char));
+  if (!buffer){
+	  fprintf(stderr,"xftree: unable to allocate paste buffer\n");
+	  return;
+  }
+  sprintf(buffer,"#xfvalid_buffer:%s:%s:\n",(cut)?"cut":"copy",our_host_name());
+  for (selection=GTK_CLIST (ctree)->selection;selection;selection=selection->next){
+    node = selection->data;
+    en = gtk_ctree_node_get_row_data (ctree, node);
+    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) continue;
+    strcat(buffer,en->path);   strcat(buffer,"\n");
+  }
+  /*printf("dbg:len=%d,data=%s\n",len,buffer);*/
+  XStoreBuffer(GDK_DISPLAY(),buffer,len,CUT_BUFFER);  
+  g_free(buffer);  
   gtk_ctree_unselect_recursive (GTK_CTREE (ctree), NULL);
 }
 
 void cb_copy(GtkWidget * widget, GtkCTree * ctree){
-   copy_cut(widget,ctree,FALSE);
+  copy_cut(widget,ctree,FALSE);
 }
 
 void cb_cut(GtkWidget * widget, GtkCTree * ctree){
-   copy_cut(widget,ctree,TRUE);
+  copy_cut(widget,ctree,TRUE);
 }
 
 /* this is equivalent to copying by dnd */
 void cb_paste(GtkWidget * widget, GtkCTree * ctree){
-  FILE *pastefile;
-  char *tmpfile,*texto,*word,*path;
   cfg *win;
-  struct stat f_stat;
-  entry *t_en;
-  int i,num;
-  GList *list;
   gboolean cut;
-
+  char *src_hostname;
+  GList *list;
+  entry *t_en;
+  char *tmpfile,*b,*word,*path;
+  int i,len=-1;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if (!pasteboard) pasteboard=define_pasteboard(win->top);
-  if (!pasteboard) {
-	  fprintf(stderr,"dbg: unable to define pasteboard\n");
-	  return;
-  }
+  b=XFetchBuffer(GDK_DISPLAY(),&len,0);
+  /*printf("dbg:bytes=%d,buffer0=%s\n",len,b);*/
 
-  path=valid_path(ctree,TRUE);
-  
-  if ((num = g_list_length (GTK_CLIST (ctree)->selection))>1) 
-  
-  if (!(pastefile=fopen(pasteboard,"r"))) {
-pasteboard_is_empty:
+  if ((!b) || (!strlen(b))) {
 	  xf_dlg_info(win->top,_("The pasteboard is currently empty."));
+	  if (b) XFree(b); 
 	  return;
   }
-
-  /* stat pastefile to get size.*/ 
-  if (stat(pasteboard,&f_stat)<0) {
-  	fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");
-	return; 
+	  
+  if ((word=strtok(b,":"))==NULL){ XFree(b); return;}
+  if (!strstr(word,"#xfvalid_buffer")){
+ 	  xf_dlg_info(win->top,_("Not a valid file transfer pasteboard."));
+	  return;
   }
-  
-  if (!(pastefile=fopen(pasteboard,"r"))) return;
-
-  texto=(char *)malloc((long long)f_stat.st_size+1);
-  if (fread(texto,(size_t)f_stat.st_size,1,pastefile)!=1){
-  	fprintf(stderr,"dbg:error reading pasteboard\n");
-	fclose(pastefile);
-	return;
-  }
-  fclose(pastefile);
-  
-  texto[(long long)f_stat.st_size]=0;
-  word=strtok(texto,"\n");
-  if (!word) {
-  	/*fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");*/
-	return; 
-  }
-  if (strstr(word,"*** cut ***")) cut=TRUE; else cut=FALSE;
-  word=word+strlen(word)+1;
-  if (!strlen(word)){
-	 free(texto);
-	 goto pasteboard_is_empty;
-  }
-	 
+  if ((word=strtok(NULL,":"))==NULL) { XFree(b); return;}  
+  if (strstr(word,"cut")) cut=TRUE; else cut=FALSE;
+  if ((word=strtok(NULL,":"))==NULL) { XFree(b); return;}  
+  src_hostname=g_strdup(word);
+  if (!src_hostname) fprintf(stderr,"xftree: source host was not specified.\n");
+  if ((word=strtok(NULL,"\n"))==NULL){ XFree(b); return;}  
+  	 
   /* create list to send to CreateTmpList */
   i = uri_parse_list (word, &list);
-  free(texto);
+  XFree(b); /* no longer needed here */
   if (!i) return;
   /* create a tmpfile */
+  path=valid_path(ctree,TRUE);
   t_en = entry_new_by_path(path);
   tmpfile=CreateTmpList(win->top,list,t_en);
   entry_free(t_en);
@@ -239,52 +200,25 @@ pasteboard_is_empty:
 	  unlink(tmpfile); 
      } 
   }
-  if (cut) unlink(pasteboard);
+  if (cut) XStoreBuffer(GDK_DISPLAY(),"",1,CUT_BUFFER); /* store a null string */
   update_timer(ctree);
+
   return;
 }
 
 void cb_paste_show(GtkWidget * widget, GtkCTree * ctree){
-  FILE *pastefile;
-  char *texto;
   cfg *win;
-  struct stat f_stat;
-  int i;
-
+  char *b;
+  int len=-1;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if (!pasteboard) pasteboard=define_pasteboard(win->top);
-  if (!pasteboard) {
-	  fprintf(stderr,"dbg: unable to define pasteboard\n");
-	  return;
-  }
-  
-  if (!(pastefile=fopen(pasteboard,"r"))) {
-	  xf_dlg_info(win->top,_("The pasteboard is currently empty."));
-	  return;
-  }
-
-  /* stat pastefile to get size.*/ 
-  if (stat(pasteboard,&f_stat)<0) {
-  	fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");
-	return; 
-  }
-  
-  texto=(char *)malloc((long long)f_stat.st_size+1);
-  if (fread(texto,(long long)f_stat.st_size,1,pastefile)!=1){
-  	fprintf(stderr,"dbg:error reading pasteboard\n");
-	fclose(pastefile);
-	return;
-  }
-  fclose(pastefile);
-  texto[(long long)f_stat.st_size]=0;
-  for (i=0;i<strlen(texto);i++) if (texto[i]=='\r') texto[i]=' ';
-
-  clear_cat(widget,ctree);
-  show_cat( _("Pasteboard contents:\n"));
-  show_cat(texto);
-  /*xf_dlg_new(win->top,_("Pasteboard contents:\n"),
-                  texto,NULL,DLG_INFO|DLG_OK);*/
-  free(texto);
+  b=XFetchBuffer(GDK_DISPLAY(),&len,0);
+  /*printf("dbg:bytes=%d,buffer0=%s\n",len,b);*/
+  if (b) {
+   clear_cat(widget,ctree);
+   if (strlen(b)) show_cat(b);
+   else show_cat( _("The pasteboard is currently empty.\n"));
+   XFree(b);
+  } else xf_dlg_info(win->top,_("No pasteboard available."));
   return;
 }
 
