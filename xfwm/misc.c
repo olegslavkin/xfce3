@@ -169,7 +169,7 @@ GetWMIconName (XfwmWindow * t)
     }
     XFree (text_prop.value);
   }
-  if (!(t->icon_name) && (t->name))
+  if (!(t->icon_name))
   {
     if (t->name)
     {
@@ -178,11 +178,11 @@ GetWMIconName (XfwmWindow * t)
     }
     else
     {
-      t->name = (char *) safemalloc (strlen (NoName) + 1);
-      strcpy (t->name, NoName);
+      t->icon_name = (char *) safemalloc (strlen (NoName) + 1);
+      strcpy (t->icon_name, NoName);
     }
   }
-  for (cp = t->name; *cp; cp++)
+  for (cp = t->icon_name; *cp; cp++)
   {
     if ((*cp == '\n') || (*cp == '\r')) *cp = ' ';
   }
