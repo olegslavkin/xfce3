@@ -387,8 +387,8 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
     gdk_draw_line (window, style->black_gc, x + width - 1, y, x + width - 1, y + height - 1);
     gdk_draw_line (window, gc2, x + 1, y + 1, x + width - 2, y + 1);
     gdk_draw_line (window, gc2, x + 1, y + 1, x + 1, y + height - 2);
-    gdk_draw_line (window, gc1, x + 1, y + height - 2, x + width - 2, y + height - 2);
-    gdk_draw_line (window, gc1, x + width - 2, y + 1, x + width - 2, y + height - 2);
+    gdk_draw_line (window, gc1, x + 2, y + height - 2, x + width - 2, y + height - 2);
+    gdk_draw_line (window, gc1, x + width - 2, y + 2, x + width - 2, y + height - 2);
 #endif
     break;
   }
