@@ -276,13 +276,19 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
 	    isdir=TRUE;
 	    w[0]=0;
             w=strrchr(file,'/');
-	    if (!w) continue; 
+	    if (!w) w=file;
+	    else w++; 
 	  } else {
 	    isdir=FALSE;
+	    w++;
 	  }
-	  filename=g_strdup(w+1);
+	  if (!strlen(w)) continue;
+	  else filename=g_strdup(w);	  
   }
-  else continue;
+  else {
+	  isdir=FALSE;
+	  filename=g_strdup(file);
+  }
 
   for (i=0;i<strlen(file);i++) if (file[i]=='/') file[i]='\\'; 
   /*for (i=0;i<strlen(file);i++) latin_1_unreadable(file+i); 
