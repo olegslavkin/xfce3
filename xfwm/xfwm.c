@@ -828,7 +828,7 @@ SetRCDefaults ()
     "XORValue 0",
     "ModulePath $PATH",
     "ActiveColor white #DCDCDC",
-    "InactiveColor white #DCDCDC",
+    "InactiveColor black #DCDCDC",
     "TitleStyle Active Solid #0A5F89",
     "TitleStyle Inactive Solid #C8C8C8",
     "MenuColor black #DCDCDC black #F0F0F0",
