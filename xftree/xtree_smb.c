@@ -221,6 +221,9 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
   static char *fname;
   FILE *tmpfile=NULL;
   extern char *randomTmpName(char *);
+    char *w;
+    int i;
+    gboolean first=TRUE,isdir;
 
   SMBctree=(GtkWidget *)ctree;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -253,6 +256,8 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
 /* * 1- parse file into NMBcommand */
 /* format smb://user@host:share/file */
 
+  /*printf("dbg:dnd=%s\n",dndS);*/
+
   if (strncmp("smb://",dndS,strlen("smb://")!=0)) {
 	incorrect_DND:
 	xf_dlg_error(win->top,_("DnD error"),_("Incorrect DnD specification"));
@@ -264,23 +269,44 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
   host=strtok(NULL,":");  if (!host) goto incorrect_DND;
   share=strtok(NULL,"/"); if (!share) goto incorrect_DND;
   file=share+strlen(share)+1;
-  /* string is now missing the first slash */
-  /* could have segv here, if no file is specified in DnD message. */
-  /*fprintf(stderr,"dbg: user=%s, host=%s, share=%s, file=%s\n",user,host,share,file);*/
-  if (strchr(file,'/')) filename=g_strdup(strrchr(file,'/')+1); else filename=g_strdup(file);
+ 
+  w=strrchr(file,'/');
+  if (w) {
+	  if (w[1]==0) {
+	    isdir=TRUE;
+	    w[0]=0;
+            w=strrchr(file,'/');
+	    if (!w) continue; 
+	  } else {
+	    isdir=FALSE;
+	  }
+	  filename=g_strdup(w+1);
+  }
+  else continue;
+
+  for (i=0;i<strlen(file);i++) if (file[i]=='/') file[i]='\\'; 
   /*for (i=0;i<strlen(file);i++) latin_1_unreadable(file+i); 
   for (i=0;i<strlen(filename);i++) latin_1_readable(filename+i); */
 /* 2.5- get drop target */  
   
 /* 3- download via tubo */ 
+  if (first){
+    first=FALSE;
     fprintf(tmpfile,"//%s/%s\n",host,share);
     fprintf(tmpfile,"%s\n",user);
-    fprintf(tmpfile,"lcd \"%s\";get \"/%s\" \"%s\";",target,file,filename);
-  
+  }
+    if (isdir){
+      fprintf(tmpfile,
+	"lcd \"%s\";cd \"/%s\";cd ..;prompt;recurse; mget %s;recurse;prompt;",target,file,filename);
+    }
+    else 
+	    fprintf(tmpfile,"lcd \"%s\";get \"%s\" \"%s\";",target,file,filename);
+ 
  } /* end for list elements */
   fclose(tmpfile);
   strcpy(SMBtmpfile,fname); 
   if (filename) g_free(filename);
+  filename=NULL;
   /* wait until OK to proceed */
   while (fork_obj) {
      while (gtk_events_pending()) gtk_main_iteration();
