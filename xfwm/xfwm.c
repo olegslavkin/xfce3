@@ -827,7 +827,7 @@ SetRCDefaults ()
   char *defaults[] = {
     "XORValue 0",
     "ModulePath $PATH",
-    "ActiveColor white #0A895E",
+    "ActiveColor white #CCCCC7",
     "InactiveColor black #CCCCC7",
     "TitleStyle Active Solid #0A895E",
     "TitleStyle Inactive Solid #B7B7B3",
@@ -1765,7 +1765,7 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
-  Scr.engine = LINEA_ENGINE;
+  Scr.engine = XFCE_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;
