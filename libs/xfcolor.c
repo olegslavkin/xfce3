@@ -574,12 +574,12 @@ initpal (XFCE_palette * p)
 {
   if (p)
   {
-    p->fnt = g_realloc (p->fnt, (strlen (DEFAULTFONT) + 1) * sizeof (char));
+    p->fnt = g_realloc (p->fnt, (strlen (XFCEDEFAULTFONT) + 1) * sizeof (char));
     p->texture = g_realloc (p->texture, sizeof (char));
     p->engine = g_realloc (p->engine, (strlen (XFCE_THEME_ENGINE) + 1) * sizeof (char));
     strcpy (p->texture, "");
     strcpy (p->engine, XFCE_THEME_ENGINE);
-    strcpy (p->fnt, DEFAULTFONT);
+    strcpy (p->fnt, XFCEDEFAULTFONT);
   }
 }
 

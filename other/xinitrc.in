@@ -14,7 +14,7 @@ xsetroot -solid black -cursor_name watch
 # xset +fp "XFCE_DIR/cursors"
 
 # Set up additionnal fonts that ship with Xfce
-xset +fp "XFCE_DIR/fonts"
+xset fp+ "XFCE_DIR/fonts"
 
 # Start-up stuff from ~/Desktop/Autostart directory, if it exists
 # (as it seems to be the new standard)
