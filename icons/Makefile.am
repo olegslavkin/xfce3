@@ -104,5 +104,6 @@ icons_DATA=\
  Xmix.xpm \
  Xterm.xpm \
  Xv.xpm \
+ playball.xpm \
  xfskin.xpm
  
