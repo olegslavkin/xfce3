@@ -35,6 +35,8 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <utime.h>
+#include <pwd.h>
+#include <grp.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -99,6 +101,7 @@ static GtkTargetEntry target_table[] = {
 };
 #define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
 
+
 #define ACCEL	2
 typedef struct
 {
@@ -113,6 +116,20 @@ menu_entry;
 
 static GtkAccelGroup *accel;
 
+/* autotype entries will appear in file-menu when no
+ * application is registered for that filetype */
+
+autotype_t autotype[]= {
+	".gz","gunzip",
+	".tar","tar -xf",
+	".tgz","tar -xzf",
+	".bz2","bunzip2",
+	".Z","uncompress",
+	".zip","unzip",
+	".ZIP","unzip",
+	NULL,NULL
+};
+
 /* keyboard shortcuts used to be bugged because of conflicting entries.
  * these macros should make it easier to avoid conflicting entries.
  * Please place any duplicate entries as a macro. (since all entries
@@ -125,6 +142,12 @@ static GtkAccelGroup *accel;
  * to plain unselect. 
  * */
 
+#define AUTOTYPE_MENU \
+    {"", (gpointer) cb_autotype, 0}
+    
+#define AUTOTAR_MENU \
+    {"", (gpointer) cb_autotar, 0,}
+ 
 #define MAINF_DIRECTORY_MENU \
     {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK}, \
@@ -187,7 +210,8 @@ static GtkAccelGroup *accel;
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
     {N_("Differences ..."), (gpointer) cb_diff, 0, GDK_i,GDK_MOD1_MASK},\
     {N_("Patch viewer ..."), (gpointer) cb_patch, 0, GDK_p,GDK_MOD1_MASK},\
-    {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_v,GDK_CONTROL_MASK},\
+    {N_("Browse SMB network ..."), (gpointer) cb_samba, 0, GDK_w,GDK_MOD1_MASK},\
+    {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_v,GDK_CONTROL_MASK}
     
 #define NONE_MENU \
     {N_("Close window"), (gpointer) cb_destroy, 0, GDK_z,GDK_CONTROL_MASK}, \
@@ -203,17 +227,48 @@ static GtkAccelGroup *accel;
     {N_("Status box"),cb_show_status, SHOW_STATUS, GDK_m,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Status titles"),cb_status_follows_expand,STATUS_FOLLOWS_EXPAND, GDK_y,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Short titles"),cb_short_titles,SHORT_TITLES, GDK_w,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Size in Kb"),cb_sizeKB,SIZE_IN_KB, GDK_k,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
     {N_("Hide toolbar"),toggle_toolbar, HIDE_TOOLBAR, GDK_t,GDK_MOD1_MASK}, \
     {N_("Hide titles"), cb_hide_titles, HIDE_TITLES, GDK_h,GDK_MOD1_MASK}, \
     {N_("Hide dates"),cb_hide_date, HIDE_DATE, GDK_d,GDK_MOD1_MASK}, \
-    {N_("Hide sizes"), cb_hide_size, HIDE_SIZE, GDK_s,GDK_MOD1_MASK}
+    {N_("Hide sizes"), cb_hide_size, HIDE_SIZE, GDK_s,GDK_MOD1_MASK}, \
+    {N_("Hide mode"),cb_hide_mode, HIDE_MODE, GDK_e,GDK_MOD1_MASK}, \
+    {N_("Hide owner"),cb_hide_uid, HIDE_UID, GDK_o,GDK_MOD1_MASK}, \
+    {N_("Hide group"),cb_hide_gid, HIDE_GID, GDK_y,GDK_MOD1_MASK}
  
 #define HELP_MENU \
     {N_("Sort by file name"), NULL, SORT_NAME, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Sort by file size"), NULL, SORT_SIZE, GDK_s,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Sort by file date"), NULL, SORT_DATE, GDK_d,GDK_CONTROL_MASK | GDK_MOD1_MASK}
 
+
+    
+char *mode_txt(mode_t mode){
+	static char modeT[11];
+	modeT[10]=0;
+	if (mode&040000) modeT[0]='d'; else modeT[0]='-';
+	if (mode&0400) modeT[1]='r'; else modeT[1]='-';
+	if (mode&0200) modeT[2]='w'; else modeT[2]='-';
+	if ((mode&04000)&&(mode&0100)) modeT[3]='s'; 
+	else if (mode&04000) modeT[3]='S';
+	else if (mode&0100) modeT[3]='x';
+	else modeT[3]='-';
+	if (mode&040)  modeT[4]='r'; else modeT[4]='-';
+	if (mode&020)  modeT[5]='w'; else modeT[5]='-';
+	if ((mode&02000)&&(mode&010)) modeT[6]='s'; 
+	else if (mode&02000) modeT[6]='S';
+	else if (mode&010) modeT[6]='x';
+	else modeT[6]='-';
+	if (mode&04)   modeT[7]='r'; else modeT[7]='-';
+	if (mode&02)   modeT[8]='w'; else modeT[8]='-';
+	if ((mode&01000)&&(mode&01)) modeT[9]='t'; 
+	else if (mode&01000) modeT[9]='T';
+	else if (mode&01) modeT[9]='x';
+	else modeT[9]='-';
+	return modeT;
+}
+    
 /*
  * start the marked program on double click
  */
@@ -227,15 +282,13 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
   cfg *win;
   reg_t *prg;
   gint row, col;
-  
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+    /*fprintf(stderr,"dbg:  click detected\n"); */
   if ((event->type == GDK_2BUTTON_PRESS) && (event->button == 1))
   {
-    /* double_click
-     */
-
-    /* check if the double click was over a directory
-     */
+    /*fprintf(stderr,"dbg: double click detected\n"); */
+	  
+    /* check if the double click was over a directory */
     row = -1;
     gtk_clist_get_selection_info (GTK_CLIST (ctree), event->x, event->y, &row, &col);
     if (row > -1)
@@ -244,6 +297,8 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
       if (EN_IS_DIR (en) && ((event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)) || (win->preferences & DOUBLE_CLICK_GOTO)))
       {
+        /* disable goto on FT_TARCHILD */
+        if (en->type & FT_TARCHILD) return TRUE;
         /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
 	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
 	return (TRUE);
@@ -258,6 +313,8 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       return (TRUE);
     }
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+    /* disable openwith on FT_TARCHILD */
+    if (en->type & FT_TARCHILD) return TRUE;
 
     if (en->type & FT_DIR_UP)
     {
@@ -306,8 +363,6 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
   return (FALSE);
 }
 
-/*
- */
 static gint
 on_click_column (GtkCList * clist, gint column, gpointer data)
 {
@@ -354,24 +409,76 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 {
   GtkCTree *ctree = GTK_CTREE (widget);
   GtkWidget **menu = (GtkWidget **) data;
+  GtkWidget *whatmenu;
   GtkCTreeNode *node;
-  int num, row, column = MN_NONE;
+  entry *en;
+  cfg *win;
+  reg_t *prg;
 
+  int num, row, column = MN_NONE;
+  
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (event->button == 3)
   {
     num = selection_type (ctree, &node);
-    if (!num)
-    {
+    if (!num) {
       row = -1;
       gtk_clist_get_selection_info (GTK_CLIST (widget), event->x, event->y, &row, &column);
-      if (row > -1)
-      {
+      if (row > -1) {
 	gtk_clist_select_row (GTK_CLIST (ctree), row, 0);
-	if (GTK_CLIST (ctree)->selection)
-	  num = selection_type (ctree, &node);
+	if (GTK_CLIST (ctree)->selection) num = selection_type (ctree, &node);
       }
     }
-    gtk_menu_popup (GTK_MENU (menu[num]), NULL, NULL, NULL, NULL, 3, event->time);
+    gtk_widget_hide(win->autotype_C);
+    if (node== GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list))
+	    gtk_widget_hide(win->autotar_C);
+    else gtk_widget_show(win->autotar_C);
+    en = gtk_ctree_node_get_row_data (ctree, node); 
+    if (!(en->type & FT_TARCHILD)&&(num==MN_FILE)){
+      int i;
+      GtkLabel *label;
+      prg = reg_prog_by_file (win->reg, en->path);
+      if (prg) {/* look in registered programs first */
+        char cmd[(PATH_MAX + 3) * 2];
+        label=(GtkLabel *)(((GtkBin *)(win->autotype_C))->child);
+	if (prg->arg) sprintf (cmd, "%s %s %s", prg->app, prg->arg, en->path);
+	else sprintf (cmd, "%s %s", prg->app, en->path);
+	gtk_label_set_text(label,cmd);
+	gtk_widget_show(win->autotype_C);
+      } else {/* use default autotypes */	       
+       char *loc;
+       loc=strrchr(en->path,'.');
+       if (loc) for (i=0;1;i++){
+	       if (autotype[i].extension==NULL) break;
+	       if (strcmp(loc,autotype[i].extension)==0){
+		       GtkLabel *label;
+	               static char *text=NULL;
+	               if (text) free(text);
+		       label=(GtkLabel *)(((GtkBin *)(win->autotype_C))->child);
+	               text=(char *)malloc(strlen(autotype[i].command)+strlen(en->label)+2);
+		       if (!text) break;
+	               sprintf(text,"%s %s",autotype[i].command,en->label);
+		       gtk_label_set_text(label,text);
+		       gtk_widget_show(win->autotype_C);
+		       break;
+	       }
+       }
+      }
+    } else if   (!(en->type & FT_TARCHILD)&&(num==MN_DIR)){ 
+        GtkLabel *label;
+        static char *text=NULL;
+	label=(GtkLabel *)(((GtkBin *)(win->autotar_C))->child);
+	if (text) free(text);	    
+	text=(char *)malloc(strlen("%% %%.tgz")+strlen(_("Create"))+strlen(en->label)+2);
+        if (text){
+           sprintf(text,"%s %s.tgz",_("Create"),en->label);
+	   gtk_label_set_text(label,text);
+	}
+    }
+    whatmenu=menu[num];
+    if (en->type & FT_TARCHILD)whatmenu=menu[MN_TARCHILD];
+    if ((en->type & FT_TARCHILD)&&(en->type & FT_DIR))whatmenu=menu[MN_NONE];
+    gtk_menu_popup (GTK_MENU (whatmenu), NULL, NULL, NULL, NULL, 3, event->time);
     return TRUE;
   }
   return FALSE;
@@ -469,11 +576,12 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 
   en1 = row1->row.data;
   en2 = row2->row.data;
+  /* FT_DIR_UP should always be on top (or bottom) */
+ 
   type1 = en1->type & (FT_DIR | FT_FILE);
   type2 = en2->type & (FT_DIR | FT_FILE);
-  if (type1 != type2)
-  {
-    /* i want to have the directories at the top  */
+  if (type1 != type2) {
+    /* I want to have the directories at the top  */
     return (type1 < type2 ? -1 : 1);
   }
 
@@ -487,17 +595,37 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   if (clist->sort_column != COL_NAME)
   {
     /* use default compare function which we have saved before  */
+    /* please don't compare numbers as strings! */
     GtkCListCompareFunc compare;
     compare = (GtkCListCompareFunc) win->compare;
     if (win->preferences&SUBSORT_BY_FILETYPE) {
-	  if ((!loc1)&&(!loc2)) return compare (clist, ptr1, ptr2);
+	  if ((!loc1)&&(!loc2)) { /* subsorted */
+	     if (clist->sort_column == COL_DATE){
+	       return en1->st.st_mtime - en2->st.st_mtime;
+	     } else if (clist->sort_column == COL_SIZE){
+	       return en1->st.st_size - en2->st.st_size;
+	     } else if (clist->sort_column == COL_MODE){	
+	       return en1->st.st_mode - en2->st.st_mode;
+	     }	  
+	     else return compare (clist, ptr1, ptr2);
+	  }
+          /* do subsorting */
 	  if ((!loc1)&&(loc2)) return strcmp (".",loc2);
 	  if ((loc1)&&(!loc2)) return strcmp (loc1,".");
 	  if (strcmp(loc1,loc2)) return strcmp(loc1,loc2);
     }
-    return compare (clist, ptr1, ptr2);
+    /* no subsorting */
+    if (clist->sort_column == COL_DATE){
+       return en1->st.st_mtime - en2->st.st_mtime;
+    } else if (clist->sort_column == COL_SIZE){
+       return en1->st.st_size - en2->st.st_size;
+    } else if (clist->sort_column == COL_MODE){	
+       return en1->st.st_mode - en2->st.st_mode;
+    }	  
+    else return compare (clist, ptr1, ptr2);
   }
   
+  /* special case, sorting by column name */
   if (win->preferences&SUBSORT_BY_FILETYPE) {
     if ((!loc1)&&(!loc2)) return strcmp (en1->label, en2->label);
     if ((!loc1)&&(loc2)) return strcmp (".",loc2);
@@ -508,8 +636,8 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 }
 
 
-/* FIXME: this routine should me a loop to reduce excessive lines of code 
- * (make for easier maintaince) */
+/* FIXME: this routine should be a loop to reduce excessive lines of code */
+ 
 static GtkWidget *
 create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 {
@@ -784,6 +912,10 @@ int kolor;
 /* masks that are duplicated elsewhere are initialized to NULL */
 static pixmap_list pixmaps[]={
 	{gPIX+PIX_PAGE,		gPIM+PIM_PAGE,		page_xpm},
+	{gPIX+PIX_PS,		NULL,			page_ps_xpm},
+	{gPIX+PIX_ADOBE,	NULL,			page_adobe_xpm},
+	{gPIX+PIX_PACKAGE,	gPIM+PIM_PACKAGE,	package_green_xpm},
+	{gPIX+PIX_LINKFLAG,	gPIM+PIM_LINKFLAG,	link_flag_xpm},
 	{gPIX+PIX_PAGE_AUDIO,	NULL,			page_audio_xpm},
 	{gPIX+PIX_TEXT,		NULL,			page_text_xpm},
 	{gPIX+PIX_COMPRESSED,	NULL,			page_compressed_xpm},
@@ -817,6 +949,10 @@ static gen_pixmap_list gen_pixmaps[]={
 	{gPIX+PIX_MAIL,		NULL,	page_xpm,	"@",	4},
 	{gPIX+PIX_BAK,		NULL,	page_xpm,	"*",	2},
 	{gPIX+PIX_DUP,		NULL,	page_xpm,	"*",	3},
+	{gPIX+PIX_TAR_TABLE,	NULL,	dir_close_xpm,	".",	0},
+	{gPIX+PIX_TAR_EXP,	NULL,	dir_open_xpm,	".",	0},
+	{gPIX+PIX_TAR_TABLE_R,	NULL,	dir_close_xpm,	".",	2},
+	{gPIX+PIX_TAR_EXP_R,	NULL,	dir_open_xpm,	".",	2},
 	{NULL,NULL,NULL,0}
 };
 
@@ -952,9 +1088,12 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   cfg *win;
   GtkAccelGroup *inner_accel;
   int i;
+  struct passwd *pw;
+  struct group *gr;
 
   menu_entry dir_mlist[] = {
     MAINF_DIRECTORY_MENU,
+    AUTOTAR_MENU,
     DIRECTORY_MENU,
     MAINF_MENU,
     INSERT_MENU,
@@ -965,7 +1104,18 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   };
 #define LAST_DIR_MENU_ENTRY (sizeof(dir_mlist)/sizeof(menu_entry))
 
+
+  menu_entry tarchild_mlist[] = {
+     DIR_FILE_MENU,
+     MAINF_MENU,
+     NONE_MENU
+  };
+#define LAST_TARCHILD_MENU_ENTRY (sizeof(tarchild_mlist)/sizeof(menu_entry))
+
+  
+
   menu_entry file_mlist[] = {
+     AUTOTYPE_MENU,
      FILE_MENU,
      DIR_FILE_MENU,
      MAINF_MENU,
@@ -1014,12 +1164,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->filterOpts=FILTER_DIRS|FILTER_FILES;
   menu = g_malloc (sizeof (GtkWidget) * MENUS);
   titles[COL_NAME] = _("Name");
-  titles[COL_SIZE] = _("Size (bytes)");
+  titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
   titles[COL_DATE] = _("Last changed");
-  if (preferences&ABREVIATE_PATHS) label[COL_NAME] = abreviate(path);
-  else label[COL_NAME] = path; 
-  label[COL_SIZE] = "";
-  label[COL_DATE] = "";
+  titles[COL_MODE] = _("Mode");
+  titles[COL_UID] = _("Owner");
+  titles[COL_GID] = _("Group");
  
   win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_policy ((GtkWindow *)win->top,FALSE,TRUE,FALSE);
@@ -1111,9 +1260,12 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_clist_set_compare_func (GTK_CLIST (ctree), my_compare);
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
 
-  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 0, TRUE);
-  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 1, TRUE);
-  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 2, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), COL_NAME, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), COL_SIZE, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), COL_DATE, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), COL_UID, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), COL_GID, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), COL_MODE, TRUE);
   /*gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 1, TRUE);*/
   /*gtk_clist_set_column_resizeable (GTK_CLIST (ctree), 2, TRUE);*/
   gtk_clist_set_column_width (GTK_CLIST (ctree), 2, 115);
@@ -1162,6 +1314,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       menu_item = gtk_menu_item_new ();
     if (dir_mlist[i].func)
     {
+      if (dir_mlist[i].func==cb_autotar) win->autotar_C=menu_item;
       if (dir_mlist[i].data == WINCFG)
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), win);
       else if (dir_mlist[i].data == TOPWIN)
@@ -1189,6 +1342,33 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   
  
   gtk_menu_attach_to_widget (GTK_MENU (menu[MN_DIR]), ctree, (GtkMenuDetachFunc) menu_detach);
+/**** tarchild list ...  */  
+  menu[MN_TARCHILD] = gtk_menu_new ();
+  gtk_menu_set_accel_group (GTK_MENU (menu[MN_TARCHILD]), accel);
+  for (i = 0; i < LAST_TARCHILD_MENU_ENTRY; i++)
+  {
+    if (tarchild_mlist[i].label)
+      menu_item = gtk_menu_item_new_with_label (_(tarchild_mlist[i].label));
+    else
+      menu_item = gtk_menu_item_new ();
+    if (tarchild_mlist[i].func)
+    {
+      if (tarchild_mlist[i].data == WINCFG)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (tarchild_mlist[i].func), win);
+      else if (file_mlist[i].data == TOPWIN)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (tarchild_mlist[i].func), GTK_WIDGET (win->top));
+      else
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (tarchild_mlist[i].func), (gpointer) ctree);
+    }
+    if (tarchild_mlist[i].key)
+    {
+      gtk_widget_add_accelerator (menu_item, "activate", accel, tarchild_mlist[i].key, tarchild_mlist[i].mod, GTK_ACCEL_VISIBLE);
+    }
+    gtk_menu_append (GTK_MENU (menu[MN_TARCHILD]), menu_item);
+    gtk_widget_show (menu_item);
+  }
+  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_TARCHILD]), ctree, (GtkMenuDetachFunc) menu_detach);
+
 
 /**** file list ...  */  
   menu[MN_FILE] = gtk_menu_new ();
@@ -1201,6 +1381,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       menu_item = gtk_menu_item_new ();
     if (file_mlist[i].func)
     {
+      if (!i) win->autotype_C=menu_item;	    
       if (file_mlist[i].data == WINCFG)
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), win);
       else if (file_mlist[i].data == TOPWIN)
@@ -1273,9 +1454,6 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
 /* first pixmap appearance */
   
-  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
-		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
-		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);   
   
   en = entry_new_by_path_and_label (path, path);
   if (!en)
@@ -1284,6 +1462,20 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   }
   en->flags = flags;
 
+  if (preferences&ABREVIATE_PATHS) label[COL_NAME] = abreviate(path);
+  else label[COL_NAME] = path; 
+  label[COL_SIZE] = "";
+  label[COL_DATE] = "";
+  
+  label[COL_MODE] = mode_txt(en->st.st_mode);
+  pw=getpwuid(en->st.st_uid); 
+  label[COL_UID] = (pw)? pw->pw_name : _("unknown");
+  gr=getgrgid (en->st.st_gid); 
+  label[COL_GID] = (gr)? gr->gr_name : _("unknown");
+  
+  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
+		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
+		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);   
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
 
@@ -1310,7 +1502,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
-  gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+  gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 	  
   menutop = create_menu (win->top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox[0]), menutop);
@@ -1355,9 +1547,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 		  gtk_widget_hide(win->menu->parent);
   }
   if (preferences & HIDE_TITLES) {
-	gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
-	gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
-	gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
+      gtk_clist_column_titles_hide((GtkCList *)ctree);
   }
   
   icon_name = strrchr (path, '/');
@@ -1366,8 +1556,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
 
-  gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
-  gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_DATE,!(preferences & HIDE_DATE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_SIZE,!(preferences & HIDE_SIZE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_MODE,!(preferences & HIDE_MODE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_UID,!(preferences & HIDE_UID));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_GID,!(preferences & HIDE_GID));
   
       
   return (win);

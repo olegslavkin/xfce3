@@ -1,3 +1,7 @@
+/*
+ * Edscott Wilson Garcia Copyright 2001-2002 GNU-GPL
+ * */
+/*BYTE 1 */
 #define SAVE_GEOMETRY 		0x01
 #define DOUBLE_CLICK_GOTO 	0x02
 #define SHORT_TITLES	 	0x04
@@ -6,6 +10,7 @@
 #define LARGE_TOOLBAR		0x20
 #define HIDE_TOOLBAR		0x40
 #define CUSTOM_FONT		0x80
+/* BYTE 2 */
 #define HIDE_SIZE		0x100
 #define HIDE_DATE		0x200
 #define HIDE_MENU		0x400
@@ -14,12 +19,19 @@
 #define FILTER_OPTION		0x2000
 #define ABREVIATE_PATHS		0x4000
 #define SORT_SIZE		0x8000
+/* BYTE 3 */
 #define SORT_DATE		0x10000
 #define SORT_NAME		0x20000
 #define STATUS_FOLLOWS_EXPAND	0x40000
 #define SHOW_STATUS		0x80000
 #define SMALL_DIALOGS		0x100000
 #define FONT_STATE		0x200000
+#define HIDE_MODE		0x400000
+#define HIDE_UID		0x800000
+/* BYTE 4 */
+#define HIDE_GID		0x1000000
+#define SIZE_IN_KB		0x2000000
+
 
 
 #define UNSORT_MASK		(0x38000 ^ 0xffffffff)
@@ -79,6 +91,9 @@ void set_colors(GtkWidget * ctree);
 int set_fontT(GtkWidget * ctree);
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
 void cb_show_status (GtkWidget * widget, GtkWidget *ctree);
+void cb_hide_mode (GtkWidget * widget, GtkWidget *ctree);
+void cb_hide_uid (GtkWidget * widget, GtkWidget *ctree);
+void cb_hide_gid (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_menu (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_titles (GtkWidget * widget, GtkWidget *ctree);
 void cb_subsort(GtkWidget * widget, GtkWidget *ctree);
@@ -100,4 +115,5 @@ void cb_registered(GtkWidget * item, GtkWidget * ctree);
 void cb_drag_copy (GtkWidget * widget, gpointer ctree);
 void cb_doubleC_goto (GtkWidget * widget, gpointer ctree);
 void cb_save_geo (GtkWidget * widget, gpointer ctree);
+void cb_sizeKB (GtkWidget * widget, gpointer ctree);
 #endif

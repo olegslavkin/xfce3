@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia Copyright 2001-2002
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -25,6 +27,7 @@
 #ifndef __ENTRY_H__
 #define __ENTRY_H__
 #include <sys/types.h>
+#include <sys/stat.h>
 typedef struct
 {
   int year;
@@ -39,32 +42,39 @@ typedef struct
 {
   gchar *path;
   gchar *label;
-  off_t size;
   int type;
   int flags;
-  time_t mtime;
-  ino_t inode;
-  mode_t mode;
+  void *org_mem; /* what this for? FIXME?*/
   mdate date;
-  void *org_mem;
+  struct stat st;
 }
 entry;
 
 
-#define FT_LINK			(1<<0)
-#define FT_DIR			(1<<1)
+#define FT_DIR			(1<<0)
+#define FT_DIR_UP		(1<<1)
 #define FT_FILE			(1<<2)
 #define FT_CHAR_DEV		(1<<3)
-#define FT_BLOCK_DEV	(1<<4)
+#define FT_BLOCK_DEV		(1<<4)
 #define FT_FIFO			(1<<5)
 #define FT_SOCKET		(1<<6)
 #define FT_EXE			(1<<7)
 #define FT_HIDDEN		(1<<8)
-#define FT_DIR_UP		(1<<9)
+#define FT_LINK			(1<<9)
 #define FT_DIR_PD		(1<<10)
-#define FT_STALE_LINK	(1<<11)
+#define FT_STALE_LINK		(1<<11)
 #define FT_UNKNOWN		(1<<12)
 #define FT_DUMMY		(1<<13)
+
+#define FT_TAR			(1<<14)
+#define FT_TARCHILD		(1<<15)
+#define FT_TAR_DUMMY		(1<<16)
+#define FT_GZ			(1<<17)
+#define FT_COMPRESS		(1<<18)
+#define FT_BZ2			(1<<19)
+
+#define EN_IS_TAR(en) (en->type & FT_TAR)
+#define EN_IS_TARCHILD(en) (en->type & FT_TARCHILD)
 
 #define EN_IS_DIR(en) (en->type & FT_DIR)
 #define EN_IS_LINK(en) (en->type & FT_LINK)
@@ -84,6 +94,5 @@ entry *entry_new_by_path (char *path);
 entry *entry_new_by_path_and_label (char *path, char *label);
 entry *entry_new_by_type (char *path, int type);
 int entry_update (entry *);
-int entry_type_update (entry *);
 
 #endif

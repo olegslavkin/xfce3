@@ -58,6 +58,7 @@
 #include "../xfsamba/tubo.h"
 #include "xtree_pasteboard.h"
 #include "xtree_cpy.h"
+#include "xtree_cb.h"
 #include "xtree_functions.h"
 #include "xtree_mess.h"
 
@@ -75,6 +76,7 @@
 #endif
 
 
+extern gboolean tar_extraction;
 
 static char *pasteboard=NULL;
 
@@ -163,7 +165,7 @@ void cb_cut(GtkWidget * widget, GtkCTree * ctree){
 /* this is equivalent to copying by dnd */
 void cb_paste(GtkWidget * widget, GtkCTree * ctree){
   FILE *pastefile;
-  char *tmpfile,*texto,*word;
+  char *tmpfile,*texto,*word,*path;
   cfg *win;
   struct stat f_stat;
   entry *t_en;
@@ -178,22 +180,9 @@ void cb_paste(GtkWidget * widget, GtkCTree * ctree){
 	  return;
   }
 
+  path=valid_path(ctree,TRUE);
+  
   if ((num = g_list_length (GTK_CLIST (ctree)->selection))>1) 
-	  goto invalid_paste;
-  if (!num) {
-	  GtkCTreeNode *root;
-          root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-	  t_en= gtk_ctree_node_get_row_data (GTK_CTREE (ctree),root); 
-  }
-  else t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), 
-		  (GTK_CLIST (ctree)->selection)->data);
-
-  /*fprintf(stderr,"dbg:selection target=%s\n",t_en->path);*/
-  if (!(t_en->type & FT_DIR)){
-invalid_paste:
-	  xf_dlg_error(win->top,_("Please select exactly one directory to insert the pasteboard contents."),NULL);
-	  return;
-  }
   
   if (!(pastefile=fopen(pasteboard,"r"))) {
 pasteboard_is_empty:
@@ -210,7 +199,7 @@ pasteboard_is_empty:
   if (!(pastefile=fopen(pasteboard,"r"))) return;
 
   texto=(char *)malloc((long long)f_stat.st_size+1);
-  if (fread(texto,(long long)f_stat.st_size,1,pastefile)!=1){
+  if (fread(texto,(size_t)f_stat.st_size,1,pastefile)!=1){
   	fprintf(stderr,"dbg:error reading pasteboard\n");
 	fclose(pastefile);
 	return;
@@ -220,7 +209,7 @@ pasteboard_is_empty:
   texto[(long long)f_stat.st_size]=0;
   word=strtok(texto,"\n");
   if (!word) {
-  	fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");
+  	/*fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");*/
 	return; 
   }
   if (strstr(word,"*** cut ***")) cut=TRUE; else cut=FALSE;
@@ -235,16 +224,20 @@ pasteboard_is_empty:
   free(texto);
   if (!i) return;
   /* create a tmpfile */
-  t_en = entry_new_by_path(t_en->path);
+  t_en = entry_new_by_path(path);
   tmpfile=CreateTmpList(win->top,list,t_en);
   entry_free(t_en);
   
   /*fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
 
    if (tmpfile) {
+     if (tar_extraction){
+	    DirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
+     } else {
 	  if ((cut)&&(on_same_device())) DirectTransfer((GtkWidget *)ctree,TR_MOVE,tmpfile);
 	  else IndirectTransfer((GtkWidget *)ctree,(cut)?TR_MOVE:TR_COPY,tmpfile);
-	  unlink(tmpfile);  
+	  unlink(tmpfile); 
+     } 
   }
   if (cut) unlink(pasteboard);
   update_timer(ctree);

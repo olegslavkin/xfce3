@@ -541,6 +541,12 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   node = GTK_CLIST (ctree)->selection->data;
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if (en->type & FT_TARCHILD) {
+	xf_dlg_error(win->top,_("This function is not available for the contents of tar files"),NULL);
+  	gtk_clist_thaw (GTK_CLIST (ctree));
+  	cursor_reset (GTK_WIDGET (ctree)); 
+	return;
+  }
 
   sfx = strrchr (en->label, '.');
   if (!sfx)

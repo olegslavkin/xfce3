@@ -63,6 +63,7 @@ void cancel_drop(gboolean state)
 	drop_cancelled=state;
 }
 
+extern gboolean tar_extraction;
 /*
  * called if drop data will be received
  * signal: drag_data_received
@@ -104,7 +105,10 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   {
     node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
     s_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-    if ((((s_en->type & FT_DIR) && (access (s_en->path, W_OK | X_OK) == 0)) || ((s_en->type & FT_FILE) && (access (s_en->path, W_OK) == 0))))
+    /* disable all drops into tar files (for now)*/
+    if (s_en->type & FT_TARCHILD) goto drag_over;
+    
+    if ((((s_en->type & FT_DIR) && (access (s_en->path, W_OK | X_OK) == 0))|| ((s_en->type & FT_FILE) && (access (s_en->path, W_OK) == 0))))
       win->dnd_row = row;
     else
       win->dnd_row = 0;
@@ -143,10 +147,10 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     uri_remove_file_prefix_from_list (list);
     node = gtk_ctree_node_nth (GTK_CTREE (ctree), win->dnd_row);
     t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+    
     /* this garantees that target will always be a directory
      * and thus no need to check further down
      * */
-    /*fprintf(stderr,"dbg:at dnd 2 (items=%d)\n",nitems);*/
     if (!(t_en->type & FT_DIR)) /* target is not a directory */
     {
       node = GTK_CTREE_ROW (node)->parent;
@@ -161,34 +165,32 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
       uri_free_list (list);
       return;*/
     }
-    /*fprintf(stderr,"dbg:at dnd 3\n");*/
     
     /* tmpfile ==NULL means drop cancelled*/
     u = list->data;
-    s_en = entry_new_by_path (u->url);
-    if (!s_en) {
-      xf_dlg_error (win->top,_("URL type not yet enabled"),u->url);
-      return;
-    }
-    if (strcmp(s_en->path,t_en->path)==0){
-	    /*fprintf(stderr,"dbg:nonsense input\n");*/
-	    break;
-    }
+    /*fprintf(stderr,"dbg:dnd, src=%s(tarchild=%d) tgt=%s\n",u->url,t_en->type & FT_TARCHILD,t_en->path);*/
+    if (strcmp(u->url,t_en->path)==0) break;/* nonsense input */
+    
     /*fprintf(stderr,"dbg:at dnd 4\n");*/
     tmpfile=CreateTmpList(win->top,list,t_en);
     /*fprintf(stderr,"dbg:dnd, tmpfile=%s\n",tmpfile);*/
     if (!tmpfile) {
          /*fprintf(stderr,"dbg:null tmpfile\n");*/
-	    break;
+	 break;
     }
-  
     /* acording to tmpfile name, do a direct move, here, and break.-*/
     cursor_wait (GTK_WIDGET (ctree));
     /* FIXME: links on same device should also be a DirectTransfer() */
-    if (on_same_device() && (mode == TR_MOVE)) DirectTransfer(ctree,mode,tmpfile);
-    else IndirectTransfer(ctree,mode,tmpfile);
-    
-    unlink(tmpfile);
+    if (tar_extraction){
+	    /* FIXME: if a tar_extraction is mixed with copy/move 
+	     * (who would do a thing like that?)
+	     * only tar_extraction will work. */
+	    DirectTransfer(ctree,mode,tmpfile);
+    } else {
+	    if (on_same_device() && (mode == TR_MOVE)) DirectTransfer(ctree,mode,tmpfile);
+	    else IndirectTransfer(ctree,mode,tmpfile);
+    }    
+    if (tmpfile) unlink(tmpfile);
     
     list=uri_free_list (list);
     cursor_reset (GTK_WIDGET (ctree));    
@@ -199,6 +201,8 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   }
   /* set cpy over*/
   /*fprintf(stderr,"dbg:parent:runOver\n");*/
+drag_over:
+  tar_extraction=FALSE;
   gtk_drag_finish (context, TRUE, TRUE, time);
   update_timer (GTK_CTREE (ctree));
 }
@@ -218,14 +222,12 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
   gchar *files;
   cfg *win = (cfg *) data;
 
-  if (!ctree)
-    return;
+  if (!ctree) return;
 
-  num = g_list_length (GTK_CLIST (ctree)->selection);
-  if (!num)
-    node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  else
-    node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0) return;
+  
+  node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
+  /*fprintf(stderr,"dbg: preparing drag data\n");*/
 
   /* prepare data for the receiver
    */
@@ -252,8 +254,13 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
       node = selection->data;
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
       slen = strlen (en->path);
-      sprintf (files, "file:%s\r\n", en->path);
-      files += slen + 5 + 2;
+      if (strncmp(en->path,"tar:",strlen("tar:"))==0){
+	      sprintf (files, "%s\r\n", en->path);
+	      files += slen + 2;
+      } else {
+	      sprintf (files, "file:%s\r\n", en->path);
+	      files += slen + strlen("file:") + 2;
+      }
       selection = selection->next;
     }
     /*printf("gdkatom=%lu(%s)\n",selection_data->target,gdk_atom_name(selection_data->target));*/
@@ -268,6 +275,8 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
   GdkDragAction action;
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
+  /*fprintf(stderr,"dbg: drag motion...\n");*/
 
   /* Get source widget and check if it is the same as the
    * destination widget. 
@@ -277,10 +286,10 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
   gboolean same;
   GtkWidget *source_widget;
   source_widget = gtk_drag_get_source_widget (dc);
-  same = ((source_widget == widget) ? TRUE : FALSE);
+  same = ((source_widget == ctree) ? TRUE : FALSE);
   if (same){
 	  printf("same widget for dnd motion\n");
-	  return FALSE;
+	  return TRUE;
   } else {
 	  printf("different widget for dnd motion\n");
 	  return FALSE;

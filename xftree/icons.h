@@ -25,4 +25,8 @@
 #include "icons/page_image.xpm"
 #include "icons/page_audio.xpm"
 #include "icons/page_core.xpm"
+#include "icons/page_ps.xpm"
+#include "icons/page_adobe.xpm"
+#include "icons/package_green.xpm"
+#include "icons/link_flag.xpm"
 #endif

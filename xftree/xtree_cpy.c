@@ -72,6 +72,7 @@
 #include "xtree_cpy.h"
 #include "xfce-common.h"
 #include "xtree_mess.h"
+#include "xtree_tar.h"
 #include "tubo.h"
 
 
@@ -111,6 +112,7 @@ static int  child_mode;
 static int total_files=0;
 
 static gboolean same_device=FALSE;
+gboolean tar_extraction=FALSE;
 static void *rw_fork_obj;
 static GtkWidget *cat,*info[3],*progress;
 static GtkWidget *tmp_ctree;
@@ -251,24 +253,18 @@ static int process_error(int code){
 
 
 
-/*FIXME: make it a char *, char * with a stat call (KISS)*/
 char *mktgpath(entry *ten,entry *sen){
   static char *target=NULL;
   if (target) free(target);
   target=(char *)malloc((strlen(ten->path)+strlen(sen->label)+2)*sizeof(char));
   if (!target) target="malloc error: mktgpath()\n";
+  
   if (EN_IS_DIR (ten))
   {
-    /* if target is a directory add the filename to the new path */
-    if (io_is_root (ten->path))
-    {
-      /* do not add a slash */
-      sprintf (target, "%s%s", ten->path, sen->label);
-    }
-    else
-    {
-      sprintf (target, "%s/%s", ten->path, sen->label);
-    }
+    if (ten->path[strlen(ten->path)-1]=='/') /* do not add a slash */
+	    sprintf (target, "%s%s", ten->path, sen->label);
+    else 
+	    sprintf (target, "%s/%s", ten->path, sen->label);
   }
   else
   {
@@ -315,13 +311,14 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
     nitems=0;
     if ((fname=randomTmpName())==NULL) return NULL;
     if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
-/*    same_device=FALSE;*/
     same_device=TRUE;
+    tar_extraction=FALSE;
     for (;list!=NULL;list=list->next){
-	struct stat s_stat,t_stat;
+	struct stat t_stat;
         u = list->data;
 	/*fprintf(stderr,"dbg:url=%s\n",u->url);*/
 	s_en = entry_new_by_path (u->url);
+	/* entry new has stated path by now */
 	if (!s_en) {
 		/*fprintf(stderr,"dbg:s_en is NULL\n");*/
 		continue;
@@ -337,12 +334,13 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 		  if (end) {
 			if (end==route) end[1]=0; /* root directory */
 			else end[0]=0;
-		  	stat(route,&t_stat);
+		  	if (stat(route,&t_stat)<0){
+				t_stat.st_dev=113;
+			}
 		  }
 		  free(route);  
 		}
 	}
-	lstat(s_en->path,&s_stat); /* stat() the link itself */
 
 	/*fprintf(stderr,"dbg:target=%s\n",target);*/
 	switch (ok_input(parent,target,s_en)){
@@ -357,9 +355,11 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 			 unlink (fname);
 			 return NULL;
 		default: 
-			 if (s_stat.st_dev != t_stat.st_dev) same_device=FALSE;
+			 if ((u->type != URI_LOCAL)||(u->type != URI_FILE)) same_device=FALSE;
+			 else if (s_en->st.st_dev != t_stat.st_dev) same_device=FALSE;
 			 nitems++;
 			 fprintf(tmpfile,"%d:%s:%s\n",u->type,s_en->path,target);
+			 /*fprintf(stderr,"dbg:%d:%s:%s\n",u->type,s_en->path,target);*/
 			 fflush(NULL);
 			 break;
 	} 
@@ -380,44 +380,45 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
  * packing off to copy/move/link
  * */
 static int ok_input(GtkWidget *parent,char *target,entry *s_en){
-  struct stat t_stat,s_stat;
+  struct stat t_stat;
   char *source;
   gboolean target_exists=TRUE;
   
   source=s_en->path;
-	/* check for valid source */
-       /* fprintf(stderr,"dbg:at okinput %s->%s\n",s_en->path,target);*/
-  if (EN_IS_DIRUP (s_en) || !io_is_valid (s_en->label)){ 
-        /*fprintf(stderr,"dbg:at okinput 1 \n");*/
-	  return DLG_RC_SKIP;
-  }
-
-        /*fprintf(stderr,"dbg:at okinput 1 \n");*/
   if (stat (target, &t_stat) < 0) {
 	if (errno != ENOENT) return xf_dlg_error_continue (parent,target, strerror (errno));
 	else target_exists=FALSE;
   }
-  if (lstat (source, &s_stat) < 0) {
-	return xf_dlg_error_continue (parent,source, strerror (errno));
+  /*fprintf(stderr,"dbg:at okinput %s->%s\n",s_en->path,target);*/
+	/* check for valid source */
+  if (strstr(s_en->path,"tar:")){
+          tar_extraction=TRUE;
   }
 
+  else if (EN_IS_DIRUP (s_en) || !io_is_valid (s_en->label)){ 
+        /*fprintf(stderr,"dbg:at okinput 1 \n");*/
+	  return DLG_RC_SKIP;
+  }
+ 
   /*fprintf(stderr,"dbg:%s->%s\n",source,target);*/
   
   /*fprintf(stderr,"dbg:at okinput 2 \n");*/
   /* target and source are the same */
-  if ((target_exists) && (t_stat.st_ino == s_stat.st_ino)) {
+  if ((target_exists) && (t_stat.st_ino == s_en->st.st_ino)) {
 	  /*fprintf(stderr,"dbg:nonsense imput\n");*/
 	  return DLG_RC_CANCEL;  
   }
 
-  if (S_ISFIFO(s_stat.st_mode)){
+  if (!tar_extraction){
+   if (S_ISFIFO(s_en->st.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy FIFO") );
-  }
-  if (S_ISCHR(s_stat.st_mode)||S_ISBLK(s_stat.st_mode)){
+   }
+   if (S_ISCHR(s_en->st.st_mode)||S_ISBLK(s_en->st.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy device file") );
-  }
-  if (S_ISBLK(s_stat.st_mode)){
+   }
+   if (S_ISBLK(s_en->st.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy socket") );
+   }
   }
  
   /*fprintf(stderr,"dbg:at okinput 3 \n");*/
@@ -594,17 +595,35 @@ static void ChildTransfer(void){
 		_exit(123);
 	}
 	child_path_number=0;
-	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile)){
-		/*fprintf(stderr,"dbg:%s\n",line);*/
+	while (!feof(tfile)&&fgets(line,MAX_LINE_SIZE-1,tfile)){
+		line[MAX_LINE_SIZE-1]=0;
 		type=atoi(strtok(line,":"));
-		source=strtok(NULL,":");
-		target=strtok(NULL,"\n");
-		
-		/*fprintf(stderr,"dbg:(%d)%s->%s\n",type,source,target);*/
-		fprintf(stdout,"child:tgt-src:%s:%s\n",target,source);
-		fprintf(stdout,"child:item:%d\n",child_path_number++);
-		if (!SubChildTransfer(target,source)) break;
+		source=strtok(NULL,"\n");
+		target=strrchr(source,':')+1;
+		*(strrchr(source,':'))=0;
+		switch (type) {
+		  case URI_LOCAL:
+		  case URI_FILE:
+			/*source=strtok(NULL,":");target=strtok(NULL,"\n");*/
+			/*fprintf(stderr,"dbg:(%d)%s->%s\n",type,source,target);*/
+			fprintf(stdout,"child:tgt-src:%s:%s\n",target,source);
+			fprintf(stdout,"child:item:%d\n",child_path_number++);
+			if (!SubChildTransfer(target,source)) goto cut_out;
+			break;
+		  case URI_HTTP:
+		  case URI_FTP:
+			/* FIXME: check for proper error control processing */
+			download(target,source);
+			break;
+		  case URI_TAR: 
+			break;
+		  default:
+			/*fprintf(stdout,"child:unknown type (%d) %s\n",type,source);*/
+			fprintf(stderr,"unknown type (%d) %s->%s\n",type,source,target);
+			break;
+		}
 	}
+cut_out:
 	fclose(tfile);
 	free (line);
 	fflush(NULL);
@@ -676,7 +695,9 @@ static gint ParentCount(gpointer data){
 		/*fprintf(stderr,"dbg:%s\n",line);*/
 		type=atoi(strtok(line,":"));
 		source=strtok(NULL,":");
-		total_files += SubParentCount(source);
+		if ((type == URI_LOCAL)||(type == URI_FILE))
+			total_files += SubParentCount(source);
+		else total_files++;
 		/*fprintf(stdout,"dbg:%s --> %d\n",source,total_files);*/
 	}
 	fclose(tfile);
@@ -716,7 +737,7 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	tmp_ctree=ctree;
 	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
         if (CHILD_FILE_LENGTH < strlen("/tmp/xftree.9999.tmp")+1){
-		fprintf(stderr,"dbg:This is a serious mistake, I need %d bytes\n",
+		fprintf(stderr,"xftree:This is a serious mistake, I need %d bytes\n",
 				strlen("/tmp/xftree.9999.tmp")+1);
 	}		
 	strncpy(child_file,tmpfile,CHILD_FILE_LENGTH);
@@ -738,6 +759,7 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 #endif
 	
         rw_fork_obj = Tubo (ChildTransfer, rwForkOver, TRUE, rwStdout, rwStderr);
+	
 	/* only parent continues from here */
         win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);	
 	/*fprintf(stderr,"dbg:call to innerloop from IndirectTransfer()\n");*/
@@ -768,16 +790,25 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 		return FALSE;
 	}
 	i=0;
-	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile)){
-		/*fprintf(stderr,"dbg:%s\n",line);*/
+	while (!feof(tfile)&&fgets(line,MAX_LINE_SIZE-1,tfile)){
+		line[MAX_LINE_SIZE-1]=0;
 		type=atoi(strtok(line,":"));
-		source=strtok(NULL,":");
-		target=strtok(NULL,"\n");
-		
-		/* moveit */
-	        if (rename (source, target) < 0){
-		  if (xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL)
-	          	return FALSE;
+		source=strtok(NULL,"\n");
+		target=strrchr(source,':')+1;
+		*(strrchr(source,':'))=0;
+		if (tar_extraction){
+			char *o_src;
+			o_src=g_strdup(source);
+			/* strtoks down the line... */
+			if (strncmp(source,"tar:",strlen("tar:"))!=0) continue;
+			tar_extract(ctree,target,source);
+			if (mode==TR_MOVE) tar_delete((GtkCTree *)ctree,o_src);
+			g_free (o_src);
+		} else {/* moveit */
+			if (rename (source, target) < 0){
+			  if (xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL)
+	          	  return FALSE;
+			}
 		}
 	}
 	fclose(tfile);
@@ -889,7 +920,7 @@ static int rwStderr (int n, void *data){
   
   if (n) return TRUE; /* this would mean binary data */
   line = (char *) data;
-  /*fprintf(stderr,"dbg (child):%s\n",line);*/
+  fprintf(stderr,"child stderr:%s\n",line);
   return TRUE;
 }
 
@@ -1136,22 +1167,28 @@ void cb_duplicate (GtkWidget * item, GtkCTree * ctree)
   int num,selected;
   cfg *win;
 
+  cursor_wait (GTK_WIDGET (ctree));
+  gtk_clist_freeze (GTK_CLIST (ctree));
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   selected = count_selection (ctree, &node);
   if (!selected) {
 	  xf_dlg_error(win->top,"No file or directory selected for duplication!",NULL);
-	  return;
+	  goto duplicate_return;
   } else if (selected > 1) {
 	  xf_dlg_error(win->top,"Only one file or directory can be selected for duplication!",NULL);
-	  return;
+	  goto duplicate_return;
   }
   
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  if (en->type & FT_TARCHILD) {
+	xf_dlg_error(win->top,_("This function is not available for the contents of tar files"),NULL);
+	goto duplicate_return;
+  }
 
-  if (!io_is_valid (en->label)) return;
+  if (!io_is_valid (en->label)) goto duplicate_return;
   cursor_wait (GTK_WIDGET (ctree));
   num = 0;
-  if ((nfile=(char *) malloc(strlen(en->path)+32))==NULL) return;
+  if ((nfile=(char *) malloc(strlen(en->path)+32))==NULL) goto duplicate_return;
   /* get highest duplicated version number*/
   {
      glob_t dirlist;
@@ -1173,8 +1210,7 @@ next:;
   }
      
   sprintf (nfile, "%s-%d", en->path, num++);
-  while (stat (nfile, &s) != -1)
-  {
+  while (stat (nfile, &s) != -1) {
     sprintf (nfile, "%s-%d", en->path, num++);
   }
 
@@ -1187,6 +1223,8 @@ next:;
   update_timer (ctree);
   cursor_reset (GTK_WIDGET (ctree));
   free(nfile);
-  return;
+duplicate_return:
+  gtk_clist_thaw (GTK_CLIST (ctree));
+  cursor_reset (GTK_WIDGET (ctree));   return;
 }
 

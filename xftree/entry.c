@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia Copyright 2001-2002
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -35,31 +37,64 @@
 #include <glib.h>
 #include "entry.h"
 #include "io.h"
+#include "uri.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
 
-/*
- */
-entry *
-entry_dupe (entry * en)
+static int entry_type_update (entry * en);
+
+int dup_stat(struct stat *tgt, struct stat *src){
+  if ((!tgt) || (!src)) return -1;
+  /* struct stat info */
+  tgt->st_dev = src->st_dev;
+  tgt->st_ino = src->st_ino;
+  tgt->st_mode = src->st_mode;
+  tgt->st_uid = src->st_uid;
+  tgt->st_gid = src->st_gid;
+  tgt->st_size = src->st_size;
+  tgt->st_atime = src->st_atime;
+  tgt->st_mtime = src->st_mtime;
+  tgt->st_ctime = src->st_ctime;
+#if 0
+  /* not used, yet */
+  tgt->st_nlink = src->st_nlink;
+  tgt->st_blksize = src->st_blksize;
+  tgt->st_blocks = src->st_blocks;
+#endif
+  return 0;	
+
+}
+
+void set_time(mdate *tgt,struct stat *src){
+  struct tm *t;
+   t = localtime (&(src->st_mtime));
+  
+   tgt->year = 1900 + t->tm_year;
+   tgt->month = t->tm_mon + 1;
+   tgt->day = t->tm_mday;
+   tgt->hour = t->tm_hour;
+   tgt->min = t->tm_min;
+}
+
+entry *entry_dupe (entry * en)
 {
   entry *new_en = NULL;
 
-  if (!en)
-    return (NULL);
+  if (!en) return (NULL);
   new_en = g_malloc (sizeof (entry));
   new_en->path = g_strdup (en->path);
   new_en->label = g_strdup (en->label);
-  new_en->size = en->size;
   new_en->type = en->type;
   new_en->flags = en->flags;
-  new_en->mtime = en->mtime;
-  new_en->inode = en->inode;
-  new_en->mode = en->mode;
-  new_en->date = en->date;
   new_en->org_mem = en->org_mem;
+  /* struct stat info */
+  if (dup_stat(&(new_en->st),&(en->st))<0){
+    entry_free (new_en);
+    return NULL;    
+  }
+  set_time(&(new_en->date),&(en->st));
   return (new_en);
 }
 
@@ -69,8 +104,7 @@ entry_dupe (entry * en)
 void
 entry_free (entry * en)
 {
-  if (en)
-  {
+  if (en) {
     g_free (en->path);
     g_free (en->label);
     g_free (en);
@@ -79,300 +113,192 @@ entry_free (entry * en)
 
 /*
  */
-entry *
-entry_new (void)
+entry *entry_new (void)
 {
   entry *en = g_malloc (sizeof (entry));
-  if (!en)
-    return (NULL);
+  if (!en) return (NULL);
   en->path = en->label = NULL;
-  en->type = en->flags = en->size = en->mtime = en->inode = 0;
+  en->type = en->flags = 0;
   en->org_mem = NULL;
   return (en);
 }
 
-/*
- */
-entry *
-entry_new_by_path_and_label (char *path, char *label)
+entry *entry_new_by_path_and_label (char *path, char *label)
 {
-  struct stat s;
   entry *en;
-  struct tm *t;
 
-  if (lstat (path, &s) == -1)
-  {
-    return (NULL);
-  }
   en = entry_new ();
-  if (!en)
-    return (NULL);
+  if (!en) return (NULL);
+  en->st.st_size = -13; /* force an update */
+  en->type = 0; /* avoid non initialized variable potencial trouble */
+  
   en->path = g_strdup (path);
   en->label = g_strdup (label);
-
-  en->size = s.st_size;
-  en->inode = s.st_ino;
-  en->mtime = s.st_mtime;
-  t = localtime (&s.st_mtime);
-  en->date.year = 1900 + t->tm_year;
-  en->date.month = t->tm_mon + 1;
-  en->date.day = t->tm_mday;
-  en->date.hour = t->tm_hour;
-  en->date.min = t->tm_min;
-
-  if (S_ISLNK (s.st_mode))
-  {
-    en->type |= FT_LINK;
-    if (stat (path, &s) == -1)
-    {
-      en->type |= FT_STALE_LINK;
-      en->size = 0;
-      return (en);
-    }
-  }
-  en->mode = s.st_mode;
-
-  if (io_is_dirup (en->label))
-  {
-    en->type = FT_DIR_UP | FT_DIR;
-    return (en);
-  }
-
-  if (S_ISDIR (s.st_mode))
-  {
-    en->type |= FT_DIR;
-    if (access (path, R_OK | X_OK) != 0)
-      en->type |= FT_DIR_PD;
-  }
-  else if (S_ISREG (s.st_mode))
-  {
-    en->type |= FT_FILE;
-    if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
-      en->type |= FT_EXE;
-  }
-  else if (S_ISCHR (s.st_mode))
-  {
-    en->type |= FT_CHAR_DEV;
-  }
-  else if (S_ISBLK (s.st_mode))
-  {
-    en->type |= FT_BLOCK_DEV;
-  }
-  else if (S_ISFIFO (s.st_mode))
-  {
-    en->type |= FT_FIFO;
-  }
-  else if (S_ISSOCK (s.st_mode))
-  {
-    en->type |= FT_SOCKET;
-  }
-  else
-  {
-    en->type |= FT_UNKNOWN;
+  /* check for valid uri types: */
+  switch (uri_type (path)){
+    case URI_LOCAL:
+    case URI_FILE:
+	    if (entry_update (en) < 0) {
+	      entry_free ( en);
+	      return (NULL);
+	    }
+            set_time(&(en->date),&(en->st));
+            entry_type_update (en);
+	    break;
+    case URI_HTTP:
+    case URI_FTP:
+    case URI_SMB:
+    case URI_TAR:
+	    break;
+    default:
+	    entry_free (en);
+	    return (NULL);	    
   }
   return (en);
+}
+
+static char *extract_label(char *path){
+  static char *label=NULL,*p;
+  
+  if (label) g_free(label);
+  label = g_strdup (path);
+  p = strrchr (label, '/');
+  if (p) {
+    if (p != label)
+    {
+      if (*(p + 1) == '\0') { /* remove slash at the end */
+	*p = '\0';
+	/* search again */
+	p = strrchr (label, '/');
+	if (!p)	{ /* give up */
+	  p = label;
+	}
+      } 
+      else {p++;}
+    }
+  }
+  else p = label;
+  return p;
 }
 
 /*
  * extract label from path and call the function above
  */
-entry *
-entry_new_by_path (char *path)
+entry *entry_new_by_path (char *path)
 {
-  char *label, *p;
-  entry *en;
-
-  p = label = g_strdup (path);
-  p = strrchr (label, '/');
-  if (p)
-  {
-    if (p != label)
-    {
-      if (*(p + 1) == '\0')
-      {
-	/* remove slash at the end */
-	*p = '\0';
-	/* search again */
-	p = strrchr (label, '/');
-	if (!p)
-	{
-	  /* give up */
-	  p = label;
-	}
-      }
-      else
-      {
-	p++;
-      }
-    }
-  }
-  else
-    p = label;
-  en = entry_new_by_path_and_label (path, p);
-  g_free (label);
+  char *label;
+  entry *en; 
+  label=extract_label(path);
+  en = entry_new_by_path_and_label (path, label);
   return en;
 }
 
-/*
- */
-entry *
-entry_new_by_type (char *path, int type)
+entry *entry_new_by_type (char *path, int type)
 {
   char *p;
   entry *en;
 
   en = entry_new ();
-  if (!en)
-    return (NULL);
-  en->path = g_strdup (path);
+  if (!en) return (NULL);
+  if (!en->path) return (NULL);
 
-  p = strrchr (en->path, '/');
-  if (p)
-  {
-    if (p != en->path)
-    {
-      if (*(p + 1) == '\0')
-      {
-	/* remove slash at the end */
-	*p = '\0';
-	/* search again */
-	p = strrchr (en->path, '/');
-	if (!p)
-	{
-	  /* give up */
-	  p = en->path;
-	}
-      }
-      else
-      {
-	p++;
-      }
-    }
-  }
-  else
-    p = en->path;
-  en->label = g_strdup (p);
+  en->path = g_strdup (path);
+  en->label = g_strdup (extract_label(path));
   en->type = type;
   return (en);
 }
 
-/*
- * update time, size, etc..
- * return 0 on failure
- * return 1 on nothing to do
- * return 2 on something has changed
+static int entry_type_update (entry * en){
+  int rc = FALSE;
+  /* check for stale links */
+  en->type = 0;
+  if (S_ISLNK (en->st.st_mode)) { 
+    struct stat s;
+    en->type |= FT_LINK; 
+    if (stat (en->path, &s) == -1) {
+      en->type |= FT_STALE_LINK;
+      return 1;
+    }
+    if (S_ISDIR (s.st_mode)) en->type |= FT_DIR;
+    else if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
+	en->type |= FT_EXE;  
+    if (S_ISREG (s.st_mode)) en->type |= FT_FILE; 
+    if (S_ISCHR (en->st.st_mode)) en->type |= FT_CHAR_DEV;
+    else if (S_ISBLK (en->st.st_mode)) en->type |= FT_BLOCK_DEV;
+    else if (S_ISFIFO (en->st.st_mode)) en->type |= FT_FIFO;
+    else if (S_ISSOCK (en->st.st_mode)) en->type |= FT_SOCKET;
+  }  
+  if (S_ISDIR (en->st.st_mode)){
+      en->type |= FT_DIR;
+      if (access (en->path, R_OK | X_OK) != 0)	en->type |= FT_DIR_PD;
+  }
+  if (S_ISREG (en->st.st_mode)){
+      en->type |= FT_FILE;
+      if ((en->st.st_mode & S_IXUSR) || (en->st.st_mode & S_IXGRP) || (en->st.st_mode & S_IXOTH))
+	en->type |= FT_EXE;
+  }
+  else if (S_ISCHR (en->st.st_mode)) en->type |= FT_CHAR_DEV;
+  else if (S_ISBLK (en->st.st_mode)) en->type |= FT_BLOCK_DEV;
+  else if (S_ISFIFO (en->st.st_mode)) en->type |= FT_FIFO;
+  else if (S_ISSOCK (en->st.st_mode)) en->type |= FT_SOCKET;
+  else en->type |= FT_UNKNOWN;
+  if (io_is_dirup (en->label)) en->type = FT_DIR_UP | FT_DIR;
+  return (0);
+}
+
+/* update struct stat..
+ * return -1 on failure (path has dissappeared)
+ * return 0 on nothing done
+ * return 1 on something has changed
  */
-int
-entry_update (entry * en)
+int entry_update (entry * en)
 {
   struct stat s;
   struct tm *t;
-  int rc = FALSE;
+  int rc = 0;
+  
+  /* don't do updates on internal tar entries */
+  if (strncmp(en->path,"tar:",strlen("tar:")) == 0) return (0);
 
-  if (lstat (en->path, &s) == -1)
-  {
-    return (ERROR);
+  if (lstat (en->path, &s) == -1) {
+	  return (-1); /* its gone */
   }
-  if (en->size != s.st_size)
-  {
-    rc = TRUE;
-    en->size = s.st_size;
+  
+  if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode))) {
+     struct stat ss;
+     if (stat (en->path, &ss) == -1) return (-1); /* its gone */
+     if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);
   }
-  if (en->inode != s.st_ino)
-  {
-    rc = TRUE;
-    en->inode = s.st_ino;
-  }
-  if (en->mtime != s.st_mtime)
-  {
-    rc = TRUE;
-    en->mtime = s.st_mtime;
-    t = localtime (&s.st_mtime);
-    en->date.year = 1900 + t->tm_year;
-    en->date.month = t->tm_mon + 1;
-    en->date.day = t->tm_mday;
-    en->date.hour = t->tm_hour;
-    en->date.min = t->tm_min;
-  }
-  if (S_ISLNK (s.st_mode))
-  {
-    if (stat (en->path, &s) == -1)
-    {
-      en->type |= FT_STALE_LINK;
-      return (TRUE);
+  
+  if (en->st.st_size<0) rc = 1;
+  if (en->st.st_size != s.st_size) rc = 1; 
+  else if (en->st.st_ino != s.st_ino) rc = 1;
+  else if (en->st.st_mtime != s.st_mtime) rc = 1;
+  else if (en->st.st_mode != s.st_mode) rc = 1;
+  else if (en->st.st_uid != s.st_uid) rc = 1;
+  else if (en->st.st_gid != s.st_gid) rc = 1;
+#if 0 /* not these */
+  else if (en->st.st_dev != s.st_dev) rc = 1;
+  else if (en->st.st_atime != s.st_atime) rc = 1;
+  else if (en->st.st_ctime != s.st_ctime) rc = 1;
+#endif
+  
+  if (rc) {
+    int rct;
+    dup_stat(&(en->st),&s);
+    set_time(&(en->date),&s);
+    rct=entry_type_update (en);
+    if ((rct=entry_type_update (en))!=0) return rct; 
+  } else {  /* just check for stale links */
+    if (S_ISLNK (s.st_mode)) { 
+      if (stat (en->path, &s) == -1) {
+        en->type |= FT_STALE_LINK;
+	/*printf("dbg:stalelink2 %s\n",en->path);*/
+        return 1;
+      }
     }
-  }
-  if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode)))
-    return (ERROR);
-
+  }  
   return (rc);
 }
 
 
-int
-entry_type_update (entry * en)
-{
-  struct stat s;
-  int rc = FALSE;
-
-  if (lstat (en->path, &s) == -1)
-  {
-    return (ERROR);
-  }
-
-  if (S_ISLNK (s.st_mode))
-  {
-    if (stat (en->path, &s) == -1)
-    {
-      en->type |= FT_STALE_LINK;
-      return (TRUE);
-    }
-  }
-  if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode)))
-    return (ERROR);
-
-  if (en->mode != s.st_mode)
-  {
-    rc = TRUE;
-    en->mode = s.st_mode;
-    en->type = 0;
-    if (S_ISDIR (s.st_mode))
-    {
-      en->type |= FT_DIR;
-      if (access (en->path, R_OK | X_OK) != 0)
-	en->type |= FT_DIR_PD;
-    }
-    else if (S_ISREG (s.st_mode))
-    {
-      en->type |= FT_FILE;
-      if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
-	en->type |= FT_EXE;
-    }
-    else if (S_ISCHR (s.st_mode))
-    {
-      en->type |= FT_CHAR_DEV;
-    }
-    else if (S_ISBLK (s.st_mode))
-    {
-      en->type |= FT_BLOCK_DEV;
-    }
-    else if (S_ISFIFO (s.st_mode))
-    {
-      en->type |= FT_FIFO;
-    }
-    else if (S_ISSOCK (s.st_mode))
-    {
-      en->type |= FT_SOCKET;
-    }
-    else
-    {
-      en->type |= FT_UNKNOWN;
-    }
-    if (io_is_dirup (en->label))
-    {
-      en->type = FT_DIR_UP | FT_DIR;
-    }
-  }
-
-  return (rc);
-}

@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia Copyright 2001-2002
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -21,9 +23,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
+#ifdef HAVE_CONFIG_H   
+#  include <config.h>   
 #endif
 
 #include <stdio.h>
@@ -39,6 +40,8 @@
 #include "my_intl.h"
 #include "gtk_prop.h"
 #include "gtk_dlg.h"
+#include "xtree_mess.h"
+#include "xtree_cfg.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -160,9 +163,9 @@ gint dlg_prop(char *path, fprop * prop, int flags)
  return (xf_dlg_prop (NULL,path,prop,flags));
 }
 
-
+/* FIXME: change memory for strings from static stack to dynamic heap */
 gint
-xf_dlg_prop (GtkWidget *parent,char *path, fprop * prop, int flags)
+xf_dlg_prop (GtkWidget *ctree,char *path, fprop * prop, int flags)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *label, *skip, *all, *notebook, *table, *owner[4], *perm[15], *info[12];
   struct tm *t;
@@ -178,7 +181,9 @@ xf_dlg_prop (GtkWidget *parent,char *path, fprop * prop, int flags)
 #define LINE_MAX	1024
 #endif
   char line[LINE_MAX + 1];
+  cfg *win;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   dl.result = 0;
   dl.prop = prop;
@@ -186,7 +191,7 @@ xf_dlg_prop (GtkWidget *parent,char *path, fprop * prop, int flags)
   gtk_window_set_title (GTK_WINDOW (dl.top), _("Properties"));
   gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
-  if (parent) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent)); 
+  if (win->top) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (win->top)); 
 
   notebook = gtk_notebook_new ();
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), notebook, TRUE, TRUE, 0);
@@ -249,7 +254,10 @@ xf_dlg_prop (GtkWidget *parent,char *path, fprop * prop, int flags)
       n += 2;
     }
   }
-  sprintf (buf, _("%lld Bytes"), (long long) prop->size);
+
+  if ((win->preferences & SIZE_IN_KB) && (prop->size >= 1024)) 
+	  sprintf (buf, _("%lld KBytes"), (long long) ((unsigned long long) prop->size/1024));
+  else sprintf (buf, _("%lld Bytes"), (long long) prop->size);
   info[n + 1] = label_new (buf, GTK_JUSTIFY_LEFT);
   info[n] = label_new (_("Size :"), GTK_JUSTIFY_RIGHT);
   gtk_table_attach (GTK_TABLE (table), info[n], 0, 1, n, n + 1, TBL_XOPT, 0, X_PAD, Y_PAD);

@@ -44,6 +44,8 @@
 #include <X11/Xproto.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#include <pwd.h>
+#include <grp.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "my_string.h"
@@ -142,6 +144,8 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   entry *en;
   char *icon_name;
   cfg *win;
+  struct passwd *pw;
+  struct group *gr;
   
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 	/*fprintf(stderr,"dbg: go_to path=%s\n",path);*/
@@ -164,13 +168,18 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
 
 	/*fprintf(stderr,"dbg: 2go_to path=%s\n",path);*/
 
+  pw=getpwuid(en->st.st_uid); 
+  gr=getgrgid (en->st.st_gid); 
+   
   for (i = 0; i < COLUMNS; i++)
   {
     if (i == COL_NAME)
       label[i] = (win->preferences&ABREVIATE_PATHS)?
-	      abreviate(uri_clear_path (en->path)):uri_clear_path (en->path);
-    else
-      label[i] = "";
+	      abreviate(uri_clear_path (en->path)):uri_clear_path (en->path);   
+    else if (i==COL_MODE) label[i] = mode_txt(en->st.st_mode); 
+    else if (i==COL_UID) label[i] = (pw)? pw->pw_name : _("unknown"); 
+    else if (i==COL_GID) label[i] = (gr)? gr->gr_name : _("unknown"); 
+    else label[i] = "";
   }
   ctree_freeze (ctree);
   
@@ -196,9 +205,12 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
 void regen_ctree(GtkCTree *ctree){
   GtkCTreeNode * root;
   entry *en;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
-  internal_go_to (ctree, root,en->path, en->flags);
+  gtk_clist_set_column_title((GtkCList *)ctree,COL_SIZE,
+	(win->preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)"));	  internal_go_to (ctree, root,en->path, en->flags);
   return;
 }
 

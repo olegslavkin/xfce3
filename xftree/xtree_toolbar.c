@@ -37,7 +37,6 @@
 #include <string.h>
 #include <errno.h>
 #include <dirent.h>
-#include <sys/stat.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
 #include <gtk/gtk.h>

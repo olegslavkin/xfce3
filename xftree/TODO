@@ -1,10 +1,6 @@
 
-Two big ones:
+One big one (mainly in xfsamba):
 7- Add code necesary to d+d files to/from xfsamba.
-6.- MC style opening of packed files: Click on files and you see the internal
-structure as if it wasn't packed. Makes it very easy to copy and move content
-from these files straight to where you want it.
-
 fix: The pasteboard should also communicate to other application via the normal
  X pasteboard.
 bug (cb_exec): 
@@ -32,6 +28,9 @@ BUGS to fix:
 ****************************************************************
 ****************************************************************
 done:
+6.- MC style opening of packed files: Click on files and you see the internal
+structure as if it wasn't packed. Makes it very easy to copy and move content
+from these files straight to where you want it.
 easy:
 16,16b- Config option: Default "open with" program, also add an option to register
     a program type when the open with dialog pops up.

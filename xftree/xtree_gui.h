@@ -50,6 +50,11 @@ typedef struct
 }
 wgeo_t;
 
+typedef struct autotype_t{
+	char *extension;
+	char *command;
+}autotype_t;
+
 enum
 {
   MN_NONE = 0,
@@ -57,6 +62,7 @@ enum
   MN_FILE = 2,
   MN_MIXED = 3,
   MN_HLP = 4,
+  MN_TARCHILD = 5,
   MENUS
 };
 
@@ -65,6 +71,9 @@ enum
   COL_NAME,
   COL_SIZE,
   COL_DATE,
+  COL_UID,
+  COL_GID,
+  COL_MODE,
   COLUMNS			/* number of columns */
 };
 
@@ -76,8 +85,12 @@ enum
   PIX_PAGE,PIX_PAGE_C,PIX_PAGE_F,PIX_PAGE_O,
   	PIX_PAGE_H,PIX_PAGE_LNK,PIX_CORE,PIX_TAR,
 	PIX_COMPRESSED,PIX_IMAGE,PIX_TEXT,PIX_MAIL,
-	PIX_BAK,PIX_DUP,
-  PIX_PAGE_AUDIO, 
+	PIX_BAK,PIX_DUP,PIX_TAR_TABLE,PIX_TAR_EXP,
+	PIX_TAR_TABLE_R,PIX_TAR_EXP_R,PIX_PS,
+	PIX_ADOBE,
+  PIX_PAGE_AUDIO,
+  PIX_PACKAGE,
+  PIX_LINKFLAG, 
   PIX_PAGE_HTML, 
   PIX_CHAR_DEV,
   PIX_FIFO,
@@ -92,6 +105,8 @@ enum
 {
   PIM_DIR_OPEN=0,
   PIM_DIR_CLOSE,
+  PIM_PACKAGE,
+  PIM_LINKFLAG, 
   PIM_DIR_PD,
   PIM_PAGE,
   PIM_PAGE_HTML, 
@@ -113,7 +128,7 @@ EXTERN GdkPixmap *gPIX[LAST_PIX];
 EXTERN GdkPixmap *gPIM[LAST_PIM];
 
 void gui_main (char *path, char *xap, char *trash, char *reg, wgeo_t *, int);
-
+char *mode_txt(mode_t mode);
 cfg *new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags);
 
 void create_pixmaps(int h,GtkWidget * ctree);

@@ -33,6 +33,7 @@ xftree_SOURCES = \
 	xtree_cpy.c xtree_cpy.h \
 	xtree_pasteboard.c xtree_pasteboard.h \
 	xtree_toolbar.c xtree_toolbar.h \
+	xtree_tar.c xtree_tar.h \
 	xtree_colorsel.c xfdiff_colorsel.h
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \

@@ -46,5 +46,11 @@ cb_refresh (GtkWidget * item, GtkCTree * ctree);
 /* at xtree_du.c: */
 void 
 cb_du (GtkWidget * item, GtkCTree * ctree);
-
+void 
+cb_samba (GtkWidget * item, GtkCTree * ctree);
+void 
+cb_autotype(GtkWidget * item, GtkCTree * ctree);
+void 
+cb_autotar(GtkWidget * item, GtkCTree * ctree);
+char *valid_path(GtkCTree *ctree,gboolean expand);
 #endif

@@ -276,6 +276,60 @@ void cb_filter_files(GtkWidget * widget, GtkWidget *ctree)
 
 }
 
+void
+cb_hide_mode (GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  win->preferences ^= HIDE_MODE;
+  preferences = win->preferences;
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_MODE,!(preferences & HIDE_MODE));
+  if (preferences & HIDE_TITLES) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_MODE].button))){ 
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_MODE].button));
+	  }
+  }
+  save_defaults(NULL);
+  return;
+}
+
+void
+cb_hide_uid (GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  win->preferences ^= HIDE_UID;
+  preferences = win->preferences;
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_UID,!(preferences & HIDE_UID));
+  if (preferences & HIDE_TITLES) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_MODE].button))){ 
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_MODE].button));
+	  }
+  }
+  save_defaults(NULL);
+  return;
+}
+
+void
+cb_hide_gid (GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  win->preferences ^= HIDE_GID;
+  preferences = win->preferences;
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_GID,!(preferences & HIDE_GID));
+  if (preferences & HIDE_TITLES) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_GID].button))){ 
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_GID].button));
+	  }
+  }
+  save_defaults(NULL);
+  return;
+}
+
 
 void
 cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
@@ -285,7 +339,7 @@ cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
 
   win->preferences ^= HIDE_DATE;
   preferences = win->preferences;
-  gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_DATE,!(preferences & HIDE_DATE));
   if (preferences & HIDE_TITLES) {
 	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button))){ 
 	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
@@ -303,7 +357,7 @@ cb_hide_size (GtkWidget * widget, GtkWidget *ctree)
 
   win->preferences ^= HIDE_SIZE;
   preferences = win->preferences;
-  gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
+  gtk_clist_set_column_visibility ((GtkCList *)ctree,COL_SIZE,!(preferences & HIDE_SIZE));
   if (preferences & HIDE_TITLES) {
 	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button))){ 
 	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
@@ -358,19 +412,9 @@ cb_hide_titles (GtkWidget * widget, GtkWidget *ctree)
   win->preferences ^= HIDE_TITLES;
   preferences = win->preferences;
   if (preferences & HIDE_TITLES) {
-	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button))){ 
-	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
-	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
-	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
-	  }
+	  gtk_clist_column_titles_hide((GtkCList *)ctree);
   } else {
-	  if (!GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button))) {
-	      gtk_widget_show(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
-	      if (!(preferences&HIDE_DATE)) 
-		      gtk_widget_show(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
-	      if (!(preferences&HIDE_SIZE))
-		      gtk_widget_show(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
-	  }
+	  gtk_clist_column_titles_show((GtkCList *)ctree);
   }
   save_defaults(NULL);
   return;
@@ -666,6 +710,17 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
 #endif
 
 void
+cb_sizeKB (GtkWidget * widget, gpointer ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= SIZE_IN_KB;
+  preferences = win->preferences;
+  save_defaults (NULL);
+  regen_ctree((GtkCTree *)ctree);  
+}
+
+void
 cb_save_geo (GtkWidget * widget, gpointer ctree)
 {
   cfg *win;
@@ -674,6 +729,7 @@ cb_save_geo (GtkWidget * widget, gpointer ctree)
   preferences = win->preferences;
   save_defaults (NULL);
 }
+
 void
 cb_doubleC_goto (GtkWidget * widget, gpointer ctree)
 {
@@ -958,10 +1014,12 @@ char *abreviate(char *path)
     shortpath=(char *)malloc(strlen(path)+4);
     if (!shortpath) return path;
     w=strrchr(path,'/');
-    if (!w) w="";
+    if (!w)  return path;
     if (w==path) return path;
+    if (strlen(w)<2) return path;
     shortpath=(char *)malloc(strlen(path)+4);
-    sprintf(shortpath,"...%s",w);
+    /*sprintf(shortpath,"...%s",w);*/
+    sprintf(shortpath,"%s",w+1);
     return shortpath;
 }
 

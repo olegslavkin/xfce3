@@ -1,1 +1,7 @@
-xftree handles 64 bit file sizes in freebsd4.4+ naturally. To enable this option in linux kernels 2.4+, compile with  -D_FILE_OFFSET_BITS=64
+Known bugs:
+
+Only when extracting from tarfile from one xftree window to a *different* xftree window:
+ - If action is move (and tarfile is not compressed), extracted file is deleted but the    ctree is not updated.
+ - If action is extract, the created file has mode 0640 instead of the mode of the
+   file within the tarfile.
+

@@ -24,8 +24,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
+#ifdef HAVE_CONFIG_H   
+#  include <config.h>   
 #endif
 
 #include <stdio.h>
@@ -184,14 +184,12 @@ uri_clear_path (const char *org_path)
 int
 uri_type (char *s)
 {
-  if (*s == '/')
-    return (URI_LOCAL);
-  if (strncmp (s, "file:/", 6) == 0)
-    return (URI_FILE);
-  if (strncmp (s, "http:/", 6) == 0)
-    return (URI_HTTP);
-  if (strncmp (s, "ftp:/", 5) == 0)
-    return (URI_FTP);
+  if (*s == '/') return (URI_LOCAL);
+  if (strncmp (s, "file:/", 6) == 0)  return (URI_FILE);
+  if (strncmp (s, "http:/", 6) == 0)  return (URI_HTTP);
+  if (strncmp (s, "ftp:/", 5) == 0)   return (URI_FTP);
+  if (strncmp (s, "tar:/", 5) == 0)   return (URI_TAR);
+  if (strncmp (s, "smb:/", 5) == 0)   return (URI_SMB);
   return (URI_LOCAL);
 }
 

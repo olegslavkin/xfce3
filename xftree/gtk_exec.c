@@ -23,11 +23,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
+#ifdef HAVE_CONFIG_H   
+#  include <config.h>   
 #endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,6 +38,7 @@
 #include "gtk_exec.h"
 #include "gtk_dlg.h"
 #include "xtree_cfg.h"
+#include "xtree_cb.h"
 #include "io.h"
 #include "reg.h"
 
@@ -98,7 +97,7 @@ on_ok (GtkWidget * ok, gpointer data)
     dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
     gtk_widget_destroy (dl.top);
     dl.result = (int) ((long) data);
-    if (gtk_toggle_button_get_active((GtkToggleButton *)dl.reg)){
+    if (dl.reg&&(gtk_toggle_button_get_active((GtkToggleButton *)dl.reg))){
       char  *sfx;
       sfx = strrchr (dl.file, '.');
       if (!sfx) {
@@ -130,7 +129,9 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   GList *apps=NULL;
   char cmd[(PATH_MAX + NAME_MAX) * 3 + 6];
   char *title;
+  char *path;
 
+  path=valid_path((GtkCTree *)ctree,FALSE);
 
   if (file)
   {
@@ -141,6 +142,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     title = _("Run program ...");
   }
 
+  dl.reg=NULL;
   dl.result = 0;
   dl.win=gtk_object_get_user_data (GTK_OBJECT (ctree));
   dl.in_terminal = 0;
@@ -209,7 +211,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
       g_print (_("Fatal error in %s at %d\n"), __FILE__, __LINE__);
       exit (1);
     }
-
+    chdir(path);
     if (dl.in_terminal)
     {
       /* start in terminal window */
@@ -230,7 +232,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
       }
       else
       {
-	sprintf (cmd, "%s &", dl.cmd);
+	sprintf (cmd, "%s &",dl.cmd);
       }
     }
     g_free (dl.cmd);

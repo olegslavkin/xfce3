@@ -24,8 +24,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* FIXME are move_file() and delete_file() here, redundant with
- * those from xtree_gui? */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -65,6 +63,7 @@
 #include "reg.h"
 #include "xfcolor.h"
 #include "xfce-common.h"
+#include "xtree_tar.h"
 
 #include "xtree_mess.h"
 #include "xtree_pasteboard.h"
@@ -87,6 +86,20 @@
 
 
 static gboolean abort_delete=FALSE;
+
+char *valid_path(GtkCTree *ctree,gboolean expand){
+  GtkCTreeNode *node;
+  entry *en;
+  count_selection (GTK_CTREE (ctree), &node);
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  while (!(en->type&FT_DIR)||(en->type&FT_TARCHILD)){
+	  node=GTK_CTREE_ROW (node)->parent;
+	  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  }
+  if ((expand)&&(!GTK_CTREE_ROW (node)->expanded))
+	 gtk_ctree_expand (GTK_CTREE (ctree), node);
+  return en->path;
+}
 
 /*
  * find a node and check if it is expanded
@@ -143,45 +156,14 @@ cb_open_trash (GtkWidget * item, GtkCTree *ctree)
 void
 cb_new_window (GtkWidget * widget, GtkCTree * ctree)
 {
-  int num;
-  gboolean new_win;
-  GList *selection = NULL;
-  GtkCTreeNode *node;
-  entry *en = NULL;
+  entry *en;
   cfg *win;
+  char *path;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  new_win = FALSE;
-  
-  num = count_selection (ctree, &node);
-  if (num)
-  {
-    for (selection = g_list_copy (GTK_CLIST (ctree)->selection); selection; selection = selection->next)
-    {
-      node = selection->data;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (!(en->type & FT_DIR))
-      {
-	continue;
-      }
-      new_win = TRUE;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
-    }
-    g_list_free (selection);
-  }
-  if (!new_win)
-  {
-    if (num)
-    {
-      node = GTK_CTREE_ROW (node)->parent;
-    }
-    if (node)
-    {
-      en = gtk_ctree_node_get_row_data (ctree, node);
-      new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
-    }
-  }
+  en = gtk_ctree_node_get_row_data (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list));
+  path=valid_path((GtkCTree *)ctree,FALSE);
+  new_top (path, win->xap, win->trash, win->reg, win->width, win->height, en->flags); 
 }
 
 void
@@ -220,25 +202,39 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
   GList *selection;
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
   num = count_selection (ctree, &node);
+  if (num) {
+    selection = GTK_CLIST (ctree)->selection;
+    while (selection){	  
+     node = selection->data;
+     en_1 = gtk_ctree_node_get_row_data (ctree, node);
+     if (en_1->type & FT_TARCHILD) gtk_ctree_unselect (ctree, node);
+     selection=selection->next;
+    }	    
+  }
+  num = count_selection (ctree, &node);
+  
   if (!num) {
     io_system ("xfdiff&");
     return;
   }
   /* take first 2 */
-  if (num > 2) {
+/*  if (num > 2) {
     if (xf_dlg_continue (win->top,_("Proceed with the first 2 selections?"),NULL)==DLG_RC_CANCEL)
 	    return;
-  }
+  }*/
   
   selection = GTK_CLIST (ctree)->selection;
   node = selection->data;
   en_1 = gtk_ctree_node_get_row_data (ctree, node);
+  if (en_1->type & FT_TARCHILD){io_system ("xfdiff&"); return;}
   selection=selection->next;
   if (selection){
 	node = selection->data;
 	en_2 = gtk_ctree_node_get_row_data (ctree, node);
-  	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+4);
+        if (en_2->type & FT_TARCHILD){io_system ("xfdiff&"); return;} 
+	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+6);
   	if (!command) return;
   	sprintf(command,"xfdiff %s %s&",en_1->path,en_2->path);
   } else {
@@ -268,24 +264,29 @@ cb_patch (GtkWidget * widget,  GtkCTree * ctree)
  */
 
 gboolean
-delete_files (GtkWidget *parent,char *path)
+delete_files (GtkWidget *ctree,char *path)
 {
   struct stat st;
   DIR *dir;
   char *test;
   struct dirent *de;
   char *complete;
+  gboolean tar_entry;
+  cfg *win;
 
-/*  printf("dbg:delete_files():%s\n",path);fflush(NULL);*/
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  /*printf("dbg:delete_files():%s\n",path);fflush(NULL);*/
   if (abort_delete) return TRUE;
-
-  if (lstat (path, &st) == -1) goto delete_error_errno;
-  if ((test = strrchr (path, '/')))
-  {
-    test++;
-    if (!io_is_valid (test)) goto delete_error;
+  tar_entry=(strncmp(path,"tar:",strlen("tar:")))?FALSE:TRUE;
+  if (!tar_entry) {
+	 if (lstat (path, &st) == -1) goto delete_error_errno;
+	 if ((test = strrchr (path, '/')))  {
+	   test++;
+	   if (!io_is_valid (test)) goto delete_error;
+ 	 }
   }
-  if (S_ISDIR (st.st_mode) && (!S_ISLNK (st.st_mode)))
+  if (!tar_entry && S_ISDIR (st.st_mode) && (!S_ISLNK (st.st_mode)))
   {
     if (access (path, R_OK | W_OK) == -1)goto delete_error;
     if ((dir = opendir (path))==NULL) goto delete_error;
@@ -295,7 +296,7 @@ delete_files (GtkWidget *parent,char *path)
       if (io_is_dirup (de->d_name))   continue;
       if ((complete = (char *)malloc(strlen(path)+strlen(de->d_name)+2))==NULL) continue;
       sprintf (complete, "%s/%s", path, de->d_name);
-      delete_files (parent,complete);
+      delete_files (ctree,complete);
       free(complete);
     }
     closedir (dir);
@@ -303,18 +304,24 @@ delete_files (GtkWidget *parent,char *path)
   }
   else
   {
-    if (unlink (path)<1){
+    if (tar_entry){
+	    /*printf("dbg:tar delete %s\n",path);*/
+	    if (tar_delete((GtkCTree *)ctree,path) < 0) {
+		    /*printf("dbg: error returned from tar_delete\n");*/
+		    goto delete_error_errno;
+	    }
+    } else if (unlink (path)<1){
 /*	    printf("dbg:%d:%s\n",errno,strerror(errno));*/
 	    goto delete_error_errno; 
     }
   }
   return TRUE;
 delete_error:
-  if (xf_dlg_new (parent,_("error deleting file"),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)
+  if (xf_dlg_new (win->top,_("error deleting file"),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)
 	  abort_delete=TRUE;
   return FALSE;
 delete_error_errno:
-  if ((errno)&&(xf_dlg_new (parent,strerror(errno),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)) abort_delete=TRUE;	  
+  if ((errno)&&(xf_dlg_new (win->top,strerror(errno),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)) abort_delete=TRUE;	  
   return FALSE;
   
   
@@ -350,7 +357,7 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
     if (io_is_dirup (de->d_name)) continue;
     if ((complete = (char *)malloc(strlen(win->trash)+strlen(de->d_name)+2))==NULL) continue;
     sprintf (complete, "%s/%s", win->trash, de->d_name);
-    delete_files (win->top,complete);
+    delete_files ((GtkWidget *)ctree,complete);
 
     if (check.flags)
     {
@@ -427,27 +434,31 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   }
 
   for (i = 0; (i < num)&&(selection!=NULL); i++,selection=selection->next){
-    gboolean zap;
+    gboolean zap,tar_entry;
     zap=FALSE;
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
-    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) {
-      /* we do not process ".." (don't bother unselecting)*/
-      /*gtk_ctree_unselect (ctree, node);*/
+    tar_entry=(strncmp(en->path,"tar:",strlen("tar:")))?FALSE:TRUE;
+    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP) || (tar_entry && (en->type & FT_DIR))) {
+      /* we do not process ".." */
+      gtk_ctree_unselect (ctree, node);
       continue;
     }
-    if (lstat (en->path, &st_target) == -1) {
+    if (tar_entry) zap=TRUE;
+    else {
+      if (lstat (en->path, &st_target) == -1) {
 	if (errno_error_continue(win->top,en->path) == DLG_RC_CANCEL) goto delete_done;
-    }
-    if (stat (win->trash, &st_trash) == -1) {
+      }
+      if (stat (win->trash, &st_trash) == -1) {
 	if (errno_error_continue(win->top,win->trash) == DLG_RC_CANCEL) goto delete_done;
-    }
-    /* only regular files and links to trash */
-    if (!(en->type & FT_FILE) && !(en->type & FT_LINK)) zap=TRUE;
-    /* files already in trash get zapped */
-    if (my_strncmp (en->path, win->trash, strlen (win->trash) )==0 )zap=TRUE;
-    /* files > 1MB or on different device get zapped */
-    if ((st_target.st_dev != st_trash.st_dev) || (st_target.st_size > 1048576))zap=TRUE; 
+      }
+      /* only regular files and links to trash */
+      if (!(en->type & FT_FILE) && !(en->type & FT_LINK)) zap=TRUE;
+      /* files already in trash get zapped */
+      if (my_strncmp (en->path, win->trash, strlen (win->trash) )==0 )zap=TRUE;
+      /* files > 1MB or on different device get zapped */
+      if ((st_target.st_dev != st_trash.st_dev) || (st_target.st_size > 1048576))zap=TRUE;
+    } 
     if (ask) {
       if (num - i == 1)
 	result = xf_dlg_question (win->top,_("Delete item ?"), en->path);
@@ -475,12 +486,12 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
       }
       if ((result == DLG_RC_ALL)||(result ==DLG_RC_OK)){ 
 	    if (zap) {
-                    fprintf(tmpfile,"%d:%s:%s/%s\n",TR_MOVE,
+                    fprintf(tmpfile,"%lu:%s:%s/%s\n",node,
 				    en->path,win->trash,en->label);
 		    zapitems++; 
 	    } else {
-                    fprintf(movefile,"%d:%s:%s/%s\n",
-				    TR_MOVE,en->path,win->trash,en->label);
+                    fprintf(movefile,"%d:%s:%s/%s\n",TR_MOVE,
+				    en->path,win->trash,en->label);
 		    moveitems++;
 	    }
             /*fprintf(stderr,"%d:%s:%s/%s\n",TR_MOVE,
@@ -503,10 +514,13 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
      return;
     }
     while (!feof(tmpfile)&&fgets(line,255,tmpfile)){
-	    char *word;
+	    char *w,*word;
 	    word=strtok(line,":"); if (!word) continue;
-	    word=strtok(NULL,":"); if (!word) continue;
-	    delete_files (win->top,word);
+	    word=strtok(NULL,"\n"); if (!word) continue;
+  	/*printf("dbg:w:%s\n",word);fflush(NULL);*/
+	    w=strrchr(word,':'); if (!w) continue; else *w=0;
+  	/*printf("dbg:w:%s\n",word);fflush(NULL);*/
+	    delete_files ((GtkWidget *)ctree,word);
     }
     fclose(tmpfile);
   }
@@ -525,33 +539,15 @@ cb_refresh (GtkWidget * widget, GtkWidget * ctree){
   update_timer (GTK_CTREE (ctree));
 }
 	
-
-/*
- * open find dialog
- */
 void
 cb_find (GtkWidget * item, GtkWidget * ctree)
 {
-  GtkCTreeNode *node;
-  char *path;
-  entry *en;
-
-  count_selection (GTK_CTREE (ctree), &node);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  path=(char *)malloc(strlen(en->path)+1+10);
-  if (!path) return;
-  sprintf (path, "xfglob %s&", en->path);
-  
-  if (!(en->type & FT_DIR)){
-	  if (strstr(path,"/")) {
-		  *(strrchr(path,'/')+1)=0;
-		  *strrchr(path,'/')='&';
-	  }
-  }
-
-  io_system (path);
-  free(path);
-  
+  char *cmd,*path;
+  path=valid_path((GtkCTree *)ctree,TRUE);
+  cmd=(char *)malloc(strlen(path)+1+10);
+  if (!cmd) return;
+  sprintf (cmd, "xfglob %s&",path);
+  io_system (cmd);  free(cmd);  
 }
 
 void
@@ -570,87 +566,65 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
 {
   entry *en;
   GtkCTreeNode *node;
-  char *path, *label, *entry_return, *fullpath;
+  char *path, *new_path,*label, *entry_return, *fullpath;
   cfg *win;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  count_selection (GTK_CTREE (ctree), &node);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  /* fprintf (stderr,"en->path=%s\n", en->path);*/
-  if (!(en->type & FT_DIR))
-  {
-    node = GTK_CTREE_ROW (node)->parent;
-    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  }
-
-  if (!GTK_CTREE_ROW (node)->expanded)
-	 gtk_ctree_expand (GTK_CTREE (ctree), node);
-
-  path=(char *)malloc(2+strlen(en->path));
-  if (!path) return;
-  label=(char *)malloc(2+strlen(_("New_Folder")));
-  if (!label){
-	 free(path);
-	 return;
-  }
   
-  if (en->path[strlen (en->path) - 1] == '/') sprintf (path, "%s", en->path);
-  else sprintf (path, "%s/", en->path);
+  path=valid_path((GtkCTree *)ctree,TRUE);
+  if (!path) return;
+
+  
+  label=(char *)malloc(2+strlen(_("New_Folder")));
+  if (!label) return;
+  
+  new_path=(char *)malloc(2+strlen(path));
+  if (!new_path){
+	  free (label);
+	  return;
+  }
+  if (path[strlen (path) - 1] == '/') sprintf (new_path, "%s", path);
+  else sprintf (new_path, "%s/", path);
+  
   strcpy (label, _("New_Folder"));
-  /*  fprintf (stderr,"path=%s\n",path); fprintf (stderr,"label=%s\n", label);*/
-  entry_return = (char *)xf_dlg_string (win->top,path, label);
+  entry_return = (char *)xf_dlg_string (win->top,new_path, label);
   if (!entry_return) {
-	 free(path); free(label); 
+	 free(new_path); free(label); 
 	 return; /* cancelled button pressed */
   }
   
-  fullpath = (char *)malloc(strlen(path)+strlen(entry_return)+2);
+  fullpath = (char *)malloc(strlen(new_path)+strlen(entry_return)+2);
   if (!fullpath){
-	 xf_dlg_error(win->top,"dbg:malloc error",NULL);
-	 free(path);
+	 xf_dlg_error(win->top,"xftree:malloc error",NULL);
+	 free(new_path);
          free(label); 
 	 return;
   }
-  sprintf(fullpath,"%s%s",path,entry_return);
-#if 0
-    fprintf (stderr,"2path=%s\n",path); 
-    fprintf (stderr,"2label=%s\n", label); 
-    fprintf (stderr,"fullpath=%s\n", fullpath);
-#endif
+  sprintf(fullpath,"%s%s",new_path,entry_return);
   if (mkdir (fullpath, 0xFFFF) != -1)
       update_timer (GTK_CTREE (ctree));
   else
       xf_dlg_error (win->top,fullpath, strerror (errno));
-  free(path); free(fullpath);  free(label);
+  free(new_path); free(fullpath);  free(label);
   return;
 }
 
-/*
- * new file
- */
 void
 cb_new_file (GtkWidget * item, GtkWidget * ctree)
 {
   entry *en;
   GtkCTreeNode *node;
-  char *path, *label, *entry_return, *fullpath;
+  char *path,*spath, *label, *entry_return, *fullpath;
   struct stat st;
   FILE *fp;
   cfg *win;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  count_selection (GTK_CTREE (ctree), &node);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
-  if (!(en->type & FT_DIR))
-  {
-    node = GTK_CTREE_ROW (node)->parent;
-    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  }
-
-  if (!GTK_CTREE_ROW (node)->expanded) gtk_ctree_expand (GTK_CTREE (ctree), node);
+  spath=valid_path((GtkCTree *)ctree,TRUE);
+  if (!spath) return;
   
-  path=(char *)malloc(2+strlen(en->path));
+  
+  path=(char *)malloc(2+strlen(spath));
   if (!path) return;
   label=(char *)malloc(2+strlen(_("New_File")));
   if (!label){
@@ -658,8 +632,8 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
 	 return;
   }
 
-  if (en->path[strlen (en->path) - 1] == '/')  sprintf (path, "%s", en->path);
-  else    sprintf (path, "%s/", en->path);
+  if (spath[strlen (spath) - 1] == '/')  sprintf (path, "%s", spath);
+  else    sprintf (path, "%s/", spath);
   strcpy (label, _("New_File"));
   entry_return = (char *)xf_dlg_string (win->top,path, label);
   
@@ -669,7 +643,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   }
   fullpath = (char *)malloc(strlen(path)+strlen(entry_return)+2);
   if (!fullpath){
-	 xf_dlg_error(win->top,"dbg:malloc error",NULL);
+	 xf_dlg_error(win->top,"xftree:malloc error",NULL);
 	 free(path);
          free(label); 
 	 return;
@@ -695,12 +669,6 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   update_timer (GTK_CTREE(ctree));
 }
 
-
-/* duplicate a file (or directory) */
-
-/*
- * rename a file
- */
 void
 cb_rename (GtkWidget * item, GtkCTree * ctree)
 {
@@ -710,41 +678,49 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
   cfg *win;
   struct stat st;
 
+  cursor_wait (GTK_WIDGET (ctree));
+  gtk_clist_freeze (GTK_CLIST (ctree));
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (!count_selection (ctree, &node))
   {
     xf_dlg_warning (win->top,_("No item marked !"));
-    return;
+    goto rename_return;
   }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) return;
-  if (strchr (en->label, '/'))  return;
+
+  if (en->type & FT_TARCHILD) {
+	xf_dlg_error(win->top,_("This function is not available for the contents of tar files"),NULL);
+	goto rename_return;
+  }
+
+  if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) goto rename_return;
+  if (strchr (en->label, '/'))  goto rename_return;
 
   label = (char *)malloc(strlen(en->label)+1);
-  if (!label) return;
+  if (!label) goto rename_return;
   strcpy(label,en->label);
   entry_return = (char *)xf_dlg_string (win->top,_("Rename to : "),label);
   
   if (!entry_return || !strlen(entry_return) || !io_is_valid (entry_return)){
-	return;
+	goto rename_return;
   }
 
   if ((p = strchr (entry_return, '/')) != NULL) {
       p[1] = '\0';
       xf_dlg_error (win->top,_("Character not allowed in filename"), p);
-      return;
+      goto rename_return;
   }
 
   ofile = (char *)malloc(strlen(en->path)+1);
   if (!ofile){
-	  return;
+	  goto rename_return;
   }	  
   strcpy(ofile,en->path);
   
   nfile = (char *)malloc(strlen(en->path)+strlen(entry_return)+1);
   if (!nfile) {
 	  free(ofile);
-	  return;
+	  goto rename_return;
   }
   strcpy (nfile,ofile);
   p=strrchr(nfile,'/');
@@ -757,16 +733,19 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
       if (xf_dlg_new(win->top,override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
 	free(ofile); free(nfile);
-	return;
+	goto rename_return;
       }
   }
   if (rename (ofile, nfile) == -1)  {
       xf_dlg_error (win->top,nfile, strerror (errno));
       free(ofile); free(nfile);
-      return;
+      goto rename_return;
   }
   update_timer (GTK_CTREE(ctree));
   free(ofile); free(nfile);
+rename_return:
+  gtk_clist_thaw (GTK_CLIST (ctree));
+  cursor_reset (GTK_WIDGET (ctree)); 
   return;
   
 }
@@ -826,6 +805,12 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
       selection = selection->next;
       continue;
     }
+    if (en->type & FT_TARCHILD) {
+	xf_dlg_error(win->top,_("This function is not available for the contents of tar files"),NULL);
+	g_list_free (selection);
+	ctree_thaw (ctree);
+	return;
+    }
 
     if (selection->next)
       flags |= IS_MULTI;
@@ -874,7 +859,7 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
 	nprop.mtime = oprop.mtime;
 	nprop.atime = oprop.atime;
 	nprop.size = oprop.size;
-	rc = xf_dlg_prop (win->top,en->path, &nprop, flags);
+	rc = xf_dlg_prop ((GtkWidget *)ctree,en->path, &nprop, flags);
       }
       switch (rc)
       {
@@ -996,22 +981,15 @@ cb_quit (GtkWidget * top,  GtkCTree * ctree)
 void
 cb_term (GtkWidget * item, GtkWidget * ctree)
 {
-  GtkCTreeNode *node;
-  char path[PATH_MAX + 1];
-  entry *en;
+  char *path,*cmd;
 
-
-  count_selection (GTK_CTREE (ctree), &node);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
-  if (!(en->type & FT_DIR))
-  {
-    node = GTK_CTREE_ROW (node)->parent;
-    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  }
-
-  sprintf (path, "xfterm \"%s\" &", en->path);
-  io_system (path);
+  path=valid_path((GtkCTree *)ctree,FALSE);
+  if (!path) return;
+  cmd=(char *)malloc(strlen(path)+13);
+  if (!cmd) return;
+  sprintf (cmd, "xfterm \"%s\" &", path);
+  io_system (cmd);
+  free(cmd);
 }
 
 void
@@ -1022,6 +1000,133 @@ cb_exec (GtkWidget * top,GtkWidget * ctree)
   xf_dlg_execute (ctree,win->xap, NULL);
 }
 
+void
+cb_samba (GtkWidget * top,GtkWidget * ctree)
+{
+  io_system ("xfsamba&");  
+}
+
+extern GtkWidget *autotype_C;
+extern autotype_t autotype[];
+
+void
+cb_autotype (GtkWidget * top,GtkWidget * ctree)
+{
+  FILE *pipe;
+  GtkCTreeNode *node;
+  int num;
+  entry *en;
+  char *loc,*cmd,*command,*path;
+  int i;
+  reg_t *prg;
+  cfg *win;
+  
+  num = count_selection ((GtkCTree *)ctree, &node);
+  /*printf("dbg: num=%d\n",num);*/
+  if (!num) return;
+       
+  ctree_freeze ((GtkCTree *)ctree);
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
+  prg = reg_prog_by_file (win->reg, en->path);
+  if (prg) {
+        char cmd[(PATH_MAX + 3) * 2];
+	if (prg->arg)
+	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
+	else
+	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
+	io_system (cmd);
+	goto end_autotype;
+  }     
+  
+  loc=strrchr(en->path,'.');
+  if (loc) for (i=0;1;i++){
+       /*printf("dbg: autotype=%s,%s\n",autotype[i].extension,autotype[i].command);*/
+       if (autotype[i].extension==NULL) break;
+       if (strcmp(loc,autotype[i].extension)==0) break;
+  }
+  if (autotype[i].command==NULL) goto end_autotype;
+  path=valid_path((GtkCTree *)ctree,FALSE);
+  chdir(path);
+  cmd = (char *) malloc(strlen(autotype[i].command)+
+		  strlen(en->path)+
+		  strlen(";echo \"DONE\"")+
+		  5);
+  if (!cmd) goto end_autotype;
+  sprintf (cmd, "%s \"%s\";echo \"DONE\"",autotype[i].command,en->path);
+  /*printf("dbg: cmd=%s\n",cmd);*/
+  pipe = popen (cmd, "r");
+  free(cmd);
+  if (pipe){
+    char line[32];
+    while (1) { 
+     fgets (line, 31, pipe);
+     line[31]=0;
+     if (strstr(line,"DONE")) break;
+     while (gtk_events_pending()) gtk_main_iteration();
+    }		     
+  }
+end_autotype:
+  ctree_thaw ((GtkCTree *)ctree);
+  update_timer ((GtkCTree *)ctree);
+}
+
+
+void
+cb_autotar (GtkWidget * top,GtkWidget * ctree)
+{
+  FILE *pipe;
+  GtkCTreeNode *node;
+  int num;
+  entry *en;
+  char *loc,*cmd;
+  int i;
+  cfg *win;
+  
+  num = count_selection ((GtkCTree *)ctree, &node);
+  /*printf("dbg: num=%d\n",num);*/
+  if (!num) return;
+  ctree_freeze ((GtkCTree *)ctree);
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
+
+  chdir(valid_path((GtkCTree *)ctree,FALSE));
+  chdir("../");
+  cmd = (char *) malloc( 2*strlen(en->path)+
+		  strlen("tar -czf \"%%.tgz\" \"%%\";echo \"DONE\";")+
+		  5);
+  if (!cmd) goto end_autotar;
+  /* check for overwrite */
+  {
+    glob_t dirlist;
+    sprintf(cmd,"%s.tgz",en->path);
+    if(glob (cmd, GLOB_ERR, NULL, &dirlist)==0){
+            cfg *win;
+	    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+	    if (xf_dlg_question(win->top,_("Override?"),cmd)!=DLG_RC_OK) 
+		    goto end_autotar;
+	    else unlink(cmd);
+    }
+    globfree(&dirlist);
+  }
+
+  
+  sprintf (cmd, "tar -czf \"%s.tgz\" \"%s\";echo \"DONE\"",en->path,en->label);
+  /*printf("dbg: cmd=%s\n",cmd);*/
+  pipe = popen (cmd, "r");
+  free(cmd);
+  if (pipe){
+    char line[32];
+    while (1) { 
+     fgets (line, 31, pipe);
+     line[31]=0;
+     if (strstr(line,"DONE")) break;
+     while (gtk_events_pending()) gtk_main_iteration();
+    }		     
+  }
+end_autotar:
+  ctree_thaw ((GtkCTree *)ctree);
+  update_timer ((GtkCTree *)ctree);
+}
 
 
 

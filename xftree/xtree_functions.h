@@ -30,10 +30,18 @@
 #include <gtk/gtk.h>
 #include "xtree_cfg.h"
 #include "xtree_gui.h"
+#include "entry.h"
 typedef struct status_info {
 	off_t howmany;
 	off_t howmuch;
 } status_info;
+
+typedef struct icon_pix {
+	GdkPixmap *pixmap;
+	GdkBitmap *pixmask;
+	GdkPixmap *open;
+	GdkBitmap *openmask;
+} icon_pix;
 
 
 int count_selection (GtkCTree * ctree, GtkCTreeNode ** first);
@@ -55,4 +63,5 @@ void set_title_ctree (GtkWidget * w, const char *path);
 gint update_timer (GtkCTree * ctree);
 void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
 
+gboolean set_icon_pix(icon_pix *pix,entry *en); 
 #endif
