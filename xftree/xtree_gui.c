@@ -230,11 +230,11 @@ autotype_t autotype[]= {
     {NULL, NULL, 0}, \
     {N_("Hide toolbar"),toggle_toolbar, HIDE_TOOLBAR, GDK_t,GDK_MOD1_MASK}, \
     {N_("Hide titles"), cb_hide_titles, HIDE_TITLES, GDK_h,GDK_MOD1_MASK}, \
-    {N_("Hide dates"),cb_hide_date, HIDE_DATE, GDK_d,GDK_MOD1_MASK}, \
     {N_("Hide sizes"), cb_hide_size, HIDE_SIZE, GDK_s,GDK_MOD1_MASK}, \
-    {N_("Hide mode"),cb_hide_mode, HIDE_MODE, GDK_e,GDK_MOD1_MASK}, \
+    {N_("Hide dates"),cb_hide_date, HIDE_DATE, GDK_d,GDK_MOD1_MASK}, \
     {N_("Hide owner"),cb_hide_uid, HIDE_UID, GDK_o,GDK_MOD1_MASK}, \
-    {N_("Hide group"),cb_hide_gid, HIDE_GID, GDK_y,GDK_MOD1_MASK}
+    {N_("Hide group"),cb_hide_gid, HIDE_GID, GDK_y,GDK_MOD1_MASK}, \
+    {N_("Hide mode"),cb_hide_mode, HIDE_MODE, GDK_e,GDK_MOD1_MASK}
  
 #define HELP_MENU \
     {N_("Sort by file name"), NULL, SORT_NAME, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
