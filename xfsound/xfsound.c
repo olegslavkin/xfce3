@@ -221,6 +221,12 @@ audio_play (short code, short backgnd)
   if ((sndcfg.playsnd) && strlen (sndcfg.playcmd) && strlen (sndcfg.datafiles[code]))
   {
     pid_t pidchild;
+
+    /* 
+       This is required if the process should not be spawned "in background"
+       because, in this case,  we want to catch the SIGCHLD signal with waitpid.
+     */
+    signal (SIGCHLD, SIG_DFL);
     switch (pidchild = fork ())
     {
       case 0:
@@ -281,6 +287,10 @@ audio_play (short code, short backgnd)
 	break;
       }
     }
+    /* 
+      Once it's over, we can put back reap in place so we will remove the zombies
+     */
+    signal (SIGCHLD, reap);
   }
 }
 
