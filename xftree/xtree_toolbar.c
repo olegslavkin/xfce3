@@ -90,21 +90,26 @@
   {_("New terminal"),	comp1_xpm,	cb_term},	\
   {_("Close window"),	closewin_xpm,	cb_destroy}, \
   {_("Run ..."), 	tb_macro_xpm,	cb_exec}, \
+  {_(""),	 	NULL,		NULL}, \
   {_("Update ..."), 	reload_xpm,	cb_reload}, \
   {_("Go back ..."), 	go_back_xpm,	cb_go_back}, \
   {_("Go to ..."), 	go_to_xpm,	cb_go_to}, \
   {_("Go up"), 		go_up_xpm,	cb_go_up}, \
   {_("Go home"),	home_xpm,	cb_go_home}, \
+  {_(""),	 	NULL,		NULL}, \
   {_("Cut ..."), 	tb_cut_xpm,	cb_cut}, \
   {_("Copy ..."), 	tb_copy_xpm,	cb_copy}, \
   {_("Paste ..."), 	tb_paste_xpm,	cb_paste}, \
   {_("Delete ..."),	delete_xpm,	cb_delete}, \
+  {_(""),	 	NULL,		NULL}, \
   {_("Find ..."), 	tb_find_xpm,	cb_find}, \
   {_("Differences ..."),tb_vsplit_xpm,	cb_diff}, \
   {_("Browse SMB network ..."),wg1_xpm,	cb_samba}, \
+  {_(""),	 	NULL,		NULL}, \
   {_("New Folder"),	new_dir_xpm,	cb_new_subdir}, \
   {_("New file ..."),	new_file_xpm,	cb_new_file}, \
   {_("Properties"),	appinfo_xpm,	cb_props}, \
+  {_(""),	 	NULL,		NULL}, \
   {_("Open Trash"),	trash_xpm,	cb_open_trash}, \
   {_("Empty Trash"),	empty_trash_xpm,cb_empty_trash}, \
   {_("Toggle Dotfiles"),dotfile_xpm,	on_dotfiles}, \
@@ -198,7 +203,8 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win,gboolean large)
   if (large) mask=stateTB[1]; else mask=stateTB[0];
 
   for (i=0;(toolbarIcon[i].text != NULL)&&(i<32);i++) {
-     if (mask & (0x01<<i)) {
+     if (toolbarIcon[i].icon==NULL) gtk_toolbar_append_space ((GtkToolbar *)toolbar);
+     else if (mask & (0x01<<i)) {
         if (large) {
 		pixmap=duplicate_xpm(top,toolbarIcon[i].icon,&pixmask);
 		widget = gtk_pixmap_new (pixmap, pixmask);
