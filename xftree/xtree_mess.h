@@ -112,6 +112,7 @@ void clear_cat (GtkWidget * widget, gpointer data);
 void cb_custom_home(GtkWidget *widget,gpointer data);
 void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree);
 void cb_registered(GtkWidget * item, GtkWidget * ctree);
+void cb_help_iv(GtkWidget * item, GtkWidget * ctree);
 
 void cb_drag_copy (GtkWidget * widget, gpointer ctree);
 void cb_doubleC_goto (GtkWidget * widget, gpointer ctree);

@@ -1141,7 +1141,14 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
 	io_system (cmd,FALSE,win->top);
 	goto end_autotype;
   }     
-  
+ 
+  if (S_ISDIR(en->st.st_mode)) {
+     char cmd[(PATH_MAX + 3) * 2];
+     /*sprintf (cmd, "%s %s","xfrox",en->path);*/
+     sprintf (cmd, "%s %s","rox",en->path);
+     io_system (cmd,TRUE,win->top);
+     goto end_autotype;
+  }
   loc=strrchr(en->path,'.');
   if (loc) for (i=0;1;i++){
        /*printf("dbg: autotype=%s,%s\n",autotype[i].extension,autotype[i].command);*/

@@ -145,8 +145,8 @@ autotype_t autotype[]= {
     {"", (gpointer) cb_autotar, 0,}
     
 #define MAINF_DIRECTORY_MENU \
-    {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
-    {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK}, \
+    {N_("Open tree view"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
+    {N_("Open terminal view"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK}, \
     {NULL, NULL, 0}, \
     {N_("New Folder"), (gpointer) cb_new_subdir, 0, GDK_n,GDK_MOD1_MASK},\
     {N_("New file"), (gpointer) cb_new_file, 0,GDK_n,GDK_CONTROL_MASK}
@@ -454,6 +454,7 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
     en = gtk_ctree_node_get_row_data (ctree, node); 
     if (!(en->type & FT_TARCHILD)&&((num==MN_FILE)||(num==MN_DIR))){
       int i;
+      static char *text=NULL;
       GtkLabel *label;
       prg = reg_prog_by_file (win->reg, en->path);
       if (prg) {/* look in registered programs first */
@@ -473,7 +474,6 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 	       if (autotype[i].extension==NULL) break;
 	       if (strcmp(loc,autotype[i].extension)==0){
 		       GtkLabel *label;
-	               static char *text=NULL;
 	               if (text) free(text);
 		       label=(GtkLabel *)(((GtkBin *)(win->autotype_C))->child);
 	               text=(char *)malloc(strlen(_(autotype[i].label))+strlen(en->label)+2);
@@ -484,6 +484,16 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 		       break;
 	       }
        }
+      } else if (num==MN_DIR) {/* use static directory entry default */
+		GtkLabel *label;
+	        if (text) free(text);
+		label=(GtkLabel *)(((GtkBin *)(win->autotype_D))->child);
+	        text=(char *)malloc(strlen(_("Open icon view"))+1);
+		if (text){
+		  sprintf(text,"%s",_("Open icon view"));
+  		  gtk_label_set_text(label,text);
+  		  gtk_widget_show(win->autotype_D);
+		}
       }
     } 
     if (!(en->type & FT_TARCHILD)&&(num==MN_DIR)){ 
@@ -875,10 +885,16 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
   
+  menuitem = gtk_menu_item_new_with_label (_("Icon view"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_help_iv), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
   menuitem = gtk_menu_item_new_with_label (_("Drag and drop"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_dnd_help), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+
 
 
   menuitem = gtk_menu_item_new_with_label (_("Unlisted shortcut keys"));

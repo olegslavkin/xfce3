@@ -254,13 +254,14 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     {
       if (dl.file)
       {
-	sprintf (cmd, "%s %s", dl.cmd, dl.file);
+	sprintf (cmd, "%s \"%s\" &", dl.cmd, dl.file);
+        io_system (cmd,FALSE,win->top); /* shell open */
       }
       else
       {
 	sprintf (cmd, "%s",dl.cmd);
+        io_system (cmd,TRUE,win->top); /* direct open */
       }
-      io_system (cmd,TRUE,win->top); /* direct open */
     }
     g_free (dl.cmd);
   }

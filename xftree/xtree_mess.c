@@ -770,6 +770,15 @@ void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
 	    );
 }
 
+void cb_help_iv(GtkWidget * item, GtkWidget * ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  xf_dlg_info (win->top, _("The Xftree icon view is the ROX-filer. At the moment this has to be installed\n" 
+"separately from XFCE. A ROX-filer specific for XFCE will soon be available.")
+	    );
+}
+
 void cb_registered(GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;
