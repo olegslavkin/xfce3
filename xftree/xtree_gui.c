@@ -155,15 +155,15 @@ autotype_t autotype[]= {
     {N_("Delete ..."), (gpointer) cb_delete, 0}
     
 #define INSERT_MENU \
-    {N_("Insert from pasteboard"), (gpointer) cb_paste, 0, GDK_i,GDK_CONTROL_MASK}
+    {N_("Insert"), (gpointer) cb_paste, 0, GDK_i,GDK_CONTROL_MASK}
     
 #define DIRECTORY_MENU \
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
     {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_v,GDK_CONTROL_MASK}
      
 #define DIR_FILE_MENU \
-    {N_("Cut to pasteboard"), (gpointer) cb_cut, 0, GDK_k,GDK_CONTROL_MASK},\
-    {N_("Copy to pasteboard"), (gpointer) cb_copy, 0, GDK_c,GDK_CONTROL_MASK}
+    {N_("Cut"), (gpointer) cb_cut, 0, GDK_k,GDK_CONTROL_MASK},\
+    {N_("Copy"), (gpointer) cb_copy, 0, GDK_c,GDK_CONTROL_MASK}
     
 #define MAIN_EDIT_MENU \
     {N_("List pasteboard contents"), (gpointer) cb_paste_show, 0, GDK_l,GDK_CONTROL_MASK},\

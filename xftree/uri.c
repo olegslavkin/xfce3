@@ -239,6 +239,7 @@ uri_parse_list (const char *text, GList ** list)
       u->url = g_malloc (len + 1);
       strncpy (u->url, p, len);
       u->url[len] = '\0';
+      /*fprintf(stderr,"uri:%s\n",u->url);*/
       u->len = len;
       u->type = uri_type (u->url);
       if (u->len > URI_MAX)

@@ -324,24 +324,17 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      pclose (pipe);
 			      return NULL;
 		      }
-		      sprintf(d_en->path,"tar:%s:%s",p_en->path,p);
+		      /*sprintf(d_en->path,"tar:%s:%s",p_en->path,p); //double colon format */
+		      sprintf(d_en->path,"tar:%s/%s",p_en->path,p);
 		      /* use either / or \ */
-		      d=strrchr(d_en->path,':')+1;
+		      /*d=strrchr(d_en->path,':')+1;*/
+		      d=p;
 		      if ((!(d_en->type &  FT_DIR))&&(strstr(d,"/")||strstr(d,"\\"))){
 			      if (strstr(d,"/")) d=strrchr(d_en->path,'/')+1;
 			      else if (strstr(d,"\\")) d=strrchr(d_en->path,'\\')+1;
 		      } 				   
 		      d_en->label=g_strdup (d);
 		      
-		      /*if ((d_en->type &  FT_DIR)&&(strlen(d_en->label)>1)) 
-		           d_en->label[strlen(d_en->label)-1]=0; */
-			/*
-		      if ((strlen(d_en->label)>1)&&
-				      ((d_en->label[strlen(d_en->label)-1]=='/')
-				       ||(d_en->label[strlen(d_en->label)-1]=='\\'))) {
-			      d_en->type |=  FT_DIR;
-		      }*/
-		           		      
 		      if (win->preferences&ABREVIATE_PATHS) 
 			      text[COL_NAME] = (d_en->type &  FT_DIR)?
 				      abreviate(d_en->label):abreviateP(d_en->label);
@@ -354,10 +347,6 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 		      {
 			      char *P_path,*d=NULL;
 			      P_path=g_strdup (p);
-			      /*if (d_en->type &  FT_DIR) {
-			         if (P_path[strlen(P_path)-1]=='/') P_path[strlen(P_path)-1]=0;
-				 else if (P_path[strlen(P_path)-1]=='\\') P_path[strlen(P_path)-1]=0;
-			      }*/
 			      if (strstr(P_path,"/")) d=strrchr(P_path,'/');
 			      else if (strstr(P_path,"\\")) d=strrchr(P_path,'\\');
 			      if (d) d[1]=0;
@@ -482,6 +471,7 @@ static void rwForkOver (void)
 	  tar_output=0;
   }
   tar_fork_obj=NULL;
+  update_timer (tar_ctree);
 }
 
 
@@ -507,6 +497,31 @@ static int inner_tar_delete(GtkCTree *ctree,char *path){
 			&check, compare_node_path);
 
 	if (strncmp(check.path,"tar:",strlen("tar:"))!=0) {errno=EFAULT;return -1;}
+	if (strchr(strchr(check.path,':')+1,':')) {
+	 /* double colon format, not standard */
+	strtok(check.path,":");
+	tar_file=strtok(NULL,":"); if (!tar_file){errno=EFAULT;return -1;}
+	tar_entry=strtok(NULL,"\n"); if (!tar_entry){errno=EFAULT;return -1;}
+	} else {
+	  char *p,*g;
+	  struct stat s;
+	  p=g_strdup(strchr(check.path,':')+1);
+	  while (stat(p,&s)<0){
+		  g=strrchr(p,'/');
+		  if (!g){
+			  fprintf(stderr,"xftree: error 989-2\n");/* should not happen */
+			  errno=EFAULT;
+			  return -1;
+		  }
+		  *g=0;
+	  }
+	  tar_file=strchr(check.path,':')+1;
+	  tar_file[strlen(p)]=0;
+	  tar_entry=tar_file+strlen(p)+1;
+	  g_free(p);
+	}
+
+	
 	strtok(check.path,":");
 	tar_file=strtok(NULL,":"); if (!tar_file){errno=EFAULT;return -1;}
 	tar_entry=strtok(NULL,"\n"); if (!tar_entry){errno=EFAULT;return -1;}
@@ -581,14 +596,33 @@ int tar_extract(GtkCTree *ctree,char *tgt,char *src){
 	if (!en) fprintf(stderr,"dbg:entry not found\n");
 	else fprintf(stderr,"dbg:mode=0%o\n",en->st.st_mode);*/
 
-	tar_entry=strrchr(src,':');
-	if (!tar_entry) return FALSE;
-	*tar_entry='+';	
-	tar_file=strrchr(src,':');
-	if (!tar_file) return FALSE;
-	tar_file++;
-	*tar_entry=0;
-	tar_entry++;
+	if (strchr(strchr(src,':')+1,':')) {
+	 /* double colon format, not standard */
+	 tar_entry=strrchr(src,':');
+	 if (!tar_entry) return FALSE;
+	 *tar_entry='+';	
+	 tar_file=strrchr(src,':');
+	 if (!tar_file) return FALSE;
+	 tar_file++;
+	 *tar_entry=0;
+	 tar_entry++;
+	} else {
+	  char *p,*g;
+	  struct stat s;
+	  p=g_strdup(strchr(src,':')+1);
+	  while (stat(p,&s)<0){
+		  g=strrchr(p,'/');
+		  if (!g){
+			  fprintf(stderr,"xftree: error 989-1\n");/* should not happen */
+			  return FALSE;
+		  }
+		  *g=0;
+	  }
+	  tar_file=strchr(src,':')+1;
+	  tar_file[strlen(p)]=0;
+	  tar_entry=tar_file+strlen(p)+1;
+	  g_free(p);
+	}
 	
 	if (strlen("tar --use-compress-program bunzip2 -OZ -f %% -x %%")+strlen(tar_file)+1+strlen(tar_entry)+1 >TAR_CMD_LEN){
 		errno=EIO;return 0;
