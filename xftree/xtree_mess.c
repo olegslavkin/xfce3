@@ -861,7 +861,7 @@ show_cat (char *message)
   gtk_container_border_width (GTK_CONTAINER (cat), 5);
   gtk_widget_set_usize(cat,350,200);
 
-  gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_MOUSE);
   gtk_window_set_title (GTK_WINDOW (cat),_("Xftree results"));
   gtk_widget_realize (cat);
   if (preferences & SMALL_DIALOGS) gdk_window_set_decorations (cat->window,GDK_DECOR_BORDER);

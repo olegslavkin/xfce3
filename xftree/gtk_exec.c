@@ -262,6 +262,8 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 		      argv[i]=strtok(NULL," ");
 		      if (!argv[i]) break;
 		      i++;
+		      if (i>=24) { argv[63]=0; break; }
+
 	      } while (1);
       } else {
           argv[2]=dl.cmd;
@@ -282,6 +284,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 		      argv[i]=strtok(NULL," ");
 		      if (!argv[i]) break;
 		      i++;
+		      if (i>=24) { argv[63]=0; break; }
 	      } while (1);
       } else {
           argv[0]=dl.cmd;

@@ -53,6 +53,7 @@ typedef struct autotype_t{
 	char *extension;
 	char *command;
 	char *label;
+	char *querypath;
 }autotype_t;
 
 enum

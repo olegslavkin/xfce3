@@ -138,6 +138,7 @@ get_visible_or_parent (GtkCTree * ctree, GtkCTreeNode * node, gpointer data)
 /*
  * timer function to update the view
  */
+
 gint update_timer (GtkCTree * ctree)
 {
   GList *list = NULL, *tmp;
@@ -145,7 +146,6 @@ gint update_timer (GtkCTree * ctree)
   gboolean manage_timeout;
   cfg *win;
 
-  //return (TRUE);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   status_node=win->status_node;
 
@@ -478,6 +478,7 @@ void reset_icon(GtkCTree * ctree, GtkCTreeNode * node){
   int i; 
   icon_pix pix; 
   gboolean isleaf;
+  gboolean isexpanded;
   cfg * win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   en = gtk_ctree_node_get_row_data (ctree, node);
@@ -486,9 +487,9 @@ void reset_icon(GtkCTree * ctree, GtkCTreeNode * node){
 		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
   isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
     /*printf("dbg: updating %s\n",en->label);*/
-  
+  isexpanded=GTK_CTREE_ROW(node)->expanded;
   gtk_ctree_set_node_info (ctree,node,(win->preferences&ABREVIATE_PATHS)?abreviate(en->label):en->label, 
-		 SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, TRUE);
+		 SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, isexpanded);
 } 
 	
 

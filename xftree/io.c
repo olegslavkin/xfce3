@@ -173,6 +173,7 @@ io_system (char **argv,GtkWidget *parent)
 	       fclose(mess);
 	       kill(io_pid,SIGUSR1);
 	   }
+	   usleep(50000);
 	   /*perror (argv[0]);*/
        }
     }

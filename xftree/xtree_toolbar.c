@@ -340,7 +340,7 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
   gtk_window_set_title (GTK_WINDOW (config_toolbar_dialog), _("Configure toolbar"));
   gtk_signal_connect (GTK_OBJECT (config_toolbar_dialog), "destroy", 
 		  GTK_SIGNAL_FUNC (destroy_config_toolbar), NULL);
-  gtk_window_position (GTK_WINDOW (config_toolbar_dialog), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (config_toolbar_dialog), GTK_WIN_POS_MOUSE);
   gtk_widget_realize (config_toolbar_dialog);
 
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);

@@ -36,6 +36,7 @@
 #ifdef linux
 #include <getopt.h>
 #endif
+#include <sys/types.h>
 #include <signal.h>
 #include <limits.h>
 #include <X11/Xlib.h>		/* XParseGeometry */
@@ -76,7 +77,7 @@ static gint open_warning(gpointer data){
 		  fclose(mess);
 		  unlink("/tmp/xftree.USR1");
 		  /*printf("dgb:parent got %s",line);*/
-		  xf_dlg_error(io_parent,line,NULL);
+		  if (io_parent) xf_dlg_error(io_parent,line,NULL);
 	  }
 	  return FALSE;
 }
@@ -92,7 +93,7 @@ finishit (int sig)
   } else {
     fprintf(stderr,"xftree: signal %d received. Cleaning up before exiting\n",sig);
     cleanup_tmpfiles();
-    on_signal(sig);
+    /*on_signal(sig);*/
     exit(1);
   }
 }

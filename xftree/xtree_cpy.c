@@ -770,7 +770,7 @@ static void cb_count_destroy(GtkWidget *widget,gpointer data){
 static void count_window(GtkWidget *parent){
   countW=gtk_dialog_new ();
   
-  gtk_window_position (GTK_WINDOW (countW), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (countW), GTK_WIN_POS_MOUSE);
   gtk_window_set_modal (GTK_WINDOW (countW), TRUE);
   count_label = gtk_label_new ( _("Counting files"));
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->vbox), count_label, TRUE, TRUE, 3);

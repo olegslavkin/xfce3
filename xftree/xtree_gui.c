@@ -111,18 +111,19 @@ menu_entry;
 static GtkAccelGroup *accel;
 
 /* autotype entries will appear in file-menu when no
- * application is registered for that filetype */
+ * application is registered for that filetype 
+ * leave a blank at end if using options (to be safe) */
 
 autotype_t autotype[]= {
-	{".gz","gunzip",N_("Uncompress")},
-	{".tar","tar -xf",N_("Extract files from")},
-	{".tgz","tar -xzf",N_("Extract files from")},
-	{".bz2","bunzip2",N_("Uncompress")},
-	{".Z","uncompress",N_("Uncompress")},
-	{".ZIP","unzip",N_("Uncompress")},
-	{".zip","unzip",N_("Uncompress")},
-	{".rpm","rpm -U --percent",N_("Install/update")},
-	{".deb","dpkg -i",N_("Install/update")},
+	{".gz","gunzip",N_("Uncompress"),NULL},
+	{".tar","tar -xf ",N_("Extract files from"),N_("Extract into")},
+	{".tgz","tar -xzf ",N_("Extract files from"),N_("Extract into")},
+	{".bz2","bunzip2",N_("Uncompress"),NULL},
+	{".Z","uncompress",N_("Uncompress"),NULL},
+	{".ZIP","unzip",N_("Uncompress"),NULL},
+	{".zip","unzip",N_("Uncompress"),NULL},
+	{".rpm","rpm -U --percent ",N_("Install/update"),NULL},
+	{".deb","dpkg -i ",N_("Install/update"),NULL},
 	{NULL,NULL}
 };
 

@@ -40,6 +40,8 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <signal.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
 #include <gtk/gtk.h>
@@ -1026,8 +1028,10 @@ cb_samba (GtkWidget * top,GtkWidget * ctree)
 
 extern GtkWidget *autotype_C;
 extern autotype_t autotype[];
-#define AUTOTYPE_CMD_LEN 1024
-static char autotype_cmd[AUTOTYPE_CMD_LEN];
+#define AUTOTYPE_PATH_LEN 256
+static char autotype_path[AUTOTYPE_PATH_LEN];
+static int autotype_cmd=-1;
+static pid_t parent_pid;
 /*static gboolean rpm_cmd_error;*/
 static GtkWidget *autotype_parent,*auto_ctree;
 static void *autotype_fork_obj=NULL;
@@ -1067,21 +1071,58 @@ static void rwForkOver (void)
   update_timer ((GtkCTree *)auto_ctree);
 }
 
+extern char **environ;
+
 static void tubo_cmd(void){
-	/*char *args[10];*/
-	int i;
+	char *argv[64];
+	int i=0;
 	int status;
-	/*args[0]=strtok(autotype_cmd," ");
-	if (args[0]) for (i=1;i<10;i++){
-		args[i]=strtok(NULL," ");
-		if (!args[i]) break;
-	}*/
+	
+	/*argv[i++]="sh";	argv[i++]="-c";*/
+        if (strstr(autotype[autotype_cmd].command," ")){
+	      char *command;
+              command=g_strdup(autotype[autotype_cmd].command);	      
+	      argv[i++]=strtok(command," ");
+	       /*fprintf(stdout,"arg[%d]=%s\n",i-1,argv[i-1]);fflush(NULL); sleep(1);*/
+	      do {
+		      argv[i]=strtok(NULL," ");
+		      if (!argv[i]) break;
+	       /*fprintf(stdout,"arg[%d]=%s\n",i,argv[i]);fflush(NULL); sleep(1);*/
+		      i++;
+		      if (i>=64) { argv[63]=0; break; }
+	      } while (1);
+        } else 
+	{argv[i++]=autotype[autotype_cmd].command;}
+	argv[i++]=autotype_path;
+	argv[i]=0;
+	/*for (i=0;argv[i]!=NULL;i++) fprintf(stdout,"--arg[%d]=%s\n",i,argv[i]);
+	  fflush(NULL);sleep(2);*/ 
 	i=fork();
-	if (!i){
-	   execlp("sh","sh","-c",autotype_cmd,(char *)0);
-/*	   execvp(args[0],args);*/
-	   _exit(123);
+	if (i<0){
+		fprintf(stderr,"unable to fork\n");
+	       	_exit(123);
 	}
+	if (!i){
+           if (execvp (argv[0], argv) == -1) {
+	     fprintf(stdout,"%s: %s\n",strerror(errno),argv[0]);
+	     /*fprintf(stdout,"parentpid=%d\n",parent_pid);*/
+#if 0
+	     FILE *mess;
+	     /* this is not working here, why? 
+	      * after sending the signal, the parent is blocked to further SIGUSR1
+	      * */
+	     mess=fopen("/tmp/xftree.USR1","w");
+	     if (mess){
+	       fprintf(mess,"%s: %s\n",argv[0],strerror(errno));
+	       fclose(mess);
+	       kill(parent_pid,SIGUSR1);
+	     }
+#endif
+	   }
+	   fflush(NULL);
+	   sleep(1);
+	   _exit(123);
+	} else usleep(500);
 	wait(&status);
 	_exit(123);
 }
@@ -1089,8 +1130,11 @@ static void tubo_cmd(void){
 
 static int inner_autotype(GtkWidget *parent){
 	autotype_parent=parent;
-	show_cat(autotype_cmd);
+	show_cat(autotype[autotype_cmd].command);
+	show_cat(" ");
+	show_cat(autotype_path);
 	show_cat("\n");
+	parent_pid=getpid();
 	autotype_fork_obj=Tubo (tubo_cmd, rwForkOver, 0, rwStdout, rwStderr);
 	usleep(50000);
         return 0;
@@ -1177,26 +1221,23 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   }
   if (autotype[i].command==NULL) goto end_autotype;
   path=valid_path((GtkCTree *)ctree,FALSE);
-  chdir(path);
-  sprintf (autotype_cmd, "%s \"%s\"",autotype[i].command,en->path);
+  if (autotype[i].querypath){
+	  char *npath;
+	  npath = (char *)xf_dlg_string (win->top,_(autotype[i].querypath),path);
+	  if (npath) {
+		  if (chdir(npath)<0){
+                     xf_dlg_error(win->top,strerror(errno),npath);
+                     ctree_thaw ((GtkCTree *)ctree);
+		     return;
+		  }
+	  }
+  } else chdir(path);
+  autotype_cmd=i;
+  strncpy(autotype_path,en->path,AUTOTYPE_PATH_LEN-1);
+  autotype_path[AUTOTYPE_PATH_LEN-1]=0;
   auto_ctree=ctree;
   autotype_tubo(win->top);
 
-#if 0
-  sprintf (cmd, "%s \"%s\";echo \"DONE\"",autotype[i].command,en->path);
-  /*printf("dbg: cmd=%s\n",cmd);*/
-  pipe = popen (cmd, "r");
-  free(cmd);
-  if (pipe){
-    char line[32];
-    while (1) { 
-     fgets (line, 31, pipe);
-     line[31]=0;
-     if (strstr(line,"DONE")) break;
-     while (gtk_events_pending()) gtk_main_iteration();
-    }		     
-  }
-#endif
   
 end_autotype:
   ctree_thaw ((GtkCTree *)ctree);

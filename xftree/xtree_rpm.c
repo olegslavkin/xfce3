@@ -146,30 +146,6 @@ static rpm_dir *clean_rpm_dir(void){
 	return NULL;
 }
 
-#if 0
-tar dummy does this.
-/* dummy entry to get expander without expanding */
-GtkCTreeNode *add_rpm_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
-   GtkCTreeNode *item=NULL;
-   icon_pix pix;
-   entry *en;
-   gchar *text[COLUMNS];
-   text[COL_NAME]=text[COL_DATE]=text[COL_SIZE]="";
-   text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
-   if ((en = entry_new ())==NULL) return NULL;
-   en->type =  FT_TARCHILD;
-   en->label=g_strdup(".");
-   en->path=g_strdup("rpm:.");
-   memcpy((void *)(&(en->st)),(void *)(&(p_en->st)),sizeof(struct stat));
-   set_icon_pix(&pix,en->type,en->label,en->flags);   
-   item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
-		  pix.pixmap,pix.pixmask,
-		  pix.open,pix.openmask,
-		  TRUE,FALSE);
-   gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);
-   return (item);   
-}
-#endif
 
 static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_level,char *rpmfile){
 	GtkCTreeNode *Tnode,*s_item;
