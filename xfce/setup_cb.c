@@ -96,9 +96,15 @@ setup_ok_cb (GtkWidget * widget, gpointer data)
   if (prev_visible_popup != current_config.visible_popup)
     update_gxfce_popup_buttons (current_config.visible_popup);
   if (prev_panel_icon_size != current_config.select_icon_size)
+  {
+    hide_current_popup_menu ();
     update_gxfce_size ();
+  }
   if (prev_popup_icon_size != current_config.popup_icon_size)
+  {
+    hide_current_popup_menu ();
     update_popup_size ();
+  }
   if (current_config.wm == XFWM)
   {
     apply_wm_colors (pal);
@@ -158,9 +164,15 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
   if (prev_visible_popup != current_config.visible_popup)
     update_gxfce_popup_buttons (current_config.visible_popup);
   if (prev_panel_icon_size != current_config.select_icon_size)
+  {
+    hide_current_popup_menu ();
     update_gxfce_size ();
+  }
   if (prev_popup_icon_size != current_config.popup_icon_size)
+  {
+    hide_current_popup_menu ();
     update_popup_size ();
+  }
   if (current_config.wm == XFWM)
   {
     apply_wm_colors (pal);
