@@ -805,11 +805,11 @@ XFCE_PACKAGE=xfce
 
 LIB_MAJOR=1
 LIB_MINOR=38
-LIB_TINY=12
+LIB_TINY=11
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.12
+XFCE_VERSION=3.8.11
 
 
 
@@ -10628,6 +10628,7 @@ if test "$ac_cv_prog_CC" = gcc -o "$ac_cv_prog_CC" = g++; then
       CFLAGS="$CFLAGS -Wall"
     fi
 
+    
     if echo "$CFLAGS" | grep "\-Wno-implicit-int" > /dev/null 2> /dev/null; then
       CFLAGS="$CFLAGS"
     else
@@ -10635,6 +10636,11 @@ if test "$ac_cv_prog_CC" = gcc -o "$ac_cv_prog_CC" = g++; then
       CFLAGS="$CFLAGS -Wno-implicit-int"
     fi
   fi
+fi
+
+if test "$target" != "NONE" ; then
+   echo "updating CFLAGS with extra target information ($target)"
+   CFLAGS="$CFLAGS -march=$target"
 fi
 
 
@@ -10692,9 +10698,9 @@ EOF
 
 
 echo $ac_n "checking if prototype for gethostname exists""... $ac_c" 1>&6
-echo "configure:10696: checking if prototype for gethostname exists" >&5
+echo "configure:10702: checking if prototype for gethostname exists" >&5
 cat > conftest.$ac_ext <<EOF
-#line 10698 "configure"
+#line 10704 "configure"
 #include "confdefs.h"
 
 #include <unistd.h>
@@ -10715,7 +10721,7 @@ rm -f conftest*
 
 
 echo $ac_n "checking XFce directory structure""... $ac_c" 1>&6
-echo "configure:10719: checking XFce directory structure" >&5
+echo "configure:10725: checking XFce directory structure" >&5
 # Check whether --with-data-dir or --without-data-dir was given.
 if test "${with_data_dir+set}" = set; then
   withval="$with_data_dir"
@@ -11308,7 +11314,6 @@ test "$no_create" = yes || ${CONFIG_SHELL-/bin/sh} $CONFIG_STATUS || exit 1
 
 
 
-
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_upgrade.in > scripts/xfce_upgrade
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfhelp.in > scripts/xfhelp
@@ -11324,7 +11329,6 @@ sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3r
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl
-sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.uk.in >  other/xfce3rc.uk
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_CN.GB2312.in >  other/xfce3rc.zh_CN.GB2312
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_TW.Big5.in >  other/xfce3rc.zh_TW.Big5
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
@@ -11341,7 +11345,6 @@ sed -e "/DISTFILES =/r palettes/DISTFILES.in" palettes/Makefile.in > palettes/Ma
 sed -e "/DISTFILES =/r fonts/DISTFILES.in" fonts/Makefile.in > fonts/Makefile
 sed -e "/DISTFILES =/r sounds/DISTFILES.in" sounds/Makefile.in > sounds/Makefile
 sed -e "/DISTFILES =/r docs/DISTFILES.in" docs/Makefile.in > docs/Makefile
-
 
 
 
