@@ -124,7 +124,7 @@ GdkPixmap *duplicate_xpm(GtkWidget *widget,char **xpm,GdkBitmap **mask){
 
   	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) xpm);
   	new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf, 2*gdk_pixbuf_get_width (orig_pixbuf), 
-		  2*gdk_pixbuf_get_height (orig_pixbuf), GDK_INTERP_NEAREST);
+		  2*gdk_pixbuf_get_height (orig_pixbuf), GDK_INTERP_BILINEAR);
   	gdk_pixbuf_render_pixmap_and_mask (new_pixbuf, &pixmap, mask, gdk_pixbuf_get_has_alpha (new_pixbuf));
   	gdk_pixbuf_unref (orig_pixbuf);
   	gdk_pixbuf_unref (new_pixbuf);

@@ -491,7 +491,7 @@ static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 		pix_w=x=r*w;
 		pix_h=y=r*gdk_pixbuf_get_height (orig_pixbuf);
 
-  		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf,x,y,GDK_INTERP_NEAREST);
+  		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf,x,y,GDK_INTERP_BILINEAR);
   		gdk_pixbuf_render_pixmap_and_mask (new_pixbuf,pixmap,pixmask,
 				gdk_pixbuf_get_has_alpha (new_pixbuf));
   		gdk_pixbuf_unref (orig_pixbuf);
