@@ -42,7 +42,7 @@ AC_SUBST(LIBTOOL_DEPS)
 #
 INSTALL_SCRIPT='${INSTALL}'
 
-ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN zh_TW.Big5"
+ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN"
 AM_GNU_GETTEXT
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
@@ -57,6 +57,7 @@ AC_C_INLINE
 AC_HEADER_TIME
 AC_PATH_X
 AC_PATH_XTRA
+AC_SYS_LARGEFILE(sys/types.h)
 
 dnl Include X libs in checks
 if test -n "$x_includes"; then
@@ -72,7 +73,6 @@ AC_CHECK_FUNCS(wait3 wait4 waitpid)
 AC_CHECK_FUNCS(snprintf vsnprintf strcasecmp strncasecmp)
 AC_CHECK_FUNCS(sendmsg memcpy memmove memset)
 AC_CHECK_FUNCS(sigaction siginterrupt)
-AC_CHECK_FUNC(iconv, AC_DEFINE(HAVE_ICONV),)
 AC_CHECK_FUNC(scandir, AC_DEFINE(HAVE_SCANDIR),)
 
 AM_PATH_GLIB(1.2.6, ,
@@ -360,10 +360,58 @@ dnl ---------------------------------------------------------------------------
   fi
 fi
 
-if test "$target" != "NONE" ; then
-   echo "updating CFLAGS with extra target information ($target)"
+#echo "dbg:options needed for large files $ac_cv_sys_largefile_CC"
+case "$ac_cv_sys_largefile_CC" in
+"")
+;;
+"no")
+;;
+"NONE")
+;;
+*)
+   CFLAGS="$CFLAGS $ac_cv_sys_largefile_CC"
+   ;;
+esac
+
+
+#echo "dbg:_FILE_OFFSET_BITS $ac_cv_sys_file_offset_bits"
+case "$ac_cv_sys_file_offset_bits" in
+"")
+;;
+"no")
+;; 
+"NONE")
+;;
+*)
+   CFLAGS="$CFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
+   ;;
+esac
+
+#echo "dbg:_LARGE_FILES $ac_cv_sys_large_files"
+case "$ac_cv_sys_large_files" in
+"")
+;;
+"no")
+;;
+"NONE")
+;;
+*)
+   CFLAGS="$CFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
+   ;;
+esac
+
+#echo "dbg:target $target"
+case "$target" in
+"")
+;;
+"no")
+;;
+"NONE")
+;;
+*)
    CFLAGS="$CFLAGS -march=$target"
-fi
+   ;;
+esac
 
 dnl AC_ARG_ENABLE(xfce_theme,
 dnl 	[  --enable-xfce-theme        [default=yes] build xfce_theme],
