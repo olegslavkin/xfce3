@@ -475,13 +475,11 @@ write_menu (XFMENU * xfmenu)
   g_free (home);
   backup = g_strconcat (filename, ".bak", NULL);
 
-  if ((backup_fp = fopen (backup, "r")))
-    fclose (backup_fp);
-  else if ((backup_fp = fopen (backup, "w")) && (fp = fopen (filename, "r")))
+  if ((backup_fp = fopen (backup, "w")) && (fp = fopen (filename, "r")))
     {
       char c;
 
-      while ((c = fgetc (fp)))
+      while ((c = fgetc (fp)) != EOF)
 	fputc (c, backup_fp);
 
       fclose (fp);
