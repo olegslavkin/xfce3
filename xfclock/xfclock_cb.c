@@ -48,8 +48,7 @@ quit_cb (GtkWidget * widget, GdkEvent * event, gpointer data)
   exit (0);
 }
 
-gint
-delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+gint delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
   quit_cb (widget, event, data);
   return (TRUE);
@@ -75,12 +74,12 @@ font_cb (GtkWidget * widget, gpointer data)
   fnt = open_fontselection (current_config.font);
 
   if (fnt)
-    {
-      newstyle = gtk_style_copy (style);
-      setfontstyle (newstyle, fnt);
-      strncpy (current_config.font, fnt, MAXSTRLEN - 1);
-      gtk_widget_set_style (clock_widget, newstyle);
-    }
+  {
+    newstyle = gtk_style_copy (style);
+    setfontstyle (newstyle, fnt);
+    strncpy (current_config.font, fnt, MAXSTRLEN - 1);
+    gtk_widget_set_style (clock_widget, newstyle);
+  }
 }
 
 void
@@ -99,14 +98,14 @@ foreground_cb (GtkWidget * widget, gpointer data)
   colors[2] = ((gdouble) style->fg[GTK_STATE_NORMAL].blue) / COLOR_GDK;
   newcolor = xfclock_colorselect (colors);
   if (newcolor)
-    {
-      current_config.fore_red = ((guint) (newcolor[0] * COLOR_GDK));
-      current_config.fore_green = ((guint) (newcolor[1] * COLOR_GDK));
-      current_config.fore_blue = ((guint) (newcolor[2] * COLOR_GDK));
-      newstyle = gtk_style_copy (style);
-      setfgstyle (newstyle, newcolor);
-      gtk_widget_set_style (clock_widget, newstyle);
-    }
+  {
+    current_config.fore_red = ((guint) (newcolor[0] * COLOR_GDK));
+    current_config.fore_green = ((guint) (newcolor[1] * COLOR_GDK));
+    current_config.fore_blue = ((guint) (newcolor[2] * COLOR_GDK));
+    newstyle = gtk_style_copy (style);
+    setfgstyle (newstyle, newcolor);
+    gtk_widget_set_style (clock_widget, newstyle);
+  }
 }
 
 void
@@ -125,17 +124,18 @@ background_cb (GtkWidget * widget, gpointer data)
   colors[2] = ((gdouble) style->bg[GTK_STATE_NORMAL].blue) / COLOR_GDK;
   newcolor = xfclock_colorselect (colors);
   if (newcolor)
-    {
-      current_config.back_red = ((guint) (newcolor[0] * COLOR_GDK));
-      current_config.back_green = ((guint) (newcolor[1] * COLOR_GDK));
-      current_config.back_blue = ((guint) (newcolor[2] * COLOR_GDK));
-      newstyle = gtk_style_copy (style);
-      setbgstyle (newstyle, newcolor);
-      gtk_widget_set_style (clock_widget, newstyle);
-    }
+  {
+    current_config.back_red = ((guint) (newcolor[0] * COLOR_GDK));
+    current_config.back_green = ((guint) (newcolor[1] * COLOR_GDK));
+    current_config.back_blue = ((guint) (newcolor[2] * COLOR_GDK));
+    newstyle = gtk_style_copy (style);
+    setbgstyle (newstyle, newcolor);
+    gtk_widget_set_style (clock_widget, newstyle);
+  }
 }
 
-gint show_popup_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
+gint
+show_popup_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   if (event->button != 3)
     return (FALSE);
@@ -143,8 +143,7 @@ gint show_popup_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
   if (!clock_popup_menu)
     clock_make_popup (MY_GTK_CLOCK (data));
 
-  gtk_menu_popup (GTK_MENU (clock_popup_menu), NULL, NULL, NULL, NULL,
-		  event->button, event->time);
+  gtk_menu_popup (GTK_MENU (clock_popup_menu), NULL, NULL, NULL, NULL, event->button, event->time);
   return (TRUE);
 }
 
@@ -152,38 +151,37 @@ void
 toggle_menubar_cb (GtkWidget * widget, gpointer data)
 {
   if (GTK_WIDGET_VISIBLE (handle_box))
-    {
-      gtk_widget_hide (handle_box);
-      current_config.menubar = FALSE;
-    }
+  {
+    gtk_widget_hide (handle_box);
+    current_config.menubar = FALSE;
+  }
   else
-    {
-      gtk_widget_show (handle_box);
-      current_config.menubar = TRUE;
-    }
+  {
+    gtk_widget_show (handle_box);
+    current_config.menubar = TRUE;
+  }
 }
 
 void
 toggle_calendar_cb (GtkWidget * widget, gpointer data)
 {
   if (GTK_WIDGET_VISIBLE (calendar))
-    {
-      gtk_widget_hide (calendar);
-      current_config.calendar = FALSE;
-    }
+  {
+    gtk_widget_hide (calendar);
+    current_config.calendar = FALSE;
+  }
   else
-    {
-      gtk_widget_show (calendar);
-      current_config.calendar = TRUE;
-    }
+  {
+    gtk_widget_show (calendar);
+    current_config.calendar = TRUE;
+  }
 }
 
 void
 toggle_digital_cb (GtkWidget * widget, gpointer data)
 {
   my_gtk_clock_toggle_mode (MY_GTK_CLOCK (data));
-  current_config.digital =
-    (my_gtk_clock_get_mode (MY_GTK_CLOCK (data)) == MY_GTK_CLOCK_DIGITAL);
+  current_config.digital = (my_gtk_clock_get_mode (MY_GTK_CLOCK (data)) == MY_GTK_CLOCK_DIGITAL);
 }
 
 void

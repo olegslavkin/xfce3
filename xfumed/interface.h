@@ -24,6 +24,5 @@
 #endif
 
 
-GtkWidget* create_xfumed (void);
-GtkWidget* create_dialog_quit (void);
-
+GtkWidget *create_xfumed (void);
+GtkWidget *create_dialog_quit (void);

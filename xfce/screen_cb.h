@@ -32,8 +32,7 @@
 
 void screen_cancel_cb (GtkWidget * widget, gpointer data);
 
-gboolean
-screen_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
+gboolean screen_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
 
 void screen_ok_cb (GtkWidget * widget, gpointer data);
 

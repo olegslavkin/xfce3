@@ -71,9 +71,9 @@ strDel (char *s, int idx, int n)
   s += idx;
   p = s + n;
   do
-    {
-      *s++ = *p;
-    }
+  {
+    *s++ = *p;
+  }
   while (*p++);
 }
 
@@ -110,11 +110,11 @@ strIns (char *s, const char *ins, int idx, int maxstrlen)
   p1 = s + l;
   p2 = p1 + li;
   while (p2 >= s + maxstrlen)
-    {
-      --p1;
-      --p2;
-      --move;
-    }
+  {
+    --p1;
+    --p2;
+    --move;
+  }
   while (move-- > 0)
     *p2-- = *p1--;
   p1 = s + idx;
@@ -160,33 +160,33 @@ findEnvVar (const char *s, int *len)
   if (!s)
     return NULL;
   while (*s)
+  {
+    next = s + 1;
+    if (*s == '$' && (isalpha (*next) || *next == '_' || *next == '{'))
     {
-      next = s + 1;
-      if (*s == '$' && (isalpha (*next) || *next == '_' || *next == '{'))
+      ret = (char *) s++;
+      if (*s == '{')
+      {
+	brace = 1;
+	++s;
+      }
+      while (*s && (isalnum (*s) || *s == '_'))
+	++s;
+      *len = s - ret;
+      if (brace)
+      {
+	if (*s == '}')
 	{
-	  ret = (char *) s++;
-	  if (*s == '{')
-	    {
-	      brace = 1;
-	      ++s;
-	    }
-	  while (*s && (isalnum (*s) || *s == '_'))
-	    ++s;
-	  *len = s - ret;
-	  if (brace)
-	    {
-	      if (*s == '}')
-		{
-		  ++*len;
-		  break;
-		}
-	      ret = NULL;
-	    }
-	  else
-	    break;
+	  ++*len;
+	  break;
 	}
-      ++s;
+	ret = NULL;
+      }
+      else
+	break;
     }
+    ++s;
+  }
   return ret;
 }
 
@@ -216,11 +216,11 @@ getEnv (const char *name)
   if (*p == '$')
     ++p;
   if (*p == '{')
-    {
-      ++p;
-      if ((p2 = strchr (p, '}')) != NULL)
-	*p2 = '\0';
-    }
+  {
+    ++p;
+    if ((p2 = strchr (p, '}')) != NULL)
+      *p2 = '\0';
+  }
   if ((ret = getenv (p)) == NULL)
     ret = empty;
   free (tmp);
@@ -264,16 +264,16 @@ envExpand (char *s, int maxstrlen)
 
   s2 = s;
   while ((var = findEnvVar (s2, &len)) != NULL)
-    {
-      ++ret;
-      save = var[len];
-      var[len] = '\0';
-      env = getEnv (var);
-      var[len] = save;
-      strDel (s, var - s, len);
-      strIns (s, env, var - s, maxstrlen);
-      s2 = var + strlen (env);
-    }
+  {
+    ++ret;
+    save = var[len];
+    var[len] = '\0';
+    env = getEnv (var);
+    var[len] = save;
+    strDel (s, var - s, len);
+    strIns (s, env, var - s, maxstrlen);
+    s2 = var + strlen (env);
+  }
   return ret;
 }
 
@@ -317,17 +317,17 @@ envDupExpand (const char *s, int extra)
   slen = strlen (s);
   bufflen = slen + 1 + extra;
   while ((var = findEnvVar (s2, &len)) != NULL)
-    {
-      save = var[len];
-      var[len] = '\0';
-      env = getEnv (var);
-      var[len] = save;
-      elen = strlen (env);
-      /* need to make a buffer the maximum possible size, else we
-       * may get trouble while expanding. */
-      bufflen += len > elen ? len : elen;
-      s2 = var + len;
-    }
+  {
+    save = var[len];
+    var[len] = '\0';
+    env = getEnv (var);
+    var[len] = save;
+    elen = strlen (env);
+    /* need to make a buffer the maximum possible size, else we
+     * may get trouble while expanding. */
+    bufflen += len > elen ? len : elen;
+    s2 = var + len;
+  }
   if (bufflen < slen + 1)
     bufflen = slen + 1;
 

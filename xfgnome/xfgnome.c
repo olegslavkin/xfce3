@@ -66,14 +66,14 @@ s_list_insert (s_list * list, long id)
     return NULL;
 
   if (list->first == NULL)
-    {
-      list->first = item;
-      list->last = item;
-    }
+  {
+    list->first = item;
+    list->last = item;
+  }
   else
-    {
-      list->last->next = item;
-    }
+  {
+    list->last->next = item;
+  }
   item->next = NULL;
   list->last = item;
   item->id = id;
@@ -95,52 +95,52 @@ s_list_remove_by_data (s_list * list, long id)
 
   /* this is our only list item */
   if (tmp1 == list->first && tmp1 == list->last)
-    {
-      free (tmp1);
-      list->first = NULL;
-      list->last = NULL;
-      return 1;
-    }
+  {
+    free (tmp1);
+    list->first = NULL;
+    list->last = NULL;
+    return 1;
+  }
   /* the last item */
   else if (tmp1 == list->last)
-    {
-      list_item *tmp2;
+  {
+    list_item *tmp2;
 
-      tmp2 = list->first;
-      while (tmp2)
-	{
-	  if (tmp2->next == list->last)
-	    break;
-	  tmp2 = tmp2->next;
-	}
-      free (tmp1);
-      tmp2->next = NULL;
-      list->last = tmp2;
-      return 1;
+    tmp2 = list->first;
+    while (tmp2)
+    {
+      if (tmp2->next == list->last)
+	break;
+      tmp2 = tmp2->next;
     }
+    free (tmp1);
+    tmp2->next = NULL;
+    list->last = tmp2;
+    return 1;
+  }
   /* the first item */
   else if (tmp1 == list->first)
-    {
-      list->first = tmp1->next;
-      free (tmp1);
-      return 1;
-    }
+  {
+    list->first = tmp1->next;
+    free (tmp1);
+    return 1;
+  }
   /*somewhere in between */
   else
-    {
-      list_item *tmp2;
+  {
+    list_item *tmp2;
 
-      tmp2 = list->first;
-      while (tmp2)
-	{
-	  if (tmp2->next == tmp1)
-	    break;
-	  tmp2 = tmp2->next;
-	}
-      tmp2->next = tmp1->next;
-      free (tmp1);
-      return 1;
+    tmp2 = list->first;
+    while (tmp2)
+    {
+      if (tmp2->next == tmp1)
+	break;
+      tmp2 = tmp2->next;
     }
+    tmp2->next = tmp1->next;
+    free (tmp1);
+    return 1;
+  }
   return 0;
 }
 
@@ -158,11 +158,11 @@ s_list_find_by_data (s_list * list, long id)
     return NULL;
 
   while (tmp)
-    {
-      if (tmp->id == id)
-	return tmp;
-      tmp = tmp->next;
-    }
+  {
+    if (tmp->id == id)
+      return tmp;
+    tmp = tmp->next;
+  }
   return NULL;
 }
 
@@ -191,11 +191,11 @@ s_list_free (s_list * list)
 
   tmp1 = list->first;
   while (tmp1)
-    {
-      tmp2 = tmp1->next;
-      free (tmp1);
-      tmp1 = tmp2;
-    }
+  {
+    tmp2 = tmp1->next;
+    free (tmp1);
+    tmp1 = tmp2;
+  }
   free (list);
   return 0;
 }
@@ -213,11 +213,11 @@ s_list_count (s_list * list)
   tmp = list->first;
 
   while (tmp)
-    {
-      if (!(tmp->flags & WINDOWLISTSKIP))
-	count++;
-      tmp = tmp->next;
-    }
+  {
+    if (!(tmp->flags & WINDOWLISTSKIP))
+      count++;
+    tmp = tmp->next;
+  }
   return count;
 }
 
@@ -231,8 +231,7 @@ gnome_compliance_init ()
   root_win = RootWindow (dpy, screen);
 
   /* supporting WM check */
-  _XA_WIN_SUPPORTING_WM_CHECK = XInternAtom (dpy, "_WIN_SUPPORTING_WM_CHECK",
-					     False);
+  _XA_WIN_SUPPORTING_WM_CHECK = XInternAtom (dpy, "_WIN_SUPPORTING_WM_CHECK", False);
   _XA_WIN_PROTOCOLS = XInternAtom (dpy, "_WIN_PROTOCOLS", False);
   _XA_WIN_STATE = XInternAtom (dpy, "_WIN_STATE", False);
   _XA_WIN_HINTS = XInternAtom (dpy, "_WIN_HINTS", False);
@@ -243,18 +242,14 @@ gnome_compliance_init ()
   _XA_WIN_WORKSPACE_COUNT = XInternAtom (dpy, "_WIN_WORKSPACE_COUNT", False);
   _XA_WIN_WORKSPACE_NAMES = XInternAtom (dpy, "_WIN_WORKSPACE_NAMES", False);
   _XA_WIN_CLIENT_LIST = XInternAtom (dpy, "_WIN_CLIENT_LIST", False);
-  _XA_WIN_DESKTOP_BUTTON_PROXY =
-    XInternAtom (dpy, "_WIN_DESKTOP_BUTTON_PROXY", False);
+  _XA_WIN_DESKTOP_BUTTON_PROXY = XInternAtom (dpy, "_WIN_DESKTOP_BUTTON_PROXY", False);
 
   /* create the GNOME window */
   gnome_win = XCreateSimpleWindow (dpy, root_win, 0, 0, 5, 5, 0, 0, 0);
 
   /* supported WM check */
-  XChangeProperty (dpy, root_win, _XA_WIN_SUPPORTING_WM_CHECK,
-		   XA_CARDINAL, 32, PropModeReplace,
-		   (unsigned char *) &gnome_win, 1);
-  XChangeProperty (dpy, gnome_win, _XA_WIN_SUPPORTING_WM_CHECK, XA_CARDINAL,
-		   32, PropModeReplace, (unsigned char *) &gnome_win, 1);
+  XChangeProperty (dpy, root_win, _XA_WIN_SUPPORTING_WM_CHECK, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &gnome_win, 1);
+  XChangeProperty (dpy, gnome_win, _XA_WIN_SUPPORTING_WM_CHECK, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &gnome_win, 1);
 
   /* supported protocols */
   count = 0;
@@ -267,8 +262,7 @@ gnome_compliance_init ()
   supported_list[count++] = _XA_WIN_WORKSPACE_COUNT;	/* done */
   supported_list[count++] = _XA_WIN_WORKSPACE_NAMES;	/* done */
   supported_list[count++] = _XA_WIN_CLIENT_LIST;	/* done */
-  XChangeProperty (dpy, root_win, _XA_WIN_PROTOCOLS, XA_ATOM, 32,
-		   PropModeReplace, (unsigned char *) supported_list, count);
+  XChangeProperty (dpy, root_win, _XA_WIN_PROTOCOLS, XA_ATOM, 32, PropModeReplace, (unsigned char *) supported_list, count);
 
 }
 
@@ -277,8 +271,7 @@ static void
 gnome_set_current_workspace (int current_desk)
 {
 
-  XChangeProperty (dpy, root_win, _XA_WIN_WORKSPACE, XA_CARDINAL, 32,
-		   PropModeReplace, (unsigned char *) &current_desk, 1);
+  XChangeProperty (dpy, root_win, _XA_WIN_WORKSPACE, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &current_desk, 1);
 }
 
 /* sets the number of workspaces */
@@ -286,8 +279,7 @@ static void
 gnome_set_workspace_count (int workspaces)
 {
 
-  XChangeProperty (dpy, root_win, _XA_WIN_WORKSPACE_COUNT, XA_CARDINAL, 32,
-		   PropModeReplace, (unsigned char *) &workspaces, 1);
+  XChangeProperty (dpy, root_win, _XA_WIN_WORKSPACE_COUNT, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &workspaces, 1);
 
 }
 
@@ -298,10 +290,10 @@ gnome_set_workspace_names (int count, char **names)
   XTextProperty text;
 
   if (XStringListToTextProperty (names, count, &text))
-    {
-      XSetTextProperty (dpy, root_win, &text, _XA_WIN_WORKSPACE_NAMES);
-      XFree (text.value);
-    }
+  {
+    XSetTextProperty (dpy, root_win, &text, _XA_WIN_WORKSPACE_NAMES);
+    XFree (text.value);
+  }
 }
 
 /* sets the window list property, skips winlistskip windows */
@@ -315,27 +307,25 @@ gnome_set_client_list (s_list * list)
   windows_count = s_list_count (list);
 
   if (windows_count != 0)
-    {
-      windows = (Window *) safemalloc (sizeof (Window) * windows_count);
+  {
+    windows = (Window *) safemalloc (sizeof (Window) * windows_count);
 
-      if (!windows)
-	{
-	  fprintf (stderr, "gnome_set_client_list: malloc failed\n");
-	  return;
-	}
-      tmp = list->first;
-      count = 0;
-      while (tmp)
-	{
-	  if (!(tmp->flags & WINDOWLISTSKIP))
-	    windows[count++] = tmp->id;
-	  tmp = tmp->next;
-	}
-      XChangeProperty (dpy, root_win, _XA_WIN_CLIENT_LIST, XA_CARDINAL, 32,
-		       PropModeReplace, (unsigned char *) windows,
-		       windows_count);
-      free (windows);
+    if (!windows)
+    {
+      fprintf (stderr, "gnome_set_client_list: malloc failed\n");
+      return;
     }
+    tmp = list->first;
+    count = 0;
+    while (tmp)
+    {
+      if (!(tmp->flags & WINDOWLISTSKIP))
+	windows[count++] = tmp->id;
+      tmp = tmp->next;
+    }
+    XChangeProperty (dpy, root_win, _XA_WIN_CLIENT_LIST, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) windows, windows_count);
+    free (windows);
+  }
 }
 
 /* translates xfwm window flags to GNOME state properties */
@@ -345,31 +335,28 @@ gnome_set_win_hints (list_item * xfwm_window)
   unsigned long flags = 0L;
 
   if (xfwm_window->flags & STICKY)
-    {
-      flags = WIN_STATE_STICKY;
-    }
+  {
+    flags = WIN_STATE_STICKY;
+  }
 
   if (xfwm_window->flags & ICONIFIED)
-    {
-      flags |= WIN_STATE_MINIMIZED;
-    }
+  {
+    flags |= WIN_STATE_MINIMIZED;
+  }
 
   if (xfwm_window->flags & SHADED)
-    {
-      flags |= WIN_STATE_SHADED;
-    }
+  {
+    flags |= WIN_STATE_SHADED;
+  }
 
   if (!(xfwm_window->flags & STICKY) && (xfwm_window->workspace != current_desk))
-    {
-      flags |= WIN_STATE_HID_WORKSPACE;
-    }
+  {
+    flags |= WIN_STATE_HID_WORKSPACE;
+  }
 
-  XChangeProperty (dpy, (Window) xfwm_window->id, _XA_WIN_WORKSPACE,
-		   XA_CARDINAL, 32, PropModeReplace,
-		   (unsigned char *) &xfwm_window->workspace, 1);
+  XChangeProperty (dpy, (Window) xfwm_window->id, _XA_WIN_WORKSPACE, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &xfwm_window->workspace, 1);
 
-  XChangeProperty (dpy, (Window) xfwm_window->id, _XA_WIN_STATE, XA_CARDINAL,
-		   32, PropModeReplace, (unsigned char *) &flags, 1);
+  XChangeProperty (dpy, (Window) xfwm_window->id, _XA_WIN_STATE, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &flags, 1);
 }
 
 /* state requests, GNOME -> xfwm */
@@ -380,70 +367,69 @@ gnome_handle_win_state (XClientMessageEvent * event, Window id, long mask)
   list_item *xfwm_window;
 
   if (event)
-    {
-      xfwm_window = s_list_find_by_data (window_list, (long) event->window);
-      change_mask = event->data.l[0];
-      new_members = event->data.l[1];
-    }
+  {
+    xfwm_window = s_list_find_by_data (window_list, (long) event->window);
+    change_mask = event->data.l[0];
+    new_members = event->data.l[1];
+  }
   else
-    {
-      xfwm_window = s_list_find_by_data (window_list, id);
-      new_members = mask;
-      change_mask = 0;
-    }
+  {
+    xfwm_window = s_list_find_by_data (window_list, id);
+    new_members = mask;
+    change_mask = 0;
+  }
   if (!xfwm_window)
     return;
 
   /* stick or unstick */
   if (new_members & WIN_STATE_STICKY)
+  {
+    if (!(xfwm_window->flags & STICKY))
     {
-      if (!(xfwm_window->flags & STICKY))
-	{
-	  SendInfo (fd, "Stick on", xfwm_window->id);
-	}
+      SendInfo (fd, "Stick on", xfwm_window->id);
     }
+  }
   else if (change_mask & WIN_STATE_STICKY)
+  {
+    if (xfwm_window->flags & STICKY)
     {
-      if (xfwm_window->flags & STICKY)
-	{
-	  SendInfo (fd, "Stick off", xfwm_window->id);
-	}
+      SendInfo (fd, "Stick off", xfwm_window->id);
     }
+  }
 
-  if ((new_members & WIN_STATE_MAXIMIZED_VERT) &&
-      (new_members & WIN_STATE_MAXIMIZED_HORIZ))
-    {
-      SendInfo (fd, "Maximize 100% 100%", xfwm_window->id);
-    }
+  if ((new_members & WIN_STATE_MAXIMIZED_VERT) && (new_members & WIN_STATE_MAXIMIZED_HORIZ))
+  {
+    SendInfo (fd, "Maximize 100% 100%", xfwm_window->id);
+  }
   else
+  {
+    /* maximize verticaly */
+    if (new_members & WIN_STATE_MAXIMIZED_VERT)
     {
-      /* maximize verticaly */
-      if (new_members & WIN_STATE_MAXIMIZED_VERT)
-	{
-	  SendInfo (fd, "Maximize 0% 100%", xfwm_window->id);
-	}
-
-      /* maximize horizontaly */
-      if (new_members & WIN_STATE_MAXIMIZED_HORIZ)
-	{
-	  SendInfo (fd, "Maximize 100% 0%", xfwm_window->id);
-	}
+      SendInfo (fd, "Maximize 0% 100%", xfwm_window->id);
     }
+
+    /* maximize horizontaly */
+    if (new_members & WIN_STATE_MAXIMIZED_HORIZ)
+    {
+      SendInfo (fd, "Maximize 100% 0%", xfwm_window->id);
+    }
+  }
   /* shade or unshade */
   if (new_members & WIN_STATE_SHADED)
+  {
+    if (!(xfwm_window->flags & SHADED))
     {
-      if (!(xfwm_window->flags & SHADED))
-	{
-	  SendInfo (fd, "Shade", xfwm_window->id);
-	}
+      SendInfo (fd, "Shade", xfwm_window->id);
     }
+  }
   else if (change_mask & WIN_STATE_SHADED)
+  {
+    if (xfwm_window->flags & SHADED)
     {
-      if (xfwm_window->flags & SHADED)
-	{
-	  SendInfo (fd, "Shade", xfwm_window->id);
-	}
+      SendInfo (fd, "Shade", xfwm_window->id);
     }
+  }
 
   if (event)
     gnome_get_prop_workspace (xfwm_window->id);
@@ -458,14 +444,12 @@ gnome_get_prop_state (Window id)
   unsigned long nitems, bytes_after;
   long flags, *data = 0;
 
-  if (XGetWindowProperty (dpy, id, _XA_WIN_STATE, 0, 1, False,
-			  XA_CARDINAL, &ret_type, &fmt, &nitems, &bytes_after,
-			  (unsigned char **) &data) == Success && data)
-    {
-      flags = *data;
-      gnome_handle_win_state (NULL, id, flags);
-      XFree (data);
-    }
+  if (XGetWindowProperty (dpy, id, _XA_WIN_STATE, 0, 1, False, XA_CARDINAL, &ret_type, &fmt, &nitems, &bytes_after, (unsigned char **) &data) == Success && data)
+  {
+    flags = *data;
+    gnome_handle_win_state (NULL, id, flags);
+    XFree (data);
+  }
 
 }
 
@@ -480,21 +464,18 @@ gnome_get_prop_workspace (Window id)
   long val, *data = 0;
 
 
-  if (XGetWindowProperty (dpy, id, _XA_WIN_WORKSPACE, 0, 1, False,
-			  XA_CARDINAL, &ret_type, &fmt, &nitems,
-			  &bytes_after,
-			  (unsigned char **) &data) == Success && data)
+  if (XGetWindowProperty (dpy, id, _XA_WIN_WORKSPACE, 0, 1, False, XA_CARDINAL, &ret_type, &fmt, &nitems, &bytes_after, (unsigned char **) &data) == Success && data)
+  {
+    val = *data;
+    XFree (data);
+    if (val != current_desk)
     {
-      val = *data;
-      XFree (data);
-      if (val != current_desk)
-	{
-	  char msg[50];
-	  sprintf (msg, "WindowsDesk 0 %d\n", (int) val);
-	  SendInfo (fd, msg, id);
-	}
-
+      char msg[50];
+      sprintf (msg, "WindowsDesk 0 %d\n", (int) val);
+      SendInfo (fd, msg, id);
     }
+
+  }
 }
 
 /* initial hints, check for GNOME hints on a window */
@@ -513,16 +494,16 @@ void
 DeadPipe (int sig)
 {
   switch (sig)
-    {
-    case SIGSEGV:
-      fprintf (stderr, "Segmentation fault in %s\n", MyName);
-      exit (-1);
-    case SIGINT:
-      fprintf (stderr, "User abort, exiting\n");
-      exit (-1);
-    default:
-      break;
-    }
+  {
+  case SIGSEGV:
+    fprintf (stderr, "Segmentation fault in %s\n", MyName);
+    exit (-1);
+  case SIGINT:
+    fprintf (stderr, "User abort, exiting\n");
+    exit (-1);
+  default:
+    break;
+  }
   exit (0);
 }
 
@@ -533,37 +514,37 @@ process_message (unsigned long type, int elements, unsigned long *body)
   int status = 0;
 
   switch (type)
-    {
-    case XFCE_M_CONFIGURE_WINDOW:
-      status = list_configure (body);
-      break;
-    case XFCE_M_ADD_WINDOW:
-      status = list_add_window (body);
-      break;
-    case XFCE_M_DESTROY_WINDOW:
-      status = list_destroy_window (body);
-      break;
-    case XFCE_M_ICONIFY:
-      status = list_iconify (body);
-      break;
-    case XFCE_M_DEICONIFY:
-      status = list_deiconify (body);
-      break;
-    case XFCE_M_WINDOW_NAME:
-      status = list_window_name (body);
-      break;
-    case XFCE_M_ICON_NAME:
-      status = list_icon_name (body);
-      break;
-    case XFCE_M_NEW_DESK:
-      status = list_desk_change (body);
-      break;
-    case XFCE_M_END_WINDOWLIST:
-      status = list_end ();
-      break;
-    default:
-      break;
-    }
+  {
+  case XFCE_M_CONFIGURE_WINDOW:
+    status = list_configure (body);
+    break;
+  case XFCE_M_ADD_WINDOW:
+    status = list_add_window (body);
+    break;
+  case XFCE_M_DESTROY_WINDOW:
+    status = list_destroy_window (body);
+    break;
+  case XFCE_M_ICONIFY:
+    status = list_iconify (body);
+    break;
+  case XFCE_M_DEICONIFY:
+    status = list_deiconify (body);
+    break;
+  case XFCE_M_WINDOW_NAME:
+    status = list_window_name (body);
+    break;
+  case XFCE_M_ICON_NAME:
+    status = list_icon_name (body);
+    break;
+  case XFCE_M_NEW_DESK:
+    status = list_desk_change (body);
+    break;
+  case XFCE_M_END_WINDOWLIST:
+    status = list_end ();
+    break;
+  default:
+    break;
+  }
 }
 
 /* list_configure:
@@ -582,31 +563,31 @@ list_configure (unsigned long *body)
     return 0;
 
   if ((item = s_list_find_by_data (window_list, body[0])) != NULL)
+  {
+    Bool update = False;
+
+    if (item->flags != body[8])
     {
-      Bool update = False;
-
-      if (item->flags != body[8])
-	{
-	  item->flags = body[8];
-	  update = True;
-	}
-      if (item->workspace != body[7])
-	{
-	  if (!(item->flags & ICONIFIED))
-	    {
-	      item->workspace = body[7];
-	      update = True;
-	    }
-	}
-
-      if (update)
-	{
-	  gnome_set_win_hints (item);
-	  gnome_set_client_list (window_list);
-	  return 1;
-	}
-      return 0;
+      item->flags = body[8];
+      update = True;
     }
+    if (item->workspace != body[7])
+    {
+      if (!(item->flags & ICONIFIED))
+      {
+	item->workspace = body[7];
+	update = True;
+      }
+    }
+
+    if (update)
+    {
+      gnome_set_win_hints (item);
+      gnome_set_client_list (window_list);
+      return 1;
+    }
+    return 0;
+  }
   return (list_add_window (body));
 }
 
@@ -624,9 +605,9 @@ list_add_window (unsigned long *body)
     return 0;
 
   if (s_list_find_by_data (window_list, body[0]))
-    {
-      return 0;
-    }
+  {
+    return 0;
+  }
   if (body[0] == gnome_win)
     return 0;
 
@@ -667,14 +648,14 @@ int
 list_destroy_window (unsigned long *body)
 {
   if (s_list_find_by_data (window_list, body[0]))
-    {
-      s_list_remove_by_data (window_list, body[0]);
-      gnome_set_client_list (window_list);
-      /* Perform some cleanup */
-      XDeleteProperty (dpy, body[0], _XA_WIN_WORKSPACE);
-      XDeleteProperty (dpy, body[0], _XA_WIN_STATE);
-      return 1;
-    }
+  {
+    s_list_remove_by_data (window_list, body[0]);
+    gnome_set_client_list (window_list);
+    /* Perform some cleanup */
+    XDeleteProperty (dpy, body[0], _XA_WIN_WORKSPACE);
+    XDeleteProperty (dpy, body[0], _XA_WIN_STATE);
+    return 1;
+  }
   return 0;
 }
 
@@ -725,35 +706,35 @@ event_handler ()
   char tmp[255];
 
   while (XPending (dpy))
+  {
+    XNextEvent (dpy, &Event);
+    switch (Event.type)
     {
-      XNextEvent (dpy, &Event);
-      switch (Event.type)
-	{
-	case PropertyNotify:
-	  if (Event.xproperty.window == gnome_win)
-	    {
-	      gnome_check_client_hints (Event.xclient.window);
-	    }
-	  break;
-	case ClientMessage:
-	  /* change workspace request */
-	  if (Event.xclient.message_type == _XA_WIN_WORKSPACE)
-	    {
-	      int desk;
-	      desk = Event.xclient.data.l[0];
-	      sprintf (tmp, "Desk 0 %d\n", desk);
-	      SendInfo (fd, tmp, None);
-	    }
-	  /* state requests */
-	  else if (Event.xclient.message_type == _XA_WIN_STATE)
-	    {
-	      gnome_handle_win_state (&Event.xclient, None, 0);
-	    }
-	  break;
-	default:
-	  break;
-	}
+    case PropertyNotify:
+      if (Event.xproperty.window == gnome_win)
+      {
+	gnome_check_client_hints (Event.xclient.window);
+      }
+      break;
+    case ClientMessage:
+      /* change workspace request */
+      if (Event.xclient.message_type == _XA_WIN_WORKSPACE)
+      {
+	int desk;
+	desk = Event.xclient.data.l[0];
+	sprintf (tmp, "Desk 0 %d\n", desk);
+	SendInfo (fd, tmp, None);
+      }
+      /* state requests */
+      else if (Event.xclient.message_type == _XA_WIN_STATE)
+      {
+	gnome_handle_win_state (&Event.xclient, None, 0);
+      }
+      break;
+    default:
+      break;
     }
+  }
 }
 
 /******************************************************************************
@@ -767,41 +748,41 @@ Loop (int *fd)
   unsigned long header[3], *body;
 
   while (1)
+  {
+    FD_ZERO (&readset);
+    FD_SET (fd[1], &readset);
+    FD_SET (x_fd, &readset);
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+#ifdef __hpux
+    if (!select (fd_width, (int *) &readset, NULL, NULL, &tv))
     {
+      XPending (dpy);
       FD_ZERO (&readset);
       FD_SET (fd[1], &readset);
       FD_SET (x_fd, &readset);
-      tv.tv_sec = 0;
-      tv.tv_usec = 0;
-#ifdef __hpux
-      if (!select (fd_width, (int *) &readset, NULL, NULL, &tv))
-	{
-	  XPending (dpy);
-	  FD_ZERO (&readset);
-	  FD_SET (fd[1], &readset);
-	  FD_SET (x_fd, &readset);
-	  select (fd_width, (int *) &readset, NULL, NULL, NULL);
-	}
+      select (fd_width, (int *) &readset, NULL, NULL, NULL);
+    }
 #else
-      if (!select (fd_width, &readset, NULL, NULL, &tv))
-	{
-	  XPending (dpy);
-	  FD_ZERO (&readset);
-	  FD_SET (fd[1], &readset);
-	  FD_SET (x_fd, &readset);
-	  select (fd_width, &readset, NULL, NULL, NULL);
-	}
+    if (!select (fd_width, &readset, NULL, NULL, &tv))
+    {
+      XPending (dpy);
+      FD_ZERO (&readset);
+      FD_SET (fd[1], &readset);
+      FD_SET (x_fd, &readset);
+      select (fd_width, &readset, NULL, NULL, NULL);
+    }
 #endif
 
-      if (FD_ISSET (x_fd, &readset))
-	event_handler ();
-      if (FD_ISSET (fd[1], &readset))
-	if (ReadXfwmPacket (fd[1], header, &body) > 0)
-	  {
-	    process_message (header[1], header[2], body);
-	    free (body);
-	  }
-    }
+    if (FD_ISSET (x_fd, &readset))
+      event_handler ();
+    if (FD_ISSET (fd[1], &readset))
+      if (ReadXfwmPacket (fd[1], header, &body) > 0)
+      {
+	process_message (header[1], header[2], body);
+	free (body);
+      }
+  }
 }
 
 static void
@@ -812,26 +793,18 @@ default_config ()
   desk_names = (char **) safemalloc (sizeof (char *));
 
   for (i = 0; i < NBSCREENS; i++)
-    {
-      if (i != 0)
-	desk_names =
-	  realloc (desk_names, sizeof (char *) + i * sizeof (char *));
-      desk_names[i] = (char *) safemalloc (4);
-      sprintf (desk_names[i], "%i", i + 1);
-    }
+  {
+    if (i != 0)
+      desk_names = realloc (desk_names, sizeof (char *) + i * sizeof (char *));
+    desk_names[i] = (char *) safemalloc (4);
+    sprintf (desk_names[i], "%i", i + 1);
+  }
 }
 
-XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event)
+XErrorHandler
+ErrorHandler (Display * dpy, XErrorEvent * event)
 {
-  if ((event->error_code == BadWindow) ||
-      (event->error_code == BadDrawable) ||
-      (event->request_code == X_GetGeometry) ||
-      (event->request_code == X_ChangeProperty) ||
-      (event->request_code == X_SetInputFocus) ||
-      (event->request_code == X_ChangeWindowAttributes) ||
-      (event->request_code == X_GrabButton) ||
-      (event->request_code == X_ChangeWindowAttributes) ||
-      (event->request_code == X_InstallColormap))
+  if ((event->error_code == BadWindow) || (event->error_code == BadDrawable) || (event->request_code == X_GetGeometry) || (event->request_code == X_ChangeProperty) || (event->request_code == X_SetInputFocus) || (event->request_code == X_ChangeWindowAttributes) || (event->request_code == X_GrabButton) || (event->request_code == X_ChangeWindowAttributes) || (event->request_code == X_InstallColormap))
     return (0);
 
   fprintf (stderr, "xfgnome: Fatal XLib internal error\n");
@@ -859,11 +832,10 @@ main (int argc, char **argv)
   strcpy (MyName, temp);
 
   if (argc < 7)
-    {
-      fprintf (stderr, "%s Version %s should only be executed by xfwm!\n",
-	       MyName, VERSION);
-      exit (1);
-    }
+  {
+    fprintf (stderr, "%s Version %s should only be executed by xfwm!\n", MyName, VERSION);
+    exit (1);
+  }
 
   /* Dead pipe == Fvwm died */
   signal (SIGPIPE, DeadPipe);
@@ -873,11 +845,10 @@ main (int argc, char **argv)
 
   /* Initialize X connection */
   if (!(dpy = XOpenDisplay (display_name)))
-    {
-      fprintf (stderr, "%s: can't open display %s", MyName,
-	       XDisplayName (display_name));
-      exit (1);
-    }
+  {
+    fprintf (stderr, "%s: can't open display %s", MyName, XDisplayName (display_name));
+    exit (1);
+  }
 
   x_fd = XConnectionNumber (dpy);
   fd_width = GetFdWidth ();
@@ -887,29 +858,25 @@ main (int argc, char **argv)
   gnome_compliance_init ();
 
   if (argc > 7)
+  {
+    desk_count = atoi (argv[7]);
+    if (desk_count < 1)
+      desk_count = 1;
+    else if (desk_count > 32)
+      desk_count = 32;
+  }
+  else if ((XGetWindowProperty (dpy, root_win, _XA_WIN_WORKSPACE_COUNT, 0L, 1L, False, XA_CARDINAL, &atype, &aformat, &nitems, &bytes_remain, &prop)) == Success)
+  {
+    if (prop != NULL)
     {
-      desk_count = atoi (argv[7]);
-      if (desk_count < 1)
-	desk_count = 1;
-      else if (desk_count > 32)
-	desk_count = 32;
-    }
-  else
-    if (
-	(XGetWindowProperty
-	 (dpy, root_win, _XA_WIN_WORKSPACE_COUNT, 0L, 1L, False, XA_CARDINAL,
-	  &atype, &aformat, &nitems, &bytes_remain, &prop)) == Success)
-    {
-      if (prop != NULL)
-	{
-	  desk_count = *(unsigned long *) prop;
-	  if (desk_count > NBSCREENS)
-	    desk_count = NBSCREENS;
-	  XFree (prop);
-	}
-      else
+      desk_count = *(unsigned long *) prop;
+      if (desk_count > NBSCREENS)
 	desk_count = NBSCREENS;
+      XFree (prop);
     }
+    else
+      desk_count = NBSCREENS;
+  }
   else
     desk_count = NBSCREENS;
 
@@ -917,15 +884,7 @@ main (int argc, char **argv)
   gnome_set_workspace_names (NBSCREENS, desk_names);
   gnome_set_workspace_count (desk_count);
 
-  SetMessageMask (fd,
-		  XFCE_M_ADD_WINDOW |
-		  XFCE_M_CONFIGURE_WINDOW |
-		  XFCE_M_DESTROY_WINDOW |
-		  XFCE_M_NEW_DESK |
-		  XFCE_M_ICONIFY |
-		  XFCE_M_DEICONIFY |
-		  XFCE_M_WINDOW_NAME |
-		  XFCE_M_ICON_NAME | XFCE_M_END_WINDOWLIST);
+  SetMessageMask (fd, XFCE_M_ADD_WINDOW | XFCE_M_CONFIGURE_WINDOW | XFCE_M_DESTROY_WINDOW | XFCE_M_NEW_DESK | XFCE_M_ICONIFY | XFCE_M_DEICONIFY | XFCE_M_WINDOW_NAME | XFCE_M_ICON_NAME | XFCE_M_END_WINDOWLIST);
 
   window_list = s_list_new ();
 

@@ -37,10 +37,10 @@ SMBListStdout (int n, void *data)
   char *line;
   char *textos[SHARE_COLUMNS];
   char directorio[XFSAMBA_MAX_STRING];
-    int i, filenamelen, caso = 0x01;
-    char *pw;
-    GdkPixmap *gPIX;
-    GdkBitmap *gPIM;
+  int i, filenamelen, caso = 0x01;
+  char *pw;
+  GdkPixmap *gPIX;
+  GdkBitmap *gPIM;
   GtkCTreeNode *node;
 
   if (n)
@@ -48,12 +48,12 @@ SMBListStdout (int n, void *data)
   line = (char *) data;
   print_diagnostics (line);
   if (strstr (line, "ERRbadpw"))
-    {				/* server has died */
-      SMBResult = CHALLENGED;
-      print_diagnostics ("DBG:");
-      print_diagnostics (line);
+  {				/* server has died */
+    SMBResult = CHALLENGED;
+    print_diagnostics ("DBG:");
+    print_diagnostics (line);
 /* here we must pop it from the cache!!!!! */
-    }
+  }
   if (strlen (line) < 2)
     return TRUE;
   if (strstr (line, "  .   "))
@@ -65,101 +65,102 @@ SMBListStdout (int n, void *data)
   /* ok. Now we have a line to process */
   /* client.c: "  %-30s%7.7s %8.0f  %s",filename,attr,size,asctime */
   /* asctime=25 */
- // if (strlen(line) > 25+2+8+1+7)
-    
-pw = line + (strlen (line) -1 - 25 - 2 - 8);
-while (pw[0]!=' ') {
-	if (pw==line) break;
-	pw--;
-}
+  // if (strlen(line) > 25+2+8+1+7)
 
-    filenamelen = strlen (line) - strlen(pw) - 7;
+  pw = line + (strlen (line) - 1 - 25 - 2 - 8);
+  while (pw[0] != ' ')
+  {
+    if (pw == line)
+      break;
+    pw--;
+  }
 
-while (pw[0]==' '){
-	if (pw[0]==0) break;
-	pw++;
-}
+  filenamelen = strlen (line) - strlen (pw) - 7;
 
-    
-    /*filenamelen = strlen (line) - 25 - 2 - 8 - 1 - 7;*/
-    for (i=0;i<SHARE_COLUMNS;i++) textos[i] = "";
-    textos[SHARE_NAME_COLUMN] = line + 2;
-    for (i = filenamelen + 1; i < filenamelen + 8; i++)
-      {
-	if (line[i] == 'D')
-	  caso ^= 0x08;
-	if (line[i] == 'H')
-	  caso ^= 0x04;
-	if (line[i] == 'R')
-	  caso ^= 0x02;
-	line[i] = 0;
-      }
-
-    if (strstr (pw, "\n")) strtok (pw, "\n");	/* chop */
-
-    /*textos[COMMENT_COLUMN] = pw;*/
-    if (strstr(pw," ")) {
-	    textos[SHARE_SIZE_COLUMN]=strtok(pw," ");
-	    textos[SHARE_DATE_COLUMN]=pw+strlen(pw)+1;
-    }
+  while (pw[0] == ' ')
+  {
+    if (pw[0] == 0)
+      break;
+    pw++;
+  }
 
 
-    latin_1_readable (line);
+  /*filenamelen = strlen (line) - 25 - 2 - 8 - 1 - 7; */
+  for (i = 0; i < SHARE_COLUMNS; i++)
+    textos[i] = "";
+  textos[SHARE_NAME_COLUMN] = line + 2;
+  for (i = filenamelen + 1; i < filenamelen + 8; i++)
+  {
+    if (line[i] == 'D')
+      caso ^= 0x08;
+    if (line[i] == 'H')
+      caso ^= 0x04;
+    if (line[i] == 'R')
+      caso ^= 0x02;
+    line[i] = 0;
+  }
 
-    if (caso & 0x08)
-      {
-	if (strcmp (selected.dirname, "/") == 0)
-	  {
-	    sprintf (directorio, "/%s/%s", NMBshare, line + 2);
-	  }
-	else
-	  {
-	    sprintf (directorio, "/%s%s/%s", NMBshare, selected.dirname,
-		     line + 2);
-	  }
-	textos[COMMENT_COLUMN] = directorio;
-	node=gtk_ctree_insert_node ((GtkCTree *) shares,
-			       (GtkCTreeNode *) selected.node, NULL, textos,
-			       SHARE_COLUMNS, gPIX_dir_close, gPIM_dir_close,
-			       gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
-	/*return TRUE;*/
-      }
-    else {
-    /* here, use different icons or notify readonly or hidden... */
-      gPIX = gPIX_page;
-      gPIM = gPIM_page;		/* default */
-      if (caso & 0x02)
-        {
-    	  gPIX = gPIX_rpage;
-	  gPIM = gPIM_rpage;
-        }				/* readonly */
-      if (caso & 0x04)
-        {				/* hidden */
-	  if (caso & 0x02)
-	    {
-	      gPIX = gPIX_rdotfile;
-	      gPIM = gPIM_rdotfile;
-	    }			/* readonly */
-	  else
-	    {
-	      gPIX = gPIX_dotfile;
-	      gPIM = gPIM_dotfile;
-	    }
-        }				/* hidden */
-      node=gtk_ctree_insert_node ((GtkCTree *) shares,
-			   (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS,
-			   gPIX, gPIM, NULL, NULL, TRUE, FALSE);
-    }
-    
+  if (strstr (pw, "\n"))
+    strtok (pw, "\n");		/* chop */
+
+  /*textos[COMMENT_COLUMN] = pw; */
+  if (strstr (pw, " "))
+  {
+    textos[SHARE_SIZE_COLUMN] = strtok (pw, " ");
+    textos[SHARE_DATE_COLUMN] = pw + strlen (pw) + 1;
+  }
+
+
+  latin_1_readable (line);
+
+  if (caso & 0x08)
+  {
+    if (strcmp (selected.dirname, "/") == 0)
     {
-	    int *data;
-	    data=(int *)malloc(2*sizeof(int));
-	    /*data[0]=data[1]=0;*/
-	    data[0]=atoi(textos[SHARE_SIZE_COLUMN]);
-            data[1]=0; /* to have date sorting work, must parse date into a time_t number */	    
-    	    gtk_ctree_node_set_row_data_full ((GtkCTree *)shares,node, 
-					data, node_destroy);
+      sprintf (directorio, "/%s/%s", NMBshare, line + 2);
     }
+    else
+    {
+      sprintf (directorio, "/%s%s/%s", NMBshare, selected.dirname, line + 2);
+    }
+    textos[COMMENT_COLUMN] = directorio;
+    node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
+    /*return TRUE; */
+  }
+  else
+  {
+    /* here, use different icons or notify readonly or hidden... */
+    gPIX = gPIX_page;
+    gPIM = gPIM_page;		/* default */
+    if (caso & 0x02)
+    {
+      gPIX = gPIX_rpage;
+      gPIM = gPIM_rpage;
+    }				/* readonly */
+    if (caso & 0x04)
+    {				/* hidden */
+      if (caso & 0x02)
+      {
+	gPIX = gPIX_rdotfile;
+	gPIM = gPIM_rdotfile;
+      }				/* readonly */
+      else
+      {
+	gPIX = gPIX_dotfile;
+	gPIM = gPIM_dotfile;
+      }
+    }				/* hidden */
+    node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX, gPIM, NULL, NULL, TRUE, FALSE);
+  }
+
+  {
+    int *data;
+    data = (int *) malloc (2 * sizeof (int));
+    /*data[0]=data[1]=0; */
+    data[0] = atoi (textos[SHARE_SIZE_COLUMN]);
+    data[1] = 0;		/* to have date sorting work, must parse date into a time_t number */
+    gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
+  }
 
   return TRUE;
 }
@@ -178,16 +179,15 @@ SMBListForkOver (void)
   print_status (_("Retrieve done."));
   fork_obj = 0;
   switch (SMBResult)
-    {
-    case CHALLENGED:
-      print_status (_("Query password has been requested."));
-      gtk_window_set_transient_for (GTK_WINDOW (passwd_dialog (1)),
-				    GTK_WINDOW (smb_nav));
-      break;
-    default:
-      break;
+  {
+  case CHALLENGED:
+    print_status (_("Query password has been requested."));
+    gtk_window_set_transient_for (GTK_WINDOW (passwd_dialog (1)), GTK_WINDOW (smb_nav));
+    break;
+  default:
+    break;
 
-    }
+  }
 }
 
 /* function executed by child after all pipes
@@ -196,40 +196,37 @@ static void
 SMBListFork (void)
 {
   char *the_netbios;
-  the_netbios =
-    (char *) malloc (strlen (NMBnetbios) + strlen (NMBshare) + 1 + 3);
+  the_netbios = (char *) malloc (strlen (NMBnetbios) + strlen (NMBshare) + 1 + 3);
   sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
 
   fprintf (stderr, "CMD: SMBclient fork: ");
-  fprintf (stderr, "smbclient %s   %s   %s   %s   %s\n", the_netbios, "-U",
-	   "*******", "-c", NMBcommand);
+  fprintf (stderr, "smbclient %s   %s   %s   %s   %s\n", the_netbios, "-U", "*******", "-c", NMBcommand);
   fflush (NULL);
-  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c",
-	  NMBcommand, (char *) 0);
+  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c", NMBcommand, (char *) 0);
 }
 
 
 void
 SMBList (void)
 {
-  stopcleanup=FALSE;
+  stopcleanup = FALSE;
   if (not_unique (fork_obj))
-    {
-      return;
-    }
+  {
+    return;
+  }
   /* LastNode not used in this file! anywhere else? */
   LastNode = (GtkCTreeNode *) selected.node;
 
   if (strlen (selected.dirname) + strlen ("ls") + 4 > XFSAMBA_MAX_STRING)
-    {
-      print_diagnostics ("DBG: Max string exceeded!");
-      print_status (_("List failed."));
-      animation (FALSE);
-      cursor_reset (GTK_WIDGET (smb_nav));
+  {
+    print_diagnostics ("DBG: Max string exceeded!");
+    print_status (_("List failed."));
+    animation (FALSE);
+    cursor_reset (GTK_WIDGET (smb_nav));
 
-      return;
+    return;
 
-    }
+  }
 
   sprintf (NMBcommand, "ls \\\"%s\\\"*", selected.dirname);
 
@@ -245,7 +242,6 @@ SMBList (void)
   print_status (_("Retreiving..."));
 
   gtk_clist_freeze (GTK_CLIST (shares));
-  fork_obj = Tubo (SMBListFork, SMBListForkOver, TRUE,
-		   SMBListStdout, parse_stderr);
+  fork_obj = Tubo (SMBListFork, SMBListForkOver, TRUE, SMBListStdout, parse_stderr);
   return;
 }

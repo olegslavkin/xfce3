@@ -38,15 +38,13 @@ void popup_cb (GtkWidget * widget, gpointer data);
 
 void select_cb (GtkWidget * widget, gpointer data);
 
-gboolean
-select_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data);
+gboolean select_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data);
 
 void update_screen (gint);
 
 void screen_cb (GtkWidget * widget, gpointer data);
 
-gboolean
-screen_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data);
+gboolean screen_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data);
 
 void info_cb (GtkWidget * widget, gpointer data);
 
@@ -54,9 +52,7 @@ void clock_digital_cb (GtkWidget * widget, gpointer data);
 
 void clock_hrs_cb (GtkWidget * widget, gpointer data);
 
-gboolean
-gxfce_clock_show_popup_cb (GtkWidget * widget,
-			   GdkEventButton * event, gpointer data);
+gboolean gxfce_clock_show_popup_cb (GtkWidget * widget, GdkEventButton * event, gpointer data);
 
 void toggle_popup_button (GtkWidget * widget, GtkPixmap * pix);
 
@@ -67,28 +63,15 @@ gint get_current_screen (void);
 
 void set_current_screen (gint);
 
-void
-select_drag_data_received (GtkWidget * widget,
-			   GdkDragContext * context,
-			   gint x,
-			   gint y,
-			   GtkSelectionData * data,
-			   guint info, guint time, gpointer i);
+void select_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer i);
 
-gboolean 
-update_gxfce_date_timer (GtkWidget * widget);
+gboolean update_gxfce_date_timer (GtkWidget * widget);
 
-gboolean
-handle_gnome_workspace_event_cb (GtkWidget * widget,
-				 GdkEventProperty * event);
+gboolean handle_gnome_workspace_event_cb (GtkWidget * widget, GdkEventProperty * event);
 
-void
-move_event_pressed (GtkWidget * widget,
-		    GdkEventButton * event, MyGtkClock * clock_widget);
+void move_event_pressed (GtkWidget * widget, GdkEventButton * event, MyGtkClock * clock_widget);
 
-void
-move_event_released (GtkWidget * widget,
-		     GdkEventButton * event, MyGtkClock * clock_widget);
+void move_event_released (GtkWidget * widget, GdkEventButton * event, MyGtkClock * clock_widget);
 
 
 #endif

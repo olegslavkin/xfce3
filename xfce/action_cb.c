@@ -47,8 +47,7 @@ void
 action_cancel_cb (GtkWidget * widget, gpointer data)
 {
   gtk_signal_disconnect (GTK_OBJECT (action_ok_button), action_signal_id1);
-  gtk_signal_disconnect (GTK_OBJECT (action_icon_browse_button),
-			 action_signal_id2);
+  gtk_signal_disconnect (GTK_OBJECT (action_icon_browse_button), action_signal_id2);
   gtk_main_quit ();
   gtk_widget_hide (action);
   gdk_window_withdraw ((GTK_WIDGET (action))->window);
@@ -60,23 +59,20 @@ action_ok_cb (GtkWidget * widget, gpointer data)
   char *s;
   gint x;
 
-  s =
-    cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (action_command_entry)));
+  s = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (action_command_entry)));
   x = strlen (s);
   if (x)
-    {
-      gtk_signal_disconnect (GTK_OBJECT (action_ok_button),
-			     action_signal_id1);
-      gtk_signal_disconnect (GTK_OBJECT (action_icon_browse_button),
-			     action_signal_id2);
-      set_command ((gint)((long) data), s);
-      if (((gint)((long) data)) < NBSELECTS)
-	set_icon_nbr ((gint)((long) data), action_get_choice_selected ());
-      gtk_main_quit ();
-      gtk_widget_hide (action);
-      gdk_window_withdraw ((GTK_WIDGET (action))->window);
-      writeconfig ();
-    }
+  {
+    gtk_signal_disconnect (GTK_OBJECT (action_ok_button), action_signal_id1);
+    gtk_signal_disconnect (GTK_OBJECT (action_icon_browse_button), action_signal_id2);
+    set_command ((gint) ((long) data), s);
+    if (((gint) ((long) data)) < NBSELECTS)
+      set_icon_nbr ((gint) ((long) data), action_get_choice_selected ());
+    gtk_main_quit ();
+    gtk_widget_hide (action);
+    gdk_window_withdraw ((GTK_WIDGET (action))->window);
+    writeconfig ();
+  }
   else
     my_show_message (_("You must provide the command to execute !"));
 }
@@ -93,15 +89,15 @@ action_browse_command_cb (GtkWidget * widget, gpointer data)
 {
   char *command;
 
-  command = get_command ((gint)((long) data));
+  command = get_command ((gint) ((long) data));
   if (strlen (command) && existfile (command))
     command = open_fileselect (command);
   else
     command = open_fileselect (XBINDIR);
   if (command)
-    {
-      gtk_entry_set_text (GTK_ENTRY (action_command_entry), command);
-    }
+  {
+    gtk_entry_set_text (GTK_ENTRY (action_command_entry), command);
+  }
 }
 
 void
@@ -109,17 +105,17 @@ action_browse_icon_cb (GtkWidget * widget, gpointer data)
 {
   char *pixfile;
 
-  pixfile = get_exticon_str ((gint)((long) data));
+  pixfile = get_exticon_str ((gint) ((long) data));
   if (strlen (pixfile) && existfile (pixfile))
     pixfile = open_fileselect (pixfile);
   else
     pixfile = open_fileselect (build_path (XFCE_ICONS));
   if (pixfile)
-    {
-      action_set_choice_selected (NB_PANEL_ICONS);
-      if (existfile (pixfile))
-	set_exticon_str ((gint)((long) data), pixfile);
-      else
-	set_exticon_str ((gint)((long) data), "None");
-    }
+  {
+    action_set_choice_selected (NB_PANEL_ICONS);
+    if (existfile (pixfile))
+      set_exticon_str ((gint) ((long) data), pixfile);
+    else
+      set_exticon_str ((gint) ((long) data), "None");
+  }
 }

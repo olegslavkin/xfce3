@@ -96,13 +96,13 @@ alloc_selects (void)
   int i;
 
   for (i = 0; i < NBSELECTS + 1; i++)
-    {
-      selects[i].command = (char *) g_malloc (5 * sizeof (char));
-      strcpy (selects[i].command, "None");
-      selects[i].ext_icon = (char *) g_malloc (5 * sizeof (char));
-      strcpy (selects[i].ext_icon, "None");
-      selects[i].icon_nbr = 99;
-    }
+  {
+    selects[i].command = (char *) g_malloc (5 * sizeof (char));
+    strcpy (selects[i].command, "None");
+    selects[i].ext_icon = (char *) g_malloc (5 * sizeof (char));
+    strcpy (selects[i].ext_icon, "None");
+    selects[i].icon_nbr = 99;
+  }
 }
 
 void
@@ -111,10 +111,10 @@ free_selects (void)
   int i;
 
   for (i = 0; i < NBSELECTS + 1; i++)
-    {
-      g_free (selects[i].command);
-      g_free (selects[i].ext_icon);
-    }
+  {
+    g_free (selects[i].command);
+    g_free (selects[i].ext_icon);
+  }
 
 }
 
@@ -124,18 +124,17 @@ load_icon_str (char *str)
   char *a;
   int i, error = 0;
   if ((a = strtok (str, ",")))
-    {
-      selects[0].icon_nbr = atoi (a);
-      for (i = 1; i < NBSELECTS; i++)
-	if ((a = strtok (NULL, ",")))
-	  selects[i].icon_nbr = (((atoi (a) < NB_PANEL_ICONS)
-				  || (atoi (a) == 99)) ? atoi (a) : i);
-	else
-	  {
-	    error = i + 1;
-	    break;
-	  }
-    }
+  {
+    selects[0].icon_nbr = atoi (a);
+    for (i = 1; i < NBSELECTS; i++)
+      if ((a = strtok (NULL, ",")))
+	selects[i].icon_nbr = (((atoi (a) < NB_PANEL_ICONS) || (atoi (a) == 99)) ? atoi (a) : i);
+      else
+      {
+	error = i + 1;
+	break;
+      }
+  }
   else
     error = 1;
   if (error)
@@ -154,10 +153,10 @@ save_icon_str (void)
   temp = (char *) g_malloc (4);
   sprintf (str, "%i", selects[0].icon_nbr);
   for (i = 1; i < NBSELECTS; i++)
-    {
-      sprintf (temp, ",%i", selects[i].icon_nbr);
-      strcat (str, temp);
-    }
+  {
+    sprintf (temp, ",%i", selects[i].icon_nbr);
+    strcat (str, temp);
+  }
   g_free (temp);
   return (str);
 }
@@ -166,20 +165,19 @@ void
 set_exticon_str (int i, char *s)
 {
   if (i < NBSELECTS)
+  {
+    g_free (selects[i].ext_icon);
+    if ((s) && (strlen (s)))
     {
-      g_free (selects[i].ext_icon);
-      if ((s) && (strlen (s)))
-	{
-	  selects[i].ext_icon =
-	    (char *) g_malloc ((strlen (s) + 1) * sizeof (char));
-	  strcpy (selects[i].ext_icon, s);
-	}
-      else
-	{
-	  selects[i].ext_icon = (char *) g_malloc (5 * sizeof (char));
-	  strcpy (selects[i].ext_icon, "None");
-	}
+      selects[i].ext_icon = (char *) g_malloc ((strlen (s) + 1) * sizeof (char));
+      strcpy (selects[i].ext_icon, s);
     }
+    else
+    {
+      selects[i].ext_icon = (char *) g_malloc (5 * sizeof (char));
+      strcpy (selects[i].ext_icon, "None");
+    }
+  }
 }
 
 char *
@@ -195,17 +193,11 @@ setup_icon (void)
 
   for (i = 0; i < NBSELECTS; i++)
     if ((selects[i].icon_nbr >= 0) && (selects[i].icon_nbr < NB_PANEL_ICONS))
-      MySetPixmapData (select_buttons.select_pixmap[i],
-		       select_buttons.select_button[i],
-		       icon_data[selects[i].icon_nbr]);
+      MySetPixmapData (select_buttons.select_pixmap[i], select_buttons.select_button[i], icon_data[selects[i].icon_nbr]);
+    else if ((selects[i].icon_nbr == 99) && (selects[i].ext_icon) && (existfile (selects[i].ext_icon)))
+      MySetPixmapFile (select_buttons.select_pixmap[i], select_buttons.select_button[i], selects[i].ext_icon);
     else
-      if ((selects[i].icon_nbr == 99)
-	  && (selects[i].ext_icon) && (existfile (selects[i].ext_icon)))
-      MySetPixmapFile (select_buttons.select_pixmap[i],
-		       select_buttons.select_button[i], selects[i].ext_icon);
-    else
-      MySetPixmapData (select_buttons.select_pixmap[i],
-		       select_buttons.select_button[i], defaulticon);
+      MySetPixmapData (select_buttons.select_pixmap[i], select_buttons.select_button[i], defaulticon);
 
 }
 
@@ -234,24 +226,18 @@ void
 set_icon_nbr (int no_cmd, int icon_nbr)
 {
   if (icon_nbr < NB_PANEL_ICONS)
-    {
-      selects[no_cmd].icon_nbr = icon_nbr;
-      MySetPixmapData (select_buttons.select_pixmap[no_cmd],
-		       select_buttons.select_button[no_cmd],
-		       icon_data[icon_nbr]);
-    }
+  {
+    selects[no_cmd].icon_nbr = icon_nbr;
+    MySetPixmapData (select_buttons.select_pixmap[no_cmd], select_buttons.select_button[no_cmd], icon_data[icon_nbr]);
+  }
   else
-    {
-      selects[no_cmd].icon_nbr = 99;
-      if ((selects[no_cmd].ext_icon)
-	  && (existfile (selects[no_cmd].ext_icon)))
-	MySetPixmapFile (select_buttons.select_pixmap[no_cmd],
-			 select_buttons.select_button[no_cmd],
-			 selects[no_cmd].ext_icon);
-      else
-	MySetPixmapData (select_buttons.select_pixmap[no_cmd],
-			 select_buttons.select_button[no_cmd], defaulticon);
-    }
+  {
+    selects[no_cmd].icon_nbr = 99;
+    if ((selects[no_cmd].ext_icon) && (existfile (selects[no_cmd].ext_icon)))
+      MySetPixmapFile (select_buttons.select_pixmap[no_cmd], select_buttons.select_button[no_cmd], selects[no_cmd].ext_icon);
+    else
+      MySetPixmapData (select_buttons.select_pixmap[no_cmd], select_buttons.select_button[no_cmd], defaulticon);
+  }
 }
 
 void
@@ -277,19 +263,16 @@ set_command (int no_sel, char *s)
 {
   g_free (selects[no_sel].command);
   if (!strlen (s) || !my_strncasecmp (s, "None", strlen ("None")))
-    {
-      selects[no_sel].command = (char *) g_malloc (5 * sizeof (char));
-      strcpy (selects[no_sel].command, "None");
-    }
+  {
+    selects[no_sel].command = (char *) g_malloc (5 * sizeof (char));
+    strcpy (selects[no_sel].command, "None");
+  }
   else
-    {
-      selects[no_sel].command =
-	(char *) g_malloc ((strlen (s) + 1) * sizeof (char));
-      strcpy (selects[no_sel].command, s);
-    }
-  gtk_tooltips_set_tip (select_buttons.select_tooltips[no_sel],
-			select_buttons.select_button[no_sel],
-			selects[no_sel].command, "ContextHelp/buttons/?");
+  {
+    selects[no_sel].command = (char *) g_malloc ((strlen (s) + 1) * sizeof (char));
+    strcpy (selects[no_sel].command, s);
+  }
+  gtk_tooltips_set_tip (select_buttons.select_tooltips[no_sel], select_buttons.select_button[no_sel], selects[no_sel].command, "ContextHelp/buttons/?");
 }
 
 char *
@@ -305,32 +288,32 @@ got_mail ()
   char *p;
 
   if (!pathbuf[0])
+  {
+    p = getenv ("MAIL");
+    if (p)
     {
-      p = getenv ("MAIL");
-      if (p)
-	{
-	  strcpy (pathbuf, p);
-	}
-      else
-	{
-	  p = getenv ("LOGNAME");
-	  if (p)
-	    {
-	      sprintf (pathbuf, MAIL_SPOOL_DIR "/%s", p);
-	    }			/* perhaps it would make sense to do something else here? */
-	}
+      strcpy (pathbuf, p);
     }
+    else
+    {
+      p = getenv ("LOGNAME");
+      if (p)
+      {
+	sprintf (pathbuf, MAIL_SPOOL_DIR "/%s", p);
+      }				/* perhaps it would make sense to do something else here? */
+    }
+  }
 
   if (stat (pathbuf, &s) < 0)
     return 0;
 
   if (s.st_size)
-    {
-      if (s.st_mtime >= s.st_atime)
-	return 2;
-      else
-	return 1;
-    }
+  {
+    if (s.st_mtime >= s.st_atime)
+      return 2;
+    else
+      return 1;
+  }
 
   return 0;
 }
@@ -343,29 +326,29 @@ gint check_mail (gpointer data)
   have_mail = got_mail ();
 
   if (have_mail != had_mail)
+  {
+    switch (have_mail)
     {
-      switch (have_mail)
-	{
-	case 0:
-	  icon_data[MAIL_ICON_NUMBER] = nomail;
-	  break;
-	case 1:
-	  icon_data[MAIL_ICON_NUMBER] = oldmail;
-	  break;
-	case 2:
-	  icon_data[MAIL_ICON_NUMBER] = mail;
-	  break;
-	default:
-	  icon_data[MAIL_ICON_NUMBER] = nomail;
-	}
-      for (i = 0; i < NB_PANEL_ICONS; i++)
-	{
-	  if (get_icon_nbr (i) == MAIL_ICON_NUMBER)
-	    {
-	      set_icon_nbr (i, MAIL_ICON_NUMBER);
-	    }
-	}
+    case 0:
+      icon_data[MAIL_ICON_NUMBER] = nomail;
+      break;
+    case 1:
+      icon_data[MAIL_ICON_NUMBER] = oldmail;
+      break;
+    case 2:
+      icon_data[MAIL_ICON_NUMBER] = mail;
+      break;
+    default:
+      icon_data[MAIL_ICON_NUMBER] = nomail;
     }
+    for (i = 0; i < NB_PANEL_ICONS; i++)
+    {
+      if (get_icon_nbr (i) == MAIL_ICON_NUMBER)
+      {
+	set_icon_nbr (i, MAIL_ICON_NUMBER);
+      }
+    }
+  }
 
   had_mail = have_mail;
   return TRUE;

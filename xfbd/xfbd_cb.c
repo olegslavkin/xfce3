@@ -51,29 +51,27 @@ browse_cb (GtkWidget * widget, gpointer data)
     fselect = open_fileselect (build_path (XFCE_BACKDROPS));
   if (fselect)
     if (strlen (fselect))
-      {
-	gtk_entry_set_text (GTK_ENTRY (filename_entry), fselect);
-	gtk_entry_set_position (GTK_ENTRY (filename_entry), 0);
-	strcpy (backdrp, fselect);
-	display_back (backdrp);
-      }
+    {
+      gtk_entry_set_text (GTK_ENTRY (filename_entry), fselect);
+      gtk_entry_set_position (GTK_ENTRY (filename_entry), 0);
+      strcpy (backdrp, fselect);
+      display_back (backdrp);
+    }
 }
 
 void
 apply_cb (GtkWidget * widget, gpointer data)
 {
-  strncpy (filename,
-	   cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (filename_entry))),
-	   MAXSTRLEN - 1);
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (setup_tiled)) ? 1 : 0)
+  strncpy (filename, cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (filename_entry))), MAXSTRLEN - 1);
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_tiled)) ? 1 : 0)
     strcpy (istiled, "tiled");
-  else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (setup_stretched)) ? 1 : 0)
+  else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_stretched)) ? 1 : 0)
     strcpy (istiled, "stretched");
   else
     strcpy (istiled, "auto");
   if (!strlen (filename))
     strcpy (filename, NOBACK);
-  select_backdrp(filename,backdrp);
+  select_backdrp (filename, backdrp);
   display_back (backdrp);
   setroot (backdrp, istiled);
 }
@@ -82,7 +80,7 @@ void
 cancel_cb (GtkWidget * widget, gpointer data)
 {
   free (backdrp);
-  free(filename);
+  free (filename);
   gtk_main_quit ();
   exit (0);
 }
@@ -90,22 +88,20 @@ cancel_cb (GtkWidget * widget, gpointer data)
 void
 ok_cb (GtkWidget * widget, gpointer data)
 {
-  strncpy (filename,
-	   cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (filename_entry))),
-	   MAXSTRLEN - 1);
-  if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (setup_tiled)) ? 1 : 0)
+  strncpy (filename, cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (filename_entry))), MAXSTRLEN - 1);
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_tiled)) ? 1 : 0)
     strcpy (istiled, "tiled");
-  else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (setup_stretched)) ? 1 : 0)
+  else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_stretched)) ? 1 : 0)
     strcpy (istiled, "stretched");
   else
     strcpy (istiled, "auto");
   if (!strlen (filename))
     strcpy (filename, NOBACK);
-  select_backdrp(filename,backdrp);
+  select_backdrp (filename, backdrp);
   writestr (filename, istiled);
   setroot (filename, istiled);
   free (backdrp);
-  free(filename);
+  free (filename);
   gtk_main_quit ();
   exit (0);
 }
@@ -121,12 +117,7 @@ clear_cb (GtkWidget * widget, gpointer data)
 }
 
 void
-on_drag_data_received (GtkWidget * widget,
-			   GdkDragContext * context,
-			   gint x,
-			   gint y,
-			   GtkSelectionData * data,
-			   guint info, guint time, gpointer cbdata)
+on_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata)
 {
   GList *fnames;
   guint count;
@@ -134,19 +125,17 @@ on_drag_data_received (GtkWidget * widget,
   fnames = gnome_uri_list_extract_filenames ((char *) data->data);
   count = g_list_length (fnames);
   if (count > 0)
-    {
-      gtk_entry_set_text (GTK_ENTRY (filename_entry), (char *) fnames->data);
-      gtk_entry_set_position (GTK_ENTRY (filename_entry), 0);
-      strcpy (backdrp, (char *) fnames->data);
-      display_back (backdrp);
-    }
+  {
+    gtk_entry_set_text (GTK_ENTRY (filename_entry), (char *) fnames->data);
+    gtk_entry_set_position (GTK_ENTRY (filename_entry), 0);
+    strcpy (backdrp, (char *) fnames->data);
+    display_back (backdrp);
+  }
   gnome_uri_list_free_strings (fnames);
-  gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE),
-		   time);
+  gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE), time);
 }
 
-gboolean
-delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+gboolean delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
   cancel_cb (widget, data);
   return (TRUE);

@@ -49,18 +49,18 @@ extern Atom _XA_MwmAtom;
 /* Motif WM window hints structure */
 typedef struct
 {
-    CARD32 flags;			/* window hints */
-    CARD32 functions;		/* requested functions */
-    CARD32 decorations;		/* requested decorations */
-    INT32 inputMode;		/* input mode */
-    CARD32 status;		/* status (ignored) */
+  CARD32 flags;			/* window hints */
+  CARD32 functions;		/* requested functions */
+  CARD32 decorations;		/* requested decorations */
+  INT32 inputMode;		/* input mode */
+  CARD32 status;		/* status (ignored) */
 }
 PropMotifWmHints;
 
 typedef struct _extended_hints
 {
-    int flags;
-    int desktop;
+  int flags;
+  int desktop;
 }
 ExtendedHints;
 
@@ -110,77 +110,71 @@ extern XfwmWindow *Tmp_win;
 void
 GetMwmHints (XfwmWindow * t)
 {
-    int actual_format;
-    Atom actual_type;
-    unsigned long nitems, bytesafter;
+  int actual_format;
+  Atom actual_type;
+  unsigned long nitems, bytesafter;
 
-    if (t->mwm_hints)
-        XFree ((char *) t->mwm_hints);
-    t->mwm_hints = NULL;
-    if (XGetWindowProperty (dpy, t->w, _XA_MwmAtom, 0L, 20L, False,
-                            _XA_MwmAtom, &actual_type, &actual_format, &nitems,
-                            &bytesafter, (unsigned char **) &t->mwm_hints) == Success && t->mwm_hints)
-    {
-        if (nitems >= PROP_MOTIF_WM_HINTS_ELEMENTS)
-            return;
-    }
+  if (t->mwm_hints)
+    XFree ((char *) t->mwm_hints);
+  t->mwm_hints = NULL;
+  if (XGetWindowProperty (dpy, t->w, _XA_MwmAtom, 0L, 20L, False, _XA_MwmAtom, &actual_type, &actual_format, &nitems, &bytesafter, (unsigned char **) &t->mwm_hints) == Success && t->mwm_hints)
+  {
+    if (nitems >= PROP_MOTIF_WM_HINTS_ELEMENTS)
+      return;
+  }
 
-    t->mwm_hints = NULL;
+  t->mwm_hints = NULL;
 }
 
 void
 GetExtHints (XfwmWindow * t)
 {
-    Atom a1, a3;
-    unsigned long lnum, ldummy;
-    int dummy;
-    ExtendedHints *eh;
+  Atom a1, a3;
+  unsigned long lnum, ldummy;
+  int dummy;
+  ExtendedHints *eh;
 
-    a1 = XInternAtom (dpy, "WM_EXTENDED_HINTS", False);
-    eh = NULL;
+  a1 = XInternAtom (dpy, "WM_EXTENDED_HINTS", False);
+  eh = NULL;
 
-    if (XGetWindowProperty (dpy, t->w, a1, 0L,
-                            (long) (sizeof (ExtendedHints) / sizeof (unsigned long)),
-                            False, a1, &a3, &dummy, &lnum,
-                            &ldummy, (unsigned char **) &eh) == Success)
+  if (XGetWindowProperty (dpy, t->w, a1, 0L, (long) (sizeof (ExtendedHints) / sizeof (unsigned long)), False, a1, &a3, &dummy, &lnum, &ldummy, (unsigned char **) &eh) == Success)
+  {
+    if (eh)
     {
-        if (eh)
-        {
-            if (eh->flags & EXTENDED_HINT_STICKY)
-                t->flags |= STICKY;
-            if (eh->flags & EXTENDED_HINT_ONTOP)
-                t->layer = MAX_LAYERS;
-            if (eh->flags & EXTENDED_HINT_ONBOTTOM)
-                t->layer = 0;
-            if (eh->flags & EXTENDED_HINT_NEVER_USE_AREA)
-                ;			/* Not implemented */
-            if (eh->flags & EXTENDED_HINT_DESKTOP)
-                ;			/* Not implemented */
-            XFree (eh);
-        }
+      if (eh->flags & EXTENDED_HINT_STICKY)
+	t->flags |= STICKY;
+      if (eh->flags & EXTENDED_HINT_ONTOP)
+	t->layer = MAX_LAYERS;
+      if (eh->flags & EXTENDED_HINT_ONBOTTOM)
+	t->layer = 0;
+      if (eh->flags & EXTENDED_HINT_NEVER_USE_AREA)
+	;			/* Not implemented */
+      if (eh->flags & EXTENDED_HINT_DESKTOP)
+	;			/* Not implemented */
+      XFree (eh);
     }
+  }
 }
 
 void
 GetKDEHints (XfwmWindow * t)
 {
-    Atom a, dummy_a;
-    unsigned long lnum, ldummy;
-    int dummy;
-    long *kh;
+  Atom a, dummy_a;
+  unsigned long lnum, ldummy;
+  int dummy;
+  long *kh;
 
-    kh = NULL;
-    a = XInternAtom (dpy, "KWM_WIN_DECORATION", False);
-    t->kde_hints = -1;
-    if (XGetWindowProperty (dpy, t->w, a, 0L, 1L, False, a, &dummy_a, &dummy,
-                            &lnum, &ldummy, (unsigned char **) &kh) == Success);
+  kh = NULL;
+  a = XInternAtom (dpy, "KWM_WIN_DECORATION", False);
+  t->kde_hints = -1;
+  if (XGetWindowProperty (dpy, t->w, a, 0L, 1L, False, a, &dummy_a, &dummy, &lnum, &ldummy, (unsigned char **) &kh) == Success);
+  {
+    if (kh)
     {
-        if (kh)
-        {
-            t->kde_hints = (kh[0] & 3);
-            XFree ((char *) kh);
-        }
+      t->kde_hints = (kh[0] & 3);
+      XFree ((char *) kh);
     }
+  }
 }
 
 /****************************************************************************
@@ -192,184 +186,178 @@ GetKDEHints (XfwmWindow * t)
 void
 SelectDecor (XfwmWindow * t, unsigned long tflags, int border_width)
 {
-    int decor, i;
-    PropMwmHints *prop;
+  int decor, i;
+  PropMwmHints *prop;
 #ifdef OLD_STYLE
-    int bw = 0;
+  int bw = 0;
 #else
-    int bw = 1;
+  int bw = 1;
 #endif
 
-    if (!(tflags & BW_FLAG))
-    {
-        border_width = Scr.NoBoundaryWidth;
-    }
+  if (!(tflags & BW_FLAG))
+  {
+    border_width = Scr.NoBoundaryWidth;
+  }
 
-    if (!border_width)
-    {
-        bw = 0;
-    }
+  if (!border_width)
+  {
+    bw = 0;
+  }
 
-    for (i = 0; i < 3; i++)
-    {
-        t->left_w[i] = 1;
-        t->right_w[i] = 1;
-    }
+  for (i = 0; i < 3; i++)
+  {
+    t->left_w[i] = 1;
+    t->right_w[i] = 1;
+  }
 
-    decor = MWM_DECOR_ALL;
-    t->functions = MWM_FUNC_ALL;
-    if (t->mwm_hints)
-    {
-        prop = (PropMwmHints *) t->mwm_hints;
-        if (tflags & MWM_DECOR_FLAG)
-            if (prop->flags & MWM_HINTS_DECORATIONS)
-                decor = prop->decorations;
-        if (tflags & MWM_FUNCTIONS_FLAG)
-            if (prop->flags & MWM_HINTS_FUNCTIONS)
-                t->functions = prop->functions;
-    }
+  decor = MWM_DECOR_ALL;
+  t->functions = MWM_FUNC_ALL;
+  if (t->mwm_hints)
+  {
+    prop = (PropMwmHints *) t->mwm_hints;
+    if (tflags & MWM_DECOR_FLAG)
+      if (prop->flags & MWM_HINTS_DECORATIONS)
+	decor = prop->decorations;
+    if (tflags & MWM_FUNCTIONS_FLAG)
+      if (prop->flags & MWM_HINTS_FUNCTIONS)
+	t->functions = prop->functions;
+  }
 
-    /* functions affect the decorations! if the user says
-     * no iconify function, then the iconify button doesn't show
-     * up. */
-    if (t->functions & MWM_FUNC_ALL)
-    {
-        /* If we get ALL + some other things, that means to use
-         * ALL except the other things... */
-        t->functions &= ~MWM_FUNC_ALL;
-        t->functions = (MWM_FUNC_RESIZE | MWM_FUNC_MOVE | MWM_FUNC_MINIMIZE |
-                        MWM_FUNC_MAXIMIZE | MWM_FUNC_CLOSE) & (~(t->functions));
-    }
-    if ((tflags & MWM_FUNCTIONS_FLAG) && (t->flags & TRANSIENT))
-    {
-        t->functions &= ~(MWM_FUNC_MAXIMIZE | MWM_FUNC_MINIMIZE);
-    }
+  /* functions affect the decorations! if the user says
+   * no iconify function, then the iconify button doesn't show
+   * up. */
+  if (t->functions & MWM_FUNC_ALL)
+  {
+    /* If we get ALL + some other things, that means to use
+     * ALL except the other things... */
+    t->functions &= ~MWM_FUNC_ALL;
+    t->functions = (MWM_FUNC_RESIZE | MWM_FUNC_MOVE | MWM_FUNC_MINIMIZE | MWM_FUNC_MAXIMIZE | MWM_FUNC_CLOSE) & (~(t->functions));
+  }
+  if ((tflags & MWM_FUNCTIONS_FLAG) && (t->flags & TRANSIENT))
+  {
+    t->functions &= ~(MWM_FUNC_MAXIMIZE | MWM_FUNC_MINIMIZE);
+  }
 
-    if (decor & MWM_DECOR_ALL)
+  if (decor & MWM_DECOR_ALL)
+  {
+    /* If we get ALL + some other things, that means to use
+     * ALL except the other things... */
+    decor &= ~MWM_DECOR_ALL;
+    decor = (MWM_DECOR_BORDER | MWM_DECOR_RESIZEH | MWM_DECOR_TITLE | MWM_DECOR_MENU | MWM_DECOR_MINIMIZE | MWM_DECOR_MAXIMIZE) & (~decor);
+  }
+
+  if (!(t->functions & MWM_FUNC_RESIZE))
+    decor &= ~MWM_DECOR_RESIZEH;
+  if (!(t->functions & MWM_FUNC_MINIMIZE))
+    decor &= ~MWM_DECOR_MINIMIZE;
+  if (!(t->functions & MWM_FUNC_MAXIMIZE))
+    decor &= ~MWM_DECOR_MAXIMIZE;
+  if (decor & (MWM_DECOR_MENU | MWM_DECOR_MINIMIZE | MWM_DECOR_MAXIMIZE))
+    decor |= MWM_DECOR_TITLE;
+
+  if (tflags & NOTITLE_FLAG)
+    decor &= ~MWM_DECOR_TITLE;
+
+  if (tflags & NOBORDER_FLAG)
+    decor &= ~(MWM_DECOR_RESIZEH | MWM_DECOR_BORDER);
+
+  if ((tflags & MWM_DECOR_FLAG) && (t->flags & TRANSIENT))
+  {
+    decor &= ~(MWM_DECOR_MAXIMIZE | MWM_DECOR_MINIMIZE);
+  }
+
+  if (t->kde_hints == KDE_normalDecoration)
+  {
+    decor |= MWM_DECOR_ALL;
+    t->functions |= MWM_FUNC_ALL;
+  }
+  else if (t->kde_hints == KDE_noDecoration)
+  {
+    decor &= ~(MWM_DECOR_BORDER | MWM_DECOR_RESIZEH | MWM_DECOR_TITLE | MWM_DECOR_MENU | MWM_DECOR_MINIMIZE | MWM_DECOR_MAXIMIZE);
+    t->functions &= ~MWM_FUNC_ALL;
+    border_width = Scr.NoBoundaryWidth;
+    bw = 0;
+  }
+  else if (t->kde_hints == KDE_tinyDecoration)
+  {
+    decor &= ~(MWM_DECOR_MAXIMIZE | MWM_DECOR_MINIMIZE | MWM_DECOR_TITLE | MWM_DECOR_RESIZEH);
+    t->functions &= ~(MWM_DECOR_MENU | MWM_FUNC_MINIMIZE | MWM_FUNC_MAXIMIZE | MWM_DECOR_TITLE);
+    border_width = 3;
+    bw = 0;
+  }
+
+  if (ShapesSupported)
+  {
+    if (t->wShaped)
+      decor &= ~(MWM_DECOR_BORDER | MWM_DECOR_RESIZEH);
+  }
+
+  t->flags &= ~(BORDER | TITLE);
+  t->boundary_width = 0;
+  t->corner_width = 0;
+  t->title_height = 0;
+  t->bw = 0;
+  if (decor & MWM_DECOR_TITLE)
+  {
+    t->flags |= TITLE;
+    t->title_height = GetDecor (t, TitleHeight);
+  }
+  if (decor & (MWM_DECOR_RESIZEH | MWM_DECOR_BORDER))
+  {
+    t->flags |= BORDER;
+    t->boundary_width = border_width;
+    t->bw = bw;
+    t->corner_width = GetDecor (t, TitleHeight) + t->boundary_width;
+  }
+  if (!(decor & MWM_DECOR_MENU))
+  {
+    for (i = 0; i < 3; ++i)
     {
-        /* If we get ALL + some other things, that means to use
-         * ALL except the other things... */
-        decor &= ~MWM_DECOR_ALL;
-        decor = (MWM_DECOR_BORDER | MWM_DECOR_RESIZEH | MWM_DECOR_TITLE |
-                 MWM_DECOR_MENU | MWM_DECOR_MINIMIZE | MWM_DECOR_MAXIMIZE)
-                & (~decor);
+      if (GetDecor (t, left_buttons[i].flags) & MWMDecorMenu)
+	t->left_w[i] = None;
+      if (GetDecor (t, right_buttons[i].flags) & MWMDecorMenu)
+	t->right_w[i] = None;
     }
-
-    if (!(t->functions & MWM_FUNC_RESIZE))
-        decor &= ~MWM_DECOR_RESIZEH;
-    if (!(t->functions & MWM_FUNC_MINIMIZE))
-        decor &= ~MWM_DECOR_MINIMIZE;
-    if (!(t->functions & MWM_FUNC_MAXIMIZE))
-        decor &= ~MWM_DECOR_MAXIMIZE;
-    if (decor & (MWM_DECOR_MENU | MWM_DECOR_MINIMIZE | MWM_DECOR_MAXIMIZE))
-        decor |= MWM_DECOR_TITLE;
-
-    if (tflags & NOTITLE_FLAG)
-        decor &= ~MWM_DECOR_TITLE;
-
-    if (tflags & NOBORDER_FLAG)
-        decor &= ~(MWM_DECOR_RESIZEH | MWM_DECOR_BORDER);
-
-    if ((tflags & MWM_DECOR_FLAG) && (t->flags & TRANSIENT))
+  }
+  if (!(decor & MWM_DECOR_MINIMIZE))
+  {
+    for (i = 0; i < 3; ++i)
     {
-        decor &= ~(MWM_DECOR_MAXIMIZE | MWM_DECOR_MINIMIZE);
+      if (GetDecor (t, left_buttons[i].flags) & MWMDecorMinimize)
+	t->left_w[i] = None;
+      if (GetDecor (t, right_buttons[i].flags) & MWMDecorMinimize)
+	t->right_w[i] = None;
     }
+  }
+  if (!(decor & MWM_DECOR_MAXIMIZE))
+  {
+    for (i = 0; i < 3; ++i)
+    {
+      if (GetDecor (t, left_buttons[i].flags) & MWMDecorMaximize)
+	t->left_w[i] = None;
+      if (GetDecor (t, right_buttons[i].flags) & MWMDecorMaximize)
+	t->right_w[i] = None;
+    }
+  }
 
-    if (t->kde_hints == KDE_normalDecoration)
-    {
-        decor |= MWM_DECOR_ALL;
-        t->functions |= MWM_FUNC_ALL;
-    }
-    else if (t->kde_hints == KDE_noDecoration)
-    {
-        decor &= ~(MWM_DECOR_BORDER | MWM_DECOR_RESIZEH | MWM_DECOR_TITLE |
-                   MWM_DECOR_MENU | MWM_DECOR_MINIMIZE | MWM_DECOR_MAXIMIZE);
-        t->functions &= ~MWM_FUNC_ALL;
-        border_width = Scr.NoBoundaryWidth;
-        bw = 0;
-    }
-    else if (t->kde_hints == KDE_tinyDecoration)
-    {
-        decor &= ~(MWM_DECOR_MAXIMIZE | MWM_DECOR_MINIMIZE |
-                   MWM_DECOR_TITLE | MWM_DECOR_RESIZEH);
-        t->functions &= ~(MWM_DECOR_MENU | MWM_FUNC_MINIMIZE |
-                          MWM_FUNC_MAXIMIZE | MWM_DECOR_TITLE);
-        border_width = 3;
-        bw = 0;
-    }
+  if (tflags & SUPPRESSICON_FLAG)
+    t->flags |= SUPPRESSICON;
 
-    if (ShapesSupported)
-    {
-        if (t->wShaped)
-            decor &= ~(MWM_DECOR_BORDER | MWM_DECOR_RESIZEH);
-    }
+  t->nr_left_buttons = Scr.nr_left_buttons;
+  t->nr_right_buttons = Scr.nr_right_buttons;
 
-    t->flags &= ~(BORDER | TITLE);
+  for (i = 0; i < Scr.nr_left_buttons; i++)
+    if (t->left_w[i] == None)
+      t->nr_left_buttons--;
+
+  for (i = 0; i < Scr.nr_right_buttons; i++)
+    if (t->right_w[i] == None)
+      t->nr_right_buttons--;
+
+  if (t->boundary_width <= 0)
     t->boundary_width = 0;
-    t->corner_width = 0;
-    t->title_height = 0;
-    t->bw = 0;
-    if (decor & MWM_DECOR_TITLE)
-    {
-        t->flags |= TITLE;
-        t->title_height = GetDecor (t, TitleHeight);
-    }
-    if (decor & (MWM_DECOR_RESIZEH | MWM_DECOR_BORDER))
-    {
-        t->flags |= BORDER;
-        t->boundary_width = border_width;
-        t->bw = bw;
-        t->corner_width = GetDecor (t, TitleHeight) + t->boundary_width;
-    }
-    if (!(decor & MWM_DECOR_MENU))
-    {
-        for (i = 0; i < 3; ++i)
-        {
-            if (GetDecor (t, left_buttons[i].flags) & MWMDecorMenu)
-                t->left_w[i] = None;
-            if (GetDecor (t, right_buttons[i].flags) & MWMDecorMenu)
-                t->right_w[i] = None;
-        }
-    }
-    if (!(decor & MWM_DECOR_MINIMIZE))
-    {
-        for (i = 0; i < 3; ++i)
-        {
-            if (GetDecor (t, left_buttons[i].flags) & MWMDecorMinimize)
-                t->left_w[i] = None;
-            if (GetDecor (t, right_buttons[i].flags) & MWMDecorMinimize)
-                t->right_w[i] = None;
-        }
-    }
-    if (!(decor & MWM_DECOR_MAXIMIZE))
-    {
-        for (i = 0; i < 3; ++i)
-        {
-            if (GetDecor (t, left_buttons[i].flags) & MWMDecorMaximize)
-                t->left_w[i] = None;
-            if (GetDecor (t, right_buttons[i].flags) & MWMDecorMaximize)
-                t->right_w[i] = None;
-        }
-    }
-
-    if(tflags & SUPPRESSICON_FLAG)
-        t->flags |= SUPPRESSICON;
-
-    t->nr_left_buttons = Scr.nr_left_buttons;
-    t->nr_right_buttons = Scr.nr_right_buttons;
-
-    for (i = 0; i < Scr.nr_left_buttons; i++)
-        if (t->left_w[i] == None)
-            t->nr_left_buttons--;
-
-    for (i = 0; i < Scr.nr_right_buttons; i++)
-        if (t->right_w[i] == None)
-            t->nr_right_buttons--;
-
-    if (t->boundary_width <= 0)
-        t->boundary_width = 0;
-    if (t->boundary_width == 0)
-        t->flags &= ~BORDER;
+  if (t->boundary_width == 0)
+    t->flags &= ~BORDER;
 }
 
 /****************************************************************************
@@ -384,98 +372,69 @@ SelectDecor (XfwmWindow * t, unsigned long tflags, int border_width)
 int
 check_allowed_function (MenuItem * mi)
 {
-    /* Complex functions are a little tricky... ignore them for now */
+  /* Complex functions are a little tricky... ignore them for now */
 
-    if ((Tmp_win) &&
-            (!(Tmp_win->flags & DoesWmDeleteWindow)) && (mi->func_type == F_DELETE))
-        return 0;
+  if ((Tmp_win) && (!(Tmp_win->flags & DoesWmDeleteWindow)) && (mi->func_type == F_DELETE))
+    return 0;
 
-    /* Move is a funny hint. Keeps it out of the menu, but you're still allowed
-     * to move. */
-    if ((mi->func_type == F_MOVE) && (Tmp_win)
-            && (!(Tmp_win->functions & MWM_FUNC_MOVE)))
-        return 0;
+  /* Move is a funny hint. Keeps it out of the menu, but you're still allowed
+   * to move. */
+  if ((mi->func_type == F_MOVE) && (Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MOVE)))
+    return 0;
 
-    if ((mi->func_type == F_RESIZE) && (Tmp_win) &&
-            (!(Tmp_win->functions & MWM_FUNC_RESIZE)))
-        return 0;
+  if ((mi->func_type == F_RESIZE) && (Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_RESIZE)))
+    return 0;
 
-    if ((mi->func_type == F_ICONIFY) && (Tmp_win) &&
-            (!(Tmp_win->flags & ICONIFIED)) &&
-            (!(Tmp_win->functions & MWM_FUNC_MINIMIZE)))
-        return 0;
+  if ((mi->func_type == F_ICONIFY) && (Tmp_win) && (!(Tmp_win->flags & ICONIFIED)) && (!(Tmp_win->functions & MWM_FUNC_MINIMIZE)))
+    return 0;
 
-    if ((mi->func_type == F_MAXIMIZE) && (Tmp_win) &&
-            (!(Tmp_win->functions & MWM_FUNC_MAXIMIZE)))
-        return 0;
+  if ((mi->func_type == F_MAXIMIZE) && (Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MAXIMIZE)))
+    return 0;
 
-    if ((mi->func_type == F_DELETE) && (Tmp_win) &&
-            (!(Tmp_win->functions & MWM_FUNC_CLOSE)))
-        return 0;
+  if ((mi->func_type == F_DELETE) && (Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)))
+    return 0;
 
-    if ((mi->func_type == F_CLOSE) && (Tmp_win) &&
-            (!(Tmp_win->functions & MWM_FUNC_CLOSE)))
-        return 0;
+  if ((mi->func_type == F_CLOSE) && (Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)))
+    return 0;
 
-    if ((mi->func_type == F_DESTROY) && (Tmp_win) &&
-            (!(Tmp_win->functions & MWM_FUNC_CLOSE)))
-        return 0;
+  if ((mi->func_type == F_DESTROY) && (Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)))
+    return 0;
 
-    if (mi->func_type == F_FUNCTION)
-    {
-        /* Hard part! What to do now? */
-        /* Hate to do it, but for lack of a better idea,
-         * check based on the menu entry name */
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MOVE)) &&
-                (mystrncasecmp (mi->item, MOVE_STRING, strlen (MOVE_STRING)) == 0))
-            return 0;
+  if (mi->func_type == F_FUNCTION)
+  {
+    /* Hard part! What to do now? */
+    /* Hate to do it, but for lack of a better idea,
+     * check based on the menu entry name */
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MOVE)) && (mystrncasecmp (mi->item, MOVE_STRING, strlen (MOVE_STRING)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_RESIZE)) &&
-                (mystrncasecmp (mi->item, RESIZE_STRING1,
-                                strlen (RESIZE_STRING1)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_RESIZE)) && (mystrncasecmp (mi->item, RESIZE_STRING1, strlen (RESIZE_STRING1)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_RESIZE)) &&
-                (mystrncasecmp (mi->item, RESIZE_STRING2,
-                                strlen (RESIZE_STRING2)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_RESIZE)) && (mystrncasecmp (mi->item, RESIZE_STRING2, strlen (RESIZE_STRING2)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MINIMIZE)) &&
-                (!(Tmp_win->flags & ICONIFIED)) &&
-                (mystrncasecmp (mi->item, MINIMIZE_STRING, strlen (MINIMIZE_STRING))
-                 == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MINIMIZE)) && (!(Tmp_win->flags & ICONIFIED)) && (mystrncasecmp (mi->item, MINIMIZE_STRING, strlen (MINIMIZE_STRING)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MINIMIZE)) &&
-                (mystrncasecmp (mi->item, MINIMIZE_STRING2,
-                                strlen (MINIMIZE_STRING2)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MINIMIZE)) && (mystrncasecmp (mi->item, MINIMIZE_STRING2, strlen (MINIMIZE_STRING2)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MAXIMIZE)) &&
-                (mystrncasecmp (mi->item, MAXIMIZE_STRING,
-                                strlen (MAXIMIZE_STRING)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_MAXIMIZE)) && (mystrncasecmp (mi->item, MAXIMIZE_STRING, strlen (MAXIMIZE_STRING)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) &&
-                (mystrncasecmp (mi->item, CLOSE_STRING1,
-                                strlen (CLOSE_STRING1)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) && (mystrncasecmp (mi->item, CLOSE_STRING1, strlen (CLOSE_STRING1)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) &&
-                (mystrncasecmp (mi->item, CLOSE_STRING2,
-                                strlen (CLOSE_STRING2)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) && (mystrncasecmp (mi->item, CLOSE_STRING2, strlen (CLOSE_STRING2)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) &&
-                (mystrncasecmp (mi->item, CLOSE_STRING3,
-                                strlen (CLOSE_STRING3)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) && (mystrncasecmp (mi->item, CLOSE_STRING3, strlen (CLOSE_STRING3)) == 0))
+      return 0;
 
-        if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) &&
-                (mystrncasecmp (mi->item, CLOSE_STRING4,
-                                strlen (CLOSE_STRING4)) == 0))
-            return 0;
+    if ((Tmp_win) && (!(Tmp_win->functions & MWM_FUNC_CLOSE)) && (mystrncasecmp (mi->item, CLOSE_STRING4, strlen (CLOSE_STRING4)) == 0))
+      return 0;
 
-    }
-    return 1;
+  }
+  return 1;
 }

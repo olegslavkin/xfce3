@@ -62,42 +62,42 @@ mouse_values (XFMouse * s)
   Display *tmpDpy;
 
   if (!(tmpDpy = XOpenDisplay ("")))
-    {
-      fprintf (stderr, _("xfmouse: Error, cannot open display.\n"));
-      fprintf (stderr, _("Is X running and $DISPLAY correctly set ?\n"));
-      return;
-    }
+  {
+    fprintf (stderr, _("xfmouse: Error, cannot open display.\n"));
+    fprintf (stderr, _("Is X running and $DISPLAY correctly set ?\n"));
+    return;
+  }
   XSync (tmpDpy, False);
   XChangePointerControl (tmpDpy, 1, 1, s->accel, DENOMINATOR, s->thresh);
   buttons = XGetPointerMapping (tmpDpy, map, 5);
   if (s->button)
+  {
+    if (buttons > 2)
     {
-      if (buttons > 2)
-	{
-	  map[0] = 1;
-	  map[1] = 2;
-	  map[2] = 3;
-	}
-      else
-	{
-	  map[0] = 2;
-	  map[1] = 1;
-	}
+      map[0] = 1;
+      map[1] = 2;
+      map[2] = 3;
     }
+    else
+    {
+      map[0] = 2;
+      map[1] = 1;
+    }
+  }
   else
+  {
+    if (buttons > 2)
     {
-      if (buttons > 2)
-	{
-	  map[0] = 3;
-	  map[1] = 2;
-	  map[2] = 1;
-	}
-      else
-	{
-	  map[0] = 1;
-	  map[1] = 2;
-	}
+      map[0] = 3;
+      map[1] = 2;
+      map[2] = 1;
     }
+    else
+    {
+      map[0] = 1;
+      map[1] = 2;
+    }
+  }
   XSetPointerMapping (tmpDpy, map, buttons);
   XFlush (tmpDpy);
   XCloseDisplay (tmpDpy);
@@ -106,8 +106,7 @@ mouse_values (XFMouse * s)
 void
 apply_mouse_values (XFMouse * s)
 {
-  s->button =
-    (int) gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (rightbtn));
+  s->button = (int) gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (rightbtn));
   s->accel = (int) GTK_ADJUSTMENT (accel)->value;
   s->thresh = (int) GTK_ADJUSTMENT (thresh)->value;
   mouse_values (s);
@@ -142,14 +141,12 @@ create_xfmouse ()
   gtk_widget_set_name (xfmouse, "xfmouse");
   gtk_object_set_data (GTK_OBJECT (xfmouse), "xfmouse", xfmouse);
   gtk_widget_set_usize (xfmouse, 340, -2);
-  gtk_window_set_title (GTK_WINDOW (xfmouse),
-			_("XFMouse - XFce Mouse Configuration"));
+  gtk_window_set_title (GTK_WINDOW (xfmouse), _("XFMouse - XFce Mouse Configuration"));
   gtk_window_position (GTK_WINDOW (xfmouse), GTK_WIN_POS_CENTER);
 
   xfmouse_mainframe = gtk_frame_new (NULL);
   gtk_widget_set_name (xfmouse_mainframe, "xfmouse_mainframe");
-  gtk_object_set_data (GTK_OBJECT (xfmouse), "xfmouse_mainframe",
-		       xfmouse_mainframe);
+  gtk_object_set_data (GTK_OBJECT (xfmouse), "xfmouse_mainframe", xfmouse_mainframe);
   gtk_widget_show (xfmouse_mainframe);
   gtk_container_add (GTK_CONTAINER (xfmouse), xfmouse_mainframe);
 #ifdef OLD_STYLE
@@ -214,8 +211,7 @@ create_xfmouse ()
   gtk_box_pack_start (GTK_BOX (hbox3), leftbtn, TRUE, TRUE, 0);
   accel_group = gtk_accel_group_new ();
   gtk_window_add_accel_group (GTK_WINDOW (xfmouse), accel_group);
-  gtk_widget_add_accelerator (leftbtn, "toggled", accel_group,
-			      GDK_l, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (leftbtn, "toggled", accel_group, GDK_l, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   rightbtn = gtk_radio_button_new_with_label (hbox3_group, _("Right"));
   hbox3_group = gtk_radio_button_group (GTK_RADIO_BUTTON (rightbtn));
@@ -223,8 +219,7 @@ create_xfmouse ()
   gtk_object_set_data (GTK_OBJECT (xfmouse), "rightbtn", rightbtn);
   gtk_widget_show (rightbtn);
   gtk_box_pack_start (GTK_BOX (hbox3), rightbtn, TRUE, TRUE, 0);
-  gtk_widget_add_accelerator (rightbtn, "toggled", accel_group,
-			      GDK_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (rightbtn, "toggled", accel_group, GDK_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (rightbtn), TRUE);
 
   frame5 = gtk_frame_new (_("Motion Settings"));
@@ -240,36 +235,25 @@ create_xfmouse ()
   gtk_widget_show (table1);
   gtk_container_add (GTK_CONTAINER (frame5), table1);
 
-  hscale3 =
-    gtk_hscale_new (GTK_ADJUSTMENT
-		    (accel = gtk_adjustment_new (6, 1, 30, 1, 1, 1)));
+  hscale3 = gtk_hscale_new (GTK_ADJUSTMENT (accel = gtk_adjustment_new (6, 1, 30, 1, 1, 1)));
   gtk_widget_set_name (hscale3, "hscale3");
   gtk_object_set_data (GTK_OBJECT (xfmouse), "hscale3", hscale3);
   gtk_widget_show (hscale3);
-  gtk_table_attach (GTK_TABLE (table1), hscale3, 1, 2, 0, 1,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_table_attach (GTK_TABLE (table1), hscale3, 1, 2, 0, 1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
   gtk_scale_set_digits (GTK_SCALE (hscale3), 0);
 
-  hscale4 =
-    gtk_hscale_new (GTK_ADJUSTMENT
-		    (thresh = gtk_adjustment_new (4, 1, 20, 1, 1, 1)));
+  hscale4 = gtk_hscale_new (GTK_ADJUSTMENT (thresh = gtk_adjustment_new (4, 1, 20, 1, 1, 1)));
   gtk_widget_set_name (hscale4, "hscale4");
   gtk_object_set_data (GTK_OBJECT (xfmouse), "hscale4", hscale4);
   gtk_widget_show (hscale4);
-  gtk_table_attach (GTK_TABLE (table1), hscale4, 1, 2, 1, 2,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_table_attach (GTK_TABLE (table1), hscale4, 1, 2, 1, 2, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
   gtk_scale_set_digits (GTK_SCALE (hscale4), 0);
 
   label3 = gtk_label_new (_("Threshold : "));
   gtk_widget_set_name (label3, "label3");
   gtk_object_set_data (GTK_OBJECT (xfmouse), "label3", label3);
   gtk_widget_show (label3);
-  gtk_table_attach (GTK_TABLE (table1), label3, 0, 1, 1, 2,
-		    (GtkAttachOptions) GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0,
-		    0);
+  gtk_table_attach (GTK_TABLE (table1), label3, 0, 1, 1, 2, (GtkAttachOptions) GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0, 0);
   gtk_label_set_justify (GTK_LABEL (label3), GTK_JUSTIFY_RIGHT);
   gtk_misc_set_alignment (GTK_MISC (label3), 1, 0.5);
   gtk_misc_set_padding (GTK_MISC (label3), 5, 0);
@@ -278,10 +262,7 @@ create_xfmouse ()
   gtk_widget_set_name (label2, "label2");
   gtk_object_set_data (GTK_OBJECT (xfmouse), "label2", label2);
   gtk_widget_show (label2);
-  gtk_table_attach (GTK_TABLE (table1), label2, 0, 1, 0, 1,
-		    (GtkAttachOptions) GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0,
-		    0);
+  gtk_table_attach (GTK_TABLE (table1), label2, 0, 1, 0, 1, (GtkAttachOptions) GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0, 0);
   gtk_label_set_justify (GTK_LABEL (label2), GTK_JUSTIFY_RIGHT);
   gtk_misc_set_alignment (GTK_MISC (label2), 1, 0.5);
   gtk_misc_set_padding (GTK_MISC (label2), 5, 0);
@@ -298,8 +279,7 @@ create_xfmouse ()
   gtk_object_set_data (GTK_OBJECT (xfmouse), "hbuttonbox1", hbuttonbox1);
   gtk_widget_show (hbuttonbox1);
   gtk_container_add (GTK_CONTAINER (frame3), hbuttonbox1);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox1),
-			     GTK_BUTTONBOX_SPREAD);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox1), GTK_BUTTONBOX_SPREAD);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (hbuttonbox1), 0);
   gtk_button_box_set_child_size (GTK_BUTTON_BOX (hbuttonbox1), 0, 0);
   gtk_button_box_set_child_ipadding (GTK_BUTTON_BOX (hbuttonbox1), 0, 0);
@@ -312,12 +292,9 @@ create_xfmouse ()
   gtk_container_border_width (GTK_CONTAINER (ok_button), 5);
   GTK_WIDGET_SET_FLAGS (ok_button, GTK_CAN_DEFAULT);
   gtk_widget_grab_default (ok_button);
-  gtk_widget_add_accelerator (ok_button, "clicked", accel_group,
-			      GDK_Return, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (ok_button, "clicked", accel_group,
-			      GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (ok_button, "clicked", accel_group,
-			      GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok_button, "clicked", accel_group, GDK_Return, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok_button, "clicked", accel_group, GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok_button, "clicked", accel_group, GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   apply_button = gtk_button_new_with_label (_("Apply"));
   gtk_widget_set_name (apply_button, "apply_button");
@@ -326,8 +303,7 @@ create_xfmouse ()
   gtk_container_add (GTK_CONTAINER (hbuttonbox1), apply_button);
   gtk_container_border_width (GTK_CONTAINER (apply_button), 5);
   GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
-  gtk_widget_add_accelerator (apply_button, "clicked", accel_group,
-			      GDK_a, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (apply_button, "clicked", accel_group, GDK_a, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   cancel_button = gtk_button_new_with_label (_("Cancel"));
   gtk_widget_set_name (cancel_button, "cancel_button");
@@ -336,19 +312,13 @@ create_xfmouse ()
   gtk_container_add (GTK_CONTAINER (hbuttonbox1), cancel_button);
   gtk_container_border_width (GTK_CONTAINER (cancel_button), 5);
   GTK_WIDGET_SET_FLAGS (cancel_button, GTK_CAN_DEFAULT);
-  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group,
-			      GDK_Escape, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group,
-			      GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group, GDK_Escape, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group, GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-  gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
-		      GTK_SIGNAL_FUNC (ok_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
-		      GTK_SIGNAL_FUNC (cancel_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (apply_button), "clicked",
-		      GTK_SIGNAL_FUNC (apply_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (xfmouse), "delete_event",
-		      GTK_SIGNAL_FUNC (delete_event), NULL);
+  gtk_signal_connect (GTK_OBJECT (ok_button), "clicked", GTK_SIGNAL_FUNC (ok_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked", GTK_SIGNAL_FUNC (cancel_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (apply_button), "clicked", GTK_SIGNAL_FUNC (apply_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (xfmouse), "delete_event", GTK_SIGNAL_FUNC (delete_event), NULL);
 
   set_icon (xfmouse, "XFMouse", xfmouse_xpm);
   return xfmouse;
@@ -369,16 +339,16 @@ void
 readstr (int i, char *str, FILE * f)
 {
   if (str)
+  {
+    if ((f) && (fgets (str, i - 1, f)) && (strlen (str)))
     {
-      if ((f) && (fgets (str, i - 1, f)) && (strlen (str)))
-        {
-	  str [strlen(str) - 1] = '\0';
-	}
-      else
-        {
-	  strcpy (str, "\0");
-	}
+      str[strlen (str) - 1] = '\0';
     }
+    else
+    {
+      strcpy (str, "\0");
+    }
+  }
 }
 
 void
@@ -388,42 +358,42 @@ loadcfg (XFMouse * s)
 
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), RCFILE);
   if (existfile (homedir))
+  {
+    f = fopen (homedir, "r");
+  }
+  else
+  {
+    snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, RCFILE);
+    if (existfile (homedir))
     {
       f = fopen (homedir, "r");
     }
-  else
-    {
-      snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, RCFILE);
-      if (existfile (homedir))
-	{
-	  f = fopen (homedir, "r");
-	}
-    }
+  }
 
   if (f)
-    {
-      readstr (10, tempstr, f);
-      s->button = (my_strncasecmp (tempstr, "Right", strlen ("Right")) == 0);
-      readstr (10, tempstr, f);
-      s->accel = atoi (tempstr);
-      readstr (10, tempstr, f);
-      s->thresh = atoi (tempstr);
-      if (s->accel < ACCEL_MIN)
-	s->accel = ACCEL_MIN;
-      else if (s->accel > ACCEL_MAX)
-	s->accel = ACCEL_MIN;
-      if (s->thresh < THRESH_MIN)
-	s->thresh = THRESH_MIN;
-      else if (s->thresh > THRESH_MAX)
-	s->thresh = THRESH_MIN;
-      fclose (f);
-    }
+  {
+    readstr (10, tempstr, f);
+    s->button = (my_strncasecmp (tempstr, "Right", strlen ("Right")) == 0);
+    readstr (10, tempstr, f);
+    s->accel = atoi (tempstr);
+    readstr (10, tempstr, f);
+    s->thresh = atoi (tempstr);
+    if (s->accel < ACCEL_MIN)
+      s->accel = ACCEL_MIN;
+    else if (s->accel > ACCEL_MAX)
+      s->accel = ACCEL_MIN;
+    if (s->thresh < THRESH_MIN)
+      s->thresh = THRESH_MIN;
+    else if (s->thresh > THRESH_MAX)
+      s->thresh = THRESH_MIN;
+    fclose (f);
+  }
   else
-    {
-      s->button = 1;
-      s->accel = 2 * DENOMINATOR;
-      s->thresh = 4;
-    }
+  {
+    s->button = 1;
+    s->accel = 2 * DENOMINATOR;
+    s->thresh = 4;
+  }
 }
 
 int
@@ -434,12 +404,12 @@ savecfg (XFMouse * s)
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), RCFILE);
 
   if ((f = fopen (homedir, "w")))
-    {
-      fprintf (f, "%s\n", ((s->button) ? "Right" : "Left"));
-      fprintf (f, "%i\n", s->accel);
-      fprintf (f, "%i\n", s->thresh);
-      fclose (f);
-    }
+  {
+    fprintf (f, "%s\n", ((s->button) ? "Right" : "Left"));
+    fprintf (f, "%i\n", s->accel);
+    fprintf (f, "%i\n", s->thresh);
+    fclose (f);
+  }
   return ((f != NULL));
 }
 
@@ -453,29 +423,26 @@ main (int argc, char *argv[])
   loadcfg (&mouseval);
 
   if (argc == 2 && strcmp (argv[1], "-i") == 0)
-    {
-      xfce_init (&argc, &argv);
+  {
+    xfce_init (&argc, &argv);
 
-      xfmouse = create_xfmouse ();
-      set_icon (xfmouse, "XFMouse", xfmouse_icon_xpm);
-      show_xfmouse (&mouseval);
-      gtk_main ();
-      xfce_end ((gpointer) NULL, 0);
-    }
+    xfmouse = create_xfmouse ();
+    set_icon (xfmouse, "XFMouse", xfmouse_icon_xpm);
+    show_xfmouse (&mouseval);
+    gtk_main ();
+    xfce_end ((gpointer) NULL, 0);
+  }
   if ((argc == 1) || (argc == 2 && strcmp (argv[1], "-d") == 0))
-    {
-      mouse_values (&mouseval);
-      return (0);
-    }
+  {
+    mouse_values (&mouseval);
+    return (0);
+  }
 
   fprintf (stderr, _("Usage : %s [OPTIONS]\n"), argv[0]);
   fprintf (stderr, _("   Where OPTIONS are :\n"));
   fprintf (stderr, _("   -i : interactive\n"));
   fprintf (stderr, _("   -d : apply configuration and exit (default)\n\n"));
-  fprintf (stderr,
-	   _
-	   ("%s is part of the XFce distribution, written by Olivier Fourdan\n\n"),
-	   argv[0]);
+  fprintf (stderr, _("%s is part of the XFce distribution, written by Olivier Fourdan\n\n"), argv[0]);
 
   return (0);
 }

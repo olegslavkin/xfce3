@@ -23,8 +23,7 @@
 
 void modify_cancel_cb (GtkWidget * widget, gpointer data);
 
-gboolean
-modify_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
+gboolean modify_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
 
 void modify_browse_command_cb (GtkWidget * widget, gpointer data);
 

@@ -60,15 +60,14 @@ create_screen (void)
   gtk_window_position (GTK_WINDOW (screen), GTK_WIN_POS_CENTER);
   gtk_widget_realize (screen);
   /*
-  gnome_layer (screen->window, MAX_LAYERS);
+     gnome_layer (screen->window, MAX_LAYERS);
    */
   accel_group = gtk_accel_group_new ();
   gtk_window_add_accel_group (GTK_WINDOW (screen), accel_group);
 
   screen_mainframe = gtk_frame_new (NULL);
   gtk_widget_set_name (screen_mainframe, "screen_mainframe");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_mainframe",
-		       screen_mainframe);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_mainframe", screen_mainframe);
   gtk_widget_show (screen_mainframe);
   gtk_container_add (GTK_CONTAINER (screen), screen_mainframe);
 #ifdef OLD_STYLE
@@ -91,8 +90,7 @@ create_screen (void)
 
   screen_topframe = gtk_frame_new (NULL);
   gtk_widget_set_name (screen_topframe, "screen_topframe");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_topframe",
-		       screen_topframe);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_topframe", screen_topframe);
   gtk_widget_show (screen_topframe);
   gtk_box_pack_start (GTK_BOX (screen_hbox), screen_topframe, TRUE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (screen_topframe), 5);
@@ -105,48 +103,36 @@ create_screen (void)
 
   screen_displayed_label = gtk_label_new (_("Define screen label :"));
   gtk_widget_set_name (screen_displayed_label, "screen_displayed_label");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_displayed_label",
-		       screen_displayed_label);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_displayed_label", screen_displayed_label);
   gtk_widget_show (screen_displayed_label);
-  gtk_table_attach (GTK_TABLE (screen_table), screen_displayed_label, 0, 1, 0,
-		    1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
-  gtk_label_set_justify (GTK_LABEL (screen_displayed_label),
-			 GTK_JUSTIFY_RIGHT);
+  gtk_table_attach (GTK_TABLE (screen_table), screen_displayed_label, 0, 1, 0, 1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_label_set_justify (GTK_LABEL (screen_displayed_label), GTK_JUSTIFY_RIGHT);
   gtk_misc_set_alignment (GTK_MISC (screen_displayed_label), 1, 0.5);
   gtk_misc_set_padding (GTK_MISC (screen_displayed_label), 10, 0);
 
   screen_displayed_entry = gtk_entry_new ();
   gtk_widget_set_name (screen_displayed_entry, "screen_displayed_entry");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_displayed_entry",
-		       screen_displayed_entry);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_displayed_entry", screen_displayed_entry);
   gtk_widget_show (screen_displayed_entry);
-  gtk_table_attach (GTK_TABLE (screen_table), screen_displayed_entry, 1, 2, 0,
-		    1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_table_attach (GTK_TABLE (screen_table), screen_displayed_entry, 1, 2, 0, 1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
 
   screen_bottomframe = gtk_frame_new (NULL);
   gtk_widget_set_name (screen_bottomframe, "screen_bottomframe");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_bottomframe",
-		       screen_bottomframe);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_bottomframe", screen_bottomframe);
   gtk_widget_show (screen_bottomframe);
-  gtk_box_pack_start (GTK_BOX (screen_vbox), screen_bottomframe, FALSE, TRUE,
-		      0);
+  gtk_box_pack_start (GTK_BOX (screen_vbox), screen_bottomframe, FALSE, TRUE, 0);
   gtk_container_border_width (GTK_CONTAINER (screen_bottomframe), 5);
 
   screen_hbuttonbox = gtk_hbutton_box_new ();
   gtk_widget_set_name (screen_hbuttonbox, "screen_hbuttonbox");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_hbuttonbox",
-		       screen_hbuttonbox);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_hbuttonbox", screen_hbuttonbox);
   gtk_widget_show (screen_hbuttonbox);
   gtk_container_add (GTK_CONTAINER (screen_bottomframe), screen_hbuttonbox);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (screen_hbuttonbox),
-			     GTK_BUTTONBOX_SPREAD);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (screen_hbuttonbox), GTK_BUTTONBOX_SPREAD);
 
   screen_ok_button = gtk_button_new_with_label (_("Ok"));
   gtk_widget_set_name (screen_ok_button, "screen_ok_button");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_ok_button",
-		       screen_ok_button);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_ok_button", screen_ok_button);
   gtk_widget_show (screen_ok_button);
   gtk_container_add (GTK_CONTAINER (screen_hbuttonbox), screen_ok_button);
   gtk_container_border_width (GTK_CONTAINER (screen_ok_button), 5);
@@ -156,30 +142,22 @@ create_screen (void)
 
   screen_cancel_button = gtk_button_new_with_label (_("Cancel"));
   gtk_widget_set_name (screen_cancel_button, "screen_cancel_button");
-  gtk_object_set_data (GTK_OBJECT (screen), "screen_cancel_button",
-		       screen_cancel_button);
+  gtk_object_set_data (GTK_OBJECT (screen), "screen_cancel_button", screen_cancel_button);
   gtk_widget_show (screen_cancel_button);
   gtk_container_add (GTK_CONTAINER (screen_hbuttonbox), screen_cancel_button);
   gtk_container_border_width (GTK_CONTAINER (screen_cancel_button), 5);
   GTK_WIDGET_SET_FLAGS (screen_cancel_button, GTK_CAN_DEFAULT);
 
-  gtk_widget_add_accelerator (screen_ok_button, "clicked", accel_group,
-			      GDK_Return, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (screen_ok_button, "clicked", accel_group,
-			      GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (screen_ok_button, "clicked", accel_group,
-			      GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (screen_ok_button, "clicked", accel_group, GDK_Return, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (screen_ok_button, "clicked", accel_group, GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (screen_ok_button, "clicked", accel_group, GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-  gtk_widget_add_accelerator (screen_cancel_button, "clicked", accel_group,
-			      GDK_Escape, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (screen_cancel_button, "clicked", accel_group,
-			      GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (screen_cancel_button, "clicked", accel_group, GDK_Escape, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (screen_cancel_button, "clicked", accel_group, GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-  gtk_signal_connect (GTK_OBJECT (screen), "delete_event",
-		      GTK_SIGNAL_FUNC (screen_delete_event), NULL);
+  gtk_signal_connect (GTK_OBJECT (screen), "delete_event", GTK_SIGNAL_FUNC (screen_delete_event), NULL);
 
-  gtk_signal_connect (GTK_OBJECT (screen_cancel_button), "clicked",
-		      GTK_SIGNAL_FUNC (screen_cancel_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (screen_cancel_button), "clicked", GTK_SIGNAL_FUNC (screen_cancel_cb), NULL);
 
   return screen;
 }
@@ -187,13 +165,9 @@ create_screen (void)
 void
 open_screen (GtkWidget * screen, gint scr_number)
 {
-  screen_signal_id =
-    gtk_signal_connect (GTK_OBJECT (screen_ok_button), "clicked",
-			GTK_SIGNAL_FUNC (screen_ok_cb),
-			(gpointer)((long) scr_number));
+  screen_signal_id = gtk_signal_connect (GTK_OBJECT (screen_ok_button), "clicked", GTK_SIGNAL_FUNC (screen_ok_cb), (gpointer) ((long) scr_number));
 
-  gtk_entry_set_text (GTK_ENTRY (screen_displayed_entry),
-		      get_gxfce_screen_label (scr_number));
+  gtk_entry_set_text (GTK_ENTRY (screen_displayed_entry), get_gxfce_screen_label (scr_number));
   gtk_entry_set_position (GTK_ENTRY (screen_displayed_entry), 0);
 
   gtk_window_set_modal (GTK_WINDOW (screen), TRUE);

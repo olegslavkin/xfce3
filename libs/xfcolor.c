@@ -41,7 +41,7 @@
 #include "fileutil.h"
 #include "xfce-common.h"
 #include "lightdark.h"
-#include "xpmext.h" 
+#include "xpmext.h"
 
 #ifndef HAVE_SNPRINTF
 #  include "snprintf.h"
@@ -73,142 +73,142 @@ char *gtkrcfile = "/.gtkrc";
 char *xfcegtkrcfile = "/.xfce/xfcegtkrc";
 char *gtktemprcfile = "/.xfce/temp.xfcegtkrc";
 
-char *resmap []= { "", /* Color 0 */
-                   "", /* Color 1 */
-	           "", /* Color 2 */
-	           "", /* Color 3 */
-                   "*XmList.background" , 
-                   "*XmLGrid.background",
-                   "Netscape*XmList.background" , 
-                   "Netscape*XmLGrid.background",
-                   "", /* Color 4 */
-	           "*text*background",
-                   "*list*background",
-                   "*Text*background",
-                   "*List*background", 
-                   "*textBackground",
-                   "*XmTextField.background", 
-                   "*XmText.background", 
-                   "Netscape*XmTextField.background", 
-                   "Netscape*XmText.background", 
-                   "", /* Color 5 */
-	           "", /* Color 6 */
-	           "*background", 
-                   "*Background",
-                   "nscal*Background",
-                   "*Menu*background", 
-                   "OpenWindows*WindowColor",
-	           "Window.Color.Background",
-	           "netscape*background",
-                   "Netscape*background",
-	           ".netscape*background",
-                   "Ddd*background",
-	           "Emacs*Background",
-                   "Emacs*backgroundToolBarColor", 
-                   "", /* Color 7 */
-                   "", /* Text Color */
-                   NULL
-	   	 };
+char *resmap[] = { "",		/* Color 0 */
+  "",				/* Color 1 */
+  "",				/* Color 2 */
+  "",				/* Color 3 */
+  "*XmList.background",
+  "*XmLGrid.background",
+  "Netscape*XmList.background",
+  "Netscape*XmLGrid.background",
+  "",				/* Color 4 */
+  "*text*background",
+  "*list*background",
+  "*Text*background",
+  "*List*background",
+  "*textBackground",
+  "*XmTextField.background",
+  "*XmText.background",
+  "Netscape*XmTextField.background",
+  "Netscape*XmText.background",
+  "",				/* Color 5 */
+  "",				/* Color 6 */
+  "*background",
+  "*Background",
+  "nscal*Background",
+  "*Menu*background",
+  "OpenWindows*WindowColor",
+  "Window.Color.Background",
+  "netscape*background",
+  "Netscape*background",
+  ".netscape*background",
+  "Ddd*background",
+  "Emacs*Background",
+  "Emacs*backgroundToolBarColor",
+  "",				/* Color 7 */
+  "",				/* Text Color */
+  NULL
+};
 
-char *resmapSel []= { "", /* Color 0 */
-                      "", /* Color 1 */
-	              "", /* Color 2 */
-	              "", /* Color 3 */
-                      "*XmList.selectBackground" , 
-                      "*XmLGrid.selectBackground",
-                      "Netscape*XmList.selectBackground" , 
-                      "Netscape*XmLGrid.selectBackground",
-	              "", /* Color 4 */
-                      "*XmTextField.selectBackground", 
-                      "*XmText.selectBackground", 
-                      "Netscape*XmTextField.selectBackground", 
-                      "Netscape*XmText.selectBackground", 
-                      "*selectBackground",
-	              "", /* Color 5 */
-	              "", /* Color 6 */
-	              "", /* Color 7 */
-                      NULL
-	   	    };
-                   
-char *resmapTxt []= { "", /* Color 0 */
-                      "", /* Color 1 */
-	              "", /* Color 2 */
-	              "", /* Color 3 */
-                      "*XmList.foreground" , 
-                      "*XmLGrid.foreground",
-                      "Netscape*XmList.foreground" , 
-                      "Netscape*XmLGrid.foreground",
-	              "", /* Color 4 */
-	              "*text*foreground",
-                      "*list*foreground",
-                      "*Text*foreground",
-                      "*List*foreground", 
-                      "*textForeground",
-                      "*XmTextField*foreground", 
-                      "*XmText*foreground", 
-                      "Netscape*XmTextField.foreground", 
-                      "Netscape*XmText.foreground", 
-	              "", /* Color 5 */
-	              "", /* Color 6 */
-	              "*foreground", 
-                      "*Foreground",
-                      "nscal*Foreground",
-                      "OpenWindows.WindowForeground",
-	              "Window.Color.Foreground",
-	              "netscape*foreground",
-                      "Netscape*foreground",
-	              ".netscape*foreground",
-                      "Ddd*foreground",
-	              "Emacs*Foreground",
-                      "Emacs*foregroundToolBarColor", 
-                      /* Color 7 */
-                      NULL
-	   	    };
-                   
-char *resmapSelTxt []= { "", /* Color 0 */
-                         "", /* Color 1 */
-	                 "", /* Color 2 */
-	                 "", /* Color 3 */
-                         "*XmList.selectForeground" , 
-                         "*XmLGrid.selectForeground",
-                         "Netscape*XmList.selectForeground" , 
-                         "Netscape*XmLGrid.selectForeground",
-	                 "", /* Color 4 */
-                         "*XmTextField.selectForeground", 
-                         "*XmText.selectForeground", 
-                         "Netscape*XmTextField.selectForeground", 
-                         "Netscape*XmText.selectForeground", 
-                         "*selectForeground",
-	                 "", /* Color 5 */
-	                 "", /* Color 6 */
-	                 "", /* Color 7 */
-                         NULL
-	   	       };
-                   
-char *fntmap [] = { "*fontList", 
-                     "Netscape*fontList", 
-                     ".netscape*fontList", 
-                     NULL 
-                  };
+char *resmapSel[] = { "",	/* Color 0 */
+  "",				/* Color 1 */
+  "",				/* Color 2 */
+  "",				/* Color 3 */
+  "*XmList.selectBackground",
+  "*XmLGrid.selectBackground",
+  "Netscape*XmList.selectBackground",
+  "Netscape*XmLGrid.selectBackground",
+  "",				/* Color 4 */
+  "*XmTextField.selectBackground",
+  "*XmText.selectBackground",
+  "Netscape*XmTextField.selectBackground",
+  "Netscape*XmText.selectBackground",
+  "*selectBackground",
+  "",				/* Color 5 */
+  "",				/* Color 6 */
+  "",				/* Color 7 */
+  NULL
+};
 
-char *additionnal [] = { "*DtTerm*shadowThickness: 1",
-                         "*enableButtonTab: True",
-                         "*enableEtchedInMenu: True",
-                         "*enableMenuInCascade: True",
-                         "*enableMultiKeyBindings: True",
-                         "*enableThinThickness: True",
-                         "Netscape*banner*folderDropdown*fontList: -adobe-courier-medium-r-*-*-*-100-*-*-*-*-iso8859-*,-adobe-courier-bold-r-*-*-*-100-*-*-*-*-iso8859-*=BOLD",
-			 "*prefs*pageTitle.fontList: -*-helvetica-medium-r-normal-*-*-120-*-*-*-*-iso8859-*=NORMAL,-*-helvetica-bold-r-*-*-*-140-*-*-*-*-iso8859-*=BOLD,-*-helvetica-medium-o-normal-*-*-120-*-*-*-*-iso8859-*=ITALIC",
-			 "Netscape*AddressOutlinerPopup*fontList:-*-helvetica-medium-r-*-*-*-100-*-*-*-*-iso8859-*,-*-helvetica-bold-r-*-*-*-100-*-*-*-*-iso8859-*=BOLD,-*-helvetica-medium-o-*-*-*-100-*-*-*-*-iso8859-*=ITALIC",
-			 "Netscape*XmLGrid*fontList: -*-helvetica-medium-r-*-*-*-100-*-*-*-*-iso8859-*,-*-helvetica-bold-r-*-*-*-100-*-*-*-*-iso8859-*=BOLD,-*-helvetica-medium-o-*-*-*-100-*-*-*-*-iso8859-*=ITALIC",
-                         NULL
-		       };
+char *resmapTxt[] = { "",	/* Color 0 */
+  "",				/* Color 1 */
+  "",				/* Color 2 */
+  "",				/* Color 3 */
+  "*XmList.foreground",
+  "*XmLGrid.foreground",
+  "Netscape*XmList.foreground",
+  "Netscape*XmLGrid.foreground",
+  "",				/* Color 4 */
+  "*text*foreground",
+  "*list*foreground",
+  "*Text*foreground",
+  "*List*foreground",
+  "*textForeground",
+  "*XmTextField*foreground",
+  "*XmText*foreground",
+  "Netscape*XmTextField.foreground",
+  "Netscape*XmText.foreground",
+  "",				/* Color 5 */
+  "",				/* Color 6 */
+  "*foreground",
+  "*Foreground",
+  "nscal*Foreground",
+  "OpenWindows.WindowForeground",
+  "Window.Color.Foreground",
+  "netscape*foreground",
+  "Netscape*foreground",
+  ".netscape*foreground",
+  "Ddd*foreground",
+  "Emacs*Foreground",
+  "Emacs*foregroundToolBarColor",
+  /* Color 7 */
+  NULL
+};
 
-char *xres [] = { "/.Xdefaults",
-                  "/.Xresources",
-                  "/.xrdb",
-                  NULL
-                };
+char *resmapSelTxt[] = { "",	/* Color 0 */
+  "",				/* Color 1 */
+  "",				/* Color 2 */
+  "",				/* Color 3 */
+  "*XmList.selectForeground",
+  "*XmLGrid.selectForeground",
+  "Netscape*XmList.selectForeground",
+  "Netscape*XmLGrid.selectForeground",
+  "",				/* Color 4 */
+  "*XmTextField.selectForeground",
+  "*XmText.selectForeground",
+  "Netscape*XmTextField.selectForeground",
+  "Netscape*XmText.selectForeground",
+  "*selectForeground",
+  "",				/* Color 5 */
+  "",				/* Color 6 */
+  "",				/* Color 7 */
+  NULL
+};
+
+char *fntmap[] = { "*fontList",
+  "Netscape*fontList",
+  ".netscape*fontList",
+  NULL
+};
+
+char *additionnal[] = { "*DtTerm*shadowThickness: 1",
+  "*enableButtonTab: True",
+  "*enableEtchedInMenu: True",
+  "*enableMenuInCascade: True",
+  "*enableMultiKeyBindings: True",
+  "*enableThinThickness: True",
+  "Netscape*banner*folderDropdown*fontList: -adobe-courier-medium-r-*-*-*-100-*-*-*-*-iso8859-*,-adobe-courier-bold-r-*-*-*-100-*-*-*-*-iso8859-*=BOLD",
+  "*prefs*pageTitle.fontList: -*-helvetica-medium-r-normal-*-*-120-*-*-*-*-iso8859-*=NORMAL,-*-helvetica-bold-r-*-*-*-140-*-*-*-*-iso8859-*=BOLD,-*-helvetica-medium-o-normal-*-*-120-*-*-*-*-iso8859-*=ITALIC",
+  "Netscape*AddressOutlinerPopup*fontList:-*-helvetica-medium-r-*-*-*-100-*-*-*-*-iso8859-*,-*-helvetica-bold-r-*-*-*-100-*-*-*-*-iso8859-*=BOLD,-*-helvetica-medium-o-*-*-*-100-*-*-*-*-iso8859-*=ITALIC",
+  "Netscape*XmLGrid*fontList: -*-helvetica-medium-r-*-*-*-100-*-*-*-*-iso8859-*,-*-helvetica-bold-r-*-*-*-100-*-*-*-*-iso8859-*=BOLD,-*-helvetica-medium-o-*-*-*-100-*-*-*-*-iso8859-*=ITALIC",
+  NULL
+};
+
+char *xres[] = { "/.Xdefaults",
+  "/.Xresources",
+  "/.xrdb",
+  NULL
+};
 
 int
 brightness (int r, int g, int b)
@@ -221,24 +221,24 @@ brightness_pal (const XFCE_palette * p, int index)
 {
   if ((p) && (index >= 0) && (index < NB_XFCE_COLORS))
   {
-      return (brightness ((short int) p->r[index],
-	  		  (short int) p->g[index], (short int) p->b[index]));
+    return (brightness ((short int) p->r[index], (short int) p->g[index], (short int) p->b[index]));
   }
   else
   {
-      return (0);
+    return (0);
   }
 }
 
-void apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
+void
+apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
 {
-  char buffer [256];
-  char mode [8];
+  char buffer[256];
+  char mode[8];
   int i = 0;
   int color = 0;
-  int tube [2];
+  int tube[2];
   int sonpid;
-  char c [20];
+  char c[20];
   char *args[4] = { "xrdb", NULL, "-all", NULL };
   char *tempstr;
 
@@ -248,120 +248,116 @@ void apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
   else
     strcpy (mode, "-remove");
   args[1] = mode;
-  
+
   /* Initiate communication pipe... */
   if (pipe (tube) == -1)
-    {
-      fprintf (stderr, "XFce : cannot open pipe\n");
-      return;
-    }
+  {
+    fprintf (stderr, "XFce : cannot open pipe\n");
+    return;
+  }
 
   /* ...And fork */
   switch (sonpid = fork ())
-    {
-      case 0:
-        close (0); dup (tube [0]);
-        close (tube [0]);
-        close (tube [1]);
-        execvp (args[0], args);
-        perror ("exec failed");
-        _exit (0);
-        break;
-      case -1:
-        fprintf (stderr, "XFce : cannot execute fork()\n");
-        close (tube [0]);
-        close (tube [1]);
-        return;
-        break;
-      default:
-       break;  
-    }
+  {
+  case 0:
+    close (0);
+    dup (tube[0]);
+    close (tube[0]);
+    close (tube[1]);
+    execvp (args[0], args);
+    perror ("exec failed");
+    _exit (0);
+    break;
+  case -1:
+    fprintf (stderr, "XFce : cannot execute fork()\n");
+    close (tube[0]);
+    close (tube[1]);
+    return;
+    break;
+  default:
+    break;
+  }
   i = 0;
   color = 0;
-  while (resmap [i]) 
+  while (resmap[i])
+  {
+    if (!strlen (resmap[i]))
+      color++;
+    else
     {
-      if (!strlen (resmap [i]))
-        color++;
-      else
-        {
-          color_to_hex (c, p, color);
-          snprintf (buffer, 255,"%s: %s\n", resmap [i], c); 
-          write (tube [1], buffer, strlen (buffer));
-        }
-      i++;
+      color_to_hex (c, p, color);
+      snprintf (buffer, 255, "%s: %s\n", resmap[i], c);
+      write (tube[1], buffer, strlen (buffer));
     }
+    i++;
+  }
   i = 0;
   color = 0;
-  while (resmapSel [i]) 
+  while (resmapSel[i])
+  {
+    if (!strlen (resmapSel[i]))
+      color++;
+    else
     {
-      if (!strlen (resmapSel [i]))
-        color++;
-      else
-        {
-          snprintf (buffer, 255, "%s: #%02X%02X%02X\n", resmapSel [i],
-	           ((short int) p->r[color]) ^ 255,
-	           ((short int) p->g[color]) ^ 128,
-                   ((short int) p->b[color]) ^  64);
-          write (tube [1], buffer, strlen (buffer));
-        }
-      i++;
+      snprintf (buffer, 255, "%s: #%02X%02X%02X\n", resmapSel[i], ((short int) p->r[color]) ^ 255, ((short int) p->g[color]) ^ 128, ((short int) p->b[color]) ^ 64);
+      write (tube[1], buffer, strlen (buffer));
     }
+    i++;
+  }
   i = 0;
   color = 0;
-  while (resmapTxt [i]) 
+  while (resmapTxt[i])
+  {
+    if (!strlen (resmapTxt[i]))
+      color++;
+    else
     {
-      if (!strlen (resmapTxt [i]))
-        color++;
-      else
-        {
-          int howbright;
+      int howbright;
 
-          howbright = brightness (p->r[color], p->g[color], p->b[color]);
-          if (howbright < fadeblack)
-            snprintf (buffer, 255,"%s: #FFFFFF\n", resmapTxt [i]); 
-          else
-            snprintf (buffer, 255,"%s: #000000\n", resmapTxt [i]); 
-          write (tube [1], buffer, strlen (buffer));
-        }
-      i++;
+      howbright = brightness (p->r[color], p->g[color], p->b[color]);
+      if (howbright < fadeblack)
+	snprintf (buffer, 255, "%s: #FFFFFF\n", resmapTxt[i]);
+      else
+	snprintf (buffer, 255, "%s: #000000\n", resmapTxt[i]);
+      write (tube[1], buffer, strlen (buffer));
     }
+    i++;
+  }
   i = 0;
   color = 0;
-  while (resmapSelTxt [i]) 
+  while (resmapSelTxt[i])
+  {
+    if (!strlen (resmapSelTxt[i]))
+      color++;
+    else
     {
-      if (!strlen (resmapSelTxt [i]))
-        color++;
-      else
-        {
-          int howbright;
+      int howbright;
 
-          howbright = brightness (((short int) p->r[color]) ^ 255,
-	                          ((short int) p->g[color]) ^ 128,
-                                  ((short int) p->b[color]) ^  64);
-          if (howbright < 50)
-            snprintf (buffer, 255,"%s: #FFFFFF\n", resmapSelTxt [i]); 
-          else
-            snprintf (buffer, 255,"%s: #000000\n", resmapSelTxt [i]); 
-          write (tube [1], buffer, strlen (buffer));
-        }
-      i++;
+      howbright = brightness (((short int) p->r[color]) ^ 255, ((short int) p->g[color]) ^ 128, ((short int) p->b[color]) ^ 64);
+      if (howbright < 50)
+	snprintf (buffer, 255, "%s: #FFFFFF\n", resmapSelTxt[i]);
+      else
+	snprintf (buffer, 255, "%s: #000000\n", resmapSelTxt[i]);
+      write (tube[1], buffer, strlen (buffer));
     }
+    i++;
+  }
   i = 0;
-  while (fntmap [i]) 
-    {
-      snprintf (buffer, 255,"%s: %s\n", fntmap [i], p->fnt);
-      write (tube [1], buffer, strlen (buffer));
-      i++;
-    }
+  while (fntmap[i])
+  {
+    snprintf (buffer, 255, "%s: %s\n", fntmap[i], p->fnt);
+    write (tube[1], buffer, strlen (buffer));
+    i++;
+  }
   i = 0;
-  while (additionnal [i]) 
-    {
-      snprintf (buffer, 255,"%s\n", additionnal [i]);
-      write (tube [1], buffer, strlen (buffer));
-      i++;
-    }
-  close (tube [0]);
-  close (tube [1]);
+  while (additionnal[i])
+  {
+    snprintf (buffer, 255, "%s\n", additionnal[i]);
+    write (tube[1], buffer, strlen (buffer));
+    i++;
+  }
+  close (tube[0]);
+  close (tube[1]);
   /* Make sure the child process has completed before continuing */
 #if HAVE_WAITPID
   waitpid (sonpid, NULL, WUNTRACED);
@@ -370,26 +366,25 @@ void apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
 #else
 # error One of waitpid or wait4 is needed.
 #endif
-  
+
   /* Once we've applied xfce colors, merge with user's defined settings */
   i = 0;
   tempstr = (char *) g_malloc (sizeof (char) * MAXSTRLEN);
-  while (xres [i])
+  while (xres[i])
+  {
+    snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), xres[i]);
+    if (existfile (tempstr))
     {
-      snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), xres [i]);
-      if (existfile (tempstr))
-        {
-          snprintf (tempstr, MAXSTRLEN, "xrdb -merge -all %s%s", (char *) getenv ("HOME"), xres [i]);
-          system (tempstr);
-        }
-      i++;
+      snprintf (tempstr, MAXSTRLEN, "xrdb -merge -all %s%s", (char *) getenv ("HOME"), xres[i]);
+      system (tempstr);
     }
+    i++;
+  }
   g_free (tempstr);
 }
 
 void
-get_rgb_from_palette (XFCE_palette * p, short int col_index, int *r, int *g,
-		      int *b)
+get_rgb_from_palette (XFCE_palette * p, short int col_index, int *r, int *g, int *b)
 {
   *r = p->r[col_index];
   *g = p->g[col_index];
@@ -403,11 +398,10 @@ color_to_hex (char *s, const XFCE_palette * p, int index)
     s = (char *) g_malloc (8 * sizeof (char));
 
   if ((p) && (s) && (index >= 0) && (index < NB_XFCE_COLORS))
-    {
-      sprintf (s, "#%02X%02X%02X", (short int) p->r[index],
-	       (short int) p->g[index], (short int) p->b[index]);
-      return (s);
-    }
+  {
+    sprintf (s, "#%02X%02X%02X", (short int) p->r[index], (short int) p->g[index], (short int) p->b[index]);
+    return (s);
+  }
   return (NULL);
 }
 
@@ -432,15 +426,14 @@ get_pixel_from_palette (XFCE_palette * p, int color_index)
 {
   XColor color;
   XWindowAttributes attributes;
-  
-  XGetWindowAttributes (GDK_DISPLAY (), 
-                        GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), 
-                        &attributes);
-  color.red   = p->r[color_index] * 255;
-  color.green = p->g[color_index] * 255;
-  color.blue  = p->b[color_index] * 255;
 
-  if (!XAllocColor (GDK_DISPLAY (), attributes.colormap, &color)) {
+  XGetWindowAttributes (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), &attributes);
+  color.red = p->r[color_index] * 255;
+  color.green = p->g[color_index] * 255;
+  color.blue = p->b[color_index] * 255;
+
+  if (!XAllocColor (GDK_DISPLAY (), attributes.colormap, &color))
+  {
     fprintf (stderr, "*** Warning *** Cannot allocate color\n");
     return (WhitePixel (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ())));
   }
@@ -455,7 +448,7 @@ newpal (void)
   p = (XFCE_palette *) g_malloc (sizeof (XFCE_palette));
   p->fnt = NULL;
   p->texture = NULL;
-  p->engine  = NULL;
+  p->engine = NULL;
 
   initpal (p);
   return (p);
@@ -465,55 +458,55 @@ void
 set_font (XFCE_palette * p, char *fnt)
 {
   if (fnt && (strlen (fnt)))
-    {
-      p->fnt = g_realloc (p->fnt, (strlen (fnt) + 1) * sizeof (char));
-      strcpy (p->fnt, fnt);
-    }
+  {
+    p->fnt = g_realloc (p->fnt, (strlen (fnt) + 1) * sizeof (char));
+    strcpy (p->fnt, fnt);
+  }
   else
-    {
-      p->fnt = g_realloc (p->fnt, sizeof (char));
-      strcpy (p->fnt, "");
-    }
+  {
+    p->fnt = g_realloc (p->fnt, sizeof (char));
+    strcpy (p->fnt, "");
+  }
 }
 
 void
 set_texture (XFCE_palette * p, char *texture)
 {
   if (texture && (strlen (texture)))
-    {
-      p->texture = g_realloc (p->texture, (strlen (texture) + 1) * sizeof (char));
-      strcpy (p->texture, texture);
-    }
+  {
+    p->texture = g_realloc (p->texture, (strlen (texture) + 1) * sizeof (char));
+    strcpy (p->texture, texture);
+  }
   else
-    {
-      p->texture = g_realloc (p->texture, sizeof (char));
-      strcpy (p->texture, "");
-    }
+  {
+    p->texture = g_realloc (p->texture, sizeof (char));
+    strcpy (p->texture, "");
+  }
 }
 
 void
 set_engine (XFCE_palette * p, char *engine)
 {
   if (engine && (strlen (engine)))
-    {
-      p->engine = g_realloc (p->engine, (strlen (engine) + 1) * sizeof (char));
-      strcpy (p->engine, engine);
-    }
+  {
+    p->engine = g_realloc (p->engine, (strlen (engine) + 1) * sizeof (char));
+    strcpy (p->engine, engine);
+  }
   else
-    {
-      p->engine = g_realloc (p->engine, sizeof (char));
-      strcpy (p->engine, "");
-    }
+  {
+    p->engine = g_realloc (p->engine, sizeof (char));
+    strcpy (p->engine, "");
+  }
 }
 
 void
 freepal (XFCE_palette * p)
 {
-  if (p->fnt)     
+  if (p->fnt)
     g_free (p->fnt);
-  if (p->texture) 
+  if (p->texture)
     g_free (p->texture);
-  if (p->engine)  
+  if (p->engine)
     g_free (p->engine);
   g_free (p);
 }
@@ -524,21 +517,21 @@ copypal (XFCE_palette * d, const XFCE_palette * s)
   int i;
 
   if (d && s)
+  {
+    for (i = 0; i < NB_XFCE_COLORS; i++)
     {
-      for (i = 0; i < NB_XFCE_COLORS; i++)
-	{
-	  d->r[i] = s->r[i];
-	  d->g[i] = s->g[i];
-	  d->b[i] = s->b[i];
-	}
-      d->fnt     = g_realloc (d->fnt,     (strlen (s->fnt) + 1) * sizeof (char));
-      d->texture = g_realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
-      d->engine  = g_realloc (d->engine,  (strlen (s->engine) + 1) * sizeof (char));
-      strcpy (d->fnt,     s->fnt);
-      strcpy (d->texture, s->texture);
-      strcpy (d->engine,  s->engine);
-      return (d);
+      d->r[i] = s->r[i];
+      d->g[i] = s->g[i];
+      d->b[i] = s->b[i];
     }
+    d->fnt = g_realloc (d->fnt, (strlen (s->fnt) + 1) * sizeof (char));
+    d->texture = g_realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
+    d->engine = g_realloc (d->engine, (strlen (s->engine) + 1) * sizeof (char));
+    strcpy (d->fnt, s->fnt);
+    strcpy (d->texture, s->texture);
+    strcpy (d->engine, s->engine);
+    return (d);
+  }
   return (NULL);
 }
 
@@ -548,21 +541,21 @@ copyvaluepal (XFCE_palette * d, const XFCE_palette * s)
   int i;
 
   if (d && s)
+  {
+    for (i = 0; i < NB_XFCE_COLORS; i++)
     {
-      for (i = 0; i < NB_XFCE_COLORS; i++)
-	{
-	  d->r[i] = s->r[i];
-	  d->g[i] = s->g[i];
-	  d->b[i] = s->b[i];
-	}
-      d->fnt     = g_realloc (d->fnt,     (strlen (s->fnt) + 1) * sizeof (char));
-      d->texture = g_realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
-      d->engine  = g_realloc (d->engine,  (strlen (s->engine) + 1) * sizeof (char));
-      strcpy (d->fnt,     s->fnt);
-      strcpy (d->texture, s->texture);
-      strcpy (d->engine,  s->engine);
-      return (d);
+      d->r[i] = s->r[i];
+      d->g[i] = s->g[i];
+      d->b[i] = s->b[i];
     }
+    d->fnt = g_realloc (d->fnt, (strlen (s->fnt) + 1) * sizeof (char));
+    d->texture = g_realloc (d->texture, (strlen (s->texture) + 1) * sizeof (char));
+    d->engine = g_realloc (d->engine, (strlen (s->engine) + 1) * sizeof (char));
+    strcpy (d->fnt, s->fnt);
+    strcpy (d->texture, s->texture);
+    strcpy (d->engine, s->engine);
+    return (d);
+  }
   return (NULL);
 }
 
@@ -570,44 +563,35 @@ void
 initpal (XFCE_palette * p)
 {
   if (p)
-    {
-      p->fnt     = g_realloc (p->fnt,     (strlen (DEFAULTFONT) + 1) * sizeof (char));
-      p->texture = g_realloc (p->texture, sizeof (char));
-      p->engine  = g_realloc (p->engine,  (strlen (DEFAULTENGINE) + 1) * sizeof (char));
-      strcpy (p->texture, "");
-      strcpy (p->engine, DEFAULTENGINE);
-      strcpy (p->fnt, DEFAULTFONT);
-    }
+  {
+    p->fnt = g_realloc (p->fnt, (strlen (DEFAULTFONT) + 1) * sizeof (char));
+    p->texture = g_realloc (p->texture, sizeof (char));
+    p->engine = g_realloc (p->engine, (strlen (DEFAULTENGINE) + 1) * sizeof (char));
+    strcpy (p->texture, "");
+    strcpy (p->engine, DEFAULTENGINE);
+    strcpy (p->fnt, DEFAULTFONT);
+  }
 }
 
 void
-write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j,
-			   char * template, gboolean textured)
+write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j, char *template, gboolean textured)
 {
   int c1_howbright, c1_howbrightSel;
   int c2_howbright, c2_howbrightSel;
   char *texture;
   char nobgpixmap[] = "<none>";
-  
+
   /* When running on a display with 256 colors or less, avoid using textures */
   if (DEFAULT_DEPTH > 8)
-      texture = p->texture;
+    texture = p->texture;
   else
-      texture = nobgpixmap;
-  
+    texture = nobgpixmap;
 
-  c1_howbright    = brightness (p->r[i], 
-                                p->g[i], 
-                                p->b[i]);
-  c1_howbrightSel = brightness (((short int) p->r[i]) ^ 255,
-                                ((short int) p->g[i]) ^ 128,
-                                ((short int) p->b[i]) ^  64);
-  c2_howbright    = brightness (p->r[j], 
-                                p->g[j], 
-                                p->b[j]);
-  c2_howbrightSel = brightness (((short int) p->r[j]) ^ 255,
-                                ((short int) p->g[j]) ^ 128,
-                                ((short int) p->b[j]) ^  64);
+
+  c1_howbright = brightness (p->r[i], p->g[i], p->b[i]);
+  c1_howbrightSel = brightness (((short int) p->r[i]) ^ 255, ((short int) p->g[i]) ^ 128, ((short int) p->b[i]) ^ 64);
+  c2_howbright = brightness (p->r[j], p->g[j], p->b[j]);
+  c2_howbrightSel = brightness (((short int) p->r[j]) ^ 255, ((short int) p->g[j]) ^ 128, ((short int) p->b[j]) ^ 64);
 
   fprintf (f, "style \"%s%u\"\n", template, i);
   fprintf (f, "{\n");
@@ -615,102 +599,84 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int i, int j,
     fprintf (f, "  font              = \"%s\"\n", p->fnt);
 
   if ((textured) && (p->texture) && (strlen (p->texture)))
-    {
-      fprintf (f, "  bg_pixmap[NORMAL] = \"%s\"\n",      texture);
-      fprintf (f, "  bg_pixmap[ACTIVE] = \"%s\"\n",      nobgpixmap);
-      fprintf (f, "  bg_pixmap[INSENSITIVE] = \"%s\"\n", (i == j) ? texture : nobgpixmap);
-      fprintf (f, "  bg_pixmap[PRELIGHT] = \"%s\"\n",    (i == j) ? texture : nobgpixmap);
-    }
+  {
+    fprintf (f, "  bg_pixmap[NORMAL] = \"%s\"\n", texture);
+    fprintf (f, "  bg_pixmap[ACTIVE] = \"%s\"\n", nobgpixmap);
+    fprintf (f, "  bg_pixmap[INSENSITIVE] = \"%s\"\n", (i == j) ? texture : nobgpixmap);
+    fprintf (f, "  bg_pixmap[PRELIGHT] = \"%s\"\n", (i == j) ? texture : nobgpixmap);
+  }
   else
-    {
-      fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
-      fprintf (f, "  bg_pixmap[ACTIVE] = \"<none>\"\n");
-      fprintf (f, "  bg_pixmap[INSENSITIVE] = \"<none>\"\n");
-      fprintf (f, "  bg_pixmap[PRELIGHT] = \"<none>\"\n");
-    }
-  
+  {
+    fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
+    fprintf (f, "  bg_pixmap[ACTIVE] = \"<none>\"\n");
+    fprintf (f, "  bg_pixmap[INSENSITIVE] = \"<none>\"\n");
+    fprintf (f, "  bg_pixmap[PRELIGHT] = \"<none>\"\n");
+  }
+
   if (c1_howbright < fadeblack)
-    {
-      fprintf (f, "  fg[NORMAL]        = \"#ffffff\"\n");
-      fprintf (f, "  text[NORMAL]      = \"#ffffff\"\n");
-      fprintf (f, "  text[INSENSITIVE] = \"#ffffff\"\n");
-    }
+  {
+    fprintf (f, "  fg[NORMAL]        = \"#ffffff\"\n");
+    fprintf (f, "  text[NORMAL]      = \"#ffffff\"\n");
+    fprintf (f, "  text[INSENSITIVE] = \"#ffffff\"\n");
+  }
   else
-    {
-      fprintf (f, "  fg[NORMAL]        = \"#000000\"\n");
-      fprintf (f, "  text[NORMAL]      = \"#000000\"\n");
-      fprintf (f, "  text[INSENSITIVE] = \"#000000\"\n");
-    }
-   fprintf (f, "  fg[INSENSITIVE]   = \"#000000\"\n");
+  {
+    fprintf (f, "  fg[NORMAL]        = \"#000000\"\n");
+    fprintf (f, "  text[NORMAL]      = \"#000000\"\n");
+    fprintf (f, "  text[INSENSITIVE] = \"#000000\"\n");
+  }
+  fprintf (f, "  fg[INSENSITIVE]   = \"#000000\"\n");
 
   if (c2_howbright < fadeblack)
-    {
-      fprintf (f, "  fg[ACTIVE]        = \"#ffffff\"\n");
-      fprintf (f, "  text[ACTIVE]      = \"#ffffff\"\n");
-      fprintf (f, "  fg[PRELIGHT]      = \"#ffffff\"\n");
-      fprintf (f, "  text[PRELIGHT]    = \"#ffffff\"\n");
-    }
+  {
+    fprintf (f, "  fg[ACTIVE]        = \"#ffffff\"\n");
+    fprintf (f, "  text[ACTIVE]      = \"#ffffff\"\n");
+    fprintf (f, "  fg[PRELIGHT]      = \"#ffffff\"\n");
+    fprintf (f, "  text[PRELIGHT]    = \"#ffffff\"\n");
+  }
   else
-    {
-      fprintf (f, "  fg[ACTIVE]        = \"#000000\"\n");
-      fprintf (f, "  text[ACTIVE]      = \"#000000\"\n");
-      fprintf (f, "  fg[PRELIGHT]      = \"#000000\"\n");
-      fprintf (f, "  text[PRELIGHT]    = \"#000000\"\n");
-    }
+  {
+    fprintf (f, "  fg[ACTIVE]        = \"#000000\"\n");
+    fprintf (f, "  text[ACTIVE]      = \"#000000\"\n");
+    fprintf (f, "  fg[PRELIGHT]      = \"#000000\"\n");
+    fprintf (f, "  text[PRELIGHT]    = \"#000000\"\n");
+  }
 
   if (c2_howbrightSel < 50)
-    {
-      fprintf (f, "  fg[SELECTED]      = \"#ffffff\"\n");
-      fprintf (f, "  text[SELECTED]    = \"#ffffff\"\n");
-    }
+  {
+    fprintf (f, "  fg[SELECTED]      = \"#ffffff\"\n");
+    fprintf (f, "  text[SELECTED]    = \"#ffffff\"\n");
+  }
   else
-    {
-      fprintf (f, "  fg[SELECTED]      = \"#000000\"\n");
-      fprintf (f, "  text[SELECTED]    = \"#000000\"\n");
-    }
+  {
+    fprintf (f, "  fg[SELECTED]      = \"#000000\"\n");
+    fprintf (f, "  text[SELECTED]    = \"#000000\"\n");
+  }
 
-  fprintf (f, "  bg[NORMAL]        = \"#%02X%02X%02X\"\n",
-	   (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  bg[NORMAL]        = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
 
-  fprintf (f, "  base[NORMAL]      = \"#%02X%02X%02X\"\n",
-	   (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  base[NORMAL]      = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
 
-  fprintf (f, "  bg[ACTIVE]        = \"#%02X%02X%02X\"\n",
-	   (short int) shift (p->r[j], DARK),
-	   (short int) shift (p->g[j], DARK),
-	   (short int) shift (p->b[j], DARK));
+  fprintf (f, "  bg[ACTIVE]        = \"#%02X%02X%02X\"\n", (short int) shift (p->r[j], DARK), (short int) shift (p->g[j], DARK), (short int) shift (p->b[j], DARK));
 
-  fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n",
-	   (short int) shift (p->r[j], DARK),
-	   (short int) shift (p->g[j], DARK),
-	   (short int) shift (p->b[j], DARK));
+  fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[j], DARK), (short int) shift (p->g[j], DARK), (short int) shift (p->b[j], DARK));
 
   if (i == j)
-    {
-      fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n",
-	       (short int) shift (p->r[i], LIGHT),
-	       (short int) shift (p->g[i], LIGHT),
-	       (short int) shift (p->b[i], LIGHT));
-    }
+  {
+    fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[i], LIGHT), (short int) shift (p->g[i], LIGHT), (short int) shift (p->b[i], LIGHT));
+  }
   else
-    {
-      fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n",
-	       (short int) p->r[j], (short int) p->g[j], (short int) p->b[j]);
-    }
-    
-  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n",
-	   (short int) p->r[j], (short int) p->g[j], (short int) p->b[j]);
+  {
+    fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[j], (short int) p->g[j], (short int) p->b[j]);
+  }
 
-  fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n",
-	   ((short int) p->r[j]) ^ 255,
-	   ((short int) p->g[j]) ^ 128,
-           ((short int) p->b[j]) ^  64);
+  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[j], (short int) p->g[j], (short int) p->b[j]);
 
-  fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n",
-	   (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((short int) p->r[j]) ^ 255, ((short int) p->g[j]) ^ 128, ((short int) p->b[j]) ^ 64);
 
-  fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n",
-	   (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+  fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
+
+  fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n", (short int) p->r[i], (short int) p->g[i], (short int) p->b[i]);
   if ((p->engine) && (strlen (p->engine)) && my_strncasecmp (p->engine, "gtk", 3))
     fprintf (f, "  engine \"%s\" {}\n", p->engine);
   fprintf (f, "}\n");
@@ -727,58 +693,57 @@ create_gtkrc_file (XFCE_palette * p, char *name)
 
   snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), (name ? name : gtkrcfile));
   if (existfile (tempstr) && ((f = fopen (tempstr, "r"))))
+  {
+    fgets (lineread, 79, f);
+    if (strlen (lineread))
     {
-      fgets (lineread, 79, f);
-      if (strlen (lineread))
-	{
-	  lineread[strlen (lineread) - 1] = 0;
-	  gtkrc_by_xfce =
-	    !strncmp (XFCE3GTKRC, lineread, strlen (XFCE3GTKRC));
-	}
-      fclose (f);
+      lineread[strlen (lineread) - 1] = 0;
+      gtkrc_by_xfce = !strncmp (XFCE3GTKRC, lineread, strlen (XFCE3GTKRC));
     }
+    fclose (f);
+  }
 
   if (gtkrc_by_xfce)
+  {
+    if ((f = fopen (tempstr, "w")))
     {
-      if ((f = fopen (tempstr, "w")))
-	{
-	  fprintf (f, "%s\n\n", XFCE3GTKRC);
-	  fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
-	  for (i = 1; i < 8; i++) /* Color 0 is used for the mouse pointer only */
-            write_style_to_gtkrc_file (f, p, i, i, "xfce_", (i == 7));
+      fprintf (f, "%s\n\n", XFCE3GTKRC);
+      fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
+      for (i = 1; i < 8; i++)	/* Color 0 is used for the mouse pointer only */
+	write_style_to_gtkrc_file (f, p, i, i, "xfce_", (i == 7));
 #ifndef OLD_STYLE
-          write_style_to_gtkrc_file (f, p, 7, 2, "xfcebar_", TRUE);
+      write_style_to_gtkrc_file (f, p, 7, 2, "xfcebar_", TRUE);
 #endif
-	  fprintf (f, "style \"tooltips-style\" {\n");
-	  fprintf (f, "  bg[NORMAL] = \"#ffffc0\"\n");
-	  fprintf (f, "  fg[NORMAL] = \"#000000\"\n");
-	  fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
-	  fprintf (f, "}\n\n");
-	  fprintf (f, "class        \"*\"               style \"xfce_7\"\n");
-	  fprintf (f, "widget       \"*gxfce_color1*\"  style \"xfce_1\"\n");
-	  fprintf (f, "widget       \"*gxfce_color2*\"  style \"xfce_2\"\n");
-	  fprintf (f, "widget       \"*gxfce_color3*\"  style \"xfce_3\"\n");
-	  fprintf (f, "widget       \"*gxfce_color4*\"  style \"xfce_4\"\n");
-	  fprintf (f, "widget       \"*gxfce_color5*\"  style \"xfce_5\"\n");
-	  fprintf (f, "widget       \"*gxfce_color6*\"  style \"xfce_6\"\n");
-	  fprintf (f, "widget       \"*gxfce_color7*\"  style \"xfce_7\"\n");
-	  fprintf (f, "widget_class \"*Gtk*Progress*\"  style \"xfce_1\"\n");
-	  fprintf (f, "widget_class \"*Gtk*List*\"      style \"xfce_4\"\n");
-	  fprintf (f, "widget_class \"*Gtk*Tree*\"      style \"xfce_4\"\n");
-	  fprintf (f, "widget_class \"*Gtk*Text*\"      style \"xfce_5\"\n");
-	  fprintf (f, "widget_class \"*Gtk*Entry*\"     style \"xfce_5\"\n");
-	  fprintf (f, "widget_class \"*Gtk*Spin*\"      style \"xfce_5\"\n");
+      fprintf (f, "style \"tooltips-style\" {\n");
+      fprintf (f, "  bg[NORMAL] = \"#ffffc0\"\n");
+      fprintf (f, "  fg[NORMAL] = \"#000000\"\n");
+      fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
+      fprintf (f, "}\n\n");
+      fprintf (f, "class        \"*\"               style \"xfce_7\"\n");
+      fprintf (f, "widget       \"*gxfce_color1*\"  style \"xfce_1\"\n");
+      fprintf (f, "widget       \"*gxfce_color2*\"  style \"xfce_2\"\n");
+      fprintf (f, "widget       \"*gxfce_color3*\"  style \"xfce_3\"\n");
+      fprintf (f, "widget       \"*gxfce_color4*\"  style \"xfce_4\"\n");
+      fprintf (f, "widget       \"*gxfce_color5*\"  style \"xfce_5\"\n");
+      fprintf (f, "widget       \"*gxfce_color6*\"  style \"xfce_6\"\n");
+      fprintf (f, "widget       \"*gxfce_color7*\"  style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*Gtk*Progress*\"  style \"xfce_1\"\n");
+      fprintf (f, "widget_class \"*Gtk*List*\"      style \"xfce_4\"\n");
+      fprintf (f, "widget_class \"*Gtk*Tree*\"      style \"xfce_4\"\n");
+      fprintf (f, "widget_class \"*Gtk*Text*\"      style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Gtk*Entry*\"     style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Gtk*Spin*\"      style \"xfce_5\"\n");
 #ifndef OLD_STYLE
-	  fprintf (f, "widget_class \"*Menu*\"          style \"xfcebar_7\"\n");
-	  fprintf (f, "widget_class \"*Button*\"        style \"xfcebar_7\"\n");
-	  fprintf (f, "widget_class \"*ToggleButton*\"  style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*Menu*\"          style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*Button*\"        style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*ToggleButton*\"  style \"xfcebar_7\"\n");
 #endif
-	  fprintf (f, "widget_class \"*CheckButton*\"  style \"xfce_7\"\n");
-	  fprintf (f, "widget_class \"*RadioButton*\"  style \"xfce_7\"\n");
-	  fprintf (f, "widget       \"gtk-tooltips\"    style \"tooltips-style\"\n");
-	  fclose (f);
-	}
+      fprintf (f, "widget_class \"*CheckButton*\"  style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*RadioButton*\"  style \"xfce_7\"\n");
+      fprintf (f, "widget       \"gtk-tooltips\"    style \"tooltips-style\"\n");
+      fclose (f);
     }
+  }
 }
 
 void
@@ -790,30 +755,28 @@ create_temp_gtkrc_file (XFCE_palette * p)
 
   snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), gtktemprcfile);
   if ((f = fopen (tempstr, "w")))
-    {
-      fprintf (f, "%s\n\n", XFCE3GTKRC);
-      fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
-      for (i = 0; i < 8; i++)
-        write_style_to_gtkrc_file (f, p, i, i, "temp_xfce_", FALSE);
-      fprintf (f, "widget       \"*temp_color0*\"  style \"temp_xfce_0\"\n");
-      fprintf (f, "widget       \"*temp_color1*\"  style \"temp_xfce_1\"\n");
-      fprintf (f, "widget       \"*temp_color2*\"  style \"temp_xfce_2\"\n");
-      fprintf (f, "widget       \"*temp_color3*\"  style \"temp_xfce_3\"\n");
-      fprintf (f, "widget       \"*temp_color4*\"  style \"temp_xfce_4\"\n");
-      fprintf (f, "widget       \"*temp_color5*\"  style \"temp_xfce_5\"\n");
-      fprintf (f, "widget       \"*temp_color6*\"  style \"temp_xfce_6\"\n");
-      fprintf (f, "widget       \"*temp_color7*\"  style \"temp_xfce_7\"\n");
-      fclose (f);
-    }
+  {
+    fprintf (f, "%s\n\n", XFCE3GTKRC);
+    fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
+    for (i = 0; i < 8; i++)
+      write_style_to_gtkrc_file (f, p, i, i, "temp_xfce_", FALSE);
+    fprintf (f, "widget       \"*temp_color0*\"  style \"temp_xfce_0\"\n");
+    fprintf (f, "widget       \"*temp_color1*\"  style \"temp_xfce_1\"\n");
+    fprintf (f, "widget       \"*temp_color2*\"  style \"temp_xfce_2\"\n");
+    fprintf (f, "widget       \"*temp_color3*\"  style \"temp_xfce_3\"\n");
+    fprintf (f, "widget       \"*temp_color4*\"  style \"temp_xfce_4\"\n");
+    fprintf (f, "widget       \"*temp_color5*\"  style \"temp_xfce_5\"\n");
+    fprintf (f, "widget       \"*temp_color6*\"  style \"temp_xfce_6\"\n");
+    fprintf (f, "widget       \"*temp_color7*\"  style \"temp_xfce_7\"\n");
+    fclose (f);
+  }
 }
 
 void
-apply_temp_gtkrc_file (XFCE_palette * p, GtkWidget *w) {
-  char tempstr[MAXSTRLEN];
-
-  snprintf (tempstr, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), gtktemprcfile);
+apply_temp_gtkrc_file (XFCE_palette * p, GtkWidget * w)
+{
   create_temp_gtkrc_file (p);
-  gtk_rc_parse (tempstr);
+  gtk_rc_reparse_all ();
   gtk_widget_reset_rc_styles (w);
 }
 
@@ -824,10 +787,10 @@ defpal (XFCE_palette * p)
   p->r[0] = 255;
   p->g[0] = 255;
   p->b[0] = 255;
-  p->r[1] =  95;
+  p->r[1] = 95;
   p->g[1] = 126;
   p->b[1] = 171;
-  p->r[2] =  95;
+  p->r[2] = 95;
   p->g[2] = 126;
   p->b[2] = 171;
   p->r[3] = 194;
@@ -839,7 +802,7 @@ defpal (XFCE_palette * p)
   p->r[5] = 255;
   p->g[5] = 255;
   p->b[5] = 255;
-  p->r[6] =  95;
+  p->r[6] = 95;
   p->g[6] = 126;
   p->b[6] = 171;
   p->r[7] = 220;
@@ -856,17 +819,17 @@ savenamepal (XFCE_palette * p, const char *name)
   int i;
 
   if ((f = fopen (name, "w")))
-    {
-      for (i = 0; i < NB_XFCE_COLORS; i++)
-	fprintf (f, "%i %i %i\n", p->r[i], p->g[i], p->b[i]);
-      if ((p->engine) && strlen (p->engine))
-	fprintf (f, "engine=%s\n", p->engine);
-      if ((p->fnt) && strlen (p->fnt))
-	fprintf (f, "%s\n", p->fnt);
-      if ((p->texture) && strlen (p->texture))
-	fprintf (f, "%s\n", p->texture);
-      fclose (f);
-    }
+  {
+    for (i = 0; i < NB_XFCE_COLORS; i++)
+      fprintf (f, "%i %i %i\n", p->r[i], p->g[i], p->b[i]);
+    if ((p->engine) && strlen (p->engine))
+      fprintf (f, "engine=%s\n", p->engine);
+    if ((p->fnt) && strlen (p->fnt))
+      fprintf (f, "%s\n", p->fnt);
+    if ((p->texture) && strlen (p->texture))
+      fprintf (f, "%s\n", p->texture);
+    fclose (f);
+  }
   return ((f != NULL));
 }
 
@@ -877,59 +840,59 @@ loadnamepal (XFCE_palette * p, const char *name)
   FILE *f;
   int i, err = 0;
   gboolean font = FALSE;
-  
+
   lineread = (char *) g_malloc ((80) * sizeof (char));
 
   if ((f = fopen (name, "r")))
+  {
+    for (i = 0; i < NB_XFCE_COLORS; i++)
     {
-      for (i = 0; i < NB_XFCE_COLORS; i++)
-	{
-	  if (!fgets (lineread, 79, f))
-	    break;
-	  if (strlen (lineread))
-	    {
-	      lineread[strlen (lineread) - 1] = '\0';
-	      if ((a = strtok (lineread, " ")))
-		p->r[i] = atoi (a);
-	      else
-		err = 1;
-	      if ((a = strtok (NULL, " ")))
-		p->g[i] = atoi (a);
-	      else
-		err = 1;
-	      if ((a = strtok (NULL, " ")))
-		p->b[i] = atoi (a);
-	      else
-		err = 1;
-	    }
-	}
-      initpal (p);
-      while (fgets (lineread, MAXSTRLEN - 1, f))
-	{
-	  if (strlen (lineread))
-	    {
-	      lineread[strlen (lineread) - 1] = '\0';
-              if (!my_strncasecmp (lineread, "engine=", strlen ("engine=")))
-                {
-                   char *s = &lineread[strlen ("engine=")];
-                   p->engine = g_realloc (p->engine, (strlen (s) + 1) * sizeof (char));
-	           strcpy (p->engine, s);
-                }
-              else if (!font)
-                {
-                   p->fnt = g_realloc (p->fnt, (strlen (lineread) + 1) * sizeof (char));
-	           strcpy (p->fnt, lineread);
-                   font = TRUE;
-                }
-              else
-	        {
-                  p->texture = g_realloc (p->texture, (strlen (lineread) + 1) * sizeof (char));
-	          strcpy (p->texture, lineread);
-	        }
-            }
-          }
-      fclose (f);
+      if (!fgets (lineread, 79, f))
+	break;
+      if (strlen (lineread))
+      {
+	lineread[strlen (lineread) - 1] = '\0';
+	if ((a = strtok (lineread, " ")))
+	  p->r[i] = atoi (a);
+	else
+	  err = 1;
+	if ((a = strtok (NULL, " ")))
+	  p->g[i] = atoi (a);
+	else
+	  err = 1;
+	if ((a = strtok (NULL, " ")))
+	  p->b[i] = atoi (a);
+	else
+	  err = 1;
+      }
     }
+    initpal (p);
+    while (fgets (lineread, MAXSTRLEN - 1, f))
+    {
+      if (strlen (lineread))
+      {
+	lineread[strlen (lineread) - 1] = '\0';
+	if (!my_strncasecmp (lineread, "engine=", strlen ("engine=")))
+	{
+	  char *s = &lineread[strlen ("engine=")];
+	  p->engine = g_realloc (p->engine, (strlen (s) + 1) * sizeof (char));
+	  strcpy (p->engine, s);
+	}
+	else if (!font)
+	{
+	  p->fnt = g_realloc (p->fnt, (strlen (lineread) + 1) * sizeof (char));
+	  strcpy (p->fnt, lineread);
+	  font = TRUE;
+	}
+	else
+	{
+	  p->texture = g_realloc (p->texture, (strlen (lineread) + 1) * sizeof (char));
+	  strcpy (p->texture, lineread);
+	}
+      }
+    }
+    fclose (f);
+  }
   g_free (lineread);
   return ((!err && (f != NULL)));
 }
@@ -957,17 +920,15 @@ loadpal (XFCE_palette * p)
   snprintf (tempstr, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rccolor);
   x = loadnamepal (p, tempstr);
   if (!x)
-    {
-      snprintf (tempstr, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rccolor);
-      x = loadnamepal (p, tempstr);
-    }
+  {
+    snprintf (tempstr, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rccolor);
+    x = loadnamepal (p, tempstr);
+  }
   g_free (tempstr);
   return (x);
 }
 
-gint
-xfce_window_client_event (GtkWidget * widget,
-			  GdkEventClient * event, gpointer p)
+gint xfce_window_client_event (GtkWidget * widget, GdkEventClient * event, gpointer p)
 {
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GTK_IS_WINDOW (widget), FALSE);
@@ -977,9 +938,9 @@ xfce_window_client_event (GtkWidget * widget,
     atom_read_colors = gdk_atom_intern (atom_read_colors_name, FALSE);
 
   if ((event->message_type == atom_read_colors) && (p))
-    {
-      loadpal ((XFCE_palette *) p);
-    }
+  {
+    loadpal ((XFCE_palette *) p);
+  }
   return FALSE;
 }
 
@@ -1016,21 +977,19 @@ applypal_to_all (void)
   gdk_event_send_clientmessage_toall ((GdkEvent *) & sev);
 }
 
-gboolean repaint_in_progress (void)
+gboolean
+repaint_in_progress (void)
 {
   return REPAINT_IN_PROGRESS;
 }
 
-void init_xfce_rcfile (void)
+void
+init_xfce_rcfile (void)
 {
   char rcfile[MAXSTRLEN];
 
-  snprintf (rcfile, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), gtkrcfile);
-  gtk_rc_parse(rcfile);
   snprintf (rcfile, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), xfcegtkrcfile);
-  gtk_rc_parse(rcfile);
   gtk_rc_add_default_file (rcfile);
   snprintf (rcfile, MAXSTRLEN, "%s%s", (char *) getenv ("HOME"), gtktemprcfile);
-  gtk_rc_parse(rcfile);
   gtk_rc_add_default_file (rcfile);
 }

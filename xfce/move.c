@@ -44,20 +44,20 @@ void
 move_internal_grab (Display * disp)
 {
   if (!xgrabbed)
-    {
-      XGrabServer (disp);
-      xgrabbed = TRUE;
-    }
+  {
+    XGrabServer (disp);
+    xgrabbed = TRUE;
+  }
 }
 
 void
 move_internal_ungrab (Display * disp)
 {
   if (xgrabbed)
-    {
-      XUngrabServer (disp);
-      xgrabbed = FALSE;
-    }
+  {
+    XUngrabServer (disp);
+    xgrabbed = FALSE;
+  }
 }
 
 void
@@ -68,15 +68,14 @@ CreateDrawGC (GdkWindow * w)
   GdkColormap *cmap;
   GdkColor col;
 
-  cmap = gdk_colormap_get_system();
+  cmap = gdk_colormap_get_system ();
   col.red = col.green = col.blue = 0xFFFF;
-  if (!gdk_color_alloc(cmap, &col)) {
-    g_error("couldn't allocate colour");
-  }  
+  if (!gdk_color_alloc (cmap, &col))
+  {
+    g_error ("couldn't allocate colour");
+  }
 
-  gcm =
-    GDK_GC_FUNCTION | GDK_GC_LINE_WIDTH | GDK_GC_FOREGROUND | GDK_GC_SUBWINDOW
-    | GDK_GC_LINE_STYLE;
+  gcm = GDK_GC_FUNCTION | GDK_GC_LINE_WIDTH | GDK_GC_FOREGROUND | GDK_GC_SUBWINDOW | GDK_GC_LINE_STYLE;
   gcv.function = GDK_XOR;
   gcv.line_width = 5;
   gcv.foreground = col;
@@ -104,10 +103,9 @@ MoveOutline (int x, int y, int width, int height)
 
   /* undraw the old one, if any */
   if (lastWidth || lastHeight)
-    {
-      gdk_draw_rectangle (GDK_ROOT_PARENT (), DrawGC, FALSE, lastx, lasty,
-			  lastWidth, lastHeight);
-    }
+  {
+    gdk_draw_rectangle (GDK_ROOT_PARENT (), DrawGC, FALSE, lastx, lasty, lastWidth, lastHeight);
+  }
 
   lastx = x;
   lasty = y;
@@ -116,10 +114,9 @@ MoveOutline (int x, int y, int width, int height)
 
   /* draw the new one, if any */
   if (lastWidth || lastHeight)
-    {
-      gdk_draw_rectangle (GDK_ROOT_PARENT (), DrawGC, FALSE, lastx, lasty,
-			  lastWidth, lastHeight);
-    }
+  {
+    gdk_draw_rectangle (GDK_ROOT_PARENT (), DrawGC, FALSE, lastx, lasty, lastWidth, lastHeight);
+  }
 }
 
 static void
@@ -134,7 +131,7 @@ move_pressed (GtkWidget * widget, GdkEventButton * event, gpointer * topwin)
   gint xp, yp;
 
   /* Added by Jason Litowitz */
-  hide_current_popup_menu();
+  hide_current_popup_menu ();
   /* ignore double and triple click */
   if (event->type != GDK_BUTTON_PRESS)
     return;
@@ -145,13 +142,10 @@ move_pressed (GtkWidget * widget, GdkEventButton * event, gpointer * topwin)
     move_internal_grab (GDK_DISPLAY ());
 
   gtk_grab_add (widget);
-  gdk_pointer_grab (widget->window, TRUE,
-		    GDK_BUTTON_RELEASE_MASK |
-		    GDK_BUTTON_MOTION_MASK, NULL, NULL, 0);
+  gdk_pointer_grab (widget->window, TRUE, GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_MOTION_MASK, NULL, NULL, 0);
 
   p = gtk_object_get_user_data (GTK_OBJECT (widget));
-  gdk_window_get_origin (((GtkWidget *) topwin)->window, &upositionx,
-			 &upositiony);
+  gdk_window_get_origin (((GtkWidget *) topwin)->window, &upositionx, &upositiony);
   gdk_window_get_size (((GtkWidget *) topwin)->window, &uwidth, &uheight);
 
   p->x = (int) upositionx - event->x_root;
@@ -191,14 +185,12 @@ move_released (GtkWidget * widget, GdkEventButton * event, gpointer * topwin)
   yp += p->y;
 
   if (!current_config.opaquemove)
-    {
-      MoveOutline (0, 0, 0, 0);
-      XSync (GDK_DISPLAY (), True);
-      move_internal_ungrab (GDK_DISPLAY ());
-    }
-  XMoveWindow (GDK_DISPLAY (),
-	       GDK_WINDOW_XWINDOW (((GtkWidget *) topwin)->window),
-	       (xp > 0) ? xp : 0, (yp > 0) ? yp : 0);
+  {
+    MoveOutline (0, 0, 0, 0);
+    XSync (GDK_DISPLAY (), True);
+    move_internal_ungrab (GDK_DISPLAY ());
+  }
+  XMoveWindow (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (((GtkWidget *) topwin)->window), (xp > 0) ? xp : 0, (yp > 0) ? yp : 0);
   gtk_grab_remove (widget);
   gdk_pointer_ungrab (0);
   writeconfig ();
@@ -224,13 +216,12 @@ move_motion (GtkWidget * widget, GdkEventMotion * event, gpointer * topwin)
   yp += p->y;
 
   if (!current_config.opaquemove)
-    {
-      gdk_window_get_size (((GtkWidget *) topwin)->window, &uwidth, &uheight);
-      MoveOutline (xp, yp, uwidth, uheight);
-    }
+  {
+    gdk_window_get_size (((GtkWidget *) topwin)->window, &uwidth, &uheight);
+    MoveOutline (xp, yp, uwidth, uheight);
+  }
   else
-    XMoveWindow (GDK_DISPLAY (),
-		 GDK_WINDOW_XWINDOW (((GtkWidget *) topwin)->window), xp, yp);
+    XMoveWindow (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (((GtkWidget *) topwin)->window), xp, yp);
 }
 
 void
@@ -241,13 +232,9 @@ create_move_button (GtkWidget * widget, GtkWidget * toplevel)
   icon_pos = g_new (CursorOffset, 1);
   gtk_object_set_user_data (GTK_OBJECT (widget), icon_pos);
 
-  gtk_widget_set_events (widget,
-			 GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
+  gtk_widget_set_events (widget, GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
 
-  gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
-		      GTK_SIGNAL_FUNC (move_pressed), toplevel);
-  gtk_signal_connect (GTK_OBJECT (widget), "button_release_event",
-		      GTK_SIGNAL_FUNC (move_released), toplevel);
-  gtk_signal_connect (GTK_OBJECT (widget), "motion_notify_event",
-		      GTK_SIGNAL_FUNC (move_motion), toplevel);
+  gtk_signal_connect (GTK_OBJECT (widget), "button_press_event", GTK_SIGNAL_FUNC (move_pressed), toplevel);
+  gtk_signal_connect (GTK_OBJECT (widget), "button_release_event", GTK_SIGNAL_FUNC (move_released), toplevel);
+  gtk_signal_connect (GTK_OBJECT (widget), "motion_notify_event", GTK_SIGNAL_FUNC (move_motion), toplevel);
 }

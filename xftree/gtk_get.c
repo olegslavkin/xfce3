@@ -54,9 +54,9 @@ static void
 cb_cancel (GtkWidget * w, void *data)
 {
   if (data)
-    {
-      gtk_widget_destroy ((GtkWidget *) data);
-    }
+  {
+    gtk_widget_destroy ((GtkWidget *) data);
+  }
   status = ST_CANCEL;
 }
 
@@ -76,43 +76,41 @@ download (uri * u, char *path)
 
   status = ST_OK;
   if (io_is_directory (path))
+  {
+    sprintf (target, "%s/%s", path, uri_basename (u->url));
+    if (io_is_file (target))
     {
-      sprintf (target, "%s/%s", path, uri_basename (u->url));
-      if (io_is_file (target))
-	{
-	  if (dlg_question (_("Override file ?"), target) != DLG_RC_OK)
-	    {
-	      return 0;
-	    }
-	}
+      if (dlg_question (_("Override file ?"), target) != DLG_RC_OK)
+      {
+	return 0;
+      }
     }
+  }
   else
-    {
-      sprintf (target, "%s", path);
-    }
+  {
+    sprintf (target, "%s", path);
+  }
 
   sprintf (cmd, "%s %s", URLFETCH, u->url);
   fp = fopen (target, "wb");
   if (!fp)
-    {
-      dlg_error (target, strerror (errno));
-      return 0;
-    }
+  {
+    dlg_error (target, strerror (errno));
+    return 0;
+  }
   pipe = popen (cmd, "r");
   if (!pipe)
-    {
-      dlg_error (target, strerror (errno));
-      fclose (fp);
-      return 0;
-    }
+  {
+    dlg_error (target, strerror (errno));
+    fclose (fp);
+    return 0;
+  }
 
   dialog = gtk_dialog_new ();
-  gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-		      GTK_SIGNAL_FUNC (cb_cancel), NULL);
+  gtk_signal_connect (GTK_OBJECT (dialog), "destroy", GTK_SIGNAL_FUNC (cb_cancel), NULL);
 
   box = gtk_vbox_new (FALSE, 4);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), box, TRUE, TRUE,
-		      0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), box, TRUE, TRUE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (box), 5);
 
   table = gtk_table_new (2, 2, FALSE);
@@ -136,10 +134,8 @@ download (uri * u, char *path)
   gtk_box_pack_start (GTK_BOX (box), label[4], TRUE, TRUE, 0);
 
   cancel = gtk_button_new_with_label (_("Cancel"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area),
-		      cancel, TRUE, FALSE, 0);
-  gtk_signal_connect (GTK_OBJECT (cancel), "clicked",
-		      GTK_SIGNAL_FUNC (cb_cancel), dialog);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), cancel, TRUE, FALSE, 0);
+  gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (cb_cancel), dialog);
 
   gtk_window_set_title (GTK_WINDOW (dialog), _("XFTree: Download"));
   gtk_widget_show_all (dialog);
@@ -152,24 +148,24 @@ download (uri * u, char *path)
   start_time = time (NULL);
   buflen = 16;
   while ((num = fread (buf, 1, buflen, pipe)) > 0)
+  {
+    fwrite (buf, 1, num, fp);
+    len += num;
+    while (gtk_events_pending ())
+      gtk_main_iteration ();
+    if (status == ST_CANCEL)
     {
-      fwrite (buf, 1, num, fp);
-      len += num;
-      while (gtk_events_pending ())
-	gtk_main_iteration ();
-      if (status == ST_CANCEL)
-	{
-	  fclose (pipe);
-	  fclose (fp);
-	  return (0);
-	}
-      elapsed = time (NULL) - start_time;
-      bps = len / (elapsed > 0 ? elapsed : 1);
-      buflen = BUFLEN < bps ? BUFLEN : bps;
-      buflen = buflen < 32 ? 32 : buflen;
-      sprintf (received, _("%d bytes received (%d bps)"), len, bps);
-      gtk_label_set_text (GTK_LABEL (label[4]), received);
+      fclose (pipe);
+      fclose (fp);
+      return (0);
     }
+    elapsed = time (NULL) - start_time;
+    bps = len / (elapsed > 0 ? elapsed : 1);
+    buflen = BUFLEN < bps ? BUFLEN : bps;
+    buflen = buflen < 32 ? 32 : buflen;
+    sprintf (received, _("%d bytes received (%d bps)"), len, bps);
+    gtk_label_set_text (GTK_LABEL (label[4]), received);
+  }
   fclose (fp);
   fclose (pipe);
 

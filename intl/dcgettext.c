@@ -29,7 +29,7 @@
 #  include <alloca.h>
 # else
 #  ifdef _AIX
- #pragma alloca
+#pragma alloca
 #  else
 #   ifndef alloca
 char *alloca ();
@@ -163,26 +163,24 @@ const char _nl_default_dirname[] = GNULOCALEDIR;
 struct binding *_nl_domain_bindings;
 
 /* Prototypes for local functions.  */
-static char *find_msg PARAMS ((struct loaded_l10nfile *domain_file,
-			       const char *msgid)) internal_function;
-static const char *category_to_name PARAMS ((int category)) internal_function;
-static const char *guess_category_value PARAMS ((int category,
-						 const char *categoryname))
-     internal_function;
+static char *find_msg
+PARAMS ((struct loaded_l10nfile * domain_file, const char *msgid)) internal_function;
+     static const char *category_to_name PARAMS ((int category)) internal_function;
+     static const char *guess_category_value PARAMS ((int category, const char *categoryname)) internal_function;
 
 
 /* For those loosing systems which don't have `alloca' we have to add
    some additional code emulating it.  */
 #ifdef HAVE_ALLOCA
 /* Nothing has to be done.  */
-# define ADD_BLOCK(list, address) /* nothing */
-# define FREE_BLOCKS(list) /* nothing */
+# define ADD_BLOCK(list, address)	/* nothing */
+# define FREE_BLOCKS(list)	/* nothing */
 #else
-struct block_list
-{
-  void *address;
-  struct block_list *next;
-};
+     struct block_list
+     {
+       void *address;
+       struct block_list *next;
+     };
 # define ADD_BLOCK(list, addr)						      \
   do {									      \
     struct block_list *newp = (struct block_list *) malloc (sizeof (*newp));  \
@@ -204,7 +202,7 @@ struct block_list
   } while (0)
 # undef alloca
 # define alloca(size) (malloc (size))
-#endif	/* have alloca */
+#endif /* have alloca */
 
 
 /* Names for the libintl functions are a problem.  They must not clash
@@ -219,8 +217,7 @@ struct block_list
 
 /* Look up MSGID in the DOMAINNAME message catalog for the current CATEGORY
    locale.  */
-char *
-DCGETTEXT (domainname, msgid, category)
+     char *DCGETTEXT (domainname, msgid, category)
      const char *domainname;
      const char *msgid;
      int category;
@@ -249,68 +246,65 @@ DCGETTEXT (domainname, msgid, category)
 
   /* First find matching binding.  */
   for (binding = _nl_domain_bindings; binding != NULL; binding = binding->next)
+  {
+    int compare = strcmp (domainname, binding->domainname);
+    if (compare == 0)
+      /* We found it!  */
+      break;
+    if (compare < 0)
     {
-      int compare = strcmp (domainname, binding->domainname);
-      if (compare == 0)
-	/* We found it!  */
-	break;
-      if (compare < 0)
-	{
-	  /* It is not in the list.  */
-	  binding = NULL;
-	  break;
-	}
+      /* It is not in the list.  */
+      binding = NULL;
+      break;
     }
+  }
 
   if (binding == NULL)
     dirname = (char *) _nl_default_dirname;
   else if (binding->dirname[0] == '/')
     dirname = binding->dirname;
   else
+  {
+    /* We have a relative path.  Make it absolute now.  */
+    size_t dirname_len = strlen (binding->dirname) + 1;
+    size_t path_max;
+    char *ret;
+
+    path_max = (unsigned) PATH_MAX;
+    path_max += 2;		/* The getcwd docs say to do this.  */
+
+    dirname = (char *) alloca (path_max + dirname_len);
+    ADD_BLOCK (block_list, dirname);
+
+    __set_errno (0);
+    while ((ret = getcwd (dirname, path_max)) == NULL && errno == ERANGE)
     {
-      /* We have a relative path.  Make it absolute now.  */
-      size_t dirname_len = strlen (binding->dirname) + 1;
-      size_t path_max;
-      char *ret;
-
-      path_max = (unsigned) PATH_MAX;
-      path_max += 2;		/* The getcwd docs say to do this.  */
-
+      path_max += PATH_INCR;
       dirname = (char *) alloca (path_max + dirname_len);
       ADD_BLOCK (block_list, dirname);
-
       __set_errno (0);
-      while ((ret = getcwd (dirname, path_max)) == NULL && errno == ERANGE)
-	{
-	  path_max += PATH_INCR;
-	  dirname = (char *) alloca (path_max + dirname_len);
-	  ADD_BLOCK (block_list, dirname);
-	  __set_errno (0);
-	}
-
-      if (ret == NULL)
-	{
-	  /* We cannot get the current working directory.  Don't signal an
-	     error but simply return the default string.  */
-	  FREE_BLOCKS (block_list);
-	  __set_errno (saved_errno);
-	  return (char *) msgid;
-	}
-
-      stpcpy (stpcpy (strchr (dirname, '\0'), "/"), binding->dirname);
     }
+
+    if (ret == NULL)
+    {
+      /* We cannot get the current working directory.  Don't signal an
+         error but simply return the default string.  */
+      FREE_BLOCKS (block_list);
+      __set_errno (saved_errno);
+      return (char *) msgid;
+    }
+
+    stpcpy (stpcpy (strchr (dirname, '\0'), "/"), binding->dirname);
+  }
 
   /* Now determine the symbolic name of CATEGORY and its value.  */
   categoryname = category_to_name (category);
   categoryvalue = guess_category_value (category, categoryname);
 
-  xdomainname = (char *) alloca (strlen (categoryname)
-				 + strlen (domainname) + 5);
+  xdomainname = (char *) alloca (strlen (categoryname) + strlen (domainname) + 5);
   ADD_BLOCK (block_list, xdomainname);
 
-  stpcpy (stpcpy (stpcpy (stpcpy (xdomainname, categoryname), "/"),
-		  domainname),
-	  ".mo");
+  stpcpy (stpcpy (stpcpy (stpcpy (xdomainname, categoryname), "/"), domainname), ".mo");
 
   /* Creating working area.  */
   single_locale = (char *) alloca (strlen (categoryvalue) + 1);
@@ -320,67 +314,66 @@ DCGETTEXT (domainname, msgid, category)
   /* Search for the given string.  This is a loop because we perhaps
      got an ordered list of languages to consider for th translation.  */
   while (1)
+  {
+    /* Make CATEGORYVALUE point to the next element of the list.  */
+    while (categoryvalue[0] != '\0' && categoryvalue[0] == ':')
+      ++categoryvalue;
+    if (categoryvalue[0] == '\0')
     {
-      /* Make CATEGORYVALUE point to the next element of the list.  */
-      while (categoryvalue[0] != '\0' && categoryvalue[0] == ':')
-	++categoryvalue;
-      if (categoryvalue[0] == '\0')
+      /* The whole contents of CATEGORYVALUE has been searched but
+         no valid entry has been found.  We solve this situation
+         by implicitly appending a "C" entry, i.e. no translation
+         will take place.  */
+      single_locale[0] = 'C';
+      single_locale[1] = '\0';
+    }
+    else
+    {
+      char *cp = single_locale;
+      while (categoryvalue[0] != '\0' && categoryvalue[0] != ':')
+	*cp++ = *categoryvalue++;
+      *cp = '\0';
+    }
+
+    /* If the current locale value is C (or POSIX) we don't load a
+       domain.  Return the MSGID.  */
+    if (strcmp (single_locale, "C") == 0 || strcmp (single_locale, "POSIX") == 0)
+    {
+      FREE_BLOCKS (block_list);
+      __set_errno (saved_errno);
+      return (char *) msgid;
+    }
+
+
+    /* Find structure describing the message catalog matching the
+       DOMAINNAME and CATEGORY.  */
+    domain = _nl_find_domain (dirname, single_locale, xdomainname);
+
+    if (domain != NULL)
+    {
+      retval = find_msg (domain, msgid);
+
+      if (retval == NULL)
+      {
+	int cnt;
+
+	for (cnt = 0; domain->successor[cnt] != NULL; ++cnt)
 	{
-	  /* The whole contents of CATEGORYVALUE has been searched but
-	     no valid entry has been found.  We solve this situation
-	     by implicitly appending a "C" entry, i.e. no translation
-	     will take place.  */
-	  single_locale[0] = 'C';
-	  single_locale[1] = '\0';
-	}
-      else
-	{
-	  char *cp = single_locale;
-	  while (categoryvalue[0] != '\0' && categoryvalue[0] != ':')
-	    *cp++ = *categoryvalue++;
-	  *cp = '\0';
-	}
-
-      /* If the current locale value is C (or POSIX) we don't load a
-	 domain.  Return the MSGID.  */
-      if (strcmp (single_locale, "C") == 0
-	  || strcmp (single_locale, "POSIX") == 0)
-	{
-	  FREE_BLOCKS (block_list);
-	  __set_errno (saved_errno);
-	  return (char *) msgid;
-	}
-
-
-      /* Find structure describing the message catalog matching the
-	 DOMAINNAME and CATEGORY.  */
-      domain = _nl_find_domain (dirname, single_locale, xdomainname);
-
-      if (domain != NULL)
-	{
-	  retval = find_msg (domain, msgid);
-
-	  if (retval == NULL)
-	    {
-	      int cnt;
-
-	      for (cnt = 0; domain->successor[cnt] != NULL; ++cnt)
-		{
-		  retval = find_msg (domain->successor[cnt], msgid);
-
-		  if (retval != NULL)
-		    break;
-		}
-	    }
+	  retval = find_msg (domain->successor[cnt], msgid);
 
 	  if (retval != NULL)
-	    {
-	      FREE_BLOCKS (block_list);
-	      __set_errno (saved_errno);
-	      return retval;
-	    }
+	    break;
 	}
+      }
+
+      if (retval != NULL)
+      {
+	FREE_BLOCKS (block_list);
+	__set_errno (saved_errno);
+	return retval;
+      }
     }
+  }
   /* NOTREACHED */
 }
 
@@ -390,8 +383,7 @@ weak_alias (__dcgettext, dcgettext);
 #endif
 
 
-static char *
-internal_function
+static char *internal_function
 find_msg (domain_file, msgid)
      struct loaded_l10nfile *domain_file;
      const char *msgid;
@@ -409,78 +401,64 @@ find_msg (domain_file, msgid)
 
   /* Locate the MSGID and its translation.  */
   if (domain->hash_size > 2 && domain->hash_tab != NULL)
-    {
-      /* Use the hashing table.  */
-      nls_uint32 len = strlen (msgid);
-      nls_uint32 hash_val = hash_string (msgid);
-      nls_uint32 idx = hash_val % domain->hash_size;
-      nls_uint32 incr = 1 + (hash_val % (domain->hash_size - 2));
-      nls_uint32 nstr = W (domain->must_swap, domain->hash_tab[idx]);
+  {
+    /* Use the hashing table.  */
+    nls_uint32 len = strlen (msgid);
+    nls_uint32 hash_val = hash_string (msgid);
+    nls_uint32 idx = hash_val % domain->hash_size;
+    nls_uint32 incr = 1 + (hash_val % (domain->hash_size - 2));
+    nls_uint32 nstr = W (domain->must_swap, domain->hash_tab[idx]);
 
+    if (nstr == 0)
+      /* Hash table entry is empty.  */
+      return NULL;
+
+    if (W (domain->must_swap, domain->orig_tab[nstr - 1].length) == len && strcmp (msgid, domain->data + W (domain->must_swap, domain->orig_tab[nstr - 1].offset)) == 0)
+      return (char *) domain->data + W (domain->must_swap, domain->trans_tab[nstr - 1].offset);
+
+    while (1)
+    {
+      if (idx >= domain->hash_size - incr)
+	idx -= domain->hash_size - incr;
+      else
+	idx += incr;
+
+      nstr = W (domain->must_swap, domain->hash_tab[idx]);
       if (nstr == 0)
 	/* Hash table entry is empty.  */
 	return NULL;
 
-      if (W (domain->must_swap, domain->orig_tab[nstr - 1].length) == len
-	  && strcmp (msgid,
-		     domain->data + W (domain->must_swap,
-				       domain->orig_tab[nstr - 1].offset)) == 0)
-	return (char *) domain->data + W (domain->must_swap,
-					  domain->trans_tab[nstr - 1].offset);
-
-      while (1)
-	{
-	  if (idx >= domain->hash_size - incr)
-	    idx -= domain->hash_size - incr;
-	  else
-	    idx += incr;
-
-	  nstr = W (domain->must_swap, domain->hash_tab[idx]);
-	  if (nstr == 0)
-	    /* Hash table entry is empty.  */
-	    return NULL;
-
-	  if (W (domain->must_swap, domain->orig_tab[nstr - 1].length) == len
-	      && strcmp (msgid,
-			 domain->data + W (domain->must_swap,
-					   domain->orig_tab[nstr - 1].offset))
-	         == 0)
-	    return (char *) domain->data
-	      + W (domain->must_swap, domain->trans_tab[nstr - 1].offset);
-	}
-      /* NOTREACHED */
+      if (W (domain->must_swap, domain->orig_tab[nstr - 1].length) == len && strcmp (msgid, domain->data + W (domain->must_swap, domain->orig_tab[nstr - 1].offset)) == 0)
+	return (char *) domain->data + W (domain->must_swap, domain->trans_tab[nstr - 1].offset);
     }
+    /* NOTREACHED */
+  }
 
   /* Now we try the default method:  binary search in the sorted
      array of messages.  */
   bottom = 0;
   top = domain->nstrings;
   while (bottom < top)
-    {
-      int cmp_val;
+  {
+    int cmp_val;
 
-      act = (bottom + top) / 2;
-      cmp_val = strcmp (msgid, domain->data
-			       + W (domain->must_swap,
-				    domain->orig_tab[act].offset));
-      if (cmp_val < 0)
-	top = act;
-      else if (cmp_val > 0)
-	bottom = act + 1;
-      else
-	break;
-    }
+    act = (bottom + top) / 2;
+    cmp_val = strcmp (msgid, domain->data + W (domain->must_swap, domain->orig_tab[act].offset));
+    if (cmp_val < 0)
+      top = act;
+    else if (cmp_val > 0)
+      bottom = act + 1;
+    else
+      break;
+  }
 
   /* If an translation is found return this.  */
-  return bottom >= top ? NULL : (char *) domain->data
-                                + W (domain->must_swap,
-				     domain->trans_tab[act].offset);
+  return bottom >= top ? NULL : (char *) domain->data + W (domain->must_swap, domain->trans_tab[act].offset);
 }
 
 
 /* Return string representation of locale CATEGORY.  */
-static const char *
-internal_function
+static const char *internal_function
 category_to_name (category)
      int category;
 {
@@ -539,8 +517,7 @@ category_to_name (category)
 }
 
 /* Guess value of current locale from value of the environment variables.  */
-static const char *
-internal_function
+static const char *internal_function
 guess_category_value (category, categoryname)
      int category;
      const char *categoryname;
@@ -602,18 +579,17 @@ stpcpy (dest, src)
 #ifdef _LIBC
 /* If we want to free all resources we have to do some work at
    program's end.  */
-static void __attribute__ ((unused))
-free_mem (void)
+static void __attribute__ ((unused)) free_mem (void)
 {
   struct binding *runp;
 
   for (runp = _nl_domain_bindings; runp != NULL; runp = runp->next)
-    {
-      free (runp->domainname);
-      if (runp->dirname != _nl_default_dirname)
-	/* Yes, this is a pointer comparison.  */
-	free (runp->dirname);
-    }
+  {
+    free (runp->domainname);
+    if (runp->dirname != _nl_default_dirname)
+      /* Yes, this is a pointer comparison.  */
+      free (runp->dirname);
+  }
 
   if (_nl_current_default_domain != _nl_default_default_domain)
     /* Yes, again a pointer comparison.  */

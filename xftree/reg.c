@@ -76,153 +76,153 @@ reg_build_list (char *file)
   regfile = g_strdup (file);
   fp = fopen (file, "r");
   if (!fp)
-    {
-      printf ("Warning, can't find %s\n", file);
-      return (NULL);
-    }
+  {
+    printf ("Warning, can't find %s\n", file);
+    return (NULL);
+  }
   buf_end = buf + BUFSIZE - 1;
   line = 0;
   while (fgets (buf, 1024, fp) != NULL)
+  {
+    line++;
+    p = buf;
+    while ((*p == ' ') || (*p == '\t'))
+      p++;
+    if (*p == '#')
+      continue;
+    prg = g_malloc (sizeof (reg_t));
+    if (!prg)
     {
-      line++;
-      p = buf;
-      while ((*p == ' ') || (*p == '\t'))
-	p++;
-      if (*p == '#')
-	continue;
-      prg = g_malloc (sizeof (reg_t));
-      if (!prg)
-	{
-	  perror ("malloc()");
-	  fclose (fp);
-	  return (g_reg);
-	}
-      prg->app = prg->sfx = prg->arg = NULL;
-      if (*p != '(')
-	{
-	  /* old style */
-	  *arg = '\0';
-	  sscanf (buf, "%s %[^ \n] %[^\n]", suffix, cmd, arg);
-	  prg->sfx = g_strdup (suffix);
-	  prg->app = g_strdup (cmd);
-	  if (*arg)
-	    prg->arg = g_strdup (arg);
-	  prg->len = strlen (suffix);
-	  g_reg = g_list_append (g_reg, prg);
-	}
-      else
-	{
-	  /* new style:
-	   * (suffix)(program)(arguments)
-	   */
-	  inner = 0;
-	  p++;
-	  ep = p;
-	  while (*ep && (ep < buf_end))
-	    {
-	      if (*ep == '(')
-		inner++;
-	      else if (*ep == ')')
-		{
-		  if (inner)
-		    inner--;
-		  else
-		    break;
-		}
-	      ep++;
-	    }
-	  if (*ep != ')')
-	    {
-	      /* parse error */
-	      fprintf (stderr, "parse error at line %d\n", line);
-	      reg_free_reg (prg);
-	      continue;
-	    }
-	  *ep = '\0';
-	  prg->sfx = g_strdup (p);
-	  prg->len = strlen (prg->sfx);
-
-	  /* find program */
-	  p = ep + 1;
-	  while (*p && (p < buf_end))
-	    {
-	      if (*p == '(')
-		break;
-	      p++;
-	    }
-	  if (*p != '(')
-	    {
-	      /* parse error */
-	      fprintf (stderr, "parse error at line %d\n", line);
-	      reg_free_reg (prg);
-	      continue;
-	    }
-	  inner = 0;
-	  p++;
-	  ep = p;
-	  while (*ep && (ep < buf_end))
-	    {
-	      if (*ep == '(')
-		inner++;
-	      else if (*ep == ')')
-		{
-		  if (inner)
-		    inner--;
-		  else
-		    break;
-		}
-	      ep++;
-	    }
-	  if (*ep != ')')
-	    {
-	      /* parse error */
-	      fprintf (stderr, "parse error at line %d\n", line);
-	      reg_free_reg (prg);
-	      continue;
-	    }
-	  *ep = '\0';
-	  prg->app = g_strdup (p);
-
-	  /* find args */
-	  p = ep + 1;
-	  while (*p && (p < buf_end))
-	    {
-	      if (*p == '(')
-		break;
-	      p++;
-	    }
-	  if (*p == '(')
-	    {
-	      inner = 0;
-	      p++;
-	      ep = p;
-	      while (*ep && (ep < buf_end))
-		{
-		  if (*ep == '(')
-		    inner++;
-		  else if (*ep == ')')
-		    {
-		      if (inner)
-			inner--;
-		      else
-			break;
-		    }
-		  ep++;
-		}
-	      if (*ep != ')')
-		{
-		  /* parse error */
-		  fprintf (stderr, "parse error at line %d\n", line);
-		  reg_free_reg (prg);
-		  continue;
-		}
-	      *ep = '\0';
-	      if (p != ep)
-		prg->arg = g_strdup (p);
-	    }
-	  g_reg = g_list_append (g_reg, prg);
-	}
+      perror ("malloc()");
+      fclose (fp);
+      return (g_reg);
     }
+    prg->app = prg->sfx = prg->arg = NULL;
+    if (*p != '(')
+    {
+      /* old style */
+      *arg = '\0';
+      sscanf (buf, "%s %[^ \n] %[^\n]", suffix, cmd, arg);
+      prg->sfx = g_strdup (suffix);
+      prg->app = g_strdup (cmd);
+      if (*arg)
+	prg->arg = g_strdup (arg);
+      prg->len = strlen (suffix);
+      g_reg = g_list_append (g_reg, prg);
+    }
+    else
+    {
+      /* new style:
+       * (suffix)(program)(arguments)
+       */
+      inner = 0;
+      p++;
+      ep = p;
+      while (*ep && (ep < buf_end))
+      {
+	if (*ep == '(')
+	  inner++;
+	else if (*ep == ')')
+	{
+	  if (inner)
+	    inner--;
+	  else
+	    break;
+	}
+	ep++;
+      }
+      if (*ep != ')')
+      {
+	/* parse error */
+	fprintf (stderr, "parse error at line %d\n", line);
+	reg_free_reg (prg);
+	continue;
+      }
+      *ep = '\0';
+      prg->sfx = g_strdup (p);
+      prg->len = strlen (prg->sfx);
+
+      /* find program */
+      p = ep + 1;
+      while (*p && (p < buf_end))
+      {
+	if (*p == '(')
+	  break;
+	p++;
+      }
+      if (*p != '(')
+      {
+	/* parse error */
+	fprintf (stderr, "parse error at line %d\n", line);
+	reg_free_reg (prg);
+	continue;
+      }
+      inner = 0;
+      p++;
+      ep = p;
+      while (*ep && (ep < buf_end))
+      {
+	if (*ep == '(')
+	  inner++;
+	else if (*ep == ')')
+	{
+	  if (inner)
+	    inner--;
+	  else
+	    break;
+	}
+	ep++;
+      }
+      if (*ep != ')')
+      {
+	/* parse error */
+	fprintf (stderr, "parse error at line %d\n", line);
+	reg_free_reg (prg);
+	continue;
+      }
+      *ep = '\0';
+      prg->app = g_strdup (p);
+
+      /* find args */
+      p = ep + 1;
+      while (*p && (p < buf_end))
+      {
+	if (*p == '(')
+	  break;
+	p++;
+      }
+      if (*p == '(')
+      {
+	inner = 0;
+	p++;
+	ep = p;
+	while (*ep && (ep < buf_end))
+	{
+	  if (*ep == '(')
+	    inner++;
+	  else if (*ep == ')')
+	  {
+	    if (inner)
+	      inner--;
+	    else
+	      break;
+	  }
+	  ep++;
+	}
+	if (*ep != ')')
+	{
+	  /* parse error */
+	  fprintf (stderr, "parse error at line %d\n", line);
+	  reg_free_reg (prg);
+	  continue;
+	}
+	*ep = '\0';
+	if (p != ep)
+	  prg->arg = g_strdup (p);
+      }
+      g_reg = g_list_append (g_reg, prg);
+    }
+  }
   fclose (fp);
   return (g_reg);
 }
@@ -234,14 +234,14 @@ reg_app_by_suffix (GList * g_reg, char *sfx)
 {
   reg *prg;
   while (g_reg)
+  {
+    prg = g_reg->data;
+    if (my_strcasecmp (prg->sfx, sfx) == 0)
     {
-      prg = g_reg->data;
-      if (my_strcasecmp (prg->sfx, sfx) == 0)
-	{
-	  return (prg->app);
-	}
-      g_reg = g_reg->next;
+      return (prg->app);
     }
+    g_reg = g_reg->next;
+  }
   return (NULL);
 }
 
@@ -252,14 +252,14 @@ reg_prog_by_suffix (GList * g_reg, char *sfx)
 {
   reg_t *prg;
   while (g_reg)
+  {
+    prg = g_reg->data;
+    if (my_strcasecmp (prg->sfx, sfx) == 0)
     {
-      prg = g_reg->data;
-      if (my_strcasecmp (prg->sfx, sfx) == 0)
-	{
-	  return (prg);
-	}
-      g_reg = g_reg->next;
+      return (prg);
     }
+    g_reg = g_reg->next;
+  }
   return (NULL);
 }
 
@@ -276,19 +276,19 @@ reg_app_by_file (GList * g_reg, char *file)
   len = strlen (file);
 
   while (g_reg)
+  {
+    prg = g_reg->data;
+    if ((!prg) || (prg->len > len))
     {
-      prg = g_reg->data;
-      if ((!prg) || (prg->len > len))
-	{
-	  g_reg = g_reg->next;
-	  continue;
-	}
-      if (my_strcasecmp (file + (len - prg->len), prg->sfx) == 0)
-	{
-	  return (prg->app);
-	}
       g_reg = g_reg->next;
+      continue;
     }
+    if (my_strcasecmp (file + (len - prg->len), prg->sfx) == 0)
+    {
+      return (prg->app);
+    }
+    g_reg = g_reg->next;
+  }
   return (NULL);
 }
 
@@ -305,19 +305,19 @@ reg_prog_by_file (GList * g_reg, char *file)
   len = strlen (file);
 
   while (g_reg)
+  {
+    prg = g_reg->data;
+    if ((!prg) || (prg->len > len))
     {
-      prg = g_reg->data;
-      if ((!prg) || (prg->len > len))
-	{
-	  g_reg = g_reg->next;
-	  continue;
-	}
-      if (my_strcasecmp (file + (len - prg->len), prg->sfx) == 0)
-	{
-	  return (prg);
-	}
       g_reg = g_reg->next;
+      continue;
     }
+    if (my_strcasecmp (file + (len - prg->len), prg->sfx) == 0)
+    {
+      return (prg);
+    }
+    g_reg = g_reg->next;
+  }
   return (NULL);
 }
 
@@ -327,14 +327,14 @@ int
 mymy_strcasecmp (char *s1, char *s2)
 {
   if ((s1 == NULL) || (s2 == NULL))
-    {
-      if (s1 == s2)
-	return 0;
-      if (s1 > s2)
-	return 1;
-      else
-	return -1;
-    }
+  {
+    if (s1 == s2)
+      return 0;
+    if (s1 > s2)
+      return 1;
+    else
+      return -1;
+  }
   return (my_strcasecmp (s1, s2));
 }
 
@@ -350,42 +350,41 @@ reg_add_suffix (GList * g_reg, char *sfx, char *program, char *args)
    * check it out ..
    */
   while (g_tmp)
+  {
+    prg = g_tmp->data;
+    if ((my_strcasecmp (prg->sfx, sfx) == 0) && (mymy_strcasecmp (prg->arg, args) == 0))
     {
-      prg = g_tmp->data;
-      if ((my_strcasecmp (prg->sfx, sfx) == 0)
-	  && (mymy_strcasecmp (prg->arg, args) == 0))
-	{
-	  found = 1;
-	  break;
-	}
-      g_tmp = g_tmp->next;
+      found = 1;
+      break;
     }
+    g_tmp = g_tmp->next;
+  }
   if (found)
+  {
+    g_free (prg->app);
+    prg->app = g_strdup (program);
+    if (args)
     {
-      g_free (prg->app);
-      prg->app = g_strdup (program);
-      if (args)
-	{
-	  g_free (prg->arg);
-	  prg->arg = g_strdup (args);
-	}
+      g_free (prg->arg);
+      prg->arg = g_strdup (args);
     }
+  }
   else
+  {
+    prg = g_malloc (sizeof (reg));
+    prg->app = g_strdup (program);
+    prg->sfx = g_strdup (sfx);
+    prg->len = strlen (sfx);
+    if (args)
     {
-      prg = g_malloc (sizeof (reg));
-      prg->app = g_strdup (program);
-      prg->sfx = g_strdup (sfx);
-      prg->len = strlen (sfx);
-      if (args)
-	{
-	  prg->arg = g_strdup (args);
-	}
-      else
-	{
-	  prg->arg = NULL;
-	}
-      g_reg = g_list_append (g_reg, prg);
+      prg->arg = g_strdup (args);
     }
+    else
+    {
+      prg->arg = NULL;
+    }
+    g_reg = g_list_append (g_reg, prg);
+  }
   g_reg = g_list_sort (g_reg, (GCompareFunc) compare_sfx);
   return g_reg;
 }
@@ -398,15 +397,15 @@ reg_destroy_list (GList * list)
   GList *g_tmp = list;
   reg *prg;
   while (g_tmp)
-    {
-      prg = (reg *) g_tmp->data;
-      g_free (prg->sfx);
-      g_free (prg->app);
-      if (prg->arg)
-	g_free (prg->arg);
-      g_free (prg);
-      g_tmp = g_tmp->next;
-    }
+  {
+    prg = (reg *) g_tmp->data;
+    g_free (prg->sfx);
+    g_free (prg->app);
+    if (prg->arg)
+      g_free (prg->arg);
+    g_free (prg);
+    g_tmp = g_tmp->next;
+  }
   g_list_free (list);
 }
 
@@ -424,27 +423,27 @@ reg_save (GList * g_reg)
     return (0);
   fp = fopen (regfile, "w");
   if (!fp)
-    {
-      perror (regfile);
-      return (FALSE);
-    }
+  {
+    perror (regfile);
+    return (FALSE);
+  }
   fprintf (fp, "# (suffix) (program) (args)\n");
   while (g_reg)
+  {
+    prg = g_reg->data;
+    if (prg)
     {
-      prg = g_reg->data;
-      if (prg)
-	{
-	  if (prg->arg)
-	    {
-	      fprintf (fp, "(%s) (%s) (%s)\n", prg->sfx, prg->app, prg->arg);
-	    }
-	  else
-	    {
-	      fprintf (fp, "(%s) (%s) ()\n", prg->sfx, prg->app);
-	    }
-	}
-      g_reg = g_reg->next;
+      if (prg->arg)
+      {
+	fprintf (fp, "(%s) (%s) (%s)\n", prg->sfx, prg->app, prg->arg);
+      }
+      else
+      {
+	fprintf (fp, "(%s) (%s) ()\n", prg->sfx, prg->app);
+      }
     }
+    g_reg = g_reg->next;
+  }
   fclose (fp);
   return (TRUE);
 }
@@ -460,26 +459,25 @@ reg_app_list (GList * g_reg)
   GList *g_tmp;
 
   while (g_reg)
-    {
-      g_apps = g_list_append (g_apps, ((reg *) g_reg->data)->app);
-      g_reg = g_reg->next;
-    }
+  {
+    g_apps = g_list_append (g_apps, ((reg *) g_reg->data)->app);
+    g_reg = g_reg->next;
+  }
   g_apps = g_list_sort (g_apps, (GCompareFunc) my_strcasecmp);
   /* remove dupes */
   g_tmp = g_apps;
   while (g_tmp)
+  {
+    if (g_tmp->next)
     {
-      if (g_tmp->next)
-	{
-	  if (my_strcasecmp ((char *) g_tmp->data, (char *) g_tmp->next->data)
-	      == 0)
-	    {
-	      g_tmp = g_apps = g_list_remove (g_apps, g_tmp->data);
-	      continue;
-	    }
-	}
-      g_tmp = g_tmp->next;
+      if (my_strcasecmp ((char *) g_tmp->data, (char *) g_tmp->next->data) == 0)
+      {
+	g_tmp = g_apps = g_list_remove (g_apps, g_tmp->data);
+	continue;
+      }
     }
+    g_tmp = g_tmp->next;
+  }
   return (g_apps);
 }
 

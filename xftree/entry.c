@@ -66,11 +66,11 @@ void
 entry_free (entry * en)
 {
   if (en)
-    {
-      g_free (en->path);
-      g_free (en->label);
-      g_free (en);
-    }
+  {
+    g_free (en->path);
+    g_free (en->label);
+    g_free (en);
+  }
 }
 
 /*
@@ -97,9 +97,9 @@ entry_new_by_path_and_label (char *path, char *label)
   struct tm *t;
 
   if (lstat (path, &s) == -1)
-    {
-      return (NULL);
-    }
+  {
+    return (NULL);
+  }
   en = entry_new ();
   if (!en)
     return (NULL);
@@ -117,56 +117,55 @@ entry_new_by_path_and_label (char *path, char *label)
   en->date.min = t->tm_min;
 
   if (S_ISLNK (s.st_mode))
+  {
+    en->type |= FT_LINK;
+    if (stat (path, &s) == -1)
     {
-      en->type |= FT_LINK;
-      if (stat (path, &s) == -1)
-	{
-	  en->type |= FT_STALE_LINK;
-	  en->size = 0;
-	  return (en);
-	}
+      en->type |= FT_STALE_LINK;
+      en->size = 0;
+      return (en);
     }
+  }
   en->mode = s.st_mode;
 
   if (io_is_dirup (en->label))
-    {
-      en->type = FT_DIR_UP | FT_DIR;
-      return (en);
-    }
+  {
+    en->type = FT_DIR_UP | FT_DIR;
+    return (en);
+  }
 
   if (S_ISDIR (s.st_mode))
-    {
-      en->type |= FT_DIR;
-      if (access (path, R_OK | X_OK) != 0)
-	en->type |= FT_DIR_PD;
-    }
+  {
+    en->type |= FT_DIR;
+    if (access (path, R_OK | X_OK) != 0)
+      en->type |= FT_DIR_PD;
+  }
   else if (S_ISREG (s.st_mode))
-    {
-      en->type |= FT_FILE;
-      if ((s.st_mode & S_IXUSR) ||
-	  (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
-	en->type |= FT_EXE;
-    }
+  {
+    en->type |= FT_FILE;
+    if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
+      en->type |= FT_EXE;
+  }
   else if (S_ISCHR (s.st_mode))
-    {
-      en->type |= FT_CHAR_DEV;
-    }
+  {
+    en->type |= FT_CHAR_DEV;
+  }
   else if (S_ISBLK (s.st_mode))
-    {
-      en->type |= FT_BLOCK_DEV;
-    }
+  {
+    en->type |= FT_BLOCK_DEV;
+  }
   else if (S_ISFIFO (s.st_mode))
-    {
-      en->type |= FT_FIFO;
-    }
+  {
+    en->type |= FT_FIFO;
+  }
   else if (S_ISSOCK (s.st_mode))
-    {
-      en->type |= FT_SOCKET;
-    }
+  {
+    en->type |= FT_SOCKET;
+  }
   else
-    {
-      en->type |= FT_UNKNOWN;
-    }
+  {
+    en->type |= FT_UNKNOWN;
+  }
   return (en);
 }
 
@@ -182,27 +181,27 @@ entry_new_by_path (char *path)
   p = label = g_strdup (path);
   p = strrchr (label, '/');
   if (p)
+  {
+    if (p != label)
     {
-      if (p != label)
+      if (*(p + 1) == '\0')
+      {
+	/* remove slash at the end */
+	*p = '\0';
+	/* search again */
+	p = strrchr (label, '/');
+	if (!p)
 	{
-	  if (*(p + 1) == '\0')
-	    {
-	      /* remove slash at the end */
-	      *p = '\0';
-	      /* search again */
-	      p = strrchr (label, '/');
-	      if (!p)
-		{
-		  /* give up */
-		  p = label;
-		}
-	    }
-	  else
-	    {
-	      p++;
-	    }
+	  /* give up */
+	  p = label;
 	}
+      }
+      else
+      {
+	p++;
+      }
     }
+  }
   else
     p = label;
   en = entry_new_by_path_and_label (path, p);
@@ -225,27 +224,27 @@ entry_new_by_type (char *path, int type)
 
   p = strrchr (en->path, '/');
   if (p)
+  {
+    if (p != en->path)
     {
-      if (p != en->path)
+      if (*(p + 1) == '\0')
+      {
+	/* remove slash at the end */
+	*p = '\0';
+	/* search again */
+	p = strrchr (en->path, '/');
+	if (!p)
 	{
-	  if (*(p + 1) == '\0')
-	    {
-	      /* remove slash at the end */
-	      *p = '\0';
-	      /* search again */
-	      p = strrchr (en->path, '/');
-	      if (!p)
-		{
-		  /* give up */
-		  p = en->path;
-		}
-	    }
-	  else
-	    {
-	      p++;
-	    }
+	  /* give up */
+	  p = en->path;
 	}
+      }
+      else
+      {
+	p++;
+      }
     }
+  }
   else
     p = en->path;
   en->label = g_strdup (p);
@@ -267,38 +266,38 @@ entry_update (entry * en)
   int rc = FALSE;
 
   if (lstat (en->path, &s) == -1)
-    {
-      return (ERROR);
-    }
+  {
+    return (ERROR);
+  }
   if (en->size != s.st_size)
-    {
-      rc = TRUE;
-      en->size = s.st_size;
-    }
+  {
+    rc = TRUE;
+    en->size = s.st_size;
+  }
   if (en->inode != s.st_ino)
-    {
-      rc = TRUE;
-      en->inode = s.st_ino;
-    }
+  {
+    rc = TRUE;
+    en->inode = s.st_ino;
+  }
   if (en->mtime != s.st_mtime)
-    {
-      rc = TRUE;
-      en->mtime = s.st_mtime;
-      t = localtime (&s.st_mtime);
-      en->date.year = 1900 + t->tm_year;
-      en->date.month = t->tm_mon + 1;
-      en->date.day = t->tm_mday;
-      en->date.hour = t->tm_hour;
-      en->date.min = t->tm_min;
-    }
+  {
+    rc = TRUE;
+    en->mtime = s.st_mtime;
+    t = localtime (&s.st_mtime);
+    en->date.year = 1900 + t->tm_year;
+    en->date.month = t->tm_mon + 1;
+    en->date.day = t->tm_mday;
+    en->date.hour = t->tm_hour;
+    en->date.min = t->tm_min;
+  }
   if (S_ISLNK (s.st_mode))
+  {
+    if (stat (en->path, &s) == -1)
     {
-      if (stat (en->path, &s) == -1)
-	{
-	  en->type |= FT_STALE_LINK;
-	  return (TRUE);
-	}
+      en->type |= FT_STALE_LINK;
+      return (TRUE);
     }
+  }
   if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode)))
     return (ERROR);
 
@@ -313,64 +312,63 @@ entry_type_update (entry * en)
   int rc = FALSE;
 
   if (lstat (en->path, &s) == -1)
-    {
-      return (ERROR);
-    }
+  {
+    return (ERROR);
+  }
 
   if (S_ISLNK (s.st_mode))
+  {
+    if (stat (en->path, &s) == -1)
     {
-      if (stat (en->path, &s) == -1)
-	{
-	  en->type |= FT_STALE_LINK;
-	  return (TRUE);
-	}
+      en->type |= FT_STALE_LINK;
+      return (TRUE);
     }
+  }
   if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode)))
     return (ERROR);
 
   if (en->mode != s.st_mode)
+  {
+    rc = TRUE;
+    en->mode = s.st_mode;
+    en->type = 0;
+    if (S_ISDIR (s.st_mode))
     {
-      rc = TRUE;
-      en->mode = s.st_mode;
-      en->type = 0;
-      if (S_ISDIR (s.st_mode))
-	{
-	  en->type |= FT_DIR;
-	  if (access (en->path, R_OK | X_OK) != 0)
-	    en->type |= FT_DIR_PD;
-	}
-      else if (S_ISREG (s.st_mode))
-	{
-	  en->type |= FT_FILE;
-	  if ((s.st_mode & S_IXUSR) ||
-	      (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
-	    en->type |= FT_EXE;
-	}
-      else if (S_ISCHR (s.st_mode))
-	{
-	  en->type |= FT_CHAR_DEV;
-	}
-      else if (S_ISBLK (s.st_mode))
-	{
-	  en->type |= FT_BLOCK_DEV;
-	}
-      else if (S_ISFIFO (s.st_mode))
-	{
-	  en->type |= FT_FIFO;
-	}
-      else if (S_ISSOCK (s.st_mode))
-	{
-	  en->type |= FT_SOCKET;
-	}
-      else
-	{
-	  en->type |= FT_UNKNOWN;
-	}
-      if (io_is_dirup (en->label))
-	{
-	  en->type = FT_DIR_UP | FT_DIR;
-	}
+      en->type |= FT_DIR;
+      if (access (en->path, R_OK | X_OK) != 0)
+	en->type |= FT_DIR_PD;
     }
+    else if (S_ISREG (s.st_mode))
+    {
+      en->type |= FT_FILE;
+      if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
+	en->type |= FT_EXE;
+    }
+    else if (S_ISCHR (s.st_mode))
+    {
+      en->type |= FT_CHAR_DEV;
+    }
+    else if (S_ISBLK (s.st_mode))
+    {
+      en->type |= FT_BLOCK_DEV;
+    }
+    else if (S_ISFIFO (s.st_mode))
+    {
+      en->type |= FT_FIFO;
+    }
+    else if (S_ISSOCK (s.st_mode))
+    {
+      en->type |= FT_SOCKET;
+    }
+    else
+    {
+      en->type |= FT_UNKNOWN;
+    }
+    if (io_is_dirup (en->label))
+    {
+      en->type = FT_DIR_UP | FT_DIR;
+    }
+  }
 
   return (rc);
 }

@@ -30,7 +30,7 @@ enum
   DND_NONE,
   DND_MOVE,
   DND_COPY,
-  DND_LINK,
+  DND_LINK
 };
 
 enum
@@ -41,7 +41,7 @@ enum
   TARGET_XTREE_WIDGET,
   TARGET_XTREE_WINDOW,
   TARGET_ROOTWIN,
-  TARGETS,
+  TARGETS
 };
 
 #endif

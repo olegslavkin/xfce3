@@ -80,104 +80,102 @@ main (int argc, char *argv[])
   strcpy (path, getenv ("HOME"));
 
   while ((c = getopt (argc, argv, "vg:i:")) != EOF)
+  {
+    switch (c)
     {
-      switch (c)
-	{
-	case 'v':
-	  verbose++;
-	  break;
-	case 'g':
-	  geometry = optarg;
-	  break;
-	case 'i':
-	  if (atoi (optarg))
-	    flags |= IGNORE_HIDDEN;
-	  else
-	    flags &= ~IGNORE_HIDDEN;
-	  break;
-	default:
-	  break;
-	}
+    case 'v':
+      verbose++;
+      break;
+    case 'g':
+      geometry = optarg;
+      break;
+    case 'i':
+      if (atoi (optarg))
+	flags |= IGNORE_HIDDEN;
+      else
+	flags &= ~IGNORE_HIDDEN;
+      break;
+    default:
+      break;
     }
+  }
   if (argc != optind)
-    {
-      strcpy (path, argv[argc - 1]);
-    }
+  {
+    strcpy (path, argv[argc - 1]);
+  }
   if (strcmp (path, ".") == 0)
-    {
-      getcwd (path, PATH_MAX);
-    }
+  {
+    getcwd (path, PATH_MAX);
+  }
   if (verbose)
-    {
-      printf (_("XFTree, based on XTree Version %s\n"), VERSION);
-      printf (_("directory: %s\n"), path);
-    }
+  {
+    printf (_("XFTree, based on XTree Version %s\n"), VERSION);
+    printf (_("directory: %s\n"), path);
+  }
   sprintf (base, "%s/%s", getenv ("HOME"), BASE_DIR);
   if (stat (base, &st) == -1)
+  {
+    if (verbose)
     {
-      if (verbose)
-	{
-	  printf (_("creating directory: %s\n"), base);
-	}
-      mkdir (base, 0700);
+      printf (_("creating directory: %s\n"), base);
     }
+    mkdir (base, 0700);
+  }
   sprintf (reg, "%s/xtree.reg", base);
   if (stat (reg, &st) == -1)
+  {
+    char buffer[MAXSTRLEN + 1];
+    char *src, *dst;
+    FILE *copyfile;
+    FILE *backfile;
+    int nb_read;
+
+    src = (char *) malloc (sizeof (char) * (sizeof (XFCE_CONFDIR) + 15));
+    dst = (char *) malloc (sizeof (char) * (sizeof (reg) + 1));
+    sprintf (src, "%s/xtree.reg", XFCE_CONFDIR);
+    sprintf (dst, "%s", reg);
+
+    copyfile = fopen (src, "r");
+    backfile = fopen (dst, "w");
+
+    if ((backfile) && (copyfile))
     {
-      char buffer[MAXSTRLEN + 1];
-      char *src, *dst;
-      FILE *copyfile;
-      FILE *backfile;
-      int nb_read;
-
-      src = (char *) malloc (sizeof (char) * (sizeof (XFCE_CONFDIR) + 15));
-      dst = (char *) malloc (sizeof (char) * (sizeof (reg) + 1));
-      sprintf (src, "%s/xtree.reg", XFCE_CONFDIR);
-      sprintf (dst, "%s", reg);
-
-      copyfile = fopen (src, "r");
-      backfile = fopen (dst, "w");
-
-      if ((backfile) && (copyfile))
-	{
-	  while ((nb_read = fread (buffer, 1, MAXSTRLEN, copyfile)) > 0)
-	    {
-	      fwrite (buffer, 1, nb_read, backfile);
-	    }
-	  fflush (backfile);
-	  fclose (backfile);
-	  fclose (copyfile);
-	}
-      free (src);
-      free (dst);
+      while ((nb_read = fread (buffer, 1, MAXSTRLEN, copyfile)) > 0)
+      {
+	fwrite (buffer, 1, nb_read, backfile);
+      }
+      fflush (backfile);
+      fclose (backfile);
+      fclose (copyfile);
     }
+    free (src);
+    free (dst);
+  }
   sprintf (trash, "%s/%s", base, TRASH_DIR);
   if (stat (trash, &st) == -1)
+  {
+    if (verbose)
     {
-      if (verbose)
-	{
-	  printf (_("creating directory: %s\n"), trash);
-	}
-      mkdir (trash, 0700);
+      printf (_("creating directory: %s\n"), trash);
     }
+    mkdir (trash, 0700);
+  }
   if (strncmp (path, "..", 2) == 0)
-    {
-      sprintf (tmp, "%s/", getcwd (NULL, PATH_MAX));
-      strcat (tmp, path);
-      strcpy (path, tmp);
-    }
+  {
+    sprintf (tmp, "%s/", getcwd (NULL, PATH_MAX));
+    strcat (tmp, path);
+    strcpy (path, tmp);
+  }
   strcpy (tmp, uri_clear_path (path));
   strcpy (path, tmp);
   if (geometry)
+  {
+    XParseGeometry (geometry, &geo.x, &geo.y, (unsigned int *) &geo.width, (unsigned int *) &geo.height);
+    if (verbose)
     {
-      XParseGeometry (geometry, &geo.x, &geo.y, (unsigned int *) &geo.width,
-		      (unsigned int *) &geo.height);
-      if (verbose)
-	{
-	  printf (_("geometry: %dx%d+%d+%d\n"), geo.width, geo.height,
-		  geo.x, geo.y);
-	}
+      printf (_("geometry: %dx%d+%d+%d\n"), geo.width, geo.height, geo.x, geo.y);
     }
+  }
   fcntl (ConnectionNumber (GDK_DISPLAY ()), F_SETFD, 1);
   gui_main (path, base, trash, reg, &geo, flags);
   xfce_end ((gpointer) NULL, 0);

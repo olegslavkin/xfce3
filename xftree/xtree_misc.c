@@ -47,13 +47,13 @@ list_from_selection (GtkCTree * ctree, GList ** list)
   sel = GTK_CLIST (ctree)->selection;
 
   while (sel)
-    {
-      num++;
-      node = sel->data;
-      en = gtk_ctree_node_get_row_data (ctree, node);
-      *list = g_list_append (*list, g_strdup (en->path));
-      sel = sel->next;
-    }
+  {
+    num++;
+    node = sel->data;
+    en = gtk_ctree_node_get_row_data (ctree, node);
+    *list = g_list_append (*list, g_strdup (en->path));
+    sel = sel->next;
+  }
   return (num);
 }
 
@@ -71,14 +71,14 @@ entry_list_from_selection (GtkCTree * ctree, GList ** list, int *state)
   sel = GTK_CLIST (ctree)->selection;
 
   while (sel && state)
-    {
-      num++;
-      en = gtk_ctree_node_get_row_data (ctree, GTK_CTREE_NODE (sel->data));
-      new_en = entry_dupe (en);
-      new_en->org_mem = en;
-      *list = g_list_append (*list, new_en);
-      sel = sel->next;
-    }
+  {
+    num++;
+    en = gtk_ctree_node_get_row_data (ctree, GTK_CTREE_NODE (sel->data));
+    new_en = entry_dupe (en);
+    new_en->org_mem = en;
+    *list = g_list_append (*list, new_en);
+    sel = sel->next;
+  }
   return (num);
 }
 
@@ -91,10 +91,10 @@ entry_list_free (GList * list)
   if (!list)
     return (0);
   while (t)
-    {
-      entry_free ((entry *) t->data);
-      t = t->next;
-    }
+  {
+    entry_free ((entry *) t->data);
+    t = t->next;
+  }
   g_list_free (list);
   return (1);
 }

@@ -50,16 +50,16 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
 
 #define GREP "grep"
 
-static void *object=NULL;
+static void *object = NULL;
 static int initial;
 static int terminated = 0;
 static char *token;
-static int options=0,type=0;
-static long size=0;
-static long month_t=0;
-static long unsigned day_t=0;
-static long unsigned hour_t=0;
-static long unsigned min_t=0;
+static int options = 0, type = 0;
+static long size = 0;
+static long month_t = 0;
+static long unsigned day_t = 0;
+static long unsigned hour_t = 0;
+static long unsigned min_t = 0;
 
 #define GLOBRUN_PID     	0x01
 #define GLOBRUN_COUNT   	0x02
@@ -78,22 +78,27 @@ static long unsigned min_t=0;
 
 #define MAX_ARG 25
 
-static int display (char *input)
+static int
+display (char *input)
 {
-  if (terminated) return terminated; /* die quietly and quickly */
+  if (terminated)
+    return terminated;		/* die quietly and quickly */
   printf ("%s\n", input);
-  if (time (NULL) - initial > 3) {
-      fflush (NULL);
-      initial = time (NULL);
+  if (time (NULL) - initial > 3)
+  {
+    fflush (NULL);
+    initial = time (NULL);
   }
   return terminated;
 }
 
-static int grep (char *file)
+static int
+grep (char *file)
 {
   static char *arguments[MAX_ARG];
   int status = 0;
-  if (terminated) return terminated; /* die quietly and quickly */
+  if (terminated)
+    return terminated;		/* die quietly and quickly */
 
   arguments[status++] = "grep";
   arguments[status++] = "-d";
@@ -111,22 +116,22 @@ static int grep (char *file)
     arguments[status++] = "-Z";
 
   if ((options & GLOBRUN_COUNT) && (options & GLOBRUN_INVERT))
-    {
-      arguments[status++] = "-c";
-      arguments[status++] = "-v";
-    }
+  {
+    arguments[status++] = "-c";
+    arguments[status++] = "-v";
+  }
   if ((options & GLOBRUN_COUNT) && !(options & GLOBRUN_INVERT))
-    {
-      arguments[status++] = "-c";
-    }
+  {
+    arguments[status++] = "-c";
+  }
   if (!(options & GLOBRUN_COUNT) && (options & GLOBRUN_INVERT))
-    {
-      arguments[status++] = "-L";
-    }
+  {
+    arguments[status++] = "-L";
+  }
   if (!(options & GLOBRUN_COUNT) && !(options & GLOBRUN_INVERT))
-    {
-      arguments[status++] = "-l";
-    }
+  {
+    arguments[status++] = "-l";
+  }
 
   if (options & GLOBRUN_REG_EXP)
     arguments[status++] = "-E";
@@ -137,17 +142,18 @@ static int grep (char *file)
   arguments[status++] = file;
   arguments[status++] = (char *) 0;
   if (options & GLOBRUN_VERBOSE)
-    {
-      int i;
-      for (i = 0; i < status; i++)
-	printf ("%s ", arguments[i]);
-      printf ("\n");
-    }
+  {
+    int i;
+    for (i = 0; i < status; i++)
+      printf ("%s ", arguments[i]);
+    printf ("\n");
+  }
 
-  if (fork () == 0){
+  if (fork () == 0)
+  {
     execvp (GREP, arguments);
-    fprintf(stderr,"%s not found in path!\n",GREP);
-    exit(1);
+    fprintf (stderr, "%s not found in path!\n", GREP);
+    exit (1);
   }
   wait (&status);
 
@@ -158,8 +164,7 @@ static int grep (char *file)
 
 static char *message[] = {
   " [-vVPrMACaiIyLcwxZ] [-fpotkhsmudgeE (option)] path \n\n",
-  "options: \n"
-    "          [-r] [-v] [-d ddd] [-m mmm] [-f filter] [-s (+/-)size]\n",
+  "options: \n" "          [-r] [-v] [-d ddd] [-m mmm] [-f filter] [-s (+/-)size]\n",
   "          [-t type] [-p perm] [grep options...] \n",
   "-v            = verbose\n",
   "-V            = print version number information\n",
@@ -175,8 +180,7 @@ static char *message[] = {
   "-t type       = any | reg | dir | sym | sock | blk | chr | fifo\n",
   "                (any, regular, directory, symlink, socket, blk_dev,\n",
   "                 chr_dev, fifo: any is the default.)\n",
-  "  * Time options must be used with either  -M, -C, or -A.\n"
-  "-k min        = file time in the previous (int) min minutes (either -M -C -A)\n",
+  "  * Time options must be used with either  -M, -C, or -A.\n" "-k min        = file time in the previous (int) min minutes (either -M -C -A)\n",
   "-h hhh        = file time in the previous (int) hh hours (either -M -C -A)\n",
   "-d ddd        = file time in the previous (int) dd days (either -M -C -A)\n",
   "-m mmm        = file time in the previous (int) mm months (either -M -C -A)\n",
@@ -191,7 +195,7 @@ static char *message[] = {
   "-Z            = Output  a  zero  byte  (the  ASCII  NUL  character)\n",
   "                instead of the character that  normally  follows  a\n",
   "                file  name (never tested option, if you do, email me)\n",
-    "\n",
+  "\n",
   "**specifying these option will be used in content search (grep):\n",
   "-e string     = containing string (if *,? or [], use quotes)\n",
   "-E regexp     = containing regexp: (use quotes amigo). \n",
@@ -223,7 +227,7 @@ void
 halt (int sig)
 {
   fflush (NULL);
-  globber_destroy(object);
+  globber_destroy (object);
   exit (1);
 }
 
@@ -232,7 +236,7 @@ halt (int sig)
 int
 main (int argc, char **argv)
 {
-  int i,timetype=0;
+  int i, timetype = 0;
   char *filter = NULL, globbered = 0;
   int (*operate) (char *) = display;
   initial = time (NULL);
@@ -245,260 +249,270 @@ main (int argc, char **argv)
 
 
   if (argc < 2)
+  {
+  error:
+    fprintf (stdout, "use:  %s ", argv[0]);
+    i = 0;
+    while (message[i])
+      fprintf (stdout, "%s", message[i++]);
+    exit (1);
+  }
+  object = globber_create ();
+  for (i = 1; i < argc; i++)
+  {
+    if (argv[i][0] == '-')
     {
-    error:
-      fprintf (stdout, "use:  %s ", argv[0]);
-      i = 0;
-      while (message[i])
-	fprintf (stdout,"%s", message[i++]);
+      /* options for the globber : **************** */
+      if (strstr (argv[i], "M") != NULL)
+      {
+	timetype = 1;
+	glob_set_options (object, GLOBBER_MTIME);
+	continue;
+      }
+      if (strstr (argv[i], "A") != NULL)
+      {
+	timetype = 1;
+	glob_set_options (object, GLOBBER_ATIME);
+	continue;
+      }
+      if (strstr (argv[i], "C") != NULL)
+      {
+	timetype = 1;
+	glob_set_options (object, GLOBBER_CTIME);
+	continue;
+      }
+      if (strstr (argv[i], "a") != NULL)
+      {
+	glob_set_options (object, GLOBBER_XDEV);
+	options |= GLOBRUN_XDEV;
+	continue;
+      }
+      if (strstr (argv[i], "v") != NULL)
+      {
+	glob_set_options (object, GLOBBER_VERBOSE);
+	options |= GLOBRUN_VERBOSE;
+	continue;
+      }
+      if (strstr (argv[i], "r") != NULL)
+      {
+	glob_set_options (object, GLOBBER_RECURSIVE);
+	options |= GLOBRUN_RECURSIVE;
+	continue;
+      }
+      if (strstr (argv[i], "u") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	glob_set_user (object, atol (argv[i]));
+	continue;
+      }
+      if (strstr (argv[i], "g") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	glob_set_group (object, atol (argv[i]));
+	continue;
+      }
+
+
+      if (strstr (argv[i], "t") != NULL)
+      {
+	i++;
+	type &= 07777;
+	CHECK_ARG;
+	/*if (strcmp (argv[i], "any") == 0) type &= 07777; */
+	if (strcmp (argv[i], "reg") == 0)
+	  type |= S_IFREG;
+	if (strcmp (argv[i], "dir") == 0)
+	  type |= S_IFDIR;
+	if (strcmp (argv[i], "sym") == 0)
+	  type |= S_IFLNK;
+	if (strcmp (argv[i], "sock") == 0)
+	  type |= S_IFSOCK;
+	if (strcmp (argv[i], "blk") == 0)
+	  type |= S_IFBLK;
+	if (strcmp (argv[i], "chr") == 0)
+	  type |= S_IFCHR;
+	if (strcmp (argv[i], "fifo") == 0)
+	  type |= S_IFIFO;
+	if (strcmp (argv[i], "any") != 0)
+	{
+	  glob_set_options (object, GLOBBER_TYPE);
+	  glob_set_type (object, type);
+	}
+	continue;
+      }
+      if (strstr (argv[i], "p") != NULL)
+      {
+	i++;
+	/*type &= S_IFMT; */
+	CHECK_ARG;
+	if (strcmp (argv[i], "suid") == 0)
+	  type |= S_ISUID;
+	if (strcmp (argv[i], "exe") == 0)
+	  type |= S_IXUSR;
+	glob_set_options (object, GLOBBER_PERM);
+	glob_set_type (object, type);
+	continue;
+      }
+      if (strstr (argv[i], "o") != NULL)
+      {
+	int valor;
+	i++;
+	type &= S_IFMT;
+	CHECK_ARG;
+	sscanf (argv[i], "%o", &valor);
+	type |= (07777 & valor);
+	glob_set_options (object, GLOBBER_PERM);
+	glob_set_type (object, type);
+	continue;
+      }
+
+      if (strstr (argv[i], "s") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	size = atol (argv[i]);
+	if (size < 0)
+	  glob_set_sizeL (object, -size * 1024);
+	else
+	  glob_set_sizeG (object, size * 1024);
+	continue;
+      }
+
+      if (strstr (argv[i], "k") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	min_t = atol (argv[i]);
+	glob_set_time (object, month_t, day_t, hour_t, min_t);
+	continue;
+      }
+      if (strstr (argv[i], "h") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	hour_t = atol (argv[i]);
+	glob_set_time (object, month_t, day_t, hour_t, min_t);
+	continue;
+      }
+      if (strstr (argv[i], "d") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	day_t = atol (argv[i]);
+	glob_set_time (object, month_t, day_t, hour_t, min_t);
+	continue;
+      }
+      if (strstr (argv[i], "m") != NULL)
+      {
+	CHECK_ARG;
+	month_t = atol (argv[i]);
+	glob_set_time (object, month_t, day_t, hour_t, min_t);
+	continue;
+      }
+
+
+      if (strstr (argv[i], "f") != NULL)
+      {
+	options |= GLOBRUN_FILTERED;
+	i++;
+	CHECK_ARG;
+	filter = argv[i];
+	if (options & GLOBRUN_VERBOSE)
+	  fprintf (stderr, "filtering %s\n", filter);
+	continue;
+      }
+      /* options for grep : ****************** */
+      if (strstr (argv[i], "I") != NULL)
+      {
+	options |= GLOBRUN_NOBINARIES;
+	continue;
+      }
+      if ((strstr (argv[i], "i") != NULL) || (strstr (argv[i], "y") != NULL))
+      {
+	options |= GLOBRUN_IGNORE_CASE;
+	continue;
+      }
+      if (strstr (argv[i], "L") != NULL)
+      {
+	options |= GLOBRUN_INVERT;
+	continue;
+      }
+      if (strstr (argv[i], "c") != NULL)
+      {
+	options |= GLOBRUN_COUNT;
+	continue;
+      }
+      if (strstr (argv[i], "w") != NULL)
+      {
+	options |= GLOBRUN_WORDS_ONLY;
+	continue;
+      }
+      if (strstr (argv[i], "x") != NULL)
+      {
+	options |= GLOBRUN_LINES_ONLY;
+	continue;
+      }
+      if (strstr (argv[i], "Z") != NULL)
+      {
+	options |= GLOBRUN_ZERO_BYTE;
+	continue;
+      }
+      if (strstr (argv[i], "P") != NULL)
+      {
+	options |= GLOBRUN_PID;
+	printf ("PID=%d\n", (int) getpid ());
+	fflush (NULL);
+	continue;
+      }
+      if (strstr (argv[i], "E") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	token = argv[i];
+	operate = grep;
+	options |= GLOBRUN_REG_EXP;
+	continue;
+      }
+      if (strstr (argv[i], "e") != NULL)
+      {
+	i++;
+	CHECK_ARG;
+	token = argv[i];
+	operate = grep;
+	options |= GLOBRUN_REG_EXP;
+	options ^= GLOBRUN_REG_EXP;	/* turn off extended regexp */
+	continue;
+      }
+
+      if (strstr (argv[i], "V") != NULL)
+      {
+	printf ("%s", VERSION_NAME);
+	return 0;
+      }
+      fprintf (stdout, "unknown argument: %s\nuse -h for help.\n", argv[i]);
       exit (1);
     }
-  object=globber_create();
-  for (i = 1; i < argc; i++)
-    {
-      if (argv[i][0] == '-')
-	{
-		/* options for the globber : *****************/
-	  if (strstr (argv[i], "M") != NULL)
-	    {
-	      timetype=1;
-	      glob_set_options(object,GLOBBER_MTIME);
-	      continue;
-	    }
-	  if (strstr (argv[i], "A") != NULL)
-	    {
-	      timetype=1;
-	      glob_set_options(object,GLOBBER_ATIME);
-	      continue;
-	    }
-	  if (strstr (argv[i], "C") != NULL)
-	    {
-	      timetype=1;
-	      glob_set_options(object,GLOBBER_CTIME);
-	      continue;
-	    }
-	  if (strstr (argv[i], "a") != NULL)
-	    {
-	      glob_set_options(object,GLOBBER_XDEV);
-	      options |= GLOBRUN_XDEV;
-	      continue;
-	    }
-	  if (strstr (argv[i], "v") != NULL)
-	    {
-	      glob_set_options(object,GLOBBER_VERBOSE);
-	      options |= GLOBRUN_VERBOSE;
-	      continue;
-	    }
-	  if (strstr (argv[i], "r") != NULL)
-	    {
-	      glob_set_options(object,GLOBBER_RECURSIVE);
-	      options |= GLOBRUN_RECURSIVE;
-	      continue;
-	    }
-	  if (strstr (argv[i], "u") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      glob_set_user(object,atol(argv[i]));
-	      continue;
-	    }
-	  if (strstr (argv[i], "g") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      glob_set_group(object,atol(argv[i]));
-	      continue;
-	    }
+    if (((min_t) || (hour_t) || (day_t) || (month_t)) && !timetype)
+      glob_set_options (object, GLOBBER_MTIME);
+    terminated = globber (object, argv[i], operate, filter);
+    globbered = 1;
+  }				/* end of argument processing */
 
-	  
-	  if (strstr (argv[i], "t") != NULL)
-	    {
-	      i++;
-	      type &= 07777; 
-	      CHECK_ARG;
-	      /*if (strcmp (argv[i], "any") == 0) type &= 07777;*/
-	      if (strcmp (argv[i], "reg") == 0) type |= S_IFREG;	
-	      if (strcmp (argv[i], "dir") == 0)	type |= S_IFDIR;
-	      if (strcmp (argv[i], "sym") == 0)	type |= S_IFLNK;
-	      if (strcmp (argv[i], "sock") == 0)type |= S_IFSOCK;
-	      if (strcmp (argv[i], "blk") == 0)	type |= S_IFBLK;
-	      if (strcmp (argv[i], "chr") == 0)	type |= S_IFCHR;
-	      if (strcmp (argv[i], "fifo") == 0)type |= S_IFIFO;
-	      if (strcmp (argv[i], "any") != 0) {
-		glob_set_options(object,GLOBBER_TYPE);
- 	        glob_set_type(object,type);
-	      }
-	      continue;
-	    }
-	  if (strstr (argv[i], "p") != NULL) 
-	    {
-	      i++;
-	      /*type &= S_IFMT;*/
-	      CHECK_ARG;
-	      if (strcmp (argv[i], "suid") == 0)
-		type |= S_ISUID;
-	      if (strcmp (argv[i], "exe") == 0)
-		type |= S_IXUSR;
-              glob_set_options(object,GLOBBER_PERM);
- 	      glob_set_type(object,type);
-	      continue;
-	    }
-	  if (strstr (argv[i], "o") != NULL)
-	   {
-	      int valor;	    
-	      i++;
-	      type &= S_IFMT;
-	      CHECK_ARG;
-	      sscanf(argv[i],"%o",&valor);
-	      type |= (07777&valor);
-              glob_set_options(object,GLOBBER_PERM);
- 	      glob_set_type(object,type);
-	      continue;
-	    }
-	  
-	  if (strstr (argv[i], "s") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      size = atol (argv[i]);
-	      if (size < 0) glob_set_sizeL(object,-size*1024);
-	      else glob_set_sizeG(object,size*1024);
-	      continue;
-	    }
 
-	  if (strstr (argv[i], "k") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      min_t = atol (argv[i]);
-              glob_set_time(object,month_t,day_t,hour_t,min_t);
-	      continue;
-	    }
-	  if (strstr (argv[i], "h") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      hour_t = atol (argv[i]);
-              glob_set_time(object,month_t,day_t,hour_t,min_t);
-	      continue;
-	    }
-	  if (strstr (argv[i], "d") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      day_t = atol (argv[i]);
-              glob_set_time(object,month_t,day_t,hour_t,min_t);
-	      continue;
-	    }
-	  if (strstr (argv[i], "m") != NULL)
-	    {
-	      CHECK_ARG;
-	      month_t = atol (argv[i]);
-              glob_set_time(object,month_t,day_t,hour_t,min_t);
-	      continue;
-	    }
-	  
-
-	  if (strstr (argv[i], "f") != NULL)
-	    {
-	      options |= GLOBRUN_FILTERED;
-	      i++;
-	      CHECK_ARG;
-	      filter = argv[i];
-	      if (options & GLOBRUN_VERBOSE)
-		fprintf (stderr, "filtering %s\n", filter);
-	      continue;
-	    }
-	      /* options for grep : *******************/
-	  if (strstr (argv[i], "I") != NULL)
-	    {
-	      options |= GLOBRUN_NOBINARIES;
-	      continue;
-	    }
-	  if ((strstr (argv[i], "i") != NULL)||(strstr (argv[i], "y") != NULL))
-	    {
-	      options |= GLOBRUN_IGNORE_CASE;
-	      continue;
-	    }
-	  if (strstr (argv[i], "L") != NULL)
-	    {
-	      options |= GLOBRUN_INVERT;
-	      continue;
-	    }
-	  if (strstr (argv[i], "c") != NULL)
-	    {
-	      options |= GLOBRUN_COUNT;
-	      continue;
-	    }
-	  if (strstr (argv[i], "w") != NULL)
-	    {
-	      options |= GLOBRUN_WORDS_ONLY;
-	      continue;
-	    }
-	  if (strstr (argv[i], "x") != NULL)
-	    {
-	      options |= GLOBRUN_LINES_ONLY;
-	      continue;
-	    }
-	  if (strstr (argv[i], "Z") != NULL)
-	    {
-	      options |= GLOBRUN_ZERO_BYTE;
-	      continue;
-	    }
-	  if (strstr (argv[i], "P") != NULL)
-	    {
-	      options |= GLOBRUN_PID;
-	      printf ("PID=%d\n", (int) getpid ());
-	      fflush (NULL);
-	      continue;
-	    }
-	  if (strstr (argv[i], "E") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      token = argv[i];
-	      operate = grep;
-	      options |= GLOBRUN_REG_EXP;
-	      continue;
-	    }
-	  if (strstr (argv[i], "e") != NULL)
-	    {
-	      i++;
-	      CHECK_ARG;
-	      token = argv[i];
-	      operate = grep;
-	      options |= GLOBRUN_REG_EXP;
-	      options ^= GLOBRUN_REG_EXP; /* turn off extended regexp */
-	      continue;
-	    }
-
-	  if (strstr (argv[i], "V") != NULL)
-	    {
-	      printf ("%s", VERSION_NAME);
-	      return 0;
-	    }
-	  fprintf(stdout,"unknown argument: %s\nuse -h for help.\n",argv[i]);
-	  exit(1);
-	}
-      if (((min_t)||(hour_t)||(day_t)||(month_t))&& !timetype) 
-	      glob_set_options(object,GLOBBER_MTIME);
-      terminated = globber (object,argv[i], operate, filter);
-      globbered = 1;
-    } /* end of argument processing */
-  
-  
   if (!globbered)
-    {
-      fprintf (stderr, "must specify path\n");
-      goto error;
-    }
+  {
+    fprintf (stderr, "must specify path\n");
+    goto error;
+  }
 /*	if (terminated) printf("glob run was terminated.\n");*/
   if (!terminated)
-    {				/* die quietly and quickly */
-      if (options & GLOBRUN_PID)
-	printf ("GLOB DONE=%d\n", (int) getpid ());
-    }
+  {				/* die quietly and quickly */
+    if (options & GLOBRUN_PID)
+      printf ("GLOB DONE=%d\n", (int) getpid ());
+  }
   fflush (NULL);
-  globber_destroy(object);
+  globber_destroy (object);
   exit (0);
 }

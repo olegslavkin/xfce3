@@ -54,8 +54,7 @@ cancel_cb (GtkWidget * widget, gpointer data)
   exit (0);
 }
 
-gboolean
-delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+gboolean delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
   cancel_cb (widget, data);
   return (TRUE);

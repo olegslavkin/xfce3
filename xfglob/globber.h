@@ -27,18 +27,17 @@
 
 #define GLOBBER_VERSION 0.5.0
 
-int globber(void *address,char *input,int (*operate)(char *),char *filter);
-int glob_clear_options(void *address);
-void *globber_create(void);
-void *globber_destroy(void *);
-int glob_set_options(void *address,int options);
-int glob_set_type(void *address,int type);
-int glob_set_sizeL(void *address,long unsigned size);
-int glob_set_sizeG(void *address,long unsigned size);
-int glob_set_user(void *address,int user);
-int glob_set_group(void *address,int group);
-int glob_set_time(void *address,long unsigned month_t,long unsigned day_t,
-		long unsigned hour_t,long unsigned min_t);
+int globber (void *address, char *input, int (*operate) (char *), char *filter);
+int glob_clear_options (void *address);
+void *globber_create (void);
+void *globber_destroy (void *);
+int glob_set_options (void *address, int options);
+int glob_set_type (void *address, int type);
+int glob_set_sizeL (void *address, long unsigned size);
+int glob_set_sizeG (void *address, long unsigned size);
+int glob_set_user (void *address, int user);
+int glob_set_group (void *address, int group);
+int glob_set_time (void *address, long unsigned month_t, long unsigned day_t, long unsigned hour_t, long unsigned min_t);
 
 #ifdef __GLOBBER_INCLUDES__
 #include <stdio.h>
@@ -72,7 +71,7 @@ int glob_set_time(void *address,long unsigned month_t,long unsigned day_t,
 #define GLOBBER_ATIME        0x20
 #define GLOBBER_CTIME        0x40
 /*GLOBBER_MTIME|GLOBBER_ATIME|GLOBBER_CTIME :*/
-#define GLOBBER_TIME         0x70 
+#define GLOBBER_TIME         0x70
 #define GLOBBER_PERM         0x80
 #define GLOBBER_TYPE         0x100
 #define GLOBBER_USER         0x200
@@ -80,7 +79,3 @@ int glob_set_time(void *address,long unsigned month_t,long unsigned day_t,
 /*  GLOBBER_XDEV | GLOBBER_SIZE | GLOBBER_TIME | GLOBBER_PERM |  
 *   GLOBBER_TYPE | GLOBBER_USER | GLOBBER_GROUP : */
 #define GLOBBER_STAT         0xffc
-
-
-
-

@@ -96,27 +96,27 @@ TuboChupoFaros (fork_struct * forkO)
   fprintf (stderr, "Chupando faros\n");
 #endif
   if (!forkO)
-    {
-      return NULL;
-    }
+  {
+    return NULL;
+  }
   for (i = 0; i < 3; i++)
+  {
+    if (forkO->tubo[i][0] > 0)
     {
-      if (forkO->tubo[i][0] > 0)
-	{
-	  close (forkO->tubo[i][0]);
-	}
-      if (forkO->tubo[i][1] > 0)
-	{
-	  close (forkO->tubo[i][1]);
-	}
-      if (forkO->tubo[i][2] > 0)
-	{
-#ifdef DEBUG_RUN
-	  fprintf (stderr, "removing input signal %d\n", i);
-#endif
-	  gtk_input_remove (forkO->tubo[i][2]);
-	}
+      close (forkO->tubo[i][0]);
     }
+    if (forkO->tubo[i][1] > 0)
+    {
+      close (forkO->tubo[i][1]);
+    }
+    if (forkO->tubo[i][2] > 0)
+    {
+#ifdef DEBUG_RUN
+      fprintf (stderr, "removing input signal %d\n", i);
+#endif
+      gtk_input_remove (forkO->tubo[i][2]);
+    }
+  }
   free (forkO);
   return NULL;
 }
@@ -140,22 +140,22 @@ TuboInput (gpointer data, gint src, GdkInputCondition condition)
 #endif
   buffer = line;
   for (i = 0; i < TUBO_BLK_SIZE - 1; i++)
-    {
-      if (!read (src, line + i, 1))
-	break;
-      if (*(line + i) == '\n')
-	{			/* only un*x ascii files */
-	  *(line + i + 1) = (char) 0;
-	  /*first parameter, gboolean no newline-char | binary data length */
-	  (*user_parse_function) (0, (void *) line);
-	  return TRUE;
-	}
-    }
-  if (i)
-    {				/* something has been read */
+  {
+    if (!read (src, line + i, 1))
+      break;
+    if (*(line + i) == '\n')
+    {				/* only un*x ascii files */
+      *(line + i + 1) = (char) 0;
+      /*first parameter, gboolean no newline-char | binary data length */
       (*user_parse_function) (0, (void *) line);
       return TRUE;
     }
+  }
+  if (i)
+  {				/* something has been read */
+    (*user_parse_function) (0, (void *) line);
+    return TRUE;
+  }
   return FALSE;
 }
 
@@ -177,11 +177,9 @@ TuboWaitDone (gpointer fork_object)
   }
 #endif
   /* what if the pipe has data? */
-  if (TuboInput
-      ((gpointer) (forkO->operate_stdout), forkO->tubo[1][0], GDK_INPUT_READ))
+  if (TuboInput ((gpointer) (forkO->operate_stdout), forkO->tubo[1][0], GDK_INPUT_READ))
     return TRUE;
-  if (TuboInput
-      ((gpointer) (forkO->operate_stderr), forkO->tubo[1][0], GDK_INPUT_READ))
+  if (TuboInput ((gpointer) (forkO->operate_stderr), forkO->tubo[1][0], GDK_INPUT_READ))
     return TRUE;
 #ifdef DEBUG_RUN
   {
@@ -204,10 +202,10 @@ TuboWait (gpointer fork_object)
   forkO = (fork_struct *) ((long) fork_object);
   waitpid (forkO->childPID, &status, WNOHANG);
   if (WIFEXITED (status))
-    {
-      forkO->childPID = 0;
-      return FALSE;
-    }
+  {
+    forkO->childPID = 0;
+    return FALSE;
+  }
   return TRUE;
 }
 
@@ -217,46 +215,42 @@ static void
 TuboSemaforo (int sig)
 {
   switch (sig)
-    {
-    case SIGUSR1:
-      break;			/* green light */
-    case SIGTERM:
-      _exit (1);
-      break;
-    default:
-      break;
-    }
+  {
+  case SIGUSR1:
+    break;			/* green light */
+  case SIGTERM:
+    _exit (1);
+    break;
+  default:
+    break;
+  }
   return;
 }
 
 
 
 void *
-Tubo (void (*fork_function) (void),
-      void (*fork_finished_function) (void),
-      int operate_stdin,
-      int (*operate_stdout) (int, void *),
-      int (*operate_stderr) (int, void *))
+Tubo (void (*fork_function) (void), void (*fork_finished_function) (void), int operate_stdin, int (*operate_stdout) (int, void *), int (*operate_stderr) (int, void *))
 {
   int i;
   fork_struct tmpfork, *newfork = NULL;
 
   if ((!operate_stdout) && (!operate_stderr))
-    {
-      TuboChupoFaros (newfork);	/* no mames condition */
-      return NULL;
-    }
+  {
+    TuboChupoFaros (newfork);	/* no mames condition */
+    return NULL;
+  }
 
   for (i = 0; i < 3; i++)
+  {
+    tmpfork.tubo[i][0] = tmpfork.tubo[i][1] = -1;
+    tmpfork.tubo[i][2] = 0;
+    if (pipe (tmpfork.tubo[i]) == -1)
     {
-      tmpfork.tubo[i][0] = tmpfork.tubo[i][1] = -1;
-      tmpfork.tubo[i][2] = 0;
-      if (pipe (tmpfork.tubo[i]) == -1)
-	{
-	  TuboChupoFaros (NULL);
-	  return NULL;
-	}
+      TuboChupoFaros (NULL);
+      return NULL;
     }
+  }
 
   tmpfork.operate_stdin = operate_stdin;
   tmpfork.operate_stdout = operate_stdout;
@@ -269,103 +263,97 @@ Tubo (void (*fork_function) (void),
   signal (SIGUSR1, TuboSemaforo);
   tmpfork.childPID = fork ();
   if (tmpfork.childPID)
-    {				/* the parent */
-      /* INPUT PIPES *************** */
+  {				/* the parent */
+    /* INPUT PIPES *************** */
 #ifdef DEBUG_RUN
 /* printf("The parent process has forked\n"); */
 #endif
-      newfork = (fork_struct *) malloc (sizeof (fork_struct));
-      if (!newfork)
-	{
-	  /* red light to child */
-	  perror ("malloc");
+    newfork = (fork_struct *) malloc (sizeof (fork_struct));
+    if (!newfork)
+    {
+      /* red light to child */
+      perror ("malloc");
 #ifdef DEBUG_RUN
 /* printf("The parent process is sending a red light\n"); */
 #endif
-	  kill (tmpfork.childPID, SIGTERM);
-	  TuboChupoFaros (NULL);
-	  return NULL;
-	}
-      MEMCPY ((void *) newfork, (void *) (&tmpfork), sizeof (fork_struct));
+      kill (tmpfork.childPID, SIGTERM);
+      TuboChupoFaros (NULL);
+      return NULL;
+    }
+    MEMCPY ((void *) newfork, (void *) (&tmpfork), sizeof (fork_struct));
 
-      close (newfork->tubo[0][0]);	/* not used */
-      if (operate_stdout)
-	{
-	  newfork->tubo[1][2] = gdk_input_add (newfork->tubo[1][0],
-					       GDK_INPUT_READ,
-					       (GdkInputFunction) TuboInput,
-					       (gpointer) operate_stdout);
-	}
-      if (operate_stderr)
-	{
-	  newfork->tubo[2][2] = gdk_input_add (newfork->tubo[2][0],
-					       GDK_INPUT_READ,
-					       (GdkInputFunction) TuboInput,
-					       (gpointer) operate_stderr);
-	}
-      /* OUTPUT PIPES ************** */
-      if (!operate_stdin)
-	close (newfork->tubo[0][1]);	/* not used */
-      close (newfork->tubo[1][1]);	/* not used */
-      close (newfork->tubo[2][1]);	/* not used */
+    close (newfork->tubo[0][0]);	/* not used */
+    if (operate_stdout)
+    {
+      newfork->tubo[1][2] = gdk_input_add (newfork->tubo[1][0], GDK_INPUT_READ, (GdkInputFunction) TuboInput, (gpointer) operate_stdout);
+    }
+    if (operate_stderr)
+    {
+      newfork->tubo[2][2] = gdk_input_add (newfork->tubo[2][0], GDK_INPUT_READ, (GdkInputFunction) TuboInput, (gpointer) operate_stderr);
+    }
+    /* OUTPUT PIPES ************** */
+    if (!operate_stdin)
+      close (newfork->tubo[0][1]);	/* not used */
+    close (newfork->tubo[1][1]);	/* not used */
+    close (newfork->tubo[2][1]);	/* not used */
 
-      /* the wait */
-      gtk_timeout_add (260, (GtkFunction) TuboWait, (gpointer) (newfork));
-      /* what to do when child is kaput. */
-      gtk_timeout_add (520, (GtkFunction) TuboWaitDone, (gpointer) (newfork));
-      /*send greenlight to child: ok to continue */
-      sleep (1);		/* race: child must be at pause before sending signal */
+    /* the wait */
+    gtk_timeout_add (260, (GtkFunction) TuboWait, (gpointer) (newfork));
+    /* what to do when child is kaput. */
+    gtk_timeout_add (520, (GtkFunction) TuboWaitDone, (gpointer) (newfork));
+    /*send greenlight to child: ok to continue */
+    sleep (1);			/* race: child must be at pause before sending signal */
 #ifdef DEBUG_RUN
 /* printf("The parent process is sending a green light\n"); */
 #endif
-      kill (newfork->childPID, SIGUSR1);
-      return newfork;		/* back to user's program flow */
-    }
+    kill (newfork->childPID, SIGUSR1);
+    return newfork;		/* back to user's program flow */
+  }
   else
-    {				/* the child */
-      /* waitfor green light. */
-      signal (SIGTERM, TuboSemaforo);
+  {				/* the child */
+    /* waitfor green light. */
+    signal (SIGTERM, TuboSemaforo);
 #ifdef DEBUG_RUN
 /* printf("The child process is waiting for the green light\n"); */
 #endif
-      pause ();
+    pause ();
 #ifdef DEBUG_RUN
 /* printf("The child has received the green light\n"); */
 #endif
-      newfork = (fork_struct *) malloc (sizeof (fork_struct));
-      if (!newfork)
-	{
+    newfork = (fork_struct *) malloc (sizeof (fork_struct));
+    if (!newfork)
+    {
 
-	  _exit (1);
-	}
-      MEMCPY ((void *) newfork, (void *) (&tmpfork), sizeof (fork_struct));
-
-      /* INPUT PIPES */
-      if (operate_stdin)
-	{
-	  dup2 (newfork->tubo[0][0], 0);	/* stdin */
-	}
-      else
-	close (newfork->tubo[0][0]);	/* not used */
-      close (newfork->tubo[1][0]);	/* not used */
-      close (newfork->tubo[2][0]);	/* not used */
-      /* OUTPUT PIPES */
-      close (newfork->tubo[0][1]);	/* not used */
-      if (operate_stdout)
-	dup2 (newfork->tubo[1][1], 1);	/* stdout */
-      else
-	close (newfork->tubo[1][1]);	/* not used */
-      if (operate_stdout)
-	dup2 (newfork->tubo[2][1], 2);	/* stderr */
-      else
-	close (newfork->tubo[2][1]);	/* not used */
-      /*  user fork function */
-      if (newfork->fork_function)
-	(*(newfork->fork_function)) ();
-      /* if it returns, clean up before sinking */
-      TuboChupoFaros (newfork);
       _exit (1);
     }
+    MEMCPY ((void *) newfork, (void *) (&tmpfork), sizeof (fork_struct));
+
+    /* INPUT PIPES */
+    if (operate_stdin)
+    {
+      dup2 (newfork->tubo[0][0], 0);	/* stdin */
+    }
+    else
+      close (newfork->tubo[0][0]);	/* not used */
+    close (newfork->tubo[1][0]);	/* not used */
+    close (newfork->tubo[2][0]);	/* not used */
+    /* OUTPUT PIPES */
+    close (newfork->tubo[0][1]);	/* not used */
+    if (operate_stdout)
+      dup2 (newfork->tubo[1][1], 1);	/* stdout */
+    else
+      close (newfork->tubo[1][1]);	/* not used */
+    if (operate_stdout)
+      dup2 (newfork->tubo[2][1], 2);	/* stderr */
+    else
+      close (newfork->tubo[2][1]);	/* not used */
+    /*  user fork function */
+    if (newfork->fork_function)
+      (*(newfork->fork_function)) ();
+    /* if it returns, clean up before sinking */
+    TuboChupoFaros (newfork);
+    _exit (1);
+  }
 }
 
 int
@@ -389,36 +377,36 @@ TuboWrite (void *forkObject, void *data, int n)
 
 
 void *
-TuboCancel (void *forkObject,void (*cleanup)(void))
+TuboCancel (void *forkObject, void (*cleanup) (void))
 {
   int i;
   fork_struct *forkO;
   forkO = (fork_struct *) forkObject;
   if (!forkO)
-    {
-      return NULL;
-    }
+  {
+    return NULL;
+  }
 #ifdef DEBUG_RUN
   fprintf (stderr, "cancelling fork object\n");
 #endif
   for (i = 0; i < 3; i++)
-    {
-      if (forkO->tubo[i][2] > 0)
-	{			/* remove input callbacks */
+  {
+    if (forkO->tubo[i][2] > 0)
+    {				/* remove input callbacks */
 #ifdef DEBUG_RUN
-	  fprintf (stderr, "removing input signal %d\n", i);
+      fprintf (stderr, "removing input signal %d\n", i);
 #endif
-	  gtk_input_remove (forkO->tubo[i][2]);
-	}
-      if (forkO->tubo[i][0] > 0)
-	{			/* close input pipes */
-	  close (forkO->tubo[i][0]);
-	}
-      if (forkO->tubo[i][1] > 0)
-	{			/* close output pipes */
-	  close (forkO->tubo[i][1]);
-	}
+      gtk_input_remove (forkO->tubo[i][2]);
     }
+    if (forkO->tubo[i][0] > 0)
+    {				/* close input pipes */
+      close (forkO->tubo[i][0]);
+    }
+    if (forkO->tubo[i][1] > 0)
+    {				/* close output pipes */
+      close (forkO->tubo[i][1]);
+    }
+  }
   forkO->fork_finished_function = NULL;
   forkO->operate_stdin = FALSE;
   forkO->operate_stdout = NULL;
@@ -426,7 +414,8 @@ TuboCancel (void *forkObject,void (*cleanup)(void))
 
   if (forkO->childPID)
     kill (forkO->childPID, SIGTERM);
-  if (cleanup) (*cleanup)();
+  if (cleanup)
+    (*cleanup) ();
 
   /*note: fork object freed by TuboWaitDone() function */
   return NULL;

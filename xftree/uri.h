@@ -34,7 +34,7 @@ enum
   URI_LOCAL,
   URI_FILE,
   URI_HTTP,
-  URI_FTP,
+  URI_FTP
 }
 UriType;
 

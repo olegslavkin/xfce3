@@ -112,19 +112,18 @@ main (int argc, char **argv)
   strcpy (MyName, temp);
 
   if (argc < 7)
-    {
-      fprintf (stderr, "%s Version %s should only be executed by xfwm!\n",
-	       MyName, VERSION);
-      exit (1);
-    }
+  {
+    fprintf (stderr, "%s Version %s should only be executed by xfwm!\n", MyName, VERSION);
+    exit (1);
+  }
   if (argc > 7)
-    {
-      desk2 = atoi (argv[7]) - 1;
-      if (desk2 < 1)
-	desk2 = 1;
-      else if (desk2 > 32)
-	desk2 = 32;
-    }
+  {
+    desk2 = atoi (argv[7]) - 1;
+    if (desk2 < 1)
+      desk2 = 1;
+    else if (desk2 > 32)
+      desk2 = 32;
+  }
 
   /* Dead pipe == XFwm died */
   signal (SIGPIPE, DeadPipe);
@@ -138,50 +137,31 @@ main (int argc, char **argv)
 
   Desks = (DeskInfo *) malloc (ndesks * sizeof (DeskInfo));
   for (i = 0; i < ndesks; i++)
-    {
-      sprintf (line, "%d", i + 1);
-      CopyString (&Desks[i].label, line);
-      CopyString (&Desks[i].Dcolor, PagerBack);
-    }
+  {
+    sprintf (line, "%d", i + 1);
+    CopyString (&Desks[i].label, line);
+    CopyString (&Desks[i].Dcolor, PagerBack);
+  }
 
   /* Initialize X connection */
   if (!(dpy = XOpenDisplay (display_name)))
-    {
-      fprintf (stderr, "%s: can't open display %s", MyName,
-	       XDisplayName (display_name));
-      exit (1);
-    }
+  {
+    fprintf (stderr, "%s: can't open display %s", MyName, XDisplayName (display_name));
+    exit (1);
+  }
   x_fd = XConnectionNumber (dpy);
 
   Scr.screen = DefaultScreen (dpy);
   Scr.Root = RootWindow (dpy, Scr.screen);
 
   if (Scr.Root == None)
-    {
-      fprintf (stderr, "%s: Screen %d is not valid ", MyName,
-	       (int) Scr.screen);
-      exit (1);
-    }
+  {
+    fprintf (stderr, "%s: Screen %d is not valid ", MyName, (int) Scr.screen);
+    exit (1);
+  }
   Scr.d_depth = DefaultDepth (dpy, Scr.screen);
 
-  SetMessageMask (fd,
-		  XFCE_M_ADD_WINDOW |
-		  XFCE_M_CONFIGURE_WINDOW |
-		  XFCE_M_DESTROY_WINDOW |
-		  XFCE_M_FOCUS_CHANGE |
-		  XFCE_M_NEW_DESK |
-		  XFCE_M_RAISE_WINDOW |
-		  XFCE_M_LOWER_WINDOW |
-		  XFCE_M_ICONIFY |
-		  XFCE_M_ICON_LOCATION |
-		  XFCE_M_DEICONIFY |
-		  XFCE_M_SHADE |
-		  XFCE_M_UNSHADE |
-		  XFCE_M_ICON_NAME |
-		  XFCE_M_CONFIG_INFO |
-		  XFCE_M_END_CONFIG_INFO | 
-                  XFCE_M_END_WINDOWLIST | 
-                  XFCE_M_RESTACK);
+  SetMessageMask (fd, XFCE_M_ADD_WINDOW | XFCE_M_CONFIGURE_WINDOW | XFCE_M_DESTROY_WINDOW | XFCE_M_FOCUS_CHANGE | XFCE_M_NEW_DESK | XFCE_M_RAISE_WINDOW | XFCE_M_LOWER_WINDOW | XFCE_M_ICONIFY | XFCE_M_ICON_LOCATION | XFCE_M_DEICONIFY | XFCE_M_SHADE | XFCE_M_UNSHADE | XFCE_M_ICON_NAME | XFCE_M_CONFIG_INFO | XFCE_M_END_CONFIG_INFO | XFCE_M_END_WINDOWLIST | XFCE_M_RESTACK);
   window_w = 40 * ((desk2 + 1) / Rows);
   window_h = 40 * (Rows);
   ParseOptions ();
@@ -210,10 +190,10 @@ Loop (int *fd)
   XEvent Event;
 
   while (1)
-    {
-      if (My_XNextEvent (dpy, &Event))
-	DispatchEvent (&Event);
-    }
+  {
+    if (My_XNextEvent (dpy, &Event))
+      DispatchEvent (&Event);
+  }
 }
 
 
@@ -227,48 +207,48 @@ void
 process_message (unsigned long type, unsigned long *body)
 {
   switch (type)
-    {
-    case XFCE_M_ADD_WINDOW:
-      list_configure (body);
-      break;
-    case XFCE_M_CONFIGURE_WINDOW:
-      list_configure (body);
-      break;
-    case XFCE_M_DESTROY_WINDOW:
-      list_destroy (body);
-      break;
-    case XFCE_M_FOCUS_CHANGE:
-      list_focus (body);
-      break;
-    case XFCE_M_NEW_DESK:
-      list_new_desk (body);
-      break;
-    case XFCE_M_RAISE_WINDOW:
-      list_raise (body);
-      break;
-    case XFCE_M_LOWER_WINDOW:
-      list_lower (body);
-      break;
-    case XFCE_M_ICONIFY:
-    case XFCE_M_ICON_LOCATION:
-      list_iconify (body);
-      break;
-    case XFCE_M_DEICONIFY:
-      list_deiconify (body);
-      break;
-    case XFCE_M_ICON_NAME:
-      list_icon_name (body);
-      break;
-    case XFCE_M_END_WINDOWLIST:
-      list_restack ();
-      break;
-    case XFCE_M_RESTACK:
-      list_restack ();
-      break;
-    default:
-      list_unknown (body);
-      break;
-    }
+  {
+  case XFCE_M_ADD_WINDOW:
+    list_configure (body);
+    break;
+  case XFCE_M_CONFIGURE_WINDOW:
+    list_configure (body);
+    break;
+  case XFCE_M_DESTROY_WINDOW:
+    list_destroy (body);
+    break;
+  case XFCE_M_FOCUS_CHANGE:
+    list_focus (body);
+    break;
+  case XFCE_M_NEW_DESK:
+    list_new_desk (body);
+    break;
+  case XFCE_M_RAISE_WINDOW:
+    list_raise (body);
+    break;
+  case XFCE_M_LOWER_WINDOW:
+    list_lower (body);
+    break;
+  case XFCE_M_ICONIFY:
+  case XFCE_M_ICON_LOCATION:
+    list_iconify (body);
+    break;
+  case XFCE_M_DEICONIFY:
+    list_deiconify (body);
+    break;
+  case XFCE_M_ICON_NAME:
+    list_icon_name (body);
+    break;
+  case XFCE_M_END_WINDOWLIST:
+    list_restack ();
+    break;
+  case XFCE_M_RESTACK:
+    list_restack ();
+    break;
+  default:
+    list_unknown (body);
+    break;
+  }
 }
 
 
@@ -299,11 +279,11 @@ list_add (unsigned long *body)
   t = Start;
   prev = &Start;
   while (t != NULL)
-    {
-      prev = &(t->next);
-      t = t->next;
-      i++;
-    }
+  {
+    prev = &(t->next);
+    t = t->next;
+    i++;
+  }
   *prev = (PagerWindow *) safemalloc (sizeof (PagerWindow));
   (*prev)->w = body[0];
   (*prev)->t = (char *) body[2];
@@ -321,33 +301,33 @@ list_add (unsigned long *body)
   (*prev)->icon_w = body[19];
   (*prev)->icon_pixmap_w = body[20];
   if ((win_fore_pix != -1) && (win_back_pix != -1))
-    {
-      (*prev)->text = win_fore_pix;
-      (*prev)->back = win_back_pix;
-    }
+  {
+    (*prev)->text = win_fore_pix;
+    (*prev)->back = win_back_pix;
+  }
   else
-    {
-      (*prev)->text = body[22];
-      (*prev)->back = body[23];
-    }
+  {
+    (*prev)->text = body[22];
+    (*prev)->back = body[23];
+  }
   (*prev)->shade_x = body[24];
   (*prev)->shade_y = body[25];
   (*prev)->shade_width = body[26];
   (*prev)->shade_height = body[27];
   if ((*prev)->flags & SHADED)
-    {
-      (*prev)->x = body[24];
-      (*prev)->y = body[25];
-      (*prev)->width = body[26];
-      (*prev)->height = body[27];
-    }
+  {
+    (*prev)->x = body[24];
+    (*prev)->y = body[25];
+    (*prev)->width = body[26];
+    (*prev)->height = body[27];
+  }
   else
-    {
-      (*prev)->x = body[3];
-      (*prev)->y = body[4];
-      (*prev)->width = body[5];
-      (*prev)->height = body[6];
-    }
+  {
+    (*prev)->x = body[3];
+    (*prev)->y = body[4];
+    (*prev)->width = body[5];
+    (*prev)->height = body[6];
+  }
   AddNewWindow (*prev);
 }
 
@@ -366,79 +346,79 @@ list_configure (unsigned long *body)
   target_w = body[0];
   t = Start;
   while ((t != NULL) && (t->w != target_w))
-    {
-      t = t->next;
-    }
+  {
+    t = t->next;
+  }
   if (t == NULL)
-    {
-      list_add (body);
+  {
+    list_add (body);
 
-    }
+  }
   else
+  {
+    t->t = (char *) body[2];
+    t->frame = body[1];
+    t->frame_x = body[3];
+    t->frame_y = body[4];
+    t->frame_width = body[5];
+    t->frame_height = body[6];
+    t->title_height = body[9];
+    t->border_width = body[10];
+    t->flags = body[8];
+    t->icon_w = body[19];
+    t->icon_pixmap_w = body[20];
+    t->shade_x = body[24];
+    t->shade_y = body[25];
+    t->shade_width = body[26];
+    t->shade_height = body[27];
+    if ((win_fore_pix != -1) && (win_back_pix != -1))
     {
-      t->t = (char *) body[2];
-      t->frame = body[1];
-      t->frame_x = body[3];
-      t->frame_y = body[4];
-      t->frame_width = body[5];
-      t->frame_height = body[6];
-      t->title_height = body[9];
-      t->border_width = body[10];
-      t->flags = body[8];
-      t->icon_w = body[19];
-      t->icon_pixmap_w = body[20];
-      t->shade_x = body[24];
-      t->shade_y = body[25];
-      t->shade_width = body[26];
-      t->shade_height = body[27];
-      if ((win_fore_pix != -1) && (win_back_pix != -1))
-	{
-	  t->text = win_fore_pix;
-	  t->back = win_back_pix;
-	}
-      else
-	{
-	  t->text = body[22];
-	  t->back = body[23];
-	}
-      if (t->flags & ICONIFIED)
-	{
-	  t->x = t->icon_x;
-	  t->y = t->icon_y;
-	  t->width = t->icon_width;
-	  t->height = t->icon_height;
-	  if (t->flags & SUPPRESSICON)
-	    {
-	      t->x = -10000;
-	      t->y = -10000;
-	    }
-	}
-      else if (t->flags & SHADED)
-	{
-	  t->x = t->shade_x;
-	  t->y = t->shade_y;
-	  t->width = t->shade_width;
-	  t->height = t->shade_height;
-	}
-      else
-	{
-	  t->x = t->frame_x;
-	  t->y = t->frame_y;
-	  t->width = t->frame_width;
-	  t->height = t->frame_height;
-	}
-      if (t->desk != body[7])
-	{
-	  ChangeDeskForWindow (t, body[7]);
-	}
-
-      else
-	MoveResizePagerView (t);
-      if (FocusWin == t)
-	Hilight (t, ON);
-      else
-	Hilight (t, OFF);
+      t->text = win_fore_pix;
+      t->back = win_back_pix;
     }
+    else
+    {
+      t->text = body[22];
+      t->back = body[23];
+    }
+    if (t->flags & ICONIFIED)
+    {
+      t->x = t->icon_x;
+      t->y = t->icon_y;
+      t->width = t->icon_width;
+      t->height = t->icon_height;
+      if (t->flags & SUPPRESSICON)
+      {
+	t->x = -10000;
+	t->y = -10000;
+      }
+    }
+    else if (t->flags & SHADED)
+    {
+      t->x = t->shade_x;
+      t->y = t->shade_y;
+      t->width = t->shade_width;
+      t->height = t->shade_height;
+    }
+    else
+    {
+      t->x = t->frame_x;
+      t->y = t->frame_y;
+      t->width = t->frame_width;
+      t->height = t->frame_height;
+    }
+    if (t->desk != body[7])
+    {
+      ChangeDeskForWindow (t, body[7]);
+    }
+
+    else
+      MoveResizePagerView (t);
+    if (FocusWin == t)
+      Hilight (t, ON);
+    else
+      Hilight (t, OFF);
+  }
 }
 
 /***********************************************************************
@@ -457,23 +437,23 @@ list_destroy (unsigned long *body)
   t = Start;
   prev = &Start;
   while ((t != NULL) && (t->w != target_w))
-    {
-      prev = &(t->next);
-      t = t->next;
-    }
+  {
+    prev = &(t->next);
+    t = t->next;
+  }
   if (t != NULL)
-    {
-      if (prev != NULL)
-	*prev = t->next;
-      /* remove window from the chain */
-      if (t->PagerView != None)
-	XDestroyWindow (dpy, t->PagerView);
-      XDestroyWindow (dpy, t->IconView);
-      if (FocusWin == t)
-	FocusWin = NULL;
+  {
+    if (prev != NULL)
+      *prev = t->next;
+    /* remove window from the chain */
+    if (t->PagerView != None)
+      XDestroyWindow (dpy, t->PagerView);
+    XDestroyWindow (dpy, t->IconView);
+    if (FocusWin == t)
+      FocusWin = NULL;
 
-      free (t);
-    }
+    free (t);
+  }
 }
 
 /***********************************************************************
@@ -491,30 +471,30 @@ list_focus (unsigned long *body)
   target_w = body[0];
 
   if ((win_hi_fore_pix != -1) && (win_hi_back_pix != -1))
-    {
-      focus_pix = win_hi_back_pix;
-      focus_fore_pix = win_hi_fore_pix;
-    }
+  {
+    focus_pix = win_hi_back_pix;
+    focus_fore_pix = win_hi_fore_pix;
+  }
   else
-    {
-      focus_pix = body[4];
-      focus_fore_pix = body[3];
-    }
+  {
+    focus_pix = body[4];
+    focus_fore_pix = body[3];
+  }
   t = Start;
   while ((t != NULL) && (t->w != target_w))
-    {
-      t = t->next;
-    }
+  {
+    t = t->next;
+  }
   if (t != FocusWin)
-    {
-      temp = FocusWin;
-      FocusWin = t;
+  {
+    temp = FocusWin;
+    FocusWin = t;
 
-      if (temp != NULL)
-	Hilight (temp, OFF);
-      if (FocusWin != NULL)
-	Hilight (FocusWin, ON);
-    }
+    if (temp != NULL)
+      Hilight (temp, OFF);
+    if (FocusWin != NULL)
+      Hilight (FocusWin, ON);
+  }
 }
 
 /***********************************************************************
@@ -592,33 +572,33 @@ list_iconify (unsigned long *body)
   target_w = body[0];
   t = Start;
   while ((t != NULL) && (t->w != target_w))
-    {
-      t = t->next;
-    }
+  {
+    t = t->next;
+  }
   if (t == NULL)
-    {
-      return;
-    }
+  {
+    return;
+  }
   else
+  {
+    t->t = (char *) body[2];
+    t->frame = body[1];
+    t->icon_x = body[3];
+    t->icon_y = body[4];
+    t->icon_width = body[5];
+    t->icon_height = body[6];
+    t->flags |= ICONIFIED;
+    t->x = t->icon_x;
+    t->y = t->icon_y;
+    if (t->flags & SUPPRESSICON)
     {
-      t->t = (char *) body[2];
-      t->frame = body[1];
-      t->icon_x = body[3];
-      t->icon_y = body[4];
-      t->icon_width = body[5];
-      t->icon_height = body[6];
-      t->flags |= ICONIFIED;
-      t->x = t->icon_x;
-      t->y = t->icon_y;
-      if (t->flags & SUPPRESSICON)
-	{
-	  t->x = -10000;
-	  t->y = -10000;
-	}
-      t->width = t->icon_width;
-      t->height = t->icon_height;
-      MoveResizePagerView (t);
+      t->x = -10000;
+      t->y = -10000;
     }
+    t->width = t->icon_width;
+    t->height = t->icon_height;
+    MoveResizePagerView (t);
+  }
 }
 
 
@@ -638,36 +618,36 @@ list_deiconify (unsigned long *body)
   target_w = body[0];
   t = Start;
   while ((t != NULL) && (t->w != target_w))
-    {
-      t = t->next;
-    }
+  {
+    t = t->next;
+  }
   if (t == NULL)
-    {
-      return;
-    }
+  {
+    return;
+  }
   else
+  {
+    t->flags &= ~ICONIFIED;
+    if (t->flags & SHADED)
     {
-      t->flags &= ~ICONIFIED;
-      if (t->flags & SHADED)
-	{
-	  t->x = t->shade_x;
-	  t->y = t->shade_y;
-	  t->width = t->shade_width;
-	  t->height = t->shade_height;
-	}
-      else
-	{
-	  t->x = t->frame_x;
-	  t->y = t->frame_y;
-	  t->width = t->frame_width;
-	  t->height = t->frame_height;
-	}
-      MoveResizePagerView (t);
-      if (FocusWin == t)
-	Hilight (t, ON);
-      else
-	Hilight (t, OFF);
+      t->x = t->shade_x;
+      t->y = t->shade_y;
+      t->width = t->shade_width;
+      t->height = t->shade_height;
     }
+    else
+    {
+      t->x = t->frame_x;
+      t->y = t->frame_y;
+      t->width = t->frame_width;
+      t->height = t->frame_height;
+    }
+    MoveResizePagerView (t);
+    if (FocusWin == t)
+      Hilight (t, ON);
+    else
+      Hilight (t, OFF);
+  }
 }
 
 /***********************************************************************
@@ -685,17 +665,17 @@ list_icon_name (unsigned long *body)
   target_w = body[0];
   t = Start;
   while ((t != NULL) && (t->w != target_w))
-    {
-      t = t->next;
-    }
+  {
+    t = t->next;
+  }
   if (t != NULL)
-    {
-      if (t->icon_name != NULL)
-	free (t->icon_name);
-      CopyString (&t->icon_name, (char *) (&body[3]));
-      LabelWindow (t);
-      LabelIconWindow (t);
-    }
+  {
+    if (t->icon_name != NULL)
+      free (t->icon_name);
+    CopyString (&t->icon_name, (char *) (&body[3]));
+    LabelWindow (t);
+    LabelIconWindow (t);
+  }
 }
 
 
@@ -711,7 +691,7 @@ list_restack (void)
 {
 #if 0
   /* Broken code (kept for further analysis) */
-  
+
   unsigned int nchildren, i, j, k;
   Window root, parent, *children;
   Window *wins;
@@ -721,33 +701,32 @@ list_restack (void)
     return;
 
   wins = (Window *) safemalloc ((nchildren + 1) * sizeof (Window));
-  
-  for (j = 0; j < ndesks; j++)
-    {
-      k = 0;
-      for (i = 0; i < nchildren; i++)
-        {
-          ptr = Start;
-          while (ptr != NULL)
-	    {
-              if (ptr->desk == j)
-                {
-	          if ((ptr->frame == children[i]) || (ptr->icon_w == children[i]) ||
-	              (ptr->icon_pixmap_w == children[i]))
-	            {
-	              if (ptr->PagerView != None)
-		        XRaiseWindow (dpy, ptr->PagerView);
-	              wins [k++] = ptr->IconView;
-	            }
-                }
-	      ptr = ptr->next;
-	    }
-        }
-      if (k > 0)
-        XRaiseWindow (dpy, wins[0]);
 
-      XRestackWindows (dpy, wins, k);
+  for (j = 0; j < ndesks; j++)
+  {
+    k = 0;
+    for (i = 0; i < nchildren; i++)
+    {
+      ptr = Start;
+      while (ptr != NULL)
+      {
+	if (ptr->desk == j)
+	{
+	  if ((ptr->frame == children[i]) || (ptr->icon_w == children[i]) || (ptr->icon_pixmap_w == children[i]))
+	  {
+	    if (ptr->PagerView != None)
+	      XRaiseWindow (dpy, ptr->PagerView);
+	    wins[k++] = ptr->IconView;
+	  }
+	}
+	ptr = ptr->next;
+      }
     }
+    if (k > 0)
+      XRaiseWindow (dpy, wins[0]);
+
+    XRestackWindows (dpy, wins, k);
+  }
 
   free (wins);
   if (nchildren > 0)
@@ -762,20 +741,19 @@ list_restack (void)
     return;
 
   for (i = 0; i < nchildren; i++)
+  {
+    ptr = Start;
+    while (ptr != NULL)
     {
-      ptr = Start;
-      while (ptr != NULL)
-	{
-	  if ((ptr->frame == children[i]) || (ptr->icon_w == children[i]) ||
-	      (ptr->icon_pixmap_w == children[i]))
-	    {
-	      if (ptr->PagerView != None)
-		XRaiseWindow (dpy, ptr->PagerView);
-	      XRaiseWindow (dpy, ptr->IconView);
-	    }
-	  ptr = ptr->next;
-	}
+      if ((ptr->frame == children[i]) || (ptr->icon_w == children[i]) || (ptr->icon_pixmap_w == children[i]))
+      {
+	if (ptr->PagerView != None)
+	  XRaiseWindow (dpy, ptr->PagerView);
+	XRaiseWindow (dpy, ptr->IconView);
+      }
+      ptr = ptr->next;
     }
+  }
 
 
   if (nchildren > 0)
@@ -800,10 +778,10 @@ My_XNextEvent (Display * dpy, XEvent * event)
   unsigned long *body;
 
   if (XPending (dpy))
-    {
-      XNextEvent (dpy, event);
-      return 1;
-    }
+  {
+    XNextEvent (dpy, event);
+    return 1;
+  }
 
   FD_ZERO (&in_fdset);
   FD_SET (x_fd, &in_fdset);
@@ -816,27 +794,27 @@ My_XNextEvent (Display * dpy, XEvent * event)
 #endif
 
   if (FD_ISSET (x_fd, &in_fdset))
+  {
+    if (XPending (dpy))
     {
-      if (XPending (dpy))
-	{
-	  XNextEvent (dpy, event);
-	  miss_counter = 0;
-	  return 1;
-	}
-      else
-	miss_counter++;
-      if (miss_counter > 100)
-	DeadPipe (0);
+      XNextEvent (dpy, event);
+      miss_counter = 0;
+      return 1;
     }
+    else
+      miss_counter++;
+    if (miss_counter > 100)
+      DeadPipe (0);
+  }
 
   if (FD_ISSET (fd[1], &in_fdset))
+  {
+    if ((count = ReadXfwmPacket (fd[1], header, &body)) > 0)
     {
-      if ((count = ReadXfwmPacket (fd[1], header, &body)) > 0)
-	{
-	  process_message (header[1], body);
-	  free (body);
-	}
+      process_message (header[1], body);
+      free (body);
     }
+  }
   return 0;
 }
 
@@ -864,128 +842,112 @@ ParseOptions ()
   GetConfigLine (fd, &tline);
 
   while (tline != NULL)
+  {
+    int g_x, g_y, flags;
+    unsigned width, height;
+
+    if ((strlen (&tline[0]) > 1) && (mystrncasecmp (tline, CatString3 ("*", MyName, ".geometry"), Clength + 10) == 0))
     {
-      int g_x, g_y, flags;
-      unsigned width, height;
-
-      if ((strlen (&tline[0]) > 1) &&
-	  (mystrncasecmp
-	   (tline, CatString3 ("*", MyName, ".geometry"), Clength + 10) == 0))
-	{
-	  tmp = &tline[Clength + 10];
-	  while (((isspace (*tmp)) && (*tmp != '\n')) && (*tmp != 0))
-	    {
-	      tmp++;
-	    }
-	  tmp[strlen (tmp) - 1] = 0;
-	  flags = XParseGeometry (tmp, &g_x, &g_y, &width, &height);
-	  if (flags & WidthValue)
-	    {
-	      window_w = width;
-	    }
-	  if (flags & HeightValue)
-	    {
-	      window_h = height;
-	    }
-	  if (flags & XValue)
-	    {
-	      window_x = g_x;
-	      usposition = 1;
-	    }
-	  if (flags & YValue)
-	    {
-	      window_y = g_y;
-	      usposition = 1;
-	    }
-	  if (flags & XNegative)
-	    {
-	      window_x = g_x;
-	      xneg = 1;
-	      usposition = 1;
-	    }
-	  if (flags & YNegative)
-	    {
-	      window_y = g_y;
-	      yneg = 1;
-	      usposition = 1;
-	    }
-	}
-      else if ((strlen (&tline[0]) > 1) &&
-	       (mystrncasecmp
-		(tline, CatString3 ("*", MyName, ".icongeometry"),
-		 Clength + 14) == 0))
-	{
-	  tmp = &tline[Clength + 14];
-	  while (((isspace (*tmp)) && (*tmp != '\n')) && (*tmp != 0))
-	    {
-	      tmp++;
-	    }
-	  tmp[strlen (tmp) - 1] = 0;
-	  printf ("Icon %s\n", tmp);
-	  flags = XParseGeometry (tmp, &g_x, &g_y, &width, &height);
-	  if (flags & WidthValue)
-	    {
-	      icon_w = width;
-	    }
-	  if (flags & HeightValue)
-	    {
-	      icon_h = height;
-	    }
-	  if (flags & XValue)
-	    {
-	      icon_x = g_x;
-	      printf ("%s: Warning  - Icon position not supported by XFwm.\n"
-		      "Extra parameter (icon pos. x=%u) ignored\n", MyName,
-		      g_x);
-	    }
-	  if (flags & YValue)
-	    {
-	      icon_y = g_y;
-	      printf ("%s: Warning  - Icon position not supported by XFwm.\n"
-		      "Extra parameter (icon pos. y=%u) ignored\n", MyName,
-		      g_y);
-	    }
-	}
-      else if ((strlen (&tline[0]) > 1) &&
-	       (mystrncasecmp
-		(tline, CatString3 ("*", MyName, ".label"),
-		 Clength + 7) == 0))
-	{
-	  desk = 0;
-	  sscanf (&tline[Clength + 7], "%d", &desk);
-	  desk--;
-	  if ((desk >= 0) && (desk <= desk2))
-	    {
-	      n = 0;
-	      while (isspace (tline[Clength + 7 + n]))
-		n++;
-	      while (!isspace (tline[Clength + 7 + n]))
-		n++;
-	      free (Desks[desk].label);
-	      CopyString (&Desks[desk].label, &tline[Clength + 7 + n]);
-	    }
-	}
-      else if ((strlen (&tline[0]) > 1) &&
-	       (mystrncasecmp
-		(tline, CatString3 ("*", MyName, ".font"), Clength + 6) == 0))
-	{
-	  CopyString (&font_string, &tline[Clength + 6]);
-	  if (mystrncasecmp (font_string, "none", 4) == 0)
-	    uselabel = 0;
-
-	}
-      else if ((strlen (&tline[0]) > 1) &&
-	       (mystrncasecmp (tline, CatString3 ("*", MyName, ".smallfont"),
-			       Clength + 11) == 0))
-	{
-	  CopyString (&smallFont, &tline[Clength + 11]);
-	  if (mystrncasecmp (smallFont, "none", 4) == 0)
-	    {
-	      free (smallFont);
-	      smallFont = NULL;
-	    }
-	}
-      GetConfigLine (fd, &tline);
+      tmp = &tline[Clength + 10];
+      while (((isspace (*tmp)) && (*tmp != '\n')) && (*tmp != 0))
+      {
+	tmp++;
+      }
+      tmp[strlen (tmp) - 1] = 0;
+      flags = XParseGeometry (tmp, &g_x, &g_y, &width, &height);
+      if (flags & WidthValue)
+      {
+	window_w = width;
+      }
+      if (flags & HeightValue)
+      {
+	window_h = height;
+      }
+      if (flags & XValue)
+      {
+	window_x = g_x;
+	usposition = 1;
+      }
+      if (flags & YValue)
+      {
+	window_y = g_y;
+	usposition = 1;
+      }
+      if (flags & XNegative)
+      {
+	window_x = g_x;
+	xneg = 1;
+	usposition = 1;
+      }
+      if (flags & YNegative)
+      {
+	window_y = g_y;
+	yneg = 1;
+	usposition = 1;
+      }
     }
+    else if ((strlen (&tline[0]) > 1) && (mystrncasecmp (tline, CatString3 ("*", MyName, ".icongeometry"), Clength + 14) == 0))
+    {
+      tmp = &tline[Clength + 14];
+      while (((isspace (*tmp)) && (*tmp != '\n')) && (*tmp != 0))
+      {
+	tmp++;
+      }
+      tmp[strlen (tmp) - 1] = 0;
+      printf ("Icon %s\n", tmp);
+      flags = XParseGeometry (tmp, &g_x, &g_y, &width, &height);
+      if (flags & WidthValue)
+      {
+	icon_w = width;
+      }
+      if (flags & HeightValue)
+      {
+	icon_h = height;
+      }
+      if (flags & XValue)
+      {
+	icon_x = g_x;
+	printf ("%s: Warning  - Icon position not supported by XFwm.\n" "Extra parameter (icon pos. x=%u) ignored\n", MyName, g_x);
+      }
+      if (flags & YValue)
+      {
+	icon_y = g_y;
+	printf ("%s: Warning  - Icon position not supported by XFwm.\n" "Extra parameter (icon pos. y=%u) ignored\n", MyName, g_y);
+      }
+    }
+    else if ((strlen (&tline[0]) > 1) && (mystrncasecmp (tline, CatString3 ("*", MyName, ".label"), Clength + 7) == 0))
+    {
+      desk = 0;
+      sscanf (&tline[Clength + 7], "%d", &desk);
+      desk--;
+      if ((desk >= 0) && (desk <= desk2))
+      {
+	n = 0;
+	while (isspace (tline[Clength + 7 + n]))
+	  n++;
+	while (!isspace (tline[Clength + 7 + n]))
+	  n++;
+	free (Desks[desk].label);
+	CopyString (&Desks[desk].label, &tline[Clength + 7 + n]);
+      }
+    }
+    else if ((strlen (&tline[0]) > 1) && (mystrncasecmp (tline, CatString3 ("*", MyName, ".font"), Clength + 6) == 0))
+    {
+      CopyString (&font_string, &tline[Clength + 6]);
+      if (mystrncasecmp (font_string, "none", 4) == 0)
+	uselabel = 0;
+
+    }
+    else if ((strlen (&tline[0]) > 1) && (mystrncasecmp (tline, CatString3 ("*", MyName, ".smallfont"), Clength + 11) == 0))
+    {
+      CopyString (&smallFont, &tline[Clength + 11]);
+      if (mystrncasecmp (smallFont, "none", 4) == 0)
+      {
+	free (smallFont);
+	smallFont = NULL;
+      }
+    }
+    GetConfigLine (fd, &tline);
+  }
   return;
 }

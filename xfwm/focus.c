@@ -59,83 +59,82 @@ void
 SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
 {
 #ifdef REQUIRES_STASHEVENT
-    extern Time lastTimestamp;
+  extern Time lastTimestamp;
 #endif
 
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : Entering SetFocus ()\n");
+  fprintf (stderr, "xfwm : Entering SetFocus ()\n");
 #endif
-    if ((FocusByMouse) && (Fw) && (Fw != Scr.Focus) && (Fw != &Scr.XfwmRoot))
+  if ((FocusByMouse) && (Fw) && (Fw != Scr.Focus) && (Fw != &Scr.XfwmRoot))
+  {
+    XfwmWindow *tmp_win1, *tmp_win2;
+
+    tmp_win1 = Fw->prev;
+    tmp_win2 = Fw->next;
+
+    if (tmp_win1 != tmp_win2)
     {
-        XfwmWindow *tmp_win1, *tmp_win2;
-
-        tmp_win1 = Fw->prev;
-        tmp_win2 = Fw->next;
-
-        if (tmp_win1 != tmp_win2)
-        {
-            if (tmp_win1)
-                tmp_win1->next = tmp_win2;
-            if (tmp_win2)
-                tmp_win2->prev = tmp_win1;
-        }
-        if (Fw != Scr.XfwmRoot.next)
-        {
-            Fw->next = Scr.XfwmRoot.next;
-            if (Scr.XfwmRoot.next)
-                Scr.XfwmRoot.next->prev = Fw;
-            Scr.XfwmRoot.next = Fw;
-            Fw->prev = &Scr.XfwmRoot;
-        }
+      if (tmp_win1)
+	tmp_win1->next = tmp_win2;
+      if (tmp_win2)
+	tmp_win2->prev = tmp_win1;
     }
-
-    if (Scr.NumberOfScreens > 1)
+    if (Fw != Scr.XfwmRoot.next)
     {
-        XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild,
-                       &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-        if (JunkRoot != Scr.Root)
-        {
-            if (Scr.Focus != NULL)
-            {
-                Scr.Focus = NULL;
+      Fw->next = Scr.XfwmRoot.next;
+      if (Scr.XfwmRoot.next)
+	Scr.XfwmRoot.next->prev = Fw;
+      Scr.XfwmRoot.next = Fw;
+      Fw->prev = &Scr.XfwmRoot;
+    }
+  }
+
+  if (Scr.NumberOfScreens > 1)
+  {
+    XQueryPointer (dpy, Scr.Root, &JunkRoot, &JunkChild, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
+    if (JunkRoot != Scr.Root)
+    {
+      if (Scr.Focus != NULL)
+      {
+	Scr.Focus = NULL;
 #ifdef REQUIRES_STASHEVENT
-                XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, lastTimestamp);
+	XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, lastTimestamp);
 #else
-                XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, CurrentTime);
+	XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, CurrentTime);
 #endif
-            }
-	    XSync (dpy, 0);
+      }
+      XSync (dpy, 0);
 #ifdef DEBUG
-            fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
+      fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
 #endif
-            return;
-        }
+      return;
     }
+  }
 
-    if ((Fw) && (Fw->Desk != Scr.CurrentDesk))
-    {
-        Fw = NULL;
-        w = Scr.NoFocusWin;
-    }
+  if ((Fw) && (Fw->Desk != Scr.CurrentDesk))
+  {
+    Fw = NULL;
+    w = Scr.NoFocusWin;
+  }
 
-    if ((Fw) && (Fw->flags & ICONIFIED) && (Fw->icon_w))
-        w = Fw->icon_w;
+  if ((Fw) && (Fw->flags & ICONIFIED) && (Fw->icon_w))
+    w = Fw->icon_w;
 
 #ifdef REQUIRES_STASHEVENT
-    XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
+  XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
 #else
-    XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
+  XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
 #endif
-    Scr.Focus = Fw;
-    Scr.UnknownWinFocused = None;
+  Scr.Focus = Fw;
+  Scr.UnknownWinFocused = None;
 
-    if ((Fw) && (Fw->flags & DoesWmTakeFocus))
+  if ((Fw) && (Fw->flags & DoesWmTakeFocus))
 #ifdef REQUIRES_STASHEVENT
-        send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, lastTimestamp);
+    send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, lastTimestamp);
 #else
-        send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, CurrentTime);
+    send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, CurrentTime);
 #endif
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
+  fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
 #endif
 }

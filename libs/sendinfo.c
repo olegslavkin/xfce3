@@ -37,14 +37,14 @@ sendinfo (int *fd, char *message, unsigned long window)
 
   win = window;
   if (message != NULL)
-    {
-      write (fd[0], &win, sizeof (unsigned long));
-      w = strlen (message);
-      write (fd[0], &w, sizeof (int));
-      write (fd[0], message, w);
-      w = 1;
-      write (fd[0], &w, sizeof (int));
-    }
+  {
+    write (fd[0], &win, sizeof (unsigned long));
+    w = strlen (message);
+    write (fd[0], &w, sizeof (int));
+    write (fd[0], message, w);
+    w = 1;
+    write (fd[0], &w, sizeof (int));
+  }
 }
 
 int
@@ -54,27 +54,23 @@ readpacket (int fd, unsigned long *header, unsigned long **body)
   char *cbody;
 
   if ((count = read (fd, header, HEADER_SIZE * sizeof (unsigned long))) > 0)
+  {
+    if (header[0] == START_FLAG)
     {
-      if (header[0] == START_FLAG)
+      body_length = header[2] - HEADER_SIZE;
+      *body = (unsigned long *) malloc (body_length * sizeof (unsigned long) + 1);
+      cbody = (char *) (*body);
+      total = 0;
+      while (total < body_length * sizeof (unsigned long))
+      {
+	if ((count2 = read (fd, &cbody[total], body_length * sizeof (unsigned long) - total)) > 0)
 	{
-	  body_length = header[2] - HEADER_SIZE;
-	  *body =
-	    (unsigned long *) malloc (body_length * sizeof (unsigned long) +
-				      1);
-	  cbody = (char *) (*body);
-	  total = 0;
-	  while (total < body_length * sizeof (unsigned long))
-	    {
-	      if ((count2 = read (fd, &cbody[total],
-				  body_length * sizeof (unsigned long) -
-				  total)) > 0)
-		{
-		  total += count2;
-		}
-	    }
+	  total += count2;
 	}
-      else
-	count = 0;
+      }
     }
+    else
+      count = 0;
+  }
   return (count);
 }

@@ -40,11 +40,8 @@ NMBLookupForkOver (void)
   animation (FALSE);
   fork_obj = NULL;
 
-  message = (char *) malloc (strlen (_("Resolved")) +
-			     strlen ((thisN->serverIP) ? thisN->serverIP :
-				     "?") + 5);
-  sprintf (message, "%s : %s", _("Resolved"),
-	   (thisN->serverIP) ? thisN->serverIP : "?");
+  message = (char *) malloc (strlen (_("Resolved")) + strlen ((thisN->serverIP) ? thisN->serverIP : "?") + 5);
+  sprintf (message, "%s : %s", _("Resolved"), (thisN->serverIP) ? thisN->serverIP : "?");
   print_status (message);
   free (message);
 }
@@ -88,26 +85,23 @@ NMBLookup (GtkWidget * widget, gpointer data)
   char *message;
 
   if (fork_obj)
-	    return;
+    return;
 
-  if ((!thisN)||(!thisN->server)||(!thisN->netbios)) return;
+  if ((!thisN) || (!thisN->server) || (!thisN->netbios))
+    return;
 
   print_status ("entering nmblookup");
-  stopcleanup=FALSE;
+  stopcleanup = FALSE;
 
 
-  message = (char *) malloc (strlen (_("Resolving for")) +
-			     strlen (thisN->server) +
-			     strlen (thisN->netbios) + 7);
-  sprintf (message, "%s %s (%s)\n", _("Resolving for"), thisN->server,
-	   thisN->netbios);
+  message = (char *) malloc (strlen (_("Resolving for")) + strlen (thisN->server) + strlen (thisN->netbios) + 7);
+  sprintf (message, "%s %s (%s)\n", _("Resolving for"), thisN->server, thisN->netbios);
   print_status (message);
   free (message);
 
   strncpy (NMBnetbios, thisN->netbios, XFSAMBA_MAX_STRING);
   NMBnetbios[XFSAMBA_MAX_STRING] = 0;
 
-  fork_obj = Tubo (NMBLookupFork, NMBLookupForkOver, FALSE,
-		   NMBLookupParse, parse_stderr);
+  fork_obj = Tubo (NMBLookupFork, NMBLookupForkOver, FALSE, NMBLookupParse, parse_stderr);
   return;
 }

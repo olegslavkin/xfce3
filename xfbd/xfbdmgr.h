@@ -8,14 +8,14 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-GtkWidget *create_xfbdmgr();
+GtkWidget *create_xfbdmgr ();
 
 GtkWidget *xfbdmgr;
 GtkWidget *clist_fileslist;
 GtkWidget *edit_name;
 
-void writeToList();
-void saveList();
+void writeToList ();
+void saveList ();
 
 gint theNumber;
 gboolean Changed;

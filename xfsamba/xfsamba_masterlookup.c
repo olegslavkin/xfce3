@@ -34,7 +34,7 @@
 *  and all data in pipe has been read : */
 
 
-static void
+void
 NMBmastersForkOver (void)
 {
   cursor_reset (GTK_WIDGET (smb_nav));
@@ -43,37 +43,36 @@ NMBmastersForkOver (void)
   /* print_diagnostics("DBG:Master servers on subnet:\n"); */
 
   if (headN)
+  {
+    nmb_list *currentN;
+    currentN = headN;
+    while (currentN)
     {
-      nmb_list *currentN;
-      currentN = headN;
-      while (currentN)
-	{
-	  print_diagnostics ("Master browser at ");
-	  if (currentN->serverIP)
-	    print_diagnostics (currentN->serverIP);
-	  else
-	    print_diagnostics ("?");
-	  print_diagnostics ("\n");
-	  currentN = currentN->next;
-	}
+      print_diagnostics ("Master browser at ");
+      if (currentN->serverIP)
+	print_diagnostics (currentN->serverIP);
+      else
+	print_diagnostics ("?");
+      print_diagnostics ("\n");
+      currentN = currentN->next;
+    }
 
-      if (headN->serverIP)
-	{
-	        /*sleep(10); */
-	  NMBmastersResolve (headN);
-	}
-    }
-  else
+    if (headN->serverIP)
     {
-      print_diagnostics
-	("Your subnet might be SMB free, or have a win95 master browser.\n");
-      print_status (_("No master browser found. See diagnostics."));
-      my_show_message(_("No master browser found.\nPlease type a computer name at location and hit RETURN"));
+      /*sleep(10); */
+      NMBmastersResolve (headN);
     }
+  }
+  else
+  {
+    print_diagnostics ("Your subnet might be SMB free, or have a win95 master browser.\n");
+    print_status (_("No master browser found. See diagnostics."));
+    my_show_message (_("No master browser found.\nPlease type a computer name at location and hit RETURN"));
+  }
 }
 
 /* function to process stdout produced by child */
-static int
+int
 NMBmastersParseLookup (int n, void *data)
 {
   char *line, *buffer;
@@ -84,10 +83,10 @@ NMBmastersParseLookup (int n, void *data)
   print_diagnostics (line);	/* verbose diagnostics */
   if (!strncmp (line, "querying", strlen ("querying")))
     return TRUE;
-  if (strstr (line, "name_query")
-      && strstr (line, "failed") && strstr (line, "__MSBROWSE__"))
+  if (strstr (line, "name_query") && strstr (line, "failed") && strstr (line, "__MSBROWSE__"))
     return TRUE;
-  if (strstr(line,"__MSBROWSE__")==NULL) return TRUE;
+  if (strstr (line, "__MSBROWSE__") == NULL)
+    return TRUE;
 
   buffer = strtok (line, " ");
   currentN = push_nmb (buffer);
@@ -98,7 +97,7 @@ NMBmastersParseLookup (int n, void *data)
 
 /* function executed by child after all pipes
 *  timeouts and inputs have been set up */
-static void
+void
 NMBmastersFork (void)
 {
 #ifdef DBG_XFSAMBA
@@ -109,12 +108,12 @@ NMBmastersFork (void)
 }
 
 
-static gboolean
+gboolean
 NMBmastersLookup (gpointer data)
 {
   animation (FALSE);
   cursor_reset (GTK_WIDGET (smb_nav));
-  stopcleanup=TRUE;
+  stopcleanup = TRUE;
 
 
   /* animation may already be set in main... */
@@ -125,8 +124,6 @@ NMBmastersLookup (gpointer data)
   cursor_wait (GTK_WIDGET (smb_nav));
   animation (TRUE);
   print_status (_("Looking for master browsers..."));
-  fork_obj =
-	  Tubo (NMBmastersFork, NMBmastersForkOver, FALSE,
-		   NMBmastersParseLookup, parse_stderr);
+  fork_obj = Tubo (NMBmastersFork, NMBmastersForkOver, FALSE, NMBmastersParseLookup, parse_stderr);
   return FALSE;
 }

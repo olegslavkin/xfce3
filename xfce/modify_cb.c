@@ -73,9 +73,9 @@ modify_browse_command_cb (GtkWidget * widget, gpointer data)
   else
     command = open_fileselect (XBINDIR);
   if (command)
-    {
-      gtk_entry_set_text (GTK_ENTRY (modify_command_entry), command);
-    }
+  {
+    gtk_entry_set_text (GTK_ENTRY (modify_command_entry), command);
+  }
 }
 
 void
@@ -92,32 +92,28 @@ modify_browse_icon_cb (GtkWidget * widget, gpointer data)
   else
     pixfile = open_fileselect (build_path (XFCE_ICONS));
   if (pixfile)
+  {
+    if (existfile (pixfile))
     {
-      if (existfile (pixfile))
-	{
-	  gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), pixfile);
-	  pixmap =
-	    MyCreateGdkPixmapFromFile (pixfile, modify_preview_frame, &mask, TRUE);
-	  gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);
-	}
-      else
-	{
-	  gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), "Default icon");
-	  pixmap =
-	    MyCreateGdkPixmapFromData (defaulticon, modify_preview_frame,
-				       &mask, TRUE);
-	  gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);
-	}
       gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), pixfile);
+      pixmap = MyCreateGdkPixmapFromFile (pixfile, modify_preview_frame, &mask, TRUE);
+      gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);
     }
+    else
+    {
+      gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), "Default icon");
+      pixmap = MyCreateGdkPixmapFromData (defaulticon, modify_preview_frame, &mask, TRUE);
+      gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);
+    }
+    gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), pixfile);
+  }
 }
 
 void
 modify_remove_cb (GtkWidget * widget, gpointer data)
 {
   if (my_yesno_dialog (_("Are you sure you want to remove this entry ?")))
-    remove_popup_entry (((gint)((long) data)) / NBMAXITEMS, 
-                        ((gint)((long) data)) % NBMAXITEMS);
+    remove_popup_entry (((gint) ((long) data)) / NBMAXITEMS, ((gint) ((long) data)) % NBMAXITEMS);
   gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
   gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
   gtk_main_quit ();
@@ -133,30 +129,26 @@ modify_change_cb (GtkWidget * widget, gpointer data)
   gint x1, x3;
   gint menu, item;
 
-  menu = ((gint)((long) data)) / NBMAXITEMS;
-  item = ((gint)((long) data)) % NBMAXITEMS;
+  menu = ((gint) ((long) data)) / NBMAXITEMS;
+  item = ((gint) ((long) data)) % NBMAXITEMS;
 
-  s1 =
-    cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_command_entry)));
+  s1 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_command_entry)));
   s2 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_icon_entry)));
-  s3 =
-    cleanup ((char *)
-	     gtk_entry_get_text (GTK_ENTRY (modify_displayed_entry)));
+  s3 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_displayed_entry)));
   x1 = strlen (s1);
   x3 = strlen (s3);
   if (x1 && x3)
-    {
-      set_entry (menu, item, s3, s2, s1);
-      gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
-      gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
-      gtk_main_quit ();
-      gtk_widget_hide (modify);
-      gdk_window_withdraw ((GTK_WIDGET (modify))->window);
-      writeconfig ();
-    }
+  {
+    set_entry (menu, item, s3, s2, s1);
+    gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
+    gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
+    gtk_main_quit ();
+    gtk_widget_hide (modify);
+    gdk_window_withdraw ((GTK_WIDGET (modify))->window);
+    writeconfig ();
+  }
   else
-    my_show_message (_
-		     ("You must provide the command\nand the label, at least !"));
+    my_show_message (_("You must provide the command\nand the label, at least !"));
 }
 
 void
@@ -166,27 +158,23 @@ modify_add_cb (GtkWidget * widget, gpointer data)
   gint x1, x3;
   gint menu;
 
-  menu = ((gint)((long) data)) / NBMAXITEMS;
+  menu = ((gint) ((long) data)) / NBMAXITEMS;
 
-  s1 =
-    cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_command_entry)));
+  s1 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_command_entry)));
   s2 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_icon_entry)));
-  s3 =
-    cleanup ((char *)
-	     gtk_entry_get_text (GTK_ENTRY (modify_displayed_entry)));
+  s3 = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (modify_displayed_entry)));
   x1 = strlen (s1);
   x3 = strlen (s3);
   if (x1 && x3)
-    {
-      add_popup_entry (menu, s3, s2, s1);
-      gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
-      gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
-      gtk_main_quit ();
-      gtk_widget_hide (modify);
-      gdk_window_withdraw ((GTK_WIDGET (modify))->window);
-      writeconfig ();
-    }
+  {
+    add_popup_entry (menu, s3, s2, s1);
+    gtk_signal_disconnect (GTK_OBJECT (modify_ok_button), signal_id1);
+    gtk_signal_disconnect (GTK_OBJECT (modify_remove_button), signal_id2);
+    gtk_main_quit ();
+    gtk_widget_hide (modify);
+    gdk_window_withdraw ((GTK_WIDGET (modify))->window);
+    writeconfig ();
+  }
   else
-    my_show_message (_
-		     ("You must provide the command\nand the label, at least !"));
+    my_show_message (_("You must provide the command\nand the label, at least !"));
 }

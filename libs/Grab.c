@@ -15,10 +15,10 @@ void
 MyXGrabServer (Display * disp)
 {
   if (xgrabcount == 0)
-    {
-      XSync (disp, 0);
-      XGrabServer (disp);
-    }
+  {
+    XSync (disp, 0);
+    XGrabServer (disp);
+  }
   xgrabcount++;
 }
 
@@ -26,12 +26,12 @@ void
 MyXUngrabServer (Display * disp)
 {
   if (--xgrabcount < 0)		/* should never happen */
-    {
-      xgrabcount = 0;
-    }
+  {
+    xgrabcount = 0;
+  }
   if (xgrabcount == 0)
-    {
-      XUngrabServer (disp);
-      XFlush (disp);
-    }
+  {
+    XUngrabServer (disp);
+    XFlush (disp);
+  }
 }

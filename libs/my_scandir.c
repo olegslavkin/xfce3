@@ -33,7 +33,8 @@ Cambridge, MA 02139, USA.  */
 #include <stdlib.h>
 #include <string.h>
 
-int scandir (const char *dir, struct dirent ***namelist, int (*select)(), int (*cmp)())
+int
+scandir (const char *dir, struct dirent ***namelist, int (*select) (), int (*cmp) ())
 {
   DIR *dp = opendir (dir);
   struct dirent **v = NULL;
@@ -50,41 +51,41 @@ int scandir (const char *dir, struct dirent ***namelist, int (*select)(), int (*
   i = 0;
   while ((d = readdir (dp)) != NULL)
     if (select == NULL || (*select) (d))
+    {
+      if (i == vsize)
       {
-	if (i == vsize)
-	  {
-	    struct dirent **new;
-	    if (vsize == 0)
-	      vsize = 10;
-	    else
-	      vsize *= 2;
-	    new = (struct dirent **) realloc (v, vsize * sizeof (*v));
-	    if (new == NULL)
-	      {
-	      lose:
-		errno = ENOMEM;
-		break;
-	      }
-	    v = new;
-	  }
-
-	v[i] = (struct dirent *) malloc (sizeof (**v));
-	if (v[i] == NULL)
-	  goto lose;
-
-	*v[i++] = *d;
+	struct dirent **new;
+	if (vsize == 0)
+	  vsize = 10;
+	else
+	  vsize *= 2;
+	new = (struct dirent **) realloc (v, vsize * sizeof (*v));
+	if (new == NULL)
+	{
+	lose:
+	  errno = ENOMEM;
+	  break;
+	}
+	v = new;
       }
 
-  if (errno != 0)
-    {
-      save = errno;
-      (void) closedir (dp);
-      while (i > 0)
-	free (v[--i]);
-      free (v);
-      errno = save;
-      return -1;
+      v[i] = (struct dirent *) malloc (sizeof (**v));
+      if (v[i] == NULL)
+	goto lose;
+
+      *v[i++] = *d;
     }
+
+  if (errno != 0)
+  {
+    save = errno;
+    (void) closedir (dp);
+    while (i > 0)
+      free (v[--i]);
+    free (v);
+    errno = save;
+    return -1;
+  }
 
   (void) closedir (dp);
   errno = save;
@@ -96,10 +97,10 @@ int scandir (const char *dir, struct dirent ***namelist, int (*select)(), int (*
   return i;
 }
 
-int alphasort (struct dirent *a, struct dirent *b)
+int
+alphasort (struct dirent *a, struct dirent *b)
 {
-  return strcmp (((struct dirent *) a)->d_name,
-		 ((struct dirent *) b)->d_name);
+  return strcmp (((struct dirent *) a)->d_name, ((struct dirent *) b)->d_name);
 }
 
 #endif /* !HAVE_SCANDIR */

@@ -42,16 +42,16 @@
 #  include "dmalloc.h"
 #endif
 
-static  int diag [2] = { -1, -1 };
+static int diag[2] = { -1, -1 };
 
 int
 existfile (const char *s)
 {
   struct stat buf;
   if (!stat (s, &buf))
-    {
-      return (buf.st_size != 0);
-    }
+  {
+    return (buf.st_size != 0);
+  }
   return (0);
 }
 
@@ -61,24 +61,25 @@ my_sleep (int n)
   struct timeval value;
 
   if (n > 0)
-    {
-      value.tv_usec = n % 1000000;
-      value.tv_sec = n / 1000000;
-      (void) select (1, 0, 0, 0, &value);
-    }
+  {
+    value.tv_usec = n % 1000000;
+    value.tv_sec = n / 1000000;
+    (void) select (1, 0, 0, 0, &value);
+  }
 }
 
-int initdiag (void)
+int
+initdiag (void)
 {
   if (diag[0] == -1)
-    {
-      pipe (diag);
-      /*
-      fcntl (diag[0], F_SETFL, O_NONBLOCK);
-      fcntl (diag[1], F_SETFL, O_NONBLOCK);
-       */
-    }
-  return (diag [0]);
+  {
+    pipe (diag);
+    /*
+       fcntl (diag[0], F_SETFL, O_NONBLOCK);
+       fcntl (diag[1], F_SETFL, O_NONBLOCK);
+     */
+  }
+  return (diag[0]);
 }
 
 void
@@ -90,74 +91,77 @@ exec_comm (char *comm, int wm)
 
   command = (char *) g_malloc ((MAXSTRLEN + 1) * sizeof (char));
   if (comm)
+  {
+    toexec = cleanup (comm);
+    /*
+       Still got something to do ? 
+     */
+    if (strlen (toexec) && my_strncasecmp (toexec, "None", strlen ("None")))
     {
-      toexec = cleanup (comm);
-      /*
-         Still got something to do ? 
-       */
-      if (strlen (toexec) && my_strncasecmp (toexec, "None", strlen ("None")))
+      if (my_strncasecmp (toexec, "Module ", strlen ("Module ")))
+      {
+	/*
+	   Do we need to start an xterm to execute the command ?
+	 */
+	if (!my_strncasecmp (toexec, "Term ", strlen ("Term ")))
 	{
-	  if (my_strncasecmp (toexec, "Module ", strlen ("Module ")))
-	    {
-	      /*
-	         Do we need to start an xterm to execute the command ?
-	       */
-	      if (!my_strncasecmp (toexec, "Term ", strlen ("Term ")))
-		{
-		  snprintf (command, MAXSTRLEN - 1, "exec %s -e %s", TERMINAL, toexec + strlen ("Term ") * sizeof (char));
-		}
-	      else
-		{
-		  /*
-		     Add 'exec ' if not present, to reduce processes nbr 
-		   */
-		  if (my_strncasecmp (toexec, "exec ", strlen ("exec ")))
-		    {
-		      snprintf (command, MAXSTRLEN - 1, "exec %s", toexec);
-		    }
-		  else
-		    {
-		      strncpy (command, toexec, MAXSTRLEN - 1);
-		    }
-		}
-	      switch (fork ())
-		{
-		case 0:
-                  /* The following is to avoid X locking when executing 
-                     terminal based application that requires user input */
-                  if ((nulldev = open ("/dev/null", O_RDWR)))
-                    {
-                      close (0); dup (nulldev);
-                    }
-                  if ((diag [0] != -1) && (diag [1] != -1))
-                    {
-                      close (1); dup (diag [1]);
-                      close (2); dup (diag [1]);
-                      close (diag [0]);
-                      close (diag [1]);
-                    }
-		  execl (DEFAULT_SHELL, DEFAULT_SHELL, "-c", command, NULL);
-		  perror ("exec failed");
-		  _exit (0);
-		  break;
-		case -1:
-		  fprintf (stderr, "XFce : cannot execute fork()\n");
-		  break;
-		default:
-		  break;
-		}
-	    }
-	  else
-	    {
-	      /*
-	         This is a module : tell FVWM to execute it 
-	       */
-	      if (wm)
-		sendinfo (fd_internal_pipe, toexec, 0);
-	      else
-		fprintf (stderr, "Needs XFwm to execute modules !\n");
-	    }
+	  snprintf (command, MAXSTRLEN - 1, "exec %s -e %s", TERMINAL, toexec + strlen ("Term ") * sizeof (char));
 	}
+	else
+	{
+	  /*
+	     Add 'exec ' if not present, to reduce processes nbr 
+	   */
+	  if (my_strncasecmp (toexec, "exec ", strlen ("exec ")))
+	  {
+	    snprintf (command, MAXSTRLEN - 1, "exec %s", toexec);
+	  }
+	  else
+	  {
+	    strncpy (command, toexec, MAXSTRLEN - 1);
+	  }
+	}
+	switch (fork ())
+	{
+	case 0:
+	  /* The following is to avoid X locking when executing 
+	     terminal based application that requires user input */
+	  if ((nulldev = open ("/dev/null", O_RDWR)))
+	  {
+	    close (0);
+	    dup (nulldev);
+	  }
+	  if ((diag[0] != -1) && (diag[1] != -1))
+	  {
+	    close (1);
+	    dup (diag[1]);
+	    close (2);
+	    dup (diag[1]);
+	    close (diag[0]);
+	    close (diag[1]);
+	  }
+	  execl (DEFAULT_SHELL, DEFAULT_SHELL, "-c", command, NULL);
+	  perror ("exec failed");
+	  _exit (0);
+	  break;
+	case -1:
+	  fprintf (stderr, "XFce : cannot execute fork()\n");
+	  break;
+	default:
+	  break;
+	}
+      }
+      else
+      {
+	/*
+	   This is a module : tell FVWM to execute it 
+	 */
+	if (wm)
+	  sendinfo (fd_internal_pipe, toexec, 0);
+	else
+	  fprintf (stderr, "Needs XFwm to execute modules !\n");
+      }
     }
+  }
   g_free (command);
 }

@@ -62,11 +62,12 @@ typedef struct nmb_cache
 }
 nmb_cache;
 
-typedef struct smb_cache {
-	char *directory;
-	GtkCTreeNode *node;
-	struct smb_cache *next;
-	
+typedef struct smb_cache
+{
+  char *directory;
+  GtkCTreeNode *node;
+  struct smb_cache *next;
+
 }
 smb_cache;
 
@@ -95,16 +96,18 @@ typedef struct nmb_history
 }
 nmb_history;
 
-typedef struct selected_struc {
-	GList *parent_node;    
-	GList *node;	
-	unsigned char *share;
-	unsigned char *dirname;	
-	unsigned char *filename;
-	unsigned char *comment;
-	gboolean directory;
-	gboolean file;
-} selected_struc;
+typedef struct selected_struc
+{
+  GList *parent_node;
+  GList *node;
+  unsigned char *share;
+  unsigned char *dirname;
+  unsigned char *filename;
+  unsigned char *comment;
+  gboolean directory;
+  gboolean file;
+}
+selected_struc;
 
 /* main prototypes : */
 
@@ -124,7 +127,7 @@ void SMBrm (void);
 void SMBtar (void);
 
 
-void eliminate2_cache(nmb_cache * the_cache,char *entry);
+void eliminate2_cache (nmb_cache * the_cache, char *entry);
 void pop_cache (nmb_cache * cache);
 void smoke_nmb_cache (nmb_cache * fromC);
 nmb_cache *clean_cache (nmb_cache * cache);
@@ -163,26 +166,12 @@ EXTERN nmb_history *thisH, *headH;
 EXTERN void *fork_obj;
 EXTERN int SMBResult;
 EXTERN char *default_user;
-EXTERN gboolean stopcleanup,nonstop;
+EXTERN gboolean stopcleanup, nonstop;
 
 /* public variables from gui : */
 
-EXTERN GdkPixmap
-  *gPIX_page,*gPIX_rpage,  *gPIX_dir_close,  *gPIX_dir_open,
-  *gPIX_dir_close_lnk,  *gPIX_dir_open_lnk,  *gPIX_comp1,
-  *gPIX_comp2,  *gPIX_wg1,  *gPIX_wg2,  *gPIX_reload,
-  *gPIX_dotfile,*gPIX_delete,*gPIX_new_dir,
-  *gPIX_rdotfile,*gPIX_view1,*gPIX_view2,*gPIX_view3,*gPIX_tar,
-  *gPIX_print, *gPIX_help, *gPIX_ip, *gPIX_download, *gPIX_upload;
+EXTERN GdkPixmap * gPIX_page, *gPIX_rpage, *gPIX_dir_close, *gPIX_dir_open, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_comp1, *gPIX_comp2, *gPIX_wg1, *gPIX_wg2, *gPIX_reload, *gPIX_dotfile, *gPIX_delete, *gPIX_new_dir, *gPIX_rdotfile, *gPIX_view1, *gPIX_view2, *gPIX_view3, *gPIX_tar, *gPIX_print, *gPIX_help, *gPIX_ip, *gPIX_download, *gPIX_upload;
 
-EXTERN GdkBitmap
-  * gPIM_page,  *gPIM_rpage,  *gPIM_dir_close,  *gPIM_dir_open,
-  *gPIM_dir_close_lnk,  *gPIM_dir_open_lnk,  *gPIM_comp1,
-  *gPIM_comp2,  *gPIM_wg1,  *gPIM_wg2,  *gPIM_reload,
-  *gPIM_dotfile,*gPIM_delete,*gPIM_new_dir,
-  *gPIM_rdotfile,*gPIM_view1,*gPIM_view2,*gPIM_view3,*gPIM_tar,
-  *gPIM_print, *gPIM_help, *gPIM_ip, *gPIM_download, *gPIM_upload;
+EXTERN GdkBitmap * gPIM_page, *gPIM_rpage, *gPIM_dir_close, *gPIM_dir_open, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_comp1, *gPIM_comp2, *gPIM_wg1, *gPIM_wg2, *gPIM_reload, *gPIM_dotfile, *gPIM_delete, *gPIM_new_dir, *gPIM_rdotfile, *gPIM_view1, *gPIM_view2, *gPIM_view3, *gPIM_tar, *gPIM_print, *gPIM_help, *gPIM_ip, *gPIM_download, *gPIM_upload;
 
-EXTERN GtkWidget
-  * smb_nav,  *location,  *locationIP,  *shares,  *servers,  *workgroups,
-  *diagnostics, *statusline, *sharesL, *serversL, *workgroupsL, *progress;
+EXTERN GtkWidget * smb_nav, *location, *locationIP, *shares, *servers, *workgroups, *diagnostics, *statusline, *sharesL, *serversL, *workgroupsL, *progress;

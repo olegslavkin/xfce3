@@ -77,24 +77,23 @@ TEXTDOMAIN (domainname)
   old = (char *) _nl_current_default_domain;
 
   /* If domain name is the null string set to default domain "messages".  */
-  if (domainname[0] == '\0'
-      || strcmp (domainname, _nl_default_default_domain) == 0)
+  if (domainname[0] == '\0' || strcmp (domainname, _nl_default_default_domain) == 0)
     _nl_current_default_domain = _nl_default_default_domain;
   else
-    {
-      /* If the following malloc fails `_nl_current_default_domain'
-	 will be NULL.  This value will be returned and so signals we
-	 are out of core.  */
+  {
+    /* If the following malloc fails `_nl_current_default_domain'
+       will be NULL.  This value will be returned and so signals we
+       are out of core.  */
 #if defined _LIBC || defined HAVE_STRDUP
-      _nl_current_default_domain = strdup (domainname);
+    _nl_current_default_domain = strdup (domainname);
 #else
-      size_t len = strlen (domainname) + 1;
-      char *cp = (char *) malloc (len);
-      if (cp != NULL)
-	memcpy (cp, domainname, len);
-      _nl_current_default_domain = cp;
+    size_t len = strlen (domainname) + 1;
+    char *cp = (char *) malloc (len);
+    if (cp != NULL)
+      memcpy (cp, domainname, len);
+    _nl_current_default_domain = cp;
 #endif
-    }
+  }
 
   if (old != _nl_default_default_domain)
     free (old);

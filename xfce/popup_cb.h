@@ -30,12 +30,9 @@
 #include <gtk/gtk.h>
 #include "popup.h"
 
-gboolean
-delete_popup_cb (GtkWidget * widget, GdkEvent * event, gpointer data);
+gboolean delete_popup_cb (GtkWidget * widget, GdkEvent * event, gpointer data);
 
-gboolean
-popup_entry_modify_cb (GtkWidget * widget,
-		       GdkEventButton * event, gpointer data);
+gboolean popup_entry_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data);
 
 void popup_entry_cb (GtkWidget * widget, gpointer data);
 
@@ -43,24 +40,11 @@ void popup_addicon_cb (GtkWidget * widget, gpointer data);
 
 void detach_cb (GtkWidget * widget, gpointer data);
 
-void
-popup_entry_drag_data_received (GtkWidget * widget,
-				GdkDragContext * context,
-				gint x,
-				gint y,
-				GtkSelectionData * data,
-				guint info, guint time, gpointer cbdata);
+void popup_entry_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata);
 
-void
-popup_addicon_drag_data_received (GtkWidget * widget,
-				  GdkDragContext * context,
-				  gint x,
-				  gint y,
-				  GtkSelectionData * data,
-				  guint info, guint time, gpointer cbdata);
+void popup_addicon_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata);
 
 /* Added by Jason Litowitz */
-void
-private_close_popup_button (gint menu);
+void private_close_popup_button (gint menu);
 
 #endif

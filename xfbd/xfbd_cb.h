@@ -26,12 +26,7 @@ void apply_cb (GtkWidget * widget, gpointer data);
 void cancel_cb (GtkWidget * widget, gpointer data);
 void ok_cb (GtkWidget * widget, gpointer data);
 void clear_cb (GtkWidget * widget, gpointer data);
-void on_drag_data_received (GtkWidget * widget,
-		            GdkDragContext * context,
-		            gint x,
-		            gint y,
-		            GtkSelectionData * data,
-		            guint info, guint time, gpointer cbdata);
+void on_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata);
 gboolean delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
 
 #endif

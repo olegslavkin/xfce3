@@ -71,38 +71,38 @@ i_play (char *soundfile)
   ST_CONFIG curr;
 
   if (setcard () != 0)
-    {
-      return -1;
-    }
-    
+  {
+    return -1;
+  }
+
   cardctl (masterfd, curr, ST_GET);
 
   if ((fp = open (soundfile, O_RDONLY, 0)) == -1)
-    {
+  {
 #ifdef DEBUG
-      perror ("open");
+    perror ("open");
 #endif
-      close (masterfd);
-      return (-1);
-    }
+    close (masterfd);
+    return (-1);
+  }
 
   next = sizeof (buffer);
 
   while ((next > 0) && (len = read (fp, buffer, next)) > 0)
+  {
+    if (write (masterfd, buffer, len) == -1)
     {
-      if (write (masterfd, buffer, len) == -1)
-	{
 #ifdef DEBUG
-	  perror ("write");
+      perror ("write");
 #endif
-          close (masterfd);
-          close (fp);
-	  return (-1);
-	}
-
-      if (len < next)
-	next = 0;
+      close (masterfd);
+      close (fp);
+      return (-1);
     }
+
+    if (len < next)
+      next = 0;
+  }
 
   close (masterfd);		/* done */
   close (fp);
@@ -113,12 +113,12 @@ int
 setcard (void)
 {
   if ((masterfd = open (DSP_NAME, O_WRONLY, 0)) == -1)
-    {
+  {
 #ifdef DEBUG
-      perror ("open");
+    perror ("open");
 #endif
-      return (-1);
-    }
+    return (-1);
+  }
 
   return 0;
 }
@@ -130,32 +130,32 @@ cardctl (int fp, ST_CONFIG parm, int st_flag)
   int error;
 
   if (st_flag)
+  {
+    if (ioctl (fp, SOUND_PCM_WRITE_BITS, &parm[0]) == -1)
     {
-      if (ioctl (fp, SOUND_PCM_WRITE_BITS, &parm[0]) == -1)
-	{
 #ifdef DEBUG
-	  perror ("ioctl");
+      perror ("ioctl");
 #endif
-	}
-      if (ioctl (fp, SOUND_PCM_WRITE_CHANNELS, &parm[1]) == -1)
-	{
-#ifdef DEBUG
-	  perror ("ioctl");
-#endif
-	}
-      if (ioctl (fp, SOUND_PCM_WRITE_RATE, &parm[2]) == -1)
-	{
-#ifdef DEBUG
-	  perror ("ioctl");
-#endif
-	}
     }
+    if (ioctl (fp, SOUND_PCM_WRITE_CHANNELS, &parm[1]) == -1)
+    {
+#ifdef DEBUG
+      perror ("ioctl");
+#endif
+    }
+    if (ioctl (fp, SOUND_PCM_WRITE_RATE, &parm[2]) == -1)
+    {
+#ifdef DEBUG
+      perror ("ioctl");
+#endif
+    }
+  }
   else
-    {
-      error = ioctl (fp, SOUND_PCM_READ_BITS, &parm[0]);
-      ioctl (fp, SOUND_PCM_READ_CHANNELS, &parm[1]);
-      ioctl (fp, SOUND_PCM_READ_RATE, &parm[2]);
-    }
+  {
+    error = ioctl (fp, SOUND_PCM_READ_BITS, &parm[0]);
+    ioctl (fp, SOUND_PCM_READ_CHANNELS, &parm[1]);
+    ioctl (fp, SOUND_PCM_READ_RATE, &parm[2]);
+  }
 
   return (temp);
 }

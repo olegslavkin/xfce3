@@ -37,13 +37,13 @@ SMBGetStdout (int n, void *data)
     return TRUE;		/* this would mean binary data */
   line = (char *) data;
   if (strstr (line, "ERRDOS"))
-    {				/* server has died */
-      SMBResult = CHALLENGED;
-    }
+  {				/* server has died */
+    SMBResult = CHALLENGED;
+  }
   if (strstr (line, "Error opening local file"))
-    {
-      SMBResult = CHALLENGED;
-    }
+  {
+    SMBResult = CHALLENGED;
+  }
   print_diagnostics (line);
 
   return TRUE;
@@ -58,16 +58,16 @@ SMBGetForkOver (void)
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);
   switch (SMBResult)
-    {
-    case CHALLENGED:
-      print_status (_("File download failed. See diagnostics for reason."));
-      break;
-    default:
-      /* upload was successful: */
-      print_status (_("Download done."));
-      break;
+  {
+  case CHALLENGED:
+    print_status (_("File download failed. See diagnostics for reason."));
+    break;
+  default:
+    /* upload was successful: */
+    print_status (_("Download done."));
+    break;
 
-    }
+  }
   fork_obj = NULL;
 
 }
@@ -80,55 +80,53 @@ SMBGetFile (void)
   static char *dataO = NULL;
   int i;
 
-  stopcleanup=FALSE;
+  stopcleanup = FALSE;
   if (!selected.filename)
-    {
+  {
 #ifdef DBG_XFSAMBA
-      print_diagnostics ("DBG:No valid file selected\n");
+    print_diagnostics ("DBG:No valid file selected\n");
 #endif
-      return;
-    }
+    return;
+  }
   if (not_unique (fork_obj))
-    {
-      return;
-    }
+  {
+    return;
+  }
 
   if (dataO)
-    {
-      free (dataO);
-    }
-  dataO = (char *) malloc (strlen (selected.filename)
-			   + strlen (selected.dirname) + 3);
+  {
+    free (dataO);
+  }
+  dataO = (char *) malloc (strlen (selected.filename) + strlen (selected.dirname) + 3);
   sprintf (dataO, "%s/%s", selected.dirname, selected.filename);
 
   print_status (_("Downloading file..."));
 
   for (i = 0; i < strlen (dataO); i++)
+  {
+    if (dataO[i] == '/')
     {
-      if (dataO[i] == '/')
-	{
-	  dataO[i] = '\\';
-	}
+      dataO[i] = '\\';
     }
+  }
 
   fileS = open_fileselect (selected.filename);
   if (!fileS)
-    {
-      print_status (_("File download cancelled."));
-      animation (FALSE);
-      cursor_reset (GTK_WIDGET (smb_nav));
-      return;
-    }
-  if (strlen (dataO) + strlen (fileS) + strlen ("get") + 3 >
-      XFSAMBA_MAX_STRING)
-    {
-      print_diagnostics ("DBG: Max string exceeded!");
-      print_status (_("Download failed."));
-      cursor_reset (GTK_WIDGET (smb_nav));
-      animation (FALSE);
-      return;
+  {
+    print_status (_("File download cancelled."));
+    animation (FALSE);
+    cursor_reset (GTK_WIDGET (smb_nav));
+    return;
+  }
+  if (strlen (dataO) + strlen (fileS) + strlen ("get") + 3 > XFSAMBA_MAX_STRING)
+  {
+    print_diagnostics ("DBG: Max string exceeded!");
+    print_status (_("Download failed."));
+    cursor_reset (GTK_WIDGET (smb_nav));
+    animation (FALSE);
+    return;
 
-    }
+  }
 
 /* done on file select:   while (the_dir[strlen (the_dir) - 1] == ' ')
 	the_dir[strlen (the_dir) - 1] = 0;*/
@@ -147,7 +145,6 @@ SMBGetFile (void)
   strncpy (NMBpassword, thisN->password, XFSAMBA_MAX_STRING);
   NMBpassword[XFSAMBA_MAX_STRING] = 0;
 
-  fork_obj = Tubo (SMBClientFork, SMBGetForkOver, TRUE,
-		   SMBGetStdout, parse_stderr);
+  fork_obj = Tubo (SMBClientFork, SMBGetForkOver, TRUE, SMBGetStdout, parse_stderr);
   return;
 }

@@ -44,13 +44,13 @@ clean_smb_cache (void)
 {
   smb_cache *last;
   while (headS)
-    {
-      if (headS->directory)
-	free (headS->directory);
-      last = headS;
-      headS = headS->next;
-      free (last);
-    }
+  {
+    if (headS->directory)
+      free (headS->directory);
+    last = headS;
+    headS = headS->next;
+    free (last);
+  }
   return;
 }
 
@@ -60,23 +60,23 @@ push_smb_cache (GtkCTreeNode * node, char *directory)
   smb_cache *currentS;
   currentS = headS;
   if (!currentS)
-    {
-      headS = currentS = (smb_cache *) malloc (sizeof (smb_cache));
-    }
+  {
+    headS = currentS = (smb_cache *) malloc (sizeof (smb_cache));
+  }
   else
-    {
-      while (currentS->next)
-	currentS = currentS->next;
-      currentS->next = (smb_cache *) malloc (sizeof (smb_cache));
+  {
+    while (currentS->next)
       currentS = currentS->next;
-    }
+    currentS->next = (smb_cache *) malloc (sizeof (smb_cache));
+    currentS = currentS->next;
+  }
   if (directory)
-    {
-      if (strstr (directory, "\n"))
-	strtok (directory, "\n");
-      currentS->directory = (char *) malloc (strlen (directory) + 1);
-      strcpy (currentS->directory, directory);
-    }
+  {
+    if (strstr (directory, "\n"))
+      strtok (directory, "\n");
+    currentS->directory = (char *) malloc (strlen (directory) + 1);
+    strcpy (currentS->directory, directory);
+  }
   currentS->node = node;
   currentS->next = NULL;
 
@@ -89,16 +89,16 @@ find_smb_cache (char *directory)
   smb_cache *currentS;
   currentS = headS;
   while (currentS)
+  {
+    /*
+       fprintf(stderr,"DBG:%s<->%s#\n",directory,currentS->directory);
+     */
+    if (!strcmp (directory, currentS->directory))
     {
-      /*
-         fprintf(stderr,"DBG:%s<->%s#\n",directory,currentS->directory);
-       */
-      if (!strcmp (directory, currentS->directory))
-	{
-	  return currentS->node;
-	}
-      currentS = currentS->next;
+      return currentS->node;
     }
+    currentS = currentS->next;
+  }
 
   return NULL;
 }
@@ -111,10 +111,10 @@ pop_cache (nmb_cache * cache)
     return;
   currentC = cache;
   while (currentC->next)
-    {
-      lastC = currentC;
-      currentC = currentC->next;
-    }
+  {
+    lastC = currentC;
+    currentC = currentC->next;
+  }
   free (currentC);
   if (lastC)
     lastC->next = NULL;
@@ -127,15 +127,15 @@ eliminate2_cache (nmb_cache * the_cache, char *entry)
   nmb_cache *currentC;
   currentC = the_cache;
   while (currentC)
+  {
+    /*printf("%s<->%s\n",currentC->textos[2], entry); */
+    if (strcmp (currentC->textos[SERVER_COMMENT_COLUMN], entry) == 0)
     {
-      /*printf("%s<->%s\n",currentC->textos[2], entry); */
-      if (strcmp (currentC->textos[SERVER_COMMENT_COLUMN], entry) == 0)
-	{
-	  strcpy (currentC->textos[SERVER_COMMENT_COLUMN], ".");
-	  break;
-	}
-      currentC = currentC->next;
+      strcpy (currentC->textos[SERVER_COMMENT_COLUMN], ".");
+      break;
     }
+    currentC = currentC->next;
+  }
 }
 
 
@@ -149,18 +149,18 @@ smoke_nmb_cache (nmb_cache * fromC)
     return;
   currentC = fromC->next;
   while (currentC)
+  {
+    int i;
+    nmb_cache *nextC;
+    nextC = currentC->next;
+    for (i = 0; i < SERVER_COLUMNS; i++)
     {
-      int i;
-      nmb_cache *nextC;
-      nextC = currentC->next;
-      for (i = 0; i < SERVER_COLUMNS; i++)
-	{
-	  if (currentC->textos[i])
-	    free (currentC->textos[i]);
-	}
-      free (currentC);
-      currentC = nextC;
+      if (currentC->textos[i])
+	free (currentC->textos[i]);
     }
+    free (currentC);
+    currentC = nextC;
+  }
   fromC->next = NULL;
 }
 
@@ -170,19 +170,19 @@ clean_cache (nmb_cache * cache)
   nmb_cache *last;
 
   while (cache)
+  {
     {
+      int i;
+      for (i = 0; i < SERVER_COLUMNS; i++)
       {
-	int i;
-	for (i = 0; i < SERVER_COLUMNS; i++)
-	  {
-	    if (cache->textos[i])
-	      free (cache->textos[i]);
-	  }
+	if (cache->textos[i])
+	  free (cache->textos[i]);
       }
-      last = cache;
-      cache = cache->next;
-      free (last);
     }
+    last = cache;
+    cache = cache->next;
+    free (last);
+  }
   return NULL;
 }
 
@@ -192,33 +192,33 @@ push_nmb_cache (nmb_cache * headC, char **textos)
   nmb_cache *currentC;
   currentC = headC;
   if (!currentC)
-    {
-      currentC = (nmb_cache *) malloc (sizeof (nmb_cache));
-    }
+  {
+    currentC = (nmb_cache *) malloc (sizeof (nmb_cache));
+  }
   else
-    {
-      while (currentC->next)
-	currentC = currentC->next;
-      currentC->next = (nmb_cache *) malloc (sizeof (nmb_cache));
+  {
+    while (currentC->next)
       currentC = currentC->next;
-    }
+    currentC->next = (nmb_cache *) malloc (sizeof (nmb_cache));
+    currentC = currentC->next;
+  }
   {
     int i;
     for (i = 0; i < SHARE_COLUMNS; i++)
+    {
+      if (textos[i])
       {
-	if (textos[i])
-	  {
-	    /*
-	       int j;       j=strlen(textos[i]-1);
-	     */
-	    while (textos[i][strlen (textos[i]) - 1] == ' ')
-	      textos[i][strlen (textos[i]) - 1] = 0;
-	    currentC->textos[i] = (char *) malloc (strlen (textos[i]) + 1);
-	    strcpy (currentC->textos[i], textos[i]);
-	  }
-	else
-	  currentC->textos[i] = NULL;
+	/*
+	   int j;       j=strlen(textos[i]-1);
+	 */
+	while (textos[i][strlen (textos[i]) - 1] == ' ')
+	  textos[i][strlen (textos[i]) - 1] = 0;
+	currentC->textos[i] = (char *) malloc (strlen (textos[i]) + 1);
+	strcpy (currentC->textos[i], textos[i]);
       }
+      else
+	currentC->textos[i] = NULL;
+    }
   }
   currentC->visited = 0;
   currentC->next = NULL;
@@ -237,12 +237,12 @@ smoke_history (nmb_history * fromH)
     return;
   currentH = fromH->next;
   while (currentH)
-    {
-      nmb_history *nextH;
-      nextH = currentH->next;
-      free (currentH);
-      currentH = nextH;
-    }
+  {
+    nmb_history *nextH;
+    nextH = currentH->next;
+    free (currentH);
+    currentH = nextH;
+  }
   fromH->next = NULL;
 }
 
@@ -252,18 +252,18 @@ push_nmb_history (nmb_list * record)
   nmb_history *currentH;
   currentH = headH;
   if (!currentH)
-    {
-      currentH = headH = (nmb_history *) malloc (sizeof (nmb_history));
-      currentH->previous = NULL;
-    }
+  {
+    currentH = headH = (nmb_history *) malloc (sizeof (nmb_history));
+    currentH->previous = NULL;
+  }
   else
-    {
-      while (currentH->next)
-	currentH = currentH->next;
-      currentH->next = (nmb_history *) malloc (sizeof (nmb_history));
-      currentH->next->previous = currentH;
+  {
+    while (currentH->next)
       currentH = currentH->next;
-    }
+    currentH->next = (nmb_history *) malloc (sizeof (nmb_history));
+    currentH->next->previous = currentH;
+    currentH = currentH->next;
+  }
   currentH->record = record;
   currentH->next = NULL;
   return currentH;
@@ -275,18 +275,18 @@ push_nmb (char *serverIP)
   nmb_list *currentN;
   currentN = headN;
   if (!currentN)
-    {
-      currentN = headN = (nmb_list *) malloc (sizeof (nmb_list));
-      currentN->previous = NULL;
-    }
+  {
+    currentN = headN = (nmb_list *) malloc (sizeof (nmb_list));
+    currentN->previous = NULL;
+  }
   else
-    {
-      while (currentN->next)
-	currentN = currentN->next;
-      currentN->next = (nmb_list *) malloc (sizeof (nmb_list));
-      currentN->next->previous = currentN;
+  {
+    while (currentN->next)
       currentN = currentN->next;
-    }
+    currentN->next = (nmb_list *) malloc (sizeof (nmb_list));
+    currentN->next->previous = currentN;
+    currentN = currentN->next;
+  }
   currentN->next = NULL;
   currentN->server = NULL;
   currentN->netbios = NULL;
@@ -308,18 +308,18 @@ push_nmbName (unsigned char *servidor)
   nmb_list *currentN;
   currentN = headN;
   if (!currentN)
-    {
-      currentN = headN = (nmb_list *) malloc (sizeof (nmb_list));
-      currentN->previous = NULL;
-    }
+  {
+    currentN = headN = (nmb_list *) malloc (sizeof (nmb_list));
+    currentN->previous = NULL;
+  }
   else
-    {
-      while (currentN->next)
-	currentN = currentN->next;
-      currentN->next = (nmb_list *) malloc (sizeof (nmb_list));
-      currentN->next->previous = currentN;
+  {
+    while (currentN->next)
       currentN = currentN->next;
-    }
+    currentN->next = (nmb_list *) malloc (sizeof (nmb_list));
+    currentN->next->previous = currentN;
+    currentN = currentN->next;
+  }
   currentN->next = NULL;
   currentN->password = (unsigned char *) malloc (strlen (default_user) + 1);
   strcpy (currentN->password, default_user);
@@ -366,12 +366,12 @@ reverse_smoke_nmb (nmb_list * fromN)
     return;
   currentN = fromN->previous;
   while (currentN)
-    {
-      nmb_list *nextN;
-      nextN = currentN->previous;
-      zap_nmb (currentN);
-      currentN = nextN;
-    }
+  {
+    nmb_list *nextN;
+    nextN = currentN->previous;
+    zap_nmb (currentN);
+    currentN = nextN;
+  }
   fromN->previous = NULL;
 }
 
@@ -383,12 +383,12 @@ smoke_nmb (nmb_list * fromN)
     return;
   currentN = fromN->next;
   while (currentN)
-    {
-      nmb_list *nextN;
-      nextN = currentN->next;
-      zap_nmb (currentN);
-      currentN = nextN;
-    }
+  {
+    nmb_list *nextN;
+    nextN = currentN->next;
+    zap_nmb (currentN);
+    currentN = nextN;
+  }
   fromN->next = NULL;
 }
 
@@ -396,11 +396,11 @@ void
 clean_nmb (void)
 {
   if (headN)
-    {
-      smoke_nmb (headN);
-      zap_nmb (headN);
-      headN = NULL;
-    }
+  {
+    smoke_nmb (headN);
+    zap_nmb (headN);
+    headN = NULL;
+  }
 }
 
 void
@@ -409,53 +409,53 @@ latin_1_readable (char *the_char)
   unsigned char *c;
   c = (unsigned char *) the_char;
   while (c[0])
+  {
+    switch (c[0])
     {
-      switch (c[0])
-	{
-	case 0x81:
-	  c[0] = 'ü';
-	  break;
-	case 0x82:
-	  c[0] = 'é';
-	  break;
-	case 0xa0:
-	  c[0] = 'á';
-	  break;
-	case 0xa1:
-	  c[0] = 'í';
-	  break;
-	case 0xa2:
-	  c[0] = 'ó';
-	  break;
-	case 0xa3:
-	  c[0] = 'ú';
-	  break;
-	case 0xa4:
-	  c[0] = 'ñ';
-	  break;
-	case 0xa5:
-	  c[0] = 'Ñ';
-	  break;
-	case 0xb5:
-	  c[0] = 'Á';
-	  break;
-	case 0x90:
-	  c[0] = 'É';
-	  break;
-	case 0xd6:
-	  c[0] = 'Í';
-	  break;
-	case 0xe0:
-	  c[0] = 'Ó';
-	  break;
-	case 0xe9:
-	  c[0] = 'Ú';
-	  break;
-	default:
-	  break;
-	}
-      c++;
+    case 0x81:
+      c[0] = 'ü';
+      break;
+    case 0x82:
+      c[0] = 'é';
+      break;
+    case 0xa0:
+      c[0] = 'á';
+      break;
+    case 0xa1:
+      c[0] = 'í';
+      break;
+    case 0xa2:
+      c[0] = 'ó';
+      break;
+    case 0xa3:
+      c[0] = 'ú';
+      break;
+    case 0xa4:
+      c[0] = 'ñ';
+      break;
+    case 0xa5:
+      c[0] = 'Ñ';
+      break;
+    case 0xb5:
+      c[0] = 'Á';
+      break;
+    case 0x90:
+      c[0] = 'É';
+      break;
+    case 0xd6:
+      c[0] = 'Í';
+      break;
+    case 0xe0:
+      c[0] = 'Ó';
+      break;
+    case 0xe9:
+      c[0] = 'Ú';
+      break;
+    default:
+      break;
     }
+    c++;
+  }
 
 }
 void
@@ -466,53 +466,53 @@ latin_1_unreadable (char *the_char)
 /*print_diagnostics("DBG:"); print_diagnostics(the_char);*/
 
   while (c[0])
+  {
+    switch (c[0])
     {
-      switch (c[0])
-	{
-	case 0xfc:
-	  c[0] = 0xa0;
-	  break;
-	case 0xe9:
-	  c[0] = 0x82;
-	  break;
-	case 0xe1:
-	  c[0] = 0xa1;
-	  break;
-	case 0xed:
-	  c[0] = 0xa2;
-	  break;
-	case 0xf3:
-	  c[0] = 0xa3;
-	  break;
-	case 0xfa:
-	  c[0] = 0x81;
-	  break;
-	case 0xf1:
-	  c[0] = 0xa4;
-	  break;
-	case 0xd1:
-	  c[0] = 0xa5;
-	  break;
-	case 0xc1:
-	  c[0] = 0xb5;
-	  break;
-	case 0xc9:
-	  c[0] = 0x90;
-	  break;
-	case 0xcd:
-	  c[0] = 0xd6;
-	  break;
-	case 0xd3:
-	  c[0] = 0xe0;
-	  break;
-	case 0xda:
-	  c[0] = 0xe9;
-	  break;
-	default:
-	  break;
-	}
-      c++;
+    case 0xfc:
+      c[0] = 0xa0;
+      break;
+    case 0xe9:
+      c[0] = 0x82;
+      break;
+    case 0xe1:
+      c[0] = 0xa1;
+      break;
+    case 0xed:
+      c[0] = 0xa2;
+      break;
+    case 0xf3:
+      c[0] = 0xa3;
+      break;
+    case 0xfa:
+      c[0] = 0x81;
+      break;
+    case 0xf1:
+      c[0] = 0xa4;
+      break;
+    case 0xd1:
+      c[0] = 0xa5;
+      break;
+    case 0xc1:
+      c[0] = 0xb5;
+      break;
+    case 0xc9:
+      c[0] = 0x90;
+      break;
+    case 0xcd:
+      c[0] = 0xd6;
+      break;
+    case 0xd3:
+      c[0] = 0xe0;
+      break;
+    case 0xda:
+      c[0] = 0xe9;
+      break;
+    default:
+      break;
     }
+    c++;
+  }
 /*print_diagnostics(the_char);print_diagnostics("\n");*/
 
 }

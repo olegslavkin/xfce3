@@ -24,9 +24,9 @@ safemalloc (int length)
 
   ptr = malloc (length);
   if (ptr == (char *) 0)
-    {
-      fprintf (stderr, "malloc of %d bytes failed. Exiting\n", length);
-      exit (1);
-    }
+  {
+    fprintf (stderr, "malloc of %d bytes failed. Exiting\n", length);
+    exit (1);
+  }
   return ptr;
 }

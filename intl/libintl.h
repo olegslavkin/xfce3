@@ -38,7 +38,8 @@
 
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* @@ end of prolog @@ */
@@ -69,18 +70,18 @@ extern "C" {
 
 /* Declarations for gettext-using-catgets interface.  Derived from
    Jim Meyering's libintl.h.  */
-struct _msg_ent
-{
-  const char *_msg;
-  int _msg_number;
-};
+  struct _msg_ent
+  {
+    const char *_msg;
+    int _msg_number;
+  };
 
 
 #if HAVE_CATGETS
 /* These two variables are defined in the automatically by po-to-tbl.sed
    generated file `cat-id-tbl.c'.  */
-extern const struct _msg_ent _msg_tbl[];
-extern int _msg_tbl_length;
+  extern const struct _msg_ent _msg_tbl[];
+  extern int _msg_tbl_length;
 #endif
 
 
@@ -91,35 +92,30 @@ extern int _msg_tbl_length;
 /* Look up MSGID in the current default message catalog for the current
    LC_MESSAGES locale.  If not found, returns MSGID itself (the default
    text).  */
-extern char *gettext PARAMS ((const char *__msgid));
-extern char *gettext__ PARAMS ((const char *__msgid));
+  extern char *gettext PARAMS ((const char *__msgid));
+  extern char *gettext__ PARAMS ((const char *__msgid));
 
 /* Look up MSGID in the DOMAINNAME message catalog for the current
    LC_MESSAGES locale.  */
-extern char *dgettext PARAMS ((const char *__domainname, const char *__msgid));
-extern char *dgettext__ PARAMS ((const char *__domainname,
-				 const char *__msgid));
+  extern char *dgettext PARAMS ((const char *__domainname, const char *__msgid));
+  extern char *dgettext__ PARAMS ((const char *__domainname, const char *__msgid));
 
 /* Look up MSGID in the DOMAINNAME message catalog for the current CATEGORY
    locale.  */
-extern char *dcgettext PARAMS ((const char *__domainname, const char *__msgid,
-				int __category));
-extern char *dcgettext__ PARAMS ((const char *__domainname,
-				  const char *__msgid, int __category));
+  extern char *dcgettext PARAMS ((const char *__domainname, const char *__msgid, int __category));
+  extern char *dcgettext__ PARAMS ((const char *__domainname, const char *__msgid, int __category));
 
 
 /* Set the current default message catalog to DOMAINNAME.
    If DOMAINNAME is null, return the current default.
    If DOMAINNAME is "", reset to the default of "messages".  */
-extern char *textdomain PARAMS ((const char *__domainname));
-extern char *textdomain__ PARAMS ((const char *__domainname));
+  extern char *textdomain PARAMS ((const char *__domainname));
+  extern char *textdomain__ PARAMS ((const char *__domainname));
 
 /* Specify that the DOMAINNAME message catalog will be found
    in DIRNAME rather than in the system locale data base.  */
-extern char *bindtextdomain PARAMS ((const char *__domainname,
-				  const char *__dirname));
-extern char *bindtextdomain__ PARAMS ((const char *__domainname,
-				    const char *__dirname));
+  extern char *bindtextdomain PARAMS ((const char *__domainname, const char *__dirname));
+  extern char *bindtextdomain__ PARAMS ((const char *__domainname, const char *__dirname));
 
 #if ENABLE_NLS
 
@@ -138,7 +134,7 @@ extern char *bindtextdomain__ PARAMS ((const char *__domainname,
 /* This global variable is defined in loadmsgcat.c.  We need a sign,
    whether a new catalog was loaded, which can be associated with all
    translations.  */
-extern int _nl_msg_cat_cntr;
+  extern int _nl_msg_cat_cntr;
 
 #   define dcgettext(Domainname, Msgid, Category)			      \
   (__extension__							      \

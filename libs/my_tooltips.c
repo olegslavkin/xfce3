@@ -52,10 +52,10 @@ update_delay_tooltips (guint delay)
   GList *tmp;
   tmp = tooltips;
   while (tmp)
-    {
-      gtk_tooltips_set_delay (GTK_TOOLTIPS (tmp->data), delay);
-      tmp = tmp->next;
-    }
+  {
+    gtk_tooltips_set_delay (GTK_TOOLTIPS (tmp->data), delay);
+    tmp = tmp->next;
+  }
 }
 
 void

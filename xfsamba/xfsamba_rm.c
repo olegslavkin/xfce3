@@ -41,9 +41,9 @@ SMBrmStdout (int n, void *data)
     return TRUE;		/* this would mean binary data */
   line = (char *) data;
   if (strstr (line, "ERRDOS"))
-    {				/* server has died */
-      SMBResult = CHALLENGED;
-    }
+  {				/* server has died */
+    SMBResult = CHALLENGED;
+  }
   print_diagnostics (line);
 
   return TRUE;
@@ -58,31 +58,30 @@ SMBrmForkOver (void)
   animation (FALSE);
   fork_obj = NULL;
   switch (SMBResult)
-    {
-    case CHALLENGED:
-      print_status (_("Remove failed. See diagnostics for details."));
-      break;
-    default:
-      /* directory creation was successful: remove node from tree */
-      eliminate2_cache (thisN->shares, selected.comment);
-      gtk_ctree_remove_node ((GtkCTree *) shares,
-			     (GtkCTreeNode *) selected.node);
-      print_status (_("Remove complete."));
-      selected.directory = selected.file = FALSE;
-      if (selected.share)
-	free (selected.share);
-      selected.share = NULL;
-      if (selected.dirname)
-	free (selected.dirname);
-      selected.dirname = NULL;
-      if (selected.filename)
-	free (selected.filename);
-      selected.filename = NULL;
-      if (selected.comment)
-	free (selected.comment);
-      selected.comment = NULL;
-      break;
-    }
+  {
+  case CHALLENGED:
+    print_status (_("Remove failed. See diagnostics for details."));
+    break;
+  default:
+    /* directory creation was successful: remove node from tree */
+    eliminate2_cache (thisN->shares, selected.comment);
+    gtk_ctree_remove_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);
+    print_status (_("Remove complete."));
+    selected.directory = selected.file = FALSE;
+    if (selected.share)
+      free (selected.share);
+    selected.share = NULL;
+    if (selected.dirname)
+      free (selected.dirname);
+    selected.dirname = NULL;
+    if (selected.filename)
+      free (selected.filename);
+    selected.filename = NULL;
+    if (selected.comment)
+      free (selected.comment);
+    selected.comment = NULL;
+    break;
+  }
 }
 
 
@@ -92,26 +91,26 @@ SMBrm (void)
   int i;
 
   if ((!selected.filename) && (!selected.dirname))
-    {
-      return;
-    }
+  {
+    return;
+  }
   if (not_unique (fork_obj))
-    {
-      return;
-    }
-  stopcleanup=FALSE;
+  {
+    return;
+  }
+  stopcleanup = FALSE;
 
   print_status (_("Removing..."));
 
 
   if (!strncmp (selected.comment, "Disk", strlen ("Disk")))
-    {
-      my_show_message (_("Sorry, top level shares cannot be removed."));
-      animation (FALSE);
-      cursor_reset (GTK_WIDGET (smb_nav));
-      print_status (_("Remove cancelled."));
-      return;
-    }
+  {
+    my_show_message (_("Sorry, top level shares cannot be removed."));
+    animation (FALSE);
+    cursor_reset (GTK_WIDGET (smb_nav));
+    print_status (_("Remove cancelled."));
+    return;
+  }
 
 
 
@@ -125,14 +124,13 @@ SMBrm (void)
   NMBpassword[XFSAMBA_MAX_STRING] = 0;
 
   if (selected.directory)
-    {
-      sprintf (NMBcommand, "rmdir \\\"%s\\\"", selected.dirname);
-    }
+  {
+    sprintf (NMBcommand, "rmdir \\\"%s\\\"", selected.dirname);
+  }
   else
-    {				/* a file to remove */
-      sprintf (NMBcommand, "cd \\\"%s\\\";del \\\"%s\\\"",
-	       selected.dirname, selected.filename);
-    }
+  {				/* a file to remove */
+    sprintf (NMBcommand, "cd \\\"%s\\\";del \\\"%s\\\"", selected.dirname, selected.filename);
+  }
 
   for (i = 0; i < strlen (NMBcommand); i++)
     if (NMBcommand[i] == '/')
@@ -144,8 +142,7 @@ SMBrm (void)
 
   {
     static GtkWidget *really_remove (void);
-    gtk_window_set_transient_for (GTK_WINDOW
-				  (really_remove ()), GTK_WINDOW (smb_nav));
+    gtk_window_set_transient_for (GTK_WINDOW (really_remove ()), GTK_WINDOW (smb_nav));
   }
 
   return;
@@ -157,16 +154,15 @@ proceed_rm (GtkWidget * widget, gpointer data)
   int ok;
   ok = (int) ((long) data);
   if (ok)
-    {
-      fork_obj = Tubo (SMBClientFork, SMBrmForkOver, TRUE,
-		       SMBrmStdout, parse_stderr);
-    }
+  {
+    fork_obj = Tubo (SMBClientFork, SMBrmForkOver, TRUE, SMBrmStdout, parse_stderr);
+  }
   else
-    {
-      cursor_reset (GTK_WIDGET (smb_nav));
-      animation (FALSE);
-      print_status (_("Remove cancelled."));
-    }
+  {
+    cursor_reset (GTK_WIDGET (smb_nav));
+    animation (FALSE);
+    print_status (_("Remove cancelled."));
+  }
   gtk_widget_destroy (dialog);
 }
 
@@ -176,19 +172,17 @@ really_remove (void)
   GtkWidget *button, *hbox, *label;
   char *pathname;
 
-  pathname=(char *) malloc(2+strlen(thisN->server)+
-		  	   1+strlen(selected.share)+
-			   strlen(selected.dirname)+
-			   1+((!selected.file)?0:strlen(selected.filename))
-			   +1);
-  
-  sprintf(pathname,"//%s/%s",thisN->server,selected.share);
-  if (strcmp(selected.dirname,"/")!=0){
-	 strcat(pathname,selected.dirname);
+  pathname = (char *) malloc (2 + strlen (thisN->server) + 1 + strlen (selected.share) + strlen (selected.dirname) + 1 + ((!selected.file) ? 0 : strlen (selected.filename)) + 1);
+
+  sprintf (pathname, "//%s/%s", thisN->server, selected.share);
+  if (strcmp (selected.dirname, "/") != 0)
+  {
+    strcat (pathname, selected.dirname);
   }
-  if (selected.file) {
-	 strcat(pathname,"/"); 
-	 strcat(pathname,selected.filename);
+  if (selected.file)
+  {
+    strcat (pathname, "/");
+    strcat (pathname, selected.filename);
   }
 
   dialog = gtk_dialog_new ();
@@ -202,14 +196,12 @@ really_remove (void)
 
 
   label = gtk_label_new (_("Confirm remove?"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND,
-		      NOFILL, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND, NOFILL, 0);
   gtk_widget_show (label);
 
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_container_border_width (GTK_CONTAINER (hbox), 5);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox,
-		      TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show (hbox);
 
   label = gtk_label_new (pathname);
@@ -219,20 +211,16 @@ really_remove (void)
 
 
   button = gtk_button_new_with_label (_("Ok"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area),
-		      button, EXPAND, NOFILL, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, EXPAND, NOFILL, 0);
   gtk_widget_show (button);
-  gtk_signal_connect (GTK_OBJECT (button), "clicked",
-		      GTK_SIGNAL_FUNC (proceed_rm), (gpointer)((long) 1));
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (proceed_rm), (gpointer) ((long) 1));
 
   button = gtk_button_new_with_label ("Cancel");
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area),
-		      button, EXPAND, NOFILL, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, EXPAND, NOFILL, 0);
   gtk_widget_show (button);
-  gtk_signal_connect (GTK_OBJECT (button), "clicked",
-		      GTK_SIGNAL_FUNC (proceed_rm), (gpointer)((long) 0));
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (proceed_rm), (gpointer) ((long) 0));
   gtk_widget_show (dialog);
-  free(pathname);
+  free (pathname);
 
   return dialog;
 }

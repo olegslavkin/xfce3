@@ -59,23 +59,23 @@ CopyString (char **dest, char *source)
   char *start;
 
   while (((isspace (*source)) && (*source != '\n')) && (*source != 0))
-    {
-      source++;
-    }
+  {
+    source++;
+  }
   len = 0;
   start = source;
   while ((*source != '\n') && (*source != 0))
-    {
-      len++;
-      source++;
-    }
+  {
+    len++;
+    source++;
+  }
 
   source--;
   while ((isspace (*source)) && (*source != 0) && (len > 0))
-    {
-      len--;
-      source--;
-    }
+  {
+    len--;
+    source--;
+  }
   *dest = safemalloc (len + 1);
   strncpy (*dest, start, len);
   (*dest)[len] = 0;
@@ -87,19 +87,19 @@ mystrcasecmp (char *s1, char *s2)
   int c1, c2;
 
   for (;;)
-    {
-      c1 = *s1;
-      c2 = *s2;
-      if (!c1 || !c2)
-	return (c1 - c2);
-      if (isupper (c1))
-	c1 = 'a' - 1 + (c1 & 31);
-      if (isupper (c2))
-	c2 = 'a' - 1 + (c2 & 31);
-      if (c1 != c2)
-	return (c1 - c2);
-      s1++, s2++;
-    }
+  {
+    c1 = *s1;
+    c2 = *s2;
+    if (!c1 || !c2)
+      return (c1 - c2);
+    if (isupper (c1))
+      c1 = 'a' - 1 + (c1 & 31);
+    if (isupper (c2))
+      c2 = 'a' - 1 + (c2 & 31);
+    if (c1 != c2)
+      return (c1 - c2);
+    s1++, s2++;
+  }
 }
 
 int
@@ -108,20 +108,20 @@ mystrncasecmp (char *s1, char *s2, int n)
   int c1, c2;
 
   for (;;)
-    {
-      if (!n)
-	return (0);
-      c1 = *s1, c2 = *s2;
-      if (!c1 || !c2)
-	return (c1 - c2);
-      if (isupper (c1))
-	c1 = 'a' - 1 + (c1 & 31);
-      if (isupper (c2))
-	c2 = 'a' - 1 + (c2 & 31);
-      if (c1 != c2)
-	return (c1 - c2);
-      n--, s1++, s2++;
-    }
+  {
+    if (!n)
+      return (0);
+    c1 = *s1, c2 = *s2;
+    if (!c1 || !c2)
+      return (c1 - c2);
+    if (isupper (c1))
+      c1 = 'a' - 1 + (c1 & 31);
+    if (isupper (c2))
+      c2 = 'a' - 1 + (c2 & 31);
+    if (c1 != c2)
+      return (c1 - c2);
+    n--, s1++, s2++;
+  }
 }
 
 /****************************************************************************
@@ -144,10 +144,10 @@ stripcpy (char *source)
   len = strlen (source);
   tmp = source + len - 1;
   while (((isspace (*tmp)) || (*tmp == '\n')) && (tmp >= source))
-    {
-      tmp--;
-      len--;
-    }
+  {
+    tmp--;
+    len--;
+  }
   ptr = safemalloc (len + 1);
   strncpy (ptr, source, len);
   ptr[len] = 0;

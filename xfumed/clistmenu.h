@@ -31,53 +31,36 @@
 #endif
 
 
-void
-clist_from_menu(GtkCList *clist, RootMenu *menu);
+void clist_from_menu (GtkCList * clist, RootMenu * menu);
 
-void
-clist_row_selected(GtkCList *clist, gint row);
+void clist_row_selected (GtkCList * clist, gint row);
 
-void
-clist_row_unselected(GtkCList *clist);
+void clist_row_unselected (GtkCList * clist);
 
-void
-clist_row_moveup(GtkCList *clist, gint row);
+void clist_row_moveup (GtkCList * clist, gint row);
 
-void
-clist_row_movedown(GtkCList *clist, gint row);
+void clist_row_movedown (GtkCList * clist, gint row);
 
-void
-clist_to_sub(GtkCList *clist, gint row);
+void clist_to_sub (GtkCList * clist, gint row);
 
-void
-clist_to_parent(GtkCList *clist, RootMenu *current_root);
+void clist_to_parent (GtkCList * clist, RootMenu * current_root);
 
-gchar**
-entries_get_text(void);
+gchar **entries_get_text (void);
 
-void
-entries_set_text(gchar *type, gchar *caption, gchar *command);
+void entries_set_text (gchar * type, gchar * caption, gchar * command);
 
-void
-add(GtkCList *clist, RootMenu *menu, gchar *text[]);
+void add (GtkCList * clist, RootMenu * menu, gchar * text[]);
 
-gchar*
-name_from_caption(gchar *caption);
+gchar *name_from_caption (gchar * caption);
 
-void
-update_nth(GtkCList *clist, RootMenu *menu, gint n, gchar *text[]);
+void update_nth (GtkCList * clist, RootMenu * menu, gint n, gchar * text[]);
 
-void
-remove_nth(GtkCList *clist, RootMenu *menu, gint n);
+void remove_nth (GtkCList * clist, RootMenu * menu, gint n);
 
-void
-save(void);
+void save (void);
 
-void
-reset(void);
+void reset (void);
 
-void
-quit(void);
-		
+void quit (void);
+
 #endif
-

@@ -39,8 +39,7 @@ GtkWidget *get_widget (GtkWidget * widget, gchar * widget_name);
   * This is an internally used function for setting notebook tabs. It is only
   * included in this header file so you don't get compilation warnings
   */
-void
-set_notebook_tab (GtkWidget * notebook, gint page_num, GtkWidget * widget);
+void set_notebook_tab (GtkWidget * notebook, gint page_num, GtkWidget * widget);
 
 void lock_size (GtkWidget * toplevel);
 
@@ -64,11 +63,7 @@ void my_show_message (gchar * message);
      my_show_dialog ("Do you want to save the current project?",
 			     3, buttons, 3, signal_handlers, NULL);
  */
-GtkWidget *my_show_dialog (gchar * message,
-			   gint nbuttons,
-			   gchar * buttons[],
-			   gint default_button,
-			   GtkSignalFunc signal_handlers[], gpointer data);
+GtkWidget *my_show_dialog (gchar * message, gint nbuttons, gchar * buttons[], gint default_button, GtkSignalFunc signal_handlers[], gpointer data);
 
 
 gint my_yesno_dialog (gchar * message);

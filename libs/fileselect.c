@@ -41,8 +41,7 @@ static void
 ok_cb (GtkWidget * twidget, gpointer data)
 {
   char *filename = (char *) data;
-  strcpy (filename,
-	  gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselect)));
+  strcpy (filename, gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselect)));
   result = filename;
   gtk_widget_destroy (fileselect);
   gtk_main_quit ();
@@ -89,51 +88,39 @@ open_fileselect (char *pat)
 
   fileselect_ok_button = GTK_FILE_SELECTION (fileselect)->ok_button;
   gtk_widget_set_name (fileselect_ok_button, "fileselect_ok_button");
-  gtk_object_set_data (GTK_OBJECT (fileselect), "fileselect_ok_button",
-		       fileselect_ok_button);
+  gtk_object_set_data (GTK_OBJECT (fileselect), "fileselect_ok_button", fileselect_ok_button);
   gtk_widget_show (fileselect_ok_button);
   GTK_WIDGET_SET_FLAGS (fileselect_ok_button, GTK_CAN_DEFAULT);
 
   fileselect_cancel_button = GTK_FILE_SELECTION (fileselect)->cancel_button;
   gtk_widget_set_name (fileselect_cancel_button, "fileselect_cancel_button");
-  gtk_object_set_data (GTK_OBJECT (fileselect), "fileselect_cancel_button",
-		       fileselect_cancel_button);
+  gtk_object_set_data (GTK_OBJECT (fileselect), "fileselect_cancel_button", fileselect_cancel_button);
   gtk_widget_show (fileselect_cancel_button);
   GTK_WIDGET_SET_FLAGS (fileselect_cancel_button, GTK_CAN_DEFAULT);
 
-  gtk_signal_connect (GTK_OBJECT (fileselect_ok_button), "clicked",
-		      GTK_SIGNAL_FUNC (ok_cb), (gpointer) filename);
-  gtk_signal_connect (GTK_OBJECT (fileselect_cancel_button), "clicked",
-		      GTK_SIGNAL_FUNC (cancel_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (fileselect_ok_button), "clicked", GTK_SIGNAL_FUNC (ok_cb), (gpointer) filename);
+  gtk_signal_connect (GTK_OBJECT (fileselect_cancel_button), "clicked", GTK_SIGNAL_FUNC (cancel_cb), NULL);
 
-  gtk_signal_connect (GTK_OBJECT (fileselect), "delete_event",
-		      GTK_SIGNAL_FUNC (delete_event), NULL);
+  gtk_signal_connect (GTK_OBJECT (fileselect), "delete_event", GTK_SIGNAL_FUNC (delete_event), NULL);
 
-  gtk_signal_connect (GTK_OBJECT (fileselect), "destroy",
-		      GTK_SIGNAL_FUNC (delete_event), NULL);
+  gtk_signal_connect (GTK_OBJECT (fileselect), "destroy", GTK_SIGNAL_FUNC (delete_event), NULL);
 
-  gtk_widget_add_accelerator (fileselect_ok_button, "clicked", accel_group,
-			      GDK_Return, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (fileselect_ok_button, "clicked", accel_group,
-			      GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (fileselect_ok_button, "clicked", accel_group,
-			      GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (fileselect_cancel_button, "clicked",
-			      accel_group, GDK_Escape, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (fileselect_cancel_button, "clicked",
-			      accel_group, GDK_c, GDK_CONTROL_MASK,
-			      GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (fileselect_ok_button, "clicked", accel_group, GDK_Return, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (fileselect_ok_button, "clicked", accel_group, GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (fileselect_ok_button, "clicked", accel_group, GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (fileselect_cancel_button, "clicked", accel_group, GDK_Escape, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (fileselect_cancel_button, "clicked", accel_group, GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
 
   /* gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION (fileselect)); */
   if ((pat) && strlen (pat))
-    {
-      strcpy (pattern, pat);
-      slash = strrchr (pattern, '/');
-      if (slash)
-	*(++slash) = '\0';
-      gtk_file_selection_complete (GTK_FILE_SELECTION (fileselect), pattern);
-    }
+  {
+    strcpy (pattern, pat);
+    slash = strrchr (pattern, '/');
+    if (slash)
+      *(++slash) = '\0';
+    gtk_file_selection_complete (GTK_FILE_SELECTION (fileselect), pattern);
+  }
   gtk_window_set_modal (GTK_WINDOW (fileselect), TRUE);
   result = NULL;
   gtk_widget_show (fileselect);

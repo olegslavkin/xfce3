@@ -60,10 +60,8 @@ screen_ok_cb (GtkWidget * widget, gpointer data)
   char *s;
   gtk_signal_disconnect (GTK_OBJECT (screen_ok_button), screen_signal_id);
 
-  s =
-    cleanup ((char *)
-	     gtk_entry_get_text (GTK_ENTRY (screen_displayed_entry)));
-  set_gxfce_screen_label ((gint)((long) data), s);
+  s = cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (screen_displayed_entry)));
+  set_gxfce_screen_label ((gint) ((long) data), s);
   apply_wm_desk_names (current_config.visible_screen);
   gtk_main_quit ();
   gtk_widget_hide (screen);

@@ -42,8 +42,7 @@ static int sm_fd = -1;
 
 /* This is called when data is available on an ICE sm_fd.  */
 static gboolean
-process_ice_messages (gpointer client_data, gint source,
-		      GdkInputCondition condition)
+process_ice_messages (gpointer client_data, gint source, GdkInputCondition condition)
 {
 #ifdef HAVE_SESSION
   IceProcessMessagesStatus status;
@@ -51,24 +50,23 @@ process_ice_messages (gpointer client_data, gint source,
   status = IceProcessMessages (SmcGetIceConnection (sm_conn), NULL, NULL);
 
   if (status == IceProcessMessagesIOError)
+  {
+    IcePointer context = IceGetConnectionContext (SmcGetIceConnection (sm_conn));
+
+    if (context && GTK_IS_OBJECT (context))
     {
-      IcePointer context =
-	IceGetConnectionContext (SmcGetIceConnection (sm_conn));
+      guint disconnect_id = gtk_signal_lookup ("disconnect",
+					       GTK_OBJECT_TYPE (context));
 
-      if (context && GTK_IS_OBJECT (context))
-	{
-	  guint disconnect_id = gtk_signal_lookup ("disconnect",
-						   GTK_OBJECT_TYPE (context));
-
-	  if (disconnect_id > 0)
-	    gtk_signal_emit (GTK_OBJECT (context), disconnect_id);
-	}
-      else
-	{
-	  IceSetShutdownNegotiation (SmcGetIceConnection (sm_conn), False);
-	  IceCloseConnection (SmcGetIceConnection (sm_conn));
-	}
+      if (disconnect_id > 0)
+	gtk_signal_emit (GTK_OBJECT (context), disconnect_id);
     }
+    else
+    {
+      IceSetShutdownNegotiation (SmcGetIceConnection (sm_conn), False);
+      IceCloseConnection (SmcGetIceConnection (sm_conn));
+    }
+  }
 #endif
   return TRUE;
 }
@@ -96,9 +94,7 @@ InstallIOErrorHandler (void)
 }
 
 static void
-callback_save_yourself (SmcConn sm_conn, SmPointer client_data,
-			int save_style, Bool shutdown, int interact_style,
-			Bool fast)
+callback_save_yourself (SmcConn sm_conn, SmPointer client_data, int save_style, Bool shutdown, int interact_style, Bool fast)
 {
   SmcSaveYourselfDone (sm_conn, False);
 }
@@ -138,34 +134,19 @@ OpenICEConn (void)
   callbacks.save_complete.callback = callback_save_complete;
   callbacks.shutdown_cancelled.callback = callback_shutdown_cancelled;
 
-  callbacks.save_yourself.client_data =
-    callbacks.die.client_data =
-    callbacks.save_complete.client_data =
-    callbacks.shutdown_cancelled.client_data = (SmPointer) NULL;
+  callbacks.save_yourself.client_data = callbacks.die.client_data = callbacks.save_complete.client_data = callbacks.shutdown_cancelled.client_data = (SmPointer) NULL;
 
-  sm_conn = SmcOpenConnection (NULL, &context, SmProtoMajor, SmProtoMinor,
-			       SmcSaveYourselfProcMask | SmcDieProcMask |
-			       SmcSaveCompleteProcMask |
-			       SmcShutdownCancelledProcMask,
-			       &callbacks, NULL, &sm_client_id, 4096,
-			       error_string_ret);
+  sm_conn = SmcOpenConnection (NULL, &context, SmProtoMajor, SmProtoMinor, SmcSaveYourselfProcMask | SmcDieProcMask | SmcSaveCompleteProcMask | SmcShutdownCancelledProcMask, &callbacks, NULL, &sm_client_id, 4096, error_string_ret);
   if (sm_conn)
-    {
-      gdk_set_sm_client_id ((gchar *) sm_client_id);
-      sm_fd = IceConnectionNumber (SmcGetIceConnection (sm_conn));
-      /* Make sure we don't pass on these file descriptors to any
-         exec'ed children */
-      fcntl (IceConnectionNumber (SmcGetIceConnection (sm_conn)), F_SETFD,
-	     fcntl (IceConnectionNumber (SmcGetIceConnection (sm_conn)),
-		    F_GETFD, 0) | FD_CLOEXEC);
+  {
+    gdk_set_sm_client_id ((gchar *) sm_client_id);
+    sm_fd = IceConnectionNumber (SmcGetIceConnection (sm_conn));
+    /* Make sure we don't pass on these file descriptors to any
+       exec'ed children */
+    fcntl (IceConnectionNumber (SmcGetIceConnection (sm_conn)), F_SETFD, fcntl (IceConnectionNumber (SmcGetIceConnection (sm_conn)), F_GETFD, 0) | FD_CLOEXEC);
 
-      input_id =
-	gdk_input_add (IceConnectionNumber (SmcGetIceConnection (sm_conn)),
-		       GDK_INPUT_READ | GDK_INPUT_EXCEPTION,
-		       (GdkInputFunction) process_ice_messages,
-		       (gpointer) (long)
-		       IceConnectionNumber (SmcGetIceConnection (sm_conn)));
-    }
+    input_id = gdk_input_add (IceConnectionNumber (SmcGetIceConnection (sm_conn)), GDK_INPUT_READ | GDK_INPUT_EXCEPTION, (GdkInputFunction) process_ice_messages, (gpointer) (long) IceConnectionNumber (SmcGetIceConnection (sm_conn)));
+  }
 
   return (sm_conn != NULL);
 #endif

@@ -27,9 +27,9 @@
 #endif
 
 char buffer[512];
-char hexnum[] =
-  { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-    'f' };
+char hexnum[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
+  'f'
+};
 
 char *
 skiphead (char *s)
@@ -48,9 +48,9 @@ nextl (char *s)
   static char *blank = " ";
 
   if (s)
-    {
-      strncpy (buffer, s, 512);
-    }
+  {
+    strncpy (buffer, s, 512);
+  }
   res = strtok (s ? buffer : NULL, "\n");
   return (res ? res : blank);
 }
@@ -61,15 +61,14 @@ skiptail (char *s)
   char *res;
   int i, j;
   if (s)
-    {
-      i = 0;
-      j = strlen (s);
-      res = (char *) (s + (strlen (s) - 1) * sizeof (char));
-      while (((isspace (*res)) || (iscntrl (*res)) || (*res == '&'))
-	     && (i++ < j))
-	res--;
-      *(++res) = 0;
-    }
+  {
+    i = 0;
+    j = strlen (s);
+    res = (char *) (s + (strlen (s) - 1) * sizeof (char));
+    while (((isspace (*res)) || (iscntrl (*res)) || (*res == '&')) && (i++ < j))
+      res--;
+    *(++res) = 0;
+  }
   return (s);
 }
 
@@ -95,19 +94,19 @@ my_strncmp (char *a, char *b, int n)
   if (!p1 || !p2)
     return (1);
   for (;;)
+  {
+    if (!n)
     {
-      if (!n)
-	{
-	  return (0);
-	}
-      if (*p1 != *p2)
-	{
-	  return (*p1 - *p2);
-	}
-      p1++;
-      p2++;
-      n--;
+      return (0);
     }
+    if (*p1 != *p2)
+    {
+      return (*p1 - *p2);
+    }
+    p1++;
+    p2++;
+    n--;
+  }
 }
 
 char
@@ -139,19 +138,19 @@ my_strncasecmp (char *a, char *b, int n)
   if (!p1 || !p2)
     return (1);
   for (;;)
+  {
+    if (!n)
     {
-      if (!n)
-	{
-	  return (0);
-	}
-      if (!my_casecmp (*p1, *p2))
-	{
-	  return (*p1 - *p2);
-	}
-      p1++;
-      p2++;
-      n--;
+      return (0);
     }
+    if (!my_casecmp (*p1, *p2))
+    {
+      return (*p1 - *p2);
+    }
+    p1++;
+    p2++;
+    n--;
+  }
 }
 
 char
@@ -171,11 +170,11 @@ char *
 tohex (char *s, short int n)
 {
   if (s)
-    {
-      s[0] = hexnum[(n / 16)];
-      s[1] = hexnum[(n % 16)];
-      s[2] = '\0';
-    }
+  {
+    s[0] = hexnum[(n / 16)];
+    s[1] = hexnum[(n % 16)];
+    s[2] = '\0';
+  }
   return (s);
 }
 
@@ -190,11 +189,11 @@ my_strrchr (char *s, char c)
     return (s);
   p1 = p2 = s;
   for (;;)
-    {
-      if (*p1++ == c)
-	p2 = p1;
-      if (!(*p1))
-	return (p2);
-    }
+  {
+    if (*p1++ == c)
+      p2 = p1;
+    if (!(*p1))
+      return (p2);
+  }
   return (s);
 }

@@ -59,8 +59,7 @@ int _nl_msg_cat_cntr = 0;
 
 /* Load the message catalogs specified by FILENAME.  If it is no valid
    message catalog do nothing.  */
-void
-internal_function
+void internal_function
 _nl_load_domain (domain_file)
      struct loaded_l10nfile *domain_file;
 {
@@ -90,77 +89,73 @@ _nl_load_domain (domain_file)
     return;
 
   /* We must know about the size of the file.  */
-  if (fstat (fd, &st) != 0
-      || (size = (size_t) st.st_size) != st.st_size
-      || size < sizeof (struct mo_file_header))
-    {
-      /* Something went wrong.  */
-      close (fd);
-      return;
-    }
+  if (fstat (fd, &st) != 0 || (size = (size_t) st.st_size) != st.st_size || size < sizeof (struct mo_file_header))
+  {
+    /* Something went wrong.  */
+    close (fd);
+    return;
+  }
 
 #if (defined HAVE_MMAP && defined HAVE_MUNMAP && !defined DISALLOW_MMAP) \
     || defined _LIBC
   /* Now we are ready to load the file.  If mmap() is available we try
      this first.  If not available or it failed we try to load it.  */
-  data = (struct mo_file_header *) mmap (NULL, size, PROT_READ,
-					 MAP_PRIVATE, fd, 0);
+  data = (struct mo_file_header *) mmap (NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
 
   if (data != (struct mo_file_header *) -1)
-    {
-      /* mmap() call was successful.  */
-      close (fd);
-      use_mmap = 1;
-    }
+  {
+    /* mmap() call was successful.  */
+    close (fd);
+    use_mmap = 1;
+  }
 #endif
 
   /* If the data is not yet available (i.e. mmap'ed) we try to load
      it manually.  */
   if (data == (struct mo_file_header *) -1)
+  {
+    size_t to_read;
+    char *read_ptr;
+
+    data = (struct mo_file_header *) malloc (size);
+    if (data == NULL)
+      return;
+
+    to_read = size;
+    read_ptr = (char *) data;
+    do
     {
-      size_t to_read;
-      char *read_ptr;
-
-      data = (struct mo_file_header *) malloc (size);
-      if (data == NULL)
+      long int nb = (long int) read (fd, read_ptr, to_read);
+      if (nb == -1)
+      {
+	close (fd);
 	return;
+      }
 
-      to_read = size;
-      read_ptr = (char *) data;
-      do
-	{
-	  long int nb = (long int) read (fd, read_ptr, to_read);
-	  if (nb == -1)
-	    {
-	      close (fd);
-	      return;
-	    }
-
-	  read_ptr += nb;
-	  to_read -= nb;
-	}
-      while (to_read > 0);
-
-      close (fd);
+      read_ptr += nb;
+      to_read -= nb;
     }
+    while (to_read > 0);
+
+    close (fd);
+  }
 
   /* Using the magic number we can test whether it really is a message
      catalog file.  */
   if (data->magic != _MAGIC && data->magic != _MAGIC_SWAPPED)
-    {
-      /* The magic number is wrong: not a message catalog file.  */
+  {
+    /* The magic number is wrong: not a message catalog file.  */
 #if (defined HAVE_MMAP && defined HAVE_MUNMAP && !defined DISALLOW_MMAP) \
     || defined _LIBC
-      if (use_mmap)
-	munmap ((caddr_t) data, size);
-      else
+    if (use_mmap)
+      munmap ((caddr_t) data, size);
+    else
 #endif
-	free (data);
-      return;
-    }
+      free (data);
+    return;
+  }
 
-  domain_file->data
-    = (struct loaded_domain *) malloc (sizeof (struct loaded_domain));
+  domain_file->data = (struct loaded_domain *) malloc (sizeof (struct loaded_domain));
   if (domain_file->data == NULL)
     return;
 
@@ -175,30 +170,27 @@ _nl_load_domain (domain_file)
 
   /* Fill in the information about the available tables.  */
   switch (W (domain->must_swap, data->revision))
-    {
-    case 0:
-      domain->nstrings = W (domain->must_swap, data->nstrings);
-      domain->orig_tab = (struct string_desc *)
-	((char *) data + W (domain->must_swap, data->orig_tab_offset));
-      domain->trans_tab = (struct string_desc *)
-	((char *) data + W (domain->must_swap, data->trans_tab_offset));
-      domain->hash_size = W (domain->must_swap, data->hash_tab_size);
-      domain->hash_tab = (nls_uint32 *)
-	((char *) data + W (domain->must_swap, data->hash_tab_offset));
-      break;
-    default:
-      /* This is an illegal revision.  */
+  {
+  case 0:
+    domain->nstrings = W (domain->must_swap, data->nstrings);
+    domain->orig_tab = (struct string_desc *) ((char *) data + W (domain->must_swap, data->orig_tab_offset));
+    domain->trans_tab = (struct string_desc *) ((char *) data + W (domain->must_swap, data->trans_tab_offset));
+    domain->hash_size = W (domain->must_swap, data->hash_tab_size);
+    domain->hash_tab = (nls_uint32 *) ((char *) data + W (domain->must_swap, data->hash_tab_offset));
+    break;
+  default:
+    /* This is an illegal revision.  */
 #if (defined HAVE_MMAP && defined HAVE_MUNMAP && !defined DISALLOW_MMAP) \
     || defined _LIBC
-      if (use_mmap)
-	munmap ((caddr_t) data, size);
-      else
+    if (use_mmap)
+      munmap ((caddr_t) data, size);
+    else
 #endif
-	free (data);
-      free (domain);
-      domain_file->data = NULL;
-      return;
-    }
+      free (data);
+    free (domain);
+    domain_file->data = NULL;
+    return;
+  }
 
   /* Show that one domain is changed.  This might make some cached
      translations invalid.  */
@@ -207,8 +199,7 @@ _nl_load_domain (domain_file)
 
 
 #ifdef _LIBC
-void
-internal_function
+void internal_function
 _nl_unload_domain (domain)
      struct loaded_domain *domain;
 {

@@ -24,21 +24,25 @@
 
 /* Typedefs */
 
-typedef enum {ITEM,SUBMENU,NOP} ItemType;
+typedef enum
+{ ITEM, SUBMENU, NOP }
+ItemType;
 typedef struct _root_menu
 {
-	gchar *parent;
-	gchar *name;
-	GList *entries;
-} RootMenu;
+  gchar *parent;
+  gchar *name;
+  GList *entries;
+}
+RootMenu;
 
 typedef struct _item_data
 {
-	ItemType type;
-	gchar *name;
-	gchar *caption;
-	gchar *command;
-} ItemData;
+  ItemType type;
+  gchar *name;
+  gchar *caption;
+  gchar *command;
+}
+ItemData;
 
 /* global variables */
 

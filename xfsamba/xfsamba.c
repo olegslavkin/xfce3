@@ -64,6 +64,8 @@
 #define LOCATION_SERVERS     2
 #define LOCATION_WORKGROUPS  3
 
+gboolean NMBmastersLookup (gpointer data);
+
 /* global memory data, not to be jeopardized on forks: */
 static unsigned char NMBpassword[XFSAMBA_MAX_STRING + 1];
 static unsigned char NMBnetbios[XFSAMBA_MAX_STRING + 1];
@@ -95,8 +97,7 @@ print_diagnostics (char *message)
 {
   if (!message)
     return;
-  gtk_text_insert (GTK_TEXT (diagnostics), NULL, NULL, NULL,
-		   message, strlen (message));
+  gtk_text_insert (GTK_TEXT (diagnostics), NULL, NULL, NULL, message, strlen (message));
 }
 
 void
@@ -131,10 +132,10 @@ static gboolean
 not_unique (void *object)
 {
   if (object)
-    {
-      print_diagnostics ("DBG:Fork object not null!\n");
-      return 1;
-    }
+  {
+    print_diagnostics ("DBG:Fork object not null!\n");
+    return 1;
+  }
   cursor_wait (GTK_WIDGET (smb_nav));
   animation (TRUE);
 #ifdef DBG_XFSAMBA
@@ -148,11 +149,11 @@ not_unique (void *object)
   print_diagnostics (selected.dirname);
   print_diagnostics ("\n");
   if (selected.file)
-    {
-      print_diagnostics ("DBG:filename=");
-      print_diagnostics (selected.filename);
-      print_diagnostics ("\n");
-    }
+  {
+    print_diagnostics ("DBG:filename=");
+    print_diagnostics (selected.filename);
+    print_diagnostics ("\n");
+  }
 #endif
   SMBResult = SUCCESS;
   return 0;
@@ -164,16 +165,15 @@ static void
 SMBClientFork (void)
 {
   char *the_netbios;
-  the_netbios =
-    (char *) malloc (strlen (NMBnetbios) + strlen (NMBshare) + 1 + 3);
+  the_netbios = (char *) malloc (strlen ((char *) NMBnetbios) + strlen ((char *) NMBshare) + 1 + 3);
   sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
 #ifdef DBG_XFSAMBA
   fprintf (stderr, "DBG:smbclient %s -c \"%s\"\n", the_netbios, NMBcommand);
-  fflush(NULL);sleep(1);
+  fflush (NULL);
+  sleep (1);
 #endif
 
-  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c",
-	  NMBcommand, (char *) 0);
+  execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c", NMBcommand, (char *) 0);
 }
 
 
@@ -193,12 +193,12 @@ SMBCleanLevel2 (void)
 
   cache = thisN->shares;
   while (cache)
-    {
-      cache->visited = 0;
-      if (!cache->textos[SHARE_NAME_COLUMN])
-	smoke_nmb_cache (cache);
-      cache = cache->next;
-    }
+  {
+    cache->visited = 0;
+    if (!cache->textos[SHARE_NAME_COLUMN])
+      smoke_nmb_cache (cache);
+    cache = cache->next;
+  }
 
 }
 
@@ -213,8 +213,7 @@ SMBreload (void)
      *  tweaking when multiple selections are enabled */
   if (!NMBselectedNode)
     return;
-  if (!gtk_ctree_node_get_text (ctree,
-				(GtkCTreeNode *) NMBselectedNode, COMMENT_COLUMN, line))
+  if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) NMBselectedNode, COMMENT_COLUMN, line))
     return;
   if (line[0][0] != '/')
     return;			/* return !directory */
@@ -237,40 +236,38 @@ SMBrefresh (unsigned char *servidor, int reload)
 {
   SMBResult = SUCCESS;
   if (!headN)
+  {
+    stopcleanup = TRUE;
+    if (servidor)
+      headN = push_nmbName (servidor);
+    else
     {
-      static gboolean NMBmastersLookup (gpointer data);
-      
-      stopcleanup=TRUE;
-      if (servidor)
-	headN = push_nmbName (servidor);
-      else
-	{
-	  NMBmastersLookup (NULL);
-	  return;
-	}
+      NMBmastersLookup (NULL);
+      return;
     }
+  }
 
   switch (reload)
+  {
+  case REFRESH:
+    if (!servidor)
     {
-    case REFRESH:
-      if (!servidor)
-	{
-	  SMBLookup (headN->server, FALSE);
-	}
-      else
-	{
-	  SMBprintTitles ();
-	  SMBForkOver ();
-	}
-      break;
-    case FORCERELOAD:
-      SMBLookup (servidor, TRUE);
-      break;
-    case RELOAD:
-    default:
-      SMBLookup (servidor, FALSE);
-      break;
+      SMBLookup (headN->server, FALSE);
     }
+    else
+    {
+      SMBprintTitles ();
+      SMBForkOver ();
+    }
+    break;
+  case FORCERELOAD:
+    SMBLookup (servidor, TRUE);
+    break;
+  case RELOAD:
+  default:
+    SMBLookup (servidor, FALSE);
+    break;
+  }
 }
 
 static void
@@ -284,32 +281,33 @@ SMBprintTitles (void)
   {
     nmb_history *currentH;
     if (items != NULL)
-      {
-	g_list_free (items);
-	items = NULL;
-      }
+    {
+      g_list_free (items);
+      items = NULL;
+    }
     currentH = thisH;
     while (currentH)
+    {
+      if (currentH->record)
       {
-	if (currentH->record) {
-	  if (currentH->record->server)
-	    items = g_list_append (items, currentH->record->server);
-	  if (currentH->record->serverIP)
-	    gtk_label_set_text ((GtkLabel *) locationIP,
-			      currentH->record->serverIP);
-	  else
-	    gtk_label_set_text ((GtkLabel *) locationIP, "-");
-	}
-	currentH = currentH->previous;
+	if (currentH->record->server)
+	  items = g_list_append (items, currentH->record->server);
+	if (currentH->record->serverIP)
+	  gtk_label_set_text ((GtkLabel *) locationIP, currentH->record->serverIP);
+	else
+	  gtk_label_set_text ((GtkLabel *) locationIP, "-");
       }
+      currentH = currentH->previous;
+    }
     if (items)
       gtk_combo_set_popdown_strings (GTK_COMBO (location), items);
-    if ((thisH)&&(thisH->record)&&(thisH->record->serverIP))
+    if ((thisH) && (thisH->record) && (thisH->record->serverIP))
       gtk_label_set_text ((GtkLabel *) locationIP, thisH->record->serverIP);
     else
       gtk_label_set_text ((GtkLabel *) locationIP, "");
   }
-  if (thisN->server){
+  if (thisN->server)
+  {
     sprintf (message, "%s : %s", thisN->server, _("Shares"));
     gtk_label_set_text ((GtkLabel *) sharesL, message);
     sprintf (message, "%s : %s", thisN->server, _("Links to other servers"));
@@ -326,55 +324,48 @@ SMBprint (nmb_list * currentN)
   GtkCTreeNode *node;
   cache = currentN->shares;
   while (cache)
+  {
+    GdkPixmap *gPIXo, *gPIXc;
+    GdkBitmap *gPIMo, *gPIMc;
+    if ((cache->textos[COMMENT_COLUMN]) && (strncmp (cache->textos[COMMENT_COLUMN], "Printer", strlen ("Printer")) == 0))
     {
-      GdkPixmap *gPIXo, *gPIXc;
-      GdkBitmap *gPIMo, *gPIMc;
-      if ((cache->textos[COMMENT_COLUMN]) &&
-	  (strncmp (cache->textos[COMMENT_COLUMN], "Printer", strlen ("Printer")) == 0))
-	{
-	  gPIXc = gPIXo = gPIX_print;
-	  gPIMc = gPIMo = gPIM_print;
-	}
-      else
-	{
-	  gPIXo = gPIX_dir_open_lnk;
-	  gPIXc = gPIX_dir_close_lnk;
-	  gPIMo = gPIM_dir_open_lnk;
-	  gPIMc = gPIM_dir_close_lnk;
-	}
-      if (cache->textos[SHARE_NAME_COLUMN]){
-	    int *data;      
-	    node=gtk_ctree_insert_node ((GtkCTree *) shares,
-			       NULL, NULL, cache->textos, SHARE_COLUMNS,
-			       gPIXc, gPIMc, gPIXo, gPIMo, FALSE, FALSE);
-	    data=(int *)malloc(2*sizeof(int));
-	    data[0]=data[1]=0;
-    	    gtk_ctree_node_set_row_data_full ((GtkCTree *)shares,node, 
-					data, node_destroy);
-       }
-
-      cache = cache->next;
+      gPIXc = gPIXo = gPIX_print;
+      gPIMc = gPIMo = gPIM_print;
     }
+    else
+    {
+      gPIXo = gPIX_dir_open_lnk;
+      gPIXc = gPIX_dir_close_lnk;
+      gPIMo = gPIM_dir_open_lnk;
+      gPIMc = gPIM_dir_close_lnk;
+    }
+    if (cache->textos[SHARE_NAME_COLUMN])
+    {
+      int *data;
+      node = gtk_ctree_insert_node ((GtkCTree *) shares, NULL, NULL, cache->textos, SHARE_COLUMNS, gPIXc, gPIMc, gPIXo, gPIMo, FALSE, FALSE);
+      data = (int *) malloc (2 * sizeof (int));
+      data[0] = data[1] = 0;
+      gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
+    }
+
+    cache = cache->next;
+  }
   cache = currentN->servers;
   while (cache)
-    {
-      gint row;
-      row = gtk_clist_append ((GtkCList *) servers, cache->textos);
-      gtk_clist_set_pixmap ((GtkCList *) servers, row, 0,
-			    (cache->visited) ? gPIX_comp2 : gPIX_comp1,
-			    (cache->visited) ? gPIM_comp2 : gPIM_comp1);
-      cache = cache->next;
-    }
+  {
+    gint row;
+    row = gtk_clist_append ((GtkCList *) servers, cache->textos);
+    gtk_clist_set_pixmap ((GtkCList *) servers, row, 0, (cache->visited) ? gPIX_comp2 : gPIX_comp1, (cache->visited) ? gPIM_comp2 : gPIM_comp1);
+    cache = cache->next;
+  }
   cache = currentN->workgroups;
   while (cache)
-    {
-      gint row;
-      row = gtk_clist_append ((GtkCList *) workgroups, cache->textos);
-      gtk_clist_set_pixmap ((GtkCList *) workgroups, row, 0,
-			    (cache->visited) ? gPIX_wg2 : gPIX_wg1,
-			    (cache->visited) ? gPIM_wg2 : gPIM_wg1);
-      cache = cache->next;
-    }
+  {
+    gint row;
+    row = gtk_clist_append ((GtkCList *) workgroups, cache->textos);
+    gtk_clist_set_pixmap ((GtkCList *) workgroups, row, 0, (cache->visited) ? gPIX_wg2 : gPIX_wg1, (cache->visited) ? gPIM_wg2 : gPIM_wg1);
+    cache = cache->next;
+  }
   if (SMBResult == SUCCESS)
     print_status (_("Query done."));
   if (SMBResult == FAILED)
@@ -395,13 +386,12 @@ SMBForkOver (void)
   SMBprint (thisN);
   thisN->loaded = 1;
   if (SMBResult == CHALLENGED)
-    {
-      print_status (_("Query password has been requested."));
-      gtk_window_set_transient_for (GTK_WINDOW (passwd_dialog (1)),
-				    GTK_WINDOW (smb_nav));
-    }
+  {
+    print_status (_("Query password has been requested."));
+    gtk_window_set_transient_for (GTK_WINDOW (passwd_dialog (1)), GTK_WINDOW (smb_nav));
+  }
   fork_obj = NULL;
-  nonstop=FALSE;
+  nonstop = FALSE;
 }
 
 /* function to process stdout produced by child */
@@ -411,59 +401,59 @@ SMBparseLookup (int n, void *data)
   char *line;
   gchar *textos[SHARE_COLUMNS];
   static char *position[2];
-  
+
   /* data is a static memory location */
   if (n)
     return TRUE;		/* this would mean binary data */
   line = (char *) data;
   if (strstr (line, "Connection") && strstr (line, "failed"))
-    {
-      cual_chingao = LOCATION_SHARES;
-      SMBResult = FAILED;
-      position[0] = line;
-      position[1] = NULL;
-    }
+  {
+    cual_chingao = LOCATION_SHARES;
+    SMBResult = FAILED;
+    position[0] = line;
+    position[1] = NULL;
+  }
   if (strstr (line, "Access") && strstr (line, "denied"))
-    {
-      cual_chingao = LOCATION_SHARES;
-      SMBResult = CHALLENGED;
-      position[0] = line;
-      position[1] = NULL;
-    }
+  {
+    cual_chingao = LOCATION_SHARES;
+    SMBResult = CHALLENGED;
+    position[0] = line;
+    position[1] = NULL;
+  }
   if (strstr (line, "--------"))
-    {
-      char *buf;
-      position[0] = strstr (line, "---");
-      buf = strtok (position[0], " ");
+  {
+    char *buf;
+    position[0] = strstr (line, "---");
+    buf = strtok (position[0], " ");
 
+    if (buf)
+    {
+      buf = strtok (NULL, "\n");
       if (buf)
-	{
-	  buf = strtok (NULL, "\n");
-	  if (buf)
-	    position[1] = strstr (buf, "---");
-	}
-      return TRUE;
+	position[1] = strstr (buf, "---");
     }
+    return TRUE;
+  }
   if (strlen (line) < 3)
     return TRUE;
   if (strstr (line, "Sharename") && strstr (line, "Comment"))
-    {
-      cual_chingao = LOCATION_SHARES;
-      position[0] = position[1] = NULL;
-      return TRUE;
-    }
+  {
+    cual_chingao = LOCATION_SHARES;
+    position[0] = position[1] = NULL;
+    return TRUE;
+  }
   if (strstr (line, "Server") && strstr (line, "Comment"))
-    {
-      cual_chingao = LOCATION_SERVERS;
-      position[0] = position[1] = NULL;
-      return TRUE;
-    }
+  {
+    cual_chingao = LOCATION_SERVERS;
+    position[0] = position[1] = NULL;
+    return TRUE;
+  }
   if (strstr (line, "Workgroup") && strstr (line, "Master"))
-    {
-      cual_chingao = LOCATION_WORKGROUPS;
-      position[0] = position[1] = NULL;
-      return TRUE;
-    }
+  {
+    cual_chingao = LOCATION_WORKGROUPS;
+    position[0] = position[1] = NULL;
+    return TRUE;
+  }
   if (!position[0])
     return TRUE;
   if (strstr (line, "\n"))
@@ -471,38 +461,44 @@ SMBparseLookup (int n, void *data)
   latin_1_readable (line);
 
   {
-	  int i;
-	  for (i=0;i<SHARE_COLUMNS;i++) textos[i] = "";
+    int i;
+    for (i = 0; i < SHARE_COLUMNS; i++)
+      textos[i] = "";
   }
   textos[SHARE_NAME_COLUMN] = position[0];
-  if (!position[1]){ 
-    textos[COMMENT_COLUMN]="*"; 
-    if (cual_chingao==LOCATION_WORKGROUPS)textos[WG_MASTER_COLUMN]="*"; 
-    if (cual_chingao==LOCATION_SERVERS)textos[SERVER_COMMENT_COLUMN]="*"; 
-  } 
+  if (!position[1])
+  {
+    textos[COMMENT_COLUMN] = "*";
+    if (cual_chingao == LOCATION_WORKGROUPS)
+      textos[WG_MASTER_COLUMN] = "*";
+    if (cual_chingao == LOCATION_SERVERS)
+      textos[SERVER_COMMENT_COLUMN] = "*";
+  }
   else
-    {
-      *(position[1] - 1) = 0;
-     textos[COMMENT_COLUMN]= position[1]; 
-     if (cual_chingao==LOCATION_WORKGROUPS)textos[WG_MASTER_COLUMN]= position[1]; 
-     if (cual_chingao==LOCATION_SERVERS)textos[SERVER_COMMENT_COLUMN]= position[1]; 
-    }
+  {
+    *(position[1] - 1) = 0;
+    textos[COMMENT_COLUMN] = position[1];
+    if (cual_chingao == LOCATION_WORKGROUPS)
+      textos[WG_MASTER_COLUMN] = position[1];
+    if (cual_chingao == LOCATION_SERVERS)
+      textos[SERVER_COMMENT_COLUMN] = position[1];
+  }
 
 
   switch (cual_chingao)
-    {
-    case LOCATION_SHARES:
-      thisN->shares = push_nmb_cache (thisN->shares, textos);
-      break;
-    case LOCATION_SERVERS:
-      thisN->servers = push_nmb_cache (thisN->servers, textos);
-      break;
-    case LOCATION_WORKGROUPS:
-      thisN->workgroups = push_nmb_cache (thisN->workgroups, textos);
-      break;
-    default:
-      return TRUE;
-    }
+  {
+  case LOCATION_SHARES:
+    thisN->shares = push_nmb_cache (thisN->shares, textos);
+    break;
+  case LOCATION_SERVERS:
+    thisN->servers = push_nmb_cache (thisN->servers, textos);
+    break;
+  case LOCATION_WORKGROUPS:
+    thisN->workgroups = push_nmb_cache (thisN->workgroups, textos);
+    break;
+  default:
+    return TRUE;
+  }
 
   return TRUE;
 }
@@ -513,8 +509,7 @@ static void
 SMBFork (void)
 {
   if (strlen (NMBpassword))
-    execlp ("smbclient", "smbclient", "-N", "-L",
-	    NMBnetbios, "-U", NMBpassword, (char *) 0);
+    execlp ("smbclient", "smbclient", "-N", "-L", NMBnetbios, "-U", NMBpassword, (char *) 0);
   else
     execlp ("smbclient", "smbclient", "-N", "-L", NMBnetbios, (char *) 0);
 }
@@ -524,10 +519,10 @@ SMBLookup (unsigned char *servidor, int reload)
 {
   char message[256];
   if (fork_obj)
-    {
-      print_diagnostics ("DBG:fork object not NULL!\n");
-      return;
-    }
+  {
+    print_diagnostics ("DBG:fork object not NULL!\n");
+    return;
+  }
   cursor_wait (GTK_WIDGET (smb_nav));
   animation (TRUE);
   SMBCleanLevel2 ();
@@ -535,38 +530,38 @@ SMBLookup (unsigned char *servidor, int reload)
   SMBResult = SUCCESS;
   thisN = headN;
   if (servidor)
+  {
+    while (thisN)		/* push into first level cache (if not there) */
     {
-      while (thisN)		/* push into first level cache (if not there) */
-	{
-	  if (strcmp ((char *) (thisN->server), (char *) servidor) == 0)
-	    {
-	      break;
-	    }
-	  thisN = thisN->next;
-	}
-      if (!thisN)
-	thisN = push_nmbName (servidor);
+      if (strcmp ((char *) (thisN->server), (char *) servidor) == 0)
+      {
+	break;
+      }
+      thisN = thisN->next;
     }
+    if (!thisN)
+      thisN = push_nmbName (servidor);
+  }
 
   if (!thisN->netbios)
-    {				/* this will enter if nmblookup was stopped */
-      static gboolean NMBmastersLookup (gpointer data);
-      clean_nmb ();
-      NMBmastersLookup (NULL);
-      return;
-    }
+  {				
+    /* this will enter if nmblookup was stopped */
+    clean_nmb ();
+    NMBmastersLookup (NULL);
+    return;
+  }
 
-  sprintf (message, "%s %s (%s)", _("Querying"),
-	   thisN->server, thisN->netbios);
+  sprintf (message, "%s %s (%s)", _("Querying"), thisN->server, thisN->netbios);
   print_status (message);
   sprintf (NMBnetbios, "%s", thisN->netbios);
 
-  if (!thisN->password) {
-      thisN->password=(char *) malloc(strlen(default_user)+1);
-      strcpy(thisN->password,default_user);
+  if (!thisN->password)
+  {
+    thisN->password = (char *) malloc (strlen (default_user) + 1);
+    strcpy (thisN->password, default_user);
   }
-  strncpy(NMBpassword,thisN->password,XFSAMBA_MAX_STRING);
-  NMBpassword[XFSAMBA_MAX_STRING]=0;
+  strncpy (NMBpassword, thisN->password, XFSAMBA_MAX_STRING);
+  NMBpassword[XFSAMBA_MAX_STRING] = 0;
 /*  if (thisN->password)
     {
       sprintf (NMBpassword, "%s", thisN->password);
@@ -574,24 +569,23 @@ SMBLookup (unsigned char *servidor, int reload)
   else NMBpassword[0]=0;*/
 
   if ((!thisH) || ((thisH) && (thisN != thisH->record)))
-    {
-      smoke_history (thisH);
-      thisH = push_nmb_history (thisN);
-    }
+  {
+    smoke_history (thisH);
+    thisH = push_nmb_history (thisN);
+  }
   SMBprintTitles ();
 
   {
     if ((reload) || (!thisN->loaded))
-      {
+    {
 #ifdef DBG_XFSAMBA
-	print_diagnostics ("DBG:Reloading server shares.\n");
+      print_diagnostics ("DBG:Reloading server shares.\n");
 #endif
-	thisN->shares = clean_cache (thisN->shares);
-	thisN->servers = clean_cache (thisN->servers);
-	thisN->workgroups = clean_cache (thisN->workgroups);
-	fork_obj = Tubo (SMBFork, SMBForkOver, FALSE,
-			 SMBparseLookup, parse_stderr);
-      }
+      thisN->shares = clean_cache (thisN->shares);
+      thisN->servers = clean_cache (thisN->servers);
+      thisN->workgroups = clean_cache (thisN->workgroups);
+      fork_obj = Tubo (SMBFork, SMBForkOver, FALSE, SMBparseLookup, parse_stderr);
+    }
     else
       SMBForkOver ();		/* load from cache  instead */
   }
@@ -648,32 +642,24 @@ abort_dialog (char *message)
 
   pixmap = MyCreateGdkPixmapFromData (warning, dialog, &mask, FALSE);
   pixmapwid = gtk_pixmap_new (pixmap, mask);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), pixmapwid, FALSE,
-		      FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), pixmapwid, FALSE, FALSE, 0);
   gtk_widget_show (pixmapwid);
 
   label = gtk_label_new (_("Samba failure! Xfsamba could not find file:"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND,
-		      NOFILL, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND, NOFILL, 0);
   gtk_widget_show (label);
 
   label = gtk_label_new (message);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND,
-		      NOFILL, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND, NOFILL, 0);
   gtk_widget_show (label);
 
-  label =
-    gtk_label_new (_
-		   ("(please install Samba or else correct the PATH environment variable)"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND,
-		      NOFILL, 0);
+  label = gtk_label_new (_("(please install Samba or else correct the PATH environment variable)"));
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, NOEXPAND, NOFILL, 0);
   gtk_widget_show (label);
 
   button = gtk_button_new_with_label (_("Ok"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area),
-		      button, EXPAND, NOFILL, 0);
-  gtk_signal_connect (GTK_OBJECT (button), "clicked",
-		      GTK_SIGNAL_FUNC (on_ok_abort), (gpointer) dialog);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, EXPAND, NOFILL, 0);
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (on_ok_abort), (gpointer) dialog);
   gtk_widget_show (button);
 
   gtk_widget_show (dialog);
@@ -683,23 +669,24 @@ abort_dialog (char *message)
 }
 
 
-gboolean sane (char *bin)
+gboolean
+sane (char *bin)
 {
   char *spath, *path, *globstring;
   glob_t dirlist;
 
   /* printf("getenv=%s\n",getenv("PATH")); */
   if (getenv ("PATH"))
-    {
-      path = (char *) malloc (strlen (getenv ("PATH")) + 2);
-      strcpy (path, getenv ("PATH"));
-      strcat (path, ":");
-    }
+  {
+    path = (char *) malloc (strlen (getenv ("PATH")) + 2);
+    strcpy (path, getenv ("PATH"));
+    strcat (path, ":");
+  }
   else
-    {
-      path = (char *) malloc (4);
-      strcpy (path, "./:");
-    }
+  {
+    path = (char *) malloc (4);
+    strcpy (path, "./:");
+  }
 
   globstring = (char *) malloc (strlen (path) + strlen (bin) + 1);
 
@@ -711,23 +698,22 @@ gboolean sane (char *bin)
     spath = path;
 
   while (spath)
-    {
-      sprintf (globstring, "%s/%s", spath, bin);
+  {
+    sprintf (globstring, "%s/%s", spath, bin);
 /*	 printf("checking for %s...\n",globstring);*/
-      if (glob (globstring, GLOB_ERR, NULL, &dirlist) == 0)
-	{
-	  /*       printf("found at %s\n",globstring); */
-	  free (globstring);
-	  globfree (&dirlist);
-	  free (path);
-	  return TRUE;
-	}
+    if (glob (globstring, GLOB_ERR, NULL, &dirlist) == 0)
+    {
+      /*       printf("found at %s\n",globstring); */
+      free (globstring);
       globfree (&dirlist);
-      spath = strtok (NULL, ":");
+      free (path);
+      return TRUE;
     }
+    globfree (&dirlist);
+    spath = strtok (NULL, ":");
+  }
 
-  gtk_window_set_transient_for (GTK_WINDOW (abort_dialog (bin)),
-				GTK_WINDOW (smb_nav));
+  gtk_window_set_transient_for (GTK_WINDOW (abort_dialog (bin)), GTK_WINDOW (smb_nav));
   gtk_main ();
   /*printf("samba failure: %s not found in PATH\n",bin); */
   exit (1);
@@ -742,11 +728,10 @@ main (int argc, char *argv[])
   thisH = NULL;
   fork_obj = NULL;
   selected.parent_node = selected.node = NULL;
-  selected.comment = selected.share =
-    selected.dirname = selected.filename = NULL;
-  stopcleanup=TRUE;
-  default_user=(char *)malloc(strlen("Guest%")+1);
-  strcpy(default_user,"Guest%");
+  selected.comment = selected.share = selected.dirname = selected.filename = NULL;
+  stopcleanup = TRUE;
+  default_user = (char *) malloc (strlen ("Guest%") + 1);
+  strcpy (default_user, "Guest%");
   xfce_init (&argc, &argv);
   /*
      signal(SIGHUP,finish);

@@ -15,14 +15,14 @@
 
 typedef struct XfwmFont
 {
-    XFontStruct *font;		/* font structure */
-    XFontSet fontset;		/* fontset for multi-language */
+  XFontStruct *font;		/* font structure */
+  XFontSet fontset;		/* fontset for multi-language */
 #ifdef HAVE_X11_XFT_XFT_H
-    XftFont *xftfont;           /* AA font */
-    Bool use_xft;
-#endif    
-    int height;			/* height of the font */
-    int y;			/* Y coordinate to draw characters */
+  XftFont *xftfont;		/* AA font */
+  Bool use_xft;
+#endif
+  int height;			/* height of the font */
+  int y;			/* Y coordinate to draw characters */
 }
 XfwmFont;
 
@@ -86,7 +86,7 @@ char *findIconFile (char *icon, char *pathlist, int type);
  * Wrappers around various X11 routines
  ***********************************************************************/
 
-void GetFontOrFixed (Display * disp, char *fontname, XfwmFont *xfwmfont);
+void GetFontOrFixed (Display * disp, char *fontname, XfwmFont * xfwmfont);
 
 void MyXGrabServer (Display * disp);
 void MyXUngrabServer (Display * disp);

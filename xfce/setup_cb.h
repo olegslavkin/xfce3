@@ -30,8 +30,7 @@ void setup_apply_cb (GtkWidget * widget, gpointer data);
 
 void setup_cancel_cb (GtkWidget * widget, gpointer data);
 
-gboolean setup_delete_event (GtkWidget * widget,
-			     GdkEvent * event, gpointer data);
+gboolean setup_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
 
 void setup_default_cb (GtkWidget * widget, gpointer data);
 

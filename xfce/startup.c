@@ -63,11 +63,10 @@ create_startup ()
   gtk_widget_realize (startup);
   gdk_window_set_decorations (startup->window, (gulong) 0);
   gnome_layer (startup->window, MAX_LAYERS);
-  
+
   startup_mainframe = gtk_frame_new (NULL);
   gtk_widget_set_name (startup_mainframe, "startup_mainframe");
-  gtk_object_set_data (GTK_OBJECT (startup), "startup_mainframe",
-		       startup_mainframe);
+  gtk_object_set_data (GTK_OBJECT (startup), "startup_mainframe", startup_mainframe);
   gtk_widget_show (startup_mainframe);
   gtk_container_add (GTK_CONTAINER (startup), startup_mainframe);
   gtk_frame_set_shadow_type (GTK_FRAME (startup_mainframe), GTK_SHADOW_OUT);
@@ -80,32 +79,26 @@ create_startup ()
 
   startup_topframe = gtk_frame_new (NULL);
   gtk_widget_set_name (startup_topframe, "startup_topframe");
-  gtk_object_set_data (GTK_OBJECT (startup), "startup_topframe",
-		       startup_topframe);
+  gtk_object_set_data (GTK_OBJECT (startup), "startup_topframe", startup_topframe);
   gtk_widget_show (startup_topframe);
-  gtk_box_pack_start (GTK_BOX (startup_vbox), startup_topframe, TRUE, TRUE,
-		      0);
+  gtk_box_pack_start (GTK_BOX (startup_vbox), startup_topframe, TRUE, TRUE, 0);
   gtk_widget_set_usize (startup_topframe, 260, 100);
   gtk_container_border_width (GTK_CONTAINER (startup_topframe), 10);
   gtk_frame_set_shadow_type (GTK_FRAME (startup_topframe), GTK_SHADOW_IN);
 
-  startup_logo_pixmap =
-    MyCreateFromPixmapFile (startup, build_path (XFCE_LOGO));
+  startup_logo_pixmap = MyCreateFromPixmapFile (startup, build_path (XFCE_LOGO));
   if (startup_logo_pixmap == NULL)
     g_error (_("Couldn't create pixmap"));
   gtk_widget_set_name (startup_logo_pixmap, "startup_logo_pixmap");
-  gtk_object_set_data (GTK_OBJECT (startup), "startup_logo_pixmap",
-		       startup_logo_pixmap);
+  gtk_object_set_data (GTK_OBJECT (startup), "startup_logo_pixmap", startup_logo_pixmap);
   gtk_widget_show (startup_logo_pixmap);
   gtk_container_add (GTK_CONTAINER (startup_topframe), startup_logo_pixmap);
 
   startup_wait_label = gtk_label_new (_("Please wait, XFce is loading..."));
   gtk_widget_set_name (startup_wait_label, "startup_wait_label");
-  gtk_object_set_data (GTK_OBJECT (startup), "startup_wait_label",
-		       startup_wait_label);
+  gtk_object_set_data (GTK_OBJECT (startup), "startup_wait_label", startup_wait_label);
   gtk_widget_show (startup_wait_label);
-  gtk_box_pack_start (GTK_BOX (startup_vbox), startup_wait_label, TRUE, TRUE,
-		      0);
+  gtk_box_pack_start (GTK_BOX (startup_vbox), startup_wait_label, TRUE, TRUE, 0);
 
   return startup;
 }

@@ -128,17 +128,15 @@ main (int argc, char *argv[])
   update_gxfce_screen_buttons (current_config.visible_screen);
   gnome_set_desk_count (current_config.visible_screen ? current_config.visible_screen : 1);
   update_gxfce_popup_buttons (current_config.visible_popup);
-  update_gxfce_coord (gxfce, &current_config.panel_x,
-		      &current_config.panel_y);
+  update_gxfce_coord (gxfce, &current_config.panel_x, &current_config.panel_y);
   update_gxfce_size ();
   update_delay_tooltips (current_config.tooltipsdelay);
   update_gxfce_clock ();
-  gtk_widget_set_uposition (gxfce, current_config.panel_x,
-			    current_config.panel_y);
+  gtk_widget_set_uposition (gxfce, current_config.panel_x, current_config.panel_y);
 
   gtk_widget_show (gxfce);
   gnome_sticky (gxfce->window);
-  
+
   gnome_layer (gxfce->window, current_config.panel_layer);
 
   if (!current_config.wm)
@@ -158,38 +156,35 @@ main (int argc, char *argv[])
   /* Update all running GTK+ apps if ~/.gtkrc is not present */
 
   if (!existfile (gtkrc_file))
-    {
-      create_gtkrc_file (pal, NULL);
-      applypal_to_all ();
-    }
+  {
+    create_gtkrc_file (pal, NULL);
+    applypal_to_all ();
+  }
 
   /* Apply user's preferences to the Window Manager */
 
   if (current_config.wm == XFWM)
-    {
-      apply_wm_colors (pal);
-      apply_wm_fonts ();
-      apply_wm_iconpos ();
-      apply_wm_options ();
-      apply_wm_snapsize ();
-      apply_wm_engine ();
-      startup_wm_modules ();
-    }
+  {
+    apply_wm_colors (pal);
+    apply_wm_fonts ();
+    apply_wm_iconpos ();
+    apply_wm_options ();
+    apply_wm_snapsize ();
+    apply_wm_engine ();
+    startup_wm_modules ();
+  }
 
-   /* Initialize the pipe for subprocess diagnostics */
-   dg = initdiag ();
-   
-   /* And display the diag box every time a message comes out */
-   gdk_input_add (dg,
-		  GDK_INPUT_READ,
-		  (GdkInputFunction) process_diag_messages,
-		  (gpointer) ((long) dg));
+  /* Initialize the pipe for subprocess diagnostics */
+  dg = initdiag ();
+
+  /* And display the diag box every time a message comes out */
+  gdk_input_add (dg, GDK_INPUT_READ, (GdkInputFunction) process_diag_messages, (gpointer) ((long) dg));
 
   /* Add a hook for the mail-check function. */
   gtk_timeout_add (MAILCHECK_PERIOD, check_mail, NULL);
 
   cursor_reset (gxfce);
-  
+
   /* Main event loop */
   gtk_main ();
 

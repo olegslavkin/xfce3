@@ -68,45 +68,45 @@ findIconFile (char *icon, char *pathlist, int type)
   path = safemalloc (l1 + l2 + 10);
   *path = '\0';
   if (*icon == '/')
-    {
-      /* No search if icon begins with a slash */
-      strcpy (path, icon);
-      return path;
-    }
+  {
+    /* No search if icon begins with a slash */
+    strcpy (path, icon);
+    return path;
+  }
 
   if ((pathlist == NULL) || (*pathlist == '\0'))
-    {
-      /* No search if pathlist is empty */
-      strcpy (path, icon);
-      return path;
-    }
+  {
+    /* No search if pathlist is empty */
+    strcpy (path, icon);
+    return path;
+  }
 
   /* Search each element of the pathlist for the icon file */
   while ((pathlist) && (*pathlist))
+  {
+    dir_end = strchr (pathlist, ':');
+    if (dir_end != NULL)
     {
-      dir_end = strchr (pathlist, ':');
-      if (dir_end != NULL)
-	{
-	  strncpy (path, pathlist, dir_end - pathlist);
-	  path[dir_end - pathlist] = 0;
-	}
-      else
-	strcpy (path, pathlist);
-
-      strcat (path, "/");
-      strcat (path, icon);
-      if (access (path, type) == 0)
-	return path;
-      strcat (path, ".gz");
-      if (access (path, type) == 0)
-	return path;
-
-      /* Point to next element of the path */
-      if (dir_end == NULL)
-	pathlist = NULL;
-      else
-	pathlist = dir_end + 1;
+      strncpy (path, pathlist, dir_end - pathlist);
+      path[dir_end - pathlist] = 0;
     }
+    else
+      strcpy (path, pathlist);
+
+    strcat (path, "/");
+    strcat (path, icon);
+    if (access (path, type) == 0)
+      return path;
+    strcat (path, ".gz");
+    if (access (path, type) == 0)
+      return path;
+
+    /* Point to next element of the path */
+    if (dir_end == NULL)
+      pathlist = NULL;
+    else
+      pathlist = dir_end + 1;
+  }
   /* Hmm, couldn't find the file.  Return NULL */
   free (path);
   return NULL;

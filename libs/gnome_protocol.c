@@ -35,8 +35,7 @@ void
 create_gnome_atoms (void)
 {
   _XA_WIN_WORKSPACE = XInternAtom (GDK_DISPLAY (), "_WIN_WORKSPACE", False);
-  _XA_WIN_WORKSPACE_COUNT =
-    XInternAtom (GDK_DISPLAY (), "_WIN_WORKSPACE_COUNT", False);
+  _XA_WIN_WORKSPACE_COUNT = XInternAtom (GDK_DISPLAY (), "_WIN_WORKSPACE_COUNT", False);
   _XA_WIN_STATE = XInternAtom (GDK_DISPLAY (), "_WIN_STATE", False);
   _XA_WIN_LAYER = XInternAtom (GDK_DISPLAY (), "_WIN_LAYER", False);
   /* _XA_WIN_WORKSPACE_NAMES = XInternAtom(GDK_DISPLAY(), "_WIN_WORKSPACE_NAMES", False); */
@@ -50,9 +49,7 @@ gnome_change_desk (int desk)
   if (!_XA_WIN_WORKSPACE)
     create_gnome_atoms ();
 
-  XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()),
-		   _XA_WIN_WORKSPACE, XA_CARDINAL, 32, PropModeReplace,
-		   (unsigned char *) &desk, 1);
+  XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), _XA_WIN_WORKSPACE, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &desk, 1);
 
   xev.type = ClientMessage;
   xev.xclient.type = ClientMessage;
@@ -62,8 +59,7 @@ gnome_change_desk (int desk)
   xev.xclient.data.l[0] = desk;
   xev.xclient.data.l[1] = gdk_time_get ();
 
-  XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False,
-	      SubstructureNotifyMask, (XEvent *) & xev);
+  XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False, SubstructureNotifyMask, (XEvent *) & xev);
 }
 
 void
@@ -71,13 +67,11 @@ gnome_set_desk_count (int desk)
 {
   if (desk <= 0)
     desk = 1;
-    
+
   if (!_XA_WIN_WORKSPACE_COUNT)
     create_gnome_atoms ();
 
-  XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()),
-		   _XA_WIN_WORKSPACE_COUNT, XA_CARDINAL, 32, PropModeReplace,
-		   (unsigned char *) &desk, 1);
+  XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), _XA_WIN_WORKSPACE_COUNT, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &desk, 1);
 
 }
 
@@ -89,11 +83,9 @@ gnome_sticky (GdkWindow * win)
   if (!_XA_WIN_STATE)
     create_gnome_atoms ();
   if (win != NULL)
-    {
-      XChangeProperty (GDK_DISPLAY (), (Window) GDK_WINDOW_XWINDOW (win),
-		       _XA_WIN_STATE, XA_CARDINAL, 32, PropModeReplace,
-		       (unsigned char *) &flags, 1);
-    }
+  {
+    XChangeProperty (GDK_DISPLAY (), (Window) GDK_WINDOW_XWINDOW (win), _XA_WIN_STATE, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &flags, 1);
+  }
 }
 
 void
@@ -103,12 +95,10 @@ gnome_layer (GdkWindow * win, gint layer)
   if (!_XA_WIN_LAYER)
     create_gnome_atoms ();
   if (win != NULL)
-    {
-      data[0] = (unsigned long) layer;
-      XChangeProperty (GDK_DISPLAY (), (Window) GDK_WINDOW_XWINDOW (win),
-		       _XA_WIN_LAYER, XA_CARDINAL, 32, PropModeReplace,
-		       (unsigned char *) data, 1);
-    }
+  {
+    data[0] = (unsigned long) layer;
+    XChangeProperty (GDK_DISPLAY (), (Window) GDK_WINDOW_XWINDOW (win), _XA_WIN_LAYER, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) data, 1);
+  }
 }
 
 static gint
@@ -124,22 +114,17 @@ get_current_workspace (void)
   if (!_XA_WIN_WORKSPACE)
     create_gnome_atoms ();
 
-  if ((XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-			   _XA_WIN_WORKSPACE,
-			   0L, 1L, False, XA_CARDINAL,
-			   &type, &format, &nitems,
-			   &bytes_after, &prop)) == 1)
-    {
-      return (-1);
-    }
+  if ((XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), _XA_WIN_WORKSPACE, 0L, 1L, False, XA_CARDINAL, &type, &format, &nitems, &bytes_after, &prop)) == 1)
+  {
+    return (-1);
+  }
 
   wws = *(CARD32 *) prop;
   XFree ((char *) prop);
   return wws;
 }
 
-gint
-gnome_desk_change (GdkEventProperty * event)
+gint gnome_desk_change (GdkEventProperty * event)
 {
   gint desk = -1;
 
@@ -148,8 +133,7 @@ gnome_desk_change (GdkEventProperty * event)
   if (!_XA_WIN_WORKSPACE)
     create_gnome_atoms ();
 
-  if ((event->atom == _XA_WIN_WORKSPACE)
-      && (event->state == GDK_PROPERTY_NEW_VALUE))
+  if ((event->atom == _XA_WIN_WORKSPACE) && (event->state == GDK_PROPERTY_NEW_VALUE))
     desk = get_current_workspace ();
   return (desk);
 }
@@ -166,10 +150,7 @@ gnome_set_root_event (GtkSignalFunc f)
   gtk_widget_set_uposition (dummy_win, -999, -999);
   gdk_window_set_user_data (GDK_ROOT_PARENT (), dummy_win);
   gdk_window_ref (GDK_ROOT_PARENT ());
-  gdk_xid_table_insert (&(GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ())),
-			GDK_ROOT_PARENT ());
-  gtk_signal_connect (GTK_OBJECT (dummy_win), "event",
-		      GTK_SIGNAL_FUNC (f), NULL);
-  XSelectInput (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()),
-		PropertyChangeMask);
+  gdk_xid_table_insert (&(GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ())), GDK_ROOT_PARENT ());
+  gtk_signal_connect (GTK_OBJECT (dummy_win), "event", GTK_SIGNAL_FUNC (f), NULL);
+  XSelectInput (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), PropertyChangeMask);
 }

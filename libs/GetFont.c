@@ -25,105 +25,104 @@
 static char *
 XftToXcore (char *fontname)
 {
-    char *t;
-    
-    t = fontname;
-    while (*t != '\0')
+  char *t;
+
+  t = fontname;
+  while (*t != '\0')
+  {
+    if (*t == ' ')
     {
-        if (*t == ' ')
-        {
-            *t = '_';
-        }
-        t++;
+      *t = '_';
     }
-    return (fontname);
+    t++;
+  }
+  return (fontname);
 }
 
 static char *
 XcoreToXft (char *fontname)
 {
-    char *t;
-    
-    t = fontname;
-    while (*t != '\0')
+  char *t;
+
+  t = fontname;
+  while (*t != '\0')
+  {
+    if (*t == '_')
     {
-        if (*t == '_')
-        {
-            *t = ' ';
-        }
-        t++;
+      *t = ' ';
     }
-    return (fontname);
+    t++;
+  }
+  return (fontname);
 }
 
 /*
  * ** loads font or "fixed" on failure
  */
 void
-GetFontOrFixed (Display * disp, char *fontname, XfwmFont *xfwmfont)
+GetFontOrFixed (Display * disp, char *fontname, XfwmFont * xfwmfont)
 {
   if ((!xfwmfont) || (!fontname))
   {
-      return;
+    return;
   }
   xfwmfont->fontset = NULL;
   xfwmfont->font = NULL;
   if (strchr (fontname, ','))
-    {				/* FontSet specified */
-      char **missing_fontlist = NULL;
-      int missing_fontnum = 0;
-      char *default_str = NULL;
+  {				/* FontSet specified */
+    char **missing_fontlist = NULL;
+    int missing_fontnum = 0;
+    char *default_str = NULL;
 
-      xfwmfont->fontset = XCreateFontSet (disp, fontname, &missing_fontlist,
-				          &missing_fontnum, &default_str);
-      if (!(xfwmfont->fontset) || missing_fontnum > 0)
-	{
-	  fprintf (stderr, "[GetFontOrFixed]: WARNING -- can't get fontset \"%s\", trying \"fixed\"\n", fontname);
-	  /* fixed should always be avail, so try that */
-	  if ((xfwmfont->font = XLoadQueryFont (disp, "fixed")) == NULL)
-	  {
-	      fprintf (stderr, "[GetFontOrFixed]: ERROR -- can't get font \"fixed\"\n");
-	  }
-	  if (missing_fontlist)
-	    XFreeStringList (missing_fontlist);
-	  xfwmfont->fontset = NULL;
-	}
-    }
-  else
+    xfwmfont->fontset = XCreateFontSet (disp, fontname, &missing_fontlist, &missing_fontnum, &default_str);
+    if (!(xfwmfont->fontset) || missing_fontnum > 0)
     {
-          fontname = XftToXcore (fontname);
-          if ((xfwmfont->font = XLoadQueryFont (disp, fontname)) == NULL)
-          {
-              fontname = XcoreToXft (fontname);
-              if ((xfwmfont->font = XLoadQueryFont (disp, fontname)) == NULL)
-              {
-                  fprintf (stderr, "[GetFontOrFixed]: WARNING -- can't get font \"%s\", trying \"fixed\"\n", fontname);
-                  /* fixed should always be avail, so try that */
-                  if ((xfwmfont->font = XLoadQueryFont (disp, "fixed")) == NULL)
-	            {
-	              fprintf (stderr, "[GetFontOrFixed]: ERROR -- can't get font \"fixed\"\n");
-                      exit (1);
-	            }
-              }
-          }
+      fprintf (stderr, "[GetFontOrFixed]: WARNING -- can't get fontset \"%s\", trying \"fixed\"\n", fontname);
+      /* fixed should always be avail, so try that */
+      if ((xfwmfont->font = XLoadQueryFont (disp, "fixed")) == NULL)
+      {
+	fprintf (stderr, "[GetFontOrFixed]: ERROR -- can't get font \"fixed\"\n");
+      }
+      if (missing_fontlist)
+	XFreeStringList (missing_fontlist);
+      xfwmfont->fontset = NULL;
     }
-#ifdef HAVE_X11_XFT_XFT_H
-  if ((!mystrncasecmp (fontname, "fixed", strlen ("fixed"))) || !(xfwmfont->use_xft))
-  {
-      xfwmfont->xftfont = NULL;  
   }
   else
   {
+    fontname = XftToXcore (fontname);
+    if ((xfwmfont->font = XLoadQueryFont (disp, fontname)) == NULL)
+    {
       fontname = XcoreToXft (fontname);
-      if ((xfwmfont->xftfont = XftFontOpenXlfd (disp, DefaultScreen(disp), fontname)) == NULL)
+      if ((xfwmfont->font = XLoadQueryFont (disp, fontname)) == NULL)
       {
-          fontname = XftToXcore (fontname);
-          if ((xfwmfont->xftfont = XftFontOpenXlfd (disp, DefaultScreen(disp), fontname)) == NULL)
-          {
-              fprintf (stderr, "[GetFontOrFixed]: WARNING -- can't get Xft font \"%s\"\n", fontname);
-              xfwmfont->xftfont = NULL;
-          }
+	fprintf (stderr, "[GetFontOrFixed]: WARNING -- can't get font \"%s\", trying \"fixed\"\n", fontname);
+	/* fixed should always be avail, so try that */
+	if ((xfwmfont->font = XLoadQueryFont (disp, "fixed")) == NULL)
+	{
+	  fprintf (stderr, "[GetFontOrFixed]: ERROR -- can't get font \"fixed\"\n");
+	  exit (1);
+	}
       }
+    }
+  }
+#ifdef HAVE_X11_XFT_XFT_H
+  if ((!mystrncasecmp (fontname, "fixed", strlen ("fixed"))) || !(xfwmfont->use_xft))
+  {
+    xfwmfont->xftfont = NULL;
+  }
+  else
+  {
+    fontname = XcoreToXft (fontname);
+    if ((xfwmfont->xftfont = XftFontOpenXlfd (disp, DefaultScreen (disp), fontname)) == NULL)
+    {
+      fontname = XftToXcore (fontname);
+      if ((xfwmfont->xftfont = XftFontOpenXlfd (disp, DefaultScreen (disp), fontname)) == NULL)
+      {
+	fprintf (stderr, "[GetFontOrFixed]: WARNING -- can't get Xft font \"%s\"\n", fontname);
+	xfwmfont->xftfont = NULL;
+      }
+    }
   }
 #endif
 }

@@ -82,16 +82,16 @@ on_ok (GtkWidget * ok, gpointer data)
   dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
 
   if (temp && strlen (temp))
-    {
-      cmd = g_malloc (MAXSTRLEN + 1);
-      if (dl.in_terminal)
-	snprintf (cmd, MAXSTRLEN, "Term %s", temp);
-      else
-	snprintf (cmd, MAXSTRLEN, "%s", temp);
-      exec_comm (cmd, 0);
-      put_history (cmd, historyfile, cbitems);
-      g_free (cmd);
-    }
+  {
+    cmd = g_malloc (MAXSTRLEN + 1);
+    if (dl.in_terminal)
+      snprintf (cmd, MAXSTRLEN, "Term %s", temp);
+    else
+      snprintf (cmd, MAXSTRLEN, "%s", temp);
+    exec_comm (cmd, 0);
+    put_history (cmd, historyfile, cbitems);
+    g_free (cmd);
+  }
   gtk_main_quit ();
 }
 
@@ -121,43 +121,43 @@ get_history (gchar * hfile)
   xfrun_history = fopen ((char *) hfile, "r");
   cbtemp = NULL;
   if (xfrun_history != NULL)
+  {
+    int i = 0;
+    char *line;
+    char *check;
+    check = NULL;
+    line = g_malloc (MAXSTRLEN);
+    while ((i++ < 10) && (fgets (line, MAXSTRLEN, xfrun_history) != NULL))
     {
-      int i = 0;
-      char *line;
-      char *check;
-      check = NULL;
-      line = g_malloc (MAXSTRLEN);
-      while ((i++ < 10) && (fgets (line, MAXSTRLEN, xfrun_history) != NULL))
+      /* no more than 10 history items */
+      if ((line[0] == '\0') || (line[0] == '\n'))
+      {
+	g_free (line);
+	break;
+      }
+      else
+      {
+	/* If there is a newline, remove it from the end of the string */
+	check = line;
+	while (check[0] != '\0')
 	{
-	  /* no more than 10 history items */
-	  if ((line[0] == '\0') || (line[0] == '\n'))
-	    {
-	      g_free (line);
-	      break;
-	    }
-	  else
-	    {
-	      /* If there is a newline, remove it from the end of the string */
-	      check = line;
-	      while (check[0] != '\0')
-		{
-		  check++;
-		  if (check[0] == '\n')
-		    check[0] = '\0';
-		}
-	      /* Add the item to the list */
-	      cbtemp = g_list_append (cbtemp, line);
-	      line = NULL;
-	      check = NULL;
-	    }
-	  line = g_malloc (MAXSTRLEN);
-	}			/* end for (i<10) */
-      fclose (xfrun_history);
-    }
+	  check++;
+	  if (check[0] == '\n')
+	    check[0] = '\0';
+	}
+	/* Add the item to the list */
+	cbtemp = g_list_append (cbtemp, line);
+	line = NULL;
+	check = NULL;
+      }
+      line = g_malloc (MAXSTRLEN);
+    }				/* end for (i<10) */
+    fclose (xfrun_history);
+  }
   else
-    {
-      cbtemp = g_list_append (cbtemp, "");
-    }
+  {
+    cbtemp = g_list_append (cbtemp, "");
+  }
   return cbtemp;
 }
 
@@ -172,20 +172,19 @@ put_history (char *newest, gchar * hfile, GList * cb)
   /* Finish print to file */
   xfrun_history = fopen ((char *) hfile, "w");
   if (xfrun_history != NULL)
+  {
+    fprintf (xfrun_history, "%s\n", newest);
+    node = cb;
+    while (node)
     {
-      fprintf (xfrun_history, "%s\n", newest);
-      node = cb;
-      while (node)
-	{
-	  if ((strcmp ((char *) node->data, newest) != 0) &&
-	      (((char *) node->data)[0] != '\0'))
-	    {
-	      fprintf (xfrun_history, "%s\n", (char *) node->data);
-	    }
-	  node = node->next;
-	}			/* endwhile */
-      fclose (xfrun_history);
-    }				/* endif */
+      if ((strcmp ((char *) node->data, newest) != 0) && (((char *) node->data)[0] != '\0'))
+      {
+	fprintf (xfrun_history, "%s\n", (char *) node->data);
+      }
+      node = node->next;
+    }				/* endwhile */
+    fclose (xfrun_history);
+  }				/* endif */
 }
 
 int
@@ -203,8 +202,7 @@ main (int argc, char *argv[])
   gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (dl.top), _("Run program ..."));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
-  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dl.top)->vbox),
-				  5);
+  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dl.top)->vbox), 5);
 
   ok = gtk_button_new_with_label (_("Ok"));
   cancel = gtk_button_new_with_label (_("Cancel"));
@@ -213,14 +211,12 @@ main (int argc, char *argv[])
   bbox = gtk_hbutton_box_new ();
   gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_END);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (bbox), 10);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->action_area), bbox,
-		      FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->action_area), bbox, FALSE, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (bbox), ok);
   gtk_container_add (GTK_CONTAINER (bbox), cancel);
 
   box = gtk_hbox_new (FALSE, 5);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE,
-		      5);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE, 5);
 
   /* combo box, created by DM 10/4/00 */
   historyfile = set_history_file ();
@@ -228,8 +224,7 @@ main (int argc, char *argv[])
   dl.input = gtk_combo_new ();
   gtk_combo_set_popdown_strings (GTK_COMBO (dl.input), cbitems);
   gtk_box_pack_start (GTK_BOX (box), dl.input, TRUE, TRUE, 0);
-  gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (dl.input)->entry), 0,
-			      -1);
+  gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (dl.input)->entry), 0, -1);
   gtk_combo_disable_activate (GTK_COMBO (dl.input));
   gtk_combo_set_case_sensitive (GTK_COMBO (dl.input), 1);
   gtk_combo_set_use_arrows (GTK_COMBO (dl.input), 1);
@@ -237,31 +232,21 @@ main (int argc, char *argv[])
 
   /* check button */
   box = gtk_hbox_new (FALSE, 5);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE,
-		      5);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE, 5);
 
   dl.check = check = gtk_check_button_new_with_label (_("Open in terminal"));
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 5);
 
-  gtk_signal_connect (GTK_OBJECT (ok), "clicked",
-		      GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
-  gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.input)->entry), "activate",
-		      GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
-  gtk_signal_connect (GTK_OBJECT (cancel), "clicked",
-		      GTK_SIGNAL_FUNC (on_cancel), (gpointer) NULL);
+  gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
+  gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.input)->entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
+  gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (on_cancel), (gpointer) NULL);
 
-  gtk_widget_add_accelerator (ok, "clicked", accel_group,
-			      GDK_Return, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (ok, "clicked", accel_group,
-			      GDK_Return, GDK_CONTROL_MASK,
-			      GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (ok, "clicked", accel_group, GDK_o,
-			      GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok, "clicked", accel_group, GDK_Return, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok, "clicked", accel_group, GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok, "clicked", accel_group, GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-  gtk_widget_add_accelerator (cancel, "clicked", accel_group,
-			      GDK_Escape, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (cancel, "clicked", accel_group,
-			      GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (cancel, "clicked", accel_group, GDK_Escape, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (cancel, "clicked", accel_group, GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   gtk_widget_show_all (dl.top);
   gtk_widget_grab_default (ok);

@@ -53,39 +53,36 @@
 void
 private_close_popup_button (gint menu)
 {
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(popup_buttons.popup_button[menu]), FALSE);
-  toggle_popup_button (GTK_WIDGET (popup_buttons.popup_button[menu]),
-		       GTK_PIXMAP (popup_buttons.popup_pixmap[menu]));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (popup_buttons.popup_button[menu]), FALSE);
+  toggle_popup_button (GTK_WIDGET (popup_buttons.popup_button[menu]), GTK_PIXMAP (popup_buttons.popup_pixmap[menu]));
 }
 
 gboolean
 delete_popup_cb (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
-  private_close_popup_button ((gint)((long) data));
+  private_close_popup_button ((gint) ((long) data));
   return (TRUE);
 }
 
 gboolean
-popup_entry_modify_cb (GtkWidget * widget,
-		       GdkEventButton * event, gpointer data)
+popup_entry_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   gint menu, item;
 
-  menu = ((gint)((long) data)) / NBMAXITEMS;
-  item = ((gint)((long) data)) % NBMAXITEMS;
+  menu = ((gint) ((long) data)) / NBMAXITEMS;
+  item = ((gint) ((long) data)) % NBMAXITEMS;
 
   if (event->button == 3)
+  {
+    open_modify (modify, menu, item);
+    if (!popup_menus[menu].detach)
     {
-      open_modify (modify, menu, item);
-      if (!popup_menus[menu].detach)
-	{
-	  hide_popup_menu (menu, FALSE);
-	  show_popup_menu (menu, -1, -1, FALSE);
-	}
-      writeconfig ();
-      return TRUE;
+      hide_popup_menu (menu, FALSE);
+      show_popup_menu (menu, -1, -1, FALSE);
     }
+    writeconfig ();
+    return TRUE;
+  }
   return FALSE;
 }
 
@@ -94,17 +91,16 @@ popup_entry_cb (GtkWidget * widget, gpointer data)
 {
   gint menu, item;
 
-  menu = ((gint)((long) data)) / NBMAXITEMS;
-  item = ((gint)((long) data)) % NBMAXITEMS;
+  menu = ((gint) ((long) data)) / NBMAXITEMS;
+  item = ((gint) ((long) data)) % NBMAXITEMS;
 
   if (!popup_menus[menu].detach)
-    {
-      private_close_popup_button (menu);
-      gtk_button_released (GTK_BUTTON (widget));
-      gtk_button_leave (GTK_BUTTON (widget));
-    }
-  exec_comm (popup_menus[menu].popup_buttons[item].command,
-	     current_config.wm);
+  {
+    private_close_popup_button (menu);
+    gtk_button_released (GTK_BUTTON (widget));
+    gtk_button_leave (GTK_BUTTON (widget));
+  }
+  exec_comm (popup_menus[menu].popup_buttons[item].command, current_config.wm);
 }
 
 void
@@ -112,7 +108,7 @@ popup_addicon_cb (GtkWidget * widget, gpointer data)
 {
   gint menu;
 
-  menu = (gint)((long) data);
+  menu = (gint) ((long) data);
   open_modify (modify, menu, -1);
   hide_popup_menu (menu, FALSE);
   show_popup_menu (menu, -1, -1, FALSE);
@@ -122,55 +118,44 @@ popup_addicon_cb (GtkWidget * widget, gpointer data)
 void
 detach_cb (GtkWidget * widget, gpointer data)
 {
-  hide_popup_menu ((gint)((long) data), FALSE);
-  popup_menus[(gint)((long) data)].detach = TRUE;
-  show_popup_menu ((gint)((long) data), -1, -1, FALSE);
+  hide_popup_menu ((gint) ((long) data), FALSE);
+  popup_menus[(gint) ((long) data)].detach = TRUE;
+  show_popup_menu ((gint) ((long) data), -1, -1, FALSE);
 }
 
 void
-popup_entry_drag_data_received (GtkWidget * widget,
-				GdkDragContext * context,
-				gint x,
-				gint y,
-				GtkSelectionData * data,
-				guint info, guint time, gpointer cbdata)
+popup_entry_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata)
 {
   GList *fnames, *fnp;
   guint count;
   char *execute, *cmd;
   gint menu, item;
 
-  menu = ((gint)((long) cbdata)) / NBMAXITEMS;
-  item = ((gint)((long) cbdata)) % NBMAXITEMS;
+  menu = ((gint) ((long) cbdata)) / NBMAXITEMS;
+  item = ((gint) ((long) cbdata)) % NBMAXITEMS;
 
   fnames = gnome_uri_list_extract_filenames ((char *) data->data);
   count = g_list_length (fnames);
   if (count > 0)
+  {
+    if (!popup_menus[menu].detach)
+      private_close_popup_button (menu);
+    execute = (char *) g_malloc (MAXSTRLEN * sizeof (char) + 1);
+    cmd = popup_menus[menu].popup_buttons[item].command;
+    for (fnp = fnames; fnp; fnp = fnp->next, count--)
     {
-      if (!popup_menus[menu].detach)
-	private_close_popup_button (menu);
-      execute = (char *) g_malloc (MAXSTRLEN * sizeof (char) + 1);
-      cmd = popup_menus[menu].popup_buttons[item].command;
-      for (fnp = fnames; fnp; fnp = fnp->next, count--)
-	{
-	  snprintf (execute, MAXSTRLEN - 1, "%s %s", cmd,
-		    (char *) (fnp->data));
-	  exec_comm (execute, current_config.wm);
-	}
-      g_free (execute);
-      gtk_drag_finish (context, TRUE, TRUE, time);
+      snprintf (execute, MAXSTRLEN - 1, "%s %s", cmd, (char *) (fnp->data));
+      exec_comm (execute, current_config.wm);
     }
+    g_free (execute);
+    gtk_drag_finish (context, TRUE, TRUE, time);
+  }
   gnome_uri_list_free_strings (fnames);
   gtk_drag_finish (context, FALSE, TRUE, time);
 }
 
 void
-popup_addicon_drag_data_received (GtkWidget * widget,
-				  GdkDragContext * context,
-				  gint x,
-				  gint y,
-				  GtkSelectionData * data,
-				  guint info, guint time, gpointer cbdata)
+popup_addicon_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata)
 {
   GList *fnames;
   guint count;
@@ -179,32 +164,32 @@ popup_addicon_drag_data_received (GtkWidget * widget,
   char *name;
   gint menu;
 
-  menu = (gint)((long) cbdata);
+  menu = (gint) ((long) cbdata);
 
   fnames = gnome_uri_list_extract_filenames ((char *) data->data);
   count = g_list_length (fnames);
   if (count > 0)
+  {
+    hide_popup_menu (menu, FALSE);
+    label = (char *) g_malloc (MAXSTRLEN * sizeof (char) + 1);
+    cmd = (char *) fnames->data;
+    if (existfile (cmd))
     {
-      hide_popup_menu (menu, FALSE);
-      label = (char *) g_malloc (MAXSTRLEN * sizeof (char) + 1);
-      cmd = (char *) fnames->data;
-      if (existfile (cmd))
-	{
-	  name = my_strrchr (cmd, '/');
-	  if (name)
-	    {
-	      snprintf (label, MAXSTRLEN - 1, "%s", name);
-	      *label = toupper (*label);
-	      add_popup_entry (menu, label, "Default icon", cmd);
-	      writeconfig ();
-	    }
-	}
-      else
-	my_show_message (_("Cannot find the file you dropped !"));
-      g_free (label);
-      show_popup_menu (menu, -1, -1, FALSE);
-      gtk_drag_finish (context, TRUE, TRUE, time);
+      name = my_strrchr (cmd, '/');
+      if (name)
+      {
+	snprintf (label, MAXSTRLEN - 1, "%s", name);
+	*label = toupper (*label);
+	add_popup_entry (menu, label, "Default icon", cmd);
+	writeconfig ();
+      }
     }
+    else
+      my_show_message (_("Cannot find the file you dropped !"));
+    g_free (label);
+    show_popup_menu (menu, -1, -1, FALSE);
+    gtk_drag_finish (context, TRUE, TRUE, time);
+  }
   gnome_uri_list_free_strings (fnames);
   gtk_drag_finish (context, FALSE, TRUE, time);
 }

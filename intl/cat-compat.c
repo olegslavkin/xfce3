@@ -50,7 +50,7 @@ char *getenv ();
 #endif
 
 /* The catalog descriptor.  */
-static nl_catd catalog = (nl_catd) -1;
+static nl_catd catalog = (nl_catd) - 1;
 
 /* Name of the default catalog.  */
 static const char default_catalog_name[] = "messages";
@@ -83,11 +83,11 @@ textdomain (domainname)
 #else
   lang = getenv ("LC_ALL");
   if (lang == NULL || lang[0] == '\0')
-    {
-      lang = getenv ("LC_MESSAGES");
-      if (lang == NULL || lang[0] == '\0')
-	lang = getenv ("LANG");
-    }
+  {
+    lang = getenv ("LC_MESSAGES");
+    if (lang == NULL || lang[0] == '\0')
+      lang = getenv ("LANG");
+  }
 #endif
   if (lang == NULL || lang[0] == '\0')
     lang = "C";
@@ -100,9 +100,7 @@ textdomain (domainname)
     domainname = default_catalog_name;
 
   /* Compute length of added path element.  */
-  new_name_len = sizeof (LOCALEDIR) - 1 + 1 + strlen (lang)
-		 + sizeof ("/LC_MESSAGES/") - 1 + sizeof (PACKAGE) - 1
-		 + sizeof (".cat");
+  new_name_len = sizeof (LOCALEDIR) - 1 + 1 + strlen (lang) + sizeof ("/LC_MESSAGES/") - 1 + sizeof (PACKAGE) - 1 + sizeof (".cat");
 
   new_name = (char *) malloc (new_name_len);
   if (new_name == NULL)
@@ -111,22 +109,21 @@ textdomain (domainname)
   strcpy (new_name, PACKAGE);
   new_catalog = catopen (new_name, 0);
 
-  if (new_catalog == (nl_catd) -1)
-    {
-      /* NLSPATH search didn't work, try absolute path */
-      sprintf (new_name, "%s/%s/LC_MESSAGES/%s.cat", LOCALEDIR, lang,
-	       PACKAGE);
-      new_catalog = catopen (new_name, 0);
+  if (new_catalog == (nl_catd) - 1)
+  {
+    /* NLSPATH search didn't work, try absolute path */
+    sprintf (new_name, "%s/%s/LC_MESSAGES/%s.cat", LOCALEDIR, lang, PACKAGE);
+    new_catalog = catopen (new_name, 0);
 
-      if (new_catalog == (nl_catd) -1)
-	{
-	  free (new_name);
-	  return (char *) catalog_name;
-	}
+    if (new_catalog == (nl_catd) - 1)
+    {
+      free (new_name);
+      return (char *) catalog_name;
     }
+  }
 
   /* Close old catalog.  */
-  if (catalog != (nl_catd) -1)
+  if (catalog != (nl_catd) - 1)
     catclose (catalog);
   if (catalog_name != default_catalog_name)
     free ((char *) catalog_name);
@@ -153,16 +150,14 @@ bindtextdomain (domainname, dirname)
   /* Compute length of added path element.  If we use setenv we don't need
      the first byts for NLSPATH=, but why complicate the code for this
      peanuts.  */
-  new_val_len = sizeof ("NLSPATH=") - 1 + strlen (dirname)
-		+ sizeof ("/%L/LC_MESSAGES/%N.cat");
+  new_val_len = sizeof ("NLSPATH=") - 1 + strlen (dirname) + sizeof ("/%L/LC_MESSAGES/%N.cat");
 
   old_val = getenv ("NLSPATH");
   if (old_val == NULL || old_val[0] == '\0')
-    {
-      old_val = NULL;
-      new_val_len += 1 + sizeof (LOCALEDIR) - 1
-	             + sizeof ("/%L/LC_MESSAGES/%N.cat");
-    }
+  {
+    old_val = NULL;
+    new_val_len += 1 + sizeof (LOCALEDIR) - 1 + sizeof ("/%L/LC_MESSAGES/%N.cat");
+  }
   else
     new_val_len += strlen (old_val);
 
@@ -180,15 +175,15 @@ bindtextdomain (domainname, dirname)
   cp = stpcpy (cp, "/%L/LC_MESSAGES/%N.cat:");
 
   if (old_val == NULL)
-    {
+  {
 # if __STDC__
-      stpcpy (cp, LOCALEDIR "/%L/LC_MESSAGES/%N.cat");
+    stpcpy (cp, LOCALEDIR "/%L/LC_MESSAGES/%N.cat");
 # else
 
-      cp = stpcpy (cp, LOCALEDIR);
-      stpcpy (cp, "/%L/LC_MESSAGES/%N.cat");
+    cp = stpcpy (cp, LOCALEDIR);
+    stpcpy (cp, "/%L/LC_MESSAGES/%N.cat");
 # endif
-    }
+  }
   else
     stpcpy (cp, old_val);
 
@@ -213,7 +208,7 @@ gettext (msg)
 {
   int msgid;
 
-  if (msg == NULL || catalog == (nl_catd) -1)
+  if (msg == NULL || catalog == (nl_catd) - 1)
     return (char *) msg;
 
   /* Get the message from the catalog.  We always use set number 1.

@@ -42,8 +42,7 @@
 void
 doplay_cb (GtkWidget * widget, gpointer data)
 {
-  if (gtk_toggle_button_get_active
-      (GTK_TOGGLE_BUTTON (play_sound_checkbutton)))
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (play_sound_checkbutton)))
     sndcfg.playsnd = 1;
   else
     sndcfg.playsnd = 0;
@@ -52,8 +51,7 @@ doplay_cb (GtkWidget * widget, gpointer data)
 void
 play_com_cb (GtkWidget * widget, gpointer data)
 {
-  strcpy (sndcfg.playcmd,
-	  cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (command_entry))));
+  strcpy (sndcfg.playcmd, cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (command_entry))));
 }
 
 void
@@ -75,10 +73,10 @@ browsefile_cb (GtkWidget * widget, gpointer data)
   else
     fselect = open_fileselect (build_path (XFCE_SOUNDS));
   if ((fselect) && strlen (fselect))
-    {
-      gtk_entry_set_text (GTK_ENTRY (soundfile_entry), fselect);
-      strcpy (sndcfg.datafiles[i], fselect);
-    }
+  {
+    gtk_entry_set_text (GTK_ENTRY (soundfile_entry), fselect);
+    strcpy (sndcfg.datafiles[i], fselect);
+  }
 }
 
 void
@@ -134,8 +132,7 @@ testfile_cb (GtkWidget * widget, gpointer data)
   audio_play (i, 0);
 }
 
-gboolean
-delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+gboolean delete_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
   cancel_cb (widget, data);
   return (TRUE);

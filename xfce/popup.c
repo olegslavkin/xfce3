@@ -69,8 +69,7 @@ static GtkTargetEntry popup_target_table[] = {
   {"text/uri-list", 0, TARGET_URL},
 };
 
-static guint n_popup_targets =
-  sizeof (popup_target_table) / sizeof (popup_target_table[0]);
+static guint n_popup_targets = sizeof (popup_target_table) / sizeof (popup_target_table[0]);
 
 /* Added by Jason Litowitz */
 static gint Current_Popup_Window = -1;
@@ -84,130 +83,58 @@ create_popup_item (GtkWidget * toplevel, gint nbr_menu, gint nbr_item)
   popup_menus[nbr_menu].popup_buttons[nbr_item].pixfile = NULL;
   popup_menus[nbr_menu].popup_buttons[nbr_item].command = NULL;
 
-  popup_menus[nbr_menu].popup_buttons[nbr_item].item_button =
-    gtk_button_new ();
-  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_button, "popup_button");
-  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_button",
-		       popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_button);
-  gtk_button_set_relief ((GtkButton *) popup_menus[nbr_menu].
-			 popup_buttons[nbr_item].item_button,
-			 GTK_RELIEF_NONE);
+  popup_menus[nbr_menu].popup_buttons[nbr_item].item_button = gtk_button_new ();
+  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, "popup_button");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_button", popup_menus[nbr_menu].popup_buttons[nbr_item].item_button);
+  gtk_button_set_relief ((GtkButton *) popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, GTK_RELIEF_NONE);
   gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button);
 
-  popup_menus[nbr_menu].popup_buttons[nbr_item].item_tooltip =
-    my_tooltips_new (current_config.tooltipsdelay);
-  gtk_tooltips_set_tip (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			item_tooltip,
-			popup_menus[nbr_menu].popup_buttons[nbr_item].
-			item_button,
-			popup_menus[nbr_menu].popup_buttons[nbr_item].command,
-			"ContextHelp/buttons/?");
-  gtk_object_set_data (GTK_OBJECT (toplevel), "tooltips",
-		       popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_tooltip);
+  popup_menus[nbr_menu].popup_buttons[nbr_item].item_tooltip = my_tooltips_new (current_config.tooltipsdelay);
+  gtk_tooltips_set_tip (popup_menus[nbr_menu].popup_buttons[nbr_item].item_tooltip, popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, popup_menus[nbr_menu].popup_buttons[nbr_item].command, "ContextHelp/buttons/?");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "tooltips", popup_menus[nbr_menu].popup_buttons[nbr_item].item_tooltip);
 
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (hbox, "hbox");
   gtk_object_set_data (GTK_OBJECT (toplevel), "hbox", hbox);
   gtk_widget_show (hbox);
-  gtk_container_add (GTK_CONTAINER
-		     (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		      item_button), hbox);
+  gtk_container_add (GTK_CONTAINER (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button), hbox);
 
-  popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame =
-    gtk_frame_new (NULL);
-  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_pixmap_frame, "frame");
-  gtk_object_set_data (GTK_OBJECT (toplevel), "frame",
-		       popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_pixmap_frame);
-  gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		   item_pixmap_frame);
-  gtk_box_pack_start (GTK_BOX (hbox),
-		      popup_menus[nbr_menu].popup_buttons[nbr_item].
-		      item_pixmap_frame, FALSE, TRUE, 0);
-  gtk_widget_set_usize (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			item_pixmap_frame, POPUP_ICON_SIZE, POPUP_ICON_SIZE);
+  popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame = gtk_frame_new (NULL);
+  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame, "frame");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "frame", popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame);
+  gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame);
+  gtk_box_pack_start (GTK_BOX (hbox), popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame, FALSE, TRUE, 0);
+  gtk_widget_set_usize (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame, POPUP_ICON_SIZE, POPUP_ICON_SIZE);
 #ifndef OLD_STYLE
-  gtk_frame_set_shadow_type (GTK_FRAME
-			     (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			      item_pixmap_frame), GTK_SHADOW_NONE);
+  gtk_frame_set_shadow_type (GTK_FRAME (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame), GTK_SHADOW_NONE);
 #else
-  gtk_frame_set_shadow_type (GTK_FRAME
-			     (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			      item_pixmap_frame), GTK_SHADOW_IN);
+  gtk_frame_set_shadow_type (GTK_FRAME (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame), GTK_SHADOW_IN);
 #endif
 
-  popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap =
-    MyCreateFromPixmapData (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			    item_pixmap_frame, empty);
+  popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap = MyCreateFromPixmapData (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame, empty);
   if (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap == NULL)
     g_error (_("Couldn't create pixmap"));
-  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_pixmap, "popup_pixmap");
-  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_pixmap",
-		       popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_pixmap);
+  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap, "popup_pixmap");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_pixmap", popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap);
   gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap);
-  gtk_container_add (GTK_CONTAINER
-		     (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		      item_pixmap_frame),
-		     popup_menus[nbr_menu].popup_buttons[nbr_item].
-		     item_pixmap);
+  gtk_container_add (GTK_CONTAINER (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame), popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap);
 
-  popup_menus[nbr_menu].popup_buttons[nbr_item].item_label =
-    gtk_label_new (popup_menus[nbr_menu].popup_buttons[nbr_item].label);
-  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_label, "popup_label");
-  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_label",
-		       popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_label);
+  popup_menus[nbr_menu].popup_buttons[nbr_item].item_label = gtk_label_new (popup_menus[nbr_menu].popup_buttons[nbr_item].label);
+  gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label, "popup_label");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "popup_label", popup_menus[nbr_menu].popup_buttons[nbr_item].item_label);
   gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label);
-  gtk_box_pack_start (GTK_BOX (hbox),
-		      popup_menus[nbr_menu].popup_buttons[nbr_item].
-		      item_label, TRUE, TRUE, 0);
-  gtk_widget_set_usize (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			item_label, 130, 0);
-  gtk_label_set_justify (GTK_LABEL
-			 (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			  item_label), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC
-			  (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			   item_label), 0.1, 0.5);
+  gtk_box_pack_start (GTK_BOX (hbox), popup_menus[nbr_menu].popup_buttons[nbr_item].item_label, TRUE, TRUE, 0);
+  gtk_widget_set_usize (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label, 130, 0);
+  gtk_label_set_justify (GTK_LABEL (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label), GTK_JUSTIFY_LEFT);
+  gtk_misc_set_alignment (GTK_MISC (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label), 0.1, 0.5);
 
-  gtk_drag_dest_set (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		     item_button, 
-		     GTK_DEST_DEFAULT_HIGHLIGHT |
-		     GTK_DEST_DEFAULT_MOTION |
-		     GTK_DEST_DEFAULT_DROP,
-                     popup_target_table,
-		     n_popup_targets, 
-                     GDK_ACTION_COPY);
+  gtk_drag_dest_set (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP, popup_target_table, n_popup_targets, GDK_ACTION_COPY);
 
-  gtk_signal_connect (GTK_OBJECT
-		      (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_button), "drag_data_received",
-		      GTK_SIGNAL_FUNC (popup_entry_drag_data_received),
-		      (gpointer)((long)(nbr_menu * NBMAXITEMS + nbr_item)));
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button), "drag_data_received", GTK_SIGNAL_FUNC (popup_entry_drag_data_received), (gpointer) ((long) (nbr_menu * NBMAXITEMS + nbr_item)));
 
-  gtk_widget_set_events (popup_menus[nbr_menu].popup_buttons[nbr_item].
-			 item_button,
-			 gtk_widget_get_events (popup_menus[nbr_menu].
-						popup_buttons[nbr_item].
-						item_button) |
-			 GDK_BUTTON3_MASK);
-  gtk_signal_connect (GTK_OBJECT
-		      (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_button), "button_press_event",
-		      GTK_SIGNAL_FUNC (popup_entry_modify_cb),
-		      (gpointer)((long) (nbr_menu * NBMAXITEMS + nbr_item)));
-  gtk_signal_connect (GTK_OBJECT
-		      (popup_menus[nbr_menu].popup_buttons[nbr_item].
-		       item_button), "clicked",
-		      GTK_SIGNAL_FUNC (popup_entry_cb),
-		      (gpointer)((long) (nbr_menu * NBMAXITEMS + nbr_item)));
+  gtk_widget_set_events (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, gtk_widget_get_events (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button) | GDK_BUTTON3_MASK);
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button), "button_press_event", GTK_SIGNAL_FUNC (popup_entry_modify_cb), (gpointer) ((long) (nbr_menu * NBMAXITEMS + nbr_item)));
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button), "clicked", GTK_SIGNAL_FUNC (popup_entry_cb), (gpointer) ((long) (nbr_menu * NBMAXITEMS + nbr_item)));
 
   return popup_menus[nbr_menu].popup_buttons[nbr_item].item_button;
 }
@@ -234,171 +161,106 @@ create_popup_menu (gint nbr)
   popup_menus[nbr].animatewin = NULL;
 
   popup_menus[nbr].popup_toplevel = gtk_window_new (GTK_WINDOW_DIALOG);
-  gtk_window_set_policy (GTK_WINDOW (popup_menus[nbr].popup_toplevel), FALSE,
-			 FALSE, TRUE);
+  gtk_window_set_policy (GTK_WINDOW (popup_menus[nbr].popup_toplevel), FALSE, FALSE, TRUE);
   gtk_widget_set_name (popup_menus[nbr].popup_toplevel, "popup");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup",
-		       popup_menus[nbr].popup_toplevel);
-  gtk_window_set_title (GTK_WINDOW (popup_menus[nbr].popup_toplevel),
-			"Popup Menu");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup", popup_menus[nbr].popup_toplevel);
+  gtk_window_set_title (GTK_WINDOW (popup_menus[nbr].popup_toplevel), "Popup Menu");
   gnome_sticky (popup_menus[nbr].popup_toplevel->window);
 
   popup_mainframe = gtk_frame_new (NULL);
   gtk_widget_set_name (popup_mainframe, "popup_mainframe");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_mainframe", popup_mainframe);
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_mainframe", popup_mainframe);
   gtk_widget_show (popup_mainframe);
-  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_toplevel),
-		     popup_mainframe);
+  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_toplevel), popup_mainframe);
   gtk_frame_set_shadow_type (GTK_FRAME (popup_mainframe), GTK_SHADOW_OUT);
 
   popup_vbox = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (popup_vbox, "popup_vbox");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_vbox", popup_vbox);
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_vbox", popup_vbox);
   gtk_widget_show (popup_vbox);
   gtk_container_add (GTK_CONTAINER (popup_mainframe), popup_vbox);
 
   popup_menus[nbr].popup_addicon_button = gtk_button_new ();
-  gtk_widget_set_name (popup_menus[nbr].popup_addicon_button,
-		       "popup_addicon_button");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_addicon_button",
-		       popup_menus[nbr].popup_addicon_button);
-  gtk_button_set_relief ((GtkButton *) popup_menus[nbr].popup_addicon_button,
-			 GTK_RELIEF_NONE);
+  gtk_widget_set_name (popup_menus[nbr].popup_addicon_button, "popup_addicon_button");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_addicon_button", popup_menus[nbr].popup_addicon_button);
+  gtk_button_set_relief ((GtkButton *) popup_menus[nbr].popup_addicon_button, GTK_RELIEF_NONE);
   gtk_widget_show (popup_menus[nbr].popup_addicon_button);
-  gtk_box_pack_start (GTK_BOX (popup_vbox),
-		      popup_menus[nbr].popup_addicon_button, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (popup_vbox), popup_menus[nbr].popup_addicon_button, FALSE, TRUE, 0);
 
   popup_addicon_tooltip = my_tooltips_new (current_config.tooltipsdelay);
-  gtk_tooltips_set_tip (popup_addicon_tooltip,
-			popup_menus[nbr].popup_addicon_button,
-			_("Add a new entry..."), "ContextHelp/buttons/?");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "tooltips", popup_addicon_tooltip);
+  gtk_tooltips_set_tip (popup_addicon_tooltip, popup_menus[nbr].popup_addicon_button, _("Add a new entry..."), "ContextHelp/buttons/?");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "tooltips", popup_addicon_tooltip);
 
   popup_addicon_hbox = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (popup_addicon_hbox, "popup_addicon_hbox");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_addicon_hbox", popup_addicon_hbox);
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_addicon_hbox", popup_addicon_hbox);
   gtk_widget_show (popup_addicon_hbox);
-  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_addicon_button),
-		     popup_addicon_hbox);
+  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_addicon_button), popup_addicon_hbox);
 
   popup_menus[nbr].popup_addicon_icon_frame = gtk_frame_new (NULL);
-  gtk_widget_set_name (popup_menus[nbr].popup_addicon_icon_frame,
-		       "popup_addicon_icon_frame");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_addicon_icon_frame",
-		       popup_menus[nbr].popup_addicon_icon_frame);
+  gtk_widget_set_name (popup_menus[nbr].popup_addicon_icon_frame, "popup_addicon_icon_frame");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_addicon_icon_frame", popup_menus[nbr].popup_addicon_icon_frame);
   gtk_widget_show (popup_menus[nbr].popup_addicon_icon_frame);
-  gtk_box_pack_start (GTK_BOX (popup_addicon_hbox),
-		      popup_menus[nbr].popup_addicon_icon_frame, FALSE, TRUE,
-		      0);
-  gtk_widget_set_usize (popup_menus[nbr].popup_addicon_icon_frame,
-			POPUP_ICON_SIZE, POPUP_ICON_SIZE);
+  gtk_box_pack_start (GTK_BOX (popup_addicon_hbox), popup_menus[nbr].popup_addicon_icon_frame, FALSE, TRUE, 0);
+  gtk_widget_set_usize (popup_menus[nbr].popup_addicon_icon_frame, POPUP_ICON_SIZE, POPUP_ICON_SIZE);
 #ifndef OLD_STYLE
-  gtk_frame_set_shadow_type (GTK_FRAME
-			     (popup_menus[nbr].popup_addicon_icon_frame),
-			     GTK_SHADOW_NONE);
+  gtk_frame_set_shadow_type (GTK_FRAME (popup_menus[nbr].popup_addicon_icon_frame), GTK_SHADOW_NONE);
 #else
-  gtk_frame_set_shadow_type (GTK_FRAME
-			     (popup_menus[nbr].popup_addicon_icon_frame),
-			     GTK_SHADOW_IN);
+  gtk_frame_set_shadow_type (GTK_FRAME (popup_menus[nbr].popup_addicon_icon_frame), GTK_SHADOW_IN);
 #endif
 
-  popup_addicon_icon_pixmap =
-    MyCreateFromPixmapData (popup_menus[nbr].popup_addicon_icon_frame,
-			    addiconpix);
+  popup_addicon_icon_pixmap = MyCreateFromPixmapData (popup_menus[nbr].popup_addicon_icon_frame, addiconpix);
   if (popup_addicon_icon_pixmap == NULL)
     g_error (_("Couldn't create pixmap"));
-  gtk_widget_set_name (popup_addicon_icon_pixmap,
-		       "popup_addicon_icon_pixmap");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_addicon_icon_pixmap",
-		       popup_addicon_icon_pixmap);
+  gtk_widget_set_name (popup_addicon_icon_pixmap, "popup_addicon_icon_pixmap");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_addicon_icon_pixmap", popup_addicon_icon_pixmap);
   gtk_widget_show (popup_addicon_icon_pixmap);
-  gtk_container_add (GTK_CONTAINER
-		     (popup_menus[nbr].popup_addicon_icon_frame),
-		     popup_addicon_icon_pixmap);
+  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_addicon_icon_frame), popup_addicon_icon_pixmap);
 
   popup_addicon_icon_label = gtk_label_new (_("Add icon..."));
   gtk_widget_set_name (popup_addicon_icon_label, "popup_addicon_icon_label");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_addicon_icon_label", popup_addicon_icon_label);
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_addicon_icon_label", popup_addicon_icon_label);
   gtk_widget_show (popup_addicon_icon_label);
-  gtk_box_pack_start (GTK_BOX (popup_addicon_hbox), popup_addicon_icon_label,
-		      TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (popup_addicon_hbox), popup_addicon_icon_label, TRUE, TRUE, 0);
   gtk_widget_set_usize (popup_addicon_icon_label, 120, -2);
-  gtk_label_set_justify (GTK_LABEL (popup_addicon_icon_label),
-			 GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (popup_addicon_icon_label), GTK_JUSTIFY_LEFT);
   gtk_misc_set_alignment (GTK_MISC (popup_addicon_icon_label), 0.1, 0.5);
 
   popup_menus[nbr].popup_addicon_separator = gtk_hseparator_new ();
-  gtk_widget_set_name (popup_menus[nbr].popup_addicon_separator,
-		       "popup_addicon_separator");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_addicon_separator",
-		       popup_menus[nbr].popup_addicon_separator);
+  gtk_widget_set_name (popup_menus[nbr].popup_addicon_separator, "popup_addicon_separator");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_addicon_separator", popup_menus[nbr].popup_addicon_separator);
   gtk_widget_show (popup_menus[nbr].popup_addicon_separator);
-  gtk_box_pack_start (GTK_BOX (popup_vbox),
-		      popup_menus[nbr].popup_addicon_separator, FALSE, TRUE,
-		      0);
+  gtk_box_pack_start (GTK_BOX (popup_vbox), popup_menus[nbr].popup_addicon_separator, FALSE, TRUE, 0);
 
   for (i = 0; i < NBMAXITEMS; i++)
-    gtk_box_pack_start (GTK_BOX (popup_vbox),
-			create_popup_item (popup_menus[nbr].popup_toplevel,
-					   nbr, i), FALSE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (popup_vbox), create_popup_item (popup_menus[nbr].popup_toplevel, nbr, i), FALSE, TRUE, 0);
 
   popup_menus[nbr].popup_detach = gtk_button_new ();
   gtk_widget_set_name (popup_menus[nbr].popup_detach, "popup_tearoff_button");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_tearoff_button", popup_menus[nbr].popup_detach);
-  gtk_button_set_relief ((GtkButton *) popup_menus[nbr].popup_detach,
-			 GTK_RELIEF_NONE);
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_tearoff_button", popup_menus[nbr].popup_detach);
+  gtk_button_set_relief ((GtkButton *) popup_menus[nbr].popup_detach, GTK_RELIEF_NONE);
   gtk_widget_show (popup_menus[nbr].popup_detach);
-  gtk_box_pack_start (GTK_BOX (popup_vbox), popup_menus[nbr].popup_detach,
-		      FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (popup_vbox), popup_menus[nbr].popup_detach, FALSE, TRUE, 0);
 
   popup_tearoff_tooltip = my_tooltips_new (current_config.tooltipsdelay);
-  gtk_tooltips_set_tip (popup_tearoff_tooltip, popup_menus[nbr].popup_detach,
-			_("Click to tear off popup menu"),
-			"ContextHelp/buttons/?");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "tooltips", popup_tearoff_tooltip);
+  gtk_tooltips_set_tip (popup_tearoff_tooltip, popup_menus[nbr].popup_detach, _("Click to tear off popup menu"), "ContextHelp/buttons/?");
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "tooltips", popup_tearoff_tooltip);
 
   popup_tearoff_hseparator = gtk_hseparator_new ();
   gtk_widget_set_name (popup_tearoff_hseparator, "popup_tearoff_hseparator");
-  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		       "popup_tearoff_hseparator", popup_tearoff_hseparator);
+  gtk_object_set_data (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "popup_tearoff_hseparator", popup_tearoff_hseparator);
   gtk_widget_show (popup_tearoff_hseparator);
-  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_detach),
-		     popup_tearoff_hseparator);
+  gtk_container_add (GTK_CONTAINER (popup_menus[nbr].popup_detach), popup_tearoff_hseparator);
 
-  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_toplevel),
-		      "delete_event", GTK_SIGNAL_FUNC (delete_popup_cb),
-		      (gpointer)((long) nbr));
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_toplevel), "delete_event", GTK_SIGNAL_FUNC (delete_popup_cb), (gpointer) ((long) nbr));
 
-  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_detach), "clicked",
-		      GTK_SIGNAL_FUNC (detach_cb), 
-                      (gpointer)((long) nbr));
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_detach), "clicked", GTK_SIGNAL_FUNC (detach_cb), (gpointer) ((long) nbr));
 
-  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_addicon_button),
-		      "clicked", GTK_SIGNAL_FUNC (popup_addicon_cb),
-		      (gpointer)((long) nbr));
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_addicon_button), "clicked", GTK_SIGNAL_FUNC (popup_addicon_cb), (gpointer) ((long) nbr));
 
-  gtk_drag_dest_set (popup_menus[nbr].popup_addicon_button,
-		     GTK_DEST_DEFAULT_HIGHLIGHT |
-		     GTK_DEST_DEFAULT_MOTION |
-		     GTK_DEST_DEFAULT_DROP,
-		     popup_target_table, n_popup_targets,
-		     GDK_ACTION_COPY);
+  gtk_drag_dest_set (popup_menus[nbr].popup_addicon_button, GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP, popup_target_table, n_popup_targets, GDK_ACTION_COPY);
 
-  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_addicon_button),
-		      "drag_data_received",
-		      GTK_SIGNAL_FUNC (popup_addicon_drag_data_received),
-		      (gpointer)((long) nbr));
+  gtk_signal_connect (GTK_OBJECT (popup_menus[nbr].popup_addicon_button), "drag_data_received", GTK_SIGNAL_FUNC (popup_addicon_drag_data_received), (gpointer) ((long) nbr));
 
   set_icon (popup_menus[nbr].popup_toplevel, "Popup Menu", menu_icon);
 
@@ -408,17 +270,15 @@ create_popup_menu (gint nbr)
 }
 
 void
-create_all_popup_menus (	GtkWidget * main)
+create_all_popup_menus (GtkWidget * main)
 {
   gint i;
 
   for (i = 0; i < NBPOPUPS; i++)
-    {
-      create_popup_menu (i);
-      gtk_window_set_transient_for (GTK_WINDOW
-				    (popup_menus[i].popup_toplevel),
-				    GTK_WINDOW (main));
-    }
+  {
+    create_popup_menu (i);
+    gtk_window_set_transient_for (GTK_WINDOW (popup_menus[i].popup_toplevel), GTK_WINDOW (main));
+  }
 }
 
 void
@@ -437,8 +297,7 @@ show_popup_menu (gint nbr, gint x, gint y, gboolean animation)
   struct timeval new_tv, old_tv;
   struct timezone tz;
 
-  anim = ((!popup_menus[nbr].detach) && animation
-	  && current_config.opaquemove);
+  anim = ((!popup_menus[nbr].detach) && animation && current_config.opaquemove);
 #endif
 
   if ((popup_menus[nbr].entries == 0) || (popup_menus[nbr].detach))
@@ -449,116 +308,102 @@ show_popup_menu (gint nbr, gint x, gint y, gboolean animation)
     gtk_widget_hide (popup_menus[nbr].popup_detach);
 
   if (popup_menus[nbr].entries == NBMAXITEMS)
-    {
-      gtk_widget_hide (popup_menus[nbr].popup_addicon_button);
-      gtk_widget_hide (popup_menus[nbr].popup_addicon_separator);
-    }
+  {
+    gtk_widget_hide (popup_menus[nbr].popup_addicon_button);
+    gtk_widget_hide (popup_menus[nbr].popup_addicon_separator);
+  }
   else
-    {
-      gtk_widget_show (popup_menus[nbr].popup_addicon_button);
-      gtk_widget_show (popup_menus[nbr].popup_addicon_separator);
-    }
+  {
+    gtk_widget_show (popup_menus[nbr].popup_addicon_button);
+    gtk_widget_show (popup_menus[nbr].popup_addicon_separator);
+  }
 
-  hide_current_popup_menu();
+  hide_current_popup_menu ();
 
   if ((x > 0) && (y > 0))
-    {
-      px = x;
-      py = y;
-      popup_menus[nbr].lastpx = x;
-      popup_menus[nbr].lastpy = y;
-    }
+  {
+    px = x;
+    py = y;
+    popup_menus[nbr].lastpx = x;
+    popup_menus[nbr].lastpy = y;
+  }
   else if (!popup_menus[nbr].detach)
-    {
-      px = popup_menus[nbr].lastpx;
-      py = popup_menus[nbr].lastpy;
-    }
+  {
+    px = popup_menus[nbr].lastpx;
+    py = popup_menus[nbr].lastpy;
+  }
   if (!GTK_WIDGET_REALIZED (popup_menus[nbr].popup_toplevel))
-    {
-      gtk_widget_realize (popup_menus[nbr].popup_toplevel);
-      set_icon (popup_menus[nbr].popup_toplevel, "Popup Menu", menu_icon);
-    }
+  {
+    gtk_widget_realize (popup_menus[nbr].popup_toplevel);
+    set_icon (popup_menus[nbr].popup_toplevel, "Popup Menu", menu_icon);
+  }
   gnome_sticky (popup_menus[nbr].popup_toplevel->window);
-  gtk_widget_size_request ((GtkWidget *) popup_menus[nbr].popup_toplevel,
-			   &requisition);
+  gtk_widget_size_request ((GtkWidget *) popup_menus[nbr].popup_toplevel, &requisition);
   uwidth = requisition.width;
   uheight = requisition.height;
   tempx = (((px - uwidth / 2) > 0) ? (px - uwidth / 2) : 0);
   tempy = (py - uheight);
   if (tempy < 0)
-    {
-      if ((py + 16 + uheight) < gdk_screen_height ())
-	tempy = py + 16;
-      else
-	tempy = 0;
-    }
+  {
+    if ((py + 16 + uheight) < gdk_screen_height ())
+      tempy = py + 16;
+    else
+      tempy = 0;
+  }
 
   if (!popup_menus[nbr].detach)
-    {
-      Current_Popup_Window = nbr;
-      gtk_widget_set_uposition (popup_menus[nbr].popup_toplevel, tempx, tempy);
-    }
+  {
+    Current_Popup_Window = nbr;
+    gtk_widget_set_uposition (popup_menus[nbr].popup_toplevel, tempx, tempy);
+  }
   else
-    {
-      Current_Popup_Window = -1;
-      gtk_widget_set_uposition (popup_menus[nbr].popup_toplevel,
-			        popup_menus[nbr].uposx, popup_menus[nbr].uposy);
-    }
+  {
+    Current_Popup_Window = -1;
+    gtk_widget_set_uposition (popup_menus[nbr].popup_toplevel, popup_menus[nbr].uposx, popup_menus[nbr].uposy);
+  }
 
 #if 0
   if ((!popup_menus[nbr].animatewin) && anim)
-    {
-      popup_menus[nbr].animatewin = gtk_window_new (GTK_WINDOW_DIALOG);
-      gtk_window_set_modal (GTK_WINDOW (popup_menus[nbr].animatewin), TRUE);
-      gtk_widget_realize (popup_menus[nbr].animatewin);
-      gtk_window_set_transient_for (GTK_WINDOW (popup_menus[nbr].animatewin),
-				    GTK_WINDOW (gxfce));
-      gdk_window_set_decorations ((popup_menus[nbr].animatewin)->window, (gulong) 0);
-    }
+  {
+    popup_menus[nbr].animatewin = gtk_window_new (GTK_WINDOW_DIALOG);
+    gtk_window_set_modal (GTK_WINDOW (popup_menus[nbr].animatewin), TRUE);
+    gtk_widget_realize (popup_menus[nbr].animatewin);
+    gtk_window_set_transient_for (GTK_WINDOW (popup_menus[nbr].animatewin), GTK_WINDOW (gxfce));
+    gdk_window_set_decorations ((popup_menus[nbr].animatewin)->window, (gulong) 0);
+  }
 
   if (anim)
+  {
+    gtk_window_set_policy (GTK_WINDOW (popup_menus[nbr].animatewin), FALSE, FALSE, FALSE);
+    gtk_widget_set_uposition (popup_menus[nbr].animatewin, tempx, tempy + uheight - speed);
+    gtk_widget_set_usize (popup_menus[nbr].animatewin, uwidth, 0);
+    gtk_widget_show_now (popup_menus[nbr].animatewin);
+    gdk_flush ();
+    XFlush (GDK_DISPLAY ());
+    gettimeofday (&old_tv, &tz);
+    for (i = 0; i < (uheight - speed); i += speed)
     {
-      gtk_window_set_policy (GTK_WINDOW (popup_menus[nbr].animatewin), FALSE,
-			     FALSE, FALSE);
-      gtk_widget_set_uposition (popup_menus[nbr].animatewin, tempx,
-				tempy + uheight - speed);
-      gtk_widget_set_usize (popup_menus[nbr].animatewin, uwidth, 0);
-      gtk_widget_show_now (popup_menus[nbr].animatewin);
+      gdk_window_move_resize (popup_menus[nbr].animatewin->window, tempx, tempy + uheight - i, uwidth, i);
       gdk_flush ();
-      XFlush (GDK_DISPLAY());
-      gettimeofday (&old_tv, &tz);
-      for (i = 0; i < (uheight - speed); i += speed)
-	{
-	  gdk_window_move_resize (popup_menus[nbr].animatewin->window, tempx,
-				  tempy + uheight - i, uwidth, i);
-	  gdk_flush ();
-          XFlush (GDK_DISPLAY());
-	  gettimeofday (&new_tv, &tz);
-	  /* Kind of smart here : We compute the speed of the animation based on the speed of the system 
-	     and/or network. The value 400.0 means 400 pixels per second */
-	  speed =
-	    400.0 / 100000.0 * ((new_tv.tv_sec * 1000000.0 + new_tv.tv_usec) -
-				(old_tv.tv_sec * 1000000.0 + old_tv.tv_usec));
-	  if (speed < 1.0)
-	    speed = 1.0;	/* in case we've got a *very* fast system */
-	  old_tv = new_tv;
-	}
-      gdk_window_move_resize (popup_menus[nbr].animatewin->window, tempx,
-			      tempy, uwidth, uheight);
+      XFlush (GDK_DISPLAY ());
+      gettimeofday (&new_tv, &tz);
+      /* Kind of smart here : We compute the speed of the animation based on the speed of the system 
+         and/or network. The value 400.0 means 400 pixels per second */
+      speed = 400.0 / 100000.0 * ((new_tv.tv_sec * 1000000.0 + new_tv.tv_usec) - (old_tv.tv_sec * 1000000.0 + old_tv.tv_usec));
+      if (speed < 1.0)
+	speed = 1.0;		/* in case we've got a *very* fast system */
+      old_tv = new_tv;
     }
+    gdk_window_move_resize (popup_menus[nbr].animatewin->window, tempx, tempy, uwidth, uheight);
+  }
 #endif
-  gdk_window_set_decorations (
-			      ((GtkWidget *)
-			       popup_menus[nbr].popup_toplevel)->window,
-			      ((popup_menus[nbr].detach)
-			       ? (GDK_DECOR_TITLE | GDK_DECOR_MENU | GDK_DECOR_BORDER) : (gulong) 0));
+  gdk_window_set_decorations (((GtkWidget *) popup_menus[nbr].popup_toplevel)->window, ((popup_menus[nbr].detach) ? (GDK_DECOR_TITLE | GDK_DECOR_MENU | GDK_DECOR_BORDER) : (gulong) 0));
   if (!GTK_WIDGET_VISIBLE (popup_menus[nbr].popup_toplevel))
     gtk_widget_show_now (popup_menus[nbr].popup_toplevel);
   gdk_flush ();
 
   for (i = 0; i < NBMAXITEMS; i++)
-    gtk_button_leave (GTK_BUTTON
-		      (popup_menus[nbr].popup_buttons[i].item_button));
+    gtk_button_leave (GTK_BUTTON (popup_menus[nbr].popup_buttons[i].item_button));
 
 #if 0
   if (popup_menus[nbr].animatewin && anim)
@@ -581,78 +426,65 @@ hide_popup_menu (gint nbr, gboolean animation)
   struct timeval new_tv, old_tv;
   struct timezone tz;
 
-  anim = ((!popup_menus[nbr].detach) && animation
-	  && current_config.opaquemove);
+  anim = ((!popup_menus[nbr].detach) && animation && current_config.opaquemove);
 
 #endif
 
 #if 0
   if (anim)
-    {
-      gdk_window_get_root_origin (
-				  ((GtkWidget *)
-				   popup_menus[nbr].popup_toplevel)->window,
-				  &uposx, &uposy);
-      gtk_widget_size_request ((GtkWidget *) popup_menus[nbr].popup_toplevel,
-			       &requisition);
-      uwidth = requisition.width;
-      uheight = requisition.height;
-    }
+  {
+    gdk_window_get_root_origin (((GtkWidget *) popup_menus[nbr].popup_toplevel)->window, &uposx, &uposy);
+    gtk_widget_size_request ((GtkWidget *) popup_menus[nbr].popup_toplevel, &requisition);
+    uwidth = requisition.width;
+    uheight = requisition.height;
+  }
 #endif
 
   if ((popup_menus[nbr].popup_toplevel)->window)
-    gdk_window_get_root_origin (
-				((GtkWidget *)
-				 popup_menus[nbr].popup_toplevel)->window,
-				&popup_menus[nbr].uposx,
-				&popup_menus[nbr].uposy);
+    gdk_window_get_root_origin (((GtkWidget *) popup_menus[nbr].popup_toplevel)->window, &popup_menus[nbr].uposx, &popup_menus[nbr].uposy);
   /* Added by Jason Litowitz */
   if (!popup_menus[nbr].detach)
     Current_Popup_Window = -1;
 
 #if 0
   if ((!popup_menus[nbr].animatewin) && anim)
-    {
-      popup_menus[nbr].animatewin = gtk_window_new (GTK_WINDOW_POPUP);
-      gtk_window_set_modal (GTK_WINDOW (popup_menus[nbr].animatewin), TRUE);
-    }
+  {
+    popup_menus[nbr].animatewin = gtk_window_new (GTK_WINDOW_POPUP);
+    gtk_window_set_modal (GTK_WINDOW (popup_menus[nbr].animatewin), TRUE);
+  }
 
   if (anim)
-    {
-      gtk_window_set_policy (GTK_WINDOW (popup_menus[nbr].animatewin), FALSE,
-			     FALSE, FALSE);
-      gtk_widget_set_uposition (popup_menus[nbr].animatewin, uposx, uposy);
-      gtk_widget_set_usize (popup_menus[nbr].animatewin, uwidth, uheight);
-      gtk_widget_show_now (popup_menus[nbr].animatewin);
-    }
+  {
+    gtk_window_set_policy (GTK_WINDOW (popup_menus[nbr].animatewin), FALSE, FALSE, FALSE);
+    gtk_widget_set_uposition (popup_menus[nbr].animatewin, uposx, uposy);
+    gtk_widget_set_usize (popup_menus[nbr].animatewin, uwidth, uheight);
+    gtk_widget_show_now (popup_menus[nbr].animatewin);
+  }
 #endif
   gtk_widget_hide (popup_menus[nbr].popup_toplevel);
   gdk_window_withdraw ((popup_menus[nbr].popup_toplevel)->window);
 
 #if 0
   gdk_flush ();
-  XFlush (GDK_DISPLAY());
+  XFlush (GDK_DISPLAY ());
   gettimeofday (&old_tv, &tz);
 
   if (anim)
+  {
+    for (i = uheight; i > 0; i -= speed)
     {
-      for (i = uheight; i > 0; i -= speed)
-	{
-	  gdk_window_move_resize (popup_menus[nbr].animatewin->window,
-				  uposx, uposy + uheight - i, uwidth, i);
-	  gdk_flush ();
-          XFlush (GDK_DISPLAY());
-	  gettimeofday (&new_tv, &tz);
-	  /* Kind of smart here : We compute the speed of the animation based on the speed of the system 
-	     and/or network. The value 400.0 means 400 pixels per second */
-	  speed =
-	    400.0 / 100000.0 * ((new_tv.tv_sec * 1000000.0 + new_tv.tv_usec) -
-				(old_tv.tv_sec * 1000000.0 + old_tv.tv_usec));
-	  if (speed < 1.0)
-	    speed = 1.0;	/* in case we've got a *very* fast system */
-	  old_tv = new_tv;
-	}
+      gdk_window_move_resize (popup_menus[nbr].animatewin->window, uposx, uposy + uheight - i, uwidth, i);
+      gdk_flush ();
+      XFlush (GDK_DISPLAY ());
+      gettimeofday (&new_tv, &tz);
+      /* Kind of smart here : We compute the speed of the animation based on the speed of the system 
+         and/or network. The value 400.0 means 400 pixels per second */
+      speed = 400.0 / 100000.0 * ((new_tv.tv_sec * 1000000.0 + new_tv.tv_usec) - (old_tv.tv_sec * 1000000.0 + old_tv.tv_usec));
+      if (speed < 1.0)
+	speed = 1.0;		/* in case we've got a *very* fast system */
+      old_tv = new_tv;
     }
+  }
 
   if (popup_menus[nbr].animatewin && anim)
     gtk_widget_hide (popup_menus[nbr].animatewin);
@@ -672,13 +504,13 @@ update_popup_entries (gint nbr)
   gint i;
 
   for (i = 0; i < popup_menus[nbr].entries; i++)
-    {
-      gtk_widget_show (popup_menus[nbr].popup_buttons[i].item_button);
-    }
+  {
+    gtk_widget_show (popup_menus[nbr].popup_buttons[i].item_button);
+  }
   for (i = popup_menus[nbr].entries; i < NBMAXITEMS; i++)
-    {
-      gtk_widget_hide (popup_menus[nbr].popup_buttons[i].item_button);
-    }
+  {
+    gtk_widget_hide (popup_menus[nbr].popup_buttons[i].item_button);
+  }
 }
 
 void
@@ -687,38 +519,26 @@ update_popup_size (void)
   gint i, j;
 
   for (i = 0; i < NBPOPUPS; i++)
+  {
+    gtk_widget_set_usize (popup_menus[i].popup_addicon_icon_frame, POPUP_ICON_SIZE, POPUP_ICON_SIZE);
+    for (j = 0; j < popup_menus[i].entries; j++)
     {
-      gtk_widget_set_usize (popup_menus[i].popup_addicon_icon_frame,
-			    POPUP_ICON_SIZE, POPUP_ICON_SIZE);
-      for (j = 0; j < popup_menus[i].entries; j++)
+      gtk_widget_set_usize (popup_menus[i].popup_buttons[j].item_pixmap_frame, POPUP_ICON_SIZE, POPUP_ICON_SIZE);
+      if (j < popup_menus[i].entries)
+      {
+	if (existfile (popup_menus[i].popup_buttons[j].pixfile))
 	{
-	  gtk_widget_set_usize (popup_menus[i].popup_buttons[j].
-				item_pixmap_frame, POPUP_ICON_SIZE,
-				POPUP_ICON_SIZE);
-	  if (j < popup_menus[i].entries)
-	    {
-	      if (existfile (popup_menus[i].popup_buttons[j].pixfile))
-		{
-		  MySetPixmapFile (popup_menus[i].popup_buttons[j].
-				   item_pixmap,
-				   popup_menus[i].popup_buttons[j].
-				   item_pixmap_frame,
-				   popup_menus[i].popup_buttons[j].pixfile);
-		}
-	      else
-		{
-		  MySetPixmapData (popup_menus[i].popup_buttons[j].
-				   item_pixmap,
-				   popup_menus[i].popup_buttons[j].
-				   item_pixmap_frame, defaulticon);
-		}
-	    }
+	  MySetPixmapFile (popup_menus[i].popup_buttons[j].item_pixmap, popup_menus[i].popup_buttons[j].item_pixmap_frame, popup_menus[i].popup_buttons[j].pixfile);
 	}
-      for (j = popup_menus[i].entries; j < NBMAXITEMS; j++)
-	gtk_widget_set_usize (popup_menus[i].popup_buttons[j].
-			      item_pixmap_frame, POPUP_ICON_SIZE,
-			      POPUP_ICON_SIZE);
+	else
+	{
+	  MySetPixmapData (popup_menus[i].popup_buttons[j].item_pixmap, popup_menus[i].popup_buttons[j].item_pixmap_frame, defaulticon);
+	}
+      }
     }
+    for (j = popup_menus[i].entries; j < NBMAXITEMS; j++)
+      gtk_widget_set_usize (popup_menus[i].popup_buttons[j].item_pixmap_frame, POPUP_ICON_SIZE, POPUP_ICON_SIZE);
+  }
 }
 
 void
@@ -733,10 +553,10 @@ set_entry (gint menu, gint entry, char *label, char *pixfile, char *command)
   l3 = strlen (command);
 
   if (l2 == 0)
-    {
-      l2 = strlen (defpix);
-      nullpix = True;
-    }
+  {
+    l2 = strlen (defpix);
+    nullpix = True;
+  }
 
   if (popup_menus[menu].popup_buttons[entry].label)
     g_free (popup_menus[menu].popup_buttons[entry].label);
@@ -745,40 +565,26 @@ set_entry (gint menu, gint entry, char *label, char *pixfile, char *command)
   if (popup_menus[menu].popup_buttons[entry].command)
     g_free (popup_menus[menu].popup_buttons[entry].command);
 
-  popup_menus[menu].popup_buttons[entry].label =
-    (char *) g_malloc (sizeof (char) * (l1 + 1));
-  popup_menus[menu].popup_buttons[entry].pixfile =
-    (char *) g_malloc (sizeof (char) * (l2 + 1));
-  popup_menus[menu].popup_buttons[entry].command =
-    (char *) g_malloc (sizeof (char) * (l3 + 1));
+  popup_menus[menu].popup_buttons[entry].label = (char *) g_malloc (sizeof (char) * (l1 + 1));
+  popup_menus[menu].popup_buttons[entry].pixfile = (char *) g_malloc (sizeof (char) * (l2 + 1));
+  popup_menus[menu].popup_buttons[entry].command = (char *) g_malloc (sizeof (char) * (l3 + 1));
 
   strcpy (popup_menus[menu].popup_buttons[entry].label, label);
-  strcpy (popup_menus[menu].popup_buttons[entry].pixfile,
-	  (nullpix ? defpix : pixfile));
+  strcpy (popup_menus[menu].popup_buttons[entry].pixfile, (nullpix ? defpix : pixfile));
   strcpy (popup_menus[menu].popup_buttons[entry].command, command);
 
   if (existfile (popup_menus[menu].popup_buttons[entry].pixfile))
-    {
-      MySetPixmapFile (popup_menus[menu].popup_buttons[entry].item_pixmap,
-		       popup_menus[menu].popup_buttons[entry].
-		       item_pixmap_frame,
-		       popup_menus[menu].popup_buttons[entry].pixfile);
-    }
+  {
+    MySetPixmapFile (popup_menus[menu].popup_buttons[entry].item_pixmap, popup_menus[menu].popup_buttons[entry].item_pixmap_frame, popup_menus[menu].popup_buttons[entry].pixfile);
+  }
   else
-    {
-      MySetPixmapData (popup_menus[menu].popup_buttons[entry].item_pixmap,
-		       popup_menus[menu].popup_buttons[entry].
-		       item_pixmap_frame, defaulticon);
-    }
+  {
+    MySetPixmapData (popup_menus[menu].popup_buttons[entry].item_pixmap, popup_menus[menu].popup_buttons[entry].item_pixmap_frame, defaulticon);
+  }
 
-  gtk_label_set_text (GTK_LABEL
-		      (popup_menus[menu].popup_buttons[entry].item_label),
-		      label);
+  gtk_label_set_text (GTK_LABEL (popup_menus[menu].popup_buttons[entry].item_label), label);
 
-  gtk_tooltips_set_tip (popup_menus[menu].popup_buttons[entry].item_tooltip,
-			popup_menus[menu].popup_buttons[entry].item_button,
-			popup_menus[menu].popup_buttons[entry].command,
-			"ContextHelp/buttons/?");
+  gtk_tooltips_set_tip (popup_menus[menu].popup_buttons[entry].item_tooltip, popup_menus[menu].popup_buttons[entry].item_button, popup_menus[menu].popup_buttons[entry].command, "ContextHelp/buttons/?");
 }
 
 void
@@ -790,9 +596,7 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
   char defpix[] = "Default Icon";
   gboolean nullpix = False;
 
-  if ((!popup_menus[menu_s].popup_buttons[entry_s].label) ||
-      (!popup_menus[menu_s].popup_buttons[entry_s].pixfile) ||
-      (!popup_menus[menu_s].popup_buttons[entry_s].command))
+  if ((!popup_menus[menu_s].popup_buttons[entry_s].label) || (!popup_menus[menu_s].popup_buttons[entry_s].pixfile) || (!popup_menus[menu_s].popup_buttons[entry_s].command))
     return;
 
   l1 = strlen (popup_menus[menu_s].popup_buttons[entry_s].label);
@@ -800,10 +604,10 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
   l3 = strlen (popup_menus[menu_s].popup_buttons[entry_s].command);
 
   if (l2 == 0)
-    {
-      l2 = strlen (defpix);
-      nullpix = True;
-    }
+  {
+    l2 = strlen (defpix);
+    nullpix = True;
+  }
 
   if (popup_menus[menu_d].popup_buttons[entry_d].label)
     g_free (popup_menus[menu_d].popup_buttons[entry_d].label);
@@ -812,48 +616,30 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
   if (popup_menus[menu_d].popup_buttons[entry_d].command)
     g_free (popup_menus[menu_d].popup_buttons[entry_d].command);
 
-  popup_menus[menu_d].popup_buttons[entry_d].label =
-    (char *) g_malloc (sizeof (char) * (l1 + 1));
-  popup_menus[menu_d].popup_buttons[entry_d].pixfile =
-    (char *) g_malloc (sizeof (char) * (l2 + 1));
-  popup_menus[menu_d].popup_buttons[entry_d].command =
-    (char *) g_malloc (sizeof (char) * (l3 + 1));
+  popup_menus[menu_d].popup_buttons[entry_d].label = (char *) g_malloc (sizeof (char) * (l1 + 1));
+  popup_menus[menu_d].popup_buttons[entry_d].pixfile = (char *) g_malloc (sizeof (char) * (l2 + 1));
+  popup_menus[menu_d].popup_buttons[entry_d].command = (char *) g_malloc (sizeof (char) * (l3 + 1));
 
-  strcpy (popup_menus[menu_d].popup_buttons[entry_d].label,
-	  popup_menus[menu_s].popup_buttons[entry_s].label);
-  strcpy (popup_menus[menu_d].popup_buttons[entry_d].pixfile,
-	  (nullpix ? defpix : popup_menus[menu_s].popup_buttons[entry_s].
-	   pixfile));
-  strcpy (popup_menus[menu_d].popup_buttons[entry_d].command,
-	  popup_menus[menu_s].popup_buttons[entry_s].command);
+  strcpy (popup_menus[menu_d].popup_buttons[entry_d].label, popup_menus[menu_s].popup_buttons[entry_s].label);
+  strcpy (popup_menus[menu_d].popup_buttons[entry_d].pixfile, (nullpix ? defpix : popup_menus[menu_s].popup_buttons[entry_s].pixfile));
+  strcpy (popup_menus[menu_d].popup_buttons[entry_d].command, popup_menus[menu_s].popup_buttons[entry_s].command);
 
-  gtk_pixmap_get (GTK_PIXMAP
-		  (popup_menus[menu_s].popup_buttons[entry_s].item_pixmap),
-		  &pixmap, &mask);
-  gtk_pixmap_set (GTK_PIXMAP
-		  (popup_menus[menu_d].popup_buttons[entry_d].item_pixmap),
-		  pixmap, mask);
+  gtk_pixmap_get (GTK_PIXMAP (popup_menus[menu_s].popup_buttons[entry_s].item_pixmap), &pixmap, &mask);
+  gtk_pixmap_set (GTK_PIXMAP (popup_menus[menu_d].popup_buttons[entry_d].item_pixmap), pixmap, mask);
 
-  gtk_label_set_text (GTK_LABEL
-		      (popup_menus[menu_d].popup_buttons[entry_d].item_label),
-		      popup_menus[menu_s].popup_buttons[entry_s].label);
+  gtk_label_set_text (GTK_LABEL (popup_menus[menu_d].popup_buttons[entry_d].item_label), popup_menus[menu_s].popup_buttons[entry_s].label);
 
-  gtk_tooltips_set_tip (popup_menus[menu_d].popup_buttons[entry_d].
-			item_tooltip,
-			popup_menus[menu_d].popup_buttons[entry_d].
-			item_button,
-			popup_menus[menu_d].popup_buttons[entry_d].command,
-			"ContextHelp/buttons/?");
+  gtk_tooltips_set_tip (popup_menus[menu_d].popup_buttons[entry_d].item_tooltip, popup_menus[menu_d].popup_buttons[entry_d].item_button, popup_menus[menu_d].popup_buttons[entry_d].command, "ContextHelp/buttons/?");
 }
 
 void
 add_popup_entry (gint nbr, char *label, char *pixfile, char *command)
 {
   if ((popup_menus[nbr].entries < NBMAXITEMS) && label && pixfile && command)
-    {
-      set_entry (nbr, popup_menus[nbr].entries, label, pixfile, command);
-      popup_menus[nbr].entries++;
-    }
+  {
+    set_entry (nbr, popup_menus[nbr].entries, label, pixfile, command);
+    popup_menus[nbr].entries++;
+  }
   update_popup_entries (nbr);
 }
 
@@ -865,28 +651,26 @@ remove_popup_entry (gint nbr_menu, gint entry)
 
   j = --popup_menus[nbr_menu].entries;
   for (i = entry; i < j; i++)
-    {
-      set_like_entry (nbr_menu, i + 1, nbr_menu, i);
-    }
+  {
+    set_like_entry (nbr_menu, i + 1, nbr_menu, i);
+  }
   update_popup_entries (nbr_menu);
   if (popup_menus[nbr_menu].popup_buttons[j].label)
-    {
-      g_free (popup_menus[nbr_menu].popup_buttons[j].label);
-      popup_menus[nbr_menu].popup_buttons[j].label = NULL;
-    }
+  {
+    g_free (popup_menus[nbr_menu].popup_buttons[j].label);
+    popup_menus[nbr_menu].popup_buttons[j].label = NULL;
+  }
   if (popup_menus[nbr_menu].popup_buttons[j].pixfile)
-    {
-      g_free (popup_menus[nbr_menu].popup_buttons[j].pixfile);
-      popup_menus[nbr_menu].popup_buttons[j].pixfile = NULL;
-    }
+  {
+    g_free (popup_menus[nbr_menu].popup_buttons[j].pixfile);
+    popup_menus[nbr_menu].popup_buttons[j].pixfile = NULL;
+  }
   if (popup_menus[nbr_menu].popup_buttons[j].command)
-    {
-      g_free (popup_menus[nbr_menu].popup_buttons[j].command);
-      popup_menus[nbr_menu].popup_buttons[j].command = NULL;
-    }
-  MySetPixmapData (popup_menus[nbr_menu].popup_buttons[j].item_pixmap,
-		   popup_menus[nbr_menu].popup_buttons[j].item_pixmap_frame,
-		   empty);
+  {
+    g_free (popup_menus[nbr_menu].popup_buttons[j].command);
+    popup_menus[nbr_menu].popup_buttons[j].command = NULL;
+  }
+  MySetPixmapData (popup_menus[nbr_menu].popup_buttons[j].item_pixmap, popup_menus[nbr_menu].popup_buttons[j].item_pixmap_frame, empty);
 }
 
 char *
@@ -918,7 +702,7 @@ void
 hide_current_popup_menu ()
 {
   if ((Current_Popup_Window != -1) && !(popup_menus[Current_Popup_Window].detach))
-    {
-      private_close_popup_button(Current_Popup_Window);
-    }
+  {
+    private_close_popup_button (Current_Popup_Window);
+  }
 }

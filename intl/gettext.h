@@ -67,14 +67,12 @@ typedef unsigned long nls_uint32;
 #  else
   /* The following line is intended to throw an error.  Using #error is
      not portable enough.  */
-  "Cannot determine unsigned 32-bit data type."
+"Cannot determine unsigned 32-bit data type."
 #  endif
 # endif
 #endif
-
-
 /* Header for binary .mo file format.  */
-struct mo_file_header
+  struct mo_file_header
 {
   /* The magic number.  */
   nls_uint32 magic;
@@ -102,4 +100,4 @@ struct string_desc
 
 /* @@ begin of epilog @@ */
 
-#endif	/* gettext.h  */
+#endif /* gettext.h  */

@@ -28,14 +28,9 @@
 #define ROW_TOP_YPIXEL(clist,row) (((clist)->row_height*(row))+\
 	(((row))+1)*1+(clist)->voffset)
 
-void on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x,
-		   gint y, GtkSelectionData * data, guint info, guint itme,
-		   void *client);
+void on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint itme, void *client);
 
-void on_drag_data_get (GtkWidget * widget, GdkDragContext * context,
-		       GtkSelectionData * selection_data, guint info,
-		       guint time, gpointer data);
-gboolean on_drag_motion(GtkWidget *widget, GdkDragContext *dc,
-                         gint x, gint y, guint t, gpointer data);
-void on_drag_end(GtkWidget *widget, GdkDragContext *dc, gpointer data);
+void on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data);
+gboolean on_drag_motion (GtkWidget * widget, GdkDragContext * dc, gint x, gint y, guint t, gpointer data);
+void on_drag_end (GtkWidget * widget, GdkDragContext * dc, gpointer data);
 #endif

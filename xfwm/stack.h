@@ -33,19 +33,18 @@ void RaiseWindow (XfwmWindow *);
 void LowerWindow (XfwmWindow *);
 void LowerIcons (void);
 Bool GetWindowLayer (XfwmWindow *);
-XfwmWindowList* WindowSorted(void);
-XfwmWindowList* LastXfwmWindowList(XfwmWindowList*);
-XfwmWindow* SearchXfwmWindowList(XfwmWindowList*, Window);
-XfwmWindowList* RemoveFromXfwmWindowList(XfwmWindowList*, XfwmWindow *);
-XfwmWindowList* AddToXfwmWindowList(XfwmWindowList*, XfwmWindow *);
-void FreeXfwmWindowList(XfwmWindowList*);
+XfwmWindowList *WindowSorted (void);
+XfwmWindowList *LastXfwmWindowList (XfwmWindowList *);
+XfwmWindow *SearchXfwmWindowList (XfwmWindowList *, Window);
+XfwmWindowList *RemoveFromXfwmWindowList (XfwmWindowList *, XfwmWindow *);
+XfwmWindowList *AddToXfwmWindowList (XfwmWindowList *, XfwmWindow *);
+void FreeXfwmWindowList (XfwmWindowList *);
 #ifdef MANAGE_OVERRIDES
-XfwmWindowList* LastWindowList(XfwmWindowList*);
-Window SearchWindowList(WindowList*, Window);
-WindowList* RemoveFromWindowList(WindowList*, Window);
-WindowList* AddToWindowList(WindowList*, Window);
-void FreeWindowList(WindowList*);
+XfwmWindowList *LastWindowList (XfwmWindowList *);
+Window SearchWindowList (WindowList *, Window);
+WindowList *RemoveFromWindowList (WindowList *, Window);
+WindowList *AddToWindowList (WindowList *, Window);
+void FreeWindowList (WindowList *);
 #endif
 
 #endif
-

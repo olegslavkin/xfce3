@@ -7,7 +7,7 @@
 
 #ifndef HAVE_SNPRINTF
 
-#include <stdarg.h>   /* for va_list */
+#include <stdarg.h>		/* for va_list */
 int snprintf (char *str, size_t count, const char *fmt, ...);
 #endif
 #ifndef HAVE_VSPRINTF

@@ -48,8 +48,7 @@ typedef struct
 XFCE_palette;
 
 extern void apply_xpalette (XFCE_palette *, gboolean);
-extern void get_rgb_from_palette (XFCE_palette *, short int, int *, int *,
-				  int *);
+extern void get_rgb_from_palette (XFCE_palette *, short int, int *, int *, int *);
 extern int brightness_pal (const XFCE_palette *, int);
 extern char *color_to_hex (char *, const XFCE_palette *, int);
 extern void set_color_table (XFCE_palette *, int, gdouble color_table[]);

@@ -41,10 +41,8 @@ static void my_gtk_clock_init (MyGtkClock * clock);
 static void my_gtk_clock_destroy (GtkObject * object);
 
 static void my_gtk_clock_realize (GtkWidget * widget);
-static void my_gtk_clock_size_request (GtkWidget * widget,
-				       GtkRequisition * requisition);
-static void my_gtk_clock_size_allocate (GtkWidget * widget,
-					GtkAllocation * allocation);
+static void my_gtk_clock_size_request (GtkWidget * widget, GtkRequisition * requisition);
+static void my_gtk_clock_size_allocate (GtkWidget * widget, GtkAllocation * allocation);
 static gint my_gtk_clock_expose (GtkWidget * widget, GdkEventExpose * event);
 static void my_gtk_clock_draw (GtkWidget * widget, GdkRectangle * area);
 static gint my_gtk_clock_timer (MyGtkClock * clock);
@@ -55,24 +53,25 @@ static void my_gtk_clock_draw_internal (GtkWidget * widget);
 
 static GtkWidgetClass *parent_class = NULL;
 
-guint my_gtk_clock_get_type ()
+guint
+my_gtk_clock_get_type ()
 {
   static guint clock_type = 0;
 
   if (!clock_type)
-    {
-      GtkTypeInfo clock_info = {
-	"MyGtkClock",
-	sizeof (MyGtkClock),
-	sizeof (MyGtkClockClass),
-	(GtkClassInitFunc) my_gtk_clock_class_init,
-	(GtkObjectInitFunc) my_gtk_clock_init,
-	(gpointer) NULL,
-	(gpointer) NULL,
-      };
+  {
+    GtkTypeInfo clock_info = {
+      "MyGtkClock",
+      sizeof (MyGtkClock),
+      sizeof (MyGtkClockClass),
+      (GtkClassInitFunc) my_gtk_clock_class_init,
+      (GtkObjectInitFunc) my_gtk_clock_init,
+      (gpointer) NULL,
+      (gpointer) NULL,
+    };
 
-      clock_type = gtk_type_unique (gtk_widget_get_type (), &clock_info);
-    }
+    clock_type = gtk_type_unique (gtk_widget_get_type (), &clock_info);
+  }
 
   return clock_type;
 }
@@ -124,20 +123,16 @@ my_gtk_clock_realize (GtkWidget * widget)
   attributes.colormap = gtk_widget_get_colormap (widget);
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
-  widget->window =
-    gdk_window_new (widget->parent->window, &attributes, attributes_mask);
+  widget->window = gdk_window_new (widget->parent->window, &attributes, attributes_mask);
 
   widget->style = gtk_style_attach (widget->style, widget->window);
 
   gdk_window_set_user_data (widget->window, widget);
 
-  gtk_style_set_background (widget->parent->style, widget->window,
-			    GTK_STATE_NORMAL);
+  gtk_style_set_background (widget->parent->style, widget->window, GTK_STATE_NORMAL);
 
   if (!(clock->timer))
-    clock->timer = gtk_timeout_add (clock->interval,
-				    (GtkFunction) my_gtk_clock_timer,
-				    (gpointer) clock);
+    clock->timer = gtk_timeout_add (clock->interval, (GtkFunction) my_gtk_clock_timer, (gpointer) clock);
 }
 
 static void
@@ -222,7 +217,8 @@ my_gtk_clock_ampm_toggle (MyGtkClock * clock)
     my_gtk_clock_draw (GTK_WIDGET (clock), NULL);
 }
 
-gboolean my_gtk_clock_ampm_shown (MyGtkClock * clock)
+gboolean
+my_gtk_clock_ampm_shown (MyGtkClock * clock)
 {
   g_return_val_if_fail (clock != NULL, FALSE);
   g_return_val_if_fail (GTK_IS_MY_CLOCK (clock), FALSE);
@@ -253,7 +249,8 @@ my_gtk_clock_secs_toggle (MyGtkClock * clock)
     my_gtk_clock_draw (GTK_WIDGET (clock), NULL);
 }
 
-gboolean my_gtk_clock_secs_shown (MyGtkClock * clock)
+gboolean
+my_gtk_clock_secs_shown (MyGtkClock * clock)
 {
   g_return_val_if_fail (clock != NULL, FALSE);
   g_return_val_if_fail (GTK_IS_MY_CLOCK (clock), FALSE);
@@ -284,7 +281,8 @@ my_gtk_clock_military_toggle (MyGtkClock * clock)
     my_gtk_clock_draw (GTK_WIDGET (clock), NULL);
 }
 
-gboolean my_gtk_clock_military_shown (MyGtkClock * clock)
+gboolean
+my_gtk_clock_military_shown (MyGtkClock * clock)
 {
   g_return_val_if_fail (clock != NULL, FALSE);
   g_return_val_if_fail (GTK_IS_MY_CLOCK (clock), FALSE);
@@ -299,15 +297,14 @@ my_gtk_clock_set_interval (MyGtkClock * clock, guint interval)
   clock->interval = interval;
 
   if (clock->timer)
-    {
-      gtk_timeout_remove (clock->timer);
-      clock->timer = gtk_timeout_add (clock->interval,
-				      (GtkFunction) my_gtk_clock_timer,
-				      (gpointer) clock);
-    }
+  {
+    gtk_timeout_remove (clock->timer);
+    clock->timer = gtk_timeout_add (clock->interval, (GtkFunction) my_gtk_clock_timer, (gpointer) clock);
+  }
 }
 
-guint my_gtk_clock_get_interval (MyGtkClock * clock)
+guint
+my_gtk_clock_get_interval (MyGtkClock * clock)
 {
   g_return_val_if_fail (clock != NULL, 0);
   g_return_val_if_fail (GTK_IS_MY_CLOCK (clock), 0);
@@ -321,10 +318,10 @@ my_gtk_clock_suspend (MyGtkClock * clock)
   g_return_if_fail (GTK_IS_MY_CLOCK (clock));
 
   if (clock->timer)
-    {
-      gtk_timeout_remove (clock->timer);
-      clock->timer = 0;
-    }
+  {
+    gtk_timeout_remove (clock->timer);
+    clock->timer = 0;
+  }
 }
 
 void
@@ -338,9 +335,7 @@ my_gtk_clock_resume (MyGtkClock * clock)
   if (!(clock->interval))
     return;
 
-  clock->timer = gtk_timeout_add (clock->interval,
-				  (GtkFunction) my_gtk_clock_timer,
-				  (gpointer) clock);
+  clock->timer = gtk_timeout_add (clock->interval, (GtkFunction) my_gtk_clock_timer, (gpointer) clock);
 }
 
 void
@@ -366,8 +361,7 @@ my_gtk_clock_toggle_mode (MyGtkClock * clock)
     my_gtk_clock_draw (GTK_WIDGET (clock), NULL);
 }
 
-MyGtkClockMode
-my_gtk_clock_get_mode (MyGtkClock * clock)
+MyGtkClockMode my_gtk_clock_get_mode (MyGtkClock * clock)
 {
   g_return_val_if_fail (clock != NULL, 0);
   g_return_val_if_fail (GTK_IS_MY_CLOCK (clock), 0);
@@ -395,13 +389,11 @@ my_gtk_clock_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
   clock = MY_GTK_CLOCK (widget);
 
   if (GTK_WIDGET_REALIZED (widget))
-    {
+  {
 
-      gdk_window_move_resize (widget->window,
-			      allocation->x, allocation->y,
-			      allocation->width, allocation->height);
+    gdk_window_move_resize (widget->window, allocation->x, allocation->y, allocation->width, allocation->height);
 
-    }
+  }
   size = MIN (allocation->width, allocation->height);
   clock->radius = size * 0.45;
   clock->internal = size * 0.49;
@@ -426,14 +418,10 @@ draw_round_frame (GtkWidget * widget)
   x = widget->allocation.width / 2 - clock->internal;
   y = widget->allocation.height / 2 - clock->internal;
 
-  gdk_draw_arc (widget->window, style->base_gc[GTK_STATE_NORMAL],
-		TRUE, x, y, w, h, 0, 360 * 64);
-  gdk_draw_arc (widget->window, style->dark_gc[GTK_STATE_NORMAL],
-		FALSE, x, y, w, h, 30 * 64, 180 * 64);
-  gdk_draw_arc (widget->window, style->black_gc,
-		FALSE, x + 1, y + 1, w - 2, h - 2, 30 * 64, 180 * 64);
-  gdk_draw_arc (widget->window, style->light_gc[GTK_STATE_NORMAL],
-		FALSE, x, y, w, h, 210 * 64, 180 * 64);
+  gdk_draw_arc (widget->window, style->base_gc[GTK_STATE_NORMAL], TRUE, x, y, w, h, 0, 360 * 64);
+  gdk_draw_arc (widget->window, style->dark_gc[GTK_STATE_NORMAL], FALSE, x, y, w, h, 30 * 64, 180 * 64);
+  gdk_draw_arc (widget->window, style->black_gc, FALSE, x + 1, y + 1, w - 2, h - 2, 30 * 64, 180 * 64);
+  gdk_draw_arc (widget->window, style->light_gc[GTK_STATE_NORMAL], FALSE, x, y, w, h, 210 * 64, 180 * 64);
 }
 
 
@@ -456,51 +444,27 @@ draw_ticks (GtkWidget * widget)
   yc = widget->allocation.height / 2;
 
   for (i = 0; i < 12; i++)
-    {
-      theta = (i * M_PI / 6.);
-      s = sin (theta);
-      c = cos (theta);
+  {
+    theta = (i * M_PI / 6.);
+    s = sin (theta);
+    c = cos (theta);
 
-      points[0].x =
-	xc + s * (clock->radius - clock->pointer_width / 2) -
-	clock->pointer_width / 4;
-      points[0].y =
-	yc + c * (clock->radius - clock->pointer_width / 2) -
-	clock->pointer_width / 4;
-      points[1].x =
-	xc + s * (clock->radius - clock->pointer_width / 2) -
-	clock->pointer_width / 4;
-      points[1].y =
-	yc + c * (clock->radius - clock->pointer_width / 2) +
-	clock->pointer_width / 4;
-      points[2].x =
-	xc + s * (clock->radius - clock->pointer_width / 2) +
-	clock->pointer_width / 4;
-      points[2].y =
-	yc + c * (clock->radius - clock->pointer_width / 2) +
-	clock->pointer_width / 4;
-      points[3].x =
-	xc + s * (clock->radius - clock->pointer_width / 2) +
-	clock->pointer_width / 4;
-      points[3].y =
-	yc + c * (clock->radius - clock->pointer_width / 2) -
-	clock->pointer_width / 4;
-      points[4].x =
-	xc + s * (clock->radius - clock->pointer_width / 2) -
-	clock->pointer_width / 4;
-      points[4].y =
-	yc + c * (clock->radius - clock->pointer_width / 2) -
-	clock->pointer_width / 4;
+    points[0].x = xc + s * (clock->radius - clock->pointer_width / 2) - clock->pointer_width / 4;
+    points[0].y = yc + c * (clock->radius - clock->pointer_width / 2) - clock->pointer_width / 4;
+    points[1].x = xc + s * (clock->radius - clock->pointer_width / 2) - clock->pointer_width / 4;
+    points[1].y = yc + c * (clock->radius - clock->pointer_width / 2) + clock->pointer_width / 4;
+    points[2].x = xc + s * (clock->radius - clock->pointer_width / 2) + clock->pointer_width / 4;
+    points[2].y = yc + c * (clock->radius - clock->pointer_width / 2) + clock->pointer_width / 4;
+    points[3].x = xc + s * (clock->radius - clock->pointer_width / 2) + clock->pointer_width / 4;
+    points[3].y = yc + c * (clock->radius - clock->pointer_width / 2) - clock->pointer_width / 4;
+    points[4].x = xc + s * (clock->radius - clock->pointer_width / 2) - clock->pointer_width / 4;
+    points[4].y = yc + c * (clock->radius - clock->pointer_width / 2) - clock->pointer_width / 4;
 
-      if (clock->relief)
-	gtk_draw_polygon (widget->style,
-			  widget->window,
-			  GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
-      else
-	gdk_draw_polygon (widget->window,
-			  widget->style->text_gc[GTK_STATE_NORMAL],
-			  TRUE, points, 5);
-    }
+    if (clock->relief)
+      gtk_draw_polygon (widget->style, widget->window, GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
+    else
+      gdk_draw_polygon (widget->window, widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points, 5);
+  }
 
 }
 
@@ -536,13 +500,9 @@ draw_sec_pointer (GtkWidget * widget)
   points[4].y = yc + c * clock->pointer_width / 4;
 
   if (clock->relief)
-    gtk_draw_polygon (widget->style,
-		      widget->window,
-		      GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
+    gtk_draw_polygon (widget->style, widget->window, GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
   else
-    gdk_draw_polygon (widget->window,
-		      widget->style->text_gc[GTK_STATE_NORMAL],
-		      TRUE, points, 5);
+    gdk_draw_polygon (widget->window, widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points, 5);
 
 }
 
@@ -578,13 +538,9 @@ draw_min_pointer (GtkWidget * widget)
   points[4].y = yc + c * clock->pointer_width / 2;
 
   if (clock->relief)
-    gtk_draw_polygon (widget->style,
-		      widget->window,
-		      GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
+    gtk_draw_polygon (widget->style, widget->window, GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
   else
-    gdk_draw_polygon (widget->window,
-		      widget->style->text_gc[GTK_STATE_NORMAL],
-		      TRUE, points, 5);
+    gdk_draw_polygon (widget->window, widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points, 5);
 
 }
 
@@ -621,13 +577,9 @@ draw_hrs_pointer (GtkWidget * widget)
 
 
   if (clock->relief)
-    gtk_draw_polygon (widget->style,
-		      widget->window,
-		      GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
+    gtk_draw_polygon (widget->style, widget->window, GTK_STATE_NORMAL, GTK_SHADOW_OUT, points, 5, TRUE);
   else
-    gdk_draw_polygon (widget->window,
-		      widget->style->text_gc[GTK_STATE_NORMAL],
-		      TRUE, points, 5);
+    gdk_draw_polygon (widget->window, widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points, 5);
 }
 
 
@@ -658,54 +610,47 @@ my_gtk_clock_draw_digital (GtkWidget * widget)
     ampm[0] = 'P';
 
   if (!(clock->military_time))
-    {
-      if (h > 12)
-	h -= 12;
-      if (h == 0)
-	h = 12;
-    }
+  {
+    if (h > 12)
+      h -= 12;
+    if (h == 0)
+      h = 12;
+  }
 
   if (clock->military_time)
+  {
+    if (clock->display_secs)
+      sprintf (time_buf, "%d:%02d:%02d", h, m, s);
+    else
+      sprintf (time_buf, "%d:%02d", h, m);
+  }
+  else
+  {
+    if (clock->display_am_pm)
+    {
+      if (clock->display_secs)
+	sprintf (time_buf, "%d:%02d:%02d %s", h, m, s, ampm);
+      else
+	sprintf (time_buf, "%d:%02d %s", h, m, ampm);
+    }
+    else
     {
       if (clock->display_secs)
 	sprintf (time_buf, "%d:%02d:%02d", h, m, s);
       else
 	sprintf (time_buf, "%d:%02d", h, m);
     }
-  else
-    {
-      if (clock->display_am_pm)
-	{
-	  if (clock->display_secs)
-	    sprintf (time_buf, "%d:%02d:%02d %s", h, m, s, ampm);
-	  else
-	    sprintf (time_buf, "%d:%02d %s", h, m, ampm);
-	}
-      else
-	{
-	  if (clock->display_secs)
-	    sprintf (time_buf, "%d:%02d:%02d", h, m, s);
-	  else
-	    sprintf (time_buf, "%d:%02d", h, m);
-	}
-    }
+  }
 
-  gdk_string_extents (widget->style->font, time_buf, &lbearing, &rbearing,
-		      &width, &ascent, &descent);
+  gdk_string_extents (widget->style->font, time_buf, &lbearing, &rbearing, &width, &ascent, &descent);
 
   /* Center in the widget */
   x = (widget->allocation.width - width) / 2;
 
   y = (widget->allocation.height + ascent - descent) / 2;
 
-  gtk_draw_box (widget->style,
-		widget->window,
-		widget->state,
-		clock->shadow_type,
-		0, 0, widget->allocation.width, widget->allocation.height);
-  gdk_draw_string (widget->window,
-		   widget->style->font,
-		   widget->style->text_gc[GTK_STATE_NORMAL], x, y, time_buf);
+  gtk_draw_box (widget->style, widget->window, widget->state, clock->shadow_type, 0, 0, widget->allocation.width, widget->allocation.height);
+  gdk_draw_string (widget->window, widget->style->font, widget->style->text_gc[GTK_STATE_NORMAL], x, y, time_buf);
 }
 
 static void
@@ -737,18 +682,18 @@ my_gtk_clock_draw_internal (GtkWidget * widget)
   clock = MY_GTK_CLOCK (widget);
 
   if (GTK_WIDGET_DRAWABLE (widget))
+  {
+    switch (clock->mode)
     {
-      switch (clock->mode)
-	{
-	case MY_GTK_CLOCK_ANALOG:
-	  my_gtk_clock_draw_analog (widget);
-	  break;
-	case MY_GTK_CLOCK_DIGITAL:
-	default:
-	  my_gtk_clock_draw_digital (widget);
-	  break;
-	}
+    case MY_GTK_CLOCK_ANALOG:
+      my_gtk_clock_draw_analog (widget);
+      break;
+    case MY_GTK_CLOCK_DIGITAL:
+    default:
+      my_gtk_clock_draw_digital (widget);
+      break;
     }
+  }
 }
 
 static gint
@@ -782,18 +727,14 @@ my_gtk_clock_draw (GtkWidget * widget, GdkRectangle * area)
 
   clock = MY_GTK_CLOCK (widget);
   if (clock->parent_style != widget->parent->style)
-    {
-      if (clock->parent_style)
-	gtk_style_unref (clock->parent_style);
-      clock->parent_style = widget->parent->style;
-      gtk_style_ref (clock->parent_style);
-    }
+  {
+    if (clock->parent_style)
+      gtk_style_unref (clock->parent_style);
+    clock->parent_style = widget->parent->style;
+    gtk_style_ref (clock->parent_style);
+  }
   if (clock->mode == MY_GTK_CLOCK_ANALOG)
-    gtk_draw_box (clock->parent_style,
-		  widget->window,
-		  widget->parent->state,
-		  GTK_SHADOW_NONE,
-		  0, 0, widget->allocation.width, widget->allocation.height);
+    gtk_draw_box (clock->parent_style, widget->window, widget->parent->state, GTK_SHADOW_NONE, 0, 0, widget->allocation.width, widget->allocation.height);
   my_gtk_clock_draw_internal (widget);
 }
 
@@ -818,15 +759,15 @@ my_gtk_clock_timer (MyGtkClock * clock)
   m = tm->tm_min;
   s = tm->tm_sec;
   if (!(((!(clock->display_secs)) || (s == os)) && (m == om) && (h == oh)))
-    {
-      os = s;
-      om = m;
-      oh = h;
-      clock->hrs_angle = 2.5 * M_PI - (h % 12) * M_PI / 6 - m * M_PI / 360;
-      clock->min_angle = 2.5 * M_PI - m * M_PI / 30;
-      clock->sec_angle = 2.5 * M_PI - s * M_PI / 30;
-      my_gtk_clock_draw_internal (GTK_WIDGET (clock));
-    }
+  {
+    os = s;
+    om = m;
+    oh = h;
+    clock->hrs_angle = 2.5 * M_PI - (h % 12) * M_PI / 6 - m * M_PI / 360;
+    clock->min_angle = 2.5 * M_PI - m * M_PI / 30;
+    clock->sec_angle = 2.5 * M_PI - s * M_PI / 30;
+    my_gtk_clock_draw_internal (GTK_WIDGET (clock));
+  }
 
   sem = FALSE;
   return TRUE;

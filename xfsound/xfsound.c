@@ -128,16 +128,16 @@ void
 readstr (int i, char *str, FILE * f)
 {
   if (str)
+  {
+    if ((f) && (fgets (str, i - 1, f)) && (strlen (str)))
     {
-      if ((f) && (fgets (str, i - 1, f)) && (strlen (str)))
-        {
-	  str [strlen(str) - 1] = '\0';
-	}
-      else
-        {
-	  strcpy (str, "\0");
-	}
+      str[strlen (str) - 1] = '\0';
     }
+    else
+    {
+      strcpy (str, "\0");
+    }
+  }
 }
 
 void
@@ -148,34 +148,34 @@ loadcfg (XFSound * s)
 
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), RCFILE);
   if (existfile (homedir))
+  {
+    f = fopen (homedir, "r");
+  }
+  else
+  {
+    snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, RCFILE);
+    if (existfile (homedir))
     {
       f = fopen (homedir, "r");
     }
-  else
-    {
-      snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, RCFILE);
-      if (existfile (homedir))
-	{
-	  f = fopen (homedir, "r");
-	}
-    }
+  }
 
   if (f)
-    {
-      readstr (15, tempstr, f);
-      s->playsnd = (my_strncasecmp (tempstr, "Play", strlen ("Play")) == 0);
-      readstr (MAXSTRLEN, s->playcmd, f);
-      for (i = 0; i < (KNOWN_MESSAGES + KNOWN_BUILTIN); i++)
-	readstr (MAXSTRLEN, s->datafiles[i], f);
-      fclose (f);
-    }
+  {
+    readstr (15, tempstr, f);
+    s->playsnd = (my_strncasecmp (tempstr, "Play", strlen ("Play")) == 0);
+    readstr (MAXSTRLEN, s->playcmd, f);
+    for (i = 0; i < (KNOWN_MESSAGES + KNOWN_BUILTIN); i++)
+      readstr (MAXSTRLEN, s->datafiles[i], f);
+    fclose (f);
+  }
   else
-    {
-      s->playsnd = 0;
-      strcpy (s->playcmd, "\0");
-      for (i = 0; i < (KNOWN_MESSAGES + KNOWN_BUILTIN); i++)
-	strcpy (s->datafiles[i], "\0");
-    }
+  {
+    s->playsnd = 0;
+    strcpy (s->playcmd, "\0");
+    for (i = 0; i < (KNOWN_MESSAGES + KNOWN_BUILTIN); i++)
+      strcpy (s->datafiles[i], "\0");
+  }
 }
 
 int
@@ -187,13 +187,13 @@ savecfg (XFSound * s)
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), RCFILE);
 
   if ((f = fopen (homedir, "w")))
-    {
-      fprintf (f, "%s\n", ((s->playsnd) ? "Play" : "NoPlay"));
-      fprintf (f, "%s\n", s->playcmd);
-      for (i = 0; i < (KNOWN_MESSAGES + KNOWN_BUILTIN); i++)
-	fprintf (f, "%s\n", s->datafiles[i]);
-      fclose (f);
-    }
+  {
+    fprintf (f, "%s\n", ((s->playsnd) ? "Play" : "NoPlay"));
+    fprintf (f, "%s\n", s->playcmd);
+    for (i = 0; i < (KNOWN_MESSAGES + KNOWN_BUILTIN); i++)
+      fprintf (f, "%s\n", s->datafiles[i]);
+    fclose (f);
+  }
   return ((f != NULL));
 }
 
@@ -212,26 +212,25 @@ audio_play (short code, short backgnd)
 {
   char *command;
 
-  if ((sndcfg.playsnd) && strlen (sndcfg.playcmd)
-      && strlen (sndcfg.datafiles[code]))
+  if ((sndcfg.playsnd) && strlen (sndcfg.playcmd) && strlen (sndcfg.datafiles[code]))
+  {
+    if (my_strncasecmp (sndcfg.playcmd, INTERNAL_PLAYER, strlen (INTERNAL_PLAYER)) == 0)
     {
-      if (my_strncasecmp
-	  (sndcfg.playcmd, INTERNAL_PLAYER, strlen (INTERNAL_PLAYER)) == 0)
-	{
-	  i_play (sndcfg.datafiles[code]);
-	}
-      else
-	{
-	  command = (char *) malloc ((MAXSTRLEN + 1) * sizeof (char));
-	  strcpy (command, sndcfg.playcmd);
-	  strcat (command, " ");
-	  strcat (command, sndcfg.datafiles[code]);
-          /* If backgnd is set, run command in background */
-          if (backgnd) strcat (command, " &");
-	  system (command);
-	  free (command);
-	}
+      i_play (sndcfg.datafiles[code]);
     }
+    else
+    {
+      command = (char *) malloc ((MAXSTRLEN + 1) * sizeof (char));
+      strcpy (command, sndcfg.playcmd);
+      strcat (command, " ");
+      strcat (command, sndcfg.datafiles[code]);
+      /* If backgnd is set, run command in background */
+      if (backgnd)
+	strcat (command, " &");
+      system (command);
+      free (command);
+    }
+  }
 }
 
 void
@@ -239,12 +238,12 @@ done (int n)
 {
   /* Cancel all signals handling to prevent the sound to be played twice ! */
   signal (SIGPIPE, SIG_IGN);
-  signal (SIGINT,  SIG_IGN);
+  signal (SIGINT, SIG_IGN);
   signal (SIGKILL, SIG_IGN);
   signal (SIGTERM, SIG_IGN);
   signal (SIGQUIT, SIG_IGN);
   signal (SIGSTOP, SIG_IGN);
-  signal (SIGHUP,  SIG_IGN);
+  signal (SIGHUP, SIG_IGN);
 
   audio_play (BUILTIN_SHUTDOWN, 0);
   exit (n);
@@ -265,22 +264,22 @@ Loop (int *fd)
   long code;
 
   while (1)
+  {
+    if ((count = ReadXfwmPacket (fd[1], header, &body)) <= 0)
     {
-      if ((count = ReadXfwmPacket (fd[1], header, &body)) <= 0)
-	{
-	  free (body);
-	  done (0);
-	}
       free (body);
-      code = value_table (header[1]);
-
-      loadcfg (&sndcfg);
-
-      if (code >= 0 && code < MAX_MESSAGES)
-	audio_play (code, 1);
-      else if (code >= MAX_MESSAGES)
-	audio_play (BUILTIN_UNKNOWN, 1);
+      done (0);
     }
+    free (body);
+    code = value_table (header[1]);
+
+    loadcfg (&sndcfg);
+
+    if (code >= 0 && code < MAX_MESSAGES)
+      audio_play (code, 1);
+    else if (code >= MAX_MESSAGES)
+      audio_play (BUILTIN_UNKNOWN, 1);
+  }
 }
 
 void
@@ -288,12 +287,12 @@ startmodule (int argc, char *argv[])
 {
   /* Intercept interupt signals to play "logout" sound */
   signal (SIGPIPE, DeadPipe);
-  signal (SIGINT,  DeadPipe);
+  signal (SIGINT, DeadPipe);
   signal (SIGKILL, DeadPipe);
   signal (SIGTERM, DeadPipe);
   signal (SIGQUIT, DeadPipe);
   signal (SIGSTOP, DeadPipe);
-  signal (SIGHUP,  DeadPipe);
+  signal (SIGHUP, DeadPipe);
 
   /* Initiate pipe */
   fd[0] = atoi (argv[1]);
@@ -307,16 +306,12 @@ startmodule (int argc, char *argv[])
 char *
 get_all_data (int i)
 {
-  if (gtk_toggle_button_get_active
-      (GTK_TOGGLE_BUTTON (play_sound_checkbutton)))
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (play_sound_checkbutton)))
     sndcfg.playsnd = 1;
   else
     sndcfg.playsnd = 0;
-  strcpy (sndcfg.playcmd,
-	  cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (command_entry))));
-  strcpy (sndcfg.datafiles[i],
-	  cleanup ((char *)
-		   gtk_entry_get_text (GTK_ENTRY (soundfile_entry))));
+  strcpy (sndcfg.playcmd, cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (command_entry))));
+  strcpy (sndcfg.datafiles[i], cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (soundfile_entry))));
   return (sndcfg.datafiles[i]);
 }
 
@@ -326,14 +321,11 @@ update_all_data (void)
   int i;
 
   if (prev >= 0)
-    strcpy (sndcfg.datafiles[prev],
-	    cleanup ((char *)
-		     gtk_entry_get_text (GTK_ENTRY (soundfile_entry))));
+    strcpy (sndcfg.datafiles[prev], cleanup ((char *) gtk_entry_get_text (GTK_ENTRY (soundfile_entry))));
   i = list_get_choice_selected ();
   gtk_entry_set_text (GTK_ENTRY (command_entry), sndcfg.playcmd);
   gtk_entry_set_text (GTK_ENTRY (soundfile_entry), sndcfg.datafiles[i]);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (play_sound_checkbutton),
-				(sndcfg.playsnd != 0));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (play_sound_checkbutton), (sndcfg.playsnd != 0));
   prev = i;
 }
 
@@ -367,15 +359,13 @@ create_xfsound ()
   gtk_widget_set_name (xfsound, "xfsound");
   gtk_object_set_data (GTK_OBJECT (xfsound), "xfsound", xfsound);
   gtk_widget_set_usize (xfsound, 0, 0);
-  gtk_window_set_title (GTK_WINDOW (xfsound),
-			_("XFSound - XFce Sound Manager"));
+  gtk_window_set_title (GTK_WINDOW (xfsound), _("XFSound - XFce Sound Manager"));
   gtk_window_position (GTK_WINDOW (xfsound), GTK_WIN_POS_CENTER);
   gtk_window_set_policy (GTK_WINDOW (xfsound), TRUE, TRUE, FALSE);
 
   xfsound_mainframe = gtk_frame_new (NULL);
   gtk_widget_set_name (xfsound_mainframe, "xfsound_mainframe");
-  gtk_object_set_data (GTK_OBJECT (xfsound), "xfsound_mainframe",
-		       xfsound_mainframe);
+  gtk_object_set_data (GTK_OBJECT (xfsound), "xfsound_mainframe", xfsound_mainframe);
   gtk_widget_show (xfsound_mainframe);
   gtk_container_add (GTK_CONTAINER (xfsound), xfsound_mainframe);
 #ifdef OLD_STYLE
@@ -383,7 +373,7 @@ create_xfsound ()
 #else
   gtk_frame_set_shadow_type (GTK_FRAME (xfsound_mainframe), GTK_SHADOW_OUT);
 #endif
-  
+
   vbox1 = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (vbox1, "vbox1");
   gtk_object_set_data (GTK_OBJECT (xfsound), "vbox1", vbox1);
@@ -420,57 +410,42 @@ create_xfsound ()
   gtk_widget_set_name (label1, "label1");
   gtk_object_set_data (GTK_OBJECT (xfsound), "label1", label1);
   gtk_widget_show (label1);
-  gtk_table_attach (GTK_TABLE (table1), label1, 0, 1, 0, 1,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_table_attach (GTK_TABLE (table1), label1, 0, 1, 0, 1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label1), 1, 0.5);
 
   label3 = gtk_label_new (_("Sound file : "));
   gtk_widget_set_name (label3, "label3");
   gtk_object_set_data (GTK_OBJECT (xfsound), "label3", label3);
   gtk_widget_show (label3);
-  gtk_table_attach (GTK_TABLE (table1), label3, 0, 1, 1, 2,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
+  gtk_table_attach (GTK_TABLE (table1), label3, 0, 1, 1, 2, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label3), 1, 0.5);
 
   test_button = gtk_button_new_with_label (_("Test"));
   gtk_widget_set_name (test_button, "test_button");
   gtk_object_set_data (GTK_OBJECT (xfsound), "test_button", test_button);
   gtk_widget_show (test_button);
-  gtk_table_attach (GTK_TABLE (table1), test_button, 2, 3, 0, 1,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND, 0, 0);
+  gtk_table_attach (GTK_TABLE (table1), test_button, 2, 3, 0, 1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND, 0, 0);
 
   browse_button = gtk_button_new_with_label (_("Browse ..."));
   gtk_widget_set_name (browse_button, "browse_button");
   gtk_object_set_data (GTK_OBJECT (xfsound), "browse_button", browse_button);
   gtk_widget_show (browse_button);
-  gtk_table_attach (GTK_TABLE (table1), browse_button, 2, 3, 1, 2,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND, 0, 0);
+  gtk_table_attach (GTK_TABLE (table1), browse_button, 2, 3, 1, 2, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND, 0, 0);
 
   soundfile_entry = gtk_entry_new ();
   gtk_widget_set_name (soundfile_entry, "soundfile_entry");
-  gtk_object_set_data (GTK_OBJECT (xfsound), "soundfile_entry",
-		       soundfile_entry);
+  gtk_object_set_data (GTK_OBJECT (xfsound), "soundfile_entry", soundfile_entry);
   /* gtk_widget_set_style(soundfile_entry, pal->cm[4]); */
   gtk_widget_show (soundfile_entry);
-  gtk_table_attach (GTK_TABLE (table1), soundfile_entry, 1, 2, 1, 2,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 5, 5);
+  gtk_table_attach (GTK_TABLE (table1), soundfile_entry, 1, 2, 1, 2, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, 5, 5);
 
   list_event_optionmenu = gtk_option_menu_new ();
   gtk_widget_set_name (list_event_optionmenu, "list_event_optionmenu");
-  gtk_object_set_data (GTK_OBJECT (xfsound), "list_event_optionmenu",
-		       list_event_optionmenu);
+  gtk_object_set_data (GTK_OBJECT (xfsound), "list_event_optionmenu", list_event_optionmenu);
   gtk_widget_show (list_event_optionmenu);
-  gtk_table_attach (GTK_TABLE (table1), list_event_optionmenu, 1, 2, 0, 1,
-		    (GtkAttachOptions) GTK_EXPAND | GTK_FILL,
-		    (GtkAttachOptions) 0, 5, 5);
+  gtk_table_attach (GTK_TABLE (table1), list_event_optionmenu, 1, 2, 0, 1, (GtkAttachOptions) GTK_EXPAND | GTK_FILL, (GtkAttachOptions) 0, 5, 5);
   list_event_optionmenu_menu = gtk_menu_new ();
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (list_event_optionmenu),
-			    list_event_optionmenu_menu);
+  gtk_option_menu_set_menu (GTK_OPTION_MENU (list_event_optionmenu), list_event_optionmenu_menu);
 
   frame5 = gtk_frame_new (NULL);
   gtk_widget_set_name (frame5, "frame5");
@@ -487,8 +462,7 @@ create_xfsound ()
 
   play_sound_checkbutton = gtk_check_button_new_with_label (_("Play Sound"));
   gtk_widget_set_name (play_sound_checkbutton, "play_sound_checkbutton");
-  gtk_object_set_data (GTK_OBJECT (xfsound), "play_sound_checkbutton",
-		       play_sound_checkbutton);
+  gtk_object_set_data (GTK_OBJECT (xfsound), "play_sound_checkbutton", play_sound_checkbutton);
   gtk_widget_show (play_sound_checkbutton);
   gtk_box_pack_start (GTK_BOX (hbox1), play_sound_checkbutton, TRUE, TRUE, 5);
   gtk_container_border_width (GTK_CONTAINER (play_sound_checkbutton), 5);
@@ -513,23 +487,20 @@ create_xfsound ()
   gtk_object_set_data (GTK_OBJECT (xfsound), "vbuttonbox1", vbuttonbox1);
   gtk_widget_show (vbuttonbox1);
   gtk_box_pack_start (GTK_BOX (hbox1), vbuttonbox1, TRUE, TRUE, 0);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox1),
-			     GTK_BUTTONBOX_SPREAD);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (vbuttonbox1), GTK_BUTTONBOX_SPREAD);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (vbuttonbox1), 0);
   gtk_button_box_set_child_size (GTK_BUTTON_BOX (vbuttonbox1), 0, 0);
   gtk_button_box_set_child_ipadding (GTK_BUTTON_BOX (vbuttonbox1), 0, 0);
 
   internal_player_button = gtk_button_new_with_label (_("Internal"));
   gtk_widget_set_name (internal_player_button, "internal_player_button");
-  gtk_object_set_data (GTK_OBJECT (xfsound), "internal_player_button",
-		       internal_player_button);
+  gtk_object_set_data (GTK_OBJECT (xfsound), "internal_player_button", internal_player_button);
   gtk_widget_show (internal_player_button);
   gtk_container_add (GTK_CONTAINER (vbuttonbox1), internal_player_button);
 
   external_player_button = gtk_button_new_with_label (_("External"));
   gtk_widget_set_name (external_player_button, "external_player_button");
-  gtk_object_set_data (GTK_OBJECT (xfsound), "external_player_button",
-		       external_player_button);
+  gtk_object_set_data (GTK_OBJECT (xfsound), "external_player_button", external_player_button);
   gtk_widget_show (external_player_button);
   gtk_container_add (GTK_CONTAINER (vbuttonbox1), external_player_button);
 
@@ -543,16 +514,14 @@ create_xfsound ()
   hbuttonbox2 = gtk_hbutton_box_new ();
   gtk_widget_set_name (hbuttonbox2, "hbuttonbox2");
   gtk_object_set_data (GTK_OBJECT (xfsound), "hbuttonbox2", hbuttonbox2);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox2),
-			     GTK_BUTTONBOX_SPREAD);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox2), GTK_BUTTONBOX_SPREAD);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (hbuttonbox2), 0);
   gtk_button_box_set_child_size (GTK_BUTTON_BOX (hbuttonbox2), 0, 0);
   gtk_button_box_set_child_ipadding (GTK_BUTTON_BOX (hbuttonbox2), 0, 0);
   gtk_container_border_width (GTK_CONTAINER (hbuttonbox2), 5);
   gtk_widget_show (hbuttonbox2);
   gtk_container_add (GTK_CONTAINER (frame3), hbuttonbox2);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox2),
-			     GTK_BUTTONBOX_SPREAD);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox2), GTK_BUTTONBOX_SPREAD);
 
   ok_button = gtk_button_new_with_label (_("Ok"));
   gtk_widget_set_name (ok_button, "ok_button");
@@ -561,13 +530,11 @@ create_xfsound ()
   gtk_container_add (GTK_CONTAINER (hbuttonbox2), ok_button);
   GTK_WIDGET_SET_FLAGS (ok_button, GTK_CAN_DEFAULT);
   gtk_widget_grab_default (ok_button);
-  
+
   accel_group = gtk_accel_group_new ();
   gtk_window_add_accel_group (GTK_WINDOW (xfsound), accel_group);
-  gtk_widget_add_accelerator (ok_button, "clicked", accel_group,
-			      GDK_Return, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (ok_button, "clicked", accel_group,
-			      GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok_button, "clicked", accel_group, GDK_Return, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok_button, "clicked", accel_group, GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   apply_button = gtk_button_new_with_label (_("Apply"));
   gtk_widget_set_name (apply_button, "apply_button");
@@ -575,8 +542,7 @@ create_xfsound ()
   gtk_widget_show (apply_button);
   gtk_container_add (GTK_CONTAINER (hbuttonbox2), apply_button);
   GTK_WIDGET_SET_FLAGS (apply_button, GTK_CAN_DEFAULT);
-  gtk_widget_add_accelerator (apply_button, "clicked", accel_group,
-			      GDK_a, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (apply_button, "clicked", accel_group, GDK_a, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   cancel_button = gtk_button_new_with_label (_("Cancel"));
   gtk_widget_set_name (cancel_button, "cancel_button");
@@ -584,28 +550,17 @@ create_xfsound ()
   gtk_widget_show (cancel_button);
   gtk_container_add (GTK_CONTAINER (hbuttonbox2), cancel_button);
   GTK_WIDGET_SET_FLAGS (cancel_button, GTK_CAN_DEFAULT);
-  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group,
-			      GDK_Escape, 0, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group,
-			      GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
-		      GTK_SIGNAL_FUNC (ok_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
-		      GTK_SIGNAL_FUNC (cancel_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (apply_button), "clicked",
-		      GTK_SIGNAL_FUNC (apply_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (play_sound_checkbutton), "clicked",
-		      GTK_SIGNAL_FUNC (doplay_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (external_player_button), "clicked",
-		      GTK_SIGNAL_FUNC (defaultcmd_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (internal_player_button), "clicked",
-		      GTK_SIGNAL_FUNC (internal_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (browse_button), "clicked",
-		      GTK_SIGNAL_FUNC (browsefile_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (test_button), "clicked",
-		      GTK_SIGNAL_FUNC (testfile_cb), NULL);
-  gtk_signal_connect (GTK_OBJECT (xfsound), "delete_event",
-		      GTK_SIGNAL_FUNC (delete_event), NULL);
+  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group, GDK_Escape, 0, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (cancel_button, "clicked", accel_group, GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_signal_connect (GTK_OBJECT (ok_button), "clicked", GTK_SIGNAL_FUNC (ok_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked", GTK_SIGNAL_FUNC (cancel_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (apply_button), "clicked", GTK_SIGNAL_FUNC (apply_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (play_sound_checkbutton), "clicked", GTK_SIGNAL_FUNC (doplay_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (external_player_button), "clicked", GTK_SIGNAL_FUNC (defaultcmd_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (internal_player_button), "clicked", GTK_SIGNAL_FUNC (internal_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (browse_button), "clicked", GTK_SIGNAL_FUNC (browsefile_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (test_button), "clicked", GTK_SIGNAL_FUNC (testfile_cb), NULL);
+  gtk_signal_connect (GTK_OBJECT (xfsound), "delete_event", GTK_SIGNAL_FUNC (delete_event), NULL);
 
   return xfsound;
 }
@@ -613,7 +568,7 @@ create_xfsound ()
 void
 private_update_menuentry_cb (GtkWidget * widget, gpointer data)
 {
-  private_menu_selected = (gint)((long)data);
+  private_menu_selected = (gint) ((long) data);
   update_all_data ();
 }
 
@@ -624,15 +579,13 @@ list_addto_choice (char *name)
   GtkWidget *menuitem = NULL;
 
   if (name && strlen (name))
-    {
-      menuitem = gtk_menu_item_new_with_label (name);
-      gtk_menu_append (GTK_MENU (list_event_optionmenu_menu), menuitem);
-      gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-			  GTK_SIGNAL_FUNC (private_update_menuentry_cb),
-			  (gpointer)((long)position++));
-      gtk_widget_show (menuitem);
-      gtk_widget_realize (menuitem);
-    }
+  {
+    menuitem = gtk_menu_item_new_with_label (name);
+    gtk_menu_append (GTK_MENU (list_event_optionmenu_menu), menuitem);
+    gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (private_update_menuentry_cb), (gpointer) ((long) position++));
+    gtk_widget_show (menuitem);
+    gtk_widget_realize (menuitem);
+  }
   return menuitem;
 }
 
@@ -645,8 +598,7 @@ list_get_choice_selected (void)
 void
 list_set_choice_selected (int index)
 {
-  gtk_option_menu_set_history (GTK_OPTION_MENU (list_event_optionmenu),
-			       index);
+  gtk_option_menu_set_history (GTK_OPTION_MENU (list_event_optionmenu), index);
   private_menu_selected = index;
 }
 
@@ -670,22 +622,20 @@ main (int argc, char *argv[])
   loadcfg (&sndcfg);
 
   if ((argc != 6) && (argc != 7))
-    {
-      xfce_init (&argc, &argv);
+  {
+    xfce_init (&argc, &argv);
 
-      xfsound = create_xfsound ();
-      init_choice_str ();
-      list_set_choice_selected (0);
-      gtk_entry_set_text (GTK_ENTRY (command_entry), sndcfg.playcmd);
-      gtk_entry_set_text (GTK_ENTRY (soundfile_entry), sndcfg.datafiles[0]);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				    (play_sound_checkbutton),
-				    (sndcfg.playsnd != 0));
-      gtk_widget_show (xfsound);
-      set_icon (xfsound, "XFSound", xfsound_icon_xpm);
-      gtk_main ();
-      xfce_end ((gpointer) NULL, 0);
-    }
+    xfsound = create_xfsound ();
+    init_choice_str ();
+    list_set_choice_selected (0);
+    gtk_entry_set_text (GTK_ENTRY (command_entry), sndcfg.playcmd);
+    gtk_entry_set_text (GTK_ENTRY (soundfile_entry), sndcfg.datafiles[0]);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (play_sound_checkbutton), (sndcfg.playsnd != 0));
+    gtk_widget_show (xfsound);
+    set_icon (xfsound, "XFSound", xfsound_icon_xpm);
+    gtk_main ();
+    xfce_end ((gpointer) NULL, 0);
+  }
   else
     startmodule (argc, argv);
   return (0);

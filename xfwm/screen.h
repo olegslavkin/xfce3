@@ -98,19 +98,19 @@
 
 typedef struct name_list_struct
 {
-    struct name_list_struct *next;	/* pointer to the next name */
-    char *name;			/* the name of the window */
-    char *value;			/* icon name */
-    int Desk;			/* Desktop number */
-    unsigned long on_flags;
-    unsigned long off_flags;
-    int border_width;
-    int layer;
-    int resize_width;
-    char *ForeColor;
-    char *BackColor;
-    unsigned long on_buttons;
-    unsigned long off_buttons;
+  struct name_list_struct *next;	/* pointer to the next name */
+  char *name;			/* the name of the window */
+  char *value;			/* icon name */
+  int Desk;			/* Desktop number */
+  unsigned long on_flags;
+  unsigned long off_flags;
+  int border_width;
+  int layer;
+  int resize_width;
+  char *ForeColor;
+  char *BackColor;
+  unsigned long on_buttons;
+  unsigned long off_buttons;
 
 }
 name_list;
@@ -118,28 +118,27 @@ name_list;
 /* used for parsing configuration */
 struct config
 {
-    char *keyword;
+  char *keyword;
 #ifdef __STDC__
-    void (*action) (char *, FILE *, char **, int *);
+  void (*action) (char *, FILE *, char **, int *);
 #else
-void (*action) ();
+  void (*action) ();
 #endif
-    char **arg;
-    int *arg2;
+  char **arg;
+  int *arg2;
 };
 
 /* used for parsing commands */
 struct functions
 {
-    char *keyword;
+  char *keyword;
 #ifdef __STDC__
-    void (*action) (XEvent *, Window, XfwmWindow *, unsigned long, char *,
-                    int *);
+  void (*action) (XEvent *, Window, XfwmWindow *, unsigned long, char *, int *);
 #else
-    void (*action) ();
+  void (*action) ();
 #endif
-    int code;
-    int type;
+  int code;
+  int type;
 };
 
 /* values for name_list flags */
@@ -173,102 +172,102 @@ struct functions
 
 typedef enum
 {
-    VectorButton,
-    SimpleButton,
-    GradButton,
-    SolidButton
+  VectorButton,
+  SimpleButton,
+  GradButton,
+  SolidButton
 }
 ButtonFaceStyle;
 
 typedef enum
 {
-    XFCE_ENGINE,
-    MOFIT_ENGINE,
-    TRENCH_ENGINE,
-    GTK_ENGINE
+  XFCE_ENGINE,
+  MOFIT_ENGINE,
+  TRENCH_ENGINE,
+  GTK_ENGINE
 }
 EngineType;
 
 typedef struct ButtonFace
 {
-    ButtonFaceStyle style;
+  ButtonFaceStyle style;
+  struct
+  {
+    Pixel back;
+    ColorPair Relief;
+    GC ShadowGC;		/* GC for button shadow */
+    GC ReliefGC;		/* GC for button background */
     struct
     {
-        Pixel back;
-        ColorPair Relief;
-        GC ShadowGC;              /* GC for button shadow */
-        GC ReliefGC;              /* GC for button background */
-        struct
-        {
-            int npixels;
-            Pixel *pixels;
-        }
-        grad;
+      int npixels;
+      Pixel *pixels;
     }
-    u;
-    struct vector_coords
-    {
-        int num;
-        int x[20];
-        int y[20];
-        int line_style[20];
-    }
-    vector;
-    Pixmap bitmap;
-    Pixmap bitmap_pressed;
-    struct ButtonFace *next;
+    grad;
+  }
+  u;
+  struct vector_coords
+  {
+    int num;
+    int x[20];
+    int y[20];
+    int line_style[20];
+  }
+  vector;
+  Pixmap bitmap;
+  Pixmap bitmap_pressed;
+  struct ButtonFace *next;
 }
 ButtonFace;
 
 /* button style flags (per title button) */
 enum
 {
-    /* MWM function hint button assignments */
-    MWMDecorMenu = (1 << 0),
-    MWMDecorMinimize = (1 << 1),
-    MWMDecorMaximize = (1 << 2),
-    DecorSticky = (1 << 3),
-    DecorShaded = (1 << 4)
+  /* MWM function hint button assignments */
+  MWMDecorMenu = (1 << 0),
+  MWMDecorMinimize = (1 << 1),
+  MWMDecorMaximize = (1 << 2),
+  DecorSticky = (1 << 3),
+  DecorShaded = (1 << 4)
 };
 
 enum ButtonState
 {
-    Active, Inactive,
-    MaxButtonState
+  Active, Inactive,
+  MaxButtonState
 };
 
 typedef struct
 {
-    int flags;
-    ButtonFace state[MaxButtonState];
+  int flags;
+  ButtonFace state[MaxButtonState];
 }
 TitleButton;
 
 typedef struct XfwmDecor
 {
-    ColorPair HiColors;		/* standard fore/back colors */
-    ColorPair LoColors;		/* standard fore/back colors */
-    ColorPair HiRelief;
-    ColorPair LoRelief;
-    GC HiReliefGC;		/* GC for active window relief */
-    GC HiShadowGC;		/* GC for active window shadow */
-    GC HiBackGC;		/* GC for active window background */
-    GC LoReliefGC;		/* GC for inactive window relief */
-    GC LoShadowGC;		/* GC for inactive window shadow */
-    GC LoBackGC;		/* GC for inactive window background */
+  ColorPair HiColors;		/* standard fore/back colors */
+  ColorPair LoColors;		/* standard fore/back colors */
+  ColorPair HiRelief;
+  ColorPair LoRelief;
+  GC HiReliefGC;		/* GC for active window relief */
+  GC HiShadowGC;		/* GC for active window shadow */
+  GC HiBackGC;			/* GC for active window background */
+  GC LoReliefGC;		/* GC for inactive window relief */
+  GC LoShadowGC;		/* GC for inactive window shadow */
+  GC LoBackGC;			/* GC for inactive window background */
 
-    int TitleHeight;		/* height of the title bar window */
-    XfwmFont WindowFont;		/* font structure for window titles */
+  int TitleHeight;		/* height of the title bar window */
+  XfwmFont WindowFont;		/* font structure for window titles */
 
-    /* titlebar buttons */
-    TitleButton left_buttons[3];
-    TitleButton right_buttons[3];
-    TitleButton titlebar;
-    struct BorderStyle
-    {
-        ButtonFace active, inactive;
-    }
-    BorderStyle;
+  /* titlebar buttons */
+  TitleButton left_buttons[3];
+  TitleButton right_buttons[3];
+  TitleButton titlebar;
+  struct BorderStyle
+  {
+    ButtonFace active, inactive;
+  }
+  BorderStyle;
 }
 XfwmDecor;
 
@@ -276,103 +275,103 @@ XfwmDecor;
 typedef struct ScreenInfo
 {
 
-    unsigned long screen;
-    int d_depth;			/* copy of DefaultDepth(dpy, screen) */
-    int NumberOfScreens;		/* number of screens on display */
-    int MyDisplayWidth;		        /* my copy of DisplayWidth(dpy, screen) */
-    int MyDisplayHeight;		/* my copy of DisplayHeight(dpy, screen) */
+  unsigned long screen;
+  int d_depth;			/* copy of DefaultDepth(dpy, screen) */
+  int NumberOfScreens;		/* number of screens on display */
+  int MyDisplayWidth;		/* my copy of DisplayWidth(dpy, screen) */
+  int MyDisplayHeight;		/* my copy of DisplayHeight(dpy, screen) */
 
-    XfwmWindow XfwmRoot;		/* the head of the xfwm window list */
-    Window Root;			/* the root window */
-    Window NoFocusWin;		        /* Window which will own focus when no other window have focus */
-    Window GnomeProxyWin;		/* Root proxy*/
+  XfwmWindow XfwmRoot;		/* the head of the xfwm window list */
+  Window Root;			/* the root window */
+  Window NoFocusWin;		/* Window which will own focus when no other window have focus */
+  Window GnomeProxyWin;		/* Root proxy */
 
-    Binding *AllBindings;
-    MenuRoot *AllMenus;
+  Binding *AllBindings;
+  MenuRoot *AllMenus;
 
-    int root_pushes;		/* current push level to install root
-    		 * colormap windows */
-    XfwmWindow *pushed_window;	/* saved window to install when pushes drops
-    		 * to zero */
-    Cursor XfwmCursors[MAX_CURSORS];
+  int root_pushes;		/* current push level to install root
+				   * colormap windows */
+  XfwmWindow *pushed_window;	/* saved window to install when pushes drops
+				   * to zero */
+  Cursor XfwmCursors[MAX_CURSORS];
 
-    name_list *TheList;		/* list of window names with attributes */
-    char *DefaultIcon;		/* Icon to use when no other icons are found */
+  name_list *TheList;		/* list of window names with attributes */
+  char *DefaultIcon;		/* Icon to use when no other icons are found */
 
-    ColorPair MenuColors;
-    ColorPair MenuSelColors;
-    ColorPair MenuRelief;
+  ColorPair MenuColors;
+  ColorPair MenuSelColors;
+  ColorPair MenuRelief;
 
-    XfwmFont StdFont;		/* font structure */
-    XfwmFont IconFont;		/* for icon labels */
-    XfwmFont WindowFont;		/* font structure for window titles */
+  XfwmFont StdFont;		/* font structure */
+  XfwmFont IconFont;		/* for icon labels */
+  XfwmFont WindowFont;		/* font structure for window titles */
 
-    GC TransMaskGC;		/* GC for transparency masks */
-    GC DrawGC;			/* GC to draw lines for move and resize */
-    GC HintsGC;			/* GC to draw lines and strings */
-    GC MenuGC;
-    GC MenuReliefGC;
-    GC MenuShadowGC;
-    GC MenuSelGC;
-    GC MenuSelReliefGC;
-    GC MenuSelShadowGC;
-    GC ScratchGC1;
-    GC ScratchGC3;
-    GC BlackGC;
+  GC TransMaskGC;		/* GC for transparency masks */
+  GC DrawGC;			/* GC to draw lines for move and resize */
+  GC HintsGC;			/* GC to draw lines and strings */
+  GC MenuGC;
+  GC MenuReliefGC;
+  GC MenuShadowGC;
+  GC MenuSelGC;
+  GC MenuSelReliefGC;
+  GC MenuSelShadowGC;
+  GC ScratchGC1;
+  GC ScratchGC3;
+  GC BlackGC;
 
-    int SizeStringWidth;		/* minimum width of size window */
-    int CornerWidth;		/* corner width for decoratedwindows */
-    int BoundaryWidth;		/* frame width for decorated windows */
-    int NoBoundaryWidth;		/* frame width for decorated windows */
+  int SizeStringWidth;		/* minimum width of size window */
+  int CornerWidth;		/* corner width for decoratedwindows */
+  int BoundaryWidth;		/* frame width for decorated windows */
+  int NoBoundaryWidth;		/* frame width for decorated windows */
 
-    XfwmDecor DefaultDecor;	/* decoration style(s) */
+  XfwmDecor DefaultDecor;	/* decoration style(s) */
 
-    int nr_left_buttons;		/* number of left-side title-bar buttons */
-    int nr_right_buttons;		/* number of right-side title-bar buttons */
+  int nr_left_buttons;		/* number of left-side title-bar buttons */
+  int nr_right_buttons;		/* number of right-side title-bar buttons */
 
-    XfwmWindow *Hilite;		/* the xfwm window that is highlighted
-    		 * except for networking delays, this is the
-    		 * window which REALLY has the focus */
-    XfwmWindow *Focus;		/* Last window which Xfwm gave the focus to
-    		 * NOT the window that really has the focus */
-    Window UnknownWinFocused;	/* None, if the focus is nowhere or on an xfwm
-    		 * * managed window. Set to id of otherwindow 
-    		 * * with focus otherwise */
-    XfwmWindow *PreviousFocus;	/* Window which had focus before xfwm stole it
-    		 * to do moves/menus/etc. */
-    int EntryHeight;		/* menu entry height */
-    int EdgeScrollX;		/* #pixels to scroll on screen edge */
-    int EdgeScrollY;		/* #pixels to scroll on screen edge */
-    unsigned long flags;
-    XfwmWindow *LastWindowRaised;	/* Last window which was raised */
-    XfwmWindow *LastWindowLowered;/* Last window which was lowered */
-    int ClickTime;		/*Max button-click delay for Function built-in */
-    int AutoRaiseDelay;		/* Delay between setting focus and raising win */
-    int CurrentDesk;		/* The current desktop number */
-    int ColormapFocus;		/* colormap focus style */
-    int iconbox;			/* 0 = top, 1 = left, 2 = bottom 3 = right */
-    int icongrid;
-    int iconspacing;
-    EngineType engine;
+  XfwmWindow *Hilite;		/* the xfwm window that is highlighted
+				   * except for networking delays, this is the
+				   * window which REALLY has the focus */
+  XfwmWindow *Focus;		/* Last window which Xfwm gave the focus to
+				   * NOT the window that really has the focus */
+  Window UnknownWinFocused;	/* None, if the focus is nowhere or on an xfwm
+				   * * managed window. Set to id of otherwindow 
+				   * * with focus otherwise */
+  XfwmWindow *PreviousFocus;	/* Window which had focus before xfwm stole it
+				   * to do moves/menus/etc. */
+  int EntryHeight;		/* menu entry height */
+  int EdgeScrollX;		/* #pixels to scroll on screen edge */
+  int EdgeScrollY;		/* #pixels to scroll on screen edge */
+  unsigned long flags;
+  XfwmWindow *LastWindowRaised;	/* Last window which was raised */
+  XfwmWindow *LastWindowLowered;	/* Last window which was lowered */
+  int ClickTime;		/*Max button-click delay for Function built-in */
+  int AutoRaiseDelay;		/* Delay between setting focus and raising win */
+  int CurrentDesk;		/* The current desktop number */
+  int ColormapFocus;		/* colormap focus style */
+  int iconbox;			/* 0 = top, 1 = left, 2 = bottom 3 = right */
+  int icongrid;
+  int iconspacing;
+  EngineType engine;
 
-    XfwmWindowList *stacklist;
+  XfwmWindowList *stacklist;
 #ifdef MANAGE_OVERRIDES
-    WindowList *overrides;
+  WindowList *overrides;
 #endif
-    /*
-     * ** some additional global options which will probably become window
-     * ** specific options later on:
-     */
-    int ClickToFocusPassesClick;
-    int SnapSize;
-    unsigned int Options;
+  /*
+   * ** some additional global options which will probably become window
+   * ** specific options later on:
+   */
+  int ClickToFocusPassesClick;
+  int SnapSize;
+  unsigned int Options;
 
-    /* AutoDeskSwitch */
-    int ndesks;
-    int sessionwait;
-    
-    /* Screen margins */   
-    unsigned int Margin[4];
+  /* AutoDeskSwitch */
+  int ndesks;
+  int sessionwait;
+
+  /* Screen margins */
+  unsigned int Margin[4];
 }
 ScreenInfo;
 

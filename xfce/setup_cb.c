@@ -52,7 +52,7 @@
 void
 color_button_cb (GtkWidget * widget, gpointer data)
 {
-  open_colorselect (temp_pal, (gint)((long) data));
+  open_colorselect (temp_pal, (gint) ((long) data));
   apply_pal_colortable (temp_pal);
   pal_changed = TRUE;
 }
@@ -65,35 +65,34 @@ setup_ok_cb (GtkWidget * widget, gpointer data)
   get_setup_values ();
   engine = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_palette_engine_combo)->entry));
   if (strcmp (engine, temp_pal->engine))
-    {
-      set_engine (temp_pal, engine);
-      pal_changed = TRUE;
-    }
+  {
+    set_engine (temp_pal, engine);
+    pal_changed = TRUE;
+  }
   if (pal_changed)
-    {
-      copyvaluepal (pal, temp_pal);
-      savepal (pal);
-      create_gtkrc_file (pal, NULL);
-      /* applypal (pal, gxfce); */
-      applypal_to_all ();
-      apply_xpalette (pal, current_config.apply_xcolors);
-    }
+  {
+    copyvaluepal (pal, temp_pal);
+    savepal (pal);
+    create_gtkrc_file (pal, NULL);
+    /* applypal (pal, gxfce); */
+    applypal_to_all ();
+    apply_xpalette (pal, current_config.apply_xcolors);
+  }
   else if (prev_apply_xcolors != current_config.apply_xcolors)
-    {
-      apply_xpalette (pal, current_config.apply_xcolors);
-    }
+  {
+    apply_xpalette (pal, current_config.apply_xcolors);
+  }
   update_delay_tooltips (current_config.tooltipsdelay);
-  
+
   update_gxfce_clock ();
   gnome_layer (gxfce->window, current_config.panel_layer);
   if (prev_visible_screen != current_config.visible_screen)
-    {
-      update_gxfce_screen_buttons (current_config.visible_screen);
-      gnome_set_desk_count (current_config.visible_screen ? current_config.visible_screen : 1);
-    }
+  {
+    update_gxfce_screen_buttons (current_config.visible_screen);
+    gnome_set_desk_count (current_config.visible_screen ? current_config.visible_screen : 1);
+  }
   if (current_config.colorize_root)
-    ApplyRootColor (pal, (current_config.gradient_root != 0),
-		    get_screen_color (get_current_screen ()));
+    ApplyRootColor (pal, (current_config.gradient_root != 0), get_screen_color (get_current_screen ()));
   if (prev_visible_popup != current_config.visible_popup)
     update_gxfce_popup_buttons (current_config.visible_popup);
   if (prev_panel_icon_size != current_config.select_icon_size)
@@ -101,24 +100,20 @@ setup_ok_cb (GtkWidget * widget, gpointer data)
   if (prev_popup_icon_size != current_config.popup_icon_size)
     update_popup_size ();
   if (current_config.wm == XFWM)
+  {
+    apply_wm_colors (pal);
+    apply_wm_fonts ();
+    apply_wm_iconpos ();
+    apply_wm_options ();
+    apply_wm_snapsize ();
+    if (prev_xfwm_engine != current_config.xfwm_engine)
     {
-      apply_wm_colors (pal);
-      apply_wm_fonts ();
-      apply_wm_iconpos ();
-      apply_wm_options ();
-      apply_wm_snapsize ();
-      if (prev_xfwm_engine != current_config.xfwm_engine)
-        {
-          apply_wm_engine ();
-	}
+      apply_wm_engine ();
     }
-  while (repaint_in_progress ());
-  my_flush_events ();
-  gtk_main_quit ();
-  cursor_reset (setup);
-  gtk_widget_hide (setup);
-  gdk_window_withdraw ((GTK_WIDGET (setup))->window);
+  }
   writeconfig ();
+  cursor_reset (setup);
+  gtk_main_quit ();
 }
 
 void
@@ -129,34 +124,33 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
   get_setup_values ();
   engine = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_palette_engine_combo)->entry));
   if (strcmp (engine, temp_pal->engine))
-    {
-      set_engine (temp_pal, engine);
-      pal_changed = TRUE;
-    }
+  {
+    set_engine (temp_pal, engine);
+    pal_changed = TRUE;
+  }
   if (pal_changed)
-    {
-      copyvaluepal (pal, temp_pal);
-      savepal (pal);
-      create_gtkrc_file (pal, NULL);
-      applypal_to_all ();
-      apply_xpalette (pal, current_config.apply_xcolors);
-    }
+  {
+    copyvaluepal (pal, temp_pal);
+    savepal (pal);
+    create_gtkrc_file (pal, NULL);
+    applypal_to_all ();
+    apply_xpalette (pal, current_config.apply_xcolors);
+  }
   else if (prev_apply_xcolors != current_config.apply_xcolors)
-    {
-      apply_xpalette (pal, current_config.apply_xcolors);
-      prev_apply_xcolors = current_config.apply_xcolors;
-    }
+  {
+    apply_xpalette (pal, current_config.apply_xcolors);
+    prev_apply_xcolors = current_config.apply_xcolors;
+  }
   update_delay_tooltips (current_config.tooltipsdelay);
   update_gxfce_clock ();
   gnome_layer (gxfce->window, current_config.panel_layer);
   if (prev_visible_screen != current_config.visible_screen)
-    {
-      update_gxfce_screen_buttons (current_config.visible_screen);
-      gnome_set_desk_count (current_config.visible_screen ? current_config.visible_screen : 1);
-    }
+  {
+    update_gxfce_screen_buttons (current_config.visible_screen);
+    gnome_set_desk_count (current_config.visible_screen ? current_config.visible_screen : 1);
+  }
   if (current_config.colorize_root)
-    ApplyRootColor (pal, (current_config.gradient_root != 0),
-		    get_screen_color (get_current_screen ()));
+    ApplyRootColor (pal, (current_config.gradient_root != 0), get_screen_color (get_current_screen ()));
   if (prev_visible_popup != current_config.visible_popup)
     update_gxfce_popup_buttons (current_config.visible_popup);
   if (prev_panel_icon_size != current_config.select_icon_size)
@@ -164,17 +158,17 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
   if (prev_popup_icon_size != current_config.popup_icon_size)
     update_popup_size ();
   if (current_config.wm == XFWM)
+  {
+    apply_wm_colors (pal);
+    apply_wm_fonts ();
+    apply_wm_iconpos ();
+    apply_wm_options ();
+    apply_wm_snapsize ();
+    if (prev_xfwm_engine != current_config.xfwm_engine)
     {
-      apply_wm_colors (pal);
-      apply_wm_fonts ();
-      apply_wm_iconpos ();
-      apply_wm_options ();
-      apply_wm_snapsize ();
-      if (prev_xfwm_engine != current_config.xfwm_engine)
-        {
-          apply_wm_engine ();
-	}
+      apply_wm_engine ();
     }
+  }
   pal_changed = FALSE;
   prev_panel_icon_size = current_config.select_icon_size;
   prev_popup_icon_size = current_config.popup_icon_size;
@@ -188,11 +182,7 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
 void
 setup_cancel_cb (GtkWidget * widget, gpointer data)
 {
-  while (repaint_in_progress ());
-  my_flush_events ();
   gtk_main_quit ();
-  gtk_widget_hide (setup);
-  gdk_window_withdraw ((GTK_WIDGET (setup))->window);
 }
 
 gboolean
@@ -236,15 +226,13 @@ void
 xfce_font_cb (GtkWidget * widget, gpointer data)
 {
   char *s = NULL;
-  s =
-    open_fontselection (gtk_entry_get_text
-			(GTK_ENTRY (setup_options.setup_font_xfce_entry)));
+  s = open_fontselection (gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_xfce_entry)));
   if ((s) && strlen (s))
-    {
-      gtk_entry_set_text (GTK_ENTRY (setup_options.setup_font_xfce_entry), s);
-      set_font (temp_pal, s);
-      pal_changed = TRUE;
-    }
+  {
+    gtk_entry_set_text (GTK_ENTRY (setup_options.setup_font_xfce_entry), s);
+    set_font (temp_pal, s);
+    pal_changed = TRUE;
+  }
 }
 
 void
@@ -254,40 +242,24 @@ toggle_repaint_checkbutton_cb (GtkWidget * widget, gpointer data)
   status = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_repaint_checkbutton));
   if (!status)
   {
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				  (setup_options.setup_gradient_checkbutton),
-				  FALSE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_gradient_checkbutton), FALSE);
   }
-  gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_gradient_checkbutton),
-			    (DEFAULT_DEPTH >= 16) && (status));
+  gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_gradient_checkbutton), (DEFAULT_DEPTH >= 16) && (status));
 }
 
 void
 toggle_focusmode_checkbutton_cb (GtkWidget * widget, gpointer data)
 {
-  if (
-      (gtk_toggle_button_get_active
-       (GTK_TOGGLE_BUTTON (setup_options.setup_focusmode_checkbutton))))
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				  (setup_options.setup_autoraise_checkbutton),
-				  FALSE);
-  gtk_widget_set_sensitive (GTK_WIDGET
-			    (setup_options.setup_autoraise_checkbutton),
-			    (!gtk_toggle_button_get_active
-			     (GTK_TOGGLE_BUTTON
-			      (setup_options.setup_focusmode_checkbutton))));
+  if ((gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_focusmode_checkbutton))))
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_autoraise_checkbutton), FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_autoraise_checkbutton), (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_focusmode_checkbutton))));
 
 }
 
 void
 toggle_digital_clock_checkbutton_cb (GtkWidget * widget, gpointer data)
 {
-  gtk_widget_set_sensitive (GTK_WIDGET
-			    (setup_options.setup_hrs_mode_checkbutton),
-			    (gtk_toggle_button_get_active
-			     (GTK_TOGGLE_BUTTON
-			      (setup_options.
-			       setup_digital_clock_checkbutton))));
+  gtk_widget_set_sensitive (GTK_WIDGET (setup_options.setup_hrs_mode_checkbutton), (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (setup_options.setup_digital_clock_checkbutton))));
 
 }
 
@@ -295,9 +267,7 @@ void
 xfwm_titlefont_cb (GtkWidget * widget, gpointer data)
 {
   char *s = NULL;
-  s =
-    open_fontselection (gtk_entry_get_text
-			(GTK_ENTRY (setup_options.setup_font_title_entry)));
+  s = open_fontselection (gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_title_entry)));
   if ((s) && strlen (s))
     gtk_entry_set_text (GTK_ENTRY (setup_options.setup_font_title_entry), s);
 }
@@ -306,9 +276,7 @@ void
 xfwm_menufont_cb (GtkWidget * widget, gpointer data)
 {
   char *s = NULL;
-  s =
-    open_fontselection (gtk_entry_get_text
-			(GTK_ENTRY (setup_options.setup_font_menu_entry)));
+  s = open_fontselection (gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_menu_entry)));
   if ((s) && strlen (s))
     gtk_entry_set_text (GTK_ENTRY (setup_options.setup_font_menu_entry), s);
 }
@@ -317,9 +285,7 @@ void
 xfwm_iconfont_cb (GtkWidget * widget, gpointer data)
 {
   char *s = NULL;
-  s =
-    open_fontselection (gtk_entry_get_text
-			(GTK_ENTRY (setup_options.setup_font_icon_entry)));
+  s = open_fontselection (gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_icon_entry)));
   if ((s) && strlen (s))
     gtk_entry_set_text (GTK_ENTRY (setup_options.setup_font_icon_entry), s);
 }

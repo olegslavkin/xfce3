@@ -40,32 +40,32 @@ uri_remove_file_prefix (char *path, int len)
   char *p;
   int striped = 0;
   if ((p = strstr (path, "file:///")) != NULL)
+  {
+    if ((p + 7) <= (path + len))
     {
-      if ((p + 7) <= (path + len))
-	{
-	  memmove (path, path + 7, len - 7);
-	  path[len - 7] = '\0';
-	  striped = 7;
-	}
+      memmove (path, path + 7, len - 7);
+      path[len - 7] = '\0';
+      striped = 7;
     }
+  }
   else if ((p = strstr (path, "file://")) != NULL)
+  {
+    if ((p + 6) <= (path + len))
     {
-      if ((p + 6) <= (path + len))
-	{
-	  memmove (path, path + 6, len - 6);
-	  path[len - 6] = '\0';
-	  striped = 6;
-	}
+      memmove (path, path + 6, len - 6);
+      path[len - 6] = '\0';
+      striped = 6;
     }
+  }
   else if ((p = strstr (path, "file:/")) != NULL)
+  {
+    if ((p + 5) <= (path + len))
     {
-      if ((p + 5) <= (path + len))
-	{
-	  memmove (path, path + 5, len - 5);
-	  path[len - 5] = '\0';
-	  striped = 5;
-	}
+      memmove (path, path + 5, len - 5);
+      path[len - 5] = '\0';
+      striped = 5;
     }
+  }
   return (striped);
 }
 
@@ -78,16 +78,16 @@ uri_remove_file_prefix_from_list (GList * list)
   uri *u;
 
   while (list)
+  {
+    u = (uri *) list->data;
+    if (u->type == URI_FILE)
     {
-      u = (uri *) list->data;
-      if (u->type == URI_FILE)
-	{
-	  rc = uri_remove_file_prefix (u->url, u->len);
-	  u->len -= rc;
-	  u->type = URI_LOCAL;
-	}
-      list = list->next;
+      rc = uri_remove_file_prefix (u->url, u->len);
+      u->len -= rc;
+      u->type = URI_LOCAL;
     }
+    list = list->next;
+  }
   return (rc);
 }
 
@@ -102,72 +102,72 @@ uri_clear_path (const char *org_path)
   int len;
 
   if (!path)
-    {
-      return (NULL);
-    }
+  {
+    return (NULL);
+  }
   strcpy (path, org_path);
   /* remove ".."
    */
   p = path + 1;
   ld = path;
   while (*p)
+  {
+    if (*p == '/')
     {
-      if (*p == '/')
+      if (*(p + 1) != '\0')
+      {
+	if (!((*(p + 1) == '.') && (*(p + 2) == '.')))
 	{
-	  if (*(p + 1) != '\0')
-	    {
-	      if (!((*(p + 1) == '.') && (*(p + 2) == '.')))
-		{
-		  ld = p;
-		}
-	    }
-	  else
-	    {
-	      break;
-	    }
+	  ld = p;
 	}
+      }
       else
-	{
-	  if ((*(p - 1) == '/') && (*p == '.') && (*(p + 1) == '.'))
-	    {
-	      len = strlen (p + 2);
-	      if (!len)
-		{
-		  *(ld + 1) = '\0';
-		}
-	      else
-		{
-		  memmove (ld, p + 2, len + 1);
-		}
-	      ld = p = path;
-	    }
-	}
-      p++;
+      {
+	break;
+      }
     }
+    else
+    {
+      if ((*(p - 1) == '/') && (*p == '.') && (*(p + 1) == '.'))
+      {
+	len = strlen (p + 2);
+	if (!len)
+	{
+	  *(ld + 1) = '\0';
+	}
+	else
+	{
+	  memmove (ld, p + 2, len + 1);
+	}
+	ld = p = path;
+      }
+    }
+    p++;
+  }
   /* remove trailing '/' and '/.'
    */
   while (1)
+  {
+    len = strlen (path);
+    if (len > 1)
     {
-      len = strlen (path);
-      if (len > 1)
-	{
-	  if (path[len - 1] == '/')
-	    path[len - 1] = '\0';
-	  else if ((path[len - 2] == '/') && (path[len - 1] == '.'))
-	    {
-	      if (len == 2)
-		path[len - 1] = '\0';
-	      else
-		path[len - 2] = '\0';
-	    }
-	  else
-	    break;
-	}
+      if (path[len - 1] == '/')
+	path[len - 1] = '\0';
+      else if ((path[len - 2] == '/') && (path[len - 1] == '.'))
+      {
+	if (len == 2)
+	  path[len - 1] = '\0';
+	else
+	  path[len - 2] = '\0';
+      }
       else
-	{
-	  break;
-	}
+	break;
     }
+    else
+    {
+      break;
+    }
+  }
   return (path);
 }
 
@@ -203,52 +203,52 @@ uri_parse_list (const char *text, GList ** list)
   p = text;
   num = 0;
   while ((p = strchr (p, '\n')) != NULL)
-    {
-      p++;
-      num++;
-    }
+  {
+    p++;
+    num++;
+  }
   if ((!num) || (text[org_len - 1] != '\n'))
     num++;
   p = text;
   no = num;
   for (i = 0; i < num; i++)
+  {
+    tlen = 2;			/* terminator length */
+    end = strchr (p, '\r');
+    if (!end)
     {
-      tlen = 2;			/* terminator length */
-      end = strchr (p, '\r');
-      if (!end)
-	{
-	  end = strchr (p, '\n');
-	  tlen = 1;
-	}
-      if (end)
-	end--;
-      else
-	end = text + org_len - 1;
-      len = end - p + 1;
-      if ((len > 0) && (*p != '#'))
-	{
-	  u = g_malloc (sizeof (uri));
-	  if (!u)
-	    return (0);
-	  u->url = g_malloc (len + 1);
-	  strncpy (u->url, p, len);
-	  u->url[len] = '\0';
-	  u->len = len;
-	  u->type = uri_type (u->url);
-	  if (u->len > URI_MAX)
-	    {
-	      u->len = URI_MAX;
-	      u->url[URI_MAX] = '\0';
-	    }
-	  *list = g_list_append (*list, u);
-	}
-      else
-	{
-	  no--;
-	}
-      p = p + len + tlen;
-
+      end = strchr (p, '\n');
+      tlen = 1;
     }
+    if (end)
+      end--;
+    else
+      end = text + org_len - 1;
+    len = end - p + 1;
+    if ((len > 0) && (*p != '#'))
+    {
+      u = g_malloc (sizeof (uri));
+      if (!u)
+	return (0);
+      u->url = g_malloc (len + 1);
+      strncpy (u->url, p, len);
+      u->url[len] = '\0';
+      u->len = len;
+      u->type = uri_type (u->url);
+      if (u->len > URI_MAX)
+      {
+	u->len = URI_MAX;
+	u->url[URI_MAX] = '\0';
+      }
+      *list = g_list_append (*list, u);
+    }
+    else
+    {
+      no--;
+    }
+    p = p + len + tlen;
+
+  }
   return (no);
 }
 
@@ -259,11 +259,11 @@ uri_free_list (GList * list)
 {
   GList *t = list;
   while (t)
-    {
-      g_free (((uri *) t->data)->url);
-      g_free ((uri *) (t->data));
-      t = t->next;
-    }
+  {
+    g_free (((uri *) t->data)->url);
+    g_free ((uri *) (t->data));
+    t = t->next;
+  }
   g_list_free (list);
 }
 
@@ -280,29 +280,29 @@ uri_to_quoted_list (GList * list)
 
   /* count items and sum the lenght */
   while (t)
-    {
-      len += ((uri *) t->data)->len;
-      nitems++;
-      t = t->next;
-    }
+  {
+    len += ((uri *) t->data)->len;
+    nitems++;
+    t = t->next;
+  }
   string = p = g_malloc (len + (nitems * 3) + 1);
   p[len + (nitems * 3)] = '\0';
   while (list)
-    {
-      u = (uri *) list->data;
-      list = list->next;
-      if (!u)
-	continue;
-      if (strchr (u->url, '\''))
-	quote = '"';
-      else
-	quote = '\'';
-      *p++ = quote;
-      memcpy (p, u->url, u->len);
-      p += u->len;
-      *p++ = quote;
-      *p++ = ' ';
-    }
+  {
+    u = (uri *) list->data;
+    list = list->next;
+    if (!u)
+      continue;
+    if (strchr (u->url, '\''))
+      quote = '"';
+    else
+      quote = '\'';
+    *p++ = quote;
+    memcpy (p, u->url, u->len);
+    p += u->len;
+    *p++ = quote;
+    *p++ = ' ';
+  }
   return (string);
 }
 
@@ -316,10 +316,10 @@ uri_basename (const char *path)
     return (NULL);
   p = strrchr (path, '/');
   if (p)
-    {
-      p++;
-      if (*p != '\0')
-	return (p);
-    }
+  {
+    p++;
+    if (*p != '\0')
+      return (p);
+  }
   return (NULL);
 }

@@ -31,7 +31,7 @@ Cambridge, MA 02139, USA.  */
 #include <dirent.h>
 #include <stdlib.h>
 
-int scandir (const char *dir, struct dirent ***namelist, int (*select)(), int (*cmp)());
+int scandir (const char *dir, struct dirent ***namelist, int (*select) (), int (*cmp) ());
 int alphasort (struct dirent *a, struct dirent *b);
 
 #endif /* !HAVE_SCANDIR */

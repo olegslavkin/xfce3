@@ -54,8 +54,7 @@ POPUP_menu;
 
 POPUP_menu popup_menus[NBPOPUPS];
 
-GtkWidget *create_popup_item (GtkWidget * toplevel,
-			      gint nbr_menu, gint nbr_item);
+GtkWidget *create_popup_item (GtkWidget * toplevel, gint nbr_menu, gint nbr_item);
 
 GtkWidget *create_popup_menu (gint nbr);
 
@@ -69,8 +68,7 @@ void close_popup_menu (gint nbr);
 
 void update_popup_entries (gint nbr);
 
-void
-set_entry (gint menu, gint entry, char *label, char *pixfile, char *command);
+void set_entry (gint menu, gint entry, char *label, char *pixfile, char *command);
 
 void update_popup_size (void);
 

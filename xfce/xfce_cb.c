@@ -89,9 +89,7 @@ static char *month_names[] = { N_("January"),
 void
 iconify_cb (GtkWidget * widget, gpointer data)
 {
-  XIconifyWindow (GDK_DISPLAY (),
-		  GDK_WINDOW_XWINDOW (((GtkWidget *) data)->window),
-		  MY_GDK_SCREEN ());
+  XIconifyWindow (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (((GtkWidget *) data)->window), MY_GDK_SCREEN ());
 }
 
 void
@@ -100,12 +98,10 @@ quit_cb (GtkWidget * widget, gpointer data)
   writeconfig ();
   if (ICEConn ())
     LogoutICEConn ();
-  else
-    if (my_yesno_dialog
-	(_("Are you sure you want to Quit ?\nThis might log you off !")))
-    {
-      gtk_main_quit ();
-    }
+  else if (my_yesno_dialog (_("Are you sure you want to Quit ?\nThis might log you off !")))
+  {
+    gtk_main_quit ();
+  }
 }
 
 gboolean
@@ -126,10 +122,10 @@ gboolean
 select_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   if (event->button == 3)
-    {
-      open_action (action, (gint)((long) data));
-      return TRUE;
-    }
+  {
+    open_action (action, (gint) ((long) data));
+    return TRUE;
+  }
   return FALSE;
 }
 
@@ -144,24 +140,20 @@ popup_cb (GtkWidget * widget, gpointer data)
   gint uheight = 0;
   gint udepth = 0;
 
-  gdk_window_get_geometry (((GtkWidget *) widget)->window, &upositionx,
-			   &upositiony, &uwidth, &uheight, &udepth);
-  gdk_window_get_root_origin (((GtkWidget *) widget)->window, &offsetx,
-			      &offsety);
-  toggle_popup_button (widget,
-		       (GtkPixmap *) popup_buttons.popup_pixmap[(gint)((long) data)]);
+  gdk_window_get_geometry (((GtkWidget *) widget)->window, &upositionx, &upositiony, &uwidth, &uheight, &udepth);
+  gdk_window_get_root_origin (((GtkWidget *) widget)->window, &offsetx, &offsety);
+  toggle_popup_button (widget, (GtkPixmap *) popup_buttons.popup_pixmap[(gint) ((long) data)]);
   if (GTK_TOGGLE_BUTTON (widget)->active)
-    show_popup_menu ((gint)((long) data), upositionx + offsetx + uwidth / 2,
-		     upositiony + offsety, TRUE);
+    show_popup_menu ((gint) ((long) data), upositionx + offsetx + uwidth / 2, upositiony + offsety, TRUE);
   else
-    close_popup_menu ((gint)((long) data));
+    close_popup_menu ((gint) ((long) data));
 }
 
 void
 select_cb (GtkWidget * widget, gpointer data)
 {
   hide_current_popup_menu ();
-  exec_comm (get_command ((gint)((long) data)), current_config.wm);
+  exec_comm (get_command ((gint) ((long) data)), current_config.wm);
 }
 
 void
@@ -170,22 +162,18 @@ update_screen (gint i)
   if ((i == current_screen_selected) || (current_config.visible_screen == 0))
     return;
 
-  if (gtk_toggle_button_get_active
-      (GTK_TOGGLE_BUTTON (screen_buttons.screen_button[i])))
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (screen_buttons.screen_button[i])))
     return;
 
   if (i >= current_config.visible_screen)
-    my_show_message (_
-		     ("You've selected a desktop which is not currently\nvisible in XFce panel."));
+    my_show_message (_("You've selected a desktop which is not currently\nvisible in XFce panel."));
   else
-    {
-      use_action = FALSE;
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				    (screen_buttons.screen_button[i]), TRUE);
-      if (current_config.colorize_root)
-	ApplyRootColor (pal, (current_config.gradient_root != 0),
-			get_screen_color (i));
-    }
+  {
+    use_action = FALSE;
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (screen_buttons.screen_button[i]), TRUE);
+    if (current_config.colorize_root)
+      ApplyRootColor (pal, (current_config.gradient_root != 0), get_screen_color (i));
+  }
 
   current_screen_selected = i;
   use_action = TRUE;
@@ -195,29 +183,29 @@ void
 screen_cb (GtkWidget * widget, gpointer data)
 {
   if (!use_action)
-    {
-      return;
-    }
+  {
+    return;
+  }
 
   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
     return;
 
-  if ((gint)((long) data) == current_screen_selected)
+  if ((gint) ((long) data) == current_screen_selected)
     return;
 
-  if ((gint)((long) data) < current_config.visible_screen)
-    switch_to_screen (pal, (gint)((long) data));
-  current_screen_selected = (gint)((long) data);
+  if ((gint) ((long) data) < current_config.visible_screen)
+    switch_to_screen (pal, (gint) ((long) data));
+  current_screen_selected = (gint) ((long) data);
 }
 
 gboolean
 screen_modify_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   if (event->button == 3)
-    {
-      open_screen (screen, (gint)((long) data));
-      return TRUE;
-    }
+  {
+    open_screen (screen, (gint) ((long) data));
+    return TRUE;
+  }
   return FALSE;
 }
 
@@ -241,8 +229,7 @@ clock_digital_cb (GtkWidget * widget, gpointer data)
 
   clock = MY_GTK_CLOCK (data);
   my_gtk_clock_toggle_mode (clock);
-  current_config.digital_clock =
-    (my_gtk_clock_get_mode (clock) == MY_GTK_CLOCK_DIGITAL);
+  current_config.digital_clock = (my_gtk_clock_get_mode (clock) == MY_GTK_CLOCK_DIGITAL);
   writeconfig ();
 }
 
@@ -258,8 +245,7 @@ clock_hrs_cb (GtkWidget * widget, gpointer data)
 }
 
 gboolean
-gxfce_clock_show_popup_cb (GtkWidget * widget, GdkEventButton * event,
-			   gpointer data)
+gxfce_clock_show_popup_cb (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   MyGtkClockMode mode;
   MyGtkClock *clock;
@@ -274,17 +260,13 @@ gxfce_clock_show_popup_cb (GtkWidget * widget, GdkEventButton * event,
 
   mode = my_gtk_clock_get_mode (clock);
 
-  GTK_CHECK_MENU_ITEM (gxfce_clock_digital_mode)->active =
-    (mode == MY_GTK_CLOCK_DIGITAL);
+  GTK_CHECK_MENU_ITEM (gxfce_clock_digital_mode)->active = (mode == MY_GTK_CLOCK_DIGITAL);
 
-  GTK_CHECK_MENU_ITEM (gxfce_clock_hrs_mode)->active =
-    my_gtk_clock_military_shown (clock);
+  GTK_CHECK_MENU_ITEM (gxfce_clock_hrs_mode)->active = my_gtk_clock_military_shown (clock);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (gxfce_clock_hrs_mode),
-			    (mode == MY_GTK_CLOCK_DIGITAL));
+  gtk_widget_set_sensitive (GTK_WIDGET (gxfce_clock_hrs_mode), (mode == MY_GTK_CLOCK_DIGITAL));
 
-  gtk_menu_popup (GTK_MENU (gxfce_clock_popup_menu), NULL, NULL, NULL, NULL,
-		  event->button, event->time);
+  gtk_menu_popup (GTK_MENU (gxfce_clock_popup_menu), NULL, NULL, NULL, NULL, event->button, event->time);
   return (TRUE);
 }
 
@@ -304,10 +286,7 @@ toggle_popup_button (GtkWidget * widget, GtkPixmap * pix)
     pixmap_dn = MyCreateGdkPixmapFromData (minbutdn, widget, &mask_dn, FALSE);
 
   if (GTK_IS_PIXMAP (pix))
-    gtk_pixmap_set (pix,
-		    (GTK_TOGGLE_BUTTON (widget)->active) ? pixmap_dn :
-		    pixmap_up,
-		    (GTK_TOGGLE_BUTTON (widget)->active) ? mask_dn : mask_up);
+    gtk_pixmap_set (pix, (GTK_TOGGLE_BUTTON (widget)->active) ? pixmap_dn : pixmap_up, (GTK_TOGGLE_BUTTON (widget)->active) ? mask_dn : mask_up);
 }
 
 gint
@@ -323,12 +302,7 @@ set_current_screen (gint i)
 }
 
 void
-select_drag_data_received (GtkWidget * widget,
-			   GdkDragContext * context,
-			   gint x,
-			   gint y,
-			   GtkSelectionData * data,
-			   guint info, guint time, gpointer cbdata)
+select_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata)
 {
   GList *fnames, *fnp;
   guint count;
@@ -336,23 +310,21 @@ select_drag_data_received (GtkWidget * widget,
   fnames = gnome_uri_list_extract_filenames ((char *) data->data);
   count = g_list_length (fnames);
   if (count > 0)
+  {
+    execute = (char *) g_malloc (MAXSTRLEN);
+    cmd = get_command ((gint) ((long) cbdata));
+    for (fnp = fnames; fnp; fnp = fnp->next, count--)
     {
-      execute = (char *) g_malloc (MAXSTRLEN);
-      cmd = get_command ((gint)((long) cbdata));
-      for (fnp = fnames; fnp; fnp = fnp->next, count--)
-	{
-	  snprintf (execute, MAXSTRLEN - 1, "%s \"%s\"", cmd,
-		    (char *) (fnp->data));
-	  exec_comm (execute, current_config.wm);
-	}
-      g_free (execute);
+      snprintf (execute, MAXSTRLEN - 1, "%s \"%s\"", cmd, (char *) (fnp->data));
+      exec_comm (execute, current_config.wm);
     }
+    g_free (execute);
+  }
   gnome_uri_list_free_strings (fnames);
-  gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE),
-		   time);
+  gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE), time);
 }
 
-gboolean 
+gboolean
 update_gxfce_date_timer (GtkWidget * widget)
 {
   time_t ticks;
@@ -368,21 +340,16 @@ update_gxfce_date_timer (GtkWidget * widget)
 
   ticks = time (0);
   tm = localtime (&ticks);
-  if ((mday != tm->tm_mday) ||
-      (wday != tm->tm_wday) || (mon != tm->tm_mon) || (year != tm->tm_year))
-    {
-      mday = tm->tm_mday;
-      wday = tm->tm_wday;
-      mon = tm->tm_mon;
-      year = tm->tm_year;
-      snprintf (date_s, 255, "%s, %u %s %u", _(day_names[wday]), mday,
-		_(month_names[mon]), year + 1900);
+  if ((mday != tm->tm_mday) || (wday != tm->tm_wday) || (mon != tm->tm_mon) || (year != tm->tm_year))
+  {
+    mday = tm->tm_mday;
+    wday = tm->tm_wday;
+    mon = tm->tm_mon;
+    year = tm->tm_year;
+    snprintf (date_s, 255, "%s, %u %s %u", _(day_names[wday]), mday, _(month_names[mon]), year + 1900);
 
-      gtk_tooltips_set_tip (gtk_tooltips_data_get
-			    (GTK_WIDGET (widget))->tooltips,
-			    GTK_WIDGET (widget), date_s,
-			    "ContextHelp/buttons/?");
-    }
+    gtk_tooltips_set_tip (gtk_tooltips_data_get (GTK_WIDGET (widget))->tooltips, GTK_WIDGET (widget), date_s, "ContextHelp/buttons/?");
+  }
   return TRUE;
 }
 
@@ -394,24 +361,22 @@ handle_gnome_workspace_event_cb (GtkWidget * widget, GdkEventProperty * event)
   g_return_val_if_fail (GTK_IS_WINDOW (widget), FALSE);
   g_return_val_if_fail (event != NULL, FALSE);
   if ((desk = gnome_desk_change (event)) >= 0)
-    {
-      if ((desk >= 0) && (desk < NBSCREENS))
-	update_screen (desk);
-    }
+  {
+    if ((desk >= 0) && (desk < NBSCREENS))
+      update_screen (desk);
+  }
   return TRUE;
 }
 
 void
-move_event_pressed (GtkWidget * widget,
-		    GdkEventButton * event, MyGtkClock * clock_widget)
+move_event_pressed (GtkWidget * widget, GdkEventButton * event, MyGtkClock * clock_widget)
 {
   if (event->button == 1)
     my_gtk_clock_suspend (clock_widget);
 }
 
 void
-move_event_released (GtkWidget * widget,
-		     GdkEventButton * event, MyGtkClock * clock_widget)
+move_event_released (GtkWidget * widget, GdkEventButton * event, MyGtkClock * clock_widget)
 {
   if (event->button == 1)
     my_gtk_clock_resume (clock_widget);

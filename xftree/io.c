@@ -52,12 +52,10 @@ io_is_exec (char *file)
 {
   struct stat file_stat;
   if (stat (file, &file_stat) != -1)
-    {
-      if ((!S_ISDIR (file_stat.st_mode)) && (file_stat.st_mode & S_IXUSR ||
-					     file_stat.st_mode & S_IXGRP ||
-					     file_stat.st_mode & S_IXOTH))
-	return (file_stat.st_mode);
-    }
+  {
+    if ((!S_ISDIR (file_stat.st_mode)) && (file_stat.st_mode & S_IXUSR || file_stat.st_mode & S_IXGRP || file_stat.st_mode & S_IXOTH))
+      return (file_stat.st_mode);
+  }
   return (0);
 }
 
@@ -69,10 +67,10 @@ io_is_directory (char *path)
 {
   struct stat file_stat;
   if (stat (path, &file_stat) != -1)
-    {
-      if (S_ISDIR (file_stat.st_mode))
-	return (1);
-    }
+  {
+    if (S_ISDIR (file_stat.st_mode))
+      return (1);
+  }
   return (0);
 }
 
@@ -84,10 +82,10 @@ io_is_file (char *path)
 {
   struct stat file_stat;
   if (stat (path, &file_stat) != -1)
-    {
-      if (S_ISREG (file_stat.st_mode))
-	return (file_stat.st_mode);
-    }
+  {
+    if (S_ISREG (file_stat.st_mode))
+      return (file_stat.st_mode);
+  }
   return (0);
 }
 
@@ -110,10 +108,10 @@ io_can_write_to_parent (char *file)
   char path[PATH_MAX + 1];
   p = strrchr (file, '/');
   if (p)
-    {
-      strncpy (path, file, p - file + 1);
-      path[p - file + 1] = '\0';
-    }
+  {
+    strncpy (path, file, p - file + 1);
+    path[p - file + 1] = '\0';
+  }
   else
     strcpy (path, ".");
   if (access (path, W_OK | X_OK) == -1)
@@ -135,40 +133,40 @@ io_system (char *cmd)
   if (pid == -1)
     return (-1);
   if (pid == 0)
+  {
+    char *argv[4];
+    /* child */
+    argv[0] = "sh";
+    argv[1] = "-c";
+    argv[2] = cmd;
+    argv[3] = NULL;
+
+    /* The following is to avoid X locking when executing 
+       terminal based application that requires user input */
+    if ((nulldev = open ("/dev/null", O_RDWR)))
     {
-      char *argv[4];
-      /* child */
-      argv[0] = "sh";
-      argv[1] = "-c";
-      argv[2] = cmd;
-      argv[3] = NULL;
-
-      /* The following is to avoid X locking when executing 
-         terminal based application that requires user input */
-      if ((nulldev = open ("/dev/null", O_RDWR)))
-	{
-	  close (0);
-	  dup (nulldev);
-	  close (1);
-	  dup (nulldev);
-	  close (2);
-	  dup (nulldev);
-	}
-
-      if (execve ("/bin/sh", argv, environ) == -1)
-	perror ("/bin/sh");
-      _exit (127);
+      close (0);
+      dup (nulldev);
+      close (1);
+      dup (nulldev);
+      close (2);
+      dup (nulldev);
     }
+
+    if (execve ("/bin/sh", argv, environ) == -1)
+      perror ("/bin/sh");
+    _exit (127);
+  }
   do
+  {
+    if (waitpid (pid, &status, 0) == -1)
     {
-      if (waitpid (pid, &status, 0) == -1)
-	{
-	  if (errno != EINTR)
-	    return (-1);
-	}
-      else
-	return status;
+      if (errno != EINTR)
+	return (-1);
     }
+    else
+      return status;
+  }
   while (1);
 }
 
@@ -198,49 +196,49 @@ io_system_var (char **arg, int len)
 
   pid = fork ();
   if (pid == -1)
-    {
-      perror ("fork()");
-      return (-1);
-    }
+  {
+    perror ("fork()");
+    return (-1);
+  }
 
   if (pid == 0)
+  {
+    /* child process */
+    char **argv = (char **) malloc (sizeof (char *) * (len + 2));
+    if (!argv)
+      _exit (127);
+    for (i = 0; i < len; i++)
     {
-      /* child process */
-      char **argv = (char **) malloc (sizeof (char *) * (len + 2));
-      if (!argv)
-	_exit (127);
-      for (i = 0; i < len; i++)
-	{
-	  argv[i] = arg[i];
-	}
-      argv[len] = NULL;
-      if (execve (argv[0], argv, environ) == -1)
-	{
-	  perror (argv[0]);
-	  _exit (127);
-	}
+      argv[i] = arg[i];
     }
+    argv[len] = NULL;
+    if (execve (argv[0], argv, environ) == -1)
+    {
+      perror (argv[0]);
+      _exit (127);
+    }
+  }
   /* parent process */
   sleep (1);
   do
+  {
+    if (waitpid (pid, &status, WNOHANG) == -1)
     {
-      if (waitpid (pid, &status, WNOHANG) == -1)
-	{
-	  if (errno != EINTR)
-	    return (-1);
-	}
-      else
-	{
-	  if (WIFEXITED (status))
-	    {
-	      if (WEXITSTATUS (status) == 127)
-		return -1;
-	      else
-		return WEXITSTATUS (status);
-	    }
-	  return 0;
-	}
+      if (errno != EINTR)
+	return (-1);
     }
+    else
+    {
+      if (WIFEXITED (status))
+      {
+	if (WEXITSTATUS (status) == 127)
+	  return -1;
+	else
+	  return WEXITSTATUS (status);
+      }
+      return 0;
+    }
+  }
   while (1);
 }
 
@@ -251,8 +249,8 @@ io_item_exists (char *path)
 {
   struct stat s;
   if (stat (path, &s) != -1)
-    {
-      return (s.st_mode);
-    }
+  {
+    return (s.st_mode);
+  }
   return (0);
 }

@@ -50,8 +50,7 @@ int buffersize = 127;
 void
 syntax_error (char *s)
 {
-  fprintf (stderr, _("XFclock : Syntax error in configuration file\n(%s)\n"),
-	   s);
+  fprintf (stderr, _("XFclock : Syntax error in configuration file\n(%s)\n"), s);
   my_alert (_("Syntax error in configuration file\nAborting"));
   exit (0);
 }
@@ -59,8 +58,7 @@ syntax_error (char *s)
 void
 data_error (char *s)
 {
-  fprintf (stderr, _("XFclock : Data mismatch error in config file\n(%s)\n"),
-	   s);
+  fprintf (stderr, _("XFclock : Data mismatch error in config file\n(%s)\n"), s);
   my_alert (_("Data mismatch error in configuration file\nAborting"));
   exit (0);
 }
@@ -70,18 +68,18 @@ nextline (FILE * f, char *lineread)
 {
   char *p;
   do
+  {
+    nl++;
+    if (!fgets (lineread, MAXSTRLEN + 1, f))
     {
-      nl++;
-      if (!fgets (lineread, MAXSTRLEN + 1, f))
-        {
-	  return (NULL);
-	}
-      if (strlen (lineread))
-        {
-	  lineread [strlen (lineread) - 1] = '\0';
-	}
-      p = skiphead (lineread);
+      return (NULL);
     }
+    if (strlen (lineread))
+    {
+      lineread[strlen (lineread) - 1] = '\0';
+    }
+    p = skiphead (lineread);
+  }
   while (!strlen (p) && !feof (f));
   if (strlen (p))
     skiptail (p);
@@ -111,11 +109,9 @@ initconfig (config * conf)
   conf->fore_blue = -1;
   conf->font = (char *) malloc (sizeof (char) * MAXSTRLEN);
   strcpy (conf->font, "*");
-  conf->holy_days=0x01;
-  conf->calendar_opt=GTK_CALENDAR_SHOW_HEADING |
-		     GTK_CALENDAR_SHOW_DAY_NAMES |
-		     GTK_CALENDAR_SHOW_WEEK_NUMBERS;
-  
+  conf->holy_days = 0x01;
+  conf->calendar_opt = GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS;
+
   return conf;
 }
 
@@ -133,37 +129,30 @@ writeconfig (GtkWidget * widget, config * conf)
   if (!configfile)
     my_alert (_("Cannot create file"));
   else
-    {
-      fprintf (configfile, "[Coords]\n");
-      gdk_window_get_root_origin (((GtkWidget *) widget)->window, &x, &y);
-      gdk_window_get_size (((GtkWidget *) widget)->window, &w, &h);
-      fprintf (configfile, "\t%i\n", x);
-      fprintf (configfile, "\t%i\n", y);
-      fprintf (configfile, "\t%i\n", w);
-      fprintf (configfile, "\t%i\n", h);
-      fprintf (configfile, "[Colors]\n");
-      fprintf (configfile, "\t%i %i %i\n", conf->fore_red,
-	       conf->fore_green, conf->fore_blue);
-      fprintf (configfile, "\t%i %i %i\n", conf->back_red,
-	       conf->back_green, conf->back_blue);
-      fprintf (configfile, "\t%s\n", conf->font);
-      fprintf (configfile, "[Options]\n");
-      fprintf (configfile,
-	       conf->calendar ? "\tDisplayCalendar\n" : "\tHideCalendar\n");
-      fprintf (configfile,
-	       conf->menubar ? "\tDisplayMenuBar\n" : "\tHideMenuBar\n");
-      fprintf (configfile,
-	       conf->digital ? "\tDigitalClock\n" : "\tAnalogClock\n");
-      fprintf (configfile,
-	       conf->seconds ? "\tDisplaySeconds\n" : "\tHideSeconds\n");
-      fprintf (configfile, conf->ampm ? "\tDisplayAMPM\n" : "\tHideAMPM\n");
-      fprintf (configfile,
-	       conf->military ? "\tDisplayMilitary\n" : "\tHideMilitary\n");
-      fprintf (configfile,"\tHoly_days : 0x%02x\n",conf->holy_days);
-      fprintf (configfile,"\tCalendar opts : 0x%02x\n",conf->calendar_opt);
-      fflush (configfile);
-      fclose (configfile);
-    }
+  {
+    fprintf (configfile, "[Coords]\n");
+    gdk_window_get_root_origin (((GtkWidget *) widget)->window, &x, &y);
+    gdk_window_get_size (((GtkWidget *) widget)->window, &w, &h);
+    fprintf (configfile, "\t%i\n", x);
+    fprintf (configfile, "\t%i\n", y);
+    fprintf (configfile, "\t%i\n", w);
+    fprintf (configfile, "\t%i\n", h);
+    fprintf (configfile, "[Colors]\n");
+    fprintf (configfile, "\t%i %i %i\n", conf->fore_red, conf->fore_green, conf->fore_blue);
+    fprintf (configfile, "\t%i %i %i\n", conf->back_red, conf->back_green, conf->back_blue);
+    fprintf (configfile, "\t%s\n", conf->font);
+    fprintf (configfile, "[Options]\n");
+    fprintf (configfile, conf->calendar ? "\tDisplayCalendar\n" : "\tHideCalendar\n");
+    fprintf (configfile, conf->menubar ? "\tDisplayMenuBar\n" : "\tHideMenuBar\n");
+    fprintf (configfile, conf->digital ? "\tDigitalClock\n" : "\tAnalogClock\n");
+    fprintf (configfile, conf->seconds ? "\tDisplaySeconds\n" : "\tHideSeconds\n");
+    fprintf (configfile, conf->ampm ? "\tDisplayAMPM\n" : "\tHideAMPM\n");
+    fprintf (configfile, conf->military ? "\tDisplayMilitary\n" : "\tHideMilitary\n");
+    fprintf (configfile, "\tHoly_days : 0x%02x\n", conf->holy_days);
+    fprintf (configfile, "\tCalendar opts : 0x%02x\n", conf->calendar_opt);
+    fflush (configfile);
+    fclose (configfile);
+  }
 }
 
 
@@ -181,98 +170,87 @@ readconfig (config * conf)
   snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
 
   if (existfile (homedir))
+  {
+    configfile = fopen (homedir, "r");
+  }
+  else
+  {
+    snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rcfile);
+    if (existfile (homedir))
     {
       configfile = fopen (homedir, "r");
     }
-  else
-    {
-      snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rcfile);
-      if (existfile (homedir))
-	{
-	  configfile = fopen (homedir, "r");
-	}
-    }
+  }
   if (configfile)
+  {
+    p = nextline (configfile, lineread);
+    if (my_strncasecmp (p, "[Coords]", strlen ("[Coords]")))
+      syntax_error (p);
+    p = nextline (configfile, lineread);
+    conf->x = atoi (p);
+    p = nextline (configfile, lineread);
+    conf->y = atoi (p);
+    p = nextline (configfile, lineread);
+    conf->w = atoi (p);
+    p = nextline (configfile, lineread);
+    conf->h = atoi (p);
+    p = nextline (configfile, lineread);
+    if (my_strncasecmp (p, "[Colors]", strlen ("[Colors]")))
+      syntax_error (p);
+    p = nextline (configfile, lineread);
+    sscanf (p, "%i %i %i", &(conf->fore_red), &(conf->fore_green), &(conf->fore_blue));
+    p = nextline (configfile, lineread);
+    sscanf (p, "%i %i %i", &(conf->back_red), &(conf->back_green), &(conf->back_blue));
+    p = nextline (configfile, lineread);
+    strcpy (conf->font, p);
+    p = nextline (configfile, lineread);
+    if (my_strncasecmp (p, "[Options]", strlen ("[Options]")))
+      syntax_error (p);
+    p = nextline (configfile, lineread);
+    conf->calendar = (my_strncasecmp (p, "DisplayCalendar", strlen ("DisplayCalendar")) == 0);
+    p = nextline (configfile, lineread);
+    conf->menubar = (my_strncasecmp (p, "DisplayMenuBar", strlen ("DisplayMenuBar")) == 0);
+    p = nextline (configfile, lineread);
+    conf->digital = (my_strncasecmp (p, "DigitalClock", strlen ("DigitalClock")) == 0);
+    p = nextline (configfile, lineread);
+    conf->seconds = (my_strncasecmp (p, "DisplaySeconds", strlen ("DisplaySeconds")) == 0);
+    p = nextline (configfile, lineread);
+    conf->ampm = (my_strncasecmp (p, "DisplayAMPM", strlen ("DisplayAMPM")) == 0);
+    p = nextline (configfile, lineread);
+    conf->military = (my_strncasecmp (p, "DisplayMilitary", strlen ("DisplayMilitary")) == 0);
+    p = nextline (configfile, lineread);
+    if (p == NULL)
+      conf->holy_days = 0x01;
+    else
     {
-      p = nextline (configfile, lineread);
-      if (my_strncasecmp (p, "[Coords]", strlen ("[Coords]")))
-	syntax_error (p);
-      p = nextline (configfile, lineread);
-      conf->x = atoi (p);
-      p = nextline (configfile, lineread);
-      conf->y = atoi (p);
-      p = nextline (configfile, lineread);
-      conf->w = atoi (p);
-      p = nextline (configfile, lineread);
-      conf->h = atoi (p);
-      p = nextline (configfile, lineread);
-      if (my_strncasecmp (p, "[Colors]", strlen ("[Colors]")))
-	syntax_error (p);
-      p = nextline (configfile, lineread);
-      sscanf (p, "%i %i %i", &(conf->fore_red),
-	      &(conf->fore_green), &(conf->fore_blue));
-      p = nextline (configfile, lineread);
-      sscanf (p, "%i %i %i", &(conf->back_red),
-	      &(conf->back_green), &(conf->back_blue));
-      p = nextline (configfile, lineread);
-      strcpy (conf->font, p);
-      p = nextline (configfile, lineread);
-      if (my_strncasecmp (p, "[Options]", strlen ("[Options]")))
-	syntax_error (p);
-      p = nextline (configfile, lineread);
-      conf->calendar =
-	(my_strncasecmp (p, "DisplayCalendar", strlen ("DisplayCalendar")) ==
-	 0);
-      p = nextline (configfile, lineread);
-      conf->menubar =
-	(my_strncasecmp (p, "DisplayMenuBar", strlen ("DisplayMenuBar")) ==
-	 0);
-      p = nextline (configfile, lineread);
-      conf->digital =
-	(my_strncasecmp (p, "DigitalClock", strlen ("DigitalClock")) == 0);
-      p = nextline (configfile, lineread);
-      conf->seconds =
-	(my_strncasecmp (p, "DisplaySeconds", strlen ("DisplaySeconds")) ==
-	 0);
-      p = nextline (configfile, lineread);
-      conf->ampm =
-	(my_strncasecmp (p, "DisplayAMPM", strlen ("DisplayAMPM")) == 0);
-      p = nextline (configfile, lineread);
-      conf->military =
-	(my_strncasecmp (p, "DisplayMilitary", strlen ("DisplayMilitary")) ==
-	 0);
-      p = nextline (configfile, lineread);
-      if (p==NULL) conf->holy_days=0x01;
-      else {
-	      char *word;
-	      word=strtok(p,":");
-	      if (word==NULL) conf->holy_days=0x01;
-	      else {
-		     word += (strlen(word)+1); 
-		     sscanf(word,"%x",&(conf->holy_days));
-		     conf->holy_days &= 0x07;
-	      }
+      char *word;
+      word = strtok (p, ":");
+      if (word == NULL)
+	conf->holy_days = 0x01;
+      else
+      {
+	word += (strlen (word) + 1);
+	sscanf (word, "%x", &(conf->holy_days));
+	conf->holy_days &= 0x07;
       }
-      p = nextline (configfile, lineread);
-      if (p==NULL) conf->calendar_opt=GTK_CALENDAR_SHOW_HEADING |
-				GTK_CALENDAR_SHOW_DAY_NAMES |
-				GTK_CALENDAR_SHOW_WEEK_NUMBERS;
-      else {
-	      char *word;
-	      word=strtok(p,":");
-	      if (word==NULL) conf->calendar_opt=GTK_CALENDAR_SHOW_HEADING |
-				GTK_CALENDAR_SHOW_DAY_NAMES |
-				GTK_CALENDAR_SHOW_WEEK_NUMBERS;
-	      else {
-		     word += (strlen(word)+1); 
-		     sscanf(word,"%x",&(conf->calendar_opt));
-		     conf->calendar_opt &= GTK_CALENDAR_SHOW_HEADING |
-				GTK_CALENDAR_SHOW_DAY_NAMES |
-				GTK_CALENDAR_SHOW_WEEK_NUMBERS |
-			        GTK_CALENDAR_WEEK_START_MONDAY;
-	      }
-      }
-
-      fclose (configfile);
     }
+    p = nextline (configfile, lineread);
+    if (p == NULL)
+      conf->calendar_opt = GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS;
+    else
+    {
+      char *word;
+      word = strtok (p, ":");
+      if (word == NULL)
+	conf->calendar_opt = GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS;
+      else
+      {
+	word += (strlen (word) + 1);
+	sscanf (word, "%x", &(conf->calendar_opt));
+	conf->calendar_opt &= GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_WEEK_NUMBERS | GTK_CALENDAR_WEEK_START_MONDAY;
+      }
+    }
+
+    fclose (configfile);
+  }
 }

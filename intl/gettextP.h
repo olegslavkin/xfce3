@@ -75,14 +75,10 @@ struct binding
   char *dirname;
 };
 
-struct loaded_l10nfile *_nl_find_domain PARAMS ((const char *__dirname,
-						 char *__locale,
-						 const char *__domainname))
-     internal_function;
-void _nl_load_domain PARAMS ((struct loaded_l10nfile *__domain))
-     internal_function;
-void _nl_unload_domain PARAMS ((struct loaded_domain *__domain))
-     internal_function;
+struct loaded_l10nfile *_nl_find_domain
+PARAMS ((const char *__dirname, char *__locale, const char *__domainname)) internal_function;
+     void _nl_load_domain PARAMS ((struct loaded_l10nfile * __domain)) internal_function;
+     void _nl_unload_domain PARAMS ((struct loaded_domain * __domain)) internal_function;
 
 /* @@ begin of epilog @@ */
 

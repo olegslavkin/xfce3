@@ -25,8 +25,7 @@ void action_cancel_cb (GtkWidget * widget, gpointer data);
 
 void action_ok_cb (GtkWidget * widget, gpointer data);
 
-gboolean
-action_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
+gboolean action_delete_event (GtkWidget * widget, GdkEvent * event, gpointer data);
 
 void action_browse_command_cb (GtkWidget * widget, gpointer data);
 

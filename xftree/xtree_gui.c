@@ -101,7 +101,7 @@ enum
   MN_DIR = 1,
   MN_FILE = 2,
   MN_MIXED = 3,
-  MENUS,
+  MENUS
 };
 
 enum
@@ -144,34 +144,11 @@ menu_entry;
 
 
 
-static GdkPixmap
-  *gPIX_page,
-  *gPIX_page_lnk,
-  *gPIX_dir_pd,
-  *gPIX_dir_close,
-  *gPIX_dir_close_lnk,
-  *gPIX_dir_open_lnk,
-  *gPIX_dir_open,
-  *gPIX_dir_up,
-  *gPIX_char_dev,
-  *gPIX_fifo,
-  *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
+static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_open, *gPIX_dir_up, *gPIX_char_dev, *gPIX_fifo, *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
 
-static GdkBitmap
-  *gPIM_page,
-  *gPIM_page_lnk,
-  *gPIM_dir_pd,
-  *gPIM_dir_close,
-  *gPIM_dir_close_lnk,
-  *gPIM_dir_open_lnk,
-  *gPIM_dir_open,
-  *gPIM_dir_up,
-  *gPIM_char_dev,
-  *gPIM_fifo,
-  *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
+static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_open, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
 
-static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg,
-			   int width, int height, int flags);
+static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg, int width, int height, int flags);
 int move_dir (char *source, char *label, char *target, int trash);
 
 gint update_timer (GtkCTree * ctree);
@@ -206,21 +183,21 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   type1 = en1->type & (FT_DIR | FT_FILE);
   type2 = en2->type & (FT_DIR | FT_FILE);
   if (type1 != type2)
-    {
-      /* i want to have the directories at the top
-       */
-      return (type1 < type2 ? -1 : 1);
-    }
+  {
+    /* i want to have the directories at the top
+     */
+    return (type1 < type2 ? -1 : 1);
+  }
   if (clist->sort_column != COL_NAME)
-    {
-      /* use default compare function which we have saved before
-       */
-      GtkCListCompareFunc compare;
-      cfg *win;
-      win = gtk_object_get_user_data (GTK_OBJECT (clist));
-      compare = (GtkCListCompareFunc) win->compare;
-      return compare (clist, ptr1, ptr2);
-    }
+  {
+    /* use default compare function which we have saved before
+     */
+    GtkCListCompareFunc compare;
+    cfg *win;
+    win = gtk_object_get_user_data (GTK_OBJECT (clist));
+    compare = (GtkCListCompareFunc) win->compare;
+    return compare (clist, ptr1, ptr2);
+  }
   return strcmp (en1->label, en2->label);
 }
 
@@ -251,9 +228,9 @@ count_selection (GtkCTree * ctree, GtkCTreeNode ** first)
   list = GTK_CLIST (ctree)->selection;
   num = g_list_length (list);
   if (num <= 0)
-    {
-      return (0);
-    }
+  {
+    return (0);
+  }
   *first = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
   return (num);
 }
@@ -274,16 +251,15 @@ selection_type (GtkCTree * ctree, GtkCTreeNode ** first)
     return (0);
 
   while (list)
-    {
-      node = list->data;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if ((en->type & FT_DIR) || (en->type & FT_DIR_UP)
-	  || (en->type & FT_DIR_PD))
-	num |= MN_DIR;
-      else
-	num |= MN_FILE;
-      list = list->next;
-    }
+  {
+    node = list->data;
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+    if ((en->type & FT_DIR) || (en->type & FT_DIR_UP) || (en->type & FT_DIR_PD))
+      num |= MN_DIR;
+    else
+      num |= MN_FILE;
+    list = list->next;
+  }
 
   *first = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
   return (num);
@@ -301,32 +277,30 @@ on_click_column (GtkCList * clist, gint column, gpointer data)
   if (column != clist->sort_column)
     gtk_clist_set_sort_column (clist, column);
   else
-    {
-      if (clist->sort_type == GTK_SORT_ASCENDING)
-	clist->sort_type = GTK_SORT_DESCENDING;
-      else
-	clist->sort_type = GTK_SORT_ASCENDING;
-    }
+  {
+    if (clist->sort_type == GTK_SORT_ASCENDING)
+      clist->sort_type = GTK_SORT_DESCENDING;
+    else
+      clist->sort_type = GTK_SORT_ASCENDING;
+  }
   num = count_selection (GTK_CTREE (clist), &node);
   if (num)
+  {
+    for (selection = g_list_copy (GTK_CLIST (clist)->selection); selection; selection = selection->next)
     {
-      for (selection = g_list_copy (GTK_CLIST (clist)->selection);
-	   selection; selection = selection->next)
-	{
-	  node = selection->data;
-	  if (!GTK_CTREE_ROW (node)->children ||
-	      (!GTK_CTREE_ROW (node)->expanded))
-	    {
-	      /* select parent node */
-	      node = GTK_CTREE_ROW (node)->parent;
-	    }
-	  gtk_ctree_sort_node (GTK_CTREE (clist), node);
-	}
+      node = selection->data;
+      if (!GTK_CTREE_ROW (node)->children || (!GTK_CTREE_ROW (node)->expanded))
+      {
+	/* select parent node */
+	node = GTK_CTREE_ROW (node)->parent;
+      }
+      gtk_ctree_sort_node (GTK_CTREE (clist), node);
     }
+  }
   else
-    {
-      gtk_clist_sort (clist);
-    }
+  {
+    gtk_clist_sort (clist);
+  }
   g_list_free (selection);
   return TRUE;
 }
@@ -349,8 +323,7 @@ void
 cb_open_trash (GtkWidget * item, void *data)
 {
   cfg *win = (cfg *) data;
-  new_top (win->trash, win->xap, win->trash, win->reg,
-	   win->width, win->height, 0);
+  new_top (win->trash, win->xap, win->trash, win->reg, win->width, win->height, 0);
 }
 
 /*
@@ -369,31 +342,28 @@ cb_new_window (GtkWidget * widget, GtkCTree * ctree)
 
   num = count_selection (ctree, &node);
   if (num)
+  {
+    for (selection = g_list_copy (GTK_CLIST (ctree)->selection); selection; selection = selection->next)
     {
-      for (selection = g_list_copy (GTK_CLIST (ctree)->selection);
-	   selection; selection = selection->next)
+      node = selection->data;
+      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+      if (!(en->type & FT_DIR))
+      {
+	node = GTK_CTREE_ROW (node)->parent;
+	if (!node)
 	{
-	  node = selection->data;
-	  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-	  if (!(en->type & FT_DIR))
-	    {
-	      node = GTK_CTREE_ROW (node)->parent;
-	      if (!node)
-		{
-		  continue;
-		}
-	    }
-	  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-	  new_top (uri_clear_path (en->path), win->xap,
-		   win->trash, win->reg, win->width, win->height, en->flags);
+	  continue;
 	}
+      }
+      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+      new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
     }
+  }
   else
-    {
-      en = gtk_ctree_node_get_row_data (ctree, node);
-      new_top (uri_clear_path (en->path), win->xap, win->trash,
-	       win->reg, win->width, win->height, en->flags);
-    }
+  {
+    en = gtk_ctree_node_get_row_data (ctree, node);
+    new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
+  }
   g_list_free (selection);
 }
 
@@ -406,9 +376,9 @@ node_unselect_by_type (GtkCTree * ctree, GtkCTreeNode * node, void *data)
 
   en = gtk_ctree_node_get_row_data (ctree, node);
   if (en->type & (int) ((long) data))
-    {
-      gtk_ctree_unselect (ctree, node);
-    }
+  {
+    gtk_ctree_unselect (ctree, node);
+  }
 }
 
 /*
@@ -424,8 +394,7 @@ cb_select (GtkWidget * item, GtkCTree * ctree)
     node = GTK_CTREE_ROW (node)->parent;
   gtk_ctree_select_recursive (ctree, node);
   gtk_ctree_unselect (ctree, node);
-  gtk_ctree_pre_recursive (ctree, node, node_unselect_by_type,
-			   (gpointer) ((long) FT_DIR_UP));
+  gtk_ctree_pre_recursive (ctree, node, node_unselect_by_type, (gpointer) ((long) FT_DIR_UP));
 }
 
 /*
@@ -465,24 +434,22 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
   int num, row, column = MN_NONE;
 
   if (event->button == 3)
+  {
+    num = selection_type (ctree, &node);
+    if (!num)
     {
-      num = selection_type (ctree, &node);
-      if (!num)
-	{
-	  row = -1;
-	  gtk_clist_get_selection_info (GTK_CLIST (widget),
-					event->x, event->y, &row, &column);
-	  if (row > -1)
-	    {
-	      gtk_clist_select_row (GTK_CLIST (ctree), row, 0);
-	      if (GTK_CLIST (ctree)->selection)
-		num = selection_type (ctree, &node);
-	    }
-	}
-      gtk_menu_popup (GTK_MENU (menu[num]), NULL, NULL, NULL, NULL,
-		      3, event->time);
-      return TRUE;
+      row = -1;
+      gtk_clist_get_selection_info (GTK_CLIST (widget), event->x, event->y, &row, &column);
+      if (row > -1)
+      {
+	gtk_clist_select_row (GTK_CLIST (ctree), row, 0);
+	if (GTK_CLIST (ctree)->selection)
+	  num = selection_type (ctree, &node);
+      }
     }
+    gtk_menu_popup (GTK_MENU (menu[num]), NULL, NULL, NULL, NULL, 3, event->time);
+    return TRUE;
+  }
   return FALSE;
 }
 
@@ -503,9 +470,7 @@ ctree_thaw (GtkCTree * ctree)
 /*
  */
 GtkCTreeNode *
-add_node (GtkCTree * ctree, GtkCTreeNode * parent,
-	  GtkCTreeNode * sibling, char *label, char *path,
-	  int *type, int flags)
+add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char *label, char *path, int *type, int flags)
 {
   entry *en;
   GtkCTreeNode *item;
@@ -514,143 +479,100 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent,
   gchar date[32] = { "" };
 
   if (!label || !path)
-    {
-      return NULL;
-    }
+  {
+    return NULL;
+  }
   if (*type & FT_DUMMY)
-    {
-      en = entry_new ();
-      en->label = g_strdup (label);
-      en->path = g_strdup (path);
-      en->type = FT_DIR | FT_DUMMY;
-    }
+  {
+    en = entry_new ();
+    en->label = g_strdup (label);
+    en->path = g_strdup (path);
+    en->type = FT_DIR | FT_DUMMY;
+  }
   else
+  {
+    en = entry_new_by_path_and_label (path, label);
+    if (!en)
     {
-      en = entry_new_by_path_and_label (path, label);
-      if (!en)
-	{
-	  return 0;
-	}
-      en->flags = flags;
-
-      sprintf (date, "%02d-%02d-%02d  %02d:%02d",
-	       en->date.year, en->date.month, en->date.day,
-	       en->date.hour, en->date.min);
-      if (en->size < 0)
-	{
-	  sprintf (size, "?(ERR %d)", -en->size);
-	}
-      else
-	{
-	  sprintf (size, "%10d", (int) en->size);
-	}
+      return 0;
     }
+    en->flags = flags;
+
+    sprintf (date, "%02d-%02d-%02d  %02d:%02d", en->date.year, en->date.month, en->date.day, en->date.hour, en->date.min);
+    if (en->size < 0)
+    {
+      sprintf (size, "?(ERR %d)", -en->size);
+    }
+    else
+    {
+      sprintf (size, "%10d", (int) en->size);
+    }
+  }
   text[COL_NAME] = en->label;
   text[COL_DATE] = date;
   text[COL_SIZE] = size;
 
   if (en->type & FT_EXE)
+  {
+    if (en->type & FT_LINK)
     {
-      if (en->type & FT_LINK)
-	{
-	  item = gtk_ctree_insert_node (ctree, parent, NULL,
-					text, SPACING,
-					gPIX_exe_lnk,
-					gPIM_exe_lnk, NULL,
-					NULL, TRUE, FALSE);
-	}
-      else
-	{
-	  item = gtk_ctree_insert_node (ctree, parent, NULL,
-					text, SPACING,
-					gPIX_exe, gPIM_exe,
-					NULL, NULL, TRUE, FALSE);
-	}
+      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_exe_lnk, gPIM_exe_lnk, NULL, NULL, TRUE, FALSE);
     }
+    else
+    {
+      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_exe, gPIM_exe, NULL, NULL, TRUE, FALSE);
+    }
+  }
   else if (en->type & FT_FILE)
+  {
+    if (en->type & FT_LINK)
     {
-      if (en->type & FT_LINK)
-	{
-	  item = gtk_ctree_insert_node (ctree, parent, NULL,
-					text, SPACING,
-					gPIX_page_lnk,
-					gPIM_page_lnk, NULL,
-					NULL, TRUE, FALSE);
-	}
-      else
-	{
-	  item = gtk_ctree_insert_node (ctree, parent, NULL,
-					text, SPACING,
-					gPIX_page, gPIM_page,
-					NULL, NULL, TRUE, FALSE);
-	}
+      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_page_lnk, gPIM_page_lnk, NULL, NULL, TRUE, FALSE);
     }
+    else
+    {
+      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
+    }
+  }
   else if (en->type & FT_DIR_UP)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_dir_up,
-				    gPIM_dir_up, NULL, NULL, TRUE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_dir_up, gPIM_dir_up, NULL, NULL, TRUE, FALSE);
+  }
   else if (en->type & FT_DIR_PD)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_dir_pd,
-				    gPIM_dir_pd, gPIX_dir_pd,
-				    gPIM_dir_pd, FALSE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_dir_pd, gPIM_dir_pd, gPIX_dir_pd, gPIM_dir_pd, FALSE, FALSE);
+  }
   else if (en->type & FT_DIR)
+  {
+    if (en->type & FT_LINK)
     {
-      if (en->type & FT_LINK)
-	{
-	  item =
-	    gtk_ctree_insert_node (ctree, parent, sibling,
-				   text, SPACING,
-				   gPIX_dir_close_lnk,
-				   gPIM_dir_close_lnk,
-				   gPIX_dir_open_lnk,
-				   gPIM_dir_open_lnk, FALSE, FALSE);
-	}
-      else
-	{
-	  item =
-	    gtk_ctree_insert_node (ctree, parent, sibling,
-				   text, SPACING,
-				   gPIX_dir_close,
-				   gPIM_dir_close,
-				   gPIX_dir_open,
-				   gPIM_dir_open, FALSE, FALSE);
-	}
+      item = gtk_ctree_insert_node (ctree, parent, sibling, text, SPACING, gPIX_dir_close_lnk, gPIM_dir_close_lnk, gPIX_dir_open_lnk, gPIM_dir_open_lnk, FALSE, FALSE);
     }
+    else
+    {
+      item = gtk_ctree_insert_node (ctree, parent, sibling, text, SPACING, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
+    }
+  }
   else if (en->type & FT_CHAR_DEV)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_char_dev,
-				    gPIM_char_dev, NULL, NULL, TRUE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_char_dev, gPIM_char_dev, NULL, NULL, TRUE, FALSE);
+  }
   else if (en->type & FT_BLOCK_DEV)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_block_dev,
-				    gPIM_block_dev, NULL, NULL, TRUE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_block_dev, gPIM_block_dev, NULL, NULL, TRUE, FALSE);
+  }
   else if (en->type & FT_FIFO)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_fifo, gPIM_fifo,
-				    NULL, NULL, TRUE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_fifo, gPIM_fifo, NULL, NULL, TRUE, FALSE);
+  }
   else if (en->type & FT_SOCKET)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_socket,
-				    gPIM_socket, NULL, NULL, TRUE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_socket, gPIM_socket, NULL, NULL, TRUE, FALSE);
+  }
   else
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text,
-				    SPACING, gPIX_stale_lnk,
-				    gPIM_stale_lnk, NULL, NULL, TRUE, FALSE);
-    }
+  {
+    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_stale_lnk, gPIM_stale_lnk, NULL, NULL, TRUE, FALSE);
+  }
   if (item)
     gtk_ctree_node_set_row_data_full (ctree, item, en, node_destroy);
   *type = en->type;
@@ -661,108 +583,77 @@ void
 update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
 {
   if (!ctree || !node || !label)
-    {
-      return;
-    }
+  {
+    return;
+  }
 
   if (type & FT_EXE)
+  {
+    if (type & FT_LINK)
     {
-      if (type & FT_LINK)
-	{
-	  gtk_ctree_set_node_info (ctree, node, label,
-				   SPACING, gPIX_exe_lnk,
-				   gPIM_exe_lnk, NULL, NULL, TRUE, FALSE);
-	}
-      else
-	{
-	  gtk_ctree_set_node_info (ctree, node, label,
-				   SPACING, gPIX_exe,
-				   gPIM_exe, NULL, NULL, TRUE, FALSE);
-	}
+      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_exe_lnk, gPIM_exe_lnk, NULL, NULL, TRUE, FALSE);
     }
+    else
+    {
+      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_exe, gPIM_exe, NULL, NULL, TRUE, FALSE);
+    }
+  }
   else if (type & FT_FILE)
+  {
+    if (type & FT_LINK)
     {
-      if (type & FT_LINK)
-	{
-	  gtk_ctree_set_node_info (ctree, node, label,
-				   SPACING, gPIX_page_lnk,
-				   gPIM_page_lnk, NULL, NULL, TRUE, FALSE);
-	}
-      else
-	{
-	  gtk_ctree_set_node_info (ctree, node, label,
-				   SPACING, gPIX_page,
-				   gPIM_page, NULL, NULL, TRUE, FALSE);
-	}
+      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_page_lnk, gPIM_page_lnk, NULL, NULL, TRUE, FALSE);
     }
+    else
+    {
+      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
+    }
+  }
   else if (type & FT_DIR_UP)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_dir_up, gPIM_dir_up, NULL,
-			       NULL, TRUE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_up, gPIM_dir_up, NULL, NULL, TRUE, FALSE);
+  }
   else if (type & FT_DIR_PD)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_dir_pd, gPIM_dir_pd,
-			       gPIX_dir_pd, gPIM_dir_pd, FALSE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_pd, gPIM_dir_pd, gPIX_dir_pd, gPIM_dir_pd, FALSE, FALSE);
+  }
   else if (type & FT_DIR)
+  {
+    if (type & FT_LINK)
     {
-      if (type & FT_LINK)
-	{
-	  gtk_ctree_set_node_info (ctree, node, label,
-				   SPACING,
-				   gPIX_dir_close_lnk,
-				   gPIM_dir_close_lnk,
-				   gPIX_dir_open_lnk,
-				   gPIM_dir_open_lnk, FALSE, FALSE);
-	}
-      else
-	{
-	  gtk_ctree_set_node_info (ctree, node, label,
-				   SPACING, gPIX_dir_close,
-				   gPIM_dir_close,
-				   gPIX_dir_open,
-				   gPIM_dir_open, FALSE, FALSE);
-	}
+      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_close_lnk, gPIM_dir_close_lnk, gPIX_dir_open_lnk, gPIM_dir_open_lnk, FALSE, FALSE);
     }
+    else
+    {
+      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
+    }
+  }
   else if (type & FT_CHAR_DEV)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_char_dev, gPIM_char_dev, NULL,
-			       NULL, TRUE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_char_dev, gPIM_char_dev, NULL, NULL, TRUE, FALSE);
+  }
   else if (type & FT_BLOCK_DEV)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_block_dev, gPIM_block_dev,
-			       NULL, NULL, TRUE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_block_dev, gPIM_block_dev, NULL, NULL, TRUE, FALSE);
+  }
   else if (type & FT_FIFO)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_fifo, gPIM_fifo, NULL, NULL, TRUE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_fifo, gPIM_fifo, NULL, NULL, TRUE, FALSE);
+  }
   else if (type & FT_SOCKET)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_socket, gPIM_socket, NULL,
-			       NULL, TRUE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_socket, gPIM_socket, NULL, NULL, TRUE, FALSE);
+  }
   else
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING,
-			       gPIX_stale_lnk, gPIM_stale_lnk,
-			       NULL, NULL, TRUE, FALSE);
-    }
+  {
+    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_stale_lnk, gPIM_stale_lnk, NULL, NULL, TRUE, FALSE);
+  }
 }
 
 /*
  */
 void
-add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth,
-	     int flags)
+add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
 {
   DIR *dir;
   struct dirent *de;
@@ -782,10 +673,10 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth,
   if (!len)
     return;
   if (path[len - 1] != '/')
-    {
-      add_slash = yes;
-      len++;
-    }
+  {
+    add_slash = yes;
+    len++;
+  }
   base = g_malloc (len + 1);
   if (!base)
     alloc_error_fatal ();
@@ -794,41 +685,38 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth,
     strcat (base, "/");
 
   if (depth == 1)
-    {
-      /* create dummy entry */
-      sprintf (complete, "%s.", base);
-      type = FT_DUMMY;
-      add_node (GTK_CTREE (ctree), root, NULL, ".", complete, &type, flags);
-      g_free (base);
-      return;
-    }
+  {
+    /* create dummy entry */
+    sprintf (complete, "%s.", base);
+    type = FT_DUMMY;
+    add_node (GTK_CTREE (ctree), root, NULL, ".", complete, &type, flags);
+    g_free (base);
+    return;
+  }
   dir = opendir (path);
   if (!dir)
-    {
-      g_free (base);
-      return;
-    }
+  {
+    g_free (base);
+    return;
+  }
   while ((de = readdir (dir)) != NULL)
-    {
-      type = 0;
-      item = NULL;
-      d_len = strlen (de->d_name);
-      if (io_is_dirup (de->d_name))
-	type |= FT_DIR_UP | FT_DIR;
-      else if ((*de->d_name == '.')
-	       && ((flags & IGNORE_HIDDEN) && (d_len >= 1)))
-	continue;
-      sprintf (complete, "%s%s", base, de->d_name);
-      strcpy (label, de->d_name);
-      if ((!io_is_current (de->d_name)))
-	item = add_node (GTK_CTREE (ctree), root, first,
-			 label, complete, &type, flags);
-      if ((type & FT_DIR) && (!(type & FT_DIR_UP))
-	  && (!(type & FT_DIR_PD)) && (io_is_valid (de->d_name)) && item)
-	add_subtree (ctree, item, complete, depth - 1, flags);
-      else if (!first)
-	first = item;
-    }
+  {
+    type = 0;
+    item = NULL;
+    d_len = strlen (de->d_name);
+    if (io_is_dirup (de->d_name))
+      type |= FT_DIR_UP | FT_DIR;
+    else if ((*de->d_name == '.') && ((flags & IGNORE_HIDDEN) && (d_len >= 1)))
+      continue;
+    sprintf (complete, "%s%s", base, de->d_name);
+    strcpy (label, de->d_name);
+    if ((!io_is_current (de->d_name)))
+      item = add_node (GTK_CTREE (ctree), root, first, label, complete, &type, flags);
+    if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (de->d_name)) && item)
+      add_subtree (ctree, item, complete, depth - 1, flags);
+    else if (!first)
+      first = item;
+  }
   g_free (base);
   closedir (dir);
   gtk_ctree_sort_node (ctree, root);
@@ -849,23 +737,23 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
   count_selection (ctree, &node);
   en = gtk_ctree_node_get_row_data (ctree, node);
   if (!(en->type & FT_DIR))
-    {
-      /* select parent node */
-      node = GTK_CTREE_ROW (node)->parent;
-      en = gtk_ctree_node_get_row_data (ctree, node);
-    }
+  {
+    /* select parent node */
+    node = GTK_CTREE_ROW (node)->parent;
+    en = gtk_ctree_node_get_row_data (ctree, node);
+  }
   /* Ignore toggle on parent directory */
   if (en->type & FT_DIR_UP)
-    {
-      gtk_clist_thaw (GTK_CLIST (ctree));
-      return;
-    }
+  {
+    gtk_clist_thaw (GTK_CLIST (ctree));
+    return;
+  }
   child = GTK_CTREE_ROW (node)->children;
   while (child)
-    {
-      gtk_ctree_remove_node (ctree, child);
-      child = GTK_CTREE_ROW (node)->children;
-    }
+  {
+    gtk_ctree_remove_node (ctree, child);
+    child = GTK_CTREE_ROW (node)->children;
+  }
   if (en->flags & IGNORE_HIDDEN)
     en->flags &= ~IGNORE_HIDDEN;
   else
@@ -887,10 +775,10 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   ctree_freeze (ctree);
   child = GTK_CTREE_ROW (node)->children;
   while (child)
-    {
-      gtk_ctree_remove_node (ctree, child);
-      child = GTK_CTREE_ROW (node)->children;
-    }
+  {
+    gtk_ctree_remove_node (ctree, child);
+    child = GTK_CTREE_ROW (node)->children;
+  }
   en = gtk_ctree_node_get_row_data (ctree, node);
   add_subtree (ctree, node, en->path, 2, en->flags);
   ctree_thaw (ctree);
@@ -906,10 +794,10 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   /* unselect all children */
   child = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->children);
   while (child)
-    {
-      gtk_ctree_unselect (ctree, child);
-      child = GTK_CTREE_ROW (child)->sibling;
-    }
+  {
+    gtk_ctree_unselect (ctree, child);
+    child = GTK_CTREE_ROW (child)->sibling;
+  }
 }
 
 /*
@@ -925,43 +813,43 @@ delete_files (char *path)
   char complete[PATH_MAX + NAME_MAX + 1];
 
   if (lstat (path, &st) == -1)
+  {
+    perror (path);
+    return;
+  }
+  if ((test = strrchr (path, '/')))
+  {
+    test++;
+    if (!io_is_valid (test))
+      return;
+  }
+  if (S_ISDIR (st.st_mode) && (!S_ISLNK (st.st_mode)))
+  {
+    if (access (path, R_OK | W_OK) == -1)
     {
-      perror (path);
       return;
     }
-  if ((test = strrchr (path, '/')))
+    dir = opendir (path);
+    if (!dir)
     {
-      test++;
-      if (!io_is_valid (test))
-	return;
+      return;
     }
-  if (S_ISDIR (st.st_mode) && (!S_ISLNK (st.st_mode)))
+    while ((de = readdir (dir)) != NULL)
     {
-      if (access (path, R_OK | W_OK) == -1)
-	{
-	  return;
-	}
-      dir = opendir (path);
-      if (!dir)
-	{
-	  return;
-	}
-      while ((de = readdir (dir)) != NULL)
-	{
-	  if (io_is_current (de->d_name))
-	    continue;
-	  if (io_is_dirup (de->d_name))
-	    continue;
-	  sprintf (complete, "%s/%s", path, de->d_name);
-	  delete_files (complete);
-	}
-      closedir (dir);
-      rmdir (path);
+      if (io_is_current (de->d_name))
+	continue;
+      if (io_is_dirup (de->d_name))
+	continue;
+      sprintf (complete, "%s/%s", path, de->d_name);
+      delete_files (complete);
     }
+    closedir (dir);
+    rmdir (path);
+  }
   else
-    {
-      unlink (path);
-    }
+  {
+    unlink (path);
+  }
 }
 
 /*
@@ -984,9 +872,9 @@ move_file (char *ofile, char *label, char *target, int trash)
     return (FALSE);
 
   if (!io_can_write_to_parent (ofile))
-    {
-      return (FALSE);
-    }
+  {
+    return (FALSE);
+  }
 
   if (access (target, W_OK | X_OK) == -1)
     return (FALSE);
@@ -998,65 +886,62 @@ move_file (char *ofile, char *label, char *target, int trash)
     return (FALSE);
   sprintf (nfile, "%s/%s", target, label);
   while (++num)
+  {
+    if (lstat (nfile, &st) == 0)
     {
-      if (lstat (nfile, &st) == 0)
-	{
-	  /* file still exists */
-	  if (!trash)
-	    return (FALSE);
-	  /* just use a new file name
-	   */
-	  sprintf (nfile, "%s/%s;%d", target, label, num);
-	}
-      else
-	break;
-    }
-  if (strcmp (ofile, nfile) == 0)
-    {
-      /* source and target are the same
+      /* file still exists */
+      if (!trash)
+	return (FALSE);
+      /* just use a new file name
        */
-      return (FALSE);
+      sprintf (nfile, "%s/%s;%d", target, label, num);
     }
+    else
+      break;
+  }
+  if (strcmp (ofile, nfile) == 0)
+  {
+    /* source and target are the same
+     */
+    return (FALSE);
+  }
 
   if (stfile.st_dev == stdir.st_dev)
+  {
+    /* rename */
+    if (rename (ofile, nfile) == -1)
     {
-      /* rename */
-      if (rename (ofile, nfile) == -1)
-	{
-	  return (FALSE);
-	}
-      return (TRUE);
+      return (FALSE);
     }
+    return (TRUE);
+  }
 
   /* check if file is a symbolic link */
   if (S_ISLNK (stfile.st_mode))
+  {
+    len = readlink (ofile, lnk, PATH_MAX);
+    if (len <= 0)
     {
-      len = readlink (ofile, lnk, PATH_MAX);
-      if (len <= 0)
-	{
-	  perror ("readlink()");
-	  return (FALSE);
-	}
-      lnk[len] = '\0';
-      if (symlink (lnk, nfile) == -1)
-	return (FALSE);
-      if (unlink (ofile) == -1)
-	{
-	  perror ("unlink()");
-	  return (FALSE);
-	}
-      return (TRUE);
+      perror ("readlink()");
+      return (FALSE);
     }
+    lnk[len] = '\0';
+    if (symlink (lnk, nfile) == -1)
+      return (FALSE);
+    if (unlink (ofile) == -1)
+    {
+      perror ("unlink()");
+      return (FALSE);
+    }
+    return (TRUE);
+  }
 
   /* we can just rename but not copy special device files ..
    */
-  if (S_ISCHR (stfile.st_mode) ||
-      S_ISBLK (stfile.st_mode) ||
-      S_ISFIFO (stfile.st_mode) || S_ISSOCK (stfile.st_mode))
-    {
-      printf (_
-	      ("Can't copy device, fifo and socket files as regular files!\n"));
-    }
+  if (S_ISCHR (stfile.st_mode) || S_ISBLK (stfile.st_mode) || S_ISFIFO (stfile.st_mode) || S_ISSOCK (stfile.st_mode))
+  {
+    printf (_("Can't copy device, fifo and socket files as regular files!\n"));
+  }
   /* copy and delete
    */
   ofp = fopen (ofile, "rb");
@@ -1064,14 +949,14 @@ move_file (char *ofile, char *label, char *target, int trash)
     return (0);
   nfp = fopen (nfile, "wb");
   if (!nfp)
-    {
-      fclose (ofp);
-      return (0);
-    }
+  {
+    fclose (ofp);
+    return (0);
+  }
   while ((num = fread (buff, 1, 1024, ofp)) > 0)
-    {
-      fwrite (buff, 1, num, nfp);
-    }
+  {
+    fwrite (buff, 1, num, nfp);
+  }
   fclose (nfp);
   fclose (ofp);
   /* reset time stamps
@@ -1102,101 +987,100 @@ move_dir (char *source, char *label, char *target, int trash)
   char name[NAME_MAX + 1];
 
   if (access (target, X_OK | W_OK) != 0)
-    {
-      perror (target);
-      return (FALSE);
-    }
+  {
+    perror (target);
+    return (FALSE);
+  }
   if (access (source, X_OK | R_OK) != 0)
-    {
-      perror (source);
-      return (FALSE);
-    }
+  {
+    perror (source);
+    return (FALSE);
+  }
   if (lstat (target, &st_target) != 0)
-    {
-      perror (target);
-      return (FALSE);
-    }
+  {
+    perror (target);
+    return (FALSE);
+  }
   if (lstat (source, &st_source) != 0)
-    {
-      perror (target);
-      return (FALSE);
-    }
+  {
+    perror (target);
+    return (FALSE);
+  }
 
   if (!(io_is_valid (label)))
     return (FALSE);
 
   sprintf (new_path, "%s/%s", target, label);
   while (++num)
+  {
+    if (lstat (new_path, &st_file) == 0)
     {
-      if (lstat (new_path, &st_file) == 0)
-	{
-	  if (!trash)
-	    return (FALSE);
-	  /* dir still exists, we have to rename */
-	  sprintf (new_path, "%s/%s;%d", target, label, num);
-	}
-      else
-	break;
-    }
-  if (st_source.st_dev == st_target.st_dev)
-    {
-      if (rename (source, new_path) == -1)
+      if (!trash)
 	return (FALSE);
-      return (TRUE);
+      /* dir still exists, we have to rename */
+      sprintf (new_path, "%s/%s;%d", target, label, num);
     }
+    else
+      break;
+  }
+  if (st_source.st_dev == st_target.st_dev)
+  {
+    if (rename (source, new_path) == -1)
+      return (FALSE);
+    return (TRUE);
+  }
 
   if (!S_ISDIR (st_source.st_mode))
-    {
-      printf (_("Moving file..\n"));
-      return move_file (source, label, target, trash);
-    }
+  {
+    printf (_("Moving file..\n"));
+    return move_file (source, label, target, trash);
+  }
 
   /* we have to copy .. */
   dir = opendir (source);
   if (!dir)
-    {
-      perror (source);
-      return (FALSE);
-    }
+  {
+    perror (source);
+    return (FALSE);
+  }
   if (mkdir (new_path, 0xFFFF) == -1)
-    {
-      perror (source);
-      closedir (dir);
-      return (FALSE);
-    }
+  {
+    perror (source);
+    closedir (dir);
+    return (FALSE);
+  }
 
   while ((de = readdir (dir)) != NULL)
+  {
+    len = strlen (de->d_name);
+    if (((len == 1) && (*de->d_name == '.')) || ((len == 2) && (de->d_name[0] == '.') && (de->d_name[1] == '.')))
     {
-      len = strlen (de->d_name);
-      if (((len == 1) && (*de->d_name == '.')) ||
-	  ((len == 2) && (de->d_name[0] == '.') && (de->d_name[1] == '.')))
-	{
-	  continue;
-	}
-      strcpy (name, de->d_name);
-      sprintf (file, "%s/%s", source, name);
-      if (lstat (file, &st_file) != 0)
-	{
-	  perror (file);
-	  return (FALSE);
-	}
-      if (S_ISDIR (st_file.st_mode))
-	{
-	  if (move_dir (file, name, new_path, trash) != TRUE)
-	    {
-	      printf (_("move_dir() recursive failed\n"));
-	      return (FALSE);
-	    }
-	}
-      else
-	{
-	  if (move_file (file, name, new_path, trash) != TRUE)
-	    {
-	      printf (_("move_dir() move_file() failed\n"));
-	      return (FALSE);
-	    }
-	}
+      continue;
     }
+    strcpy (name, de->d_name);
+    sprintf (file, "%s/%s", source, name);
+    if (lstat (file, &st_file) != 0)
+    {
+      perror (file);
+      return (FALSE);
+    }
+    if (S_ISDIR (st_file.st_mode))
+    {
+      if (move_dir (file, name, new_path, trash) != TRUE)
+      {
+	printf (_("move_dir() recursive failed\n"));
+	return (FALSE);
+      }
+    }
+    else
+    {
+      if (move_file (file, name, new_path, trash) != TRUE)
+      {
+	printf (_("move_dir() move_file() failed\n"));
+	return (FALSE);
+      }
+    }
+  }
   closedir (dir);
   rmdir (source);
   return (TRUE);
@@ -1212,14 +1096,14 @@ node_is_open (GtkCTree * ctree, GtkCTreeNode * node, void *data)
   entry *check = (entry *) data;
   entry *en = gtk_ctree_node_get_row_data (ctree, node);
   if (strcmp (en->path, check->path) == 0)
+  {
+    row = GTK_CTREE_ROW (node);
+    if (row->expanded)
     {
-      row = GTK_CTREE_ROW (node);
-      if (row->expanded)
-	{
-	  check->label = (char *) node;
-	  check->flags = TRUE;
-	}
+      check->label = (char *) node;
+      check->flags = TRUE;
     }
+  }
 }
 
 /*
@@ -1251,38 +1135,31 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
   if (!win)
     return;
   /* check if the trash dir is open, so we have to update */
-  gtk_ctree_pre_recursive (ctree,
-			   GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list),
-			   node_is_open, &check);
+  gtk_ctree_pre_recursive (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), node_is_open, &check);
   dir = opendir (win->trash);
   if (!dir)
     return;
   cursor_wait (GTK_WIDGET (ctree));
   while ((de = readdir (dir)) != NULL)
-    {
-      if (io_is_current (de->d_name))
-	continue;
-      if (io_is_dirup (de->d_name))
-	continue;
-      sprintf (complete, "%s/%s", win->trash, de->d_name);
-      delete_files (complete);
+  {
+    if (io_is_current (de->d_name))
+      continue;
+    if (io_is_dirup (de->d_name))
+      continue;
+    sprintf (complete, "%s/%s", win->trash, de->d_name);
+    delete_files (complete);
 
-      if (check.flags)
-	{
-	  /* remove node */
-	  check.path = complete;
-	  node = gtk_ctree_find_by_row_data_custom (ctree,
-						    GTK_CTREE_NODE
-						    (GTK_CLIST
-						     (ctree)->row_list),
-						    &check,
-						    compare_node_path);
-	  if (node)
-	    {
-	      gtk_ctree_remove_node (ctree, node);
-	    }
-	}
+    if (check.flags)
+    {
+      /* remove node */
+      check.path = complete;
+      node = gtk_ctree_find_by_row_data_custom (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), &check, compare_node_path);
+      if (node)
+      {
+	gtk_ctree_remove_node (ctree, node);
+      }
     }
+  }
   closedir (dir);
   cursor_reset (GTK_WIDGET (ctree));
 }
@@ -1306,108 +1183,98 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
 
   num = count_selection (ctree, &node);
   if (!num)
+  {
+    /* nothing to delete */
+    dlg_warning (_("No files marked !"));
+    return;
+  }
+  for (i = 0; i < num; i++)
+  {
+    if (!GTK_CLIST (ctree)->selection)
     {
-      /* nothing to delete */
-      dlg_warning (_("No files marked !"));
+      continue;
+    }
+    node = GTK_CLIST (ctree)->selection->data;
+    en = gtk_ctree_node_get_row_data (ctree, node);
+    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
+    {
+      /* we do not process ".." */
+      gtk_ctree_unselect (ctree, node);
+      continue;
+    }
+    if (ask)
+    {
+      if (num - i == 1)
+	result = dlg_question (_("Delete item ?"), en->path);
+      else
+	result = dlg_question_l (_("Delete item ?"), en->path, DLG_ALL | DLG_SKIP);
+    }
+    else
+      result = DLG_RC_ALL;
+    if (result == DLG_RC_CANCEL)
+    {
       return;
     }
-  for (i = 0; i < num; i++)
+    else if (result == DLG_RC_OK || result == DLG_RC_ALL)
     {
-      if (!GTK_CLIST (ctree)->selection)
+      if (result == DLG_RC_ALL)
+      {
+	ask = FALSE;
+      }
+      while (gtk_events_pending ())
+	gtk_main_iteration ();
+      ctree_freeze (ctree);
+
+      if (lstat (en->path, &st_target) == -1)
+      {
+	dlg_error (_("Can't stat() file"), en->path);
+	ctree_thaw (ctree);
+	return;
+      }
+
+      if (stat (win->trash, &st_trash) == -1)
+      {
+	dlg_error (_("Can't stat() file"), win->trash);
+	ctree_thaw (ctree);
+	return;
+      }
+
+      if (((en->type & FT_FILE) || (en->type & FT_LINK)) && (my_strncmp (en->path, win->trash, strlen (win->trash))) && (st_target.st_dev == st_trash.st_dev) && (st_target.st_size < 1048576))
+      {
+	if (!move_file (en->path, en->label, win->trash, 1))
 	{
-	  continue;
-	}
-      node = GTK_CLIST (ctree)->selection->data;
-      en = gtk_ctree_node_get_row_data (ctree, node);
-      if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
-	{
-	  /* we do not process ".." */
+	  perror (_("move_file()"));
 	  gtk_ctree_unselect (ctree, node);
-	  continue;
+	  if (dlg_error_continue (en->path, _("Move to trash failed")) == DLG_RC_CANCEL)
+	  {
+	    ctree_thaw (ctree);
+	    return;
+	  }
 	}
-      if (ask)
+	else
 	{
-	  if (num - i == 1)
-	    result = dlg_question (_("Delete item ?"), en->path);
-	  else
-	    result = dlg_question_l (_("Delete item ?"),
-				     en->path, DLG_ALL | DLG_SKIP);
+	  gtk_ctree_remove_node (ctree, node);
 	}
+      }
       else
-	result = DLG_RC_ALL;
-      if (result == DLG_RC_CANCEL)
+      {
+	if (dlg_question (_("Can't move file to trash, hard delete ?"), en->path) == DLG_RC_OK)
 	{
-	  return;
+	  delete_files (en->path);
+	  gtk_ctree_remove_node (ctree, node);
 	}
-      else if (result == DLG_RC_OK || result == DLG_RC_ALL)
-	{
-	  if (result == DLG_RC_ALL)
-	    {
-	      ask = FALSE;
-	    }
-	  while (gtk_events_pending ())
-	    gtk_main_iteration ();
-	  ctree_freeze (ctree);
-
-	  if (lstat (en->path, &st_target) == -1)
-	    {
-	      dlg_error (_("Can't stat() file"), en->path);
-	      ctree_thaw (ctree);
-	      return;
-	    }
-
-	  if (stat (win->trash, &st_trash) == -1)
-	    {
-	      dlg_error (_("Can't stat() file"), win->trash);
-	      ctree_thaw (ctree);
-	      return;
-	    }
-
-	  if (((en->type & FT_FILE) || (en->type & FT_LINK))
-	      &&
-	      (my_strncmp
-	       (en->path, win->trash, strlen (win->trash)))
-	      && (st_target.st_dev == st_trash.st_dev)
-	      && (st_target.st_size < 1048576))
-	    {
-	      if (!move_file (en->path, en->label, win->trash, 1))
-		{
-		  perror (_("move_file()"));
-		  gtk_ctree_unselect (ctree, node);
-		  if (dlg_error_continue
-		      (en->path, _("Move to trash failed")) == DLG_RC_CANCEL)
-		    {
-		      ctree_thaw (ctree);
-		      return;
-		    }
-		}
-	      else
-		{
-		  gtk_ctree_remove_node (ctree, node);
-		}
-	    }
-	  else
-	    {
-	      if (dlg_question
-		  (_
-		   ("Can't move file to trash, hard delete ?"),
-		   en->path) == DLG_RC_OK)
-		{
-		  delete_files (en->path);
-		  gtk_ctree_remove_node (ctree, node);
-		}
-	      else
-		{
-		  gtk_ctree_unselect (ctree, node);
-		}
-	    }
-	  ctree_thaw (ctree);
-	}
-      else if (result == DLG_RC_SKIP)
+	else
 	{
 	  gtk_ctree_unselect (ctree, node);
 	}
+      }
+      ctree_thaw (ctree);
     }
+    else if (result == DLG_RC_SKIP)
+    {
+      gtk_ctree_unselect (ctree, node);
+    }
+  }
 }
 
 /*
@@ -1432,9 +1299,7 @@ cb_find (GtkWidget * item, GtkWidget * ctree)
 void
 cb_about (GtkWidget * item, GtkWidget * ctree)
 {
-  dlg_info (_("This is XFTree, based on 'XTree' "
-	      "\n(c) by Rasca\npublished under GNU GPL"
-	      "\nhttp://home.pages.de/~rasca/xap/"));
+  dlg_info (_("This is XFTree, based on 'XTree' " "\n(c) by Rasca\npublished under GNU GPL" "\nhttp://home.pages.de/~rasca/xap/"));
 }
 
 /*
@@ -1459,27 +1324,25 @@ go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
 
   en = entry_new_by_path_and_label (path, path);
   if (!en)
-    {
-      printf (_("Can't find row data\n"));
-      return;
-    }
+  {
+    printf (_("Can't find row data\n"));
+    return;
+  }
   if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
     return;
   en->flags = flags;
 
   for (i = 0; i < COLUMNS; i++)
-    {
-      if (i == COL_NAME)
-	label[i] = uri_clear_path (en->path);
-      else
-	label[i] = "";
-    }
+  {
+    if (i == COL_NAME)
+      label[i] = uri_clear_path (en->path);
+    else
+      label[i] = "";
+  }
   ctree_freeze (ctree);
   gtk_ctree_remove_node (ctree, root);
 
-  root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8,
-				gPIX_dir_close, gPIM_dir_close,
-				gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
+  root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
   gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
   add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
   ctree_thaw (ctree);
@@ -1487,9 +1350,7 @@ go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
   icon_name = strrchr (en->path, '/');
   if ((icon_name) && (!(*(++icon_name))))
     icon_name = NULL;
-  gdk_window_set_icon_name (gtk_widget_get_toplevel
-			    (GTK_WIDGET (ctree))->window,
-			    (icon_name ? icon_name : "/"));
+  gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, (icon_name ? icon_name : "/"));
 }
 
 /*
@@ -1500,10 +1361,10 @@ free_list (GList * list)
   GList *t = list;
 
   while (t)
-    {
-      g_free (t->data);
-      t = t->next;
-    }
+  {
+    g_free (t->data);
+    t = t->next;
+  }
   g_list_free (list);
 }
 
@@ -1523,60 +1384,60 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
 
   if ((!count) || (count > 1) || (en && (!(en->type & FT_DIR))))
+  {
+    list = NULL;
+    if (en)
     {
-      list = NULL;
-      if (en)
+      strcpy (path, en->path);
+      p = path;
+      while ((p = strrchr (path, '/')) != NULL)
+      {
+	if (p == path)
+	{
+	  *(p + 1) = '\0';
+	  list = g_list_append (list, g_strdup (path));
+	  break;
+	}
+	*p = '\0';
+	list = g_list_append (list, g_strdup (path));
+      }
+      if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
+      {
+	strcpy (path, en->path);
+      }
+      else
+      {
+	p = strrchr (en->path, '/');
+	if (p)
+	{
+	  strncpy (path, en->path, p - en->path);
+	  path[p - en->path] = '\0';
+	}
+	else
 	{
 	  strcpy (path, en->path);
-	  p = path;
-	  while ((p = strrchr (path, '/')) != NULL)
-	    {
-	      if (p == path)
-		{
-		  *(p + 1) = '\0';
-		  list = g_list_append (list, g_strdup (path));
-		  break;
-		}
-	      *p = '\0';
-	      list = g_list_append (list, g_strdup (path));
-	    }
-	  if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
-	    {
-	      strcpy (path, en->path);
-	    }
-	  else
-	    {
-	      p = strrchr (en->path, '/');
-	      if (p)
-		{
-		  strncpy (path, en->path, p - en->path);
-		  path[p - en->path] = '\0';
-		}
-	      else
-		{
-		  strcpy (path, en->path);
-		}
-	    }
 	}
-      else
-	{
-	  list = g_list_append (list, "/");
-	  list = g_list_append (list, "/usr");
-	  list = g_list_append (list, "/home");
-	  strcpy (path, "/");
-	}
-      if (dlg_combo (_("Go to"), path, list) != DLG_RC_OK)
-	{
-	  free_list (list);
-	  return;
-	}
-      free_list (list);
+      }
     }
-  else
+    else
     {
-      if (en)
-	strcpy (path, en->path);
+      list = g_list_append (list, "/");
+      list = g_list_append (list, "/usr");
+      list = g_list_append (list, "/home");
+      strcpy (path, "/");
     }
+    if (dlg_combo (_("Go to"), path, list) != DLG_RC_OK)
+    {
+      free_list (list);
+      return;
+    }
+    free_list (list);
+  }
+  else
+  {
+    if (en)
+      strcpy (path, en->path);
+  }
   if (en)
     go_to (ctree, root, path, en->flags);
 }
@@ -1605,18 +1466,18 @@ cb_go_up (GtkWidget * item, GtkCTree * ctree)
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
   if (!en)
-    {
-      return;
-    }
+  {
+    return;
+  }
 
   strcpy (path, en->path);
   p = strrchr (path, '/');
   if (p == path)
-    {
-      if (!*(p + 1))
-	return;
-      *(p + 1) = '\0';
-    }
+  {
+    if (!*(p + 1))
+      return;
+    *(p + 1) = '\0';
+  }
   else
     *p = '\0';
   go_to (ctree, root, path, en->flags);
@@ -1636,87 +1497,80 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
   reg_t *prg;
   gint row, col;
   if ((event->type == GDK_2BUTTON_PRESS) && (event->button == 1))
+  {
+    /* double_click
+     */
+
+    /* check if the double click was over a directory
+     */
+    row = -1;
+    gtk_clist_get_selection_info (GTK_CLIST (ctree), event->x, event->y, &row, &col);
+    if (row > -1)
     {
-      /* double_click
-       */
-
-      /* check if the double click was over a directory
-       */
-      row = -1;
-      gtk_clist_get_selection_info (GTK_CLIST (ctree), event->x,
-				    event->y, &row, &col);
-      if (row > -1)
-	{
-	  node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
-	  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-	  if (EN_IS_DIR (en)
-	      && (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)))
-	    {
-	      /* Alt or Ctrl button is pressed, it's the same as _go_to()..
-	       */
-	      go_to (GTK_CTREE (ctree),
-		     GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path,
-		     en->flags);
-	      return (TRUE);
-	    }
-	}
-      if (!count_selection (GTK_CTREE (ctree), &node))
-	{
-	  return (TRUE);
-	}
-      if (!node)
-	{
-	  return (TRUE);
-	}
+      node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
-      if (en->type & FT_DIR_UP)
-	{
-	  node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-	  go_to (GTK_CTREE (ctree), node,
-		 uri_clear_path (en->path), en->flags);
-	  return (TRUE);
-	}
-      if (!(en->type & FT_FILE))
-	return (FALSE);
-      up = gtk_ctree_node_get_row_data (GTK_CTREE (ctree),
-					GTK_CTREE_ROW (node)->parent);
-      cursor_wait (GTK_WIDGET (ctree));
-
-      wd = getcwd (NULL, PATH_MAX);
-      chdir (up->path);
-      if (en->type & FT_EXE)
-	{			/*io_can_exec (en->path)) */
-	  if (event->state & GDK_MOD1_MASK)
-	    sprintf (cmd, "%s -e \"%s\" &", TERMINAL, en->path);
-	  else
-	    sprintf (cmd, "\"%s\" &", en->path);
-	  io_system (cmd);
-	}
-      else
-	{
-	  /* call open with dialog */
-	  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-	  prg = reg_prog_by_file (win->reg, en->path);
-	  if (prg)
-	    {
-	      if (prg->arg)
-		sprintf (cmd, "\"%s\" %s \"%s\" &",
-			 prg->app, prg->arg, en->path);
-	      else
-		sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
-	      io_system (cmd);
-	    }
-	  else
-	    {
-	      dlg_open_with (win->xap, "", en->path);
-	    }
-	}
-      chdir (wd);
-      free (wd);
-      cursor_reset (GTK_WIDGET (ctree));
+      if (EN_IS_DIR (en) && (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)))
+      {
+	/* Alt or Ctrl button is pressed, it's the same as _go_to()..
+	 */
+	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
+	return (TRUE);
+      }
+    }
+    if (!count_selection (GTK_CTREE (ctree), &node))
+    {
       return (TRUE);
     }
+    if (!node)
+    {
+      return (TRUE);
+    }
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+
+    if (en->type & FT_DIR_UP)
+    {
+      node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+      go_to (GTK_CTREE (ctree), node, uri_clear_path (en->path), en->flags);
+      return (TRUE);
+    }
+    if (!(en->type & FT_FILE))
+      return (FALSE);
+    up = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), GTK_CTREE_ROW (node)->parent);
+    cursor_wait (GTK_WIDGET (ctree));
+
+    wd = getcwd (NULL, PATH_MAX);
+    chdir (up->path);
+    if (en->type & FT_EXE)
+    {				/*io_can_exec (en->path)) */
+      if (event->state & GDK_MOD1_MASK)
+	sprintf (cmd, "%s -e \"%s\" &", TERMINAL, en->path);
+      else
+	sprintf (cmd, "\"%s\" &", en->path);
+      io_system (cmd);
+    }
+    else
+    {
+      /* call open with dialog */
+      win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+      prg = reg_prog_by_file (win->reg, en->path);
+      if (prg)
+      {
+	if (prg->arg)
+	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
+	else
+	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
+	io_system (cmd);
+      }
+      else
+      {
+	dlg_open_with (win->xap, "", en->path);
+      }
+    }
+    chdir (wd);
+    free (wd);
+    cursor_reset (GTK_WIDGET (ctree));
+    return (TRUE);
+  }
   return (FALSE);
 }
 
@@ -1732,70 +1586,65 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
   GdkEventButton evbtn;
 
   switch (event->keyval)
+  {
+  case GDK_Delete:
+    cb_delete (NULL, GTK_CTREE (ctree));
+    return (TRUE);
+    break;
+  case GDK_Return:
+    num = g_list_length (GTK_CLIST (ctree)->row_list);
+    for (i = 0; i < num; i++)
     {
-    case GDK_Delete:
-      cb_delete (NULL, GTK_CTREE (ctree));
-      return (TRUE);
-      break;
-    case GDK_Return:
+      if (GTK_CLIST (ctree)->focus_row == i)
+      {
+	node = gtk_ctree_node_nth (GTK_CTREE (ctree), i);
+	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+	if (EN_IS_DIR (en) && !(en->type & FT_DIR_UP))
+	{
+	  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
+	  {
+	    /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
+	    go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
+	    return (TRUE);
+	    break;
+	  }
+	  if (!GTK_CTREE_ROW (node)->expanded)
+	    gtk_ctree_expand (GTK_CTREE (ctree), node);
+	  else
+	    gtk_ctree_collapse (GTK_CTREE (ctree), node);
+	  return (TRUE);
+	  break;
+	}
+      }
+    }
+
+    evbtn.type = GDK_2BUTTON_PRESS;
+    evbtn.button = 1;
+    evbtn.state = event->state;
+    on_double_click (ctree, &evbtn, menu);
+    return (TRUE);
+    break;
+  default:
+    if ((event->keyval >= GDK_A) && (event->keyval <= GDK_z) && (event->state <= GDK_SHIFT_MASK))
+    {
       num = g_list_length (GTK_CLIST (ctree)->row_list);
       for (i = 0; i < num; i++)
+      {
+	node = gtk_ctree_node_nth (GTK_CTREE (ctree), i);
+	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+	if (en->label && (*en->label == (char) event->keyval) && gtk_ctree_node_is_visible (GTK_CTREE (ctree), node))
 	{
-	  if (GTK_CLIST (ctree)->focus_row == i)
-	    {
-	      node = gtk_ctree_node_nth (GTK_CTREE (ctree), i);
-	      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-	      if (EN_IS_DIR (en) && !(en->type & FT_DIR_UP))
-		{
-		  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
-		    {
-		      /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
-		      go_to (GTK_CTREE (ctree),
-			     GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list),
-			     en->path, en->flags);
-		      return (TRUE);
-		      break;
-		    }
-		  if (!GTK_CTREE_ROW (node)->expanded)
-		    gtk_ctree_expand (GTK_CTREE (ctree), node);
-		  else
-		    gtk_ctree_collapse (GTK_CTREE (ctree), node);
-		  return (TRUE);
-		  break;
-		}
-	    }
+	  GTK_CLIST (ctree)->focus_row = i;
+	  gtk_ctree_unselect_recursive (GTK_CTREE (ctree), NULL);
+	  gtk_clist_moveto (GTK_CLIST (ctree), i, COL_NAME, 0, 0);
+	  gtk_clist_select_row (GTK_CLIST (ctree), i, COL_NAME);
+	  break;
 	}
-
-      evbtn.type = GDK_2BUTTON_PRESS;
-      evbtn.button = 1;
-      evbtn.state = event->state;
-      on_double_click (ctree, &evbtn, menu);
+      }
       return (TRUE);
-      break;
-    default:
-      if ((event->keyval >= GDK_A) && (event->keyval <= GDK_z) &&
-	  (event->state <= GDK_SHIFT_MASK))
-	{
-	  num = g_list_length (GTK_CLIST (ctree)->row_list);
-	  for (i = 0; i < num; i++)
-	    {
-	      node = gtk_ctree_node_nth (GTK_CTREE (ctree), i);
-	      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-	      if (en->label
-		  && (*en->label == (char) event->keyval)
-		  && gtk_ctree_node_is_visible (GTK_CTREE (ctree), node))
-		{
-		  GTK_CLIST (ctree)->focus_row = i;
-		  gtk_ctree_unselect_recursive (GTK_CTREE (ctree), NULL);
-		  gtk_clist_moveto (GTK_CLIST (ctree), i, COL_NAME, 0, 0);
-		  gtk_clist_select_row (GTK_CLIST (ctree), i, COL_NAME);
-		  break;
-		}
-	    }
-	  return (TRUE);
-	}
-      break;
     }
+    break;
+  }
   return (FALSE);
 }
 
@@ -1809,14 +1658,14 @@ node_has_child (GtkCTree * ctree, GtkCTreeNode * node, char *label)
 
   child = GTK_CTREE_ROW (node)->children;
   while (child)
+  {
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), child);
+    if (strcmp (en->label, label) == 0)
     {
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), child);
-      if (strcmp (en->label, label) == 0)
-	{
-	  return (1);
-	}
-      child = GTK_CTREE_ROW (child)->sibling;
+      return (1);
     }
+    child = GTK_CTREE_ROW (child)->sibling;
+  }
   return (0);
 }
 
@@ -1839,10 +1688,10 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   gchar date[32];
   cfg *win;
   gboolean manage_timeout;
-  
+
   if (!ctree)
     return 0;
-    
+
   if (!node)
     return 0;
 
@@ -1850,130 +1699,115 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   manage_timeout = (win->timer != 0);
 
   if (manage_timeout)
-    {
-      gtk_timeout_remove (win->timer);
-      win->timer = 0;
-    }
+  {
+    gtk_timeout_remove (win->timer);
+    win->timer = 0;
+  }
 
   tree_updated = FALSE;
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   if ((root_changed = entry_update (en)) == ERROR)
+  {
+    next = GTK_CTREE_ROW (node)->sibling;
+    gtk_ctree_remove_node (ctree, node);
+    if (!next)
     {
-      next = GTK_CTREE_ROW (node)->sibling;
-      gtk_ctree_remove_node (ctree, node);
-      if (!next)
+      if (manage_timeout)
       {
-        if (manage_timeout)
-          {
-            win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
-          }
-	return TRUE;
+	win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
       }
-      node = next;
+      return TRUE;
     }
+    node = next;
+  }
   child = GTK_CTREE_ROW (node)->children;
   while (child)
+  {
+    child_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), child);
+    if ((changed = entry_update (child_en)) == ERROR)
     {
-      child_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), child);
-      if ((changed = entry_update (child_en)) == ERROR)
-	{
-	  gtk_ctree_remove_node (ctree, child);
-	  /* realign the list */
-	  child = GTK_CTREE_ROW (node)->children;
-	  tree_updated = TRUE;
-	  continue;
-	}
-      else if (changed == TRUE)
-	{
-	  /* update the labels */
-	  sprintf (date, "%02d-%02d-%02d  %02d:%02d",
-		   child_en->date.year, child_en->date.month,
-		   child_en->date.day, child_en->date.hour,
-		   child_en->date.min);
-	  sprintf (size, "%10d", (int) child_en->size);
-	  gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
-	  gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
-	}
-      if (entry_type_update (child_en) == TRUE)
-	{
-	  update_node (ctree, child, child_en->type, child_en->label);
-	  tree_updated = TRUE;
-	}
-      if (!(GTK_CTREE_ROW (child)->children)
-	  && (io_is_valid (child_en->label))
-	  && !(child_en->type & FT_DIR_UP)
-	  && !(child_en->type & FT_DIR_PD) && (child_en->type & FT_DIR))
-	add_subtree (GTK_CTREE (ctree), child,
-		     child_en->path, 1, child_en->flags);
-      child = GTK_CTREE_ROW (child)->sibling;
+      gtk_ctree_remove_node (ctree, child);
+      /* realign the list */
+      child = GTK_CTREE_ROW (node)->children;
+      tree_updated = TRUE;
+      continue;
     }
+    else if (changed == TRUE)
+    {
+      /* update the labels */
+      sprintf (date, "%02d-%02d-%02d  %02d:%02d", child_en->date.year, child_en->date.month, child_en->date.day, child_en->date.hour, child_en->date.min);
+      sprintf (size, "%10d", (int) child_en->size);
+      gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
+      gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
+    }
+    if (entry_type_update (child_en) == TRUE)
+    {
+      update_node (ctree, child, child_en->type, child_en->label);
+      tree_updated = TRUE;
+    }
+    if (!(GTK_CTREE_ROW (child)->children) && (io_is_valid (child_en->label)) && !(child_en->type & FT_DIR_UP) && !(child_en->type & FT_DIR_PD) && (child_en->type & FT_DIR))
+      add_subtree (GTK_CTREE (ctree), child, child_en->path, 1, child_en->flags);
+    child = GTK_CTREE_ROW (child)->sibling;
+  }
 
   if ((root_changed || tree_updated) && (en->type & FT_DIR))
+  {
+    if (GTK_CTREE_ROW (node)->expanded)
     {
-      if (GTK_CTREE_ROW (node)->expanded)
+      /* may be there are new files */
+      dir = opendir (en->path);
+      if (!dir)
+      {
+	if (manage_timeout)
 	{
-	  /* may be there are new files */
-	  dir = opendir (en->path);
-	  if (!dir)
-          {
-            if (manage_timeout)
-              {
-                win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
-              }
-	    return TRUE;
-          }
-	  p_len = strlen (en->path);
-	  while ((de = readdir (dir)) != NULL)
-	    {
-	      if (io_is_hidden (de->d_name) && (en->flags & IGNORE_HIDDEN))
-		continue;
-	      if (io_is_current (de->d_name))
-		continue;
-	      strcpy (label, de->d_name);
-	      if (!node_has_child (ctree, node, label)
-		  && !(io_is_current (label)))
-		{
-		  if (io_is_root (label))
-		    sprintf (compl, "%s%s", en->path, label);
-		  else
-		    sprintf (compl, "%s/%s", en->path, label);
-		  type = 0;
-		  new_child = NULL;
-		  if (!io_is_current (label) && label)
-		    new_child =
-		      add_node (ctree, node,
-				NULL, label, compl, &type, en->flags);
-		  if ((type & FT_DIR)
-		      && (io_is_valid (label))
-		      && !(type & FT_DIR_UP)
-		      && !(type & FT_DIR_PD) && new_child)
-		    add_subtree (ctree, new_child, compl, 1, en->flags);
-		  if (entry_type_update (en) == TRUE)
-		    update_node (ctree, node, en->type, en->label);
-		  entry_update (en);
-		  tree_updated = TRUE;
-		}
-	    }
-	  closedir (dir);
+	  win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
 	}
-      else if ((GTK_CTREE_ROW (node)->children)
-	       && (io_is_valid (en->label))
-	       && !(en->type & FT_DIR_UP) && !(en->type & FT_DIR_PD))
+	return TRUE;
+      }
+      p_len = strlen (en->path);
+      while ((de = readdir (dir)) != NULL)
+      {
+	if (io_is_hidden (de->d_name) && (en->flags & IGNORE_HIDDEN))
+	  continue;
+	if (io_is_current (de->d_name))
+	  continue;
+	strcpy (label, de->d_name);
+	if (!node_has_child (ctree, node, label) && !(io_is_current (label)))
 	{
-	  add_subtree (GTK_CTREE (ctree), node, en->path, 1, en->flags);
+	  if (io_is_root (label))
+	    sprintf (compl, "%s%s", en->path, label);
+	  else
+	    sprintf (compl, "%s/%s", en->path, label);
+	  type = 0;
+	  new_child = NULL;
+	  if (!io_is_current (label) && label)
+	    new_child = add_node (ctree, node, NULL, label, compl, &type, en->flags);
+	  if ((type & FT_DIR) && (io_is_valid (label)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
+	    add_subtree (ctree, new_child, compl, 1, en->flags);
 	  if (entry_type_update (en) == TRUE)
 	    update_node (ctree, node, en->type, en->label);
 	  entry_update (en);
+	  tree_updated = TRUE;
 	}
-      if (tree_updated)
-	{
-	  gtk_ctree_sort_node (GTK_CTREE (ctree), node);
-	}
+      }
+      closedir (dir);
     }
-  if (manage_timeout)
+    else if ((GTK_CTREE_ROW (node)->children) && (io_is_valid (en->label)) && !(en->type & FT_DIR_UP) && !(en->type & FT_DIR_PD))
     {
-      win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
+      add_subtree (GTK_CTREE (ctree), node, en->path, 1, en->flags);
+      if (entry_type_update (en) == TRUE)
+	update_node (ctree, node, en->type, en->label);
+      entry_update (en);
     }
+    if (tree_updated)
+    {
+      gtk_ctree_sort_node (GTK_CTREE (ctree), node);
+    }
+  }
+  if (manage_timeout)
+  {
+    win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
+  }
   return (tree_updated);
 }
 
@@ -1993,10 +1827,10 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
   count_selection (GTK_CTREE (ctree), &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   if (!(en->type & FT_DIR))
-    {
-      node = GTK_CTREE_ROW (node)->parent;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-    }
+  {
+    node = GTK_CTREE_ROW (node)->parent;
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  }
 
   if (!GTK_CTREE_ROW (node)->expanded)
     gtk_ctree_expand (GTK_CTREE (ctree), node);
@@ -2007,13 +1841,13 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
     sprintf (path, "%s/", en->path);
   strcpy (label, _("New_Folder"));
   if (dlg_string (path, label) == DLG_RC_OK)
-    {
-      sprintf (compl, "%s%s", path, label);
-      if (mkdir (compl, 0xFFFF) != -1)
-	update_tree (GTK_CTREE (ctree), node);
-      else
-	dlg_error (compl, strerror (errno));
-    }
+  {
+    sprintf (compl, "%s%s", path, label);
+    if (mkdir (compl, 0xFFFF) != -1)
+      update_tree (GTK_CTREE (ctree), node);
+    else
+      dlg_error (compl, strerror (errno));
+  }
 }
 
 /*
@@ -2035,10 +1869,10 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
 
   if (!(en->type & FT_DIR))
-    {
-      node = GTK_CTREE_ROW (node)->parent;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-    }
+  {
+    node = GTK_CTREE_ROW (node)->parent;
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  }
 
   if (!GTK_CTREE_ROW (node)->expanded)
     gtk_ctree_expand (GTK_CTREE (ctree), node);
@@ -2048,30 +1882,27 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   else
     sprintf (path, "%s/", en->path);
   strcpy (label, "New_File.c");
-  if ((dlg_string (path, label) == DLG_RC_OK) && strlen (label)
-      && io_is_valid (label))
+  if ((dlg_string (path, label) == DLG_RC_OK) && strlen (label) && io_is_valid (label))
+  {
+    sprintf (compl, "%s%s", path, label);
+    if (stat (compl, &st) != -1)
     {
-      sprintf (compl, "%s%s", path, label);
-      if (stat (compl, &st) != -1)
-	{
-	  if (dlg_question
-	      (_("File exists ! Override ?"), compl) != DLG_RC_OK)
-	    {
-	      return;
-	    }
-	  exists = 1;
-	}
-      fp = fopen (compl, "w");
-      if (!fp)
-	{
-	  dlg_error (_("Can't create : "), compl);
-	  return;
-	}
-      fclose (fp);
-      if (!exists)
-	add_node (GTK_CTREE (ctree), node, NULL, label,
-		  compl, &tmp, en->flags);
+      if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
+      {
+	return;
+      }
+      exists = 1;
     }
+    fp = fopen (compl, "w");
+    if (!fp)
+    {
+      dlg_error (_("Can't create : "), compl);
+      return;
+    }
+    fclose (fp);
+    if (!exists)
+      add_node (GTK_CTREE (ctree), node, NULL, label, compl, &tmp, en->flags);
+  }
 }
 
 
@@ -2090,9 +1921,9 @@ cb_duplicate (GtkWidget * item, GtkCTree * ctree)
   char buf[MAXBUF];
 
   if (!count_selection (ctree, &node))
-    {
-      return;
-    }
+  {
+    return;
+  }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
 
   if (!io_is_valid (en->label) || (en->type & FT_DIR))
@@ -2101,28 +1932,28 @@ cb_duplicate (GtkWidget * item, GtkCTree * ctree)
   num = 0;
   sprintf (nfile, "%s-%d", en->path, num++);
   while (stat (nfile, &s) != -1)
-    {
-      sprintf (nfile, "%s-%d", en->path, num++);
-    }
+  {
+    sprintf (nfile, "%s-%d", en->path, num++);
+  }
   ofp = fopen (en->path, "rb");
   if (!ofp)
-    {
-      dlg_error (en->path, strerror (errno));
-      cursor_reset (GTK_WIDGET (ctree));
-      return;
-    }
+  {
+    dlg_error (en->path, strerror (errno));
+    cursor_reset (GTK_WIDGET (ctree));
+    return;
+  }
   nfp = fopen (nfile, "wb");
   if (!nfp)
-    {
-      dlg_error (nfile, strerror (errno));
-      fclose (ofp);
-      cursor_reset (GTK_WIDGET (ctree));
-      return;
-    }
+  {
+    dlg_error (nfile, strerror (errno));
+    fclose (ofp);
+    cursor_reset (GTK_WIDGET (ctree));
+    return;
+  }
   while ((len = fread (buf, 1, MAXBUF, ofp)) > 0)
-    {
-      fwrite (buf, 1, len, nfp);
-    }
+  {
+    fwrite (buf, 1, len, nfp);
+  }
   fclose (nfp);
   fclose (ofp);
   cursor_reset (GTK_WIDGET (ctree));
@@ -2145,10 +1976,10 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
   struct stat st;
 
   if (!count_selection (ctree, &node))
-    {
-      dlg_warning (_("No item marked !"));
-      return;
-    }
+  {
+    dlg_warning (_("No item marked !"));
+    return;
+  }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
     return;
@@ -2157,66 +1988,62 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
 
   ctree_freeze (ctree);
   sprintf (nfile, "%s", en->label);
-  if ((dlg_string (_("Rename to : "), nfile) == DLG_RC_OK)
-      && strlen (nfile) && io_is_valid (nfile))
+  if ((dlg_string (_("Rename to : "), nfile) == DLG_RC_OK) && strlen (nfile) && io_is_valid (nfile))
+  {
+    if ((p = strchr (nfile, '/')) != NULL)
     {
-      if ((p = strchr (nfile, '/')) != NULL)
-	{
-	  p[1] = '\0';
-	  dlg_error (_("Character not allowed in filename"), p);
-	  ctree_thaw (ctree);
-	  return;
-	}
-      sprintf (ofile, "%s", en->path);
-      p = strrchr (ofile, '/');
-      p++;
-      sprintf (p, "%s", nfile);
-      strcpy (nfile, ofile);
-      strcpy (ofile, en->path);
-      if (lstat (nfile, &st) != ERROR)
-	{
-	  if (dlg_question (_("Override ?"), nfile) != DLG_RC_OK)
-	    {
-	      ctree_thaw (ctree);
-	      return;
-	    }
-	  existing_file = TRUE;
-	}
-      if (rename (ofile, nfile) == -1)
-	{
-	  dlg_error (nfile, strerror (errno));
-	}
-      else
-	{
-	  if (existing_file)
-	    {
-	      /* If the user choosed to overwrite an existing file, the node already
-	         exists, thus we need to remove the current node (otherwise we'll
-	         get the same file twice, and the update process won't remove it
-	         since the file exists !).
-	       */
-	      gtk_ctree_remove_node (ctree, node);
-	    }
-	  else
-	    {
-	      /* If the file did not exist previously, just the name of the node
-	         according to the given name
-	       */
-	      g_free (en->path);
-	      g_free (en->label);
-	      en->path = g_strdup (nfile);
-	      p = strrchr (nfile, '/');
-	      p++;
-	      en->label = g_strdup (p);
-	      gtk_ctree_get_node_info (ctree, node, NULL,
-				       &spacing, &pix,
-				       &pim, NULL, NULL, NULL, NULL);
-	      gtk_ctree_node_set_pixtext (ctree, node, 0,
-					  p, spacing, pix, pim);
-	      update_tree (ctree, node);
-	    }
-	}
+      p[1] = '\0';
+      dlg_error (_("Character not allowed in filename"), p);
+      ctree_thaw (ctree);
+      return;
     }
+    sprintf (ofile, "%s", en->path);
+    p = strrchr (ofile, '/');
+    p++;
+    sprintf (p, "%s", nfile);
+    strcpy (nfile, ofile);
+    strcpy (ofile, en->path);
+    if (lstat (nfile, &st) != ERROR)
+    {
+      if (dlg_question (_("Override ?"), nfile) != DLG_RC_OK)
+      {
+	ctree_thaw (ctree);
+	return;
+      }
+      existing_file = TRUE;
+    }
+    if (rename (ofile, nfile) == -1)
+    {
+      dlg_error (nfile, strerror (errno));
+    }
+    else
+    {
+      if (existing_file)
+      {
+	/* If the user choosed to overwrite an existing file, the node already
+	   exists, thus we need to remove the current node (otherwise we'll
+	   get the same file twice, and the update process won't remove it
+	   since the file exists !).
+	 */
+	gtk_ctree_remove_node (ctree, node);
+      }
+      else
+      {
+	/* If the file did not exist previously, just the name of the node
+	   according to the given name
+	 */
+	g_free (en->path);
+	g_free (en->label);
+	en->path = g_strdup (nfile);
+	p = strrchr (nfile, '/');
+	p++;
+	en->label = g_strdup (p);
+	gtk_ctree_get_node_info (ctree, node, NULL, &spacing, &pix, &pim, NULL, NULL, NULL, NULL);
+	gtk_ctree_node_set_pixtext (ctree, node, 0, p, spacing, pix, pim);
+	update_tree (ctree, node);
+      }
+    }
+  }
   ctree_thaw (ctree);
 }
 
@@ -2232,10 +2059,10 @@ cb_open_with (GtkWidget * item, GtkCTree * ctree)
   char *prg;
 
   if (!count_selection (ctree, &node))
-    {
-      dlg_warning (_("No files marked !"));
-      return;
-    }
+  {
+    dlg_warning (_("No files marked !"));
+    return;
+  }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   prg = reg_app_by_file (win->reg, en->path);
@@ -2260,121 +2087,118 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
   selection = g_list_copy (GTK_CLIST (ctree)->selection);
 
   while (selection)
+  {
+    node = selection->data;
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+    if (!io_is_valid (en->label))
     {
-      node = selection->data;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (!io_is_valid (en->label))
-	{
-	  selection = selection->next;
-	  continue;
-	}
+      selection = selection->next;
+      continue;
+    }
 
-      if (selection->next)
-	flags |= IS_MULTI;
-      if (lstat (en->path, &fst) == -1)
+    if (selection->next)
+      flags |= IS_MULTI;
+    if (lstat (en->path, &fst) == -1)
+    {
+      if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
+      {
+	g_list_free (selection);
+	ctree_thaw (ctree);
+	return;
+      }
+      selection = selection->next;
+      continue;
+    }
+    else
+    {
+      if (S_ISLNK (fst.st_mode))
+      {
+	if (stat (en->path, &fst) == -1)
 	{
-	  if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
-	    {
-	      g_list_free (selection);
-	      ctree_thaw (ctree);
-	      return;
-	    }
-	  selection = selection->next;
-	  continue;
-	}
-      else
-	{
-	  if (S_ISLNK (fst.st_mode))
-	    {
-	      if (stat (en->path, &fst) == -1)
-		{
-		  flags |= IS_STALE_LINK;
-		  if (ask)
-		    {
-		      /* if the first is a stale link we can not
-		       * change mode for all other if the user
-		       * presses "all", cause it would result in
-		       * rwxrwxrwx :-(
-		       */
-		      first_is_stale_link = 1;
-		    }
-		}
-	    }
-	  oprop.mode = fst.st_mode;
-	  oprop.uid = fst.st_uid;
-	  oprop.gid = fst.st_gid;
-	  oprop.ctime = fst.st_ctime;
-	  oprop.mtime = fst.st_mtime;
-	  oprop.atime = fst.st_atime;
-	  oprop.size = fst.st_size;
+	  flags |= IS_STALE_LINK;
 	  if (ask)
+	  {
+	    /* if the first is a stale link we can not
+	     * change mode for all other if the user
+	     * presses "all", cause it would result in
+	     * rwxrwxrwx :-(
+	     */
+	    first_is_stale_link = 1;
+	  }
+	}
+      }
+      oprop.mode = fst.st_mode;
+      oprop.uid = fst.st_uid;
+      oprop.gid = fst.st_gid;
+      oprop.ctime = fst.st_ctime;
+      oprop.mtime = fst.st_mtime;
+      oprop.atime = fst.st_atime;
+      oprop.size = fst.st_size;
+      if (ask)
+      {
+	nprop.mode = oprop.mode;
+	nprop.uid = oprop.uid;
+	nprop.gid = oprop.gid;
+	nprop.ctime = oprop.ctime;
+	nprop.mtime = oprop.mtime;
+	nprop.atime = oprop.atime;
+	nprop.size = oprop.size;
+	rc = dlg_prop (en->path, &nprop, flags);
+      }
+      switch (rc)
+      {
+      case DLG_RC_OK:
+      case DLG_RC_ALL:
+	if (io_is_valid (en->label))
+	{
+	  if ((oprop.mode != nprop.mode) && (!(flags & IS_STALE_LINK)) && (!first_is_stale_link))
+	  {
+	    /* chmod() on a symlink itself isn't possible */
+	    if (chmod (en->path, nprop.mode) == -1)
 	    {
-	      nprop.mode = oprop.mode;
-	      nprop.uid = oprop.uid;
-	      nprop.gid = oprop.gid;
-	      nprop.ctime = oprop.ctime;
-	      nprop.mtime = oprop.mtime;
-	      nprop.atime = oprop.atime;
-	      nprop.size = oprop.size;
-	      rc = dlg_prop (en->path, &nprop, flags);
-	    }
-	  switch (rc)
-	    {
-	    case DLG_RC_OK:
-	    case DLG_RC_ALL:
-	      if (io_is_valid (en->label))
-		{
-		  if ((oprop.mode != nprop.mode) &&
-		      (!(flags & IS_STALE_LINK)) && (!first_is_stale_link))
-		    {
-		      /* chmod() on a symlink itself isn't possible */
-		      if (chmod (en->path, nprop.mode) == -1)
-			{
-			  if (dlg_continue
-			      (en->path, strerror (errno)) != DLG_RC_OK)
-			    {
-			      g_list_free (selection);
-			      ctree_thaw (ctree);
-			      return;
-			    }
-			  selection = selection->next;
-			  continue;
-			}
-		    }
-		  if ((oprop.uid != nprop.uid) || (oprop.gid != nprop.gid))
-		    {
-		      if (chown (en->path, nprop.uid, nprop.gid) == -1)
-			{
-			  if (dlg_continue
-			      (en->path, strerror (errno)) != DLG_RC_OK)
-			    {
-			      g_list_free (selection);
-			      ctree_thaw (ctree);
-			      return;
-			    }
-			  selection = selection->next;
-			  continue;
-			}
-		    }
-		  if (rc == DLG_RC_ALL)
-		    ask = 0;
-		  if (ask)
-		    first_is_stale_link = 0;
-		}
-	      break;
-	    case DLG_RC_SKIP:
+	      if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
+	      {
+		g_list_free (selection);
+		ctree_thaw (ctree);
+		return;
+	      }
 	      selection = selection->next;
 	      continue;
-	      break;
-	    default:
-	      ctree_thaw (ctree);
-	      g_list_free (selection);
-	      return;
-	      break;
 	    }
+	  }
+	  if ((oprop.uid != nprop.uid) || (oprop.gid != nprop.gid))
+	  {
+	    if (chown (en->path, nprop.uid, nprop.gid) == -1)
+	    {
+	      if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
+	      {
+		g_list_free (selection);
+		ctree_thaw (ctree);
+		return;
+	      }
+	      selection = selection->next;
+	      continue;
+	    }
+	  }
+	  if (rc == DLG_RC_ALL)
+	    ask = 0;
+	  if (ask)
+	    first_is_stale_link = 0;
 	}
-      selection = selection->next;
+	break;
+      case DLG_RC_SKIP:
+	selection = selection->next;
+	continue;
+	break;
+      default:
+	ctree_thaw (ctree);
+	g_list_free (selection);
+	return;
+	break;
+      }
     }
+    selection = selection->next;
+  }
   g_list_free (selection);
   ctree_thaw (ctree);
 }
@@ -2404,51 +2228,48 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
 
   sfx = strrchr (en->label, '.');
   if (!sfx)
+  {
+    if (dlg_continue (_("Can't find suffix in filename, using complete filename"), en->label) != DLG_RC_OK)
     {
-      if (dlg_continue
-	  (_
-	   ("Can't find suffix in filename, using complete filename"),
-	   en->label) != DLG_RC_OK)
-	{
-	  ctree_thaw (GTK_CTREE (ctree));
-	  return;
-	}
-      sfx = en->label;
-      sprintf (label, _("Register program for file \"%s\""), sfx);
+      ctree_thaw (GTK_CTREE (ctree));
+      return;
     }
+    sfx = en->label;
+    sprintf (label, _("Register program for file \"%s\""), sfx);
+  }
   else
-    {
-      sprintf (label, _("Register program for suffix \"%s\""), sfx);
-    }
+  {
+    sprintf (label, _("Register program for suffix \"%s\""), sfx);
+  }
   prog = reg_prog_by_suffix (win->reg, sfx);
   if (prog)
+  {
+    if (prog->arg)
     {
-      if (prog->arg)
-	{
-	  sprintf (path, "%s %s", prog->app, prog->arg);
-	}
-      else
-	{
-	  strcpy (path, prog->app);
-	}
+      sprintf (path, "%s %s", prog->app, prog->arg);
     }
+    else
+    {
+      strcpy (path, prog->app);
+    }
+  }
   else
     strcpy (path, DEF_APP);
   apps = reg_app_list (win->reg);
   if (dlg_combo (label, path, apps) == DLG_RC_OK)
+  {
+    if (*path)
     {
-      if (*path)
-	{
-	  if ((arg = strchr (path, ' ')) != NULL)
-	    {
-	      *arg++ = '\0';
-	      if (!*arg)
-		arg = NULL;
-	    }
-	  win->reg = reg_add_suffix (win->reg, sfx, path, arg);
-	  reg_save (win->reg);
-	}
+      if ((arg = strchr (path, ' ')) != NULL)
+      {
+	*arg++ = '\0';
+	if (!*arg)
+	  arg = NULL;
+      }
+      win->reg = reg_add_suffix (win->reg, sfx, path, arg);
+      reg_save (win->reg);
     }
+  }
   ctree_thaw (GTK_CTREE (ctree));
   g_list_free (apps);
 }
@@ -2467,17 +2288,16 @@ on_destroy (GtkWidget * top, cfg * win)
   g_free (win->xap);
   g_free (win);
   if (!top_has_more ())
-    {
-      free_app_list ();
-      gtk_main_quit ();
-    }
+  {
+    free_app_list ();
+    gtk_main_quit ();
+  }
 }
 
 /*
  * if window manager send delete event
  */
-gint
-on_delete (GtkWidget * w, GdkEvent * event, gpointer data)
+gint on_delete (GtkWidget * w, GdkEvent * event, gpointer data)
 {
   return (FALSE);
 }
@@ -2504,73 +2324,69 @@ get_visible_or_parent (GtkCTree * ctree, GtkCTreeNode * node, gpointer data)
   if (GTK_CTREE_ROW (node)->is_leaf)
     return;
 
-  if (gtk_ctree_node_is_visible (ctree, node) &&
-      GTK_CTREE_ROW (node)->expanded)
-    {
-      /* we can't remove a node or something else here,
-       * that would break the calling gtk_ctree_pre_recursive()
-       * so we remember the node in a linked list
-       */
-      *list = g_list_append (*list, node);
-      return;
-    }
+  if (gtk_ctree_node_is_visible (ctree, node) && GTK_CTREE_ROW (node)->expanded)
+  {
+    /* we can't remove a node or something else here,
+     * that would break the calling gtk_ctree_pre_recursive()
+     * so we remember the node in a linked list
+     */
+    *list = g_list_append (*list, node);
+    return;
+  }
 
   /* check if at least one child is visible
    */
   child = GTK_CTREE_ROW (node)->children;
   while (child)
+  {
+    if (gtk_ctree_node_is_visible (GTK_CTREE (ctree), child))
     {
-      if (gtk_ctree_node_is_visible (GTK_CTREE (ctree), child))
-	{
-	  *list = g_list_append (*list, node);
-	  return;
-	}
-      child = GTK_CTREE_ROW (child)->sibling;
+      *list = g_list_append (*list, node);
+      return;
     }
+    child = GTK_CTREE_ROW (child)->sibling;
+  }
 }
 
 /*
  * timer function to update the view
  */
-gint
-update_timer (GtkCTree * ctree)
+gint update_timer (GtkCTree * ctree)
 {
   GList *list = NULL, *tmp;
   GtkCTreeNode *node;
   cfg *win;
   gboolean manage_timeout;
-  
+
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   manage_timeout = (win->timer != 0);
 
   if (manage_timeout)
-    {
-      gtk_timeout_remove (win->timer);
-      win->timer = 0;
-    }
+  {
+    gtk_timeout_remove (win->timer);
+    win->timer = 0;
+  }
 
 
   /* get a list of directories we have to check
    */
-  gtk_ctree_post_recursive (ctree,
-			    GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list),
-			    get_visible_or_parent, &list);
+  gtk_ctree_post_recursive (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), get_visible_or_parent, &list);
 
   tmp = list;
   while (tmp)
+  {
+    node = tmp->data;
+    if (update_tree (ctree, node) == TRUE)
     {
-      node = tmp->data;
-      if (update_tree (ctree, node) == TRUE)
-	{
-	  break;
-	}
-      tmp = tmp->next;
+      break;
     }
+    tmp = tmp->next;
+  }
   g_list_free (list);
   if (manage_timeout)
-    {
-      win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
-    }
+  {
+    win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
+  }
   return (TRUE);
 }
 
@@ -2586,10 +2402,10 @@ cb_term (GtkWidget * item, GtkWidget * ctree)
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
 
   if (!(en->type & FT_DIR))
-    {
-      node = GTK_CTREE_ROW (node)->parent;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-    }
+  {
+    node = GTK_CTREE_ROW (node)->parent;
+    en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  }
 
   sprintf (path, "xfterm \"%s\" &", en->path);
   io_system (path);
@@ -2604,26 +2420,16 @@ cb_exec (GtkWidget * top, gpointer data)
   dlg_execute (win->xap, NULL);
 }
 
-XErrorHandler
-ErrorHandler (Display * dpy, XErrorEvent * event)
+XErrorHandler ErrorHandler (Display * dpy, XErrorEvent * event)
 {
   char buf[64];
-  if ((event->error_code == BadWindow) ||
-      (event->error_code == BadDrawable) ||
-      (event->request_code == X_GetGeometry) ||
-      (event->request_code == X_ChangeProperty) ||
-      (event->request_code == X_SetInputFocus) ||
-      (event->request_code == X_ChangeWindowAttributes) ||
-      (event->request_code == X_GrabButton) ||
-      (event->request_code == X_ChangeWindowAttributes) ||
-      (event->request_code == X_InstallColormap))
+  if ((event->error_code == BadWindow) || (event->error_code == BadDrawable) || (event->request_code == X_GetGeometry) || (event->request_code == X_ChangeProperty) || (event->request_code == X_SetInputFocus) || (event->request_code == X_ChangeWindowAttributes) || (event->request_code == X_GrabButton) || (event->request_code == X_ChangeWindowAttributes) || (event->request_code == X_InstallColormap))
     return (0);
 
   XGetErrorText (dpy, event->error_code, buf, 63);
   fprintf (stderr, "xftree: Fatal XLib internal error\n");
   fprintf (stderr, "%s\n", buf);
-  fprintf (stderr, "Request %d, Error %d\n",
-	   event->request_code, event->error_code);
+  fprintf (stderr, "Request %d, Error %d\n", event->request_code, event->error_code);
   exit (1);
   return (0);
 }
@@ -2634,111 +2440,41 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
   GtkWidget *toolbar;
 
   toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_toolbar_set_space_style ((GtkToolbar *) toolbar,
-			       GTK_TOOLBAR_SPACE_LINE);
+  gtk_toolbar_set_space_style ((GtkToolbar *) toolbar, GTK_TOOLBAR_SPACE_LINE);
   gtk_toolbar_set_button_relief ((GtkToolbar *) toolbar, GTK_RELIEF_NONE);
   gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("New window"),
-			   _("New window"),
-			   _("New window"),
-			   MyCreateFromPixmapData (toolbar,
-						   new_win_xpm),
-			   GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New window"), _("New window"), _("New window"), MyCreateFromPixmapData (toolbar, new_win_xpm), GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Close window"),
-			   _("Close window"),
-			   _("Close window"),
-			   MyCreateFromPixmapData (toolbar,
-						   closewin_xpm),
-			   GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Close window"), _("Close window"), _("Close window"), MyCreateFromPixmapData (toolbar, closewin_xpm), GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
 
   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Go to ..."),
-			   _("Go to ..."),
-			   _("Go to ..."),
-			   MyCreateFromPixmapData (toolbar, go_to_xpm),
-			   GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go to ..."), _("Go to ..."), _("Go to ..."), MyCreateFromPixmapData (toolbar, go_to_xpm), GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Go up ..."),
-			   _("Go up ..."),
-			   _("Go up ..."),
-			   MyCreateFromPixmapData (toolbar, go_up_xpm),
-			   GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go up ..."), _("Go up ..."), _("Go up ..."), MyCreateFromPixmapData (toolbar, go_up_xpm), GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Go home"),
-			   _("Go home"),
-			   _("Go home"),
-			   MyCreateFromPixmapData (toolbar, home_xpm),
-			   GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go home"), _("Go home"), _("Go home"), MyCreateFromPixmapData (toolbar, home_xpm), GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
 
   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("New Folder"),
-			   _("New Folder"),
-			   _("New Folder"),
-			   MyCreateFromPixmapData (toolbar,
-						   new_dir_xpm),
-			   GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New Folder"), _("New Folder"), _("New Folder"), MyCreateFromPixmapData (toolbar, new_dir_xpm), GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("New file ..."),
-			   _("New file ..."),
-			   _("New file ..."),
-			   MyCreateFromPixmapData (toolbar,
-						   new_file_xpm),
-			   GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("New file ..."), _("New file ..."), _("New file ..."), MyCreateFromPixmapData (toolbar, new_file_xpm), GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Properties"),
-			   _("Properties"),
-			   _("Properties"),
-			   MyCreateFromPixmapData (toolbar,
-						   appinfo_xpm),
-			   GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Properties"), _("Properties"), _("Properties"), MyCreateFromPixmapData (toolbar, appinfo_xpm), GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
 
   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Delete ..."),
-			   _("Delete ..."),
-			   _("Delete ..."),
-			   MyCreateFromPixmapData (toolbar,
-						   delete_xpm),
-			   GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Delete ..."), _("Delete ..."), _("Delete ..."), MyCreateFromPixmapData (toolbar, delete_xpm), GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Open Trash"),
-			   _("Open Trash"),
-			   _("Open Trash"),
-			   MyCreateFromPixmapData (toolbar, trash_xpm),
-			   GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Open Trash"), _("Open Trash"), _("Open Trash"), MyCreateFromPixmapData (toolbar, trash_xpm), GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Empty Trash"),
-			   _("Empty Trash"),
-			   _("Empty Trash"),
-			   MyCreateFromPixmapData (toolbar,
-						   empty_trash_xpm),
-			   GTK_SIGNAL_FUNC (cb_empty_trash),
-			   (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Empty Trash"), _("Empty Trash"), _("Empty Trash"), MyCreateFromPixmapData (toolbar, empty_trash_xpm), GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
 
   gtk_toolbar_append_space ((GtkToolbar *) toolbar);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-			   _("Toggle Dotfiles"),
-			   _("Toggle Dotfiles"),
-			   _("Toggle Dotfiles"),
-			   MyCreateFromPixmapData (toolbar,
-						   dotfile_xpm),
-			   GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Toggle Dotfiles"), _("Toggle Dotfiles"), _("Toggle Dotfiles"), MyCreateFromPixmapData (toolbar, dotfile_xpm), GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
 
   return toolbar;
 }
@@ -2765,26 +2501,22 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menuitem = gtk_menu_item_new_with_label (_("New window"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new_with_label (_("Open in terminal"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_term), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_term), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new_with_label (_("New Folder ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new_with_label (_("New file ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2793,41 +2525,35 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menuitem = gtk_menu_item_new_with_label (_("Run program ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_exec), (gpointer) top);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_exec), (gpointer) top);
 
   menuitem = gtk_menu_item_new_with_label (_("Delete ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Find ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_find), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_find), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Properties ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
 
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Differences ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 0));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 0));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Patch viewer ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 1));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 1));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
@@ -2838,14 +2564,12 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menuitem = gtk_menu_item_new_with_label (_("Open Trash"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
 
   menuitem = gtk_menu_item_new_with_label (_("Empty Trash"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
 
   menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2854,8 +2578,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menuitem = gtk_menu_item_new_with_label (_("Close window"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
 
   menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2864,8 +2587,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menuitem = gtk_menu_item_new_with_label (_("Quit"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (gtk_main_quit), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (gtk_main_quit), (gpointer) ctree);
   /* Create "Settings" menu */
   menuitem = gtk_menu_item_new_with_label (_("Settings"));
   gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
@@ -2875,22 +2597,19 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 
   menuitem = gtk_menu_item_new_with_label (_("Go to ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
 
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Go up"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
 
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Go home"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
 
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
@@ -2900,8 +2619,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Toggle Dotfiles"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
 
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
@@ -2915,8 +2633,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
   menuitem = gtk_menu_item_new_with_label (_("About ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-		      GTK_SIGNAL_FUNC (cb_about), ctree);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_about), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
@@ -2927,8 +2644,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
  * create a new toplevel window
  */
 static GtkWidget *
-new_top (char *path, char *xap, char *trash, GList * reg,
-	 int width, int height, int flags)
+new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags)
 {
   GtkWidget *vbox;
   GtkWidget *handlebox1;
@@ -3141,10 +2857,8 @@ new_top (char *path, char *xap, char *trash, GList * reg,
   label[COL_DATE] = "";
   top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
-  gtk_signal_connect (GTK_OBJECT (top), "destroy",
-		      GTK_SIGNAL_FUNC (on_destroy), (gpointer) win);
-  gtk_signal_connect (GTK_OBJECT (top), "delete_event",
-		      GTK_SIGNAL_FUNC (on_delete), (gpointer) win);
+  gtk_signal_connect (GTK_OBJECT (top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) win);
+  gtk_signal_connect (GTK_OBJECT (top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) win);
   top_register (top);
 
   vbox = gtk_vbox_new (FALSE, 0);
@@ -3162,8 +2876,7 @@ new_top (char *path, char *xap, char *trash, GList * reg,
 
   scrolled = gtk_scrolled_window_new (NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), scrolled, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   ctree = gtk_ctree_new_with_titles (COLUMNS, 0, titles);
   gtk_clist_set_auto_sort (GTK_CLIST (ctree), FALSE);
@@ -3171,21 +2884,9 @@ new_top (char *path, char *xap, char *trash, GList * reg,
   accel = gtk_accel_group_new ();
   gtk_accel_group_attach (accel, GTK_OBJECT (top));
 
-  gtk_widget_add_accelerator (GTK_WIDGET
-			      (GTK_CLIST (ctree)->column[COL_NAME].button),
-			      "clicked", accel, GDK_n,
-			      GDK_CONTROL_MASK | GDK_MOD1_MASK,
-			      GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (GTK_WIDGET
-			      (GTK_CLIST (ctree)->column[COL_DATE].button),
-			      "clicked", accel, GDK_d,
-			      GDK_CONTROL_MASK | GDK_MOD1_MASK,
-			      GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (GTK_WIDGET
-			      (GTK_CLIST (ctree)->column[COL_SIZE].button),
-			      "clicked", accel, GDK_s,
-			      GDK_CONTROL_MASK | GDK_MOD1_MASK,
-			      GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button), "clicked", accel, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button), "clicked", accel, GDK_d, GDK_CONTROL_MASK | GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button), "clicked", accel, GDK_s, GDK_CONTROL_MASK | GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
 
   win->compare = (gpointer) GTK_CLIST (ctree)->compare;
   win->trash = g_strdup (trash);
@@ -3211,208 +2912,141 @@ new_top (char *path, char *xap, char *trash, GList * reg,
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_DIR]), accel);
 
   for (i = 0; i < LAST_DIR_MENU_ENTRY; i++)
+  {
+    if (dir_mlist[i].label)
+      menu_item = gtk_menu_item_new_with_label (_(dir_mlist[i].label));
+    else
+      menu_item = gtk_menu_item_new ();
+    if (dir_mlist[i].func)
     {
-      if (dir_mlist[i].label)
-	menu_item = gtk_menu_item_new_with_label (_(dir_mlist[i].label));
+      if (dir_mlist[i].data == WINCFG)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), win);
+      else if (dir_mlist[i].data == TOPWIN)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), GTK_WIDGET (top));
       else
-	menu_item = gtk_menu_item_new ();
-      if (dir_mlist[i].func)
-	{
-	  if (dir_mlist[i].data == WINCFG)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC (dir_mlist[i].func), win);
-	  else if (dir_mlist[i].data == TOPWIN)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(dir_mlist[i].func), GTK_WIDGET (top));
-	  else
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(dir_mlist[i].func), (gpointer) ctree);
-	}
-      if (dir_mlist[i].key)
-	{
-	  gtk_widget_add_accelerator (menu_item, "activate",
-				      accel, dir_mlist[i].key,
-				      dir_mlist[i].mod, GTK_ACCEL_VISIBLE);
-	}
-      gtk_menu_append (GTK_MENU (menu[MN_DIR]), menu_item);
-      gtk_widget_show (menu_item);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), (gpointer) ctree);
     }
-  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_DIR]), ctree,
-			     (GtkMenuDetachFunc) menu_detach);
+    if (dir_mlist[i].key)
+    {
+      gtk_widget_add_accelerator (menu_item, "activate", accel, dir_mlist[i].key, dir_mlist[i].mod, GTK_ACCEL_VISIBLE);
+    }
+    gtk_menu_append (GTK_MENU (menu[MN_DIR]), menu_item);
+    gtk_widget_show (menu_item);
+  }
+  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_DIR]), ctree, (GtkMenuDetachFunc) menu_detach);
 
   menu[MN_FILE] = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_FILE]), accel);
   for (i = 0; i < LAST_FILE_MENU_ENTRY; i++)
+  {
+    if (file_mlist[i].label)
+      menu_item = gtk_menu_item_new_with_label (_(file_mlist[i].label));
+    else
+      menu_item = gtk_menu_item_new ();
+    if (file_mlist[i].func)
     {
-      if (file_mlist[i].label)
-	menu_item = gtk_menu_item_new_with_label (_(file_mlist[i].label));
+      if (file_mlist[i].data == WINCFG)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), win);
+      else if (file_mlist[i].data == TOPWIN)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), GTK_WIDGET (top));
       else
-	menu_item = gtk_menu_item_new ();
-      if (file_mlist[i].func)
-	{
-	  if (file_mlist[i].data == WINCFG)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC (file_mlist[i].func), win);
-	  else if (file_mlist[i].data == TOPWIN)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(file_mlist[i].func), GTK_WIDGET (top));
-	  else
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(file_mlist[i].func), (gpointer) ctree);
-	}
-      if (file_mlist[i].key)
-	{
-	  gtk_widget_add_accelerator (menu_item, "activate",
-				      accel,
-				      file_mlist[i].key,
-				      file_mlist[i].mod, GTK_ACCEL_VISIBLE);
-	}
-      gtk_menu_append (GTK_MENU (menu[MN_FILE]), menu_item);
-      gtk_widget_show (menu_item);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), (gpointer) ctree);
     }
-  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_FILE]), ctree,
-			     (GtkMenuDetachFunc) menu_detach);
+    if (file_mlist[i].key)
+    {
+      gtk_widget_add_accelerator (menu_item, "activate", accel, file_mlist[i].key, file_mlist[i].mod, GTK_ACCEL_VISIBLE);
+    }
+    gtk_menu_append (GTK_MENU (menu[MN_FILE]), menu_item);
+    gtk_widget_show (menu_item);
+  }
+  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_FILE]), ctree, (GtkMenuDetachFunc) menu_detach);
 
   menu[MN_MIXED] = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_MIXED]), accel);
   for (i = 0; i < LAST_MIXED_MENU_ENTRY; i++)
+  {
+    if (mixed_mlist[i].label)
+      menu_item = gtk_menu_item_new_with_label (_(mixed_mlist[i].label));
+    else
+      menu_item = gtk_menu_item_new ();
+    if (mixed_mlist[i].func)
     {
-      if (mixed_mlist[i].label)
-	menu_item = gtk_menu_item_new_with_label (_(mixed_mlist[i].label));
+      if (mixed_mlist[i].data == WINCFG)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), win);
+      else if (mixed_mlist[i].data == TOPWIN)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), GTK_WIDGET (top));
       else
-	menu_item = gtk_menu_item_new ();
-      if (mixed_mlist[i].func)
-	{
-	  if (mixed_mlist[i].data == WINCFG)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC (mixed_mlist[i].func), win);
-	  else if (mixed_mlist[i].data == TOPWIN)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(mixed_mlist[i].func), GTK_WIDGET (top));
-	  else
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(mixed_mlist[i].func), (gpointer) ctree);
-	}
-      if (mixed_mlist[i].key)
-	{
-	  gtk_widget_add_accelerator (menu_item, "activate",
-				      accel,
-				      mixed_mlist[i].key,
-				      mixed_mlist[i].mod, GTK_ACCEL_VISIBLE);
-	}
-      gtk_menu_append (GTK_MENU (menu[MN_MIXED]), menu_item);
-      gtk_widget_show (menu_item);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), (gpointer) ctree);
     }
-  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_MIXED]), ctree,
-			     (GtkMenuDetachFunc) menu_detach);
+    if (mixed_mlist[i].key)
+    {
+      gtk_widget_add_accelerator (menu_item, "activate", accel, mixed_mlist[i].key, mixed_mlist[i].mod, GTK_ACCEL_VISIBLE);
+    }
+    gtk_menu_append (GTK_MENU (menu[MN_MIXED]), menu_item);
+    gtk_widget_show (menu_item);
+  }
+  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_MIXED]), ctree, (GtkMenuDetachFunc) menu_detach);
 
   menu[MN_NONE] = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_NONE]), accel);
 
   for (i = 0; i < LAST_NONE_MENU_ENTRY; i++)
+  {
+    if (none_mlist[i].label)
+      menu_item = gtk_menu_item_new_with_label (_(none_mlist[i].label));
+    else
+      menu_item = gtk_menu_item_new ();
+    if (none_mlist[i].func)
     {
-      if (none_mlist[i].label)
-	menu_item = gtk_menu_item_new_with_label (_(none_mlist[i].label));
+      if (none_mlist[i].data == WINCFG)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), win);
+      else if (none_mlist[i].data == TOPWIN)
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), GTK_WIDGET (top));
       else
-	menu_item = gtk_menu_item_new ();
-      if (none_mlist[i].func)
-	{
-	  if (none_mlist[i].data == WINCFG)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC (none_mlist[i].func), win);
-	  else if (none_mlist[i].data == TOPWIN)
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(none_mlist[i].func), GTK_WIDGET (top));
-	  else
-	    gtk_signal_connect (GTK_OBJECT (menu_item),
-				"activate",
-				GTK_SIGNAL_FUNC
-				(none_mlist[i].func), (gpointer) ctree);
-	}
-      if (none_mlist[i].key)
-	{
-	  gtk_widget_add_accelerator (menu_item, "activate",
-				      accel,
-				      none_mlist[i].key,
-				      none_mlist[i].mod, GTK_ACCEL_VISIBLE);
-	}
-      gtk_menu_append (GTK_MENU (menu[MN_NONE]), menu_item);
-      gtk_widget_show (menu_item);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), (gpointer) ctree);
     }
-  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_NONE]), ctree,
-			     (GtkMenuDetachFunc) menu_detach);
+    if (none_mlist[i].key)
+    {
+      gtk_widget_add_accelerator (menu_item, "activate", accel, none_mlist[i].key, none_mlist[i].mod, GTK_ACCEL_VISIBLE);
+    }
+    gtk_menu_append (GTK_MENU (menu[MN_NONE]), menu_item);
+    gtk_widget_show (menu_item);
+  }
+  gtk_menu_attach_to_widget (GTK_MENU (menu[MN_NONE]), ctree, (GtkMenuDetachFunc) menu_detach);
 
-  root = gtk_ctree_insert_node (GTK_CTREE (ctree),
-				NULL, NULL, label, 8,
-				gPIX_dir_close, gPIM_dir_close,
-				gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
+  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
   en = entry_new_by_path_and_label (path, path);
   if (!en)
-    {
-      exit (1);
-    }
+  {
+    exit (1);
+  }
   en->flags = flags;
 
-  gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en,
-				    node_destroy);
+  gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
 
 
-  gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand",
-		      GTK_SIGNAL_FUNC (on_expand), path);
-  gtk_signal_connect (GTK_OBJECT (ctree), "tree_collapse",
-		      GTK_SIGNAL_FUNC (on_collapse), path);
-  gtk_signal_connect (GTK_OBJECT (ctree), "click_column",
-		      GTK_SIGNAL_FUNC (on_click_column), en);
-  gtk_signal_connect_after (GTK_OBJECT (ctree), "button_press_event",
-			    GTK_SIGNAL_FUNC (on_double_click), root);
-  gtk_signal_connect (GTK_OBJECT (ctree), "button_press_event",
-		      GTK_SIGNAL_FUNC (on_button_press), menu);
-  gtk_signal_connect (GTK_OBJECT (ctree), "key_press_event",
-		      GTK_SIGNAL_FUNC (on_key_press), menu);
-  gtk_signal_connect (GTK_OBJECT (ctree), "drag_data_received",
-		      GTK_SIGNAL_FUNC (on_drag_data), win);
-  gtk_signal_connect (GTK_OBJECT (ctree), "drag_data_get",
-		      GTK_SIGNAL_FUNC (on_drag_data_get), win);
-  gtk_signal_connect( GTK_OBJECT(ctree), "drag_motion",
-                      GTK_SIGNAL_FUNC(on_drag_motion), NULL);
-  gtk_signal_connect (GTK_OBJECT (ctree), "drag_end",
-		      GTK_SIGNAL_FUNC (on_drag_end), win);
+  gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), path);
+  gtk_signal_connect (GTK_OBJECT (ctree), "tree_collapse", GTK_SIGNAL_FUNC (on_collapse), path);
+  gtk_signal_connect (GTK_OBJECT (ctree), "click_column", GTK_SIGNAL_FUNC (on_click_column), en);
+  gtk_signal_connect_after (GTK_OBJECT (ctree), "button_press_event", GTK_SIGNAL_FUNC (on_double_click), root);
+  gtk_signal_connect (GTK_OBJECT (ctree), "button_press_event", GTK_SIGNAL_FUNC (on_button_press), menu);
+  gtk_signal_connect (GTK_OBJECT (ctree), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), menu);
+  gtk_signal_connect (GTK_OBJECT (ctree), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data), win);
+  gtk_signal_connect (GTK_OBJECT (ctree), "drag_data_get", GTK_SIGNAL_FUNC (on_drag_data_get), win);
+  gtk_signal_connect (GTK_OBJECT (ctree), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
+  gtk_signal_connect (GTK_OBJECT (ctree), "drag_end", GTK_SIGNAL_FUNC (on_drag_end), win);
 
   set_title (top, en->path);
   if (win->width > 0 && win->height > 0)
-    {
-      gtk_window_set_default_size (GTK_WINDOW (top), width, height);
-    }
+  {
+    gtk_window_set_default_size (GTK_WINDOW (top), width, height);
+  }
 
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   gtk_widget_show_all (top);
-  gtk_drag_source_set (ctree,
-		       GDK_BUTTON1_MASK|GDK_BUTTON2_MASK, target_table, NUM_TARGETS,
-		       GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
-  gtk_drag_dest_set (ctree, 
-                     GTK_DEST_DEFAULT_DROP,
-		     target_table,
-		     NUM_TARGETS,
-		     GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+  gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+  gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 
   menutop = create_menu (top, ctree, win);
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
@@ -3434,8 +3068,7 @@ new_top (char *path, char *xap, char *trash, GList * reg,
  * create pixmaps and create a new toplevel tree widget
  */
 void
-gui_main (char *path, char *xap_path, char *trash, char *reg_file,
-	  wgeo_t * geo, int flags)
+gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo, int flags)
 {
   GList *reg;
   GtkWidget *top, *new_win;
@@ -3444,47 +3077,32 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file,
   gtk_widget_realize (top);
 
   gPIX_page = MyCreateGdkPixmapFromData (page_xpm, top, &gPIM_page, FALSE);
-  gPIX_page_lnk =
-    MyCreateGdkPixmapFromData (page_lnk_xpm, top, &gPIM_page_lnk, FALSE);
-  gPIX_dir_pd =
-    MyCreateGdkPixmapFromData (dir_pd_xpm, top, &gPIM_dir_pd, FALSE);
-  gPIX_dir_open =
-    MyCreateGdkPixmapFromData (dir_open_xpm, top, &gPIM_dir_open, FALSE);
-  gPIX_dir_open_lnk =
-    MyCreateGdkPixmapFromData (dir_open_lnk_xpm, top,
-			       &gPIM_dir_open_lnk, FALSE);
-  gPIX_dir_close =
-    MyCreateGdkPixmapFromData (dir_close_xpm, top, &gPIM_dir_close, FALSE);
-  gPIX_dir_close_lnk =
-    MyCreateGdkPixmapFromData (dir_close_lnk_xpm, top,
-			       &gPIM_dir_close_lnk, FALSE);
-  gPIX_dir_up =
-    MyCreateGdkPixmapFromData (dir_up_xpm, top, &gPIM_dir_up, FALSE);
+  gPIX_page_lnk = MyCreateGdkPixmapFromData (page_lnk_xpm, top, &gPIM_page_lnk, FALSE);
+  gPIX_dir_pd = MyCreateGdkPixmapFromData (dir_pd_xpm, top, &gPIM_dir_pd, FALSE);
+  gPIX_dir_open = MyCreateGdkPixmapFromData (dir_open_xpm, top, &gPIM_dir_open, FALSE);
+  gPIX_dir_open_lnk = MyCreateGdkPixmapFromData (dir_open_lnk_xpm, top, &gPIM_dir_open_lnk, FALSE);
+  gPIX_dir_close = MyCreateGdkPixmapFromData (dir_close_xpm, top, &gPIM_dir_close, FALSE);
+  gPIX_dir_close_lnk = MyCreateGdkPixmapFromData (dir_close_lnk_xpm, top, &gPIM_dir_close_lnk, FALSE);
+  gPIX_dir_up = MyCreateGdkPixmapFromData (dir_up_xpm, top, &gPIM_dir_up, FALSE);
   gPIX_exe = MyCreateGdkPixmapFromData (exe_xpm, top, &gPIM_exe, FALSE);
-  gPIX_exe_lnk =
-    MyCreateGdkPixmapFromData (exe_lnk_xpm, top, &gPIM_exe_lnk, FALSE);
-  gPIX_char_dev =
-    MyCreateGdkPixmapFromData (char_dev_xpm, top, &gPIM_char_dev, FALSE);
-  gPIX_block_dev =
-    MyCreateGdkPixmapFromData (block_dev_xpm, top, &gPIM_block_dev, FALSE);
+  gPIX_exe_lnk = MyCreateGdkPixmapFromData (exe_lnk_xpm, top, &gPIM_exe_lnk, FALSE);
+  gPIX_char_dev = MyCreateGdkPixmapFromData (char_dev_xpm, top, &gPIM_char_dev, FALSE);
+  gPIX_block_dev = MyCreateGdkPixmapFromData (block_dev_xpm, top, &gPIM_block_dev, FALSE);
   gPIX_fifo = MyCreateGdkPixmapFromData (fifo_xpm, top, &gPIM_fifo, FALSE);
-  gPIX_socket =
-    MyCreateGdkPixmapFromData (socket_xpm, top, &gPIM_socket, FALSE);
-  gPIX_stale_lnk =
-    MyCreateGdkPixmapFromData (stale_lnk_xpm, top, &gPIM_stale_lnk, FALSE);
+  gPIX_socket = MyCreateGdkPixmapFromData (socket_xpm, top, &gPIM_socket, FALSE);
+  gPIX_stale_lnk = MyCreateGdkPixmapFromData (stale_lnk_xpm, top, &gPIM_stale_lnk, FALSE);
 
   if (!io_is_directory (path))
-    {
-      dlg_error (path, strerror (errno));
-      return;
-    }
+  {
+    dlg_error (path, strerror (errno));
+    return;
+  }
   reg = reg_build_list (reg_file);
-  new_win =
-    new_top (path, xap_path, trash, reg, geo->width, geo->height, flags);
+  new_win = new_top (path, xap_path, trash, reg, geo->width, geo->height, flags);
   if (geo->x > -1 && geo->y > -1)
-    {
-      gtk_widget_set_uposition (new_win, geo->x, geo->y);
-    }
+  {
+    gtk_widget_set_uposition (new_win, geo->x, geo->y);
+  }
 
   gtk_main ();
   exit (0);

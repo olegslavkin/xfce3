@@ -133,22 +133,24 @@
 #undef EMULATE_XINERAMA
 
 #ifdef EMULATE_XINERAMA
-  #ifndef HAVE_X11_EXTENSIONS_XINERAMA_H
+#ifndef HAVE_X11_EXTENSIONS_XINERAMA_H
 /* Define XineramaScreenInfo for systems missing Xinerama support */
-typedef struct {
-    int   screen_number;
-    short x_org;
-    short y_org;
-    short width;
-    short height;
-} XineramaScreenInfo;
-  #endif
+typedef struct
+{
+  int screen_number;
+  short x_org;
+  short y_org;
+  short width;
+  short height;
+}
+XineramaScreenInfo;
+#endif
 # endif
 
 typedef struct ColorPair
 {
-    Pixel fore;
-    Pixel back;
+  Pixel fore;
+  Pixel back;
 }
 ColorPair;
 
@@ -157,97 +159,97 @@ ColorPair;
  */
 typedef struct XfwmWindow
 {
-    struct XfwmWindow *next;	/* next xfwm window */
-    struct XfwmWindow *prev;	/* prev xfwm window */
-    Window w;			/* the child window */
-    int old_bw;			/* border width before reparenting */
-    Window frame;			/* the frame window */
-    Window Parent;		/* Parent window. Mandatory as MWM is designed like this */
-    Window title_w;		/* the title bar window */
-    Window sides[4];
-    Window corners[4];		/* Corner pieces */
-    int nr_left_buttons;
-    int nr_right_buttons;
-    Window left_w[3];
-    Window right_w[3];
-    Window icon_w;		/* the icon window */
-    Window icon_pixmap_w;		/* the icon window */
-    int wShaped;			/* is this a shaped window */
-    int frame_x;			/* x position of frame */
-    int frame_y;			/* y position of frame */
-    int frame_width;		/* width of frame */
-    int frame_height;		/* height of frame */
-    int boundary_width;
-    int corner_width;
-    int bw;
-    int title_x;
-    int title_y;
-    int title_height;		/* height of the title bar */
-    int title_width;		/* width of the title bar */
-    int icon_x_loc;		/* icon window x coordinate */
-    int icon_xl_loc;		/* icon label window x coordinate */
-    int icon_y_loc;		/* icon window y coordiante */
-    int icon_w_width;		/* width of the icon window */
-    int icon_w_height;		/* height of the icon window */
-    int icon_t_width;		/* width of the icon title window */
-    int icon_p_width;		/* width of the icon pixmap window */
-    int icon_p_height;		/* height of the icon pixmap window */
-    int shade_x;			/* shaded window x coordinate */
-    int shade_y;			/* shaded window y coordiante */
-    int shade_width;		/* width of the shaded window */
-    int shade_height;		/* height of the shaded window */
-    Bool icon_arranged;		/* internal flag */
-    Bool triggered;		/* internal flag */
-    Bool deleted;		/* internal flag */
-    Pixmap iconPixmap;		/* pixmap for the icon */
-    int iconDepth;		/* Drawable depth for the icon */
-    Pixmap icon_maskPixmap;	/* pixmap for the icon mask */
-    char *name;			/* name of the window */
-    char *icon_name;		/* name of the icon */
-    XWindowAttributes attr;	/* the child window attributes */
-    XSizeHints hints;		/* normal hints */
-    XWMHints *wmhints;		/* WM hints */
-    XClassHint class;
-    int Desk;			/* Tells which desktop this window is on */
-    int FocusDesk;		/* Where (if at all) was it focussed */
-    int DeIconifyDesk;		/* Desk to deiconify to, for StubbornIcons */
-    Window transientfor;
+  struct XfwmWindow *next;	/* next xfwm window */
+  struct XfwmWindow *prev;	/* prev xfwm window */
+  Window w;			/* the child window */
+  int old_bw;			/* border width before reparenting */
+  Window frame;			/* the frame window */
+  Window Parent;		/* Parent window. Mandatory as MWM is designed like this */
+  Window title_w;		/* the title bar window */
+  Window sides[4];
+  Window corners[4];		/* Corner pieces */
+  int nr_left_buttons;
+  int nr_right_buttons;
+  Window left_w[3];
+  Window right_w[3];
+  Window icon_w;		/* the icon window */
+  Window icon_pixmap_w;		/* the icon window */
+  int wShaped;			/* is this a shaped window */
+  int frame_x;			/* x position of frame */
+  int frame_y;			/* y position of frame */
+  int frame_width;		/* width of frame */
+  int frame_height;		/* height of frame */
+  int boundary_width;
+  int corner_width;
+  int bw;
+  int title_x;
+  int title_y;
+  int title_height;		/* height of the title bar */
+  int title_width;		/* width of the title bar */
+  int icon_x_loc;		/* icon window x coordinate */
+  int icon_xl_loc;		/* icon label window x coordinate */
+  int icon_y_loc;		/* icon window y coordiante */
+  int icon_w_width;		/* width of the icon window */
+  int icon_w_height;		/* height of the icon window */
+  int icon_t_width;		/* width of the icon title window */
+  int icon_p_width;		/* width of the icon pixmap window */
+  int icon_p_height;		/* height of the icon pixmap window */
+  int shade_x;			/* shaded window x coordinate */
+  int shade_y;			/* shaded window y coordiante */
+  int shade_width;		/* width of the shaded window */
+  int shade_height;		/* height of the shaded window */
+  Bool icon_arranged;		/* internal flag */
+  Bool triggered;		/* internal flag */
+  Bool deleted;			/* internal flag */
+  Pixmap iconPixmap;		/* pixmap for the icon */
+  int iconDepth;		/* Drawable depth for the icon */
+  Pixmap icon_maskPixmap;	/* pixmap for the icon mask */
+  char *name;			/* name of the window */
+  char *icon_name;		/* name of the icon */
+  XWindowAttributes attr;	/* the child window attributes */
+  XSizeHints hints;		/* normal hints */
+  XWMHints *wmhints;		/* WM hints */
+  XClassHint class;
+  int Desk;			/* Tells which desktop this window is on */
+  int FocusDesk;		/* Where (if at all) was it focussed */
+  int DeIconifyDesk;		/* Desk to deiconify to, for StubbornIcons */
+  Window transientfor;
 
-    unsigned long flags;
+  unsigned long flags;
 
-    char *icon_bitmap_file;
+  char *icon_bitmap_file;
 
-    int orig_x;			/* unmaximized x coordinate */
-    int orig_y;			/* unmaximized y coordinate */
-    int orig_wd;			/* unmaximized window width */
-    int orig_ht;			/* unmaximized window height */
+  int orig_x;			/* unmaximized x coordinate */
+  int orig_y;			/* unmaximized y coordinate */
+  int orig_wd;			/* unmaximized window width */
+  int orig_ht;			/* unmaximized window height */
 
-    int xdiff, ydiff;		/* used to restore window position on exit */
-    int *mwm_hints;
-    int ol_hints;
-    int kde_hints;
-    int functions;
-    Window *cmap_windows;		/* Colormap windows property */
-    int number_cmap_windows;	/* Should generally be 0 */
-    Pixel TextPixel;
-    Pixel BackPixel;
-    unsigned long buttons;
-    int layer;
+  int xdiff, ydiff;		/* used to restore window position on exit */
+  int *mwm_hints;
+  int ol_hints;
+  int kde_hints;
+  int functions;
+  Window *cmap_windows;		/* Colormap windows property */
+  int number_cmap_windows;	/* Should generally be 0 */
+  Pixel TextPixel;
+  Pixel BackPixel;
+  unsigned long buttons;
+  int layer;
 }
 XfwmWindow;
 
 typedef struct XfwmWindowList
 {
-    struct XfwmWindowList *next;	/* next in list */
-    struct XfwmWindowList *prev;	/* prev in list */
-    struct XfwmWindow *win;	/* xfwm window */
+  struct XfwmWindowList *next;	/* next in list */
+  struct XfwmWindowList *prev;	/* prev in list */
+  struct XfwmWindow *win;	/* xfwm window */
 }
 XfwmWindowList;
 
 typedef struct WindowList
 {
-    struct WindowList *next;  /* next in list */
-    Window w;	    /* window */
+  struct WindowList *next;	/* next in list */
+  Window w;			/* window */
 }
 WindowList;
 
@@ -280,7 +282,7 @@ WindowList;
 #define ICON_MOVED              (1L<<20)
 #define ICON_UNMAPPED           (1L<<21)
 #define MAP_PENDING             (1L<<22)
-#define RAISEDWIN               (1L<<23) /* Used for autoraise facility */
+#define RAISEDWIN               (1L<<23)	/* Used for autoraise facility */
 #define SHADED                  (1L<<24)
 #define WM_NAME_CHANGED         (1L<<25)
 #define RECAPTURE               (1L<<28)

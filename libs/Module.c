@@ -40,31 +40,28 @@ ReadXfwmPacket (int fd, unsigned long *header, unsigned long **body)
   char *cbody;
 
   if ((count = read (fd, header, HEADER_SIZE * sizeof (unsigned long))) > 0)
+  {
+    if (header[0] == START_FLAG)
     {
-      if (header[0] == START_FLAG)
+      body_length = header[2] - HEADER_SIZE;
+      *body = (unsigned long *) safemalloc (body_length * sizeof (unsigned long));
+      cbody = (char *) (*body);
+      total = 0;
+      while (total < body_length * sizeof (unsigned long))
+      {
+	if ((count2 = read (fd, &cbody[total], body_length * sizeof (unsigned long) - total)) > 0)
 	{
-	  body_length = header[2] - HEADER_SIZE;
-	  *body = (unsigned long *)
-	    safemalloc (body_length * sizeof (unsigned long));
-	  cbody = (char *) (*body);
-	  total = 0;
-	  while (total < body_length * sizeof (unsigned long))
-	    {
-	      if ((count2 =
-		   read (fd, &cbody[total],
-			 body_length * sizeof (unsigned long) - total)) > 0)
-		{
-		  total += count2;
-		}
-	      else if (count2 < 0)
-		{
-		  kill (getpid (), SIGPIPE);
-		}
-	    }
+	  total += count2;
 	}
-      else
-	count = 0;
+	else if (count2 < 0)
+	{
+	  kill (getpid (), SIGPIPE);
+	}
+      }
     }
+    else
+      count = 0;
+  }
   if (count <= 0)
     kill (getpid (), SIGPIPE);
   return count;
@@ -83,14 +80,14 @@ SendText (int *fd, char *message, unsigned long window)
 
   win = window;
   if (message != NULL)
-    {
-      write (fd[0], &win, sizeof (unsigned long));
-      w = strlen (message);
-      write (fd[0], &w, sizeof (int));
-      write (fd[0], message, w);
-      w = 1;
-      write (fd[0], &w, sizeof (int));
-    }
+  {
+    write (fd[0], &win, sizeof (unsigned long));
+    w = strlen (message);
+    write (fd[0], &w, sizeof (int));
+    write (fd[0], message, w);
+    w = 1;
+    write (fd[0], &w, sizeof (int));
+  }
 }
 
 /***************************************************************************
@@ -125,35 +122,35 @@ GetConfigLine (int *fd, char **tline)
     free (line);
 
   if (first_pass)
-    {
-      SendInfo (fd, "Send_ConfigInfo", 0);
-      first_pass = 0;
-    }
+  {
+    SendInfo (fd, "Send_ConfigInfo", 0);
+    first_pass = 0;
+  }
 
   while (!done)
+  {
+    count = ReadXfwmPacket (fd[1], header, (unsigned long **) &line);
+    if (count > 0)
+      *tline = &line[3 * sizeof (long)];
+    else
+      *tline = NULL;
+    if (*tline != NULL)
     {
-      count = ReadXfwmPacket (fd[1], header, (unsigned long **) &line);
-      if (count > 0)
-	*tline = &line[3 * sizeof (long)];
-      else
-	*tline = NULL;
-      if (*tline != NULL)
-	{
-	  while (isspace (**tline))
-	    (*tline)++;
-	}
+      while (isspace (**tline))
+	(*tline)++;
+    }
 
 /*   fprintf(stderr,"%x %x\n",header[1],XFCE_M_END_CONFIG_INFO); */
-      if (header[1] == XFCE_M_CONFIG_INFO)
-	done = 1;
-      else if (header[1] == XFCE_M_END_CONFIG_INFO)
-	{
-	  done = 1;
-	  if (line != NULL)
-	    free (line);
-	  line = NULL;
-	  *tline = NULL;
-	}
+    if (header[1] == XFCE_M_CONFIG_INFO)
+      done = 1;
+    else if (header[1] == XFCE_M_END_CONFIG_INFO)
+    {
+      done = 1;
+      if (line != NULL)
+	free (line);
+      line = NULL;
+      *tline = NULL;
     }
+  }
   return NULL;
 }

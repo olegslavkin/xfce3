@@ -47,15 +47,13 @@ static void
 on_clear_show_diag (GtkWidget * widget, gpointer data)
 {
   guint lg;
-  
-  lg = gtk_text_get_length (GTK_TEXT(text));
-  gtk_text_backward_delete (GTK_TEXT(text), lg);
+
+  lg = gtk_text_get_length (GTK_TEXT (text));
+  gtk_text_backward_delete (GTK_TEXT (text), lg);
 }
 
 static gboolean
-delete_event_show_diag (GtkWidget * widget,
-			GdkEvent * event, 
-                        gpointer data)
+delete_event_show_diag (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
   gtk_widget_hide (GTK_WIDGET (dialog_show_diag));
   gdk_window_withdraw ((GTK_WIDGET (dialog_show_diag))->window);
@@ -69,33 +67,30 @@ show_diag (gchar * message)
 
   if ((!message) || (!strlen (message)))
     return;
-    
+
   if (dialog_show_diag != NULL)
+  {
+    if (current_config.show_diagnostic)
     {
-      if (current_config.show_diagnostic)
-        {
-          gtk_text_insert (GTK_TEXT (text), NULL, NULL,
-                         NULL, message, strlen (message));
-          if (!GTK_WIDGET_VISIBLE (dialog_show_diag))
-            {
-              gtk_widget_show (dialog_show_diag);
-            }
-        }
-       return;
+      gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, message, strlen (message));
+      if (!GTK_WIDGET_VISIBLE (dialog_show_diag))
+      {
+	gtk_widget_show (dialog_show_diag);
+      }
     }
-    
+    return;
+  }
+
   dialog_show_diag = gtk_dialog_new ();
   gtk_container_border_width (GTK_CONTAINER (dialog_show_diag), 5);
 
   gtk_window_position (GTK_WINDOW (dialog_show_diag), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (dialog_show_diag), _("Subprocess diagnostic"));
   gtk_widget_realize (dialog_show_diag);
-  
+
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_show_diag)->vbox), scrolled_window,
-		      TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-				  GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_show_diag)->vbox), scrolled_window, TRUE, TRUE, 0);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
   gtk_widget_show (scrolled_window);
 
   text = gtk_text_new (NULL, NULL);
@@ -109,8 +104,7 @@ show_diag (gchar * message)
   bbox = gtk_hbutton_box_new ();
   gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_END);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (bbox), 5);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_show_diag)->action_area), 
-  		      bbox, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_show_diag)->action_area), bbox, FALSE, TRUE, 0);
   gtk_widget_show (bbox);
 
   clear = gtk_button_new_with_label (_("Clear"));
@@ -124,38 +118,30 @@ show_diag (gchar * message)
   gtk_widget_grab_default (button);
   gtk_widget_show (button);
 
-  gtk_signal_connect (GTK_OBJECT (clear), "clicked",
-		      GTK_SIGNAL_FUNC (on_clear_show_diag),
-		      GTK_WIDGET (dialog_show_diag));
-  gtk_signal_connect (GTK_OBJECT (button), "clicked",
-		      GTK_SIGNAL_FUNC (on_ok_show_diag),
-		      GTK_WIDGET (dialog_show_diag));
-  gtk_signal_connect (GTK_OBJECT (dialog_show_diag), "delete_event",
-		      GTK_SIGNAL_FUNC (delete_event_show_diag),
-                      GTK_WIDGET (dialog_show_diag));
+  gtk_signal_connect (GTK_OBJECT (clear), "clicked", GTK_SIGNAL_FUNC (on_clear_show_diag), GTK_WIDGET (dialog_show_diag));
+  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (on_ok_show_diag), GTK_WIDGET (dialog_show_diag));
+  gtk_signal_connect (GTK_OBJECT (dialog_show_diag), "delete_event", GTK_SIGNAL_FUNC (delete_event_show_diag), GTK_WIDGET (dialog_show_diag));
   set_icon (dialog_show_diag, _("Subprocess diagnostic"), diagicon);
 
   if (current_config.show_diagnostic)
-    {
-      gtk_text_insert (GTK_TEXT (text), NULL, NULL,
-                       NULL, message, strlen (message));
-      gtk_widget_show (dialog_show_diag);
-    }
+  {
+    gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, message, strlen (message));
+    gtk_widget_show (dialog_show_diag);
+  }
 }
 
 gboolean
-process_diag_messages (gpointer client_data, gint source,
-		       GdkInputCondition condition)
+process_diag_messages (gpointer client_data, gint source, GdkInputCondition condition)
 {
-  char buffer [MAXSTRLEN];
+  char buffer[MAXSTRLEN];
   size_t elts;
 
   elts = read (source, buffer, MAXSTRLEN - 1);
-  if ((int) elts > 0) 
-    {
-      buffer [elts] = '\0';
-      show_diag ((gchar *) buffer);
-      /* printf ("Diag : %s\n",  buffer); */
-    }
+  if ((int) elts > 0)
+  {
+    buffer[elts] = '\0';
+    show_diag ((gchar *) buffer);
+    /* printf ("Diag : %s\n",  buffer); */
+  }
   return (1);
 }

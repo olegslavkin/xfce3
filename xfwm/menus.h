@@ -73,55 +73,55 @@
 
 typedef struct MenuItem
 {
-    struct MenuItem *next;	/* next menu item */
-    struct MenuItem *prev;	/* prev menu item */
-    char *item;			/* the character string displayed on left */
-    char *item2;			/* the character string displayed on right */
-    char *action;			/* action to be performed */
-    short item_num;		/* item number of this menu */
-    short x;			/* x coordinate for text (item) */
-    short x2;			/* x coordinate for text (item2) */
-    short y_offset;		/* y coordinate for item */
-    short y_height;		/* y height for item */
-    short func_type;		/* type of built in function */
-    short state;			/* video state, 0 = normal, 1 = reversed */
-    short strlen;			/* strlen(item) */
-    short strlen2;		/* strlen(item2) */
-    short hotkey;			/* Hot key offset (pete@tecc.co.uk).
-    		 * 0 - No hot key
-    		 * +ve - offset to hot key char in item
-    		 * -ve - offset to hot key char in item2
-    		 * (offsets have 1 added, so +1 or -1
-    		 * refer to the *first* character)
-    		 */
+  struct MenuItem *next;	/* next menu item */
+  struct MenuItem *prev;	/* prev menu item */
+  char *item;			/* the character string displayed on left */
+  char *item2;			/* the character string displayed on right */
+  char *action;			/* action to be performed */
+  short item_num;		/* item number of this menu */
+  short x;			/* x coordinate for text (item) */
+  short x2;			/* x coordinate for text (item2) */
+  short y_offset;		/* y coordinate for item */
+  short y_height;		/* y height for item */
+  short func_type;		/* type of built in function */
+  short state;			/* video state, 0 = normal, 1 = reversed */
+  short strlen;			/* strlen(item) */
+  short strlen2;		/* strlen(item2) */
+  short hotkey;			/* Hot key offset (pete@tecc.co.uk).
+				   * 0 - No hot key
+				   * +ve - offset to hot key char in item
+				   * -ve - offset to hot key char in item2
+				   * (offsets have 1 added, so +1 or -1
+				   * refer to the *first* character)
+				 */
 }
 MenuItem;
 
 typedef struct MenuRoot
 {
-    struct MenuItem *first;	/* first item in menu */
-    struct MenuItem *last;	/* last item in menu */
-    struct MenuRoot *next;	/* next in list of root menus */
-    char *name;			/* name of root */
-    Window w;			/* the window of the menu */
-    short height;			/* height of the menu */
-    short width;			/* width of the menu for 1st col */
-    short width2;			/* width of the menu for 2nd col */
-    short items;			/* number of items in the menu */
-    Bool in_use;
-    int func;
+  struct MenuItem *first;	/* first item in menu */
+  struct MenuItem *last;	/* last item in menu */
+  struct MenuRoot *next;	/* next in list of root menus */
+  char *name;			/* name of root */
+  Window w;			/* the window of the menu */
+  short height;			/* height of the menu */
+  short width;			/* width of the menu for 1st col */
+  short width2;			/* width of the menu for 2nd col */
+  short items;			/* number of items in the menu */
+  Bool in_use;
+  int func;
 }
 MenuRoot;
 
 typedef struct Binding
 {
-    char IsMouse;			/* Is it a mouse or key binding 1= mouse; */
-    int Button_Key;		/* Mouse Button number of Keycode */
-    char *key_name;		/* In case of keycode, give the key_name too */
-    int Context;			/* Contex is Xfwm context, ie titlebar, frame, etc */
-    int Modifier;			/* Modifiers for keyboard state */
-    char *Action;			/* What to do? */
-    struct Binding *NextBinding;
+  char IsMouse;			/* Is it a mouse or key binding 1= mouse; */
+  int Button_Key;		/* Mouse Button number of Keycode */
+  char *key_name;		/* In case of keycode, give the key_name too */
+  int Context;			/* Contex is Xfwm context, ie titlebar, frame, etc */
+  int Modifier;			/* Modifiers for keyboard state */
+  char *Action;			/* What to do? */
+  struct Binding *NextBinding;
 }
 Binding;
 

@@ -23,15 +23,11 @@
 /* Tubo() returns void pointer to tubo object 
 *  usage: see example below */
 
-void *Tubo (void (*fork_function) (void),
-	    void (*fork_finished_function) (void),
-	    int operate_stdin,
-	    int (*operate_stdout) (int, void *),
-	    int (*operate_stderr) (int, void *));
+void *Tubo (void (*fork_function) (void), void (*fork_finished_function) (void), int operate_stdin, int (*operate_stdout) (int, void *), int (*operate_stderr) (int, void *));
 
 /* TuboCancel() terminates a running fork. Called
-*  with the pointer returned from Tubo()  */ 
-void *TuboCancel (void *forkObject,void (*cleanup)(void));
+*  with the pointer returned from Tubo()  */
+void *TuboCancel (void *forkObject, void (*cleanup) (void));
 
 /* TuboWrite() will sent n bytes of the data pointed
 *  at by the void pointer "data". forkObject is the

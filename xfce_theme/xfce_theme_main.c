@@ -4,8 +4,8 @@
 #define SCROLLBAR_WIDTH 14
 
 /* Theme functions to export */
-void                theme_init(GtkThemeEngine * engine);
-void                theme_exit(void);
+void theme_init (GtkThemeEngine * engine);
+void theme_exit (void);
 
 /* Exported vtable from th_draw */
 
@@ -14,29 +14,28 @@ extern GtkStyleClass xfce_default_class;
 /* internals */
 
 static guint
-theme_parse_rc_style(GScanner * scanner,
-		     GtkRcStyle * rc_style)
+theme_parse_rc_style (GScanner * scanner, GtkRcStyle * rc_style)
 {
-  guint               token;
+  guint token;
 
-  token = g_scanner_peek_next_token(scanner);
+  token = g_scanner_peek_next_token (scanner);
   while (token != G_TOKEN_RIGHT_CURLY)
+  {
+    switch (token)
     {
-      switch (token)
-	{
-	default:
-	  g_scanner_get_next_token(scanner);
-	  token = G_TOKEN_RIGHT_CURLY;
-	  break;
-	}
-
-      if (token != G_TOKEN_NONE)
-	return token;
-
-      token = g_scanner_peek_next_token(scanner);
+    default:
+      g_scanner_get_next_token (scanner);
+      token = G_TOKEN_RIGHT_CURLY;
+      break;
     }
 
-  g_scanner_get_next_token(scanner);
+    if (token != G_TOKEN_NONE)
+      return token;
+
+    token = g_scanner_peek_next_token (scanner);
+  }
+
+  g_scanner_get_next_token (scanner);
 
   rc_style->engine_data = NULL;
 
@@ -44,46 +43,43 @@ theme_parse_rc_style(GScanner * scanner,
 }
 
 static void
-theme_merge_rc_style(GtkRcStyle * dest,
-		     GtkRcStyle * src)
+theme_merge_rc_style (GtkRcStyle * dest, GtkRcStyle * src)
 {
 }
 
 static void
-theme_rc_style_to_style(GtkStyle * style,
-			GtkRcStyle * rc_style)
+theme_rc_style_to_style (GtkStyle * style, GtkRcStyle * rc_style)
 {
   style->klass = &xfce_default_class;
 }
 
 static void
-theme_duplicate_style(GtkStyle * dest,
-		      GtkStyle * src)
+theme_duplicate_style (GtkStyle * dest, GtkStyle * src)
 {
 }
 
 static void
-theme_realize_style(GtkStyle * style)
+theme_realize_style (GtkStyle * style)
 {
 }
 
 static void
-theme_unrealize_style(GtkStyle * style)
+theme_unrealize_style (GtkStyle * style)
 {
 }
 
 static void
-theme_destroy_rc_style(GtkRcStyle * rc_style)
+theme_destroy_rc_style (GtkRcStyle * rc_style)
 {
 }
 
 static void
-theme_destroy_style(GtkStyle * style)
+theme_destroy_style (GtkStyle * style)
 {
 }
 
 void
-theme_init(GtkThemeEngine * engine)
+theme_init (GtkThemeEngine * engine)
 {
   GtkRangeClass *rangeclass;
 
@@ -97,15 +93,15 @@ theme_init(GtkThemeEngine * engine)
   engine->destroy_style = theme_destroy_style;
   engine->set_background = NULL;
 
-   /* Make scrollbars wider */
-   rangeclass = (GtkRangeClass *)gtk_type_class(gtk_range_get_type());
-   rangeclass->slider_width    = SCROLLBAR_WIDTH;
-   rangeclass->min_slider_size = SCROLLBAR_WIDTH;
-   rangeclass->stepper_size    = SCROLLBAR_WIDTH;
+  /* Make scrollbars wider */
+  rangeclass = (GtkRangeClass *) gtk_type_class (gtk_range_get_type ());
+  rangeclass->slider_width = SCROLLBAR_WIDTH;
+  rangeclass->min_slider_size = SCROLLBAR_WIDTH;
+  rangeclass->stepper_size = SCROLLBAR_WIDTH;
 }
 
 void
-theme_exit(void)
+theme_exit (void)
 {
 }
 
@@ -113,12 +109,9 @@ theme_exit(void)
  * is loaded and checks to see if we are compatible with the
  * version of GTK+ that loads us.
  */
-G_MODULE_EXPORT const gchar* g_module_check_init (GModule *module);
-const gchar*
-g_module_check_init (GModule *module)
+G_MODULE_EXPORT const gchar *g_module_check_init (GModule * module);
+const gchar *
+g_module_check_init (GModule * module)
 {
-  return gtk_check_version (GTK_MAJOR_VERSION,
-			    GTK_MINOR_VERSION,
-			    GTK_MICRO_VERSION - GTK_INTERFACE_AGE);
+  return gtk_check_version (GTK_MAJOR_VERSION, GTK_MINOR_VERSION, GTK_MICRO_VERSION - GTK_INTERFACE_AGE);
 }
-

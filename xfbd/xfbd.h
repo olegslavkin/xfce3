@@ -30,8 +30,8 @@ GtkWidget *preview_pixmap_frame;
 GtkWidget *preview_pixmap;
 GtkWidget *filename_entry;
 GtkWidget *setup_tiled;
-GtkWidget *setup_stretched; 
-GtkWidget *setup_auto; 
+GtkWidget *setup_stretched;
+GtkWidget *setup_auto;
 
 char *backdrp;
 char *istiled;
@@ -42,15 +42,8 @@ void readstr (char *str, char *tiled);
 int writestr (char *str, char *tiled);
 void display_back (char *str);
 
-void select_backdrp(char*, char*);
+void select_backdrp (char *, char *);
 
 GtkWidget *create_xfbd ();
 
 #endif
-
-
-
-
-
-
-

@@ -56,174 +56,181 @@
 #endif
 
 
-void Myquit(GtkWidget *widget, gpointer data){
-  gtk_main_quit();
+void
+Myquit (GtkWidget * widget, gpointer data)
+{
+  gtk_main_quit ();
   xfce_end ((gpointer) NULL, 0);
 }
 
-void get_save_filename(GtkFileSelection *selector, gpointer user_data){
+void
+get_save_filename (GtkFileSelection * selector, gpointer user_data)
+{
   gchar *fselect;
 
-  fselect=malloc(sizeof(gchar)*MAXSTRLEN);
-  strcpy(fselect,gtk_file_selection_get_filename(GTK_FILE_SELECTION(fileselector2)));
-  fselect[strlen(fselect)]=0;
-  
-  gtk_entry_set_text(GTK_ENTRY(edit_name), fselect);
+  fselect = malloc (sizeof (gchar) * MAXSTRLEN);
+  strcpy (fselect, gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselector2)));
+  fselect[strlen (fselect)] = 0;
 
-  saveList();
+  gtk_entry_set_text (GTK_ENTRY (edit_name), fselect);
 
-  Changed=FALSE;
+  saveList ();
 
-  free(fselect);
+  Changed = FALSE;
+
+  free (fselect);
 
 }
 
-void save_clicked(GtkWidget* widget, gpointer data){
-  if(strcmp(gtk_entry_get_text(GTK_ENTRY(edit_name)), "")!=0){
-    saveList();
-  }else{
-    fileselector2=gtk_file_selection_new("Choose List to Save to...");
-    gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(fileselector2)->ok_button), 
-                       "clicked", 
-                       GTK_SIGNAL_FUNC(get_save_filename),
-                       (gpointer) NULL);
-    gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(fileselector2)->ok_button), 
-                              "clicked", 
-                              GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                              (gpointer) fileselector2);
-    gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(fileselector2)->cancel_button), 
-                              "clicked", 
-                              GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                              (gpointer) fileselector2);
-    gtk_widget_show(fileselector2);
+void
+save_clicked (GtkWidget * widget, gpointer data)
+{
+  if (strcmp (gtk_entry_get_text (GTK_ENTRY (edit_name)), "") != 0)
+  {
+    saveList ();
+  }
+  else
+  {
+    fileselector2 = gtk_file_selection_new ("Choose List to Save to...");
+    gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (fileselector2)->ok_button), "clicked", GTK_SIGNAL_FUNC (get_save_filename), (gpointer) NULL);
+    gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fileselector2)->ok_button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), (gpointer) fileselector2);
+    gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fileselector2)->cancel_button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), (gpointer) fileselector2);
+    gtk_widget_show (fileselector2);
   }
 }
 
-void get_load_filename(GtkFileSelection *selector, gpointer user_data){
+void
+get_load_filename (GtkFileSelection * selector, gpointer user_data)
+{
   gchar *fselect;
 
-  fselect=malloc(sizeof(gchar)*MAXSTRLEN);
-  strcpy(fselect,gtk_file_selection_get_filename(GTK_FILE_SELECTION(fileselector1)));
-  fselect[strlen(fselect)]=0;
-  
-  gtk_entry_set_text(GTK_ENTRY(edit_name), fselect);
+  fselect = malloc (sizeof (gchar) * MAXSTRLEN);
+  strcpy (fselect, gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselector1)));
+  fselect[strlen (fselect)] = 0;
 
-  writeToList();
+  gtk_entry_set_text (GTK_ENTRY (edit_name), fselect);
 
-  Changed=FALSE;
+  writeToList ();
 
-  free(fselect);
+  Changed = FALSE;
+
+  free (fselect);
 
 }
 
-void edit_changed(GtkWidget* widget, gpointer data){
-  Changed=TRUE;
+void
+edit_changed (GtkWidget * widget, gpointer data)
+{
+  Changed = TRUE;
 }
 
-void load_clicked(GtkWidget* widget, gpointer data){
-  if(Changed==FALSE){
-    fileselector1=gtk_file_selection_new("Choose List to Load...");
-    gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(fileselector1)->ok_button), 
-                       "clicked", 
-                       GTK_SIGNAL_FUNC(get_load_filename),
-                       (gpointer) NULL);
-    gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(fileselector1)->ok_button), 
-                              "clicked", 
-                              GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                              (gpointer) fileselector1);
-    gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(fileselector1)->cancel_button), 
-                              "clicked", 
-                              GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                              (gpointer) fileselector1);
-    gtk_widget_show(fileselector1);
-  }else{
-    writeToList();
+void
+load_clicked (GtkWidget * widget, gpointer data)
+{
+  if (Changed == FALSE)
+  {
+    fileselector1 = gtk_file_selection_new ("Choose List to Load...");
+    gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (fileselector1)->ok_button), "clicked", GTK_SIGNAL_FUNC (get_load_filename), (gpointer) NULL);
+    gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fileselector1)->ok_button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), (gpointer) fileselector1);
+    gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fileselector1)->cancel_button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), (gpointer) fileselector1);
+    gtk_widget_show (fileselector1);
+  }
+  else
+  {
+    writeToList ();
   }
 }
 
-void add_filename(gchar* fselect){
+void
+add_filename (gchar * fselect)
+{
   gchar *indFile;
   struct stat stat_buf;
   struct dirent **namelist;
   int n;
-  
-  stat(fselect, &stat_buf);
 
-  if(S_ISDIR(stat_buf.st_mode)){
-    indFile=malloc(sizeof(gchar)*MAXSTRLEN);
-    n=scandir(fselect, &namelist, 0, alphasort);
-    if(n>0){
-      while(--n>1){
-	strcpy(indFile,fselect);
-	strcat(indFile, "/");
-	strcat(indFile, namelist[n]->d_name);
-	add_filename(indFile);
+  stat (fselect, &stat_buf);
+
+  if (S_ISDIR (stat_buf.st_mode))
+  {
+    indFile = malloc (sizeof (gchar) * MAXSTRLEN);
+    n = scandir (fselect, &namelist, 0, alphasort);
+    if (n > 0)
+    {
+      while (--n > 1)
+      {
+	strcpy (indFile, fselect);
+	strcat (indFile, "/");
+	strcat (indFile, namelist[n]->d_name);
+	add_filename (indFile);
       }
-      free(indFile);
+      free (indFile);
     }
-  }else{
+  }
+  else
+  {
     theNumber++;
-    gtk_clist_append(GTK_CLIST(clist_fileslist), &fselect);
+    gtk_clist_append (GTK_CLIST (clist_fileslist), &fselect);
   }
 
-}
-
-void get_add_filename(GtkFileSelection *selector, gpointer user_data){
-  gchar *fselect;
-
-  fselect=malloc(sizeof(gchar)*MAXSTRLEN);
-  strcpy(fselect,gtk_file_selection_get_filename(GTK_FILE_SELECTION(fileselector)));
-  if(fselect[strlen(fselect)-1]=='/'){
-    fselect[strlen(fselect)-1]=0;
-  }else{
-    fselect[strlen(fselect)]=0;
-  }
-
-  add_filename(fselect);
-
-  free(fselect);
-
-}
-
-void add_clicked(GtkWidget* widget, gpointer data){
-  fileselector=gtk_file_selection_new("Choose Image to Add");
-  gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(fileselector)->ok_button), 
-                     "clicked", 
-                     GTK_SIGNAL_FUNC(get_add_filename),
-                     (gpointer) NULL);
-  gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(fileselector)->ok_button), 
-                            "clicked", 
-                            GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                            (gpointer)fileselector);
-  gtk_signal_connect_object(GTK_OBJECT(GTK_FILE_SELECTION(fileselector)->cancel_button), 
-                            "clicked", 
-                            GTK_SIGNAL_FUNC(gtk_widget_destroy),
-                            (gpointer) fileselector);
-  gtk_widget_show(fileselector);
-}
-
-void remove_clicked(GtkWidget* widget, gpointer data){
-  if(selected!=-1){
-    theNumber--;
-    gtk_clist_remove(GTK_CLIST(clist_fileslist), selected);
-  }
-}
-
-void selectionMade(GtkWidget *widget, gint row, gint column, GdkEventButton *event, gpointer data){
-  selected=row;
-}
-
-void selectionLost(GtkWidget *widget, gint row, gint column, GdkEventButton *event, gpointer data){
-  selected=-1;
 }
 
 void
-on_drag_data_received (GtkWidget * widget,
-		       GdkDragContext * context,
-		       gint x,
-		       gint y,
-		       GtkSelectionData * data,
-		       guint info, guint time, gpointer cbdata)
+get_add_filename (GtkFileSelection * selector, gpointer user_data)
+{
+  gchar *fselect;
+
+  fselect = malloc (sizeof (gchar) * MAXSTRLEN);
+  strcpy (fselect, gtk_file_selection_get_filename (GTK_FILE_SELECTION (fileselector)));
+  if (fselect[strlen (fselect) - 1] == '/')
+  {
+    fselect[strlen (fselect) - 1] = 0;
+  }
+  else
+  {
+    fselect[strlen (fselect)] = 0;
+  }
+
+  add_filename (fselect);
+
+  free (fselect);
+
+}
+
+void
+add_clicked (GtkWidget * widget, gpointer data)
+{
+  fileselector = gtk_file_selection_new ("Choose Image to Add");
+  gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (fileselector)->ok_button), "clicked", GTK_SIGNAL_FUNC (get_add_filename), (gpointer) NULL);
+  gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fileselector)->ok_button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), (gpointer) fileselector);
+  gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fileselector)->cancel_button), "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy), (gpointer) fileselector);
+  gtk_widget_show (fileselector);
+}
+
+void
+remove_clicked (GtkWidget * widget, gpointer data)
+{
+  if (selected != -1)
+  {
+    theNumber--;
+    gtk_clist_remove (GTK_CLIST (clist_fileslist), selected);
+  }
+}
+
+void
+selectionMade (GtkWidget * widget, gint row, gint column, GdkEventButton * event, gpointer data)
+{
+  selected = row;
+}
+
+void
+selectionLost (GtkWidget * widget, gint row, gint column, GdkEventButton * event, gpointer data)
+{
+  selected = -1;
+}
+
+void
+on_drag_data_received (GtkWidget * widget, GdkDragContext * context, gint x, gint y, GtkSelectionData * data, guint info, guint time, gpointer cbdata)
 {
   GList *fnames, *fnp;
   guint count;
@@ -231,16 +238,14 @@ on_drag_data_received (GtkWidget * widget,
   fnames = gnome_uri_list_extract_filenames ((char *) data->data);
   count = g_list_length (fnames);
   if (count > 0)
+  {
+    gtk_clist_freeze (GTK_CLIST (clist_fileslist));
+    for (fnp = fnames; fnp; fnp = fnp->next, count--)
     {
-      gtk_clist_freeze(GTK_CLIST(clist_fileslist));
-      for (fnp = fnames; fnp; fnp = fnp->next, count--)
-	{
-          add_filename((gchar *) fnp->data);
-	}
-      gtk_clist_thaw(GTK_CLIST(clist_fileslist));
+      add_filename ((gchar *) fnp->data);
     }
+    gtk_clist_thaw (GTK_CLIST (clist_fileslist));
+  }
   gnome_uri_list_free_strings (fnames);
-  gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE),
-		   time);
+  gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE), time);
 }
-
