@@ -10,7 +10,8 @@
 #include <stdarg.h>		/* for va_list */
 int snprintf (char *str, size_t count, const char *fmt, ...);
 #endif
-#ifndef HAVE_VSPRINTF
+
+#ifndef HAVE_VSNPRINTF
 int vsnprintf (char *str, size_t count, const char *fmt, va_list arg);
 #endif
 
