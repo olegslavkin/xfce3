@@ -282,7 +282,7 @@ SMBtarDialog (void)
   }
 
   dialog = gtk_dialog_new ();
-  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
   gtk_window_set_policy (GTK_WINDOW (dialog), TRUE, TRUE, FALSE);
   gtk_container_border_width (GTK_CONTAINER (dialog), 5);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);

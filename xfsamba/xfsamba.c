@@ -38,7 +38,7 @@
 #include <glob.h>
 #include <time.h>
 #include <gdk/gdkkeysyms.h>
-
+#include <errno.h>
 #ifndef HAVE_SNPRINTF
 #include "snprintf.h"
 #endif
@@ -288,6 +288,7 @@ finishit (int sig)
 int
 main (int argc, char *argv[])
 {
+	char *homedir;
   headN = thisN = NULL;
   thisH = NULL;
   fork_obj = NULL;
@@ -296,6 +297,24 @@ main (int argc, char *argv[])
   stopcleanup = TRUE;
   default_user = (char *) malloc (strlen ("Guest%") + 1);
   strcpy (default_user, "Guest%");
+
+  /* if .xfce directory isnot there, create it. */
+  {
+   struct stat h_stat;
+   homedir=(char *)malloc(strlen(getenv ("HOME"))+1+strlen("%%/.xfce"));
+   sprintf (homedir, "%s/.xfce", (char *) getenv ("HOME"));
+   if (stat(homedir,&h_stat) < 0){
+	if (errno!=ENOENT) {
+		printf("xfsamba: cannot open %s\n",homedir);
+		exit(1);
+	}
+	if (mkdir(homedir,0770) < 0) {
+		printf("xfsamba: cannot create %s\n",homedir);
+		exit(1);
+	}
+   }
+  }
+
   xfce_init (&argc, &argv);
 
   /* for temporary file cleanup */

@@ -37,11 +37,8 @@
 /* functions to use tubo.c for mkdir */
 
 /*******SMBmkdir******************/
-static GtkWidget *dialog;
 
-static char *new_dir = NULL;
-static GtkWidget *dir_name_entry;
-
+static char *new_dir=NULL;
 /* function executed after all pipes
 *  timeouts and inputs have been set up */
 static void
@@ -59,113 +56,6 @@ SMBmkdirFork (void)
   execlp ("smbclient", "smbclient", the_netbios, "-U", NMBpassword, "-c", NMBcommand, (char *) 0);
 }
 
-static void
-proceed_dir_name (GtkWidget * widget, gpointer data)
-{
-  int ok;
-  ok = (int) ((long) data);
-  if (ok)
-  {
-    void SMBmkdir_with_name (void);
-    char *fileO;
-    fileO = gtk_entry_get_text (GTK_ENTRY (dir_name_entry));
-    if (fileO)
-    {
-      if (new_dir)
-      {
-	free (new_dir);
-      }
-      new_dir = (char *) malloc (strlen (fileO) + 1);
-      strcpy (new_dir, fileO);
-    }
-
-    SMBmkdir_with_name ();
-  }
-  else
-    new_dir = NULL;
-  gtk_widget_destroy (dialog);
-}
-
-static void
-dir_name_entry_keypress (GtkWidget * entry, GdkEventKey * event, gpointer data)
-{
-  if (event->keyval == GDK_Return)
-    proceed_dir_name (NULL, (gpointer) ((long) 1));
-  return;
-}
-
-static GtkWidget *
-mkdir_name (char *remote_share, char *remote_dir)
-{
-  GtkWidget *button, *hbox, *label;
-  char *ask;
-  ask = _("Please provide a name for the new directory at");
-
-  dialog = gtk_dialog_new ();
-  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-  gtk_window_set_policy (GTK_WINDOW (dialog), TRUE, TRUE, FALSE);
-  gtk_container_border_width (GTK_CONTAINER (dialog), 5);
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-
-  gtk_widget_realize (dialog);
-
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_container_border_width (GTK_CONTAINER (hbox), 5);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new (ask);
-  gtk_box_pack_start (GTK_BOX (hbox), label, NOEXPAND, NOFILL, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new (" //");
-  gtk_box_pack_start (GTK_BOX (hbox), label, NOEXPAND, NOFILL, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new (thisN->server);
-  gtk_box_pack_start (GTK_BOX (hbox), label, NOEXPAND, NOFILL, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new ("/");
-  gtk_box_pack_start (GTK_BOX (hbox), label, NOEXPAND, NOFILL, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new (remote_share);
-  gtk_box_pack_start (GTK_BOX (hbox), label, NOEXPAND, NOFILL, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new (remote_dir);
-  gtk_box_pack_start (GTK_BOX (hbox), label, NOEXPAND, NOFILL, 0);
-  gtk_widget_show (label);
-
-
-  gtk_widget_show (hbox);
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_container_border_width (GTK_CONTAINER (hbox), 5);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show (hbox);
-
-  dir_name_entry = gtk_entry_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), dir_name_entry, EXPAND, NOFILL, 0);
-  gtk_entry_set_visibility ((GtkEntry *) dir_name_entry, TRUE);
-  gtk_signal_connect (GTK_OBJECT (dir_name_entry), "key-press-event", GTK_SIGNAL_FUNC (dir_name_entry_keypress), NULL);
-  gtk_widget_show (dir_name_entry);
-
-
-  button = gtk_button_new_with_label (_("Ok"));
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, EXPAND, NOFILL, 0);
-  gtk_widget_show (button);
-  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (proceed_dir_name), (gpointer) ((long) 1));
-  button = gtk_button_new_with_label ("Cancel");
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, EXPAND, NOFILL, 0);
-  gtk_widget_show (button);
-  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (proceed_dir_name), (gpointer) ((long) 0));
-  gtk_widget_show (dialog);
-  gtk_widget_grab_focus (dir_name_entry);
-  return dialog;
-}
-
-
 
 
 /* function to process stdout produced by child */
@@ -179,6 +69,7 @@ SMBmkdirStdout (int n, void *data)
   if (strstr (line, "ERRDOS"))
   {				/* server has died */
     SMBResult = CHALLENGED;
+    xf_dlg_warning(smb_nav,line);
   }
   print_status (line);
 
@@ -221,7 +112,6 @@ SMBmkdirForkOver (pid_t pid)
       {
 	sprintf (textos[COMMENT_COLUMN], "/%s%s/%s", selected.share, selected.dirname, new_dir);
       }
-      free (textos[COMMENT_COLUMN]);
       {
 	smb_entry *data;
 	data=smb_entry_new(); 
@@ -235,15 +125,17 @@ SMBmkdirForkOver (pid_t pid)
         node = add_node(data,textos,(GtkCTreeNode *) selected.node);
         gtk_ctree_sort_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);	
       }
-
+      g_free (textos[COMMENT_COLUMN]);
     }
     break;
   }
+  if (new_dir) g_free(new_dir);
 }
 
+extern int mount_stderr (int n, void *data);
 
 void
-SMBmkdir_with_name (void)
+SMBmkdir_with_name (char *new_dir)
 {
   int i;
   animation (TRUE);
@@ -272,27 +164,21 @@ SMBmkdir_with_name (void)
   }
   sprintf (NMBcommand, "mkdir \\\"%s\\%s\\\"", selected.dirname, new_dir);
   for (i = 0; i < strlen (NMBcommand); i++)
-    if (NMBcommand[i] == '/')
-      NMBcommand[i] = '\\';
+    if (NMBcommand[i] == '/') NMBcommand[i] = '\\';
   print_diagnostics (NMBcommand);
   print_diagnostics ("\n");
-
-
-  fork_obj = Tubo (SMBmkdirFork, SMBmkdirForkOver, TRUE, SMBmkdirStdout, parse_stderr);
+  fork_obj = Tubo (SMBmkdirFork, SMBmkdirForkOver, TRUE, SMBmkdirStdout, mount_stderr);
 }
 
 void
 SMBmkdir (void)
 {				/* data is a pointer to the share */
+  char *entry_return;
+  if (!selected.dirname)  return;
 
-  if (!selected.dirname)
-  {
-    return;
-  }
-
-  if (not_unique (fork_obj))
-  {
-    return;
+  while (not_unique (fork_obj)) {
+     while (gtk_events_pending()) gtk_main_iteration();
+     usleep(50000);
   }
 
   print_status (_("Creating dir..."));
@@ -307,11 +193,18 @@ SMBmkdir (void)
   strncpy (NMBpassword, thisN->password, XFSAMBA_MAX_STRING);
   NMBpassword[XFSAMBA_MAX_STRING] = 0;
 
+  
+  
   /* here, dialog to ask new dir name */
-  gtk_window_set_transient_for (GTK_WINDOW (mkdir_name (NMBshare, selected.dirname)), GTK_WINDOW (smb_nav));
-
-/* gtk_main() keeps rolling here. SMBmkdir_with_name() is
-*  called to finish off */
+  entry_return=(char *)xf_dlg_string(smb_nav,_("New directory name:"),_("New Folder"));
+  if (!entry_return){
+    cursor_reset (GTK_WIDGET (smb_nav));
+    animation (FALSE);
+    return;
+  }
+  
+  new_dir = g_strdup(entry_return);
+  SMBmkdir_with_name (entry_return);
 
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);

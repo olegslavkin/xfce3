@@ -19,9 +19,7 @@
 
 
 /* FIXME: put in dummy entry to get expanders for folders */
-/* FIXME: change messages for xf_dlg routines. */
-/* FIXME: autoordering after a list, direcotires on top. */
-/* FIXME: part 2... get drag src to send to xftree , multiple selection pues.*/
+/* FIXME: autoordering after a list is not working right */
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -106,7 +104,7 @@ static int ok_input(GtkWidget *parent,char *source){
 }
 
 
-char  *CreateTmpList(GtkWidget *parent,GList *list,char *target){
+static char  *CreateTmpList(GtkWidget *parent,GList *list,char *target){
     FILE *tmpfile;
     uri *u;
     char *w;

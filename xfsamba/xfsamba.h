@@ -7,7 +7,7 @@
 #include "io.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.40"
+#define XFSAMBA_VERSION "0.42"
 #endif
 
 #ifdef XFSAMBA_MAIN

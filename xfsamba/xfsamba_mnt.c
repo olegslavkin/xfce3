@@ -174,8 +174,7 @@ pop_smbmnt (pid_t pid){
 
 
 static void *mnt_fork=NULL;
-static int
-mount_stderr (int n, void *data)
+int mount_stderr (int n, void *data)
 {
 
   char *line;

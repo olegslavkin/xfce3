@@ -188,7 +188,6 @@ static void
 cb_paste (GtkWidget * item, GtkWidget * ctree){
 	xf_dlg_warning(smb_nav,"This function is not yet active");
 }
-
 static void
 cb_master (GtkWidget * item, GtkWidget * ctree)
 {
@@ -198,7 +197,7 @@ cb_master (GtkWidget * item, GtkWidget * ctree)
 static void
 cb_about (GtkWidget * item, GtkWidget * ctree)
 {
-  xf_dlg_warning (smb_nav,_("This is XFSamba " XFSAMBA_VERSION "\n(c) Edscott Wilson Garcia under GNU GPL" "\nXFCE modules are (c) Olivier Fourdan http://www.xfce.org/"));
+  xf_dlg_warning (smb_nav,_("This is XFSamba " XFSAMBA_VERSION "\n(c) Edscott Wilson Garcia under GNU GPL"));
 }
 
 #ifdef OBSOLETE
@@ -229,20 +228,14 @@ cb_view (GtkWidget * widget, gpointer data)
   {
     switch (caso)
     {
-    case 0x100:
-      view_toggle = 0x0;
-      break;
-    case 0x200:
-      view_toggle = 0x10;
-      break;
-    case 0x400:
-      view_toggle = 0x11;
-      break;
+     case 0x100: view_toggle = 0x0; break;
+     case 0x200: view_toggle = 0x10; break;
+     case 0x400: view_toggle = 0x11; break;
+     case 0x800: view_toggle = 0x01; break;
     }
   }
-  else
-    view_toggle ^= caso;
-
+  else view_toggle ^= caso;
+  
   if (view_toggle & 0x01)
   {
     gtk_widget_hide (show_diag);
@@ -261,8 +254,8 @@ cb_view (GtkWidget * widget, gpointer data)
   {
     gtk_widget_hide (show_links);
     gtk_widget_show (hide_links);
-    gtk_paned_set_position (GTK_PANED (vpaned2), vpaned2->allocation.height / 2);
-    gtk_paned_set_position (GTK_PANED (hpaned), hpaned->allocation.width / 2);
+    gtk_paned_set_position (GTK_PANED (vpaned2), 0.65 * vpaned2->allocation.height);
+    gtk_paned_set_position (GTK_PANED (hpaned), 0.50 * hpaned->allocation.width);
   }
   else
   {
@@ -457,54 +450,117 @@ select_user (void)
 
 
 void
-cb_download (GtkWidget * widget, gpointer data)
+cb_download (GtkWidget * widget, GtkWidget *ctree)
 {
-  if (selected.file)
-    SMBGetFile ();
-  else
-    xf_dlg_warning (smb_nav,_("A file must be selected!"));
+	/*FIXME: do multiple files and directories */
+  int num;	
+  GList *s;
+  smb_entry *en;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))!=1){
+    xf_dlg_warning (smb_nav,_("A single file can be selected!"));
+    return;
+  }
+  s = GTK_CLIST (ctree)->selection;
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+  if (!(en->type&S_T_FILE)){
+    xf_dlg_warning (smb_nav,_("A single file can be selected!"));
+    return;
+  }
+  SMBGetFile ();
 }
 
 void
-cb_upload (GtkWidget * widget, gpointer data)
+cb_upload (GtkWidget * widget, GtkWidget *ctree)
 {
-  if (selected.directory)
-    SMBPutFile ();
-  else
-    xf_dlg_warning (smb_nav,_("A directory must be selected!"));
+  int num;	
+  GList *s;
+  smb_entry *en;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))!=1){
+    xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
+    return;
+  }
+  s = GTK_CLIST (ctree)->selection;
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+  if (!(en->type&S_T_DIRECTORY)){
+    xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
+    return;
+  }
+  SMBPutFile ();
 }
 
 void
-cb_new_dir (GtkWidget * widget, gpointer data)
+cb_new_dir (GtkWidget * widget, GtkWidget *ctree)
 {
-  if (selected.directory)
-    SMBmkdir ();
-  else
-    xf_dlg_warning (smb_nav,_("A directory must be selected!"));
+  int num;	
+  smb_entry *en;
+  GList *s;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))!=1){
+    xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
+    return;
+  }
+  s = GTK_CLIST (ctree)->selection;
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+  if (!(en->type&S_T_DIRECTORY)){
+    xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
+    return;
+  }
+  SMBmkdir ();
 }
 
 void
-cb_delete (GtkWidget * widget, gpointer data)
+cb_delete (GtkWidget * widget, GtkWidget *ctree)
 {
-  if ((selected.directory) || (selected.file))
-    SMBrm ();
-  else
-  {
+  GList *s,*e=NULL;
+  smb_entry *en;
+  int num;
+  char *orig_share=NULL;   
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0){
     xf_dlg_warning (smb_nav,_("Something to be deleted must be selected!"));
+    return;
   }
+  /* if num > 1, unselect all directory entries 
+   * (a recursive delete should be used, but not mentioned
+   * in man smbclient)*/
+  for (s = GTK_CLIST (ctree)->selection; s != NULL; s=s->next){
+     en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+     if (!orig_share) g_strdup(en->share);
+     if (orig_share && (strcmp(orig_share,en->share)!=0)) {
+	     g_free(orig_share);
+             xf_dlg_warning (smb_nav,_("Only elements from a single share may be selected!"));
+	     return;
+     }
+     if ((num > 1) && (en->type & S_T_DIRECTORY)) e=g_list_append(e,(gpointer)s->data);
+     if (en->type & (S_T_SHARE|S_T_PRINTER|S_T_IPC)) e=g_list_append(e,(gpointer)s->data);
+   }
+  if (orig_share) g_free(orig_share);
+  for (s=e; s != NULL; s=s->next){
+    gtk_ctree_unselect((GtkCTree *)ctree,s->data);
+  } g_list_free(e);
+     
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0){
+    xf_dlg_warning (smb_nav,_("Something to be deleted must be selected!"));
+    return;
+  }  
+  if (num) SMBrm ();
 }
 
 void
-cb_tar (GtkWidget * widget, gpointer data)
+cb_tar (GtkWidget * widget, GtkWidget *ctree)
 {
-  if (selected.directory)
-  {
-    SMBtar ();
+ int num;	
+  smb_entry *en;
+  GList *s;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0){
+    xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
+    return;
   }
-  else
-  {
-    xf_dlg_warning (smb_nav,_("A directory must be selected!"));
+  s = GTK_CLIST (ctree)->selection;
+  en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+  if (!(en->type&S_T_DIRECTORY)){
+    xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
+    return;
   }
+  SMBtar ();
 }
 
 extern GtkCTreeNode *DropNode;
@@ -648,6 +704,9 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
   nmb_cache *cache;
   char **line;
 
+  /* only expand on single selections */
+  if (g_list_length (GTK_CLIST (ctree)->selection) > 1) return;
+  
   line=get_select_share(ctree,node);
   if (!line || selected.file) return;
   
@@ -964,7 +1023,9 @@ newbox (gboolean pack, int vertical, GtkWidget * parent, gboolean expand, gboole
 #include "icons/go_to.xpm"
 #include "icons/go_back.xpm"
 #include "icons/home.xpm"
+#if 0
 #include "icons/stop.xpm"
+#endif
 #include "icons/dir_close_lnk.xpm"
 #include "icons/dir_open_lnk.xpm"
 #include "icons/dir_close.xpm"
@@ -984,6 +1045,7 @@ newbox (gboolean pack, int vertical, GtkWidget * parent, gboolean expand, gboole
 #include "icons/view1.xpm"
 #include "icons/view2.xpm"
 #include "icons/view3.xpm"
+#include "icons/view4.xpm"
 #include "icons/delete.xpm"
 #include "icons/new_dir.xpm"
 #include "icons/new_win.xpm"
@@ -1015,20 +1077,106 @@ icon_button (char **data, char *tip)
   return button;
 }
 
-GtkWidget *
-create_smb_window (void)
-{
-  int lineH;
-  GtkWidget * vbox, *vbox1, *vbox2, *hbox, *widget, *handlebox, *scrolled, *button, *separator;
+static void make_menu(GtkWidget *handlebox){
+	GtkWidget *hbox,*menu, *submenu, *menubar;
+	hbox = newbox (ADD, HORIZONTAL, handlebox, NOTUSED, NOTUSED, 3);
+	/* menu bar */
+	menubar = gtk_menu_bar_new ();
+	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (menubar), GTK_SHADOW_NONE);
+	gtk_container_add (GTK_CONTAINER (hbox), menubar);
+	gtk_widget_show (menubar);
 
+/* FILE */
+	menu = shortcut_menu (MENUBAR, menubar, _("File"), NULL, NULL);
+	/* (s): multiple file upload/download enabled by DnD mostly */
+	submenu = shortcut_menu (SUBMENU, menu, _("Download..."), GTK_SIGNAL_FUNC (cb_download),(gpointer) shares);
+	submenu = shortcut_menu (SUBMENU, menu, _("Upload..."), GTK_SIGNAL_FUNC (cb_upload),(gpointer) shares);
 
-  smb_nav = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_policy (GTK_WINDOW (smb_nav), TRUE, TRUE, FALSE);
+	submenu = shortcut_menu (SUBMENU, menu, _("New folder..."), GTK_SIGNAL_FUNC (cb_new_dir),(gpointer) shares);
+	submenu = shortcut_menu (SUBMENU, menu, _("Delete..."), GTK_SIGNAL_FUNC (cb_delete),(gpointer) shares);
+	submenu = shortcut_menu (SUBMENU, menu, _("Tar..."), GTK_SIGNAL_FUNC (cb_tar),(gpointer) shares);
+	submenu = shortcut_menu (SUBMENU, menu, _("Exit"), GTK_SIGNAL_FUNC (delete_event), NULL);
 
-  gtk_signal_connect (GTK_OBJECT (smb_nav), "destroy", GTK_SIGNAL_FUNC (delete_event), (gpointer) GTK_WIDGET (smb_nav));
-  gtk_signal_connect (GTK_OBJECT (smb_nav), "delete_event", GTK_SIGNAL_FUNC (delete_event), (gpointer) GTK_WIDGET (smb_nav));
-  /* pixmaps */
+/* EDIT */
+	menu = shortcut_menu (MENUBAR, menubar, _("Edit"), NULL, NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Paste..."), GTK_SIGNAL_FUNC (cb_paste),(gpointer) shares);
+	submenu = shortcut_menu (SUBMENU, menu, _("Cut..."), GTK_SIGNAL_FUNC (cb_cut),(gpointer) shares);
+	submenu = shortcut_menu (SUBMENU, menu, _("Copy..."), GTK_SIGNAL_FUNC (cb_copy),(gpointer) shares);
+	
+/* GOTO */
+	menu = shortcut_menu (MENUBAR, menubar, _("Go"), NULL, NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Home..."), GTK_SIGNAL_FUNC (go_home), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Reload..."), GTK_SIGNAL_FUNC (go_reload), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Forward..."), GTK_SIGNAL_FUNC (go_forward), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Back..."), GTK_SIGNAL_FUNC (go_back), NULL);
+/* TOOLS */
+	menu = shortcut_menu (MENUBAR, menubar, _("Tools"), NULL, NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Local file browser"), GTK_SIGNAL_FUNC (cb_xftree), NULL);
+/* VIEW */
+	menu = shortcut_menu (MENUBAR, menubar, _("View"), NULL, NULL);
 
+	show_diag = submenu = shortcut_menu (SUBMENU, menu, _("Show diagnostics"), 
+			GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x01));
+	hide_diag = submenu = shortcut_menu (SUBMENU, menu, _("Hide diagnostics"), 
+			GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x1));
+	show_links = submenu = shortcut_menu (SUBMENU, menu, _("Show browser links"), 
+			GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x10));
+	hide_links = submenu = shortcut_menu (SUBMENU, menu, _("Hide browser links"), 
+			GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x10));
+/* PREFERENCES */
+	menu = shortcut_menu (MENUBAR, menubar, _("Preferences"), NULL, NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("Browse as..."), GTK_SIGNAL_FUNC (select_user), NULL);
+
+/* HELP */
+
+	menu = shortcut_menu (RIGHT_MENU, menubar, _("Help"), NULL, NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("About master browser..."), GTK_SIGNAL_FUNC (cb_master), NULL);
+	submenu = shortcut_menu (SUBMENU, menu, _("About xfsamba..."), GTK_SIGNAL_FUNC (cb_about), NULL);
+}
+
+#if 0
+   {_("Stop ..."), 	stop_xpm,	go_stop,	0x0}, 
+#endif
+   
+#define TOOLBARICONS \
+   {_("Xftree ..."),	new_win_xpm,	cb_xftree,	0x0}, \
+   {_(""),		NULL ,		NULL,		0x0}, \
+   {_("Back ..."),	go_back_xpm ,	go_back,	0x0}, \
+   {_("Forward ..."),	go_to_xpm ,	go_forward,	0x0}, \
+   {_("Reload ..."), 	reload_xpm,	go_reload,	0x0}, \
+   {_("Home ..."), 	home_xpm,	go_home,	0x0}, \
+   {_(""),		NULL ,		NULL,		0x0}, \
+   {_("Cut ..."),	tb_cut_xpm ,	cb_cut,		0x0}, \
+   {_("Copy ..."),	tb_copy_xpm ,	cb_copy,	0x0}, \
+   {_("Paste ..."),	tb_paste_xpm ,	cb_paste,	0x0}, \
+   {_("New folder ..."),new_dir_xpm ,	cb_new_dir,	0x0}, \
+   {_("Delete ..."),	delete_xpm ,	cb_delete,	0x0}, \
+   {_(""),		NULL ,		NULL,		0x0}, \
+   {_("Mount ..."), 	mount_xpm,	cb_mount,	0x0}, \
+   {_("Download ..."),download_xpm,	cb_download,	0x0}, \
+   {_("Upload ..."),	upload_xpm ,	cb_upload,	0x0}, \
+   {_("Tar ..."), 	tar_xpm,	cb_tar,		0x0}, \
+   {_(""),		NULL ,		NULL,		0x0}, \
+   {_("Set View 1"),	view1_xpm ,	cb_view,	0x100}, \
+   {_("Set View 2"),	view2_xpm ,	cb_view,	0x200}, \
+   {_("Set View 3"),	view3_xpm ,	cb_view,	0x400}, \
+   {_("Set View 4"),	view4_xpm ,	cb_view,	0x800}, \
+   {_(""),		NULL ,		NULL,		0x0}, \
+   {_("Help ..."),	help_xpm ,	cb_about,	0x0}, \
+   {NULL,NULL,NULL,0} 
+typedef struct boton_icono {
+	char *text;
+	char **icon;
+	gpointer function;
+	long data;
+} boton_icono;
+ 
+
+static void make_toolbar(GtkWidget *handlebox){
+  boton_icono toolbarIcon[]={TOOLBARICONS};
+  int i;
+  /* other pixmaps */
+  GtkWidget *toolbar,*button;
   gPIX_page = MyCreateGdkPixmapFromData (page_xpm, smb_nav, &gPIM_page, FALSE);
   gPIX_rpage = MyCreateGdkPixmapFromData (rpage_xpm, smb_nav, &gPIM_rpage, FALSE);
   gPIX_dir_open = MyCreateGdkPixmapFromData (dir_open_xpm, smb_nav, &gPIM_dir_open, FALSE);
@@ -1039,21 +1187,45 @@ create_smb_window (void)
   gPIX_comp2 = MyCreateGdkPixmapFromData (comp2_xpm, smb_nav, &gPIM_comp2, FALSE);
   gPIX_wg1 = MyCreateGdkPixmapFromData (wg1_xpm, smb_nav, &gPIM_wg1, FALSE);
   gPIX_wg2 = MyCreateGdkPixmapFromData (wg2_xpm, smb_nav, &gPIM_wg2, FALSE);
-  gPIX_reload = MyCreateGdkPixmapFromData (reload_xpm, smb_nav, &gPIM_reload, FALSE);
   gPIX_dotfile = MyCreateGdkPixmapFromData (dotfile_xpm, smb_nav, &gPIM_dotfile, FALSE);
   gPIX_rdotfile = MyCreateGdkPixmapFromData (rdotfile_xpm, smb_nav, &gPIM_rdotfile, FALSE);
   gPIX_print = MyCreateGdkPixmapFromData (print_xpm, smb_nav, &gPIM_print, FALSE);
-  gPIX_help = MyCreateGdkPixmapFromData (help_xpm, smb_nav, &gPIM_help, FALSE);
   gPIX_ip = MyCreateGdkPixmapFromData (ip_xpm, smb_nav, &gPIM_ip, FALSE);
-  gPIX_download = MyCreateGdkPixmapFromData (download_xpm, smb_nav, &gPIM_download, FALSE);
-  gPIX_upload = MyCreateGdkPixmapFromData (upload_xpm, smb_nav, &gPIM_upload, FALSE);
-  gPIX_tar = MyCreateGdkPixmapFromData (tar_xpm, smb_nav, &gPIM_tar, FALSE);
-  gPIX_view1 = MyCreateGdkPixmapFromData (view1_xpm, smb_nav, &gPIM_view1, FALSE);
-  gPIX_view2 = MyCreateGdkPixmapFromData (view2_xpm, smb_nav, &gPIM_view2, FALSE);
-  gPIX_view3 = MyCreateGdkPixmapFromData (view3_xpm, smb_nav, &gPIM_view3, FALSE);
-  gPIX_new_dir = MyCreateGdkPixmapFromData (new_dir_xpm, smb_nav, &gPIM_new_dir, FALSE);
-  gPIX_delete = MyCreateGdkPixmapFromData (delete_xpm, smb_nav, &gPIM_delete, FALSE);
+  
+  toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_toolbar_set_space_style ((GtkToolbar *) toolbar, GTK_TOOLBAR_SPACE_LINE);
+  gtk_toolbar_set_button_relief ((GtkToolbar *) toolbar, GTK_RELIEF_NONE);
+  gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
+  gtk_widget_realize(smb_nav);	
+  /* icon bar */
+  gtk_container_add (GTK_CONTAINER (handlebox), toolbar);
+  
+  for (i=0;(toolbarIcon[i].text != NULL)&&(i<32);i++) {
+       if (toolbarIcon[i].icon==NULL) gtk_toolbar_append_space ((GtkToolbar *)toolbar);
+       else {
+        button=MyCreateFromPixmapData (toolbar, toolbarIcon[i].icon);
+        gtk_toolbar_append_item ((GtkToolbar *) toolbar,NULL,
+			toolbarIcon[i].text,toolbarIcon[i].text,
+			button, GTK_SIGNAL_FUNC (toolbarIcon[i].function),
+	(!toolbarIcon[i].data)?(gpointer) shares:(gpointer)(toolbarIcon[i].data));
+       }
+  }
+  gtk_widget_show_all(toolbar);
+}
+	
+GtkWidget *
+create_smb_window (void)
+{
+  int lineH;
+  GtkWidget * vbox, *vbox1, *vbox2, *hbox, *widget, *toolbar,*menubar,
+            *handlebox, *scrolled, *button;
 
+
+  smb_nav = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_policy (GTK_WINDOW (smb_nav), TRUE, TRUE, FALSE);
+
+  gtk_signal_connect (GTK_OBJECT (smb_nav), "destroy", GTK_SIGNAL_FUNC (delete_event), (gpointer) GTK_WIDGET (smb_nav));
+  gtk_signal_connect (GTK_OBJECT (smb_nav), "delete_event", GTK_SIGNAL_FUNC (delete_event), (gpointer) GTK_WIDGET (smb_nav));
   /* boxes: */
 
   vbox = newbox (ADD, VERTICAL, smb_nav, FILL, EXPAND, 0);
@@ -1061,163 +1233,10 @@ create_smb_window (void)
   lineH = widget->style->font->ascent + widget->style->font->descent + 5;
 
   {
-    /* I think this way to structure boxcode is easier to picture */
     vbox1 = newbox (PACK, VERTICAL, vbox, NOEXPAND, NOFILL, 0);
     {
-      handlebox = newbox (PACK, HANDLEBOX, vbox1, NOEXPAND, NOFILL, 0);
-      {
-	GtkWidget *menu, *submenu, *menubar;
-	hbox = newbox (ADD, HORIZONTAL, handlebox, NOTUSED, NOTUSED, 3);
-	/* menu bar */
-	menubar = gtk_menu_bar_new ();
-	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (menubar), GTK_SHADOW_NONE);
-	gtk_container_add (GTK_CONTAINER (hbox), menubar);
-	gtk_widget_show (menubar);
-	menu = shortcut_menu (MENUBAR, menubar, _("File"), NULL, NULL);
-	/* (s): multiple file upload/download to be enabled in future */
-	submenu = shortcut_menu (SUBMENU, menu, _("Download..."), GTK_SIGNAL_FUNC (cb_download), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Upload..."), GTK_SIGNAL_FUNC (cb_upload), NULL);
-
-	submenu = shortcut_menu (SUBMENU, menu, _("New folder..."), GTK_SIGNAL_FUNC (cb_new_dir), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Delete..."), GTK_SIGNAL_FUNC (cb_delete), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Tar..."), GTK_SIGNAL_FUNC (cb_tar), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Exit"), GTK_SIGNAL_FUNC (delete_event), NULL);
-
-	menu = shortcut_menu (MENUBAR, menubar, _("Preferences"), NULL, NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Browse as..."), GTK_SIGNAL_FUNC (select_user), NULL);
-
-	menu = shortcut_menu (MENUBAR, menubar, _("View"), NULL, NULL);
-
-	show_diag = submenu = shortcut_menu (SUBMENU, menu, _("Show diagnostics"), GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x01));
-	hide_diag = submenu = shortcut_menu (SUBMENU, menu, _("Hide diagnostics"), GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x1));
-	show_links = submenu = shortcut_menu (SUBMENU, menu, _("Show browser links"), GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x10));
-	hide_links = submenu = shortcut_menu (SUBMENU, menu, _("Hide browser links"), GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x10));
-
-	menu = shortcut_menu (MENUBAR, menubar, _("Go"), NULL, NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Home..."), GTK_SIGNAL_FUNC (go_home), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Reload..."), GTK_SIGNAL_FUNC (go_reload), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Forward..."), GTK_SIGNAL_FUNC (go_forward), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("Back..."), GTK_SIGNAL_FUNC (go_back), NULL);
-	menu = shortcut_menu (RIGHT_MENU, menubar, _("Help"), NULL, NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("About master browser..."), GTK_SIGNAL_FUNC (cb_master), NULL);
-	submenu = shortcut_menu (SUBMENU, menu, _("About xfsamba..."), GTK_SIGNAL_FUNC (cb_about), NULL);
-      }
-      handlebox = newbox (PACK, HANDLEBOX, vbox1, NOEXPAND, NOFILL, 0);
-      {
-	hbox = newbox (ADD, HORIZONTAL, handlebox, NOTUSED, NOTUSED, 3);
-	/*
-	   hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{ 
-	 */
-	/* icon bar */
-	button = icon_button (new_win_xpm, _("Xftree ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_xftree), NULL);
-	gtk_widget_show (button);
-	button = icon_button (go_back_xpm, _("Back ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (go_back), NULL);
-	gtk_widget_show (button);
-	button = icon_button (go_to_xpm, _("Forward ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (go_forward), NULL);
-	gtk_widget_show (button);
-	button = icon_button (reload_xpm, _("Reload ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (go_reload), NULL);
-	gtk_widget_show (button);
-
-	button = icon_button (home_xpm, _("Home ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (go_home), NULL);
-	gtk_widget_show (button);
-	button = icon_button (stop_xpm, _("Stop ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (go_stop), NULL);
-	gtk_widget_show (button);
-
-	separator = gtk_vseparator_new ();
-	gtk_widget_show (separator);
-	gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
-
-	button = icon_button (new_dir_xpm, _("New folder ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_new_dir), NULL);
-	gtk_widget_show (button);
-
-	button = icon_button (delete_xpm, _("Delete ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_delete), NULL);
-	gtk_widget_show (button);
-
-	separator = gtk_vseparator_new ();
-	gtk_widget_show (separator);
-	gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
-
-	button = icon_button (mount_xpm, _("Mount ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_mount), NULL);
-	gtk_widget_show (button);
-
-	button = icon_button (download_xpm, _("Download ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_download), NULL);
-	gtk_widget_show (button);
-
-	button = icon_button (upload_xpm, _("Upload ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_upload), NULL);
-	gtk_widget_show (button);
-
-
-	button = icon_button (tar_xpm, _("Tar ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_tar), NULL);
-	gtk_widget_show (button);
-
-	separator = gtk_vseparator_new ();
-	gtk_widget_show (separator);
-	gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
-	
-	button = icon_button (tb_cut_xpm, _("Cut ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_cut), NULL);
-	gtk_widget_show (button);
-	
-	button = icon_button (tb_copy_xpm, _("Copy ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_copy), NULL);
-	gtk_widget_show (button);
-
-	button = icon_button (tb_paste_xpm, _("Paste ..."));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_paste), NULL);
-	gtk_widget_show (button);
-
-	button = icon_button (help_xpm, _("Help ..."));
-	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_about), NULL);
-	gtk_widget_show (button);
-
-	separator = gtk_vseparator_new ();
-	gtk_widget_show (separator);
-	gtk_box_pack_end (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
-
-	button = icon_button (view3_xpm, _("Set View 3"));
-	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x400));
-	gtk_widget_show (button);
-
-	button = icon_button (view2_xpm, _("Set View 2"));
-	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x200));
-	gtk_widget_show (button);
-
-	button = icon_button (view1_xpm, _("Set View 1"));
-	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (cb_view), (gpointer) ((long) 0x100));
-	gtk_widget_show (button);
-
-      }
+      menubar = newbox (PACK, HANDLEBOX, vbox1, NOEXPAND, NOFILL, 0);
+      toolbar = newbox (PACK, HANDLEBOX, vbox1, NOEXPAND, NOFILL, 0);
       handlebox = newbox (PACK, HANDLEBOX, vbox1, NOEXPAND, NOFILL, 0);
       {
 	hbox = newbox (ADD, HORIZONTAL, handlebox, NOTUSED, NOTUSED, 3);
@@ -1304,10 +1323,10 @@ create_smb_window (void)
 	  gtk_widget_show (shares);
 	}
       }
-      //gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);*/
-	gtk_drag_source_set (shares, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK | GDK_BUTTON3_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY );
-      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_MOTION, target_table, NUM_TARGETS,  GDK_ACTION_MOVE | GDK_ACTION_COPY );
-//      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+      gtk_drag_source_set (shares, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK | GDK_BUTTON3_MASK, 
+			target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY );
+      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_MOTION, 
+		      target_table, NUM_TARGETS,  GDK_ACTION_MOVE | GDK_ACTION_COPY );
 	  
 
       hbox = gtk_hbox_new (FALSE, 0);
@@ -1382,6 +1401,10 @@ create_smb_window (void)
       }
       gtk_widget_show (vpaned2);
     }
+      
+    make_menu(menubar);
+    make_toolbar(toolbar);
+    gtk_widget_realize(smb_nav);
     vbox1 = gtk_vbox_new (FALSE, 0);	/*newbox (PACK, VERTICAL, vbox, NOEXPAND, NOFILL, 0); */
     gtk_paned_pack2 (GTK_PANED (vpaned), vbox1, TRUE, TRUE);
 
