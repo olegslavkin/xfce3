@@ -1,3 +1,33 @@
+2001-10-25  xfce
+
+	* po/xfce.pot, xfwm/events.c: Really, nothing.
+
+2001-10-24  xfce
+
+	* palettes/: Moz9, Moz9-2: Update Moz9 palettes
+
+2001-10-24  xfce
+
+	* other/xfwmrc.in, xfwm/builtins.c, xfwm/functions.c, xfwm/misc.h,
+	xfwm/parse.h, xfwm/xfwm.c, xfwm/xfwm.h: Add "HonorWMFocusHint"
+	option to enable/disable support for WM focus hint
+
+2001-10-23  xfce
+
+	* xfwm/events.c: Add a few more tests before calling XFindContext()
+
+2001-10-22  xfce
+
+	* xfwm/virtual.c: Add a pause before switching focus
+
+2001-10-22  xfce
+
+	* xfwm/: builtins.c, virtual.c: Protect XQueryPointer
+
+2001-10-21  xfce
+
+	* ChangeLog, xfce-3.8.9.lsm: Update ChangeLog
+
 2001-10-21  xfce
 
 	* libs/Strings.c, libs/safemalloc.c, libs/utils.h, po/xfce.pot,
