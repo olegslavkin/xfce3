@@ -56,13 +56,20 @@ static char  *CreateTmpList(void){
    if ((fname=randomTmpName(NULL))==NULL) return NULL;
    if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
    for (s = GTK_CLIST (shares)->selection; s != NULL; s=s->next){
+     char *t,*ss;
      en = gtk_ctree_node_get_row_data ((GtkCTree *)shares, s->data);
+     t=g_strdup(en->dirname);
+     latin_1_unreadable(t); /* this a smbclient bugworkaround */
      if (en->type & S_T_DIRECTORY){
-        fprintf(tmpfile,"cd /;rmdir \"%s\\\";\n",en->dirname);	     
+        fprintf(tmpfile,"cd /;rmdir \"%s\\\";\n",t);	     
      } else {
-	fprintf(tmpfile,"cd \"%s\";\n",en->dirname);
-	fprintf(tmpfile,"del \"%s\";\n",en->filename);
+        ss=g_strdup(en->filename);
+        latin_1_unreadable(ss); /* this a smbclient bugworkaround */
+	fprintf(tmpfile,"cd \"%s\";\n",t);
+	fprintf(tmpfile,"del \"%s\";\n",ss);
+	g_free(ss);
      }
+     g_free(t);
    }
    fclose (tmpfile);
    return fname;

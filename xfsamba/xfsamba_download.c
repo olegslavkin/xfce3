@@ -154,7 +154,13 @@ SMBGetFile (void)
 /* done on file select:   while (the_dir[strlen (the_dir) - 1] == ' ')
 	the_dir[strlen (the_dir) - 1] = 0;*/
 
-  sprintf (NMBcommand, "get \\\"%s\\\" \"%s\"", dataO, fileS);
+  {
+   char *t;
+   t=g_strdup(dataO);
+   latin_1_unreadable(t); /* this a smbclient bugworkaround */
+   sprintf (NMBcommand, "get \\\"%s\\\" \"%s\"", t, fileS);
+   g_free(t);
+  }
 
   print_diagnostics (NMBcommand);
   print_diagnostics ("\n");

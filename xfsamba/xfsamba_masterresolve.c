@@ -196,13 +196,9 @@ NMBmastersResolveOver (pid_t pid)
 again_master:
   if (thisN->netbios)
   {
-    int i;
     thisN->server = (char *) malloc (strlen (thisN->netbios) + 1);
-    for (i = 0; i <= strlen (thisN->netbios); i++)
-    {
-      strcpy (thisN->server, thisN->netbios);
-      latin_1_readable (thisN->server);
-    }
+    strcpy (thisN->server, thisN->netbios);
+    latin_1_readable (thisN->server);
     if (items != NULL)
     {
       g_list_free (items);

@@ -193,8 +193,9 @@ SMBListStdout (int n, void *data)
     textos[SHARE_DATE_COLUMN] = pw + strlen (pw) + 1;
   }
 
-/* This might not be necesary anymore with LANG defined */
-  latin_1_readable (line);
+/* This bugworkaround no longer necesary. Still necesary for
+ * smblookup though */
+  /*latin_1_readable (line);*/
   en->share=g_strdup(NMBshare);
   {
     char *word;
@@ -288,9 +289,14 @@ SMBList (void)
     return;
 
   }
+  {
+   char *t;
+   t=g_strdup(selected.dirname);
+   latin_1_unreadable(t); /* this a smbclient bugworkaround */
+   sprintf (NMBcommand, "ls \\\"%s\\\"*", t);
+   g_free(t);
 
-  sprintf (NMBcommand, "ls \\\"%s\\\"*", selected.dirname);
-
+  }
   strncpy (NMBnetbios, thisN->netbios, XFSAMBA_MAX_STRING);
   NMBnetbios[XFSAMBA_MAX_STRING] = 0;
 

@@ -165,7 +165,16 @@ SMBmkdir_with_name (char *new_dir)
     return;
 
   }
-  sprintf (NMBcommand, "mkdir \\\"%s\\%s\\\"", selected.dirname, new_dir);
+  {
+    char *t,*s;
+    t=g_strdup(new_dir);
+    s=g_strdup(selected.dirname);
+    latin_1_unreadable(t); /* this a smbclient bugworkaround */
+    latin_1_unreadable(s); /* this a smbclient bugworkaround */
+    sprintf (NMBcommand, "mkdir \\\"%s\\%s\\\"", s, t);
+    g_free(t);
+    g_free(s);
+  }
   for (i = 0; i < strlen (NMBcommand); i++)
     if (NMBcommand[i] == '/') NMBcommand[i] = '\\';
   print_diagnostics (NMBcommand);

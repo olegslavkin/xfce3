@@ -454,120 +454,106 @@ clean_nmb (void)
     headN = NULL;
   }
 }
+typedef struct dostext_t {
+	unsigned char readable;
+	unsigned char unreadable;
+} dostext_t;
 
-void
-latin_1_readable (char *the_char)
-{
+/* starts at 0xc0 */
+static dostext_t dostext[]={
+ {0xc0, 0xb7}, /* À */
+ {0xc1, 0xb5}, /* Á */
+ {0xc2, 0xb6}, /* Â */
+ {0xc3, 0xc7}, /* Ã */
+ {0xc4, 0x8e}, /* Ä */
+ {0xc5, 0x8f}, /* Å */
+ {0xc6, 0x92}, /* Æ */
+ {0xc7, 0x80}, /* Ç */
+ {0xc8, 0xd4}, /* È */
+ {0xc9, 0x90}, /* É */
+ {0xca, 0xd2}, /* Ê */
+ {0xcb, 0xd3}, /* Ë */
+ {0xcc, 0xde}, /* Ì */
+ {0xcd, 0xd6}, /* Í */
+ {0xce, 0xd7}, /* Î */
+ {0xcf, 0xd8}, /* Ï */
+ {0xd0, 0xd1}, /* Ð */
+ {0xd1, 0xa5}, /* Ñ */
+ {0xd2, 0xe3}, /* Ò */
+ {0xd3, 0xe0}, /* Ó */
+ {0xd4, 0xe2}, /* Ô */
+ {0xd5, 0xe5}, /* Õ */
+ {0xd6, 0x99}, /* Ö */
+ {0xd7, 0x9e}, /* × */
+ {0xd8, 0x9d}, /* Ø */
+ {0xd9, 0xeb}, /* Ù */
+ {0xda, 0xe9}, /* Ú */
+ {0xdb, 0xea}, /* Û */
+ {0xdc, 0x9a}, /* Ü */
+ {0xdd, 0xed}, /* Ý */
+ {0xde, 0xe8}, /* Þ */
+ {0xdf, 0xe1}, /* ß */
+ {0xe0, 0x85}, /* à */
+ {0xe1, 0xa0}, /* á */
+ {0xe2, 0x83}, /* â */
+ {0xe3, 0xc6}, /* ã */
+ {0xe4, 0x84}, /* ä */
+ {0xe5, 0x86}, /* å */
+ {0xe6, 0x91}, /* æ */
+ {0xe7, 0x87}, /* ç */
+ {0xe8, 0x8a}, /* è */
+ {0xe9, 0x82}, /* é */
+ {0xea, 0x88}, /* ê */
+ {0xeb, 0x89}, /* ë */
+ {0xec, 0x8d}, /* ì */
+ {0xed, 0xa1}, /* í */
+ {0xee, 0x8c}, /* î */
+ {0xef, 0x8b}, /* ï */
+ {0xf0, 0xd0}, /* ð */
+ {0xf1, 0xa4}, /* ñ */
+ {0xf2, 0x95}, /* ò */
+ {0xf3, 0xa2}, /* ó */
+ {0xf4, 0x93}, /* ô */
+ {0xf5, 0xe4}, /* õ */
+ {0xf6, 0x94}, /* ö */
+ {0xf7, 0xf6}, /* ÷ */
+ {0xf8, 0x9b}, /* ø */
+ {0xf9, 0x97}, /* ù */
+ {0xfa, 0xa3}, /* ú */
+ {0xfb, 0x96}, /* û */
+ {0xfc, 0x81}, /* ü */
+ {0xfd, 0xec}, /* ý */
+ {0xfe, 0xe7}, /* þ */
+ {0,0}
+};
+
+void dos_txt (char *the_char,gboolean readable){
   unsigned char *c;
-  c = (unsigned char *) the_char;
-  while (c[0])
-  {
-    switch (c[0])
-    {
-    case 0x81:
-      c[0] = 'ü';
-      break;
-    case 0x82:
-      c[0] = 'é';
-      break;
-    case 0xa0:
-      c[0] = 'á';
-      break;
-    case 0xa1:
-      c[0] = 'í';
-      break;
-    case 0xa2:
-      c[0] = 'ó';
-      break;
-    case 0xa3:
-      c[0] = 'ú';
-      break;
-    case 0xa4:
-      c[0] = 'ñ';
-      break;
-    case 0xa5:
-      c[0] = 'Ñ';
-      break;
-    case 0xb5:
-      c[0] = 'Á';
-      break;
-    case 0x90:
-      c[0] = 'É';
-      break;
-    case 0xd6:
-      c[0] = 'Í';
-      break;
-    case 0xe0:
-      c[0] = 'Ó';
-      break;
-    case 0xe9:
-      c[0] = 'Ú';
-      break;
-    default:
-      break;
-    }
-    c++;
+  dostext_t *t;
+  for (c=(unsigned char *) the_char; c[0]!=0; c++)  {
+	  t=dostext;
+	  while (t->readable){
+		  if (readable){
+			if (c[0] == t->unreadable) {c[0] = t->readable; break;}
+		  } else {
+			if (c[0] == t->readable) {c[0] = t->unreadable; break;}
+		  }
+		  t++;	  
+	  }
   }
-
 }
-void
-latin_1_unreadable (char *the_char)
-{
-  unsigned char *c;
-  c = (unsigned char *) the_char;
-/*print_diagnostics("DBG:"); print_diagnostics(the_char);*/
 
-  while (c[0])
-  {
-    switch (c[0])
-    {
-    case 0xfc:
-      c[0] = 0xa0;
-      break;
-    case 0xe9:
-      c[0] = 0x82;
-      break;
-    case 0xe1:
-      c[0] = 0xa1;
-      break;
-    case 0xed:
-      c[0] = 0xa2;
-      break;
-    case 0xf3:
-      c[0] = 0xa3;
-      break;
-    case 0xfa:
-      c[0] = 0x81;
-      break;
-    case 0xf1:
-      c[0] = 0xa4;
-      break;
-    case 0xd1:
-      c[0] = 0xa5;
-      break;
-    case 0xc1:
-      c[0] = 0xb5;
-      break;
-    case 0xc9:
-      c[0] = 0x90;
-      break;
-    case 0xcd:
-      c[0] = 0xd6;
-      break;
-    case 0xd3:
-      c[0] = 0xe0;
-      break;
-    case 0xda:
-      c[0] = 0xe9;
-      break;
-    default:
-      break;
-    }
-    c++;
-  }
-/*print_diagnostics(the_char);print_diagnostics("\n");*/
-
+void latin_1_readable (char *the_char) {
+        /*print_diagnostics("DBG: ascii_readable=");print_diagnostics(the_char);*/
+	dos_txt(the_char,TRUE);
+        /*print_diagnostics("-->");print_diagnostics(the_char);print_diagnostics("\n");*/
 }
+void latin_1_unreadable (char *the_char) {
+        /*print_diagnostics("DBG: ascii_unreadable=");print_diagnostics(the_char);*/
+	dos_txt(the_char,FALSE);
+        /*print_diagnostics("-->");print_diagnostics(the_char);print_diagnostics("\n");*/
+}
+
 
 
 /****************************************/

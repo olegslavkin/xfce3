@@ -217,7 +217,16 @@ SMBPutFile (void)
   }
 
 
-  sprintf (NMBcommand, "put \"%s\" \\\"%s\\%s\\\"", fileS, dataO, fileUp);
+  {
+   char *t,*s;
+   t=g_strdup(dataO);
+   s=g_strdup(fileUp);
+   latin_1_unreadable(t); /* this a smbclient bugworkaround */
+   latin_1_unreadable(s); /* this a smbclient bugworkaround */
+   sprintf (NMBcommand, "put \"%s\" \\\"%s\\%s\\\"", fileS, t, s);
+   g_free(t);
+   g_free(s);
+  }
   free (dataO);
   print_diagnostics (NMBcommand);
   print_diagnostics ("\n");
