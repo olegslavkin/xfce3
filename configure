@@ -12,9 +12,9 @@ ac_help=
 ac_default_prefix=/usr/local
 # Any additions from configure.in:
 ac_help="$ac_help
-  --enable-static[=PKGS]  build static libraries [default=no]"
-ac_help="$ac_help
   --enable-shared[=PKGS]  build shared libraries [default=yes]"
+ac_help="$ac_help
+  --enable-static[=PKGS]  build static libraries [default=yes]"
 ac_help="$ac_help
   --enable-fast-install[=PKGS]  optimize for fast installation [default=yes]"
 ac_help="$ac_help
@@ -207,14 +207,14 @@ ac_help="$ac_help
   --enable-xinerama       enable xinerama extension [default]
   --disable-xinerama      Don't use xinerama extension even if available"
 ac_help="$ac_help
-  --enable-xft            enable xinerama extension 
-  --disable-xft           Don't use xinerama extension even if available [default] "
+  --enable-xft            enable xft extension 
+  --disable-xft           Don't use xft extension even if available [default] "
 ac_help="$ac_help
   --enable-gtk-engine=PFX path to GTK engine libraries"
 ac_help="$ac_help
-  --enable-gdk-pixbuf=PFX prefix where gdk-pixbuf is installed (optional, only selected if imlib is missing)"
+  --enable-gdk-pixbuf=PFX prefix where gdk-pixbuf is installed"
 ac_help="$ac_help
-  --enable-imlib=PFX      prefix where Imlib is installed (optional)"
+  --enable-imlib=PFX      prefix where Imlib is installed (optional, only selected if gdk-pixbuf is missing)"
 ac_help="$ac_help
   --enable-dt             enable CDE specific files"
 ac_help="$ac_help
@@ -1860,36 +1860,13 @@ test -z "$INSTALL_SCRIPT" && INSTALL_SCRIPT='${INSTALL_PROGRAM}'
 
 test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
 
-# Check whether --enable-static or --disable-static was given.
-if test "${enable_static+set}" = set; then
-  enableval="$enable_static"
-  p=${PACKAGE-default}
-case $enableval in
-yes) enable_static=yes ;;
-no) enable_static=no ;;
-*)
-  enable_static=no
-  # Look at the argument we got.  We use all the common list separators.
-  IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS="${IFS}:,"
-  for pkg in $enableval; do
-    if test "X$pkg" = "X$p"; then
-      enable_static=yes
-    fi
-  done
-  IFS="$ac_save_ifs"
-  ;;
-esac
-else
-  enable_static=no
-fi
-
 echo $ac_n "checking for Cygwin environment""... $ac_c" 1>&6
-echo "configure:1888: checking for Cygwin environment" >&5
+echo "configure:1865: checking for Cygwin environment" >&5
 if eval "test \"`echo '$''{'ac_cv_cygwin'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
-#line 1893 "configure"
+#line 1870 "configure"
 #include "confdefs.h"
 
 int main() {
@@ -1900,7 +1877,7 @@ int main() {
 return __CYGWIN__;
 ; return 0; }
 EOF
-if { (eval echo configure:1904: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+if { (eval echo configure:1881: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
   ac_cv_cygwin=yes
 else
@@ -1917,19 +1894,19 @@ echo "$ac_t""$ac_cv_cygwin" 1>&6
 CYGWIN=
 test "$ac_cv_cygwin" = yes && CYGWIN=yes
 echo $ac_n "checking for mingw32 environment""... $ac_c" 1>&6
-echo "configure:1921: checking for mingw32 environment" >&5
+echo "configure:1898: checking for mingw32 environment" >&5
 if eval "test \"`echo '$''{'ac_cv_mingw32'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
-#line 1926 "configure"
+#line 1903 "configure"
 #include "confdefs.h"
 
 int main() {
 return __MINGW32__;
 ; return 0; }
 EOF
-if { (eval echo configure:1933: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+if { (eval echo configure:1910: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
   ac_cv_mingw32=yes
 else
@@ -1966,6 +1943,29 @@ no) enable_shared=no ;;
 esac
 else
   enable_shared=yes
+fi
+
+# Check whether --enable-static or --disable-static was given.
+if test "${enable_static+set}" = set; then
+  enableval="$enable_static"
+  p=${PACKAGE-default}
+case $enableval in
+yes) enable_static=yes ;;
+no) enable_static=no ;;
+*)
+  enable_static=no
+  # Look at the argument we got.  We use all the common list separators.
+  IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS="${IFS}:,"
+  for pkg in $enableval; do
+    if test "X$pkg" = "X$p"; then
+      enable_static=yes
+    fi
+  done
+  IFS="$ac_save_ifs"
+  ;;
+esac
+else
+  enable_static=yes
 fi
 
 # Check whether --enable-fast-install or --disable-fast-install was given.

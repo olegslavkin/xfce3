@@ -15,18 +15,27 @@ Copyright:	GPL
 Group: 		User Interface/Desktops
 Source:		http://www.xfce.org/archive/%{name}-%{version}.tar.gz
 Buildroot: 	/var/tmp/%{name}-root
-Requires: 	xscreensaver, gtk+ >= 1.2.6
+Requires: 	xscreensaver, xfce-libs, gtk+ >= 1.2.6
+Packager:	Olivier Fourdan <fourdan@xfce.org>
 
 %description
 XFce is a fast, lightweight desktop
 environment for Linux and various Unices...
+
+%package libs
+Summary:	Required internal libraries for Xfce
+Group: 		User Interface/Desktops
+Packager:	Olivier Fourdan <fourdan@xfce.org>
+
+%description libs
+A couple libraries for Xfce components.
 
 %prep
 %setup -q -n %{name}-%{version}
 
 %build
 ./configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
---disable-dt --enable-gtk-engine=%{gtkengines}
+--disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft
 make
 
 %install
@@ -59,8 +68,13 @@ rm -rf $RPM_BUILD_ROOT
 %{confdir}/xfce/*
 %{gtkengines}/libxfce.*
 
+%files libs
+%defattr(-, root, root)
+%{prefix}/lib/lib*.so*
+%{prefix}/lib/*a
+
 %post
-ldconfig
+/sbin/ldconfig
 if [ "$LC_ALL" = "pt_BR" ]; then
    echo
    echo Nota :
@@ -95,6 +109,9 @@ else
    echo environment, to ensure backward compatibility.
    echo
 fi
+
+%postun
+/sbin/ldconfig
 
 %changelog
 * Mon Oct 30 2000 Charles Stevenson <csteven@yellowdoglinux.com>

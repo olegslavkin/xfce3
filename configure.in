@@ -29,7 +29,6 @@ AM_PROG_CC_STDC
 AC_HEADER_STDC
 AC_PROG_MAKE_SET
 AC_PROG_INSTALL
-AC_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
 ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv zh zh_CN"
@@ -98,8 +97,8 @@ fi
 AC_SUBST(XINERAMA_LIBS)
 
 AC_ARG_ENABLE(xft,
-[  --enable-xft            enable xinerama extension 
-  --disable-xft           Don't use xinerama extension even if available [default] ], [],
+[  --enable-xft            enable xft extension 
+  --disable-xft           Don't use xft extension even if available [default] ], [],
  [enable_xft=no])
 
 XFT_LIBS=""
@@ -126,7 +125,7 @@ AC_CHECK_LIB(SM, SmcOpenConnection,
 
 dnl test for gdk-pixbuf library
 AC_ARG_ENABLE(gdk-pixbuf,
-[  --enable-gdk-pixbuf=PFX prefix where gdk-pixbuf is installed (optional, only selected if imlib is missing)],
+[  --enable-gdk-pixbuf=PFX prefix where gdk-pixbuf is installed],
   [
     if test "$enableval" != "no"; then
       if test -x "$enableval/bin/gdk-pixbuf-config"; then
@@ -162,7 +161,7 @@ AC_SUBST(GDK_PIXBUF_CFLAGS)
 if test "x$GDK_PIXBUF_LIBS" = "x"; then
   dnl test for imlib library
   AC_ARG_ENABLE(imlib,
-  [  --enable-imlib=PFX      prefix where Imlib is installed (optional)],
+  [  --enable-imlib=PFX      prefix where Imlib is installed (optional, only selected if gdk-pixbuf is missing)],
     [
       if test "$enableval" != "no"; then
 	if test -x "$enableval/bin/imlib-config"; then
