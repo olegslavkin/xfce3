@@ -244,6 +244,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       char *cmd;
       gchar *text[COLUMNS],date[32],size[32],mode[12],uid[32],gid[32];
       cfg *win;
+      gboolean nopipe=TRUE;
 
       win = gtk_object_get_user_data (GTK_OBJECT (ctree));
       text[COL_DATE]=date;
@@ -260,6 +261,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       else sprintf (cmd, "tar -vtf %s", p_en->path);
       /*printf("dbg:%s\n",cmd);*/
       pipe = popen (cmd, "r");
+      g_free(cmd);
       if (pipe) {
               icon_pix pix;  
 	      char *p,*d,*u;
@@ -269,6 +271,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      pclose (pipe);
 			      return NULL;
 		      }
+		      nopipe=FALSE;
 		      d_en->type =  FT_TARCHILD;
 		      /*fprintf(stderr,"dbg:%s",line);*/
 		      /* mode */
@@ -371,8 +374,22 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 	      }
 	      pclose (pipe);
       }
+      if (nopipe) {
+         icon_pix pix;  
+	 set_icon_pix(&pix,FT_PD," ");
+	 if ((d_en = entry_new ())==NULL) return NULL;
+	 d_en->type =  FT_RPM|FT_RPMCHILD;
+	 d_en->path=d_en->label=NULL;
+	 text[COL_DATE]=text[COL_SIZE]=text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
+	 text[COL_NAME] = _("tar: command not found");
+	 /* use open pixmaps for error situation */
+	 s_item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
+	  		pix.open,pix.openmask,NULL,NULL,TRUE,FALSE);
+	 if (s_item) {
+		 gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
+	 }
+      }
       /*fprintf(stderr,"dbg:done inserting tar stuff\n");*/
-      free(cmd);
       headTar=clean_tar_dir();
       gtk_ctree_sort_node (ctree, parent);
       return s_item;

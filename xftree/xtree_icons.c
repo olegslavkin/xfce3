@@ -60,6 +60,9 @@ enum
   PIX_DIR_OPEN=0, 
   PIX_DIR_CLOSE,PIX_DIR_UP,
   PIX_DIR_PD,
+  PIX_DIR_RO,
+  PIX_DIR_RO_OPEN,
+  PIX_PD,
   PIX_PAGE,PIX_PAGE_C,PIX_PAGE_F,PIX_PAGE_O,
   	PIX_PAGE_H,PIX_PAGE_LNK,PIX_CORE,PIX_TAR,
 	PIX_COMPRESSED,PIX_IMAGE,PIX_TEXT,PIX_MAIL,
@@ -90,6 +93,7 @@ enum
   PIM_LINKFLAG, 
   PIM_EXEFLAG, 
   PIM_DIR_PD,
+  PIM_PD,
   PIM_PAGE,
   PIM_PAGE_HTML, 
   PIM_CHAR_DEV,
@@ -125,6 +129,9 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_PO,		NULL,			page_po_xpm},
 	{gPIX+PIX_BAK,		NULL,			page_backup_xpm},
 	{gPIX+PIX_DIR_PD,	NULL,			dir_pd_xpm},
+	{gPIX+PIX_PD,		gPIM+PIM_PD,		pd_xpm},
+	{gPIX+PIX_DIR_RO,	NULL,			dir_ro_xpm},
+	{gPIX+PIX_DIR_RO_OPEN,	NULL,			dir_ro_open_xpm},
 	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
 	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
 	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
@@ -365,7 +372,11 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
   /*defaults :*/
   PIXid[0]=PIXid[2]=PIX_PAGE;
   PIXid[1]=PIXid[3]=PIM_PAGE;
-
+  /* error defaults */
+  if (type&FT_PD){
+   PIXid[0]=PIXid[2]=PIX_PD;
+   PIXid[1]=PIXid[3]=PIM_PD;
+  }
   /* directories: no icon flag applied */
   if (type & FT_DIR){
      PIXid[1]=PIM_DIR_CLOSE;
@@ -388,6 +399,10 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
       if (type & FT_DIR_PD) {
        PIXid[0]=PIX_DIR_PD;
        PIXid[2]=PIX_DIR_OPEN;
+      }
+      if (type & FT_DIR_RO) {
+       PIXid[0]=PIX_DIR_RO;
+       PIXid[2]=PIX_DIR_RO_OPEN;
       }
       goto icon_identified;
   } else if (type & FT_DIR_UP){

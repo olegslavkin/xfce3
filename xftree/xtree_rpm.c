@@ -20,8 +20,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#define _ENABLE_RPM_
-#ifdef _ENABLE_RPM_
 
 
 #ifdef HAVE_CONFIG_H
@@ -136,7 +134,6 @@ static GtkCTreeNode *find_rpm_dir(char *name){
 	}
 	return NULL;
 }
-#if 0
 static rpm_dir *clean_rpm_dir(void){
 	struct rpm_dir *p,*l;
 	p=headRpm;
@@ -148,12 +145,10 @@ static rpm_dir *clean_rpm_dir(void){
 	}
 	return NULL;
 }
-#endif
 
 /* dummy entry to get expander without expanding */
 GtkCTreeNode *add_rpm_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
    GtkCTreeNode *item=NULL;
-#if 0
    icon_pix pix;
    entry *en;
    gchar *text[COLUMNS];
@@ -170,7 +165,6 @@ GtkCTreeNode *add_rpm_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
 		  pix.open,pix.openmask,
 		  TRUE,FALSE);
    gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);
-#endif
    return (item);   
 }
 
@@ -240,7 +234,6 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
 
 GtkCTreeNode *add_rpm_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       GtkCTreeNode *s_item=NULL;
-#if 0
       GtkCTreeNode *p_node;
       entry *d_en;
       FILE *pipe;
@@ -350,32 +343,26 @@ GtkCTreeNode *add_rpm_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 	      }
 	      pclose (pipe);
       }
-#if 0
-      /* FIXME: the node is going to update() which should not happen! 
-       * and sigsegv on dragging the expander!*/
       if (nopipe) {
          icon_pix pix;  
-	 set_icon_pix(&pix,FT_DIR_PD," ");
+	 set_icon_pix(&pix,FT_PD," ");
 	 if ((d_en = entry_new ())==NULL) return NULL;
 	 d_en->type =  FT_RPM|FT_RPMCHILD;
 	 d_en->path=d_en->label=NULL;
 	 text[COL_DATE]=text[COL_SIZE]=text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
-	 text[COL_NAME] = _("rpm command not found");
+	 text[COL_NAME] = _("rpm: command not found");
+	 /* use open pixmaps for error situation */
 	 s_item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
-	  		pix.pixmap,pix.pixmask,NULL,NULL,TRUE,FALSE);
+	  		pix.open,pix.openmask,NULL,NULL,TRUE,FALSE);
 	 if (s_item) {
 		 gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
 	 }
       }
-#endif
       /*fprintf(stderr,"dbg:done inserting rpm stuff\n");*/
-      free(cmd);
       headRpm=clean_rpm_dir();
       gtk_ctree_sort_node (ctree, parent);
-#endif
       return s_item;
 }
 
 
-#endif
 

@@ -796,7 +796,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   }
   
   
-  if (!(en->type&(FT_TAR|FT_TARCHILD))&& !(en->type&(FT_RPM|FT_RPMCHILD)) )
+  if (!(en->type&(FT_TAR|FT_TARCHILD|FT_RPM|FT_RPMCHILD)) )
 	  for (child=GTK_CTREE_ROW (node)->children;child != NULL;child = GTK_CTREE_ROW (child)->sibling)
   {
 	  

@@ -276,6 +276,7 @@ int entry_update (entry * en)
      if (S_ISDIR (ss.st_mode)) {
 	     tipo |= FT_DIR;
              if (access (en->path, R_OK | X_OK) != 0) tipo |= FT_DIR_PD;
+	     else if (access (en->path, W_OK) != 0) tipo |= FT_DIR_RO;
              dup_stat(&s,&ss);
      } 
      if ((ss.st_mode & S_IXUSR) || (ss.st_mode & S_IXGRP) || (ss.st_mode & S_IXOTH))
@@ -291,6 +292,7 @@ int entry_update (entry * en)
      if (S_ISDIR (s.st_mode)) {
 	     tipo |= FT_DIR;
              if (access (en->path, R_OK | X_OK) != 0) tipo |= FT_DIR_PD;
+	     else if (access (en->path, W_OK) != 0) tipo |= FT_DIR_RO;
      }
      if (S_ISREG (s.st_mode)){
         tipo |= FT_FILE;

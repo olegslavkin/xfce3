@@ -243,6 +243,7 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
     {
       node = selection->data;
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+      if (!en->path) return;
       len += strlen (en->path) + 5 + 2;
       selection = selection->next;
     }
@@ -253,6 +254,7 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
     {
       node = selection->data;
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+      if (!en->path) return;
       slen = strlen (en->path);
       if (strncmp(en->path,"tar:",strlen("tar:"))==0){
 	      sprintf (files, "%s\r\n", en->path);
