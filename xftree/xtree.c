@@ -37,6 +37,7 @@
 #include <getopt.h>
 #endif
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <signal.h>
 #include <limits.h>
 #include <X11/Xlib.h>		/* XParseGeometry */
@@ -66,6 +67,8 @@
 #  include "dmalloc.h"
 #endif
 GtkWidget *io_parent=NULL;
+char *arg_hostname=NULL;
+char *arg_display=NULL;
 
 static gint open_warning(gpointer data){
 	  FILE *mess;
@@ -98,6 +101,9 @@ finishit (int sig)
   }
 }
 
+extern gboolean check_hostname(char *host);
+extern char *our_host_name(void);
+
 int
 main (int argc, char *argv[])
 {
@@ -114,8 +120,9 @@ main (int argc, char *argv[])
   struct stat st;
   wgeo_t geo = { -1, -1, 380, 480 };
 
-  xfce_init (&argc, &argv);
-
+  /* xfce_init must appear after argument processing 
+   * so that alternate display can be specified */
+  
   /* for temporary file cleanup */
   signal (SIGHUP, finishit);
   signal (SIGINT, finishit);
@@ -130,12 +137,11 @@ main (int argc, char *argv[])
   signal (SIGUSR1, finishit);
   signal (SIGUSR2, finishit);
 
-  sprintf (rc, "%s/%s/%s", path, BASE_DIR, "xtree.rc");
-
+  sprintf (rc, "%s/%s/%s", getenv("HOME"), BASE_DIR, "xtree.rc");
   read_defaults();
   strcpy (path,(custom_home_dir)?custom_home_dir: getenv ("HOME"));
 
-  while ((c = getopt (argc, argv, "vg:i:")) != EOF)
+  while ((c = getopt (argc, argv, "vg:i:h:d:")) != EOF)
   {
     switch (c)
     {
@@ -145,6 +151,12 @@ main (int argc, char *argv[])
     case 'g':
       geometry = optarg;
       break;
+    case 'h':
+      arg_hostname=optarg;
+      break;  
+    case 'd':
+      arg_display=optarg;
+      break;  
     case 'i':
       if (atoi (optarg))
 	flags |= IGNORE_HIDDEN;
@@ -155,6 +167,46 @@ main (int argc, char *argv[])
       break;
     }
   }
+
+  if (arg_display) {
+	  setenv("DISPLAY",arg_display,TRUE);
+	  /*printf("display is %s\n",getenv("DISPLAY"));*/
+  }
+
+  /* remote xftree instance
+   * (no enabled yet, a little buggy because of the "sane()"
+   *  routine eliminating register entries on remote host) */
+  if ((arg_hostname) && (!check_hostname(arg_hostname))){
+#if 0
+	  char *Argv[12];
+	  char *dpy;
+	  int i=0,status;
+	  pid_t pid;
+	  dpy=(char *)malloc(strlen(our_host_name())+strlen(":0.0")+1);
+	  if (dpy) {
+	    sprintf(dpy,"%s:0.0",our_host_name());	  
+	    Argv[i++]="ssh";
+	    Argv[i++]=arg_hostname;
+	    Argv[i++]="xftree";
+	    if (argc != optind) Argv[i++]=argv[argc - 1];
+	    Argv[i++]="-d";
+	    Argv[i++]=dpy;
+	    Argv[i++]=0;
+	    
+	    pid=fork();
+	    if (pid<0){
+	      printf("Xftree: Cannot fork\n");
+	    } else if (fork()!=0) wait(&status);
+	    else {
+	      execvp(Argv[0],Argv);
+	      printf("Xftree: Cannot open remote xftree at %s\n",arg_hostname);
+	    }
+	  } 
+#endif
+	  exit(1);  	  
+  }
+  xfce_init (&argc, &argv);
+  
   if (argc != optind)
   {
     strcpy (path, argv[argc - 1]);
@@ -163,6 +215,7 @@ main (int argc, char *argv[])
   {
     getcwd (path, PATH_MAX);
   }
+
   if (verbose)
   {
     printf (_("XFTree, based on XTree Version %s\n"), VERSION);

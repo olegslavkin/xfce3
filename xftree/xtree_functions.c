@@ -48,6 +48,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkenums.h>
+#include <X11/Xatom.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "my_string.h"
@@ -107,12 +108,12 @@ char *our_host_name(void)
 {
  static char *name = NULL;
  if (!name){
-	char buffer[4096];
-	if (gethostname(buffer, 4096) == 0)
+	char buffer[256];
+	if (gethostname(buffer, 256) == 0)
 	{
 	  /* gethostname doesn't always return the full name... */
 	  struct hostent *ent;
-	  buffer[4095] = '\0';
+	  buffer[256] = '\0';
 	  ent = gethostbyname(buffer);
 	  name = g_strdup(ent ? ent->h_name : buffer);
 	}
@@ -123,6 +124,31 @@ char *our_host_name(void)
 	}
  }
  return name;
+}
+
+gboolean check_hostname(char *host){
+	char buffer[256],*testv;
+	int i;
+	if (host[0]==':') return TRUE;	
+	testv="localhost";	
+	if (strncmp(host,testv,strlen(testv))==0) return TRUE;
+	testv="localhost.localnet";	
+	if (strncmp(host,testv,strlen(testv))==0) return TRUE;
+	if (gethostname(buffer, 256) == 0)
+	{
+	  struct hostent *ent;
+	  buffer[256] = '\0';
+	  testv=buffer;
+	  /*printf("dbg:%s==%s\n",host,testv);*/
+	  if (strncmp(host,testv,strlen(testv))==0) return TRUE;
+	  ent = gethostbyname(buffer);
+	  for (i=0; ent->h_aliases[i] != NULL ; i++){
+		  testv=ent->h_aliases[i];
+		  /*printf("dbg:%s==%s\n",host,testv);*/
+	          if (strncmp(host,testv,strlen(testv))==0) return TRUE;
+	  }
+	}
+	return FALSE;
 }
 
 /*
@@ -798,6 +824,9 @@ set_title_ctree (GtkWidget * ctree, const char *path)
 {
   char *title,*hostname;
   cfg *win;
+  GdkAtom atomo;
+  entry *en;
+  GtkCTreeNode *root;
   
   hostname=our_host_name();
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -823,8 +852,47 @@ set_title_ctree (GtkWidget * ctree, const char *path)
   gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
   gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, 
 		  win->iconname);
-  free(title);
-}
+  sprintf(title,"xftree %s",path);
+  root=find_root((GtkCTree *) ctree);
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
+  g_free(title);
+  
+  atomo=gdk_atom_intern("WM_COMMAND",TRUE);
+  gdk_property_change (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window,
+		  atomo,
+                  XA_STRING, /* GdkAtom type,*/
+                  8, /* bit per data element: gint format*/
+ 	      	  GDK_PROP_MODE_REPLACE,
+                  (guchar *)"xftree",  
+		  strlen("xftree")+1); 
+
+  { /* remote connections */
+    /*printf("display=%s differs from hostname\n",getenv("DISPLAY"));*/
+    gdk_property_change (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window,
+		  atomo,
+                  XA_STRING, /* GdkAtom type,*/
+                  8, /* bit per data element: gint format*/
+ 	      	  GDK_PROP_MODE_APPEND,
+                  (guchar *)"-h",  
+		  3); 
+    gdk_property_change (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window,
+		  atomo,
+                  XA_STRING, /* GdkAtom type,*/
+                  8, /* bit per data element: gint format*/
+ 	      	  GDK_PROP_MODE_APPEND,
+                  (guchar *)hostname,  
+		  strlen(hostname)+1); 
+  }
+  
+  gdk_property_change (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window,
+		  atomo,
+                  XA_STRING, /* GdkAtom type,*/
+                  8, /* bit per data element: gint format*/
+ 	      	  GDK_PROP_MODE_APPEND,
+                  (guchar *)en->path,  
+		  strlen(en->path)+1);
+  
+ }
 
 
 /*

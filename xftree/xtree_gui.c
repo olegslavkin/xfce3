@@ -48,6 +48,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkenums.h>
+#include <X11/Xatom.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "my_string.h"
@@ -1011,7 +1012,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   int i;
   struct passwd *pw;
   struct group *gr;
+  GdkAtom atomo;
 
+	  
   menu_entry dir_mlist[] = {
     AUTOTYPE_MENU,
     MAINF_DIRECTORY_MENU,
@@ -1099,14 +1102,26 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_policy ((GtkWindow *)win->top,FALSE,TRUE,FALSE);
   gtk_widget_realize (win->top);
-    
+
   win->gogo = pushgo(path,win->gogo);
                                               
   top_register (win->top);
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (win->top), vbox);
   gtk_widget_show (vbox);
-
+  
+  atomo=gdk_atom_intern("WM_COMMAND",FALSE);
+  gdk_property_change (gtk_widget_get_parent_window(vbox),
+		  atomo,
+                  XA_STRING, /* GdkAtom type,*/
+                  8, /* bit per data element: gint format*/
+ 	      	  GDK_PROP_MODE_REPLACE,
+                  (guchar *)"xftree",  
+		  strlen("xftree")+1);  
+  atomo=gdk_atom_intern("WM_CLIENT_LEADER",TRUE);
+  if (atomo != GDK_NONE) {
+	  gdk_property_delete (gtk_widget_get_parent_window(vbox),atomo);
+  }
   for (i=0;i<4;i++) {
 	  handlebox[i] = gtk_handle_box_new ();
 	  gtk_container_border_width (GTK_CONTAINER (handlebox[i]), 2);
