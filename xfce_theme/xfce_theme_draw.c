@@ -24,6 +24,8 @@
 #  include <config.h>
 #endif
 
+#define DETAIL(s)   ((detail) && (!strcmp(s, detail)))
+
 /* 
   Portions based on Raleigh theme by Owen Taylor
   Portions based on Notif theme
@@ -366,17 +368,53 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
     gdk_draw_line (window, style->bg_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
     gdk_draw_line (window, style->bg_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
 #else
-    gdk_draw_line (window, style->dark_gc[state_type], x, y, x + width - 1, y);
-    gdk_draw_line (window, style->dark_gc[state_type], x, y, x, y + height - 1);
+    if(DETAIL("hscrollbar") || DETAIL("vscrollbar"))
+    {
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x + width - 2, y);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x, y + height - 2);
 
-    gdk_draw_line (window, style->light_gc[state_type], x + 1, y + height - 1, x + width - 1, y + height - 1);
-    gdk_draw_line (window, style->light_gc[state_type], x + width - 1, y + 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y + height - 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y, x + width - 1, y + height - 1);
 
-    gdk_draw_line (window, style->black_gc, x + 1, y + 1, x + width - 2, y + 1);
-    gdk_draw_line (window, style->black_gc, x + 1, y + 1, x + 1, y + height - 2);
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + 1, x + width - 2, y + 1);
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + 1, x + 1, y + height - 2);
 
-    gdk_draw_line (window, style->dark_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
-    gdk_draw_line (window, style->dark_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->light_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->light_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
+    }
+    else if(DETAIL("trough"))
+    {
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x + width - 2, y);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x, y + height - 2);
+
+        gdk_draw_line(window, style->dark_gc[state_type], x, y + height - 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y, x + width - 1, y + height - 1);
+
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + 1, x + width - 2, y + 1);
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + 1, x + 1, y + height - 2);
+
+        gdk_draw_line(window, style->light_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->light_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
+    }
+    else
+    {
+        gdk_draw_line(window, style->dark_gc[state_type], x + 1, y, x + width - 2, y);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y + 1, x, y + height - 2);
+
+        gdk_draw_line(window, style->dark_gc[state_type], x + 1, y + height - 1, x + width - 2, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y + 1, x + width - 1, y + height - 2);
+
+        gdk_draw_line(window, style->bg_gc[state_type], x + 1, y + 1, x + width - 2, y + 1);
+        gdk_draw_line(window, style->bg_gc[state_type], x + 1, y + 1, x + 1, y + height - 2);
+
+        gdk_draw_line(window, style->bg_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->bg_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
+
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x, y);
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x + width - 1, y);
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x, y + height - 1);
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x + width - 1, y + height - 1);
+    }
 #endif
     break;
   case GTK_SHADOW_OUT:
@@ -393,17 +431,67 @@ draw_shadow (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
     gdk_draw_line (window, style->bg_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
     gdk_draw_line (window, style->bg_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
 #else
-    gdk_draw_line (window, style->dark_gc[state_type], x, y, x + width - 1, y);
-    gdk_draw_line (window, style->dark_gc[state_type], x, y, x, y + height - 1);
+    if(DETAIL("vscrollbar") || DETAIL("hscrollbar") || DETAIL("slider") || DETAIL("vscale") || DETAIL("hscale"))
+    {
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x + width - 1, y);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x, y + height - 1);
 
-    gdk_draw_line (window, style->black_gc, x + 1, y + height - 1, x + width - 1, y + height - 1);
-    gdk_draw_line (window, style->black_gc, x + width - 1, y + 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + 1, y + height - 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y + 1, x + width - 1, y + height - 1);
 
-    gdk_draw_line (window, style->light_gc[state_type], x + 1, y + 1, x + width - 2, y + 1);
-    gdk_draw_line (window, style->light_gc[state_type], x + 1, y + 1, x + 1, y + height - 2);
+        gdk_draw_line(window, style->light_gc[state_type], x + 1, y + 1, x + width - 3, y + 1);
+        gdk_draw_line(window, style->light_gc[state_type], x + 1, y + 1, x + 1, y + height - 3);
 
-    gdk_draw_line (window, style->dark_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
-    gdk_draw_line (window, style->dark_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->mid_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
+    }
+    else if(DETAIL("menubar") || DETAIL("toolbar") || DETAIL("dockitem") || DETAIL("dockitem_bin"))
+    {
+        gdk_draw_line(window, style->light_gc[state_type], x, y, x + width - 2, y);
+        gdk_draw_line(window, style->light_gc[state_type], x, y, x, y + height - 2);
+
+        gdk_draw_line(window, style->dark_gc[state_type], x, y + height - 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y, x + width - 1, y + height - 1);
+
+        gdk_draw_line(window, style->bg_gc[state_type], x + 1, y + 1, x + width - 2, y + 1);
+        gdk_draw_line(window, style->bg_gc[state_type], x + 1, y + 1, x + 1, y + height - 2);
+
+        gdk_draw_line(window, style->bg_gc[state_type], x + 2, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->bg_gc[state_type], x + width - 2, y + 2, x + width - 2, y + height - 2);
+    }
+    else if(DETAIL("frame") || DETAIL("menu"))
+    {
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x + width - 1, y);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y, x, y + height - 1);
+
+        gdk_draw_line(window, style->dark_gc[state_type], x + 1, y + height - 1, x + width - 1, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y + 1, x + width - 1, y + height - 1);
+
+        gdk_draw_line(window, style->light_gc[state_type], x + 1, y + 1, x + width - 3, y + 1);
+        gdk_draw_line(window, style->light_gc[state_type], x + 1, y + 1, x + 1, y + height - 3);
+
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->mid_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
+    }
+    else
+    {
+        gdk_draw_line(window, style->dark_gc[state_type], x + 1, y, x + width - 2, y);
+        gdk_draw_line(window, style->dark_gc[state_type], x, y + 1, x, y + height - 2);
+
+        gdk_draw_line(window, style->dark_gc[state_type], x + 1, y + height - 1, x + width - 2, y + height - 1);
+        gdk_draw_line(window, style->dark_gc[state_type], x + width - 1, y + 1, x + width - 1, y + height - 2);
+
+        gdk_draw_line(window, style->light_gc[state_type], x + 1, y + 1, x + width - 3, y + 1);
+        gdk_draw_line(window, style->light_gc[state_type], x + 1, y + 1, x + 1, y + height - 3);
+
+        gdk_draw_line(window, style->mid_gc[state_type], x + 1, y + height - 2, x + width - 2, y + height - 2);
+        gdk_draw_line(window, style->mid_gc[state_type], x + width - 2, y + 1, x + width - 2, y + height - 2);
+
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x, y);
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x + width - 1, y);
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x, y + height - 1);
+        gdk_draw_point(window, style->bg_gc[GTK_STATE_NORMAL], x + width - 1, y + height - 1);
+    }
 #endif
     break;
   }
@@ -665,7 +753,7 @@ draw_box (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkShad
   else
     gtk_style_apply_default_pixmap (style, window, state_type, area, x, y, width, height);
 
-  if (detail && (!strcmp (detail, "slider")))
+  if (DETAIL("slider"))
   {
     GtkOrientation orientation = GTK_ORIENTATION_VERTICAL;
     if (width > height)
@@ -673,7 +761,7 @@ draw_box (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkShad
     xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
   }
 #ifdef OLD_STYLE
-  if ((detail) && (!strcmp ("menuitem", detail)) && (state_type == GTK_STATE_PRELIGHT))
+  if (DETAIL("menuitem", detail) && (state_type == GTK_STATE_PRELIGHT))
     gtk_paint_shadow (style, window, state_type, GTK_SHADOW_IN, area, widget, detail, x, y, width, height);
   else
     gtk_paint_shadow (style, window, state_type, shadow_type, area, widget, detail, x, y, width, height);
@@ -700,9 +788,9 @@ draw_flat_box (GtkStyle * style, GdkWindow * window, GtkStateType state_type, Gt
 
   gc1 = style->bg_gc[state_type];
 
-  if ((detail) && (!strcmp ("text", detail)) && (state_type == GTK_STATE_SELECTED))
+  if (DETAIL("text") && (state_type == GTK_STATE_SELECTED))
     gc1 = style->bg_gc[GTK_STATE_SELECTED];
-  else if ((detail) && (!strcmp ("viewportbin", detail)))
+  else if (DETAIL("viewportbin"))
     gc1 = style->bg_gc[GTK_STATE_NORMAL];
   if ((!style->bg_pixmap[state_type]) || (gc1 != style->bg_gc[state_type]) || (gdk_window_get_type (window) == GDK_WINDOW_PIXMAP))
   {
@@ -711,7 +799,7 @@ draw_flat_box (GtkStyle * style, GdkWindow * window, GtkStateType state_type, Gt
       gdk_gc_set_clip_rectangle (gc1, area);
     }
     gdk_draw_rectangle (window, gc1, TRUE, x, y, width, height);
-    if ((detail) && (!strcmp ("tooltip", detail)))
+    if (DETAIL("tooltip"))
       gdk_draw_rectangle (window, style->black_gc, FALSE, x, y, width - 1, height - 1);
     if (area)
     {
@@ -749,7 +837,7 @@ draw_check (GtkStyle * style, GdkWindow * window, GtkStateType state, GtkShadowT
   x -= (1 + PART_SIZE - width) / 2;
   y -= (1 + PART_SIZE - height) / 2;
 
-  if (strcmp (detail, "check") == 0)	/* Menu item */
+  if (DETAIL("check"))	/* Menu item */
   {
     if (shadow == GTK_SHADOW_IN)
     {
@@ -775,7 +863,7 @@ draw_option (GtkStyle * style, GdkWindow * window, GtkStateType state, GtkShadow
   x -= (1 + PART_SIZE - width) / 2;
   y -= (1 + PART_SIZE - height) / 2;
 
-  if (strcmp (detail, "option") == 0)	/* Menu item */
+  if (DETAIL("option"))	/* Menu item */
   {
     if (shadow == GTK_SHADOW_IN)
     {
@@ -887,7 +975,7 @@ draw_arrow (GtkStyle * style, GdkWindow * window, GtkStateType state, GtkShadowT
   else if (height == -1)
     gdk_window_get_size (window, NULL, &height);
 
-  if (detail && strcmp (detail, "spinbutton") == 0)
+  if (DETAIL("spinbutton"))
   {
     x += (width - 7) / 2;
 
@@ -898,7 +986,7 @@ draw_arrow (GtkStyle * style, GdkWindow * window, GtkStateType state, GtkShadowT
 
     draw_varrow (window, style->text_gc[state], shadow, area, arrow_type, x, y, 7, 4);
   }
-  else if (detail && strcmp (detail, "vscrollbar") == 0)
+  else if (DETAIL("vscrollbar"))
   {
     draw_box (style, window, state, shadow, area, widget, detail, x, y, width, height);
 
@@ -908,7 +996,7 @@ draw_arrow (GtkStyle * style, GdkWindow * window, GtkStateType state, GtkShadowT
     draw_varrow (window, style->text_gc[state], shadow, area, arrow_type, x, y, 7, 5);
 
   }
-  else if (detail && strcmp (detail, "hscrollbar") == 0)
+  else if (DETAIL("hscrollbar"))
   {
     draw_box (style, window, state, shadow, area, widget, detail, x, y, width, height);
 
@@ -1332,7 +1420,7 @@ draw_slider (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
   else if (height == -1)
     gdk_window_get_size (window, NULL, &height);
 
-  gtk_draw_box (style, window, state_type, shadow_type, x, y, width, height);
+  draw_box (style, window, state_type, shadow_type, area, widget, detail, x, y, width, height);
   xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
 }
 
@@ -1349,6 +1437,6 @@ draw_handle (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
   else if (height == -1)
     gdk_window_get_size (window, NULL, &height);
 
-  gtk_draw_box (style, window, state_type, GTK_SHADOW_OUT, x, y, width, height);
+  draw_box (style, window, state_type, shadow_type, area, widget, detail, x, y, width, height);
   xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
 }
