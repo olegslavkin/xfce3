@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia C-2001 for xfce project
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -33,7 +35,9 @@
 #include "my_intl.h"
 #include "gtk_exec.h"
 #include "gtk_dlg.h"
+#include "xtree_cfg.h"
 #include "io.h"
+#include "reg.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -44,35 +48,16 @@ typedef struct
   GtkWidget *top;
   GtkWidget *combo;
   GtkWidget *check;
+  GtkWidget *reg;
+  cfg *win;
   char *cmd;
+  char *file;
   int result;
   int in_terminal;
 }
 dlg;
 
 static dlg dl;
-static GList *list = NULL;
-
-/*
- */
-GList *
-free_app_list (void)
-{
-  GList *g_tmp;
-  /* free the program list
-   */
-  if (list)
-  {
-    g_tmp = list;
-    while (g_tmp)
-    {
-      g_free (g_tmp->data);
-      g_tmp = g_tmp->next;
-    }
-    g_list_free (list);
-  }
-  return NULL;
-}
 
 /*
  */
@@ -93,30 +78,35 @@ static void
 on_ok (GtkWidget * ok, gpointer data)
 {
   char *temp;
-  GList *g_tmp;
-  gboolean found = FALSE;
+  static char *last_temp=NULL;
 
   temp = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (dl.combo)->entry));
+  if (last_temp) free(last_temp);
+  last_temp=(char *)malloc(strlen(temp)+1);
+  if (!last_temp) on_cancel (ok, (gpointer) ((long) DLG_RC_CANCEL));
+  strcpy(last_temp,temp);	  
 
-  if (strlen (temp))
+
+  if (strlen (last_temp))
   {
-    dl.cmd = g_strdup (temp);
-    g_tmp = list;
+    dl.cmd = g_strdup (last_temp);
 
-    while (g_tmp)
-    {
-      if (strcmp (g_tmp->data, dl.cmd) == 0)
-      {
-	found = TRUE;
-	break;
-      }
-      g_tmp = g_tmp->next;
-    }
-    if (!found)
-      list = g_list_append (list, g_strdup (temp));
     dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
     gtk_widget_destroy (dl.top);
     dl.result = (int) ((long) data);
+    if (gtk_toggle_button_get_active((GtkToggleButton *)dl.reg)){
+      char  *sfx;
+      sfx = strrchr (dl.file, '.');
+      if (!sfx) {
+	      sfx = strrchr (dl.file, '/');
+	      if (sfx) sfx++;
+      }
+      if (sfx) {
+	     dl.win->reg = reg_add_suffix (dl.win->reg, sfx, last_temp, NULL);
+	     reg_save (dl.win->reg);
+      }
+	    
+    }
     gtk_main_quit ();
   }
   else
@@ -130,12 +120,13 @@ on_ok (GtkWidget * ok, gpointer data)
 gint dlg_open_with (char *xap, char *defval, char *file){
 	return (xf_dlg_open_with (NULL,xap,defval,file));
 }
-gint xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file)
+gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *label, *box, *check;
-
+  GList *apps=NULL;
   char cmd[(PATH_MAX + NAME_MAX) * 3 + 6];
   char *title;
+
 
   if (file)
   {
@@ -147,13 +138,15 @@ gint xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file)
   }
 
   dl.result = 0;
+  dl.win=gtk_object_get_user_data (GTK_OBJECT (ctree));
   dl.in_terminal = 0;
+  dl.file=file;
   dl.top = gtk_dialog_new ();
   gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (dl.top), title);
   gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
-  if (parent) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent)); 
+  if (dl.win->top) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (dl.win->top)); 
   
   gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dl.top)->vbox), 5);
 
@@ -168,8 +161,9 @@ gint xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file)
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE, 0);
 
   dl.combo = gtk_combo_new ();
-  if (list)
-    gtk_combo_set_popdown_strings (GTK_COMBO (dl.combo), list);
+  apps = reg_app_list (dl.win->reg);
+  if (apps)
+    gtk_combo_set_popdown_strings (GTK_COMBO (dl.combo), apps);
   gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (dl.combo)->entry), 0, -1);
   gtk_combo_disable_activate (GTK_COMBO (dl.combo));
   if (defval)
@@ -187,6 +181,10 @@ gint xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file)
 
   dl.check = check = gtk_check_button_new_with_label (_("Open in terminal"));
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
+  
+  dl.reg = gtk_check_button_new_with_label (_("Remember application"));
+  gtk_box_pack_start (GTK_BOX (box), dl.reg, FALSE, FALSE, 0);
+
 
   gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.combo)->entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));

@@ -216,19 +216,32 @@ static int process_error(int code){
 	if (strstr(message,"\n")) strtok(message,"\n");
 	if (I_am_child)
 	{
-		FILE *hold;
-		fprintf(stdout,"child:%s %s\n",message,(txt)?txt:"*");
-		fflush(NULL);
-		if (runover) return TRUE;
-		holdfile=(char *)malloc(strlen(child_file)+1+strlen(".hold"));
-		if (!holdfile) return FALSE; /* will _exit() */
-		sprintf(holdfile,"%s.hold",child_file);
-		hold=fopen(holdfile,"w"); if (!hold) return FALSE;
-		fclose(hold);
-		/* active wait */
-		while ((hold=fopen(holdfile,"r"))!=NULL){
-			fclose(hold);
+		FILE *allF;
+    		char *allfile;
+		gboolean doall=FALSE;
+		/* check for all flag */
+    		allfile=(char *)malloc(strlen(child_file)+1+strlen(".all"));
+	 	if (allfile) { 
+		  sprintf(allfile,"%s.all",child_file);
+		  allF=fopen(allfile,"r");
+		  if (allF) {doall=TRUE;fclose(allF);}
+        	  free(allfile);
+		}
+		if (!doall) {
+		  FILE *hold;
+		  fprintf(stdout,"child:%s %s\n",message,(txt)?txt:"*");
+		  fflush(NULL);
+		  if (runover) return TRUE;
+		  holdfile=(char *)malloc(strlen(child_file)+1+strlen(".hold"));
+	 	  if (!holdfile) return FALSE; /* will _exit() */
+		  sprintf(holdfile,"%s.hold",child_file);
+		  hold=fopen(holdfile,"w"); if (!hold) return FALSE;
+		  fclose(hold);
+		  /* active wait */
+		  while ((hold=fopen(holdfile,"r"))!=NULL){
+		  	fclose(hold);
 			usleep(500000);
+		  }
 		}
 		return code; /* skip file with problem */
 	}
@@ -776,8 +789,9 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
  * */
 #define BUFFER_SIZE (4096)
 static int internal_rw_file(char *target,char *source,off_t size){
-	int i,j=0,source_file,target_file,total_size=0;
+	int i,j=0,source_file,target_file;
 	char *buffer;
+	off_t total_size=0;
 	gboolean too_few=FALSE,too_many=FALSE;
 	int b_size=BUFFER_SIZE;
         struct stat statbuf;
@@ -826,8 +840,8 @@ static int internal_rw_file(char *target,char *source,off_t size){
 		
 		/* This is not really any good information, and it just
 		 * slows xftree down too much.
-		fprintf(stdout,"child:bytes:path %d, file %d -> %d bytes\n",
-				child_path_number,child_file_number,total_size);fflush(NULL);
+		fprintf(stdout,"child:bytes:path %d, file %d -> %lld bytes\n",
+				child_path_number,child_file_number,(long long)total_size);fflush(NULL);
 		usleep(50);	*/
 	}
 	free(buffer);
@@ -929,7 +943,19 @@ static int rwStdout (int n, void *data){
   /*fprintf(stderr,"dbg(rwStdout error):%s\n",texto);fflush(NULL);*/
   /*set_dnd_status sets static variable in xtree_dnd to break loop;*/
 /*  rc=xf_dlg_error_continue (cat,texto,NULL);*/
-  rc=xf_dlg_error_continue (cat,texto,NULL);
+  rc=xf_dlg_new(cat,texto,NULL,NULL,DLG_CANCEL|DLG_CONTINUE|DLG_ALL);
+  /*rc=xf_dlg_error_continue_all (cat,texto,NULL);*/
+  if (rc==DLG_RC_ALL){
+    FILE *allF;
+    char *allfile;
+    allfile=(char *)malloc(strlen(child_file)+1+strlen(".all"));
+    if (allfile) { 
+	sprintf(allfile,"%s.all",child_file);
+	allF=fopen(allfile,"w"); if (allF) fclose(allF);	    
+        free(allfile);
+    }
+  }
+  
   holdfile=(char *)malloc(strlen(child_file)+1+strlen(".hold"));
   if (!holdfile) { /* this should not happen */
 	  cb_cancel(NULL,NULL);
@@ -946,6 +972,13 @@ static int rwStdout (int n, void *data){
 /* function called when child is dead */
 static void rwForkOver (void)
 {
+  char *allfile;
+  allfile=(char *)malloc(strlen(child_file)+1+strlen(".all"));
+  if (allfile) { 
+    sprintf(allfile,"%s.all",child_file);
+    unlink(allfile);
+    free(allfile);
+  }  
 /*  cursor_reset (GTK_WIDGET (smb_nav));*/
   rw_fork_obj = NULL;
   /*fprintf(stderr,"dbg: call to innerloop from forkover()\n");fflush(NULL);*/

@@ -295,7 +295,7 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       }
       else
       {
-	xf_dlg_open_with (win->top,win->xap, "", en->path);
+	xf_dlg_open_with (ctree,win->xap, "", en->path);
       }
     }
     chdir (wd);
@@ -750,6 +750,12 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_custom_SCK), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+  
+  menuitem = gtk_menu_item_new_with_label (_("Registered applications"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_registered), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
 
   menuitem = gtk_menu_item_new_with_label (_("About ..."));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_about), ctree);
@@ -778,21 +784,22 @@ int kolor;
 /* masks that are duplicated elsewhere are initialized to NULL */
 static pixmap_list pixmaps[]={
 	{gPIX+PIX_PAGE,		gPIM+PIM_PAGE,		page_xpm},
-	{gPIX+PIX_PAGE_AUDIO,	gPIM+PIM_PAGE_AUDIO,	page_audio_xpm},
-	{gPIX+PIX_TEXT,		NULL,			text_xpm},
-	{gPIX+PIX_COMPRESSED,	NULL,			compressed_xpm},
-	{gPIX+PIX_IMAGE,	NULL,			image_xpm},
-	{gPIX+PIX_TAR,		NULL,			tar_xpm},
-	{gPIX+PIX_PAGE_LNK,	NULL,			page_lnk_xpm},
+	{gPIX+PIX_PAGE_AUDIO,	NULL,			page_audio_xpm},
+	{gPIX+PIX_TEXT,		NULL,			page_text_xpm},
+	{gPIX+PIX_COMPRESSED,	NULL,			page_compressed_xpm},
+	{gPIX+PIX_IMAGE,	NULL,			page_image_xpm},
+	{gPIX+PIX_TAR,		NULL,			page_tar_xpm},
+	{gPIX+PIX_PAGE_LNK,	NULL,			page_link_xpm},
 	{gPIX+PIX_DIR_PD,	NULL,			dir_pd_xpm},
 	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
 	{gPIX+PIX_DIR_OPEN_LNK,	NULL,			dir_open_lnk_xpm},
 	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
 	{gPIX+PIX_DIR_CLOSE_LNK,NULL,			dir_close_lnk_xpm},
 	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
-	{gPIX+PIX_EXE,		gPIM+PIM_EXE,		exe_xpm},
-	{gPIX+PIX_EXE_LINK,	NULL,			exe_lnk_xpm},
-	{gPIX+PIX_EXE_SCRIPT,	NULL,			exe_script_xpm},
+	{gPIX+PIX_EXE,		gPIM+PIM_EXE,		page_exe_xpm},
+	{gPIX+PIX_EXE_LINK,	NULL,			page_exe_link_xpm},
+	{gPIX+PIX_EXE_SCRIPT,	NULL,			page_exe_script_xpm},
+	{gPIX+PIX_CORE,		NULL,			page_core_xpm},
 	{gPIX+PIX_CHAR_DEV,	gPIM+PIM_CHAR_DEV,	char_dev_xpm},
 	{gPIX+PIX_BLOCK_DEV,	gPIM+PIM_BLOCK_DEV,	block_dev_xpm},
 	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
@@ -807,7 +814,9 @@ static gen_pixmap_list gen_pixmaps[]={
 	{gPIX+PIX_PAGE_H,	NULL,	page_xpm,	"h",	1},
 	{gPIX+PIX_PAGE_F,	NULL,	page_xpm,	"f",	0},
 	{gPIX+PIX_PAGE_O,	NULL,	page_xpm,	"o",	3},
-	{gPIX+PIX_CORE,		NULL,	page_xpm,	"!",	2},
+	{gPIX+PIX_MAIL,		NULL,	page_xpm,	"@",	4},
+	{gPIX+PIX_BAK,		NULL,	page_xpm,	"*",	2},
+	{gPIX+PIX_DUP,		NULL,	page_xpm,	"*",	3},
 	{NULL,NULL,NULL,0}
 };
 
@@ -829,10 +838,15 @@ static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 				gdk_pixbuf_get_has_alpha (new_pixbuf));
   		gdk_pixbuf_unref (orig_pixbuf);
   		gdk_pixbuf_unref (new_pixbuf);
-
+ 	        gtk_clist_set_row_height ((GtkCList *)ctree,h);
 	} else
 #endif	
-	      *pixmap = MyCreateGdkPixmapFromData(xpm,hack,pixmask,FALSE);
+	{
+	      	*pixmap = MyCreateGdkPixmapFromData(xpm,hack,pixmask,FALSE);
+                gtk_clist_set_row_height ((GtkCList *)ctree,16);
+	}
+
+
 	return ;
 
 }
@@ -872,13 +886,14 @@ void create_pixmaps(int h,GtkWidget *ctree){
   for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
 	int x,y;
 	GdkColor back;
-	GdkColor kolor[4];
+	GdkColor kolor[5];
 	gint lbearing, rbearing, width, ascent, descent;
 
 	kolor[0].pixel=0, kolor[0].red= kolor[0].green=0;kolor[0].blue =65535;
 	kolor[1].pixel=1, kolor[1].red= kolor[1].blue=0; kolor[1].green=40000;
 	kolor[2].pixel=2, kolor[2].blue=kolor[2].green=0;kolor[2].red  =65535;
 	kolor[3].pixel=3, kolor[3].red= kolor[3].green=  kolor[3].blue =42000;
+	kolor[4].pixel=4, kolor[4].red= kolor[4].green=  kolor[4].blue =0;
 	
 	colormap = gdk_colormap_get_system();
 	gdk_colormap_alloc_color (colormap,kolor+gen_pixmaps[i].kolor,FALSE,TRUE);  
@@ -1364,7 +1379,8 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   GList *reg;
   cfg *new_win;
   int i;
-
+  
+  /*fprintf(stderr,"dbg:sizeof(off_t)=%d\n",sizeof(off_t));*/
   for (i=0;i<LAST_PIX;i++) gPIX[i]=NULL;
   for (i=0;i<LAST_PIM;i++) gPIM[i]=NULL;
   

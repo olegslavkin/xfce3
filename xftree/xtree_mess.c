@@ -383,7 +383,8 @@ char * override_txt(char *new_file,char *old_file)
   static char *message=NULL;
   char *ot=_("Override ?"),*otime=NULL,*ntime;
   char *with=_("with");
-  long unsigned int i,osize=0,nsize;
+  off_t i;
+  int osize=0,nsize;
   
   if (message) {free (message);}
   if (lstat (new_file, &nst) == ERROR){
@@ -393,13 +394,13 @@ char * override_txt(char *new_file,char *old_file)
   if (lstat (old_file, &ost) != ERROR){
     old_exists=TRUE;
     osize=1;
-    i=(long unsigned int)ost.st_size;
+    i=ost.st_size;
     otime=(char *)malloc( strlen(ctime(&(ost.st_mtime))) + 1 );
     strcpy(otime,ctime(&(ost.st_mtime)) );
     while (i) {i = i/10; osize++;}
   }
   nsize=1;
-  i=(long unsigned int)nst.st_size;
+  i=nst.st_size;
   while (i) {i = i/10; nsize++;}
   ntime=ctime(&(nst.st_mtime));
    
@@ -413,15 +414,15 @@ char * override_txt(char *new_file,char *old_file)
   message=(char *)malloc(i*sizeof(char));
   if (!message) {return ot;}
   if (old_exists){
-	sprintf(message,"%s\n%s %s %ld %s\n%s\n%s %s %ld %s\n",ot,
-			new_file,ntime,(long int)nst.st_size,BYTES,
+	sprintf(message,"%s\n%s %s %lld %s\n%s\n%s %s %lld %s\n",ot,
+			new_file,ntime,(long long)nst.st_size,BYTES,
 			with,
-			old_file,otime,(long int)ost.st_size,BYTES);
+			old_file,otime,(long long)ost.st_size,BYTES);
 	free(otime);
   }
   else
-	sprintf(message,"%s\n%s %s %ld %s\n",ot,
-			new_file,ntime,(long int)nst.st_size,BYTES);
+	sprintf(message,"%s\n%s %s %lld %s\n",ot,
+			new_file,ntime,(long long)nst.st_size,BYTES);
   return message;
 }
 	
@@ -700,7 +701,16 @@ void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
 "This means that you can open a menu,highlight an entry\nand press a keyboard key to create the shortcut.")
 	    );
 }
-			  
+
+void cb_registered(GtkWidget * item, GtkWidget * ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  xf_dlg_info (win->top,N_("Xftree can register applications by filename or filetype\nby selecting \"Register\" from one of the menus or by selecting\n\"Register application\" on mouse double-click.\n" 
+"If you wish to edit the applications that are already registered,\n please look at ~/.xfce/xtree.reg.")
+	    );
+}
+		  
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;

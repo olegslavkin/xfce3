@@ -790,7 +790,7 @@ cb_open_with (GtkWidget * item, GtkCTree * ctree)
   }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   prg = reg_app_by_file (win->reg, en->path);
-  xf_dlg_open_with (win->top,win->xap, prg ? prg : DEF_APP, en->path);
+  xf_dlg_open_with ((GtkWidget *)ctree,win->xap, prg ? prg : DEF_APP, en->path);
 }
 
 /*
@@ -955,7 +955,6 @@ on_destroy (GtkWidget * top,  GtkCTree * ctree)
   g_free (win);
   if (!top_has_more ())
   {
-    free_app_list ();
     gtk_main_quit ();
   }
 }

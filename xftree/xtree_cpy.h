@@ -3,7 +3,6 @@
 #ifdef XTREE_CPY_MAIN  
 #else /* XTREE_CPY_MAIN */
 #endif /* XTREE_CPY_MAIN */
-#include <sys/param.h>
 
 /* byte 1 */
 #define RW_ERROR_MALLOC		0x01
@@ -48,6 +47,7 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile);
 gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile);
 void set_override(gboolean state);
 gboolean on_same_device(void);
+
 
 /* Block size definition, from FSF cp */
 /* Get or fake the disk device blocksize.

@@ -26,12 +26,13 @@
 
 #ifndef __XTREE_FUNCTIONS_H__
 #define __XTREE_FUNCTIONS_H__
+#include <sys/types.h>
 #include <gtk/gtk.h>
 #include "xtree_cfg.h"
 #include "xtree_gui.h"
 typedef struct status_info {
-	int howmany;
-	int howmuch;
+	off_t howmany;
+	off_t howmuch;
 } status_info;
 
 

@@ -25,7 +25,7 @@
 #ifndef __GTK_EXEC_H__
 #define __GTK_EXEC_H__
 
-int xf_dlg_open_with (GtkWidget *parent,char *xap, char *defval, char *file);
+int xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file);
 /* depredated (use xf_dlg_open_with instead): */
 int dlg_open_with (char *xap, char *defval, char *file);
 GList *free_app_list (void);

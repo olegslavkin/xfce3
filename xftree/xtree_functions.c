@@ -363,6 +363,30 @@ static gboolean script_type(char *loc){
   };
   return checkif_type(Type,loc);			    
 }
+static gboolean mail_type(char *loc){
+  char *Type[]={
+	  "inbox","outbox","mbox","dead.letter",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+
+static gboolean bak_type(char *loc){
+  char *Type[]={
+	  ".bak",".BAK",".old",".rpmsave",".rpmnew",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+
+static gboolean dup_type(char *loc){
+  char *l;
+  for (l=loc+1;*l!=0;l++){
+	  if ((*l > '9')||(*l < '0')) return FALSE;
+  }
+  return TRUE;			    
+}
+
 
 
 static gboolean set_icon_pix(icon_pix *pix,entry *en) {
@@ -384,7 +408,11 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
     else {
       pix->pixmap=gPIX[PIX_PAGE]; /* default */
       if (strcmp(en->label,"core")==0) pix->pixmap=gPIX[PIX_CORE];
-      if ( (loc=strrchr(en->path,'.')) != NULL ){
+      else if (mail_type(en->label))	pix->pixmap=gPIX[PIX_MAIL];	      
+      else if ( (loc=strrchr(en->label,'-')) != NULL ){
+         if (dup_type(loc)) pix->pixmap=gPIX[PIX_DUP];	      
+      }
+      if ( (loc=strrchr(en->label,'.')) != NULL ){
 	      if (strlen(loc)==2) switch (loc[1]){
 		      case 'c': pix->pixmap=gPIX[PIX_PAGE_C]; break;
 		      case 'h': pix->pixmap=gPIX[PIX_PAGE_H]; break;
@@ -392,6 +420,7 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
 		      case 'o': pix->pixmap=gPIX[PIX_PAGE_O]; break;
 		      default: break;				      
 	      }
+	      else if (bak_type(loc)) 		pix->pixmap=gPIX[PIX_BAK];	      
 	      else if (image_type(loc)) 	pix->pixmap=gPIX[PIX_IMAGE];
 	      else if (text_type(loc))  	pix->pixmap=gPIX[PIX_TEXT];
 	      else if (compressed_type(loc)) 	pix->pixmap=gPIX[PIX_COMPRESSED];
@@ -466,11 +495,11 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
     sprintf (date, "%02d-%02d-%02d  %02d:%02d", en->date.year, en->date.month, en->date.day, en->date.hour, en->date.min);
     if (en->size < 0)
     {
-      sprintf (size, "?(ERR %lu)", -(long unsigned int)en->size);
+      sprintf (size, "?(ERR %lld)", -(long long)en->size);
     }
     else
     {
-      sprintf (size, "%10lu", (long unsigned int) en->size);
+      sprintf (size, " %lld", (long long) en->size);
     }
   }
   if (win->preferences&ABREVIATE_PATHS) text[COL_NAME] = abreviateP(en->label); else 
@@ -536,11 +565,11 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
    status_inf.howmuch *= 0.0009765625; /* value in Kb */ 
    texto=(char *)malloc(128+strlen(p_en->path));
    if (!texto) return;
-   sprintf(texto,"%s: %d %s, %d Kb.",
+   sprintf(texto,"%s: %lld %s, %lld Kb.",
 		   p_en->path, /* FIXME: use abbreviated path if configured */
-		   status_inf.howmany,
+		   (long long)status_inf.howmany,
 		   _("files"),
-		   status_inf.howmuch);
+		   (long long)status_inf.howmuch);
    gtk_label_set_text ((GtkLabel *)win->status,texto);
 
    /*fprintf(stderr,"dbg:%s\n",texto);*/
@@ -863,7 +892,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
       sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
 		      child_en->date.year, child_en->date.month, 
 		      child_en->date.day, child_en->date.hour, child_en->date.min);
-      sprintf (size, "%10d", (int) child_en->size);
+      sprintf (size, " %lld", (long long) child_en->size);
       gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
       gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
     }

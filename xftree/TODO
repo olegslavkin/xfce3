@@ -12,10 +12,6 @@ Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
 the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
 
 
-easy:
-16,16b- Config option: Default "open with" program, also add an option to register
-    a program type when the open with dialog pops up.
-
 complicated:
 4- gtk-2 
 
@@ -36,6 +32,9 @@ BUGS to fix:
 ****************************************************************
 ****************************************************************
 done:
+easy:
+16,16b- Config option: Default "open with" program, also add an option to register
+    a program type when the open with dialog pops up.
 a *must* do:
 Once the copy/move has gone recursive, on errors it must query continue/cancel
 instead of just cancelling. 

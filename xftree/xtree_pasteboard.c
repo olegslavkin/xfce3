@@ -209,15 +209,15 @@ pasteboard_is_empty:
   
   if (!(pastefile=fopen(pasteboard,"r"))) return;
 
-  texto=(char *)malloc((long unsigned int)f_stat.st_size+1);
-  if (fread(texto,(long unsigned int)f_stat.st_size,1,pastefile)!=1){
+  texto=(char *)malloc((long long)f_stat.st_size+1);
+  if (fread(texto,(long long)f_stat.st_size,1,pastefile)!=1){
   	fprintf(stderr,"dbg:error reading pasteboard\n");
 	fclose(pastefile);
 	return;
   }
   fclose(pastefile);
   
-  texto[(long unsigned int)f_stat.st_size]=0;
+  texto[(long long)f_stat.st_size]=0;
   word=strtok(texto,"\n");
   if (!word) {
   	fprintf(stderr,"dbg:cb_paste(), this shouldn't happen\n");
@@ -276,14 +276,14 @@ void cb_paste_show(GtkWidget * widget, GtkCTree * ctree){
 	return; 
   }
   
-  texto=(char *)malloc((long unsigned int)f_stat.st_size+1);
-  if (fread(texto,(long unsigned int)f_stat.st_size,1,pastefile)!=1){
+  texto=(char *)malloc((long long)f_stat.st_size+1);
+  if (fread(texto,(long long)f_stat.st_size,1,pastefile)!=1){
   	fprintf(stderr,"dbg:error reading pasteboard\n");
 	fclose(pastefile);
 	return;
   }
   fclose(pastefile);
-  texto[(long unsigned int)f_stat.st_size]=0;
+  texto[(long long)f_stat.st_size]=0;
   for (i=0;i<strlen(texto);i++) if (texto[i]=='\r') texto[i]=' ';
 
   clear_cat(widget,ctree);

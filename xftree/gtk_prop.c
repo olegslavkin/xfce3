@@ -245,7 +245,7 @@ xf_dlg_prop (GtkWidget *parent,char *path, fprop * prop, int flags)
       n += 2;
     }
   }
-  sprintf (buf, _("%ld Bytes"), (unsigned long) prop->size);
+  sprintf (buf, _("%lld Bytes"), (long long) prop->size);
   info[n + 1] = label_new (buf, GTK_JUSTIFY_LEFT);
   info[n] = label_new (_("Size :"), GTK_JUSTIFY_RIGHT);
   gtk_table_attach (GTK_TABLE (table), info[n], 0, 1, n, n + 1, TBL_XOPT, 0, X_PAD, Y_PAD);

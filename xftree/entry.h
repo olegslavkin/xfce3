@@ -42,9 +42,9 @@ typedef struct
   off_t size;
   int type;
   int flags;
-  int mtime;
-  int inode;
-  unsigned int mode;
+  time_t mtime;
+  ino_t inode;
+  mode_t mode;
   mdate date;
   void *org_mem;
 }
