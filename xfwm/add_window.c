@@ -117,21 +117,22 @@ AddWindow (Window w)
 {
   XfwmWindow *tmp_win;		/* new xfwm window structure */
   unsigned long valuemask;	/* mask for create windows */
-  XSetWindowAttributes attributes;	/* attributes for create windows */
-  int i, x, y, width, height;
-  char *value;
   unsigned long tflag = 0L;
-  int Desk, border_width, layer;
+  unsigned long nitems, bytes_remain;
   unsigned long state;
-  char *forecolor = NULL, *backcolor = NULL;
+  int aformat;
+  int i, x, y, width, height;
+  int Desk, border_width, layer;
   int client_argc;
+  char *value;
+  char *forecolor = NULL, *backcolor = NULL;
   char **client_argv = NULL, *str_type;
+  unsigned char *prop;
+  XSetWindowAttributes attributes;	/* attributes for create windows */
   Bool status;
   XrmValue rm_value;
+  XEvent dummy;
   Atom atype;
-  int aformat;
-  unsigned long nitems, bytes_remain;
-  unsigned char *prop;
 
   extern XfwmWindow *colormap_win;
 
@@ -484,9 +485,17 @@ AddWindow (Window w)
     tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
   InstallWindowColormaps (colormap_win);
 
+  /* If for some reason the windows will come out, just destroy it and give up */
+  if (XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
+  {
+    Destroy (tmp_win);
+    return (NULL);
+  }
+
   /* When we're all clear, map window */
   XMapSubwindows (dpy, tmp_win->frame);
   XRaiseWindow (dpy, tmp_win->Parent);
+
   return (tmp_win);
 }
 

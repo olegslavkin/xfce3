@@ -755,38 +755,7 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
   if ((tmp_win->flags & TRANSIENT))
     return;
 
-  /* iconify transients first */
-  for (t = Scr.XfwmRoot.next; t != NULL; t = t->next)
-  {
-    if ((t == tmp_win) || ((t->flags & TRANSIENT) && (t->transientfor == tmp_win->w)))
-    {
-      /*
-       * Prevent the receipt of an UnmapNotify, since that would
-       * cause a transition to the Withdrawn state.
-       */
-      t->flags &= ~MAPPED;
-      XGetWindowAttributes (dpy, t->w, &winattrs);
-      eventMask = winattrs.your_event_mask;
-      XSelectInput (dpy, t->w, eventMask & ~StructureNotifyMask);
-      XUnmapWindow (dpy, t->w);
-      XUnmapWindow (dpy, t->frame);
-      XSelectInput (dpy, t->w, eventMask);
-      t->DeIconifyDesk = t->Desk;
-      if (t->icon_w)
-	XUnmapWindow (dpy, t->icon_w);
-      if (t->icon_pixmap_w)
-	XUnmapWindow (dpy, t->icon_pixmap_w);
-      SetMapStateProp (t, IconicState);
-      SetBorder (t, False, False, False, None);
-      if (t != tmp_win)
-      {
-	t->flags |= ICONIFIED | ICON_UNMAPPED;
-
-	Broadcast (XFCE_M_ICONIFY, 7, t->w, t->frame, (unsigned long) t, -10000, -10000, t->icon_w_width, t->icon_w_height + t->icon_p_height);
-	BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, t);
-      }
-    }
-  }
+  /* Now create icons first so it looks faster */
   if (tmp_win->icon_w == None)
   {
     if (tmp_win->flags & ICON_MOVED)
@@ -824,6 +793,39 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
 
   if ((!(tmp_win->flags & STARTICONIC)) && (!(tmp_win->flags & ICON_MOVED) || !CheckIconPlace (tmp_win)))
     AutoPlace (tmp_win, False);
+
+  /* iconify transients first */
+  for (t = Scr.XfwmRoot.next; t != NULL; t = t->next)
+  {
+    if ((t == tmp_win) || ((t->flags & TRANSIENT) && (t->transientfor == tmp_win->w)))
+    {
+      /*
+       * Prevent the receipt of an UnmapNotify, since that would
+       * cause a transition to the Withdrawn state.
+       */
+      t->flags &= ~MAPPED;
+      XGetWindowAttributes (dpy, t->w, &winattrs);
+      eventMask = winattrs.your_event_mask;
+      XSelectInput (dpy, t->w, eventMask & ~StructureNotifyMask);
+      XUnmapWindow (dpy, t->w);
+      XUnmapWindow (dpy, t->frame);
+      XSelectInput (dpy, t->w, eventMask);
+      t->DeIconifyDesk = t->Desk;
+      if (t->icon_w)
+	XUnmapWindow (dpy, t->icon_w);
+      if (t->icon_pixmap_w)
+	XUnmapWindow (dpy, t->icon_pixmap_w);
+      SetMapStateProp (t, IconicState);
+      SetBorder (t, False, False, False, None);
+      if (t != tmp_win)
+      {
+	t->flags |= ICONIFIED | ICON_UNMAPPED;
+
+	Broadcast (XFCE_M_ICONIFY, 7, t->w, t->frame, (unsigned long) t, -10000, -10000, t->icon_w_width, t->icon_w_height + t->icon_p_height);
+	BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, t);
+      }
+    }
+  }
   tmp_win->flags |= ICONIFIED;
   tmp_win->flags &= ~ICON_UNMAPPED;
   Broadcast (XFCE_M_ICONIFY, 7, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, tmp_win->icon_x_loc, tmp_win->icon_y_loc, tmp_win->icon_w_width, tmp_win->icon_w_height + tmp_win->icon_p_height);
