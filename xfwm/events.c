@@ -1519,9 +1519,9 @@ HandleConfigureRequest ()
     Tmp_win->old_bw = cre->border_width;
 
   if (cre->value_mask & CWX)
-    x = cre->x - Tmp_win->boundary_width - Tmp_win->bw;
+    x = cre->x;
   if (cre->value_mask & CWY)
-    y = cre->y - Tmp_win->boundary_width - Tmp_win->title_height - Tmp_win->bw;
+    y = cre->y;
   if (cre->value_mask & CWWidth)
     width = cre->width + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
   if (cre->value_mask & CWHeight)
@@ -1534,7 +1534,7 @@ HandleConfigureRequest ()
     SetBorder (Tmp_win, Scr.Hilite == Tmp_win, True, True, None);
   }
 
-  SetupFrame (Tmp_win, x, y, width, height, False, True);
+  SetupFrame (Tmp_win, x, y, width, height, True, True);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleConfigureRequest ()\n");
 #endif

@@ -402,17 +402,8 @@ AddWindow (Window w)
     }
   }
 
-  x = tmp_win->frame_x;
-  tmp_win->frame_x = 0;
-  y = tmp_win->frame_y;
-  tmp_win->frame_y = 0;
-  width = tmp_win->frame_width;
-  tmp_win->frame_width = 0;
-  height = tmp_win->frame_height;
-  tmp_win->frame_height = 0;
-  SetupFrame (tmp_win, x, y, width, height, True, True);
-
   XReparentWindow (dpy, w, tmp_win->Parent, 0, 0);
+  XRaiseWindow (dpy, tmp_win->Parent);
   valuemask = (CWEventMask | CWDontPropagate);
   attributes.event_mask = (StructureNotifyMask | PropertyChangeMask | ColormapChangeMask | EnterWindowMask | LeaveWindowMask | FocusChangeMask);
 
@@ -469,6 +460,16 @@ AddWindow (Window w)
   MyXGrabButton (dpy, AnyButton, 0, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
   MyXGrabButton (dpy, AnyButton, AnyModifier, tmp_win->frame, True, ButtonPressMask, GrabModeSync, GrabModeAsync, None, None);
 
+  x = tmp_win->frame_x;
+  tmp_win->frame_x = 0;
+  y = tmp_win->frame_y;
+  tmp_win->frame_y = 0;
+  width = tmp_win->frame_width;
+  tmp_win->frame_width = 0;
+  height = tmp_win->frame_height;
+  tmp_win->frame_height = 0;
+  SetupFrame (tmp_win, x, y, width, height, True, True);
+
   XSync (dpy, 0);
   MyXUngrabServer (dpy);
 
@@ -489,7 +490,6 @@ AddWindow (Window w)
 
   /* When we're all clear, map window */
   XMapSubwindows (dpy, tmp_win->frame);
-  XRaiseWindow (dpy, tmp_win->Parent);
 
   return (tmp_win);
 }
