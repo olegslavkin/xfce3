@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-30 14:32+0200\n"
+"POT-Creation-Date: 2001-10-04 12:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Statescu <Daniel.Statescu@bigfoot.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,10 +36,12 @@ msgid "Message"
 msgstr "Mesaj"
 
 #: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
+#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:133
 msgid "Yes"
 msgstr "Da"
 
 #: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
+#: xfumed/xfumed_gui_cb.c:77 xfumed/xfumed_gui_cb.c:134
 msgid "No"
 msgstr "Nu"
 
@@ -85,6 +87,7 @@ msgstr "Alegere ..."
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
 #: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
+#: xfumed/xfumed_gui.c:437
 msgid "Ok"
 msgstr "Ok"
 
@@ -92,6 +95,7 @@ msgstr "Ok"
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
+#: xfumed/xfumed_gui.c:445
 msgid "Cancel"
 msgstr "Anulare"
 
@@ -229,7 +233,7 @@ msgstr "Eticheta :"
 msgid "Position :"
 msgstr "Accelerare : "
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/interface.c:338
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/xfumed_gui.c:149
 msgid "Remove"
 msgstr "Sterge"
 
@@ -669,7 +673,7 @@ msgstr "Setup..."
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:699 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/interface.c:372
+#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:189
 msgid "Quit"
 msgstr "Iesire"
 
@@ -1743,7 +1747,7 @@ msgid "Auto strip level"
 msgstr ""
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242
+#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:99
 msgid "Actions"
 msgstr ""
 
@@ -2576,7 +2580,7 @@ msgstr "Test"
 msgid "Play Sound"
 msgstr "Asculta Sunet"
 
-#: xfsound/xfsound.c:551 xfumed/interface.c:265
+#: xfsound/xfsound.c:551
 msgid "Command : "
 msgstr "Comand† : "
 
@@ -3330,101 +3334,114 @@ msgstr ""
 msgid "Upload failed."
 msgstr "Mut fisierul..\n"
 
-#: xfumed/clistmenu.c:34
-#, c-format
-msgid "   Menu: %s   Parent: %s"
+#: xfumed/xfumed_gui.c:47
+msgid "User Menu Editor"
 msgstr ""
 
-#. nothing found
-#: xfumed/clistmenu.c:42 xfumed/clistmenu.c:52 xfumed/usermenu.c:57
-#: xfumed/usermenu.c:68
-msgid "Toplevel"
-msgstr ""
-
-#: xfumed/clistmenu.c:42
-#, fuzzy
-msgid "None"
-msgstr "Nou†"
-
-#: xfumed/clistmenu.c:458
-msgid "Your changes will take effect on next startup"
-msgstr ""
-
-#: xfumed/interface.c:89
-msgid "XFce User Menu Editor"
-msgstr ""
-
-#: xfumed/interface.c:137
-#, fuzzy
-msgid "Go to parent menu"
-msgstr "Du-te la semn"
-
-#: xfumed/interface.c:144
-#, fuzzy
-msgid "Go to submenu"
-msgstr "Du-te la semn"
-
-#: xfumed/interface.c:169
-#, fuzzy
-msgid "Type"
-msgstr "Tip :"
-
-#: xfumed/interface.c:175
+#: xfumed/xfumed_gui.c:85
 #, fuzzy
 msgid "Caption"
 msgstr "Configurare"
 
-#: xfumed/interface.c:181
+#: xfumed/xfumed_gui.c:92
 #, fuzzy
 msgid "Command"
 msgstr "Comand† : "
 
-#: xfumed/interface.c:235
-msgid "Edit item"
+#: xfumed/xfumed_gui.c:117
+#, fuzzy
+msgid "Move Up"
+msgstr "&Mut†"
+
+#: xfumed/xfumed_gui.c:125
+msgid "Move Down"
 msgstr ""
 
-#: xfumed/interface.c:249
-#, fuzzy
-msgid "Type : "
-msgstr "Tip :"
-
-#: xfumed/interface.c:257
-#, fuzzy
-msgid "Caption : "
-msgstr "Accelerare : "
-
-#: xfumed/interface.c:324
+#: xfumed/xfumed_gui.c:133
 msgid "Add"
 msgstr ""
 
-#: xfumed/interface.c:331
-msgid "Update"
-msgstr ""
+#: xfumed/xfumed_gui.c:141
+#, fuzzy
+msgid "Edit"
+msgstr "Opt"
 
-#: xfumed/interface.c:358
+#: xfumed/xfumed_gui.c:173
 #, fuzzy
 msgid "Save"
 msgstr "Salvare ..."
 
-#: xfumed/interface.c:365
+#: xfumed/xfumed_gui.c:181
 #, fuzzy
 msgid "Reset"
 msgstr "Test"
 
-#: xfumed/interface.c:403
+#: xfumed/xfumed_gui.c:313
+msgid "Edit Entry"
+msgstr ""
+
+#: xfumed/xfumed_gui.c:315
+msgid "Add Entry"
+msgstr ""
+
+#: xfumed/xfumed_gui.c:338
+#, fuzzy
+msgid "Type: "
+msgstr "Tip :"
+
+#: xfumed/xfumed_gui.c:348
+#, fuzzy
+msgid "Caption: "
+msgstr "Accelerare : "
+
+#: xfumed/xfumed_gui.c:358
+#, fuzzy
+msgid "Command: "
+msgstr "Comand† : "
+
+#: xfumed/xfumed_gui_cb.c:22
+msgid "Your changes will take effect on next startup"
+msgstr ""
+
+#: xfumed/xfumed_gui_cb.c:69
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
-"Do you want to quit and lose the changes ?"
+"Do you want to save the changes ?"
 msgstr ""
 
-#: xfumed/interface.c:409
+#: xfumed/xfumed_gui_cb.c:78
 msgid "Don't Quit"
 msgstr ""
 
-#: xfumed/interface.c:410
-msgid "Quit, don't save"
+#: xfumed/xfumed_gui_cb.c:127
+#, fuzzy
+msgid "Do you want to delete this entry ?"
+msgstr "Sinteti sigur ca vreti sa stergeti aceasta inregistrare ?"
+
+#: xfumed/xfumed_gui_cb.c:129
+msgid ""
+"If you delete a submenu, all its entries and \n"
+"submenus will also be deleted.\n"
+"\n"
+"Do you want to delete this submenu ?"
 msgstr ""
+
+#, fuzzy
+#~ msgid "None"
+#~ msgstr "Nou†"
+
+#, fuzzy
+#~ msgid "Go to parent menu"
+#~ msgstr "Du-te la semn"
+
+#, fuzzy
+#~ msgid "Go to submenu"
+#~ msgstr "Du-te la semn"
+
+#, fuzzy
+#~ msgid "Type"
+#~ msgstr "Tip :"
 
 #~ msgid "XFce : %s File not found.\n"
 #~ msgstr "XFce : %s Fisier inexistent.\n"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE 3\n"
-"POT-Creation-Date: 2001-09-30 14:32+0200\n"
+"POT-Creation-Date: 2001-10-04 12:24+0200\n"
 "PO-Revision-Date: 2001-05-30 16:09+02:00\n"
 "Last-Translator: Matthias Warkus <mawa@iname.com>\n"
 "Language-Team: me and my monkey <mawa@iname.com>\n"
@@ -36,10 +36,12 @@ msgid "Message"
 msgstr "Meldung"
 
 #: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
+#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:133
 msgid "Yes"
 msgstr "Ja"
 
 #: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
+#: xfumed/xfumed_gui_cb.c:77 xfumed/xfumed_gui_cb.c:134
 msgid "No"
 msgstr "Nein"
 
@@ -85,6 +87,7 @@ msgstr "Wählen..."
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
 #: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
+#: xfumed/xfumed_gui.c:437
 msgid "Ok"
 msgstr "OK"
 
@@ -92,6 +95,7 @@ msgstr "OK"
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
+#: xfumed/xfumed_gui.c:445
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -228,7 +232,7 @@ msgstr "Beschriftung:"
 msgid "Position :"
 msgstr "Ort: "
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/interface.c:338
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/xfumed_gui.c:149
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -666,7 +670,7 @@ msgstr "Einstellungen..."
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:699 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/interface.c:372
+#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:189
 msgid "Quit"
 msgstr "Ende"
 
@@ -1746,7 +1750,7 @@ msgid "Auto strip level"
 msgstr "Automatische Strip-Ebene"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242
+#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:99
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -2587,7 +2591,7 @@ msgstr "Test"
 msgid "Play Sound"
 msgstr "Sound abspielen"
 
-#: xfsound/xfsound.c:551 xfumed/interface.c:265
+#: xfsound/xfsound.c:551
 msgid "Command : "
 msgstr "Befehl: "
 
@@ -3306,94 +3310,124 @@ msgstr "Angegebene Datei existiert nicht"
 msgid "Upload failed."
 msgstr "Upload fehlgeschlagen"
 
-#: xfumed/clistmenu.c:34
-#, c-format
-msgid "   Menu: %s   Parent: %s"
-msgstr "   Menü: %s   Elter: %s"
-
-#. nothing found
-#: xfumed/clistmenu.c:42 xfumed/clistmenu.c:52 xfumed/usermenu.c:57
-#: xfumed/usermenu.c:68
-msgid "Toplevel"
-msgstr "Oberstes"
-
-#: xfumed/clistmenu.c:42
-msgid "None"
-msgstr "Keines"
-
-#: xfumed/clistmenu.c:458
-msgid "Your changes will take effect on next startup"
-msgstr "Ihre Änderungen werden beim nächsten Start in Kraft treten"
-
-#: xfumed/interface.c:89
-msgid "XFce User Menu Editor"
+#: xfumed/xfumed_gui.c:47
+#, fuzzy
+msgid "User Menu Editor"
 msgstr "XFCE-Benutzermenü-Editor"
 
-#: xfumed/interface.c:137
-msgid "Go to parent menu"
-msgstr "Zu Elternmenü gehen"
-
-#: xfumed/interface.c:144
-msgid "Go to submenu"
-msgstr "Zu Untermenü gehen"
-
-#: xfumed/interface.c:169
-msgid "Type"
-msgstr "Typ"
-
-#: xfumed/interface.c:175
+#: xfumed/xfumed_gui.c:85
 msgid "Caption"
 msgstr "Beschriftung"
 
-#: xfumed/interface.c:181
+#: xfumed/xfumed_gui.c:92
 msgid "Command"
 msgstr "Befehl"
 
-#: xfumed/interface.c:235
-msgid "Edit item"
-msgstr "Eintrag bearbeiten"
+#: xfumed/xfumed_gui.c:117
+#, fuzzy
+msgid "Move Up"
+msgstr "Verschieben"
 
-#: xfumed/interface.c:249
-msgid "Type : "
-msgstr "Typ: "
+#: xfumed/xfumed_gui.c:125
+msgid "Move Down"
+msgstr ""
 
-#: xfumed/interface.c:257
-msgid "Caption : "
-msgstr "Beschriftung: "
-
-#: xfumed/interface.c:324
+#: xfumed/xfumed_gui.c:133
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: xfumed/interface.c:331
-msgid "Update"
-msgstr "Aktualisieren"
+#: xfumed/xfumed_gui.c:141
+#, fuzzy
+msgid "Edit"
+msgstr "Beenden"
 
-#: xfumed/interface.c:358
+#: xfumed/xfumed_gui.c:173
 msgid "Save"
 msgstr "Speichern"
 
-#: xfumed/interface.c:365
+#: xfumed/xfumed_gui.c:181
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: xfumed/interface.c:403
+#: xfumed/xfumed_gui.c:313
+#, fuzzy
+msgid "Edit Entry"
+msgstr "Eintrag bearbeiten"
+
+#: xfumed/xfumed_gui.c:315
+msgid "Add Entry"
+msgstr ""
+
+#: xfumed/xfumed_gui.c:338
+#, fuzzy
+msgid "Type: "
+msgstr "Typ: "
+
+#: xfumed/xfumed_gui.c:348
+#, fuzzy
+msgid "Caption: "
+msgstr "Beschriftung: "
+
+#: xfumed/xfumed_gui.c:358
+#, fuzzy
+msgid "Command: "
+msgstr "Befehl: "
+
+#: xfumed/xfumed_gui_cb.c:22
+msgid "Your changes will take effect on next startup"
+msgstr "Ihre Änderungen werden beim nächsten Start in Kraft treten"
+
+#: xfumed/xfumed_gui_cb.c:69
+#, fuzzy
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
-"Do you want to quit and lose the changes ?"
+"Do you want to save the changes ?"
 msgstr ""
 "Es gibt ungesicherte Änderungen am Menü.\n"
 "\n"
 "Möchten Sie das Programm beenden und die Änderungen verlieren?"
 
-#: xfumed/interface.c:409
+#: xfumed/xfumed_gui_cb.c:78
 msgid "Don't Quit"
 msgstr "Nicht beenden"
 
-#: xfumed/interface.c:410
-msgid "Quit, don't save"
-msgstr "Beenden, nicht speichern"
+#: xfumed/xfumed_gui_cb.c:127
+#, fuzzy
+msgid "Do you want to delete this entry ?"
+msgstr "Sind Sie sicher, dass Sie diesen Eintrag entfernen wollen?"
+
+#: xfumed/xfumed_gui_cb.c:129
+msgid ""
+"If you delete a submenu, all its entries and \n"
+"submenus will also be deleted.\n"
+"\n"
+"Do you want to delete this submenu ?"
+msgstr ""
+
+#~ msgid "   Menu: %s   Parent: %s"
+#~ msgstr "   Menü: %s   Elter: %s"
+
+#~ msgid "Toplevel"
+#~ msgstr "Oberstes"
+
+#~ msgid "None"
+#~ msgstr "Keines"
+
+#~ msgid "Go to parent menu"
+#~ msgstr "Zu Elternmenü gehen"
+
+#~ msgid "Go to submenu"
+#~ msgstr "Zu Untermenü gehen"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Update"
+#~ msgstr "Aktualisieren"
+
+#~ msgid "Quit, don't save"
+#~ msgstr "Beenden, nicht speichern"
 
 #~ msgid "XFce : %s File not found.\n"
 #~ msgstr "XFCE: %s Datei nicht gefunden.\n"

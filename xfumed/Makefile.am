@@ -8,11 +8,9 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ 
 
 bin_PROGRAMS = xfumed 
 
-xfumed_SOURCES = main.c xfumed.h \
-				interface.c interface.h \
-				callbacks.c callbacks.h \
-				usermenu.c usermenu.h \
-				clistmenu.c clistmenu.h
+xfumed_SOURCES = xfumed.c xfumed.h \
+				xfumed_gui.c xfumed_gui.h \
+				xfumed_gui_cb.c xfumed_gui_cb.h 
 
 xfumed_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \

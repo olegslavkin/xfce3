@@ -82,9 +82,9 @@ xfsamba/xfsamba_rm.c
 xfsamba/xfsamba_tar.c
 xfsamba/xfsamba_upload.c
 #XFumed source files
-xfumed/callbacks.c
-xfumed/clistmenu.c
-xfumed/interface.c
-xfumed/interface.h
-xfumed/usermenu.c
-xfumed/usermenu.h
+xfumed/xfumed.c
+xfumed/xfumed_gui.c
+xfumed/xfumed_gui_cb.c
+xfumed/xfumed.h
+xfumed/xfumed_gui.h
+xfumed/xfumed_gui_cb.h
