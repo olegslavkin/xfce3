@@ -44,4 +44,4 @@ EXTRA_DIST = \
 # increase the release-tag) in the xfce.spec (e.g. 3.8.14.20011214) and run
 # "./autogen.sh && make rpm"  (it also builds xfce-3.8.14.20011214.tar.gz)
 rpm : dist
-	rpm -ta $(PACKAGE)-$(VERSION).tar.gz
+	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
