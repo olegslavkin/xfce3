@@ -64,7 +64,7 @@ ifelse(AC_ACVERSION, [2.13], [],
 #
 INSTALL_SCRIPT='${INSTALL}'
 
-ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN zh_TW.Big5"
+ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja ms nl pl pt_BR ro ru sk sr sv uk zh zh_CN zh_TW.Big5"
 AM_GNU_GETTEXT
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
