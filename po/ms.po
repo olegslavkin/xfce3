@@ -3096,10 +3096,11 @@ msgid "xfbdmgr - XFCE List Manager"
 msgstr "xfbdmgr - Pengurus Senarai XFCE"
 
 #: xfbd/xfbdmgr.c:257
+msgid "File not found.\n"
+msgstr "Fail tidak dijumpai.\n"
+
 #: xfwm/xfwm.c:854
-msgid ""
-"File not found.\n"
-"&Restart"
+msgid "&Restart"
 msgstr "&Mulasemula"
 
 #: xfwm/xfwm.c:855
