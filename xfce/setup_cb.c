@@ -94,7 +94,10 @@ setup_ok_cb (GtkWidget * widget, gpointer data)
   if (current_config.colorize_root)
     ApplyRootColor (pal, (current_config.gradient_root != 0), get_screen_color (get_current_screen ()));
   if (prev_visible_popup != current_config.visible_popup)
+  {
+    hide_current_popup_menu ();
     update_gxfce_popup_buttons (current_config.visible_popup);
+  }
   if (prev_panel_icon_size != current_config.select_icon_size)
   {
     hide_current_popup_menu ();
@@ -162,7 +165,10 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
   if (current_config.colorize_root)
     ApplyRootColor (pal, (current_config.gradient_root != 0), get_screen_color (get_current_screen ()));
   if (prev_visible_popup != current_config.visible_popup)
+  {
+    hide_current_popup_menu ();
     update_gxfce_popup_buttons (current_config.visible_popup);
+  }
   if (prev_panel_icon_size != current_config.select_icon_size)
   {
     hide_current_popup_menu ();
