@@ -32,11 +32,9 @@
 #include "my_intl.h"
 #include "gtk_dlg.h"
 #include "gtk_dnd.h"
-#include "icons/warning.xpm"
-#include "icons/info.xpm"
-#include "icons/question.xpm"
-#include "icons/error.xpm"
+#include "dlg_icons.h"
 #include "xpmext.h"
+#include "xtree_mess.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -263,7 +261,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   gtk_container_set_border_width (GTK_CONTAINER (box), 5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE, 0);
   gtk_widget_realize (dl.top);
-  gdk_window_set_decorations (dl.top->window,GDK_DECOR_BORDER);
+  if (preferences & SMALL_DIALOGS) gdk_window_set_decorations (dl.top->window,GDK_DECOR_BORDER);
 
   /* SJB */
 	accelgrp = gtk_accel_group_new();

@@ -18,6 +18,7 @@
 #define SORT_NAME		0x20000
 #define STATUS_FOLLOWS_EXPAND	0x40000
 #define SHOW_STATUS		0x80000
+#define SMALL_DIALOGS		0x100000
 
 
 #define UNSORT_MASK		(0x38000 ^ 0xffffffff)
