@@ -286,7 +286,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
       fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
 #endif
-      SetFocus (Win->w, Win, True, False);
+      SetFocus (Win->w, Win, False, False);
 #ifdef DEBUG
       fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -304,7 +304,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Setting focus to '%s'\n", Win->name);
 #endif
-    SetFocus (Win->w, Win, True, False);
+    SetFocus (Win->w, Win, False, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -316,7 +316,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Revert focus itself='%s'\n", Win->name);
 #endif
-    SetFocus (Tmp_win->w, Tmp_win, True, False);
+    SetFocus (Tmp_win->w, Tmp_win, False, False);
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
@@ -366,21 +366,6 @@ Destroy (XfwmWindow * Tmp_win)
     Tmp_win->next->prev = Tmp_win->prev;
   Scr.stacklist = RemoveFromXfwmWindowList (Scr.stacklist, Tmp_win);
 
-  if (Scr.LastWindowRaised == Tmp_win)
-  {
-    Scr.LastWindowRaised = NULL;
-  }
-
-  if (Scr.LastWindowLowered == Tmp_win)
-  {
-    Scr.LastWindowLowered = NULL;
-  }
-
-  if (Scr.Hilite == Tmp_win)
-  {
-    Scr.Hilite = NULL;
-  }
-
   if (Scr.PreviousFocus == Tmp_win)
   {
     Scr.PreviousFocus = NULL;
@@ -401,15 +386,29 @@ Destroy (XfwmWindow * Tmp_win)
     colormap_win = NULL;
   }
 
+  XUnmapWindow (dpy, Tmp_win->frame);
+  XSync (dpy, 0);
+  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
+
+  if (Scr.LastWindowRaised == Tmp_win)
+  {
+    Scr.LastWindowRaised = NULL;
+  }
+
+  if (Scr.LastWindowLowered == Tmp_win)
+  {
+    Scr.LastWindowLowered = NULL;
+  }
+
+  if (Scr.Hilite == Tmp_win)
+  {
+    Scr.Hilite = NULL;
+  }
+
   if (Scr.Focus == Tmp_win)
   {
     RevertFocus (Tmp_win, False);
   }
-
-  XUnmapWindow (dpy, Tmp_win->frame);
-  XSync (dpy, 0);
-
-  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
 
   if ((Tmp_win->icon_w) && (Tmp_win->flags & PIXMAP_OURS))
 #ifdef HAVE_IMLIB
