@@ -77,6 +77,7 @@ enum
   PIX_BLOCK_DEV,
   PIX_STALE_LNK,
   PIX_EXE,PIX_EXE_SCRIPT,PIX_EXE_LINK,
+  PIX_EXE_FILE,
   LAST_PIX
 };
 /* don't repeat masks that already exist */
@@ -95,6 +96,7 @@ enum
   PIM_SOCKET,
   PIM_BLOCK_DEV,
   PIM_EXE,
+  PIM_EXE_FILE,
   LAST_PIM
 };
 
@@ -128,6 +130,7 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
 	{gPIX+PIX_SOCKET,	gPIM+PIM_SOCKET,	socket_xpm},
 	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
+	{gPIX+PIX_EXE_FILE,	gPIM+PIM_EXE_FILE,	exe_file_xpm},
 	{NULL,NULL,NULL}
 };
 
@@ -303,50 +306,7 @@ static void create_higher_pixmap(int PIXid){
   return; 
 }
 
-#if 0
-void
-xf_draw_bitmap (GdkDrawable *drawable,
-		 GdkGC       *gc,
-		 GdkPixmap   *src,
-		 gint         xsrc,
-		 gint         ysrc,
-		 gint         xdest,
-		 gint         ydest,
-		 gint         width,
-		 gint         height)
-{
-  GdkWindowPrivate *drawable_private;
-  GdkWindowPrivate *src_private;
-  GdkGCPrivate *gc_private;
-
-  g_return_if_fail (drawable != NULL);
-  g_return_if_fail (src != NULL);
-  g_return_if_fail (gc != NULL);
-
-  drawable_private = (GdkWindowPrivate*) drawable;
-  src_private = (GdkWindowPrivate*) src;
-  if (drawable_private->destroyed || src_private->destroyed)
-    return;
-  gc_private = (GdkGCPrivate*) gc;
-
-  if (width == -1)
-    width = src_private->width;
-  if (height == -1)
-    height = src_private->height;
-
-  XCopyPlane (drawable_private->xdisplay,
-	     src_private->xwindow,
-	     drawable_private->xwindow,
-	     gc_private->xgc,
-	     xsrc, ysrc,
-	     width, height,
-	     xdest, ydest,1);
-}
-#endif
-
-#if 0
 static void create_higher_bitmap(int PIMid){
-	/* This should work, but it doesn't */
   GdkGC *gc; 
   int PIMbase;
   if (PIMid >= LAST_PIM*3) {
@@ -358,13 +318,11 @@ static void create_higher_bitmap(int PIMid){
   }
   else {fprintf(stderr,"xftree: error PIXid=%d (max=%d)\n",PIMid,LAST_PIM*4);return;}
   if ((!gPIM[PIMbase])||(!hack)) {fprintf(stderr,"xftree: error 3345\n");return;}
-  /*{fprintf(stderr,"dbg: PIMid=%d (max=%d)\n",PIMid,LAST_PIM*4);}*/
-  
   
   gPIM[PIMid]=gdk_pixmap_new (hack->window,pix_w,pix_h,1);
    if (!gPIM[PIMbase]){fprintf(stderr,"xftree: error 3348\n");return;}
-  gc = gdk_gc_new (hack->window);
-  gdk_draw_pixmap((GdkPixmap *)gPIM[PIMid],gc,(GdkPixmap *)gPIM[PIMbase],0,0,0,0,pix_w,pix_h);
+  gc = gdk_gc_new (gPIM[PIMbase]);
+  gdk_draw_pixmap(gPIM[PIMid],gc,gPIM[PIMbase],0,0,0,0,pix_w,pix_h);
   if (PIMid >= LAST_PIM*2) {
 	PIMbase = PIMid - (LAST_PIM*2);
 	gdk_gc_set_clip_mask(gc,gPIM[PIM_EXEFLAG]);
@@ -387,7 +345,6 @@ static void create_higher_bitmap(int PIMid){
   gdk_gc_destroy (gc);
   return; 
 }
-#endif
 
 
 
@@ -477,16 +434,21 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
 
 icon_identified:
    {
-     int offsetB=0,offsetP=0; 
+    int offsetB=0,offsetP=0; 
+    if ((type & FT_EXE) && (PIXid[0]==PIX_PAGE)) {
+	   PIXid[0]=PIX_EXE_FILE;PIXid[1]=PIM_EXE_FILE;
+	   if (type & FT_LINK){offsetP=LAST_PIX,offsetB=LAST_PIM;}
+    } else {
      if ((type & FT_LINK)&&(type & FT_DIR)){
 	   offsetP=LAST_PIX,offsetB=LAST_PIM;  
      } else if ((type & FT_LINK)&&(type & FT_EXE)) {offsetP=3*LAST_PIX,offsetB=3*LAST_PIM;}
      else if (type & FT_LINK){offsetP=LAST_PIX,offsetB=LAST_PIM;}
      else if (type & FT_EXE) {offsetP=2*LAST_PIX,offsetB=2*LAST_PIM;}
+    }
      PIXid[0] += offsetP;
      PIXid[2] += offsetP;
-     /*PIXid[1] += offsetB;*/
-     /*PIXid[3] += offsetB;*/
+     PIXid[1] += offsetB;
+     PIXid[3] += offsetB;
    }
   
 icon_done:
@@ -496,12 +458,12 @@ icon_done:
   if (!gPIX[PIXid[0]]) {
           /*fprintf(stderr,"dbg: icondone PIXid=%d\n",PIXid[0]);*/
 	  create_higher_pixmap(PIXid[0]);
-	  /*create_higher_bitmap(PIXid[1]);*/
+	  create_higher_bitmap(PIXid[1]);
   }
   if (!gPIX[PIXid[2]]) {
           /*fprintf(stderr,"dbg: icondone PIXid=%d\n",PIXid[2]);*/
 	  create_higher_pixmap(PIXid[2]);
-	  /*create_higher_bitmap(PIXid[3]);*/
+	  create_higher_bitmap(PIXid[3]);
   }
   
   pix->pixmap=gPIX[PIXid[0]];

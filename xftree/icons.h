@@ -24,4 +24,5 @@
 #include "icons/package_green.xpm"
 #include "icons/link_flag.xpm"
 #include "icons/exe.xpm"
+#include "icons/exe_file.xpm"
 #endif
