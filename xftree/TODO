@@ -10,6 +10,10 @@ from these files straight to where you want it.
 11- make a tree refresh inmediate after "duplicate file" and other actions that don't respond quickly (which others?)
 
 done:
+8- Add ctrl-T for keyboard shortcut to open terminal. Probably keyboard shorcuts
+ for all menu items. --- This was already there, but it was bugged. It has been 
+ fixed and reorganized to make for easier maintainance.
+ 11- make a tree refresh inmediate after "duplicate file" and other actions that don't respond quickly (which others? New file was a bit bugged, since the new file was not put in the correct tree location)
  9- Override file dialog should lstat both new and old file and show info 
   so user can decide whether or not to override. Also, on non-confirm 
   copy operation, if file will be overwritten, ask for confirmation, 

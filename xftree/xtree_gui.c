@@ -100,6 +100,7 @@
 #  include "dmalloc.h"
 #endif
 
+
 enum
 {
   MN_NONE = 0,
@@ -158,6 +159,7 @@ int move_dir (char *source, char *label, char *target, int trash);
 
 gint update_timer (GtkCTree * ctree);
 char * override_txt(char *new_file,char *old_file);
+static void cb_new_subdir (GtkWidget * item, GtkWidget * ctree);
 
 /*
  */
@@ -1614,6 +1616,10 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
     cb_delete (NULL, GTK_CTREE (ctree));
     return (TRUE);
     break;
+  case GDK_Insert:
+    cb_new_subdir (NULL, GTK_WIDGET (ctree));
+    return (TRUE);
+    break;
   case GDK_Return:
     num = g_list_length (GTK_CLIST (ctree)->row_list);
     for (i = 0; i < num; i++)
@@ -1838,7 +1844,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 /*
  * create a new folder in the current
  */
-void
+static void
 cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
 {
   entry *en;
@@ -1884,7 +1890,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   char path[PATH_MAX + 1];
   char label[PATH_MAX + 1];
   char compl[PATH_MAX + 1];
-  int tmp = 0, exists = 0;
+  int exists = 0;
   struct stat st;
   FILE *fp;
 
@@ -1924,8 +1930,17 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
       return;
     }
     fclose (fp);
-    if (!exists)
-      add_node (GTK_CTREE (ctree), node, NULL, label, compl, &tmp, en->flags);
+#if 0
+    /* this puts the node out of place within the ordering scheme and is lost to user.
+     * use update timer instead. It will be fast since the directory info is cached
+     * in memory by now.*/
+    if (!exists){
+     int tmp = 0; 
+     add_node (GTK_CTREE (ctree), node, NULL, label, compl, &tmp, en->flags);
+    }
+#endif
+    update_timer (GTK_CTREE(ctree));
+    
   }
 }
 
@@ -1980,6 +1995,11 @@ cb_duplicate (GtkWidget * item, GtkCTree * ctree)
   }
   fclose (nfp);
   fclose (ofp);
+  
+  /* immediate refresh */
+  update_timer (ctree);
+
+  
   cursor_reset (GTK_WIDGET (ctree));
 }
 
@@ -2689,183 +2709,84 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   cfg *win;
   GtkAccelGroup *accel;
   int i;
+  
+/* keyboard shortcuts used to be bugged because of conflicting entries.
+ * these macros should make it easier to avoid conflicting entries.
+ * Please place any duplicate entries as a macro. Duplicate entries
+ * will also use GDK_CONTROL_MASK,and single entries GDK_MOD1_MASK.
+ * Duplicate entries must explicitly have the key explanation
+ * in the text (gtk caveat). It would be nice to put the key
+ * explanation flush to the right, like gtk would do. */
+#define COMMON_MENU_1 \
+    {N_("New window ... Ctl-W"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
+    {N_("Open terminal ... Ctl-T"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK},\
+    {NULL, NULL, 0}
+#define COMMON_MENU_2 \
+    {N_("Properties ... Ctl-P"), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
+    {N_("Rename ... Ctl-R"), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
+    {N_("Delete ... del"), (gpointer) cb_delete, 0},\
+    {N_("Show disk usage... Ctl-U"), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
+    {NULL, NULL, 0}
+#define COMMON_MENU_GOTO \
+    {N_("Find ... Ctl-F"), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
+    {N_("Go to ... Ctl-G"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
+    {N_("Go up ... Ctl-B"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\
+    {N_("Go home ... Ctl-H"), (gpointer) cb_go_home, 0,GDK_h,GDK_CONTROL_MASK},\
+    {NULL, NULL, 0}
+#define COMMON_MENU_SELECT \
+    {N_("Toggle Dotfiles ... Ctl-D"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
+    {N_("Unselect ... Ctl-K"), (gpointer) cb_unselect, 0, GDK_k,GDK_CONTROL_MASK},\
+    {N_("Select all ... Ctl-S"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
+    {N_("Unselect all ... Ctl-Z"), (gpointer) cb_unselect, 0,GDK_z,GDK_CONTROL_MASK},\
+    {NULL, NULL, 0}
+#define COMMON_MENU_LAST \
+    {N_("Run program ... Ctl-X"), (gpointer) cb_exec, WINCFG,GDK_x,GDK_CONTROL_MASK},\
+    {N_("Open Trash ... Ctl-O"), (gpointer) cb_open_trash, WINCFG, GDK_o,GDK_CONTROL_MASK},\
+    {N_("Empty Trash ... Ctl-E"), (gpointer) cb_empty_trash, 0, GDK_e,GDK_CONTROL_MASK},\
+    {N_("Close window ... Ctl-A"), (gpointer) cb_destroy, TOPWIN, GDK_a,GDK_CONTROL_MASK},\
+    {N_("Quit ... Ctl-Q"), (gpointer) gtk_main_quit, 0, GDK_q,GDK_CONTROL_MASK}
+#define COMMON_MENU_NEW \
+    {N_("New Folder ... ins"), (gpointer) cb_new_subdir, 0},\
+    {N_("New file ... Ctl-N"), (gpointer) cb_new_file, 0,GDK_n,GDK_CONTROL_MASK}
 
   menu_entry dir_mlist[] = {
-    {N_("Open in new"), (gpointer) cb_new_window, 0},
-    {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_k,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("New Folder ..."), (gpointer) cb_new_subdir, 0, GDK_n,
-     GDK_MOD1_MASK},
-    {N_("New file ..."), (gpointer) cb_new_file, 0, GDK_k,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,
-     GDK_MOD1_MASK},
-    {N_("Delete ..."), (gpointer) cb_delete, 0, GDK_x,
-     GDK_CONTROL_MASK},
-    {N_("Show disk usage..."), (gpointer) cb_du, 0, GDK_u,
-     GDK_CONTROL_MASK},
-    {NULL, NULL, 0},
-    {N_("Go to ..."), (gpointer) cb_go_to, 0},
-    {N_("Go to marked"), (gpointer) cb_go_to, 0, GDK_g,
-     GDK_MOD1_MASK},
-    {N_("Go up"), (gpointer) cb_go_up, 0, GDK_u,
-     GDK_MOD1_MASK},
-    {N_("Go home"), (gpointer) cb_go_home, 0, GDK_h,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-
-    {N_("Unselect"), (gpointer) cb_unselect, 0, GDK_a,
-     GDK_SHIFT_MASK | GDK_MOD1_MASK},
-    {N_("Select all"), (gpointer) cb_select, 0, GDK_a,
-     GDK_MOD1_MASK},
-    {N_("Unselect all"), (gpointer) cb_unselect, 0},
-    {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,
-     GDK_MOD1_MASK},
-
-    {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_D,
-     GDK_SHIFT_MASK | GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Properties ..."), (gpointer) cb_props, 0, GDK_i,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,
-     GDK_MOD1_MASK},
-    {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_t,
-     GDK_MOD1_MASK},
-    {N_("About ..."), (gpointer) cb_about, 0, GDK_a,
-     GDK_CONTROL_MASK},
-    {NULL, NULL, 0},
-    {N_("Run program ..."), (gpointer) cb_exec, WINCFG},
-    {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_w,
-     GDK_MOD1_MASK},
-    {N_("Quit"), (gpointer) gtk_main_quit, 0, GDK_q,
-     GDK_MOD1_MASK},
+    COMMON_MENU_1,
+    COMMON_MENU_NEW,
+    COMMON_MENU_2,
+    {N_("Go to marked"), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK},
+    COMMON_MENU_GOTO,
+    COMMON_MENU_SELECT,
+    COMMON_MENU_LAST
   };
 #define LAST_DIR_MENU_ENTRY (sizeof(dir_mlist)/sizeof(menu_entry))
 
   menu_entry file_mlist[] = {
-    {N_("New window"), (gpointer) cb_new_window, 0},
-    {NULL, NULL, 0},
-    {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,
-     GDK_MOD1_MASK},
-    {N_("Delete ..."), (gpointer) cb_delete, 0, GDK_x,
-     GDK_CONTROL_MASK},
-    {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_d,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Go to ..."), (gpointer) cb_go_to, 0},
-    {N_("Go up"), (gpointer) cb_go_up, 0, GDK_u,
-     GDK_MOD1_MASK},
-    {N_("Go home"), (gpointer) cb_go_home, 0, GDK_h,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-
-    {N_("Unselect"), (gpointer) cb_unselect, 0, GDK_a,
-     GDK_SHIFT_MASK | GDK_MOD1_MASK},
-    {N_("Select all"), (gpointer) cb_select, 0, GDK_a,
-     GDK_MOD1_MASK},
-    {N_("Unselect all"), (gpointer) cb_unselect, 0},
-    {NULL, NULL, 0},
-    {N_("Properties ..."), (gpointer) cb_props, 0, GDK_i,
-     GDK_MOD1_MASK},
-    {N_("Register ..."), (gpointer) cb_register, 0, GDK_j,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,
-     GDK_MOD1_MASK},
-    {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_t,
-     GDK_MOD1_MASK},
-    {N_("About ..."), (gpointer) cb_about, 0, GDK_a,
-     GDK_CONTROL_MASK},
-    {NULL, NULL, 0},
-    {N_("Run program ..."), (gpointer) cb_exec, WINCFG},
-    {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_w,
-     GDK_MOD1_MASK},
-    {N_("Quit"), (gpointer) gtk_main_quit, 0, GDK_q,
-     GDK_MOD1_MASK},
+     COMMON_MENU_1,
+     {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},
+     {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},
+     {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_d,GDK_MOD1_MASK},
+     COMMON_MENU_2,
+     COMMON_MENU_GOTO,
+     COMMON_MENU_SELECT,
+     COMMON_MENU_LAST
   };
 #define LAST_FILE_MENU_ENTRY (sizeof(file_mlist)/sizeof(menu_entry))
 
   menu_entry mixed_mlist[] = {
-    {N_("New windows"), (gpointer) cb_new_window, 0},
-    {NULL, NULL, 0},
-    {N_("Delete ..."), (gpointer) cb_delete, 0, GDK_x,
-     GDK_CONTROL_MASK},
-    {NULL, NULL, 0},
-    {N_("Go to ..."), (gpointer) cb_go_to, 0},
-    {N_("Go up"), (gpointer) cb_go_up, 0, GDK_u,
-     GDK_MOD1_MASK},
-    {N_("Go home"), (gpointer) cb_go_home, 0, GDK_h,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-
-    {N_("Unselect"), (gpointer) cb_unselect, 0, GDK_a,
-     GDK_SHIFT_MASK | GDK_MOD1_MASK},
-    {N_("Select all"), (gpointer) cb_select, 0, GDK_a,
-     GDK_MOD1_MASK},
-    {N_("Unselect all"), (gpointer) cb_unselect, 0},
-    {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,
-     GDK_MOD1_MASK},
-
-    {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_D,
-     GDK_SHIFT_MASK | GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Empty Trash"), (gpointer) cb_empty_trash, 0},
-    {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG},
-    {NULL, NULL, 0},
-    {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,
-     GDK_MOD1_MASK},
-    {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_t,
-     GDK_MOD1_MASK},
-    {N_("About ..."), (gpointer) cb_about, 0, GDK_a,
-     GDK_CONTROL_MASK},
-    {NULL, NULL, 0},
-    {N_("Run program ..."), (gpointer) cb_exec, WINCFG},
-    {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_w,
-     GDK_MOD1_MASK},
-    {N_("Quit"), (gpointer) gtk_main_quit, 0, GDK_q,
-     GDK_MOD1_MASK},
+    COMMON_MENU_1,
+    COMMON_MENU_2,
+    COMMON_MENU_GOTO,
+    COMMON_MENU_SELECT,
+    COMMON_MENU_LAST
   };
 #define LAST_MIXED_MENU_ENTRY (sizeof(mixed_mlist)/sizeof(menu_entry))
 
   menu_entry none_mlist[] = {
-    {N_("New window"), (gpointer) cb_new_window, 0},
-    {NULL, NULL, 0},
-    {N_("New Folder ..."), (gpointer) cb_new_subdir, 0},
-    {N_("New file ..."), (gpointer) cb_new_file, 0, GDK_k,
-     GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Go to ..."), (gpointer) cb_go_to, 0},
-    {N_("Go up"), (gpointer) cb_go_up, 0, GDK_u,
-     GDK_MOD1_MASK},
-    {N_("Go home"), (gpointer) cb_go_home, 0},
-    {NULL, NULL, 0},
-    {N_("Select all"), (gpointer) cb_select, 0, GDK_a,
-     GDK_MOD1_MASK},
-    {N_("Unselect all"), (gpointer) cb_unselect, 0},
-
-    {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_D,
-     GDK_SHIFT_MASK | GDK_MOD1_MASK},
-    {NULL, NULL, 0},
-    {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,
-     GDK_MOD1_MASK},
-    {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,
-     GDK_MOD1_MASK},
-    {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_t,
-     GDK_MOD1_MASK},
-    {N_("About ..."), (gpointer) cb_about, 0, GDK_a,
-     GDK_CONTROL_MASK},
-    {NULL, NULL, 0},
-    {N_("Run program ..."), (gpointer) cb_exec, WINCFG},
-    {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_w,
-     GDK_MOD1_MASK},
-    {N_("Quit"), (gpointer) gtk_main_quit, 0, GDK_q,
-     GDK_MOD1_MASK},
+    COMMON_MENU_1,
+    COMMON_MENU_NEW,
+    COMMON_MENU_GOTO,
+    COMMON_MENU_SELECT,
+    COMMON_MENU_LAST
   };
 #define LAST_NONE_MENU_ENTRY (sizeof(none_mlist)/sizeof(menu_entry))
 
