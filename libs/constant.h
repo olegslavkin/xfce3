@@ -55,7 +55,7 @@
 #endif
 
 #ifndef DEFAULTTEXTURE
-#define DEFAULTTEXTURE 	"textures/Xfcemetal.xpm"
+#define DEFAULTTEXTURE 	""
 #endif
 
 #ifndef DEFAULTFONT
