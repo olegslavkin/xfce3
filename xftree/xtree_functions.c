@@ -140,7 +140,7 @@ gboolean check_hostname(char *host){
 	if (gethostname(buffer, 256) == 0)
 	{
 	  struct hostent *ent;
-	  buffer[256] = '\0';
+	  buffer[255] = '\0';
 	  testv=buffer;
 	  /*printf("dbg:%s==%s\n",host,testv);*/
 	  if (strncmp(host,testv,strlen(testv))==0) return TRUE;
