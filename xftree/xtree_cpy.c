@@ -318,7 +318,7 @@ static char *SimpleTmpList(GtkWidget *parent,char *tgt,char *src){
     FILE *tmpfile;
     if ((fname=randomTmpName(NULL))==NULL) return NULL;
     if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
-    fprintf(tmpfile,"%d:%s:%s\n",TR_COPY,src,tgt);
+    fprintf(tmpfile,"%d\t%s\t%s\n",TR_COPY,src,tgt);
     fclose(tmpfile);
     return fname;
 }

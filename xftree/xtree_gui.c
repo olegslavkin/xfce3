@@ -1118,10 +1118,12 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
  	      	  GDK_PROP_MODE_REPLACE,
                   (guchar *)"xftree",  
 		  strlen("xftree")+1);  
+  
   atomo=gdk_atom_intern("WM_CLIENT_LEADER",TRUE);
   if (atomo != GDK_NONE) {
 	  gdk_property_delete (gtk_widget_get_parent_window(vbox),atomo);
   }
+  
   for (i=0;i<4;i++) {
 	  handlebox[i] = gtk_handle_box_new ();
 	  gtk_container_border_width (GTK_CONTAINER (handlebox[i]), 2);
