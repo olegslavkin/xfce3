@@ -92,7 +92,9 @@ download (char *tgt,char *src)
     bps = len / (elapsed > 0 ? elapsed : 1);
     buflen = BUFLEN < bps ? BUFLEN : bps;
     buflen = buflen < 32 ? 32 : buflen;
-    fprintf (stdout, _("child:bytes:%d bytes received (%d bps)"), len, bps);
+    fprintf (stdout, "child:bytes:%s", len);
+    fprintf (stdout, _(" bytes received"));
+    fprintf (stdout,"(%d bps)",  bps);
   }
   fclose (fp);
   fclose (pipe);
