@@ -1,9 +1,8 @@
-Three big ones:
+Two big ones:
 7- Add code necesary to d+d files to/from xfsamba.
 6.- MC style opening of packed files: Click on files and you see the internal
 structure as if it wasn't packed. Makes it very easy to copy and move content
 from these files straight to where you want it.
-18- different type icons for different documents and configurable icon sizes.
 
 fix: The pasteboard should also communicate to other application via the normal
  X pasteboard.
@@ -52,6 +51,7 @@ the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_que
     algorithm.
 
 gtk_dlg.c memory leak in entry_edit and combo fixed.
+18- different type icons for different documents and configurable icon sizes.
 
 19- much more configurable (file open actons ...)
 21- Config table for toolbar icons (both large and small)
