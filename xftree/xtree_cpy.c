@@ -440,7 +440,7 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
    if (S_ISCHR(s_en->st.st_mode)||S_ISBLK(s_en->st.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy device file") );
    }
-   if (S_ISBLK(s_en->st.st_mode)){
+   if (S_ISSOCK(s_en->st.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy socket") );
    }
   }
