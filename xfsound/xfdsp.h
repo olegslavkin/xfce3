@@ -28,6 +28,6 @@ typedef int ST_CONFIG[3];
 
 int i_play (char *);		/* internal player */
 int setcard (void);
-int *cardctl (int, ST_CONFIG, int);
+void cardctl (int, ST_CONFIG);
 
 #endif

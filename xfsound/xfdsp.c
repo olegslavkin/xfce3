@@ -73,61 +73,129 @@
 #  include "dmalloc.h"
 #endif
 
-#if defined(linux) || defined(__FreeBSD__)
+#if defined(linux) || defined(__FreeBSD__)  || defined(HAVE_ARTSD)
+
+#if !defined(HAVE_ARTSD)
 int masterfd;
+#endif
+
+/* BUFFER_FRAMES represents the size of the buffer in frames. */
+#define BUFFER_FRAMES 4096
 
 int
 i_play (char *soundfile)
 {
-  char *buffer[256];
-  int next, len;
+  void *buffer;
   ST_CONFIG curr;
 #if defined(HAVE_AUDIOFILE)
   AFfilehandle fp;
+  int sampleFormat, sampleWidth, channelCount, frameSize, frameRate;
+  AFframecount	frameCount, framesRead;
 #else
   int fp;
+  int framesRead;
 #endif
+#if defined(HAVE_ARTSD)
+  arts_stream_t 	stream;
+  int errorcode;
 
+  errorcode = arts_init();
+  if (errorcode < 0)
+  {
+    fprintf(stderr, "arts_init error: %s\n", arts_error_text(errorcode));
+    return -1;
+  }
+#else
   if (setcard () != 0)
   {
     return -1;
   }
+#endif
 
-  cardctl (masterfd, curr, ST_GET);
-
-#if defined (HAVE_AUDIOFILE)
-  if ((fp = afOpenFile(soundfile, "r", NULL)) == -1)
+#if defined(HAVE_AUDIOFILE)
+  if ((fp = afOpenFile(soundfile, "r", NULL)) == NULL)
 #else
   if ((fp = open (soundfile, O_RDONLY, 0)) == -1)
 #endif
   {
+#if !defined(HAVE_ARTSD)
+    close (masterfd);
+#endif
 #ifdef DEBUG
     perror ("open");
 #endif
-    close (masterfd);
     return (-1);
   }
 
-  next = sizeof (buffer);
-
-  while ((next > 0) && (len = read (fp, buffer, next)) > 0)
+#if defined(HAVE_AUDIOFILE)
+  frameCount = afGetFrameCount(fp, AF_DEFAULT_TRACK);
+  channelCount = afGetChannels(fp, AF_DEFAULT_TRACK);
+  afGetSampleFormat(fp, AF_DEFAULT_TRACK, &sampleFormat, &sampleWidth);
+  frameSize = afGetFrameSize(fp, AF_DEFAULT_TRACK, 1);
+  frameRate = (int) afGetRate(fp, AF_DEFAULT_TRACK);
+  if ((sampleFormat != AF_SAMPFMT_TWOSCOMP) && (sampleFormat != AF_SAMPFMT_UNSIGNED))
   {
-    if (write (masterfd, buffer, len) == -1)
-    {
-#ifdef DEBUG
-      perror ("write");
+	  printf("The audio file must contain integer data in two's complement or unsigned format.\n");
+          afCloseFile (fp);
+          exit(-1);
+  }
+  curr[0] = sampleWidth;
+  curr[1] = sampleFormat;
+  curr[2] = frameRate;
+#else
+  curr[0] = 8;
+  curr[1] = 1;
+  curr[2] = 8000;
 #endif
-      close (masterfd);
-      close (fp);
-      return (-1);
-    }
 
-    if (len < next)
-      next = 0;
+#if defined(HAVE_ARTSD)
+  stream = arts_play_stream(frameRate, sampleWidth, channelCount, "linuxtest");
+#else
+  cardctl (masterfd, curr);
+#endif
+
+#if defined(HAVE_AUDIOFILE)
+  buffer = malloc(BUFFER_FRAMES * frameSize);
+  framesRead = afReadFrames(fp, AF_DEFAULT_TRACK, buffer, BUFFER_FRAMES);
+#else
+  buffer = malloc(BUFFER_FRAMES);
+  framesRead = read (fp, buffer, BUFFER_FRAMES);
+#endif
+  while (framesRead > 0)
+  {
+#if defined(HAVE_ARTSD)
+#if defined(HAVE_AUDIOFILE)
+    arts_write(stream, buffer, framesRead * frameSize);
+#else
+    arts_write(stream, buffer, framesRead);
+#endif
+#else
+#if defined(HAVE_AUDIOFILE)
+    write (masterfd, buffer, framesRead * frameSize);
+#else
+    write (masterfd, buffer, framesRead);
+#endif
+#endif
+#if defined(HAVE_AUDIOFILE)
+    framesRead = afReadFrames(fp, AF_DEFAULT_TRACK, buffer, BUFFER_FRAMES);
+#else
+    framesRead = read (fp, buffer, BUFFER_FRAMES);
+#endif
   }
 
-  close (masterfd);		/* done */
+#if defined(HAVE_ARTSD)
+  arts_close_stream(stream);
+  arts_free();
+#else
+  close (masterfd);
+#endif
+
+#if defined(HAVE_AUDIOFILE)
+  afCloseFile (fp);
+#else  
   close (fp);
+#endif
+  free(buffer);
   return 0;
 }
 
@@ -145,41 +213,33 @@ setcard (void)
   return (0);
 }
 
-int *
-cardctl (int fp, ST_CONFIG parm, int st_flag)
+void
+cardctl (int fp, ST_CONFIG parm)
 {
-  static ST_CONFIG temp;
-  int error;
+  int format, frequency, channels;
+  
+  format = parm[0];
+  channels = parm[1];
+  frequency = parm[2];
 
-  if (st_flag)
+  if (ioctl (fp, SNDCTL_DSP_SETFMT, &format) == -1)
   {
-    if (ioctl (fp, SOUND_PCM_WRITE_BITS, &parm[0]) == -1)
-    {
 #ifdef DEBUG
-      perror ("ioctl");
+    perror ("ioctl");
 #endif
-    }
-    if (ioctl (fp, SOUND_PCM_WRITE_CHANNELS, &parm[1]) == -1)
-    {
-#ifdef DEBUG
-      perror ("ioctl");
-#endif
-    }
-    if (ioctl (fp, SOUND_PCM_WRITE_RATE, &parm[2]) == -1)
-    {
-#ifdef DEBUG
-      perror ("ioctl");
-#endif
-    }
   }
-  else
+  if (ioctl (fp, SNDCTL_DSP_CHANNELS, &channels) == -1)
   {
-    error = ioctl (fp, SOUND_PCM_READ_BITS, &parm[0]);
-    ioctl (fp, SOUND_PCM_READ_CHANNELS, &parm[1]);
-    ioctl (fp, SOUND_PCM_READ_RATE, &parm[2]);
+#ifdef DEBUG
+    perror ("ioctl");
+#endif
   }
-
-  return (temp);
+  if (ioctl (fp, SNDCTL_DSP_SPEED, &frequency) == -1)
+  {
+#ifdef DEBUG
+    perror ("ioctl");
+#endif
+  }
 }
 #else
 int
@@ -194,200 +254,10 @@ setcard (void)
   return (-1);
 }
 
-int *
-cardctl (int fp, ST_CONFIG parm, int st_flag)
+void
+cardctl (int fp, ST_CONFIG parm)
 {
   return (NULL);
 }
 
-#endif
-
-#if 0
-/*
-	Audio File Library
-
-	Copyright 1998-1999, Michael Pruett <michael@68k.org>
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License as
-	published by the Free Software Foundation; either version 2 of
-	the License, or (at your option) any later version.
-
-	This program is distributed in the hope that it will be
-	useful, but WITHOUT ANY WARRANTY; without even the implied
-	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-	PURPOSE.  See the GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public
-	License along with this program; if not, write to the Free
-	Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-	MA 02111-1307, USA.
-*/
-
-/*
-	linuxtest.c
-
-	This file plays a 16-bit, 44.1 kHz monophonic or stereophonic
-	audio file through a PC sound card on a Linux system.  This file
-	will not compile under any operating system that does not support
-	the Open Sound System API.
-*/
-
-#include <stdio.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <linux/soundcard.h>
-#include <artsc.h>
-
-#include <audiofile.h>
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-/*
-	If it's not defined already, define the native audio hardware
-	byte order.
-*/
-
-#ifndef AFMT_S16_NE
-#ifdef WORDS_BIGENDIAN /* defined in config.h */
-#define AFMT_S16_NE AFMT_S16_BE
-#else
-#define AFMT_S16_NE AFMT_S16_LE
-#endif /* WORDS_BIGENDIAN */
-#endif /* AFMT_S16_NE */
-
-void setupdsp (int audiofd, int channelCount, int freq);
-void usage (void);
-
-/* BUFFER_FRAMES represents the size of the buffer in frames. */
-#define BUFFER_FRAMES 4096
-
-int main (int argc, char **argv)
-{
-	AFfilehandle	file;
-	AFframecount	frameCount, framesRead;
-	int		sampleFormat, sampleWidth, channelCount, frameSize;
-	int		frameRate;
-	void		*buffer;
-	int		audiofd;
-	int 		errorcode;
-	arts_stream_t 	stream;
-
-	if (argc != 2)
-		usage();
-	
-	errorcode = arts_init();
-    	if (errorcode < 0)
-    	{
-        	fprintf(stderr, "arts_init error: %s\n", arts_error_text(errorcode));
-        	return 1;
-    	}
-	file = afOpenFile(argv[1], "r", NULL);
-	frameCount = afGetFrameCount(file, AF_DEFAULT_TRACK);
-	printf("frame count: %d\n", (int) frameCount);
-
-	channelCount = afGetChannels(file, AF_DEFAULT_TRACK);
-	afGetSampleFormat(file, AF_DEFAULT_TRACK, &sampleFormat, &sampleWidth);
-
-	frameSize = afGetFrameSize(file, AF_DEFAULT_TRACK, 1);
-	frameRate = (int) afGetRate(file, AF_DEFAULT_TRACK);
-
-	printf("sample format: %d, rate %d Hz, sample width: %d, channels: %d\n",
-		sampleFormat, frameRate,sampleWidth, channelCount);
-
-	if ((sampleFormat != AF_SAMPFMT_TWOSCOMP) &&
-		(sampleFormat != AF_SAMPFMT_UNSIGNED))
-	{
-		printf("The audio file must contain integer data in two's complement or unsigned format.\n");
-		exit(-1);
-	}
-/*
-	if ((sampleWidth != 16) || (channelCount > 2))
-	{
-		printf("The audio file must be of a 16-bit monophonic or stereophonic format.\n");
-		exit(-1);
-	}
- */
-	buffer = malloc(BUFFER_FRAMES * frameSize);
-
-	if (audiofd < 0)
-	{
-		perror("open");
-		exit(-1);
-	}
-
-	/* setupdsp(audiofd, channelCount, frameRate); */
-	printf ("opening stream\n");
-	stream = arts_play_stream(frameRate, sampleWidth, channelCount, "linuxtest");
-	printf ("Reading stream\n");
-	framesRead = afReadFrames(file, AF_DEFAULT_TRACK, buffer, BUFFER_FRAMES);
-	printf ("Done\n");
-
-	while (framesRead > 0)
-	{
-		printf("read %ld frames\n", framesRead);
-		/* write(audiofd, buffer, framesRead * frameSize); */
-		errorcode = arts_write(stream, buffer, framesRead * frameSize);
-        	if(errorcode < 0)
-        	{
-            		fprintf(stderr, "arts_write error: %s\n", arts_error_text(errorcode));
-            		return 1;
-        	}		
-		framesRead = afReadFrames(file, AF_DEFAULT_TRACK, buffer,
-			BUFFER_FRAMES);
-	}
-
-	/* close(audiofd); */
-	arts_close_stream(stream);
-        arts_free();
-	free(buffer);
-
-	return 0;
-}
-
-void setupdsp (int audiofd, int channelCount, int freq)
-{
-	int	format, frequency, channels;
-
-	format = AFMT_S16_NE;
-	if (ioctl(audiofd, SNDCTL_DSP_SETFMT, &format) == -1)
-	{
-		perror("set format");
-		exit(-1);
-	}
-
-	if (format != AFMT_S16_NE)
-	{
-		fprintf(stderr, "format not correct.\n");
-		exit(-1);
-	}
-
-	channels = channelCount;
-	if (ioctl(audiofd, SNDCTL_DSP_CHANNELS, &channels) == -1)
-	{
-		perror("set channels");
-		exit(-1);
-	}
-
-	frequency = freq;
-	if (ioctl(audiofd, SNDCTL_DSP_SPEED, &frequency) == -1)
-	{
-		perror("set frequency");
-		exit(-1);
-	}
-}
-
-void usage (void)
-{
-	fprintf(stderr, "usage: linuxtest file\n");
-	fprintf(stderr,
-		"where file refers to a 16-bit monophonic or stereophonic 44.1 kHz audio file\n");
-	exit(-1);
-}
 #endif
