@@ -1,0 +1,7 @@
+0.1.2
+- fix for xfskin if no xfsoundrc is found
+0.1.1
+- fix for restartXFCE (solaris)
+- include sound pathname in quotes when containing spaces
+0.1
+- initial version.
