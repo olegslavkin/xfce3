@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 rm -f /tmp/Xrootenv.0
 rm -f /tmp/fvwmrc*
