@@ -19,8 +19,8 @@
 #ifndef __LIGHTDARK_H__
 #define __LIGHTDARK_H__
 
-#define HI_MULT		1.35
-#define LO_MULT		0.70
+#define HI_MULT		1.30
+#define LO_MULT		0.60
 #define shift(col, val) (((col * val) < 255.0) ? (int) (col * val) : 255)
 #define shift16(col, val) (((col * val) < 65535.0) ? (int) (col * val) : 65535)
 
