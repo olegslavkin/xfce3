@@ -63,6 +63,9 @@
 #undef HAVE_SCANDIR
 #undef HAVE_X11_EXTENSIONS_XINERAMA_H
 #undef HAVE_X11_XFT_XFT_H
+#undef HAVE_SYS_SOUNDCARD_H
+#undef HAVE_LINUX_SOUNDCARD_H
+#undef HAVE_MACHINE_SOUNDCARD_H
 #undef PACKAGE
 #undef VERSION
 #undef HAVE_IMLIB
@@ -170,8 +173,14 @@
 /* Define if you have the <limits.h> header file.  */
 #undef HAVE_LIMITS_H
 
+/* Define if you have the <linux/soundcard.h> header file.  */
+#undef HAVE_LINUX_SOUNDCARD_H
+
 /* Define if you have the <locale.h> header file.  */
 #undef HAVE_LOCALE_H
+
+/* Define if you have the <machine/soundcard.h> header file.  */
+#undef HAVE_MACHINE_SOUNDCARD_H
 
 /* Define if you have the <malloc.h> header file.  */
 #undef HAVE_MALLOC_H
@@ -193,6 +202,9 @@
 
 /* Define if you have the <sys/param.h> header file.  */
 #undef HAVE_SYS_PARAM_H
+
+/* Define if you have the <sys/soundcard.h> header file.  */
+#undef HAVE_SYS_SOUNDCARD_H
 
 /* Define if you have the <unistd.h> header file.  */
 #undef HAVE_UNISTD_H

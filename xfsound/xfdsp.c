@@ -16,9 +16,12 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-/* audiofile and aRts support added by Olivier Fourdan */
+/* 
+   19-SEP-2001: Huge update and almost complete rewrite.
+   audiofile and aRts support added by Olivier Fourdan
+ */
 
-/* Linux sound support contributed by Alex Fiori :
+/* Linux sound support initially contributed by Alex Fiori :
  	Hi Oliver! :)
 	I'm using XFCE, really rules.
 	Well, this is my first contrib for you, and I
@@ -63,8 +66,16 @@
 #if defined(HAVE_ARTS)
 #include <artsc.h>
 #else
-#if defined(linux) || defined(__FreeBSD__)
-#include <sys/soundcard.h>	/* guess :) */
+#if defined(HAVE_SYS_SOUNDCARD_H)
+#include <sys/soundcard.h>
+#else
+#if defined(HAVE_LINUX_SOUNDCARD_H)
+#include <linux/soundcard.h>
+#else
+#if defined(HAVE_MACHINE_SOUNDCARD_H)
+#include <machine/soundcard.h>
+#endif
+#endif
 #endif
 #endif
 
@@ -95,7 +106,7 @@ sound_init (void)
 #endif
 }
 
-#if defined(linux) || defined(__FreeBSD__)  || defined(HAVE_ARTS)
+#if defined(HAVE_SYS_SOUNDCARD_H) || defined(HAVE_LINUX_SOUNDCARD_H) || defined(HAVE_MACHINE_SOUNDCARD_H) || defined(HAVE_ARTS)
 
 #if !defined(HAVE_ARTS)
 int masterfd;
@@ -172,7 +183,7 @@ i_play (char *soundfile)
 #endif
 
 #if defined(HAVE_ARTS)
-  stream = arts_play_stream(frameRate, sampleWidth, channelCount, "linuxtest");
+  stream = arts_play_stream(frameRate, sampleWidth, channelCount, "xfsound");
 #else
   cardctl (masterfd, &curr);
   if ((curr[0] != sampleWidth) || (curr[1] != channelCount) || (curr[2] != frameRate))
