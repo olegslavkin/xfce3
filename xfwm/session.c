@@ -726,9 +726,10 @@ callback_save_yourself2 (SmcConn sm_conn, SmPointer client_data)
         path = pwd->pw_dir;
     }
 
-    filename = tempnam (path, ".fs-");
+    filename = safemalloc (MAXSTRLEN * sizeof (char));
+    snprintf (filename, MAXSTRLEN - 1, "%s/.fs-XXXXXX", path);
 
-    if ((Scr.Options & SessionMgt) && (f = fopen (filename, "w")))
+    if ((Scr.Options & SessionMgt) && (f = fdopen (mkstemp(filename), "r+")))
     {
         success = save_session_state (sm_conn, filename, f);
         fclose (f);
@@ -741,6 +742,7 @@ callback_save_yourself2 (SmcConn sm_conn, SmPointer client_data)
     builtin_save_session ();
     SmcSaveYourselfDone (sm_conn, success);
     sent_save_done = 1;
+    free (filename);
 }
 
 static void
