@@ -420,11 +420,20 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   if (mname) g_free(mname);
   fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
   srandom(time(NULL));
-  fname = (char *)malloc(sizeof(char)*(fnamelen));
-  mname = (char *)malloc(sizeof(char)*(fnamelen));
-  if (!fname) return ; if (!mname) return ;
-  sprintf(fname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
-  sprintf(mname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
+  {
+   long long fid,mid;
+   fid=random()*(9999.0/RAND_MAX);   
+   mid=random()*(9999.0/RAND_MAX);   
+   /*printf("dbg:fid=%lld, mid=%lld\n",fid,mid);*/
+   while (fid > 9999) fid /= 2; 
+   while (mid > 9999) mid /= 2; 
+   if (fid==mid){ if (fid < 9999) mid++; else mid--; }
+   fname = (char *)malloc(sizeof(char)*(fnamelen));
+   mname = (char *)malloc(sizeof(char)*(fnamelen));
+   if (!fname) return ; if (!mname) return ;
+   sprintf(fname,"/tmp/xftree.%lld.tmp",fid);
+   sprintf(mname,"/tmp/xftree.%lld.tmp",mid);
+  }
   
   /*fprintf(stderr,"dbg:fname=%s,mname=%s",fname,mname);*/
   

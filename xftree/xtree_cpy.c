@@ -283,13 +283,16 @@ static int nitems;
 char *randomTmpName(char *ext){
     static char *fname=NULL;
     int fnamelen;
+    long long id;
     if (ext==NULL) ext="tmp";
     if (fname) g_free(fname);
+    id=random()*(9999.0/RAND_MAX);
+    while (id > 9999) id /= 2; 
     fnamelen=strlen("/tmp/xftree.9999.")+strlen(ext)+1;
     srandom(time(NULL));
     fname = (char *)malloc(sizeof(char)*(fnamelen));
     if (!fname) return NULL;
-    sprintf(fname,"/tmp/xftree.%d.%s",(int)((9999.0/RAND_MAX)*random()),ext);
+    sprintf(fname,"/tmp/xftree.%lld.%s",id,ext);
     return fname;
 }
 
