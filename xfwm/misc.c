@@ -673,6 +673,9 @@ UngrabEm (void)
     /* if the window still exists, focus on it */
     if (w)
     {
+#ifdef DEBUG
+      fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
+#endif
       SetFocus (w, Scr.PreviousFocus, 0);
     }
     Scr.PreviousFocus = NULL;

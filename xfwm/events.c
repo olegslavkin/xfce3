@@ -423,6 +423,9 @@ HandleFocusIn ()
   }
   else if (Tmp_win != Scr.Hilite)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : HandleFocusIn () : Focus set to %s\n", Tmp_win->name);
+#endif
     Scr.Focus = Tmp_win;
     SetBorder (Tmp_win, True, True, True, None);
     Broadcast (XFCE_M_FOCUS_CHANGE, 5, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, GetDecor (Tmp_win, HiColors.fore), GetDecor (Tmp_win, HiColors.back), 0, 0);
@@ -959,7 +962,6 @@ HandleMapNotify ()
 void
 HandleUnmapNotify ()
 {
-  extern XfwmWindow *colormap_win;
   int dstx, dsty;
   Window dumwin;
   XEvent dummy;

@@ -567,7 +567,12 @@ PopDownMenu ()
     ActiveItem->state = 0;
 
   XUnmapWindow (dpy, ActiveMenu->w);
-  XSync (dpy, 0);
+  UninstallRootColormap ();
+  if (!menu_on)
+  {
+    UngrabEm ();
+    WaitForButtonsUp ();
+    XFlush (dpy);
 #ifdef REQUIRES_STASHEVENT
     while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
     {
@@ -576,11 +581,6 @@ PopDownMenu ()
 #else
     while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
 #endif
-  UninstallRootColormap ();
-  if (!menu_on)
-  {
-    UngrabEm ();
-    WaitForButtonsUp ();
   }
   if (Context & (C_WINDOW | C_FRAME | C_TITLE | C_SIDEBAR))
     menuFromFrameOrWindowOrTitlebar = TRUE;

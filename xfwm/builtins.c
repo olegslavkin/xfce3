@@ -2614,15 +2614,6 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     XDeleteContext (dpy, taskw, MenuContext);
     XUnmapWindow (dpy, taskw);
     XDestroyWindow (dpy, taskw);
-    XSync (dpy, 0);
-#ifdef REQUIRES_STASHEVENT
-    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
-    {
-      StashEventTime (&JunkEvent);
-    }
-#else
-    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
-#endif
   }
 
   if ((!abort) && (t != NULL))
@@ -2634,6 +2625,15 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
   }
   UninstallRootColormap ();
   UngrabEm ();
+  XFlush (dpy);
+#ifdef REQUIRES_STASHEVENT
+  while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
+  {
+    StashEventTime (&JunkEvent);
+  }
+#else
+  while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
+#endif
 }
 
 void
