@@ -1,5 +1,5 @@
 1- Some configuration options  
-2- An "all" button when doing hard deletes
+done: 2- An "all" button when doing hard deletes
 3- Debug the "goto" option (seems the "fork" may lose variables at times).
 4- gtk-2 
 5.- Somehow be able to show the total size of a folder including all it's
