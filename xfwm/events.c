@@ -988,7 +988,6 @@ HandleMapNotify ()
   Tmp_win->flags &= ~(MAP_PENDING | ICONIFIED | ICON_UNMAPPED);
   XSync (dpy, 0);
   MyXUngrabServer (dpy);
-
   fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleMapNotify ()\n");
@@ -1025,17 +1024,6 @@ HandleUnmapNotify ()
    */
   if ((Event.xunmap.event != Event.xunmap.window) && (Event.xunmap.event != Scr.Root || !Event.xunmap.send_event))
   {
-    Window focusBug;
-    int rt;
-
-    XGetInputFocus (dpy, &focusBug, &rt);
-    if ((Scr.Focus != NULL) && (focusBug == None))
-    {
-#ifdef DEBUG
-      fprintf (stderr, "xfwm : HandleUnmapNotify () Forcing focus\n");
-#endif
-      SetFocus (Scr.NoFocusWin, NULL, False, False);
-    }
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Event ignored\n");
 #endif
@@ -1084,12 +1072,13 @@ HandleUnmapNotify ()
 #endif
     return;
   }
+
+  MyXGrabServer (dpy);
   if (XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
   {
     XEvent ev;
     Bool reparented;
 
-    MyXGrabServer (dpy);
     reparented = XCheckTypedWindowEvent (dpy, Event.xunmap.window, ReparentNotify, &ev);
     SetMapStateProp (Tmp_win, WithdrawnState);
     if (reparented)
@@ -1105,11 +1094,12 @@ HandleUnmapNotify ()
     }
     XRemoveFromSaveSet (dpy, Event.xunmap.window);
     XSelectInput (dpy, Event.xunmap.window, NoEventMask);
-    XSync (dpy, 0);
-    MyXUngrabServer (dpy);
   }
   Destroy (Tmp_win);
   Tmp_win = NULL;
+  XSync (dpy, 0);
+  MyXUngrabServer (dpy);
+  fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif
