@@ -40,7 +40,8 @@ xftree_SOURCES = \
 	xtree_tar.c xtree_tar.h \
 	xtree_rpm.c xtree_rpm.h \
 	xtree_colorsel.c xfdiff_colorsel.h \
-	xtree_icons.c xtree_icons.h
+	xtree_icons.c xtree_icons.h \
+	xtree_smb.c
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \

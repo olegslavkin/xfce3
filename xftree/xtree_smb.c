@@ -33,6 +33,8 @@
 
 /*******SMBGet******************/
 
+#if 0
+
 /* function executed after all pipes
 *  timeouts and inputs have been set up */
 static void
@@ -76,8 +78,6 @@ SMBGetStdout (int n, void *data)
 static void
 SMBGetForkOver (void)
 {
-  //cursor_reset (GTK_WIDGET (smb_nav));
-  //animation (FALSE);
   switch (SMBResult)
   {
   case CHALLENGED:
@@ -92,11 +92,20 @@ SMBGetForkOver (void)
   fork_obj = NULL;
 
 }
-
+#endif
 
 void
-SMBGetFile (void)
+SMBGetFile (char *file)
 {
+  /*fprintf(stderr,"dbg: processing %s\n",file);*/
+/*
+ * 1- parse file into NMBcommand
+ * 2- open modal dialog with animation
+ * 3- download via tubo. 
+ * 4- on forkover, close modal animation dialog
+ * 5- signal USR1 on any errors
+ * */
+#if 0	
   char *fileS;
   static char *dataO = NULL;
   int i;
@@ -167,5 +176,6 @@ SMBGetFile (void)
   NMBpassword[XFSAMBA_MAX_STRING] = 0;
 
   fork_obj = Tubo (SMBGetFork, SMBGetForkOver, TRUE, SMBGetStdout, parse_stderr);
+#endif
   return;
 }

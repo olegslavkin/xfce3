@@ -146,7 +146,13 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     nitems = uri_parse_list ((const char *) data->data, &list);
     if (!nitems) break; /* of course */
-    uri_remove_file_prefix_from_list (list);
+    u = list->data;
+    if (u->type == URI_SMB){
+	    extern void SMBGetFile (char *);
+	    fprintf(stderr,"dbg: SMB type received.\n");
+	    SMBGetFile (u->url);
+	    break;
+    } else uri_remove_file_prefix_from_list (list);
     node = gtk_ctree_node_nth (GTK_CTREE (ctree), win->dnd_row);
     t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
     
@@ -162,22 +168,26 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     if ((!(t_en->type & FT_DIR)) || (t_en->type & FT_DIR_UP) || (!io_is_valid (t_en->label))|| (EN_IS_DIRUP (t_en)))
     {
 	   /* fprintf(stderr,"dbg:nonsense input\n");*/
-      break;
+        list=uri_free_list (list);
+        break;
       /*gtk_drag_finish (context, FALSE, (mode == TR_MOVE), time);
-      uri_free_list (list);
       return;*/
     }
     
     /* tmpfile ==NULL means drop cancelled*/
-    u = list->data;
+    /* above: u = list->data;*/
     /*fprintf(stderr,"dbg:dnd, src=%s(tarchild=%d) tgt=%s\n",u->url,t_en->type & FT_TARCHILD,t_en->path);*/
-    if (strcmp(u->url,t_en->path)==0) break;/* nonsense input */
+    if (strcmp(u->url,t_en->path)==0) {
+            list=uri_free_list (list);
+	    break;/* nonsense input */
+    }
     
     /*fprintf(stderr,"dbg:at dnd 4\n");*/
     tmpfile=CreateTmpList(win->top,list,t_en);
     /*fprintf(stderr,"dbg:dnd, tmpfile=%s\n",tmpfile);*/
     if (!tmpfile) {
          /*fprintf(stderr,"dbg:null tmpfile\n");*/
+         list=uri_free_list (list);
 	 break;
     }
     /* acording to tmpfile name, do a direct move, here, and break.-*/
