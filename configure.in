@@ -32,6 +32,13 @@ AC_PROG_MAKE_SET
 AM_PROG_LIBTOOL
 AC_PROG_LIBTOOL
 AC_SUBST(LIBTOOL_DEPS)
+dnl AC_SYS_LARGEFILE is missing in Autoconf-2.13
+ifelse(AC_ACVERSION, [2.13], [],
+[
+   AC_SYS_LARGEFILE
+])
+
+AC_SYS_LARGEFILE
 
 # Taken from Jamie Zawinski's configure script for xscreensaver :
 #
@@ -57,7 +64,6 @@ AC_C_INLINE
 AC_HEADER_TIME
 AC_PATH_X
 AC_PATH_XTRA
-AC_SYS_LARGEFILE
 
 dnl Include X libs in checks
 if test -n "$x_includes"; then
@@ -360,46 +366,6 @@ dnl ---------------------------------------------------------------------------
     fi
   fi
 fi
-
-#echo "dbg:options needed for large files $ac_cv_sys_largefile_CC"
-case "$ac_cv_sys_largefile_CC" in
-"")
-;;
-"no")
-;;
-"NONE")
-;;
-*)
-   CFLAGS="$CFLAGS $ac_cv_sys_largefile_CC"
-   ;;
-esac
-
-
-#echo "dbg:_FILE_OFFSET_BITS $ac_cv_sys_file_offset_bits"
-case "$ac_cv_sys_file_offset_bits" in
-"")
-;;
-"no")
-;; 
-"NONE")
-;;
-*)
-   CFLAGS="$CFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
-   ;;
-esac
-
-#echo "dbg:_LARGE_FILES $ac_cv_sys_large_files"
-case "$ac_cv_sys_large_files" in
-"")
-;;
-"no")
-;;
-"NONE")
-;;
-*)
-   CFLAGS="$CFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
-   ;;
-esac
 
 #echo "dbg:target $target"
 case "$target" in
