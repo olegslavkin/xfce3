@@ -52,7 +52,7 @@
 	-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1
 	-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1
 	MapFocus
-	Gtk_engine
+	Linea_engine
 [Screens]
 	4
 [Tooltips]

@@ -6,6 +6,9 @@ dnl ---------------------------------------------------------------------------
 
 AC_INIT()
 
+dnl AC_PREREQ(2.50)
+
+
 AC_CANONICAL_HOST
 
 XFCE_PACKAGE=xfce
