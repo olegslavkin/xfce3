@@ -312,6 +312,7 @@ static int process_error(int code){
 		  fclose(hold);
 		  /* active wait */
 		  while ((hold=fopen(holdfile,"r"))!=NULL){
+		        fprintf(stdout,"unclogging pipe\n");fflush(NULL);
 		  	fclose(hold);
 			usleep(500000);
 		  }
