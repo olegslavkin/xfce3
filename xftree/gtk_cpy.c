@@ -157,6 +157,10 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
       if (rc == DLG_RC_CANCEL)
 	return (FALSE);
     }
+    else
+    {
+      return (TRUE);
+    }
   }
   else if (lstat (ten->path, &t_stat) == ERROR)
   {
