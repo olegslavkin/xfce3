@@ -40,6 +40,7 @@ libxfwmcore_la_SOURCES = \
 	Picture.c \
 	Strings.c \
 	System.c \
+	UTF8.c \
 	alpha_header.h \
 	configure.h \
 	envvar.c  \
