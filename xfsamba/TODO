@@ -1,6 +1,10 @@
+- buggy when mixed files and directories are dropped or pasted.
 -check and eliminate need for latin1 translation routines (no longer necesary
 on later versions of samba)
--print by DnD (as a confirm, ask for text or binary)
+-print by DnD
 -cut,copy and paste options
-
+-font (with iconsize) and background color
+-bug: gtk in suspended state when waiting for a forked smbumount which is
+      pending (mount a share, open a terminal with the xftree, close the
+      xftree, this will create condition).
 --- in xftree: enable recursive downloading when a directory is dropped there.

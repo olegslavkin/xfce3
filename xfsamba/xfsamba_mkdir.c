@@ -103,6 +103,7 @@ SMBmkdirForkOver (pid_t pid)
       textos[SHARE_NAME_COLUMN] = new_dir;
       textos[SHARE_SIZE_COLUMN] = "0";
       textos[SHARE_DATE_COLUMN] = ctime (&fecha);
+      if (strstr(textos[SHARE_DATE_COLUMN],"\n")) strtok(textos[SHARE_DATE_COLUMN],"\n");
       textos[COMMENT_COLUMN] = (char *) malloc (1 + strlen (selected.share) + strlen (selected.dirname) + 1 + strlen (new_dir) + 1);
       if (strcmp (selected.dirname, "/") == 0)
       {
@@ -119,9 +120,9 @@ SMBmkdirForkOver (pid_t pid)
 	data->i[2]=1;
 	data->label=g_strdup(new_dir);
 	data->type |= S_T_DIRECTORY;
-	data->dirname = g_strdup(new_dir);
+	data->dirname=(char *)malloc(strlen(selected.dirname+1)+strlen(new_dir)+2);
+	sprintf(data->dirname,"%s/%s",selected.dirname+1,new_dir);
 	data->share=g_strdup(selected.share);
-	data->dirname=g_strdup(new_dir);
         node = add_node(data,textos,(GtkCTreeNode *) selected.node);
         gtk_ctree_sort_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);	
       }

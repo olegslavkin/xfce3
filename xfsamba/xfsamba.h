@@ -228,6 +228,9 @@ gboolean sane (char *bin);
 void read_defaults(void);
 void save_defaults (void);
 void clean_smbmnt (void);
+void cb_copy(GtkWidget * widget, GtkCTree * ctree);
+void cb_cut(GtkWidget * widget, GtkCTree * ctree);
+void cb_paste(GtkWidget * widget, GtkCTree * ctree);
 
 
 /************public variables *******************/

@@ -58,7 +58,7 @@ static char  *CreateTmpList(void){
    for (s = GTK_CLIST (shares)->selection; s != NULL; s=s->next){
      en = gtk_ctree_node_get_row_data ((GtkCTree *)shares, s->data);
      if (en->type & S_T_DIRECTORY){
-        fprintf(tmpfile,"rmdir \"%s\\\";\n",en->dirname);	     
+        fprintf(tmpfile,"cd /;rmdir \"%s\\\";\n",en->dirname);	     
      } else {
 	fprintf(tmpfile,"cd \"%s\";\n",en->dirname);
 	fprintf(tmpfile,"del \"%s\";\n",en->filename);

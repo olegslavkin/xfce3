@@ -109,6 +109,7 @@ static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
       if (!path){
 	data=smb_entry_new();
 	data->type |= S_T_DIRECTORY;
+	data->share=g_strdup(selected.share);
 	data->dirname=(char *)malloc(strlen(selected.dirname)+strlen(label)+2);
 	sprintf(data->dirname,"%s/%s",selected.dirname,label);
       } else {

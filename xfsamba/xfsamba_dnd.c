@@ -30,8 +30,11 @@
 #include <errno.h>
 #include <unistd.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
-
+#include <X11/Xlib.h>
+#include <X11/Xproto.h>
+#include <netdb.h>
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -143,17 +146,16 @@ static char  *CreateTmpList(GtkWidget *parent,GList *list,char *target){
 			 print_status(u->url);
 		 } 
 		 else if (S_ISREG(s.st_mode)) {
-	  	   fprintf(tmpfile,"cd \"%s\";\n",selected.dirname);
+	  	   fprintf(tmpfile,"cd /;cd \"%s\";\n",selected.dirname);
   		   /*fprintf(tmpfile,"put \"%s\" \"%s\\%s\";\n",u->url,selected.dirname+1,w);*/
   		   fprintf(tmpfile,"put \"%s\" \"%s\";\n",u->url,w);
 		 }
 		 else if (S_ISDIR(s.st_mode)) {
-	  	   fprintf(tmpfile,"cd \"%s\";\n",selected.dirname);
+	  	   fprintf(tmpfile,"cd /;cd \"%s\";\n",selected.dirname);
 	  	   fprintf(tmpfile,"mkdir \"%s\";\n",w);
 	  	   fprintf(tmpfile,"cd \"%s\";\n",w);
 	  	   fprintf(tmpfile,"prompt;recurse;\n");
 	  	   fprintf(tmpfile,"lcd \"%s\";\n",u->url);
-	  	   fprintf(tmpfile,"mask *;\n");
 	  	   fprintf(tmpfile,"mput *;\n");
 	  	   fprintf(tmpfile,"prompt;recurse;\n");
 		 }
@@ -193,6 +195,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   GtkCList *clist;
   char *tmpfile=NULL;
   GList *list=NULL;
+  smb_entry *en;
   GtkCTreeNode *the_node;
   
 #define xDISABLE_DND
@@ -224,6 +227,17 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     if (action == GDK_ACTION_MOVE) mode = TR_MOVE;
     else if (action == GDK_ACTION_COPY) mode = TR_COPY;
     else return;
+
+    gtk_ctree_unselect_recursive ((GtkCTree *)ctree, NULL);
+    the_node=gtk_ctree_node_nth ((GtkCTree *)ctree,row);
+    en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, the_node);
+    if (selected.share) g_free(selected.share);
+    if (selected.dirname) g_free(selected.dirname);
+    selected.share=g_strdup(en->share);
+    selected.dirname=g_strdup(en->dirname);
+
+#if 0
+obsolete    
     /* do an unselect */
     gtk_ctree_unselect_recursive ((GtkCTree *)ctree, NULL);
     the_node=gtk_ctree_node_nth ((GtkCTree *)ctree,row);
@@ -239,8 +253,9 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
 	}
     }
     
-    select_share ((GtkCTree *)ctree, (GList *) the_node, col, NULL);
-
+    /* not really: select_share ((GtkCTree *)ctree, (GList *) the_node, col, NULL);*/
+#endif
+    
     /*fprintf(stderr,"dbg: share=%s\n",selected.share);
     fprintf(stderr,"dbg: dir=%s\n",selected.dirname);*/
    
@@ -382,5 +397,185 @@ on_drag_data_get (GtkWidget * ctree, GdkDragContext * context, GtkSelectionData 
     break;
     
   }
+}
+/************** pasteboard stuff ************************/
+#define CUT_BUFFER 0
+char *our_host_name(void)
+{
+ static char *name = NULL;
+ if (!name){
+	char buffer[256];
+	if (gethostname(buffer, 256) == 0)
+	{
+	  /* gethostname doesn't always return the full name... */
+	  struct hostent *ent;
+	  buffer[256] = '\0';
+	  ent = gethostbyname(buffer);
+	  name = g_strdup(ent ? ent->h_name : buffer);
+	}
+	else
+	{
+	  g_warning("gethostname() failed - using localhost\n");
+	  name = g_strdup("localhost");
+	}
+ }
+ return name;
+}
+static void copy_cut(GtkWidget * widget, GtkCTree * ctree,gboolean cut)
+{
+  GList *s;
+  smb_entry *en;
+
+  int len;
+  char *buffer,*w;
+  
+  XStoreBuffer(GDK_DISPLAY(),"",1,CUT_BUFFER); /* store a null string */
+  if (!(g_list_length (GTK_CLIST (ctree)->selection))) return;
+  len=1+strlen("#xfvalid_buffer:copy:%%:\n");
+  len += strlen(our_host_name());
+
+  for (s = GTK_CLIST (ctree)->selection; s != NULL; s=s->next){
+	int addlen;
+	addlen=strlen("smb://@://\n");
+        en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+	/*printf("dbg:filename=%s, share=%s, dirname=%s\n",
+		 en->filename,en->share,en->dirname);*/
+	/*line=get_select_share((GtkCTree *)ctree,s->data);*/
+   	if (!thisN->password || !en->share || !en->dirname || !thisN->netbios ) continue;
+	addlen += (strlen(en->share)+strlen(en->dirname)
+		    +strlen(thisN->netbios)+strlen(thisN->password));
+	if (en->filename){
+	  addlen +=strlen(en->filename); 
+	} 
+	len += addlen;
+  }
+
+  buffer=(char *)malloc(len+sizeof(char));
+  if (!buffer){
+	  fprintf(stderr,"xfsamba: unable to allocate paste buffer\n");
+	  return;
+  }
+  sprintf(buffer,"#xfvalid_buffer:%s:%s:\n",(cut)?"cut":"copy",our_host_name());
+  w=buffer+strlen(buffer);
+  
+  for (s = GTK_CLIST (ctree)->selection; s != NULL; s=s->next){
+    en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
+    if (!thisN->password || !en->share || !en->dirname || !thisN->netbios ) continue;
+    if (en->filename)
+	 sprintf (w, "smb://%s@%s:%s%s%s%s\r\n",thisN->password,thisN->netbios,
+	    en->share,
+	     en->dirname,
+	    (strcmp(en->dirname,"/")==0)?"":"/",
+	    (en->filename)?(en->filename):"");
+    else sprintf (w, "smb://%s@%s:%s%s%s\r\n",thisN->password,thisN->netbios,
+	    en->share,en->dirname,
+	    (strcmp(en->dirname,"/")==0)?"":"/");
+
+    w = w + strlen(w);
+  }
+  /*printf("dbg:len=%d,data=%s\n",len,buffer);*/
+  XStoreBuffer(GDK_DISPLAY(),buffer,len,CUT_BUFFER);  
+  g_free(buffer);  
+  gtk_ctree_unselect_recursive (GTK_CTREE (ctree), NULL);
+}
+
+void cb_copy(GtkWidget * widget, GtkCTree * ctree){
+  copy_cut(widget,ctree,FALSE);
+}
+
+void cb_cut(GtkWidget * widget, GtkCTree * ctree){
+  copy_cut(widget,ctree,TRUE);
+}
+
+/* this is equivalent to copying by dnd */
+void cb_paste(GtkWidget * widget, GtkCTree * ctree){
+  uri *u;
+  gboolean cut;
+  char *src_hostname;
+  GList *list,*s;
+  char *tmpfile,*b,*word;
+  int num,i,len=-1;
+  smb_entry *en;
+
+  if (!thisN->password || !thisN->netbios ) return;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0){
+	 xf_dlg_warning(smb_nav,_("No target selected!"));
+	 /*fprintf(stderr,"dbg: return 2 from oddg()\n");*/
+	 return;
+  }
+  else if (num >1){
+	 xf_dlg_warning(smb_nav,_("More than one target selected!"));
+	 /*fprintf(stderr,"dbg: return 2 from oddg()\n");*/
+	 return;
+  }
+  s = GTK_CLIST (ctree)->selection;
+  en = gtk_ctree_node_get_row_data (ctree, s->data);
+  if (!en->share || !en->dirname) {
+	  printf("xfsamba:error 3341\n");
+	  return;
+  }
+  if (selected.share) g_free(selected.share);
+  if (selected.dirname) g_free(selected.dirname);
+  selected.share=g_strdup(en->share);
+  selected.dirname=g_strdup(en->dirname);
+  
+  
+  
+  b=XFetchBuffer(GDK_DISPLAY(),&len,0);
+  /*printf("dbg:bytes=%d,buffer0=%s\n",len,b);*/
+
+  if ((!b) || (!strlen(b))) {
+	  xf_dlg_info(smb_nav,_("The pasteboard is currently empty."));
+	  if (b) XFree(b); 
+	  return;
+  }
+	  
+  if ((word=strtok(b,":"))==NULL){ XFree(b); return;}
+  if (!strstr(word,"#xfvalid_buffer")){
+ 	  xf_dlg_info(smb_nav,_("Not a valid file transfer pasteboard."));
+	  return;
+  }
+  if ((word=strtok(NULL,":"))==NULL) { XFree(b); return;}  
+  if (strstr(word,"cut")) cut=TRUE; else cut=FALSE;
+  if ((word=strtok(NULL,":"))==NULL) { XFree(b); return;}  
+  src_hostname=g_strdup(word);
+  if (!src_hostname) fprintf(stderr,"xftree: source host was not specified.\n");
+  else {
+     if (strcmp(src_hostname,our_host_name())!=0) {
+       xf_dlg_error(smb_nav,_("Files are on a remote host"),src_hostname);
+       XFree(b); return;
+     }
+  }
+  if ((word=strtok(NULL,"\n"))==NULL){ XFree(b); return;}  
+         /*fprintf(stderr,"dbg:parse\n");*/
+  	 
+  /* create list to send to CreateTmpList */
+  i = uri_parse_list (word, &list);
+  XFree(b); /* no longer needed here */
+  if (!i) {
+         /*fprintf(stderr,"dbg:uri_parse_list (word, &list)==0\n");*/
+	  return;
+  }
+    u = list->data;
+    if ((u->type!=URI_FILE)&&(u->type!=URI_LOCAL)) {
+        /* fprintf(stderr,"dbg:u->type!=URI_FILE\n");*/
+           list=uri_free_list (list);
+ 	    return;
+    }
+    uri_remove_file_prefix_from_list (list);
+    /* tmpfile ==NULL means drop cancelled*/
+    tmpfile=CreateTmpList(smb_nav,list,NULL);
+    if (!tmpfile) {
+         /*fprintf(stderr,"dbg:null tmpfile\n");*/
+         list=uri_free_list (list);
+	 return;
+    }
+    /*else fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
+    SMBDropFile (tmpfile);
+    /*FIXME: if cut, then zap old files */
+    list=uri_free_list (list);
+  if (cut) XStoreBuffer(GDK_DISPLAY(),"",1,CUT_BUFFER); /* store a null string */
+
+  return;
 }
 

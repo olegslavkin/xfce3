@@ -309,18 +309,10 @@ cb_xftree (GtkWidget * item, GtkWidget * ctree){
 extern void
 cb_mount (GtkWidget * item, GtkWidget * ctree);
 
-static void
-cb_cut (GtkWidget * item, GtkWidget * ctree){
+/*void
+cb_paste (GtkWidget * item, GtkCTree * ctree){
 	xf_dlg_warning(smb_nav,"This function is not yet active");
-}
-static void
-cb_copy (GtkWidget * item, GtkWidget * ctree){
-	xf_dlg_warning(smb_nav,"This function is not yet active");
-}
-static void
-cb_paste (GtkWidget * item, GtkWidget * ctree){
-	xf_dlg_warning(smb_nav,"This function is not yet active");
-}
+}*/
 static void
 cb_master (GtkWidget * item, GtkWidget * ctree)
 {
@@ -656,7 +648,7 @@ cb_new_dir (GtkWidget * widget, GtkWidget *ctree)
   }
   s = GTK_CLIST (ctree)->selection;
   en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, s->data);
-  if (!(en->type&S_T_DIRECTORY)){
+  if (!(en->type&(S_T_DIRECTORY|S_T_SHARE))){
     xf_dlg_warning (smb_nav,_("A single directory must be selected!"));
     return;
   }
