@@ -1,3 +1,171 @@
+2001-11-25  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2001-11-25  xfce
+
+	* xfwm/: events.c, misc.h, placement.c: Reimplement gravity in xfwm
+
+2001-11-25  xfce
+
+	* po/POTFILES.in, po/ca.gmo, po/ca.po, po/cat-id-tbl.c, po/cs.gmo,
+	po/cs.po, po/da.gmo, po/da.po, po/de.gmo, po/de.po, po/en_GB.gmo,
+	po/en_GB.po, po/es.gmo, po/es.po, po/et.gmo, po/et.po, po/fi.gmo,
+	po/fi.po, po/fr.gmo, po/fr.po, po/gl.gmo, po/gl.po, po/hu.gmo,
+	po/hu.po, po/it.gmo, po/it.po, po/ja.gmo, po/ja.po, po/nl.gmo,
+	po/nl.po, po/pl.gmo, po/pl.po, po/pt_BR.gmo, po/pt_BR.po,
+	po/ro.gmo, po/ro.po, po/ru.gmo, po/ru.po, po/sk.gmo, po/sk.po,
+	po/sr.gmo, po/sr.po, po/sv.gmo, po/sv.po, po/uk.gmo, po/uk.po,
+	po/xfce.pot, po/zh.gmo, po/zh.po, po/zh_CN.gmo, po/zh_CN.po,
+	xftree/xtree_go.c: Fix compilation problem in xftree Update po
+	Update POTFILES.in
+
+2001-11-25  xfce
+
+	* xfwm/: events.c, placement.c: Improve ICCCM compliance
+
+2001-11-25  edscott
+
+	* xftree/TODO: - update TODO file with advances.
+
+2001-11-25  edscott
+
+	* xftree/: Makefile.am, Makefile.in, gtk_exec.c, gtk_exec.h, reg.c,
+	uri.c, uri.h, xtree_cfg.h, xtree_dnd.c, xtree_go.c, xtree_go.h,
+	xtree_gui.c, xtree_gui.h, xtree_mess.c, xtree_misc.c, xtree_misc.h:
+	- Found and eliminated a *big* bug in goto combo: appending glist
+	ele-   ments to an already freed glist and freeing non assigned
+	memory.I be-   lieve this is the sought for goto bug, since it only
+	happens when using   the goto combo box, not the double click goto.
+	 - Took goto functions out of xftree_gui.c and created file
+	xtree_go.c   for better maintainance.  - Created go_back function
+	and added the toolbar button for it (it still	is not perfect, but
+	has no serious bugs: I'm too tired to finish it   entirely at the
+	moment).
+
+2001-11-25  edscott
+
+	* xftree/icons/go_back.xpm: [no log message]
+
+2001-11-24  xfce
+
+	* po/cat-id-tbl.c, po/xfce.pot, xfce/setup.c, xfce/xfwm.c,
+	xfwm/events.c, xfwm/themes.c: Improve ICCCM compliance Change xfwm
+	theme engine "xfce"
+
+2001-11-24  edscott
+
+	* xftree/: gtk_cpy.c, gtk_cpy.h: - removed old copy/move routines
+	(gtk_cpy.c,h) from stable tree.
+
+2001-11-24  xfce
+
+	* po/cat-id-tbl.c, po/xfce.pot, xfwm/borders.c, xfwm/events.c,
+	xfwm/misc.c, xfwm/virtual.c: Optimize
+
+2001-11-24  edscott
+
+	* xftree/: Makefile.am, Makefile.in, xtree_gui.c,
+	xtree_pasteboard.c, xtree_pasteboard.h: - Added pasteboard
+	functionality with menu entries and shortcut keys:   ctl-c = copy
+	selection to pasteboard   ctl-l = list pasteboard contents   ctl-i
+	= insert pasteboard contents at current selection   ctl-k = clear
+	pasteboard contents
+
+2001-11-24  edscott
+
+	* xftree/: xtree_cpy.c, xtree_dnd.c: - fixed a small bobo in
+	xtree_cpy.c. Must test for file_exists before	examining source
+	and target st_ino values. duh...
+
+2001-11-24  edscott
+
+	* xftree/: xtree_gui.c, xtree_mess.c, xtree_mess.h: no .xfce dir
+	bugfix
+
+2001-11-24  edscott
+
+	* xftree/: TODO, xtree_dnd.c: removed c++ comments
+
+2001-11-24  xfce
+
+	* xfwm/: decorations.c, events.c, placement.c, xfwm.h: Fix small
+	stuff in configurRequest handler
+
+2001-11-24  xfce
+
+	* xftree/Makefile.in, xfwm/events.c: [no log message]
+
+2001-11-24  xfce
+
+	* po/cat-id-tbl.c, po/xfce.pot, xfwm/placement.c: [no log message]
+
+2001-11-24  edscott
+
+	* xftree/Makefile.am: Makefile for new copy/move routines.
+
+2001-11-23  xfce
+
+	* xfwm/: add_window.c, borders.c, events.c, placement.c: [no log
+	message]
+
+2001-11-23  edscott
+
+	* xftree/: TODO, xtree_cpy.c, xtree_cpy.h, xtree_dnd.c,
+	xtree_gui.c: New copy/move routines in xtree_cpy, replacing gtk_cpy
+	to fix design caused bugs. Need to delete gtk_cpy.c and gtk_cpy.h
+	from cvs tree now.
+
+2001-11-23  xfce
+
+	* xfwm/: events.c, placement.c: [no log message]
+
+2001-11-23  edscott
+
+	* xftree/: reg.c, reg.h, xtree_gui.c, xtree_mess.h: - fixed bug in
+	delete (when actual delete failed, xftree was confused) - KISS'ed
+	move routine in xtree_gui.c - fixed the drag by expander bug
+	reported by Didier.  - added the drag does copy configuration
+	option (allowing for user   selection of the original xftree drag
+	action)
+
+2001-11-23  xfce
+
+	* xfwm/: add_window.c, events.c, themes.c: Locations issues
+
+2001-11-22  xfce
+
+	* configure, configure.in, xfce-3.8.12.lsm, xfce-3.8.14.lsm,
+	xfce.spec, xfwm/borders.c, xfwm/decorations.c: Increase version
+	number to 3.8.14 Remove the inner border, because it confuses apps
+	and cause a 1 pixel offset
+
+2001-11-22  xfce
+
+	* xfwm/: add_window.c, events.c: Change configureNotify handler for
+	Java apps
+
+2001-11-21  xfce
+
+	* xfwm/events.c: Fix ClickRaise function that wasn't working since
+	version 3.8.1x
+
+2001-11-21  xfce
+
+	* configure, configure.in, xfce-3.8.12.lsm, xfce.spec, po/xfce.pot,
+	xftree/reg.c, xftree/xtree_gui.c, xfwm/icons.c: Fix a problem in
+	xftree file type registration, Fix a potential race condition in
+	xfwm that could have left blank frame.
+
+2001-11-21  xfce
+
+	* xfsound/xfdsp.c: Remove device reset before each playback
+
+2001-11-20  xfce
+
+	* po/xfce.pot, scripts/xfce_upgrade, scripts/xfce_upgrade.in: Check
+	existance of $HOME/.xinitrc in xfce_upgrade script
+
 2001-11-20  xfce
 
 	* ChangeLog: Update ChangeLog
