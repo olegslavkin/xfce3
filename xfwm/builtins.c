@@ -1944,7 +1944,7 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
       bf->u.ReliefGC = (GC) NULL;
     }
     break;
-  case VectorButton:
+  case PixButton:
     if (bf->bitmap != None)
     {
       XFreePixmap (dpy, bf->bitmap);

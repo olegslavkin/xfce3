@@ -1326,7 +1326,7 @@ LoadDefaultLeftButton (ButtonFace * bf, int i)
 {
   bf->u.ShadowGC = (GC) NULL;
   bf->u.ReliefGC = (GC) NULL;
-  bf->style = VectorButton;
+  bf->style = PixButton;
   switch (i % 3)
   {
   case 0:
@@ -1441,7 +1441,7 @@ LoadDefaultRightButton (ButtonFace * bf, int i)
 {
   bf->u.ShadowGC = (GC) NULL;
   bf->u.ReliefGC = (GC) NULL;
-  bf->style = VectorButton;
+  bf->style = PixButton;
   switch (i % 3)
   {
   case 0:

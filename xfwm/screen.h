@@ -172,15 +172,6 @@ struct functions
 
 typedef enum
 {
-  VectorButton,
-  SimpleButton,
-  GradButton,
-  SolidButton
-}
-ButtonFaceStyle;
-
-typedef enum
-{
   XFCE_ENGINE,
   MOFIT_ENGINE,
   TRENCH_ENGINE,
@@ -188,6 +179,15 @@ typedef enum
   LINEA_ENGINE
 }
 EngineType;
+
+typedef enum
+{
+  PixButton,
+  SimpleButton,
+  GradButton,
+  SolidButton
+}
+ButtonFaceStyle;
 
 typedef struct ButtonFace
 {

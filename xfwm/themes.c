@@ -891,9 +891,6 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
 
   switch (type)
   {
-  case SimpleButton:
-    break;
-
   case SolidButton:
     {
       XRectangle bounds;
@@ -940,7 +937,7 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
     }
     break;
 
-  case VectorButton:
+  case PixButton:
     XFillRectangle (dpy, win, BackGC, 0, 0, w, h);
     if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
     {
@@ -1740,7 +1737,7 @@ DrawButton_mofit (XfwmWindow * t, Window win, XRectangle *area, int w, int h, Bu
   
   switch (type)
   {
-  case VectorButton:
+  case PixButton:
     if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
     {
       DrawLinePattern (win, area, ShadowGC, ReliefGC, &bf->vector, w, h);
@@ -2528,7 +2525,7 @@ DrawButton_trench (XfwmWindow * t, Window win, XRectangle *area, int w, int h, B
 
   switch (type)
   {
-  case VectorButton:
+  case PixButton:
     XFillRectangle (dpy, win, Scr.TransMaskGC, 0, 0, w, h);
     if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
     {
@@ -3335,7 +3332,7 @@ DrawButton_gtk (XfwmWindow * t, Window win, XRectangle *area, int w, int h, Butt
 
   switch (type)
   {
-  case VectorButton:
+  case PixButton:
     {
       XFillRectangle (dpy, win, BackGC, 0, 0, w, h);
       if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
@@ -4033,7 +4030,7 @@ DrawButton_linea (XfwmWindow * t, Window win, XRectangle *area, int w, int h, Bu
     XDrawLine (dpy, win, HiGC, 0, h - 1, w, h - 1);
      */
     break;
-  case VectorButton:
+  case PixButton:
     if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
     {
       XSetClipOrigin (dpy, Scr.TransMaskGC, (w - 16) / 2, (h - 16) / 2);
