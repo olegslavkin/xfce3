@@ -270,25 +270,38 @@ void set_override(gboolean state)
 
 static int nitems;
 
-char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
+static char *randomTmpName(void){
     static char *fname=NULL;
-    char *target;
     int fnamelen;
-    FILE *tmpfile;
-    uri *u;
-    entry *s_en;
-    
-    nitems=0;
     if (fname) free(fname);
     fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
     srandom(time(NULL));
     fname = (char *)malloc(sizeof(char)*(fnamelen));
     if (!fname) return NULL;
     sprintf(fname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
+    return fname;
+}
+
+static char *SimpleTmpList(GtkWidget *parent,char *tgt,char *src){
+    static char *fname=NULL;
+    FILE *tmpfile;
+    if ((fname=randomTmpName())==NULL) return NULL;
     if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
-	/* create tmp file, unique name*/
-	/*fprintf(stderr,"dbg: %s\n",fname);*/
+    fprintf(tmpfile,"%d:%s:%s\n",TR_COPY,src,tgt);
+    fclose(tmpfile);
+    return fname;
+}
+
+char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
+    char *target;   
+    FILE *tmpfile;
+    uri *u;
+    static char *fname=NULL;
+    entry *s_en;
     
+    nitems=0;
+    if ((fname=randomTmpName())==NULL) return NULL;
+    if ((tmpfile=fopen(fname,"w"))==NULL) return NULL;
 /*    same_device=FALSE;*/
     same_device=TRUE;
     for (;list!=NULL;list=list->next){
@@ -475,6 +488,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 		  newtarget=(char *)malloc(strlen(target)+strlen(src)+3);
 		  if (!newtarget) {
 			  free(globstring);
+			  globfree(&dirlist);
 			  return FALSE; /* fatal error */
 		  }
 		  sprintf(newtarget,"%s/%s",target,src);
@@ -483,11 +497,13 @@ static gboolean SubChildTransfer(char *target,char *source){
 			/*fprintf(stderr,"dbg:dirlisterror: %s\n",dirlist.gl_pathv[i]);*/
 	  		free(globstring);
 		 	free(newtarget);
+			globfree(&dirlist);
 			return FALSE; /* fatal error */
 		  }
 		  free(newtarget);
 		}
 		free(globstring);
+		globfree(&dirlist);
 		
 		/* remove old directory (rmdir should fail if any interior move failed) */
 		if ((child_mode & TR_MOVE) && (rmdir(source)<0)){
@@ -667,7 +683,7 @@ static void count_window(GtkWidget *parent){
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->action_area), count_label, TRUE, TRUE, 3);
   gtk_widget_show(count_label);
   gtk_widget_realize (countW);
-  /* gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER); */
+  if (preferences&SMALL_DIALOGS) gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER);
   if (parent) gtk_window_set_transient_for (GTK_WINDOW (countW), GTK_WINDOW (parent)); 
   gtk_widget_show_all(countW);
   gdk_flush();
@@ -1073,5 +1089,68 @@ GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode)
 
   return cat;
 
+}
+
+void cb_duplicate (GtkWidget * item, GtkCTree * ctree)
+{
+  entry *en;
+  struct stat s;
+  GtkCTreeNode *node;
+  char *nfile,*tmpfile;
+  int num,selected;
+  cfg *win;
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  selected = count_selection (ctree, &node);
+  if (!selected) {
+	  xf_dlg_error(win->top,"No file or directory selected for duplication!",NULL);
+	  return;
+  } else if (selected > 1) {
+	  xf_dlg_error(win->top,"Only one file or directory can be selected for duplication!",NULL);
+	  return;
+  }
+  
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+
+  if (!io_is_valid (en->label)) return;
+  cursor_wait (GTK_WIDGET (ctree));
+  num = 0;
+  if ((nfile=(char *) malloc(strlen(en->path)+32))==NULL) return;
+  /* get highest duplicated version number*/
+  {
+     glob_t dirlist;
+     int i,j;
+     char *wd;
+     sprintf (nfile, "%s-*", en->path);
+     if (glob (nfile, GLOB_ERR, NULL, &dirlist) == 0) {
+	     
+	for (i = 0; i < dirlist.gl_pathc; i++) {
+	     wd = strrchr(dirlist.gl_pathv[i],'-')+1;
+	     for (j=0;j<strlen(wd);j++) if ((wd[j] > '9')||(wd[j] < '0')) goto next;
+	     if (num <= atoi(wd)) num = atoi(wd) + 1; 
+	     /*printf("%d:%s\n",i,dirlist.gl_pathv[i]);*/
+	}
+next:;
+     }
+     globfree(&dirlist);
+     
+  }
+     
+  sprintf (nfile, "%s-%d", en->path, num++);
+  while (stat (nfile, &s) != -1)
+  {
+    sprintf (nfile, "%s-%d", en->path, num++);
+  }
+
+  
+  tmpfile = SimpleTmpList(win->top,nfile,en->path);
+  IndirectTransfer((GtkWidget *)ctree,TR_COPY,tmpfile);
+  
+  
+   /* immediate refresh */
+  update_timer (ctree);
+  cursor_reset (GTK_WIDGET (ctree));
+  free(nfile);
+  return;
 }
 

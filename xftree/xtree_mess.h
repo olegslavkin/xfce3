@@ -19,9 +19,12 @@
 #define STATUS_FOLLOWS_EXPAND	0x40000
 #define SHOW_STATUS		0x80000
 #define SMALL_DIALOGS		0x100000
+#define FONT_STATE		0x200000
 
 
 #define UNSORT_MASK		(0x38000 ^ 0xffffffff)
+
+
 #define FILTER_DIRS		0x01
 #define FILTER_FILES		0x02
 
@@ -86,11 +89,14 @@ void cb_filter_files(GtkWidget * widget, GtkWidget *ctree);
 void cb_abreviate(GtkWidget * widget, GtkWidget *ctree);
 xf_dirent *xf_opendir(char *path,GtkWidget *ctree);
 xf_dirent *xf_closedir(xf_dirent *diren);
-char *xf_readdir(xf_dirent *diren);
+char *xf_readdir(xf_dirent *diren,GtkWidget *ctree);
 char *abreviate(char *path);
 char *abreviateP(char *path);
 void clear_cat (GtkWidget * widget, gpointer data);
 void cb_custom_home(GtkWidget *widget,gpointer data);
 void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree);
 
+void cb_drag_copy (GtkWidget * widget, gpointer ctree);
+void cb_doubleC_goto (GtkWidget * widget, gpointer ctree);
+void cb_save_geo (GtkWidget * widget, gpointer ctree);
 #endif

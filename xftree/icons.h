@@ -23,5 +23,5 @@
 #include "icons/compressed.xpm"
 #include "icons/text.xpm"
 #include "icons/image.xpm"
-#include "icons/core.xpm"
+#include "icons/page_audio.xpm"
 #endif

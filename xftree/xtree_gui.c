@@ -70,6 +70,7 @@
 #include "xtree_go.h"
 #include "xtree_cb.h"
 #include "xtree_toolbar.h"
+#include "xtree_cpy.h"
 #include "icons.h"
 
 #ifdef HAVE_GDK_PIXBUF
@@ -159,6 +160,7 @@ static GtkAccelGroup *accel;
    
     
 #define DIR_OR_FILE_MENU \
+    {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_c,GDK_MOD1_MASK}, \
     {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
     {N_("Properties ..."), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
     {NULL, NULL, 0} 
@@ -168,8 +170,7 @@ static GtkAccelGroup *accel;
    
 #define FILE_MENU \
      {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
-     {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},\
-     {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_c,GDK_MOD1_MASK} 
+     {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK}
      
 #define SIMPLE_GOTO_MENU \
     {N_("Go to ..."), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK}
@@ -199,7 +200,7 @@ static GtkAccelGroup *accel;
     {N_("Enable filter"),cb_filter,FILTER_OPTION, GDK_f,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Abbreviate paths"),cb_abreviate,ABREVIATE_PATHS, GDK_a,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
-    {N_("Status box"),cb_show_status, SHOW_STATUS, GDK_t,GDK_MOD1_MASK}, \
+    {N_("Status box"),cb_show_status, SHOW_STATUS, GDK_m,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Status titles"),cb_status_follows_expand,STATUS_FOLLOWS_EXPAND, GDK_y,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {N_("Short titles"),cb_short_titles,SHORT_TITLES, GDK_w,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
@@ -226,6 +227,8 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
   cfg *win;
   reg_t *prg;
   gint row, col;
+  
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if ((event->type == GDK_2BUTTON_PRESS) && (event->button == 1))
   {
     /* double_click
@@ -239,7 +242,7 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     {
       node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (EN_IS_DIR (en) && ((event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)) || (preferences & DOUBLE_CLICK_GOTO)))
+      if (EN_IS_DIR (en) && ((event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)) || (win->preferences & DOUBLE_CLICK_GOTO)))
       {
         /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
 	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
@@ -281,7 +284,6 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     else
     {
       /* call open with dialog */
-      win = gtk_object_get_user_data (GTK_OBJECT (ctree));
       prg = reg_prog_by_file (win->reg, en->path);
       if (prg)
       {
@@ -462,6 +464,8 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   entry *en1, *en2;
   char *loc1=NULL,*loc2=NULL;
   int type1, type2;
+    cfg *win;
+    win = gtk_object_get_user_data (GTK_OBJECT (clist));
 
   en1 = row1->row.data;
   en2 = row2->row.data;
@@ -475,7 +479,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 
   
 /* subsort by filetype */
-  if (preferences&SUBSORT_BY_FILETYPE) {
+  if (win->preferences&SUBSORT_BY_FILETYPE) {
 	  loc1=strrchr(en1->label,'.');
 	  loc2=strrchr(en2->label,'.');
   }
@@ -484,10 +488,8 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   {
     /* use default compare function which we have saved before  */
     GtkCListCompareFunc compare;
-    cfg *win;
-    win = gtk_object_get_user_data (GTK_OBJECT (clist));
     compare = (GtkCListCompareFunc) win->compare;
-    if (preferences&SUBSORT_BY_FILETYPE) {
+    if (win->preferences&SUBSORT_BY_FILETYPE) {
 	  if ((!loc1)&&(!loc2)) return compare (clist, ptr1, ptr2);
 	  if ((!loc1)&&(loc2)) return strcmp (".",loc2);
 	  if ((loc1)&&(!loc2)) return strcmp (loc1,".");
@@ -496,7 +498,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
     return compare (clist, ptr1, ptr2);
   }
   
-  if (preferences&SUBSORT_BY_FILETYPE) {
+  if (win->preferences&SUBSORT_BY_FILETYPE) {
     if ((!loc1)&&(!loc2)) return strcmp (en1->label, en2->label);
     if ((!loc1)&&(loc2)) return strcmp (".",loc2);
     if ((loc1)&&(!loc2)) return strcmp (loc1,".");
@@ -673,13 +675,36 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 		   GDK_m,GDK_MOD1_MASK,GTK_ACCEL_VISIBLE );
   gtk_widget_show (menuitem);
   
+  menuitem = gtk_check_menu_item_new_with_label (_("Save geometry on exit"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (SAVE_GEOMETRY & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", 
+		    GTK_SIGNAL_FUNC (cb_save_geo), (gpointer) ctree);
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Double click does GOTO"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (DOUBLE_CLICK_GOTO & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", 
+		    GTK_SIGNAL_FUNC (cb_doubleC_goto), (gpointer) ctree);
+
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Drag does copy"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (DRAG_DOES_COPY & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_menu_append (GTK_MENU (menu), menuitem);  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", 
+		    GTK_SIGNAL_FUNC (cb_drag_copy), (gpointer) ctree);
+
+#if 0
   shortcut_menu (menu, _("Save geometry on exit"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(SAVE_GEOMETRY)) );
   shortcut_menu (menu, _("Double click does GOTO"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(DOUBLE_CLICK_GOTO)) );
   shortcut_menu (menu, _("Drag does copy"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(DRAG_DOES_COPY)) );
-
+#endif
 
   menuitem = gtk_menu_item_new_with_label (_("Set background color"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_colors), ctree);
@@ -747,40 +772,43 @@ GdkPixmap  **pixmap;
 GdkPixmap  **pixmask;
 char **xpm;
 char *c;
+int kolor;
 } gen_pixmap_list;
 
 /* masks that are duplicated elsewhere are initialized to NULL */
 static pixmap_list pixmaps[]={
-	{&gPIX_page,		&gPIM_page,		page_xpm},
-	{&gPIX_core,		NULL,			core_xpm},
-	{&gPIX_text,		NULL,			text_xpm},
-	{&gPIX_compressed,	NULL,			compressed_xpm},
-	{&gPIX_image,		NULL,			image_xpm},
-	{&gPIX_tar,		NULL,			tar_xpm},
-	{&gPIX_page_lnk,	NULL,			page_lnk_xpm},
-	{&gPIX_dir_pd,		NULL,			dir_pd_xpm},
-	{&gPIX_dir_open,	&gPIM_dir_open,		dir_open_xpm},
-	{&gPIX_dir_open_lnk,	NULL,			dir_open_lnk_xpm},
-	{&gPIX_dir_close,	&gPIM_dir_close,	dir_close_xpm},
-	{&gPIX_dir_close_lnk,	NULL,			dir_close_lnk_xpm},
-	{&gPIX_dir_up,		NULL,			dir_up_xpm},
-	{&gPIX_exe,		&gPIM_exe,		exe_xpm},
-	{&gPIX_exe_lnk,		NULL,			exe_lnk_xpm},
-	{&gPIX_exe_script,	NULL,			exe_script_xpm},
-	{&gPIX_char_dev,	&gPIM_char_dev,		char_dev_xpm},
-	{&gPIX_block_dev,	&gPIM_block_dev,	block_dev_xpm},
-	{&gPIX_fifo,		&gPIM_fifo,		fifo_xpm},
-	{&gPIX_socket,		&gPIM_socket,		socket_xpm},
-	{&gPIX_stale_lnk,	&gPIM_stale_lnk,	stale_lnk_xpm},
-	{&gPIX_page_html,	&gPIM_page_html,	page_html_xpm},
+	{gPIX+PIX_PAGE,		gPIM+PIM_PAGE,		page_xpm},
+	{gPIX+PIX_PAGE_AUDIO,	gPIM+PIM_PAGE_AUDIO,	page_audio_xpm},
+	{gPIX+PIX_TEXT,		NULL,			text_xpm},
+	{gPIX+PIX_COMPRESSED,	NULL,			compressed_xpm},
+	{gPIX+PIX_IMAGE,	NULL,			image_xpm},
+	{gPIX+PIX_TAR,		NULL,			tar_xpm},
+	{gPIX+PIX_PAGE_LNK,	NULL,			page_lnk_xpm},
+	{gPIX+PIX_DIR_PD,	NULL,			dir_pd_xpm},
+	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
+	{gPIX+PIX_DIR_OPEN_LNK,	NULL,			dir_open_lnk_xpm},
+	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
+	{gPIX+PIX_DIR_CLOSE_LNK,NULL,			dir_close_lnk_xpm},
+	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
+	{gPIX+PIX_EXE,		gPIM+PIM_EXE,		exe_xpm},
+	{gPIX+PIX_EXE_LINK,	NULL,			exe_lnk_xpm},
+	{gPIX+PIX_EXE_SCRIPT,	NULL,			exe_script_xpm},
+	{gPIX+PIX_CHAR_DEV,	gPIM+PIM_CHAR_DEV,	char_dev_xpm},
+	{gPIX+PIX_BLOCK_DEV,	gPIM+PIM_BLOCK_DEV,	block_dev_xpm},
+	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
+	{gPIX+PIX_SOCKET,	gPIM+PIM_SOCKET,	socket_xpm},
+	{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},
+	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
 	{NULL,NULL,NULL}
 };
 
 static gen_pixmap_list gen_pixmaps[]={
-	{&gPIX_pageC,	NULL,	page_xpm,	"c"},
-	{&gPIX_pageH,	NULL,	page_xpm,	"h"},
-	{&gPIX_pageF,	NULL,	page_xpm,	"f"},
-	{NULL,NULL,NULL}
+	{gPIX+PIX_PAGE_C,	NULL,	page_xpm,	"c",	0},
+	{gPIX+PIX_PAGE_H,	NULL,	page_xpm,	"h",	1},
+	{gPIX+PIX_PAGE_F,	NULL,	page_xpm,	"f",	0},
+	{gPIX+PIX_PAGE_O,	NULL,	page_xpm,	"o",	3},
+	{gPIX+PIX_CORE,		NULL,	page_xpm,	"!",	2},
+	{NULL,NULL,NULL,0}
 };
 
 static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
@@ -822,8 +850,9 @@ static gint on_filter (GtkWidget * widget, GdkEventKey * event, GtkWidget *ctree
 
 void create_pixmaps(int h,GtkWidget *ctree){
   GtkStyle  *style;
-  static GdkColormap *colormap=NULL;
-  static GdkGC* gc=NULL; 
+  GdkColormap *colormap;
+  GdkGC *gc; 
+
   int i;
   static GtkWidget *hack=NULL; 
   /* hack: to be able to use icons globally, independent of xftree window.*/
@@ -832,23 +861,7 @@ void create_pixmaps(int h,GtkWidget *ctree){
 #ifndef HAVE_GDK_PIXBUF
   else return; /* don't recreate pixmaps without gdk-pixbuf  */
 #endif
-  
-  if (!gc) {
-	GdkColor fore,back;
-	
-       /*if (!gdk_color_black (colormap,&fore)) fprintf(stderr,"DBG: no black\n");*/
-   	fore.red=fore.green=0;
-	fore.blue=65535;
-	if (!colormap) {
-		colormap = gdk_colormap_get_system();
-		gdk_colormap_alloc_color (colormap,&fore,FALSE,TRUE);
-	}
-        if (!gdk_color_white (colormap,&back)) fprintf(stderr,"DBG: no white\n");
-	gc = gdk_gc_new (hack->window);
-	gdk_gc_set_foreground (gc,&fore);
-	gdk_gc_set_background (gc,&back);
-  }
-	
+  	
   for (i=0;pixmaps[i].pixmap != NULL; i++){ 
 	  if (*(pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(pixmaps[i].pixmap));
 	  if ((pixmaps[i].pixmask)&&(*(pixmaps[i].pixmask) != NULL)) gdk_bitmap_unref(*(pixmaps[i].pixmask));
@@ -857,16 +870,45 @@ void create_pixmaps(int h,GtkWidget *ctree){
  
   style=gtk_widget_get_style (ctree);
   for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
-	int x,y,ch;
+	int x,y;
+	GdkColor back;
+	GdkColor kolor[4];
+	gint lbearing, rbearing, width, ascent, descent;
+
+	kolor[0].pixel=0, kolor[0].red= kolor[0].green=0;kolor[0].blue =65535;
+	kolor[1].pixel=1, kolor[1].red= kolor[1].blue=0; kolor[1].green=40000;
+	kolor[2].pixel=2, kolor[2].blue=kolor[2].green=0;kolor[2].red  =65535;
+	kolor[3].pixel=3, kolor[3].red= kolor[3].green=  kolor[3].blue =42000;
+	
+	colormap = gdk_colormap_get_system();
+	gdk_colormap_alloc_color (colormap,kolor+gen_pixmaps[i].kolor,FALSE,TRUE);  
+	  	  
+        if (!gdk_color_white (colormap,&back)) fprintf(stderr,"DBG: no white\n");
+	gc = gdk_gc_new (hack->window);
+	gdk_gc_set_foreground (gc,kolor+gen_pixmaps[i].kolor);
+	gdk_gc_set_background (gc,&back);
+  	
+
+	
 	if (*(gen_pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(gen_pixmaps[i].pixmap));
 	scale_pixmap(hack,h,ctree,gen_pixmaps[i].xpm,gen_pixmaps[i].pixmap,gen_pixmaps[i].pixmask);
- 	ch=gdk_char_height (style->font,gen_pixmaps[i].c[0]);
-        x=h/5;
-        y=h/2+2*ch/3;
-  	/*fprintf(stderr,"dbg: drawing...ch=%d, y=%d, pixH=%d\n",ch,y,h);*/
-	/*gdk_draw_line ((GdkDrawable *)(*(pixmaps[i].pixmap)),gc,0,0,30,30);*/
+        gdk_string_extents (style->font,gen_pixmaps[i].c,
+			&lbearing,&rbearing,&width,&ascent,&descent);
+#if 0	
+  	fprintf(stderr,"dbg: drawing %s...lbearing=%d,rbearing=%d,width=%d,ascent=%d,descent=%d,measure=%d,width=%d,height=%d\n",
+			gen_pixmaps[i].c,lbearing,rbearing,width,ascent,descent,
+			gdk_char_measure(style->font,gen_pixmaps[i].c[0]),
+			gdk_char_width(style->font,gen_pixmaps[i].c[0]),
+			gdk_char_height (style->font,gen_pixmaps[i].c[0]));
+#endif	
+
+
+	/* numbers for page_xpm */
+        x=h/4-lbearing+1;
+        y=13*h/16-descent-1;
 	gdk_draw_text ((GdkDrawable *)(*(gen_pixmaps[i].pixmap)),style->font,gc,
 				x,y,gen_pixmaps[i].c,strlen(gen_pixmaps[i].c));
+	gdk_gc_destroy (gc);
 	  
   }
    
@@ -1215,7 +1257,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 /* first pixmap appearance */
   
   root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
-		  gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);   
+		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
+		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);   
   
   en = entry_new_by_path_and_label (path, path);
   if (!en)
@@ -1242,7 +1285,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
                               
 
 
-  set_title (win->top, en->path);
+  set_title_ctree (ctree, en->path);
   if (win->width > 0 && win->height > 0)
   {
     gtk_window_set_default_size (GTK_WINDOW (win->top), width, height);
@@ -1320,6 +1363,11 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
 {
   GList *reg;
   cfg *new_win;
+  int i;
+
+  for (i=0;i<LAST_PIX;i++) gPIX[i]=NULL;
+  for (i=0;i<LAST_PIM;i++) gPIM[i]=NULL;
+  
 
   reg = reg_build_list (reg_file);
   if (SAVE_GEOMETRY & preferences){

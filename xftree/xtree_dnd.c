@@ -263,9 +263,11 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
 }
 
 gboolean
-on_drag_motion (GtkWidget * widget, GdkDragContext * dc, gint x, gint y, guint t, gpointer data)
+on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t, gpointer data)
 {
   GdkDragAction action;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   /* Get source widget and check if it is the same as the
    * destination widget. 
@@ -287,7 +289,7 @@ on_drag_motion (GtkWidget * widget, GdkDragContext * dc, gint x, gint y, guint t
 #endif
 
   /* Insert code to get our default action here. */
-  if (preferences & DRAG_DOES_COPY) action = GDK_ACTION_COPY;
+  if (win->preferences & DRAG_DOES_COPY) action = GDK_ACTION_COPY;
   else action = GDK_ACTION_MOVE;
 
   /* Respond with default drag action (status). First we check

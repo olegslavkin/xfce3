@@ -54,6 +54,7 @@ typedef struct
   golist *gogo;
   int filterOpts;
   unsigned int preferences;
+  unsigned int stateTB[2];
 }
 cfg, cfg_t;
 

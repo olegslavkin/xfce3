@@ -143,18 +143,17 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   char *icon_name;
   cfg *win;
   
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 	/*fprintf(stderr,"dbg: go_to path=%s\n",path);*/
   if (strstr(path,"/..")) {
      if (strlen(path)<=3) return; /* no higher than root */
 	*(strrchr(path,'/'))=0;
-
-	*(strrchr(path,'/'))=0;
+	if (strstr(path,"/")) *(strrchr(path,'/'))=0;
 	if (path[0]==0) strcpy(path,"/");
    }    		
   en = entry_new_by_path (path);
   if (!en)
   {
-    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
     xf_dlg_error(win->top,_("Cannot find path"),path);
     /*fprintf (stderr,"dbg:Can't find row data at go_to()\n");*/
     return;
@@ -168,7 +167,7 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   for (i = 0; i < COLUMNS; i++)
   {
     if (i == COL_NAME)
-      label[i] = (preferences&ABREVIATE_PATHS)?
+      label[i] = (win->preferences&ABREVIATE_PATHS)?
 	      abreviate(uri_clear_path (en->path)):uri_clear_path (en->path);
     else
       label[i] = "";
@@ -181,11 +180,12 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   gtk_ctree_remove_node (ctree, root);
   
 
-  root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, TRUE);
-  gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
+  root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8, 
+		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
+		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);  	  gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
   add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
   ctree_thaw (ctree);
-  set_title (GTK_WIDGET (ctree), uri_clear_path (en->path));
+  set_title_ctree (GTK_WIDGET (ctree), uri_clear_path (en->path));
   icon_name = strrchr (en->path, '/');
   if ((icon_name) && (!(*(++icon_name))))
     icon_name = NULL;
@@ -236,7 +236,7 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   /* if double click is selected for goto, then doing the 
    * following line is totally unnecesary and hinders the speed 
    * of xftree, so it is disactivated */
-  if (!(preferences & DOUBLE_CLICK_GOTO) && (count == 1) && (en->type & FT_DIR)) {
+  if (!(win->preferences & DOUBLE_CLICK_GOTO) && (count == 1) && (en->type & FT_DIR)) {
   	go_to (ctree, root, en->path, en->flags);
 	return;
   }

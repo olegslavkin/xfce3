@@ -83,9 +83,6 @@
 static GdkFont *the_font; 
 static char *custom_font=NULL;
 
-/* FIXME: when font change implies a change in icon size
- * then propagate an event to all xftree windows so that
- * the font changes accordingly*/
 int set_fontT(GtkWidget * ctree){
 	GtkStyle  *Ostyle,*style;
 	Ostyle=gtk_widget_get_style (ctree);
@@ -199,12 +196,17 @@ void
 cb_select_font (GtkWidget * widget, GtkWidget *ctree)
 {
   char *font_selected;
+  cfg *win;
       
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   font_selected = open_fontselection ("fixed");
+  win->preferences ^= FONT_STATE;
   if (!font_selected) {
-	  preferences &= (CUSTOM_FONT ^ 0xffffffff);
+	  win->preferences &= (CUSTOM_FONT ^ 0xffffffff);
+	  preferences = win->preferences;
   } else  {
-	preferences |= CUSTOM_FONT;
+	win->preferences |= CUSTOM_FONT;
+	preferences = win->preferences;
   	if (custom_font) free(custom_font);
 	custom_font=(char *)malloc(strlen(font_selected)+1);
 	if (custom_font) strcpy(custom_font,font_selected);
@@ -217,7 +219,10 @@ cb_select_font (GtkWidget * widget, GtkWidget *ctree)
 }
 void cb_subsort(GtkWidget * widget, GtkWidget *ctree)
 {
-  preferences ^= SUBSORT_BY_FILETYPE;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= SUBSORT_BY_FILETYPE;
+  preferences = win->preferences;
   gtk_clist_sort ((GtkCList *)ctree);
   save_defaults(NULL);
   return;
@@ -228,7 +233,8 @@ void cb_filter(GtkWidget * widget, GtkWidget *ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  preferences ^= FILTER_OPTION;
+  win->preferences ^= FILTER_OPTION;
+  preferences = win->preferences;
   if (preferences & FILTER_OPTION){
 	if (!GTK_WIDGET_VISIBLE(win->filter->parent->parent))
 		gtk_widget_show(win->filter->parent->parent);
@@ -247,6 +253,7 @@ static void filter_reload(GtkWidget * widget, GtkWidget *ctree){
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));  
   if (!(win->filterOpts)) preferences &= (FILTER_OPTION^0xffffffff);
   else preferences |= FILTER_OPTION;
+  preferences = win->preferences;
   cb_reload(widget, (gpointer) ctree);
   return;
 }
@@ -273,7 +280,11 @@ void cb_filter_files(GtkWidget * widget, GtkWidget *ctree)
 void
 cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
 {
-  preferences ^= HIDE_DATE;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  win->preferences ^= HIDE_DATE;
+  preferences = win->preferences;
   gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
   if (preferences & HIDE_TITLES) {
 	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button))){ 
@@ -287,7 +298,11 @@ cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
 void
 cb_hide_size (GtkWidget * widget, GtkWidget *ctree)
 {
-  preferences ^= HIDE_SIZE;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  win->preferences ^= HIDE_SIZE;
+  preferences = win->preferences;
   gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
   if (preferences & HIDE_TITLES) {
 	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button))){ 
@@ -304,7 +319,8 @@ cb_hide_menu (GtkWidget * widget, GtkWidget *ctree)
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
-  preferences ^= HIDE_MENU;
+  win->preferences ^= HIDE_MENU;
+  preferences = win->preferences;
   if (preferences & HIDE_MENU) {
 	  if (GTK_WIDGET_VISIBLE(win->menu->parent)) {
 		  gtk_widget_show(win->restore_menu);
@@ -326,8 +342,8 @@ cb_abreviate (GtkWidget * widget, GtkWidget *ctree)
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
 
-  preferences ^= ABREVIATE_PATHS;
-  win->preferences = preferences;
+  win->preferences ^= ABREVIATE_PATHS;
+  preferences = win->preferences;
   save_defaults(NULL);
   cb_reload(widget,(gpointer) ctree);
   return;
@@ -336,7 +352,11 @@ cb_abreviate (GtkWidget * widget, GtkWidget *ctree)
 void
 cb_hide_titles (GtkWidget * widget, GtkWidget *ctree)
 {
-  preferences ^= HIDE_TITLES;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
+  win->preferences ^= HIDE_TITLES;
+  preferences = win->preferences;
   if (preferences & HIDE_TITLES) {
 	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button))){ 
 	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
@@ -404,7 +424,8 @@ char * override_txt(char *new_file,char *old_file)
 			new_file,ntime,nst.st_size,BYTES);
   return message;
 }
-			 
+	
+#if 0
 GtkWidget *
 shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data)
 {
@@ -426,6 +447,7 @@ shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data)
   gtk_widget_show (menuitem);
   return menuitem;
 }
+#endif 
 
 void save_defaults (GtkWidget *parent)
 {
@@ -572,14 +594,15 @@ void cb_status_follows_expand(GtkWidget * widget, GtkWidget *ctree)
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
-  preferences ^= STATUS_FOLLOWS_EXPAND;
+  win->preferences ^= STATUS_FOLLOWS_EXPAND;
+  preferences = win->preferences;
   save_defaults (NULL);
   if (preferences & STATUS_FOLLOWS_EXPAND){
   	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), win->status_node);
   } else {
   	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
   }
-  set_title(win->top,en->path);
+  set_title_ctree(ctree,en->path);
 }
 
 void cb_show_status(GtkWidget * widget, GtkWidget *ctree)
@@ -592,7 +615,8 @@ void cb_show_status(GtkWidget * widget, GtkWidget *ctree)
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
-  preferences ^= SHOW_STATUS;
+  win->preferences ^= SHOW_STATUS;
+  preferences = win->preferences;
   if (preferences & SHOW_STATUS) {
 	  if (!GTK_WIDGET_VISIBLE(GTK_WIDGET (win->status->parent))){ 
 	      gtk_widget_show(GTK_WIDGET (win->status->parent));
@@ -604,7 +628,7 @@ void cb_show_status(GtkWidget * widget, GtkWidget *ctree)
   }
   save_defaults (NULL);
 
-  set_title(win->top,en->path);
+  set_title_ctree(ctree,en->path);
 }
 
 
@@ -617,7 +641,8 @@ void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree)); 
-  preferences ^= SHORT_TITLES;
+  win->preferences ^= SHORT_TITLES;
+  preferences = win->preferences;
   save_defaults (NULL);
   
   if (preferences & STATUS_FOLLOWS_EXPAND){
@@ -626,15 +651,44 @@ void cb_short_titles(GtkWidget * widget, GtkWidget *ctree)
   	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), root);
   }
   
-  set_title(win->top,en->path);
+  set_title_ctree(ctree,en->path);
 }
-
+#if 0
 void
 cb_toggle_preferences (GtkWidget * widget, gpointer data)
 {
   int toggler;
   toggler = (long)(data);
   preferences ^= toggler;
+  save_defaults (NULL);
+}
+#endif
+
+void
+cb_save_geo (GtkWidget * widget, gpointer ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= SAVE_GEOMETRY;
+  preferences = win->preferences;
+  save_defaults (NULL);
+}
+void
+cb_doubleC_goto (GtkWidget * widget, gpointer ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= DOUBLE_CLICK_GOTO;
+  preferences = win->preferences;
+  save_defaults (NULL);
+}
+void
+cb_drag_copy (GtkWidget * widget, gpointer ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= DRAG_DOES_COPY;
+  preferences = win->preferences;
   save_defaults (NULL);
 }
 			  
@@ -711,7 +765,7 @@ show_cat (char *message)
   gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (cat),_("Xftree results"));
   gtk_widget_realize (cat);
-  /* gdk_window_set_decorations (cat->window,GDK_DECOR_BORDER); */
+  if (preferences & SMALL_DIALOGS) gdk_window_set_decorations (cat->window,GDK_DECOR_BORDER);
 
 
   scrolled = gtk_scrolled_window_new (NULL, NULL);
@@ -761,7 +815,7 @@ xf_dirent *xf_opendir(char *path,GtkWidget *ctree){
       diren->dir = NULL;
       diren->globstring= NULL;
       diren->glob_count=0;
-     if (!(preferences & FILTER_OPTION)){ /* no filtering */
+     if (!(win->preferences & FILTER_OPTION)){ /* no filtering */
           diren->dir = opendir (path);
      } else {
        char *name=NULL;
@@ -851,8 +905,11 @@ xf_dirent *xf_closedir(xf_dirent *diren){
       return diren;
 }
 	     
-char *xf_readdir(xf_dirent *diren){
-      if (!(preferences & FILTER_OPTION)){ /* no filtering */
+char *xf_readdir(xf_dirent *diren,GtkWidget *ctree){
+      cfg *win;
+      
+      win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+      if (!(win->preferences & FILTER_OPTION)){ /* no filtering */
         struct dirent *de;
 	de = readdir (diren->dir);
 	if (!de) return NULL; else return (de->d_name);
@@ -889,6 +946,7 @@ char *abreviate(char *path)
     shortpath=(char *)malloc(strlen(path)+4);
     if (!shortpath) return path;
     w=strrchr(path,'/');
+    if (!w) w="";
     if (w==path) return path;
     shortpath=(char *)malloc(strlen(path)+4);
     sprintf(shortpath,"...%s",w);

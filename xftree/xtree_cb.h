@@ -26,8 +26,6 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree);
 void
 cb_new_file (GtkWidget * item, GtkWidget * ctree);
 void
-cb_duplicate (GtkWidget * item, GtkCTree * ctree);
-void
 cb_rename (GtkWidget * item, GtkCTree * ctree);
 void
 cb_open_with (GtkWidget * item, GtkCTree * ctree);

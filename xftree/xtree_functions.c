@@ -345,6 +345,17 @@ static gboolean www_type(char *loc){
   };
   return checkif_type(Type,loc);			    
 }
+static gboolean audio_type(char *loc){
+  char *Type[]={
+	  ".wav",".mp3",".mid",".midi",
+	  ".kar",".mpga",".mp2",
+	  ".ra",".aif",".aiff",".ram",
+	  ".rm",".au",".snd",
+	  NULL
+  };
+  return checkif_type(Type,loc);			    
+}
+
 static gboolean script_type(char *loc){
   char *Type[]={
 	  ".pl",".sh",".csh",
@@ -359,56 +370,61 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
   gboolean isleaf=TRUE;
   pix->open=pix->openmask=NULL;
   if (en->type & FT_EXE) {
-    if (en->type & FT_LINK) pix->pixmap=gPIX_exe_lnk; 
-    else pix->pixmap=gPIX_exe;
+    if (en->type & FT_LINK) pix->pixmap=gPIX[PIX_EXE_LINK]; 
+    else pix->pixmap=gPIX[PIX_EXE];
     if ( (loc=strrchr(en->path,'.')) != NULL ){
-    	if (script_type(loc)) pix->pixmap=gPIX_exe_script;
+    	if (script_type(loc)) pix->pixmap=gPIX[PIX_EXE_SCRIPT];
     }
-    pix->pixmask=gPIM_exe;    
+    pix->pixmask=gPIM[PIM_EXE];    
   }
   else if (en->type & FT_FILE)/* letter modified here */
   {
-    pix->pixmask=gPIM_page;
-    if (en->type & FT_LINK) pix->pixmap=gPIX_page_lnk; 
+    pix->pixmask=gPIM[PIM_PAGE];
+    if (en->type & FT_LINK) pix->pixmap=gPIX[PIX_PAGE_LNK]; 
     else {
-      pix->pixmap=gPIX_page; /* default */
-      if (strcmp(en->label,"core")==0) pix->pixmap=gPIX_core;
+      pix->pixmap=gPIX[PIX_PAGE]; /* default */
+      if (strcmp(en->label,"core")==0) pix->pixmap=gPIX[PIX_CORE];
       if ( (loc=strrchr(en->path,'.')) != NULL ){
 	      if (strlen(loc)==2) switch (loc[1]){
-		      case 'c': pix->pixmap=gPIX_pageC; break;
-		      case 'h': pix->pixmap=gPIX_pageH; break;
-		      case 'f': pix->pixmap=gPIX_pageF; break;
+		      case 'c': pix->pixmap=gPIX[PIX_PAGE_C]; break;
+		      case 'h': pix->pixmap=gPIX[PIX_PAGE_H]; break;
+		      case 'f': pix->pixmap=gPIX[PIX_PAGE_F]; break;
+		      case 'o': pix->pixmap=gPIX[PIX_PAGE_O]; break;
 		      default: break;				      
 	      }
-	      else if (image_type(loc)) 	pix->pixmap=gPIX_image;
-	      else if (text_type(loc))  	pix->pixmap=gPIX_text;
-	      else if (compressed_type(loc)) 	pix->pixmap=gPIX_compressed;
+	      else if (image_type(loc)) 	pix->pixmap=gPIX[PIX_IMAGE];
+	      else if (text_type(loc))  	pix->pixmap=gPIX[PIX_TEXT];
+	      else if (compressed_type(loc)) 	pix->pixmap=gPIX[PIX_COMPRESSED];
 	      else if (www_type(loc)) {
-		           pix->pixmap=gPIX_page_html;
-	                   pix->pixmask=gPIM_page_html;
+		           pix->pixmap=gPIX[PIX_PAGE_HTML];
+	                   pix->pixmask=gPIM[PIM_PAGE_HTML];
 	      }
-    	      else if (packed_type(loc)) 	pix->pixmap=gPIX_tar;
+ 	      else if (audio_type(loc)) {
+		           pix->pixmap=gPIX[PIX_PAGE_AUDIO];
+	                   pix->pixmask=gPIM[PIM_PAGE_AUDIO];
+	      }
+   	      else if (packed_type(loc)) pix->pixmap=gPIX[PIX_TAR];
       }
     }  
   }
-  else if (en->type & FT_DIR_UP) {pix->pixmap=gPIX_dir_up,pix->pixmask=gPIM_dir_close;}
+  else if (en->type & FT_DIR_UP) {pix->pixmap=gPIX[PIX_DIR_UP],pix->pixmask=gPIM[PIM_DIR_CLOSE];}
   else if (en->type & FT_DIR_PD) {
 	  isleaf=FALSE;
-	  pix->pixmap=gPIX_dir_pd,pix->pixmask=gPIM_dir_close;
-	  pix->open=gPIX_dir_open,pix->openmask=gPIM_dir_open;
+	  pix->pixmap=gPIX[PIX_DIR_PD],pix->pixmask=gPIM[PIM_DIR_CLOSE];
+	  pix->open=gPIX[PIX_DIR_OPEN],pix->openmask=gPIM[PIM_DIR_OPEN];
   }
   else if (en->type & FT_DIR){
     isleaf=FALSE;
-    if (en->type & FT_LINK) pix->pixmap=gPIX_dir_close_lnk;
-    else pix->pixmap=gPIX_dir_close;
-    pix->pixmask=gPIM_dir_close;
-    pix->open=gPIX_dir_open,pix->openmask=gPIM_dir_open;
+    if (en->type & FT_LINK) pix->pixmap=gPIX[PIX_DIR_CLOSE_LNK];
+    else pix->pixmap=gPIX[PIX_DIR_CLOSE];
+    pix->pixmask=gPIM[PIM_DIR_CLOSE];
+    pix->open=gPIX[PIX_DIR_OPEN],pix->openmask=gPIM[PIM_DIR_OPEN];
   }
-  else if (en->type & FT_CHAR_DEV){pix->pixmap=gPIX_char_dev,pix->pixmask=gPIM_char_dev;}
-  else if (en->type & FT_BLOCK_DEV){pix->pixmap=gPIX_block_dev,pix->pixmask=gPIM_block_dev;}
-  else if (en->type & FT_FIFO){pix->pixmap=gPIX_fifo,pix->pixmask=gPIM_fifo;}
-  else if (en->type & FT_SOCKET){pix->pixmap=gPIX_socket,pix->pixmask=gPIM_socket;}
-  else {pix->pixmap=gPIX_stale_lnk,pix->pixmask=gPIM_stale_lnk;}
+  else if (en->type & FT_CHAR_DEV){pix->pixmap=gPIX[PIX_CHAR_DEV],pix->pixmask=gPIM[PIM_CHAR_DEV];}
+  else if (en->type & FT_BLOCK_DEV){pix->pixmap=gPIX[PIX_BLOCK_DEV],pix->pixmask=gPIM[PIM_BLOCK_DEV];}
+  else if (en->type & FT_FIFO){pix->pixmap=gPIX[PIX_FIFO],pix->pixmask=gPIM[PIM_FIFO];}
+  else if (en->type & FT_SOCKET){pix->pixmap=gPIX[PIX_SOCKET],pix->pixmask=gPIM[PIM_SOCKET];}
+  else {pix->pixmap=gPIX[PIX_STALE_LNK],pix->pixmask=gPIM[PIM_STALE_LNK];}
 
   return isleaf;
 }
@@ -417,6 +433,7 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
 GtkCTreeNode *
 add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char *label, char *path, int *type, int flags)
 {
+  cfg *win;
   entry *en;
   GtkCTreeNode *item;
   gchar *text[COLUMNS];
@@ -425,6 +442,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   icon_pix pix;  
   gboolean isleaf;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (!label || !path)
   {
     return NULL;
@@ -455,7 +473,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
       sprintf (size, "%10d", (int) en->size);
     }
   }
-  if (preferences&ABREVIATE_PATHS) text[COL_NAME] = abreviateP(en->label); else 
+  if (win->preferences&ABREVIATE_PATHS) text[COL_NAME] = abreviateP(en->label); else 
   text[COL_NAME] = en->label;
   text[COL_DATE] = date;
   text[COL_SIZE] = size;
@@ -534,14 +552,15 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
 
 void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
 {
+  cfg * win;
   xf_dirent *diren;
   GtkCTreeNode *item = NULL, *first = NULL;
   char *base;
-  /* FIXME: use malloc() and free() calls instead of static memory size */
-  gchar complete[PATH_MAX + NAME_MAX + 1];
-  gchar label[NAME_MAX + 1];
+  char *complete;
+  char *label;
   int add_slash = no, len, d_len;
   int type = 0;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   if (depth == 0) return ;
 
@@ -555,8 +574,6 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
   }
   base = g_malloc (len + 1);
   if (!base){
-    cfg * win;
-    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
     xf_dlg_error(win->top,_("internal malloc error:"),strerror(errno));
     exit(1);
   }
@@ -564,22 +581,27 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
   if (add_slash)
     strcat (base, "/");
 
+      /* fprintf(stderr,"dbg:base=%s\n",base);*/
   if (depth == 1)
   {
     /* create dummy entry */
+    if ((complete=(char *)malloc(strlen(base)+2))==NULL) return;
     sprintf (complete, "%s.", base);
     type = FT_DUMMY;
     add_node (GTK_CTREE (ctree), root, NULL, ".", complete, &type, flags);
     g_free (base);
+    free(complete);
     return ;
   }
   {
    char *name;
    /* ../ is usually not filtered in, so add it */
-   if (preferences&FILTER_OPTION) {
+   if (win->preferences&FILTER_OPTION) {
      type=FT_DIR_UP;
+     if ((complete=(char *)malloc(strlen(base)+3))==NULL) return;
      sprintf (complete, "%s..", base);
      add_node (GTK_CTREE (ctree), root, NULL, "..",complete , &type, flags);
+     free(complete);
    }
    diren = xf_opendir (path,(GtkWidget *)ctree);
    if (!diren) {
@@ -587,7 +609,7 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
     g_free (base);
     return ;
    }
-   while ((name = xf_readdir (diren)) != NULL) {
+   while ((name = xf_readdir (diren,(GtkWidget *)ctree)) != NULL) {
     type = 0;
     item = NULL;
     d_len = strlen (name);
@@ -595,7 +617,9 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
     if (io_is_dirup (name)) type |= FT_DIR_UP | FT_DIR;
     else if ((d_len >= 1) && io_is_hidden (name) && ((flags & IGNORE_HIDDEN)))
       continue;
+    if ((complete=(char *)malloc(strlen(base)+strlen(name)+1))==NULL) continue;
     sprintf (complete, "%s%s", base, name);
+    if ((label=(char *)malloc(strlen(name)+1))==NULL) continue;
     strcpy (label, name);
     if ((!io_is_current (name))){
       entry *en;
@@ -606,7 +630,9 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
 	    /* this is just to get the necesary expanders on startup */
       add_subtree (ctree, item, complete, depth - 1, flags);
     }
-    else if (!first) first = item;
+    else {if (!first) {first = item;}}
+    free(complete);
+    free(label);
    }
    diren=xf_closedir (diren);
    update_status(root,ctree);
@@ -675,10 +701,10 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   en = gtk_ctree_node_get_row_data (ctree, node);
   add_subtree (ctree, node, en->path, 2, en->flags);
   ctree_thaw (ctree);
-  if (preferences & STATUS_FOLLOWS_EXPAND){
+  if (win->preferences & STATUS_FOLLOWS_EXPAND){
    cfg *win;
    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-   set_title(win->top,en->path);
+   set_title_ctree((GtkWidget *)ctree,en->path);
   }
 }
 
@@ -688,8 +714,10 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 void
 on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 {
+   cfg *win;
   GtkCTreeNode *child,*parent;
   /* unselect all children */
+   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   child = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->children);
   if (node==GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list)) parent=node;
   else parent = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->parent);
@@ -698,12 +726,10 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
     gtk_ctree_unselect (ctree, child);
     child = GTK_CTREE_ROW (child)->sibling;
   }
-  if (preferences & STATUS_FOLLOWS_EXPAND){
-   cfg *win;
+  if (win->preferences & STATUS_FOLLOWS_EXPAND){
    entry *en;
    en = gtk_ctree_node_get_row_data (ctree, parent);
-   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-   set_title(win->top,en->path);
+   set_title_ctree((GtkWidget *)ctree,en->path);
   }
   update_status(parent,ctree);
 }
@@ -715,14 +741,27 @@ set_title (GtkWidget * w, const char *path)
   char *title;
   title = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
   if (!title) return; 
-  if (preferences&SHORT_TITLES) {
+  sprintf (title, "XFTree: %s", path);
+  gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (w)), title);
+  free(title);
+
+}
+void
+set_title_ctree (GtkWidget * ctree, const char *path)
+{
+  char *title;
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  title = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+  if (!title) return; 
+  if (win->preferences&SHORT_TITLES) {
 	  char *word;
 	  word = strrchr (path,'/');
 	  if (word) sprintf(title,"%s",(word[1]==0)?word:word+1);
 	  else  sprintf(title,"XFTree");	  
   }
   else sprintf (title, "%s", path);
-  gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (w)), title);
+  gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
   free(title);
 
 }
@@ -774,11 +813,13 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  /* simple case, abbreviate preference changed in another window */
-  if ((win->preferences&ABREVIATE_PATHS) != (preferences&ABREVIATE_PATHS)) {
-	  regen_ctree(ctree);
-	  win->preferences=preferences;
-	  return 0;
+  /* simple case, global preference changed in another window */
+  if ((win->preferences&FONT_STATE) != (preferences&FONT_STATE)) {
+	/*printf("dbg: global prefs changed!\n");*/
+	win->preferences &= (preferences&FONT_STATE);
+        set_fontT((GtkWidget *)ctree);
+	/*regen_ctree(ctree);*/
+	return 0;
   }
   
   manage_timeout = (win->timer != 0);
@@ -853,7 +894,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	return TRUE;
        }
        p_len = strlen (en->path);
-       while ((name = xf_readdir (diren)) != NULL) {
+       while ((name = xf_readdir (diren,(GtkWidget *)ctree)) != NULL) {
 	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
 	if (io_is_current (name))  continue;
 	if (!node_has_child (ctree, node, name))

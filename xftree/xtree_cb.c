@@ -274,7 +274,7 @@ delete_files (GtkWidget *parent,char *path)
   DIR *dir;
   char *test;
   struct dirent *de;
-  char complete[PATH_MAX + NAME_MAX + 1];
+  char *complete;
 
 /*  printf("dbg:delete_files():%s\n",path);fflush(NULL);*/
   if (abort_delete) return TRUE;
@@ -293,8 +293,10 @@ delete_files (GtkWidget *parent,char *path)
     {
       if (io_is_current (de->d_name)) continue;
       if (io_is_dirup (de->d_name))   continue;
+      if ((complete = (char *)malloc(strlen(path)+strlen(de->d_name)+2))==NULL) continue;
       sprintf (complete, "%s/%s", path, de->d_name);
       delete_files (parent,complete);
+      free(complete);
     }
     closedir (dir);
     if (rmdir (path)<1)goto delete_error_errno; 
@@ -328,7 +330,7 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
   cfg *win;
   DIR *dir;
   struct dirent *de;
-  char complete[PATH_MAX + 1];
+  char *complete;
   entry check;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -344,10 +346,9 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
   cursor_wait (GTK_WIDGET (ctree));
   while ((de = readdir (dir)) != NULL)
   {
-    if (io_is_current (de->d_name))
-      continue;
-    if (io_is_dirup (de->d_name))
-      continue;
+    if (io_is_current (de->d_name)) continue;
+    if (io_is_dirup (de->d_name)) continue;
+    if ((complete = (char *)malloc(strlen(win->trash)+strlen(de->d_name)+2))==NULL) continue;
     sprintf (complete, "%s/%s", win->trash, de->d_name);
     delete_files (win->top,complete);
 
@@ -361,6 +362,7 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
 	gtk_ctree_remove_node (ctree, node);
       }
     }
+    free(complete);
   }
   closedir (dir);
   cursor_reset (GTK_WIDGET (ctree));
@@ -694,65 +696,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
 }
 
 
-/*
- * duplicate a file
- */
-void
-cb_duplicate (GtkWidget * item, GtkCTree * ctree)
-{
-  entry *en;
-  GtkCTreeNode *node;
-  char nfile[PATH_MAX + 1];
-  int num, len;
-  struct stat s;
-  FILE *ofp, *nfp;
-  char buf[MAXBUF];
-  cfg *win;
-
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if (!count_selection (ctree, &node))
-  {
-    return;
-  }
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
-  if (!io_is_valid (en->label) || (en->type & FT_DIR))
-    return;
-  cursor_wait (GTK_WIDGET (ctree));
-  num = 0;
-  sprintf (nfile, "%s-%d", en->path, num++);
-  while (stat (nfile, &s) != -1)
-  {
-    sprintf (nfile, "%s-%d", en->path, num++);
-  }
-  ofp = fopen (en->path, "rb");
-  if (!ofp)
-  {
-    xf_dlg_error (win->top,en->path, strerror (errno));
-    cursor_reset (GTK_WIDGET (ctree));
-    return;
-  }
-  nfp = fopen (nfile, "wb");
-  if (!nfp)
-  {
-    xf_dlg_error (win->top,nfile, strerror (errno));
-    fclose (ofp);
-    cursor_reset (GTK_WIDGET (ctree));
-    return;
-  }
-  while ((len = fread (buf, 1, MAXBUF, ofp)) > 0)
-  {
-    fwrite (buf, 1, len, nfp);
-  }
-  fclose (nfp);
-  fclose (ofp);
-  
-  /* immediate refresh */
-  update_timer (ctree);
-
-  
-  cursor_reset (GTK_WIDGET (ctree));
-}
+/* duplicate a file (or directory) */
 
 /*
  * rename a file
