@@ -9,6 +9,7 @@
 #define HIDE_SIZE		0x100
 #define HIDE_DATE		0x200
 
+
 #define XFTREE_CONFIG_FILE "xftreerc"
 
 #ifdef XTREE_MESS_MAIN  
@@ -41,5 +42,4 @@ void cb_hide_date (GtkWidget * widget, GtkWidget * ctree);
 void cb_hide_size (GtkWidget * widget, GtkWidget * ctree);
 void set_colors(GtkWidget * ctree);
 void set_fontT(GtkWidget * ctree);
-void redraw_top (GtkWidget * ctree);
-
+void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);

@@ -383,6 +383,16 @@ static gboolean SubChildTransfer(char *target,char *source){
 	}
 	lstat(source,&s_stat); /* stat() the link itself */
 	
+	/* do the link business before going recursive:
+	 * (link directories, not contents) */
+	if (child_mode & TR_LINK){ 
+	  if (symlink (source, target) < 0) {
+	     process_error(RW_ERROR_WRITING_TGT);
+	     return FALSE;
+	  } else return TRUE;
+	}
+	
+	
 	/* recursivity, if src is directory:
 	 * 1- mkdir tgt/src
 	 * 2- glob src
@@ -441,15 +451,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 	     return FALSE;
 	   } else return TRUE;
 	}
-	if (child_mode & TR_LINK){ 
-		/*FIXME:never tested link function. 
-		 * how the hell do you call this? 
-		 * put it in help or something*/
-	  if (symlink (source, target) < 0) {
-	     process_error(RW_ERROR_WRITING_TGT);
-	     return FALSE;
-	  } else return TRUE;
-	}
+	
 	if (S_ISFIFO(s_stat.st_mode)){
 	   process_error(RW_ERROR_FIFO);
 	   return FALSE;

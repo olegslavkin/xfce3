@@ -26,10 +26,7 @@ unknown:
 17- desktop icons
 
 BUGS to fix:
-  -shift-ctrl to link: put in help and fix the directory symlink
-     bug. It is symlinking the entire contents of the directory
-     and not the directory itself.
-  -information dialogs can get lost beneath 
+   -information dialogs can get lost beneath 
              * need to check behavior of dlg_prop(),
                dlg_open_with(),dlg_execute() called in xtre_gui
              * need to check other files
@@ -44,6 +41,9 @@ BUGS to fix:
 ****************************************************************
 done:
 bugs fixed
+  -shift-ctrl to link: put in help and fix the directory symlink
+     bug. It is symlinking the entire contents of the directory
+     and not the directory itself.
 
 Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
 the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)

@@ -45,7 +45,6 @@
 #include "constant.h"
 #include "my_intl.h"
 #include "my_string.h"
-#include "xpmext.h"
 #include "xtree_gui.h"
 #include "gtk_dlg.h"
 #include "gtk_exec.h"
@@ -65,9 +64,10 @@
 #include "xtree_go.h"
 #include "xtree_cb.h"
 #include "icons.h"
+#include "xpmext.h"
 
-#ifdef HAVE_GDK_IMLIB
-#include <gdk_imlib.h>
+#ifdef HAVE_GDK_PIXBUF
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #endif
 
 #ifndef HAVE_SNPRINTF
@@ -115,9 +115,73 @@ typedef struct boton_icono {
 } boton_icono;
 
 
+GdkPixmap *duplicate_xpm(GtkWidget *widget,char **xpm,GdkBitmap **mask){
+	GdkPixmap *pixmap;
+#ifdef HAVE_GDK_PIXBUF
+  	GdkPixbuf *orig_pixbuf,*new_pixbuf;
+
+  	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) xpm);
+  	new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf, 2*gdk_pixbuf_get_width (orig_pixbuf), 
+		  2*gdk_pixbuf_get_height (orig_pixbuf), GDK_INTERP_NEAREST);
+  	gdk_pixbuf_render_pixmap_and_mask (new_pixbuf, &pixmap, mask, gdk_pixbuf_get_has_alpha (new_pixbuf));
+  	gdk_pixbuf_unref (orig_pixbuf);
+  	gdk_pixbuf_unref (new_pixbuf);
+  	return pixmap;
+#else /* fallback to xpm basics */
+#define TMP_FILE_NAME "/tmp/xftree_tmp.xpm"
+	char *w,*ww;
+	static gchar *wx=NULL;
+	FILE *tmpfile;
+	int i,j,x,y,numcols,numchar;
+
+	if (!xpm) return NULL;
+	if (!xpm[0]) return NULL;
+	ww = (char *)malloc(strlen(xpm[0])+32);
+	strncpy(ww,xpm[0],strlen(xpm[0])+31);
+	ww[strlen(xpm[0])+31]=0;
+	
+	w=strtok(ww," "); if (!w) return NULL;
+	x=atoi(w);
+	w=strtok(NULL," ");   if (!w) return NULL;
+	y=atoi(w);
+	w=strtok(NULL," ");   if (!w) return NULL;
+	numcols=atoi(w);
+	w=strtok(NULL," ");   if (!w) return NULL;
+	numchar=atoi(w); 
+	if (numchar != 1 ) return NULL; /* only 256 colors */
+	free(ww);
+
+	tmpfile=fopen(TMP_FILE_NAME,"w");
+	fprintf(tmpfile,"/* XPM */\nstatic char *dupped_xpm[]={\n");
+	fprintf(tmpfile,"\"%d %d %d %d\",\n",2*x,2*y,numcols,numchar);
+	/* write colors */
+        for (i=0;i<numcols;i++){
+		fprintf(tmpfile,"\"%s\",\n",xpm[i+1]);
+	}
+	/* write data */
+	wx = (char *)malloc(1+2*x);
+	for (i=0;i<2*y;i++) {
+	    for (j=0;j<2*x;j++) wx[j] = xpm[i/2+numcols+1][j/2];
+	    wx[2*x] = 0;
+	    fprintf(tmpfile,"\"%s\",\n",wx);
+	}
+        fprintf(tmpfile,"};\n");
+	fclose(tmpfile);
+	free(wx);
+
+  	pixmap=gdk_pixmap_create_from_xpm (widget->window,mask,NULL,TMP_FILE_NAME);
+	unlink(TMP_FILE_NAME);
+        return pixmap;
+#endif /* !HAVE_GDK_PIXBUF */
+}		
+  
+
 GtkWidget *
-create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
+create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win,gboolean large)
 {
+  GdkPixmap *pixmap=NULL;
+  GdkBitmap *pixmask=NULL;
+  GtkWidget *widget;
   int i;
   unsigned int mask;
   GtkWidget *toolbar;
@@ -127,14 +191,20 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_toolbar_set_space_style ((GtkToolbar *) toolbar, GTK_TOOLBAR_SPACE_LINE);
   gtk_toolbar_set_button_relief ((GtkToolbar *) toolbar, GTK_RELIEF_NONE);
   gtk_container_set_border_width (GTK_CONTAINER (toolbar), 2);
+  gtk_widget_realize(top);
+  if (large) mask=stateTB[1]; else mask=stateTB[0];
 
   for (i=0;(toolbarIcon[i].text != NULL)&&(i<32);i++) {
-     if (preferences & LARGE_TOOLBAR) mask=stateTB[1]; else mask=stateTB[0];
      if (mask & (0x01<<i)) {
+        if (large) {
+		pixmap=duplicate_xpm(top,toolbarIcon[i].icon,&pixmask);
+		widget = gtk_pixmap_new (pixmap, pixmask);
+	} else widget=MyCreateFromPixmapData (toolbar, toolbarIcon[i].icon);
        gtk_toolbar_append_item ((GtkToolbar *) toolbar,
-	toolbarIcon[i].text,toolbarIcon[i].text,toolbarIcon[i].text,
-	MyCreateFromPixmapData (toolbar, toolbarIcon[i].icon), 
-	GTK_SIGNAL_FUNC (toolbarIcon[i].function), 
+	NULL,
+	toolbarIcon[i].text,toolbarIcon[i].text,
+	widget, 
+	GTK_SIGNAL_FUNC (toolbarIcon[i].function),
 	(gpointer) ctree);
      }
   }
@@ -142,45 +212,56 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 }
 
 
-static unsigned int initial_preferences,initial_mask[2];
+/*static unsigned int initial_preferences,initial_mask[2];*/
 static GtkWidget *config_toolbar_dialog=NULL;
-//static  GSList *r_group=NULL;
 
 static void destroy_config_toolbar(GtkWidget * widget,gpointer data){
   gtk_widget_destroy (widget);
 }
 
 static void cancel_config_toolbar(GtkWidget * widget,GtkWidget *ctree){
-      int i;
   destroy_config_toolbar(config_toolbar_dialog,NULL);
-  for (i=0;i<2;i++) stateTB[i]=initial_mask[i];
+  /*for (i=0;i<2;i++) stateTB[i]=initial_mask[i];*/
   save_defaults(NULL);
   return;
 }
 
-static void ok_Sconfig_toolbar(GtkWidget * widget,GtkWidget *ctree){
-  destroy_config_toolbar(config_toolbar_dialog,NULL);
-  preferences &= (LARGE_TOOLBAR ^ 0xffffffff);
-  save_defaults(NULL);
-  if (
-    ((stateTB[0]!=initial_mask[0])&&(!(preferences&LARGE_TOOLBAR))) 
-    ||( (preferences|HIDE_TOOLBAR) != (initial_preferences|HIDE_TOOLBAR))
-     ) {
-     redraw_top (ctree);
-     /*fprintf(stderr,"dbg:regen toolbar..\n");*/
+static void regen_toolbar(GtkWidget * widget,GtkWidget *ctree){
+  cfg *win;
+  GtkWidget *toolbar,*parent,*toolbarN;
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if (preferences & LARGE_TOOLBAR) {
+	  toolbar=win->toolbarO;
+	  toolbarN=win->toolbar;
+  } else {
+	  toolbar=win->toolbar;
+	  toolbarN=win->toolbarO;
+  }
+  
+  parent=toolbar->parent;
+  gtk_widget_destroy(toolbar);
+  
+  toolbar = create_toolbar (win->top, ctree, win,preferences & LARGE_TOOLBAR);
+  gtk_container_add (GTK_CONTAINER (parent), toolbar);
+  gtk_widget_show (toolbar);
+  if (!GTK_WIDGET_VISIBLE(parent)&&(!(preferences&HIDE_TOOLBAR))) {
+	  
+	  gtk_widget_show(parent);
+	  gtk_widget_hide(toolbarN->parent);
+  }
+ 
+  if (preferences & LARGE_TOOLBAR) {
+	  win->toolbarO=toolbar;
+  } else {
+	  win->toolbar=toolbar;
   }
 }
+
 static void ok_Lconfig_toolbar(GtkWidget * widget,GtkWidget *ctree){
-  destroy_config_toolbar(config_toolbar_dialog,NULL);
-  preferences |= LARGE_TOOLBAR;
+  preferences ^= LARGE_TOOLBAR;	
+  regen_toolbar(widget,ctree);
   save_defaults(NULL);
-  if (
-    ((stateTB[1]!=initial_mask[1])&&(preferences&LARGE_TOOLBAR)) 
-    ||( (preferences|HIDE_TOOLBAR) != (initial_preferences|HIDE_TOOLBAR))
-     ) {
-     redraw_top (ctree);
-     /*fprintf(stderr,"dbg:regen toolbar..\n");*/
-  }
 }
 
 
@@ -207,13 +288,19 @@ static void toggle_toolbars1(GtkWidget * widget,gpointer data){
 
 static void toggle_toolbar(GtkWidget * widget, GtkWidget *ctree){
 	cfg *win;
+	GtkWidget *tb;
   	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 			
 	preferences ^= HIDE_TOOLBAR;
+	
+	if (preferences & LARGE_TOOLBAR) tb=(win->toolbarO)->parent;
+	else tb=(win->toolbar)->parent;
+
 	if (preferences & HIDE_TOOLBAR) {
-		if (GTK_WIDGET_VISIBLE(win->toolbar)) gtk_widget_hide(win->toolbar);
+		if (GTK_WIDGET_VISIBLE(tb)) gtk_widget_hide(tb);
 	}
-	else if (!GTK_WIDGET_VISIBLE(win->toolbar)) gtk_widget_show(win->toolbar);
+	else if (!GTK_WIDGET_VISIBLE(tb)) gtk_widget_show(tb);
+	
 }
 
 static GtkWidget *toolbar_config(GtkWidget *ctree){
@@ -226,13 +313,11 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
 	  _("Large icons. ")
   };
   char *button_label[]={
-	  _("Apply large icons"),
-	  _("Apply small icons"),
-	  _("Cancel")
+	  _("Regen"),/* this is an invisible button */
+	  _("OK")
   };
   gpointer button_function[]={
-	ok_Lconfig_toolbar,
-	ok_Sconfig_toolbar,
+	regen_toolbar,
 	cancel_config_toolbar
   };
 
@@ -252,7 +337,6 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (config_toolbar_dialog)->vbox), scrolledwindow, TRUE, TRUE, 0);
   gtk_widget_show (scrolledwindow);
- // gtk_container_add (GTK_CONTAINER (config_toolbar_dialog), scrolledwindow);
 
   viewport = gtk_viewport_new (NULL, NULL);
   gtk_widget_ref (viewport);
@@ -304,6 +388,8 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
        gtk_widget_show (widget);
        gtk_signal_connect (GTK_OBJECT (widget), "toggled", GTK_SIGNAL_FUNC (toolbar_func[j]), 
 		     (gpointer)((long) (1 << i)));
+       gtk_signal_connect (GTK_OBJECT (widget), "clicked", GTK_SIGNAL_FUNC (regen_toolbar),
+		   (gpointer) ctree);
        gtk_table_attach (GTK_TABLE (table), 
 		     widget, 
 		     j+2,j+3, i+1, i+2,
@@ -317,27 +403,32 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
   hbox=gtk_hbox_new(TRUE,5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (config_toolbar_dialog)->vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
-  if (preferences & HIDE_TOOLBAR) gtk_toggle_button_set_active ((GtkToggleButton *)widget,TRUE);
   
   widget = gtk_check_button_new_with_label (_("Hide toolbar"));
   gtk_box_pack_end (GTK_BOX (hbox),widget, FALSE, FALSE, 0);
   gtk_widget_show (widget);
-  /* toggle button before connecting */
   if (preferences & HIDE_TOOLBAR) gtk_toggle_button_set_active ((GtkToggleButton *)widget,TRUE);
   gtk_signal_connect (GTK_OBJECT (widget), "clicked", GTK_SIGNAL_FUNC (toggle_toolbar),
 		   (gpointer) ctree);
   
-  
-  /* buttons */
-  for (i=0;i<3;i++) { 
+  widget = gtk_check_button_new_with_label (_("Large buttons"));
+  gtk_box_pack_end (GTK_BOX (hbox),widget, FALSE, FALSE, 0);
+  gtk_widget_show (widget);
+  if (preferences & LARGE_TOOLBAR) gtk_toggle_button_set_active ((GtkToggleButton *)widget,TRUE);
+  gtk_signal_connect (GTK_OBJECT (widget), "clicked", GTK_SIGNAL_FUNC (ok_Lconfig_toolbar),
+		   (gpointer) ctree);
+ 
+   /* buttons */
+  for (i=0;i<2;i++) { 
     widget = gtk_button_new_with_label (button_label[i]);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG(config_toolbar_dialog)->action_area),widget, FALSE, FALSE, 0);
-    gtk_widget_show (widget);
+    /*gtk_widget_show (widget);*/
     gtk_signal_connect (GTK_OBJECT (widget), "clicked", GTK_SIGNAL_FUNC (button_function[i]),
 		  (gpointer) ctree);
   }
+  gtk_widget_show (widget); /* only show last button. */
   
-  gtk_widget_set_usize(config_toolbar_dialog,-1,333);
+  gtk_widget_set_usize(config_toolbar_dialog,333,333);
   gtk_window_set_modal (GTK_WINDOW (config_toolbar_dialog), TRUE);
   gtk_widget_show (config_toolbar_dialog);
   return config_toolbar_dialog;
@@ -346,17 +437,11 @@ static GtkWidget *toolbar_config(GtkWidget *ctree){
 
 void cb_config_toolbar(GtkWidget *widget,GtkWidget *ctree){ 
   cfg *win;
-  int i;
-  //if (r_group) g_slist_free (r_group);  r_group=NULL;
-  initial_preferences=preferences;
-  for (i=0;i<2;i++) initial_mask[i]=stateTB[i];
+  /*initial_preferences=preferences;*/
+  /*for (i=0;i<2;i++) initial_mask[i]=stateTB[i];*/
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (win && win->top) 
     gtk_window_set_transient_for (GTK_WINDOW (toolbar_config(ctree)), GTK_WINDOW (win->top)); 	
 }
 
-  
-  
-     	   
 
-	

@@ -68,6 +68,9 @@
 #include "xtree_mess.h"
 #include "xtree_pasteboard.h"
 #include "xtree_go.h"
+#include "xtree_cpy.h"
+#include "xtree_cfg.h"
+
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -251,240 +254,6 @@ cb_patch (GtkWidget * widget,  GtkCTree * ctree)
     io_system ("xfdiff -p&");
 }
 
-/*
- * file: filename incl. path
- * label: filename
- * target: copy filename to target directory
- */
-gboolean
-move_file (char *ofile, char *label, char *target, int trash)
-{
-  int len, num = 0;
-  struct stat stfile, st, stdir;
-  char nfile[PATH_MAX + NAME_MAX + 1];
-  char lnk[PATH_MAX + 1];
-  FILE *ofp, *nfp;
-  char buff[1024];
-  struct utimbuf ut;
-
-  if (!io_is_valid (label))
-    return (FALSE);
-
-  if (!io_can_write_to_parent (ofile))
-  {
-    return (FALSE);
-  }
-
-  if (access (target, W_OK | X_OK) == -1)
-    return (FALSE);
-
-  /* move or copy/delete */
-  if (lstat (ofile, &stfile) == -1)
-    return (FALSE);
-  if (stat (target, &stdir) == -1)
-    return (FALSE);
-  sprintf (nfile, "%s/%s", target, label);
-  while (++num)
-  {
-    if (lstat (nfile, &st) == 0)
-    {
-      /* file still exists */
-      if (!trash)
-	return (FALSE);
-      /* just use a new file name
-       */
-      sprintf (nfile, "%s/%s;%d", target, label, num);
-    }
-    else
-      break;
-  }
-  if (strcmp (ofile, nfile) == 0)
-  {
-    /* source and target are the same
-     */
-    return (FALSE);
-  }
-
-  if (stfile.st_dev == stdir.st_dev)
-  {
-    /* rename */
-    if (rename (ofile, nfile) == -1)
-    {
-      return (FALSE);
-    }
-    return (TRUE);
-  }
-
-  /* check if file is a symbolic link */
-  if (S_ISLNK (stfile.st_mode))
-  {
-    len = readlink (ofile, lnk, PATH_MAX);
-    if (len <= 0)
-    {
-      perror ("readlink()");
-      return (FALSE);
-    }
-    lnk[len] = '\0';
-    if (symlink (lnk, nfile) == -1)
-      return (FALSE);
-    if (unlink (ofile) == -1)
-    {
-      perror ("unlink()");
-      return (FALSE);
-    }
-    return (TRUE);
-  }
-
-  /* we can just rename but not copy special device files ..
-   */
-  if (S_ISCHR (stfile.st_mode) || S_ISBLK (stfile.st_mode) || S_ISFIFO (stfile.st_mode) || S_ISSOCK (stfile.st_mode))
-  {
-    printf (_("Can't copy device, fifo and socket files as regular files!\n"));
-  }
-  /* copy and delete
-   */
-  ofp = fopen (ofile, "rb");
-  if (!ofp)
-    return (FALSE);
-  nfp = fopen (nfile, "wb");
-  if (!nfp)
-  {
-    fclose (ofp);
-    return (FALSE);
-  }
-  while ((num = fread (buff, 1, 1024, ofp)) > 0)
-  {
-    fwrite (buff, 1, num, nfp);
-  }
-  fclose (nfp);
-  fclose (ofp);
-  /* reset time stamps
-   */
-  ut.actime = stfile.st_atime;
-  ut.modtime = stfile.st_mtime;
-  utime (nfile, &ut);
-  if (unlink (ofile) != 0)
-    return (FALSE);
-  return (TRUE);
-}
-
-/*fixme: redundant
- * path: directory incl. path
- * label: directory
- * target: copy source to target directory
- * trash: if == 1, auto-rename in trash-dir
- */
-int
-move_dir (char *source, char *label, char *target, int trash)
-{
-  DIR *dir;
-  int len, num = 0;
-  struct dirent *de;
-  struct stat st_source, st_target, st_file;
-  char new_path[PATH_MAX + 1];
-  char file[PATH_MAX + NAME_MAX + 1];
-  char name[NAME_MAX + 1];
-
-  if (access (target, X_OK | W_OK) != 0)
-  {
-    perror (target);
-    return (FALSE);
-  }
-  if (access (source, X_OK | R_OK) != 0)
-  {
-    perror (source);
-    return (FALSE);
-  }
-  if (lstat (target, &st_target) != 0)
-  {
-    perror (target);
-    return (FALSE);
-  }
-  if (lstat (source, &st_source) != 0)
-  {
-    perror (target);
-    return (FALSE);
-  }
-
-  if (!(io_is_valid (label)))
-    return (FALSE);
-
-  sprintf (new_path, "%s/%s", target, label);
-  while (++num)
-  {
-    if (lstat (new_path, &st_file) == 0)
-    {
-      if (!trash)
-	return (FALSE);
-      /* dir still exists, we have to rename */
-      sprintf (new_path, "%s/%s;%d", target, label, num);
-    }
-    else
-      break;
-  }
-  if (st_source.st_dev == st_target.st_dev)
-  {
-    if (rename (source, new_path) == -1)
-      return (FALSE);
-    return (TRUE);
-  }
-
-  if (!S_ISDIR (st_source.st_mode))
-  {
-    /*printf ("dbg:Moving file..\n");*/
-    return move_file (source, label, target, trash);
-  }
-
-  /* we have to copy .. */
-  dir = opendir (source);
-  if (!dir)
-  {
-    perror (source);
-    return (FALSE);
-  }
-  if (mkdir (new_path, 0xFFFF) == -1)
-  {
-    perror (source);
-    closedir (dir);
-    return (FALSE);
-  }
-
-  while ((de = readdir (dir)) != NULL)
-  {
-    len = strlen (de->d_name);
-    if (((len == 1) && (*de->d_name == '.')) || ((len == 2) && (de->d_name[0] == '.') && (de->d_name[1] == '.')))
-    {
-      continue;
-    }
-    strcpy (name, de->d_name);
-    sprintf (file, "%s/%s", source, name);
-    if (lstat (file, &st_file) != 0)
-    {
-      perror (file);
-      return (FALSE);
-    }
-    if (S_ISDIR (st_file.st_mode))
-    {
-      if (move_dir (file, name, new_path, trash) != TRUE)
-      {
-	printf (_("move_dir() recursive failed\n"));
-	return (FALSE);
-      }
-    }
-    else
-    {
-      if (move_file (file, name, new_path, trash) != TRUE)
-      {
-	printf (_("move_dir() move_file() failed\n"));
-	return (FALSE);
-      }
-    }
-  }
-  closedir (dir);
-  rmdir (source);
-  return (TRUE);
-}
-
 
 /*
  * really delete files incl. subs
@@ -595,6 +364,12 @@ cb_empty_trash (GtkWidget * widget, GtkCTree * ctree)
 void
 cb_delete (GtkWidget * widget, GtkCTree * ctree)
 {
+    static char *fname=NULL;
+    static char *mname=NULL;
+    int fnamelen;
+    FILE *tmpfile;
+    FILE *movefile;
+    int zapitems=0,moveitems=0;  
   int num, i;
   GtkCTreeNode *node;
   entry *en;
@@ -605,6 +380,8 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   struct stat st_target;
   struct stat st_trash;
   GList *selection;
+
+  
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   abort_delete=FALSE;
   num = count_selection (ctree, &node);
@@ -619,73 +396,102 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   /*freezeit */
   ctree_freeze (ctree);
   
-/* using variable selection alllows to skip all the node unselect stuff
- * which is making a lot of bug noise
- * */
-  for (i = 0; (i < num)&&(selection!=NULL); i++,selection=selection->next)
-  {
+     
+  if (fname) free(fname);
+  if (mname) free(mname);
+  fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
+  srandom(time(NULL));
+  fname = (char *)malloc(sizeof(char)*(fnamelen));
+  mname = (char *)malloc(sizeof(char)*(fnamelen));
+  if (!fname) return ; if (!mname) return ;
+  sprintf(fname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
+  sprintf(mname,"/tmp/xftree.%d.tmp",(int)((9999.0/RAND_MAX)*random()));
+  if ((tmpfile=fopen(fname,"w"))==NULL) return ;
+  if ((movefile=fopen(mname,"w"))==NULL) return ;
+
+  for (i = 0; (i < num)&&(selection!=NULL); i++,selection=selection->next){
+    gboolean zap;
+    zap=FALSE;
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
-    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP))
-    {
+    if (!io_is_valid (en->label) || (en->type & FT_DIR_UP)) {
       /* we do not process ".." (don't bother unselecting)*/
       /*gtk_ctree_unselect (ctree, node);*/
       continue;
     }
-    if (ask)
-    {
+    if (lstat (en->path, &st_target) == -1) {
+	if (errno_error_continue(win->top,en->path) == DLG_RC_CANCEL) goto delete_done;
+    }
+    if (stat (win->trash, &st_trash) == -1) {
+	if (errno_error_continue(win->top,win->trash) == DLG_RC_CANCEL) goto delete_done;
+    }
+    /* only regular files and links to trash */
+    if (!(en->type & FT_FILE) && !(en->type & FT_LINK)) zap=TRUE;
+    /* files already in trash get zapped */
+    if (my_strncmp (en->path, win->trash, strlen (win->trash) )==0 )zap=TRUE;
+    /* files > 1MB or on different device get zapped */
+    if ((st_target.st_dev != st_trash.st_dev) || (st_target.st_size > 1048576))zap=TRUE; 
+    if (ask) {
       if (num - i == 1)
 	result = xf_dlg_question (win->top,_("Delete item ?"), en->path);
       else
 	result = xf_dlg_question_l (win->top,_("Delete item ?"), en->path, DLG_ALL | DLG_SKIP);
     }
-    else
-      result = DLG_RC_ALL;
+    else result = DLG_RC_ALL;
     if (result == DLG_RC_CANCEL) goto delete_done;
-    else if (result == DLG_RC_OK || result == DLG_RC_ALL)
-    {
-      if (result == DLG_RC_ALL)
-      {
-	ask = FALSE;
-      }
-      /* again, update tree until the end. (bug aversion comittee) */
-      /*while (gtk_events_pending ()) gtk_main_iteration ();*/
-
-      if (lstat (en->path, &st_target) == -1)
-      {
-	if (errno_error_continue(win->top,en->path) == DLG_RC_CANCEL) goto delete_done;
-      }
-
-      if (stat (win->trash, &st_trash) == -1)
-      {
-	if (errno_error_continue(win->top,win->trash) == DLG_RC_CANCEL) goto delete_done;
-      }
-
-      if (((en->type & FT_FILE) || (en->type & FT_LINK)) && (my_strncmp (en->path, win->trash, strlen (win->trash))) && (st_target.st_dev == st_trash.st_dev) && (st_target.st_size < 1048576))
-      {
-	if (!move_file (en->path, en->label, win->trash, 1))
-	{
- 	  if (errno_error_continue(win->top,en->path) == DLG_RC_CANCEL) goto delete_done;
-	}
-      }
-      else
-      {
+    else if (result == DLG_RC_OK || result == DLG_RC_ALL)  {
+      if (result == DLG_RC_ALL) ask = FALSE;
+      if (zap) {
 	if (ask_again) { 
 		if (num - i == 1)
-			result = xf_dlg_question (win->top,_("Can't move file to trash, hard delete ?"), en->path);
+			result = xf_dlg_question (win->top,
+					_("Can't move file to trash, hard delete ?"),
+				        en->path);
 		else	
-			result = xf_dlg_question_l (win->top,_("Can't move file to trash, hard delete ?"), en->path, DLG_ALL | DLG_SKIP);
+			result = xf_dlg_question_l (win->top,
+					_("Can't move file to trash, hard delete ?"), 
+					en->path, DLG_ALL | DLG_SKIP);
 
 			
-		if (result == DLG_RC_ALL)
-    		{
-	 	 ask_again = FALSE;
-      		}
+		if (result == DLG_RC_ALL)  ask_again = FALSE;
 	} else result=DLG_RC_OK;
-	if ((result == DLG_RC_ALL)||(result ==DLG_RC_OK)) delete_files (win->top,en->path);
+      }
+      if ((result == DLG_RC_ALL)||(result ==DLG_RC_OK)){ 
+	    if (zap) {
+                    fprintf(tmpfile,"%d:%s:%s/%s\n",TR_MOVE,
+				    en->path,win->trash,en->label);
+		    zapitems++; 
+	    } else {
+                    fprintf(movefile,"%d:%s:%s/%s\n",
+				    TR_MOVE,en->path,win->trash,en->label);
+		    moveitems++;
+	    }
+            /*fprintf(stderr,"%d:%s:%s/%s\n",TR_MOVE,
+				    en->path,win->trash,en->label);*/
+            fflush(NULL); 
       }
     }
   }
+  
+  fclose (tmpfile);
+  fclose (movefile);
+
+  if (moveitems) DirectTransfer((GtkWidget *)ctree,TR_MOVE,mname);
+  else unlink(mname);
+
+  if (zapitems) {
+    char line[256];
+    if ((tmpfile=fopen(fname,"r"))==NULL) return;
+    while (!feof(tmpfile)&&fgets(line,255,tmpfile)){
+	    char *word;
+	    word=strtok(line,":"); if (!word) continue;
+	    word=strtok(NULL,":"); if (!word) continue;
+	    delete_files (win->top,word);
+    }
+    fclose(tmpfile);
+  }
+  unlink(fname);
+  
   /* immediate refresh */
 delete_done:  
   ctree_thaw (ctree);

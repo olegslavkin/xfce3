@@ -225,44 +225,6 @@ cb_hide_size (GtkWidget * widget, GtkWidget *ctree)
   return;
 }
 
-void
-redraw_top (GtkWidget * ctree)
-{
-  cfg *win,*new_win;
-  gint X,Y;
-  GtkCTreeNode *node;
-  entry *en;
-  
-  gdk_flush();
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &X, &Y);
-
-  /* apply new configuration: */
-  node=GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-
-  new_win=new_top (win->gogo->path, win->xap, win->trash, win->reg, win->width, win->height, en->flags);
-  /* pass on history list*/
-  while (new_win->gogo) new_win->gogo = popgo(new_win->gogo);
-  new_win->gogo = win->gogo;
-  win->gogo = NULL; /* so golist wont be destroyed */
-  cb_destroy (NULL,(GtkCTree *)ctree);/* destroy old configuration */
-  
-  {
-    gint x,y;
-    gtk_window_reposition (GTK_WINDOW(new_win->top),X,Y);
-    gdk_flush(); 
-    usleep(100000); /* don't race xfwm */
-    gdk_window_get_root_origin ((new_win->top)->window, &x, &y);
-    gtk_window_reposition (GTK_WINDOW(new_win->top),X+(X-x),Y+(Y-y));
-    /*printf("dbg:old x=%d, y=%d\n",X,Y);
-    printf("dbg:new x=%d, y=%d\n",x,y);
-    printf("dbg:correct x=%d, y=%d\n",X+(X-x), Y+(Y-y));*/
-  }
-
-  return;
-}
-
 char * override_txt(char *new_file,char *old_file)
 {
   gboolean old_exists=FALSE;
@@ -475,6 +437,20 @@ void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   xf_dlg_info (win->top,N_("Xftree handles keyboard shortcuts dynamically.\n" 
 "This means that you can open a menu,highlight an entry\nand press a keyboard key to create the shortcut.")
+	    );
+}
+			  
+void cb_dnd_help(GtkWidget * item, GtkWidget * ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  xf_dlg_info (win->top,N_("Xftree handles drag and drop the following way:\n"
+"SHIFT drag+drop --> move\n"
+"CTRL drag+drop --> copy\n"
+"SHIFT-CTRL drag+drop --> link\n"
+"The default drag+drop action is move,\n" 
+"but can be changed in the preferences menu.\n"
+"To drag multiple files, use the middle button.\n")
 	    );
 }
 

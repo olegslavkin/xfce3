@@ -125,7 +125,6 @@ static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close_lnk,
 static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
 
 
-
 int move_dir (char *source, char *label, char *target, int trash);
 
 static GtkAccelGroup *accel;
@@ -1395,6 +1394,12 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_widget_show (menuitem);
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
+  
+  menuitem = gtk_menu_item_new_with_label (_("Drag and drop"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_dnd_help), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
 
   menuitem = gtk_menu_item_new_with_label (_("Default shortcut keys"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -1424,6 +1429,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   GtkWidget *vbox;
   GtkWidget *handlebox1;
   GtkWidget *handlebox2;
+  GtkWidget *handlebox4;
   GtkWidget *menutop;
   GtkWidget *scrolled;
   GtkWidget *toolbar;
@@ -1577,6 +1583,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_SIZE] = "";
   label[COL_DATE] = "";
   win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_policy ((GtkWindow *)win->top,FALSE,TRUE,FALSE);
+                                             
   win->gogo = pushgo(path,win->gogo);
                                               
   top_register (win->top);
@@ -1592,6 +1600,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   handlebox2 = gtk_handle_box_new ();
   gtk_box_pack_start (GTK_BOX (vbox), handlebox2, FALSE, FALSE, 0);
   gtk_widget_show (handlebox2);
+  
+  handlebox4 = gtk_handle_box_new ();
+  gtk_box_pack_start (GTK_BOX (vbox), handlebox4, FALSE, FALSE, 0);
+  gtk_widget_show (handlebox4);
 
   scrolled = gtk_scrolled_window_new (NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), scrolled, TRUE, TRUE, 0);
@@ -1799,19 +1811,23 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
   gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
-  if (!(preferences & LARGE_TOOLBAR)) gtk_widget_show_all (win->top);
-
+	  
   menutop = create_menu (win->top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
   gtk_widget_show (menutop);
 
   
-  toolbar = create_toolbar (win->top, ctree, win);
+  toolbar = create_toolbar (win->top, ctree, win,FALSE);
   gtk_container_add (GTK_CONTAINER (handlebox2), toolbar);
   gtk_widget_show (toolbar);
-  win->toolbar=handlebox2;
+  win->toolbar=toolbar;
+  
+  toolbar = create_toolbar (win->top, ctree, win,TRUE);
+  gtk_container_add (GTK_CONTAINER (handlebox4), toolbar);
+  gtk_widget_show (toolbar);
+  win->toolbarO=toolbar;
 
-  if (preferences & LARGE_TOOLBAR) gtk_widget_show_all (win->top);
+  gtk_widget_show_all (win->top);
 
   icon_name = strrchr (path, '/');
   if ((icon_name) && (!(*(++icon_name))))
@@ -1822,7 +1838,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
   gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
-
+  
+  if (preferences & LARGE_TOOLBAR) gtk_widget_hide((win->toolbar)->parent);
+  else gtk_widget_hide((win->toolbarO)->parent);
+  
   return (win);
 }
 
