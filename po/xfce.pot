@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-08 22:50+0200\n"
+"POT-Creation-Date: 2001-09-09 10:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgid "Icon Style :"
 msgstr ""
 
 #: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:202
-#: xfce/modify.c:210 xfsound/xfsound.c:429
+#: xfce/modify.c:210 xfsound/xfsound.c:414
 msgid "Browse ..."
 msgstr ""
 
@@ -84,14 +84,14 @@ msgstr ""
 #: xfce/setup.c:1128 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
-#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:526
+#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:511
 #: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
 msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
 #: xfce/setup.c:1145 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:547 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
+#: xfsound/xfsound.c:532 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 msgid "Cancel"
 msgstr ""
@@ -531,12 +531,12 @@ msgstr ""
 msgid "Windows"
 msgstr ""
 
-#: xfce/setup.c:1109 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1109 xfce/startup.c:60 xfsound/xfsound.c:79
 msgid "Startup"
 msgstr ""
 
 #: xfbd/xfbd.c:541 xfce/setup.c:1137 xfmouse/xfmouse.c:299
-#: xfsound/xfsound.c:539
+#: xfsound/xfsound.c:524
 msgid "Apply"
 msgstr ""
 
@@ -2388,91 +2388,91 @@ msgstr ""
 msgid "New Desk"
 msgstr ""
 
-#: xfsound/xfsound.c:68
+#: xfsound/xfsound.c:67
 msgid "Add Window"
 msgstr ""
 
-#: xfsound/xfsound.c:70
+#: xfsound/xfsound.c:68
 msgid "Raise Window"
 msgstr ""
 
-#: xfsound/xfsound.c:72
+#: xfsound/xfsound.c:69
 msgid "Lower Window"
 msgstr ""
 
-#: xfsound/xfsound.c:74
+#: xfsound/xfsound.c:70
 msgid "Configure Window"
 msgstr ""
 
-#: xfsound/xfsound.c:76
+#: xfsound/xfsound.c:71
 msgid "Focus Change"
 msgstr ""
 
-#: xfsound/xfsound.c:78
+#: xfsound/xfsound.c:72
 msgid "Destroy Window"
 msgstr ""
 
-#: xfsound/xfsound.c:80
+#: xfsound/xfsound.c:73
 msgid "Iconify"
 msgstr ""
 
-#: xfsound/xfsound.c:82
+#: xfsound/xfsound.c:74
 msgid "De-iconify"
 msgstr ""
 
-#: xfsound/xfsound.c:84
+#: xfsound/xfsound.c:75
 msgid "Shade"
 msgstr ""
 
-#: xfsound/xfsound.c:86
+#: xfsound/xfsound.c:76
 msgid "Un-Shade"
 msgstr ""
 
-#: xfsound/xfsound.c:88
+#: xfsound/xfsound.c:77
 msgid "Maximize"
 msgstr ""
 
-#: xfsound/xfsound.c:90
+#: xfsound/xfsound.c:78
 msgid "De-maximize"
 msgstr ""
 
-#: xfsound/xfsound.c:94
+#: xfsound/xfsound.c:80
 msgid "Shutdown"
 msgstr ""
 
-#: xfsound/xfsound.c:96
+#: xfsound/xfsound.c:81
 msgid "Unknown"
 msgstr ""
 
-#: xfsound/xfsound.c:362
+#: xfsound/xfsound.c:347
 msgid "XFSound - XFce Sound Manager"
 msgstr ""
 
-#: xfsound/xfsound.c:409
+#: xfsound/xfsound.c:394
 msgid "Event : "
 msgstr ""
 
-#: xfsound/xfsound.c:416
+#: xfsound/xfsound.c:401
 msgid "Sound file : "
 msgstr ""
 
-#: xfsound/xfsound.c:423
+#: xfsound/xfsound.c:408
 msgid "Test"
 msgstr ""
 
-#: xfsound/xfsound.c:463
+#: xfsound/xfsound.c:448
 msgid "Play Sound"
 msgstr ""
 
-#: xfsound/xfsound.c:471 xfumed/interface.c:265
+#: xfsound/xfsound.c:456 xfumed/interface.c:265
 msgid "Command : "
 msgstr ""
 
-#: xfsound/xfsound.c:495
+#: xfsound/xfsound.c:480
 msgid "Internal"
 msgstr ""
 
-#: xfsound/xfsound.c:501
+#: xfsound/xfsound.c:486
 msgid "External"
 msgstr ""
 

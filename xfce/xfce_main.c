@@ -30,7 +30,6 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <sys/types.h>
-#include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>

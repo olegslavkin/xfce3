@@ -154,12 +154,12 @@ exec_comm (char *comm, int wm)
       else
       {
 	/*
-	   This is a module : tell FVWM to execute it 
+	   This is a module : tell xfwm to execute it 
 	 */
 	if (wm)
 	  sendinfo (fd_internal_pipe, toexec, 0);
 	else
-	  fprintf (stderr, "Needs XFwm to execute modules !\n");
+	  fprintf (stderr, "Needs xfwm to execute modules !\n");
       }
     }
   }

@@ -36,6 +36,15 @@
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <ctype.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "my_intl.h"
 #include "xfsound.h"
 #include "xfsound_cb.h"
@@ -83,6 +92,20 @@ T_messages messages[KNOWN_MESSAGES + KNOWN_BUILTIN] = {
 
 static gint private_menu_selected = -1;
 static gint prev = -1;
+
+void
+reap (int sig)
+{
+  signal (SIGCHLD, SIG_DFL);
+#if HAVE_WAITPID
+  while (waitpid (-1, NULL, WNOHANG) > 0);
+#elif HAVE_WAIT3
+  while (wait3 (NULL, WNOHANG, NULL) > 0);
+#else
+# error One of waitpid or wait3 is needed.
+#endif
+  signal (SIGCHLD, reap);
+}
 
 void
 display_error (char *s)
@@ -195,25 +218,68 @@ value_table (long id)
 void
 audio_play (short code, short backgnd)
 {
-  char *command;
-
   if ((sndcfg.playsnd) && strlen (sndcfg.playcmd) && strlen (sndcfg.datafiles[code]))
   {
-    if (my_strncasecmp (sndcfg.playcmd, INTERNAL_PLAYER, strlen (INTERNAL_PLAYER)) == 0)
+    pid_t pidchild;
+    switch (pidchild = fork ())
     {
-      i_play (sndcfg.datafiles[code]);
-    }
-    else
-    {
-      command = (char *) malloc ((MAXSTRLEN + 1) * sizeof (char));
-      strcpy (command, sndcfg.playcmd);
-      strcat (command, " ");
-      strcat (command, sndcfg.datafiles[code]);
-      /* If backgnd is set, run command in background */
-      if (backgnd)
-	strcat (command, " &");
-      system (command);
-      free (command);
+      case 0:
+      {
+	if (my_strncasecmp (sndcfg.playcmd, INTERNAL_PLAYER, strlen (INTERNAL_PLAYER)) == 0)
+	{
+	  i_play (sndcfg.datafiles[code]);
+	}
+	else
+	{
+	  int l1, l2, l3;
+          int nulldev;
+          char *command;
+
+	  l1 = strlen (sndcfg.playcmd);
+	  l2 = strlen (sndcfg.datafiles[code]);
+	  l3 = l1 + l2 + 8;
+	  command = (char *) malloc (l3 * sizeof (char));
+
+	  strcpy (command, sndcfg.playcmd);
+	  strcat (command, " ");
+	  strcat (command, sndcfg.datafiles[code]);
+	  if (my_strncasecmp (sndcfg.playcmd, "exec ", strlen ("exec ")))
+	  {
+	    snprintf (command, l3, "exec %s %s", sndcfg.playcmd, sndcfg.datafiles[code]);
+	  }
+	  else
+	  {
+	    snprintf (command, l3, "%s %s", sndcfg.playcmd, sndcfg.datafiles[code]);
+	  }
+	  /* The following is to avoid X locking when executing 
+	     terminal based application that requires user input */
+	  if ((nulldev = open ("/dev/null", O_RDWR)))
+	  {
+	    close (0);
+	    dup (nulldev);
+	  }
+	  execl (DEFAULT_SHELL, DEFAULT_SHELL, "-c", command, NULL);
+	  perror ("exec failed");
+	  _exit (0);
+	  break;
+      }
+      case -1:
+	fprintf (stderr, "xfsound : cannot execute fork()\n");
+	break;
+      default:
+	if (!backgnd)
+	{
+	  int status;
+#if HAVE_WAITPID
+          waitpid (pidchild, &status, 0);
+#elif HAVE_WAIT3
+          wait4 (pidchild, &status, 0, NULL);
+#else
+# error One of waitpid or wait3 is needed.
+#endif
+	}
+	break;
+      }
     }
   }
 }
@@ -605,6 +671,7 @@ main (int argc, char *argv[])
   tempstr = (char *) malloc (16 * sizeof (char));
   allocXFSound (&sndcfg);
   loadcfg (&sndcfg);
+  signal (SIGCHLD, reap);
 
   if ((argc != 6) && (argc != 7))
   {
