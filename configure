@@ -3651,7 +3651,7 @@ irix5* | irix6*)
 # This must be Linux ELF.
 linux-gnu*)
   case $host_cpu in
-  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* | s390* )
+  alpha* | hppa* | i*86 | powerpc* | sparc* | ia64* )
     lt_cv_deplibs_check_method=pass_all ;;
   *)
     # glibc up to 2.1.1 does not perform some relocations on ARM
@@ -9449,7 +9449,7 @@ done
     else
             echo "$as_me:9450: checking version of bison" >&5
 echo $ECHO_N "checking version of bison... $ECHO_C" >&6
-      ac_prog_version=`$INTLBISON --version 2>&1 | sed -n 's/^.*GNU Bison.* \([0-9]*\.[0-9.]*\).*$/\1/p'`
+      ac_prog_version=`$INTLBISON --version 2>&1 | sed -n 's/^.*GNU Bison .* \([0-9]*\.[0-9.]*\).*$/\1/p'`
       case $ac_prog_version in
         '') ac_prog_version="v. ?.??, bad"; ac_verc_fail=yes;;
         1.2[6-9]* | 1.[3-9][0-9]* | [2-9].*)
@@ -13402,11 +13402,17 @@ else
 
     LIBXML2_CONFIG=xml2-config
 
+   case "$VERSION" in
+   3.*)
+    echo "$as_me:13407: result: checking for libxml2 is not enabled... skipped" >&5
+echo "${ECHO_T}checking for libxml2 is not enabled... skipped" >&6
+    ;;
+   *)
     LIBXML2_LIBS=`$LIBXML2_CONFIG --libs`
     LIBXML2_CFLAGS=`$LIBXML2_CONFIG --cflags`
 
     save_LIBS=$LIBS ; LIBS=""
-    echo "$as_me:13409: checking for xmlParseDoc in -lxml2" >&5
+    echo "$as_me:13415: checking for xmlParseDoc in -lxml2" >&5
 echo $ECHO_N "checking for xmlParseDoc in -lxml2... $ECHO_C" >&6
 if test "${ac_cv_lib_xml2_xmlParseDoc+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
@@ -13414,7 +13420,7 @@ else
   ac_check_lib_save_LIBS=$LIBS
 LIBS="-lxml2 $LIBXML2_LIBS $LIBS"
 cat >conftest.$ac_ext <<_ACEOF
-#line 13417 "configure"
+#line 13423 "configure"
 #include "confdefs.h"
 
 /* Override any gcc2 internal prototype to avoid an error.  */
@@ -13433,16 +13439,16 @@ xmlParseDoc ();
 }
 _ACEOF
 rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:13436: \"$ac_link\"") >&5
+if { (eval echo "$as_me:13442: \"$ac_link\"") >&5
   (eval $ac_link) 2>&5
   ac_status=$?
-  echo "$as_me:13439: \$? = $ac_status" >&5
+  echo "$as_me:13445: \$? = $ac_status" >&5
   (exit $ac_status); } &&
          { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:13442: \"$ac_try\"") >&5
+  { (eval echo "$as_me:13448: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
-  echo "$as_me:13445: \$? = $ac_status" >&5
+  echo "$as_me:13451: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
   ac_cv_lib_xml2_xmlParseDoc=yes
 else
@@ -13453,7 +13459,7 @@ fi
 rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-echo "$as_me:13456: result: $ac_cv_lib_xml2_xmlParseDoc" >&5
+echo "$as_me:13462: result: $ac_cv_lib_xml2_xmlParseDoc" >&5
 echo "${ECHO_T}$ac_cv_lib_xml2_xmlParseDoc" >&6
 if test $ac_cv_lib_xml2_xmlParseDoc = yes; then
   cat >>confdefs.h <<\EOF
@@ -13463,10 +13469,12 @@ EOF
 fi
 
     LIBS=$save_LIBS
+    ;;
+   esac
 
 fi;
 
-echo "$as_me:13469: checking whether to install CDE specific files" >&5
+echo "$as_me:13477: checking whether to install CDE specific files" >&5
 echo $ECHO_N "checking whether to install CDE specific files... $ECHO_C" >&6
 # Check whether --enable-dt or --disable-dt was given.
 if test "${enable_dt+set}" = set; then
@@ -13476,22 +13484,22 @@ else
   USE_DT=no
 
 fi;
-echo "$as_me:13479: result: $USE_DT" >&5
+echo "$as_me:13487: result: $USE_DT" >&5
 echo "${ECHO_T}$USE_DT" >&6
 
 # Check whether --with-dt-suffix or --without-dt-suffix was given.
 if test "${with_dt_suffix+set}" = set; then
   withval="$with_dt_suffix"
 
-  echo "$as_me:13486: checking for string to append to CDE filenames" >&5
+  echo "$as_me:13494: checking for string to append to CDE filenames" >&5
 echo $ECHO_N "checking for string to append to CDE filenames... $ECHO_C" >&6
   DT_SUFFIX="$withval"
-  echo "$as_me:13489: result: $DT_SUFFIX" >&5
+  echo "$as_me:13497: result: $DT_SUFFIX" >&5
 echo "${ECHO_T}$DT_SUFFIX" >&6
 
 fi;
 
-echo "$as_me:13494: checking whether to install GDM specific files" >&5
+echo "$as_me:13502: checking whether to install GDM specific files" >&5
 echo $ECHO_N "checking whether to install GDM specific files... $ECHO_C" >&6
 # Check whether --enable-gdm or --disable-gdm was given.
 if test "${enable_gdm+set}" = set; then
@@ -13501,11 +13509,11 @@ else
   USE_GDM=no
 
 fi;
-echo "$as_me:13504: result: $USE_GDM" >&5
+echo "$as_me:13512: result: $USE_GDM" >&5
 echo "${ECHO_T}$USE_GDM" >&6
 
 GDM_PREFIX=/etc/X11/gdm/Sessions
-echo "$as_me:13508: checking where GDM keeps session files" >&5
+echo "$as_me:13516: checking where GDM keeps session files" >&5
 echo $ECHO_N "checking where GDM keeps session files... $ECHO_C" >&6
 
 # Check whether --with-gdm-prefix or --without-gdm-prefix was given.
@@ -13514,11 +13522,11 @@ if test "${with_gdm_prefix+set}" = set; then
    GDM_PREFIX="$withval", GDM_PREFIX=/etc/X11/gdm/Sessions
 
 fi;
-echo "$as_me:13517: result: $GDM_PREFIX" >&5
+echo "$as_me:13525: result: $GDM_PREFIX" >&5
 echo "${ECHO_T}$GDM_PREFIX" >&6
 
 compiler_warnings=yes
-echo "$as_me:13521: checking if we want compiler warnings" >&5
+echo "$as_me:13529: checking if we want compiler warnings" >&5
 echo $ECHO_N "checking if we want compiler warnings... $ECHO_C" >&6
 # Check whether --enable-warnings or --disable-warnings was given.
 if test "${enable_warnings+set}" = set; then
@@ -13528,7 +13536,7 @@ else
   compiler_warnings="yes"
 
 fi;
-echo "$as_me:13531: result: $compiler_warnings" >&5
+echo "$as_me:13539: result: $compiler_warnings" >&5
 echo "${ECHO_T}$compiler_warnings" >&6
 
 if test "$ac_cv_prog_CC" = gcc -o "$ac_cv_prog_CC" = g++; then
@@ -13606,29 +13614,29 @@ cat >>confdefs.h <<\EOF
 #define REQUIRES_STASHEVENT 1
 EOF
 
-echo "$as_me:13609: checking if prototype for gethostname exists" >&5
+echo "$as_me:13617: checking if prototype for gethostname exists" >&5
 echo $ECHO_N "checking if prototype for gethostname exists... $ECHO_C" >&6
 cat >conftest.$ac_ext <<_ACEOF
-#line 13612 "configure"
+#line 13620 "configure"
 #include "confdefs.h"
 
 #include <unistd.h>
 _ACEOF
 if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
   egrep "gethostname" >/dev/null 2>&1; then
-  echo "$as_me:13619: result: yes" >&5
+  echo "$as_me:13627: result: yes" >&5
 echo "${ECHO_T}yes" >&6
 cat >>confdefs.h <<\EOF
 #define HAVE_GETHOSTNAME_PROTO 1
 EOF
 
 else
-  echo "$as_me:13626: result: no" >&5
+  echo "$as_me:13634: result: no" >&5
 echo "${ECHO_T}no" >&6
 fi
 rm -f conftest*
 
-echo "$as_me:13631: checking XFce directory structure" >&5
+echo "$as_me:13639: checking XFce directory structure" >&5
 echo $ECHO_N "checking XFce directory structure... $ECHO_C" >&6
 
 # Check whether --with-data-dir or --without-data-dir was given.
@@ -13676,13 +13684,13 @@ else
 fi
 fi;
 
-echo "$as_me:13679: result: ok" >&5
+echo "$as_me:13687: result: ok" >&5
 echo "${ECHO_T}ok" >&6
-echo "$as_me:13681: result: XFCE_DIR set to $XFCE_DIR" >&5
+echo "$as_me:13689: result: XFCE_DIR set to $XFCE_DIR" >&5
 echo "${ECHO_T}XFCE_DIR set to $XFCE_DIR" >&6
-echo "$as_me:13683: result: XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&5
+echo "$as_me:13691: result: XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&5
 echo "${ECHO_T}XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&6
-echo "$as_me:13685: result: XFCE_CONFDIR set to $XFCE_CONFDIR" >&5
+echo "$as_me:13693: result: XFCE_CONFDIR set to $XFCE_CONFDIR" >&5
 echo "${ECHO_T}XFCE_CONFDIR set to $XFCE_CONFDIR" >&6
 
 ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xftree/icons/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfdiff/icons/Makefile xfglob/Makefile xfglob/icons/Makefile xfsamba/Makefile xfsamba/icons/Makefile xfumed/Makefile xfumed/icons/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/sgml/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
@@ -13765,7 +13773,7 @@ DEFS=-DHAVE_CONFIG_H
 : ${CONFIG_STATUS=./config.status}
 ac_clean_files_save=$ac_clean_files
 ac_clean_files="$ac_clean_files $CONFIG_STATUS"
-{ echo "$as_me:13768: creating $CONFIG_STATUS" >&5
+{ echo "$as_me:13776: creating $CONFIG_STATUS" >&5
 echo "$as_me: creating $CONFIG_STATUS" >&6;}
 cat >$CONFIG_STATUS <<_ACEOF
 #! $SHELL
@@ -13944,7 +13952,7 @@ cat >>$CONFIG_STATUS <<\EOF
     echo "$ac_cs_version"; exit 0 ;;
   --he | --h)
     # Conflict between --help and --header
-    { { echo "$as_me:13947: error: ambiguous option: $1
+    { { echo "$as_me:13955: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&2;}
@@ -13963,7 +13971,7 @@ Try \`$0 --help' for more information." >&2;}
     ac_need_defaults=false;;
 
   # This is an error.
-  -*) { { echo "$as_me:13966: error: unrecognized option: $1
+  -*) { { echo "$as_me:13974: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&2;}
@@ -14051,7 +14059,7 @@ do
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "default-2" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-2" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
-  *) { { echo "$as_me:14054: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:14062: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -14345,7 +14353,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:14348: creating $ac_file" >&5
+    { echo "$as_me:14356: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -14363,7 +14371,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:14366: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:14374: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -14376,7 +14384,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:14379: error: cannot find input file: $f" >&5
+           { { echo "$as_me:14387: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -14437,7 +14445,7 @@ for ac_file in : $CONFIG_HEADERS; do test "x$ac_file" = x: && continue
   * )   ac_file_in=$ac_file.in ;;
   esac
 
-  test x"$ac_file" != x- && { echo "$as_me:14440: creating $ac_file" >&5
+  test x"$ac_file" != x- && { echo "$as_me:14448: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
 
   # First look for the input files in the build tree, otherwise in the
@@ -14448,7 +14456,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:14451: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:14459: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -14461,7 +14469,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:14464: error: cannot find input file: $f" >&5
+           { { echo "$as_me:14472: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -14578,7 +14586,7 @@ cat >>$CONFIG_STATUS <<\EOF
   rm -f $tmp/in
   if test x"$ac_file" != x-; then
     if cmp -s $ac_file $tmp/config.h 2>/dev/null; then
-      { echo "$as_me:14581: $ac_file is unchanged" >&5
+      { echo "$as_me:14589: $ac_file is unchanged" >&5
 echo "$as_me: $ac_file is unchanged" >&6;}
     else
       ac_dir=`$as_expr X"$ac_file" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
@@ -14629,11 +14637,11 @@ for ac_file in : $CONFIG_LINKS; do test "x$ac_file" = x: && continue
   ac_dest=`echo "$ac_file" | sed 's,:.*,,'`
   ac_source=`echo "$ac_file" | sed 's,[^:]*:,,'`
 
-  { echo "$as_me:14632: linking $srcdir/$ac_source to $ac_dest" >&5
+  { echo "$as_me:14640: linking $srcdir/$ac_source to $ac_dest" >&5
 echo "$as_me: linking $srcdir/$ac_source to $ac_dest" >&6;}
 
   if test ! -r $srcdir/$ac_source; then
-    { { echo "$as_me:14636: error: $srcdir/$ac_source: File not found" >&5
+    { { echo "$as_me:14644: error: $srcdir/$ac_source: File not found" >&5
 echo "$as_me: error: $srcdir/$ac_source: File not found" >&2;}
    { (exit 1); exit 1; }; }
   fi
@@ -14683,7 +14691,7 @@ done; }
   # Make a symlink if possible; otherwise try a hard link.
   ln -s $ac_rel_source $ac_dest 2>/dev/null ||
     ln $srcdir/$ac_source $ac_dest ||
-    { { echo "$as_me:14686: error: cannot link $ac_dest to $srcdir/$ac_source" >&5
+    { { echo "$as_me:14694: error: cannot link $ac_dest to $srcdir/$ac_source" >&5
 echo "$as_me: error: cannot link $ac_dest to $srcdir/$ac_source" >&2;}
    { (exit 1); exit 1; }; }
 done
