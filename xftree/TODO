@@ -44,6 +44,10 @@ BUGS to fix:
 ****************************************************************
 ****************************************************************
 done:
+a *must* do:
+Once the copy/move has gone recursive, on errors it must query continue/cancel
+instead of just cancelling. 
+
 bugs fixed
   -shift-ctrl to link: put in help and fix the directory symlink
      bug. It is symlinking the entire contents of the directory

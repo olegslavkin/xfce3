@@ -4,7 +4,6 @@
 #else /* XTREE_CPY_MAIN */
 #endif /* XTREE_CPY_MAIN */
 
-#define RW_OK			0
 /* byte 1 */
 #define RW_ERROR_MALLOC		0x01
 #define RW_ERROR_OPENING_SRC	0x02
@@ -29,7 +28,8 @@
 #define RW_ERROR_DEVICE		0x40000
 #define RW_ERROR_SOCKET		0x80000
 #define RW_ERROR_WRITING_SRC	0x100000
-
+#define RW_OK			0x200000
+#define RW_ERROR_WRITING_DIR 	0x400000
 
 #define TR_COPY		1
 #define TR_MOVE		2

@@ -96,12 +96,19 @@
 #define GLOB_ONLYDIR 0x0
 #endif
 
+#define CHILD_FILE_LENGTH 64
+#define MAX_LINE_SIZE (sizeof(char)*256)
+static char child_file[CHILD_FILE_LENGTH];
+static int  child_mode;
+
 static gboolean same_device=FALSE;
 static void *rw_fork_obj;
 static GtkWidget *cat,*info[3],*progress;
 static gboolean I_am_child=FALSE,incomplete_target=FALSE;
 static char *fork_target,*fork_source;
 static int child_file_number,child_path_number;
+static	char *holdfile;
+static	char *targetdir;
 
 
 static int ok_input(GtkWidget *parent,char *target,entry *s_en);
@@ -113,6 +120,7 @@ static void rwForkOver (void);
 static void set_innerloop(gboolean state);
 static int process_error(int code);
 static void cb_cancel (GtkWidget * w, void *data);
+static gboolean all_recursive=FALSE;
 
 gboolean on_same_device(void){return same_device;}
 
@@ -123,12 +131,17 @@ gboolean on_same_device(void){return same_device;}
  */
 static int process_error(int code){
 	char *message="runOver",*txt=NULL;
+	gboolean runover=FALSE;
 	switch (code){
 	  case RW_ERRNO:
 		  message=strerror(errno);
 		  break;	
 	  case RW_ERROR_MALLOC:
 		  message=_("Insufficient system memory"); 
+		  break;
+	  case RW_ERROR_WRITING_DIR:
+		  txt=targetdir; 
+		  message=strerror(errno);
 		  break;
 	  case RW_ERROR_READING_SRC:
 	  case RW_ERROR_OPENING_SRC:
@@ -182,12 +195,28 @@ static int process_error(int code){
 		  txt=fork_source;
 		  message=_("Can't copy socket"); 
 		  break;
+	  default:runover=TRUE; break;
 	}
 	if (strstr(message,"\n")) strtok(message,"\n");
-	if (I_am_child){
+	if (I_am_child)
+	{
+		FILE *hold;
 		fprintf(stdout,"child:%s %s\n",message,(txt)?txt:"*");
 		fflush(NULL);
-	} 
+		if (runover) return TRUE;
+		holdfile=(char *)malloc(strlen(child_file)+1+strlen(".hold"));
+		if (!holdfile) return FALSE; /* will _exit() */
+		sprintf(holdfile,"%s.hold",child_file);
+		hold=fopen(holdfile,"w"); if (!hold) return FALSE;
+		fclose(hold);
+		/* active wait */
+		while ((hold=fopen(holdfile,"r"))!=NULL){
+			fclose(hold);
+			usleep(500000);
+		}
+		return code; /* skip file with problem */
+	}
+	
 	return code;
 }
 
@@ -366,11 +395,6 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
   return DLG_RC_OK;
 }
 
-#define CHILD_FILE_LENGTH 64
-#define MAX_LINE_SIZE (sizeof(char)*256)
-static char child_file[CHILD_FILE_LENGTH];
-static int  child_mode;
-
 static gboolean SubChildTransfer(char *target,char *source){
 	struct stat s_stat,t_stat;
 	int i,rc;
@@ -393,8 +417,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 	 * (link directories, not contents) */
 	if (child_mode & TR_LINK){ 
 	  if (symlink (source, target) < 0) {
-	     process_error(RW_ERROR_WRITING_TGT);
-	     return FALSE;
+	     return process_error(RW_ERROR_WRITING_TGT);
 	  } else return TRUE;
 	}
 	
@@ -410,12 +433,13 @@ static gboolean SubChildTransfer(char *target,char *source){
 		char *globstring,*newtarget,*src;
 			
 		globstring = (char *)malloc(strlen(source)+3);
-		if (!globstring) return FALSE;
+		if (!globstring) return FALSE; /* fatal error */
 		sprintf(globstring,"%s/*",source);
 		/* create target dir */
 		if (mkdir(target,(s_stat.st_mode|0700))<0){
-			fprintf(stdout,"child:%s %s\n",strerror(errno),target);
-			return FALSE;
+			targetdir=target;
+			return process_error(RW_ERROR_WRITING_DIR);/* user intervention */
+			/*fprintf(stdout,"child:%s %s\n",strerror(errno),target);*/
 		}
 	  	/*fprintf(stderr,"dbg:dir created: %s\n",target);*/
 		/* glob source dir */
@@ -429,7 +453,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 		  newtarget=(char *)malloc(strlen(target)+strlen(src)+3);
 		  if (!newtarget) {
 			  free(globstring);
-			  return FALSE;
+			  return FALSE; /* fatal error */
 		  }
 		  sprintf(newtarget,"%s/%s",target,src);
 		  /*fprintf(stderr,"dbg:dirlist: %s\n",dirlist.gl_pathv[i]);*/
@@ -437,52 +461,50 @@ static gboolean SubChildTransfer(char *target,char *source){
 			/*fprintf(stderr,"dbg:dirlisterror: %s\n",dirlist.gl_pathv[i]);*/
 	  		free(globstring);
 		 	free(newtarget);
-			return FALSE;
+			return FALSE; /* fatal error */
 		  }
 		  free(newtarget);
 		}
 		free(globstring);
 		
-		/* remove old directory */
+		/* remove old directory (rmdir should fail if any interior move failed) */
 		if ((child_mode & TR_MOVE) && (rmdir(source)<0)){
-			process_error(RW_ERROR_WRITING_TGT);
-			return FALSE;
+			return process_error(RW_ERROR_WRITING_TGT); /* user intervention */
+			/*return FALSE;*/
 		}
 		return TRUE;		
 	}
 	
 	if ((child_mode & TR_MOVE) && (s_stat.st_dev == t_stat.st_dev) ){
 	   if (rename (source, target) < 0){
-	     process_error(RW_ERROR_WRITING_TGT);
-	     return FALSE;
+	    return process_error(RW_ERROR_WRITING_TGT);/* user intervention */
 	   } else return TRUE;
 	}
 	
 	if (S_ISFIFO(s_stat.st_mode)){
-	   process_error(RW_ERROR_FIFO);
-	   return FALSE;
+	  return process_error(RW_ERROR_FIFO);/* user intervention */
 	}
 	if (S_ISCHR(s_stat.st_mode)||S_ISBLK(s_stat.st_mode)){
-	   process_error(RW_ERROR_DEVICE);
-	   return FALSE;
+	   return process_error(RW_ERROR_DEVICE);/* user intervention */
 	}
 	if (S_ISSOCK(s_stat.st_mode)){
-	   process_error(RW_ERROR_SOCKET);
-	   return FALSE;
+	   return process_error(RW_ERROR_SOCKET);/* user intervention */
 	}	
         /* we have to copy the data by reading/writing  */
  	rc=process_error(internal_rw_file(target,source,s_stat.st_size));
         /* on any error, cancel whole operation:
 	 * (which means the continue and cancel buttons
 	 *  in the popup are the same thing for the time being) */	
-        if (rc != RW_OK) return FALSE; 	
-	if ((child_mode & TR_MOVE) && (unlink(source) < 0)) {
-	   process_error(RW_ERROR_WRITING_SRC);
-	   return FALSE;
-	}
+        if (!rc) return FALSE; /* user intervention */	
+	 
+	if (rc == RW_OK) { /* NO ERRORS */
+	  if ((child_mode & TR_MOVE) && (unlink(source) < 0)) {
+	   return process_error(RW_ERROR_WRITING_SRC);/* user intervention */
+	  }
 	
-	if (chmod (target, s_stat.st_mode) < 0){
-		return (RW_ERROR_STAT_WRITE_TGT);
+	  if (chmod (target, s_stat.st_mode) < 0){
+	   return process_error(RW_ERROR_STAT_WRITE_TGT);/* user intervention */
+	  }
 	}
 	/* wow. everything went ok. */
 	return TRUE;
@@ -500,17 +522,20 @@ static void ChildTransfer(void){
 	char *line,*source,*target;
 	int type;
 	
+	all_recursive=FALSE;
 	I_am_child=TRUE;
 	signal(SIGTERM,finish);
 	incomplete_target=FALSE;
 	line=(char *)malloc(MAX_LINE_SIZE);
-	if (!line) {
+	if (!line) { /* fatal error */
 		process_error(RW_ERROR_MALLOC);
-		_exit(123);
+		unlink(holdfile);
+		_exit(123); 
 	}
 	tfile=fopen(child_file,"r");
-	if (!tfile) {
+	if (!tfile) {/* fatal error */
 		process_error(RW_ERRNO);
+		unlink(holdfile);
 		_exit(123);
 	}
 	child_path_number=0;
@@ -525,20 +550,6 @@ static void ChildTransfer(void){
 		fprintf(stdout,"child:item:%d\n",child_path_number++);
 		child_file_number=0;
 		if (!SubChildTransfer(target,source)) break;
-
-		/* child version of copy will cancel operation if
-		 * any error occurs. This might happen 
-		 * when the offending file is within a directory that has
-		 * been dndped. te get around this, child must exec a xftree
-		 * to do all copying, handle progress dialog, query on errors,
-		 * and finally exit quietly witout ever opening a ctree 
-		 * itself. Another way to make it work would be to fix the
-		 * stdin function in tubo.c so that it works and establish 
-		 * a two way communication bewteen parent and child. I prefer
-		 * the first way because it would allow simultaneous copy operations
-		 * from two or more independent drag and drops, and it would free
-		 * the xftree window for the user before the copy finishes. (ewg)
-		 * */
 	}
 	fclose(tfile);
 	free (line);
@@ -758,8 +769,16 @@ static int rwStdout (int n, void *data){
   /*fprintf(stderr,"dbg(rwStdout error):%s\n",texto);fflush(NULL);*/
   /*set_dnd_status sets static variable in xtree_dnd to break loop;*/
 /*  rc=xf_dlg_error_continue (cat,texto,NULL);*/
-  rc=xf_dlg_error (cat,texto,NULL);
-  if (rc==DLG_RC_CANCEL) cb_cancel(NULL,NULL);
+  rc=xf_dlg_error_continue (cat,texto,NULL);
+  holdfile=(char *)malloc(strlen(child_file)+1+strlen(".hold"));
+  if (!holdfile) { /* this should not happen */
+	  cb_cancel(NULL,NULL);
+	  return TRUE; 
+  }
+  sprintf(holdfile,"%s.hold",child_file);  
+  if (rc==DLG_RC_CANCEL) cb_cancel(NULL,NULL); /* terminates child */
+  usleep(500000); /* give child time to close */
+  unlink(holdfile); free(holdfile);
   /*set_innerloop(FALSE);*/
   return TRUE;
 }
@@ -773,33 +792,6 @@ static void rwForkOver (void)
   set_innerloop(FALSE);
 }
 
-#if 0
-/* function to be executed by the child process */
-static void rwFork(void){
-	process_error(internal_rw_file(fork_target,fork_source));
-	fflush(NULL);
-/*	sleep(1);*/
-	_exit(123);
-}
-
-/* function to set up child fork.
- * target and source strings are copied
- * to global memory to avoid it being lost
- * */
-int rw_file(char *target,char *source){
-	/* strings copied to global memory for proper fork */
-	strncpy(fork_source,source,FORK_CHAR_LEN);
-	fork_source[FORK_CHAR_LEN]=(char)0;
-	strncpy(fork_target,target,FORK_CHAR_LEN);
-	fork_target[FORK_CHAR_LEN]=(char)0;
-fprintf(stderr,"dbg:about to fork with %s->%s\n",fork_source,fork_target);
-        rw_fork_obj = Tubo (rwFork, rwForkOver, TRUE, rwStdout, rwStderr);
-	/* process keyboard events until copy is done: */
-fprintf(stderr,"dbg:call to innerloop from rw_file()\n");
-	set_innerloop(TRUE);
-	return TRUE;
-}
-#endif
 
 /* function to set source and target strings
  * in the dialog box.
