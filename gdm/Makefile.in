@@ -46,8 +46,11 @@ install-data-no: all
 
 install-data-yes: all
 	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(gdm_prefix); \
+	else \
+	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(gdm_prefix); \
 	fi
+        $(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
 
 installcheck:
 

@@ -59,24 +59,24 @@ install-data-no: all
 
 install-data-yes: all
 	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(MKINSTALLDIRS) $(dtconfdir)/C/Xresources.d/; \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(dtconfdir)/C/Xresources.d/; \
 	else \
-	  $(SHELL) $(MKINSTALLDIRS) $(dtconfdir)/C/Xresources.d/; \
+	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(dtconfdir)/C/Xresources.d/; \
 	fi
 	$(INSTALL_SCRIPT) $(srcdir)/Xinitrc.xfce \
-			$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
+			$(DESTDIR)$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
 	$(INSTALL_SCRIPT) $(srcdir)/Xsession.xfce \
-			$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
+			$(DESTDIR)$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
 	$(INSTALL_DATA) $(srcdir)/Xresources.xfce \
-		  	$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
+		  	$(DESTDIR)$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
 
 # Define this as empty until I found a useful application.
 installcheck:
 
 uninstall:
-	rm -f $(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
-	rm -f $(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
-	rm -f $(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
+	rm -f $(DESTDIR)$(dtconfdir)/Xinitrc.xfce$(DT_SUFFIX)
+	rm -f $(DESTDIR)$(dtconfdir)/Xsession.xfce$(DT_SUFFIX)
+	rm -f $(DESTDIR)$(dtconfdir)/C/Xresources.d/Xresources.xfce$(DT_SUFFIX)
 
 check: all
 
