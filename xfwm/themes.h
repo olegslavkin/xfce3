@@ -125,4 +125,17 @@ void DrawTrianglePattern_gtk (Window, GC, GC, GC, int, int, int, int, short);
 void RelieveIconTitle_gtk (Window, int, int, GC, GC);
 void RelieveIconPixmap_gtk (Window, int, int, GC, GC);
 
+void SetInnerBorder_linea (XfwmWindow *, Bool);
+void DrawButton_linea (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
+void DrawStripes_linea (XfwmWindow *, Window, int, int, int, int, Bool);
+void SetTitleBar_linea (XfwmWindow *, Bool);
+void RelieveWindow_linea (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
+void RelieveHalfRectangle_linea (Window, int, int, int, int, GC, GC, int);
+void DrawSelectedEntry_linea (Window, int, int, int, int, GC *);
+void DrawTopMenu_linea (Window, int, GC, GC);
+void DrawBottomMenu_linea (Window, int, int, int, int, GC, GC);
+void DrawTrianglePattern_linea (Window, GC, GC, GC, int, int, int, int, short);
+void RelieveIconTitle_linea (Window, int, int, GC, GC);
+void RelieveIconPixmap_linea (Window, int, int, GC, GC);
+
 #endif

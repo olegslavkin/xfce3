@@ -385,14 +385,14 @@ AddWindow (Window w)
     {
       if ((i < Scr.nr_left_buttons) && (tmp_win->left_w[i] > 0))
       {
-	tmp_win->left_w[i] = XCreateWindow (dpy, tmp_win->frame, tmp_win->title_height * i, 0, tmp_win->title_height, tmp_win->title_height, 0, CopyFromParent, InputOutput, CopyFromParent, valuemask | CWBackPixel, &attributes);
+	tmp_win->left_w[i] = XCreateWindow (dpy, tmp_win->frame, tmp_win->title_height * i, 0, tmp_win->title_height, tmp_win->title_height, 0, CopyFromParent, InputOutput, CopyFromParent, valuemask, &attributes);
       }
       else
 	tmp_win->left_w[i] = None;
 
       if ((i < Scr.nr_right_buttons) && (tmp_win->right_w[i] > 0))
       {
-	tmp_win->right_w[i] = XCreateWindow (dpy, tmp_win->frame, tmp_win->title_width - tmp_win->title_height * (i + 1), 0, tmp_win->title_height, tmp_win->title_height, 0, CopyFromParent, InputOutput, CopyFromParent, valuemask | CWBackPixel, &attributes);
+	tmp_win->right_w[i] = XCreateWindow (dpy, tmp_win->frame, tmp_win->title_width - tmp_win->title_height * (i + 1), 0, tmp_win->title_height, tmp_win->title_height, 0, CopyFromParent, InputOutput, CopyFromParent, valuemask, &attributes);
       }
       else
 	tmp_win->right_w[i] = None;

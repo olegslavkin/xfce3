@@ -77,6 +77,7 @@
 #define ENGINE_MOFIT_CMD    "Engine Mofit"
 #define ENGINE_TRENCH_CMD   "Engine Trench"
 #define ENGINE_GTK_CMD      "Engine Gtk"
+#define ENGINE_LINEA_CMD    "Engine Linea"
 
 void assume_event (unsigned long type, unsigned long *body);
 

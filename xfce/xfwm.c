@@ -360,6 +360,9 @@ apply_wm_engine (void)
     case GTK_ENGINE:
       sendinfo (fd_internal_pipe, ENGINE_GTK_CMD, 0);
       break;
+    case LINEA_ENGINE:
+      sendinfo (fd_internal_pipe, ENGINE_LINEA_CMD, 0);
+      break;
     default:
       sendinfo (fd_internal_pipe, ENGINE_XFCE_CMD, 0);
     }

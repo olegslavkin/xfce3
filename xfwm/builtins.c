@@ -2999,6 +2999,8 @@ engine_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     Scr.engine = TRENCH_ENGINE;
   else if (mystrncasecmp (style, "G", 1) == 0)
     Scr.engine = GTK_ENGINE;
+  else if (mystrncasecmp (style, "L", 1) == 0)
+    Scr.engine = LINEA_ENGINE;
   else
   {
     xfwm_msg (ERR, "Engine", "Unknown parameter, using Xfce engine");

@@ -811,6 +811,7 @@ create_setup (XFCE_palette * pal)
     xfwm_engines = g_list_append (xfwm_engines, "Xfce");
     xfwm_engines = g_list_append (xfwm_engines, "Mofit");
     xfwm_engines = g_list_append (xfwm_engines, "Trench");
+    xfwm_engines = g_list_append (xfwm_engines, "Linea");
   }
   setup_options.setup_xfwm_engine_combo = gtk_combo_new ();
   gtk_combo_set_popdown_strings (GTK_COMBO (setup_options.setup_xfwm_engine_combo), xfwm_engines);
@@ -1269,6 +1270,9 @@ show_setup (XFCE_palette * pal)
   case GTK_ENGINE:
     gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), "Gtk");
     break;
+  case LINEA_ENGINE:
+    gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), "Linea");
+    break;
   default:
     gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), "Xfce");
     break;
@@ -1283,6 +1287,9 @@ show_setup (XFCE_palette * pal)
     break;
   case GTK_ENGINE:
     gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), "Gtk");
+    break;
+  case LINEA_ENGINE:
+    gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), "Linea");
     break;
   default:
     gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (setup_options.setup_xfwm_engine_combo)->entry), "Xfce");
@@ -1365,6 +1372,8 @@ get_setup_values (void)
     current_config.xfwm_engine = TRENCH_ENGINE;
   else if (!g_strncasecmp (xfwm_engine, "g", 1))
     current_config.xfwm_engine = GTK_ENGINE;
+  else if (!g_strncasecmp (xfwm_engine, "l", 1))
+    current_config.xfwm_engine = LINEA_ENGINE;
   else
     current_config.xfwm_engine = MOFIT_ENGINE;
 

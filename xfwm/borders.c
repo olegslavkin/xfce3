@@ -185,8 +185,6 @@ RedrawLeftButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_wi
   int i;
   GC ReliefGC, ShadowGC;
   Pixel BackColor;
-  XSetWindowAttributes attributes;
-  unsigned long valuemask;
 
   if (!t)
     return;
@@ -206,22 +204,17 @@ RedrawLeftButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_wi
     ShadowGC = GetDecor (t, LoShadowGC);
   }
 
-  attributes.background_pixel = BackColor;
-  valuemask = CWBackPixel;
-
   for (i = 0; i < Scr.nr_left_buttons; ++i)
   {
     if (t->left_w[i] != None)
     {
       enum ButtonState bs = GetButtonState (t->left_w[i]);
       ButtonFace *bf = &GetDecor (t, left_buttons[i].state[bs]);
-      ChangeWindowColor (t->left_w[i], valuemask);
       if (flush_expose (t->left_w[i]) || (expose_win == t->left_w[i]) || (expose_win == None) || NewColor)
       {
 	int inverted = PressedW == t->left_w[i];
 	for (; bf; bf = bf->next)
 	  DrawButton (t, t->left_w[i], t->title_height, t->title_height, bf, ReliefGC, ShadowGC, inverted, GetDecor (t, left_buttons[i].flags));
-
       }
     }
   }
@@ -233,8 +226,6 @@ RedrawRightButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_w
   int i;
   GC ReliefGC, ShadowGC;
   Pixel BackColor;
-  XSetWindowAttributes attributes;
-  unsigned long valuemask;
 
   if (!t)
     return;
@@ -254,16 +245,12 @@ RedrawRightButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_w
     ShadowGC = GetDecor (t, LoShadowGC);
   }
 
-  attributes.background_pixel = BackColor;
-  valuemask = CWBackPixel;
-
   for (i = 0; i < Scr.nr_right_buttons; ++i)
   {
     if (t->right_w[i] != None)
     {
       enum ButtonState bs = GetButtonState (t->right_w[i]);
       ButtonFace *bf = &GetDecor (t, right_buttons[i].state[bs]);
-      ChangeWindowColor (t->right_w[i], valuemask);
       if (flush_expose (t->right_w[i]) || (expose_win == t->right_w[i]) || (expose_win == None) || NewColor)
       {
 	int inverted = PressedW == t->right_w[i];

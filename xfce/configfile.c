@@ -269,6 +269,9 @@ writeconfig (void)
     case GTK_ENGINE:
       fprintf (configfile, "\tGtk_engine\n");
       break;
+    case LINEA_ENGINE:
+      fprintf (configfile, "\tLinea_engine\n");
+      break;
     default:
       fprintf (configfile, "\tXfce_engine\n");
       break;
@@ -716,6 +719,11 @@ readconfig (void)
       else if (!my_strncasecmp (p, "G", strlen ("G")))
       {
 	current_config.xfwm_engine = GTK_ENGINE;
+	p = nextline (configfile, lineread);
+      }
+      else if (!my_strncasecmp (p, "L", strlen ("L")))
+      {
+	current_config.xfwm_engine = LINEA_ENGINE;
 	p = nextline (configfile, lineread);
       }
       else if (my_strncasecmp (p, "[", strlen ("[")))
