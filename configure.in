@@ -12,11 +12,11 @@ XFCE_PACKAGE=xfce
 
 LIB_MAJOR=1
 LIB_MINOR=38
-LIB_TINY=12
+LIB_TINY=11
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.12
+XFCE_VERSION=3.8.11
 
 AC_SUBST(VERSION, $XFCE_VERSION)
 AC_SUBST(LIBVERSION)
@@ -42,7 +42,7 @@ AC_SUBST(LIBTOOL_DEPS)
 #
 INSTALL_SCRIPT='${INSTALL}'
 
-ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN"
+ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv zh zh_CN"
 AM_GNU_GETTEXT
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
@@ -348,6 +348,7 @@ dnl the application itself which have implicit int declarations will go
 dnl unnoticed.  but oh well; whomever writes the code should be sure not to
 dnl use any implicit declarations.
 dnl ---------------------------------------------------------------------------
+    
     if echo "$CFLAGS" | grep "\-Wno-implicit-int" > /dev/null 2> /dev/null; then
       CFLAGS="$CFLAGS"
     else
@@ -355,6 +356,11 @@ dnl ---------------------------------------------------------------------------
       CFLAGS="$CFLAGS -Wno-implicit-int"
     fi
   fi
+fi
+
+if test "$target" != "NONE" ; then
+   echo "updating CFLAGS with extra target information ($target)"
+   CFLAGS="$CFLAGS -march=$target"
 fi
 
 dnl AC_ARG_ENABLE(xfce_theme,
@@ -459,7 +465,6 @@ AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CON
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl])
-AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.uk.in >  other/xfce3rc.uk])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_CN.GB2312.in >  other/xfce3rc.zh_CN.GB2312])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.zh_TW.Big5.in >  other/xfce3rc.zh_TW.Big5])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc])
