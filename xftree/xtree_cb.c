@@ -1181,12 +1181,13 @@ void
 cb_autotype (GtkWidget * top,GtkWidget * ctree)
 {
   /*FILE *pipe;*/
-  char *argv[4];
+  char *argv[24];
   GtkCTreeNode *node;
   int num;
   entry *en;
+  char *a=NULL;
   char *loc,*path;
-  int i=0;
+  int j,i=0;
   reg_t *prg;
   cfg *win;
   
@@ -1199,11 +1200,25 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
   prg = reg_prog_by_file (win->reg, en->path);
   if (prg) {
-	argv[0]=prg->app;
-	if (prg->arg){argv[1]=prg->arg; argv[2]=en->path; argv[3]=0;} 
-	else {argv[1]=en->path; argv[2]=0;}
-	io_system (argv,win->top);
-	goto end_autotype;
+      j=0;
+      argv[j++]=prg->app;
+      if (prg->arg){	      
+        if (strstr(prg->arg," ")){
+		a=g_strdup(prg->arg);
+		argv[j++]=strtok(a," ");
+		do {
+		      argv[j]=strtok(NULL," ");
+		      if (!argv[j]) break;
+		      j++;
+		      if (j>=24) { argv[24]=0; break; }
+
+	        } while (1);
+	} else 	argv[j++]=prg->arg;
+      } 
+      argv[j++]=en->path;
+      argv[j]=0;
+      io_system (argv,win->top);
+      goto end_autotype;
   }     
  
   if (S_ISDIR(en->st.st_mode)) {
@@ -1241,6 +1256,7 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
 
   
 end_autotype:
+  if (a) g_free(a);
   ctree_thaw ((GtkCTree *)ctree);
   update_timer ((GtkCTree *)ctree);
 }

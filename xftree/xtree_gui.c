@@ -278,7 +278,9 @@ char *mode_txt(mode_t mode){
 static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node){
   cfg *win;
   reg_t *prg;
-  char *argv[64];
+  char *argv[24];
+  char *a=NULL;
+  int j=0;
     entry *up;
    /* disable openwith on FT_TARCHILD */
     win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -332,13 +334,13 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       }
 	    
       if (doterminal || (mod_mask & GDK_MOD1_MASK)){
-	argv[0]=TERMINAL;
-	argv[1]="-e";
-	argv[2]=en->path;
-	argv[3]=0;
+	argv[j++]=TERMINAL;
+	argv[j++]="-e";
+	argv[j++]=en->path;
+	argv[j]=0;
       } else {
-	argv[0]=en->path;
-	argv[1]=0;
+	argv[j++]=en->path;
+	argv[j]=0;
       }
       io_system (argv,win->top); /* open directly */ 
     }
@@ -348,16 +350,27 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       prg = reg_prog_by_file (win->reg, en->path);
       if (prg)
       {
-	argv[0]=prg->app;
+	argv[j++]=prg->app;
 	if (prg->arg){
-	  argv[1]=prg->arg;
-	  argv[2]=en->path;
-	  argv[3]=0;
+	  if (strstr(prg->arg," ")){
+		a=g_strdup(prg->arg);
+		argv[j++]=strtok(a," ");
+		do {
+		      argv[j]=strtok(NULL," ");
+		      if (!argv[j]) break;
+		      j++;
+		      if (j>=24) { argv[24]=0; break; }
+
+	        } while (1);
+	  } else  argv[j++]=prg->arg;
+	  argv[j++]=en->path;
+	  argv[j]=0;
 	} else {
-	  argv[1]=en->path;
-	  argv[2]=0;
+	  argv[j++]=en->path;
+	  argv[j]=0;
 	}
 	io_system (argv,win->top); /* open direct */
+	if (a) g_free(a);
       }
       else
       {
