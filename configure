@@ -1254,7 +1254,7 @@ LIB_TINY=14
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.14e
+XFCE_VERSION=3.8.14f
 echo "$as_me:1258: checking versioncode $XFCE_VERSION in xfce.spec" >&5
 echo $ECHO_N "checking versioncode $XFCE_VERSION in xfce.spec... $ECHO_C" >&6
 xfce_version=`grep version xfce.spec | grep define | sed -e 's,^[^0-9.]*,,g'`
