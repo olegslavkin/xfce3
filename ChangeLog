@@ -1,3 +1,211 @@
+2001-09-30  xfce
+
+	* xfce-3.8.9.lsm, po/ca.po, po/cs.gmo, po/cs.po, po/da.gmo,
+	po/da.po, po/de.gmo, po/de.po, po/en_GB.po, po/es.gmo, po/es.po,
+	po/et.po, po/fi.po, po/fr.gmo, po/fr.po, po/gl.gmo, po/gl.po,
+	po/hu.gmo, po/hu.po, po/it.po, po/ja.po, po/nl.gmo, po/nl.po,
+	po/pl.po, po/pt_BR.gmo, po/pt_BR.po, po/ro.gmo, po/ro.po, po/ru.po,
+	po/sk.po, po/sr.gmo, po/sr.po, po/sv.po, po/xfce.pot, po/zh.po,
+	po/zh_CN.po, xfce/modify.c: Update potfiles Change position label
+	in modify/add item dialog
+
+2001-09-29  xfce
+
+	* po/cat-id-tbl.c, po/xfce.pot, xfce/modify.c, xfce/popup_cb.c,
+	xfwm/xfwm.c: Add icons on top of menu (instead of bottom) Change
+	select mouse pointer in xfwm
+
+2001-09-29  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, libs/xfce-common.c,
+	libs/xfce-common.h, other/xinitrc, other/xinitrc.mwm, po/cs.gmo,
+	po/da.gmo, po/de.gmo, po/es.gmo, po/fr.gmo, po/gl.gmo, po/hu.gmo,
+	po/nl.gmo, po/pt_BR.gmo, po/ro.gmo, po/sr.gmo, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfce/configfile.c,
+	xfce/modify.c, xfce/modify.h, xfce/modify_cb.c, xfce/popup.c,
+	xfce/popup.h, xfce/popup_cb.c: Add much wanted menu reordering
+	option
+
+2001-09-28  xfce
+
+	* xfsound/xfdsp.c: Use _exit()
+
+2001-09-28  xfce
+
+	* configure, configure.in, backdrops/Blue.list,
+	backdrops/Toulouse.list, other/xinitrc, other/xinitrc.mwm,
+	scripts/startxfce, scripts/xfce_setup, scripts/xfhelp: Change back
+	version number to 3.8.9
+
+2001-09-28  xfce
+
+	* backdrops/: DISTFILES.in, Horizon.png: [no log message]
+
+2001-09-28  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2001-09-27  xfce
+
+	* Makefile.am, Makefile.in, Makefile.init, configure, configure.in,
+	xfce.spec, gdm/Makefile.in, gdm/XFce.in, libs/Makefile.in,
+	po/ca.po, po/cs.po, po/da.po, po/de.po, po/en_GB.po, po/es.po,
+	po/et.po, po/fi.po, po/fr.po, po/gl.po, po/hu.po, po/it.po,
+	po/ja.po, po/nl.po, po/pl.po, po/pt_BR.po, po/ro.po, po/ru.po,
+	po/sk.po, po/sr.po, po/sv.po, po/xfce.pot, po/zh.po, po/zh_CN.po,
+	scripts/Makefile.in, xfbd/Makefile.in, xfce/Makefile.in,
+	xfce_theme/Makefile.in, xfclock/Makefile.in, xfdiff/Makefile.in,
+	xfglob/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsound/Makefile.in, xftree/Makefile.in,
+	xfumed/Makefile.in, xfwm/Makefile.in, xfwm/themes.c: Include
+	patches from Chris Fuhrman (gdm support and Makefile.init) Slightly
+	improve Linea theme
+
+2001-09-27  xfce
+
+	* scripts/: xfce_upgrade, xfce_upgrade.in: Remove removal of .gtkrc
+
+2001-09-27  xfce
+
+	* backdrops/Default.xpm, backdrops/Linea.xpm, libs/xfcolor.c,
+	palettes/Default, palettes/Linea, xfwm/xfwm.c: [no log message]
+
+2001-09-26  xfce
+
+	* configure, configure.in, xfce-3.8.8.lsm, xfce-3.8.9.lsm,
+	xfce.spec, backdrops/DISTFILES.in, backdrops/Default.xpm,
+	backdrops/Reader.xpm, libs/xfcolor.c, other/Default,
+	other/xfce3rc.cs.in, other/xfce3rc.de.in, other/xfce3rc.fr.in,
+	other/xfce3rc.hu.in, other/xfce3rc.in, other/xfce3rc.ja.in,
+	other/xfce3rc.ko.in, other/xfce3rc.nl.in, other/xfce3rc.sr.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	palettes/DISTFILES.in, palettes/Default, palettes/Reader,
+	po/xfce.pot, xfwm/xfwm.c: Change version number to 3.8.9 Change
+	default palette to Linea Change default backdrop Change default
+	xfwm engine Add printout of audiofile, arts and gdk-pixbuf support
+	to "xfwm -version" Rename previous defaults to palette/Reader and
+	backdrop/Reader.xpm
+
+2001-09-26  xfce
+
+	* po/xfce.pot, xfwm/add_window.c, xfwm/bindings.c, xfwm/builtins.c,
+	xfwm/events.c, xfwm/functions.c, xfwm/icons.c, xfwm/menus.c,
+	xfwm/misc.c, xfwm/move.c, xfwm/placement.c, xfwm/resize.c,
+	xfwm/stack.c, xfwm/style.c, xfwm/themes.c, xfwm/themes.h,
+	xfwm/xfwm.c: Limit the length of window name/icon name
+
+2001-09-26  xfce
+
+	* xfwm/misc.c: [no log message]
+
+2001-09-25  xfce
+
+	* po/xfce.pot: Improve "Linea" theme engine
+
+2001-09-25  xfce
+
+	* xfwm/themes.c, xfce/xfwm.c: [no log message]
+
+2001-09-25  xfce
+
+	* backdrops/: DISTFILES.in, Linea.xpm: [no log message]
+
+2001-09-25  xfce
+
+	* palettes/Linea: [no log message]
+
+2001-09-25  xfce
+
+	* palettes/DISTFILES.in, palettes/Linea, xfwm/themes.c: [no log
+	message]
+
+2001-09-25  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2001-09-24  xfce
+
+	* palettes/Blue, palettes/DISTFILES.in, po/xfce.pot,
+	xfce/configfile.c, xfce/configfile.h, xfce/setup.c, xfce/xfwm.c,
+	xfce/xfwm.h, xfwm/add_window.c, xfwm/borders.c, xfwm/builtins.c,
+	xfwm/screen.h, xfwm/themes.c, xfwm/themes.h: Add new xfwm theme
+	"Linea"
+
+2001-09-24  xfce
+
+	* palettes/: DISTFILES.in, Win2: [no log message]
+
+2001-09-23  xfce
+
+	* xfwm/: borders.c, themes.c, themes.h: Window inner border color
+	is now implemented in themes.c
+
+2001-09-20  xfce
+
+	* xfce.spec, xfsound/xfdsp.c: Fixed xfdsp.c so it compiles w/out
+	audiofile
+
+2001-09-19  xfce
+
+	* scripts/xfmountdev: Eject media after unmounting
+
+2001-09-19  xfce
+
+	* po/: cs.gmo, cs.po: Update Czech potfile (Rudolf Ulc
+	<rudolf.ulc@oku-st.cz>)
+
+2001-09-18  xfce
+
+	* xfwm/themes.c: Fix a glitch in xfce theme engine for xfwm
+
+2001-09-18  xfce
+
+	* palettes/Win: [no log message]
+
+2001-09-18  xfce
+
+	* palettes/Metal: [no log message]
+
+2001-09-18  xfce
+
+	* palettes/PruneDark: [no log message]
+
+2001-09-17  xfce
+
+	* Makefile.in, libs/Makefile.in, po/ca.gmo, po/ca.po, po/cs.gmo,
+	po/cs.po, po/da.gmo, po/da.po, po/de.gmo, po/de.po, po/en_GB.gmo,
+	po/en_GB.po, po/es.gmo, po/es.po, po/et.gmo, po/et.po, po/fi.gmo,
+	po/fi.po, po/fr.gmo, po/fr.po, po/gl.gmo, po/gl.po, po/hu.gmo,
+	po/hu.po, po/it.gmo, po/it.po, po/ja.gmo, po/ja.po, po/nl.gmo,
+	po/nl.po, po/pl.gmo, po/pl.po, po/pt_BR.gmo, po/pt_BR.po,
+	po/ro.gmo, po/ro.po, po/ru.gmo, po/ru.po, po/sk.gmo, po/sk.po,
+	po/sr.gmo, po/sr.po, po/sv.gmo, po/sv.po, po/zh.gmo, po/zh.po,
+	po/zh_CN.gmo, po/zh_CN.po, scripts/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfglob/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsound/Makefile.in,
+	xftree/Makefile.in, xfumed/Makefile.in, xfwm/Makefile.in: Update
+	potfiles Update Makefiles Slightly chnage xfce_theme Time to freeze
+	for 3.8.8 now...
+
+2001-09-17  xfce
+
+	* Makefile.in, libs/Makefile.in, libs/constant.h, libs/xfcolor.c,
+	palettes/Default, palettes/Defcon, po/xfce.pot,
+	scripts/Makefile.in, xfbd/Makefile.in, xfce/Makefile.in,
+	xfce_theme/Makefile.in, xfce_theme/xfce_theme_draw.c,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfglob/Makefile.in,
+	xfgnome/Makefile.in, xfmenu/Makefile.in, xfmouse/Makefile.in,
+	xfpager/Makefile.in, xfrun/Makefile.in, xfsamba/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xfumed/Makefile.in,
+	xfwm/Makefile.in: [no log message]
+
+2001-09-16  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-09-16  xfce
 
 	* acconfig.h, config.h.in, configure, configure.in,
