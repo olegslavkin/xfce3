@@ -1,5 +1,14 @@
 2001-10-25  xfce
 
+	* xfwm/: builtins.c, menus.c: Fix a problem with some apps not
+	seing the FocusOut event when using Alt+Tab switching (e.g. kwrite)
+
+2001-10-25  xfce
+
+	* ChangeLog, xfce-3.8.9.lsm: Update ChangeLog
+
+2001-10-25  xfce
+
 	* xfwm/: builtins.c, menus.c, misc.h: Make use of discard_events ()
 	function to get rid of Enter/Lean notify events when unmapping
 	menus
