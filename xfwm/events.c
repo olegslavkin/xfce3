@@ -1525,45 +1525,30 @@ HandleConfigureRequest ()
   width = Tmp_win->frame_width;
   height = Tmp_win->frame_height;
 
-  /* for restoring */
   if (cre->value_mask & CWBorderWidth)
+  {
     Tmp_win->old_bw = cre->border_width;
-
+  }
+  if (cre->value_mask & (CWX | CWY))
+  {
+    GetGravityOffsets (Tmp_win);
+  }
   if (cre->value_mask & CWX)
   {
-    x = cre->x;
-    if ((Tmp_win->hints.flags & PWinGravity) && (Tmp_win->hints.win_gravity == StaticGravity))
-    {
-      x -= (Tmp_win->boundary_width + Tmp_win->bw);
-    }
-    else
-    {
-      if (Tmp_win->gravx > 0)
-	x -=  2 * (Tmp_win->boundary_width + Tmp_win->bw - Tmp_win->old_bw);
-      else if (Tmp_win->gravx < 0)
-	x +=  Tmp_win->old_bw - Tmp_win->bw;
-    }
+    x = cre->x + Tmp_win->gravx;
   }
   if (cre->value_mask & CWY)
   {
-    y = cre->y;
-    if ((Tmp_win->hints.flags & PWinGravity) && (Tmp_win->hints.win_gravity == StaticGravity))
-    {
-      y -= (Tmp_win->title_height + Tmp_win->boundary_width + Tmp_win->bw);
-    }
-    else
-    {
-      if (Tmp_win->gravy > 0)
-	y -=  2 * (Tmp_win->boundary_width + Tmp_win->bw - Tmp_win->old_bw) + Tmp_win->title_height;
-      else if (Tmp_win->gravy < 0)
-	y +=  Tmp_win->old_bw - Tmp_win->bw;
-    }
+    y = cre->y + Tmp_win->gravy;
   }
   if (cre->value_mask & CWWidth)
+  {
     width = cre->width + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
+  }
   if (cre->value_mask & CWHeight)
+  {
     height = cre->height + Tmp_win->title_height + 2 * (Tmp_win->boundary_width + Tmp_win->bw);
-
+  }
   /* Remove the MAXIMIZED flag */
   if (Tmp_win->flags & MAXIMIZED)
   {

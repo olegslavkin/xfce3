@@ -204,6 +204,7 @@ void PopDownMenu (void);
 void WaitForButtonsUp (void);
 void FocusOn (XfwmWindow * t, Bool DeIconifyFlag);
 void WarpOn (XfwmWindow * t, int warp_x, int x_unit, int warp_y, int y_unit);
+void GetGravityOffsets (XfwmWindow * tmp_win);
 Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long flags, int Desk);
 void GetWMName (XfwmWindow *);
 void GetWMIconName (XfwmWindow *);

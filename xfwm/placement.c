@@ -66,37 +66,53 @@
 #define BORNE(t1) ((t1 < Scr.SnapSize) && (t1 > -Scr.SnapSize))
 #define INSIDE(x1,y1,x2,y2,x3,y3) ((x1 >= x2) && (x1 <= x3) && (y1 >= y2) && (y1 <= y3))
 
-struct _gravity_offset
-{
-  int x, y;
-};
-
 void
-GetGravityOffsets (XfwmWindow * tmp, int *xp, int *yp)
+GetGravityOffsets (XfwmWindow * tmp_win)
 {
-  static struct _gravity_offset gravity_offsets[11] = {
-    {0, 0},			/* ForgetGravity */
-    {-1, -1},			/* NorthWestGravity */
-    {0, -1},			/* NorthGravity */
-    {1, -1},			/* NorthEastGravity */
-    {-1, 0},			/* WestGravity */
-    {0, 0},			/* CenterGravity */
-    {1, 0},			/* EastGravity */
-    {-1, 1},			/* SouthWestGravity */
-    {0, 1},			/* SouthGravity */
-    {1, 1},			/* SouthEastGravity */
-    {0, 0},			/* StaticGravity */
-  };
-  int g = ((tmp->hints.flags & PWinGravity) ? tmp->hints.win_gravity : NorthWestGravity);
+  int g = ((tmp_win->hints.flags & PWinGravity) ? tmp_win->hints.win_gravity : NorthWestGravity);
 
-  if (g < ForgetGravity || g > StaticGravity)
-    *xp = *yp = 0;
-  else
+  switch (g)
   {
-    *xp = (int) gravity_offsets[g].x;
-    *yp = (int) gravity_offsets[g].y;
+    case NorthWestGravity:
+      tmp_win->gravx = tmp_win->bw - tmp_win->old_bw;
+      tmp_win->gravy = tmp_win->bw - tmp_win->old_bw;
+      break;
+    case NorthGravity:
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravy = tmp_win->bw - tmp_win->old_bw;
+      break;
+    case NorthEastGravity:
+      tmp_win->gravx = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
+      tmp_win->gravy = tmp_win->bw - tmp_win->old_bw;
+      break;
+    case WestGravity:
+      tmp_win->gravx = tmp_win->bw - tmp_win->old_bw;
+      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+      break;
+    case EastGravity:
+      tmp_win->gravx = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
+      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+      break;
+    case SouthWestGravity:
+      tmp_win->gravx = tmp_win->bw - tmp_win->old_bw;
+      tmp_win->gravy = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
+      break;
+    case SouthGravity:
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravy = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
+      break;
+    case SouthEastGravity:
+      tmp_win->gravx = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
+      tmp_win->gravy = - 2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) - tmp_win->title_height;
+      break;
+    case ForgetGravity:
+    case CenterGravity:
+    case StaticGravity:
+    default:
+      tmp_win->gravx = - (tmp_win->boundary_width + tmp_win->bw);
+      tmp_win->gravy = - (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
+      break;
   }
-  return;
 }
 
 /* Compute rectangle overlap area */
@@ -199,9 +215,7 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
   int center_x, center_y;
 #endif
 
-  GetGravityOffsets (tmp_win, &tmp_win->gravx, &tmp_win->gravy);
   XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &xl, &yt, &dummy_win_x, &dummy_win_y, &dummy_mask);
-
 
   /* Select a desk to put the window on (in list of priority):
    * 1. Sticky Windows stay on the current desk.
@@ -259,25 +273,9 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
   }
   else
   {
-    /* the USPosition was specified, or the window is a transient,
-     * or it starts iconic so place it automatically */
-
-    if ((tmp_win->hints.flags & PWinGravity) && (tmp_win->hints.win_gravity == StaticGravity))
-    {
-      tmp_win->attr.x -= (tmp_win->boundary_width + tmp_win->bw);
-      tmp_win->attr.y -= (tmp_win->title_height + tmp_win->boundary_width + tmp_win->bw);
-    }
-    else
-    {
-      if (tmp_win->gravx > 0)
-	tmp_win->attr.x -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw);
-      else if (tmp_win->gravx < 0)
-	tmp_win->attr.x +=  tmp_win->old_bw - tmp_win->bw;
-      if (tmp_win->gravy > 0)
-	tmp_win->attr.y -=  2 * (tmp_win->boundary_width + tmp_win->bw - tmp_win->old_bw) + tmp_win->title_height;
-      else if (tmp_win->gravy < 0)
-	tmp_win->attr.y +=  tmp_win->old_bw - tmp_win->bw;
-    }
+    GetGravityOffsets (tmp_win);
+    tmp_win->attr.x += tmp_win->gravx;
+    tmp_win->attr.y += tmp_win->gravy;
 #if defined(HAVE_X11_EXTENSIONS_XINERAMA_H) || defined(EMULATE_XINERAMA)
     if ((!(tmp_win->flags & RECAPTURE)) && (xinerama_heads != 0) && (xinerama_infos != NULL) && (enable_xinerama))
     {
