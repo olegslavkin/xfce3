@@ -1,0 +1,11 @@
+1- Some configuration options  
+2- An "all" button when doing hard deletes
+3- Debug the "goto" option (seems the "fork" may lose variables at times).
+4- gtk-2 
+5.- Somehow be able to show the total size of a folder including all it's
+content, sub-folders and their content.
+6.- MC style opening of packed files: Click on files and you see the internal
+structure as if it wasn't packed. Makes it very easy to copy and move content
+from these files straight to where you want it.
+
+And yes. XFtree is a marvel. Fast, always there, and always in use.
