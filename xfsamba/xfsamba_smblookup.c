@@ -113,11 +113,13 @@ SMBprint (nmb_list * currentN)
     }
     if (cache->textos[SHARE_NAME_COLUMN])
     {
-      int *data;
+	smb_entry *data;
       node = gtk_ctree_insert_node ((GtkCTree *) shares, NULL, NULL, cache->textos, SHARE_COLUMNS, gPIXc, gPIMc, gPIXo, gPIMo, FALSE, FALSE);
-      data = (int *) malloc (2 * sizeof (int));
-      data[0] = data[1] = 0;
-      gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
+ 	data = (smb_entry *) malloc (sizeof (smb_entry));
+	data->i[0] = data->i[1] = 0;
+	data->i[2]=1;
+	data->label=g_strdup(cache->textos[SHARE_NAME_COLUMN]);
+       gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
     }
 
     cache = cache->next;

@@ -72,6 +72,10 @@
 
 /******************* structures ****************/
 
+typedef struct smb_entry{
+	off_t i[3];
+	char *label;
+} smb_entry;
 
 typedef struct nmb_cache
 {

@@ -17,12 +17,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-/*  FIXME: upload not working if directory must be listed, broken pipe on many 
- *         uploads at once, no error message on failed up loads, tree is not being updated */
 
 /* FIXME: put in dummy entry to get expanders for folders */
-/* FIXME: directories cannot be uploaded by dnd */
-/* FIXME: change all meesages for xf_dlg routines. */
+/* FIXME: change messages for xf_dlg routines. */
+/* FIXME: autoordering after a list, direcotires on top. */
 /* FIXME: part 2... get drag src to send to xftree */
 
 #include <stdlib.h>
@@ -90,13 +88,10 @@ static int ok_input(GtkWidget *parent,char *source){
   if (lstat (source, &t_stat) < 0) {
 	if (errno != ENOENT) return xf_dlg_error_continue (parent,source, strerror (errno));
   }
-  if (S_ISDIR(t_stat.st_mode)){ /* FIXME: do a recursive glob to get all files to upload */
-        /*fprintf(stderr,"dbg:at okinput 1 \n");*/
-	  return DLG_RC_SKIP;
-  }
  
-  /*fprintf(stderr,"dbg:%s->%s\n",source,target);*/
-   if (S_ISFIFO(t_stat.st_mode)){
+#if 0
+  /* these are dumped later on, with error message in diagnostic box */
+  if (S_ISFIFO(t_stat.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy FIFO") );
    }
    if (S_ISCHR(t_stat.st_mode)||S_ISBLK(t_stat.st_mode)){
@@ -105,6 +100,7 @@ static int ok_input(GtkWidget *parent,char *source){
    if (S_ISSOCK(t_stat.st_mode)){
 	return xf_dlg_error_continue (parent,source,_("Can't copy socket") );
    }
+#endif
  
   return DLG_RC_OK;
 }
@@ -115,7 +111,8 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,char *target){
     uri *u;
     char *w;
     static char *fname=NULL;
-    int i,nitems=0;
+    int nitems=0;
+    struct stat s;
     
     nitems=0;
     if ((fname=randomTmpName(NULL))==NULL) return NULL;
@@ -126,30 +123,46 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,char *target){
 
 	/*fprintf(stderr,"dbg:target=%s\n",target);*/
 	switch (ok_input(parent,u->url)){
-		case DLG_RC_SKIP:
-			/*fprintf(stderr,"dbg:skipping %s\n",s_en->path);*/		      		
-			  break;
-		case DLG_RC_CANCEL:  /* dnd cancelled */
-			/*fprintf(stderr,"dbg:cancelled %s\n",s_en->path);*/
-    			 fclose (tmpfile);
+	 case DLG_RC_SKIP:
+		/*fprintf(stderr,"dbg:skipping %s\n",s_en->path);*/		      		
+		  break;
+	 case DLG_RC_CANCEL:  /* dnd cancelled */
+		/*fprintf(stderr,"dbg:cancelled %s\n",s_en->path);*/
+    		 fclose (tmpfile);
+		 unlink (fname);
+		 return NULL;
+	 default: 
+		 nitems++;
+		 /*fprintf(tmpfile,"%d:%s:%s\n",u->type,u->url,target);*/ 
+		 if (!strchr(u->url,'/')) {
+			 fclose(tmpfile);
 			 unlink (fname);
 			 return NULL;
-		default: 
-			 nitems++;
-			 /*fprintf(tmpfile,"%d:%s:%s\n",u->type,u->url,target);*/ 
-			 if (!strchr(u->url,'/')) {
-				 fclose(tmpfile);
-				 unlink (fname);
-				 return NULL;
-			 }
-			 w=strrchr(u->url,'/')+1;
-			 for (i = 0; i < strlen (selected.dirname); i++) {
-				 if (selected.dirname[i] == '/') selected.dirname[i] = '\\';
-			 }
-  			 fprintf(tmpfile,"put \"%s\" \"%s\\%s\";\n",u->url,selected.dirname,w);
-			 /*fprintf(stderr,"put \"%s\" \"%s\\%s\";\n",u->url,selected.dirname,w);*/
-			 fflush(NULL);
-			 break;
+		 }
+		 w=strrchr(u->url,'/')+1;
+		 if (lstat(u->url,&s)<0){
+			 print_status("xftree: cannot stat local file ");
+			 print_status(u->url);
+		 } 
+		 else if (S_ISREG(s.st_mode)) {
+  		   fprintf(tmpfile,"put \"%s\" \"%s\\%s\";\n",u->url,selected.dirname+1,w);
+		 }
+		 else if (S_ISDIR(s.st_mode)) {
+	  	   fprintf(tmpfile,"cd \"%s\";\n",selected.dirname);
+	  	   fprintf(tmpfile,"mkdir \"%s\";\n",w);
+	  	   fprintf(tmpfile,"cd \"%s\";\n",w);
+	  	   fprintf(tmpfile,"prompt;recurse;\n");
+	  	   fprintf(tmpfile,"lcd \"%s\";\n",u->url);
+	  	   fprintf(tmpfile,"mask *;\n");
+	  	   fprintf(tmpfile,"mput *;\n");
+	  	   fprintf(tmpfile,"prompt;recurse;\n");
+		 }
+		 else { /*CHR, BLK, FIFO, LNK, SOCK */
+ 		   print_status("xftree: cannot upload ");
+	 	   print_status(u->url);
+	         }
+		 fflush(NULL);
+		 break;
 	} 
     }
     fclose (tmpfile);
@@ -180,8 +193,9 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   GtkCList *clist;
   char *tmpfile=NULL;
   GList *list=NULL;
-
-#define DISABLE_DND
+  GtkCTreeNode *the_node;
+  
+#define xDISABLE_DND
 #ifdef DISABLE_DND
   return;
 #endif
@@ -197,7 +211,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   row = col = -1;
   y -= clist->column_title_area.height;
   gtk_clist_get_selection_info (clist, x, y, &row, &col);
-  fprintf(stderr,"dbg: drop received. row=%d\n",row);
+  /*fprintf(stderr,"dbg: drop received. row=%d\n",row);*/
   
   switch (info)
   {
@@ -211,11 +225,21 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     else return;
     /* do an unselect */
     gtk_ctree_unselect_recursive ((GtkCTree *)ctree, NULL);
-    select_share ((GtkCTree *)ctree, (GList *) gtk_ctree_node_nth ((GtkCTree *)ctree,row), col, NULL);
-    /* FIXME:if share could not be open, then abort drop */
- 
-    fprintf(stderr,"dbg: share=%s\n",selected.share);
-    fprintf(stderr,"dbg: dir=%s\n",selected.dirname);
+    the_node=gtk_ctree_node_nth ((GtkCTree *)ctree,row);
+
+    {
+	char *line[3];
+        gtk_ctree_node_get_text ((GtkCTree *)ctree, the_node, COMMENT_COLUMN, line);
+	if ((line[0][0]!='/')&&(strcmp(line[0],"Disk")!=0)){
+		the_node=GTK_CTREE_ROW(the_node)->parent;
+		if (!the_node) return;
+	}
+    }
+    
+    select_share ((GtkCTree *)ctree, (GList *) the_node, col, NULL);
+
+    /*fprintf(stderr,"dbg: share=%s\n",selected.share);
+    fprintf(stderr,"dbg: dir=%s\n",selected.dirname);*/
    
     nitems = uri_parse_list ((const char *) data->data, &list);
     if (!nitems) break; /* of course */
@@ -227,13 +251,11 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
          /*fprintf(stderr,"dbg:null tmpfile\n");*/
 	 break;
     }
-    else fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);
-    /*cursor_wait (GTK_WIDGET (ctree));*/
+    /*else fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
     SMBDropFile (tmpfile);
 /*	    DirectTransfer(ctree,mode,tmpfile);*/
     
     list=uri_free_list (list);
-    /*cursor_reset (GTK_WIDGET (ctree));    */
     
     break;
   default:

@@ -68,19 +68,33 @@ static nmb_cache *current_cache;
 void
 node_destroy (gpointer p)
 {
-  int *data = (int *) p;
-  free (data);
+  smb_entry *data;
+  data = (smb_entry *) p;
+  if (data) {
+   if (data->label) g_free(data->label);
+   g_free (data);
+  }
 }
-
+ 
 static gint
 compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 {
   GtkCTreeRow *row1 = (GtkCTreeRow *) ptr1;
   GtkCTreeRow *row2 = (GtkCTreeRow *) ptr2;
-  int i, *i1, *i2;
+  int i;
+  smb_entry *e1,*e2;
 
-  i1 = row1->row.data;
-  i2 = row2->row.data;
+  
+
+  e1 = row1->row.data;
+  e2 = row2->row.data;
+
+    /* I want to have the directories at the top  */
+  if (e1->i[2] != e2->i[2]){
+    return (e2->i[2] - e1->i[2]);
+  }
+  /*printf("dbg:%d--%d\n",i1[2],i2[2]);*/
+  
   switch (clist->sort_column)
   {
   case 2:
@@ -89,14 +103,16 @@ compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   case 3:
     i = 1;
     break;
+  case 1:
+    return (strcmp(e2->label,e1->label));
   default:
     i = 0;
   }
 
-  return i1[i] - i2[i];
+  return e2->i[i] - e1->i[i];
 }
 
-static gint
+gint
 on_click_column (GtkCList * clist, gint column, gpointer data)
 {
   GtkCTreeNode *node;
@@ -106,7 +122,7 @@ on_click_column (GtkCList * clist, gint column, gpointer data)
     gtk_clist_set_compare_func (clist, NULL);
   else
   {
-    if ((column == 2) || (column == 3))
+    if ((column == 1) ||(column == 2) || (column == 3))
     {
       gtk_clist_set_compare_func (clist, compare);
     }
@@ -1217,7 +1233,7 @@ create_smb_window (void)
 	  gtk_container_add (GTK_CONTAINER (scrolled), shares);
 	  for (i = 0; i < SHARE_COLUMNS; i++)
 	    gtk_clist_set_column_auto_resize ((GtkCList *) shares, i, TRUE);
-	  gtk_clist_set_auto_sort ((GtkCList *) shares, TRUE);
+	  /*gtk_clist_set_auto_sort ((GtkCList *) shares, TRUE);*/
 	  gtk_widget_show (shares);
 	}
       }

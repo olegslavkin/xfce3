@@ -37,6 +37,9 @@
 
 #endif
 
+extern gint
+on_click_column (GtkCList * clist, gint column, gpointer data);
+
 static GtkCTreeNode *LastNode;
 
 /* function to process stdout produced by child */
@@ -165,14 +168,17 @@ SMBListStdout (int n, void *data)
   }
 
   {
-    int *data;
-    data = (int *) malloc (2 * sizeof (int));
+    smb_entry *data;
+    data = (smb_entry *) malloc (sizeof (smb_entry));
     /*data[0]=data[1]=0; */
-    data[0] = atoi (textos[SHARE_SIZE_COLUMN]);
-    data[1] = 0;		/* to have date sorting work, must parse date into a time_t number */
+    data->i[0] = atoi (textos[SHARE_SIZE_COLUMN]);
+    data->i[1] = 0;		/* to have date sorting work, must parse date into a time_t number */
+    data->i[2] = (caso & 0x08)?1:0;
+    data->label = g_strdup(textos[SHARE_NAME_COLUMN]);
+    /*printf("dbg:%s-->%d\n",textos[SHARE_NAME_COLUMN],data[2]);*/
     gtk_ctree_node_set_row_data_full ((GtkCTree *) shares, node, data, node_destroy);
   }
-
+  gtk_ctree_sort_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node);
   return TRUE;
 }
 
@@ -184,9 +190,6 @@ SMBListForkOver (void)
   /* no jalo para arreglar directorios: 
      gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
    */
-  gtk_clist_thaw (GTK_CLIST (shares));
-  cursor_reset (GTK_WIDGET (smb_nav));
-  animation (FALSE);
   print_status (_("Retrieve done."));
   fork_obj = 0;
   switch (SMBResult)
@@ -199,6 +202,11 @@ SMBListForkOver (void)
     break;
 
   }
+  on_click_column ((GtkCList *)shares,1,NULL);
+  gtk_clist_thaw (GTK_CLIST (shares));
+  cursor_reset (GTK_WIDGET (smb_nav));
+  animation (FALSE);
+
 }
 
 /* function executed by child after all pipes

@@ -77,6 +77,7 @@ SMBPutStdout (int n, void *data)
 }
 
 static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
+      char line[256];
       GtkCTreeNode *node;
       time_t fecha;
       char sizeo[64];
@@ -86,7 +87,8 @@ static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
       for (i = 0; i < SHARE_COLUMNS; i++)textos[i] = "";
       textos[SHARE_NAME_COLUMN] = label;
 
-      if (lstat (path, &st) == 0) {
+      if (!path) textos[SHARE_SIZE_COLUMN] = "0";
+      else if (lstat (path, &st) == 0) {
 	sprintf (sizeo, "%lld", (long long)st.st_size);
 	textos[SHARE_SIZE_COLUMN] = sizeo;
 	sizei = st.st_size;
@@ -98,13 +100,25 @@ static void putin(GtkCTree *ctree,GtkCTreeNode *nodo,char *path,char *label) {
       if (strstr(textos[SHARE_DATE_COLUMN],"\n"))
 	      textos[SHARE_DATE_COLUMN] = strtok (textos[SHARE_DATE_COLUMN],"\n");  
 
-      textos[COMMENT_COLUMN] = _("Uploaded file.");
-      node = gtk_ctree_insert_node (ctree, nodo, NULL, textos, SHARE_COLUMNS, gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
+      if (path) textos[COMMENT_COLUMN] = _("Uploaded file.");
+      else {
+	      sprintf(line,"/%s%s/%s",selected.share,selected.dirname,label);
+	      textos[COMMENT_COLUMN] =line;
+      }
+      if (!path){
+	      node = gtk_ctree_insert_node (ctree, nodo, NULL, textos, SHARE_COLUMNS, 
+		      gPIX_dir_close, gPIM_dir_close,gPIX_dir_open,gPIM_dir_open, FALSE, FALSE);
+      } else {
+	      node = gtk_ctree_insert_node (ctree, nodo, NULL, textos, SHARE_COLUMNS, 
+		      gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
+      }
       {
-	off_t *data;
-	data = (off_t *) malloc (2 * sizeof (off_t));
-	data[0] = sizei;
-	data[1] = time(NULL);		
+	smb_entry *data;
+	data = (smb_entry *) malloc (sizeof (smb_entry));
+	data->i[0] = sizei;
+	data->i[1] = time(NULL);
+	if (!path) data->i[2]=1; else data->i[2]=0;
+	data->label=g_strdup(label);
 	gtk_ctree_node_set_row_data_full (ctree, node, data, node_destroy);
       }
 }
@@ -229,16 +243,17 @@ GtkCTreeNode *DropNode=NULL;
 static void
 SMBDropForkOver (void)
 {
+  while (gtk_events_pending()) gtk_main_iteration();
+  gdk_flush();
   cursor_reset (GTK_WIDGET (smb_nav));
   animation (FALSE);
   switch (SMBResult)
   {
   case CHALLENGED:
-    print_status (_("File upload failed. See diagnostics for reason."));
+    print_status (_("Upload produced errors. See diagnostics for reason."));
     break;
   default:
     /* upload was successful: */
-    print_status (_("Upload done."));
     if (upload_tmpfile) {
 	FILE *tmpF;
 	tmpF=fopen(upload_tmpfile,"r");
@@ -247,15 +262,25 @@ SMBDropForkOver (void)
 	  while (!feof(tmpF) && fgets(line,255,tmpF)){
 	    char *w;
 	    line[255]=0;
-	    w=strtok(line,"\""); if (!w) break;
-	    w=strtok(NULL,"\""); if (!w) break;
-	    if (!strchr(w,'/')) break;
-	    if (!DropNode) break;
-	    putin((GtkCTree *)shares,DropNode,w,strrchr(w,'/')+1);	    
+	    if (strstr(line,"mput")) continue;
+	    if (strstr(line,"put")){
+	      w=strtok(line,"\""); if (!w) break;
+	      w=strtok(NULL,"\""); if (!w) break;
+	      if (!strchr(w,'/')) break;
+	      if (!DropNode) break;
+              /*fprintf (stderr, "DBG:parent->%s\n", w);*/
+	      putin((GtkCTree *)shares,DropNode,w,strrchr(w,'/')+1);	    
+	    }
+	    else if (strstr(line,"mkdir")){
+	      w=strtok(line,"\""); if (!w) break;
+	      w=strtok(NULL,"\""); if (!w) break;
+	      putin((GtkCTree *)shares,DropNode,NULL,w);	    
+	    }
 	  }
 	  fclose (tmpF);
 	}
     }
+    print_status (_("Upload done."));
     break;
 
   }
@@ -263,6 +288,12 @@ SMBDropForkOver (void)
   fork_obj = NULL;
 }
 
+static void forgetit(char *why,char *who){
+          fprintf (stderr, "xfsamba: %s %s\n",(why)?why:" ",(who)?who:" ");
+	  fflush(NULL);
+	  usleep(50000);
+          _exit(123);
+}
 
 /* function executed after all pipes
 *  timeouts and inputs have been set up */
@@ -273,30 +304,27 @@ SMBDropFork (void)
   char *the_netbios;
   char *the_command=NULL;
   char line[256];
-  the_netbios = (char *) malloc (strlen ((char *) NMBnetbios) + strlen ((char *) NMBshare) + 1 + 3);
-  if (!the_netbios) _exit(123);
-  tmpfile=fopen(NMBcommand,"r");
-  if (!tmpfile) _exit(123);
+  struct stat s;
+  if ((the_netbios = (char *) malloc (strlen ((char *) NMBnetbios) + strlen ((char *) NMBshare) + 1 + 3))==NULL)
+	  forgetit("insufficient memory",NULL);
+  if (stat(NMBcommand,&s)<0)  forgetit("unable to stat temp file",NMBcommand);
+  if ((the_command = (char *)malloc(s.st_size+1))==NULL) forgetit("unable allocate memory for",NMBcommand);
+  if ((tmpfile=fopen(NMBcommand,"r"))==NULL) forgetit("unable to open",NMBcommand);
+  strcpy(the_command,"");
   while (!feof(tmpfile) && fgets(line,255,tmpfile)){
 	  char *w;
 	  line[255]=0;
 	  if (!strstr(line,"\n")) continue;
 	  w=strtok(line,"\n");
-	  if (!the_command){
-		  the_command=(char *)malloc(strlen(line)+1);
-		  if (!the_command) _exit(123);
-		  strcpy(the_command,line);
-	  } else {
-		  the_command=(char *)realloc((void *)the_command,strlen(line)+1);
-		  if (!the_command) _exit(123);
-		  strcat(the_command,line);
-	  }
+          /*fprintf (stderr, "DBG:child->%s\n", w);fflush(NULL);*/
+	  strcat(the_command,w);	  
   }
+  fprintf (stderr, "DBG:child, the_command-> %s\n", the_command);fflush(NULL);
   sprintf (the_netbios, "//%s/%s", NMBnetbios, NMBshare);
 
   
 #ifdef DBG_XFSAMBA
-  fprintf (stderr, "DBG:smbclient %s -c \"put %s\"\n", the_netbios, the_command);
+  fprintf (stderr, "DBG:smbclient %s -c %s\n", the_netbios, the_command);
   fflush (NULL);
   sleep (1);
 #endif
@@ -311,7 +339,10 @@ SMBDropFile (char *tmpfile)
 {
 
   if (!selected.directory) return;
-  if (not_unique (fork_obj))return;
+  while (not_unique (fork_obj)) {
+     while (gtk_events_pending()) gtk_main_iteration();
+     usleep(50000);
+  }
   
   upload_tmpfile=tmpfile;
   stopcleanup = FALSE;
