@@ -302,7 +302,7 @@ Tubo (void (*fork_function) (void), void (*fork_finished_function) (void), int o
     /* what to do when child is kaput. */
     gtk_timeout_add (520, (GtkFunction) TuboWaitDone, (gpointer) (newfork));
     /*send greenlight to child: ok to continue */
-    sleep (1);			/* race: child must be at pause before sending signal */
+    usleep (5000);			/* race: child must be at pause before sending signal */
 #ifdef DEBUG_RUN
 /* printf("The parent process is sending a green light\n"); */
 #endif
