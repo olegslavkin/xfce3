@@ -63,7 +63,7 @@ ln -sf ../icons more-icons
 
 chmod 0755 $RPM_BUILD_ROOT%{confdir}/xfce/{xsession,xinitrc,xinitrc.mwm,Xclients}
 
-strip -s $RPM_BUILD_ROOT%{prefix}/bin/* || :
+# strip -s $RPM_BUILD_ROOT%{prefix}/bin/* || :
 strip -s $RPM_BUILD_ROOT%{gtkengines}/* || :
 gzip $RPM_BUILD_ROOT%{_mandir}/man1/* || :
 

@@ -31,17 +31,23 @@
 #undef OLD_STYLE
 #undef MANAGE_OVERRIDES
 
+/* Define if using `alloca.c'. */
+#undef C_ALLOCA
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
    */
 #undef CRAY_STACKSEG_END
 
-/* Define if using `alloca.c'. */
-#undef C_ALLOCA
-
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
 #undef ENABLE_NLS
+
+/* Number of bits in a file offset, on hosts where this is settable. */
+#undef _FILE_OFFSET_BITS
 
 /* Define if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
@@ -49,8 +55,17 @@
 /* Define if you have <alloca.h> and it should be used (not on Ultrix). */
 #undef HAVE_ALLOCA_H
 
+/* Define if you have the `__argz_count' function. */
+#undef HAVE___ARGZ_COUNT
+
 /* Define if you have the <argz.h> header file. */
 #undef HAVE_ARGZ_H
+
+/* Define if you have the `__argz_next' function. */
+#undef HAVE___ARGZ_NEXT
+
+/* Define if you have the `__argz_stringify' function. */
+#undef HAVE___ARGZ_STRINGIFY
 
 /* Define if you have the <ctype.h> header file. */
 #undef HAVE_CTYPE_H
@@ -196,11 +211,11 @@
 /* Define if you have the `strdup' function. */
 #undef HAVE_STRDUP
 
-/* Define if you have the <strings.h> header file. */
-#undef HAVE_STRINGS_H
-
 /* Define if you have the <string.h> header file. */
 #undef HAVE_STRING_H
+
+/* Define if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
 
 /* Define if you have the `strncasecmp' function. */
 #undef HAVE_STRNCASECMP
@@ -250,23 +265,27 @@
 /* Define if you have the <X11/Xft/Xft.h> header file. */
 #undef HAVE_X11_XFT_XFT_H
 
-/* Define if you have the `__argz_count' function. */
-#undef HAVE___ARGZ_COUNT
-
-/* Define if you have the `__argz_next' function. */
-#undef HAVE___ARGZ_NEXT
-
-/* Define if you have the `__argz_stringify' function. */
-#undef HAVE___ARGZ_STRINGIFY
-
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST
+
+/* Define as `__inline' if that's what the C compiler calls it, or to nothing
+   if it is not supported. */
+#undef inline
+
+/* Define for large files, on AIX-style hosts. */
+#undef _LARGE_FILES
+
+/* Define to `long' if <sys/types.h> does not define. */
+#undef off_t
 
 /* Name of package */
 #undef PACKAGE
 
 /* Define as the return type of signal handlers (`int' or `void'). */
 #undef RETSIGTYPE
+
+/* Define to `unsigned' if <sys/types.h> does not define. */
+#undef size_t
 
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
@@ -290,22 +309,3 @@
 
 /* Define if the X Window System is missing or not being used. */
 #undef X_DISPLAY_MISSING
-
-/* Number of bits in a file offset, on hosts where this is settable. */
-#undef _FILE_OFFSET_BITS
-
-/* Define for large files, on AIX-style hosts. */
-#undef _LARGE_FILES
-
-/* Define to empty if `const' does not conform to ANSI C. */
-#undef const
-
-/* Define as `__inline' if that's what the C compiler calls it, or to nothing
-   if it is not supported. */
-#undef inline
-
-/* Define to `long' if <sys/types.h> does not define. */
-#undef off_t
-
-/* Define to `unsigned' if <sys/types.h> does not define. */
-#undef size_t

@@ -23,6 +23,7 @@ palettes_DATA=\
  BlueX3 \
  BlueX4 \
  CandyBox \
+ CandyBox2 \
  Cheese \
  Chrome \
  Citrouille \
