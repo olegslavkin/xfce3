@@ -948,19 +948,19 @@ my_gtk_clock_draw_leds (GtkWidget * widget)
     
   len = strlen (time_buf);
   
-  if (((len * digits_huge_width) < widget->allocation.width) && (digits_huge_height < widget->allocation.height))
+  if (((len * digits_huge_width) <= widget->allocation.width) && (digits_huge_height <= widget->allocation.height))
   {
     clock->leds_size = DIGIT_HUGE;
     c_width          = digits_huge_width;
     c_height         = digits_huge_height;
   }
-  else if (((len * digits_large_width) < widget->allocation.width) && (digits_large_height < widget->allocation.height))
+  else if (((len * digits_large_width) <= widget->allocation.width) && (digits_large_height <= widget->allocation.height))
   {
     clock->leds_size = DIGIT_LARGE;
     c_width          = digits_large_width;
     c_height         = digits_large_height;
   }
-  else if (((len * digits_medium_width) < widget->allocation.width) && (digits_medium_height < widget->allocation.height))
+  else if (((len * digits_medium_width) <= widget->allocation.width) && (digits_medium_height <= widget->allocation.height))
   {
     clock->leds_size = DIGIT_MEDIUM;
     c_width          = digits_medium_width;
