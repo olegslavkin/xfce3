@@ -50,9 +50,9 @@
 #define my_min(a,b) ((a > b) ? b : a)
 #define my_abs(a)   ((a > 0) ? a : -a)
 
-#define AcceptInput(t)  (!(t->wmhints) || \
+#define AcceptInput(t)  (t && (!(t->wmhints) || \
                         ((t->wmhints) && !(t->wmhints->flags & InputHint)) || \
-                        ((t->wmhints) && (t->wmhints->flags & InputHint) && (t->wmhints->input)))
+                        ((t->wmhints) && (t->wmhints->flags & InputHint) && (t->wmhints->input))))
 
 #define ICON_HEIGHT (Scr.IconFont.height+6)
 

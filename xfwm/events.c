@@ -668,14 +668,16 @@ HandlePropertyNotify ()
       if (!(Tmp_win->flags & SUPPRESSICON))
       {
 	if (Tmp_win->icon_w)
+	{
+	  XDeleteContext (dpy, Tmp_win->icon_w, XfwmContext);
 	  XDestroyWindow (dpy, Tmp_win->icon_w);
-	XDeleteContext (dpy, Tmp_win->icon_w, XfwmContext);
+	}
 	if (Tmp_win->flags & ICON_OURS)
 	{
 	  if (Tmp_win->icon_pixmap_w != None)
 	  {
-	    XDestroyWindow (dpy, Tmp_win->icon_pixmap_w);
 	    XDeleteContext (dpy, Tmp_win->icon_pixmap_w, XfwmContext);
+	    XDestroyWindow (dpy, Tmp_win->icon_pixmap_w);
 	  }
 	}
 	else
