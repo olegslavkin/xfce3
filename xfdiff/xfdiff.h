@@ -79,7 +79,7 @@
 #define PATCH_f TRUE		/* patch has -f option. This is mandatory for GNU patch, as it queries on reversed patches */
 
 #define XFDIFF_CONFIG_FILE "xfdiffrc"
-#define XFDIFF_VERSION "1.2.7"
+#define XFDIFF_VERSION "1.2.8"
 
 #define AUTOSAVE		/* automatic configuration save, a la xfclock */
 /* draw window width (should be dynamic))*/
