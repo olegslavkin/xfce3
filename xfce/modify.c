@@ -58,7 +58,6 @@ create_modify ()
   GtkWidget *modify_command_label;
   GtkWidget *modify_icon_label;
   GtkWidget *modify_pos_frame;
-  GtkWidget *modify_pos_hscale;
   GtkWidget *modify_displayed_label;
   GtkWidget *modify_position_label;
   GtkWidget *modify_command_browse_button;
@@ -337,9 +336,10 @@ open_modify (GtkWidget * modify, gint menu, gint item)
     gtk_entry_set_text (GTK_ENTRY (modify_command_entry), "");
     gtk_entry_set_text (GTK_ENTRY (modify_icon_entry), "");
     gtk_entry_set_text (GTK_ENTRY (modify_displayed_entry), "");
-    gtk_adjustment_clamp_page (GTK_ADJUSTMENT (modify_pos_adj), 1, get_popup_menu_entries(menu) + 1);
-    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), 1);
     my_set_adjustment_bounds (GTK_ADJUSTMENT (modify_pos_adj), 1.0, (gfloat) (get_popup_menu_entries(menu) + 1));
+    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), 1);
+    gtk_range_default_hslider_update(GTK_RANGE (modify_pos_hscale));
+    gtk_scale_draw_value (GTK_SCALE (modify_pos_hscale));
     pixmap = MyCreateGdkPixmapFromData (empty, modify_preview_frame, &mask, TRUE);
     gtk_pixmap_set (GTK_PIXMAP (modify_preview_pixmap), pixmap, mask);
     gtk_widget_hide (modify_remove_button);
@@ -352,9 +352,10 @@ open_modify (GtkWidget * modify, gint menu, gint item)
     gtk_window_set_title (GTK_WINDOW (modify), _("Modify Item ..."));
     gtk_entry_set_text (GTK_ENTRY (modify_command_entry), get_popup_entry_command (menu, item));
     gtk_entry_set_text (GTK_ENTRY (modify_displayed_entry), get_popup_entry_label (menu, item));
-    gtk_adjustment_clamp_page (GTK_ADJUSTMENT (modify_pos_adj), 1, get_popup_menu_entries(menu));
-    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), item + 1);
     my_set_adjustment_bounds (GTK_ADJUSTMENT (modify_pos_adj), 1.0, (gfloat) (get_popup_menu_entries(menu)));
+    gtk_adjustment_set_value (GTK_ADJUSTMENT (modify_pos_adj), item + 1);
+    gtk_range_default_hslider_update(GTK_RANGE (modify_pos_hscale));
+    gtk_scale_draw_value (GTK_SCALE (modify_pos_hscale));
     pixfile = get_popup_entry_icon (menu, item);
     if (existfile (pixfile))
     {
