@@ -1,6 +1,6 @@
 Begin3
 Title		XFce
-Version:        3.8.10
+Version:        3.8.11
 Entered-date:   29OCT01
 Description:    XFce is an easy-to-use and easy-to-configure environment 
 		using the popular GTK+ toolkit for X11, featuring drag'n drop,
@@ -15,8 +15,8 @@ Keywords:       desktop, utility, toolbar, icons, menu interface,
 Author:         fourdan@xfce.org (Olivier Fourdan)
 Maintained-by:  fourdan@xfce.org (Olivier Fourdan)
 Primary-site:   HTTP://www.xfce.org/
-			 	 3904Kb xfce-3.8.10.tar.gz
-			 	    1Kb xfce-3.8.10.lsm
+			 	 3904Kb xfce-3.8.11.tar.gz
+			 	    1Kb xfce-3.8.11.lsm
 Alternate-site:	HTTP://www.baysurf.net/linux/xfce/
 		HTTP://tsikora.tiac.net/xfce/
 Original-site:	HTTP://www.xfce.org/
