@@ -428,14 +428,8 @@ draw_round_frame (GtkWidget * widget)
 
   gdk_draw_arc (widget->window, style->base_gc[GTK_STATE_NORMAL],
 		TRUE, x, y, w, h, 0, 360 * 64);
-
-  gdk_draw_arc (widget->window, style->black_gc,
-		FALSE, x + 1, y + 1, w - 1, h - 1, 30 * 64, 180 * 64);
-  gdk_draw_arc (widget->window, style->mid_gc[GTK_STATE_NORMAL],
+  gdk_draw_arc (widget->window, style->dark_gc[GTK_STATE_NORMAL],
 		FALSE, x, y, w, h, 30 * 64, 180 * 64);
-
-  gdk_draw_arc (widget->window, style->bg_gc[GTK_STATE_NORMAL],
-		FALSE, x + 1, y + 1, w - 1, h - 1, 210 * 64, 180 * 64);
   gdk_draw_arc (widget->window, style->light_gc[GTK_STATE_NORMAL],
 		FALSE, x, y, w, h, 210 * 64, 180 * 64);
 }
