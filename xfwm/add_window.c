@@ -133,19 +133,9 @@ AddWindow (Window w)
     return NULL;
   }
 
-  /* Give some CPU to the application in case it wants to update its attributes */
-  sleep_a_little (20000);
-  /* And grab the server so the window doesn't go away while we're capturing it */
+  XSelectInput(dpy, tmp_win->w, PropertyChangeMask);
   XSync (dpy, 0);
-  MyXGrabServer (dpy);
-  if ((XGetWindowAttributes (dpy, w, &(tmp_win->attr)) == 0) ||
-      (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0))
-  {
-    free (tmp_win);
-    MyXUngrabServer (dpy);
-    return NULL;
-  }
-
+  XGetWindowAttributes (dpy, w, &(tmp_win->attr));
   XSetWindowBorderWidth (dpy, w, 0);
 
   tmp_win->flags = 0;
@@ -322,6 +312,25 @@ AddWindow (Window w)
   }
   tmp_win->BackPixel = GetDecor (tmp_win, LoColors.back);
   attributes.background_pixel = tmp_win->BackPixel;
+
+  /* Grab the server so the window doesn't go away while we're capturing it */
+  XSync (dpy, 0);
+  MyXGrabServer (dpy);
+  if (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth) == 0)
+  {
+    free (tmp_win);
+    free_window_names (tmp_win, True, True);
+    if (tmp_win->wmhints)
+      XFree (tmp_win->wmhints);
+    if (tmp_win->class.res_name && tmp_win->class.res_name != NoResource)
+      XFree (tmp_win->class.res_name);
+    if (tmp_win->class.res_class && tmp_win->class.res_class != NoClass)
+      XFree (tmp_win->class.res_class);
+    if (tmp_win->mwm_hints)
+      XFree (tmp_win->mwm_hints);
+    MyXUngrabServer (dpy);
+    return NULL;
+  }
 
   /* create windows */
 

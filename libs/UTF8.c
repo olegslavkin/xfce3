@@ -45,9 +45,90 @@ char * get_charset_from_lang (void)
   return (charset);
 }
 
-int iconv_string (const char* tocode, const char* fromcode,
-                  const char* start, const char* end,
-                  char** resultp, size_t* lengthp)
+#define F 0   /* character never appears in text */
+#define T 1   /* character appears in plain ASCII text */
+#define I 2   /* character appears in ISO-8859 text */
+#define X 3   /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
+
+static unsigned int isUtf8(const char *start, const char *end) 
+{
+  int n;
+  register char *c;
+  unsigned int gotone = 0;
+
+  static const char text_chars[256] = {
+  /*                  BEL BS HT LF    FF CR    */
+        F, F, F, F, F, F, F, T, T, T, T, F, T, T, F, F,  /* 0x0X */
+        /*                              ESC          */
+        F, F, F, F, F, F, F, F, F, F, F, T, F, F, F, F,  /* 0x1X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x2X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x3X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x4X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x5X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x6X */
+        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, F,  /* 0x7X */
+        /*            NEL                            */
+        X, X, X, X, X, T, X, X, X, X, X, X, X, X, X, X,  /* 0x8X */
+        X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,  /* 0x9X */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xaX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xbX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xcX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xdX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xeX */
+        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I   /* 0xfX */
+  };
+
+  /* *ulen = 0; */
+  c = (char *) start;
+  for (c = (char *) start; c < (char *) end; c++) {
+    if ((*c & 0x80) == 0) {        /* 0xxxxxxx is plain ASCII */
+      /*
+       * Even if the whole file is valid UTF-8 sequences,
+       * still reject it if it uses weird control characters.
+       */
+
+      if (text_chars[*c] != T)
+        return 0;
+
+    } else if ((*c & 0x40) == 0) { /* 10xxxxxx never 1st byte */
+      return 0;
+    } else {                           /* 11xxxxxx begins UTF-8 */
+      int following;
+
+    if ((*c & 0x20) == 0) {             /* 110xxxxx */
+      following = 1;
+    } else if ((*c & 0x10) == 0) {      /* 1110xxxx */
+      following = 2;
+    } else if ((*c & 0x08) == 0) {      /* 11110xxx */
+      following = 3;
+    } else if ((*c & 0x04) == 0) {      /* 111110xx */
+      following = 4;
+    } else if ((*c & 0x02) == 0) {      /* 1111110x */
+      following = 5;
+    } else
+      return 0;
+
+      for (n = 0; n < following; n++) {
+        c++;
+        if (!*c)
+          goto done;
+
+        if ((*c & 0x80) == 0 || (*c & 0x40))
+          return 0;
+      }
+      gotone = 1;
+    }
+  }
+done:
+  return gotone;   /* don't claim it's UTF-8 if it's all 7-bit */
+}
+
+#undef F
+#undef T
+#undef I
+#undef X
+
+static int _iconv_string (const char* tocode, const char* fromcode, const char* start, const char* end, char** resultp, size_t* lengthp)
 {
   iconv_t cd = iconv_open(tocode,fromcode);
   size_t length;
@@ -61,17 +142,17 @@ int iconv_string (const char* tocode, const char* fromcode,
       int ret;
       /* Try UTF-8 first. There are very few ISO-8859-1 inputs that would
          be valid UTF-8, but many UTF-8 inputs are valid ISO-8859-1. */
-      ret = iconv_string(tocode,"UTF-8",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"UTF-8",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
         return ret;
-      ret = iconv_string(tocode,"ISO-8859-1",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"ISO-8859-1",start,end,resultp,lengthp);
       return ret;
     }
     if (!mystrcasecmp((char *) fromcode,"autodetect_jp")) {
       int ret;
       /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
          it will fail. */
-      ret = iconv_string(tocode,"ISO-2022-JP-2",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"ISO-2022-JP-2",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
         return ret;
       /* Try EUC-JP next. Short SHIFT_JIS inputs may come out wrong. This
@@ -79,22 +160,22 @@ int iconv_string (const char* tocode, const char* fromcode,
          If we tried SHIFT_JIS first, then some short EUC-JP inputs would
          come out wrong, and people would condemn EUC-JP and Unix, which
          would not be good. */
-      ret = iconv_string(tocode,"EUC-JP",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"EUC-JP",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
         return ret;
       /* Finally try SHIFT_JIS. */
-      ret = iconv_string(tocode,"SHIFT_JIS",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"SHIFT_JIS",start,end,resultp,lengthp);
       return ret;
     }
     if (!mystrcasecmp((char *) fromcode,"autodetect_kr")) {
       int ret;
       /* Try 7-bit encoding first. If the input contains bytes >= 0x80,
          it will fail. */
-      ret = iconv_string(tocode,"ISO-2022-KR",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"ISO-2022-KR",start,end,resultp,lengthp);
       if (!(ret < 0 && errno == EILSEQ))
         return ret;
       /* Finally try EUC-KR. */
-      ret = iconv_string(tocode,"EUC-KR",start,end,resultp,lengthp);
+      ret = _iconv_string(tocode,"EUC-KR",start,end,resultp,lengthp);
       return ret;
     }
     errno = EINVAL;
@@ -103,7 +184,7 @@ int iconv_string (const char* tocode, const char* fromcode,
   /* Determine the length we need. */
   {
     size_t count = 0;
-    char tmpbuf[__ICONV_BUFSIZE__ + 1];
+    char tmpbuf[__ICONV_BUFSIZE__];
     const char* inptr = start;
     size_t insize = end-start;
     while (insize > 0) {
@@ -186,4 +267,24 @@ int iconv_string (const char* tocode, const char* fromcode,
   }
   iconv_close(cd);
   return 0;
+}
+
+int iconv_string (const char* tocode, const char* start, const char* end, char** resultp, size_t* lengthp)
+{
+  int ret;
+  if (isUtf8 (start, end))
+  {
+    fprintf ("UFT8 string handled\n");
+    ret = _iconv_string(tocode,"UTF-8", start, end, resultp, lengthp);    
+  }
+  else
+  {
+    *resultp = (char *) safemalloc (sizeof (char) * (end - start + 1));
+    strncpy (*resultp, start, end - start);
+    *(*resultp + (end - start)) = 0;
+    if (lengthp)
+      *lengthp = (size_t) (end - start);
+    ret = 0;
+  }
+  return (ret);
 }

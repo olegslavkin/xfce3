@@ -10,9 +10,7 @@
 #include <stdlib.h>
 
 char * get_charset_from_lang (void);
-int iconv_string (const char* tocode, const char* fromcode,
-                  const char* start, const char* end,
-                  char** resultp, size_t* lengthp);
+int iconv_string (const char* tocode, const char* start, const char* end,char** resultp, size_t* lengthp);
 		  
 		  
 #endif
