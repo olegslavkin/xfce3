@@ -23,7 +23,7 @@
 #define XF_IND		1
 #define ST_GET		0
 #define DSP_NAME	"/dev/dsp"
-#define ARTSD_CMD       "exec artsd"
+#define ARTSD_CMD       "exec artswrapper"
 
 typedef int ST_CONFIG[3];
 
