@@ -1,3 +1,8 @@
+0.34
+- introduced dnd, not activated. Bugs to remove before activation: 
+* intermintent Xlib crash on multiple upload, 
+* cannot drop into non expanded folders
+* cannot drop on non folders
 0.33.2
 - restructured program modules
 0.32

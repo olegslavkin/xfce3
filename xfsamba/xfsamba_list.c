@@ -134,6 +134,8 @@ SMBListStdout (int n, void *data)
     }
     textos[COMMENT_COLUMN] = directorio;
     node = gtk_ctree_insert_node ((GtkCTree *) shares, (GtkCTreeNode *) selected.node, NULL, textos, SHARE_COLUMNS, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
+    /* FIXME: insert a dummy entry here. Be sure to remove it on the first expansion,
+     *        as determined by reload. */
     /*return TRUE; */
   }
   else

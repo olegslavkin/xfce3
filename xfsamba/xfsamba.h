@@ -5,7 +5,7 @@
 /********** defines ***************/
 
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.33.2"
+#define XFSAMBA_VERSION "0.34"
 #endif
 
 #ifdef XFSAMBA_MAIN
@@ -14,6 +14,10 @@
 #define EXTERN extern
 #endif
 
+#define TR_COPY		0x01
+#define TR_MOVE		0x02
+#define TR_LINK		0x04
+#define TR_OVERRIDE	0x08
 
 #define LOCATION_SHARES      1
 #define LOCATION_SERVERS     2

@@ -48,11 +48,20 @@
 /* local xfsamba includes : */
 #undef XFSAMBA_MAIN
 #include "xfsamba.h"
+#include "xfsamba_dnd.h"
 #include "tubo.h"
+
+static GtkTargetEntry target_table[] = {
+  {"text/uri-list", 0, TARGET_URI_LIST},
+  {"text/plain", 0, TARGET_PLAIN},
+  {"STRING", 0, TARGET_STRING}
+};
+#define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
+
 
 static GtkWidget *vpaned, *hpaned, *vpaned2, *show_links, *hide_links, *show_diag, *hide_diag;
 /* diagnostics=0x01, links=0x10 :*/
-int view_toggle = 0x11;
+int view_toggle = 0x10;
 static GtkWidget * user, *passwd, *dialog;
 static nmb_cache *current_cache;
 
@@ -456,6 +465,7 @@ cb_tar (GtkWidget * widget, gpointer data)
   }
 }
 
+extern GtkCTreeNode *DropNode;
 
 void
 select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
@@ -470,17 +480,13 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
 
 
   selected.directory = selected.file = FALSE;
-  if (selected.share)
-    free (selected.share);
+  if (selected.share) free (selected.share);
   selected.share = NULL;
-  if (selected.dirname)
-    free (selected.dirname);
+  if (selected.dirname) free (selected.dirname);
   selected.dirname = NULL;
-  if (selected.filename)
-    free (selected.filename);
+  if (selected.filename) free (selected.filename);
   selected.filename = NULL;
-  if (selected.comment)
-    free (selected.comment);
+  if (selected.comment) free (selected.comment);
   selected.comment = NULL;
 
   selected.comment = (char *) malloc (strlen (line[1]) + 1);
@@ -489,40 +495,38 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
   selected.node = node;		/* this is leaf or node */
   selected.parent_node = NULL;
 
-  if (!strncmp (selected.comment, "Disk", strlen ("Disk")))
-  {
-    selected.directory = TRUE;
-  }
+  if (!strncmp (selected.comment, "Disk", strlen ("Disk"))) 
+	  selected.directory = TRUE;
 
-  if ((selected.comment[0] == '/') && (selected.comment[1]))
-  {
+  if ((selected.comment[0] == '/') && (selected.comment[1])) {
     selected.directory = TRUE;
     selected.parent_node = node;
   }
 
-  if ((GTK_CTREE_ROW (node)->parent) && (line[1][0] != '/'))
-  {
+  if ((GTK_CTREE_ROW (node)->parent) && (line[1][0] != '/')) {
     selected.file = TRUE;
     selected.parent_node = (GList *) (GTK_CTREE_ROW (node)->parent);
   }
 
 /* get the share and dirname: */
-  if (selected.parent_node == NULL)
-  {				/* top level node */
+  if (selected.parent_node == NULL) {	/* top level node */
     selected.share = (char *) malloc (strlen (line[0]) + 1);
     sprintf (selected.share, "%s", line[0]);
     selected.dirname = (char *) malloc (3);
     sprintf (selected.dirname, "/");
-  }
-  else
-  {				/* something not top level */
+    DropNode=(GtkCTreeNode *)node;
+  } else {  /* something not top level */
     char *word;
     int i;
+    DropNode=NULL;
+    gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) node, COMMENT_COLUMN, line + 1);
+    if (line[1][0]=='/') DropNode=(GtkCTreeNode *)node;
     if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) selected.parent_node, COMMENT_COLUMN, line + 1))
     {
       print_diagnostics ("DBG:unable to get parent information\n");
       return;
     }
+    if (!DropNode) DropNode=(GtkCTreeNode *)selected.parent_node;
     if (strncmp (line[1], "Disk", strlen ("Disk")) == 0)
     {
       gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) selected.parent_node, SHARE_NAME_COLUMN, line + 1);
@@ -1208,7 +1212,8 @@ create_smb_window (void)
 	  gtk_clist_set_reorderable (GTK_CLIST (shares), FALSE);
 	  gtk_signal_connect (GTK_OBJECT (shares), "tree-select-row", GTK_SIGNAL_FUNC (select_share), (gpointer) GTK_WIDGET (shares));
 	  gtk_signal_connect (GTK_OBJECT (shares), "click_column", GTK_SIGNAL_FUNC (on_click_column), NULL);
-
+  	  gtk_signal_connect (GTK_OBJECT (shares), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data), NULL);
+  	  gtk_signal_connect (GTK_OBJECT (shares), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
 	  gtk_container_add (GTK_CONTAINER (scrolled), shares);
 	  for (i = 0; i < SHARE_COLUMNS; i++)
 	    gtk_clist_set_column_auto_resize ((GtkCList *) shares, i, TRUE);
@@ -1216,6 +1221,10 @@ create_smb_window (void)
 	  gtk_widget_show (shares);
 	}
       }
+      //gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);*/
+      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_MOTION, target_table, NUM_TARGETS,  GDK_ACTION_MOVE | GDK_ACTION_COPY );
+//      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+	  
 
       hbox = gtk_hbox_new (FALSE, 0);
       gtk_paned_pack2 (GTK_PANED (vpaned2), hbox, TRUE, TRUE);

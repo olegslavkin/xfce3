@@ -64,6 +64,18 @@
 #include "icons/warning.xpm"
 #include "icons/xfsamba.xpm"
 
+int preferences=0x0;
+
+static void cleanup_tmpfiles(void){
+   glob_t dirlist;
+   int i;
+   if (glob ("/tmp/xfsamba*", GLOB_ERR ,NULL, &dirlist) != 0) {
+		  /*fprintf (stderr, "dbg:%s: no match\n", globstring);*/
+	return;
+   } else for (i = 0; i < dirlist.gl_pathc; i++) {
+	   unlink(dirlist.gl_pathv[i]);
+   }
+}
 
 void
 xfsamba_abort (int why)
@@ -83,10 +95,11 @@ void
 print_status (char *mess)
 {
   static char message[256];
+  int i;
   strncpy (message, mess, 255);
   message[255] = 0;
-  if (strstr (message, "\n"))
-    strtok (message, "\n");	/* chop chop */
+  if (strstr (message, "\n")) strtok (message, "\n");	/* chop chop */
+  for (i=0;i<strlen(message);i++) if (message[i]=='\t') message[i]=' ';
 #ifdef DBG_XFSAMBA
   print_diagnostics ("DBG:");
   print_diagnostics (message);
@@ -198,6 +211,7 @@ static void
 on_ok_abort (GtkWidget * widget, gpointer data)
 {
   gtk_main_quit ();
+    cleanup_tmpfiles();
   exit (1);
 }
 
@@ -242,7 +256,6 @@ abort_dialog (char *message)
 
   return dialog;
 }
-
 
 gboolean
 sane (char *bin)
@@ -291,8 +304,30 @@ sane (char *bin)
   gtk_window_set_transient_for (GTK_WINDOW (abort_dialog (bin)), GTK_WINDOW (smb_nav));
   gtk_main ();
   /*printf("samba failure: %s not found in PATH\n",bin); */
+    cleanup_tmpfiles();
   exit (1);
 }
+
+
+static void
+finishit (int sig)
+{
+#if 0
+  if (sig == SIGUSR1) {
+          /*while (gtk_events_pending()) gtk_main_iteration();*/
+	  /* must do it this way to avoid threads fighting for gtk_main loop */
+          gtk_timeout_add (260, (GtkFunction) open_warning, NULL);
+	  return;
+  } else 
+#endif
+  {
+    fprintf(stderr,"xfsamba: signal %d received. Cleaning up before exiting\n",sig);
+    cleanup_tmpfiles();
+    on_signal(sig);
+    exit(1);
+  }
+}
+
 
 
 int
@@ -307,12 +342,21 @@ main (int argc, char *argv[])
   default_user = (char *) malloc (strlen ("Guest%") + 1);
   strcpy (default_user, "Guest%");
   xfce_init (&argc, &argv);
-  /*
-     signal(SIGHUP,finish);
-     signal(SIGSEGV,finish);
-     signal(SIGKILL,finish);
-     signal(SIGTERM,finish);
-   */
+
+  /* for temporary file cleanup */
+  signal (SIGHUP, finishit);
+  signal (SIGINT, finishit);
+  signal (SIGQUIT, finishit);
+  signal (SIGABRT, finishit);
+  signal (SIGBUS, finishit);
+  signal (SIGSEGV, finishit);
+  signal (SIGTERM, finishit);
+  signal (SIGFPE, finishit);
+
+  signal (SIGKILL, finishit);
+  signal (SIGUSR1, finishit);
+  signal (SIGUSR2, finishit);
+
   create_smb_window ();
   set_icon (smb_nav, "Xfsamba", xfsamba_xpm);
   cursor_wait (GTK_WIDGET (smb_nav));
@@ -321,5 +365,6 @@ main (int argc, char *argv[])
   sane ("smbclient");
   gtk_timeout_add (500, (GtkFunction) NMBmastersLookup, NULL);
   gtk_main ();
+  cleanup_tmpfiles();
   return (0);
 }
