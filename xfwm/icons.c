@@ -713,9 +713,6 @@ DeIconify (XfwmWindow * tmp_win)
       XGetWindowAttributes (dpy, t->w, &winattrs);
       eventMask = winattrs.your_event_mask;
       XSelectInput (dpy, t->w, (eventMask & ~StructureNotifyMask));
-#if 0
-      XSync (dpy, 0);
-#endif
       if (t->Desk == Scr.CurrentDesk)
       {
 	XMapWindow (dpy, t->frame);
@@ -729,18 +726,14 @@ DeIconify (XfwmWindow * tmp_win)
       RaiseWindow (t);
       XSelectInput (dpy, t->w, eventMask);
       SetMapStateProp (t, NormalState);
-#if 0
-      XSync (dpy, 0);
-#endif
       if (t->icon_w)
 	XUnmapWindow (dpy, t->icon_w);
       if (t->icon_pixmap_w)
 	XUnmapWindow (dpy, t->icon_pixmap_w);
+      XFlush (dpy);
       Broadcast (XFCE_M_DEICONIFY, 3, t->w, t->frame, (unsigned long) t, 0, 0, 0, 0);
     }
   }
-
-  RaiseWindow (tmp_win);
   FocusOn (tmp_win, False);
   fast_process_expose ();
   return;

@@ -212,13 +212,12 @@ fast_process_expose (void)
 {
   XEvent old_event;
 
-  memcpy(&old_event, &Event, sizeof(XEvent));
-  XPending(dpy);
-  while (XCheckMaskEvent (dpy, (ExposureMask), &Event))
+  mymemcpy((char *) &old_event, (char *) &Event, sizeof(XEvent));
+  while (XCheckMaskEvent (dpy, ExposureMask, &Event))
   {
     DispatchEvent ();
   }
-  memcpy(&Event, &old_event, sizeof(XEvent));
+  mymemcpy((char *) &Event, (char *) &old_event, sizeof(XEvent));
 }
 
 int discard_events(long event_mask)
@@ -991,13 +990,13 @@ HandleMapNotify ()
   XMapWindow (dpy, Tmp_win->w);
   MyXUngrabServer (dpy);
 
+  Tmp_win->flags |= MAPPED;
+  Tmp_win->flags &= ~(MAP_PENDING | ICONIFIED | ICON_UNMAPPED);
+
   if (Tmp_win->flags & ICONIFIED)
     Broadcast (XFCE_M_DEICONIFY, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
   else
     Broadcast (XFCE_M_MAP, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
-
-  Tmp_win->flags |= MAPPED;
-  Tmp_win->flags &= ~(MAP_PENDING | ICONIFIED | ICON_UNMAPPED);
 
   if ((Tmp_win->Desk == Scr.CurrentDesk) && (Scr.Options & MapFocus) && AcceptInput (Tmp_win))
   {
@@ -1843,6 +1842,15 @@ My_XNextEvent (Display * dpy, XEvent * event)
   if ((!alarmed) && (sm_fd >= 0) && (FD_ISSET (sm_fd, &in_fdset)))
     ProcessICEMsgs ();
 #endif
+
+  if (XPending (dpy))
+  {
+    XNextEvent (dpy, event);
+#ifdef REQUIRES_STASHEVENT
+    StashEventTime (event);
+#endif
+    return 1;
+  }
 
   return 0;
 }

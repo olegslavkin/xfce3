@@ -266,8 +266,11 @@ DeferExecution (XEvent * eventp, Window * w, XfwmWindow ** tmp_win, unsigned lon
 void
 FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
 {
-  if (!(t && AcceptInput(t)))
+  if (!AcceptInput(t))
     return;
+
+  /* Make sure UngrabEm () won't return focus to previous window ! */
+  Scr.PreviousFocus = NULL;
 
   if ((DeIconifyFlag) && (t->flags & ICONIFIED))
     DeIconify (t);
@@ -284,9 +287,6 @@ FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
   }
 
   SetFocus (t->w, t, True, False);
-
-  /* Make sure UngrabEm () won't return focus to previous window ! */
-  Scr.PreviousFocus = NULL;
 }
 
 
