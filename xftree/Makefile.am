@@ -38,6 +38,7 @@ xftree_SOURCES = \
 	xtree_pasteboard.c xtree_pasteboard.h \
 	xtree_toolbar.c xtree_toolbar.h \
 	xtree_tar.c xtree_tar.h \
+	xtree_rpm.c xtree_rpm.h \
 	xtree_colorsel.c xfdiff_colorsel.h \
 	xtree_icons.c xtree_icons.h
 

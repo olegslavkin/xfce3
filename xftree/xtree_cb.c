@@ -39,6 +39,7 @@
 #include <errno.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
 #include <gtk/gtk.h>
@@ -70,6 +71,7 @@
 #include "xtree_go.h"
 #include "xtree_cpy.h"
 #include "xtree_cfg.h"
+#include "tubo.h"
 
 
 #ifdef HAVE_GDK_IMLIB
@@ -587,6 +589,7 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
   strcpy (label, _("New_Folder"));
   entry_return = (char *)xf_dlg_string (win->top,new_path, label);
   if (!entry_return) {
+         /*fprintf(stderr,"dbg:null return\n");*/
 	 free(new_path); free(label); 
 	 return; /* cancelled button pressed */
   }
@@ -599,6 +602,7 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
 	 return;
   }
   sprintf(fullpath,"%s%s",new_path,entry_return);
+  /*fprintf(stderr,"dbg:making %s\n",fullpath);*/
   if (mkdir (fullpath, 0xFFFF) != -1)
       update_timer (GTK_CTREE (ctree));
   else
@@ -1004,15 +1008,96 @@ cb_samba (GtkWidget * top,GtkWidget * ctree)
 
 extern GtkWidget *autotype_C;
 extern autotype_t autotype[];
+#define AUTOTYPE_CMD_LEN 1024
+static char autotype_cmd[AUTOTYPE_CMD_LEN];
+/*static gboolean rpm_cmd_error;*/
+static GtkWidget *autotype_parent;
+static void *autotype_fork_obj=NULL;
+
+/* function to process stderr produced by child */
+static int rwStderr (int n, void *data){
+  char *line;
+  
+  if (n) return TRUE; /* this would mean binary data */
+  line = (char *) data;
+  show_cat(_("** command error:\n"));
+  show_cat(line);
+  /*fprintf(stderr,"dbg (child):%s\n",line);*/
+  /*rpm_cmd_error=TRUE;
+  xf_dlg_error(autotype_parent,line,NULL);*/
+  return TRUE;
+}
+/* function to process stdout produced by child */
+static int rwStdout (int n, void *data){
+  char *line;
+  if (n) return TRUE; 
+  else{
+	  line = (char *) data;
+	  if (line[0]=='%') show_cat(".");
+	  else show_cat(line);
+	  /*write(1,data, strlen(line));*/
+  }
+  return TRUE;
+}
+
+/* function called when child is dead */
+static void rwForkOver (void)
+{
+  /*if (rpm_cmd_error) fprintf(stderr,"dbg: fork is over with error\n");*/
+  autotype_fork_obj=NULL;
+  show_cat(_("command finished\n"));
+}
+
+static void tubo_cmd(void){
+	char *args[10];
+	int i;
+	int status;
+	args[0]=strtok(autotype_cmd," ");
+	if (args[0]) for (i=1;i<10;i++){
+		args[i]=strtok(NULL," ");
+		if (!args[i]) break;
+	}
+	i=fork();
+	if (!i){
+	   execvp(args[0],args);
+	   _exit(123);
+	}
+	wait(&status);
+	_exit(123);
+}
+
+
+static int inner_autotype(GtkWidget *parent){
+	autotype_parent=parent;
+	show_cat(autotype_cmd);
+	show_cat("\n");
+	autotype_fork_obj=Tubo (tubo_cmd, rwForkOver, 0, rwStdout, rwStderr);
+	usleep(50000);
+        return 0;
+	
+}
+
+
+int autotype_tubo(GtkWidget *parent){
+	while (1){
+		if (!autotype_fork_obj){
+			return inner_autotype(parent);
+			break;
+		}
+                while (gtk_events_pending()) gtk_main_iteration();
+		usleep(50000);
+	}
+	return 0;
+}
 
 void
 cb_autotype (GtkWidget * top,GtkWidget * ctree)
 {
-  FILE *pipe;
+  /*FILE *pipe;*/
   GtkCTreeNode *node;
   int num;
   entry *en;
-  char *loc,*cmd,*path;
+  char *loc,*path;
   int i=0;
   reg_t *prg;
   cfg *win;
@@ -1044,11 +1129,10 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   if (autotype[i].command==NULL) goto end_autotype;
   path=valid_path((GtkCTree *)ctree,FALSE);
   chdir(path);
-  cmd = (char *) malloc(strlen(autotype[i].command)+
-		  strlen(en->path)+
-		  strlen(";echo \"DONE\"")+
-		  5);
-  if (!cmd) goto end_autotype;
+  sprintf (autotype_cmd, "%s %s",autotype[i].command,en->path);
+  autotype_tubo(win->top);
+
+#if 0
   sprintf (cmd, "%s \"%s\";echo \"DONE\"",autotype[i].command,en->path);
   /*printf("dbg: cmd=%s\n",cmd);*/
   pipe = popen (cmd, "r");
@@ -1062,6 +1146,8 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
      while (gtk_events_pending()) gtk_main_iteration();
     }		     
   }
+#endif
+  
 end_autotype:
   ctree_thaw ((GtkCTree *)ctree);
   update_timer ((GtkCTree *)ctree);

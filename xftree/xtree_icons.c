@@ -265,7 +265,8 @@ static gboolean ps_type(char *loc){
 }
 static gboolean packed_type(char *loc){
   char *Type[]={
-	  ".deb",".rpm",".cpio",
+	  ".rpm",
+	  /*".deb",".cpio",*/
 	  NULL
   };
   return checkif_type(Type,loc);			    
@@ -426,7 +427,10 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
    else if (text_type(loc))PIXid[0]= PIX_TEXT;
    else if (ps_type(loc))PIXid[0]=PIX_PS;
    else if (adobe_type(loc))PIXid[0]=PIX_ADOBE;
-   else if (packed_type(loc)){PIXid[0]=PIX_PACKAGE,PIXid[1]=PIM_PACKAGE;}
+   else if (packed_type(loc)){
+	   PIXid[0]=PIX_PACKAGE,PIXid[1]=PIM_PACKAGE;
+	   PIXid[2]=PIX_PACKAGE,PIXid[3]=PIM_PACKAGE;
+   }
    else if (compressed_type(loc)) {PIXid[0]=PIX_COMPRESSED,PIXid[2]=PIX_COMPRESSED,PIXid[3]=PIM_PAGE;}
    else if (www_type(loc)) {PIXid[0]=PIX_PAGE_HTML,PIXid[1]=PIM_PAGE_HTML;}
    else if (audio_type(loc))PIXid[0]= PIX_PAGE_AUDIO;

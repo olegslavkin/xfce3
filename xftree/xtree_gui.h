@@ -53,6 +53,7 @@ wgeo_t;
 typedef struct autotype_t{
 	char *extension;
 	char *command;
+	char *label;
 }autotype_t;
 
 enum

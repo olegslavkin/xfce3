@@ -73,6 +73,12 @@ entry;
 #define FT_COMPRESS		(1<<18)
 #define FT_BZ2			(1<<19)
 
+#define FT_RPM			(1<<20)
+#define FT_RPMCHILD		(1<<21)
+#define FT_RPM_DUMMY		(1<<22)
+
+
+
 #define EN_IS_TAR(en) (en->type & FT_TAR)
 #define EN_IS_TARCHILD(en) (en->type & FT_TARCHILD)
 

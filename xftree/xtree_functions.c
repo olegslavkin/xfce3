@@ -70,6 +70,7 @@
 #include "xtree_go.h"
 #include "xtree_cb.h"
 #include "xtree_tar.h"
+#include "xtree_rpm.h"
 #include "xtree_toolbar.h"
 #include "xtree_functions.h"
 #include "xtree_icons.h"
@@ -334,6 +335,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
     if (strstr(en->label,".")){
 	  char *w;
 	  w=strrchr(en->label,'.');
+	  if (strcmp(w,".rpm")==0) en->type |= (FT_RPM|FT_RPM_DUMMY);
 	  if (strcmp(w,".tar")==0) en->type |= (FT_TAR|FT_TAR_DUMMY);
 	  if (strcmp(w,".tgz")==0) en->type |= (FT_TAR|FT_TAR_DUMMY|FT_GZ);
 	  if (strcmp(w,".gz")==0) {
@@ -371,7 +373,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   text[COL_GID] = (gr)? gr->gr_name : _("unknown");
 
   isleaf=set_icon_pix(&pix,en->type,en->label);
-  if (en->type & FT_TAR) isleaf=FALSE;
+  if (en->type & (FT_TAR|FT_RPM)) isleaf=FALSE;
   
   /*fprintf(stderr,"dbg:%s en_is_tar=%d\n",en->label,en->type & FT_TAR);*/
 /**************************/
@@ -380,10 +382,8 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
 		  pix.pixmap,pix.pixmask, pix.open,pix.openmask, isleaf, FALSE);
   if (item){
     gtk_ctree_node_set_row_data_full (ctree, item, en, node_destroy);
-    if (en->type & FT_TAR) {
-	    add_tar_dummy(ctree, item,en);
-    }
-/*    if (en->type & FT_TAR) add_tar_tree(ctree, item,en);*/
+    if (en->type & FT_TAR) add_tar_dummy(ctree, item,en);
+    if (en->type & FT_RPM) add_rpm_dummy(ctree, item,en);
   }
   *type = en->type;
   return (item);
@@ -616,8 +616,8 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   entry *en;
 
   en = gtk_ctree_node_get_row_data (ctree, node);
-  if (en->type & (FT_TAR|FT_TARCHILD)) {
-      if  (en->type & FT_TAR_DUMMY){
+  if (en->type & (FT_TAR|FT_TARCHILD|FT_RPM|FT_RPMCHILD)) {	 
+      if  (en->type & (FT_TAR_DUMMY|FT_RPM_DUMMY)){
 	      /*printf("doingit\n");*/
 	      /* cursor wait */
               ctree_freeze (ctree);
@@ -627,9 +627,11 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
                 gtk_ctree_remove_node (ctree, child);
                 child = GTK_CTREE_ROW (node)->children;
               }
-	      en->type ^= FT_TAR_DUMMY;
+	      if (en->type & FT_TAR_DUMMY) en->type ^= FT_TAR_DUMMY;
+	      if (en->type & FT_RPM_DUMMY) en->type ^= FT_RPM_DUMMY;
 	      /* add tar tree */
-              add_tar_tree(ctree,node,en);
+              if (en->type & (FT_RPM|FT_RPMCHILD)) add_rpm_tree(ctree,node,en);
+              if (en->type & (FT_TAR|FT_TARCHILD)) add_tar_tree(ctree,node,en);
 	      /* cursor_reset */
               ctree_thaw (ctree);
       } 
@@ -679,6 +681,7 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   
   en = gtk_ctree_node_get_row_data (ctree, parent);
   if (en->type & (FT_TAR|FT_TARCHILD)) return;
+  if (en->type & (FT_RPM|FT_RPMCHILD)) return;
   if (win->preferences & STATUS_FOLLOWS_EXPAND){
    set_title_ctree((GtkWidget *)ctree,en->path);
   }
@@ -793,7 +796,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   }
   
   
-  if (!(en->type&(FT_TAR|FT_TARCHILD)))
+  if (!(en->type&(FT_TAR|FT_TARCHILD))&& !(en->type&(FT_RPM|FT_RPMCHILD)) )
 	  for (child=GTK_CTREE_ROW (node)->children;child != NULL;child = GTK_CTREE_ROW (child)->sibling)
   {
 	  
@@ -865,7 +868,8 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 
     /*fprintf(stderr,"dbg:(%s)rc=%d,tu=%d, isdir=%d\n",en->path,root_changed,tree_updated,en->type & FT_DIR);fflush(NULL);*/
   /*if ((root_changed || tree_updated) && (en->type & FT_DIR))*/
-  if (root_changed && (en->type & FT_DIR) && !(en->type & (FT_TARCHILD|FT_TAR))) {
+  if (root_changed && (en->type & FT_DIR) && !(en->type & (FT_TARCHILD|FT_TAR))
+		   && !(en->type & (FT_RPMCHILD|FT_RPM))) {
     /* root changed == maybe new entries */
     /*fprintf(stderr,"dbg:rc=%d,tu=%d\n",root_changed,tree_updated);fflush(NULL);*/
     if (GTK_CTREE_ROW (node)->expanded)

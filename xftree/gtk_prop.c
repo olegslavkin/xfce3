@@ -163,6 +163,19 @@ gint dlg_prop(char *path, fprop * prop, int flags)
  return (xf_dlg_prop (NULL,path,prop,flags));
 }
 
+static GtkWidget *create_text (GtkWidget * parent, char *text)
+{
+  GtkWidget *scroll, *helpText;
+  scroll = gtk_scrolled_window_new (NULL, NULL);
+  gtk_container_border_width (GTK_CONTAINER (scroll), 2);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_box_pack_start (GTK_BOX (parent), scroll, TRUE, TRUE, 0);
+  helpText = gtk_label_new (text);
+  gtk_label_set_justify (GTK_LABEL (helpText), GTK_JUSTIFY_LEFT);
+  gtk_scrolled_window_add_with_viewport ((GtkScrolledWindow *) scroll, helpText);
+  return scroll;
+}
+
 /* FIXME: change memory for strings from static stack to dynamic heap */
 gint
 xf_dlg_prop (GtkWidget *ctree,char *path, fprop * prop, int flags)
@@ -415,6 +428,36 @@ xf_dlg_prop (GtkWidget *ctree,char *path, fprop * prop, int flags)
   owner[2] = label_new (_("Group :"), GTK_JUSTIFY_RIGHT);
   gtk_table_attach (GTK_TABLE (table), owner[2], 0, 1, 1, 2, 0, 0, X_PAD, Y_PAD);
   gtk_table_attach (GTK_TABLE (table), owner[3], 1, 2, 1, 2, 0, 0, X_PAD, 0);
+
+/* for rpm files and only if rpm can be execd */
+  {
+    char *loc=NULL;
+    loc=strrchr(path,'.');
+    if ((loc) &&  (strcmp(loc,".rpm")==0)){
+     sprintf (cmd, "rpm -qip \"%s\"", path);
+     pipe = popen (cmd, "r");
+     if (pipe){
+      char *p;
+      p=(char *)malloc(1);
+      p[0]=0;
+      while (fgets(line,LINE_MAX-1,pipe)){
+	line[LINE_MAX-1]=0;
+        p=(char *)realloc((void *)p,strlen(line)+strlen(p)+1);	       
+	strcat(p,line);    
+      }
+      if (strlen(p)) {
+       label = gtk_label_new (_("RPM info"));
+       table = gtk_vbox_new (FALSE, 0);
+       gtk_notebook_append_page (GTK_NOTEBOOK (notebook), table, label);
+       create_text (table, p);
+      }
+      pclose (pipe);
+      if (p) free(p);
+     }
+    }
+  }
+ 
+  
 
   gtk_signal_connect (GTK_OBJECT (dl.top), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
   gtk_widget_show_all (dl.top);

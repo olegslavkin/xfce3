@@ -170,9 +170,9 @@ GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
 }
 #if 10
 /* preliminary bug fix for non gnu generated tar file expansion */
-static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_level,int type){
+static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_level,int type,char *tarfile){
 	GtkCTreeNode *Tnode,*s_item;
-	char *c,*N_path;
+	char *c,*d,*N_path;
 	entry *d_en;
 	gchar *text[COLUMNS];
         icon_pix pix;  
@@ -187,8 +187,25 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
 		exit(1);
 	  }
 	  d_en->type =  FT_TARCHILD|FT_DIR;
-	  d_en->label=g_strdup(path); /* FIXME */
-	  d_en->path=g_strdup(path);
+	  d_en->path=(char *)malloc(strlen(path)+strlen(tarfile)+strlen("tar:")+3);
+	  if (!d_en->path) {
+		  fprintf(stderr,"xftree:error 3342\n");
+		  return NULL;
+	  }
+	  sprintf(d_en->path,"tar:%s:%s",tarfile,path);
+	  /* buggy: d_en->path=g_strdup(path);*/
+	  c=g_strdup(path);
+	  
+	  
+	  if (strstr(c,"/")) {d=strrchr(c,'/');*d=0;}
+	  else if (strstr(c,"\\")) {d=strrchr(c,'\\');*d=0;}
+	  
+	  if (strstr(c,"/")) d=strrchr(c,'/')+1;
+	  else if (strstr(c,"\\")) d=strrchr(c,'\\')+1;
+	  else d=NULL;
+	  if (d) d_en->label=g_strdup(d);
+	  else d_en->label=g_strdup(path); 
+	  g_free(c);
 	  text[COL_NAME] = d_en->label;
 	  set_icon_pix(&pix,FT_TARCHILD|FT_DIR|type,path);
   
@@ -200,7 +217,7 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
 		else c=strrchr(N_path,'\\');
 		c[1]=0;
 
-		if (!Tnode) Tnode=parent_node(ctree,N_path,top_level,type);
+		if (!Tnode) Tnode=parent_node(ctree,N_path,top_level,type,tarfile);
 	  } else Tnode=top_level;
  	  
 	  /*fprintf(stderr,"dbg:inserting %s \n",path);*/
@@ -335,7 +352,8 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      else if (strstr(P_path,"\\")) d=strrchr(P_path,'\\');
 			      if (d) d[1]=0;
 			      /* non gnu tar generated view fix, preliminary */
-			      p_node=parent_node(ctree,P_path,parent,p_en->type&(FT_COMPRESS|FT_BZ2|FT_GZ));
+			      p_node=parent_node(ctree,P_path,parent,
+					      p_en->type&(FT_COMPRESS|FT_BZ2|FT_GZ),p_en->path);
 			      if (!p_node) p_node=parent; /* error fallback */
 			      g_free(P_path);
 			      
@@ -360,6 +378,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       gtk_ctree_sort_node (ctree, parent);
       return s_item;
 }
+
 
 #define TAR_CMD_LEN 1024
 static char tar_cmd[TAR_CMD_LEN];

@@ -934,28 +934,54 @@ xf_dirent *xf_opendir(char *path,GtkWidget *ctree){
 #define GLOB_APPEND 0
        win->filterOpts = (FILTER_DIRS|FILTER_FILES);
 #endif  
-       
+#ifndef GLOB_NOSPACE
+#define GLOB_NOSPACE 34554
+#endif         
        if (win->filterOpts == (FILTER_DIRS|FILTER_FILES)) {
           /*fprintf(stderr,"dbg:dirandfiles....(%d)**********\n",win->filterOpts);*/
 	       /* both files and dirs are filtered */
-	       glob (diren->globstring, GLOB_ERR | GLOB_PERIOD, NULL, &(diren->dirlist));
+	       if (glob (diren->globstring, GLOB_ERR | GLOB_PERIOD, NULL, &(diren->dirlist))
+			       ==GLOB_NOSPACE){
+		       fprintf(stderr,"xftree:insufficient resources for filtering %s\n",diren->globstring);
+		       free(diren->globstring);
+      	       	       globfree(&(diren->dirlist));
+                       free (diren);
+                       diren=NULL;
+	       }
        } else if (win->filterOpts == FILTER_FILES){
           /*fprintf(stderr,"dbg:only files....**********\n");*/
 	       /* only files are filtered. duplicate directories zapped at xf_readdir() */
-	       glob (diren->globstar, GLOB_ERR | GLOB_PERIOD | GLOB_ONLYDIR, 
-		      NULL, &(diren->dirlist));
-	       glob (diren->globstring,
+	       if ((glob (diren->globstar, GLOB_ERR | GLOB_PERIOD | GLOB_ONLYDIR, 
+		      NULL, &(diren->dirlist))
+			       ==GLOB_NOSPACE)
+		|| (glob (diren->globstring,
 		      GLOB_ERR | GLOB_PERIOD | GLOB_APPEND | GLOB_MARK, 
-		      NULL, &(diren->dirlist));	       	       
+		      NULL, &(diren->dirlist))
+			       ==GLOB_NOSPACE)){
+		       fprintf(stderr,"xftree:insuficient resources for filtering %s\n",diren->globstring);
+		       free(diren->globstring);
+      	       	       globfree(&(diren->dirlist));
+                       free (diren);
+                       diren=NULL;
+	       }
+	 			
        } 
        else { 
 	       /* only directories are filtered */
           /*fprintf(stderr,"dbg:dirs....**********\n");*/
- 	       glob (diren->globstring, GLOB_ERR | GLOB_PERIOD | GLOB_ONLYDIR , 
-		      NULL, &(diren->dirlist));
-	       glob (diren->globstar,
+ 	       if ((glob (diren->globstring, GLOB_ERR | GLOB_PERIOD | GLOB_ONLYDIR , 
+		      NULL, &(diren->dirlist))
+			       ==GLOB_NOSPACE)
+		|| (glob (diren->globstar,
 		      GLOB_ERR | GLOB_PERIOD | GLOB_APPEND |  GLOB_MARK, 
-		      NULL, &(diren->dirlist));
+		      NULL, &(diren->dirlist))
+			       ==GLOB_NOSPACE)){
+		       fprintf(stderr,"xftree:insuficient resources for filtering %s\n",diren->globstring);
+		       free(diren->globstring);
+      	       	       globfree(&(diren->dirlist));
+                       free (diren);
+                       diren=NULL;
+	       }
       }
      } /* end if filtered by glob */
      return diren;	      

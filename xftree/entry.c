@@ -43,8 +43,6 @@
 #  include "dmalloc.h"
 #endif
 
-static int entry_type_update (entry * en);
-
 int dup_stat(struct stat *tgt, struct stat *src){
   if ((!tgt) || (!src)) return -1;
   /* struct stat info */
@@ -254,8 +252,9 @@ int entry_update (entry * en)
   int rc = 0;
   int tipo=0;
   
-  /* don't do updates on internal tar entries */
+  /* don't do updates on internal tar-rpm entries */
   if (strncmp(en->path,"tar:",strlen("tar:")) == 0) return (0);
+  if (strncmp(en->path,"rpm:",strlen("rpm:")) == 0) return (0);
 
   if (lstat (en->path, &s) == -1) {
 	  return (-1); /* its gone */

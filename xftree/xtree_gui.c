@@ -113,13 +113,14 @@ static GtkAccelGroup *accel;
  * application is registered for that filetype */
 
 autotype_t autotype[]= {
-	{".gz","gunzip"},
-	{".tar","tar -xf"},
-	{".tgz","tar -xzf"},
-	{".bz2","bunzip2"},
-	{".Z","uncompress"},
-	{".zip","unzip"},
-	{".ZIP","unzip"},
+	{".gz","gunzip",N_("Uncompress")},
+	{".tar","tar -xf",N_("Extract files from")},
+	{".tgz","tar -xzf",N_("Extract files from")},
+	{".bz2","bunzip2",N_("Uncompress")},
+	{".Z","uncompress",N_("Uncompress")},
+	{".ZIP","unzip",N_("Uncompress")},
+	{".zip","unzip",N_("Uncompress")},
+	{".rpm","rpm -U --percent",N_("Install/update")},
 	{NULL,NULL}
 };
 
@@ -448,9 +449,9 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 	               static char *text=NULL;
 	               if (text) free(text);
 		       label=(GtkLabel *)(((GtkBin *)(win->autotype_C))->child);
-	               text=(char *)malloc(strlen(autotype[i].command)+strlen(en->label)+2);
+	               text=(char *)malloc(strlen(_(autotype[i].label))+strlen(en->label)+2);
 		       if (!text) break;
-	               sprintf(text,"%s %s",autotype[i].command,en->label);
+	               sprintf(text,"%s %s",_(autotype[i].label),en->label);
 		       gtk_label_set_text(label,text);
 		       gtk_widget_show(win->autotype_C);
 		       break;
