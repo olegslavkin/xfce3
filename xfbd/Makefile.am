@@ -21,9 +21,9 @@ xfbd_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ \
 
 xfbd_DEPENDENCIES = ../libs/libxfcecore.la
 
-xfbdmgr_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ \
+xfbdmgr_LDADD = ../libs/libxfwmcore.la ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ \
 @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
 
-xfbdmgr_DEPENDENCIES = ../libs/libxfcecore.la
+xfbdmgr_DEPENDENCIES = ../libs/libxfwmcore.la ../libs/libxfcecore.la
 
 man_MANS=xfbd.1
