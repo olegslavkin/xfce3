@@ -36,6 +36,7 @@
 #define TR_LINK		0x04
 #define TR_OVERRIDE	0x08
 
+void cb_touch (GtkWidget * item, GtkCTree * ctree);
 void cb_symlink (GtkWidget * item, GtkCTree * ctree);
 void cb_duplicate (GtkWidget * item, GtkCTree * ctree);
 GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode);
