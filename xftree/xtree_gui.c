@@ -1337,7 +1337,7 @@ cb_about (GtkWidget * item, GtkWidget * ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  xf_dlg_info (win->top,_("This is XFTree, based on 'XTree' " "\n(c) by Rasca\npublished under GNU GPL" "\nhttp://home.pages.de/~rasca/xap/"));
+  xf_dlg_info (win->top,_("This is XFTree (C) under GNU GPL\n" "with code contributed by:\n" "Rasca, Berlin\n" "Olivier Fourdan\n" "Edscott Wilson Garcia\n"));
 }
 
 
