@@ -704,8 +704,6 @@ Iconify_all (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     if (!((t->win)->flags & ICONIFIED) && !((t->win)->flags & TRANSIENT) && ((t->win)->flags & TITLE) && ((t->win)->Desk == Scr.CurrentDesk))
     {
       Iconify ((t->win), 0, 0, False);
-      /* Restart from scratch */
-      t = LastXfwmWindowList (Scr.stacklist);
     }
     t = t->prev;
   }
