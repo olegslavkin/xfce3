@@ -2065,28 +2065,55 @@ Done (int restart, char *command)
     }
 
     if (Scr.StdFont.font)
+    {
         XFreeFont (dpy, Scr.StdFont.font);
+        Scr.StdFont.font = NULL;
+    }
     if (Scr.StdFont.fontset)
+    {
         XFreeFontSet (dpy, Scr.StdFont.fontset);
+        Scr.StdFont.fontset = NULL;
+    }
 #ifdef HAVE_X11_XFT_XFT_H
     if (Scr.StdFont.xftfont)
+    {
         XftFontClose (dpy, Scr.StdFont.xftfont);
+        Scr.StdFont.xftfont = NULL;
+    }
 #endif
     if (Scr.IconFont.font)
+    {
         XFreeFont (dpy, Scr.IconFont.font);
+        Scr.IconFont.font = NULL;
+    }
     if (Scr.IconFont.fontset)
+    {
         XFreeFontSet (dpy, Scr.IconFont.fontset);
+        Scr.IconFont.fontset = NULL;
+    }
 #ifdef HAVE_X11_XFT_XFT_H
     if (Scr.IconFont.xftfont)
+    {
         XftFontClose (dpy, Scr.IconFont.xftfont);
+        Scr.IconFont.xftfont = NULL;
+    }
 #endif
     if (Scr.WindowFont.font)
+    {
         XFreeFont (dpy, Scr.WindowFont.font);
+        Scr.WindowFont.font = NULL;
+    }
     if (Scr.WindowFont.fontset)
+    {
         XFreeFontSet (dpy, Scr.WindowFont.fontset);
+        Scr.WindowFont.fontset = NULL;
+    }
 #ifdef HAVE_X11_XFT_XFT_H
     if (Scr.WindowFont.xftfont)
+    {
         XftFontClose (dpy, Scr.WindowFont.xftfont);
+        Scr.WindowFont.xftfont = NULL;
+    }
 #endif
 
     /* Take time to save the current session (if ICE is not available) */

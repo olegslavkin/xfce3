@@ -1731,12 +1731,21 @@ SetMenuFont (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 	return;
     }
     if (Scr.StdFont.font)
+    {
         XFreeFont (dpy, Scr.StdFont.font);
+        Scr.StdFont.font = NULL;
+    }
     if (Scr.StdFont.fontset)
+    {
         XFreeFontSet (dpy, Scr.StdFont.fontset);
+        Scr.StdFont.fontset = NULL;
+    }
 #ifdef HAVE_X11_XFT_XFT_H
     if (Scr.StdFont.xftfont)
+    {
         XftFontClose (dpy, Scr.StdFont.xftfont);
+        Scr.StdFont.xftfont = NULL;
+    }
     Scr.StdFont.use_xft = enable_xft;
 #endif
     GetFontOrFixed (dpy, font, &(Scr.StdFont));
@@ -1860,12 +1869,21 @@ LoadIconFont (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 	return;
     }
     if (Scr.StdFont.font)
+    {
         XFreeFont (dpy, Scr.IconFont.font);
+        Scr.IconFont.font = NULL;
+    }
     if (Scr.IconFont.fontset)
+    {
         XFreeFontSet (dpy, Scr.IconFont.fontset);
+        Scr.IconFont.fontset = NULL;
+    }
 #ifdef HAVE_X11_XFT_XFT_H
     if (Scr.IconFont.xftfont)
+    {
         XftFontClose (dpy, Scr.IconFont.xftfont);
+        Scr.IconFont.xftfont = NULL;
+    }
     Scr.IconFont.use_xft = enable_xft;
 #endif
     GetFontOrFixed (dpy, font, &(Scr.IconFont));
@@ -1941,12 +1959,21 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win,
 	return;
     }
     if (fl->WindowFont.font)
+    {
         XFreeFont (dpy, fl->WindowFont.font);
+        fl->WindowFont.font = NULL;
+    }
     if (fl->WindowFont.fontset)
+    {
         XFreeFontSet (dpy, fl->WindowFont.fontset);
+        fl->WindowFont.fontset = NULL;
+    }
 #ifdef HAVE_X11_XFT_XFT_H
     if (fl->WindowFont.xftfont)
+    {
         XftFontClose (dpy, fl->WindowFont.xftfont);
+        fl->WindowFont.xftfont = NULL;
+    }
     fl->WindowFont.use_xft = enable_xft;
 #endif
     GetFontOrFixed (dpy, font, &(fl->WindowFont));
