@@ -215,7 +215,7 @@ static void download_window(GtkWidget *parent,char *host){
 void
 SMBGetFile (GtkCTree *ctree, char *target,GList *list)
 {
-  char *dndS,*host=NULL,*user,*share,*file,*filename=NULL;
+  char *dndS,*host=NULL,*user,*orig_share=NULL,*share,*file,*filename=NULL;
   uri *u;
   cfg *win;
   static char *fname;
@@ -298,8 +298,15 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
 /* 3- download via tubo */ 
   if (first){
     first=FALSE;
+    orig_share=g_strdup(share);
     fprintf(tmpfile,"//%s/%s\n",host,share);
     fprintf(tmpfile,"%s\n",user);
+  }
+  /* only process files from first drop */
+  if (orig_share && strcmp(share,orig_share)!=0) {
+	  xf_dlg_warning(win->top,_("Only drops from a single share are allowed"));
+	  g_free(orig_share);
+	  return;
   }
     if (isdir){
       fprintf(tmpfile,
@@ -322,7 +329,7 @@ SMBGetFile (GtkCTree *ctree, char *target,GList *list)
   download_window(win->top,host);
   SMBResult=0;
   fork_obj = Tubo (SMBFork, SMBForkOver, TRUE, SMBStdout, SMBStdout);
-
+  if (orig_share) g_free(orig_share);
 
   return;
 }
