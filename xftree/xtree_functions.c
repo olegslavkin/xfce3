@@ -863,7 +863,7 @@ set_title_ctree (GtkWidget * ctree, const char *path)
                   XA_STRING, /* GdkAtom type,*/
                   8, /* bit per data element: gint format*/
  	      	  GDK_PROP_MODE_APPEND,
-                  (guchar *)"-h",  
+                  (guchar *)"-H",  
 		  3); 
     gdk_property_change (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window,
 		  atomo,

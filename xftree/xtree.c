@@ -69,6 +69,7 @@
 GtkWidget *io_parent=NULL;
 char *arg_hostname=NULL;
 char *arg_display=NULL;
+int pixmap_level=3;
 
 #if 0
 static gint open_warning(gpointer data){
@@ -133,17 +134,28 @@ main (int argc, char *argv[])
   read_defaults();
   strcpy (path,(custom_home_dir)?custom_home_dir: getenv ("HOME"));
 
-  while ((c = getopt (argc, argv, "vg:i:h:d:")) != EOF)
+  while ((c = getopt (argc, argv, "hp:vg:i:H:d:")) != EOF)
   {
     switch (c)
     {
+    case 'h':
+	    printf("xftree -p (0|1|2|3) sets the icon level\n\
+0 = no icons at all\n\
+1 = basic icon set, no scaling done\n\
+2 = extended icon set, no scaling done\n\
+3 = extended icon set with scaling to font size\n");
+	    exit(1);
+			   
+    case 'p':
+      pixmap_level=atoi(optarg);
+      break;
     case 'v':
       verbose++;
       break;
     case 'g':
       geometry = optarg;
       break;
-    case 'h':
+    case 'H':
       arg_hostname=optarg;
       break;  
     case 'd':

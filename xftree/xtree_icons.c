@@ -39,6 +39,7 @@
 #include <gdk_imlib.h>
 #endif
 
+extern int pixmap_level;
 
 /* pixmap list */
 typedef struct pixmap_list {
@@ -299,6 +300,9 @@ static gboolean packed_type(char *loc){
 static void create_higher_pixmap(int PIXid){
   GdkGC *gc; 
   int PIXbase;
+
+  if (pixmap_level<2) return; /* no higher icons at all */
+  
   if (PIXid >= LAST_PIX*3) {
 	  PIXbase = PIXid - (LAST_PIX*3);
   } else if (PIXid >= LAST_PIX*2) {
@@ -341,6 +345,9 @@ static void create_higher_pixmap(int PIXid){
 static void create_higher_bitmap(int PIMid){
   GdkGC *gc; 
   int PIMbase;
+
+
+  if (pixmap_level<2) return; /* no higher icons at all */
   if (PIMid >= LAST_PIM*3) {
 	  PIMbase = PIMid - (LAST_PIM*3);
   } else if (PIMid >= LAST_PIM*2) {
@@ -512,10 +519,12 @@ icon_identified:
      }
      else if (type & FT_EXE) {offsetP=2*LAST_PIX,offsetB=2*LAST_PIM;}
     }
+    if (pixmap_level>1) {
      PIXid[0] += offsetP;
      PIXid[2] += offsetP;
      PIXid[1] += offsetB;
      PIXid[3] += offsetB;
+    }
    }
   
   /* if the requested icon pixmap does not exist, 
@@ -532,6 +541,13 @@ icon_identified:
 	  create_higher_bitmap(PIXid[3]);
   }
   
+  /* if icon pixmap creation was disabled, fallback to default */
+  
+  if (!gPIX[PIXid[0]]) {
+	    PIXid[1]=PIXid[3]=PIM_PAGE;
+	    PIXid[0]=PIXid[2]=PIX_PAGE;
+  }
+  
   pix->pixmap=gPIX[PIXid[0]];
   pix->pixmask=gPIM[PIXid[1]];
   pix->open=gPIX[PIXid[2]]; 
@@ -543,8 +559,9 @@ icon_identified:
 #
 static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
 		GdkPixmap **pixmap, GdkBitmap **pixmask){
+	
 #ifdef HAVE_GDK_PIXBUF
-	if (h>0){
+	if (pixmap_level>2 && h>0){
 		GdkPixbuf *orig_pixbuf,*new_pixbuf;
 		float r=0;
 		int w,x,y;
@@ -561,6 +578,8 @@ static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
   		gdk_pixbuf_unref (new_pixbuf);
  	        gtk_clist_set_row_height ((GtkCList *)ctree,h);
 	} else
+#else
+#warning compilation without GDK_PIXBUF
 #endif	
 	{
 	      	*pixmap = MyCreateGdkPixmapFromData(xpm,hack,pixmask,FALSE);
@@ -600,11 +619,14 @@ void create_pixmaps(int h,GtkWidget *ctree){
   GdkGC *gc; 
 
   int i;
+  if (!pixmap_level) return; /* no icons at all */
+  
   /* hack: to be able to use icons globally, independent of xftree window.*/
   if (!hack) {hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);} 
 #ifndef HAVE_GDK_PIXBUF
   else return; /* dont recreate without gdkpixbuf */
 #endif
+  
   	
   for (i=0;pixmaps[i].pixmap != NULL; i++){ 
 	  if (*(pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(pixmaps[i].pixmap));
@@ -612,7 +634,7 @@ void create_pixmaps(int h,GtkWidget *ctree){
 	  scale_pixmap(hack,h,ctree,pixmaps[i].xpm,pixmaps[i].pixmap,pixmaps[i].pixmask);
   }
   style=gtk_widget_get_style (ctree);
-  for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
+  if (pixmap_level>1) for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
 	int x,y;
 	GdkColor back;
 	GdkColor kolor[5];
