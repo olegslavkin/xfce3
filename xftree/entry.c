@@ -195,7 +195,6 @@ entry *entry_new_by_path (char *path)
 
 entry *entry_new_by_type (char *path, int type)
 {
-  char *p;
   entry *en;
 
   en = entry_new ();
@@ -209,7 +208,6 @@ entry *entry_new_by_type (char *path, int type)
 }
 
 static int entry_type_update (entry * en){
-  int rc = FALSE;
   /* check for stale links */
   en->type = 0;
   if (S_ISLNK (en->st.st_mode)) { 
@@ -254,7 +252,6 @@ static int entry_type_update (entry * en){
 int entry_update (entry * en)
 {
   struct stat s;
-  struct tm *t;
   int rc = 0;
   int tipo=0;
   

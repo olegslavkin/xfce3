@@ -752,7 +752,7 @@ typedef struct deletenode_t {
 int
 update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 {
-  GtkCTreeNode *child = NULL, *new_child = NULL, *next;
+  GtkCTreeNode *child = NULL, *new_child = NULL;
   entry *en, *child_en;
   char compl[PATH_MAX + 1];
   int type, p_len, changed, tree_updated, root_changed;

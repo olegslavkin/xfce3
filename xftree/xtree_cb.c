@@ -486,7 +486,7 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
       }
       if ((result == DLG_RC_ALL)||(result ==DLG_RC_OK)){ 
 	    if (zap) {
-                    fprintf(tmpfile,"%lu:%s:%s/%s\n",node,
+                    fprintf(tmpfile,"%lu:%s:%s/%s\n",(long unsigned)node,
 				    en->path,win->trash,en->label);
 		    zapitems++; 
 	    } else {
@@ -564,8 +564,6 @@ cb_about (GtkWidget * item, GtkWidget * ctree)
 void
 cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
 {
-  entry *en;
-  GtkCTreeNode *node;
   char *path, *new_path,*label, *entry_return, *fullpath;
   cfg *win;
 
@@ -612,8 +610,6 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
 void
 cb_new_file (GtkWidget * item, GtkWidget * ctree)
 {
-  entry *en;
-  GtkCTreeNode *node;
   char *path,*spath, *label, *entry_return, *fullpath;
   struct stat st;
   FILE *fp;
@@ -1016,8 +1012,8 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   GtkCTreeNode *node;
   int num;
   entry *en;
-  char *loc,*cmd,*command,*path;
-  int i;
+  char *loc,*cmd,*path;
+  int i=0;
   reg_t *prg;
   cfg *win;
   
@@ -1079,9 +1075,7 @@ cb_autotar (GtkWidget * top,GtkWidget * ctree)
   GtkCTreeNode *node;
   int num;
   entry *en;
-  char *loc,*cmd;
-  int i;
-  cfg *win;
+  char *cmd;
   
   num = count_selection ((GtkCTree *)ctree, &node);
   /*printf("dbg: num=%d\n",num);*/

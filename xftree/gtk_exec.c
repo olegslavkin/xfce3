@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <dirent.h>
 #include <gtk/gtk.h>
+#include <unistd.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "gtk_exec.h"

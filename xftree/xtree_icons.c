@@ -180,13 +180,14 @@ static gboolean text_type(char *loc){
   };
   return checkif_type(Type,loc);			    
 }
+/*
 static gboolean word_type(char *loc){
   char *Type[]={
 	  ".doc",".DOC",
 	  NULL
   };
   return checkif_type(Type,loc);			    
-}
+}*/
 
 static gboolean compressed_type(char *loc){
   char *Type[]={
@@ -352,7 +353,7 @@ static void create_higher_bitmap(int PIMid){
 gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
   char *loc,*loc2;
   gboolean isleaf=TRUE;
-  int i,PIXid[4];
+  int PIXid[4];
   
   /*defaults :*/
   PIXid[0]=PIXid[2]=PIX_PAGE;
@@ -454,7 +455,6 @@ icon_identified:
      PIXid[3] += offsetB;
    }
   
-icon_done:
   /* if the requested icon pixmap does not exist, 
    * create pixmap on X server */
   

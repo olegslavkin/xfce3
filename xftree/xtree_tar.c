@@ -38,6 +38,7 @@
 #include <glob.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <pwd.h>
 #include <grp.h>
@@ -169,7 +170,7 @@ GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
 }
 
 GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
-      GtkCTreeNode *s_item,*p_node;
+      GtkCTreeNode *s_item=NULL,*p_node;
       entry *d_en;
       FILE *pipe;
       char *cmd;
@@ -193,8 +194,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       pipe = popen (cmd, "r");
       if (pipe) {
               icon_pix pix;  
-	      char *p,*d,*u,*path;
-	      static char *uid=NULL,*gid=NULL;
+	      char *p,*d,*u;
 	      char line[256];
 	      while (!feof(pipe) && fgets (line, 255, pipe)){
       		      if ((d_en = entry_new ())==NULL) {
@@ -207,22 +207,22 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 		      strcpy(text[COL_MODE],strtok(line," "));
 		      d_en->st.st_mode=0;
 		      if (strlen(line)>8) {
-		       if (line[0]='r')d_en->st.st_mode |= 0400; 
-		       if (line[1]='w')d_en->st.st_mode |= 0200; 
+		       if (line[0]=='r')d_en->st.st_mode |= 0400; 
+		       if (line[1]=='w')d_en->st.st_mode |= 0200; 
 		       switch (*(line+2)){
 			      case 'x':  d_en->st.st_mode |= 0100;break;
 			      case 's':  d_en->st.st_mode |= 04100;break;
 			      case 'S':  d_en->st.st_mode |= 04000;break;
 		       }
-		       if (line[3]='r')d_en->st.st_mode |= 040; 
-		       if (line[4]='w')d_en->st.st_mode |= 020; 
+		       if (line[3]=='r')d_en->st.st_mode |= 040; 
+		       if (line[4]=='w')d_en->st.st_mode |= 020; 
 		       switch (*(line+5)){
 			      case 'x':  d_en->st.st_mode |= 010;break;
 			      case 's':  d_en->st.st_mode |= 02010;break;
 			      case 'S':  d_en->st.st_mode |= 02000;break;
 		       }
-		       if (line[6]='r')d_en->st.st_mode |= 04; 
-		       if (line[7]='w')d_en->st.st_mode |= 02; 
+		       if (line[6]=='r')d_en->st.st_mode |= 04; 
+		       if (line[7]=='w')d_en->st.st_mode |= 02; 
 		       switch (*(line+8)){
 			      case 'x':  d_en->st.st_mode |= 01;break;
 			      case 't':  d_en->st.st_mode |= 01001;break;
@@ -309,12 +309,12 @@ static gboolean tar_cmd_error;
 static GtkWidget *tar_parent;
 static GtkCTree *tar_ctree;
 static void *tar_fork_obj=NULL;
-static entry *tar_en;
 static GtkCTreeNode *tar_node;
 
 static void tubo_cmd(void){
 	char *args[10];
 	int i;
+	int status;
 	args[0]=strtok(tar_cmd," ");
 	if (args[0]) for (i=1;i<10;i++){
 		args[i]=strtok(NULL," ");
@@ -325,7 +325,7 @@ static void tubo_cmd(void){
 	   execvp(args[0],args);
 	   _exit(123);
 	}
-	wait(i);
+	wait(&status);
 	_exit(123);
 }
 
@@ -407,7 +407,6 @@ compare_node_path (gconstpointer ptr1, gconstpointer ptr2)
 
 static int inner_tar_delete(GtkCTree *ctree,char *path){
 	char *tar_file,*tar_entry;
-	entry *en;
 	cfg *win;
 	entry check;
 	int type=0;

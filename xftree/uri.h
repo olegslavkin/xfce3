@@ -50,6 +50,7 @@ typedef struct
 }
 uri, uri_t;
 
+int uri_type (char *s);
 char *uri_clear_path (const char *);
 char *uri_to_quoted_list (GList *);
 int uri_parse_list (const char *, GList **);

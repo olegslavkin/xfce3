@@ -113,14 +113,14 @@ static GtkAccelGroup *accel;
  * application is registered for that filetype */
 
 autotype_t autotype[]= {
-	".gz","gunzip",
-	".tar","tar -xf",
-	".tgz","tar -xzf",
-	".bz2","bunzip2",
-	".Z","uncompress",
-	".zip","unzip",
-	".ZIP","unzip",
-	NULL,NULL
+	{".gz","gunzip"},
+	{".tar","tar -xf"},
+	{".tgz","tar -xzf"},
+	{".bz2","bunzip2"},
+	{".Z","uncompress"},
+	{".zip","unzip"},
+	{".ZIP","unzip"},
+	{NULL,NULL}
 };
 
 /* keyboard shortcuts used to be bugged because of conflicting entries.
@@ -1415,7 +1415,6 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
 {
   GList *reg;
   cfg *new_win;
-  int i;
   
   /*fprintf(stderr,"dbg:sizeof(off_t)=%d\n",sizeof(off_t));*/
   init_pixmaps();  

@@ -59,6 +59,7 @@
 #include "xtree_go.h"
 #include "xtree_cb.h"
 #include "xtree_functions.h"
+#include "xtree_icons.h"
 #include "fontselection.h"
 
 #ifdef HAVE_GDK_IMLIB
