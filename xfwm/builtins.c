@@ -806,11 +806,27 @@ void
 lower_function (XEvent * eventp, Window w, XfwmWindow * tmp_win,
                 unsigned long context, char *action, int *Module)
 {
+    XfwmWindow *MouseWin;
+    Window mw;
+    
     if (DeferExecution (eventp, &w, &tmp_win, &context, SELECT, ButtonRelease))
         return;
 
     if (tmp_win)
+    {
         LowerWindow (tmp_win);
+    }
+    /* Now handle focus transition */   
+    XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY,
+                   &JunkX, &JunkY, &JunkMask);
+    if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &MouseWin) == XCNOENT)
+    {
+        MouseWin = NULL;
+    }
+    if (MouseWin)
+    {
+        SetFocus (MouseWin->w, MouseWin, 0);
+    }
 }
 
 void
@@ -1251,6 +1267,9 @@ void
 raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win,
                  unsigned long context, char *action, int *Module)
 {
+    XfwmWindow *MouseWin;
+    Window mw;
+    
     if (DeferExecution (eventp, &w, &tmp_win, &context, SELECT, ButtonRelease))
         return;
     if (tmp_win == NULL)
@@ -1263,6 +1282,17 @@ raiselower_func (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     else
     {
         RaiseWindow (tmp_win);
+    }
+    /* Now handle focus transition */   
+    XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY,
+                   &JunkX, &JunkY, &JunkMask);
+    if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &MouseWin) == XCNOENT)
+    {
+        MouseWin = NULL;
+    }
+    if (MouseWin)
+    {
+        SetFocus (MouseWin->w, MouseWin, 0);
     }
 }
 
