@@ -238,6 +238,13 @@ on_ctree_drag_data_received (GtkWidget * widget, GdkDragContext * drag_context, 
 
       if (node != sibling)
 	{
+	  /* code to be able to drag into empty subdirs */
+	  if (!GTK_CTREE_ROW (sibling)->is_leaf && 
+	      GTK_CTREE_ROW (sibling)->children==NULL)
+	  {
+	    parent=sibling;
+	    sibling=NULL;
+	  }
 	  gtk_ctree_move (GTK_CTREE (xfmenu->ctree), node, parent, sibling);
 	  xfmenu->first_node = gtk_ctree_node_nth (GTK_CTREE (xfmenu->ctree), 0);
 	  xfmenu->saved = FALSE;
