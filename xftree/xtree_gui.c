@@ -150,6 +150,7 @@ autotype_t autotype[]= {
 
 #define MAINF_MENU \
     {NULL, NULL, 0}, \
+    {N_("Symlink ..."), (gpointer) cb_symlink, 0, GDK_l,GDK_MOD1_MASK}, \
     {N_("Delete ..."), (gpointer) cb_delete, 0}
     
 #define INSERT_MENU \

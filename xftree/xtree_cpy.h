@@ -36,6 +36,7 @@
 #define TR_LINK		4
 #define TR_OVERRIDE	8
 
+void cb_symlink (GtkWidget * item, GtkCTree * ctree);
 void cb_duplicate (GtkWidget * item, GtkCTree * ctree);
 GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode);
 int rw_file(char *target,char *source);

@@ -1228,3 +1228,88 @@ duplicate_return:
   cursor_reset (GTK_WIDGET (ctree));   return;
 }
 
+void cb_symlink (GtkWidget * item, GtkCTree * ctree)
+{
+  entry *en;
+  GtkCTreeNode *node;
+  char *nfile,*ofile,*p,*entry_return;
+  int num,selected;
+  struct stat st;
+  cfg *win;
+
+  cursor_wait (GTK_WIDGET (ctree));
+  gtk_clist_freeze (GTK_CLIST (ctree));
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  selected = count_selection (ctree, &node);
+  if (!selected) {
+	  xf_dlg_error(win->top,"No file or directory selected for symlink!",NULL);
+	  goto symlink_return;
+  } else if (selected > 1) {
+	  xf_dlg_error(win->top,"Only one file or directory can be selected for symlink!",NULL);
+	  goto symlink_return;
+  }
+  
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+  if (en->type & FT_TARCHILD) {
+	xf_dlg_error(win->top,_("This function is not available for the contents of tar files"),NULL);
+	goto symlink_return;
+  }
+
+  if (!io_is_valid (en->label)) goto symlink_return;
+  cursor_wait (GTK_WIDGET (ctree));
+  num = 0;
+  if ((nfile=(char *) malloc(strlen(en->path)+12))==NULL) goto symlink_return;
+
+  sprintf (nfile, "%s-lnk", en->label);
+  
+  entry_return = (char *)xf_dlg_string (win->top,_("Symlink name : "),nfile);
+  
+  if (!entry_return || !strlen(entry_return) || !io_is_valid (entry_return)){
+	goto symlink_return;
+  }
+
+  if ((p = strchr (entry_return, '/')) != NULL) {
+      p[1] = '\0';
+      xf_dlg_error (win->top,_("Character not allowed in filename"), p);
+      goto symlink_return;
+  }
+  ofile = (char *)malloc(strlen(en->path)+1);
+  if (!ofile){
+	  goto symlink_return;
+  }	  
+  strcpy(ofile,en->path);
+  free(nfile);
+  nfile = (char *)malloc(strlen(en->path)+strlen(entry_return)+1);
+  if (!nfile) {
+	  free(ofile);
+	  goto symlink_return;
+  }
+  strcpy (nfile,ofile);
+  p=strrchr(nfile,'/');
+  p[1]=0;
+  strcat(nfile,entry_return);
+
+  /*fprintf(stderr,"dbg: rename %s->%s\n",ofile,nfile);*/
+
+  if (lstat (nfile, &st) != ERROR)  {
+      xf_dlg_error (win->top,_("File exists !"), nfile);
+      free(ofile); free(nfile);
+      goto symlink_return;
+  }
+
+  /*fprintf(stderr,"dbg:ln -s %s %s\n",ofile,nfile);*/
+  if (fork()==0){
+	  execlp("ln","ln","-s",ofile,nfile,(char *)0);
+	  _exit(123);
+  } else usleep(50000);
+	   
+   /* immediate refresh */
+  update_timer (ctree);
+  cursor_reset (GTK_WIDGET (ctree));
+  free(nfile);
+  free(ofile);
+symlink_return:
+  gtk_clist_thaw (GTK_CLIST (ctree));
+  cursor_reset (GTK_WIDGET (ctree));   return;
+}
+
