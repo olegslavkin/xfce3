@@ -223,10 +223,10 @@ static int entry_type_update (entry * en){
     else if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
 	en->type |= FT_EXE;  
     if (S_ISREG (s.st_mode)) en->type |= FT_FILE; 
-    if (S_ISCHR (en->st.st_mode)) en->type |= FT_CHAR_DEV;
-    else if (S_ISBLK (en->st.st_mode)) en->type |= FT_BLOCK_DEV;
-    else if (S_ISFIFO (en->st.st_mode)) en->type |= FT_FIFO;
-    else if (S_ISSOCK (en->st.st_mode)) en->type |= FT_SOCKET;
+    else if (S_ISCHR (s.st_mode)) en->type |= FT_CHAR_DEV;
+    else if (S_ISBLK (s.st_mode)) en->type |= FT_BLOCK_DEV;
+    else if (S_ISFIFO (s.st_mode)) en->type |= FT_FIFO;
+    else if (S_ISSOCK (s.st_mode)) en->type |= FT_SOCKET;
   }  
   if (S_ISDIR (en->st.st_mode)){
       en->type |= FT_DIR;
@@ -256,7 +256,7 @@ int entry_update (entry * en)
   struct stat s;
   struct tm *t;
   int rc = 0;
-  gboolean isdirlnk=FALSE;
+  int tipo=0;
   
   /* don't do updates on internal tar entries */
   if (strncmp(en->path,"tar:",strlen("tar:")) == 0) return (0);
@@ -264,17 +264,28 @@ int entry_update (entry * en)
   if (lstat (en->path, &s) == -1) {
 	  return (-1); /* its gone */
   }
-  
-  
-  if (EN_IS_DIR (en) && (!S_ISDIR (s.st_mode))) {
-     struct stat ss;
-     if (stat (en->path, &ss) == -1) return (-1); /* its gone */
-     if (EN_IS_DIR (en) && S_ISLNK (s.st_mode)) {
-	     dup_stat(&s,&ss); 
-	     isdirlnk=TRUE;
-     }
-     else if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);
+  /* don't do updates on noticed devices */
+  /*if (en->type & (FT_CHAR_DEV|FT_BLOCK_DEV)) return (0);*/
+  /*printf("dbg:%s 0x%x ? 0x%x\n",en->label,en->type,FT_CHAR_DEV|FT_BLOCK_DEV);*/
+
+  if (lstat (en->path, &s) == -1) {
+	  return (-1); /* its gone */
   }
+  
+  
+  if (S_ISLNK (s.st_mode)){
+     struct stat ss;
+     tipo |= FT_LINK;
+     if (stat (en->path, &ss) == -1) {
+        en->type |= FT_STALE_LINK;
+	return (1); /* its gone */
+     }
+     if (S_ISDIR (en->st.st_mode)) {
+	     tipo |= FT_DIR;
+             dup_stat(&s,&ss);
+     } 
+  }
+  /*if (EN_IS_DIR (en) && (!S_ISDIR (ss.st_mode))) return (0);*/
   
   if (en->st.st_size<0) rc = 1;
   if (en->st.st_size != s.st_size) rc = 1; 
@@ -294,8 +305,9 @@ int entry_update (entry * en)
     dup_stat(&(en->st),&s);
     set_time(&(en->date),&s);
     /*rct=entry_type_update (en);*/
-    if ((rct=entry_type_update (en))!=0) return rct; 
-    if (isdirlnk) en->type |= (FT_LINK|FT_DIR);
+    rct=entry_type_update (en); 
+    if (tipo) en->type |= tipo;
+    if (rct) return rct;
   } else {  /* just check for stale links */
     if (S_ISLNK (s.st_mode)) { 
       if (stat (en->path, &s) == -1) {

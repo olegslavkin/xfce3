@@ -469,6 +469,7 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
 
 void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags)
 {
+  unsigned int count=0;
   cfg * win;
   xf_dirent *diren;
   GtkCTreeNode *item = NULL, *first = NULL;
@@ -543,6 +544,11 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
       item = add_node (GTK_CTREE (ctree), root, first, label, complete, &type, flags);
       en = gtk_ctree_node_get_row_data (ctree, item); 
     }
+    if ((++count % 512)==0){
+        gtk_clist_thaw (GTK_CLIST (ctree));
+        while (gtk_events_pending()) gtk_main_iteration();	     
+        gtk_clist_freeze (GTK_CLIST (ctree));
+    }
     if ((type & FT_DIR) && (!(type & FT_DIR_UP)) && (!(type & FT_DIR_PD)) && (io_is_valid (name)) && item){
 	    /* this is just to get the necesary expanders on startup */
       add_subtree (ctree, item, complete, depth - 1, flags);
@@ -555,7 +561,8 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
    update_status(root,ctree);
   } 
   g_free (base);
-  gtk_ctree_sort_node (ctree, root);
+  /* do not autosort directories with more than 1024 entries */
+  if (count <= 1024)gtk_ctree_sort_node (ctree, root);
   return ;
 }
 
@@ -835,7 +842,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
       gr=getgrgid (en->st.st_gid); 
       gtk_ctree_node_set_text (ctree, child, COL_GID,(gr)? gr->gr_name : _("unknown") );      
       update_node (ctree, child, child_en->type, child_en->label); /* icon changes */
-      tree_updated = TRUE;
+      /* skip sort if no files added tree_updated = TRUE;*/
     }
     /* this may be a dummy subtree, and need not be updated when node is collapsed
      * when node is expanded, each subnode will be updated individually by
@@ -888,7 +895,6 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	  /*fprintf(stderr,"dbg:adding %s (%s)\n",label,name);fflush(NULL);*/
 
 	  new_child = add_node (ctree, node, NULL, name, compl, &type, en->flags);
-	  
 	  if ((type & FT_DIR) && (io_is_valid (name)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
 	    add_subtree (ctree, new_child, compl, 1, en->flags);
 	  if (entry_update (en) > 0) update_node (ctree, node, en->type, en->label);
@@ -905,7 +911,9 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
       /*if (entry_update (en) > 0) update_node (ctree, node, en->type, en->label); */
     }
   }
-  if (tree_updated || root_changed) {
+  /*if (tree_updated || root_changed) {*/
+  if (root_changed) {
+      /*fprintf(stderr,"dbg:doing sort\n");fflush(NULL);*/
       gtk_ctree_sort_node (GTK_CTREE (ctree), node);
   }
  
@@ -914,6 +922,7 @@ done_update_timer:
   {
     win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   }
+  /*fprintf(stderr,"dbg:done updating\n");fflush(NULL);*/
   return (TRUE);
 }
 

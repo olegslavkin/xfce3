@@ -442,7 +442,9 @@ icon_identified:
      if ((type & FT_LINK)&&(type & FT_DIR)){
 	   offsetP=LAST_PIX,offsetB=LAST_PIM;  
      } else if ((type & FT_LINK)&&(type & FT_EXE)) {offsetP=3*LAST_PIX,offsetB=3*LAST_PIM;}
-     else if (type & FT_LINK){offsetP=LAST_PIX,offsetB=LAST_PIM;}
+     else if (type & FT_LINK){
+	     offsetP=LAST_PIX,offsetB=LAST_PIM;
+     }
      else if (type & FT_EXE) {offsetP=2*LAST_PIX,offsetB=2*LAST_PIM;}
     }
      PIXid[0] += offsetP;
