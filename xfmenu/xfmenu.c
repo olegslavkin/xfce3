@@ -68,6 +68,7 @@
 
 #define GMENUPATH "/share/gnome/apps"
 #define KMENUPATH "/share/applnk"
+#define SYSPATH   "/etc/X11/applnk"
 #define DEFAULT_CHARSET "ISO-8859-15"
 #ifdef HAVE_ICONV
 #define F 0   /* character never appears in text */
@@ -427,6 +428,7 @@ get_menu_dirs (MenuType mtype)
       menupath = g_strconcat (home, "/.kde2/applnk", NULL);
       kdedirs = g_list_append (kdedirs, menupath);
     }
+    kdedirs = g_list_append (kdedirs, SYSPATH);
 
     return kdedirs;
   }
@@ -461,6 +463,7 @@ get_menu_dirs (MenuType mtype)
       menupath = g_strconcat (home, "/.gnome/apps", NULL);
       gnomedirs = g_list_append (gnomedirs, menupath);
     }
+    gnomedirs = g_list_append (gnomedirs, SYSPATH);
 
     return gnomedirs;
   }
