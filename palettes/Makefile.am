@@ -84,6 +84,7 @@ palettes_DATA=\
  OldWood \
  Pale \
  Paper \
+ Pelgrim \
  Pinky \
  Plum \
  Power \
