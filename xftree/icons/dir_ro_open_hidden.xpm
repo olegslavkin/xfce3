@@ -1,5 +1,5 @@
 /* XPM */
-static char *dir_ro_open_hidden_xpm[] = {
+static char *dir_ro_open_dot_xpm[] = {
 /* width height num_colors chars_per_pixel */
 "    16    16        9            1",
 /* colors */
@@ -8,10 +8,10 @@ static char *dir_ro_open_hidden_xpm[] = {
 "a c #c6864a",
 "b c #ffc78c",
 "c c #000000",
-"d c #00ff00",
+"d c #666666",
 "e c #ffffff",
-"f c #009900",
-"g c #bbff00",
+"f c #888888",
+"g c #ffff00",
 /* pixels */
 "...###a. .......",
 "..#bbbba. ......",
