@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFce 3.8.0\n"
-"POT-Creation-Date: 2001-10-05 22:56+0200\n"
+"POT-Creation-Date: 2001-11-08 22:21+0100\n"
 "PO-Revision-Date: 2001-05-04 23:03+0200\n"
 "Last-Translator: Jasper Huijsmans <j.b.huijsmans@freeler.nl>\n"
 "Language-Team: \n"
@@ -26,7 +26,7 @@ msgstr "Bestand Selecteren"
 msgid "Font Selection"
 msgstr "Lettertype Selecteren"
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1400 xfdiff/xfdiff_misc.c:130
+#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
 #: xfdiff/xfdiff_misc.c:136
 msgid "OK"
 msgstr "OK"
@@ -35,21 +35,21 @@ msgstr "OK"
 msgid "Message"
 msgstr "Bericht"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
-#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:127
+#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:265
+#: xfumed/xfumed_gui_cb.c:74 xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr "Ja"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
-#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:128
+#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:296
+#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr "Nee"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:165
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:223
 msgid "Question"
 msgstr "Vraag"
 
-#: libs/xfce-common.c:602
+#: libs/xfce-common.c:603
 msgid "Terminated: "
 msgstr "Beëindigd: "
 
@@ -83,17 +83,17 @@ msgstr "Bladeren ..."
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
-#: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
-#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
-#: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
+#: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
+#: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
+#: xftree/gtk_dlg.c:260 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:291
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 #: xfumed/xfumed_gui.c:359
 msgid "Cancel"
@@ -182,7 +182,7 @@ msgid "Subprocess diagnostic"
 msgstr "Subproces diagnose"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1592 xfglob/xfglob.c:658
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658
 msgid "Clear"
 msgstr "Wissen"
 
@@ -763,9 +763,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Communicatieverbinding gesloten. Afsluiten...\n"
 
-#: xfce/xfwm.c:434 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
-#: xfwm/xfwm.c:848 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
-#: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854
+#: xfce/xfwm.c:434 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
+#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
+#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
 msgid "Workspace"
 msgstr "Bureaublad"
 
@@ -786,7 +786,7 @@ msgstr "kopiëren"
 msgid "link"
 msgstr "link"
 
-#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:267
+#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:271
 #, c-format
 msgid "%d bytes"
 msgstr "%d bytes"
@@ -795,130 +795,130 @@ msgstr "%d bytes"
 msgid "Override file?"
 msgstr "Bestand overschrijven?"
 
-#: xftree/gtk_cpy.c:163 xftree/gtk_cpy.c:168 xftree/gtk_cpy.c:345
-#: xftree/gtk_cpy.c:349 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
+#: xftree/gtk_cpy.c:167 xftree/gtk_cpy.c:172 xftree/gtk_cpy.c:349
+#: xftree/gtk_cpy.c:353 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
 msgid "Can't stat() file"
 msgstr "stat() werkt niet op bestand"
 
-#: xftree/gtk_cpy.c:175
+#: xftree/gtk_cpy.c:179
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr "Wilt u item(s) %s naar"
 
-#: xftree/gtk_cpy.c:217
+#: xftree/gtk_cpy.c:221
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:237
+#: xftree/gtk_cpy.c:241
 msgid "Can't copy device file"
 msgstr "Kan apparaatbestand niet kopiëren"
 
-#: xftree/gtk_cpy.c:242
+#: xftree/gtk_cpy.c:246
 msgid "Can't copy FIFO"
 msgstr "Kan FIFO niet kopiëren"
 
-#: xftree/gtk_cpy.c:246
+#: xftree/gtk_cpy.c:250
 msgid "Can't copy socket"
 msgstr "Kan SOCKET niet kopiëren"
 
-#: xftree/gtk_cpy.c:281
+#: xftree/gtk_cpy.c:285
 msgid "Too few bytes transferred ! Device full ?"
 msgstr "Te weinig bytes getransporteerd ! Apparaat vol ?"
 
-#: xftree/gtk_cpy.c:285
+#: xftree/gtk_cpy.c:289
 msgid "Too many bytes transferred !?"
 msgstr "Te veel bytes getransporteerd !?"
 
-#: xftree/gtk_cpy.c:331
+#: xftree/gtk_cpy.c:335
 msgid "Source and Target directories are the same"
 msgstr "Bron- en Bestemmingsdirectories zijn hetzelfde"
 
-#: xftree/gtk_cpy.c:382
+#: xftree/gtk_cpy.c:386
 msgid "exists and is not a directory"
 msgstr "bestaat en is geen directory"
 
-#: xftree/gtk_cpy.c:456
+#: xftree/gtk_cpy.c:460
 msgid "XFTree: Copy"
 msgstr "XFTree: Kopiëren"
 
-#: xftree/gtk_cpy.c:460
+#: xftree/gtk_cpy.c:464
 msgid "XFTree: Move"
 msgstr "XFTree: Verplaatsen"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:468
 msgid "XFTree: Link"
 msgstr "XFTree: Link"
 
-#: xftree/gtk_cpy.c:468
+#: xftree/gtk_cpy.c:472
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Onbekende transport modus: %d\n"
 
-#: xftree/gtk_cpy.c:474
+#: xftree/gtk_cpy.c:478
 msgid "transfer()"
 msgstr "transfer()"
 
-#: xftree/gtk_cpy.c:474
+#: xftree/gtk_cpy.c:478
 msgid "fatal error"
 msgstr "fatale fout"
 
-#: xftree/gtk_cpy.c:480
+#: xftree/gtk_cpy.c:484
 msgid "Error getting info from"
 msgstr "Fout tijdens krijgen info van"
 
-#: xftree/gtk_cpy.c:485
+#: xftree/gtk_cpy.c:489
 msgid "Fatal Error"
 msgstr "Fatale Fout"
 
-#: xftree/gtk_cpy.c:485
+#: xftree/gtk_cpy.c:489
 msgid "Can't transfer items to a file"
 msgstr "Kan items niet naar een bestand transporteren"
 
-#: xftree/gtk_cpy.c:502
+#: xftree/gtk_cpy.c:506
 msgid "Source: "
 msgstr "Bron: "
 
-#: xftree/gtk_cpy.c:508
+#: xftree/gtk_cpy.c:512
 msgid "Target: "
 msgstr "Bestemming : "
 
-#: xftree/gtk_cpy.c:514
+#: xftree/gtk_cpy.c:518
 msgid "0 bytes transferred"
 msgstr "0 bytes getransporteerd"
 
-#: xftree/gtk_cpy.c:535 xftree/gtk_dlg.c:175
+#: xftree/gtk_cpy.c:539 xftree/gtk_dlg.c:233
 msgid "Error"
 msgstr "Fout"
 
-#: xftree/gtk_cpy.c:535
+#: xftree/gtk_cpy.c:539
 msgid "Can't transfer a directory to a file"
 msgstr "Kan een directory niet naar een bestand transporteren"
 
-#: xftree/gtk_dlg.c:170
+#: xftree/gtk_dlg.c:228
 msgid "Information"
 msgstr "Informatie"
 
-#: xftree/gtk_dlg.c:180
+#: xftree/gtk_dlg.c:238
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: xftree/gtk_dlg.c:184
+#: xftree/gtk_dlg.c:242
 msgid "Dialog"
 msgstr "Dialoog"
 
-#: xftree/gtk_dlg.c:210
+#: xftree/gtk_dlg.c:270
 msgid "Continue"
 msgstr "Doorgaan"
 
-#: xftree/gtk_dlg.c:220 xftree/gtk_prop.c:198
+#: xftree/gtk_dlg.c:281 xftree/gtk_prop.c:198
 msgid "Skip"
 msgstr "Overslaan"
 
-#: xftree/gtk_dlg.c:242 xftree/gtk_prop.c:199
+#: xftree/gtk_dlg.c:307 xftree/gtk_prop.c:199
 msgid "All"
 msgstr "Alles"
 
-#: xftree/gtk_dlg.c:250
+#: xftree/gtk_dlg.c:317
 msgid "Close"
 msgstr "Sluiten"
 
@@ -928,7 +928,7 @@ msgstr "Openen met ..."
 
 #: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
 #: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
-#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:880
+#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr "Programma uitvoeren ..."
 
@@ -1244,7 +1244,7 @@ msgid "Toggle Dotfiles"
 msgstr "Puntbestanden Aan/Uit"
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1167
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
 #: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
 msgid "File"
 msgstr "Bestand"
@@ -1271,7 +1271,7 @@ msgid "Patch viewer ..."
 msgstr "Patch viewer"
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:872
+#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:881
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -1281,7 +1281,7 @@ msgid "Go up"
 msgstr "Ga omhoog"
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1269
+#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
 #: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
 msgid "Help"
 msgstr "Help"
@@ -1450,37 +1450,37 @@ msgstr "Forking diff. Even geduld a.u.b.\n"
 msgid "Finished forking.\n"
 msgstr "Forking beëindigd.\n"
 
-#: xfdiff/xfdiff.c:1323
+#: xfdiff/xfdiff.c:1388
 msgid "Running patch...\n"
 msgstr "Patch uitvoeren...\n"
 
-#: xfdiff/xfdiff.c:1391
+#: xfdiff/xfdiff.c:1456
 msgid "xfdiff version"
 msgstr "xfdiff versie"
 
-#: xfdiff/xfdiff.c:1392
+#: xfdiff/xfdiff.c:1457
 msgid "use xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
 msgstr "gebruik xfdiff [ -h | --help | -p] [linkerbestand] [rechterbestand]\n"
 
-#: xfdiff/xfdiff.c:1393
+#: xfdiff/xfdiff.c:1458
 msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
 msgstr ""
 "-p : linkerbestand en rechterbestand zijn een patch directory en een patch "
 "bestand\n"
 
-#: xfdiff/xfdiff.c:1394
+#: xfdiff/xfdiff.c:1459
 msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
 msgstr "-PN: N is strip niveau (0-9) voor patch (snelle keuze)\n"
 
-#: xfdiff/xfdiff.c:1395
+#: xfdiff/xfdiff.c:1460
 msgid "-R: patch file is reversed (quick toggle)\n"
 msgstr "-R: patch bestand is omgekeerd (snelle keuze)\n"
 
-#: xfdiff/xfdiff.c:1396
+#: xfdiff/xfdiff.c:1461
 msgid "-N: patch file is not reversed (quick toggle)\n"
 msgstr "-N: patch bestand is niet omgekeerd (snelle keuze)\n"
 
-#: xfdiff/xfdiff.c:1397
+#: xfdiff/xfdiff.c:1462
 msgid ""
 "-h, --help : print this message\n"
 "\n"
@@ -1488,11 +1488,11 @@ msgstr ""
 "-h, --help : toon dit bericht\n"
 "\n"
 
-#: xfdiff/xfdiff.c:1398
+#: xfdiff/xfdiff.c:1463
 msgid "xfdiff (c) Edscott Wilson Garcia 2001, under GNU-GPL\n"
 msgstr "xfdiff (c) Edscott Wilson Garcia 2001, onder GNU-GPL\n"
 
-#: xfdiff/xfdiff.c:1399
+#: xfdiff/xfdiff.c:1464
 msgid ""
 "XFCE modules copyright Olivier Fourdan 1999-2001, under GNU-GPL\n"
 "\n"
@@ -1504,24 +1504,24 @@ msgstr ""
 msgid "Xfdiff diagnostic"
 msgstr "Xfdiff diagnose"
 
-#: xfdiff/xfdiff_gui.c:174
+#: xfdiff/xfdiff_gui.c:175
 msgid "A patch file and directory must be selected first!"
 msgstr "Een patch bestand en directory moeten eerst worden geselecteerd!"
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been undone."
 msgstr "Patch is ongedaan gemaakt."
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been applied."
 msgstr "Patch is toegepast."
 
-#: xfdiff/xfdiff_gui.c:201
+#: xfdiff/xfdiff_gui.c:202
 msgid "Please select a name for the patch file in the next dialog."
 msgstr ""
 "Selecteer een naam voor het patch-bestand in het volgende dialoogvenster."
 
-#: xfdiff/xfdiff_gui.c:220
+#: xfdiff/xfdiff_gui.c:221
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
@@ -1531,244 +1531,244 @@ msgstr ""
 "Even geduld a.u.b. (xfdiff lijkt mogelijk bevroren).\n"
 "Diff zal bezig zijn"
 
-#: xfdiff/xfdiff_gui.c:227
+#: xfdiff/xfdiff_gui.c:228
 msgid "Patch file could not be created"
 msgstr "Patch-bestand kon niet gemaakt worden"
 
-#: xfdiff/xfdiff_gui.c:232 xfdiff/xfdiff_gui.c:237
+#: xfdiff/xfdiff_gui.c:233 xfdiff/xfdiff_gui.c:238
 msgid "Strip level for created patch file="
 msgstr "Strip-niveau voor patch-bestand="
 
-#: xfdiff/xfdiff_gui.c:239
+#: xfdiff/xfdiff_gui.c:240
 msgid " has been created\n"
 msgstr " is gemaakt\n"
 
-#: xfdiff/xfdiff_gui.c:253
+#: xfdiff/xfdiff_gui.c:254
 msgid "Patch file creation cancelled"
 msgstr "Maken patch-bestand afgebroken"
 
-#: xfdiff/xfdiff_gui.c:403
+#: xfdiff/xfdiff_gui.c:404
 msgid "Line synchronization enabled.\n"
 msgstr "Regelsynchronisatie ingeschakeld.\n"
 
-#: xfdiff/xfdiff_gui.c:405
+#: xfdiff/xfdiff_gui.c:406
 msgid "Line synchronization disabled.\n"
 msgstr "Regelsynchronisatie uitgeschakeld.\n"
 
-#: xfdiff/xfdiff_gui.c:442
+#: xfdiff/xfdiff_gui.c:443
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr "Patch uitgebreide diagnose ingeschakeld\n"
 
-#: xfdiff/xfdiff_gui.c:444
+#: xfdiff/xfdiff_gui.c:445
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr "Patch uitgebreide diagnose uitgeschakeld\n"
 
-#: xfdiff/xfdiff_gui.c:463
+#: xfdiff/xfdiff_gui.c:464
 msgid "Line numbers enabled.\n"
 msgstr "Regelnummering ingeschakeld.\n"
 
-#: xfdiff/xfdiff_gui.c:465
+#: xfdiff/xfdiff_gui.c:466
 msgid "Line numbers disabled.\n"
 msgstr "Regelnummering uitgeschakeld.\n"
 
-#: xfdiff/xfdiff_gui.c:477
+#: xfdiff/xfdiff_gui.c:478
 msgid "Polygons will now be filled.\n"
 msgstr "Polygonen zullen nu gevuld worden.\n"
 
-#: xfdiff/xfdiff_gui.c:479
+#: xfdiff/xfdiff_gui.c:480
 msgid "Polygons will now *not* be filled.\n"
 msgstr "Polygonen zullen nu niet gevuld worden.\n"
 
-#: xfdiff/xfdiff_gui.c:493
+#: xfdiff/xfdiff_gui.c:494
 msgid "Patch will now be assumed reversed.\n"
 msgstr "Patch wordt aangenomen omgekeerd te zijn.\n"
 
-#: xfdiff/xfdiff_gui.c:495
+#: xfdiff/xfdiff_gui.c:496
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr "Patch wordt aangenomen niet omgekeerd te zijn.\n"
 
 #.
-#: xfdiff/xfdiff_gui.c:516
+#: xfdiff/xfdiff_gui.c:517
 msgid "Font selection"
 msgstr "Lettertype Selecteren"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:525 xfdiff/xfdiff_misc.c:800
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
 msgid "Could not load specified font\n"
 msgstr "Kon opgegeven lettertype niet laden\n"
 
-#: xfdiff/xfdiff_gui.c:584
+#: xfdiff/xfdiff_gui.c:585
 msgid "Select highlight background color"
 msgstr "Achtergrondkleur highlight installen"
 
-#: xfdiff/xfdiff_gui.c:587
+#: xfdiff/xfdiff_gui.c:588
 msgid "Select highlight text color"
 msgstr "Textkleur highlight instellen"
 
-#: xfdiff/xfdiff_gui.c:685 xfdiff/xfdiff_gui.c:686
+#: xfdiff/xfdiff_gui.c:686 xfdiff/xfdiff_gui.c:687
 msgid "Warning: cannot read from "
 msgstr "Waarschuwing: kan niet lezen van "
 
-#: xfdiff/xfdiff_gui.c:690 xfdiff/xfdiff_gui.c:691
+#: xfdiff/xfdiff_gui.c:691 xfdiff/xfdiff_gui.c:692
 msgid "is not in patch file."
 msgstr "is geen patch-bestand."
 
-#: xfdiff/xfdiff_gui.c:797
+#: xfdiff/xfdiff_gui.c:798
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr "Standaard .xfdiffrc bestand kon niet gemaakt worden\n"
 
-#: xfdiff/xfdiff_gui.c:817
+#: xfdiff/xfdiff_gui.c:818
 msgid "Default configuration has been saved\n"
 msgstr "Standaard configuratie is opgeslagen\n"
 
-#: xfdiff/xfdiff_gui.c:825
+#: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
 msgstr "Dit is XFDiff "
 
-#: xfdiff/xfdiff_gui.c:844
+#: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
 msgstr "Er is geen volgend verschil"
 
-#: xfdiff/xfdiff_gui.c:853
+#: xfdiff/xfdiff_gui.c:854
 msgid "There is no previous difference"
 msgstr "Er is geen eerder verschil"
 
-#: xfdiff/xfdiff_gui.c:875
+#: xfdiff/xfdiff_gui.c:876
 msgid "There is no such file"
 msgstr "Bestand niet gevonden"
 
-#: xfdiff/xfdiff_gui.c:885
+#: xfdiff/xfdiff_gui.c:886
 msgid "There is no next file"
 msgstr "Er is geen volgend bestand"
 
-#: xfdiff/xfdiff_gui.c:896
+#: xfdiff/xfdiff_gui.c:897
 msgid "There is no previous file"
 msgstr "Er is geen vorig bestand"
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:983
+#: xfdiff/xfdiff_gui.c:984
 msgid "That is a directory (or symlink)"
 msgstr "Dat is een directory (of symlink)"
 
-#: xfdiff/xfdiff_gui.c:1168
+#: xfdiff/xfdiff_gui.c:1169
 msgid "Select left file"
 msgstr "Linker bestand selecteren"
 
-#: xfdiff/xfdiff_gui.c:1169
+#: xfdiff/xfdiff_gui.c:1170
 msgid "Select right file"
 msgstr "Rechter bestand selecteren"
 
-#: xfdiff/xfdiff_gui.c:1170
+#: xfdiff/xfdiff_gui.c:1171
 msgid "Select patch file"
 msgstr "Patch-bestand selecteren"
 
-#: xfdiff/xfdiff_gui.c:1171
+#: xfdiff/xfdiff_gui.c:1172
 msgid "Select directory where to apply patch"
 msgstr "Directory selecteren om patch op toe te passen"
 
-#: xfdiff/xfdiff_gui.c:1174
+#: xfdiff/xfdiff_gui.c:1175
 msgid "Switch to patch mode"
 msgstr "Wissel naar patch modus"
 
-#: xfdiff/xfdiff_gui.c:1177
+#: xfdiff/xfdiff_gui.c:1178
 msgid "Switch to diff mode"
 msgstr "Wissel naar diff modus"
 
-#: xfdiff/xfdiff_gui.c:1182 xfdiff/xfdiff_gui.c:1609
+#: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
 #: xfsamba/xfsamba_gui.c:1022
 msgid "Exit"
 msgstr "Afsluiten"
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:1185
+#: xfdiff/xfdiff_gui.c:1186
 msgid "Diff Settings"
 msgstr "Diff Instellingen"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:1188
+#: xfdiff/xfdiff_gui.c:1189
 msgid "Font"
 msgstr "Lettertype"
 
-#: xfdiff/xfdiff_gui.c:1189
+#: xfdiff/xfdiff_gui.c:1190
 msgid "Highlight text color"
 msgstr "Textkleur markeren"
 
-#: xfdiff/xfdiff_gui.c:1190
+#: xfdiff/xfdiff_gui.c:1191
 msgid "Highlight background color"
 msgstr "Achtergrondkleur markeren"
 
-#: xfdiff/xfdiff_gui.c:1191
+#: xfdiff/xfdiff_gui.c:1192
 msgid "Fill polygons"
 msgstr "Polygonen vullen"
 
-#: xfdiff/xfdiff_gui.c:1192
+#: xfdiff/xfdiff_gui.c:1193
 msgid "Show line numbers"
 msgstr "Regelnummers tonen"
 
-#: xfdiff/xfdiff_gui.c:1194
+#: xfdiff/xfdiff_gui.c:1195
 msgid "Use line synchronization voids"
 msgstr "Gebruik witregels voor regel-synchronisatie"
 
-#: xfdiff/xfdiff_gui.c:1200
+#: xfdiff/xfdiff_gui.c:1201
 msgid "Save settings as default"
 msgstr "Instellingen opslaan als standaard"
 
-#: xfdiff/xfdiff_gui.c:1202
+#: xfdiff/xfdiff_gui.c:1203
 msgid "Patch Settings"
 msgstr "Patch Instellingen"
 
-#: xfdiff/xfdiff_gui.c:1204
+#: xfdiff/xfdiff_gui.c:1205
 msgid "Verbose patch diagnostics"
 msgstr "Uitgebreide patch diagnose"
 
-#: xfdiff/xfdiff_gui.c:1206
+#: xfdiff/xfdiff_gui.c:1207
 msgid "Patch options only active in patch-mode"
 msgstr "Patch opties zijn alleen actief in patch modus"
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:1211
+#: xfdiff/xfdiff_gui.c:1212
 msgid "Assume patch is reversed"
 msgstr "Neem aan dat patch omgedraaid is"
 
-#: xfdiff/xfdiff_gui.c:1213
+#: xfdiff/xfdiff_gui.c:1214
 msgid "Auto strip level"
 msgstr "Automatisch strip niveau"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:92
+#: xfdiff/xfdiff_gui.c:1243 xfumed/xfumed_gui.c:92
 msgid "Actions"
 msgstr "Acties"
 
-#: xfdiff/xfdiff_gui.c:1243
+#: xfdiff/xfdiff_gui.c:1244
 msgid "View differences"
 msgstr "Toon verschillen"
 
-#: xfdiff/xfdiff_gui.c:1244
+#: xfdiff/xfdiff_gui.c:1245
 msgid "View differences in new"
 msgstr "Toon verschillen in nieuw venster"
 
-#: xfdiff/xfdiff_gui.c:1246
+#: xfdiff/xfdiff_gui.c:1247
 msgid "View patch created differences"
 msgstr "Toon verschillen gecreëerd door patch"
 
-#: xfdiff/xfdiff_gui.c:1249
+#: xfdiff/xfdiff_gui.c:1250
 msgid "View patch created differences in new"
 msgstr "Toon verschillen gecreëerd door patch in nieuw venster"
 
-#: xfdiff/xfdiff_gui.c:1254
+#: xfdiff/xfdiff_gui.c:1255
 msgid "Create patch file"
 msgstr "Maak patch-bestand"
 
-#: xfdiff/xfdiff_gui.c:1261
+#: xfdiff/xfdiff_gui.c:1262
 msgid "Apply patch to Hard Drive"
 msgstr "Patch toepassen naar Harde Schijf"
 
-#: xfdiff/xfdiff_gui.c:1264
+#: xfdiff/xfdiff_gui.c:1265
 msgid "Undo patch to Hard Drive"
 msgstr "Patch naar Harde Schijf ongedaan maken"
 
-#: xfdiff/xfdiff_gui.c:1270 xfglob/xfglob.c:1921
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
 msgid "About"
 msgstr "Info..."
 
@@ -1779,19 +1779,19 @@ msgstr "Info..."
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1602
+#: xfdiff/xfdiff_gui.c:1603
 msgid "Next difference"
 msgstr "Volgend verschil"
 
-#: xfdiff/xfdiff_gui.c:1605
+#: xfdiff/xfdiff_gui.c:1606
 msgid "Prev difference"
 msgstr "Vorig verschill"
 
-#: xfdiff/xfdiff_gui.c:1606
+#: xfdiff/xfdiff_gui.c:1607
 msgid "Next file"
 msgstr "Volgend bestand"
 
-#: xfdiff/xfdiff_gui.c:1607
+#: xfdiff/xfdiff_gui.c:1608
 msgid "Previous file"
 msgstr "Vorig bestand"
 
@@ -1831,7 +1831,7 @@ msgstr "fout bij openen bestand: xfdiff_aborting run"
 msgid "unspecified error: xfdiff_aborting run"
 msgstr "Ongedefinieerde fout: xfdiff_aborting run"
 
-#: xfdiff/xfdiff_misc.c:603
+#: xfdiff/xfdiff_misc.c:604
 msgid ""
 "No file was found for patching\n"
 "Either the directory to apply patch is not correctly selected\n"
@@ -1841,7 +1841,7 @@ msgstr ""
 "De directory om de patch toe te passen is niet goed geselecteerd\n"
 "of er is een verkeerd stripniveau gebruikt\n"
 
-#: xfdiff/xfdiff_misc.c:620
+#: xfdiff/xfdiff_misc.c:621
 msgid ""
 "Patch command has produced reject output.\n"
 "See diagnostics window."
@@ -1849,40 +1849,40 @@ msgstr ""
 "Patch commando heeft een reject output geproduceerd.\n"
 "Zie diagnose venster."
 
-#: xfdiff/xfdiff_misc.c:647
+#: xfdiff/xfdiff_misc.c:648
 msgid "No directory was selected!"
 msgstr "Geen directory geselecteerd!"
 
 #.
-#: xfdiff/xfdiff_misc.c:661
+#: xfdiff/xfdiff_misc.c:662
 msgid "Directory or file selection"
 msgstr "Directory of bestand selecteren"
 
-#: xfdiff/xfdiff_misc.c:696 xfdiff/xfdiff_misc.c:699
+#: xfdiff/xfdiff_misc.c:697 xfdiff/xfdiff_misc.c:700
 msgid "Please select it in the next dialog."
 msgstr "Selecteer het in het volgende dialoogvenster"
 
-#: xfdiff/xfdiff_misc.c:737
+#: xfdiff/xfdiff_misc.c:738
 msgid "File exists, overwrite?"
 msgstr "Bestand bestaat, overschrijven ?"
 
-#: xfdiff/xfdiff_misc.c:741
+#: xfdiff/xfdiff_misc.c:742
 msgid "Cannot open file for write\n"
 msgstr "Kan niet schrijven naar bestand\n"
 
-#: xfdiff/xfdiff_misc.c:923 xfdiff/xfdiff_misc.c:928
+#: xfdiff/xfdiff_misc.c:924 xfdiff/xfdiff_misc.c:929
 msgid "couldn't allocate color"
 msgstr "kon kleur niet toewijzen"
 
-#: xfdiff/xfdiff_misc.c:962 xfdiff/xfdiff_misc.c:986
+#: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr "Patch : "
 
-#: xfdiff/xfdiff_misc.c:965 xfdiff/xfdiff_misc.c:991
+#: xfdiff/xfdiff_misc.c:966 xfdiff/xfdiff_misc.c:992
 msgid " applied at: "
 msgstr " toegepast op: "
 
-#: xfdiff/xfdiff_misc.c:1011
+#: xfdiff/xfdiff_misc.c:1012
 msgid "Press OK to see patch diffs"
 msgstr "Druk op OK om patch te zien"
 
@@ -2697,176 +2697,148 @@ msgstr "xfbdmgr - XFCE List Manager"
 msgid "File not found.\n"
 msgstr "Bestand niet gevonden.\n"
 
-#: xfwm/xfwm.c:842
+#: xfwm/xfwm.c:851
 msgid "&Restart"
 msgstr "&Herstart"
 
-#: xfwm/xfwm.c:843
+#: xfwm/xfwm.c:852
 msgid "&Quit"
 msgstr "A&fsluiten"
 
-#: xfwm/xfwm.c:856
+#: xfwm/xfwm.c:865
 msgid "&Move"
 msgstr "&Verplaatsen"
 
-#: xfwm/xfwm.c:857
+#: xfwm/xfwm.c:866
 msgid "&Resize"
 msgstr "Ver&groten"
 
-#: xfwm/xfwm.c:858
+#: xfwm/xfwm.c:867
 msgid "(De)&Iconify"
 msgstr "(De)M&inimaliseren"
 
-#: xfwm/xfwm.c:859
+#: xfwm/xfwm.c:868
 msgid "(Un)&Stick"
 msgstr "&Plakken/Loslaten"
 
-#: xfwm/xfwm.c:860
+#: xfwm/xfwm.c:869
 msgid "(Un)S&hade"
 msgstr "Op&rollen/Uitrollen"
 
-#: xfwm/xfwm.c:861
+#: xfwm/xfwm.c:870
 msgid "(Un)Ma&ximize"
 msgstr "(De)Ma&ximalizeren"
 
-#: xfwm/xfwm.c:863
+#: xfwm/xfwm.c:872
 msgid "Se&nd to..."
 msgstr "Ze&nden naar..."
 
-#: xfwm/xfwm.c:864
+#: xfwm/xfwm.c:873
 msgid "S&witch to..."
 msgstr "&Ga naar..."
 
-#: xfwm/xfwm.c:866
+#: xfwm/xfwm.c:875
 msgid "&Close"
 msgstr "&Sluiten"
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:877
 msgid "User Menu"
 msgstr "Menu Gebruiker"
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:878
 msgid "Edit menu..."
 msgstr "Menu bewerken..."
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:882
 msgid "&Mouse..."
 msgstr "&Muis..."
 
-#: xfwm/xfwm.c:874
+#: xfwm/xfwm.c:883
 msgid "&Backdrop..."
 msgstr "&Achtergrond..."
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:884
 msgid "&Sound..."
 msgstr "&Geluid..."
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:886
 msgid "&New window"
 msgstr "&Nieuw venster"
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:887
 msgid "&User Menu"
 msgstr "Menu &Gebruiker"
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:891
 msgid "&Arrange icons"
 msgstr "&Pictogrammen ordenen"
 
-#: xfwm/xfwm.c:883
+#: xfwm/xfwm.c:892
 msgid "&Iconify all"
 msgstr "&Alles Minimaliseren"
 
-#: xfwm/xfwm.c:884
+#: xfwm/xfwm.c:893
 msgid "&Refresh"
 msgstr "&Verversen"
 
-#: xfwm/xfwm.c:885
+#: xfwm/xfwm.c:894
 msgid "Shuffle &Up"
 msgstr "Vo&lgend venster"
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:895
 msgid "Shuffle &Down"
 msgstr "Vo&rig venster"
 
-#: xfwm/xfwm.c:888
+#: xfwm/xfwm.c:897
 msgid "&Settings"
 msgstr "&Instellingen"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:899
 msgid "&Quit XFwm"
 msgstr "XFwm A&fsluiten"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:901
 msgid "&Full Screen"
 msgstr "Volledig &scherm"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:902
 msgid "&Vertical"
 msgstr "Ver&ticaal"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:903
 msgid "&Horizontal"
 msgstr "&Horizontaal"
 
-#: xfwm/xfwm.c:1224
+#: xfwm/xfwm.c:1233
 msgid "xfwm terminated: "
 msgstr "xfwm beëindigd: "
 
-#: xfsamba/xfsamba.c:311
-msgid "Shares"
-msgstr "Shares"
-
-#: xfsamba/xfsamba.c:313
-msgid "Links to other servers"
-msgstr "Verbindingen met andere servers"
-
-#: xfsamba/xfsamba.c:315
-msgid "Links to other workgroups"
-msgstr "Verbindingen met andere werkgroepen"
-
-#: xfsamba/xfsamba.c:370
-msgid "Query done."
-msgstr "Klaar met opzoeken."
-
-#: xfsamba/xfsamba.c:372
-msgid "Query failed. Machine may be down."
-msgstr "Opzoeken mislukt. Machine is mogelijk niet bereikbaar."
-
-#: xfsamba/xfsamba.c:390 xfsamba/xfsamba_list.c:184
-msgid "Query password has been requested."
-msgstr "Query wachtwoord vereist."
-
-#: xfsamba/xfsamba.c:554
-msgid "Querying"
-msgstr "Zoeken"
-
-#: xfsamba/xfsamba.c:648
+#: xfsamba/xfsamba.c:223
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Samba probleem! Xfsamba kon bestand niet vinden:"
 
-#: xfsamba/xfsamba.c:656
+#: xfsamba/xfsamba.c:231
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr "(Installeer Samba of corrigeer de PATH omgevingsvariabele)"
 
-#: xfsamba/xfsamba_download.c:63
+#: xfsamba/xfsamba_download.c:87
 msgid "File download failed. See diagnostics for reason."
 msgstr "Bestand downloaden mislukt. Zie diagnose voor reden."
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:67
+#: xfsamba/xfsamba_download.c:91
 msgid "Download done."
 msgstr "Download gereed."
 
-#: xfsamba/xfsamba_download.c:103
+#: xfsamba/xfsamba_download.c:127
 msgid "Downloading file..."
 msgstr "Bestand downloaden..."
 
-#: xfsamba/xfsamba_download.c:116
+#: xfsamba/xfsamba_download.c:140
 msgid "File download cancelled."
 msgstr "Dowloaden bestand afgebroken."
 
-#: xfsamba/xfsamba_download.c:124
+#: xfsamba/xfsamba_download.c:148
 msgid "Download failed."
 msgstr "Downloaden mislukt."
 
@@ -2957,7 +2929,7 @@ msgstr "Nieuwe map..."
 msgid "Delete..."
 msgstr "Verwijderen..."
 
-#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:434
+#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:441
 msgid "Tar..."
 msgstr "Tar..."
 
@@ -3112,32 +3084,60 @@ msgstr "Locatie bekende werkgroepen : "
 msgid "Welcome to xfsamba."
 msgstr "Welkom bij xfsamba."
 
-#: xfsamba/xfsamba_list.c:179
+#: xfsamba/xfsamba_list.c:188
 msgid "Retrieve done."
 msgstr "Ophalen geslaagd."
 
-#: xfsamba/xfsamba_list.c:223
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+msgid "Query password has been requested."
+msgstr "Query wachtwoord vereist."
+
+#: xfsamba/xfsamba_list.c:232
 msgid "List failed."
 msgstr "List mislukt."
 
-#: xfsamba/xfsamba_list.c:242
+#: xfsamba/xfsamba_list.c:251
 msgid "Retreiving..."
 msgstr "Ophalen..."
 
-#: xfsamba/xfsamba_lookup.c:43 xfsamba/xfsamba_lookup.c:44
-#: xfsamba/xfsamba_masterresolve.c:204 xfsamba/xfsamba_masterresolve.c:205
+#: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
+#: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 msgid "Resolved"
 msgstr "Opgelost"
 
-#: xfsamba/xfsamba_lookup.c:97 xfsamba/xfsamba_lookup.c:98
+#: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
 msgid "Resolving for"
 msgstr "Oplossen voor"
 
-#: xfsamba/xfsamba_masterlookup.c:69
+#: xfsamba/xfsamba_smblookup.c:84
+msgid "Shares"
+msgstr "Shares"
+
+#: xfsamba/xfsamba_smblookup.c:86
+msgid "Links to other servers"
+msgstr "Verbindingen met andere servers"
+
+#: xfsamba/xfsamba_smblookup.c:88
+msgid "Links to other workgroups"
+msgstr "Verbindingen met andere werkgroepen"
+
+#: xfsamba/xfsamba_smblookup.c:143
+msgid "Query done."
+msgstr "Klaar met opzoeken."
+
+#: xfsamba/xfsamba_smblookup.c:145
+msgid "Query failed. Machine may be down."
+msgstr "Opzoeken mislukt. Machine is mogelijk niet bereikbaar."
+
+#: xfsamba/xfsamba_smblookup.c:324
+msgid "Querying"
+msgstr "Zoeken"
+
+#: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
 msgstr "Geen master browser gevonden. Zie diagnose."
 
-#: xfsamba/xfsamba_masterlookup.c:70
+#: xfsamba/xfsamba_masterlookup.c:78
 msgid ""
 "No master browser found.\n"
 "Please type a computer name at location and hit RETURN"
@@ -3145,30 +3145,30 @@ msgstr ""
 "Geen master browser gevonden.\n"
 "Geef een computer naam op de locatie en druk op ENTER"
 
-#: xfsamba/xfsamba_masterlookup.c:126
+#: xfsamba/xfsamba_masterlookup.c:134
 msgid "Looking for master browsers..."
 msgstr "Master browser zoeken..."
 
-#: xfsamba/xfsamba_masterresolve.c:97
+#: xfsamba/xfsamba_masterresolve.c:110
 msgid "Please provide netbios name for master browser at "
 msgstr "U moet de netbios naam opgeven van de masterbrowser op "
 
-#: xfsamba/xfsamba_masterresolve.c:166
+#: xfsamba/xfsamba_masterresolve.c:179
 msgid "Master browser netbios name must be provided."
 msgstr "Master browser netbios naam moet worden opgegeven."
 
-#: xfsamba/xfsamba_masterresolve.c:214 xfsamba/xfsamba_masterresolve.c:215
-#: xfsamba/xfsamba_masterresolve.c:221
+#: xfsamba/xfsamba_masterresolve.c:227 xfsamba/xfsamba_masterresolve.c:228
+#: xfsamba/xfsamba_masterresolve.c:234
 msgid "No status response"
 msgstr "Geen status antwoord"
 
-#: xfsamba/xfsamba_masterresolve.c:233
+#: xfsamba/xfsamba_masterresolve.c:246
 msgid "Master browser not resolved. Use location box to browse."
 msgstr ""
 "Oplossen master browser adres mislukt. Druk op herladen om opnieuw te "
 "proberen."
 
-#: xfsamba/xfsamba_masterresolve.c:234
+#: xfsamba/xfsamba_masterresolve.c:247
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
@@ -3176,143 +3176,143 @@ msgstr ""
 "Geen master browser opgelostGeef een computer naam op de locatie en druk op "
 "ENTER"
 
-#: xfsamba/xfsamba_masterresolve.c:288 xfsamba/xfsamba_masterresolve.c:289
+#: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
 msgid "Resolving"
 msgstr "Oplossen"
 
-#: xfsamba/xfsamba_mkdir.c:74
+#: xfsamba/xfsamba_mkdir.c:102
 msgid "Please provide a name for the new directory at"
 msgstr "Geef naam voor nieuwe directory in"
 
-#: xfsamba/xfsamba_mkdir.c:172
+#: xfsamba/xfsamba_mkdir.c:200
 msgid "Directory creation failed. See diagnostics for details."
 msgstr "Maken directory mislukt. Zie diagnose voor details."
 
-#: xfsamba/xfsamba_mkdir.c:181
+#: xfsamba/xfsamba_mkdir.c:209
 msgid "Directory created."
 msgstr "Directory gemaakt."
 
-#: xfsamba/xfsamba_mkdir.c:222
+#: xfsamba/xfsamba_mkdir.c:250
 msgid "Create directory cancelled."
 msgstr "Maken directory afgebroken"
 
-#: xfsamba/xfsamba_mkdir.c:233
+#: xfsamba/xfsamba_mkdir.c:261
 msgid "Create directory failed."
 msgstr "Maken directory mislukt."
 
-#: xfsamba/xfsamba_mkdir.c:264
+#: xfsamba/xfsamba_mkdir.c:292
 msgid "Creating dir..."
 msgstr "Directory maken..."
 
-#: xfsamba/xfsamba_rm.c:63
+#: xfsamba/xfsamba_rm.c:86
 msgid "Remove failed. See diagnostics for details."
 msgstr "Verwijderen mislukt. Zie diagnose voor details."
 
-#: xfsamba/xfsamba_rm.c:69
+#: xfsamba/xfsamba_rm.c:92
 msgid "Remove complete."
 msgstr "Verwijderen voltooid."
 
-#: xfsamba/xfsamba_rm.c:103
+#: xfsamba/xfsamba_rm.c:126
 msgid "Removing..."
 msgstr "Verwijderen..."
 
-#: xfsamba/xfsamba_rm.c:108
+#: xfsamba/xfsamba_rm.c:131
 msgid "Sorry, top level shares cannot be removed."
 msgstr "Sorry, top level shares kunnen niet worden verwijderd."
 
-#: xfsamba/xfsamba_rm.c:111 xfsamba/xfsamba_rm.c:164
+#: xfsamba/xfsamba_rm.c:134 xfsamba/xfsamba_rm.c:187
 msgid "Remove cancelled."
 msgstr "Verwijderen afgebroken."
 
-#: xfsamba/xfsamba_rm.c:198
+#: xfsamba/xfsamba_rm.c:221
 msgid "Confirm remove?"
 msgstr "Verwijderen bevestigen?"
 
-#: xfsamba/xfsamba_tar.c:114
+#: xfsamba/xfsamba_tar.c:121
 msgid "Tar failed. See diagnostics for details."
 msgstr "Tar mislukt. Zie diagnose voor details."
 
-#: xfsamba/xfsamba_tar.c:119
+#: xfsamba/xfsamba_tar.c:126
 msgid "Tar extraction has completed"
 msgstr "Tar extractie voltooid"
 
-#: xfsamba/xfsamba_tar.c:124
+#: xfsamba/xfsamba_tar.c:131
 msgid "Tar command complete."
 msgstr "Tar commando voltooid."
 
-#: xfsamba/xfsamba_tar.c:146
+#: xfsamba/xfsamba_tar.c:153
 msgid "Please select input tarfile next."
 msgstr "Selecteer invoer tar-bestand."
 
-#: xfsamba/xfsamba_tar.c:150
+#: xfsamba/xfsamba_tar.c:157
 msgid "Please select the output tarfile next."
 msgstr "Selecteer uitvoer tar-bestand"
 
-#: xfsamba/xfsamba_tar.c:184 xfsamba/xfsamba_tar.c:225
+#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
 msgid "Tar cancelled."
 msgstr "Tar afgebroken."
 
-#: xfsamba/xfsamba_tar.c:196
+#: xfsamba/xfsamba_tar.c:203
 msgid "Cannot open tar file"
 msgstr "Kan tar-bestand niet openen"
 
-#: xfsamba/xfsamba_tar.c:207
+#: xfsamba/xfsamba_tar.c:214
 msgid "Cannot create tar file"
 msgstr "Kan tar-bestand niet maken"
 
-#: xfsamba/xfsamba_tar.c:318
+#: xfsamba/xfsamba_tar.c:325
 msgid "create"
 msgstr "maken"
 
-#: xfsamba/xfsamba_tar.c:321
+#: xfsamba/xfsamba_tar.c:328
 msgid "extract"
 msgstr "extraheren"
 
-#: xfsamba/xfsamba_tar.c:364
+#: xfsamba/xfsamba_tar.c:371
 msgid "full"
 msgstr "volledig"
 
-#: xfsamba/xfsamba_tar.c:367
+#: xfsamba/xfsamba_tar.c:374
 msgid "incremental"
 msgstr "cumulatief"
 
-#: xfsamba/xfsamba_tar.c:390
+#: xfsamba/xfsamba_tar.c:397
 msgid "do not reset archive bit"
 msgstr "archive bit niet resetten"
 
-#: xfsamba/xfsamba_tar.c:393
+#: xfsamba/xfsamba_tar.c:400
 msgid "reset archive bit"
 msgstr "archive bit resetten"
 
-#: xfsamba/xfsamba_tar.c:405
+#: xfsamba/xfsamba_tar.c:412
 msgid "Options"
 msgstr "Opties"
 
-#: xfsamba/xfsamba_upload.c:62
+#: xfsamba/xfsamba_upload.c:91
 msgid "File upload failed. See diagnostics for reason."
 msgstr "Bestand uploaden mislukt. Zie diagnose voor reden."
 
-#: xfsamba/xfsamba_upload.c:72
+#: xfsamba/xfsamba_upload.c:101
 msgid "Upload done."
 msgstr "Uploaden geslaagd."
 
-#: xfsamba/xfsamba_upload.c:90
+#: xfsamba/xfsamba_upload.c:119
 msgid "Uploaded file."
 msgstr "Uploaden bestand."
 
-#: xfsamba/xfsamba_upload.c:124
+#: xfsamba/xfsamba_upload.c:153
 msgid "Uploading file..."
 msgstr "Bestand uploaden..."
 
-#: xfsamba/xfsamba_upload.c:130
+#: xfsamba/xfsamba_upload.c:159
 msgid "File upload cancelled."
 msgstr "Bestand uploaden beëindigd."
 
-#: xfsamba/xfsamba_upload.c:140
+#: xfsamba/xfsamba_upload.c:169
 msgid "Specified file does not exist"
 msgstr "Opgegeven bestand bestaat niet"
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:155
+#: xfsamba/xfsamba_upload.c:170 xfsamba/xfsamba_upload.c:184
 msgid "Upload failed."
 msgstr "Bestand uploaden mislukt."
 
@@ -3388,15 +3388,15 @@ msgstr ""
 "\n"
 "Wilt u de wijzigingen opslaan ?"
 
-#: xfumed/xfumed_gui_cb.c:77
+#: xfumed/xfumed_gui_cb.c:76
 msgid "Don't Quit"
 msgstr "Niet Afsluiten"
 
-#: xfumed/xfumed_gui_cb.c:123
+#: xfumed/xfumed_gui_cb.c:121
 msgid "Do you want to delete this entry ?"
 msgstr "Weet u zeker dat u deze optie wilt verwijderen ?"
 
-#: xfumed/xfumed_gui_cb.c:125
+#: xfumed/xfumed_gui_cb.c:123
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"

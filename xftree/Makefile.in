@@ -135,7 +135,7 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ -I../ -I../libs/ 
 
 bin_PROGRAMS = xftree 
 
-xftree_SOURCES =  	entry.c entry.h 	gtk_cpy.c gtk_cpy.h 	gtk_dlg.c gtk_dlg.h 	gtk_dnd.h 	gtk_exec.c gtk_exec.h 	gtk_get.c gtk_get.h 	gtk_prop.c gtk_prop.h 	i18n.h 	io.c io.h 	reg.c reg.h 	top.c top.h 	uri.c uri.h 	xtree.c 	xtree_cfg.h 	xtree_dnd.c xtree_dnd.h 	xtree_gui.c xtree_gui.h 	xtree_misc.c xtree_misc.h
+xftree_SOURCES =  	entry.c entry.h 	gtk_cpy.c gtk_cpy.h 	gtk_dlg.c gtk_dlg.h 	gtk_dnd.h 	gtk_exec.c gtk_exec.h 	gtk_get.c gtk_get.h 	gtk_prop.c gtk_prop.h 	i18n.h 	io.c io.h 	reg.c reg.h 	top.c top.h 	uri.c uri.h 	xtree.c 	xtree_cfg.h 	xtree_dnd.c xtree_dnd.h 	xtree_gui.c xtree_gui.h 	xtree_misc.c xtree_misc.h 	xtree_du.c tubo.c tubo.h 	xtree_mess.c
 
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ ${X_LIBS} ${X_PRE_LIBS} -lXpm
@@ -162,7 +162,8 @@ X_PRE_LIBS = @X_PRE_LIBS@
 xftree_OBJECTS =  entry.$(OBJEXT) gtk_cpy.$(OBJEXT) gtk_dlg.$(OBJEXT) \
 gtk_exec.$(OBJEXT) gtk_get.$(OBJEXT) gtk_prop.$(OBJEXT) io.$(OBJEXT) \
 reg.$(OBJEXT) top.$(OBJEXT) uri.$(OBJEXT) xtree.$(OBJEXT) \
-xtree_dnd.$(OBJEXT) xtree_gui.$(OBJEXT) xtree_misc.$(OBJEXT)
+xtree_dnd.$(OBJEXT) xtree_gui.$(OBJEXT) xtree_misc.$(OBJEXT) \
+xtree_du.$(OBJEXT) tubo.$(OBJEXT) xtree_mess.$(OBJEXT)
 xftree_LDFLAGS = 
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)

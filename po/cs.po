@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.9\n"
-"POT-Creation-Date: 2001-10-08 22:32+0200\n"
+"POT-Creation-Date: 2001-11-08 22:21+0100\n"
 "PO-Revision-Date: 2001-10-08  12:00+0200\n"
 "Last-Translator: Rudolf Ulc <rudolf.ulc@oku-st.cz>\n"
 "Language-Team: CZ      <li@linux.cz>\n"
@@ -27,7 +27,7 @@ msgstr "Výbìr souboru"
 msgid "Font Selection"
 msgstr "Výbìr písma"
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1400 xfdiff/xfdiff_misc.c:130
+#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
 #: xfdiff/xfdiff_misc.c:136
 msgid "OK"
 msgstr "OK"
@@ -36,21 +36,21 @@ msgstr "OK"
 msgid "Message"
 msgstr "Zpráva"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
-#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:127
+#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:265
+#: xfumed/xfumed_gui_cb.c:74 xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr "Ano"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
-#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:128
+#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:296
+#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr "Ne"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:165
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:223
 msgid "Question"
 msgstr "Otázka"
 
-#: libs/xfce-common.c:602
+#: libs/xfce-common.c:603
 msgid "Terminated: "
 msgstr "Ukonèen: "
 
@@ -84,17 +84,17 @@ msgstr "Vybrat ..."
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
-#: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
-#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
-#: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
+#: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
+#: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
+#: xftree/gtk_dlg.c:260 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:291
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 #: xfumed/xfumed_gui.c:359
 msgid "Cancel"
@@ -183,7 +183,7 @@ msgid "Subprocess diagnostic"
 msgstr "Diagnostický dialog subprocesù"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1592 xfglob/xfglob.c:658
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658
 msgid "Clear"
 msgstr "Smazat"
 
@@ -764,9 +764,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Komunikaèní roura byla uzavøena. Ukonèuji..\n"
 
-#: xfce/xfwm.c:434 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
-#: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854 xfwm/xfwm.c:855
-#: xfwm/xfwm.c:856 xfwm/xfwm.c:857 xfwm/xfwm.c:858
+#: xfce/xfwm.c:434 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
+#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
+#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
 msgid "Workspace"
 msgstr "Plocha"
 
@@ -787,7 +787,7 @@ msgstr "kopírovat"
 msgid "link"
 msgstr "linkovat"
 
-#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:267
+#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:271
 #, c-format
 msgid "%d bytes"
 msgstr "%d bajtù"
@@ -796,130 +796,130 @@ msgstr "%d bajtù"
 msgid "Override file?"
 msgstr "Pøepsat soubor?"
 
-#: xftree/gtk_cpy.c:163 xftree/gtk_cpy.c:168 xftree/gtk_cpy.c:345
-#: xftree/gtk_cpy.c:349 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
+#: xftree/gtk_cpy.c:167 xftree/gtk_cpy.c:172 xftree/gtk_cpy.c:349
+#: xftree/gtk_cpy.c:353 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
 msgid "Can't stat() file"
 msgstr "Nemohu zjistit informace o souboru"
 
-#: xftree/gtk_cpy.c:175
+#: xftree/gtk_cpy.c:179
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr "Opravdu chcete %s polo¾ky do"
 
-#: xftree/gtk_cpy.c:217
+#: xftree/gtk_cpy.c:221
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:237
+#: xftree/gtk_cpy.c:241
 msgid "Can't copy device file"
 msgstr "Nemohu kopírovat soubor zaøízení"
 
-#: xftree/gtk_cpy.c:242
+#: xftree/gtk_cpy.c:246
 msgid "Can't copy FIFO"
 msgstr "Nemohu kopírovat FIFO"
 
-#: xftree/gtk_cpy.c:246
+#: xftree/gtk_cpy.c:250
 msgid "Can't copy socket"
 msgstr "Nemohu kopírovat socket"
 
-#: xftree/gtk_cpy.c:281
+#: xftree/gtk_cpy.c:285
 msgid "Too few bytes transferred ! Device full ?"
 msgstr "Velmi málo pøenesených bajtù ! Zaøízení je asi plné ?"
 
-#: xftree/gtk_cpy.c:285
+#: xftree/gtk_cpy.c:289
 msgid "Too many bytes transferred !?"
 msgstr "Je pøeneseno pøíli¹ mnoho bajtù !? "
 
-#: xftree/gtk_cpy.c:331
+#: xftree/gtk_cpy.c:335
 msgid "Source and Target directories are the same"
 msgstr "Zdojové a cílové adresáøe jsou toto¾né"
 
-#: xftree/gtk_cpy.c:382
+#: xftree/gtk_cpy.c:386
 msgid "exists and is not a directory"
 msgstr "existuje a není to adresáø"
 
-#: xftree/gtk_cpy.c:456
+#: xftree/gtk_cpy.c:460
 msgid "XFTree: Copy"
 msgstr "XFTree: Kopírování"
 
-#: xftree/gtk_cpy.c:460
+#: xftree/gtk_cpy.c:464
 msgid "XFTree: Move"
 msgstr "XFTree: Pøesouvání"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:468
 msgid "XFTree: Link"
 msgstr "XFTree: Linkování"
 
-#: xftree/gtk_cpy.c:468
+#: xftree/gtk_cpy.c:472
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Neznámý transferový mód: %d\n"
 
-#: xftree/gtk_cpy.c:474
+#: xftree/gtk_cpy.c:478
 msgid "transfer()"
 msgstr "transfer()"
 
-#: xftree/gtk_cpy.c:474
+#: xftree/gtk_cpy.c:478
 msgid "fatal error"
 msgstr "kritická chyba"
 
-#: xftree/gtk_cpy.c:480
+#: xftree/gtk_cpy.c:484
 msgid "Error getting info from"
 msgstr "Chyba pøi získávání informace z"
 
-#: xftree/gtk_cpy.c:485
+#: xftree/gtk_cpy.c:489
 msgid "Fatal Error"
 msgstr "Kritická chyba"
 
-#: xftree/gtk_cpy.c:485
+#: xftree/gtk_cpy.c:489
 msgid "Can't transfer items to a file"
 msgstr "Nemohu pøesunout polo¾ku do souboru"
 
-#: xftree/gtk_cpy.c:502
+#: xftree/gtk_cpy.c:506
 msgid "Source: "
 msgstr "Zdroj: "
 
-#: xftree/gtk_cpy.c:508
+#: xftree/gtk_cpy.c:512
 msgid "Target: "
 msgstr "Cíl: "
 
-#: xftree/gtk_cpy.c:514
+#: xftree/gtk_cpy.c:518
 msgid "0 bytes transferred"
 msgstr "0 pøenesených bajtù"
 
-#: xftree/gtk_cpy.c:535 xftree/gtk_dlg.c:175
+#: xftree/gtk_cpy.c:539 xftree/gtk_dlg.c:233
 msgid "Error"
 msgstr "Chyba"
 
-#: xftree/gtk_cpy.c:535
+#: xftree/gtk_cpy.c:539
 msgid "Can't transfer a directory to a file"
 msgstr "Nemohu pøenést adresáø do souboru"
 
-#: xftree/gtk_dlg.c:170
+#: xftree/gtk_dlg.c:228
 msgid "Information"
 msgstr "Informace"
 
-#: xftree/gtk_dlg.c:180
+#: xftree/gtk_dlg.c:238
 msgid "Warning"
 msgstr "Varování"
 
-#: xftree/gtk_dlg.c:184
+#: xftree/gtk_dlg.c:242
 msgid "Dialog"
 msgstr "Dialog"
 
-#: xftree/gtk_dlg.c:210
+#: xftree/gtk_dlg.c:270
 msgid "Continue"
 msgstr "Pokraèovat"
 
-#: xftree/gtk_dlg.c:220 xftree/gtk_prop.c:198
+#: xftree/gtk_dlg.c:281 xftree/gtk_prop.c:198
 msgid "Skip"
 msgstr "Pøeskoèit"
 
-#: xftree/gtk_dlg.c:242 xftree/gtk_prop.c:199
+#: xftree/gtk_dlg.c:307 xftree/gtk_prop.c:199
 msgid "All"
 msgstr "V¹echny"
 
-#: xftree/gtk_dlg.c:250
+#: xftree/gtk_dlg.c:317
 msgid "Close"
 msgstr "Zavøít"
 
@@ -929,7 +929,7 @@ msgstr "Otevøít pomocí ..."
 
 #: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
 #: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
-#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:884
+#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr "Spustit program ..."
 
@@ -1244,7 +1244,7 @@ msgid "Toggle Dotfiles"
 msgstr "Zobrazit soubory zaèínající teèkou"
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1167
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
 #: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
 msgid "File"
 msgstr "Soubor"
@@ -1271,7 +1271,7 @@ msgid "Patch viewer ..."
 msgstr "Prohlí¾eè patchù ..."
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:876
+#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:881
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -1281,7 +1281,7 @@ msgid "Go up"
 msgstr "Jít nahoru"
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1269
+#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
 #: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
 msgid "Help"
 msgstr "Pomoc"
@@ -1450,36 +1450,36 @@ msgstr "Nyní provádím diff. Prosím buïte trpìlivý.\n"
 msgid "Finished forking.\n"
 msgstr "Dokonèeno provádìní.\n"
 
-#: xfdiff/xfdiff.c:1323
+#: xfdiff/xfdiff.c:1388
 msgid "Running patch...\n"
 msgstr "Provádím patch...\n"
 
-#: xfdiff/xfdiff.c:1391
+#: xfdiff/xfdiff.c:1456
 msgid "xfdiff version"
 msgstr "xfdiff verze"
 
-#: xfdiff/xfdiff.c:1392
+#: xfdiff/xfdiff.c:1457
 msgid "use xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
 msgstr "pou¾ití xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
 
-#: xfdiff/xfdiff.c:1393
+#: xfdiff/xfdiff.c:1458
 msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
 msgstr ""
 "-p : levý soubor a pravý soubor jsou patchovaný adresáø a patchovaný soubor\n"
 
-#: xfdiff/xfdiff.c:1394
+#: xfdiff/xfdiff.c:1459
 msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
 msgstr "-PN: N je úroveò odstraòování cest (0-9) pro patch (rychlé u¾ití)\n"
 
-#: xfdiff/xfdiff.c:1395
+#: xfdiff/xfdiff.c:1460
 msgid "-R: patch file is reversed (quick toggle)\n"
 msgstr "-R: patch soubor je obráceny (rychlé u¾ití)\n"
 
-#: xfdiff/xfdiff.c:1396
+#: xfdiff/xfdiff.c:1461
 msgid "-N: patch file is not reversed (quick toggle)\n"
 msgstr "-N: patch soubor není obrácený (rychlé u¾ití)\n"
 
-#: xfdiff/xfdiff.c:1397
+#: xfdiff/xfdiff.c:1462
 msgid ""
 "-h, --help : print this message\n"
 "\n"
@@ -1487,11 +1487,11 @@ msgstr ""
 "-h, --help : tiskni tuto zprávu\n"
 "\n"
 
-#: xfdiff/xfdiff.c:1398
+#: xfdiff/xfdiff.c:1463
 msgid "xfdiff (c) Edscott Wilson Garcia 2001, under GNU-GPL\n"
 msgstr "xfdiff (c) Edscott Wilson Garcia 2001, pod GNU-GPL\n"
 
-#: xfdiff/xfdiff.c:1399
+#: xfdiff/xfdiff.c:1464
 msgid ""
 "XFCE modules copyright Olivier Fourdan 1999-2001, under GNU-GPL\n"
 "\n"
@@ -1503,23 +1503,23 @@ msgstr ""
 msgid "Xfdiff diagnostic"
 msgstr "Diagnostika Xfdiff"
 
-#: xfdiff/xfdiff_gui.c:174
+#: xfdiff/xfdiff_gui.c:175
 msgid "A patch file and directory must be selected first!"
 msgstr "Nejdøíve musí být vybrán patch soubor a adresáø!"
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been undone."
 msgstr "Patch byl neúèinný."
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been applied."
 msgstr "Patch byl aplikován."
 
-#: xfdiff/xfdiff_gui.c:201
+#: xfdiff/xfdiff_gui.c:202
 msgid "Please select a name for the patch file in the next dialog."
 msgstr "Vyberte prosím v následujícím dialogu jméno pro patch soubor."
 
-#: xfdiff/xfdiff_gui.c:220
+#: xfdiff/xfdiff_gui.c:221
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
@@ -1529,244 +1529,244 @@ msgstr ""
 "Prosím buïte trpìlivý.\n"
 "Diff bude pracovat"
 
-#: xfdiff/xfdiff_gui.c:227
+#: xfdiff/xfdiff_gui.c:228
 msgid "Patch file could not be created"
 msgstr "Nemohl být vytvoøen patch soubor"
 
-#: xfdiff/xfdiff_gui.c:232 xfdiff/xfdiff_gui.c:237
+#: xfdiff/xfdiff_gui.c:233 xfdiff/xfdiff_gui.c:238
 msgid "Strip level for created patch file="
 msgstr "Úroveò odstraòování cest pro vytváøený patch soubor="
 
-#: xfdiff/xfdiff_gui.c:239
+#: xfdiff/xfdiff_gui.c:240
 msgid " has been created\n"
 msgstr " byl vytvoøen\n"
 
-#: xfdiff/xfdiff_gui.c:253
+#: xfdiff/xfdiff_gui.c:254
 msgid "Patch file creation cancelled"
 msgstr "Vytváøení patch souboru bylo pøeru¹eno"
 
-#: xfdiff/xfdiff_gui.c:403
+#: xfdiff/xfdiff_gui.c:404
 msgid "Line synchronization enabled.\n"
 msgstr "Synchronizace øádkù je zapnuta.\n"
 
-#: xfdiff/xfdiff_gui.c:405
+#: xfdiff/xfdiff_gui.c:406
 msgid "Line synchronization disabled.\n"
 msgstr "Synchronizace øádkù je vypnuta.\n"
 
-#: xfdiff/xfdiff_gui.c:442
+#: xfdiff/xfdiff_gui.c:443
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr "Vìt¹í diagnostika patche je zapnuta.\n"
 
-#: xfdiff/xfdiff_gui.c:444
+#: xfdiff/xfdiff_gui.c:445
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr "Podrobnìj¹í diagnostika patche vypnuta\n"
 
-#: xfdiff/xfdiff_gui.c:463
+#: xfdiff/xfdiff_gui.c:464
 msgid "Line numbers enabled.\n"
 msgstr "Èíslování øádkù je zapnuto.\n"
 
-#: xfdiff/xfdiff_gui.c:465
+#: xfdiff/xfdiff_gui.c:466
 msgid "Line numbers disabled.\n"
 msgstr "Èíslování øádkù je vypnuto.\n"
 
-#: xfdiff/xfdiff_gui.c:477
+#: xfdiff/xfdiff_gui.c:478
 msgid "Polygons will now be filled.\n"
 msgstr "Trojúhelníky budou vyplnìny.\n"
 
-#: xfdiff/xfdiff_gui.c:479
+#: xfdiff/xfdiff_gui.c:480
 msgid "Polygons will now *not* be filled.\n"
 msgstr "Trojúhelníky nebudou vyplnìny.\n"
 
-#: xfdiff/xfdiff_gui.c:493
+#: xfdiff/xfdiff_gui.c:494
 msgid "Patch will now be assumed reversed.\n"
 msgstr "Patch bude pøijat obrácenì.\n"
 
-#: xfdiff/xfdiff_gui.c:495
+#: xfdiff/xfdiff_gui.c:496
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr "Patch nebude pøijat obrácenì.\n"
 
 #.
-#: xfdiff/xfdiff_gui.c:516
+#: xfdiff/xfdiff_gui.c:517
 msgid "Font selection"
 msgstr "Výbìr písma"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:525 xfdiff/xfdiff_misc.c:800
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
 msgid "Could not load specified font\n"
 msgstr "Nemohu naèíst vybraný font\n"
 
-#: xfdiff/xfdiff_gui.c:584
+#: xfdiff/xfdiff_gui.c:585
 msgid "Select highlight background color"
 msgstr "Výbrat barvu pozadí"
 
-#: xfdiff/xfdiff_gui.c:587
+#: xfdiff/xfdiff_gui.c:588
 msgid "Select highlight text color"
 msgstr "Vybrat barvu textu"
 
-#: xfdiff/xfdiff_gui.c:685 xfdiff/xfdiff_gui.c:686
+#: xfdiff/xfdiff_gui.c:686 xfdiff/xfdiff_gui.c:687
 msgid "Warning: cannot read from "
 msgstr "Varování: nelze èíst z "
 
-#: xfdiff/xfdiff_gui.c:690 xfdiff/xfdiff_gui.c:691
+#: xfdiff/xfdiff_gui.c:691 xfdiff/xfdiff_gui.c:692
 msgid "is not in patch file."
 msgstr "není to patch soubor."
 
-#: xfdiff/xfdiff_gui.c:797
+#: xfdiff/xfdiff_gui.c:798
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr "Nemohu vytvoøit defaultní .xfdiffrc\n"
 
-#: xfdiff/xfdiff_gui.c:817
+#: xfdiff/xfdiff_gui.c:818
 msgid "Default configuration has been saved\n"
 msgstr "Byla ulo¾ena defaultní konfigurace\n"
 
-#: xfdiff/xfdiff_gui.c:825
+#: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
 msgstr "To je XFDiff "
 
-#: xfdiff/xfdiff_gui.c:844
+#: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
 msgstr "Není dal¹í rozdíl"
 
-#: xfdiff/xfdiff_gui.c:853
+#: xfdiff/xfdiff_gui.c:854
 msgid "There is no previous difference"
 msgstr "Není pøedchozí rozdíl"
 
-#: xfdiff/xfdiff_gui.c:875
+#: xfdiff/xfdiff_gui.c:876
 msgid "There is no such file"
 msgstr "Není ¾ádný takový soubor"
 
-#: xfdiff/xfdiff_gui.c:885
+#: xfdiff/xfdiff_gui.c:886
 msgid "There is no next file"
 msgstr "Není dal¹í soubor"
 
-#: xfdiff/xfdiff_gui.c:896
+#: xfdiff/xfdiff_gui.c:897
 msgid "There is no previous file"
 msgstr "Není pøedchozí soubor"
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:983
+#: xfdiff/xfdiff_gui.c:984
 msgid "That is a directory (or symlink)"
 msgstr "To je adresáø ( nebo symbolický link)"
 
-#: xfdiff/xfdiff_gui.c:1168
+#: xfdiff/xfdiff_gui.c:1169
 msgid "Select left file"
 msgstr "Vybrat levý soubor"
 
-#: xfdiff/xfdiff_gui.c:1169
+#: xfdiff/xfdiff_gui.c:1170
 msgid "Select right file"
 msgstr "Výbrat pravý soubor"
 
-#: xfdiff/xfdiff_gui.c:1170
+#: xfdiff/xfdiff_gui.c:1171
 msgid "Select patch file"
 msgstr "Výbrat patch soubor"
 
-#: xfdiff/xfdiff_gui.c:1171
+#: xfdiff/xfdiff_gui.c:1172
 msgid "Select directory where to apply patch"
 msgstr "Vybrat adresáø, kam bude aplikován patch"
 
-#: xfdiff/xfdiff_gui.c:1174
+#: xfdiff/xfdiff_gui.c:1175
 msgid "Switch to patch mode"
 msgstr "Pøepnout do patch módu"
 
-#: xfdiff/xfdiff_gui.c:1177
+#: xfdiff/xfdiff_gui.c:1178
 msgid "Switch to diff mode"
 msgstr "Pøepnout do diff módu"
 
-#: xfdiff/xfdiff_gui.c:1182 xfdiff/xfdiff_gui.c:1609
+#: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
 #: xfsamba/xfsamba_gui.c:1022
 msgid "Exit"
 msgstr "Konec"
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:1185
+#: xfdiff/xfdiff_gui.c:1186
 msgid "Diff Settings"
 msgstr "Nastavit diff"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:1188
+#: xfdiff/xfdiff_gui.c:1189
 msgid "Font"
 msgstr "Písmo"
 
-#: xfdiff/xfdiff_gui.c:1189
+#: xfdiff/xfdiff_gui.c:1190
 msgid "Highlight text color"
 msgstr "Zvýraznit barvu textu"
 
-#: xfdiff/xfdiff_gui.c:1190
+#: xfdiff/xfdiff_gui.c:1191
 msgid "Highlight background color"
 msgstr "Zvýraznit barvu pozadí"
 
-#: xfdiff/xfdiff_gui.c:1191
+#: xfdiff/xfdiff_gui.c:1192
 msgid "Fill polygons"
 msgstr "Vyplnit trojúhelníky"
 
-#: xfdiff/xfdiff_gui.c:1192
+#: xfdiff/xfdiff_gui.c:1193
 msgid "Show line numbers"
 msgstr "Ukázat èísla øádkù "
 
-#: xfdiff/xfdiff_gui.c:1194
+#: xfdiff/xfdiff_gui.c:1195
 msgid "Use line synchronization voids"
 msgstr "Pou¾ít prázdné synchronizaèní øádky"
 
-#: xfdiff/xfdiff_gui.c:1200
+#: xfdiff/xfdiff_gui.c:1201
 msgid "Save settings as default"
 msgstr "Ulo¾it nastavení jako defaultní"
 
-#: xfdiff/xfdiff_gui.c:1202
+#: xfdiff/xfdiff_gui.c:1203
 msgid "Patch Settings"
 msgstr "Nastavit patch"
 
-#: xfdiff/xfdiff_gui.c:1204
+#: xfdiff/xfdiff_gui.c:1205
 msgid "Verbose patch diagnostics"
 msgstr "Podrobnìj¹í diagnostika patche"
 
-#: xfdiff/xfdiff_gui.c:1206
+#: xfdiff/xfdiff_gui.c:1207
 msgid "Patch options only active in patch-mode"
 msgstr "Volby pro patch jsou aktivní pouze v patch módu"
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:1211
+#: xfdiff/xfdiff_gui.c:1212
 msgid "Assume patch is reversed"
 msgstr "Pøedpokládaný patch je obrácený"
 
-#: xfdiff/xfdiff_gui.c:1213
+#: xfdiff/xfdiff_gui.c:1214
 msgid "Auto strip level"
 msgstr "Automatická úroveò odstraòování cest"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:92
+#: xfdiff/xfdiff_gui.c:1243 xfumed/xfumed_gui.c:92
 msgid "Actions"
 msgstr "Akce"
 
-#: xfdiff/xfdiff_gui.c:1243
+#: xfdiff/xfdiff_gui.c:1244
 msgid "View differences"
 msgstr "Zobrazit rozdíly"
 
-#: xfdiff/xfdiff_gui.c:1244
+#: xfdiff/xfdiff_gui.c:1245
 msgid "View differences in new"
 msgstr "Zobrazit rozdíly v novém oknì"
 
-#: xfdiff/xfdiff_gui.c:1246
+#: xfdiff/xfdiff_gui.c:1247
 msgid "View patch created differences"
 msgstr "Zobrazit patchem vytvoøené rozdíly"
 
-#: xfdiff/xfdiff_gui.c:1249
+#: xfdiff/xfdiff_gui.c:1250
 msgid "View patch created differences in new"
 msgstr "Zobrazit patchem vytvoøené rozdíly v novém oknì"
 
-#: xfdiff/xfdiff_gui.c:1254
+#: xfdiff/xfdiff_gui.c:1255
 msgid "Create patch file"
 msgstr "Vytvoøit patch soubor"
 
-#: xfdiff/xfdiff_gui.c:1261
+#: xfdiff/xfdiff_gui.c:1262
 msgid "Apply patch to Hard Drive"
 msgstr "Aplikovat patch na hard disk"
 
-#: xfdiff/xfdiff_gui.c:1264
+#: xfdiff/xfdiff_gui.c:1265
 msgid "Undo patch to Hard Drive"
 msgstr "Zru¹it patch na hard disku"
 
-#: xfdiff/xfdiff_gui.c:1270 xfglob/xfglob.c:1921
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
 msgid "About"
 msgstr "O programu"
 
@@ -1777,19 +1777,19 @@ msgstr "O programu"
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1602
+#: xfdiff/xfdiff_gui.c:1603
 msgid "Next difference"
 msgstr "Dal¹í rozdíl"
 
-#: xfdiff/xfdiff_gui.c:1605
+#: xfdiff/xfdiff_gui.c:1606
 msgid "Prev difference"
 msgstr "Pøedchozí rozdíl"
 
-#: xfdiff/xfdiff_gui.c:1606
+#: xfdiff/xfdiff_gui.c:1607
 msgid "Next file"
 msgstr "Dal¹í soubor"
 
-#: xfdiff/xfdiff_gui.c:1607
+#: xfdiff/xfdiff_gui.c:1608
 msgid "Previous file"
 msgstr "Pøedchozí soubor"
 
@@ -1829,7 +1829,7 @@ msgstr "Chyba otevøení souboru: xfdiff konèí"
 msgid "unspecified error: xfdiff_aborting run"
 msgstr "Nespecifikovaná chyba: xfdiff konèí"
 
-#: xfdiff/xfdiff_misc.c:603
+#: xfdiff/xfdiff_misc.c:604
 msgid ""
 "No file was found for patching\n"
 "Either the directory to apply patch is not correctly selected\n"
@@ -1839,7 +1839,7 @@ msgstr ""
 "Adresáø pro aplikaci patche není správnì vybrán nebo je\n"
 "pou¾ita nekorektní úroveò odstraòování cest(default -p0)\n"
 
-#: xfdiff/xfdiff_misc.c:620
+#: xfdiff/xfdiff_misc.c:621
 msgid ""
 "Patch command has produced reject output.\n"
 "See diagnostics window."
@@ -1847,40 +1847,40 @@ msgstr ""
 "Patch pøíkaz vyøadil pøíkaz\n"
 "Podívejte se na diagnostické okno"
 
-#: xfdiff/xfdiff_misc.c:647
+#: xfdiff/xfdiff_misc.c:648
 msgid "No directory was selected!"
 msgstr "®ádný adresáø nebyl vybrán!"
 
 #.
-#: xfdiff/xfdiff_misc.c:661
+#: xfdiff/xfdiff_misc.c:662
 msgid "Directory or file selection"
 msgstr "Výbìr adresáøe nebo souboru"
 
-#: xfdiff/xfdiff_misc.c:696 xfdiff/xfdiff_misc.c:699
+#: xfdiff/xfdiff_misc.c:697 xfdiff/xfdiff_misc.c:700
 msgid "Please select it in the next dialog."
 msgstr "Vyberte ho prosím v následujícím dialogu"
 
-#: xfdiff/xfdiff_misc.c:737
+#: xfdiff/xfdiff_misc.c:738
 msgid "File exists, overwrite?"
 msgstr "Soubor u¾ existuje ! Pøepsat ?"
 
-#: xfdiff/xfdiff_misc.c:741
+#: xfdiff/xfdiff_misc.c:742
 msgid "Cannot open file for write\n"
 msgstr "Nemohu otevøít soubor pro zápis\n"
 
-#: xfdiff/xfdiff_misc.c:923 xfdiff/xfdiff_misc.c:928
+#: xfdiff/xfdiff_misc.c:924 xfdiff/xfdiff_misc.c:929
 msgid "couldn't allocate color"
 msgstr "Nemohu alokovat barvy"
 
-#: xfdiff/xfdiff_misc.c:962 xfdiff/xfdiff_misc.c:986
+#: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr "Patch : "
 
-#: xfdiff/xfdiff_misc.c:965 xfdiff/xfdiff_misc.c:991
+#: xfdiff/xfdiff_misc.c:966 xfdiff/xfdiff_misc.c:992
 msgid " applied at: "
 msgstr " aplikovat na: "
 
-#: xfdiff/xfdiff_misc.c:1011
+#: xfdiff/xfdiff_misc.c:1012
 msgid "Press OK to see patch diffs"
 msgstr "Stisknìte OK pro zobrazení rozdílù patche"
 
@@ -2699,177 +2699,149 @@ msgstr "xfbdmgr - XFCE mana¾ér seznamu"
 msgid "File not found.\n"
 msgstr "Soubor nenalezen\n"
 
-#: xfwm/xfwm.c:846
+#: xfwm/xfwm.c:851
 msgid "&Restart"
 msgstr "&Restartovat"
 
-#: xfwm/xfwm.c:847
+#: xfwm/xfwm.c:852
 msgid "&Quit"
 msgstr "&Ukonèit"
 
-#: xfwm/xfwm.c:860
+#: xfwm/xfwm.c:865
 msgid "&Move"
 msgstr "&Pøesunout"
 
-#: xfwm/xfwm.c:861
+#: xfwm/xfwm.c:866
 msgid "&Resize"
 msgstr "&Zmìnit velikost"
 
-#: xfwm/xfwm.c:862
+#: xfwm/xfwm.c:867
 msgid "(De)&Iconify"
 msgstr "(De)&Ikonifikovat"
 
-#: xfwm/xfwm.c:863
+#: xfwm/xfwm.c:868
 msgid "(Un)&Stick"
 msgstr "(Od)&Lepit"
 
-#: xfwm/xfwm.c:864
+#: xfwm/xfwm.c:869
 msgid "(Un)S&hade"
 msgstr "(Od)R&olovat"
 
-#: xfwm/xfwm.c:865
+#: xfwm/xfwm.c:870
 msgid "(Un)Ma&ximize"
 msgstr "(Od)Ma&ximalizovat"
 
-#: xfwm/xfwm.c:867
+#: xfwm/xfwm.c:872
 msgid "Se&nd to..."
 msgstr "Po&slat do..."
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:873
 msgid "S&witch to..."
 msgstr "Pø&epnout na..."
 
-#: xfwm/xfwm.c:870
+#: xfwm/xfwm.c:875
 msgid "&Close"
 msgstr "&Zavøít"
 
-#: xfwm/xfwm.c:872
+#: xfwm/xfwm.c:877
 msgid "User Menu"
 msgstr "U¾ivatelské menu"
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:878
 msgid "Edit menu..."
 msgstr "Upravit menu ..."
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:882
 msgid "&Mouse..."
 msgstr "&My¹i"
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:883
 msgid "&Backdrop..."
 msgstr "&Pozadí..."
 
-#: xfwm/xfwm.c:879
+#: xfwm/xfwm.c:884
 msgid "&Sound..."
 msgstr "&Zvukù..."
 
-#: xfwm/xfwm.c:881
+#: xfwm/xfwm.c:886
 msgid "&New window"
 msgstr "&Nové okno"
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:887
 msgid "&User Menu"
 msgstr "&U¾ivatelské menu"
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:891
 msgid "&Arrange icons"
 msgstr "&Uspoøádat ikony"
 
-#: xfwm/xfwm.c:887
+#: xfwm/xfwm.c:892
 msgid "&Iconify all"
 msgstr "&Ikonifikovat v¹e"
 
-#: xfwm/xfwm.c:888
+#: xfwm/xfwm.c:893
 msgid "&Refresh"
 msgstr "&Obnovit"
 
-#: xfwm/xfwm.c:889
+#: xfwm/xfwm.c:894
 msgid "Shuffle &Up"
 msgstr "Pøepnout &Nahoøe"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:895
 msgid "Shuffle &Down"
 msgstr "Pøepnout &Dole"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:897
 msgid "&Settings"
 msgstr "&Nastavení"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:899
 msgid "&Quit XFwm"
 msgstr "&Konec XFwm"
 
-#: xfwm/xfwm.c:896
+#: xfwm/xfwm.c:901
 msgid "&Full Screen"
 msgstr "&Celá obrazovka"
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:902
 msgid "&Vertical"
 msgstr "&Vertikálnì"
 
-#: xfwm/xfwm.c:898
+#: xfwm/xfwm.c:903
 msgid "&Horizontal"
 msgstr "&Horizontálnì"
 
-#: xfwm/xfwm.c:1228
+#: xfwm/xfwm.c:1233
 msgid "xfwm terminated: "
 msgstr "xfwm je ukonèeno: "
 
-#: xfsamba/xfsamba.c:311
-msgid "Shares"
-msgstr "Sdílení"
-
-#: xfsamba/xfsamba.c:313
-msgid "Links to other servers"
-msgstr "Seznam serverù"
-
-#: xfsamba/xfsamba.c:315
-msgid "Links to other workgroups"
-msgstr "Seznam pracovních skupin"
-
-#: xfsamba/xfsamba.c:370
-msgid "Query done."
-msgstr "Dotaz proveden."
-
-#: xfsamba/xfsamba.c:372
-msgid "Query failed. Machine may be down."
-msgstr "Dotaz selhal. Poèítaè mù¾e být vypnut."
-
-#: xfsamba/xfsamba.c:390 xfsamba/xfsamba_list.c:184
-msgid "Query password has been requested."
-msgstr "®ádost o heslo pro dotaz."
-
-#: xfsamba/xfsamba.c:554
-msgid "Querying"
-msgstr "Dotazování"
-
-#: xfsamba/xfsamba.c:648
+#: xfsamba/xfsamba.c:223
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Samba selhala ! Xfsamba nemù¾e nalézt soubor:"
 
-#: xfsamba/xfsamba.c:656
+#: xfsamba/xfsamba.c:231
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr ""
 "(prosím nainstalujte Sambu nebo nastavte jinak promìnnou prostøedí PATH)"
 
-#: xfsamba/xfsamba_download.c:63
+#: xfsamba/xfsamba_download.c:87
 msgid "File download failed. See diagnostics for reason."
 msgstr "Download souboru selhal. Podívejte se do diagnostiky na dùvod."
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:67
+#: xfsamba/xfsamba_download.c:91
 msgid "Download done."
 msgstr "Download proveden."
 
-#: xfsamba/xfsamba_download.c:103
+#: xfsamba/xfsamba_download.c:127
 msgid "Downloading file..."
 msgstr "Downloaduji soubor..."
 
-#: xfsamba/xfsamba_download.c:116
+#: xfsamba/xfsamba_download.c:140
 msgid "File download cancelled."
 msgstr "Download souboru je pøeru¹en"
 
-#: xfsamba/xfsamba_download.c:124
+#: xfsamba/xfsamba_download.c:148
 msgid "Download failed."
 msgstr "Download selhal"
 
@@ -2959,7 +2931,7 @@ msgstr "Nový adresáø ..."
 msgid "Delete..."
 msgstr "Smazat ..."
 
-#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:434
+#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:441
 msgid "Tar..."
 msgstr "Tar..."
 
@@ -3114,32 +3086,60 @@ msgstr "Umístìní známých pracovních skupin : "
 msgid "Welcome to xfsamba."
 msgstr "Vítá vás xfsamba."
 
-#: xfsamba/xfsamba_list.c:179
+#: xfsamba/xfsamba_list.c:188
 msgid "Retrieve done."
 msgstr "Obnovení provedeno."
 
-#: xfsamba/xfsamba_list.c:223
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+msgid "Query password has been requested."
+msgstr "®ádost o heslo pro dotaz."
+
+#: xfsamba/xfsamba_list.c:232
 msgid "List failed."
 msgstr "Výpis selhal."
 
-#: xfsamba/xfsamba_list.c:242
+#: xfsamba/xfsamba_list.c:251
 msgid "Retreiving..."
 msgstr "Obnovuji..."
 
-#: xfsamba/xfsamba_lookup.c:43 xfsamba/xfsamba_lookup.c:44
-#: xfsamba/xfsamba_masterresolve.c:204 xfsamba/xfsamba_masterresolve.c:205
+#: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
+#: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 msgid "Resolved"
 msgstr "Nalezeno"
 
-#: xfsamba/xfsamba_lookup.c:97 xfsamba/xfsamba_lookup.c:98
+#: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
 msgid "Resolving for"
 msgstr "Nalezeno pro"
 
-#: xfsamba/xfsamba_masterlookup.c:69
+#: xfsamba/xfsamba_smblookup.c:84
+msgid "Shares"
+msgstr "Sdílení"
+
+#: xfsamba/xfsamba_smblookup.c:86
+msgid "Links to other servers"
+msgstr "Seznam serverù"
+
+#: xfsamba/xfsamba_smblookup.c:88
+msgid "Links to other workgroups"
+msgstr "Seznam pracovních skupin"
+
+#: xfsamba/xfsamba_smblookup.c:143
+msgid "Query done."
+msgstr "Dotaz proveden."
+
+#: xfsamba/xfsamba_smblookup.c:145
+msgid "Query failed. Machine may be down."
+msgstr "Dotaz selhal. Poèítaè mù¾e být vypnut."
+
+#: xfsamba/xfsamba_smblookup.c:324
+msgid "Querying"
+msgstr "Dotazování"
+
+#: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
 msgstr "®ádný master browser není nalezen. Podívejte se na diagnostiku."
 
-#: xfsamba/xfsamba_masterlookup.c:70
+#: xfsamba/xfsamba_masterlookup.c:78
 msgid ""
 "No master browser found.\n"
 "Please type a computer name at location and hit RETURN"
@@ -3147,28 +3147,28 @@ msgstr ""
 "®ádný master browser není nalezen.\n"
 "Prosím napi¹te jméno poèítaèe do pole Jméno serveru a stisknìte return"
 
-#: xfsamba/xfsamba_masterlookup.c:126
+#: xfsamba/xfsamba_masterlookup.c:134
 msgid "Looking for master browsers..."
 msgstr "Rozhlí¾ím se po master browserech..."
 
-#: xfsamba/xfsamba_masterresolve.c:97
+#: xfsamba/xfsamba_masterresolve.c:110
 msgid "Please provide netbios name for master browser at "
 msgstr "Prosím zadejte netbios jméno master browseru "
 
-#: xfsamba/xfsamba_masterresolve.c:166
+#: xfsamba/xfsamba_masterresolve.c:179
 msgid "Master browser netbios name must be provided."
 msgstr "Musí být zadáno netbios jméno master browseru."
 
-#: xfsamba/xfsamba_masterresolve.c:214 xfsamba/xfsamba_masterresolve.c:215
-#: xfsamba/xfsamba_masterresolve.c:221
+#: xfsamba/xfsamba_masterresolve.c:227 xfsamba/xfsamba_masterresolve.c:228
+#: xfsamba/xfsamba_masterresolve.c:234
 msgid "No status response"
 msgstr "®ádná odezva o stavu"
 
-#: xfsamba/xfsamba_masterresolve.c:233
+#: xfsamba/xfsamba_masterresolve.c:246
 msgid "Master browser not resolved. Use location box to browse."
 msgstr "Master browser není nalezen. Pou¾ijte k prohlí¾ení pole se jménem."
 
-#: xfsamba/xfsamba_masterresolve.c:234
+#: xfsamba/xfsamba_masterresolve.c:247
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
@@ -3176,143 +3176,143 @@ msgstr ""
 "®ádný master browser není nalezen.\n"
 "Prosím napi¹te jméno poèítaèe do pole Jméno serveru a stisknìte return"
 
-#: xfsamba/xfsamba_masterresolve.c:288 xfsamba/xfsamba_masterresolve.c:289
+#: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
 msgid "Resolving"
 msgstr "Hledání"
 
-#: xfsamba/xfsamba_mkdir.c:74
+#: xfsamba/xfsamba_mkdir.c:102
 msgid "Please provide a name for the new directory at"
 msgstr "Prosím zadejte jméno a heslo pro nový adresáø v"
 
-#: xfsamba/xfsamba_mkdir.c:172
+#: xfsamba/xfsamba_mkdir.c:200
 msgid "Directory creation failed. See diagnostics for details."
 msgstr "Vytvoøení adresáøe selhalo. Podívejte se do diagnostiky na dùvod ."
 
-#: xfsamba/xfsamba_mkdir.c:181
+#: xfsamba/xfsamba_mkdir.c:209
 msgid "Directory created."
 msgstr "Adresáø vytvoøen"
 
-#: xfsamba/xfsamba_mkdir.c:222
+#: xfsamba/xfsamba_mkdir.c:250
 msgid "Create directory cancelled."
 msgstr "Vytváøení adresáøe bylo pøeru¹eno"
 
-#: xfsamba/xfsamba_mkdir.c:233
+#: xfsamba/xfsamba_mkdir.c:261
 msgid "Create directory failed."
 msgstr "Vytváøení adresáøe selhalo."
 
-#: xfsamba/xfsamba_mkdir.c:264
+#: xfsamba/xfsamba_mkdir.c:292
 msgid "Creating dir..."
 msgstr "Vytváøím adresáø..."
 
-#: xfsamba/xfsamba_rm.c:63
+#: xfsamba/xfsamba_rm.c:86
 msgid "Remove failed. See diagnostics for details."
 msgstr "Mazání selhalo. Podívejte se do diagnostiky na dùvod."
 
-#: xfsamba/xfsamba_rm.c:69
+#: xfsamba/xfsamba_rm.c:92
 msgid "Remove complete."
 msgstr "Mazání je kompletní."
 
-#: xfsamba/xfsamba_rm.c:103
+#: xfsamba/xfsamba_rm.c:126
 msgid "Removing..."
 msgstr "Ma¾u..."
 
-#: xfsamba/xfsamba_rm.c:108
+#: xfsamba/xfsamba_rm.c:131
 msgid "Sorry, top level shares cannot be removed."
 msgstr "Lituji, ale nejvy¹¹í úroveò sdílení nelze smazat."
 
-#: xfsamba/xfsamba_rm.c:111 xfsamba/xfsamba_rm.c:164
+#: xfsamba/xfsamba_rm.c:134 xfsamba/xfsamba_rm.c:187
 msgid "Remove cancelled."
 msgstr "Mazání je pøeru¹eno."
 
-#: xfsamba/xfsamba_rm.c:198
+#: xfsamba/xfsamba_rm.c:221
 msgid "Confirm remove?"
 msgstr "Potvrdíte mazání?"
 
-#: xfsamba/xfsamba_tar.c:114
+#: xfsamba/xfsamba_tar.c:121
 msgid "Tar failed. See diagnostics for details."
 msgstr "Tar selhal. Podívejte se do diagnostiky na dùvod."
 
-#: xfsamba/xfsamba_tar.c:119
+#: xfsamba/xfsamba_tar.c:126
 msgid "Tar extraction has completed"
 msgstr "Rozbalení tarem je ukonèeno"
 
-#: xfsamba/xfsamba_tar.c:124
+#: xfsamba/xfsamba_tar.c:131
 msgid "Tar command complete."
 msgstr "Pøíkaz tar je ukonèen"
 
-#: xfsamba/xfsamba_tar.c:146
+#: xfsamba/xfsamba_tar.c:153
 msgid "Please select input tarfile next."
 msgstr "Vyberte prosím soubory pro tar."
 
-#: xfsamba/xfsamba_tar.c:150
+#: xfsamba/xfsamba_tar.c:157
 msgid "Please select the output tarfile next."
 msgstr "Vyberte prosím výstupní soubor pro tar."
 
-#: xfsamba/xfsamba_tar.c:184 xfsamba/xfsamba_tar.c:225
+#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
 msgid "Tar cancelled."
 msgstr "Tar je pøeru¹en."
 
-#: xfsamba/xfsamba_tar.c:196
+#: xfsamba/xfsamba_tar.c:203
 msgid "Cannot open tar file"
 msgstr "Nemohu otevøít tar soubor"
 
-#: xfsamba/xfsamba_tar.c:207
+#: xfsamba/xfsamba_tar.c:214
 msgid "Cannot create tar file"
 msgstr "Nemohu vytvoøit tar soubor"
 
-#: xfsamba/xfsamba_tar.c:318
+#: xfsamba/xfsamba_tar.c:325
 msgid "create"
 msgstr "vytvoøit"
 
-#: xfsamba/xfsamba_tar.c:321
+#: xfsamba/xfsamba_tar.c:328
 msgid "extract"
 msgstr "vybalit"
 
-#: xfsamba/xfsamba_tar.c:364
+#: xfsamba/xfsamba_tar.c:371
 msgid "full"
 msgstr "plné"
 
-#: xfsamba/xfsamba_tar.c:367
+#: xfsamba/xfsamba_tar.c:374
 msgid "incremental"
 msgstr "pøidávat"
 
-#: xfsamba/xfsamba_tar.c:390
+#: xfsamba/xfsamba_tar.c:397
 msgid "do not reset archive bit"
 msgstr "neru¹it archivní bit"
 
-#: xfsamba/xfsamba_tar.c:393
+#: xfsamba/xfsamba_tar.c:400
 msgid "reset archive bit"
 msgstr "zru¹it archivní bit"
 
-#: xfsamba/xfsamba_tar.c:405
+#: xfsamba/xfsamba_tar.c:412
 msgid "Options"
 msgstr "Volby"
 
-#: xfsamba/xfsamba_upload.c:62
+#: xfsamba/xfsamba_upload.c:91
 msgid "File upload failed. See diagnostics for reason."
 msgstr "Upload souboru selhal. Podívejte se do diagnostiky na dùvod."
 
-#: xfsamba/xfsamba_upload.c:72
+#: xfsamba/xfsamba_upload.c:101
 msgid "Upload done."
 msgstr "Upload dokonèen."
 
-#: xfsamba/xfsamba_upload.c:90
+#: xfsamba/xfsamba_upload.c:119
 msgid "Uploaded file."
 msgstr "Uploadovaný soubor."
 
-#: xfsamba/xfsamba_upload.c:124
+#: xfsamba/xfsamba_upload.c:153
 msgid "Uploading file..."
 msgstr "Uploaduji soubor..."
 
-#: xfsamba/xfsamba_upload.c:130
+#: xfsamba/xfsamba_upload.c:159
 msgid "File upload cancelled."
 msgstr "Upload souboru je pøeru¹en."
 
-#: xfsamba/xfsamba_upload.c:140
+#: xfsamba/xfsamba_upload.c:169
 msgid "Specified file does not exist"
 msgstr "Specifikovaný soubor neexistuje"
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:155
+#: xfsamba/xfsamba_upload.c:170 xfsamba/xfsamba_upload.c:184
 msgid "Upload failed."
 msgstr "Upload selhal."
 
@@ -3386,15 +3386,15 @@ msgstr ""
 "\n"
 "Chcete ulo¾it zmìny ?"
 
-#: xfumed/xfumed_gui_cb.c:77
+#: xfumed/xfumed_gui_cb.c:76
 msgid "Don't Quit"
 msgstr "Zpìt"
 
-#: xfumed/xfumed_gui_cb.c:123
+#: xfumed/xfumed_gui_cb.c:121
 msgid "Do you want to delete this entry ?"
 msgstr "Opravdu chcete zru¹it tuto polo¾ku ?"
 
-#: xfumed/xfumed_gui_cb.c:125
+#: xfumed/xfumed_gui_cb.c:123
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"

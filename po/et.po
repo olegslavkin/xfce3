@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.8\n"
-"POT-Creation-Date: 2001-07-11 22:25+0200\n"
+"POT-Creation-Date: 2001-11-08 22:21+0100\n"
 "PO-Revision-Date: 2001-10-09 21:42+0200\n"
 "Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -14,89 +14,93 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libs/colorselect.c:93 xfclock/xfclock_colorsel.c:79
-#: xfdiff/xfdiff_colorsel.c:87
+#: libs/colorselect.c:91 xfclock/xfclock_colorsel.c:77
+#: xfdiff/xfdiff_colorsel.c:85
 msgid "Select Color"
 msgstr "Valige värv"
 
-#: libs/fileselect.c:80
+#: libs/fileselect.c:79
 msgid "Select File"
 msgstr "Valige fail"
 
-#: libs/fontselection.c:82
+#: libs/fontselection.c:80
 msgid "Font Selection"
 msgstr "Tekstikuju valik"
 
-#: libs/xfce-common.c:264 xfdiff/xfdiff_gui.c:1191 xfdiff/xfdiff_misc.c:129
-#: xfdiff/xfdiff_misc.c:139
+#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
+#: xfdiff/xfdiff_misc.c:136
 msgid "OK"
 msgstr "Olgu"
 
-#: libs/xfce-common.c:279
+#: libs/xfce-common.c:266
 msgid "Message"
 msgstr "Teade"
 
-#: libs/xfce-common.c:400 xfdiff/xfdiff_misc.c:134 xftree/gtk_dlg.c:217
+#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:265
+#: xfumed/xfumed_gui_cb.c:74 xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr "Jah"
 
-#: libs/xfce-common.c:400 xfdiff/xfdiff_misc.c:134 xftree/gtk_dlg.c:249
+#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:296
+#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr "Ei"
 
-#: libs/xfce-common.c:415 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:175
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:223
 msgid "Question"
 msgstr "Küsimus"
 
-#: libs/xfce-common.c:628
+#: libs/xfce-common.c:603
 msgid "Terminated: "
 msgstr "Kõrvaldatud: "
 
-#: libs/xpmext.c:421 libs/xpmext.c:443
+#: libs/xpmext.c:377 libs/xpmext.c:398
 #, c-format
 msgid "*** WARNING ***: Cannot load image file %s\n"
 msgstr "*** HOIATUS ***: Ei suuda lugeda pildi faili %s\n"
 
-#: libs/xpmext.c:473
+#: libs/xpmext.c:419
 #, c-format
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
 msgstr "*** HOIATUS ***: Ei suuda lugeda pildi faili %s\n"
 
-#: xfce/action.c:63
+#: xfce/action.c:64
 msgid "Define action ..."
 msgstr "Defineeri tegevus ..."
 
-#: xfce/action.c:110 xfce/modify.c:168
+#: xfce/action.c:109 xfce/modify.c:160
 msgid "Command Line :"
 msgstr "Käsklus :"
 
-#: xfce/action.c:122
+#: xfce/action.c:118
 msgid "Icon Style :"
 msgstr "Ikooni stiil :"
 
-#: xfbd/xfbd.c:550 xfce/action.c:155 xfce/action.c:168 xfce/modify.c:232
-#: xfce/modify.c:245 xfsound/xfsound.c:445
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:232
+#: xfce/modify.c:240 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr "Lehitse ..."
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
-#: xfce/setup.c:1583 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
-#: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
-#: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
-#: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
-#: xftree/gtk_dlg.c:213 xftree/gtk_exec.c:157 xftree/gtk_prop.c:187
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
+#: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
+#: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
+#: xftree/gtk_dlg.c:260 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
+#: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Olgu"
 
-#: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
-#: xfce/setup.c:1607 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
-#: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
-#: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
+#: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:291
+#: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
+#: xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Loobu"
 
-#: xfce/action_cb.c:81
+#: xfce/action_cb.c:77
 msgid "You must provide the command to execute !"
 msgstr "Te peate andma käsu mida käivitada !"
 
@@ -109,7 +113,7 @@ msgstr ""
 "XFce : Konfiguratsiooni failis on süntaksi viga\n"
 "(%s)\n"
 
-#: xfce/configfile.c:55 xfclock/xfclock_config.c:55
+#: xfce/configfile.c:55 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
@@ -126,7 +130,7 @@ msgstr ""
 "XFce : Konfiguratsiooni failis andmed ei klapi\n"
 "(%s)\n"
 
-#: xfce/configfile.c:63 xfclock/xfclock_config.c:64
+#: xfce/configfile.c:63 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
@@ -134,32 +138,27 @@ msgstr ""
 "Konfiguratsiooni failis andmed ei klapi\n"
 "Katkestan"
 
-#: xfce/configfile.c:188 xfclock/xfclock_config.c:134
+#: xfce/configfile.c:206 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr "Ei suuda luua faili"
 
-#: xfce/configfile.c:347
+#: xfce/configfile.c:353
 msgid "Cannot reset configuration file"
 msgstr "Ei suuda taasseada konfiguratsiooni faili."
 
-#: xfce/configfile.c:350
+#: xfce/configfile.c:356
 msgid "Creating new config file...\n"
 msgstr "Loon uue konfiguratsioonifaili... \n"
 
-#: xfce/configfile.c:561 xfce/configfile.c:570 xfce/configfile.c:578
-#, c-format
-msgid "XFce : %s File not found.\n"
-msgstr "XFce : %s Faili ei leidu.\n"
-
-#: xfce/configfile.c:577 xfce/configfile.c:584
+#: xfce/configfile.c:540 xfce/configfile.c:550
 msgid "Cannot open configuration file"
 msgstr "Ei suuda avada konfiguratsiooni faili"
 
-#: xfce/configfile.c:590
+#: xfce/configfile.c:556
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Fail ei paista olevat XFce 3 -me konfiguratsioonifail !"
 
-#: xfce/configfile.c:592
+#: xfce/configfile.c:557
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
@@ -167,80 +166,85 @@ msgstr ""
 "Kas sa tahad konfiguratsiooni faili uuesti seada  ?\n"
 " \t(Eelmine fail salvestatkse koos \".orig\" laiendiga)"
 
-#: xfce/configfile.c:602
+#: xfce/configfile.c:568
 msgid "Cannot open new config, Giving up..."
 msgstr "Ei suuda avada uut konfiguratsiooni, Annan alla..."
 
-#: xfce/configfile.c:603
+#: xfce/configfile.c:569
 msgid "Cannot load configuration file"
 msgstr "Eis suuda lugeda konfiguratsiooni faili"
 
-#: xfce/configfile.c:610
+#: xfce/configfile.c:575
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Ei suuda kasutada XFce konfiguratsiooni faili vanu versioone"
 
-#: xfce/diagnostic.c:91 xfce/diagnostic.c:136
+#: xfce/diagnostic.c:88 xfce/diagnostic.c:124
 msgid "Subprocess diagnostic"
 msgstr "Alamprotsessi diagnostika"
 
-#: xfbd/xfbd.c:570 xfce/diagnostic.c:116 xfdiff/xfdiff_diag.c:186
-#: xfdiff/xfdiff_gui.c:1386 xfglob/xfglob.c:675
+#: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658
 msgid "Clear"
 msgstr "Puhasta"
 
-#: xfce/diagnostic.c:121 xfdiff/xfdiff_diag.c:191 xfglob/xfglob.c:689
+#: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
 msgid "Dismiss"
 msgstr "Pole enam vaja"
 
-#: xfce/info.c:77
+#: xfce/info.c:76
 msgid "Info ..."
 msgstr "Teave ..."
 
-#: xfbd/xfbd.c:447 xfce/info.c:108 xfce/modify.c:134 xfce/popup.c:147
-#: xfce/popup.c:315 xfce/startup.c:95 xfce/xfce.c:223 xfce/xfce.c:293
-#: xfce/xfce.c:595 xfce/xfce.c:634 xfce/xfce.c:777 xfce/xfce.c:806
-#: xfce/xfce.c:848 xfce/xfce.c:939 xfce/xfce.c:967 xfglob/xfglob.c:563
-#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:940
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
+#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
+#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
+#: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr "Ei saa luua rasterpilti"
 
-#: xfce/info.c:125
+#: xfce/info.c:121
 msgid "By Olivier Fourdan (c) 1997-2000"
 msgstr "Oliver Fourdan'ilt (c) 1997-2000"
 
-#: xfce/info.c:193
+#: xfce/info.c:184
 msgid "Accept"
 msgstr "Nõusolek"
 
-#: xfce/modify.c:70 xfce/modify.c:372
+#: xfce/modify.c:74 xfce/modify.c:352
 msgid "Modify Item ..."
 msgstr "Modifitseeri eset ..."
 
-#: xfce/modify.c:142
+#: xfce/modify.c:138
 msgid "Preview Icon"
 msgstr "Ikooni eelvaade"
 
-#: xfce/modify.c:180
+#: xfce/modify.c:169
 msgid "Icon File :"
 msgstr "Ikooni fail :"
 
-#: xfce/modify.c:192
+#: xfce/modify.c:178
 msgid "Label :"
 msgstr "Pealkiri :"
 
-#: xfbd/xfbdmgr.c:178 xfce/modify.c:294 xfumed/interface.c:389
+#: xfce/modify.c:187
+#, fuzzy
+msgid "Position :"
+msgstr "Asukoht : "
+
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:285 xfumed/xfumed_gui.c:136
 msgid "Remove"
 msgstr "Eemalda"
 
-#: xfbd/xfbdmgr.c:172 xfce/modify.c:353
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:335
 msgid "Add Item ..."
 msgstr "Lisa programm ..."
 
-#: xfce/modify_cb.c:118
+#: xfce/modify_cb.c:115
 msgid "Are you sure you want to remove this entry ?"
 msgstr "Olete te kindel, et soovite eemaldada seda sissekannet ?"
 
-#: xfce/modify_cb.c:159 xfce/modify_cb.c:191
+#: xfce/modify_cb.c:156 xfce/modify_cb.c:185
 msgid ""
 "You must provide the command\n"
 "and the label, at least !"
@@ -248,27 +252,27 @@ msgstr ""
 "Te peate vähemalt andma käsu\n"
 "ja pealkirja !"
 
-#: xfce/popup.c:277
+#: xfce/popup.c:190
 msgid "Add a new entry..."
 msgstr "Lisa uus sissekanne..."
 
-#: xfce/popup.c:326
+#: xfce/popup.c:219
 msgid "Add icon..."
 msgstr "Lisa programm"
 
-#: xfce/popup.c:366
+#: xfce/popup.c:245
 msgid "Click to tear off popup menu"
 msgstr "Kliki rebitaval püstmenüül"
 
-#: xfce/popup_cb.c:203
+#: xfce/popup_cb.c:192
 msgid "Cannot find the file you dropped !"
 msgstr "Ei leia teie veetud faili"
 
-#: xfce/screen.c:59
+#: xfce/screen.c:60
 msgid "Screen label ..."
 msgstr "Ekraani pealkiri ..."
 
-#: xfce/screen.c:106
+#: xfce/screen.c:105
 msgid "Define screen label :"
 msgstr "Defineeri ekraani pealkiri :"
 
@@ -328,236 +332,236 @@ msgstr "Heli"
 msgid "External..."
 msgstr "Väline..."
 
-#: xfce/setup.c:283
+#: xfce/setup.c:280
 msgid "Setup"
 msgstr "Seade"
 
-#: xfce/setup.c:374
+#: xfce/setup.c:359
 msgid "GTK theme engine : "
 msgstr "GTK teeama mootor : "
 
-#: xfce/setup.c:403
+#: xfce/setup.c:381
 msgid "Apply colors to all applications"
 msgstr "Lisa värvid kõigile applicatsioonidele"
 
-#: xfbd/xfbdmgr.c:166 xfce/setup.c:430
+#: xfbd/xfbdmgr.c:167 xfce/setup.c:401
 msgid "Load ..."
 msgstr "Lae ..."
 
-#: xfbd/xfbdmgr.c:160 xfce/setup.c:444
+#: xfbd/xfbdmgr.c:161 xfce/setup.c:409
 msgid "Save ..."
 msgstr "Salvesta ..."
 
-#: xfce/setup.c:458
+#: xfce/setup.c:417
 msgid "Default"
 msgstr "Vaikimisi"
 
-#: xfce/setup.c:492
+#: xfce/setup.c:439
 msgid "Repaint root window of workspace"
 msgstr "Puhasta töökoha alusaken"
 
-#: xfce/setup.c:505
+#: xfce/setup.c:446
 msgid "Use gradient color as wallpaper"
 msgstr "Kasuta muutuvat taustavärvi"
 
-#: xfce/setup.c:518
+#: xfce/setup.c:453
 msgid "Use tear-off menus"
 msgstr "Kasuta rippmenüüsid"
 
-#: xfce/setup.c:531
+#: xfce/setup.c:460
 msgid "Show subprocess diagnostic dialog"
 msgstr "Näita alamprotsessi diagnostika dialoogi"
 
-#: xfce/setup.c:543
+#: xfce/setup.c:467
 msgid "Panel layer"
 msgstr "Paneeli kõrgus"
 
-#: xfce/setup.c:561
+#: xfce/setup.c:481
 msgid "Bottom"
 msgstr "All"
 
-#: xfce/setup.c:584 xfce/setup.c:1173
+#: xfce/setup.c:499 xfce/setup.c:878
 msgid "Top"
 msgstr "Ülal"
 
-#: xfce/setup.c:594
+#: xfce/setup.c:506
 msgid "Clock"
 msgstr "Kell"
 
-#: xfce/setup.c:612
+#: xfce/setup.c:520
 msgid "Use digital clock on panel"
 msgstr "Kasuta digitaalset kellanäitu"
 
-#: xfce/setup.c:626
+#: xfce/setup.c:527
 msgid "Use military time (24 hours)"
 msgstr "Kasuta 24 tunnilist ajanäitu"
 
-#: xfce/setup.c:638
+#: xfce/setup.c:534
 msgid "Tooltips"
 msgstr "Märkused"
 
-#: xfce/setup.c:657
+#: xfce/setup.c:548
 msgid "Tooltips delay (ms.) : "
 msgstr "Märkuste viivitus (ms.) :"
 
-#: xfce/setup.c:685
+#: xfce/setup.c:563
 msgid "Virtual Screens"
 msgstr "Virtuaalekraanid"
 
-#: xfce/setup.c:703
+#: xfce/setup.c:577
 msgid "Number of virtual desktops : "
 msgstr "Virtuaalekraanide arv :"
 
-#: xfce/setup.c:728
+#: xfce/setup.c:591
 msgid "Popups & Icons"
 msgstr "Püstmenüüd ja ikoonid"
 
-#: xfce/setup.c:746
+#: xfce/setup.c:605
 msgid "Number of popup menus : "
 msgstr "Püstmenüüde arv"
 
-#: xfce/setup.c:771
+#: xfce/setup.c:619
 msgid "Size of icons on panel"
 msgstr "Ikoonide suurus paneelil"
 
-#: xfce/setup.c:790 xfce/setup.c:848
+#: xfce/setup.c:633 xfce/setup.c:668
 msgid "Large"
 msgstr "Suur"
 
-#: xfce/setup.c:804 xfce/setup.c:862
+#: xfce/setup.c:640 xfce/setup.c:675
 msgid "Medium"
 msgstr "Keskmine"
 
-#: xfce/setup.c:817 xfce/setup.c:875
+#: xfce/setup.c:647 xfce/setup.c:682
 msgid "Small"
 msgstr "Väike"
 
-#: xfce/setup.c:829
+#: xfce/setup.c:654
 msgid "Size of icons on pop-up menus"
 msgstr "Ikoonide suurus püstmenüüs"
 
-#: xfce/setup.c:887
+#: xfce/setup.c:689
 msgid "Font style"
 msgstr "Tekstikuju stiil"
 
-#: xfce/setup.c:917 xfce/setup.c:1374 xfce/setup.c:1388 xfce/setup.c:1402
+#: xfce/setup.c:710 xfce/setup.c:1005 xfce/setup.c:1012 xfce/setup.c:1019
 msgid "Browse..."
 msgstr "Lehitse..."
 
-#: xfce/setup.c:952
+#: xfce/setup.c:734
 msgid "Click to focus windows"
 msgstr "Akna fokusserimiseks toksa"
 
-#: xfce/setup.c:965
+#: xfce/setup.c:741
 msgid "Automatically focus on new window"
 msgstr "Fokuseeri uuele aknale automaatselt"
 
-#: xfce/setup.c:978
+#: xfce/setup.c:748
 msgid "Auto raise windows"
 msgstr "Too aken automaatselt esile"
 
-#: xfce/setup.c:992
+#: xfce/setup.c:755
 msgid "Show contents of window while moving"
 msgstr "Näita akna liikumisel akna sisu"
 
-#: xfce/setup.c:1007
+#: xfce/setup.c:762
 msgid "Show contents of window while resizing"
 msgstr "Näita akna sisu suuruse muutmisel"
 
-#: xfce/setup.c:1022
+#: xfce/setup.c:769
 msgid "Use gradient color for the active window"
 msgstr "Kasuta aktiivse akna näitamiseks muutuvat värvi"
 
-#: xfce/setup.c:1036
+#: xfce/setup.c:777
 msgid "Use gradient color for inactive windows"
 msgstr "Kasuta passiivse akna näitamiseks muutuvat värvi"
 
-#: xfce/setup.c:1074
+#: xfce/setup.c:801
 msgid "Window border style : "
 msgstr "Aknaraami stiil : "
 
-#: xfce/setup.c:1117
+#: xfce/setup.c:839
 msgid "Window snapping size (0 disable) : "
 msgstr "Akna napsamise kaugus (0 keelab) : "
 
-#: xfce/setup.c:1156
+#: xfce/setup.c:866
 msgid "Icon position"
 msgstr "Ikooni asukoht"
 
-#: xfce/setup.c:1188 xfmouse/xfmouse.c:209
+#: xfce/setup.c:885 xfmouse/xfmouse.c:206
 msgid "Left"
 msgstr "Vasakul"
 
-#: xfce/setup.c:1203
+#: xfce/setup.c:892
 msgid "bottom"
 msgstr "All"
 
-#: xfce/setup.c:1218 xfmouse/xfmouse.c:220
+#: xfce/setup.c:899 xfmouse/xfmouse.c:216
 msgid "Right"
 msgstr "Paremal"
 
-#: xfce/setup.c:1334
+#: xfce/setup.c:978
 msgid "Title font :"
 msgstr "Pealkirja teksti kuju :"
 
-#: xfce/setup.c:1347
+#: xfce/setup.c:987
 msgid "Icon font :"
 msgstr "Ikooni teksti kuju :"
 
-#: xfce/setup.c:1360
+#: xfce/setup.c:996
 msgid "Menu font :"
 msgstr "Menüü teksti kuju :"
 
-#: xfce/setup.c:1438
+#: xfce/setup.c:1043
 msgid "Sound module (xfsound)"
 msgstr "Helimoodul (xfsound) "
 
-#: xfce/setup.c:1452
+#: xfce/setup.c:1050
 msgid "Mouse settings (xfmouse)"
 msgstr "Hiire seadistused (xfmouse)"
 
-#: xfce/setup.c:1466
+#: xfce/setup.c:1057
 msgid "Backdrop settings (xfbd)"
 msgstr "Taustapildi seadistused (xfbd)"
 
-#: xfce/setup.c:1480
+#: xfce/setup.c:1064
 msgid "Pager (xfpager)"
 msgstr "Leheküljed (xfpager)"
 
-#: xfce/setup.c:1494
+#: xfce/setup.c:1071
 msgid "GNOME (xfgnome)"
 msgstr "GNOME (xfgnome)"
 
-#: xfce/setup.c:1508
+#: xfce/setup.c:1078
 msgid "GNOME menu (xfmenu)"
 msgstr "GNOME menüü (xfgnome)"
 
-#: xfce/setup.c:1522
+#: xfce/setup.c:1085
 msgid "KDE menu (xfmenu)"
 msgstr "KDE menüü (xfmenu)"
 
-#: xfce/setup.c:1535
+#: xfce/setup.c:1092
 msgid "Palette"
 msgstr "Värvivalik"
 
-#: xfce/setup.c:1543
+#: xfce/setup.c:1098
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1551
+#: xfce/setup.c:1104
 msgid "Windows"
 msgstr "Aknad"
 
-#: xfce/setup.c:1559 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1110 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
 msgstr "Alustus"
 
-#: xfbd/xfbd.c:560 xfce/setup.c:1595 xfmouse/xfmouse.c:322
-#: xfsound/xfsound.c:572
+#: xfbd/xfbd.c:541 xfce/setup.c:1138 xfmouse/xfmouse.c:299
+#: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr "Lisa"
 
-#: xfce/startup.c:102
+#: xfce/startup.c:97
 msgid "Please wait, XFce is loading..."
 msgstr "Palun oota, XFce loeb..."
 
@@ -641,30 +645,26 @@ msgstr "Üheksateist"
 msgid "Twenty"
 msgstr "Kakskümmend"
 
-#: xfce/xfce.c:106 xfclock/xfclock_menus.c:119
+#: xfce/xfce.c:103 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
 msgstr "Digitaalreziim"
 
-#: xfce/xfce.c:118
+#: xfce/xfce.c:111
 msgid "24 hours mode"
 msgstr "24 tunni reziim"
 
-#: xfce/xfce.c:800 xfclock/xfclock_menus.c:269
+#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "Sellest..."
 
-#: xfce/xfce.c:842
+#: xfce/xfce.c:676
 msgid "Setup..."
 msgstr "Sedistus..."
 
-#: xfce/xfce.c:868
-msgid "Whoooops !"
-msgstr "Sessiooni sulgemine !"
-
-#: xfbd/xfbdmgr.c:184 xfce/xfce.c:872 xfclock/xfclock_menus.c:68
-#: xfclock/xfclock_menus.c:95 xfglob/xfglob.c:2164 xftree/xtree_gui.c:2864
-#: xftree/xtree_gui.c:3000 xftree/xtree_gui.c:3046 xftree/xtree_gui.c:3088
-#: xftree/xtree_gui.c:3124 xfumed/interface.c:428
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
+#: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
+#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Välju"
 
@@ -745,7 +745,7 @@ msgstr "November"
 msgid "December"
 msgstr "Detsember"
 
-#: xfce/xfce_cb.c:105
+#: xfce/xfce_cb.c:101
 msgid ""
 "Are you sure you want to Quit ?\n"
 "This might log you off !"
@@ -753,7 +753,7 @@ msgstr ""
 "Olete te kindel, et soovite väljuda ?\n"
 "Sellega võite arvutist väljuda !"
 
-#: xfce/xfce_cb.c:179
+#: xfce/xfce_cb.c:169
 msgid ""
 "You've selected a desktop which is not currently\n"
 "visible in XFce panel."
@@ -765,9 +765,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFce: kommunikatsioonitoru suletud. Väljun...\n"
 
-#: xfce/xfwm.c:441 xfwm/xfwm.c:878 xfwm/xfwm.c:879 xfwm/xfwm.c:880
-#: xfwm/xfwm.c:881 xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884
-#: xfwm/xfwm.c:885 xfwm/xfwm.c:886 xfwm/xfwm.c:887
+#: xfce/xfwm.c:434 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
+#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
+#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
 msgid "Workspace"
 msgstr "Tööruum"
 
@@ -776,103 +776,104 @@ msgstr "Tööruum"
 msgid "transfer_view() %d\n"
 msgstr "transpordi vaade() %d\n"
 
-#: xftree/gtk_cpy.c:112
+#: xftree/gtk_cpy.c:110
 msgid "move"
 msgstr "liiguta"
 
-#: xftree/gtk_cpy.c:116
+#: xftree/gtk_cpy.c:114
 msgid "copy"
 msgstr "kopeeri"
 
-#: xftree/gtk_cpy.c:120
+#: xftree/gtk_cpy.c:118
 msgid "link"
 msgstr "viita"
 
-#: xftree/gtk_cpy.c:148 xftree/gtk_cpy.c:269
+#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:271
 #, c-format
 msgid "%d bytes"
 msgstr "%d baiti"
 
-#: xftree/gtk_cpy.c:156
+#: xftree/gtk_cpy.c:154
 msgid "Override file?"
 msgstr "Kas kirjutan faili üle ?"
 
-#: xftree/gtk_cpy.c:165 xftree/gtk_cpy.c:170 xftree/gtk_cpy.c:347
-#: xftree/gtk_cpy.c:351 xftree/xtree_gui.c:1354 xftree/xtree_gui.c:1361
+#: xftree/gtk_cpy.c:167 xftree/gtk_cpy.c:172 xftree/gtk_cpy.c:349
+#: xftree/gtk_cpy.c:353 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
 msgid "Can't stat() file"
 msgstr "Ei suuda stat() faili"
 
-#: xftree/gtk_cpy.c:177
+#: xftree/gtk_cpy.c:179
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr "Kas sa tahad ka neid %s -da "
 
-#: xftree/gtk_cpy.c:219
+#: xftree/gtk_cpy.c:221
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:239
+#: xftree/gtk_cpy.c:241
 msgid "Can't copy device file"
 msgstr "Seadet ei saa kopeerida"
 
-#: xftree/gtk_cpy.c:244
+#: xftree/gtk_cpy.c:246
 msgid "Can't copy FIFO"
 msgstr "FIFO-t ei saa kopeerida"
 
-#: xftree/gtk_cpy.c:248
+#: xftree/gtk_cpy.c:250
 msgid "Can't copy socket"
 msgstr "SOCKET'it ei saa kopeerida"
 
-#: xftree/gtk_cpy.c:283
-msgid "Too free bytes transferred ! Device full ?"
+#: xftree/gtk_cpy.c:285
+#, fuzzy
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "Liiga vähe baiti kanti edasi ! Kas seade on täis ?"
 
-#: xftree/gtk_cpy.c:287
+#: xftree/gtk_cpy.c:289
 msgid "Too many bytes transferred !?"
 msgstr "Liialt palju baite kanti !?"
 
-#: xftree/gtk_cpy.c:333
+#: xftree/gtk_cpy.c:335
 msgid "Source and Target directories are the same"
 msgstr "Lähte ja sihi kataloogid on samad"
 
-#: xftree/gtk_cpy.c:384
+#: xftree/gtk_cpy.c:386
 msgid "exists and is not a directory"
 msgstr "eksisteerib ja ei ole kataloog"
 
-#: xftree/gtk_cpy.c:458
+#: xftree/gtk_cpy.c:460
 msgid "XFTree: Copy"
 msgstr "XFTree: kopeeri"
 
-#: xftree/gtk_cpy.c:462
+#: xftree/gtk_cpy.c:464
 msgid "XFTree: Move"
 msgstr "XFTree: Liiguta"
 
-#: xftree/gtk_cpy.c:466
+#: xftree/gtk_cpy.c:468
 msgid "XFTree: Link"
 msgstr "viita"
 
-#: xftree/gtk_cpy.c:470
+#: xftree/gtk_cpy.c:472
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Tundmatu kandmisviis: %d\n"
 
-#: xftree/gtk_cpy.c:476
+#: xftree/gtk_cpy.c:478
 msgid "transfer()"
 msgstr "transfer()"
 
-#: xftree/gtk_cpy.c:476
+#: xftree/gtk_cpy.c:478
 msgid "fatal error"
 msgstr "saatuslik viga"
 
-#: xftree/gtk_cpy.c:482
+#: xftree/gtk_cpy.c:484
 msgid "Error getting info from"
 msgstr "Viga info saamisel"
 
-#: xftree/gtk_cpy.c:487
+#: xftree/gtk_cpy.c:489
 msgid "Fatal Error"
 msgstr "Saatuslik Viga"
 
-#: xftree/gtk_cpy.c:487
+#: xftree/gtk_cpy.c:489
 msgid "Can't transfer items to a file"
 msgstr "Ei saa neid kanda faili"
 
@@ -888,60 +889,60 @@ msgstr "Siht: "
 msgid "0 bytes transferred"
 msgstr "kanti 0 baiti"
 
-#: xftree/gtk_cpy.c:541 xftree/gtk_dlg.c:185
+#: xftree/gtk_cpy.c:539 xftree/gtk_dlg.c:233
 msgid "Error"
 msgstr "Viga"
 
-#: xftree/gtk_cpy.c:541
+#: xftree/gtk_cpy.c:539
 msgid "Can't transfer a directory to a file"
 msgstr "Ei saa kanda kataloogi faili"
 
-#: xftree/gtk_dlg.c:180
+#: xftree/gtk_dlg.c:228
 msgid "Information"
 msgstr "Informatsioon"
 
-#: xftree/gtk_dlg.c:190
+#: xftree/gtk_dlg.c:238
 msgid "Warning"
 msgstr "Hoiatus"
 
-#: xftree/gtk_dlg.c:194
+#: xftree/gtk_dlg.c:242
 msgid "Dialog"
 msgstr "Dialoog"
 
-#: xftree/gtk_dlg.c:221
+#: xftree/gtk_dlg.c:270
 msgid "Continue"
 msgstr "Jätka"
 
-#: xftree/gtk_dlg.c:234 xftree/gtk_prop.c:207
+#: xftree/gtk_dlg.c:281 xftree/gtk_prop.c:198
 msgid "Skip"
 msgstr "Jäta vahele"
 
-#: xftree/gtk_dlg.c:260 xftree/gtk_prop.c:208
+#: xftree/gtk_dlg.c:307 xftree/gtk_prop.c:199
 msgid "All"
 msgstr "Kõik"
 
-#: xftree/gtk_dlg.c:270
+#: xftree/gtk_dlg.c:317
 msgid "Close"
 msgstr "Sulge"
 
-#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:3008
+#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:2729
 msgid "Open with ..."
 msgstr "Ava kasutades ..."
 
-#: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
-#: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
-#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:913
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
+#: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
+#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr "Käivita programm ..."
 
-#: xfrun/xfrun.c:243 xftree/gtk_exec.c:190 xftree/xtree_gui.c:2771
-#: xftree/xtree_gui.c:2954
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:183 xftree/xtree_gui.c:2511
+#: xftree/xtree_gui.c:2675
 msgid "Open in terminal"
 msgstr "Ava terminalis"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:212
+#: xftree/gtk_exec.c:201
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Saatuslik viga failis %s kohal %d\n"
@@ -950,114 +951,113 @@ msgstr "Saatuslik viga failis %s kohal %d\n"
 msgid "Override file ?"
 msgstr "Ületada fail ?"
 
-#: xftree/gtk_get.c:121
+#: xftree/gtk_get.c:119
 msgid "Source : "
 msgstr "Läte : "
 
-#: xftree/gtk_get.c:128
+#: xftree/gtk_get.c:126
 msgid "Target : "
 msgstr "Siht : "
 
-#: xftree/gtk_get.c:135
+#: xftree/gtk_get.c:133
 msgid "0 bytes received"
 msgstr "0 baiti saabus"
 
-#: xftree/gtk_get.c:144
+#: xftree/gtk_get.c:140
 msgid "XFTree: Download"
 msgstr "XFTree: Loe alla"
 
-#: xftree/gtk_get.c:170
+#: xftree/gtk_get.c:166
 #, c-format
 msgid "%d bytes received (%d bps)"
 msgstr "Saabus %d baiti (%d B/s)"
 
-#: xftree/gtk_prop.c:176 xftree/xtree_gui.c:2700 xftree/xtree_gui.c:2701
-#: xftree/xtree_gui.c:2702
+#: xftree/gtk_prop.c:175 xftree/xtree_gui.c:2470
 msgid "Properties"
 msgstr "Seadistused"
 
 #. date and size page
-#: xftree/gtk_prop.c:225
+#: xftree/gtk_prop.c:210
 msgid "Info"
 msgstr "Info"
 
-#: xftree/gtk_prop.c:230
+#: xftree/gtk_prop.c:215
 msgid "Name :"
 msgstr "Nimi :"
 
-#: xftree/gtk_prop.c:251
+#: xftree/gtk_prop.c:234
 msgid "Type :"
 msgstr "Tüüp :"
 
-#: xftree/gtk_prop.c:260
+#: xftree/gtk_prop.c:240
 #, c-format
 msgid "%ld Bytes"
 msgstr "%ld Baiti"
 
-#: xftree/gtk_prop.c:262
+#: xftree/gtk_prop.c:242
 msgid "Size :"
 msgstr "Suurus :"
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:250
 msgid "Creation Time :"
 msgstr "Loomise aeg :"
 
-#: xftree/gtk_prop.c:286
+#: xftree/gtk_prop.c:258
 msgid "Modification Time :"
 msgstr "Muudatuste aeg :"
 
-#: xftree/gtk_prop.c:298
+#: xftree/gtk_prop.c:266
 msgid "Access Time :"
 msgstr "Kasutamise aeg :"
 
-#: xftree/gtk_prop.c:308
+#: xftree/gtk_prop.c:274
 msgid "Permissions"
 msgstr "Õigused"
 
-#: xfglob/xfglob.c:1706 xftree/gtk_prop.c:312 xftree/gtk_prop.c:448
+#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:278 xftree/gtk_prop.c:375
 msgid "Owner :"
 msgstr "Omanik :"
 
-#: xfglob/xfglob.c:1707 xfglob/xfglob.c:1739 xfglob/xfglob.c:1770
-#: xftree/gtk_prop.c:313 xftree/gtk_prop.c:350 xftree/gtk_prop.c:386
+#: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
+#: xftree/gtk_prop.c:279 xftree/gtk_prop.c:303 xftree/gtk_prop.c:326
 msgid "Read"
 msgstr "Lugemine"
 
-#: xfglob/xfglob.c:1713 xfglob/xfglob.c:1745 xfglob/xfglob.c:1776
-#: xftree/gtk_prop.c:319 xftree/gtk_prop.c:356 xftree/gtk_prop.c:392
+#: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
+#: xftree/gtk_prop.c:283 xftree/gtk_prop.c:307 xftree/gtk_prop.c:330
 msgid "Write"
 msgstr "Kirjutamine"
 
-#: xfglob/xfglob.c:1719 xfglob/xfglob.c:1751 xfglob/xfglob.c:1782
-#: xftree/gtk_prop.c:325 xftree/gtk_prop.c:362 xftree/gtk_prop.c:398
+#: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
+#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
 msgid "Execute"
 msgstr "Käivitamine"
 
-#: xfglob/xfglob.c:1725 xftree/gtk_prop.c:331
+#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:291
 msgid "Set UID"
 msgstr "Sea kasutaja ID"
 
-#: xfglob/xfglob.c:1738 xftree/gtk_prop.c:349 xftree/gtk_prop.c:460
+#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:302 xftree/gtk_prop.c:386
 msgid "Group :"
 msgstr "Grupp :"
 
-#: xfglob/xfglob.c:1757 xftree/gtk_prop.c:368
+#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:315
 msgid "Set GID"
 msgstr "Sea grupi ID"
 
-#: xfglob/xfglob.c:1769 xftree/gtk_prop.c:385
+#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:325
 msgid "Other :"
 msgstr "Muu :"
 
-#: xfglob/xfglob.c:1788 xftree/gtk_prop.c:404
+#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:338
 msgid "Sticky"
 msgstr "Naelutatud"
 
-#: xftree/gtk_prop.c:437
+#: xftree/gtk_prop.c:364
 msgid "Owner"
 msgstr "Omanik"
 
-#: xftree/gtk_prop.c:442 xftree/gtk_prop.c:454
+#: xftree/gtk_prop.c:369 xftree/gtk_prop.c:380
 msgid "unknown"
 msgstr "tundmatu"
 
@@ -1076,58 +1076,58 @@ msgstr "kataloog: %s\n"
 msgid "creating directory: %s\n"
 msgstr "kataloogi %s loomine \n"
 
-#: xftree/xtree.c:177
+#: xftree/xtree.c:176
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geomeetria: %dx%d+%d+%d\n"
 
-#: xftree/xtree_gui.c:187
+#: xftree/xtree_gui.c:169
 #, c-format
 msgid "malloc error in %s at line %d\n"
 msgstr "mälueraldamise viga %s -s real %d\n"
 
-#: xftree/xtree_gui.c:343
+#: xftree/xtree_gui.c:322
 msgid "menu_detach()\n"
 msgstr "menu_detach()\n"
 
-#: xftree/xtree_gui.c:1058
+#: xftree/xtree_gui.c:948
 msgid "Can't copy device, fifo and socket files as regular files!\n"
 msgstr "Ei saa kopeerida seadmeid, fifot ja pesa faile nagu tavalisi!\n"
 
-#: xftree/xtree_gui.c:1150
+#: xftree/xtree_gui.c:1040
 msgid "Moving file..\n"
 msgstr "Liigutan faili..\n"
 
-#: xftree/xtree_gui.c:1187
+#: xftree/xtree_gui.c:1076
 msgid "move_dir() recursive failed\n"
 msgstr "move_dir() rekursiivselt ebaõnnestus\n"
 
-#: xftree/xtree_gui.c:1195
+#: xftree/xtree_gui.c:1084
 msgid "move_dir() move_file() failed\n"
 msgstr "move_dir() move_file() ebaõnnestus\n"
 
 #. nothing to delete
-#: xftree/xtree_gui.c:1311 xftree/xtree_gui.c:2236
+#: xftree/xtree_gui.c:1193 xftree/xtree_gui.c:2068
 msgid "No files marked !"
 msgstr "Ühtki faili poe märgitud !"
 
-#: xftree/xtree_gui.c:1331 xftree/xtree_gui.c:1333
+#: xftree/xtree_gui.c:1213 xftree/xtree_gui.c:1215
 msgid "Delete item ?"
 msgstr "Kustutada see ?"
 
-#: xftree/xtree_gui.c:1375
+#: xftree/xtree_gui.c:1251
 msgid "move_file()"
 msgstr "move_file()"
 
-#: xftree/xtree_gui.c:1378
+#: xftree/xtree_gui.c:1253
 msgid "Move to trash failed"
 msgstr "Prügikasti viskamine ebaõnnestus"
 
-#: xftree/xtree_gui.c:1393
+#: xftree/xtree_gui.c:1266
 msgid "Can't move file to trash, hard delete ?"
 msgstr "Ei saa visata faili prügikasti, kas hävitan julmalt ?"
 
-#: xftree/xtree_gui.c:1435
+#: xftree/xtree_gui.c:1307
 msgid ""
 "This is XFTree, based on 'XTree' \n"
 "(c) by Rasca\n"
@@ -1139,255 +1139,250 @@ msgstr ""
 "publitseeritud GNU GPL all\n"
 "http://home.pages.de/~rasca/xap/"
 
-#: xftree/xtree_gui.c:1463
+#: xftree/xtree_gui.c:1333
 msgid "Can't find row data\n"
 msgstr "Ei leidnud reainfot\n"
 
-#: xftree/xtree_gui.c:1568
+#: xftree/xtree_gui.c:1434
 msgid "Go to"
 msgstr "Mine"
 
-#: xftree/xtree_gui.c:2008
+#: xftree/xtree_gui.c:1847
 msgid "New_Folder"
 msgstr "Uus kataloog"
 
-#: xftree/xtree_gui.c:2058
+#: xftree/xtree_gui.c:1895
 msgid "File exists ! Override ?"
 msgstr "Failid leiduvad ! Kas kirjutame üle ?"
 
-#: xftree/xtree_gui.c:2067
+#: xftree/xtree_gui.c:1904
 msgid "Can't create : "
 msgstr "Ei saa luua : "
 
-#: xftree/xtree_gui.c:2149
+#: xftree/xtree_gui.c:1985
 msgid "No item marked !"
 msgstr "Midagi pole märgitud !"
 
-#: xftree/xtree_gui.c:2160
+#: xftree/xtree_gui.c:1996
 msgid "Rename to : "
 msgstr "Nimeta sinna ümber : "
 
-#: xftree/xtree_gui.c:2166
+#: xftree/xtree_gui.c:2001
 msgid "Character not allowed in filename"
 msgstr "Sümbol ei ole failinimes lubatud"
 
-#: xftree/xtree_gui.c:2178
+#: xftree/xtree_gui.c:2013
 msgid "Override ?"
 msgstr "Kas eirame ?"
 
-#: xftree/xtree_gui.c:2410
+#: xftree/xtree_gui.c:2237
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Ei leia laiendit faili nimes, kasutam täielikku nime"
 
-#: xftree/xtree_gui.c:2417
+#: xftree/xtree_gui.c:2243
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Registreeri programm faili jaoks \"%s\""
 
-#: xftree/xtree_gui.c:2421
+#: xftree/xtree_gui.c:2247
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Registreeri programm laiendile \"%s\""
 
-#: xftree/xtree_gui.c:2643 xftree/xtree_gui.c:2644 xftree/xtree_gui.c:2645
-#: xftree/xtree_gui.c:2765 xftree/xtree_gui.c:3006 xftree/xtree_gui.c:3094
+#: xftree/xtree_gui.c:2452 xftree/xtree_gui.c:2506 xftree/xtree_gui.c:2727
+#: xftree/xtree_gui.c:2815
 msgid "New window"
 msgstr "Uus aken"
 
-#: xftree/xtree_gui.c:2651 xftree/xtree_gui.c:2652 xftree/xtree_gui.c:2653
-#: xftree/xtree_gui.c:2854 xftree/xtree_gui.c:2998 xftree/xtree_gui.c:3044
-#: xftree/xtree_gui.c:3086 xftree/xtree_gui.c:3122
+#: xftree/xtree_gui.c:2454 xftree/xtree_gui.c:2583 xftree/xtree_gui.c:2719
+#: xftree/xtree_gui.c:2765 xftree/xtree_gui.c:2807 xftree/xtree_gui.c:2843
 msgid "Close window"
 msgstr "Sulge aken"
 
-#: xftree/xtree_gui.c:2661 xftree/xtree_gui.c:2662 xftree/xtree_gui.c:2663
-#: xftree/xtree_gui.c:2877 xftree/xtree_gui.c:2967 xftree/xtree_gui.c:3018
-#: xftree/xtree_gui.c:3057 xftree/xtree_gui.c:3100
+#: xftree/xtree_gui.c:2458 xftree/xtree_gui.c:2604 xftree/xtree_gui.c:2688
+#: xftree/xtree_gui.c:2739 xftree/xtree_gui.c:2778 xftree/xtree_gui.c:2821
 msgid "Go to ..."
 msgstr "Mine ..."
 
-#: xftree/xtree_gui.c:2668 xftree/xtree_gui.c:2669 xftree/xtree_gui.c:2670
+#: xftree/xtree_gui.c:2460
 msgid "Go up ..."
 msgstr "Mine üles..."
 
-#: xftree/xtree_gui.c:2675 xftree/xtree_gui.c:2676 xftree/xtree_gui.c:2677
-#: xftree/xtree_gui.c:2891 xftree/xtree_gui.c:2972 xftree/xtree_gui.c:3021
-#: xftree/xtree_gui.c:3060 xftree/xtree_gui.c:3103
+#: xftree/xtree_gui.c:2462 xftree/xtree_gui.c:2616 xftree/xtree_gui.c:2693
+#: xftree/xtree_gui.c:2742 xftree/xtree_gui.c:2781 xftree/xtree_gui.c:2824
 msgid "Go home"
 msgstr "Mine koju"
 
-#: xftree/xtree_gui.c:2684 xftree/xtree_gui.c:2685 xftree/xtree_gui.c:2686
+#: xftree/xtree_gui.c:2466
 msgid "New Folder"
 msgstr "Uus kataloog"
 
-#: xftree/xtree_gui.c:2692 xftree/xtree_gui.c:2693 xftree/xtree_gui.c:2694
-#: xftree/xtree_gui.c:2783 xftree/xtree_gui.c:2959 xftree/xtree_gui.c:3097
+#: xftree/xtree_gui.c:2468 xftree/xtree_gui.c:2521 xftree/xtree_gui.c:2680
+#: xftree/xtree_gui.c:2818
 msgid "New file ..."
 msgstr "Uus fail ..."
 
-#: xfsamba/xfsamba_gui.c:1132 xftree/xtree_gui.c:2710 xftree/xtree_gui.c:2711
-#: xftree/xtree_gui.c:2712 xftree/xtree_gui.c:2799 xftree/xtree_gui.c:2964
-#: xftree/xtree_gui.c:3013 xftree/xtree_gui.c:3054
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2474 xftree/xtree_gui.c:2535
+#: xftree/xtree_gui.c:2685 xftree/xtree_gui.c:2734 xftree/xtree_gui.c:2775
 msgid "Delete ..."
 msgstr "Kustutamine ..."
 
-#: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2719 xftree/xtree_gui.c:2720
-#: xftree/xtree_gui.c:2838 xftree/xtree_gui.c:2992 xftree/xtree_gui.c:3038
-#: xftree/xtree_gui.c:3076 xftree/xtree_gui.c:3080 xftree/xtree_gui.c:3116
+#: xftree/xtree_gui.c:2476 xftree/xtree_gui.c:2569 xftree/xtree_gui.c:2713
+#: xftree/xtree_gui.c:2759 xftree/xtree_gui.c:2797 xftree/xtree_gui.c:2801
+#: xftree/xtree_gui.c:2837
 msgid "Open Trash"
 msgstr "Ava prügikast"
 
-#: xftree/xtree_gui.c:2725 xftree/xtree_gui.c:2726 xftree/xtree_gui.c:2727
-#: xftree/xtree_gui.c:2844 xftree/xtree_gui.c:2990 xftree/xtree_gui.c:3036
-#: xftree/xtree_gui.c:3075 xftree/xtree_gui.c:3078 xftree/xtree_gui.c:3114
+#: xftree/xtree_gui.c:2478 xftree/xtree_gui.c:2574 xftree/xtree_gui.c:2711
+#: xftree/xtree_gui.c:2757 xftree/xtree_gui.c:2796 xftree/xtree_gui.c:2799
+#: xftree/xtree_gui.c:2835
 msgid "Empty Trash"
 msgstr "Tühjenda prügikast"
 
-#: xftree/xtree_gui.c:2736 xftree/xtree_gui.c:2737 xftree/xtree_gui.c:2738
-#: xftree/xtree_gui.c:2902 xftree/xtree_gui.c:2984 xftree/xtree_gui.c:3072
-#: xftree/xtree_gui.c:3109
+#: xftree/xtree_gui.c:2482 xftree/xtree_gui.c:2626 xftree/xtree_gui.c:2705
+#: xftree/xtree_gui.c:2793 xftree/xtree_gui.c:2830
 msgid "Toggle Dotfiles"
 msgstr "Märgi ümber punktifailid"
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:89 xfdiff/xfdiff_gui.c:938
-#: xfsamba/xfsamba_gui.c:1038 xftree/xtree_gui.c:2758
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
 msgid "File"
 msgstr "Fail"
 
-#: xftree/xtree_gui.c:2777 xftree/xtree_gui.c:2957 xftree/xtree_gui.c:3096
+#: xftree/xtree_gui.c:2516 xftree/xtree_gui.c:2678 xftree/xtree_gui.c:2817
 msgid "New Folder ..."
 msgstr "Uus kataloog ..."
 
-#: xftree/xtree_gui.c:2809 xftree/xtree_gui.c:2981 xftree/xtree_gui.c:3069
-#: xftree/xtree_gui.c:3112
+#: xftree/xtree_gui.c:2544 xftree/xtree_gui.c:2702 xftree/xtree_gui.c:2790
+#: xftree/xtree_gui.c:2833
 msgid "Find ..."
 msgstr "Otsi ..."
 
-#: xftree/xtree_gui.c:2815 xftree/xtree_gui.c:2987 xftree/xtree_gui.c:3031
+#: xftree/xtree_gui.c:2549 xftree/xtree_gui.c:2708 xftree/xtree_gui.c:2752
 msgid "Properties ..."
 msgstr "Seadistused ..."
 
-#: xftree/xtree_gui.c:2822
+#: xftree/xtree_gui.c:2555
 msgid "Differences ..."
 msgstr "Erinevused ..."
 
-#: xftree/xtree_gui.c:2828
+#: xftree/xtree_gui.c:2560
 msgid "Patch viewer ..."
 msgstr "Patch'ide lehitseja ..."
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:905
+#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:881
 msgid "Settings"
 msgstr "Seaded"
 
-#: xftree/xtree_gui.c:2884 xftree/xtree_gui.c:2970 xftree/xtree_gui.c:3019
-#: xftree/xtree_gui.c:3058 xftree/xtree_gui.c:3101
+#: xftree/xtree_gui.c:2610 xftree/xtree_gui.c:2691 xftree/xtree_gui.c:2740
+#: xftree/xtree_gui.c:2779 xftree/xtree_gui.c:2822
 msgid "Go up"
 msgstr "Mine ülesse"
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:262 xfdiff/xfdiff_gui.c:1057
-#: xfsamba/xfsamba_gui.c:1082 xftree/xtree_gui.c:2910
+#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
 msgid "Help"
 msgstr "Abimees"
 
-#: xftree/xtree_gui.c:2917 xftree/xtree_gui.c:2994 xftree/xtree_gui.c:3040
-#: xftree/xtree_gui.c:3082 xftree/xtree_gui.c:3118
+#: xftree/xtree_gui.c:2640 xftree/xtree_gui.c:2715 xftree/xtree_gui.c:2761
+#: xftree/xtree_gui.c:2803 xftree/xtree_gui.c:2839
 msgid "About ..."
 msgstr "Sellest ..."
 
-#: xftree/xtree_gui.c:2953
+#: xftree/xtree_gui.c:2674
 msgid "Open in new"
 msgstr "Ava uues"
 
-#: xftree/xtree_gui.c:2962 xftree/xtree_gui.c:3011
+#: xftree/xtree_gui.c:2683 xftree/xtree_gui.c:2732
 msgid "Rename ..."
 msgstr "Ümbernimetus ..."
 
-#: xftree/xtree_gui.c:2968
+#: xftree/xtree_gui.c:2689
 msgid "Go to marked"
 msgstr "Mine märgitu juurde"
 
-#: xftree/xtree_gui.c:2976 xftree/xtree_gui.c:3025 xftree/xtree_gui.c:3064
+#: xftree/xtree_gui.c:2697 xftree/xtree_gui.c:2746 xftree/xtree_gui.c:2785
 msgid "Unselect"
 msgstr "Eemalda märgistus"
 
-#: xftree/xtree_gui.c:2978 xftree/xtree_gui.c:3027 xftree/xtree_gui.c:3066
-#: xftree/xtree_gui.c:3105
+#: xftree/xtree_gui.c:2699 xftree/xtree_gui.c:2748 xftree/xtree_gui.c:2787
+#: xftree/xtree_gui.c:2826
 msgid "Select all"
 msgstr "Märgi kõik"
 
-#: xftree/xtree_gui.c:2980 xftree/xtree_gui.c:3029 xftree/xtree_gui.c:3068
-#: xftree/xtree_gui.c:3107
+#: xftree/xtree_gui.c:2701 xftree/xtree_gui.c:2750 xftree/xtree_gui.c:2789
+#: xftree/xtree_gui.c:2828
 msgid "Unselect all"
 msgstr "Eemalda kõigilt märgistus"
 
-#: xftree/xtree_gui.c:3015
+#: xftree/xtree_gui.c:2736
 msgid "Duplicate"
 msgstr "Dublitseeeri"
 
-#: xftree/xtree_gui.c:3033
+#: xftree/xtree_gui.c:2754
 msgid "Register ..."
 msgstr "Registreeri ..."
 
-#: xftree/xtree_gui.c:3052
+#: xftree/xtree_gui.c:2773
 msgid "New windows"
 msgstr "Uus aken"
 
-#: xfglob/xfglob.c:612 xfsamba/xfsamba_gui.c:1258 xftree/xtree_gui.c:3136
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2857
 msgid "Name"
 msgstr "Nimi"
 
-#: xfglob/xfglob.c:614 xftree/xtree_gui.c:3137
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2858
 msgid "Size (bytes)"
 msgstr "Suurus (Baitides)"
 
-#: xfglob/xfglob.c:615 xftree/xtree_gui.c:3138
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2859
 msgid "Last changed"
 msgstr "Viimati muudetud"
 
-#: xftree/xtree_dnd.c:125
+#: xftree/xtree_dnd.c:121
 msgid "Unknown action !"
 msgstr "Tundmatu tegevus !"
 
-#: xftree/xtree_dnd.c:141
+#: xftree/xtree_dnd.c:136
 msgid "Target must be a directory !"
 msgstr "Sihtkoht peab olema kataloog !"
 
-#: xftree/xtree_dnd.c:170
+#: xftree/xtree_dnd.c:165
 #, c-format
 msgid "Type not supported.. (%d)\n"
 msgstr "Tüüp ei ole toetatud.. (%d)\n"
 
 #. convenience location of duplicate dialog texts
 #. non-static
-#: xfdiff/xfdiff.c:102
+#: xfdiff/xfdiff.c:116
 msgid "Strip level now set to "
 msgstr "Harutamise tase on nüüd seatud"
 
-#: xfdiff/xfdiff.c:103
+#: xfdiff/xfdiff.c:117
 msgid "No patch file has been selected."
 msgstr "Patch fail pole selekteeritud."
 
-#: xfdiff/xfdiff.c:104
+#: xfdiff/xfdiff.c:118
 msgid "No directory to apply patch has been selected."
 msgstr "Kataloog, kuhu patch lisada, pole selekteeritud."
 
-#: xfdiff/xfdiff.c:105
+#: xfdiff/xfdiff.c:119
 msgid "No left path has been selected."
 msgstr "Vasak teekond pole selekteeritud."
 
-#: xfdiff/xfdiff.c:106
+#: xfdiff/xfdiff.c:120
 msgid "No right path has been selected."
 msgstr "Parem teekond pole selekteeritud."
 
 #. static
-#: xfdiff/xfdiff.c:108
+#: xfdiff/xfdiff.c:122
 msgid "Patch file can not be opened for read!"
 msgstr "Ei suuda avada Patch faili lugemiseks!"
 
-#: xfdiff/xfdiff.c:109
+#: xfdiff/xfdiff.c:123
 msgid ""
 "Files are identical\n"
 "(or binary files that may or may not differ)"
@@ -1396,20 +1391,19 @@ msgstr ""
 "(või on tegemist binaarfailidega, \n"
 " mis võivad erineda või ei erine)"
 
-#: xfdiff/xfdiff.c:110
+#: xfdiff/xfdiff.c:124
 msgid "Patch file is not in unified format"
 msgstr "Patch fail ople 'ik unified' formaadis"
 
-#: xfdiff/xfdiff.c:111
+#: xfdiff/xfdiff.c:125
 msgid "****Empty file****\n"
 msgstr "**** Tühi fail ****\n"
 
-#. missing color attribute
-#: xfdiff/xfdiff.c:255 xfdiff/xfdiff.c:260 xfdiff/xfdiff.c:261
+#: xfdiff/xfdiff.c:314 xfdiff/xfdiff.c:320
 msgid "****Binary data****\n"
 msgstr "**** Binaarandmed ****\n"
 
-#: xfdiff/xfdiff.c:329
+#: xfdiff/xfdiff.c:404
 msgid ""
 "You have selected a directory.\n"
 "Should subdirectories be included?"
@@ -1417,28 +1411,28 @@ msgstr ""
 "Te määrasite kataloogi.\n"
 "Kas kaasata alamkataloogid?"
 
-#: xfdiff/xfdiff.c:377
+#: xfdiff/xfdiff.c:469
 msgid " versus "
 msgstr " versus  "
 
 #. 10 is size of MAXINT of 32 bits:
-#: xfdiff/xfdiff.c:390 xfdiff/xfdiff.c:393
+#: xfdiff/xfdiff.c:489 xfdiff/xfdiff.c:493
 msgid "different sections found"
 msgstr "leiti erinevad sektsioonid"
 
-#: xfdiff/xfdiff.c:464
+#: xfdiff/xfdiff.c:577
 msgid "Include binary files?"
 msgstr "Kas lisada binaarfailid?"
 
-#: xfdiff/xfdiff.c:465
+#: xfdiff/xfdiff.c:579
 msgid "Include subdirectories?"
 msgstr "Kas lisada alamkataloogid?"
 
-#: xfdiff/xfdiff.c:468
+#: xfdiff/xfdiff.c:583
 msgid "Working diff...\n"
 msgstr "Diff töötab...\n"
 
-#: xfdiff/xfdiff.c:758
+#: xfdiff/xfdiff.c:948
 msgid ""
 "Patch file has been modified by another process\n"
 "Please reload\n"
@@ -1446,47 +1440,47 @@ msgstr ""
 "Teine protsess on vahepeal Patch faili modifitseerinud\n"
 "Palun loe uuesti sisse\n"
 
-#: xfdiff/xfdiff.c:927
+#: xfdiff/xfdiff.c:1158
 msgid "Reversed patch detected. Should I try reversing it?"
 msgstr "Ümberööratud patch. Kas proovin ümber pöörata?"
 
-#: xfdiff/xfdiff.c:934
+#: xfdiff/xfdiff.c:1167
 msgid "Now forking diff. Please be patient.\n"
 msgstr "Hargnen diff'i. Palun ole kannatlik.\n"
 
-#: xfdiff/xfdiff.c:936
+#: xfdiff/xfdiff.c:1169
 msgid "Finished forking.\n"
 msgstr "Hargnemine löpetatud.\n"
 
-#: xfdiff/xfdiff.c:1053
+#: xfdiff/xfdiff.c:1388
 msgid "Running patch...\n"
 msgstr "Patch'i töötlemine...\n"
 
-#: xfdiff/xfdiff.c:1103
+#: xfdiff/xfdiff.c:1456
 msgid "xfdiff version"
 msgstr "xdiff'i versioon"
 
-#: xfdiff/xfdiff.c:1105
+#: xfdiff/xfdiff.c:1457
 msgid "use xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
 msgstr "kasuta xdiff [ -h | --help | -p] [vasakfail][paremfail]\n"
 
-#: xfdiff/xfdiff.c:1107
+#: xfdiff/xfdiff.c:1458
 msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
 msgstr "-p : vasakfail ja paremfail on patchtee ja patchfail\n"
 
-#: xfdiff/xfdiff.c:1109
+#: xfdiff/xfdiff.c:1459
 msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
 msgstr "-PN: N on patch'i arutamise tase (0-9) (kiire lülitus)\n"
 
-#: xfdiff/xfdiff.c:1111
+#: xfdiff/xfdiff.c:1460
 msgid "-R: patch file is reversed (quick toggle)\n"
 msgstr "-R: patch fail on pööratud (kiire lülitus)\n"
 
-#: xfdiff/xfdiff.c:1113
+#: xfdiff/xfdiff.c:1461
 msgid "-N: patch file is not reversed (quick toggle)\n"
 msgstr "-N: patch faili pole pööratud (kiire lülitus)\n"
 
-#: xfdiff/xfdiff.c:1115
+#: xfdiff/xfdiff.c:1462
 msgid ""
 "-h, --help : print this message\n"
 "\n"
@@ -1494,38 +1488,38 @@ msgstr ""
 "-h, --help : väljastab selle teate\n"
 "\n"
 
-#: xfdiff/xfdiff.c:1117
+#: xfdiff/xfdiff.c:1463
 msgid "xfdiff (c) Edscott Wilson Garcia 2001, under GNU-GPL\n"
 msgstr "xdiff (c) Edscott Wilson Garcia 2001, GNU-GPL litsenseeritud\n"
 
-#: xfdiff/xfdiff.c:1119
+#: xfdiff/xfdiff.c:1464
 msgid ""
 "XFCE modules copyright Olivier Fourdan 1999-2001, under GNU-GPL\n"
 "\n"
 msgstr ""
 "XFCE moodulid copyright Oliver Fourdan 1999-2001, GNU-GPL litsentseeritud\n"
 
-#: xfdiff/xfdiff_diag.c:138
+#: xfdiff/xfdiff_diag.c:135
 msgid "Xfdiff diagnostic"
 msgstr "XFdiff diagnostika"
 
-#: xfdiff/xfdiff_gui.c:151
+#: xfdiff/xfdiff_gui.c:175
 msgid "A patch file and directory must be selected first!"
 msgstr "Patch fail ja kataloog tulevad köigepealt selekteerida!"
 
-#: xfdiff/xfdiff_gui.c:160
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been undone."
 msgstr "Patch'imine tagasi vöetud."
 
-#: xfdiff/xfdiff_gui.c:160
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been applied."
 msgstr "Patch sai lisatud."
 
-#: xfdiff/xfdiff_gui.c:173
+#: xfdiff/xfdiff_gui.c:202
 msgid "Please select a name for the patch file in the next dialog."
 msgstr "Palun selekteeri järgmises dialoogis nimi patch failile."
 
-#: xfdiff/xfdiff_gui.c:183
+#: xfdiff/xfdiff_gui.c:221
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
@@ -1535,253 +1529,244 @@ msgstr ""
 "Palun ole kannatlik (võib näida, et xdiff hangub).\n"
 "Diff hakkab tööle"
 
-#: xfdiff/xfdiff_gui.c:188
+#: xfdiff/xfdiff_gui.c:228
 msgid "Patch file could not be created"
 msgstr "Patch faili ei suudetud luua"
 
-#: xfdiff/xfdiff_gui.c:192 xfdiff/xfdiff_gui.c:195
+#: xfdiff/xfdiff_gui.c:233 xfdiff/xfdiff_gui.c:238
 msgid "Strip level for created patch file="
 msgstr "Arutamise tase loodud patch failile ="
 
-#: xfdiff/xfdiff_gui.c:196
+#: xfdiff/xfdiff_gui.c:240
 msgid " has been created\n"
 msgstr " sai loodud\n"
 
-#: xfdiff/xfdiff_gui.c:206
+#: xfdiff/xfdiff_gui.c:254
 msgid "Patch file creation cancelled"
 msgstr "Patch faili loomine katkestatud"
 
-#: xfdiff/xfdiff_gui.c:317
+#: xfdiff/xfdiff_gui.c:404
 msgid "Line synchronization enabled.\n"
 msgstr "Joone sünkroniseerimine lubatud.\n"
 
-#: xfdiff/xfdiff_gui.c:318
+#: xfdiff/xfdiff_gui.c:406
 msgid "Line synchronization disabled.\n"
 msgstr "Joone sünkroniseerimine keelatud.\n"
 
-#: xfdiff/xfdiff_gui.c:342
+#: xfdiff/xfdiff_gui.c:443
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr "Patch alamprotsessi diagnostika lubatud.\n"
 
-#: xfdiff/xfdiff_gui.c:343
+#: xfdiff/xfdiff_gui.c:445
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr "Patchi 'verbose' diagnostika keelatud. \n"
 
-#: xfdiff/xfdiff_gui.c:357
+#: xfdiff/xfdiff_gui.c:464
 msgid "Line numbers enabled.\n"
 msgstr "Reanumbrid lubatud.\n"
 
-#: xfdiff/xfdiff_gui.c:358
+#: xfdiff/xfdiff_gui.c:466
 msgid "Line numbers disabled.\n"
 msgstr "Reanumbrid keelatud.\n"
 
-#: xfdiff/xfdiff_gui.c:367
+#: xfdiff/xfdiff_gui.c:478
 msgid "Polygons will now be filled.\n"
 msgstr "Nüüd värvitakse hulknurki.\n"
 
-#: xfdiff/xfdiff_gui.c:368
+#: xfdiff/xfdiff_gui.c:480
 msgid "Polygons will now *not* be filled.\n"
 msgstr "Nüüd ei värvita hulknurki.\n"
 
-#: xfdiff/xfdiff_gui.c:379
+#: xfdiff/xfdiff_gui.c:494
 msgid "Patch will now be assumed reversed.\n"
 msgstr "Nüüd eeldatakse, et patch on pööratud.\n"
 
-#: xfdiff/xfdiff_gui.c:380
+#: xfdiff/xfdiff_gui.c:496
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr "Nüüd eeldatakse, et patch ei ole pööratud.\n"
 
 #.
-#: xfdiff/xfdiff_gui.c:397
+#: xfdiff/xfdiff_gui.c:517
 msgid "Font selection"
 msgstr "Tekstikuju valik"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:404 xfdiff/xfdiff_misc.c:661
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
 msgid "Could not load specified font\n"
 msgstr "Ei suutnud laadida määratletud tekstikuju\n"
 
-#: xfdiff/xfdiff_gui.c:459
+#: xfdiff/xfdiff_gui.c:585
 msgid "Select highlight background color"
 msgstr "Vali esildatud tausta värv..."
 
-#: xfdiff/xfdiff_gui.c:463
+#: xfdiff/xfdiff_gui.c:588
 msgid "Select highlight text color"
 msgstr "Vali esildatud teksti värvi"
 
-#: xfdiff/xfdiff_gui.c:539 xfdiff/xfdiff_gui.c:540
+#: xfdiff/xfdiff_gui.c:686 xfdiff/xfdiff_gui.c:687
 msgid "Warning: cannot read from "
 msgstr "Hoiatus: ei suuda lugeda :"
 
-#: xfdiff/xfdiff_gui.c:543 xfdiff/xfdiff_gui.c:544
+#: xfdiff/xfdiff_gui.c:691 xfdiff/xfdiff_gui.c:692
 msgid "is not in patch file."
 msgstr "ei ole patch failis."
 
-#: xfdiff/xfdiff_gui.c:620
+#: xfdiff/xfdiff_gui.c:798
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr "Vaikimisi .xdiffrc faili ei suudetud luua\n"
 
-#: xfdiff/xfdiff_gui.c:640
+#: xfdiff/xfdiff_gui.c:818
 msgid "Default configuration has been saved\n"
 msgstr "Vaikimisi konfiguratsioon salvestati\n"
 
-#: xfdiff/xfdiff_gui.c:647
+#: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
 msgstr "See on XFDiff "
 
-#: xfdiff/xfdiff_gui.c:648
-msgid ""
-"\n"
-"(c) by Edscott Wilson Garcia under GNU GPL\n"
-"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
-msgstr ""
-"\n"
-"(c) by Edscott Wilson Garcia, GNU GPL\n"
-"XFCE moodulid (c) Olivier Fourdan http://www.xfce.org/"
-
-#: xfdiff/xfdiff_gui.c:660
+#: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
 msgstr "Ei ole järgmist erinevust"
 
-#: xfdiff/xfdiff_gui.c:663
+#: xfdiff/xfdiff_gui.c:854
 msgid "There is no previous difference"
 msgstr "Ei ole eelmist erinevust"
 
-#: xfdiff/xfdiff_gui.c:679
+#: xfdiff/xfdiff_gui.c:876
 msgid "There is no such file"
 msgstr "Ei ole sellist faili"
 
-#: xfdiff/xfdiff_gui.c:683
+#: xfdiff/xfdiff_gui.c:886
 msgid "There is no next file"
 msgstr "Ei ole järgmist faili"
 
-#: xfdiff/xfdiff_gui.c:687
+#: xfdiff/xfdiff_gui.c:897
 msgid "There is no previous file"
 msgstr "Ei ole eelmist faili"
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:760
+#: xfdiff/xfdiff_gui.c:984
 msgid "That is a directory (or symlink)"
 msgstr "See on kataloog (või sümboolviit)"
 
-#: xfdiff/xfdiff_gui.c:939
+#: xfdiff/xfdiff_gui.c:1169
 msgid "Select left file"
 msgstr "Valige vasak fail"
 
-#: xfdiff/xfdiff_gui.c:941
+#: xfdiff/xfdiff_gui.c:1170
 msgid "Select right file"
 msgstr "Valige parem fail"
 
-#: xfdiff/xfdiff_gui.c:943
+#: xfdiff/xfdiff_gui.c:1171
 msgid "Select patch file"
 msgstr "Valige patch fail"
 
-#: xfdiff/xfdiff_gui.c:945
+#: xfdiff/xfdiff_gui.c:1172
 msgid "Select directory where to apply patch"
 msgstr "Määrake kataloog, kuhu patch lisada"
 
-#: xfdiff/xfdiff_gui.c:949
+#: xfdiff/xfdiff_gui.c:1175
 msgid "Switch to patch mode"
 msgstr "Lülituda patch reziimi"
 
-#: xfdiff/xfdiff_gui.c:952
+#: xfdiff/xfdiff_gui.c:1178
 msgid "Switch to diff mode"
 msgstr "Lülituda diff reziimi"
 
-#: xfdiff/xfdiff_gui.c:957 xfdiff/xfdiff_gui.c:1408 xfsamba/xfsamba_gui.c:1051
+#: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
+#: xfsamba/xfsamba_gui.c:1022
 msgid "Exit"
 msgstr "Välju"
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:961
+#: xfdiff/xfdiff_gui.c:1186
 msgid "Diff Settings"
 msgstr "Diff seadistused"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:964
+#: xfdiff/xfdiff_gui.c:1189
 msgid "Font"
 msgstr "Tekstikuju"
 
-#: xfdiff/xfdiff_gui.c:966
+#: xfdiff/xfdiff_gui.c:1190
 msgid "Highlight text color"
 msgstr "Esildatud teksti värvi"
 
-#: xfdiff/xfdiff_gui.c:968
+#: xfdiff/xfdiff_gui.c:1191
 msgid "Highlight background color"
 msgstr "Esildatud tausta värv"
 
-#: xfdiff/xfdiff_gui.c:970
+#: xfdiff/xfdiff_gui.c:1192
 msgid "Fill polygons"
 msgstr "Värvi hulknurgad"
 
-#: xfdiff/xfdiff_gui.c:972
+#: xfdiff/xfdiff_gui.c:1193
 msgid "Show line numbers"
 msgstr "Näita reanumbreid"
 
-#: xfdiff/xfdiff_gui.c:975
+#: xfdiff/xfdiff_gui.c:1195
 msgid "Use line synchronization voids"
 msgstr "Kasuta reasünkroniseerimise vahendeid"
 
-#: xfdiff/xfdiff_gui.c:981
+#: xfdiff/xfdiff_gui.c:1201
 msgid "Save settings as default"
 msgstr "Salvesta seaded kui vaikimisi"
 
-#: xfdiff/xfdiff_gui.c:984
+#: xfdiff/xfdiff_gui.c:1203
 msgid "Patch Settings"
 msgstr "Patch Seadistused"
 
-#: xfdiff/xfdiff_gui.c:986
+#: xfdiff/xfdiff_gui.c:1205
 msgid "Verbose patch diagnostics"
 msgstr "Alamprotsessi diagnostika"
 
-#: xfdiff/xfdiff_gui.c:989
+#: xfdiff/xfdiff_gui.c:1207
 msgid "Patch options only active in patch-mode"
 msgstr "Patch seaded on aktiivsed ainult Patch reziimis"
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:994
+#: xfdiff/xfdiff_gui.c:1212
 msgid "Assume patch is reversed"
 msgstr "Eelda, et patch on pööratud"
 
-#: xfdiff/xfdiff_gui.c:997
+#: xfdiff/xfdiff_gui.c:1214
 msgid "Auto strip level"
 msgstr "Automaatne arutamise tase"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1027
+#: xfdiff/xfdiff_gui.c:1243 xfumed/xfumed_gui.c:92
 msgid "Actions"
 msgstr "Tegevused"
 
-#: xfdiff/xfdiff_gui.c:1028
+#: xfdiff/xfdiff_gui.c:1244
 msgid "View differences"
 msgstr "Vaata erinevusi"
 
-#: xfdiff/xfdiff_gui.c:1030
+#: xfdiff/xfdiff_gui.c:1245
 msgid "View differences in new"
 msgstr "Vaata uues erinevusi"
 
-#: xfdiff/xfdiff_gui.c:1033
+#: xfdiff/xfdiff_gui.c:1247
 msgid "View patch created differences"
 msgstr "Vaata patchi loodud erinevusi"
 
-#: xfdiff/xfdiff_gui.c:1036
+#: xfdiff/xfdiff_gui.c:1250
 msgid "View patch created differences in new"
 msgstr "Vaata patchi loodud erinevusi uues"
 
-#: xfdiff/xfdiff_gui.c:1041
+#: xfdiff/xfdiff_gui.c:1255
 msgid "Create patch file"
 msgstr "Loo patch fail"
 
-#: xfdiff/xfdiff_gui.c:1049
+#: xfdiff/xfdiff_gui.c:1262
 msgid "Apply patch to Hard Drive"
 msgstr "Lisa patch kõvakettale"
 
-#: xfdiff/xfdiff_gui.c:1052
+#: xfdiff/xfdiff_gui.c:1265
 msgid "Undo patch to Hard Drive"
 msgstr "Taasta patch kõvakettal"
 
-#: xfdiff/xfdiff_gui.c:1058 xfglob/xfglob.c:2125
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
 msgid "About"
 msgstr "Sellest"
 
@@ -1792,39 +1777,39 @@ msgstr "Sellest"
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1397
+#: xfdiff/xfdiff_gui.c:1603
 msgid "Next difference"
 msgstr "Järgmine erinevus"
 
-#: xfdiff/xfdiff_gui.c:1401
+#: xfdiff/xfdiff_gui.c:1606
 msgid "Prev difference"
 msgstr "Eelmine erinevus"
 
-#: xfdiff/xfdiff_gui.c:1403
+#: xfdiff/xfdiff_gui.c:1607
 msgid "Next file"
 msgstr "Järgmine fail"
 
-#: xfdiff/xfdiff_gui.c:1405
+#: xfdiff/xfdiff_gui.c:1608
 msgid "Previous file"
 msgstr "Eelmine fail"
 
-#: xfdiff/xfdiff_misc.c:89
+#: xfdiff/xfdiff_misc.c:91
 msgid "Could not set selected font"
 msgstr "Ei suutnud laadida määratletud tekstikuju"
 
-#: xfdiff/xfdiff_misc.c:128
+#: xfdiff/xfdiff_misc.c:130
 msgid "Confirm"
 msgstr "Kinnita"
 
-#: xfdiff/xfdiff_misc.c:129
+#: xfdiff/xfdiff_misc.c:130
 msgid "Abort"
 msgstr "Peata"
 
-#: xfdiff/xfdiff_misc.c:138
+#: xfdiff/xfdiff_misc.c:136
 msgid "Alert"
 msgstr "Alarm"
 
-#: xfdiff/xfdiff_misc.c:325
+#: xfdiff/xfdiff_misc.c:361
 msgid ""
 "A bug?\n"
 "Please send full traceback to xfce-dev@moongroup.com"
@@ -1832,19 +1817,19 @@ msgstr ""
 "Prussakas?\n"
 "Palun saada täielik tagasivõte aadressile xfce-dev@moongroup.com"
 
-#: xfdiff/xfdiff_misc.c:330
+#: xfdiff/xfdiff_misc.c:366
 msgid "Low memory (malloc) error: xfdiff_aborting run"
 msgstr "Vähe mälu (malloc) viga: xdiff_aborting run"
 
-#: xfdiff/xfdiff_misc.c:333
+#: xfdiff/xfdiff_misc.c:369
 msgid "file open error: xfdiff_aborting run"
 msgstr "Faili avamise error: xdiff_aborting run"
 
-#: xfdiff/xfdiff_misc.c:336
+#: xfdiff/xfdiff_misc.c:372
 msgid "unspecified error: xfdiff_aborting run"
 msgstr "määratlemata viga: xdiff_aborting run"
 
-#: xfdiff/xfdiff_misc.c:516
+#: xfdiff/xfdiff_misc.c:604
 msgid ""
 "No file was found for patching\n"
 "Either the directory to apply patch is not correctly selected\n"
@@ -1854,7 +1839,7 @@ msgstr ""
 "Kas kataloog kuhu patchi lisada polnud korrektselt määratud\n"
 "või oli märgitud ebakorrektne arutamise tase.\n"
 
-#: xfdiff/xfdiff_misc.c:530
+#: xfdiff/xfdiff_misc.c:621
 msgid ""
 "Patch command has produced reject output.\n"
 "See diagnostics window."
@@ -1862,150 +1847,149 @@ msgstr ""
 "Patch käsklus tootis väljundi minemaviskamise.\n"
 "Vaata diagnostika akent."
 
-#: xfdiff/xfdiff_misc.c:551
+#: xfdiff/xfdiff_misc.c:648
 msgid "No directory was selected!"
 msgstr "Ühtki kataloogi polnud märgitud!"
 
 #.
-#: xfdiff/xfdiff_misc.c:563
+#: xfdiff/xfdiff_misc.c:662
 msgid "Directory or file selection"
 msgstr "Kataloogi või faili määramine"
 
-#: xfdiff/xfdiff_misc.c:586 xfdiff/xfdiff_misc.c:588
+#: xfdiff/xfdiff_misc.c:697 xfdiff/xfdiff_misc.c:700
 msgid "Please select it in the next dialog."
 msgstr "Palun märgi see järgmises dialoogis."
 
-#: xfdiff/xfdiff_misc.c:618
+#: xfdiff/xfdiff_misc.c:738
 msgid "File exists, overwrite?"
 msgstr "Fail leidub ! Kas kirjutame üle ?"
 
-#: xfdiff/xfdiff_misc.c:621
+#: xfdiff/xfdiff_misc.c:742
 msgid "Cannot open file for write\n"
 msgstr "Ei suuda avada faili salvestamiseks\n"
 
-#: xfdiff/xfdiff_misc.c:764 xfdiff/xfdiff_misc.c:766
+#: xfdiff/xfdiff_misc.c:924 xfdiff/xfdiff_misc.c:929
 msgid "couldn't allocate color"
 msgstr "Ei saa värve paika seada"
 
-#. font color!
-#: xfdiff/xfdiff_misc.c:793 xfdiff/xfdiff_misc.c:813
+#: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr "Patch: "
 
-#: xfdiff/xfdiff_misc.c:796 xfdiff/xfdiff_misc.c:818
+#: xfdiff/xfdiff_misc.c:966 xfdiff/xfdiff_misc.c:992
 msgid " applied at: "
 msgstr "lisatud :"
 
-#: xfdiff/xfdiff_misc.c:832
+#: xfdiff/xfdiff_misc.c:1012
 msgid "Press OK to see patch diffs"
 msgstr "Vajuta OK nagemaks patch'i erinevusi"
 
-#: xfglob/xfglob.c:471 xfglob/xfglob.c:472
+#: xfglob/xfglob.c:459 xfglob/xfglob.c:460
 msgid "Results limit reached"
 msgstr "Saavutati tulemuste piirväärtus."
 
-#: xfglob/xfglob.c:480
+#: xfglob/xfglob.c:468
 msgid "Cancelled"
 msgstr "Katkestatud"
 
-#: xfglob/xfglob.c:481
+#: xfglob/xfglob.c:469
 msgid "Search canceled!\n"
 msgstr "Otsing katkestatud!\n"
 
-#: xfglob/xfglob.c:505 xfglob/xfglob.c:532
+#: xfglob/xfglob.c:494 xfglob/xfglob.c:524
 msgid "Glob run must finish or be cancelled first."
 msgstr "Globi töö peab enne lõppema või katkestatama."
 
-#: xfglob/xfglob.c:516
+#: xfglob/xfglob.c:507
 msgid "Find results.\n"
 msgstr "Otsi tulemusi... \n"
 
-#: xfglob/xfglob.c:593 xfglob/xfglob.c:704
+#: xfglob/xfglob.c:587 xfglob/xfglob.c:679
 msgid "Find results..."
 msgstr "Otsi tulemusi..."
 
-#: xfglob/xfglob.c:613 xfglob/xfglob.c:1325
+#: xfglob/xfglob.c:606 xfglob/xfglob.c:1361
 msgid "Directory"
 msgstr "Kataloog"
 
-#: xfglob/xfglob.c:616
+#: xfglob/xfglob.c:609
 msgid "Mode"
 msgstr "Reziim"
 
-#: xfglob/xfglob.c:1021
+#: xfglob/xfglob.c:1031
 msgid "Incoherent size considerations!"
 msgstr "Sobimatud suuruse määrangud!"
 
 #. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
-#: xfglob/xfglob.c:1178
+#: xfglob/xfglob.c:1201
 msgid "Result of "
 msgstr "Tulemused"
 
-#: xfglob/xfglob.c:1189 xfglob/xfglob.c:1621
+#: xfglob/xfglob.c:1212 xfglob/xfglob.c:1555
 msgid "File type :"
 msgstr "Faili tüüp : "
 
-#: xfglob/xfglob.c:1253
+#: xfglob/xfglob.c:1284
 msgid "Anyone"
 msgstr "Igaüks"
 
 #. translation of filetypes
-#: xfglob/xfglob.c:1323
+#: xfglob/xfglob.c:1361
 msgid "Any kind"
 msgstr "Kõik tüübid"
 
-#: xfglob/xfglob.c:1324
+#: xfglob/xfglob.c:1361
 msgid "Regular"
 msgstr "Regulaarne"
 
-#: xfglob/xfglob.c:1326
+#: xfglob/xfglob.c:1361
 msgid "Symlink"
 msgstr "Sümboolviit"
 
-#: xfglob/xfglob.c:1327
+#: xfglob/xfglob.c:1361
 msgid "Socket"
 msgstr "Pesa"
 
-#: xfglob/xfglob.c:1328
+#: xfglob/xfglob.c:1361
 msgid "Block device"
 msgstr "Plokk seade"
 
-#: xfglob/xfglob.c:1329
+#: xfglob/xfglob.c:1361
 msgid "Character device"
 msgstr "Sümbolseade"
 
-#: xfglob/xfglob.c:1330
+#: xfglob/xfglob.c:1361
 msgid "FIFO"
 msgstr "FIFO"
 
-#: xfglob/xfglob.c:1341
+#: xfglob/xfglob.c:1371
 msgid "Xfglob"
 msgstr "Xfglob"
 
 #. *******************************
 #. show the notebook pages:
 #. fourth circle : notebook tabs stuff
-#: xfglob/xfglob.c:1404 xfglob/xfglob.c:2113 xfglob/xfglob.c:2148
+#: xfglob/xfglob.c:1422 xfglob/xfglob.c:1912 xfglob/xfglob.c:1940
 msgid "Find"
 msgstr "Otsi"
 
-#: xfglob/xfglob.c:1419
+#: xfglob/xfglob.c:1434
 msgid "Path : "
 msgstr "Teekond :"
 
-#: xfglob/xfglob.c:1436
+#: xfglob/xfglob.c:1443
 msgid "Browse"
 msgstr "Lehitse"
 
-#: xfglob/xfglob.c:1447
+#: xfglob/xfglob.c:1452
 msgid "File filter : "
 msgstr "Failifilter : "
 
-#: xfglob/xfglob.c:1462
+#: xfglob/xfglob.c:1460
 msgid "What's a file filter?"
 msgstr "Mis on faili filter?"
 
-#: xfglob/xfglob.c:1473
+#: xfglob/xfglob.c:1467
 msgid ""
 "Basic rules:\n"
 "\n"
@@ -2017,35 +2001,35 @@ msgstr ""
 "*  Klapib iga sümboliga null või rohkem korda järjest.\n"
 "?  Klapib iga sümboliga täpselt ühe korra.\n"
 
-#: xfglob/xfglob.c:1483
+#: xfglob/xfglob.c:1473
 msgid "Search subdirectories too"
 msgstr "Otsi ka alamkataloogidest"
 
-#: xfglob/xfglob.c:1487
+#: xfglob/xfglob.c:1475
 msgid "Limit results to first : "
 msgstr "Piida tulemusi arvule:"
 
-#: xfglob/xfglob.c:1502
+#: xfglob/xfglob.c:1488
 msgid "Content search"
 msgstr "Sisu otsing"
 
-#: xfglob/xfglob.c:1517
+#: xfglob/xfglob.c:1500
 msgid "Containing : "
 msgstr "Sisaldab : "
 
-#: xfglob/xfglob.c:1535
+#: xfglob/xfglob.c:1511
 msgid "Case sensitive search"
 msgstr "Tõstutundlik otsing"
 
-#: xfglob/xfglob.c:1538
+#: xfglob/xfglob.c:1512
 msgid "Extended regexp"
 msgstr "Laiendatud laused"
 
-#: xfglob/xfglob.c:1542
+#: xfglob/xfglob.c:1515
 msgid "What's a regexp?"
 msgstr "Mis on erandid?"
 
-#: xfglob/xfglob.c:1549
+#: xfglob/xfglob.c:1521
 msgid ""
 "Reserved characters for extended regexp are\n"
 ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
@@ -2114,19 +2098,19 @@ msgstr ""
 "\n"
 "Rohkem informatsiooni saab kui trükite käsureale \"man grep\".\n"
 
-#: xfglob/xfglob.c:1607
+#: xfglob/xfglob.c:1542
 msgid "File considerations"
 msgstr "Faili kitsendused"
 
-#: xfglob/xfglob.c:1634
+#: xfglob/xfglob.c:1566
 msgid "Stay on single filesystem"
 msgstr "Jää ühele failisüsteemile"
 
-#: xfglob/xfglob.c:1636
+#: xfglob/xfglob.c:1567
 msgid "What's a single filesystem?"
 msgstr "Mis on üksik failisüsteem?"
 
-#: xfglob/xfglob.c:1643
+#: xfglob/xfglob.c:1571
 msgid ""
 "Staying on a single filesystem will hinder\n"
 "searching on different physical disk partitions.\n"
@@ -2138,15 +2122,15 @@ msgstr ""
 "See on eriti kasulik, kui te ei soovi otsida\n"
 "nfs või smb seadmetelt.\n"
 
-#: xfglob/xfglob.c:1671
+#: xfglob/xfglob.c:1593
 msgid "Permission considerations"
 msgstr "Õiguste määratlused"
 
-#: xfglob/xfglob.c:1678
+#: xfglob/xfglob.c:1597
 msgid "How does permission filtering work?"
 msgstr "Kuidas õiguste järgi filtreerimine töötab?"
 
-#: xfglob/xfglob.c:1685
+#: xfglob/xfglob.c:1601
 msgid ""
 "When permission filtering is active:\n"
 "-If a file has one of the chosen permission bits,\n"
@@ -2160,15 +2144,15 @@ msgstr ""
 "- Kui mitte ühtegi õiguse lippu ei ole seatud,\n"
 "  siis leitakse failid, millel pole ühtki õiguselippu seatud.\n"
 
-#: xfglob/xfglob.c:1813
+#: xfglob/xfglob.c:1697
 msgid "User/group considerations"
 msgstr "Kasutaja/grupi määratlused"
 
-#: xfglob/xfglob.c:1820
+#: xfglob/xfglob.c:1701
 msgid "How does user/group filtering work?"
 msgstr "Kuidas kasutaja/grupi filtreerimine töötab?"
 
-#: xfglob/xfglob.c:1827
+#: xfglob/xfglob.c:1705
 msgid ""
 "If user and group are both set to any \n"
 "value other than anyone:\n"
@@ -2180,23 +2164,23 @@ msgstr ""
 "- failid loetakse leituks kui mõlemad\n"
 "  tingimused sobivad.\n"
 
-#: xfglob/xfglob.c:1844
+#: xfglob/xfglob.c:1716
 msgid "User ID: "
 msgstr "Kasutaja ID : "
 
-#: xfglob/xfglob.c:1858
+#: xfglob/xfglob.c:1727
 msgid "Group ID: "
 msgstr "Grupi ID :"
 
-#: xfglob/xfglob.c:1875
+#: xfglob/xfglob.c:1742
 msgid "Size considerations"
 msgstr "Suuruse kitsendused"
 
-#: xfglob/xfglob.c:1882
+#: xfglob/xfglob.c:1746
 msgid "How does size filtering work?"
 msgstr "Kuidas suuruse järgi filtreerimine töötab?"
 
-#: xfglob/xfglob.c:1889
+#: xfglob/xfglob.c:1750
 msgid ""
 "-If a size of 0 (zero) is specified for \n"
 " size-less-than, this will be ignored.\n"
@@ -2210,23 +2194,23 @@ msgstr ""
 " on määratud, siis mõlemad kriteeriumid peavad sobima\n"
 " et fail loetaks leituks.\n"
 
-#: xfglob/xfglob.c:1908
+#: xfglob/xfglob.c:1762
 msgid "Size greater than (KB): "
 msgstr "Suurus suurem kui"
 
-#: xfglob/xfglob.c:1927
+#: xfglob/xfglob.c:1777
 msgid "Size less than (KB): "
 msgstr "Suurus väiksem kui (KB): "
 
-#: xfglob/xfglob.c:1951
+#: xfglob/xfglob.c:1797
 msgid "Time considerations"
 msgstr "Aja kitsendused"
 
-#: xfglob/xfglob.c:1958
+#: xfglob/xfglob.c:1801
 msgid "How does time filtering work?"
 msgstr "Kuidas aja filtreerimine töötab?"
 
-#: xfglob/xfglob.c:1965
+#: xfglob/xfglob.c:1805
 msgid ""
 "Three different time modes may be selected:\n"
 "*modified:\n"
@@ -2275,111 +2259,111 @@ msgstr ""
 "ksutamise aeg muutub, seega kaks järgnevat otsingut\n"
 "ei anna samasuguseid tulemusi.\n"
 
-#: xfglob/xfglob.c:2001
+#: xfglob/xfglob.c:1817
 msgid "Modified"
 msgstr "Redigeeritud"
 
-#: xfglob/xfglob.c:2002
+#: xfglob/xfglob.c:1818
 msgid "Changed"
 msgstr "Muudetud"
 
-#: xfglob/xfglob.c:2003
+#: xfglob/xfglob.c:1819
 msgid "Accessed"
 msgstr "Kasutatud"
 
-#: xfglob/xfglob.c:2012
+#: xfglob/xfglob.c:1825
 msgid "In the previous : "
 msgstr "Eelnevatel : "
 
-#: xfglob/xfglob.c:2025
+#: xfglob/xfglob.c:1835
 msgid "Minutes"
 msgstr "Minutid"
 
-#: xfglob/xfglob.c:2026
+#: xfglob/xfglob.c:1836
 msgid "Hours"
 msgstr "Tunnid"
 
-#: xfglob/xfglob.c:2027
+#: xfglob/xfglob.c:1837
 msgid "Days"
 msgstr "päevadel"
 
-#: xfglob/xfglob.c:2028
+#: xfglob/xfglob.c:1838
 msgid "Months"
 msgstr "kuudel"
 
-#: xfglob/xfglob.c:2061
+#: xfglob/xfglob.c:1869
 msgid "General considerations"
 msgstr "Üldised kaalutlused"
 
-#: xfglob/xfglob.c:2072
+#: xfglob/xfglob.c:1879
 msgid "Do not look into binary files"
 msgstr "Ära otsi binaarfailidest"
 
-#: xfglob/xfglob.c:2075
+#: xfglob/xfglob.c:1881
 msgid "Output count of matching lines"
 msgstr "Väljasta kattuvate ridade loend"
 
-#: xfglob/xfglob.c:2078
+#: xfglob/xfglob.c:1883
 msgid "Match anywhere"
 msgstr "Sobib ükskõik kuhu"
 
-#: xfglob/xfglob.c:2080
+#: xfglob/xfglob.c:1884
 msgid "Match whole words only"
 msgstr "Võrdle täissõnu"
 
-#: xfglob/xfglob.c:2082
+#: xfglob/xfglob.c:1885
 msgid "Match whole lines only"
 msgstr "Võrdle täisridu"
 
-#: xfglob/xfglob.c:2084
+#: xfglob/xfglob.c:1886
 msgid "Output files where no match is found"
 msgstr "Väljasta failid, kus kattuvust ei leitud"
 
-#: xfglob/xfglob.c:2117
+#: xfglob/xfglob.c:1915
 msgid "Filter options"
 msgstr "Filtri seaded"
 
-#: xfglob/xfglob.c:2121
+#: xfglob/xfglob.c:1918
 msgid "Content options"
 msgstr "Glob seaded"
 
-#: xfglob/xfglob.c:2156
+#: xfglob/xfglob.c:1946
 msgid "Results"
 msgstr "Tulemused"
 
-#: xfglob/xfglob.c:2177
+#: xfglob/xfglob.c:1961
 msgid "working..."
 msgstr "töötan..."
 
-#: xfglob/xfglob.c:2182
+#: xfglob/xfglob.c:1964
 msgid "Cancel Search"
 msgstr "Loobu Otsingust"
 
-#: xfglob/xfglob.c:2241
+#: xfglob/xfglob.c:2013
 msgid "Nothing found...\n"
 msgstr "Mitte midagi ei leidunud...\n"
 
-#: xfglob/xfglob.c:2249
+#: xfglob/xfglob.c:2021
 msgid "Files found="
 msgstr "Failid leitud="
 
-#: xfglob/xfglob.c:2252
+#: xfglob/xfglob.c:2024
 msgid "(interrupted because limit exceded)"
 msgstr "(katkestatud, sest limiit ületatud)"
 
-#: xfglob/xfglob.c:2309
+#: xfglob/xfglob.c:2078
 msgid "lines"
 msgstr "jooned"
 
-#: xfglob/xfglob.c:2375
+#: xfglob/xfglob.c:2144
 msgid "unable to stat:"
 msgstr "ei saa stat:"
 
-#: xfclock/xfclock.c:120
+#: xfclock/xfclock.c:118
 msgid "XFClock - XFce Clock & Calendar"
 msgstr "XFClock - XFce Kell & kalender"
 
-#: xfclock/xfclock_cb.c:213
+#: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
 "(c) 1997-2000 Olivier Fourdan"
@@ -2396,7 +2380,7 @@ msgstr ""
 "XFclock : Süntaksi viga konfiguratsiooni faili\n"
 "(%s)\n"
 
-#: xfclock/xfclock_config.c:62
+#: xfclock/xfclock_config.c:61
 #, c-format
 msgid ""
 "XFclock : Data mismatch error in config file\n"
@@ -2409,68 +2393,68 @@ msgstr ""
 msgid "Hide/show menubar"
 msgstr "Varja/näita menüüriba"
 
-#: xfclock/xfclock_menus.c:55 xfclock/xfclock_menus.c:108
+#: xfclock/xfclock_menus.c:54 xfclock/xfclock_menus.c:103
 msgid "Hide/show calendar"
 msgstr "Varja/näita kalendrit"
 
-#: xfclock/xfclock_menus.c:128
+#: xfclock/xfclock_menus.c:119
 msgid "24 hour mode"
 msgstr "24 tunni reziim"
 
-#: xfclock/xfclock_menus.c:138
+#: xfclock/xfclock_menus.c:126
 msgid "Display AM/PM"
 msgstr "Näita EL/PL"
 
-#: xfclock/xfclock_menus.c:147
+#: xfclock/xfclock_menus.c:133
 msgid "Display seconds"
 msgstr "Näita sekundeid"
 
-#: xfclock/xfclock_menus.c:160
+#: xfclock/xfclock_menus.c:144
 msgid "Background color..."
 msgstr "Tausta värv..."
 
-#: xfclock/xfclock_menus.c:166
+#: xfclock/xfclock_menus.c:149
 msgid "Foreground color..."
 msgstr "Kujutise värv..."
 
-#: xfclock/xfclock_menus.c:172
+#: xfclock/xfclock_menus.c:154
 msgid "Font..."
 msgstr "Tekstikuju..."
 
-#: xfclock/xfclock_menus.c:182
+#: xfclock/xfclock_menus.c:163
 msgid "Hide menubar"
 msgstr "Varja menüüriba"
 
 #. Create "Calendar options" menu
-#: xfclock/xfclock_menus.c:189
+#: xfclock/xfclock_menus.c:169
 msgid "Calendar Options"
 msgstr "Kalendri seaded"
 
-#: xfclock/xfclock_menus.c:196
+#: xfclock/xfclock_menus.c:176
 msgid "Mark Fridays"
 msgstr "Märgi Reeded"
 
-#: xfclock/xfclock_menus.c:204
+#: xfclock/xfclock_menus.c:183
 msgid "Mark Saturdays"
 msgstr "Märgi Laupäevad"
 
-#: xfclock/xfclock_menus.c:212
+#: xfclock/xfclock_menus.c:190
 msgid "Mark Sundays"
 msgstr "Märgi Pühapäevad"
 
-#: xfclock/xfclock_menus.c:224
+#: xfclock/xfclock_menus.c:201
 msgid "Show week numbers"
 msgstr "Näta nädalanumbreid"
 
-#: xfclock/xfclock_menus.c:233
+#: xfclock/xfclock_menus.c:208
 msgid "Show day names"
 msgstr "Näita päevanimesid"
 
-#: xfclock/xfclock_menus.c:241
+#: xfclock/xfclock_menus.c:215
 msgid "Show heading"
 msgstr "Näita pealkirja"
 
-#: xfclock/xfclock_menus.c:253
+#: xfclock/xfclock_menus.c:226
 msgid "Week starts on Monday"
 msgstr "Nädal algab Esmaspäevaga"
 
@@ -2482,40 +2466,40 @@ msgstr "xfmouse: Viga, ei suuda avada ekraani. \n"
 msgid "Is X running and $DISPLAY correctly set ?\n"
 msgstr "Kas X töötab ja $DISPLAY on seatud korrektselt ?\n"
 
-#: xfmouse/xfmouse.c:146
+#: xfmouse/xfmouse.c:144
 msgid "XFMouse - XFce Mouse Configuration"
 msgstr "XFMouse - XFce Hiire konfiguraator"
 
-#: xfmouse/xfmouse.c:180
+#: xfmouse/xfmouse.c:177
 msgid "Button Settings"
 msgstr "Nupu seadistused"
 
-#: xfmouse/xfmouse.c:230
+#: xfmouse/xfmouse.c:225
 msgid "Motion Settings"
 msgstr "Liikumise seadistused"
 
-#: xfmouse/xfmouse.c:265
+#: xfmouse/xfmouse.c:252
 msgid "Threshold : "
 msgstr "Hoideväärtus : "
 
-#: xfmouse/xfmouse.c:277
+#: xfmouse/xfmouse.c:261
 msgid "Acceleration : "
 msgstr "Kiirendus : "
 
-#: xfbd/xfbd.c:735 xfmouse/xfmouse.c:471
+#: xfbd/xfbd.c:695 xfmouse/xfmouse.c:441
 #, c-format
 msgid "Usage : %s [OPTIONS]\n"
 msgstr "Kasutus : %s [SEADISTUSED]\n"
 
-#: xfbd/xfbd.c:736 xfmouse/xfmouse.c:472
+#: xfbd/xfbd.c:696 xfmouse/xfmouse.c:442
 msgid "   Where OPTIONS are :\n"
 msgstr "   Milles SEADISTUSED on :\n"
 
-#: xfmouse/xfmouse.c:473
+#: xfmouse/xfmouse.c:443
 msgid "   -i : interactive\n"
 msgstr "   -i : interaktiivne\n"
 
-#: xfmouse/xfmouse.c:474
+#: xfmouse/xfmouse.c:444
 msgid ""
 "   -d : apply configuration and exit (default)\n"
 "\n"
@@ -2523,7 +2507,7 @@ msgstr ""
 "   -d : lisa konfiguratsioon ja välju (vaikimisi)\n"
 "\n"
 
-#: xfbd/xfbd.c:743 xfmouse/xfmouse.c:477
+#: xfbd/xfbd.c:699 xfmouse/xfmouse.c:445
 #, c-format
 msgid ""
 "%s is part of the XFce distribution, written by Olivier Fourdan\n"
@@ -2532,39 +2516,39 @@ msgstr ""
 "%s on osa XFce turustusest, kirjutas Oliver Fourdan\n"
 "\n"
 
-#: xfsound/xfsound.c:66
+#: xfsound/xfsound.c:75
 msgid "New Desk"
 msgstr "Uus laud"
 
-#: xfsound/xfsound.c:68
+#: xfsound/xfsound.c:76
 msgid "Add Window"
 msgstr "Lisa aken"
 
-#: xfsound/xfsound.c:70
+#: xfsound/xfsound.c:77
 msgid "Raise Window"
 msgstr "Tõsta aken"
 
-#: xfsound/xfsound.c:72
+#: xfsound/xfsound.c:78
 msgid "Lower Window"
 msgstr "Langeta aken"
 
-#: xfsound/xfsound.c:74
+#: xfsound/xfsound.c:79
 msgid "Configure Window"
 msgstr "Konfigureeri aken"
 
-#: xfsound/xfsound.c:76
+#: xfsound/xfsound.c:80
 msgid "Focus Change"
 msgstr "Fookuse muutmine"
 
-#: xfsound/xfsound.c:78
+#: xfsound/xfsound.c:81
 msgid "Destroy Window"
 msgstr "Hävita aken"
 
-#: xfsound/xfsound.c:80
+#: xfsound/xfsound.c:82
 msgid "Iconify"
 msgstr "Ikoniseeri"
 
-#: xfsound/xfsound.c:82
+#: xfsound/xfsound.c:83
 msgid "De-iconify"
 msgstr "Taasta suurus"
 
@@ -2572,59 +2556,59 @@ msgstr "Taasta suurus"
 msgid "Shade"
 msgstr "Varjuta"
 
-#: xfsound/xfsound.c:86
+#: xfsound/xfsound.c:85
 msgid "Un-Shade"
 msgstr "Ära varjuta"
 
-#: xfsound/xfsound.c:88
+#: xfsound/xfsound.c:86
 msgid "Maximize"
 msgstr "Maksimiseeri"
 
-#: xfsound/xfsound.c:90
+#: xfsound/xfsound.c:87
 msgid "De-maximize"
 msgstr "Ära maksimiseeri"
 
-#: xfsound/xfsound.c:94
+#: xfsound/xfsound.c:89
 msgid "Shutdown"
 msgstr "Seiska"
 
-#: xfsound/xfsound.c:96
+#: xfsound/xfsound.c:90
 msgid "Unknown"
 msgstr "Teadmatu"
 
-#: xfsound/xfsound.c:371
+#: xfsound/xfsound.c:442
 msgid "XFSound - XFce Sound Manager"
 msgstr "XFSound - XFce Heli Seadistaja"
 
-#: xfsound/xfsound.c:419
+#: xfsound/xfsound.c:489
 msgid "Event : "
 msgstr "Sündmus : "
 
-#: xfsound/xfsound.c:428
+#: xfsound/xfsound.c:496
 msgid "Sound file : "
 msgstr "Helifail : "
 
-#: xfsound/xfsound.c:437
+#: xfsound/xfsound.c:503
 msgid "Test"
 msgstr "Test"
 
-#: xfsound/xfsound.c:488
+#: xfsound/xfsound.c:543
 msgid "Play Sound"
 msgstr "Mängi Lugu"
 
-#: xfsound/xfsound.c:497 xfumed/interface.c:295
+#: xfsound/xfsound.c:551
 msgid "Command : "
 msgstr "Käsklus : "
 
-#: xfsound/xfsound.c:522
+#: xfsound/xfsound.c:575
 msgid "Internal"
 msgstr "Sisemine"
 
-#: xfsound/xfsound.c:529
+#: xfsound/xfsound.c:581
 msgid "External"
 msgstr "Välimine"
 
-#: xfbd/xfbd.c:290
+#: xfbd/xfbd.c:280
 msgid ""
 "Error\n"
 "Cannot open file"
@@ -2632,7 +2616,7 @@ msgstr ""
 "Viga \n"
 "Ei saa avada faili"
 
-#: xfbd/xfbd.c:292
+#: xfbd/xfbd.c:282
 msgid ""
 "Error\n"
 "Cannot allocate colors"
@@ -2640,7 +2624,7 @@ msgstr ""
 "Viga\n"
 "Ei saa seada värve paika"
 
-#: xfbd/xfbd.c:294
+#: xfbd/xfbd.c:284
 msgid ""
 "Error\n"
 "File format invalid"
@@ -2648,7 +2632,7 @@ msgstr ""
 "Viga\n"
 "Vale failiformaat"
 
-#: xfbd/xfbd.c:296
+#: xfbd/xfbd.c:286
 msgid ""
 "Error\n"
 "Color definition invalid"
@@ -2656,7 +2640,7 @@ msgstr ""
 "Viga\n"
 "Vale värvidefinitsioon"
 
-#: xfbd/xfbd.c:298
+#: xfbd/xfbd.c:288
 msgid ""
 "Error\n"
 "Not enough Memory"
@@ -2664,35 +2648,35 @@ msgstr ""
 "Viga\n"
 "Selleks ei jagu mälu"
 
-#: xfbd/xfbd.c:415
+#: xfbd/xfbd.c:405
 msgid "XFbd - XFce Backdrop Manager"
 msgstr "XFbd - XFce taustapildi seadja"
 
-#: xfbd/xfbd.c:459 xfbd/xfbdmgr.c:147
+#: xfbd/xfbd.c:448 xfbd/xfbdmgr.c:148
 msgid "Filename : "
 msgstr "Failinimi : "
 
-#: xfbd/xfbd.c:481
+#: xfbd/xfbd.c:470
 msgid "Display image : "
 msgstr "Ekraanipilt :"
 
-#: xfbd/xfbd.c:488
+#: xfbd/xfbd.c:477
 msgid "Tiled"
 msgstr "Jaotatud"
 
-#: xfbd/xfbd.c:497
+#: xfbd/xfbd.c:485
 msgid "Stretched"
 msgstr "Vajutatud"
 
-#: xfbd/xfbd.c:506
+#: xfbd/xfbd.c:493
 msgid "Auto"
 msgstr "Automaatne"
 
-#: xfbd/xfbd.c:738
+#: xfbd/xfbd.c:697
 msgid "   -i : interactive, prompts for backdrop to display\n"
 msgstr "   -i : interaktiivne, võimaldab taustapilti näidata\n"
 
-#: xfbd/xfbd.c:740
+#: xfbd/xfbd.c:698
 msgid ""
 "   -d : display, reads configuration and exit (default)\n"
 "\n"
@@ -2700,188 +2684,160 @@ msgstr ""
 "   -d : display, loeb konfiguratsioon ja väljub (vaikimisi)\n"
 "\n"
 
-#: xfbd/xfbdmgr.c:88
+#: xfbd/xfbdmgr.c:89
 msgid "xfbdmgr - XFCE List Manager"
 msgstr "xfbdmgr - XFCE Listi Hooldaja"
 
-#: xfbd/xfbdmgr.c:278
+#: xfbd/xfbdmgr.c:257
 msgid "File not found.\n"
 msgstr "Faili ei leidu nud.\n"
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:851
 msgid "&Restart"
 msgstr "&R -Taaskäivitus"
 
-#: xfwm/xfwm.c:876
+#: xfwm/xfwm.c:852
 msgid "&Quit"
 msgstr "&Q -Välju"
 
-#: xfwm/xfwm.c:889
+#: xfwm/xfwm.c:865
 msgid "&Move"
 msgstr "&M -Nihuta"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:866
 msgid "&Resize"
 msgstr "&R -Muuda suurus"
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:867
 msgid "(De)&Iconify"
 msgstr "&I -Taasta tillukesest suureks"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:868
 msgid "(Un)&Stick"
 msgstr "&S -Naeluta lahti"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:869
 msgid "(Un)S&hade"
 msgstr "&h -Eemalda vari"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:870
 msgid "(Un)Ma&ximize"
 msgstr "&x -Taasta väikeseks"
 
-#: xfwm/xfwm.c:896
+#: xfwm/xfwm.c:872
 msgid "Se&nd to..."
 msgstr "&n -Saada..."
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:873
 msgid "S&witch to..."
 msgstr "&w -Lülita..."
 
-#: xfwm/xfwm.c:899
+#: xfwm/xfwm.c:875
 msgid "&Close"
 msgstr "&C Sulge"
 
-#: xfwm/xfwm.c:901
+#: xfwm/xfwm.c:877
 msgid "User Menu"
 msgstr "Kasutaja Menüü"
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:878
 msgid "Edit menu..."
 msgstr "Redigeeri menüüd..."
 
-#: xfwm/xfwm.c:906
+#: xfwm/xfwm.c:882
 msgid "&Mouse..."
 msgstr "&M -Hiir"
 
-#: xfwm/xfwm.c:907
+#: xfwm/xfwm.c:883
 msgid "&Backdrop..."
 msgstr "&B -Taustapilt..."
 
-#: xfwm/xfwm.c:908
+#: xfwm/xfwm.c:884
 msgid "&Sound..."
 msgstr "&S -Heli..."
 
-#: xfwm/xfwm.c:910
+#: xfwm/xfwm.c:886
 msgid "&New window"
 msgstr "&N -Uus aken"
 
-#: xfwm/xfwm.c:911
+#: xfwm/xfwm.c:887
 msgid "&User Menu"
 msgstr "&U -Kasutaja Menüü"
 
-#: xfwm/xfwm.c:915
+#: xfwm/xfwm.c:891
 msgid "&Arrange icons"
 msgstr "&A -Järjesta ikoonid"
 
-#: xfwm/xfwm.c:916
+#: xfwm/xfwm.c:892
 msgid "&Iconify all"
 msgstr "&I -Ikoniseeri kõik"
 
-#: xfwm/xfwm.c:917
+#: xfwm/xfwm.c:893
 msgid "&Refresh"
 msgstr "&R -Joonista üle"
 
-#: xfwm/xfwm.c:918
+#: xfwm/xfwm.c:894
 msgid "Shuffle &Up"
 msgstr "&U -Juhuslikult ülesse"
 
-#: xfwm/xfwm.c:919
+#: xfwm/xfwm.c:895
 msgid "Shuffle &Down"
 msgstr "&D - Juhuslikult alla"
 
-#: xfwm/xfwm.c:921
+#: xfwm/xfwm.c:897
 msgid "&Settings"
 msgstr "&Seadistused"
 
-#: xfwm/xfwm.c:923
+#: xfwm/xfwm.c:899
 msgid "&Quit XFwm"
 msgstr "&Q -Välju XFwm"
 
-#: xfwm/xfwm.c:925
+#: xfwm/xfwm.c:901
 msgid "&Full Screen"
 msgstr "&F -Täisekraan"
 
-#: xfwm/xfwm.c:926
+#: xfwm/xfwm.c:902
 msgid "&Vertical"
 msgstr "&V -Vertikaalne"
 
-#: xfwm/xfwm.c:927
+#: xfwm/xfwm.c:903
 msgid "&Horizontal"
 msgstr "&H -Horisontaalne"
 
-#: xfwm/xfwm.c:1264
+#: xfwm/xfwm.c:1233
 msgid "xfwm terminated: "
 msgstr "xfwm kõrvaldatud: "
 
-#: xfsamba/xfsamba.c:313
-msgid "Shares"
-msgstr "Jaotused"
-
-#: xfsamba/xfsamba.c:315
-msgid "Links to other servers"
-msgstr "Viidad teistele serveritele"
-
-#: xfsamba/xfsamba.c:317
-msgid "Links to other workgroups"
-msgstr "Viidad teistele töögruppidele"
-
-#: xfsamba/xfsamba.c:379
-msgid "Query done."
-msgstr "Otsing tehtud"
-
-#: xfsamba/xfsamba.c:381
-msgid "Query failed. Machine may be down."
-msgstr "Otsing ebaõnnestus. Masin võib mitte töötada."
-
-#: xfsamba/xfsamba.c:399 xfsamba/xfsamba_list.c:183
-msgid "Query password has been requested."
-msgstr "Otsing nõuab parooli."
-
-#: xfsamba/xfsamba.c:559
-msgid "Querying"
-msgstr "Otsing"
-
-#: xfsamba/xfsamba.c:655
+#: xfsamba/xfsamba.c:223
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Sanba viga! Xfsamba ei suuda leida faile:"
 
-#: xfsamba/xfsamba.c:667
+#: xfsamba/xfsamba.c:231
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr "(palun installeeri Samba või korrigeeri PATH keskkonnamuutuja)"
 
-#: xfsamba/xfsamba_download.c:63
+#: xfsamba/xfsamba_download.c:87
 msgid "File download failed. See diagnostics for reason."
 msgstr "Faili allalaadimine ebaõnnestus. Vaata põhjuseks diagnostikat."
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:67
+#: xfsamba/xfsamba_download.c:91
 msgid "Download done."
 msgstr "Allalaadimine tehtud."
 
-#: xfsamba/xfsamba_download.c:104
+#: xfsamba/xfsamba_download.c:127
 msgid "Downloading file..."
 msgstr "Laen faili alla..."
 
-#: xfsamba/xfsamba_download.c:117
+#: xfsamba/xfsamba_download.c:140
 msgid "File download cancelled."
 msgstr "Faili allalaadimine katkestatud."
 
-#: xfsamba/xfsamba_download.c:126
+#: xfsamba/xfsamba_download.c:148
 msgid "Download failed."
 msgstr "Allalaadimine ebaõnnestus."
 
-#: xfsamba/xfsamba_gui.c:138
+#: xfsamba/xfsamba_gui.c:145
 msgid ""
 "If you have win95 nodes on your network, xfsamba might not find\n"
 "a master browser. If you start smb services on your linux box,\n"
@@ -2897,143 +2853,133 @@ msgstr ""
 "et muudatused kasutusele võetaks. Muidu\n"
 "peate te sisestama arvuti aadressi ja vajutama [RETURN] klahvi.\n"
 
-#: xfsamba/xfsamba_gui.c:150
+#: xfsamba/xfsamba_gui.c:151
 msgid "This is XFSamba "
 msgstr "See on XFSamba "
 
-#: xfsamba/xfsamba_gui.c:151
-msgid ""
-"\n"
-"(c) Edscott Wilson Garcia under GNU GPL\n"
-"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
-msgstr ""
-"\n"
-"(c) Edscott Wilson Garcia, GNU GPL\n"
-"XFCE moodulid (c) Olivier Fourdan http://www.xfce.org/"
-
-#: xfsamba/xfsamba_gui.c:316
+#: xfsamba/xfsamba_gui.c:337
 msgid "Please provide information for server "
 msgstr "Palun anna servari kohta infot "
 
-#: xfsamba/xfsamba_gui.c:317
+#: xfsamba/xfsamba_gui.c:339
 msgid "Please provide browsing preferences "
 msgstr "Palun anna lehitsemise parameetrid"
 
-#: xfsamba/xfsamba_gui.c:334
+#: xfsamba/xfsamba_gui.c:356
 msgid "Username : "
 msgstr "Kasutajanimi  : "
 
-#: xfsamba/xfsamba_gui.c:356
+#: xfsamba/xfsamba_gui.c:376
 msgid "Password  : "
 msgstr "Parool  : "
 
-#: xfsamba/xfsamba_gui.c:400
+#: xfsamba/xfsamba_gui.c:414
 msgid "A file must be selected!"
 msgstr "Fail tuleb selekteerida!"
 
-#: xfsamba/xfsamba_gui.c:409 xfsamba/xfsamba_gui.c:418
-#: xfsamba/xfsamba_gui.c:440
+#: xfsamba/xfsamba_gui.c:423 xfsamba/xfsamba_gui.c:432
+#: xfsamba/xfsamba_gui.c:455
 msgid "A directory must be selected!"
 msgstr "Kataloog tuleb selekteerida!"
 
-#: xfsamba/xfsamba_gui.c:428
+#: xfsamba/xfsamba_gui.c:442
 msgid "Something to be deleted must be selected!"
 msgstr "Midagi, mida kustutada, tuleb selekteerida!"
 
-#: xfsamba/xfsamba_gui.c:747
+#: xfsamba/xfsamba_gui.c:756
 msgid "Going to master browser..."
 msgstr "Siirdun pealehitseja juurde..."
 
-#: xfsamba/xfsamba_gui.c:757
+#: xfsamba/xfsamba_gui.c:766
 msgid "Going back..."
 msgstr "Tagasi..."
 
-#: xfsamba/xfsamba_gui.c:769
+#: xfsamba/xfsamba_gui.c:778
 msgid "Going forward..."
 msgstr "Edasi..."
 
-#: xfsamba/xfsamba_gui.c:784
+#: xfsamba/xfsamba_gui.c:794
 msgid "Attempting to stop query..."
 msgstr "Üritan peatada päringut..."
 
-#: xfsamba/xfsamba_gui.c:788
+#: xfsamba/xfsamba_gui.c:798
 msgid "Query stopped."
 msgstr "Päring peatatud."
 
 #. (s): multiple file upload/download to be enabled in future
-#: xfsamba/xfsamba_gui.c:1040
+#: xfsamba/xfsamba_gui.c:1016
 msgid "Download..."
 msgstr "Allalaadimine..."
 
-#: xfsamba/xfsamba_gui.c:1042
+#: xfsamba/xfsamba_gui.c:1017
 msgid "Upload..."
 msgstr "Üleslaadimine..."
 
-#: xfsamba/xfsamba_gui.c:1045
+#: xfsamba/xfsamba_gui.c:1019
 msgid "New folder..."
 msgstr "Uus kataloog..."
 
-#: xfsamba/xfsamba_gui.c:1047
+#: xfsamba/xfsamba_gui.c:1020
 msgid "Delete..."
 msgstr "Kustuta..."
 
-#: xfsamba/xfsamba_gui.c:1049 xfsamba/xfsamba_tar.c:386
+#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:441
 msgid "Tar..."
 msgstr "Tar..."
 
-#: xfsamba/xfsamba_gui.c:1054
+#: xfsamba/xfsamba_gui.c:1024
 msgid "Preferences"
 msgstr "Parameetrid"
 
-#: xfsamba/xfsamba_gui.c:1055
+#: xfsamba/xfsamba_gui.c:1025
 msgid "Browse as..."
 msgstr "Lehitse kui ..."
 
-#: xfsamba/xfsamba_gui.c:1058
+#: xfsamba/xfsamba_gui.c:1027
 msgid "View"
 msgstr "Vaata"
 
-#: xfsamba/xfsamba_gui.c:1061
+#: xfsamba/xfsamba_gui.c:1029
 msgid "Show diagnostics"
 msgstr "Näita diagnostikat"
 
-#: xfsamba/xfsamba_gui.c:1064
+#: xfsamba/xfsamba_gui.c:1030
 msgid "Hide diagnostics"
 msgstr "Näita diagnostikat"
 
-#: xfsamba/xfsamba_gui.c:1067
+#: xfsamba/xfsamba_gui.c:1031
 msgid "Show browser links"
 msgstr "Näita lehitseja viitasid"
 
-#: xfsamba/xfsamba_gui.c:1070
+#: xfsamba/xfsamba_gui.c:1032
 msgid "Hide browser links"
 msgstr "Näita lehitseja viitasid"
 
-#: xfsamba/xfsamba_gui.c:1073
+#: xfsamba/xfsamba_gui.c:1034
 msgid "Go"
 msgstr "Mine"
 
-#: xfsamba/xfsamba_gui.c:1074
+#: xfsamba/xfsamba_gui.c:1035
 msgid "Home..."
 msgstr "Kodu ..."
 
-#: xfsamba/xfsamba_gui.c:1076
+#: xfsamba/xfsamba_gui.c:1036
 msgid "Reload..."
 msgstr "Taaslae ..."
 
-#: xfsamba/xfsamba_gui.c:1078
+#: xfsamba/xfsamba_gui.c:1037
 msgid "Forward..."
 msgstr "Edasi ..."
 
-#: xfsamba/xfsamba_gui.c:1080
+#: xfsamba/xfsamba_gui.c:1038
 msgid "Back..."
 msgstr "Tagasi ..."
 
-#: xfsamba/xfsamba_gui.c:1083
+#: xfsamba/xfsamba_gui.c:1040
 msgid "About master browser..."
 msgstr "Infot pealehitsejast ..."
 
-#: xfsamba/xfsamba_gui.c:1085
+#: xfsamba/xfsamba_gui.c:1041
 msgid "About xfsamba..."
 msgstr "Infot xfsambast ..."
 
@@ -3041,123 +2987,151 @@ msgstr "Infot xfsambast ..."
 #. hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{
 #.
 #. icon bar
-#: xfsamba/xfsamba_gui.c:1095
+#: xfsamba/xfsamba_gui.c:1050
 msgid "Back ..."
 msgstr "Tagasi ..."
 
-#: xfsamba/xfsamba_gui.c:1100
+#: xfsamba/xfsamba_gui.c:1054
 msgid "Forward ..."
 msgstr "Edasi ..."
 
-#: xfsamba/xfsamba_gui.c:1105
+#: xfsamba/xfsamba_gui.c:1058
 msgid "Reload ..."
 msgstr "Taaslae ..."
 
-#: xfsamba/xfsamba_gui.c:1111
+#: xfsamba/xfsamba_gui.c:1063
 msgid "Home ..."
 msgstr "Kodu ..."
 
-#: xfsamba/xfsamba_gui.c:1116
+#: xfsamba/xfsamba_gui.c:1067
 msgid "Stop ..."
 msgstr "Seiska ..."
 
-#: xfsamba/xfsamba_gui.c:1126
+#: xfsamba/xfsamba_gui.c:1076
 msgid "New folder ..."
 msgstr "Uus kataloog ..."
 
-#: xfsamba/xfsamba_gui.c:1142
+#: xfsamba/xfsamba_gui.c:1090
 msgid "Download ..."
 msgstr "Allalaadimine ..."
 
-#: xfsamba/xfsamba_gui.c:1148
+#: xfsamba/xfsamba_gui.c:1095
 msgid "Upload ..."
 msgstr "Üleslaadimine ..."
 
-#: xfsamba/xfsamba_gui.c:1155
+#: xfsamba/xfsamba_gui.c:1101
 msgid "Tar ..."
 msgstr "Tar ..."
 
-#: xfsamba/xfsamba_gui.c:1166
+#: xfsamba/xfsamba_gui.c:1111
 msgid "Help ..."
 msgstr "Abimees ..."
 
-#: xfsamba/xfsamba_gui.c:1176
+#: xfsamba/xfsamba_gui.c:1120
 msgid "Set View 3"
 msgstr "Sea vaade 3"
 
-#: xfsamba/xfsamba_gui.c:1182
+#: xfsamba/xfsamba_gui.c:1125
 msgid "Set View 2"
 msgstr "Sea vaade 2"
 
-#: xfsamba/xfsamba_gui.c:1188
+#: xfsamba/xfsamba_gui.c:1130
 msgid "Set View 1"
 msgstr "Sea vaade 1"
 
-#: xfsamba/xfsamba_gui.c:1200
+#: xfsamba/xfsamba_gui.c:1141
 msgid "Location : "
 msgstr "Asukoht : "
 
-#: xfsamba/xfsamba_gui.c:1216
+#: xfsamba/xfsamba_gui.c:1155
 msgid "Show IP"
 msgstr "Näita IP'd"
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1243
+#: xfsamba/xfsamba_gui.c:1181
 msgid "Location shares : "
 msgstr "Asukoha jaosmaterjal : "
 
-#: xfsamba/xfsamba_gui.c:1259
+#: xfsamba/xfsamba_gui.c:1196
 msgid "Size"
 msgstr "Suurus"
 
-#: xfsamba/xfsamba_gui.c:1260
+#: xfsamba/xfsamba_gui.c:1197
 msgid "Date"
 msgstr "kuupäev"
 
-#: xfsamba/xfsamba_gui.c:1261
+#: xfsamba/xfsamba_gui.c:1198
 msgid "Comment"
 msgstr "Kommentaar"
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1305
+#: xfsamba/xfsamba_gui.c:1239
 msgid "Location known servers : "
 msgstr "Asukoha teadaolevad serverid : "
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1337
+#: xfsamba/xfsamba_gui.c:1267
 msgid "Location known workgroups : "
 msgstr "Asukoha teadaolevad töögrupit : "
 
-#: xfsamba/xfsamba_gui.c:1404
+#: xfsamba/xfsamba_gui.c:1325
 msgid "Welcome to xfsamba."
 msgstr "Teretulemast xfsambasse."
 
-#: xfsamba/xfsamba_list.c:178
+#: xfsamba/xfsamba_list.c:188
 msgid "Retrieve done."
 msgstr "Tirimine lõpetatud"
 
-#: xfsamba/xfsamba_list.c:226
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+msgid "Query password has been requested."
+msgstr "Otsing nõuab parooli."
+
+#: xfsamba/xfsamba_list.c:232
 msgid "List failed."
 msgstr "Nimistu ebaõnnestus."
 
-#: xfsamba/xfsamba_list.c:245
+#: xfsamba/xfsamba_list.c:251
 msgid "Retreiving..."
 msgstr "Tirin"
 
-#: xfsamba/xfsamba_lookup.c:43 xfsamba/xfsamba_lookup.c:46
-#: xfsamba/xfsamba_masterresolve.c:203 xfsamba/xfsamba_masterresolve.c:205
+#: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
+#: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 msgid "Resolved"
 msgstr "Lahendatud"
 
-#: xfsamba/xfsamba_lookup.c:99 xfsamba/xfsamba_lookup.c:102
+#: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
 msgid "Resolving for"
 msgstr "Lahendan "
 
-#: xfsamba/xfsamba_masterlookup.c:70
+#: xfsamba/xfsamba_smblookup.c:84
+msgid "Shares"
+msgstr "Jaotused"
+
+#: xfsamba/xfsamba_smblookup.c:86
+msgid "Links to other servers"
+msgstr "Viidad teistele serveritele"
+
+#: xfsamba/xfsamba_smblookup.c:88
+msgid "Links to other workgroups"
+msgstr "Viidad teistele töögruppidele"
+
+#: xfsamba/xfsamba_smblookup.c:143
+msgid "Query done."
+msgstr "Otsing tehtud"
+
+#: xfsamba/xfsamba_smblookup.c:145
+msgid "Query failed. Machine may be down."
+msgstr "Otsing ebaõnnestus. Masin võib mitte töötada."
+
+#: xfsamba/xfsamba_smblookup.c:324
+msgid "Querying"
+msgstr "Otsing"
+
+#: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
 msgstr "Pealehitsejat ei leitud. Vaata diagnostikat."
 
-#: xfsamba/xfsamba_masterlookup.c:71
+#: xfsamba/xfsamba_masterlookup.c:78
 msgid ""
 "No master browser found.\n"
 "Please type a computer name at location and hit RETURN"
@@ -3165,28 +3139,28 @@ msgstr ""
 "Pealehitsejat Ei leidunud.\n"
 "Palun sisesta arvuti nimi lokatsioonilahtrisse ja vajuta [RETURN]"
 
-#: xfsamba/xfsamba_masterlookup.c:127
+#: xfsamba/xfsamba_masterlookup.c:134
 msgid "Looking for master browsers..."
 msgstr "Otsin pealehitsejat..."
 
-#: xfsamba/xfsamba_masterresolve.c:97
+#: xfsamba/xfsamba_masterresolve.c:110
 msgid "Please provide netbios name for master browser at "
 msgstr "Palun anna netbiose nimi pealehitsejale"
 
-#: xfsamba/xfsamba_masterresolve.c:164
+#: xfsamba/xfsamba_masterresolve.c:179
 msgid "Master browser netbios name must be provided."
 msgstr "Pealehitseja netbiosi nimi peab olema antud."
 
-#: xfsamba/xfsamba_masterresolve.c:215 xfsamba/xfsamba_masterresolve.c:217
-#: xfsamba/xfsamba_masterresolve.c:223
+#: xfsamba/xfsamba_masterresolve.c:227 xfsamba/xfsamba_masterresolve.c:228
+#: xfsamba/xfsamba_masterresolve.c:234
 msgid "No status response"
 msgstr "Ei tulnud olekuvastust"
 
-#: xfsamba/xfsamba_masterresolve.c:234
+#: xfsamba/xfsamba_masterresolve.c:246
 msgid "Master browser not resolved. Use location box to browse."
 msgstr "Pealehitsejat ei leidnud. Kasuta asukoha kasti lehitsemaks."
 
-#: xfsamba/xfsamba_masterresolve.c:235
+#: xfsamba/xfsamba_masterresolve.c:247
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
@@ -3194,250 +3168,300 @@ msgstr ""
 "Ei leidnud pealehitsejat.\n"
 "Palun sisesta arvuti nimi lokatsioonilahtrisse ja vajuta [RETURN]"
 
-#: xfsamba/xfsamba_masterresolve.c:290 xfsamba/xfsamba_masterresolve.c:292
+#: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
 msgid "Resolving"
 msgstr "Lahendan"
 
-#: xfsamba/xfsamba_mkdir.c:75
+#: xfsamba/xfsamba_mkdir.c:102
 msgid "Please provide a name for the new directory at"
 msgstr "Palun anna uuele kataloogile nimi"
 
-#: xfsamba/xfsamba_mkdir.c:181
+#: xfsamba/xfsamba_mkdir.c:200
 msgid "Directory creation failed. See diagnostics for details."
 msgstr "Kataloogi loomine ebaõnnestus. Vaata diagnostikast detaile."
 
-#: xfsamba/xfsamba_mkdir.c:190
+#: xfsamba/xfsamba_mkdir.c:209
 msgid "Directory created."
 msgstr "Kataloog loodud."
 
-#: xfsamba/xfsamba_mkdir.c:237
+#: xfsamba/xfsamba_mkdir.c:250
 msgid "Create directory cancelled."
 msgstr "Kataloogi loomine katkestati"
 
-#: xfsamba/xfsamba_mkdir.c:249
+#: xfsamba/xfsamba_mkdir.c:261
 msgid "Create directory failed."
 msgstr "Kataloogi loomine ebaõnnestus."
 
-#: xfsamba/xfsamba_mkdir.c:281
+#: xfsamba/xfsamba_mkdir.c:292
 msgid "Creating dir..."
 msgstr "Kataloogi loomine..."
 
-#: xfsamba/xfsamba_rm.c:63
+#: xfsamba/xfsamba_rm.c:86
 msgid "Remove failed. See diagnostics for details."
 msgstr "Eemaldamine ebaõnnestus. Vaada detaile diagnostikast."
 
-#: xfsamba/xfsamba_rm.c:70
+#: xfsamba/xfsamba_rm.c:92
 msgid "Remove complete."
 msgstr "Eemaldamine lõpetatud."
 
-#: xfsamba/xfsamba_rm.c:104
+#: xfsamba/xfsamba_rm.c:126
 msgid "Removing..."
 msgstr "Eemaldamine..."
 
-#: xfsamba/xfsamba_rm.c:109
+#: xfsamba/xfsamba_rm.c:131
 msgid "Sorry, top level shares cannot be removed."
 msgstr "Vabanda, kõrgeima astme jaotisi ei saa eemaldada."
 
-#: xfsamba/xfsamba_rm.c:112 xfsamba/xfsamba_rm.c:168
+#: xfsamba/xfsamba_rm.c:134 xfsamba/xfsamba_rm.c:187
 msgid "Remove cancelled."
 msgstr "Eemaldamine katkestatud."
 
-#: xfsamba/xfsamba_rm.c:204
+#: xfsamba/xfsamba_rm.c:221
 msgid "Confirm remove?"
 msgstr "Kinnita eemaldamist!"
 
-#: xfsamba/xfsamba_tar.c:99
+#: xfsamba/xfsamba_tar.c:121
 msgid "Tar failed. See diagnostics for details."
 msgstr "Tar ebaõnnestus. Detaile vaata diagnostikast."
 
-#: xfsamba/xfsamba_tar.c:103
+#: xfsamba/xfsamba_tar.c:126
 msgid "Tar extraction has completed"
 msgstr "Tar lahtiarutamine lõpetatud"
 
-#: xfsamba/xfsamba_tar.c:106
+#: xfsamba/xfsamba_tar.c:131
 msgid "Tar command complete."
 msgstr "Tar käsklus lõpetatud."
 
-#: xfsamba/xfsamba_tar.c:126
+#: xfsamba/xfsamba_tar.c:153
 msgid "Please select input tarfile next."
 msgstr "Palun märgista järgnevalt sisendi tarfail."
 
-#: xfsamba/xfsamba_tar.c:128
+#: xfsamba/xfsamba_tar.c:157
 msgid "Please select the output tarfile next."
 msgstr "Palun  märgista väljundi tarfail."
 
-#: xfsamba/xfsamba_tar.c:152 xfsamba/xfsamba_tar.c:189
+#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
 msgid "Tar cancelled."
 msgstr "Tar katkestatud."
 
-#: xfsamba/xfsamba_tar.c:162
+#: xfsamba/xfsamba_tar.c:203
 msgid "Cannot open tar file"
 msgstr "Ei suuda avada tar faili"
 
-#: xfsamba/xfsamba_tar.c:170
+#: xfsamba/xfsamba_tar.c:214
 msgid "Cannot create tar file"
 msgstr "Ei suuda luua tarfaili"
 
-#: xfsamba/xfsamba_tar.c:272
+#: xfsamba/xfsamba_tar.c:325
 msgid "create"
 msgstr "loo"
 
-#: xfsamba/xfsamba_tar.c:275
+#: xfsamba/xfsamba_tar.c:328
 msgid "extract"
 msgstr "väljuta"
 
-#: xfsamba/xfsamba_tar.c:316
+#: xfsamba/xfsamba_tar.c:371
 msgid "full"
 msgstr "täis"
 
-#: xfsamba/xfsamba_tar.c:319
+#: xfsamba/xfsamba_tar.c:374
 msgid "incremental"
 msgstr "kasvav"
 
-#: xfsamba/xfsamba_tar.c:339
+#: xfsamba/xfsamba_tar.c:397
 msgid "do not reset archive bit"
 msgstr "ära taasta arhiivi bitti"
 
-#: xfsamba/xfsamba_tar.c:342
+#: xfsamba/xfsamba_tar.c:400
 msgid "reset archive bit"
 msgstr "taasta arhiivi bitt"
 
-#: xfsamba/xfsamba_tar.c:355
+#: xfsamba/xfsamba_tar.c:412
 msgid "Options"
 msgstr "Seaded"
 
-#: xfsamba/xfsamba_upload.c:62
+#: xfsamba/xfsamba_upload.c:91
 msgid "File upload failed. See diagnostics for reason."
 msgstr "Faili üleslaadimine ebaõnnestus. Vaata detaile diagnostikast."
 
-#: xfsamba/xfsamba_upload.c:72
+#: xfsamba/xfsamba_upload.c:101
 msgid "Upload done."
 msgstr "Üleslaadimine tehtud."
 
-#: xfsamba/xfsamba_upload.c:87
+#: xfsamba/xfsamba_upload.c:119
 msgid "Uploaded file."
 msgstr "Üleslaetud fail."
 
-#: xfsamba/xfsamba_upload.c:125
+#: xfsamba/xfsamba_upload.c:153
 msgid "Uploading file..."
 msgstr "Laadin ülesse faili..."
 
-#: xfsamba/xfsamba_upload.c:131
+#: xfsamba/xfsamba_upload.c:159
 msgid "File upload cancelled."
 msgstr "Üleslaadimine katkestatud."
 
-#: xfsamba/xfsamba_upload.c:141
+#: xfsamba/xfsamba_upload.c:169
 msgid "Specified file does not exist"
 msgstr "Määratud faili ei eksisteeri"
 
-#: xfsamba/xfsamba_upload.c:142 xfsamba/xfsamba_upload.c:157
+#: xfsamba/xfsamba_upload.c:170 xfsamba/xfsamba_upload.c:184
 msgid "Upload failed."
 msgstr "Üleslaadimine ebaõnnestus."
 
-#: xfumed/clistmenu.c:33
-#, c-format
-msgid "   Menu: %s   Parent: %s"
-msgstr "   Menüü: %s   Vanem: %s"
-
-#. nothing found
-#: xfumed/clistmenu.c:41 xfumed/clistmenu.c:51 xfumed/usermenu.c:55
-#: xfumed/usermenu.c:66
-msgid "Toplevel"
-msgstr "Peanivoo"
-
-#: xfumed/clistmenu.c:41
-msgid "None"
-msgstr "Mitte midagi"
-
-#: xfumed/clistmenu.c:449
-msgid "Your changes will take effect on next startup"
-msgstr "Teie muudatused ilmnevad järgmisel käivitusel"
-
-#: xfumed/interface.c:89
-msgid "XFce User Menu Editor"
+#: xfumed/xfumed_gui.c:47
+#, fuzzy
+msgid "User Menu Editor"
 msgstr "XFce kasutaja menüü redaktor"
 
-#: xfumed/interface.c:145
-msgid "Go to parent menu"
-msgstr "Mine pemenüüsse"
-
-#: xfumed/interface.c:153
-msgid "Go to submenu"
-msgstr "Mine alammenüüsse"
-
-#: xfumed/interface.c:182
-msgid "Type"
-msgstr "Tüüp"
-
-#: xfumed/interface.c:189
+#: xfumed/xfumed_gui.c:80
 msgid "Caption"
 msgstr "Märkus"
 
-#: xfumed/interface.c:196
+#: xfumed/xfumed_gui.c:86
 msgid "Command"
 msgstr "Käsklus"
 
-#: xfumed/interface.c:257
-msgid "Edit item"
-msgstr "Redigeeri elementi"
+#: xfumed/xfumed_gui.c:108
+#, fuzzy
+msgid "Move Up"
+msgstr "&M -Nihuta"
 
-#: xfumed/interface.c:273
-msgid "Type : "
-msgstr "Tüüp : "
+#: xfumed/xfumed_gui.c:115
+msgid "Move Down"
+msgstr ""
 
-#: xfumed/interface.c:284
-msgid "Caption : "
-msgstr "Märkus : "
-
-#: xfumed/interface.c:373
+#: xfumed/xfumed_gui.c:122
 msgid "Add"
 msgstr "Lisa"
 
-#: xfumed/interface.c:381
-msgid "Update"
-msgstr "Uuenda"
+#: xfumed/xfumed_gui.c:129
+#, fuzzy
+msgid "Edit"
+msgstr "Välju"
 
-#: xfumed/interface.c:412
+#: xfumed/xfumed_gui.c:157
 msgid "Save"
 msgstr "Salvesta"
 
-#: xfumed/interface.c:420
+#: xfumed/xfumed_gui.c:164
 msgid "Reset"
 msgstr "Reset"
 
-#: xfumed/interface.c:491
+#: xfumed/xfumed_gui.c:252
+#, fuzzy
+msgid "Edit Entry"
+msgstr "Redigeeri elementi"
+
+#: xfumed/xfumed_gui.c:254
+msgid "Add Entry"
+msgstr ""
+
+#: xfumed/xfumed_gui.c:275
+#, fuzzy
+msgid "Type: "
+msgstr "Tüüp : "
+
+#: xfumed/xfumed_gui.c:282
+#, fuzzy
+msgid "Caption: "
+msgstr "Märkus : "
+
+#: xfumed/xfumed_gui.c:289
+#, fuzzy
+msgid "Command: "
+msgstr "Käsklus : "
+
+#: xfumed/xfumed_gui_cb.c:23
+msgid "Your changes will take effect on next startup"
+msgstr "Teie muudatused ilmnevad järgmisel käivitusel"
+
+#: xfumed/xfumed_gui_cb.c:69
+#, fuzzy
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
-"Do you want to quit and lose the changes ?"
+"Do you want to save the changes ?"
 msgstr ""
 "Leidub menüüsse alvestamata muudatusi.\n"
 "\n"
 "Kas soovite väljuda ja kaotada muudatused ? "
 
-#: xfumed/interface.c:494
+#: xfumed/xfumed_gui_cb.c:76
 msgid "Don't Quit"
 msgstr "Ära välju"
 
-#: xfumed/interface.c:494
-msgid "Quit, don't save"
-msgstr "Välju, ära salvesta"
+#: xfumed/xfumed_gui_cb.c:121
+#, fuzzy
+msgid "Do you want to delete this entry ?"
+msgstr "Olete te kindel, et soovite eemaldada seda sissekannet ?"
 
-#: xfumed/interface.h:21
-msgid "Item"
-msgstr "Element"
+#: xfumed/xfumed_gui_cb.c:123
+msgid ""
+"If you delete a submenu, all its entries and \n"
+"submenus will also be deleted.\n"
+"\n"
+"Do you want to delete this submenu ?"
+msgstr ""
 
-#: xfumed/interface.h:22
-msgid "Submenu"
-msgstr "Alammenüü"
+#~ msgid "XFce : %s File not found.\n"
+#~ msgstr "XFce : %s Faili ei leidu.\n"
 
-#: xfumed/interface.h:23
-msgid "Separator"
-msgstr "Eraldaja"
+#~ msgid "Whoooops !"
+#~ msgstr "Sessiooni sulgemine !"
 
-#: xfumed/usermenu.h:28
-msgid "# This file was generated by xfumed - XFce User Menu Editor"
-msgstr "# See loodi xfumedi abil - XFce kasuataja menüü redaktor"
+#~ msgid ""
+#~ "\n"
+#~ "(c) by Edscott Wilson Garcia under GNU GPL\n"
+#~ "XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
+#~ msgstr ""
+#~ "\n"
+#~ "(c) by Edscott Wilson Garcia, GNU GPL\n"
+#~ "XFCE moodulid (c) Olivier Fourdan http://www.xfce.org/"
+
+#~ msgid ""
+#~ "\n"
+#~ "(c) Edscott Wilson Garcia under GNU GPL\n"
+#~ "XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+#~ msgstr ""
+#~ "\n"
+#~ "(c) Edscott Wilson Garcia, GNU GPL\n"
+#~ "XFCE moodulid (c) Olivier Fourdan http://www.xfce.org/"
+
+#~ msgid "   Menu: %s   Parent: %s"
+#~ msgstr "   Menüü: %s   Vanem: %s"
+
+#~ msgid "Toplevel"
+#~ msgstr "Peanivoo"
+
+#~ msgid "None"
+#~ msgstr "Mitte midagi"
+
+#~ msgid "Go to parent menu"
+#~ msgstr "Mine pemenüüsse"
+
+#~ msgid "Go to submenu"
+#~ msgstr "Mine alammenüüsse"
+
+#~ msgid "Type"
+#~ msgstr "Tüüp"
+
+#~ msgid "Update"
+#~ msgstr "Uuenda"
+
+#~ msgid "Quit, don't save"
+#~ msgstr "Välju, ära salvesta"
+
+#~ msgid "Item"
+#~ msgstr "Element"
+
+#~ msgid "Submenu"
+#~ msgstr "Alammenüü"
+
+#~ msgid "Separator"
+#~ msgstr "Eraldaja"
+
+#~ msgid "# This file was generated by xfumed - XFce User Menu Editor"
+#~ msgstr "# See loodi xfumedi abil - XFce kasuataja menüü redaktor"
 
 #~ msgid "Source and Target are the same"
 #~ msgstr "Läte ja siht on samad"

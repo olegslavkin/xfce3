@@ -148,8 +148,6 @@ typedef struct
 }
 menu_entry;
 
-
-
 static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_open, *gPIX_dir_up, *gPIX_char_dev, *gPIX_fifo, *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
 
 static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_open, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
@@ -2781,12 +2779,6 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   GtkAccelGroup *accel;
   int i;
 
-  read_defaults();
-  if (SAVE_GEOMETRY & preferences){
-	  width=geometryX;
-	  height=geometryY;
-  }
-  
 /* keyboard shortcuts used to be bugged because of conflicting entries.
  * these macros should make it easier to avoid conflicting entries.
  * Please place any duplicate entries as a macro. 
@@ -2798,12 +2790,14 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+
 #define COMMON_MENU_2 \
-    {N_("Properties ... Ctl-P"), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
-    {N_("Rename ... Ctl-R"), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
-    {N_("Delete ... del"), (gpointer) cb_delete, 0},\
-    {N_("Show disk usage... Ctl-U"), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
+    {N_("Properties ..."), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
+    {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
+    {N_("Delete ..."), (gpointer) cb_delete, 0},\
+    {N_("Show disk usage..."), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+    
 #define COMMON_MENU_GOTO \
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
     {N_("Go home"), (gpointer) cb_go_home, 0,GDK_h,GDK_CONTROL_MASK},\
@@ -2811,11 +2805,13 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Go to"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
     /*{N_("Go back ... Ctl-B"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\*/
+
 #define COMMON_MENU_SELECT \
     {N_("Select all"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
     {N_("Unselect"), (gpointer) cb_unselect, 0,GDK_q,GDK_CONTROL_MASK},\
     {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+
 #define COMMON_MENU_LAST \
     {N_("Run program ..."), (gpointer) cb_exec, WINCFG,GDK_x,GDK_CONTROL_MASK},\
     {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_o,GDK_CONTROL_MASK},\
@@ -2823,7 +2819,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_z,GDK_CONTROL_MASK}
     
 /* quit only on main menu now, so that default geometry is saved correctly with cb_quit.
- *     {N_("Quit ... Ctl-C"), (gpointer) cb_quit, 0, GDK_c,GDK_CONTROL_MASK}*/
+ *     {N_("Quit ... Ctl-C"), (gpointer) cb_quit, 0, GDK_c,GDK_CONTROL_MASK} */
 
 #define COMMON_MENU_NEW \
     {N_("New Folder"), (gpointer) cb_new_subdir, 0},\
@@ -2838,6 +2834,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     COMMON_MENU_SELECT,
     COMMON_MENU_LAST
   };
+  
 #define LAST_DIR_MENU_ENTRY (sizeof(dir_mlist)/sizeof(menu_entry))
 
   menu_entry file_mlist[] = {
@@ -2870,6 +2867,13 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   };
 #define LAST_NONE_MENU_ENTRY (sizeof(none_mlist)/sizeof(menu_entry))
 
+  read_defaults();
+  if (SAVE_GEOMETRY & preferences)
+  {
+	  width=geometryX;
+	  height=geometryY;
+  }
+  
   /* Set up X error Handler */
   XSetErrorHandler ((XErrorHandler) ErrorHandler);
 

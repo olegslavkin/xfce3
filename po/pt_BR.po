@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.5.0\n"
-"POT-Creation-Date: 2001-10-04 12:24+0200\n"
+"POT-Creation-Date: 2001-11-08 22:21+0100\n"
 "PO-Revision-Date: 2000-10-01 18:00+0200\n"
 "Last-Translator: Fernando M. Roxo da Motta <roxo@conectiva.com>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -27,7 +27,7 @@ msgstr "Selecionar Arquivo"
 msgid "Font Selection"
 msgstr "Seleção de  Fonte "
 
-#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1400 xfdiff/xfdiff_misc.c:130
+#: libs/xfce-common.c:256 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
 #: xfdiff/xfdiff_misc.c:136
 msgid "OK"
 msgstr "OK"
@@ -36,21 +36,21 @@ msgstr "OK"
 msgid "Message"
 msgstr "Mensagem"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
-#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:133
+#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:265
+#: xfumed/xfumed_gui_cb.c:74 xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr "Sim"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
-#: xfumed/xfumed_gui_cb.c:77 xfumed/xfumed_gui_cb.c:134
+#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:296
+#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr "Não"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:165
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:223
 msgid "Question"
 msgstr "Pergunta"
 
-#: libs/xfce-common.c:602
+#: libs/xfce-common.c:603
 msgid "Terminated: "
 msgstr "Terminada:"
 
@@ -68,7 +68,7 @@ msgstr "*** AVISO ***: impossível carregar arquivo de mapa de pixels %s\n"
 msgid "Define action ..."
 msgstr "Define ação ..."
 
-#: xfce/action.c:109 xfce/modify.c:161
+#: xfce/action.c:109 xfce/modify.c:160
 msgid "Command Line :"
 msgstr "Linha de Comando :"
 
@@ -76,27 +76,27 @@ msgstr "Linha de Comando :"
 msgid "Icon Style :"
 msgstr "Estilo de Ícone :"
 
-#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:233
-#: xfce/modify.c:241 xfsound/xfsound.c:509
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:232
+#: xfce/modify.c:240 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr "Navegar ..."
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:277 xfce/screen.c:134
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
-#: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
-#: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
-#: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
-#: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
-#: xfumed/xfumed_gui.c:437
+#: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
+#: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
+#: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
+#: xftree/gtk_dlg.c:260 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
+#: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "OK"
 
-#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:294 xfce/screen.c:144
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:291
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
-#: xfumed/xfumed_gui.c:445
+#: xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Cancela"
 
@@ -184,7 +184,7 @@ msgid "Subprocess diagnostic"
 msgstr "Diagnóstico de subprocesso"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1592 xfglob/xfglob.c:658
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658
 msgid "Clear"
 msgstr "Limpar"
 
@@ -196,10 +196,10 @@ msgstr "Dispensar"
 msgid "Info ..."
 msgstr "Informações ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:133 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
-#: xfce/xfce.c:495 xfce/xfce.c:526 xfce/xfce.c:623 xfce/xfce.c:644
-#: xfce/xfce.c:677 xfce/xfce.c:692 xfce/xfce.c:750 xfce/xfce.c:771
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
+#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
+#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
 #: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr "Impossível criar mapa de pixels"
@@ -212,32 +212,32 @@ msgstr "Por Oliver Fourdan (c) 1997-2000"
 msgid "Accept"
 msgstr "Concordo"
 
-#: xfce/modify.c:75 xfce/modify.c:352
+#: xfce/modify.c:74 xfce/modify.c:352
 msgid "Modify Item ..."
 msgstr "Modificar Ítem ..."
 
-#: xfce/modify.c:139
+#: xfce/modify.c:138
 msgid "Preview Icon"
 msgstr "Prévia do Ícone "
 
-#: xfce/modify.c:170
+#: xfce/modify.c:169
 msgid "Icon File :"
 msgstr "Arquivo do Ícone :"
 
-#: xfce/modify.c:179
+#: xfce/modify.c:178
 msgid "Label :"
 msgstr "Rótulo :"
 
-#: xfce/modify.c:188
+#: xfce/modify.c:187
 #, fuzzy
 msgid "Position :"
 msgstr "Aceleração : "
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/xfumed_gui.c:149
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:285 xfumed/xfumed_gui.c:136
 msgid "Remove"
 msgstr "Remover"
 
-#: xfbd/xfbdmgr.c:173 xfce/modify.c:336
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:335
 msgid "Add Item ..."
 msgstr "Adicionar Ítem ..."
 
@@ -663,18 +663,18 @@ msgstr "Modo digital"
 msgid "24 hours mode"
 msgstr "Modo 24 horas"
 
-#: xfce/xfce.c:639 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "Sobre..."
 
-#: xfce/xfce.c:672
+#: xfce/xfce.c:676
 msgid "Setup..."
 msgstr "Configuração..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:699 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:189
+#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Sair"
 
@@ -775,9 +775,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Duto de comunicação fechado. Saindo...\n"
 
-#: xfce/xfwm.c:434 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
-#: xfwm/xfwm.c:848 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
-#: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854
+#: xfce/xfwm.c:434 xfwm/xfwm.c:854 xfwm/xfwm.c:855 xfwm/xfwm.c:856
+#: xfwm/xfwm.c:857 xfwm/xfwm.c:858 xfwm/xfwm.c:859 xfwm/xfwm.c:860
+#: xfwm/xfwm.c:861 xfwm/xfwm.c:862 xfwm/xfwm.c:863
 msgid "Workspace"
 msgstr "Área de trabalho"
 
@@ -798,7 +798,7 @@ msgstr "copiar"
 msgid "link"
 msgstr "link"
 
-#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:267
+#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:271
 #, c-format
 msgid "%d bytes"
 msgstr "%d bytes"
@@ -807,132 +807,132 @@ msgstr "%d bytes"
 msgid "Override file?"
 msgstr "Sobrescrever arquivo?"
 
-#: xftree/gtk_cpy.c:163 xftree/gtk_cpy.c:168 xftree/gtk_cpy.c:345
-#: xftree/gtk_cpy.c:349 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
+#: xftree/gtk_cpy.c:167 xftree/gtk_cpy.c:172 xftree/gtk_cpy.c:349
+#: xftree/gtk_cpy.c:353 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
 msgid "Can't stat() file"
 msgstr "Impossível checar status do arquivo"
 
-#: xftree/gtk_cpy.c:175
+#: xftree/gtk_cpy.c:179
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr "Você quer %s o(s) ítem(s) para"
 
-#: xftree/gtk_cpy.c:217
+#: xftree/gtk_cpy.c:221
 msgid "readlink()"
 msgstr "ler_link()"
 
-#: xftree/gtk_cpy.c:237
+#: xftree/gtk_cpy.c:241
 msgid "Can't copy device file"
 msgstr "Impossível copiar arquivo de dispositivo"
 
-#: xftree/gtk_cpy.c:242
+#: xftree/gtk_cpy.c:246
 msgid "Can't copy FIFO"
 msgstr "Impossível copiar FIFO"
 
-#: xftree/gtk_cpy.c:246
+#: xftree/gtk_cpy.c:250
 msgid "Can't copy socket"
 msgstr "Impossível copiar SOCKET"
 
-#: xftree/gtk_cpy.c:281
+#: xftree/gtk_cpy.c:285
 #, fuzzy
 msgid "Too few bytes transferred ! Device full ?"
 msgstr "Poucos bytes transferidos ! Dispositivo cheio ?"
 
-#: xftree/gtk_cpy.c:285
+#: xftree/gtk_cpy.c:289
 #, fuzzy
 msgid "Too many bytes transferred !?"
 msgstr "Muitos bytes transferidos !?"
 
-#: xftree/gtk_cpy.c:331
+#: xftree/gtk_cpy.c:335
 msgid "Source and Target directories are the same"
 msgstr "Diretórios Fonte e Destino são os mesmos"
 
-#: xftree/gtk_cpy.c:382
+#: xftree/gtk_cpy.c:386
 msgid "exists and is not a directory"
 msgstr "existe e não é um diretório"
 
-#: xftree/gtk_cpy.c:456
+#: xftree/gtk_cpy.c:460
 msgid "XFTree: Copy"
 msgstr "XFTree: Copiar"
 
-#: xftree/gtk_cpy.c:460
+#: xftree/gtk_cpy.c:464
 msgid "XFTree: Move"
 msgstr "XFTree: Mover"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:468
 msgid "XFTree: Link"
 msgstr "XFTree: Link"
 
-#: xftree/gtk_cpy.c:468
+#: xftree/gtk_cpy.c:472
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Modo de transferência desconhecido: %d\n"
 
-#: xftree/gtk_cpy.c:474
+#: xftree/gtk_cpy.c:478
 msgid "transfer()"
 msgstr "transferência()"
 
-#: xftree/gtk_cpy.c:474
+#: xftree/gtk_cpy.c:478
 msgid "fatal error"
 msgstr "erro fatal"
 
-#: xftree/gtk_cpy.c:480
+#: xftree/gtk_cpy.c:484
 msgid "Error getting info from"
 msgstr "Erro ao obter informações de"
 
-#: xftree/gtk_cpy.c:485
+#: xftree/gtk_cpy.c:489
 msgid "Fatal Error"
 msgstr "Erro Fatal"
 
-#: xftree/gtk_cpy.c:485
+#: xftree/gtk_cpy.c:489
 msgid "Can't transfer items to a file"
 msgstr "Impossível transferir ítens para uma arquivo"
 
-#: xftree/gtk_cpy.c:502
+#: xftree/gtk_cpy.c:506
 msgid "Source: "
 msgstr "Fonte:"
 
-#: xftree/gtk_cpy.c:508
+#: xftree/gtk_cpy.c:512
 msgid "Target: "
 msgstr "Destino:"
 
-#: xftree/gtk_cpy.c:514
+#: xftree/gtk_cpy.c:518
 msgid "0 bytes transferred"
 msgstr "0 bytes transferidos"
 
-#: xftree/gtk_cpy.c:535 xftree/gtk_dlg.c:175
+#: xftree/gtk_cpy.c:539 xftree/gtk_dlg.c:233
 msgid "Error"
 msgstr "Erro"
 
-#: xftree/gtk_cpy.c:535
+#: xftree/gtk_cpy.c:539
 msgid "Can't transfer a directory to a file"
 msgstr "Impossível transferir um diretório para um arquivo"
 
-#: xftree/gtk_dlg.c:170
+#: xftree/gtk_dlg.c:228
 msgid "Information"
 msgstr "Informação"
 
-#: xftree/gtk_dlg.c:180
+#: xftree/gtk_dlg.c:238
 msgid "Warning"
 msgstr "Aviso"
 
-#: xftree/gtk_dlg.c:184
+#: xftree/gtk_dlg.c:242
 msgid "Dialog"
 msgstr "Diálogo"
 
-#: xftree/gtk_dlg.c:210
+#: xftree/gtk_dlg.c:270
 msgid "Continue"
 msgstr "Continuar"
 
-#: xftree/gtk_dlg.c:220 xftree/gtk_prop.c:198
+#: xftree/gtk_dlg.c:281 xftree/gtk_prop.c:198
 msgid "Skip"
 msgstr "Saltar"
 
-#: xftree/gtk_dlg.c:242 xftree/gtk_prop.c:199
+#: xftree/gtk_dlg.c:307 xftree/gtk_prop.c:199
 msgid "All"
 msgstr "Todos"
 
-#: xftree/gtk_dlg.c:250
+#: xftree/gtk_dlg.c:317
 msgid "Close"
 msgstr "Fechar"
 
@@ -942,7 +942,7 @@ msgstr "Abrir com ..."
 
 #: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
 #: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
-#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:880
+#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr "Rodar programa ..."
 
@@ -1260,7 +1260,7 @@ msgid "Toggle Dotfiles"
 msgstr "Alternar Dotfiles"
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1167
+#: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
 #: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
 msgid "File"
 msgstr "Arquivo"
@@ -1288,7 +1288,7 @@ msgid "Patch viewer ..."
 msgstr ""
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:872
+#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:881
 msgid "Settings"
 msgstr "Configurações"
 
@@ -1298,7 +1298,7 @@ msgid "Go up"
 msgstr "Subir"
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1269
+#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
 #: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
 msgid "Help"
 msgstr "Ajuda"
@@ -1463,45 +1463,45 @@ msgstr ""
 msgid "Finished forking.\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1323
+#: xfdiff/xfdiff.c:1388
 msgid "Running patch...\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1391
+#: xfdiff/xfdiff.c:1456
 msgid "xfdiff version"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1392
+#: xfdiff/xfdiff.c:1457
 msgid "use xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1393
+#: xfdiff/xfdiff.c:1458
 msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1394
+#: xfdiff/xfdiff.c:1459
 msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1395
+#: xfdiff/xfdiff.c:1460
 msgid "-R: patch file is reversed (quick toggle)\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1396
+#: xfdiff/xfdiff.c:1461
 msgid "-N: patch file is not reversed (quick toggle)\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1397
+#: xfdiff/xfdiff.c:1462
 msgid ""
 "-h, --help : print this message\n"
 "\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1398
+#: xfdiff/xfdiff.c:1463
 msgid "xfdiff (c) Edscott Wilson Garcia 2001, under GNU-GPL\n"
 msgstr ""
 
-#: xfdiff/xfdiff.c:1399
+#: xfdiff/xfdiff.c:1464
 msgid ""
 "XFCE modules copyright Olivier Fourdan 1999-2001, under GNU-GPL\n"
 "\n"
@@ -1511,284 +1511,284 @@ msgstr ""
 msgid "Xfdiff diagnostic"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:174
+#: xfdiff/xfdiff_gui.c:175
 msgid "A patch file and directory must be selected first!"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been undone."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been applied."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:201
+#: xfdiff/xfdiff_gui.c:202
 msgid "Please select a name for the patch file in the next dialog."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:220
+#: xfdiff/xfdiff_gui.c:221
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
 "Diff will be working"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:227
+#: xfdiff/xfdiff_gui.c:228
 msgid "Patch file could not be created"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:232 xfdiff/xfdiff_gui.c:237
+#: xfdiff/xfdiff_gui.c:233 xfdiff/xfdiff_gui.c:238
 msgid "Strip level for created patch file="
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:239
+#: xfdiff/xfdiff_gui.c:240
 msgid " has been created\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:253
+#: xfdiff/xfdiff_gui.c:254
 msgid "Patch file creation cancelled"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:403
+#: xfdiff/xfdiff_gui.c:404
 msgid "Line synchronization enabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:405
+#: xfdiff/xfdiff_gui.c:406
 msgid "Line synchronization disabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:442
+#: xfdiff/xfdiff_gui.c:443
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:444
+#: xfdiff/xfdiff_gui.c:445
 #, fuzzy
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr "Mostar diagnóstico de subprocessos"
 
-#: xfdiff/xfdiff_gui.c:463
+#: xfdiff/xfdiff_gui.c:464
 msgid "Line numbers enabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:465
+#: xfdiff/xfdiff_gui.c:466
 msgid "Line numbers disabled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:477
+#: xfdiff/xfdiff_gui.c:478
 msgid "Polygons will now be filled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:479
+#: xfdiff/xfdiff_gui.c:480
 msgid "Polygons will now *not* be filled.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:493
+#: xfdiff/xfdiff_gui.c:494
 msgid "Patch will now be assumed reversed.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:495
+#: xfdiff/xfdiff_gui.c:496
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr ""
 
 #.
-#: xfdiff/xfdiff_gui.c:516
+#: xfdiff/xfdiff_gui.c:517
 #, fuzzy
 msgid "Font selection"
 msgstr "Seleção de  Fonte "
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:525 xfdiff/xfdiff_misc.c:800
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801
 msgid "Could not load specified font\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:584
+#: xfdiff/xfdiff_gui.c:585
 #, fuzzy
 msgid "Select highlight background color"
 msgstr "Cor de fundo..."
 
-#: xfdiff/xfdiff_gui.c:587
+#: xfdiff/xfdiff_gui.c:588
 msgid "Select highlight text color"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:685 xfdiff/xfdiff_gui.c:686
+#: xfdiff/xfdiff_gui.c:686 xfdiff/xfdiff_gui.c:687
 msgid "Warning: cannot read from "
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:690 xfdiff/xfdiff_gui.c:691
+#: xfdiff/xfdiff_gui.c:691 xfdiff/xfdiff_gui.c:692
 msgid "is not in patch file."
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:797
+#: xfdiff/xfdiff_gui.c:798
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:817
+#: xfdiff/xfdiff_gui.c:818
 msgid "Default configuration has been saved\n"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:825
+#: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:844
+#: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:853
+#: xfdiff/xfdiff_gui.c:854
 msgid "There is no previous difference"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:875
+#: xfdiff/xfdiff_gui.c:876
 msgid "There is no such file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:885
+#: xfdiff/xfdiff_gui.c:886
 msgid "There is no next file"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:896
+#: xfdiff/xfdiff_gui.c:897
 msgid "There is no previous file"
 msgstr ""
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:983
+#: xfdiff/xfdiff_gui.c:984
 #, fuzzy
 msgid "That is a directory (or symlink)"
 msgstr "Destino deve ser um diretório !"
 
-#: xfdiff/xfdiff_gui.c:1168
+#: xfdiff/xfdiff_gui.c:1169
 #, fuzzy
 msgid "Select left file"
 msgstr "Selecionar Arquivo"
 
-#: xfdiff/xfdiff_gui.c:1169
+#: xfdiff/xfdiff_gui.c:1170
 #, fuzzy
 msgid "Select right file"
 msgstr "Selecionar Arquivo"
 
-#: xfdiff/xfdiff_gui.c:1170
+#: xfdiff/xfdiff_gui.c:1171
 #, fuzzy
 msgid "Select patch file"
 msgstr "Selecionar Arquivo"
 
-#: xfdiff/xfdiff_gui.c:1171
+#: xfdiff/xfdiff_gui.c:1172
 msgid "Select directory where to apply patch"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1174
+#: xfdiff/xfdiff_gui.c:1175
 msgid "Switch to patch mode"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1177
+#: xfdiff/xfdiff_gui.c:1178
 msgid "Switch to diff mode"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1182 xfdiff/xfdiff_gui.c:1609
+#: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
 #: xfsamba/xfsamba_gui.c:1022
 #, fuzzy
 msgid "Exit"
 msgstr "Oito"
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:1185
+#: xfdiff/xfdiff_gui.c:1186
 #, fuzzy
 msgid "Diff Settings"
 msgstr "Configurações"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:1188
+#: xfdiff/xfdiff_gui.c:1189
 #, fuzzy
 msgid "Font"
 msgstr "Fonte..."
 
-#: xfdiff/xfdiff_gui.c:1189
+#: xfdiff/xfdiff_gui.c:1190
 msgid "Highlight text color"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1190
+#: xfdiff/xfdiff_gui.c:1191
 #, fuzzy
 msgid "Highlight background color"
 msgstr "Cor de fundo..."
 
-#: xfdiff/xfdiff_gui.c:1191
+#: xfdiff/xfdiff_gui.c:1192
 msgid "Fill polygons"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1192
+#: xfdiff/xfdiff_gui.c:1193
 #, fuzzy
 msgid "Show line numbers"
 msgstr "Mostrar número das semanas"
 
-#: xfdiff/xfdiff_gui.c:1194
+#: xfdiff/xfdiff_gui.c:1195
 msgid "Use line synchronization voids"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1200
+#: xfdiff/xfdiff_gui.c:1201
 msgid "Save settings as default"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1202
+#: xfdiff/xfdiff_gui.c:1203
 #, fuzzy
 msgid "Patch Settings"
 msgstr "Configurações"
 
-#: xfdiff/xfdiff_gui.c:1204
+#: xfdiff/xfdiff_gui.c:1205
 #, fuzzy
 msgid "Verbose patch diagnostics"
 msgstr "Diagnóstico de subprocesso"
 
-#: xfdiff/xfdiff_gui.c:1206
+#: xfdiff/xfdiff_gui.c:1207
 msgid "Patch options only active in patch-mode"
 msgstr ""
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:1211
+#: xfdiff/xfdiff_gui.c:1212
 msgid "Assume patch is reversed"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1213
+#: xfdiff/xfdiff_gui.c:1214
 msgid "Auto strip level"
 msgstr ""
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:99
+#: xfdiff/xfdiff_gui.c:1243 xfumed/xfumed_gui.c:92
 msgid "Actions"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1243
+#: xfdiff/xfdiff_gui.c:1244
 #, fuzzy
 msgid "View differences"
 msgstr "Apagar ..."
 
-#: xfdiff/xfdiff_gui.c:1244
+#: xfdiff/xfdiff_gui.c:1245
 msgid "View differences in new"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1246
+#: xfdiff/xfdiff_gui.c:1247
 msgid "View patch created differences"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1249
+#: xfdiff/xfdiff_gui.c:1250
 msgid "View patch created differences in new"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1254
+#: xfdiff/xfdiff_gui.c:1255
 #, fuzzy
 msgid "Create patch file"
 msgstr "Impossível checar status do arquivo"
 
-#: xfdiff/xfdiff_gui.c:1261
+#: xfdiff/xfdiff_gui.c:1262
 #, fuzzy
 msgid "Apply patch to Hard Drive"
 msgstr "Aplicar"
 
-#: xfdiff/xfdiff_gui.c:1264
+#: xfdiff/xfdiff_gui.c:1265
 msgid "Undo patch to Hard Drive"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:1270 xfglob/xfglob.c:1921
+#: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1921
 #, fuzzy
 msgid "About"
 msgstr "Sobre..."
@@ -1800,22 +1800,22 @@ msgstr "Sobre..."
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1602
+#: xfdiff/xfdiff_gui.c:1603
 #, fuzzy
 msgid "Next difference"
 msgstr "Apagar ..."
 
-#: xfdiff/xfdiff_gui.c:1605
+#: xfdiff/xfdiff_gui.c:1606
 #, fuzzy
 msgid "Prev difference"
 msgstr "Apagar ..."
 
-#: xfdiff/xfdiff_gui.c:1606
+#: xfdiff/xfdiff_gui.c:1607
 #, fuzzy
 msgid "Next file"
 msgstr "Novo arquivo ..."
 
-#: xfdiff/xfdiff_gui.c:1607
+#: xfdiff/xfdiff_gui.c:1608
 #, fuzzy
 msgid "Previous file"
 msgstr "Sobrescrever arquivo?"
@@ -1857,60 +1857,60 @@ msgstr ""
 msgid "unspecified error: xfdiff_aborting run"
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:603
+#: xfdiff/xfdiff_misc.c:604
 msgid ""
 "No file was found for patching\n"
 "Either the directory to apply patch is not correctly selected\n"
 "or an incorrect strip level was used.\n"
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:620
+#: xfdiff/xfdiff_misc.c:621
 msgid ""
 "Patch command has produced reject output.\n"
 "See diagnostics window."
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:647
+#: xfdiff/xfdiff_misc.c:648
 msgid "No directory was selected!"
 msgstr ""
 
 #.
-#: xfdiff/xfdiff_misc.c:661
+#: xfdiff/xfdiff_misc.c:662
 msgid "Directory or file selection"
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:696 xfdiff/xfdiff_misc.c:699
+#: xfdiff/xfdiff_misc.c:697 xfdiff/xfdiff_misc.c:700
 msgid "Please select it in the next dialog."
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:737
+#: xfdiff/xfdiff_misc.c:738
 #, fuzzy
 msgid "File exists, overwrite?"
 msgstr "O arquivo existe ! Sobrescrever ? "
 
-#: xfdiff/xfdiff_misc.c:741
+#: xfdiff/xfdiff_misc.c:742
 #, fuzzy
 msgid "Cannot open file for write\n"
 msgstr ""
 "Erro\n"
 "Impossível abrir arquivo"
 
-#: xfdiff/xfdiff_misc.c:923 xfdiff/xfdiff_misc.c:928
+#: xfdiff/xfdiff_misc.c:924 xfdiff/xfdiff_misc.c:929
 #, fuzzy
 msgid "couldn't allocate color"
 msgstr ""
 "Erro\n"
 "Impossível alocar cores"
 
-#: xfdiff/xfdiff_misc.c:962 xfdiff/xfdiff_misc.c:986
+#: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:965 xfdiff/xfdiff_misc.c:991
+#: xfdiff/xfdiff_misc.c:966 xfdiff/xfdiff_misc.c:992
 msgid " applied at: "
 msgstr ""
 
-#: xfdiff/xfdiff_misc.c:1011
+#: xfdiff/xfdiff_misc.c:1012
 msgid "Press OK to see patch diffs"
 msgstr ""
 
@@ -2351,7 +2351,7 @@ msgstr ""
 msgid "XFClock - XFce Clock & Calendar"
 msgstr "XFClock - XFce Relógio & Calendário"
 
-#: xfclock/xfclock_cb.c:211
+#: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
 "(c) 1997-2000 Olivier Fourdan"
@@ -2683,182 +2683,152 @@ msgstr ""
 msgid "File not found.\n"
 msgstr "XFce : Arquivo %s não encontrado.\n"
 
-#: xfwm/xfwm.c:842
+#: xfwm/xfwm.c:851
 msgid "&Restart"
 msgstr "&Reiniciar"
 
-#: xfwm/xfwm.c:843
+#: xfwm/xfwm.c:852
 msgid "&Quit"
 msgstr "&Abandonar"
 
-#: xfwm/xfwm.c:856
+#: xfwm/xfwm.c:865
 msgid "&Move"
 msgstr "&Movimentar"
 
-#: xfwm/xfwm.c:857
+#: xfwm/xfwm.c:866
 msgid "&Resize"
 msgstr "&Redimensionar"
 
-#: xfwm/xfwm.c:858
+#: xfwm/xfwm.c:867
 msgid "(De)&Iconify"
 msgstr "(Des)&Iconificar"
 
-#: xfwm/xfwm.c:859
+#: xfwm/xfwm.c:868
 msgid "(Un)&Stick"
 msgstr "(Des)&Prender"
 
-#: xfwm/xfwm.c:860
+#: xfwm/xfwm.c:869
 msgid "(Un)S&hade"
 msgstr "(Un)C&ortina"
 
-#: xfwm/xfwm.c:861
+#: xfwm/xfwm.c:870
 msgid "(Un)Ma&ximize"
 msgstr "(Des)Ma&ximizar"
 
-#: xfwm/xfwm.c:863
+#: xfwm/xfwm.c:872
 msgid "Se&nd to..."
 msgstr "En&viar para..."
 
-#: xfwm/xfwm.c:864
+#: xfwm/xfwm.c:873
 msgid "S&witch to..."
 msgstr "A&lternar para..."
 
-#: xfwm/xfwm.c:866
+#: xfwm/xfwm.c:875
 msgid "&Close"
 msgstr "&Fechar"
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:877
 msgid "User Menu"
 msgstr "Menu do Usuário"
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:878
 #, fuzzy
 msgid "Edit menu..."
 msgstr "Externo..."
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:882
 msgid "&Mouse..."
 msgstr "&Mouse..."
 
-#: xfwm/xfwm.c:874
+#: xfwm/xfwm.c:883
 msgid "&Backdrop..."
 msgstr "&Cenário..."
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:884
 msgid "&Sound..."
 msgstr "&Som..."
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:886
 msgid "&New window"
 msgstr "&Nova janela "
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:887
 msgid "&User Menu"
 msgstr "Menu do &Usuário"
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:891
 msgid "&Arrange icons"
 msgstr "&Arranjar ícones"
 
-#: xfwm/xfwm.c:883
+#: xfwm/xfwm.c:892
 msgid "&Iconify all"
 msgstr "&Transformar todos em ícones"
 
-#: xfwm/xfwm.c:884
+#: xfwm/xfwm.c:893
 msgid "&Refresh"
 msgstr "Re&novar"
 
-#: xfwm/xfwm.c:885
+#: xfwm/xfwm.c:894
 msgid "Shuffle &Up"
 msgstr "Misturar &Para cima"
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:895
 msgid "Shuffle &Down"
 msgstr "Misturar P&ara Baixo"
 
-#: xfwm/xfwm.c:888
+#: xfwm/xfwm.c:897
 #, fuzzy
 msgid "&Settings"
 msgstr "Configurações"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:899
 msgid "&Quit XFwm"
 msgstr "&Sair do XFwm"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:901
 msgid "&Full Screen"
 msgstr "Tela &Cheia"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:902
 msgid "&Vertical"
 msgstr "&Vertical"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:903
 msgid "&Horizontal"
 msgstr "&Horizontal"
 
-#: xfwm/xfwm.c:1224
+#: xfwm/xfwm.c:1233
 #, fuzzy
 msgid "xfwm terminated: "
 msgstr "Terminada:"
 
-#: xfsamba/xfsamba.c:311
-#, fuzzy
-msgid "Shares"
-msgstr "Cortina"
-
-#: xfsamba/xfsamba.c:313
-msgid "Links to other servers"
-msgstr ""
-
-#: xfsamba/xfsamba.c:315
-msgid "Links to other workgroups"
-msgstr ""
-
-#: xfsamba/xfsamba.c:370
-msgid "Query done."
-msgstr ""
-
-#: xfsamba/xfsamba.c:372
-msgid "Query failed. Machine may be down."
-msgstr ""
-
-#: xfsamba/xfsamba.c:390 xfsamba/xfsamba_list.c:184
-msgid "Query password has been requested."
-msgstr ""
-
-#: xfsamba/xfsamba.c:554
-#, fuzzy
-msgid "Querying"
-msgstr "Pergunta"
-
-#: xfsamba/xfsamba.c:648
+#: xfsamba/xfsamba.c:223
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr ""
 
-#: xfsamba/xfsamba.c:656
+#: xfsamba/xfsamba.c:231
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr ""
 
-#: xfsamba/xfsamba_download.c:63
+#: xfsamba/xfsamba_download.c:87
 msgid "File download failed. See diagnostics for reason."
 msgstr ""
 
 #. upload was successful:
-#: xfsamba/xfsamba_download.c:67
+#: xfsamba/xfsamba_download.c:91
 msgid "Download done."
 msgstr ""
 
-#: xfsamba/xfsamba_download.c:103
+#: xfsamba/xfsamba_download.c:127
 #, fuzzy
 msgid "Downloading file..."
 msgstr "Movendo arquivo...\n"
 
-#: xfsamba/xfsamba_download.c:116
+#: xfsamba/xfsamba_download.c:140
 msgid "File download cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_download.c:124
+#: xfsamba/xfsamba_download.c:148
 #, fuzzy
 msgid "Download failed."
 msgstr "Arquivo de Som : "
@@ -2948,7 +2918,7 @@ msgstr "Novo Diretório ..."
 msgid "Delete..."
 msgstr "Apagar ..."
 
-#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:434
+#: xfsamba/xfsamba_gui.c:1021 xfsamba/xfsamba_tar.c:441
 #, fuzzy
 msgid "Tar..."
 msgstr "Carregar ..."
@@ -3126,215 +3096,245 @@ msgstr ""
 msgid "Welcome to xfsamba."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:179
+#: xfsamba/xfsamba_list.c:188
 msgid "Retrieve done."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:223
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+msgid "Query password has been requested."
+msgstr ""
+
+#: xfsamba/xfsamba_list.c:232
 msgid "List failed."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:242
+#: xfsamba/xfsamba_list.c:251
 msgid "Retreiving..."
 msgstr ""
 
-#: xfsamba/xfsamba_lookup.c:43 xfsamba/xfsamba_lookup.c:44
-#: xfsamba/xfsamba_masterresolve.c:204 xfsamba/xfsamba_masterresolve.c:205
+#: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
+#: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 #, fuzzy
 msgid "Resolved"
 msgstr "Remover"
 
-#: xfsamba/xfsamba_lookup.c:97 xfsamba/xfsamba_lookup.c:98
+#: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
 msgid "Resolving for"
 msgstr ""
 
-#: xfsamba/xfsamba_masterlookup.c:69
+#: xfsamba/xfsamba_smblookup.c:84
+#, fuzzy
+msgid "Shares"
+msgstr "Cortina"
+
+#: xfsamba/xfsamba_smblookup.c:86
+msgid "Links to other servers"
+msgstr ""
+
+#: xfsamba/xfsamba_smblookup.c:88
+msgid "Links to other workgroups"
+msgstr ""
+
+#: xfsamba/xfsamba_smblookup.c:143
+msgid "Query done."
+msgstr ""
+
+#: xfsamba/xfsamba_smblookup.c:145
+msgid "Query failed. Machine may be down."
+msgstr ""
+
+#: xfsamba/xfsamba_smblookup.c:324
+#, fuzzy
+msgid "Querying"
+msgstr "Pergunta"
+
+#: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
 msgstr ""
 
-#: xfsamba/xfsamba_masterlookup.c:70
+#: xfsamba/xfsamba_masterlookup.c:78
 msgid ""
 "No master browser found.\n"
 "Please type a computer name at location and hit RETURN"
 msgstr ""
 
-#: xfsamba/xfsamba_masterlookup.c:126
+#: xfsamba/xfsamba_masterlookup.c:134
 msgid "Looking for master browsers..."
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:97
+#: xfsamba/xfsamba_masterresolve.c:110
 msgid "Please provide netbios name for master browser at "
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:166
+#: xfsamba/xfsamba_masterresolve.c:179
 msgid "Master browser netbios name must be provided."
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:214 xfsamba/xfsamba_masterresolve.c:215
-#: xfsamba/xfsamba_masterresolve.c:221
+#: xfsamba/xfsamba_masterresolve.c:227 xfsamba/xfsamba_masterresolve.c:228
+#: xfsamba/xfsamba_masterresolve.c:234
 msgid "No status response"
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:233
+#: xfsamba/xfsamba_masterresolve.c:246
 msgid "Master browser not resolved. Use location box to browse."
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:234
+#: xfsamba/xfsamba_masterresolve.c:247
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
 msgstr ""
 
-#: xfsamba/xfsamba_masterresolve.c:288 xfsamba/xfsamba_masterresolve.c:289
+#: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
 #, fuzzy
 msgid "Resolving"
 msgstr "Remover"
 
-#: xfsamba/xfsamba_mkdir.c:74
+#: xfsamba/xfsamba_mkdir.c:102
 msgid "Please provide a name for the new directory at"
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:172
+#: xfsamba/xfsamba_mkdir.c:200
 msgid "Directory creation failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_mkdir.c:181
+#: xfsamba/xfsamba_mkdir.c:209
 #, fuzzy
 msgid "Directory created."
 msgstr "diretório: %s\n"
 
-#: xfsamba/xfsamba_mkdir.c:222
+#: xfsamba/xfsamba_mkdir.c:250
 #, fuzzy
 msgid "Create directory cancelled."
 msgstr "criando diretório: %s\n"
 
-#: xfsamba/xfsamba_mkdir.c:233
+#: xfsamba/xfsamba_mkdir.c:261
 #, fuzzy
 msgid "Create directory failed."
 msgstr "criando diretório: %s\n"
 
-#: xfsamba/xfsamba_mkdir.c:264
+#: xfsamba/xfsamba_mkdir.c:292
 #, fuzzy
 msgid "Creating dir..."
 msgstr "Movendo arquivo...\n"
 
-#: xfsamba/xfsamba_rm.c:63
+#: xfsamba/xfsamba_rm.c:86
 msgid "Remove failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:69
+#: xfsamba/xfsamba_rm.c:92
 msgid "Remove complete."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:103
+#: xfsamba/xfsamba_rm.c:126
 #, fuzzy
 msgid "Removing..."
 msgstr "Remover"
 
-#: xfsamba/xfsamba_rm.c:108
+#: xfsamba/xfsamba_rm.c:131
 msgid "Sorry, top level shares cannot be removed."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:111 xfsamba/xfsamba_rm.c:164
+#: xfsamba/xfsamba_rm.c:134 xfsamba/xfsamba_rm.c:187
 msgid "Remove cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_rm.c:198
+#: xfsamba/xfsamba_rm.c:221
 msgid "Confirm remove?"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:114
+#: xfsamba/xfsamba_tar.c:121
 msgid "Tar failed. See diagnostics for details."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:119
+#: xfsamba/xfsamba_tar.c:126
 msgid "Tar extraction has completed"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:124
+#: xfsamba/xfsamba_tar.c:131
 msgid "Tar command complete."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:146
+#: xfsamba/xfsamba_tar.c:153
 msgid "Please select input tarfile next."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:150
+#: xfsamba/xfsamba_tar.c:157
 msgid "Please select the output tarfile next."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:184 xfsamba/xfsamba_tar.c:225
+#: xfsamba/xfsamba_tar.c:191 xfsamba/xfsamba_tar.c:232
 msgid "Tar cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:196
+#: xfsamba/xfsamba_tar.c:203
 #, fuzzy
 msgid "Cannot open tar file"
 msgstr ""
 "Erro\n"
 "Impossível abrir arquivo"
 
-#: xfsamba/xfsamba_tar.c:207
+#: xfsamba/xfsamba_tar.c:214
 #, fuzzy
 msgid "Cannot create tar file"
 msgstr "Impossível criar arquivo"
 
-#: xfsamba/xfsamba_tar.c:318
+#: xfsamba/xfsamba_tar.c:325
 msgid "create"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:321
+#: xfsamba/xfsamba_tar.c:328
 msgid "extract"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:364
+#: xfsamba/xfsamba_tar.c:371
 msgid "full"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:367
+#: xfsamba/xfsamba_tar.c:374
 #, fuzzy
 msgid "incremental"
 msgstr "Concordo"
 
-#: xfsamba/xfsamba_tar.c:390
+#: xfsamba/xfsamba_tar.c:397
 msgid "do not reset archive bit"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:393
+#: xfsamba/xfsamba_tar.c:400
 msgid "reset archive bit"
 msgstr ""
 
-#: xfsamba/xfsamba_tar.c:405
+#: xfsamba/xfsamba_tar.c:412
 #, fuzzy
 msgid "Options"
 msgstr "Opções do Calendário"
 
-#: xfsamba/xfsamba_upload.c:62
+#: xfsamba/xfsamba_upload.c:91
 msgid "File upload failed. See diagnostics for reason."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:72
+#: xfsamba/xfsamba_upload.c:101
 msgid "Upload done."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:90
+#: xfsamba/xfsamba_upload.c:119
 msgid "Uploaded file."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:124
+#: xfsamba/xfsamba_upload.c:153
 #, fuzzy
 msgid "Uploading file..."
 msgstr "Movendo arquivo...\n"
 
-#: xfsamba/xfsamba_upload.c:130
+#: xfsamba/xfsamba_upload.c:159
 msgid "File upload cancelled."
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:140
+#: xfsamba/xfsamba_upload.c:169
 msgid "Specified file does not exist"
 msgstr ""
 
-#: xfsamba/xfsamba_upload.c:141 xfsamba/xfsamba_upload.c:155
+#: xfsamba/xfsamba_upload.c:170 xfsamba/xfsamba_upload.c:184
 #, fuzzy
 msgid "Upload failed."
 msgstr "Movendo arquivo...\n"
@@ -3344,68 +3344,68 @@ msgstr "Movendo arquivo...\n"
 msgid "User Menu Editor"
 msgstr "Menu do Usuário"
 
-#: xfumed/xfumed_gui.c:85
+#: xfumed/xfumed_gui.c:80
 #, fuzzy
 msgid "Caption"
 msgstr "Opções do Calendário"
 
-#: xfumed/xfumed_gui.c:92
+#: xfumed/xfumed_gui.c:86
 #, fuzzy
 msgid "Command"
 msgstr "Comando : "
 
-#: xfumed/xfumed_gui.c:117
+#: xfumed/xfumed_gui.c:108
 #, fuzzy
 msgid "Move Up"
 msgstr "&Movimentar"
 
-#: xfumed/xfumed_gui.c:125
+#: xfumed/xfumed_gui.c:115
 msgid "Move Down"
 msgstr ""
 
-#: xfumed/xfumed_gui.c:133
+#: xfumed/xfumed_gui.c:122
 msgid "Add"
 msgstr ""
 
-#: xfumed/xfumed_gui.c:141
+#: xfumed/xfumed_gui.c:129
 #, fuzzy
 msgid "Edit"
 msgstr "Oito"
 
-#: xfumed/xfumed_gui.c:173
+#: xfumed/xfumed_gui.c:157
 #, fuzzy
 msgid "Save"
 msgstr "Gravar ..."
 
-#: xfumed/xfumed_gui.c:181
+#: xfumed/xfumed_gui.c:164
 #, fuzzy
 msgid "Reset"
 msgstr "Testar"
 
-#: xfumed/xfumed_gui.c:313
+#: xfumed/xfumed_gui.c:252
 msgid "Edit Entry"
 msgstr ""
 
-#: xfumed/xfumed_gui.c:315
+#: xfumed/xfumed_gui.c:254
 msgid "Add Entry"
 msgstr ""
 
-#: xfumed/xfumed_gui.c:338
+#: xfumed/xfumed_gui.c:275
 #, fuzzy
 msgid "Type: "
 msgstr "Tipo :"
 
-#: xfumed/xfumed_gui.c:348
+#: xfumed/xfumed_gui.c:282
 #, fuzzy
 msgid "Caption: "
 msgstr "Aceleração : "
 
-#: xfumed/xfumed_gui.c:358
+#: xfumed/xfumed_gui.c:289
 #, fuzzy
 msgid "Command: "
 msgstr "Comando : "
 
-#: xfumed/xfumed_gui_cb.c:22
+#: xfumed/xfumed_gui_cb.c:23
 msgid "Your changes will take effect on next startup"
 msgstr ""
 
@@ -3416,16 +3416,16 @@ msgid ""
 "Do you want to save the changes ?"
 msgstr ""
 
-#: xfumed/xfumed_gui_cb.c:78
+#: xfumed/xfumed_gui_cb.c:76
 msgid "Don't Quit"
 msgstr ""
 
-#: xfumed/xfumed_gui_cb.c:127
+#: xfumed/xfumed_gui_cb.c:121
 #, fuzzy
 msgid "Do you want to delete this entry ?"
 msgstr "Você tem certeza de que quer remover esta entrada ?"
 
-#: xfumed/xfumed_gui_cb.c:129
+#: xfumed/xfumed_gui_cb.c:123
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"

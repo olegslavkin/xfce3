@@ -61,7 +61,7 @@ changeDesks_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long
   int n, val1, val1_unit, val2, val2_unit;
 
   n = GetTwoArguments (action, &val1, &val2, &val1_unit, &val2_unit, 0, 0);
-  changeDesks (val1, val2, 1, 1, 1);
+  changeDesks (val1, val2, True, True, True);
 }
 
 void
@@ -98,10 +98,13 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
 
   XSync (dpy, 0);
   if (grab)
+  {
     MyXGrabServer (dpy);
-
+  }
   if (broadcast)
+  {
     Broadcast (XFCE_M_NEW_DESK, 1, Scr.CurrentDesk, 0, 0, 0, 0, 0, 0);
+  }
   /* Scan the window list, mapping windows on the new Desk,
    * unmapping windows on the old Desk */
   /* Unmap from bottom to top of stack */
@@ -185,9 +188,11 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
     else
       SetFocus (Scr.NoFocusWin, NULL, False, False);
   }
-  if (grab)
-    MyXUngrabServer (dpy);
   XSync (dpy, 0);
+  if (grab)
+  {
+    MyXUngrabServer (dpy);
+  }
 }
 
 /**************************************************************************
