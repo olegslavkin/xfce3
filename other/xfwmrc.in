@@ -192,9 +192,10 @@ Style "sylpheed"    icon "XFCE_DIR/icons/Mail.xpm"
 # Remove the "Alt+Click = move" binding
 #Mouse 1 W M -
 # Remove root click (required for GNOME proxy win)
+#Mouse 0 R A -
 #Mouse 1 R A -
-#Mouse 1 R A -
-#Mouse 1 R A -
+#Mouse 2 R A -
+#Mouse 3 R A -
 
 
 # Uncomment the following if you prefer a single click on an icon 

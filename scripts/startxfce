@@ -25,8 +25,16 @@ fi
 if test "x$DISPLAY" = "x"
 then
   echo $0: Starting X server
-  exec xinit /etc/X11//xfce/xinitrc $*
+  if [ -x $HOME/.xfce/xinitrc ]; then
+	exec xinit $HOME/.xfce/xinitrc $*
+  else
+	exec xinit /etc/X11/xfce/xinitrc $*
+  fi  
 else
   echo $0: X server already running on display $DISPLAY
-  /bin/sh /etc/X11//xfce/xinitrc
+  if [ -x $HOME/.xfce/xinitrc ]; then
+	exec /bin/sh $HOME/.xfce/xinitrc
+  else
+	exec /bin/sh /etc/X11/xfce/xinitrc
+  fi
 fi
