@@ -45,6 +45,11 @@
 #include "gnome_protocol.h"
 #include "constant.h"
 
+#ifdef XFCE_TASKBAR
+  #include "taskbar.h"
+#endif
+
+
 #ifdef DMALLOC
 #  include "dmalloc.h"
 #endif
@@ -127,6 +132,10 @@ setup_ok_cb (GtkWidget * widget, gpointer data)
  */
   gtk_widget_hide (setup);
   gdk_window_withdraw ((GTK_WIDGET (setup))->window);
+#ifdef XFCE_TASKBAR
+  taskbar_applay_xfce_config(&current_config);
+#endif
+
 }
 
 void
@@ -199,6 +208,9 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
   prev_xfwm_engine = current_config.xfwm_engine;
   writeconfig ();
   cursor_reset (setup);
+#ifdef XFCE_TASKBAR
+  taskbar_applay_xfce_config(&current_config);
+#endif
 }
 
 void

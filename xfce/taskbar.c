@@ -104,6 +104,7 @@ typedef struct _taskbar_xfce {
   GtkWidget *gtk_proc_load_indicator;
   int gtk_pressed;
   int base_height;
+  int base_width;
   GtkWidget *model_widget;
   int gtk_task_no;
   gint gtk_timeout_handler_id;
@@ -137,7 +138,7 @@ void taskbar_synch_single_task_widget_with_desk(long id, taskbar_window *win);
 void taskbar_synch_task_widget_with_desk();
 void taskbar_synch_labels();
 
-void taskbar_set_standalone_state(GtkWidget *tb_panel);
+void taskbar_set_standalone_state();
 gint tb_set_proc_load(gpointer data);
 void taskbar_put_in_taskjar(taskbar_window *tbw);
 void 
@@ -188,7 +189,6 @@ void taskbar_xfwm_init()
 #endif
   g_xfce_taskbar.windows=NULL;
 
-  // g_xfce_taskbar.gtk_timeout_handler_id=gtk_timeout_add(300,tb_set_proc_load,NULL);
 
   if (current_config.wm)
     sendinfo (fd_internal_pipe,TASKBAR_CMD_WIN_LIST, 0);
@@ -313,7 +313,7 @@ void taskbar_sort(int new_order)
   default:
     return;
     ;
-  } //switch
+  } 
   taskbar_adapt_widgets_to_tasks_order();
 }
 
@@ -343,7 +343,6 @@ taskbar_check_if_taskjar(taskbar_window *tbw)
 void taskbar_check_events(unsigned long type,unsigned long *body)
 {
   taskbar_window *tbw;
-  //GList *clist;
   long desk_diff;
   long flags_diff;
   int is_new;
@@ -556,7 +555,6 @@ void taskbar_synch_task_widget_with_desk()
 GList *clist;
 taskbar_window *win;
 
-//  g_xfce_taskbar.gtk_task_no=0;
   clist=g_list_first(g_xfce_taskbar.windows);
   while (clist) {
     win=(taskbar_window*)clist->data;
@@ -569,7 +567,6 @@ taskbar_window *win;
 
 
 
-// int omitt_toggle_handler=FALSE;
 
 void taskbar_on_button_task_toggled(GtkToggleButton *button,
                                     gpointer user_data)
@@ -577,9 +574,6 @@ void taskbar_on_button_task_toggled(GtkToggleButton *button,
   long id=(long)user_data;
   int oldPressed;
 
-//  if(omitt_toggle_handler)
-//    return;
-//  omitt_toggle_handler=TRUE;
   oldPressed=g_xfce_taskbar.gtk_pressed;
   g_xfce_taskbar.gtk_pressed=FALSE;
 
@@ -588,7 +582,6 @@ void taskbar_on_button_task_toggled(GtkToggleButton *button,
   } else {
     taskbar_toggle_iconify(id);   
   }
-//  omitt_toggle_handler=FALSE;
 }
 
 gint taskbar_on_button_task_pressed(GtkToggleButton *button,GdkEventButton *event,
@@ -639,14 +632,10 @@ void taskbar_add_task_widget(long id,char *wname)
   gtk_object_set_data(GTK_OBJECT(button),"handler_id",(gpointer)handler_id);
 
 
-//  gtk_widget_show (button);
 #ifdef LOG_FILE
   fprintf(_f,"show button: %ld\n",id);
 #endif
-//  taskbar_remove_labels();
   gtk_box_pack_start (GTK_BOX (w), button, TRUE, TRUE, 0);
-//  g_xfce_taskbar.gtk_task_no++;
-//  taskbar_set_labels();
 
 }
 
@@ -665,14 +654,9 @@ void taskbar_remove_task_widget(long id)
   if ((GtkToggleButton*)button==g_xfce_taskbar.gtk_toggled_button)
     g_xfce_taskbar.gtk_toggled_button=NULL;
 
-//  taskbar_remove_labels();
-//  if(GTK_WIDGET_VISIBLE(button)) 
-//    g_xfce_taskbar.gtk_task_no--;
 
   gtk_container_remove(GTK_CONTAINER(w),button);
   gtk_object_remove_data(GTK_OBJECT(w),sid);
-//  gtk_widget_destroy(button);
-//  taskbar_set_labels();
 }
 
 void taskbar_update_task_widget(long id,char *wname)
@@ -685,13 +669,6 @@ void taskbar_update_task_widget(long id,char *wname)
   if (!button)
     return;
 
-  // TODO:  TEMP SOLUTION 
-/*
-  if((wname!=NULL)&&(strncasecmp ("XFce Main Panel",wname,10)==0)) {
-    taskbar_remove_task_widget(id);
-    return;
-  }
-*/
   gl=gtk_container_children(GTK_CONTAINER(button));
 
   if (gl&&gl->data) {
@@ -718,7 +695,6 @@ void taskbar_select_task_widget(long id)
     return;
 
   handler_id=(guint)gtk_object_get_data(GTK_OBJECT(button),"handler_id");
-//    omitt_toggle_handler=TRUE;
   if (g_xfce_taskbar.gtk_toggled_button) {
     handler_id=(guint)gtk_object_get_data(GTK_OBJECT(g_xfce_taskbar.gtk_toggled_button),"handler_id");
     gtk_signal_handler_block(GTK_OBJECT(g_xfce_taskbar.gtk_toggled_button),handler_id);
@@ -736,7 +712,6 @@ void taskbar_select_task_widget(long id)
 
   g_xfce_taskbar.gtk_toggled_button=(GtkToggleButton*)button;
 
-//    omitt_toggle_handler=FALSE;
 }
 
 
@@ -747,14 +722,13 @@ void HSVtoRGB( float *r, float *g, float *b, float h, float s, float v )
   float f, p, q, t;
 
   if ( s == 0 ) {
-// achromatic (grey)
     *r = *g = *b = v;
     return;
   }
 
-  h /= 60;// sector 0 to 5
+  h /= 60;
   i = floor( h );
-  f = h - i;// factorial part of h
+  f = h - i;
   p = v * ( 1 - s );
   q = v * ( 1 - s * f );
   t = v * ( 1 - s * ( 1 - f ) );
@@ -785,7 +759,7 @@ void HSVtoRGB( float *r, float *g, float *b, float h, float s, float v )
     *g = p;
     *b = v;
     break;
-  default:// case 5:
+  default:
     *r = v;
     *g = p;
     *b = q;
@@ -881,7 +855,7 @@ void taskbar_on_button_open_clicked(GtkWidget *w,gpointer data)
     break;
   default:
     tb_radio=NULL;
-  } //switch
+  } 
   gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(tb_radio),1);
   
   
@@ -889,7 +863,7 @@ void taskbar_on_button_open_clicked(GtkWidget *w,gpointer data)
   g_xfce_taskbar.flags|=TASKBAR_FLAG_OPENED;
   taskbar_synch_task_widget_with_desk();
 
-  taskbar_set_standalone_state(tb_panel);
+  taskbar_set_standalone_state();
 
 }
 
@@ -913,7 +887,6 @@ void taskbar_on_button_close_clicked(GtkWidget *w,gpointer data)
   GtkWidget *tb_button_open;
   GtkWidget *tb_hrule;  
   GtkWidget *tb_standalone;  
-
   g_xfce_taskbar.gtk_proc_load_indicator=NULL;
 
   tb_panel=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(w),"tb_panel");
@@ -924,12 +897,21 @@ void taskbar_on_button_close_clicked(GtkWidget *w,gpointer data)
   tb_standalone=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_mcheck_standalone");
 
   g_xfce_taskbar.flags&=~TASKBAR_FLAG_OPENED;
-  taskbar_set_standalone_state(tb_panel);
+   /* work around for size changing */
+  tb_button_open->allocation.width=-1;
+  tb_button_open->allocation.height=-1;
+  taskbar_set_standalone_state();
 
   gtk_widget_hide_all(tb_hbox1);
   gtk_widget_hide(tb_hrule);
   gtk_widget_show(tb_button_open);
-
+/*
+  while(gtk_events_pending())
+    gtk_main_iteration();
+printf("--wait_3\n");
+  sleep(4);
+printf("---close clicked end\n");
+*/
 }
 
 /*
@@ -945,7 +927,6 @@ gint taskbar_on_button_close_right_clicked(GtkWidget *widget, GdkEventButton *ev
                     event->button, event->time);
     return TRUE;
   }
-//fflush(f);
   return FALSE;
 }
 
@@ -973,7 +954,7 @@ GtkWidget* taskbar_create_standalone_frame(GtkWidget *to_be_added)
   gtk_window_set_title (GTK_WINDOW (window), "XFce Taskbar");
   gtk_widget_realize (window);
   /* decorations !!!!! */
-  gdk_window_set_decorations (window->window, 0);//GDK_DECOR_RESIZEH);
+  gdk_window_set_decorations (window->window, 0);
   frame=gtk_frame_new(NULL);
   gtk_widget_show(frame);
   gtk_container_add(GTK_CONTAINER(window),frame);
@@ -998,7 +979,6 @@ GtkWidget* taskbar_create_standalone_frame(GtkWidget *to_be_added)
   gtk_object_ref(GTK_OBJECT(to_be_added));
   if (to_be_added->parent)
     gtk_container_remove(GTK_CONTAINER(to_be_added->parent),to_be_added);
-//  gtk_widget_unparent(to_be_added);
   gtk_container_add(GTK_CONTAINER(hbox),to_be_added);
   gtk_object_unref(GTK_OBJECT(to_be_added));
 
@@ -1023,8 +1003,9 @@ GtkWidget* taskbar_create_standalone_frame(GtkWidget *to_be_added)
 }
 
 
-void taskbar_set_standalone_state(GtkWidget *tb_panel)
+void taskbar_set_standalone_state()
 {
+  GtkWidget *tb_panel;
   GtkWidget *tb_parent;
   GtkWidget *tb_hrule;
   GtkWidget *tb_hbox1;
@@ -1034,12 +1015,13 @@ void taskbar_set_standalone_state(GtkWidget *tb_panel)
   gboolean state;
   int x,y;
 
+  tb_panel=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(g_xfce_taskbar.gtk_realtaskbar),"tb_panel");
+
   tb_hbox1=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_hbox1");
   tb_hrule=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_hrule");
-  tb_button_open=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_size_model");
+  tb_button_open=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_button_open");
 
   toggle=gtk_toggle_button_new_with_label("A");
-
 /*  
   toggle_style=gtk_widget_get_style(toggle);
   if(toggle_style->font) {
@@ -1072,20 +1054,14 @@ void taskbar_set_standalone_state(GtkWidget *tb_panel)
         gtk_container_remove(GTK_CONTAINER(tb_panel->parent),tb_panel);
       tb_parent=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_parent");
       gtk_container_add(GTK_CONTAINER(tb_parent),tb_panel);
-      gtk_widget_show(tb_hrule);
-      gtk_widget_show(tb_panel);
+        gtk_widget_show(tb_hrule);
+        gtk_widget_show(tb_panel);
       gtk_object_unref(GTK_OBJECT(tb_panel));
       gtk_widget_destroy(g_xfce_taskbar.gtk_stand_alone);
       g_xfce_taskbar.gtk_stand_alone=NULL;
     }
-    
-/*
-    gtk_widget_show(tb_button_open);
-    gtk_widget_size_allocate(tb_button_open,&alloc);
-    gtk_widget_hide(tb_button_open);
-*/
-    gtk_widget_set_usize(tb_hbox1,tb_button_open->allocation.width,g_xfce_taskbar.base_height);
-    gtk_widget_set_usize(tb_hrule,tb_button_open->allocation.width,2); 
+    gtk_widget_set_usize(tb_hbox1,g_xfce_taskbar.base_width,g_xfce_taskbar.base_height);
+    gtk_widget_set_usize(tb_hrule,g_xfce_taskbar.base_width,2); 
   }
 }
 void taskbar_on_mcheck_standalone_toggled(GtkWidget *w, gpointer user_data)
@@ -1098,7 +1074,7 @@ void taskbar_on_mcheck_standalone_toggled(GtkWidget *w, gpointer user_data)
   } else {
     g_xfce_taskbar.flags&=~TASKBAR_FLAG_STANDALONE;
   }
-  taskbar_set_standalone_state(tb_panel);
+  taskbar_set_standalone_state();
 }
 
 void taskbar_on_mcheck_sysload_toggled(GtkWidget *w, gpointer user_data)
@@ -1279,7 +1255,7 @@ taskbar_read_taskbarrc()
   char buff[1024],*s,*ps;
   char *token;
   int i,cmd_no,line_no;
-  static xfwm_cmd cmds[MAX_XFWM_CMDS]; //TODO
+  static xfwm_cmd cmds[MAX_XFWM_CMDS]; 
   char *patterns[MAX_XFWM_CMDS];
   int patt_no;
   /* parse taskbarrc file */
@@ -1385,7 +1361,6 @@ taskbar_read_taskbarrc()
       menu_item=gtk_menu_item_new();
     } else {
       menu_item=gtk_menu_item_new_with_label(cmds[i].name);
-//      gtk_object_set_data (GTK_OBJECT (popup_menu), cmds[i].name, menu_item);
       gtk_signal_connect(GTK_OBJECT(menu_item),"activate",
                          GTK_SIGNAL_FUNC(taskbar_on_popup_menu_select),(gpointer)(&cmds[i]));
       if(cmds[i].flags&XFWM_CMD_FLAG_DESK) {
@@ -1398,10 +1373,6 @@ taskbar_read_taskbarrc()
 
   return popup_menu;
 }
-
-
-GtkWidget *_panel;
-
 
 void
 taskbar_applay_xfce_config(config *config)
@@ -1431,7 +1402,41 @@ int i;
   }
   if(!g_xfce_taskbar.gtk_task_popup_menu);
     g_xfce_taskbar.gtk_task_popup_menu=taskbar_read_taskbarrc();
+/*
+  if(g_xfce_taskbar.flags&TASKBAR_FLAG_OPENED) {
+    GTK_WIDGET(_open)->allocation.width=-1;
+    GTK_WIDGET(_open)->allocation.height=-1;
+    taskbar_set_standalone_state();
+printf("APPLAY\n");
+printf(" close\n");
+    gtk_button_clicked(_close);
+printf(" open\n");
+    gtk_button_clicked(_open);
+  }
+*/    
 
+}
+
+
+gboolean taskbar_on_model_widget_configure (GtkWidget *widget,GtkRequisition *event,
+                                            gpointer user_data)
+{
+  GtkWidget *tb_panel;
+  GtkWidget *tb_hrule;
+  GtkWidget *tb_hbox1;
+
+  tb_panel=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(g_xfce_taskbar.gtk_realtaskbar),"tb_panel");
+
+  tb_hbox1=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_hbox1");
+  tb_hrule=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(tb_panel),"tb_hrule");
+  
+  if(event->width==g_xfce_taskbar.base_width)
+    return FALSE;
+  g_xfce_taskbar.base_width=event->width;
+  
+  taskbar_set_standalone_state();
+
+  return FALSE;
 }
 
 /* 
@@ -1468,6 +1473,8 @@ GtkWidget *taskbar_create_gxfce_with_taskbar (GtkWidget *parent,GtkWidget *size_
   tb_button_open=gtk_button_new();
   gtk_object_set_data(GTK_OBJECT(tb_panel),"tb_parent",(gpointer)parent);
   gtk_object_set_data(GTK_OBJECT(tb_panel),"tb_size_model",(gpointer)size_model);
+  gtk_signal_connect(GTK_OBJECT(size_model),"size_request",GTK_SIGNAL_FUNC(taskbar_on_model_widget_configure),NULL);
+  gtk_widget_set_usize(tb_button_open,-1,4); 
   gtk_object_set_data (GTK_OBJECT (tb_panel), "tb_button_open", tb_button_open);
   gtk_object_set_data (GTK_OBJECT (tb_button_open), "tb_panel", tb_panel);
 
@@ -1475,7 +1482,6 @@ GtkWidget *taskbar_create_gxfce_with_taskbar (GtkWidget *parent,GtkWidget *size_
   gtk_signal_connect(GTK_OBJECT(tb_button_open),"clicked",GTK_SIGNAL_FUNC(taskbar_on_button_open_clicked),NULL);
   gtk_widget_show(tb_panel);
   gtk_widget_show(tb_button_open);
-  gtk_widget_set_usize(tb_button_open,tb_button_open->allocation.width,4);// TODO correct height
 
   tb_hrule=gtk_hseparator_new();
   gtk_object_set_data (GTK_OBJECT (tb_panel), "tb_hrule", tb_hrule);
@@ -1587,16 +1593,8 @@ gtk_widget_set_sensitive(menu_item,FALSE);
   gtk_tooltips_set_tip(gtk_tooltips_new(),tb_button_taskjar,_("TaskJar"),NULL);
   gtk_object_set_data (GTK_OBJECT (tb_panel), "tb_button_taskjar", tb_button_taskjar);
   gtk_object_set_data (GTK_OBJECT (tb_button_taskjar), "tb_panel", tb_panel);
+  gtk_object_set_data (GTK_OBJECT (tb_real), "tb_panel", tb_panel);
   
-/*
-//  taskjar_pixmap = MyCreateFromPixmapData (tb_button_taskjar,taskjarEmpty);
-  taskjar_pixmap=gtk_pixmap_new(gdk_pixmap_create_from_xpm_d(tb_button_taskjar->window,&bitmap,
-                                                             NULL,taskjarEmpty),bitmap);
-  if (taskjar_pixmap == NULL)
-    g_error (_("Couldn't create taskjar pixmap"));
-  gtk_object_set_data (GTK_OBJECT (tb_button_taskjar), "tb_taskjar_pixmap", taskjar_pixmap);
-  gtk_container_add(GTK_CONTAINER(tb_button_taskjar),taskjar_pixmap);
-*/  
   gtk_signal_connect_object(GTK_OBJECT(tb_button_taskjar), "button_press_event",
                             GTK_SIGNAL_FUNC (taskbar_on_button_taskjar_clicked), NULL);
   
@@ -1612,7 +1610,6 @@ gtk_widget_set_sensitive(menu_item,FALSE);
 gtk_widget_set_sensitive(menu_item,FALSE);
   label=GTK_WIDGET(gtk_container_children(GTK_CONTAINER(menu_item))->data);
   gtk_misc_set_alignment(GTK_MISC(label), 0.5, 0.5);
-//  gtk_label_set_justify(GTK_LABEL(label),GTK_JUSTIFY_CENTER);
   gtk_menu_append(GTK_MENU(taskjar_menu),menu_item);
   gtk_widget_show(menu_item);
   menu_item=gtk_menu_item_new();
@@ -1629,7 +1626,7 @@ gtk_widget_set_sensitive(menu_item,FALSE);
   }
   g_xfce_taskbar.gtk_task_no=0;
   g_xfce_taskbar.gtk_toggled_button=NULL;
-  g_xfce_taskbar.curr_desk=0; //TODO check if -1 is better ?
+  g_xfce_taskbar.curr_desk=0; 
   g_xfce_taskbar.model_widget=tb_button_open;
   g_xfce_taskbar.gtk_stand_alone=NULL;
   g_xfce_taskbar.gtk_pressed=FALSE;
@@ -1649,11 +1646,11 @@ gtk_widget_set_sensitive(menu_item,FALSE);
 
 
   taskbar_set_labels();
-  _panel=tb_panel;
   if(g_xfce_taskbar.flags&TASKBAR_FLAG_OPENED) {
     gtk_button_clicked(GTK_BUTTON(tb_button_open));
 
   }
+
   return tb_panel;
 }
 
@@ -1693,7 +1690,7 @@ taskbar_save_config(FILE *f)
     fprintf(f,"\tSortByUnsorted\n");
     break;
   default:
-  } //switch
+  } 
 }
 
 
@@ -1744,6 +1741,7 @@ GtkWidget *tb_button_open;
   }
   return NULL;
 }
+
 
 
 #endif

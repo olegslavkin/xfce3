@@ -9,7 +9,7 @@
 
 #include <gtk/gtk.h>
 #include <stdio.h>
-                              
+#include "configfile.h"                               
 
 
 void 
@@ -32,5 +32,7 @@ taskbar_save_config(FILE *f);
 char*
 taskbar_read_config(FILE *f, char *lineread,int max);
 
+void
+taskbar_applay_xfce_config(config *config);
 
 #endif

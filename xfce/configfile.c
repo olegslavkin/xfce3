@@ -765,10 +765,8 @@ readconfig (void)
     {
       sprintf (dummy, "[Menu%u]", i + 1);
       p = nextline (configfile, lineread);
-      if(p&&(*p=='[')&&!my_strnSTARTS(p,"[Menu"))
-        break; /* Marcin Staszyszyn: CHECK IT */
       j = 0;
-      while ((p) && (!my_strnSTARTS (p, dummy)))
+      while ((p) && !my_strnSTARTS (p, dummy)&& !my_strnSTARTS (p, "[Taskbar"))
       {
         label = g_strdup (p ? p : "None");
         p = nextline (configfile, lineread);
