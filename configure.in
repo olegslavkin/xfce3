@@ -19,7 +19,7 @@ LIB_TINY=14
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.14
+XFCE_VERSION=3.8.14b
 xfce_version=`grep version xfce.spec | grep define | sed -e 's,[[^0-9.]],,g'`
 case `echo $xfce_version | sed -e "s,$XFCE_VERSION,DEVELOPMENTVERSION,"` in
   DEVELOPMENTVERSION.*) 
@@ -87,7 +87,14 @@ AC_CHECK_FUNCS(snprintf vsnprintf strcasecmp strncasecmp)
 AC_CHECK_FUNCS(sendmsg memcpy memmove memset)
 AC_CHECK_FUNCS(sigaction siginterrupt)
 AC_CHECK_FUNC(scandir, AC_DEFINE(HAVE_SCANDIR),)
-AC_CHECK_FUNC(iconv, AC_DEFINE(HAVE_ICONV),)
+ICONV_LIBS=""
+AC_CHECK_FUNC(iconv, 
+      AC_CHECK_DECL(_libiconv_version,
+      [ AC_MSG_RESULT(assuming iconv.h belongs to GNU libiconv)
+        AC_CHECK_LIB(iconv, iconv, ICONV_LIBS="-liconv"; AC_DEFINE(HAVE_ICONV),)],
+      [ AC_MSG_RESULT(assuming iconv.h belongs to the C library)
+        AC_CHECK_FUNCS(iconv iconv_open iconv_close ,AC_DEFINE(HAVE_ICONV),)]),)
+AC_SUBST(ICONV_LIBS)
 
 AM_PATH_GLIB(1.2.6, ,
             AC_MSG_ERROR(Cannot find GLIB: Is glib-config in path?))

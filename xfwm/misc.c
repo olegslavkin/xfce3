@@ -818,6 +818,7 @@ UnmapIt (XfwmWindow * t)
   XGetWindowAttributes (dpy, t->w, &winattrs);
   eventMask = winattrs.your_event_mask;
   XSelectInput (dpy, t->w, eventMask & ~StructureNotifyMask);
+  XFlush (dpy);
   if (t->flags & ICONIFIED)
   {
     if (t->icon_pixmap_w != None)
@@ -831,6 +832,7 @@ UnmapIt (XfwmWindow * t)
     XUnmapWindow (dpy, t->frame);
   }
   XSelectInput (dpy, t->w, eventMask);
+  XFlush (dpy);
 }
 
 /**************************************************************************
@@ -850,6 +852,7 @@ MapIt (XfwmWindow * t)
   XGetWindowAttributes (dpy, t->w, &winattrs);
   eventMask = winattrs.your_event_mask;
   XSelectInput (dpy, t->w, (eventMask & ~StructureNotifyMask));
+  XFlush (dpy);
   if (t->flags & ICONIFIED)
   {
     if (t->icon_pixmap_w != None)
@@ -864,6 +867,7 @@ MapIt (XfwmWindow * t)
     XMapWindow (dpy, t->w);
   }
   XSelectInput (dpy, t->w, eventMask);
+  XFlush (dpy);
 }
 
 /*

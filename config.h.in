@@ -97,8 +97,14 @@
 /* Define if you have the `getuid' function. */
 #undef HAVE_GETUID
 
-/* Define if you have the iconv() function. */
+/* Define if you have the `iconv' function. */
 #undef HAVE_ICONV
+
+/* Define if you have the `iconv_close' function. */
+#undef HAVE_ICONV_CLOSE
+
+/* Define if you have the `iconv_open' function. */
+#undef HAVE_ICONV_OPEN
 
 /* Define if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
