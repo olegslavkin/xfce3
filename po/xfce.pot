@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-08-10 12:08+0200\n"
+"POT-Creation-Date: 2001-08-10 21:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:172 xfce/modify.c:238 xfce/screen.c:133
-#: xfce/setup.c:1131 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfce/setup.c:1128 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:526
@@ -90,7 +90,7 @@ msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:559 xfce/action.c:181 xfce/modify.c:255 xfce/screen.c:143
-#: xfce/setup.c:1148 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfce/setup.c:1145 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:547 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 msgid "Cancel"
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: xfce/setup.c:499 xfce/setup.c:880
+#: xfce/setup.c:499 xfce/setup.c:877
 msgid "Top"
 msgstr ""
 
@@ -428,7 +428,7 @@ msgstr ""
 msgid "Font style"
 msgstr ""
 
-#: xfce/setup.c:710 xfce/setup.c:1007 xfce/setup.c:1014 xfce/setup.c:1021
+#: xfce/setup.c:710 xfce/setup.c:1004 xfce/setup.c:1011 xfce/setup.c:1018
 msgid "Browse..."
 msgstr ""
 
@@ -456,91 +456,91 @@ msgstr ""
 msgid "Use gradient color for the active window"
 msgstr ""
 
-#: xfce/setup.c:776
+#: xfce/setup.c:777
 msgid "Use gradient color for inactive windows"
 msgstr ""
 
-#: xfce/setup.c:804
+#: xfce/setup.c:801
 msgid "Window border style : "
 msgstr ""
 
-#: xfce/setup.c:841
+#: xfce/setup.c:838
 msgid "Window snapping size (0 disable) : "
 msgstr ""
 
-#: xfce/setup.c:868
+#: xfce/setup.c:865
 msgid "Icon position"
 msgstr ""
 
-#: xfce/setup.c:887 xfmouse/xfmouse.c:206
+#: xfce/setup.c:884 xfmouse/xfmouse.c:206
 msgid "Left"
 msgstr ""
 
-#: xfce/setup.c:894
+#: xfce/setup.c:891
 msgid "bottom"
 msgstr ""
 
-#: xfce/setup.c:901 xfmouse/xfmouse.c:216
+#: xfce/setup.c:898 xfmouse/xfmouse.c:216
 msgid "Right"
 msgstr ""
 
-#: xfce/setup.c:980
+#: xfce/setup.c:977
 msgid "Title font :"
 msgstr ""
 
-#: xfce/setup.c:989
+#: xfce/setup.c:986
 msgid "Icon font :"
 msgstr ""
 
-#: xfce/setup.c:998
+#: xfce/setup.c:995
 msgid "Menu font :"
 msgstr ""
 
-#: xfce/setup.c:1045
+#: xfce/setup.c:1042
 msgid "Sound module (xfsound)"
 msgstr ""
 
-#: xfce/setup.c:1052
+#: xfce/setup.c:1049
 msgid "Mouse settings (xfmouse)"
 msgstr ""
 
-#: xfce/setup.c:1059
+#: xfce/setup.c:1056
 msgid "Backdrop settings (xfbd)"
 msgstr ""
 
-#: xfce/setup.c:1066
+#: xfce/setup.c:1063
 msgid "Pager (xfpager)"
 msgstr ""
 
-#: xfce/setup.c:1073
+#: xfce/setup.c:1070
 msgid "GNOME (xfgnome)"
 msgstr ""
 
-#: xfce/setup.c:1080
+#: xfce/setup.c:1077
 msgid "GNOME menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1087
+#: xfce/setup.c:1084
 msgid "KDE menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1094
+#: xfce/setup.c:1091
 msgid "Palette"
 msgstr ""
 
-#: xfce/setup.c:1100
+#: xfce/setup.c:1097
 msgid "XFce"
 msgstr ""
 
-#: xfce/setup.c:1106
+#: xfce/setup.c:1103
 msgid "Windows"
 msgstr ""
 
-#: xfce/setup.c:1112 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1109 xfce/startup.c:60 xfsound/xfsound.c:92
 msgid "Startup"
 msgstr ""
 
-#: xfbd/xfbd.c:541 xfce/setup.c:1140 xfmouse/xfmouse.c:299
+#: xfbd/xfbd.c:541 xfce/setup.c:1137 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:539
 msgid "Apply"
 msgstr ""
