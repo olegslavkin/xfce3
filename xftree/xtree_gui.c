@@ -7,6 +7,8 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
+ * Edscott Wilson Garcia 2001, for xfce project
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -88,6 +90,8 @@
 #include "icons/stale_lnk.xpm"
 #include "icons/xftree_icon.xpm"
 
+#include "xtree_mess.h"
+
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
 #endif
@@ -107,6 +111,7 @@ enum
   MN_DIR = 1,
   MN_FILE = 2,
   MN_MIXED = 3,
+  MN_HLP = 4,
   MENUS
 };
 
@@ -148,6 +153,8 @@ typedef struct
 }
 menu_entry;
 
+
+
 static GdkPixmap * gPIX_page, *gPIX_page_lnk, *gPIX_dir_pd, *gPIX_dir_close, *gPIX_dir_close_lnk, *gPIX_dir_open_lnk, *gPIX_dir_open, *gPIX_dir_up, *gPIX_char_dev, *gPIX_fifo, *gPIX_socket, *gPIX_block_dev, *gPIX_exe, *gPIX_stale_lnk, *gPIX_exe_lnk;
 
 static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close, *gPIM_dir_close_lnk, *gPIM_dir_open_lnk, *gPIM_dir_open, *gPIM_dir_up, *gPIM_char_dev, *gPIM_fifo, *gPIM_socket, *gPIM_block_dev, *gPIM_exe, *gPIM_stale_lnk, *gPIM_exe_lnk;
@@ -155,25 +162,13 @@ static GdkBitmap * gPIM_page, *gPIM_page_lnk, *gPIM_dir_pd, *gPIM_dir_close, *gP
 static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg, int width, int height, int flags);
 int move_dir (char *source, char *label, char *target, int trash);
 
+static GtkAccelGroup *accel;
+
 gint update_timer (GtkCTree * ctree);
 static void cb_new_subdir (GtkWidget * item, GtkWidget * ctree);
 
-/* wouldbe xtree_mess.h: */
-#define SAVE_GEOMETRY 		0x01
-#define DOUBLE_CLICK_GOTO 	0x02
 
-extern int preferences;
-extern int geometryX;
-extern int geometryY;
-void read_defaults(void);
-void save_defaults(void);
-char * 
- override_txt(char *new_file,char *old_file);
-GtkWidget *
- shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data);
-void 
- cb_toggle_preferences (GtkWidget * widget, gpointer data);
-/* end wouldbe xtree_mess.h */
+
 
 
 /*
@@ -1333,20 +1328,39 @@ cb_find (GtkWidget * item, GtkWidget * ctree)
 
 /*
  */
-void
+static void
 cb_about (GtkWidget * item, GtkWidget * ctree)
 {
   dlg_info (_("This is XFTree, based on 'XTree' " "\n(c) by Rasca\npublished under GNU GPL" "\nhttp://home.pages.de/~rasca/xap/"));
 }
 
+
 /*
  */
-static void
+void
 set_title (GtkWidget * w, const char *path)
 {
-  char title[PATH_MAX + 1 + 20];
-  sprintf (title, "XFTree: %s", path);
+  char *title;
+  title = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+  if (!title) return; 
+  if (preferences&SHORT_TITLES) {
+	  char *word;
+	  word = strrchr (path,'/');
+	  if (word) sprintf(title,"%s",(word[1]==0)?word:word+1);
+	  else  sprintf(title,"XFTree");	  
+  }
+  else sprintf (title, "XFTree: %s", path);
   gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (w)), title);
+  free(title);
+
+  Awin=w;
+  {
+    char *tmp_path;
+    tmp_path=(char *)malloc((strlen(path)+1)*sizeof(char));
+    if (tmp_path) strcpy(tmp_path,path);
+    if (Apath) free(Apath);
+    Apath=tmp_path;
+  }
 }
 
 /*
@@ -1632,10 +1646,6 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
   {
   case GDK_Delete:
     cb_delete (NULL, GTK_CTREE (ctree));
-    return (TRUE);
-    break;
-  case GDK_Insert:
-    cb_new_subdir (NULL, GTK_WIDGET (ctree));
     return (TRUE);
     break;
   case GDK_Return:
@@ -2532,7 +2542,7 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go to ..."), _("Go to ..."), _("Go to ..."), MyCreateFromPixmapData (toolbar, go_to_xpm), GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
 
-  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go up ..."), _("Go up ..."), _("Go up ..."), MyCreateFromPixmapData (toolbar, go_up_xpm), GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
+  gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go up"), _("Go up"), _("Go up"), MyCreateFromPixmapData (toolbar, go_up_xpm), GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
 
   gtk_toolbar_append_item ((GtkToolbar *) toolbar, _("Go home"), _("Go home"), _("Go home"), MyCreateFromPixmapData (toolbar, home_xpm), GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
 
@@ -2560,7 +2570,7 @@ create_toolbar (GtkWidget * top, GtkWidget * ctree, cfg * win)
 }
 
 GtkWidget *
-create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
+create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 {
   GtkWidget *menubar;
   GtkWidget *menu;
@@ -2602,11 +2612,11 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
 
-/*  menuitem = gtk_menu_item_new_with_label (_("Delete ... del"));
+  menuitem = gtk_menu_item_new_with_label (_("Delete ..."));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
-*/
+
   
   menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2621,7 +2631,9 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_quit), (gpointer) top);
-
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_c,GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  
   /* Create "Edit" menu */
   menuitem = gtk_menu_item_new_with_label (_("Edit"));
   gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
@@ -2704,11 +2716,11 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
-  /* TODO #12:
-  menuitem = gtk_menu_item_new_with_label (_("Go back ... Ctl-B"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);
+  /* TODO #12:*/
+  menuitem = gtk_menu_item_new_with_label (_("Go back"));
+/*  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);*/
   gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);*/
+  gtk_widget_show (menuitem);
 
   menuitem = gtk_menu_item_new_with_label (_("Go up"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
@@ -2736,6 +2748,8 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
 		  (gpointer)((long)(SAVE_GEOMETRY)) );
   shortcut_menu (menu, _("Double click does GOTO"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(DOUBLE_CLICK_GOTO)) );
+  shortcut_menu (menu, _("Short titles"), (gpointer) cb_toggle_preferences, 
+		  (gpointer)((long)(SHORT_TITLES)) );
   
 
   /* Create "Help" menu */
@@ -2743,13 +2757,24 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_menu_item_right_justify (GTK_MENU_ITEM (menuitem));
   gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
   gtk_widget_show (menuitem);
-
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
+
+  menuitem = gtk_menu_item_new_with_label (_("Default shortcut keys"));
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem),hlpmenu);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new_with_label (_("Custom shortcut keys"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_custom_SCK), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
   menuitem = gtk_menu_item_new_with_label (_("About ..."));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_about), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+
 
   return menubar;
 }
@@ -2776,12 +2801,13 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   char *icon_name;
   entry *en;
   cfg *win;
-  GtkAccelGroup *accel;
+  GtkAccelGroup *inner_accel;
   int i;
 
 /* keyboard shortcuts used to be bugged because of conflicting entries.
  * these macros should make it easier to avoid conflicting entries.
- * Please place any duplicate entries as a macro. 
+ * Please place any duplicate entries as a macro. (since all entries
+ * duplicate at least with help menu, all should be here).
  * 
  * note: "unselect all" was eliminated since the function call was identical
  * to plain unselect. 
@@ -2790,58 +2816,56 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
-
+#define COMMON_HELP_1 \
+    {N_("Go to marked"), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK}    
+#define COMMON_HELP_2 \
+     {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
+     {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},\
+     {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_d,GDK_MOD1_MASK} 
+#define COMMON_MENU_NEW \
+    {N_("New Folder"), (gpointer) cb_new_subdir, 0, GDK_n,GDK_MOD1_MASK},\
+    {N_("New file"), (gpointer) cb_new_file, 0,GDK_n,GDK_CONTROL_MASK}
 #define COMMON_MENU_2 \
     {N_("Properties ..."), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
     {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
     {N_("Delete ..."), (gpointer) cb_delete, 0},\
-    {N_("Show disk usage..."), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
+    {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
-    
 #define COMMON_MENU_GOTO \
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
     {N_("Go home"), (gpointer) cb_go_home, 0,GDK_h,GDK_CONTROL_MASK},\
+    {N_("Go back"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\
     {N_("Go up"), (gpointer) cb_go_up, 0,GDK_a,GDK_CONTROL_MASK},\
     {N_("Go to"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
-    /*{N_("Go back ... Ctl-B"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\*/
-
 #define COMMON_MENU_SELECT \
     {N_("Select all"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
     {N_("Unselect"), (gpointer) cb_unselect, 0,GDK_q,GDK_CONTROL_MASK},\
     {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
-
 #define COMMON_MENU_LAST \
     {N_("Run program ..."), (gpointer) cb_exec, WINCFG,GDK_x,GDK_CONTROL_MASK},\
     {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_o,GDK_CONTROL_MASK},\
     {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,GDK_CONTROL_MASK},\
     {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_z,GDK_CONTROL_MASK}
-    
-/* quit only on main menu now, so that default geometry is saved correctly with cb_quit.
- *     {N_("Quit ... Ctl-C"), (gpointer) cb_quit, 0, GDK_c,GDK_CONTROL_MASK} */
-
-#define COMMON_MENU_NEW \
-    {N_("New Folder"), (gpointer) cb_new_subdir, 0},\
-    {N_("New file"), (gpointer) cb_new_file, 0,GDK_n,GDK_CONTROL_MASK}
+/* quit only on main menu now, so that default geometry is saved correctly with cb_quit.*/
+#define COMMON_HELP_3 \
+    {N_("Quit ..."), NULL, 0, GDK_c,GDK_CONTROL_MASK}
 
   menu_entry dir_mlist[] = {
     COMMON_MENU_1,
     COMMON_MENU_NEW,
     COMMON_MENU_2,
-    {N_("Go to marked"), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK},
+    COMMON_HELP_1,
     COMMON_MENU_GOTO,
     COMMON_MENU_SELECT,
     COMMON_MENU_LAST
   };
-  
 #define LAST_DIR_MENU_ENTRY (sizeof(dir_mlist)/sizeof(menu_entry))
 
   menu_entry file_mlist[] = {
      COMMON_MENU_1,
-     {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},
-     {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},
-     {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_d,GDK_MOD1_MASK},
+     COMMON_HELP_2,
      COMMON_MENU_2,
      COMMON_MENU_GOTO,
      COMMON_MENU_SELECT,
@@ -2866,6 +2890,19 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     COMMON_MENU_LAST
   };
 #define LAST_NONE_MENU_ENTRY (sizeof(none_mlist)/sizeof(menu_entry))
+  menu_entry help_mlist[] = {
+    COMMON_MENU_1,
+    COMMON_MENU_NEW,
+    {NULL, NULL, 0},
+    COMMON_HELP_2,
+    COMMON_MENU_2,
+    COMMON_MENU_GOTO,
+    COMMON_HELP_1,
+    COMMON_MENU_SELECT,
+    COMMON_MENU_LAST,
+    COMMON_HELP_3    
+  };
+#define LAST_HELP_MENU_ENTRY (sizeof(help_mlist)/sizeof(menu_entry))
 
   read_defaults();
   if (SAVE_GEOMETRY & preferences)
@@ -2940,8 +2977,33 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_clist_set_reorderable (GTK_CLIST (ctree), FALSE);
   gtk_container_add (GTK_CONTAINER (scrolled), ctree);
 
+ /**** help menu, non operation, for displaying default kyeboard shortcuts */
+  menu[MN_HLP] = gtk_menu_new ();
+  inner_accel = gtk_accel_group_new ();
+  gtk_accel_group_attach (inner_accel, GTK_OBJECT (menu[MN_HLP]));
+
+
+  for (i = 0; i < LAST_HELP_MENU_ENTRY; i++)
+  {
+    if (help_mlist[i].label)
+      menu_item = gtk_menu_item_new_with_label (help_mlist[i].label);
+    else
+      menu_item = gtk_menu_item_new ();
+    gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (cb_default_SCK),(gpointer)(help_mlist+i));
+    if (help_mlist[i].key)
+    {
+      gtk_widget_add_accelerator (menu_item, "activate", inner_accel, help_mlist[i].key, help_mlist[i].mod,GTK_ACCEL_VISIBLE);
+    }
+    gtk_menu_append (GTK_MENU (menu[MN_HLP]), menu_item);
+    gtk_widget_show (menu_item);
+  }
+
+
+ /***** directory list ...***/ 
+ 
   menu[MN_DIR] = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_DIR]), accel);
+
 
   for (i = 0; i < LAST_DIR_MENU_ENTRY; i++)
   {
@@ -2960,13 +3022,14 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     }
     if (dir_mlist[i].key)
     {
-      gtk_widget_add_accelerator (menu_item, "activate", accel, dir_mlist[i].key, dir_mlist[i].mod, GTK_ACCEL_VISIBLE);
+      gtk_widget_add_accelerator (menu_item, "activate", accel, dir_mlist[i].key, dir_mlist[i].mod,GTK_ACCEL_VISIBLE );
     }
     gtk_menu_append (GTK_MENU (menu[MN_DIR]), menu_item);
     gtk_widget_show (menu_item);
   }
   gtk_menu_attach_to_widget (GTK_MENU (menu[MN_DIR]), ctree, (GtkMenuDetachFunc) menu_detach);
 
+/**** file list ...  */  
   menu[MN_FILE] = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_FILE]), accel);
   for (i = 0; i < LAST_FILE_MENU_ENTRY; i++)
@@ -2993,6 +3056,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   }
   gtk_menu_attach_to_widget (GTK_MENU (menu[MN_FILE]), ctree, (GtkMenuDetachFunc) menu_detach);
 
+  /*** mixed list... */
   menu[MN_MIXED] = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (menu[MN_MIXED]), accel);
   for (i = 0; i < LAST_MIXED_MENU_ENTRY; i++)
@@ -3080,7 +3144,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
   gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 
-  menutop = create_menu (top, ctree, win);
+  menutop = create_menu (top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
   gtk_widget_show (menutop);
 

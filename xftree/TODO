@@ -6,11 +6,18 @@ from these files straight to where you want it.
 7- Add code necesary to d+d files to/from xfsamba.
 10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place, also faster than opening and closing dialogs).
 12- Add a "Go Back" function. (do while debugging goto option)
-13- add help for creating custom shortcut keys, and default defined shorcut keys
-14- add "save user shortcutkeys to config options
-
+14- add "save user shortcutkeys to config options:
+    does gtk store the custom values in the associated accel?
+    if so, how do you retrieve the values?
+bugs to fix: information dialogs can get lost beneath
+             erratic behavior when the top open folder gets moved away by 
+             another process.
 done:
-1- Some configuration options --> save geometry on exit and double click does goto
+13- add help for creating custom shortcut keys, and default defined shorcut keys
+1- Some configuration options --> 
+    save geometry on exit, 
+    double click does goto, 
+    short-titles
 8- Add ctrl-T for keyboard shortcut to open terminal. Probably keyboard shorcuts
  for all menu items. --- This was already there, but it was bugged. It has been 
  fixed and reorganized to make for easier maintainance.

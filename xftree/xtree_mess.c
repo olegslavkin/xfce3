@@ -1,5 +1,5 @@
 /* copywrite 2001 edscott wilson garcia under GNU/GPL 
-* 
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -69,12 +69,8 @@
 /* this file is for processing certain common messages.
  * override warning to begin with */
 
-#define SAVE_GEOMETRY 		0x01
-#define DOUBLE_CLICK_GOTO 	0x02
-
-#define XFTREE_CONFIG_FILE "xftreerc"
-
-int preferences,geometryX,geometryY;
+#define XTREE_MESS_MAIN
+#include "xtree_mess.h"
 
 #define BYTES "bytes"
 
@@ -219,7 +215,10 @@ void read_defaults(void){
   fclose(defaults);  
   
 }
-			  
+
+/* from xtree_gui.c: */
+void set_title (GtkWidget * w, const char *path);
+
 void
 cb_toggle_preferences (GtkWidget * widget, gpointer data)
 {
@@ -227,8 +226,36 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
   toggler = (long)(data);
   preferences ^= toggler;
   save_defaults ();
+  if (toggler&SHORT_TITLES) {
+	  if (Apath&&Awin) set_title(Awin,Apath);
+  }
 }
 			  
+void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)
+{
+  dlg_info (N_("GTK handles keyboard shortcuts dynamically\n" 
+"This means that you can open a menu,highlight an entry\nand press a keyboard key to create the shortcut.")
+	    );
+}
+
+void cb_default_SCK(GtkWidget * item, gpointer data)
+{
+#if 0
+	char * message;
+	char *txt=_("You selected the default keyboard shortcut for ");
+	menu_entry *helpitem;
+	helpitem = (menu_entry *)data;
+	if ((!helpitem) || (!(helpitem->label))) return;
+	message=(char *)malloc((strlen(txt)+strlen(helpitem->label)+1)*sizeof(char));
+	if (!message) return;
+	sprintf(message,"%s%s",txt,helpitem->label);
+	dlg_info (message);
+	free(message);
+#endif
+	dlg_info (_("Keyboard shortcuts are a fast way to access menu functions."));
+	
+}
+
 	  
   
   
