@@ -559,15 +559,13 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 	   Just make sure that the window is not off screen once ConstrainSize
 	   has been called...
 	 */
-	if ((new_x + new_width) > MyDisplayWidth(center_x, center_y))
+	if ((new_x + new_width) > MyDisplayX(center_x, center_y) + MyDisplayWidth(center_x, center_y))
 	  {
-	    new_x = my_max (new_x + (MyDisplayWidth(center_x, center_y) - new_width), 
-	                    MyDisplayX(center_x, center_y));
+	    new_x = MyDisplayX(center_x, center_y);
 	  }
-	if ((new_y + new_height) > MyDisplayHeight(center_x, center_y))
+	if ((new_y + new_height) > MyDisplayY(center_x, center_y) + MyDisplayHeight(center_x, center_y))
 	  {
-	    new_y = my_max ((new_y + (MyDisplayHeight(center_x, center_y) - new_height)), 
-	                    MyDisplayY(center_x, center_y));
+	    new_y = MyDisplayY(center_x, center_y);
 	  }
         if (!(tmp_win->flags & ICONIFIED))
         {
