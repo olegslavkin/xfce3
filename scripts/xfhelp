@@ -28,7 +28,7 @@ if [ -d "$XFCE_DATA/help/" ]
 then 
   HELP_DIR="$XFCE_DATA/help"
 else 
-  HELP_DIR="/usr/share/xfce/help"
+  HELP_DIR="/usr/local/share/xfce/help"
 fi
 
 # Look first in ne location then in old location
