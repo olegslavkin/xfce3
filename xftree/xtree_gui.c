@@ -1164,7 +1164,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   menu = g_malloc (sizeof (GtkWidget) * MENUS);
   titles[COL_NAME] = _("Name");
   /*titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");*/
-  titles[COL_SIZE] = _("Size");
+  titles[COL_SIZE] = _("Size (bytes)");
   titles[COL_DATE] = _("Last changed");
   titles[COL_MODE] = _("Mode");
   titles[COL_UID] = _("Owner");
@@ -1201,6 +1201,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_widget_show (win->status); 
   
   ctree = gtk_ctree_new_with_titles (COLUMNS, 0, titles);
+  gtk_clist_set_column_justification((GtkCList *)ctree,COL_SIZE,GTK_JUSTIFY_RIGHT);
+
+
+
 
   {
 	GtkWidget *box;
@@ -1478,6 +1482,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);   
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
+  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
+		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
 
 
   gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), path);

@@ -154,7 +154,7 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
 	*(strrchr(path,'/'))=0;
 	if (strstr(path,"/")) *(strrchr(path,'/'))=0;
 	if (path[0]==0) strcpy(path,"/");
-   }    		
+  }    		
   en = entry_new_by_path (path);
   if (!en)
   {
@@ -166,8 +166,7 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   if (!io_is_valid (en->label)) return;
   en->flags = flags;
 
-	/*fprintf(stderr,"dbg: 2go_to path=%s\n",path);*/
-
+  /*fprintf(stderr,"dbg: 2go_to path=%s\n",path);*/
   pw=getpwuid(en->st.st_uid); 
   gr=getgrgid (en->st.st_gid); 
    
@@ -183,21 +182,20 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   }
   ctree_freeze (ctree);
   
-	/*fprintf(stderr,"dbg: 3go_to path=%s\n",path);*/
-  
-  //win->gogo=pushgo(path,win->gogo);
-  gtk_ctree_remove_node (ctree, root);
-  
-
+  /* fprintf(stderr,"dbg: 3go_to path=%s\n",path); */
+  gtk_ctree_remove_node (ctree, root); 
   root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8, 
 		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
-		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);  	  gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
+		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);  	  
+  gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
   add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
+  
+  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
+		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
   ctree_thaw (ctree);
   set_title_ctree (GTK_WIDGET (ctree), uri_clear_path (en->path));
   icon_name = strrchr (en->path, '/');
-  if ((icon_name) && (!(*(++icon_name))))
-    icon_name = NULL;
+  if ((icon_name) && (!(*(++icon_name)))) icon_name = NULL;
   gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, (icon_name ? icon_name : "/"));
 
 }

@@ -509,8 +509,8 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   entry *en;
   GtkCTreeNode *item;
   gchar *text[COLUMNS];
-  gchar size[32] = { "" };
-  gchar date[32] = { "" };
+  gchar size[32];
+  gchar date[32];
   icon_pix pix;  
   gboolean isleaf;
   struct passwd *pw;
@@ -556,13 +556,13 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
 	  }
     }
     {
-      char *tag="";
+      char *tag="  ";
       unsigned long long tama;
       tama =  en->st.st_size;
-      if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag="G";}
-      else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag="M";}
-      else if (tama >= 1024*10) {tama /= 1024; tag="K";}
-      sprintf (size, " %6llu%s", tama,tag);
+      if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" Gb";}
+      else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
+      else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+      sprintf (size, " %llu%s", tama,tag);
     }
   }
   sprintf (date, "%02d-%02d-%02d  %02d:%02d", en->date.year, en->date.month, en->date.day, en->date.hour, en->date.min);
@@ -638,6 +638,7 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
       en = gtk_ctree_node_get_row_data (ctree, child); 
       status_inf.howmany++;
       status_inf.howmuch += en->st.st_size;
+	  /* fprintf(stderr,"dbg:%s=%lld total=%lld\n",en->path,(long long)en->st.st_size,status_inf.howmuch);*/
   }
    /*
     * status_inf.howmuch *= 0.0009765625;
@@ -649,14 +650,20 @@ static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
     * 
     * The compiler is your friend. */
    
-   status_inf.howmuch = ((unsigned long long)(status_inf.howmuch))/1024;
+   status_inf.howmuch = ((unsigned long long)(status_inf.howmuch));
    texto=(char *)malloc(128+strlen(p_en->path));
    if (!texto) return;
-   sprintf(texto,"%s: %lld %s, %lld Kb.",
-		   p_en->path, /* FIXME: use abbreviated path if configured */
+   {
+       char *tag="";
+       unsigned long long tama;
+       tama =  (unsigned long long)status_inf.howmuch;
+       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag="G";}
+       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag="M";}
+       else if (tama >= 1024*10) {tama /= 1024; tag="K";}
+       sprintf(texto,"%s: %lld %s, %lld %sbytes.",p_en->path, 
 		   (long long)status_inf.howmany,
-		   _("files"),
-		   (long long)status_inf.howmuch);
+		   _("files"),tama,tag);
+  }
    gtk_label_set_text ((GtkLabel *)win->status,texto);
 
    /*fprintf(stderr,"dbg:%s\n",texto);*/
@@ -1014,13 +1021,13 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
      struct group *gr;
      /*fprintf(stderr,"dbg: doing update for %s\n",en->label);*/
       {
-       char *tag="b";
+       char *tag="  ";
        unsigned long long tama;
        tama =  child_en->st.st_size;
-       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag="Gb";}
-       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag="Mb";}
-       else if (tama >= 1024*10) {tama /= 1024; tag="Kb";}
-       sprintf (size, " %6llu %s", tama,tag);
+       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" Gb";}
+       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
+       else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+       sprintf (size, " %llu%s", tama,tag);
       }
      
       sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
