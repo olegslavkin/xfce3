@@ -58,10 +58,10 @@ Margin Bottom 50
 
 # Style used for some known applications :
 Style "*"			BorderWidth 6
-# Style "xfce"			StaysOnTop
-Style "Alert"			Sticky, StaysOnTop
-Style "Question"		Sticky, StaysOnTop
-Style "Message"			Sticky, StaysOnTop
+# Style "xfce"			StayOnTop
+Style "Alert"			Sticky, StayOnTop
+Style "Question"		Sticky, StayOnTop
+Style "Message"			Sticky, StayOnTop
 Style "xfbd"			Sticky 
 Style "xfpager"			Sticky
 # Style "*lock"			Sticky
