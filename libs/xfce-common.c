@@ -713,6 +713,12 @@ xfce_init (int *argc, char **argv[])
   {
     gdk_imlib_set_cache_info (0, images);
   }
+#else
+#ifdef HAVE_GDK_PIXBUF
+  gdk_rgb_init ();
+  gtk_widget_set_default_colormap (gdk_rgb_get_cmap ());
+  gtk_widget_set_default_visual (gdk_rgb_get_visual ());
+#endif
 #endif
   init_xfce_rcfile();
 }
