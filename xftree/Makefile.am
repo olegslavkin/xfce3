@@ -10,7 +10,6 @@ bin_PROGRAMS = xftree
 
 xftree_SOURCES = \
 	entry.c entry.h \
-	gtk_cpy.c gtk_cpy.h \
 	gtk_dlg.c gtk_dlg.h \
 	gtk_dnd.h \
 	gtk_exec.c gtk_exec.h \
@@ -27,7 +26,8 @@ xftree_SOURCES = \
 	xtree_gui.c xtree_gui.h \
 	xtree_misc.c xtree_misc.h \
 	xtree_du.c tubo.c tubo.h \
-	xtree_mess.c
+	xtree_mess.c xtree_mess.h \
+	xtree_cpy.c xtree_cpy.h
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \
