@@ -161,9 +161,9 @@ bestplace (XfwmWindow * tmp_win, int px, int py)
   best_x = MyDisplayX (px, py) + Scr.Margin[1];
   best_y = MyDisplayY (px, py) + Scr.Margin[0];
 
-  for (test_y = MyDisplayY (px, py) + Scr.Margin[0]; test_y < ymax; test_y += 5)
+  for (test_y = MyDisplayY (px, py) + Scr.Margin[0]; test_y < ymax; test_y += 8)
   {
-    for (test_x = MyDisplayX (px, py) + Scr.Margin[1]; test_x < xmax; test_x += 5)
+    for (test_x = MyDisplayX (px, py) + Scr.Margin[1]; test_x < xmax; test_x += 8)
     {
       unsigned long count_overlaps = 0;
       t = Scr.XfwmRoot.next;
