@@ -794,12 +794,12 @@ void
 defpal (XFCE_palette * p)
 {
   initpal (p);
-  p->r[0] = 0;
-  p->g[0] = 0;
-  p->b[0] = 0;
-  p->r[1] = 215;
-  p->g[1] = 215;
-  p->b[1] = 215;
+  p->r[0] = 255;
+  p->g[0] = 255;
+  p->b[0] = 255;
+  p->r[1] = 192;
+  p->g[1] = 192;
+  p->b[1] = 192;
   p->r[2] = 235;
   p->g[2] = 235;
   p->b[2] = 235;
@@ -812,12 +812,12 @@ defpal (XFCE_palette * p)
   p->r[5] = 235;
   p->g[5] = 235;
   p->b[5] = 235;
-  p->r[6] = 19;
-  p->g[6] = 106;
-  p->b[6] = 170;
-  p->r[7] = 215;
-  p->g[7] = 215;
-  p->b[7] = 215;
+  p->r[6] = 20;
+  p->g[6] = 107;
+  p->b[6] = 171;
+  p->r[7] = 198;
+  p->g[7] = 198;
+  p->b[7] = 198;
   p->texture = g_realloc (p->texture, sizeof (char) * (strlen (DEFAULTTEXTURE) + 1));
   strcpy (p->texture, DEFAULTTEXTURE);
 }

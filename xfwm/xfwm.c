@@ -824,12 +824,12 @@ SetRCDefaults ()
   char *defaults[] = {
     "XORValue 0",
     "ModulePath $PATH",
-    "ActiveColor white #D7D7D7",
-    "InactiveColor black #D7D7D7",
-    "TitleStyle Active Solid #136AAA",
+    "ActiveColor white #C6C6C6",
+    "InactiveColor black #C6C6C6",
+    "TitleStyle Active Solid #146BAB",
     "TitleStyle Inactive Solid #C0C0C0",
-    "MenuColor black #D7D7D7 black #EBEBEB",
-    "CursorColor #000000 white",
+    "MenuColor black #C6C6C6 black #EBEBEB",
+    "CursorColor white black",
     "FocusMode Click",
     "AnimateWin Off",
     "OpaqueMove On",
@@ -1762,7 +1762,7 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
-  Scr.engine = GTK_ENGINE;
+  Scr.engine = XFCE_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;

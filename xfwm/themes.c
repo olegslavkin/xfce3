@@ -1338,13 +1338,15 @@ DrawTrianglePattern_xfce (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, 
 void
 RelieveIconTitle_xfce (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
-  RelieveRectangle (win, 0, 0, w, h, ReliefGC, ShadowGC);
+  RelieveRectangle (win, 0, 0, w, h, Scr.BlackGC, Scr.BlackGC);
+  RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
 }
 
 void
 RelieveIconPixmap_xfce (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 {
-  RelieveRectangle (win, 0, 0, w, h, ReliefGC, ShadowGC);
+  RelieveRectangle (win, 0, 0, w, h, Scr.BlackGC, Scr.BlackGC);
+  RelieveRectangle (win, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
 }
 
 /*
