@@ -1580,8 +1580,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 		  win->iconname);
   } */
   win->iconname = NULL;
-  set_icon (win->top,win->iconname, xftree_icon_xpm);
   set_title_ctree (ctree, en->path);
+  set_icon (win->top,win->iconname, xftree_icon_xpm);
   
 
  /* icon_name = strrchr (path, '/');
