@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <dirent.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include <unistd.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
@@ -77,6 +78,17 @@ on_cancel (GtkWidget * btn, gpointer * data)
   }
   dl.result = DLG_RC_CANCEL;
   gtk_main_quit ();
+}
+
+static gint
+on_key_press (GtkWidget * entry, GdkEventKey * event, gpointer cancel)
+{
+  if (event->keyval == GDK_Escape)
+  {
+    on_cancel ((GtkWidget *) cancel, (gpointer) ((long) DLG_RC_CANCEL));
+    return (TRUE);
+  }
+  return (FALSE);
 }
 
 /*
@@ -211,6 +223,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.combo)->entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_CANCEL));
+  gtk_signal_connect (GTK_OBJECT (dl.top), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
   gtk_widget_grab_default (ok);
   gtk_widget_grab_focus (GTK_COMBO (dl.combo)->entry);
 
