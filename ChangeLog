@@ -1,3 +1,16 @@
+2001-10-27  xfce
+
+	* acconfig.h, config.h.in, configure, configure.in, xfwm/xfwm.c:
+	Put back StasheventTime
+
+2001-10-26  xfce
+
+	* xfwm/: builtins.c, events.c: Small tweaks
+
+2001-10-26  xfce
+
+	* ChangeLog, xfce-3.8.9.lsm: Update ChangeLog
+
 2001-10-25  xfce
 
 	* xfwm/: builtins.c, menus.c: Fix a problem with some apps not
