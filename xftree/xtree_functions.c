@@ -432,7 +432,6 @@ static gboolean set_icon_pix(icon_pix *pix,entry *en) {
 	      }
  	      else if (audio_type(loc)) {
 		           pix->pixmap=gPIX[PIX_PAGE_AUDIO];
-	                   pix->pixmask=gPIM[PIM_PAGE_AUDIO];
 	      }
    	      else if (packed_type(loc)) pix->pixmap=gPIX[PIX_TAR];
       }

@@ -1,0 +1,1 @@
+xftree handles 64 bit file sizes in freebsd4.4+ naturally. To enable this option in linux kernels 2.4+, compile with  -D_FILE_OFFSET_BITS=64
