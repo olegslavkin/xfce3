@@ -267,20 +267,23 @@ reg_build_list (char *file)
 	  prg->arg = g_strdup (p);
       }
       /* check for coherent values */
+      /* only if  DISPLAY is :0.0 to avoid false removes from remotes*/
       /* if it is a directory register, does the directory exist? */
-      if (*(prg->sfx)=='/'){
+      if (strcmp(getenv("DISPLAY"),":0.0")==0) {
+       if (*(prg->sfx)=='/'){
 	      struct stat s;
 	      if (stat(prg->sfx,&s)<0)       {
 	         fprintf (stderr, "xftree:removing %s from xtree.reg\n",prg->sfx);
 		 reg_free_reg (prg);
 		 continue;
 	      }
-      }
-      /* does the application exist? glob the path */
-      if (!sane(prg->app)){
+       }
+       /* does the application exist? glob the path */
+       if (!sane(prg->app)){
           fprintf (stderr, "xftree:removing %s application from xtree.reg\n",prg->app);
 	  reg_free_reg (prg);
 	  continue;      
+       }
       }
       g_reg = g_list_append (g_reg, prg);
     }
