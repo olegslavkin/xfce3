@@ -254,7 +254,7 @@ AddWindow (Window w)
     {
       Desk = atoi (rm_value.addr);
       Desk = ((Desk > 0) ? Desk - 1 : 0);
-      tflag |= STARTSONDESK_FLAG;
+      tflag |= STARTONDESK_FLAG;
     }
     XrmDestroyDatabase (db);
     db = NULL;

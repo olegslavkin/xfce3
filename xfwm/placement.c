@@ -201,7 +201,7 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
 
   /* Select a desk to put the window on (in list of priority):
    * 1. Sticky Windows stay on the current desk.
-   * 2. Windows specified with StartsOnDesk go where specified
+   * 2. Windows specified with StartOnDesk go where specified
    * 3. Put it on the desk it was on before the restart.
    * 4. Transients go on the same desk as their parents.
    * 5. Window groups stay together (completely untested)
@@ -209,7 +209,7 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
   tmp_win->Desk = Scr.CurrentDesk;
   if (tflag & STICKY_FLAG)
     tmp_win->Desk = Scr.CurrentDesk;
-  else if (tflag & STARTSONDESK_FLAG)
+  else if (tflag & STARTONDESK_FLAG)
     tmp_win->Desk = Desk;
   else
   {

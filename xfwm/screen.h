@@ -157,7 +157,7 @@ struct functions
 #define NOTITLE_FLAG              (1L<<9)
 #define NOBORDER_FLAG             (1L<<10)
 #define ICON_FLAG                 (1L<<11)
-#define STARTSONDESK_FLAG         (1L<<12)
+#define STARTONDESK_FLAG          (1L<<12)
 #define BW_FLAG                   (1L<<13)
 #define FORE_COLOR_FLAG           (1L<<14)
 #define BACK_COLOR_FLAG           (1L<<15)

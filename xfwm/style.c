@@ -243,13 +243,13 @@ ProcessNewStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 	restofline += 11;
 	off_flags |= START_ICONIC_FLAG;
       }
-      else if (mystrncasecmp (restofline, "staysonbottom", 13) == 0)
+      else if (mystrncasecmp (restofline, "stayonbottom", 13) == 0)
       {
 	/* This one is kept for backward compatibility */
 	restofline += 13;
 	layer = 0;
       }
-      else if (mystrncasecmp (restofline, "staysontop", 10) == 0)
+      else if (mystrncasecmp (restofline, "stayontop", 10) == 0)
       {
 	/* This one is kept for backward compatibility */
 	restofline += 10;
@@ -260,10 +260,10 @@ ProcessNewStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long 
 	off_flags |= STICKY_FLAG;
 	restofline += 6;
       }
-      else if (mystrncasecmp (restofline, "startsondesk", 12) == 0)
+      else if (mystrncasecmp (restofline, "startondesk", 12) == 0)
       {
 	restofline += 12;
-	off_flags |= STARTSONDESK_FLAG;
+	off_flags |= STARTONDESK_FLAG;
 	sscanf (restofline, "%d", &desknumber);
 	while (isspace (*restofline))
 	  restofline++;
@@ -424,7 +424,7 @@ LookInStyleList (char *name, XClassHint * class, char **value, int *Desk, int *b
       {
 	if (nptr->value != NULL)
 	  *value = nptr->value;
-	if (nptr->off_flags & STARTSONDESK_FLAG)
+	if (nptr->off_flags & STARTONDESK_FLAG)
 	  *Desk = ((nptr->Desk > 0) ? nptr->Desk - 1 : 0);
 	if (nptr->off_flags & BW_FLAG)
 	  *border_width = nptr->border_width;
@@ -444,7 +444,7 @@ LookInStyleList (char *name, XClassHint * class, char **value, int *Desk, int *b
       {
 	if (nptr->value != NULL)
 	  *value = nptr->value;
-	if (nptr->off_flags & STARTSONDESK_FLAG)
+	if (nptr->off_flags & STARTONDESK_FLAG)
 	  *Desk = ((nptr->Desk > 0) ? nptr->Desk - 1 : 0);
 	if (nptr->off_flags & FORE_COLOR_FLAG)
 	  *forecolor = nptr->ForeColor;
@@ -464,7 +464,7 @@ LookInStyleList (char *name, XClassHint * class, char **value, int *Desk, int *b
     {
       if (nptr->value != NULL)
 	*value = nptr->value;
-      if (nptr->off_flags & STARTSONDESK_FLAG)
+      if (nptr->off_flags & STARTONDESK_FLAG)
 	*Desk = ((nptr->Desk > 0) ? nptr->Desk - 1 : 0);
       if (nptr->off_flags & FORE_COLOR_FLAG)
 	*forecolor = nptr->ForeColor;
