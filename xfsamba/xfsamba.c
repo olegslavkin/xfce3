@@ -22,6 +22,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <unistd.h>
 #include <stdarg.h>
 #include <signal.h>
@@ -29,14 +33,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <gtk/gtk.h>
 #include <glob.h>
 #include <time.h>
 #include <gdk/gdkkeysyms.h>
-
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
 
 #ifndef HAVE_SNPRINTF
 #include "snprintf.h"

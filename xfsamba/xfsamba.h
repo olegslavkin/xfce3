@@ -4,6 +4,7 @@
 
 /********** defines ***************/
 
+#include <sys/types.h>
 #ifndef XFSAMBA_VERSION
 #define XFSAMBA_VERSION "0.37"
 #endif
