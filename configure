@@ -5470,7 +5470,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 #
 INSTALL_SCRIPT='${INSTALL}'
 
-ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN"
+ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv uk zh zh_CN zh_TW.Big5"
 # Extract the first word of "ranlib", so it can be a program name with args.
 set dummy ranlib; ac_word=$2
 echo $ac_n "checking for $ac_word""... $ac_c" 1>&6

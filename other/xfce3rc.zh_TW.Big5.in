@@ -1,36 +1,36 @@
 # XFce 3 Configuration File - Do not edit
 [Coords]
-	-1
-	-1
+        -1
+        -1
 [ButtonLabels]
-	One
-	Two
-	Three
-	Four
-	Five
-	Six
-	Seven
-	Eight
-	Nine
-	Ten
+	一
+	二
+	三
+	四
+	五
+	六
+	七
+	八
+	九
+	十
 [External_Icons]
 	XFCE_DIR/icons/FolderDeposit.xpm
 	XFCE_DIR/icons/FileAPP.xpm
 	XFCE_DIR/icons/CheckMarkMonitor.xpm
 	XFCE_DIR/icons/Interface.xpm
-	XFCE_DIR/icons/NetscapeLogo.xpm
-	XFCE_DIR/icons/Printer.xpm
+	XFCE_DIR/icons/Netscape3.xpm
+	XFCE_DIR/icons/Xterm.xpm
 	XFCE_DIR/icons/Info.xpm
 	XFCE_DIR/icons/RecycleLogo.xpm
 	None
-	XFCE_DIR/icons/3dpaint.xpm
+	XFCE_DIR/icons/Xmix.xpm
 	XFCE_DIR/icons/TrueDie.xpm
 	None
-	None
+	XFCE_DIR/icons/Gimp2.xpm
 [Popups]
 	8
 [Icons]
-	99,99,99,4,99,99,99,99,8,99,99,11,7
+	5,1,7,4,99,99,99,99,8,99,99,11,99
 [WorkSpace]
 	NoRepaint
 	Solid
@@ -52,7 +52,7 @@
 	-*-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-big5-0
 	-*-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-big5-0
 	MapFocus
-	Linea_engine
+	Xfce_engine
 [Screens]
 	4
 [Tooltips]
@@ -66,125 +66,131 @@
 [Commands]
 	xftree
 	xfrun
-	xfterm
+	gedit
 	xfmouse -i
 	netscape
-	xfprint
+	rxvt
 	xfhelp
 	xftrash
 	None
-	xv
+	xmms
 	None
 	None
-	abiword
+	gimp
 [Menu1]
-	XFClock
+	時鐘
 	XFCE_DIR/icons/Clock.xpm
 	xfclock
-	XFTree
+	文件管理器
 	XFCE_DIR/icons/FileManager.xpm
 	xftree
-	SMB Browser...
+	SMB 瀏覽器...
 	XFCE_DIR/icons/FileAPP.xpm
 	xfsamba
-	File search...
+	文件查找...
 	XFCE_DIR/icons/MagnifyGlas.xpm
 	xfglob
-	Mount CDROM
+	安裝光盤
 	XFCE_DIR/icons/ColoredCompactDisc.xpm
 	xfmountdev /mnt/cdrom
-	Mount floppy
+	安裝軟盤
 	XFCE_DIR/icons/DiskFloppy.xpm
 	xfmountdev /mnt/floppy
-	Run...
+	運行...
 	XFCE_DIR/icons/FileAPP.xpm
 	xfrun
 [Menu2]
-	Calculator
+	計算器
 	XFCE_DIR/icons/OldBlueAddingMachine.xpm
 	xcalc
-	Editres
+	資源編輯器
 	XFCE_DIR/icons/X_server.xpm
 	editres
-        Diff tool (xfdiff)
-        XFCE_DIR/icons/ForwardBackwardPagesBook.xpm
-        xfdiff
-	Magnify
+	比較工具(xfdiff)
+	XFCE_DIR/icons/ForwardBackwardPagesBook.xpm
+	xfdiff
+	放大鏡
 	XFCE_DIR/icons/MagnifyGlas.xpm
 	xmag
-	Debugger
+	調試器
 	XFCE_DIR/icons/BulletHole.xpm
 	xxgdb
-	GNU Emacs
-	XFCE_DIR/icons/Edit.xpm
-	emacs
-	GNOME Panel
+	GNOME 面板
 	XFCE_DIR/icons/Gnome-panel.xpm
 	panel
 [Menu3]
-	X-Terminal
-	XFCE_DIR/icons/CheckMarkMonitor.xpm
-	xfterm
-	X-Edit
+	AbiWord 字處理
+	XFCE_DIR/icons/Pen.xpm
+	abiword
+	X-編輯器
 	XFCE_DIR/icons/Document.xpm
 	xedit
-	Vi
+	Vi 編輯器
 	XFCE_DIR/icons/Keys.xpm
-	Term vi
+	gvim
+	Emacs 編輯器
+	XFCE_DIR/icons/Edit.xpm
+	emacs
+	GEdit 編輯器
+	XFCE_DIR/icons/Book.xpm
+	gedit
 [Menu4]
-	XFPager
+	桌面管理器
 	XFCE_DIR/icons/RayTracedGear.xpm
 	Module xfpager
-	XFMouse
+	鼠標設置
 	XFCE_DIR/icons/Mouse.xpm
 	xfmouse -i
-	XFSound
+	聲音設置
 	XFCE_DIR/icons/MicroPhonePro.xpm
 	xfsound -i
-	Backdrop
+	打印機
+	XFCE_DIR/icons/Printer.xpm
+	xfprint
+	桌面背景
 	XFCE_DIR/icons/MaelstromInFrame.xpm
 	xfbd -i
 	XFGnome
 	XFCE_DIR/icons/Gnome-logo.xpm
 	Module xfgnome
-	Gfx. Configuration
+	Gfx. 設置
 	XFCE_DIR/icons/BWwidgets.xpm
 	imlib_config
-	Screensaver Opt.
-	XFCE_DIR/icons/KeysOnChain.xpm
-	xscreensaver-demo
 [Menu5]
-	Netscape Browser
+	Netscape 瀏覽器
 	XFCE_DIR/icons/Netscape3.xpm
 	netscape
-	Netscape Mail
+	Netscape 郵件
 	XFCE_DIR/icons/News.xpm
 	netscape -mail
 [Menu6]
-	Printer
-	XFCE_DIR/icons/Printer.xpm
-	xfprint
+	終端
+	XFCE_DIR/icons/Terminal.xpm
+	xfterm
 [Menu7]
-	AbiWord
-	XFCE_DIR/icons/Pen.xpm
-	abiword
-	Nedit
-	XFCE_DIR/icons/Book.xpm
-	nedit
+	GIMP 圖像處理
+	XFCE_DIR/icons/GIMP.xpm
+	gimp
+	XV 圖像工具
+	XFCE_DIR/icons/XV.xpm
+	xv
+	畫圖
+	XFCE_DIR/icons/3dpaint.xpm
+	xpaint
 [Menu8]
-	Trash
+	回收站
 	XFCE_DIR/icons/RecycleLogo.xpm
 	xftrash
 [Menu9]
+	屏幕保護
+	XFCE_DIR/icons/KeysOnChain.xpm
+	xscreensaver-demo
 [Menu10]
-	Gimp
-	XFCE_DIR/icons/GIMP.xpm
-	gimp
-	XV
-	XFCE_DIR/icons/XV.xpm
-	xv
-	X-Paint
-	XFCE_DIR/icons/3dpaint.xpm
-	xpaint
+	調音台
+	XFCE_DIR/icons/Xmix.xpm
+	xmixer
+	多媒體播放器
+	XFCE_DIR/icons/Xmix.xpm
+	xmms
 [Menu11]
 [Menu12]

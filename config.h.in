@@ -158,6 +158,12 @@
 /* Define if you have the waitpid function.  */
 #undef HAVE_WAITPID
 
+/* Define if you have the <X11/Xft/Xft.h> header file.  */
+#undef HAVE_X11_XFT_XFT_H
+
+/* Define if you have the <X11/extensions/Xinerama.h> header file.  */
+#undef HAVE_X11_EXTENSIONS_XINERAMA_H
+
 /* Define if you have the <argz.h> header file.  */
 #undef HAVE_ARGZ_H
 
@@ -197,6 +203,9 @@
 /* Define if you have the <nl_types.h> header file.  */
 #undef HAVE_NL_TYPES_H
 
+/* Define if you have the <stdlib.h> header file.  */
+#undef HAVE_STDLIB_H
+
 /* Define if you have the <string.h> header file.  */
 #undef HAVE_STRING_H
 
@@ -212,23 +221,23 @@
 /* Define if you have the <sys/soundcard.h> header file.  */
 #undef HAVE_SYS_SOUNDCARD_H
 
+/* Define if you have the <sys/stat.h> header file.  */
+#undef HAVE_SYS_STAT_H
+
+/* Define if you have the <sys/types.h> header file.  */
+#undef HAVE_SYS_TYPES_H
+
 /* Define if you have the <unistd.h> header file.  */
 #undef HAVE_UNISTD_H
 
 /* Define if you have the <values.h> header file.  */
 #undef HAVE_VALUES_H
 
-/* Define if you have the <X11/extensions/Xinerama.h> header file.  */
-#undef HAVE_X11_EXTENSIONS_XINERAMA_H
-
-/* Define if you have the <X11/Xft/Xft.h> header file.  */
-#undef HAVE_X11_XFT_XFT_H
+/* Define if you have the Xpm library (-lXpm).  */
+#undef HAVE_LIBXPM
 
 /* Define if you have the i library (-li).  */
 #undef HAVE_LIBI
-
-/* Define if you have the Xpm library (-lXpm).  */
-#undef HAVE_LIBXPM
 
 /* Name of package */
 #undef PACKAGE
