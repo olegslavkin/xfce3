@@ -1,13 +1,32 @@
+- Use the conventional Xpasteboard and provide compatibility with
+  other file managers and programs for cut+paste (also for the
+  future rsync option). Perhaps still use the private file for
+  distinguising copies from moves from rsyncs
+- Create a linked list of "cut paths", "copied paths" so as to change
+  the icons if the paths happen to be in the way of an update_tree. also,
+  the changing of the X pasteboard should cause a update_tree (because of
+  the icon story).i.e., changing the Xpastboard caused an update of the
+  linked lists cut/copy, which in turn, when changed, causes an update_tree
+  event.
+- add rsync by d+d between two xftrees running on two different
+  hosts, but on the same X display
+- Enable "open with" from the innards of tar files. This implies extracting
+  to /tmp first, then calling cb_open_with. It requires cleanup of temporary
+  files on exit of xftree (all), and thus requires capture of sigint,
+  sigsegv, sigkill, sigusr and any other that causes program termination.
+  create global push_tmp_file(char *path), clean_tmp_files(gboolean verbose),
+  and on extracting to a temp file, don't lose the extension so registered 
+  programs will keep working.
+- Enable .deb expansion. (I need a debian box to do the testing first).
+- Figure out Prasad's bug in solaris.
 - Add code necesary to d+d files to/from xfsamba. 
   (most of this happens in xfsamba).
-- gtk-2
 - add an application to open a gdk_pixmap canvas to paint thumbtack
   previews of all .jpg, .png, .gif, .xpm in selected directory.
   This should be separate code from xftree, like xfglob.
+- gtk-2
 
 Maybe (only if repeatedly requested):
-- The pasteboard should communicate to other application via the normal
-  X pasteboard.
 - add "save user shortcutkeys" to config options:
     (does gtk store the custom values in the associated accel?
     if so, how do you retrieve the values?)
@@ -16,7 +35,7 @@ Maybe (only if repeatedly requested):
 
 BUGS to fix:
 - dialogs should open in the same screen as the xftree window
-  when dealing with xinerama.
+  when dealing with xinerama, or atleast center located.
 
 ****************************************************************
 ****************************************************************
