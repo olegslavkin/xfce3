@@ -274,23 +274,25 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   fprintf (stderr, "xfwm : RevertFocus () : Entering routine\n");
 #endif
 
-  XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
-  if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &Win) == XCNOENT)
+  if (fallback_to_itself)
   {
-    Win = NULL;
-  }
-  if ((Win) && (Win != Tmp_win) && AcceptInput(Win))
-  {
+    XQueryPointer (dpy, Scr.Root, &JunkRoot, &mw, &JunkX, &JunkY, &JunkX, &JunkY, &JunkMask);
+    if (XFindContext (dpy, mw, XfwmContext, (caddr_t *) &Win) == XCNOENT)
+    {
+      Win = NULL;
+    }
+    if ((Win) && (Win != Tmp_win) && AcceptInput(Win))
+    {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
+      fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
 #endif
-    SetFocus (Win->w, Win, True, False);
+      SetFocus (Win->w, Win, True, False);
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
+      fprintf (stderr, "xfwm : RevertFocus () : Leaving routine\n");
 #endif
-    return;
+      return;
+    }
   }
-
   Win = Tmp_win->next;
   while (Win && !(AcceptInput(Win) && !(Win->flags & ICONIFIED) && (Tmp_win->Desk == Win->Desk)))
   {
@@ -352,6 +354,12 @@ Destroy (XfwmWindow * Tmp_win)
 #endif
     return;
   }
+
+  /* Remove contexts */
+  XDeleteContext (dpy, Tmp_win->w, XfwmContext);
+  XDeleteContext (dpy, Tmp_win->Parent, XfwmContext);
+  XDeleteContext (dpy, Tmp_win->frame, XfwmContext);
+
   if (Tmp_win->prev != NULL)
     Tmp_win->prev->next = Tmp_win->next;
   if (Tmp_win->next != NULL)
@@ -393,18 +401,15 @@ Destroy (XfwmWindow * Tmp_win)
     colormap_win = NULL;
   }
 
-  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
-
-  XDeleteContext (dpy, Tmp_win->w, XfwmContext);
-  XDeleteContext (dpy, Tmp_win->Parent, XfwmContext);
-  XDeleteContext (dpy, Tmp_win->frame, XfwmContext);
-  XUnmapWindow (dpy, Tmp_win->frame);
-  XSync (dpy, 0);
-
   if (Scr.Focus == Tmp_win)
   {
     RevertFocus (Tmp_win, False);
   }
+
+  XUnmapWindow (dpy, Tmp_win->frame);
+  XSync (dpy, 0);
+
+  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
 
   if ((Tmp_win->icon_w) && (Tmp_win->flags & PIXMAP_OURS))
 #ifdef HAVE_IMLIB

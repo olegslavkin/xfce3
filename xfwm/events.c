@@ -828,7 +828,6 @@ HandleDestroyNotify ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering DestroyNotify ()\n");
 #endif
-  MyXGrabServer (dpy);
   if (Tmp_win)
   {
 #ifdef DEBUG
@@ -837,7 +836,6 @@ HandleDestroyNotify ()
     Destroy (Tmp_win);
     Tmp_win = NULL;
   }
-  MyXUngrabServer (dpy);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleDestroyNotify ()\n");
 #endif
@@ -1082,12 +1080,12 @@ HandleUnmapNotify ()
     return;
   }
 
-  MyXGrabServer (dpy);
   if (!XCheckTypedWindowEvent (dpy, Event.xunmap.window, DestroyNotify, &dummy) && XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin))
   {
     XEvent ev;
     Bool reparented;
 
+    MyXGrabServer (dpy);
     reparented = XCheckTypedWindowEvent (dpy, Event.xunmap.window, ReparentNotify, &ev);
     SetMapStateProp (Tmp_win, WithdrawnState);
     if (reparented)
@@ -1103,11 +1101,11 @@ HandleUnmapNotify ()
     }
     XRemoveFromSaveSet (dpy, Event.xunmap.window);
     XSelectInput (dpy, Event.xunmap.window, NoEventMask);
+    XSync (dpy, 0);
+    MyXUngrabServer (dpy);
   }
   Destroy (Tmp_win);
   Tmp_win = NULL;
-  XSync (dpy, 0);
-  MyXUngrabServer (dpy);
   fast_process_expose ();
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
