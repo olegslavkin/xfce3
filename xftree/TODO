@@ -5,7 +5,8 @@ structure as if it wasn't packed. Makes it very easy to copy and move content
 from these files straight to where you want it.
 18- different type icons for different documents and configurable icon sizes.
 
-
+fix: The pasteboard should also communicate to other application via the normal
+ X pasteboard.
 bug (cb_exec): 
 Gtk-WARNING **: invalid cast from `GtkScrolledWindow' to `GtkWindow'
 the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_questonl)
