@@ -31,6 +31,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <netdb.h>
 #include <stdarg.h>
 #include <utime.h>
 #include <stdlib.h>
@@ -98,6 +99,32 @@
 
 static void update_status(GtkCTreeNode * node,GtkCTree * ctree);
 static int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
+
+/* Return our complete host name, unconditionally 
+ * (Credit for this routine is to Thomas Leonard
+ *  from the rox-filer)*/
+char *our_host_name(void)
+{
+ static char *name = NULL;
+ if (!name){
+	char buffer[4096];
+	if (gethostname(buffer, 4096) == 0)
+	{
+	  /* gethostname doesn't always return the full name... */
+	  struct hostent *ent;
+	  buffer[4095] = '\0';
+	  ent = gethostbyname(buffer);
+	  name = g_strdup(ent ? ent->h_name : buffer);
+	}
+	else
+	{
+	  g_warning("gethostname() failed - using localhost\n");
+	  name = g_strdup("localhost");
+	}
+ }
+ return name;
+}
+
 /*
  * check if a node is a directory and is visible and expanded
  * will be called for every node
@@ -769,35 +796,31 @@ set_title (GtkWidget * w, const char *path)
 void
 set_title_ctree (GtkWidget * ctree, const char *path)
 {
-  char *title;
+  char *title,*hostname;
   cfg *win;
+  
+  hostname=our_host_name();
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  title = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+  title = (char *)malloc((strlen("XFTree: ")+strlen(hostname)+strlen(path)+1)*sizeof(char));
   if (win->iconname) g_free(win->iconname);
-  win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(path)+1)*sizeof(char));
+  win->iconname = (char *)malloc((strlen("XFTree: ")+strlen(hostname)+strlen(path)+1)*sizeof(char));
   if (!title || !win->iconname) return; 
   
   
   if (win->preferences&SHORT_TITLES) {
 	  char *word;
 	  word = strrchr (path,'/');
+          if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
+            sprintf(win->iconname,"~%s",path+strlen(getenv ("HOME")));
+          } else sprintf (win->iconname, "%s", path);
 	  if (word) sprintf(title,"%s",(word[1]==0)?word:word+1);
 	  else  sprintf(title,"XFTree");	  
-          gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
   }
   else {
-  	/*printf("%s==%s\n",path,getenv ("HOME"));*/
-  	if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
-	  sprintf(title,"~%s",path+strlen(getenv ("HOME")));
-  	} else {
-		sprintf (title, "%s", path);
-  	}	  
-  	gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
+	sprintf (title, "//%s%s",hostname,path); 
+        strcpy (win->iconname,title);
   }
-  /*printf("%s==%s\n",path,getenv ("HOME"));*/
-  if (strncmp(path,getenv ("HOME"),strlen(getenv ("HOME")))==0){	  
-    sprintf(win->iconname,"~%s",path+strlen(getenv ("HOME")));
-  } else sprintf (win->iconname, "%s", path);
+  gtk_window_set_title (GTK_WINDOW (gtk_widget_get_toplevel (win->top)), title);
   gdk_window_set_icon_name (gtk_widget_get_toplevel (GTK_WIDGET (ctree))->window, 
 		  win->iconname);
   free(title);

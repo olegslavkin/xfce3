@@ -382,8 +382,8 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 			 if (s_en->st.st_dev != t_stat.st_dev) same_device=FALSE;
 			 
 			 nitems++;
-			 fprintf(tmpfile,"%d:%s:%s\n",u->type,s_en->path,target);
-			 /*fprintf(stderr,"dbg:%d:%s:%s\n",u->type,s_en->path,target);*/
+			 fprintf(tmpfile,"%d\t%s\t%s\n",u->type,s_en->path,target);
+			 /*fprintf(stderr,"dbg:%d\t%s\t%s\n",u->type,s_en->path,target);*/
 			 fflush(NULL);
 			 break;
 	} 
@@ -648,16 +648,16 @@ static void ChildTransfer(void){
 	child_path_number=0;
 	while (!feof(tfile)&&fgets(line,MAX_LINE_SIZE-1,tfile)){
 		line[MAX_LINE_SIZE-1]=0;
-		type=atoi(strtok(line,":"));
+		type=atoi(strtok(line,"\t"));
 		source=strtok(NULL,"\n");
-		target=strrchr(source,':')+1;
-		*(strrchr(source,':'))=0;
+		target=strrchr(source,'\t')+1;
+		*(strrchr(source,'\t'))=0;
 		switch (type) {
 		  case URI_LOCAL:
 		  case URI_FILE:
-			/*source=strtok(NULL,":");target=strtok(NULL,"\n");*/
+			/*source=strtok(NULL,"\t");target=strtok(NULL,"\n");*/
 			/*fprintf(stderr,"dbg:(%d)%s->%s\n",type,source,target);*/
-			fprintf(stdout,"child:tgt-src:%s:%s\n",target,source);
+			fprintf(stdout,"child:tgt-src:%s\t%s\n",target,source);
 			fprintf(stdout,"child:item:%d\n",child_path_number++);
 			if (!SubChildTransfer(target,source)) goto cut_out;
 			break;
@@ -685,6 +685,8 @@ static GtkWidget *count_label;
 static gboolean count_cancelled;
 static GtkWidget *countW=NULL;
 
+static int countT;
+
 static int SubParentCount(char *source){
 	struct stat s_stat;
 	int i,count;
@@ -698,33 +700,30 @@ static int SubParentCount(char *source){
 		if (!globstring) return FALSE; /* fatal error */
 		sprintf(globstring,"%s/*",source);
 		/* glob source dir */
+		{
+		 char count_txt[32];
+		 sprintf(count_txt,"%d",countT);
+		 if (!count_cancelled) gtk_label_set_text (GTK_LABEL (count_label),count_txt );
+		 while (gtk_events_pending()) gtk_main_iteration();
+ 			 gdk_flush();
+		}
 		if (glob (globstring, GLOB_ERR | GLOB_TILDE | GLOB_PERIOD, 
 					NULL, &dirlist) != 0) {
 			return 0;
 		}
   		else {
-		 char *count_txt = NULL;
 		 count = 0;
-		 count_txt=(char *)malloc(strlen(source)+strlen(" --> ")+32);
-		 if (count_txt != NULL) {
-			 char *short_txt;
-			 if (strstr(source,"/")==NULL) short_txt=source;
-			 else short_txt=strrchr(source,'/')+1;
-			 if (*short_txt==0) short_txt=source;
-			 sprintf(count_txt,"%s --> %d",short_txt,count);
-			 if (!count_cancelled) gtk_label_set_text (GTK_LABEL (count_label),count_txt );
-			 g_free(count_txt);
-			 while (gtk_events_pending()) gtk_main_iteration();
- 			 gdk_flush();
-		 }
+		 countT += (dirlist.gl_pathc-3);
 		 for (i = 0; i < dirlist.gl_pathc; i++) {
-	          if (count_cancelled) return 0;
 		  if (strstr(dirlist.gl_pathv[i],"/")) src=strrchr(dirlist.gl_pathv[i],'/')+1;
 		  else src = dirlist.gl_pathv[i];
 		  if ((strcmp(src,".")==0)||(strcmp(src,"..")==0)) continue;
+		  if (count_cancelled) {globfree(&dirlist); return 0; }
 		  count += SubParentCount(dirlist.gl_pathv[i]);
+		  	  
 		  /*fprintf(stdout,"dbg:%s --> %d\n",dirlist.gl_pathv[i],count);*/
 		 }
+		 globfree(&dirlist);
 		}
 		g_free(globstring);		
 		return count;		
@@ -737,7 +736,7 @@ static gint ParentCount(gpointer data){
 	FILE *tfile;
 	char *line,*source;
 	int type;
-	total_files=0;
+	countT=total_files=0;
 	line=(char *)malloc(MAX_LINE_SIZE);
 	if (!line) goto count_done; 
 	tfile=fopen(child_file,"r");
@@ -747,11 +746,14 @@ static gint ParentCount(gpointer data){
 	}
 	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile) && !count_cancelled){
 		/*fprintf(stderr,"dbg:%s\n",line);*/
-		type=atoi(strtok(line,":"));
-		source=strtok(NULL,":");
-		if ((type == URI_LOCAL)||(type == URI_FILE))
+		type=atoi(strtok(line,"\t"));
+		source=strtok(NULL,"\t");
+		if ((type == URI_LOCAL)||(type == URI_FILE)){
+			if (count_cancelled) goto count_done; 
 			total_files += SubParentCount(source);
+		}
 		else total_files++;
+		
 		/*fprintf(stdout,"dbg:%s --> %d\n",source,total_files);*/
 	}
 	fclose(tfile);
@@ -766,8 +768,14 @@ static void cb_count_destroy(GtkWidget *widget,gpointer data){
 	count_cancelled=TRUE; /* for user destruction */
 	countW=NULL;
 }
+static void cb_count_cancel(GtkWidget *widget,gpointer data){
+	count_cancelled=TRUE; /* for user destruction */
+	gtk_widget_destroy(countW);
+	countW=NULL;
+}
 
 static void count_window(GtkWidget *parent){
+	GtkWidget *cancel;
   countW=gtk_dialog_new ();
   
   gtk_window_position (GTK_WINDOW (countW), GTK_WIN_POS_MOUSE);
@@ -776,9 +784,14 @@ static void count_window(GtkWidget *parent){
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->vbox), count_label, TRUE, TRUE, 3);
   
   count_label = gtk_label_new ( ".........................................");
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->action_area), count_label, TRUE, TRUE, 3);
-  gtk_widget_show(count_label);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->vbox), count_label, TRUE, TRUE, 3);
+
+  cancel=gtk_button_new_with_label(_("Cancel"));
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->action_area), cancel, FALSE, FALSE, 3);
+  gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (cb_count_cancel), NULL);
+  
   gtk_widget_realize (countW);
+  
   if (preferences&SMALL_DIALOGS) gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER);
   if (parent) gtk_window_set_transient_for (GTK_WINDOW (countW), GTK_WINDOW (parent)); 
   gtk_signal_connect (GTK_OBJECT (countW), "destroy", GTK_SIGNAL_FUNC (cb_count_destroy), NULL);
@@ -859,10 +872,10 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	i=0;
 	while (!feof(tfile)&&fgets(line,MAX_LINE_SIZE-1,tfile)){
 		line[MAX_LINE_SIZE-1]=0;
-		type=atoi(strtok(line,":"));
+		type=atoi(strtok(line,"\t"));
 		source=strtok(NULL,"\n");
-		target=strrchr(source,':')+1;
-		*(strrchr(source,':'))=0;
+		target=strrchr(source,'\t')+1;
+		*(strrchr(source,'\t'))=0;
 		lstat(source,&st);
 		if (S_ISLNK(st.st_mode)) {
 	  	  char *src_lnk;
@@ -1065,7 +1078,7 @@ static int rwStdout (int n, void *data){
 	char *src,*tgt;
   	strtok(line,":");
   	strtok(NULL,":");
-	tgt=strtok(NULL,":");
+	tgt=strtok(NULL,"\t");
 	src=strtok(NULL,"\n");
         if (tgt && src) set_show_cpy(tgt,src);
 	return TRUE;
@@ -1241,7 +1254,7 @@ GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode)
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (cat)->action_area), cancel, TRUE, FALSE, 0);
   gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (cb_cancel),NULL);
 
-  gtk_widget_set_usize(cat,300,150);
+  gtk_widget_realize(cat);  
   gtk_widget_show_all (cat);
 
   if (mode == TR_COPY)      tit = _("XFTree: Copy");	  
@@ -1256,8 +1269,6 @@ GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode)
   }
 
   
-  gtk_widget_show (cat);
-  gtk_widget_realize(cat);  
   /*gdk_flush();*/
   gtk_window_set_modal (GTK_WINDOW (cat), TRUE);
   if (parent) gtk_window_set_transient_for (GTK_WINDOW (cat), GTK_WINDOW (parent));

@@ -50,10 +50,10 @@ void ctree_thaw (GtkCTree * ctree);
 void ctree_freeze (GtkCTree * ctree);
 void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags);
 
-void set_title (GtkWidget * w, const char *path);
+/*void set_title (GtkWidget * w, const char *path);*/
 void set_title_ctree (GtkWidget * w, const char *path);
 gint update_timer (GtkCTree * ctree);
 void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
-
+char *our_host_name(void);
 void reset_icon(GtkCTree * ctree, GtkCTreeNode * node);
 #endif

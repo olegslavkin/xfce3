@@ -161,7 +161,8 @@ io_system (char **argv,GtkWidget *parent)
     } else _exit (127);
 
     /* second fork instead of using /bin/sh,
-     * this enables error processing */
+     * this enables error processing 
+     * (sometimes, at least :-0*/
     if (fork ()==0) { 
        /*printf("dbg:by direct...\n");*/
        if (execve (argv[0], argv, environ) == -1) {

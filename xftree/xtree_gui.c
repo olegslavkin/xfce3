@@ -307,7 +307,30 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
     cursor_wait (GTK_WIDGET (ctree));
     chdir (up->path);
     if (en->type & FT_EXE) { /*io_can_exec (en->path)) */
-      if (mod_mask & GDK_MOD1_MASK){
+      /* here let's do a check if its a script file 
+       * and if it is, then runit in a terminal window.*/
+      char *cmd;
+      FILE *pipe;
+      gboolean doterminal=FALSE;
+      cmd=(char *)malloc(strlen("file \"xx\"")+strlen(en->path)+1);
+      if (cmd) {	
+         sprintf (cmd, "file \"%s\"",en->path);
+         pipe = popen (cmd, "r");
+       	 if (pipe)
+  	 {
+  	  char *p,line[LINE_MAX+1];
+  	  fgets (line, LINE_MAX, pipe);
+  	  line[LINE_MAX] = 0;
+   	  pclose (pipe);
+  	  if ((p = strstr (line, ": ")) != NULL){
+   	   p += 2;
+	   if (strstr(p,"script")) doterminal=TRUE;
+   	  }
+ 	 }
+	 g_free(cmd);
+      }
+	    
+      if (doterminal || (mod_mask & GDK_MOD1_MASK)){
 	argv[0]=TERMINAL;
 	argv[1]="-e";
 	argv[2]=en->path;
@@ -345,8 +368,8 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
 }
     
 /*
- * start the marked program on double click
- */
+ * set drag set for ctree
+ *  */
 gboolean was_double_click=FALSE;
 static gint
 on_button_release (GtkWidget * ctree, GdkEventButton * event, void *menu){
@@ -364,7 +387,9 @@ on_button_release (GtkWidget * ctree, GdkEventButton * event, void *menu){
   return 1;
 }
 
-	
+/* 
+ * start the marked program on double click 
+ * */
 static gint
 on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
 {

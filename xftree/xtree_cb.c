@@ -498,11 +498,11 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
       }
       if ((result == DLG_RC_ALL)||(result ==DLG_RC_OK)){ 
 	    if (zap) {
-                    fprintf(tmpfile,"%lu:%s:%s/%s\n",(long unsigned)node,
+                    fprintf(tmpfile,"%lu\t%s\t%s/%s\n",(long unsigned)node,
 				    en->path,win->trash,en->label);
 		    zapitems++; 
 	    } else {
-                    fprintf(movefile,"%d:%s:%s/%s\n",TR_MOVE,
+                    fprintf(movefile,"%d\t%s\t%s/%s\n",TR_MOVE,
 				    en->path,win->trash,en->label);
 		    moveitems++;
 	    }
@@ -528,10 +528,10 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     }
     while (!feof(tmpfile)&&fgets(line,255,tmpfile)){
 	    char *w,*word;
-	    word=strtok(line,":"); if (!word) continue;
+	    word=strtok(line,"\t"); if (!word) continue;
 	    word=strtok(NULL,"\n"); if (!word) continue;
   	/*printf("dbg:w:%s\n",word);fflush(NULL);*/
-	    w=strrchr(word,':'); if (!w) continue; else *w=0;
+	    w=strrchr(word,'\t'); if (!w) continue; else *w=0;
   	/*printf("dbg:w:%s\n",word);fflush(NULL);*/
 	    delete_files ((GtkWidget *)ctree,word);
     }
@@ -1169,7 +1169,8 @@ void cb_rox (GtkWidget * top,GtkWidget * ctree){
   en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
   /*sprintf (cmd, "%s %s","xfrox",en->path);*/
   argv[0]="rox";
-  argv[1]=en->path;
+  /*argv[1]=en->path;*/
+  argv[1]=valid_path((GtkCTree *)ctree,FALSE);
   argv[2]=0;
   io_system (argv,win->top);
 
