@@ -3,6 +3,7 @@
 EXTRA_DIST = $(conffiles_DATA) $(sysfiles_DATA) *.in
  
 CLEANFILES = \
+ COPYING \
  xfbdrc \
  xfce3rc \
  xfce3rc.cs \
