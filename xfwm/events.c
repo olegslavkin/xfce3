@@ -109,9 +109,7 @@ XfwmWindow *ButtonWindow;	/* button press window structure */
 XEvent Event;			/* the current event */
 XfwmWindow *Tmp_win;		/* the current xfwm window */
 
-int last_event_type = 0;
-Window last_event_window = 0;
-volatile int alarmed;
+static int alarmed;
 static int old_x_root = 0;
 static int old_y_root = 0;
 #ifdef REQUIRES_STASHEVENT
@@ -236,6 +234,22 @@ int discard_events(long event_mask)
   return count;
 }
 
+int discard_window_events(Window w, long event_mask)
+{
+  XEvent e;
+  int count;
+
+  XSync(dpy, 0);
+  for (count = 0; XCheckWindowEvent(dpy, w, event_mask, &e); count++)
+  {
+#ifdef REQUIRES_STASHEVENT
+    StashEventTime(&e);
+#endif
+  }
+
+  return count;
+}
+
 void
 InitEventHandlerJumpTable (void)
 {
@@ -263,7 +277,6 @@ InitEventHandlerJumpTable (void)
   EventHandlerJumpTable[VisibilityNotify] = HandleVisibilityNotify;
   EventHandlerJumpTable[ColormapNotify] = HandleColormapNotify;
   EventHandlerJumpTable[MotionNotify] = HandleMotionNotify;
-  EventHandlerJumpTable[ReparentNotify] = HandleReparentNotify;
   if (ShapesSupported)
     EventHandlerJumpTable[ShapeEventBase + ShapeNotify] = HandleShapeNotify;
 }
@@ -286,9 +299,6 @@ DispatchEvent ()
   {
     Tmp_win = NULL;
   }
-  last_event_type = Event.type;
-  last_event_window = w;
-
   if (EventHandlerJumpTable[Event.type])
     (*EventHandlerJumpTable[Event.type]) ();
 
@@ -307,7 +317,6 @@ HandleEvents ()
 {
   while (!runlevel)
   {
-    last_event_type = 0;
     if (My_XNextEvent (dpy, &Event))
     {
       DispatchEvent ();
@@ -350,13 +359,13 @@ GetContext (XfwmWindow * t, XEvent * e, Window * w)
   {
     if (*w == t->title_w)
       Context = C_TITLE;
-    if ((*w == t->w) || (*w == t->Parent))
+    if (*w == t->w)
       Context = C_WINDOW;
     if (*w == t->icon_w)
       Context = C_ICON;
     if (*w == t->icon_pixmap_w)
       Context = C_ICON;
-    if (*w == t->frame)
+    if ((*w == t->frame) || (*w == t->Parent))
       Context = C_SIDEBAR;
     for (i = 0; i < 4; i++)
       if (*w == t->corners[i])
@@ -836,21 +845,17 @@ HandleDestroyNotify ()
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering DestroyNotify ()\n");
 #endif
-  if (Event.xdestroywindow.event != Event.xdestroywindow.window)
+  if (!Tmp_win)
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : Leaving HandleDestroyNotify (): Event ignored\n");
+    fprintf (stderr, "xfwm : Leaving HandleDestroyNotify (): Tmp_win == NULL\n");
 #endif
     return;
   }
-
-  if (Tmp_win)
-  {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : HandleDestroyNotify (): Destroying %s\n", Tmp_win->name);
+  fprintf (stderr, "xfwm : HandleDestroyNotify (): Destroying %s\n", Tmp_win->name);
 #endif
-    Destroy (Tmp_win);
-  }
+  Destroy (Tmp_win);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleDestroyNotify ()\n");
 #endif
@@ -1021,11 +1026,9 @@ HandleMapNotify ()
 void
 HandleUnmapNotify ()
 {
-  int dstx, dsty;
-  Window dumwin;
+  Window w;
   XEvent dummy;
-  Bool weMustUnmap = False;
-  
+
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleUnmapNotify ()\n");
 #endif
@@ -1037,7 +1040,10 @@ HandleUnmapNotify ()
   }
 #endif
 
-  if ((!Tmp_win) || (Event.xunmap.event != Event.xunmap.window))
+  /*
+   * Don't ignore events as described below.
+   */
+  if ((Event.xunmap.event != Event.xunmap.window) && (Event.xunmap.event != Scr.Root || !Event.xunmap.send_event))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Event ignored\n");
@@ -1045,17 +1051,28 @@ HandleUnmapNotify ()
     return;
   }
 
-  if (weMustUnmap)
+  if ((Event.xunmap.event == Scr.Root) && Event.xunmap.send_event)
   {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : HandleUnmapNotify (): Unmapping window\n");
+    fprintf (stderr, "xfwm : HandleUnmapNotify (): ICCCM2 unmap request\n");
 #endif
-    XUnmapWindow (dpy, Event.xunmap.window);
+    Event.xany.window = Event.xunmap.window;
+    if (XFindContext (dpy, Event.xany.window, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT)
+    {
+#ifdef DEBUG
+      fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Tmp_win == NULL\n");
+#endif
+      return;
+    }
   }
 
+  if (!Tmp_win)
+  {
 #ifdef DEBUG
-  fprintf (stderr, "xfwm : HandleUnmapNotify (): About to unmap/destroy '%s'\n", Tmp_win->name);
+    fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Tmp_win == NULL\n");
 #endif
+    return;
+  }
 
   if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
   {
@@ -1064,20 +1081,31 @@ HandleUnmapNotify ()
 #endif
     return;
   }
-
-  if (!(XCheckTypedWindowEvent (dpy, Event.xunmap.window, DestroyNotify, &dummy)) &&
-      (XTranslateCoordinates (dpy, Event.xunmap.window, Scr.Root, 0, 0, &dstx, &dsty, &dumwin)))
+  w = Tmp_win->w;
+  if (Tmp_win->flags & ICONIFIED)
+  {
+    if (Tmp_win->icon_pixmap_w != None)
+      XUnmapWindow (dpy, Tmp_win->icon_pixmap_w);
+    if (Tmp_win->icon_w != None)
+      XUnmapWindow (dpy, Tmp_win->icon_w);
+  }
+  else
+  {
+    XUnmapWindow (dpy, Tmp_win->frame);
+  }
+  XSync (dpy, 0);
+  MyXGrabServer (dpy);
+  if (!XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
   {
     XEvent ev;
     Bool reparented;
-
-    MyXGrabServer (dpy);
-    reparented = XCheckTypedWindowEvent (dpy, Event.xunmap.window, ReparentNotify, &ev);
+    XSelectInput (dpy, w, NoEventMask);
     SetMapStateProp (Tmp_win, WithdrawnState);
+    reparented = XCheckTypedWindowEvent (dpy, w, ReparentNotify, &ev);
     if (reparented)
     {
       if (Tmp_win->old_bw)
-	XSetWindowBorderWidth (dpy, Event.xunmap.window, Tmp_win->old_bw);
+	XSetWindowBorderWidth (dpy, w, Tmp_win->old_bw);
       if ((!(Tmp_win->flags & SUPPRESSICON)) && (Tmp_win->wmhints && (Tmp_win->wmhints->flags & IconWindowHint)))
 	XUnmapWindow (dpy, Tmp_win->wmhints->icon_window);
     }
@@ -1085,41 +1113,14 @@ HandleUnmapNotify ()
     {
       RestoreWithdrawnLocation (Tmp_win, False);
     }
-    XRemoveFromSaveSet (dpy, Event.xunmap.window);
-    MyXUngrabServer (dpy);
+    XRemoveFromSaveSet (dpy, w);
   }
   Destroy (Tmp_win);
+  XSync (dpy, 0);
+  MyXUngrabServer (dpy);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif
-}
-
-/***********************************************************************
- *
- *  Procedure:
- *	HandleReparentNotify - ReparentNotify event handler
- *
- ************************************************************************/
-void HandleReparentNotify(void)
-{
-  if (!Tmp_win)
-    return;
-
-  if (Event.xreparent.parent == Scr.Root)
-  {
-    return;
-  }
-  if (Event.xreparent.parent != Tmp_win->frame)
-  {
-    SetMapStateProp(Tmp_win, WithdrawnState);
-    XRemoveFromSaveSet(dpy, Event.xreparent.window);
-    XSelectInput (dpy, Event.xreparent.window, NoEventMask);
-    discard_events(SubstructureRedirectMask | VisibilityChangeMask);
-    Destroy(Tmp_win);
-    Tmp_win = NULL;
-  }
-
-  return;
 }
 
 /***********************************************************************

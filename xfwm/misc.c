@@ -337,10 +337,13 @@ Destroy (XfwmWindow * tmp_win)
     return;
   }
 
-  /* Blocking events on application window */ 
-  XSelectInput (dpy, tmp_win->w, NoEventMask);
+  XDeleteContext (dpy, tmp_win->w,      XfwmContext);
+  XDeleteContext (dpy, tmp_win->Parent, XfwmContext);
+  XDeleteContext (dpy, tmp_win->frame,  XfwmContext);
   XSync (dpy, 0);
   
+  Broadcast (XFCE_M_DESTROY_WINDOW, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
+
   /* Removing window from internal window stack */
   if (tmp_win->prev != NULL)
     tmp_win->prev->next = tmp_win->next;
@@ -382,8 +385,6 @@ Destroy (XfwmWindow * tmp_win)
   {
     colormap_win = NULL;
   }
-
-  Broadcast (XFCE_M_DESTROY_WINDOW, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
 
   if (Scr.Focus == tmp_win)
   {
@@ -453,10 +454,6 @@ Destroy (XfwmWindow * tmp_win)
       tmp_win->corners[i] = None;
     }
   }
-#ifdef DEBUG
-  fprintf (stderr, "xfwm : Destroy () : Freeing data\n");
-#endif
-
   free_window_names (tmp_win, True, True);
   if (tmp_win->wmhints)
     XFree (tmp_win->wmhints);
@@ -466,18 +463,16 @@ Destroy (XfwmWindow * tmp_win)
     XFree (tmp_win->class.res_class);
   if (tmp_win->mwm_hints)
     XFree (tmp_win->mwm_hints);
-
   if (tmp_win->cmap_windows)
     XFree (tmp_win->cmap_windows);
-
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
 #endif
-  XDeleteContext (dpy, tmp_win->w,      XfwmContext);
-  XDeleteContext (dpy, tmp_win->Parent, XfwmContext);
-  XDeleteContext (dpy, tmp_win->frame,  XfwmContext);
   XDestroyWindow (dpy, tmp_win->frame);
   XSync (dpy, 0);
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : Destroy () : Freeing data\n");
+#endif
   free (tmp_win);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Leaving routine\n");
@@ -566,6 +561,7 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
     }
 
     XConfigureWindow (dpy, tmp->w, mask, &xwc);
+    XSync (dpy, 0);
   }
 }
 

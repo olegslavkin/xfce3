@@ -147,9 +147,6 @@ executeModule (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
   extern char *xfwm_file;
   Window win;
 
-  if (eventp->type != KeyPress)
-    UngrabEm ();
-
   if (action == NULL)
     return;
 

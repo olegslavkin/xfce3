@@ -103,7 +103,6 @@ void HandlePropertyNotify (void);
 void HandleKeyPress (void);
 void HandleVisibilityNotify (void);
 void HandleColormapNotify (void);
-void HandleReparentNotify (void);
 void RestoreWithdrawnLocation (XfwmWindow *, Bool);
 void Destroy (XfwmWindow *);
 XfwmWindow *AddWindow (Window w);

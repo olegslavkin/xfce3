@@ -560,8 +560,15 @@ main (int argc, char **argv)
 
   XSetErrorHandler ((XErrorHandler) CatchRedirectError);
   XSetIOErrorHandler ((XIOErrorHandler) CatchFatal);
-  XSelectInput (dpy, Scr.Root, LeaveWindowMask | EnterWindowMask | PropertyChangeMask | SubstructureRedirectMask | KeyPressMask | KeyReleaseMask | SubstructureNotifyMask | PointerMotionMask |	/* AutoDeskSwitch */
-		ButtonPressMask | ButtonReleaseMask);
+  XSelectInput (dpy, Scr.Root, LeaveWindowMask | 
+                               EnterWindowMask | 
+			       PropertyChangeMask | 
+			       SubstructureRedirectMask | 
+			       SubstructureNotifyMask | 
+			       KeyPressMask | KeyReleaseMask | 
+			       PointerMotionMask |	/* AutoDeskSwitch */
+		               ButtonPressMask | ButtonReleaseMask | 
+			       ColormapChangeMask);
   XSync (dpy, 0);
   XSetErrorHandler ((XErrorHandler) XfwmErrorHandler);
   BlackoutScreen ();		/* if they want to hide the capture/startup */
@@ -2138,14 +2145,13 @@ CatchFatal (Display * dpy)
 static XErrorHandler
 XfwmErrorHandler (Display * dpy, XErrorEvent * event)
 {
-  extern int last_event_type;
   char buf[64];
 
 #ifdef DEBUG
   fprintf (stderr, "XfwmErrorHandler (): Entering routine\n");
 #else
   /* some errors are acceptable, mostly they're caused by
-   * trying to update a lost  window */
+   * trying to update a lost window */
   if ((event->error_code == BadWindow) || (event->request_code == X_GetGeometry) || (event->error_code == BadDrawable) || (event->request_code == X_SetInputFocus) || (event->request_code == X_GrabButton) || (event->request_code == X_ChangeWindowAttributes) || (event->request_code == X_InstallColormap))
     return 0;
 #endif
@@ -2153,7 +2159,7 @@ XfwmErrorHandler (Display * dpy, XErrorEvent * event)
   XGetErrorText (dpy, event->error_code, buf, 63);
   xfwm_msg (ERR, "XfwmErrorHandler", "*** internal error ***");
   xfwm_msg (ERR, "XfwmErrorHandler", "%s", buf);
-  xfwm_msg (ERR, "XfwmErrorHandler", "Request %d, Error %d, EventType: %d", event->request_code, event->error_code, last_event_type);
+  xfwm_msg (ERR, "XfwmErrorHandler", "Request %d, Error %d", event->request_code, event->error_code);
 #ifdef DEBUG
   fprintf (stderr, "XfwmErrorHandler (): Leaving routine\n");
 #endif
