@@ -1,5 +1,5 @@
 /* xfsamba.h: header file for xfsamba modules.
- * copyright 2001 Edscott Wilson Garcia under GNU/GPL
+ * copyright 2001-2002 Edscott Wilson Garcia under GNU/GPL
  * */
 
 /********** defines ***************/
@@ -9,7 +9,7 @@
 #include "../xfdiff/xfdiff_colorsel.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.44"
+#define XFSAMBA_VERSION "0.45"
 #endif
 
 #ifdef XFSAMBA_MAIN
@@ -201,6 +201,7 @@ void pop_cache (nmb_cache * cache);
 void smoke_nmb_cache (nmb_cache * fromC);
 nmb_cache *clean_cache (nmb_cache * cache);
 nmb_cache *push_nmb_cache (nmb_cache * headC, char **textos);
+nmb_cache *push_nmb_cacheF (nmb_cache * headC, char **textos);
 
 void smoke_history (nmb_history * fromH);
 nmb_history *push_nmb_history (nmb_list * record);

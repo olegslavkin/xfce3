@@ -731,12 +731,15 @@ cb_tar (GtkWidget * widget, GtkWidget *ctree)
 extern GtkCTreeNode *DropNode;
 
 char **get_select_share(GtkCTree * ctree, GList * node){
-  static char *line[3];
+  static char *line[SHARE_COLUMNS];
   smb_entry *en;
+  int i;
+  for (i=0;i<SHARE_COLUMNS;i++) line[i]=NULL;
   if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) node, SHARE_NAME_COLUMN, line))
     return NULL;
   if (!gtk_ctree_node_get_text (ctree, (GtkCTreeNode *) node, COMMENT_COLUMN, line + 1))
     return NULL;
+  /*printf("dbg:%s\n%s\n",line[0],line[1]);*/
   selected.directory = selected.file = FALSE;
   if (selected.share) free (selected.share);
   selected.share = NULL;
@@ -929,7 +932,8 @@ select_share (GtkCTree * ctree, GList * node, gint column, gpointer user_data)
 #endif
     textos[0] = textos[1] = NULL;
     textos[2] = line[1];
-    push_nmb_cache (thisN->shares, textos);
+    push_nmb_cacheF (thisN->shares, textos);
+/*    push_nmb_cache (thisN->shares, textos);*/
     current_cache = NULL;
   }
 

@@ -211,6 +211,7 @@ push_nmb_cache (nmb_cache * headC, char **textos)
 	/*
 	   int j;       j=strlen(textos[i]-1);
 	 */
+	/*printf("dbg:textos[%d]=%s\n",i,textos[i]);*/
 	while (textos[i][strlen (textos[i]) - 1] == ' ')
 	  textos[i][strlen (textos[i]) - 1] = 0;
 	currentC->textos[i] = (char *) malloc (strlen (textos[i]) + 1);
@@ -228,6 +229,57 @@ push_nmb_cache (nmb_cache * headC, char **textos)
   else
     return currentC;
 }
+
+/* FIXME: uniformize with above function:
+ * this one uses a char ** of length 3 while
+ * the above uses a char ** of length SHARE_COLUMNS.
+ * Both functions are called from different parts
+ * of xfsamba. It does not look nice and should
+ * be fixed. */
+nmb_cache *
+push_nmb_cacheF (nmb_cache * headC, char **textos)
+{
+  nmb_cache *currentC;
+  currentC = headC;
+  if (!currentC)
+  {
+    currentC = (nmb_cache *) malloc (sizeof (nmb_cache));
+  }
+  else
+  {
+    while (currentC->next)
+      currentC = currentC->next;
+    currentC->next = (nmb_cache *) malloc (sizeof (nmb_cache));
+    currentC = currentC->next;
+  }
+  {
+    int i;
+    for (i = 0; i < 3; i++)
+    {
+      if (textos[i])
+      {
+	/*
+	   int j;       j=strlen(textos[i]-1);
+	 */
+	/*printf("dbg:textos[%d]=%s\n",i,textos[i]);*/
+	while (textos[i][strlen (textos[i]) - 1] == ' ')
+	  textos[i][strlen (textos[i]) - 1] = 0;
+	currentC->textos[i] = (char *) malloc (strlen (textos[i]) + 1);
+	strcpy (currentC->textos[i], textos[i]);
+      }
+      else
+	currentC->textos[i] = NULL;
+    }
+  }
+  currentC->visited = 0;
+  currentC->next = NULL;
+
+  if (headC)
+    return headC;
+  else
+    return currentC;
+}
+
 
 void
 smoke_history (nmb_history * fromH)
