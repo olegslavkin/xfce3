@@ -1258,7 +1258,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = x;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, ShadowGC, seg, i);
+      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
       i = 0;
       seg[i].x1 = x + 1;
       seg[i].y1 = y;
@@ -1289,7 +1289,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = w + x;
       seg[i++].y2 = y;
-      XDrawSegments (dpy, win, ShadowGC, seg, i);
+      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y + 1;
@@ -1379,7 +1379,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = y;
-      XDrawSegments (dpy, win, ShadowGC, seg, i);
+      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
       i = 0;
       seg[i].x1 = x + 1;
       seg[i].y1 = y + 1;
@@ -1430,7 +1430,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = y;
-      XDrawSegments (dpy, win, ShadowGC, seg, i);
+      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
 #ifndef OLD_STYLE
       i = 0;
       seg[i].x1 = x + w - t->boundary_width + 1;
@@ -1475,12 +1475,12 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = h + y - 1;
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = h + y - 1;
-      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-      i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
       seg[i].x2 = x;
       seg[i++].y2 = h + y - 1;
+      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
+      i = 0;
       seg[i].x1 = x + 2;
       seg[i].y1 = h + y - 2;
       seg[i].x2 = w + x;
@@ -1569,7 +1569,7 @@ RelieveHalfRectangle_xfce (Window win, XRectangle *area, int x, int y, int w, in
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  XDrawLine (dpy, win, ShadowGC, x, y, x, h + y);
+  XDrawLine (dpy, win, Scr.BlackGC, x, y, x, h + y);
   XDrawLine (dpy, win, ReliefGC, x + 1, y, x + 1, h + y);
 
   XDrawLine (dpy, win, ShadowGC, w + x - 2, y + (Top ? 1 : 0), w + x - 2, h + y);
@@ -1619,7 +1619,7 @@ DrawSelectedEntry_xfce (Window win, XRectangle *area, int x, int y, int w, int h
 void
 DrawTopMenu_xfce (Window win, XRectangle *area, int w, GC ReliefGC, GC ShadowGC)
 {
-  XDrawLine (dpy, win, ShadowGC, 0, 0, w - 2, 0);
+  XDrawLine (dpy, win, Scr.BlackGC, 0, 0, w - 2, 0);
   XDrawLine (dpy, win, ReliefGC, 1, 1, w - 3, 1);
 }
 
@@ -1657,7 +1657,7 @@ RelieveIconTitle_xfce (Window win, XRectangle *area, int w, int h, GC ReliefGC, 
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, Scr.BlackGC);
+  RelieveRectangle (win, NULL, 0, 0, w, h, Scr.BlackGC, Scr.BlackGC);
   RelieveRectangle (win, NULL, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
 
   if (area)
@@ -1678,7 +1678,7 @@ RelieveIconPixmap_xfce (Window win, XRectangle *area, int w, int h, GC ReliefGC,
     XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, Scr.BlackGC);
+  RelieveRectangle (win, NULL, 0, 0, w, h, Scr.BlackGC, Scr.BlackGC);
   RelieveRectangle (win, NULL, 1, 1, w - 2, h - 2, ReliefGC, ShadowGC);
 
   if (area)
