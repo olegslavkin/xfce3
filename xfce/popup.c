@@ -77,6 +77,7 @@ GtkWidget *
 create_popup_item (GtkWidget * toplevel, gint nbr_menu, gint nbr_item)
 {
   GtkWidget *hbox;
+  GtkWidget *label_frame;
 
   popup_menus[nbr_menu].popup_buttons[nbr_item].label = NULL;
   popup_menus[nbr_menu].popup_buttons[nbr_item].pixfile = NULL;
@@ -118,14 +119,22 @@ create_popup_item (GtkWidget * toplevel, gint nbr_menu, gint nbr_item)
   gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap);
   gtk_container_add (GTK_CONTAINER (popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap_frame), popup_menus[nbr_menu].popup_buttons[nbr_item].item_pixmap);
 
+  label_frame = gtk_frame_new (NULL);
+  gtk_widget_set_name (label_frame, "frame");
+  gtk_object_set_data (GTK_OBJECT (toplevel), "frame", label_frame);
+  gtk_widget_show (label_frame);
+  gtk_container_set_border_width (GTK_CONTAINER (label_frame), 2);
+  gtk_box_pack_start (GTK_BOX (hbox), label_frame, TRUE, TRUE, 0);
+  gtk_frame_set_shadow_type (GTK_FRAME (label_frame), GTK_SHADOW_NONE);
+
   popup_menus[nbr_menu].popup_buttons[nbr_item].item_label = gtk_label_new (popup_menus[nbr_menu].popup_buttons[nbr_item].label);
   gtk_widget_set_name (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label, "popup_label");
   gtk_object_set_data (GTK_OBJECT (toplevel), "popup_label", popup_menus[nbr_menu].popup_buttons[nbr_item].item_label);
   gtk_widget_show (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label);
-  gtk_box_pack_start (GTK_BOX (hbox), popup_menus[nbr_menu].popup_buttons[nbr_item].item_label, TRUE, TRUE, 0);
+  gtk_container_add (GTK_CONTAINER (label_frame), popup_menus[nbr_menu].popup_buttons[nbr_item].item_label);
   gtk_widget_set_usize (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label, 130, 0);
   gtk_label_set_justify (GTK_LABEL (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label), 0.1, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (popup_menus[nbr_menu].popup_buttons[nbr_item].item_label), 0.0, 0.5);
 
   gtk_drag_dest_set (popup_menus[nbr_menu].popup_buttons[nbr_item].item_button, GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP, popup_target_table, n_popup_targets, GDK_ACTION_COPY);
 
