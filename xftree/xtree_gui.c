@@ -2168,8 +2168,7 @@ cb_quit (GtkWidget * top,  GtkCTree * ctree)
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
   save_defaults(NULL);
-  gtk_widget_destroy (root);
-//  gtk_main_quit();
+  gtk_main_quit();
 }
 	
 
