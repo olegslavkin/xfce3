@@ -1633,6 +1633,7 @@ SetMenuFont (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     free (font);
     return;
   }
+  
   if (Scr.StdFont.fontset)
   {				/* Temporarily, set FontStruct for calculating. */
     XFontStruct **fs_list = NULL;
@@ -1768,6 +1769,7 @@ LoadIconFont (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
     free (font);
     return;
   }
+  
   if (Scr.IconFont.fontset)
   {				/* Temporarily, set FontStruct for calculating. */
     XFontStruct **fs_list = NULL;
@@ -1779,7 +1781,6 @@ LoadIconFont (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
       if (Scr.IconFont.font->ascent < fs_list[i]->ascent)
 	Scr.IconFont.font->ascent = fs_list[i]->ascent;
   }
-
 #ifdef HAVE_X11_XFT_XFT_H
   else if ((enable_xft) && (Scr.IconFont.xftfont))
   {
@@ -1853,7 +1854,6 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
     free (font);
     return;
   }
-
 
   if (fl->WindowFont.fontset)
   {				/* Temporarily, set FontStruct for calculating. */
