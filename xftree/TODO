@@ -40,6 +40,8 @@ the bug is in dlg_execute (2 bug in gtk_dlg.c. also the dlg_question and dlg_que
 ****************************************************************
 ****************************************************************
 done:
+gtk_dlg.c memory leak in entry_edit and combo fixed.
+
 19- much more configurable (file open actons ...)
 21- Config table for toolbar icons (both large and small)
 20- Config option: fonts
