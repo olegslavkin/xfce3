@@ -351,13 +351,15 @@ void
 cb_new_window (GtkWidget * widget, GtkCTree * ctree)
 {
   int num;
+  gboolean new_win;
   GList *selection = NULL;
   GtkCTreeNode *node;
   entry *en = NULL;
   cfg *win;
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-
+  new_win = FALSE;
+  
   num = count_selection (ctree, &node);
   if (num)
   {
@@ -369,16 +371,24 @@ cb_new_window (GtkWidget * widget, GtkCTree * ctree)
       {
 	continue;
       }
+      new_win = TRUE;
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
       new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
     }
+    g_list_free (selection);
   }
-  else
+  if (!new_win)
   {
-    en = gtk_ctree_node_get_row_data (ctree, node);
-    new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
+    if (num)
+    {
+      node = GTK_CTREE_ROW (node)->parent;
+    }
+    if (node)
+    {
+      en = gtk_ctree_node_get_row_data (ctree, node);
+      new_top (uri_clear_path (en->path), win->xap, win->trash, win->reg, win->width, win->height, en->flags);
+    }
   }
-  g_list_free (selection);
 }
 
 /*
