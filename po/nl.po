@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFce 3.8.14\n"
-"POT-Creation-Date: 2002-01-17 10:33+0100\n"
+"POT-Creation-Date: 2002-01-18 20:16+0100\n"
 "PO-Revision-Date: 2001-12-11 21:44GMT\n"
 "Last-Translator: Jasper Huijsmans <j.b.huijsmans@freeler.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -88,13 +88,13 @@ msgstr "Bladeren ..."
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:160 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1179 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:160 xftree/gtk_prop.c:201
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_prop.c:201
 #: xftree/xtree_cpy.c:1131 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Annuleren"
@@ -182,12 +182,12 @@ msgid "Subprocess diagnostic"
 msgstr "Subproces diagnose"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:854
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:855
 msgid "Clear"
 msgstr "Wissen"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:859
+#: xftree/xtree_mess.c:860
 msgid "Dismiss"
 msgstr "Sluiten"
 
@@ -811,34 +811,33 @@ msgstr "_Alles"
 msgid "_Close"
 msgstr "_Sluiten"
 
-#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:188
+#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:188
 msgid "Open with ..."
 msgstr "Openen met ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:142 xftree/xtree_gui.c:202
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:202
 #: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr "Programma uitvoeren ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:146
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:189 xftree/xtree_gui.c:146
 msgid "Open in terminal"
 msgstr "Openen in terminal"
 
-#: xftree/gtk_exec.c:192
+#: xftree/gtk_exec.c:193
 msgid "Remember application"
 msgstr "Toepassing onthouden"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:211
+#: xftree/gtk_exec.c:212
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Fatale fout in %s op %d\n"
 
-#: xftree/gtk_get.c:95
-#, c-format
-msgid "child:bytes:%d bytes received (%d bps)"
-msgstr "kind:bytes:%d bytes ontvangen (%d bps)"
+#: xftree/gtk_get.c:96
+msgid " bytes received"
+msgstr " bytes ontvangen"
 
 #: xftree/gtk_prop.c:191 xftree/xtree_toolbar.c:106
 msgid "Properties"
@@ -925,13 +924,13 @@ msgid "Owner"
 msgstr "Eigenaar"
 
 #: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
-#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:834
-#: xftree/xtree_functions.c:836 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:841
+#: xftree/xtree_functions.c:843 xftree/xtree_go.c:180 xftree/xtree_go.c:181
 #: xftree/xtree_gui.c:1308 xftree/xtree_gui.c:1310
 msgid "unknown"
 msgstr "onbekend"
 
-#: xftree/reg.c:545 xftree/xtree_cb.c:692 xftree/xtree_cb.c:809
+#: xftree/reg.c:545 xftree/xtree_cb.c:688 xftree/xtree_cb.c:805
 #: xftree/xtree_cpy.c:1184
 msgid "This function is not available for the contents of tar files"
 msgstr "Deze functie is niet beschikbaar voor de inhoud van tar bestanden"
@@ -975,7 +974,7 @@ msgid "error deleting file"
 msgstr "fout bij verwijderen bestand"
 
 #. nothing to delete
-#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:767
+#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:763
 msgid "No files marked !"
 msgstr "Geen bestanden geselecteerd !"
 
@@ -1001,40 +1000,37 @@ msgstr ""
 "Olivier Fourdan\n"
 "Edscott Wilson Garcia\n"
 
-#: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
+#: xftree/xtree_cb.c:576 xftree/xtree_cb.c:587
 msgid "New_Folder"
 msgstr "Nieuwe_Map"
 
-#: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
-#, fuzzy
+#: xftree/xtree_cb.c:625 xftree/xtree_cb.c:633
 msgid "New_File"
-msgstr "Nieuwe_Map"
+msgstr "Nieuw_Bestand"
 
-#: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733
+#: xftree/xtree_cb.c:653 xftree/xtree_cb.c:729
 msgid "File exists !"
 msgstr "Bestand bestaat !"
 
-#: xftree/xtree_cb.c:686
+#: xftree/xtree_cb.c:682
 msgid "No item marked !"
 msgstr "Geen item gemarkeerd !"
 
-#: xftree/xtree_cb.c:702
+#: xftree/xtree_cb.c:698
 msgid "Rename to : "
 msgstr "Hernoemen naar : "
 
-#: xftree/xtree_cb.c:710
+#: xftree/xtree_cb.c:706
 msgid "Character not allowed in filename"
 msgstr "Karakter niet toegestaan in bestandsnaam"
 
-#: xftree/xtree_cb.c:794
-#, fuzzy
+#: xftree/xtree_cb.c:790
 msgid "Nothing selected !"
-msgstr "Geen map geselecteerd!"
+msgstr "Niets geselecteerd!"
 
-#: xftree/xtree_cb.c:1105
-#, fuzzy
+#: xftree/xtree_cb.c:1099
 msgid "Override?"
-msgstr "Overschrijven ?"
+msgstr "Overschrijven?"
 
 #: xftree/xtree_cpy.c:158
 msgid "Insufficient system memory"
@@ -1073,9 +1069,8 @@ msgid "Can't copy socket"
 msgstr "Kan SOCKET niet kopiëren"
 
 #: xftree/xtree_cpy.c:715
-#, fuzzy
 msgid "Counting files"
-msgstr "_Doorgaan"
+msgstr "Bestanden aan het tellen"
 
 #: xftree/xtree_cpy.c:1034
 #, c-format
@@ -1115,7 +1110,6 @@ msgid "Disk usage:"
 msgstr "Schijfgebruik"
 
 #: xftree/xtree_du.c:148
-#, fuzzy
 msgid "No directory selected !"
 msgstr "Geen map geselecteerd!"
 
@@ -1123,7 +1117,7 @@ msgstr "Geen map geselecteerd!"
 msgid "files"
 msgstr "bestanden"
 
-#: xftree/xtree_functions.c:494
+#: xftree/xtree_functions.c:495
 msgid "internal malloc error:"
 msgstr "interne malloc fout:"
 
@@ -1137,18 +1131,16 @@ msgid "Go to"
 msgstr "Ga naar"
 
 #: xftree/xtree_gui.c:145
-#, fuzzy
 msgid "Open in new"
-msgstr "Openen in terminal"
+msgstr "Openen in nieuw venster"
 
 #: xftree/xtree_gui.c:148 xftree/xtree_toolbar.c:104
 msgid "New Folder"
 msgstr "Nieuwe Map"
 
 #: xftree/xtree_gui.c:149
-#, fuzzy
 msgid "New file"
-msgstr "Volgend bestand"
+msgstr "Nieuw bestand"
 
 #: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:153
 #: xftree/xtree_toolbar.c:100
@@ -1204,9 +1196,8 @@ msgid "Empty Trash"
 msgstr "Prullenbak Legen"
 
 #: xftree/xtree_gui.c:179
-#, fuzzy
 msgid "Duplicate"
-msgstr "Datum"
+msgstr "Dupliceren"
 
 #: xftree/xtree_gui.c:180
 msgid "Rename ..."
@@ -1298,7 +1289,6 @@ msgid "Hide sizes"
 msgstr "Groottes verbergen"
 
 #: xftree/xtree_gui.c:227
-#, fuzzy
 msgid "Hide dates"
 msgstr "Datums verbergen"
 
@@ -1327,9 +1317,8 @@ msgid "Sort by file date"
 msgstr "Sorteren op datum"
 
 #: xftree/xtree_gui.c:464 xftree/xtree_gui.c:466
-#, fuzzy
 msgid "Create"
-msgstr "maken"
+msgstr "Maken"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
@@ -1437,7 +1426,6 @@ msgid "Group"
 msgstr "Groep"
 
 #: xftree/xtree_gui.c:1046
-#, fuzzy
 msgid "Filter:"
 msgstr "Filter:"
 
@@ -1450,28 +1438,28 @@ msgid "Show main menu"
 msgstr "Menubalk tonen"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:95
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:96
 msgid "Could not load specified font\n"
 msgstr "Kon opgegeven lettertype niet laden\n"
 
-#: xftree/xtree_mess.c:428
+#: xftree/xtree_mess.c:429
 msgid "Override ?"
 msgstr "Overschrijven ?"
 
-#: xftree/xtree_mess.c:429
+#: xftree/xtree_mess.c:430
 msgid "with"
 msgstr "met"
 
-#: xftree/xtree_mess.c:508 xftree/xtree_mess.c:509 xftree/xtree_mess.c:525
-#: xftree/xtree_mess.c:526
+#: xftree/xtree_mess.c:509 xftree/xtree_mess.c:510 xftree/xtree_mess.c:526
+#: xftree/xtree_mess.c:527
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Standaard xftreerc bestand kon niet gemaakt worden\n"
 
-#: xftree/xtree_mess.c:562
+#: xftree/xtree_mess.c:563
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Standaard xftreerc bestand kon niet gelezen worden\n"
 
-#: xftree/xtree_mess.c:756
+#: xftree/xtree_mess.c:757
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1481,7 +1469,7 @@ msgstr ""
 "Houdt de muis boven een menuoptie en type de gewenste\n"
 "toetscombinatie om een sneltoets te definiëren"
 
-#: xftree/xtree_mess.c:765
+#: xftree/xtree_mess.c:766
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1495,7 +1483,7 @@ msgstr ""
 "Bestaande registraties kunnen bewerkt worden in het bestand ~/.xfce/xftree."
 "reg."
 
-#: xftree/xtree_mess.c:774
+#: xftree/xtree_mess.c:775
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1513,15 +1501,15 @@ msgstr ""
 "worden in het Voorkeuren menu.\n"
 "Gebruik de middelste muisknop om meerdere bestanden te slepen.\n"
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:790
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr "Sneltoetsen zijn en snelle manier om menuopties te activieren."
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:833
 msgid "Xftree results"
 msgstr "Xftree resultaten"
 
-#: xftree/xtree_mess.c:1047
+#: xftree/xtree_mess.c:1048
 msgid "Home directory : "
 msgstr "Thuismap : "
 
@@ -1543,61 +1531,52 @@ msgid "New window"
 msgstr "Nieuw venster"
 
 #: xftree/xtree_toolbar.c:89
-#, fuzzy
 msgid "Terminal"
-msgstr "Beëindigd: "
+msgstr "Terminal"
 
 #: xftree/xtree_toolbar.c:91
-#, fuzzy
 msgid "Run ..."
-msgstr "Hernoemen ..."
+msgstr "Uitvoeren ..."
 
 #: xftree/xtree_toolbar.c:92
-#, fuzzy
 msgid "Update ..."
-msgstr "Vernieuwen"
+msgstr "Vernieuwen ..."
 
 #: xftree/xtree_toolbar.c:93
 msgid "Go back ..."
 msgstr "Teruggaan ..."
 
 #: xftree/xtree_toolbar.c:97
-#, fuzzy
 msgid "Cut ..."
-msgstr "Afsluiten ..."
+msgstr "Knippen ..."
 
 #: xftree/xtree_toolbar.c:98
-#, fuzzy
 msgid "Copy ..."
-msgstr "Stop ..."
+msgstr "Kopiëren ..."
 
 #: xftree/xtree_toolbar.c:99
-#, fuzzy
 msgid "Paste ..."
-msgstr "Opslaan ..."
+msgstr "Plakken ..."
 
 #: xftree/xtree_toolbar.c:105
 msgid "New file ..."
 msgstr "Nieuw bestand ..."
 
 #: xftree/xtree_toolbar.c:322
-#, fuzzy
 msgid "Action"
-msgstr "Acties"
+msgstr "Actie"
 
 #: xftree/xtree_toolbar.c:323
 msgid "Small icons. "
 msgstr "Kleine pictogrammen"
 
 #: xftree/xtree_toolbar.c:324
-#, fuzzy
 msgid "Large icons. "
-msgstr "&Pictogrammen ordenen"
+msgstr "Grote Pictogrammen"
 
 #: xftree/xtree_toolbar.c:327
-#, fuzzy
 msgid "Regen"
-msgstr "Reset"
+msgstr "Regenereren"
 
 #: xftree/xtree_toolbar.c:427
 msgid "Large buttons"
@@ -3675,6 +3654,9 @@ msgstr "Submenu"
 msgid "Separator"
 msgstr "Scheidingslijn"
 
+#~ msgid "child:bytes:%d bytes received (%d bps)"
+#~ msgstr "kind:bytes:%d bytes ontvangen (%d bps)"
+
 #~ msgid "Information"
 #~ msgstr "Informatie"
 
@@ -3692,9 +3674,6 @@ msgstr "Scheidingslijn"
 
 #~ msgid "Target : "
 #~ msgstr "Bestemming : "
-
-#~ msgid "0 bytes received"
-#~ msgstr "0 bytes ontvangen"
 
 #~ msgid "XFTree: Download"
 #~ msgstr "XFTree: Downloaden"
