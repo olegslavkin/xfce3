@@ -347,9 +347,9 @@ SaveWindowStates (FILE * f)
   {
     /*
      * Skip transient windows
-     */
     if ((tmp_win->flags & TRANSIENT) && (tmp_win->transientfor != tmp_win->w))
       continue;
+     */
 
     fprintf (f, "[CLIENT] %lx\n", tmp_win->w);
 
