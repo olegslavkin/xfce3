@@ -490,7 +490,7 @@ Destroy (XfwmWindow * tmp_win)
 void
 RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
 {
-  int a, b, w2, h2;
+  int a, b;
   unsigned int bw, mask;
   XWindowChanges xwc;
   /* Dummy var for XGetGeometry */
@@ -507,47 +507,10 @@ RestoreWithdrawnLocation (XfwmWindow * tmp, Bool restart)
     xwc.y = b;
     xwc.border_width = tmp->old_bw;
     mask = (CWX | CWY | CWBorderWidth);
-
-    /* We can not assume that the window is currently on the screen.
-     * Although this is normally the case, it is not always true.  The
-     * most common example is when the user does something in an
-     * application which will, after some amount of computational delay,
-     * cause the window to be unmapped, but then switches screens before
-     * this happens.  The XTranslateCoordinates call above will set the
-     * window coordinates to either be larger than the screen, or negative.
-     * This will result in the window being placed in odd, or even
-     * unviewable locations when the window is remapped.  The followin code
-     * forces the "relative" location to be within the bounds of the display.
-     *
-     * gpw -- 11/11/93
-     *
-     * Unfortunately, this does horrendous things during re-starts, 
-     * hence the "if(restart)" clause (RN) 
-     *
-     * Also, fixed so that it only does this stuff if a window is more than
-     * half off the screen. (RN)
-     */
-
     if (!restart)
     {
-      /* Don't mess with it if its partially on the screen now */
-      if ((tmp->frame_x < 0) || (tmp->frame_y < 0) || (tmp->frame_x >= Scr.MyDisplayWidth) || (tmp->frame_y >= Scr.MyDisplayHeight))
-      {
-	w2 = (tmp->frame_width >> 1);
-	h2 = (tmp->frame_height >> 1);
-	if ((xwc.x < -w2) || (xwc.x > (Scr.MyDisplayWidth - w2)))
-	{
-	  xwc.x = xwc.x % Scr.MyDisplayWidth;
-	  if (xwc.x < -w2)
-	    xwc.x += Scr.MyDisplayWidth;
-	}
-	if ((xwc.y < -h2) || (xwc.y > (Scr.MyDisplayHeight - h2)))
-	{
-	  xwc.y = xwc.y % Scr.MyDisplayHeight;
-	  if (xwc.y < -h2)
-	    xwc.y += Scr.MyDisplayHeight;
-	}
-      }
+	xwc.x -= tmp->old_bw;
+	xwc.y -= tmp->old_bw;
     }
     XReparentWindow (dpy, tmp->w, Scr.Root, xwc.x, xwc.y);
 
