@@ -634,11 +634,8 @@ DrawButton_xfce (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC R
 
   BackGC = ((Scr.Hilite == t) ? GetDecor (t, HiBackGC) : GetDecor (t, LoBackGC));
 
-#ifndef OLD_STYLE
-  XDrawLine (dpy, win, ShadowGC, 0, h - 1, w, h - 1);
-#endif
-
   flush_expose (win);
+
   switch (type)
   {
   case SimpleButton:
@@ -655,12 +652,9 @@ DrawButton_xfce (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC R
       if (w > h)
       {
 	XFillRectangle (dpy, win, BackGC, 0, 0, bounds.height / 2, bounds.height);
-
 	XFillArc (dpy, win, Scr.TransMaskGC, 0, 0, bounds.height, bounds.height - 1, 90 * 64, 180 * 64);
 	XFillRectangle (dpy, win, Scr.TransMaskGC, bounds.height / 2, 1, bounds.width - bounds.height, bounds.height - 1);
-
 	XFillRectangle (dpy, win, BackGC, bounds.width - (bounds.height / 2), 0, bounds.height / 2, bounds.height);
-
 	XFillArc (dpy, win, Scr.TransMaskGC, bounds.width - bounds.height - 1, 0, bounds.height, bounds.height - 1, 90 * 64, -180 * 64);
       }
       else
@@ -682,7 +676,9 @@ DrawButton_xfce (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC R
 
     if (inverted)
       RelieveRectangle (win, 0, 0, w - 1, h - 1, ShadowGC, ReliefGC);
-
+#ifndef OLD_STYLE
+    XDrawLine (dpy, win, ShadowGC, 0, h - 1, w - 1, h - 1);
+#endif
     break;
 
   case GradButton:
