@@ -1424,8 +1424,6 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y + 1;
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-      i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
       seg[i].x2 = w + x - 1;
@@ -1443,7 +1441,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = h + y - 2;
       seg[i].x2 = x + w - t->boundary_width + 1;
       seg[i++].y2 = h + y - 2;
-      XDrawSegments (dpy, win, BlGC, seg, i);
+      XDrawSegments (dpy, win, LoGC, seg, i);
       XDrawPoint (dpy, win, BlGC, x + w - t->boundary_width, y + h - 1);
 #endif
       break;
