@@ -246,7 +246,6 @@ static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
 long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *data, int type)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *all = NULL, *skip = NULL, *close = NULL, *icon = NULL, *combo = NULL, *label, *box, *button_box;
-  /*char title[DLG_MAX];*/
   char *longlabel = NULL;
   GdkPixmap *pix = NULL, *pim;
   GtkAccelGroup *accelgrp;
@@ -375,7 +374,8 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
 
   if (type & DLG_ENTRY_VIEW)
   {
-    dl.entry = gtk_entry_new_with_max_length (DLG_MAX);
+    dl.entry = gtk_entry_new ();
+    gtk_entry_set_max_length (dl.entry,DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     gtk_entry_set_editable (GTK_ENTRY (dl.entry), FALSE);
     /* do not uncomment the following line. Some versions
@@ -385,7 +385,8 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   else if (type & DLG_ENTRY_EDIT)
   {
     /*fprintf(stderr,"dbg2:labelval..%s\ndbg:defval..%s\n",labelval,defval);*/
-    dl.entry = gtk_entry_new_with_max_length (DLG_MAX);
+    dl.entry = gtk_entry_new ();
+    gtk_entry_set_max_length (dl.entry,DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
     GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
