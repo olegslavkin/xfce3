@@ -1,5 +1,17 @@
 2001-10-25  xfce
 
+	* xfwm/: builtins.c, menus.c, misc.h: Make use of discard_events ()
+	function to get rid of Enter/Lean notify events when unmapping
+	menus
+
+2001-10-25  edscott
+
+	* xfdiff/: Changelog, xfdiff.c, xfdiff.h, xfdiff_gui.c,
+	xfdiff_misc.c: modified the patch file parser to take some
+	nonunified format,   in particular, Mosix patches to the kernel.
+
+2001-10-25  xfce
+
 	* po/xfce.pot, xfwm/events.c: Really, nothing.
 
 2001-10-24  xfce
