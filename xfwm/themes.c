@@ -900,17 +900,29 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
 
       if (area)
       {
+	XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
+	XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
 	XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
 	XSetClipRectangles(dpy, Scr.TransMaskGC, 0, 0, area, 1, Unsorted);
       }
 
       if (w > h)
       {
-	XFillRectangle (dpy, win, BackGC, 0, 0, bounds.height / 2, bounds.height);
-	XFillArc (dpy, win, Scr.TransMaskGC, 0, 0, bounds.height, bounds.height - 1, 90 * 64, 180 * 64);
-	XFillRectangle (dpy, win, Scr.TransMaskGC, bounds.height / 2, 1, bounds.width - bounds.height, bounds.height - 1);
-	XFillRectangle (dpy, win, BackGC, bounds.width - (bounds.height / 2), 0, bounds.height / 2, bounds.height);
-	XFillArc (dpy, win, Scr.TransMaskGC, bounds.width - bounds.height - 1, 0, bounds.height, bounds.height - 1, 90 * 64, -180 * 64);
+#ifndef OLD_STYLE      
+	XFillRectangle (dpy, win, BackGC, 0, 0, h / 2, h - 1);
+        XDrawLine (dpy, win, ReliefGC, 0, h - 1, h / 2, h - 1);
+#else
+	XFillRectangle (dpy, win, BackGC, 0, 0, h / 2, h);
+#endif
+	XFillArc (dpy, win, Scr.TransMaskGC, 0, 0, h, h - 1, 90 * 64, 180 * 64);
+	XFillRectangle (dpy, win, Scr.TransMaskGC, h / 2, 1, w - h, h - 1);
+#ifndef OLD_STYLE
+	XFillRectangle (dpy, win, BackGC, w - (h / 2), 0, h / 2, h - 1);
+        XDrawLine (dpy, win, ReliefGC, w - (h / 2), h - 1, w, h - 1);
+#else
+	XFillRectangle (dpy, win, BackGC, w - (h / 2), 0, h / 2, h);
+#endif
+	XFillArc (dpy, win, Scr.TransMaskGC, w - h - 1, 0, h, h - 1, 90 * 64, -180 * 64);
       }
       else
 	XFillRectangle (dpy, win, Scr.TransMaskGC, 0, 0, w, h - 1);
@@ -938,15 +950,19 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
 
     if (inverted)
     {
-#ifndef OLD_STYLE
+#ifdef OLD_STYLE
+      RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, ReliefGC);
+#else
       RelieveRectangle (win, NULL, 1, 1, w - 2, h - 2, ShadowGC, ReliefGC);
       RelieveRectangle (win, NULL, 2, 2, w - 4, h - 4, Scr.BlackGC, ShadowGC);
-#else
-      RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, ReliefGC);
+    }
+    else
+    {
+      XDrawLine (dpy, win, ShadowGC, 0, h - 2, w - 1, h - 2);
 #endif
     }
 #ifndef OLD_STYLE
-    XDrawLine (dpy, win, ShadowGC, 0, h - 1, w - 1, h - 1);
+    XDrawLine (dpy, win, Scr.BlackGC, 0, h - 1, w - 1, h - 1);
 #endif
     break;
 
@@ -967,9 +983,13 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
 
 	if (w > h)
 	{
-	  XFillRectangle (dpy, win, BackGC, 0, 0, bounds.height / 2, bounds.height);
-
-	  XFillArc (dpy, win, Scr.TransMaskGC, 0, 0, bounds.height, bounds.height - 1, 90 * 64, 180 * 64);
+#ifndef OLD_STYLE
+	  XFillRectangle (dpy, win, BackGC, 0, 0, h / 2, h - 1);
+          XDrawLine (dpy, win, ReliefGC, 0, h - 1, h / 2, h - 1);
+#else	
+	  XFillRectangle (dpy, win, BackGC, 0, 0, h / 2, h);
+#endif
+	  XFillArc (dpy, win, Scr.TransMaskGC, 0, 0, h, h - 1, 90 * 64, 180 * 64);
 	}
 	while (i < bf->u.grad.npixels)
 	{
@@ -979,13 +999,19 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
 	}
 	if (w > h)
 	{
-	  XFillRectangle (dpy, win, BackGC, bounds.width - (bounds.height / 2), 0, bounds.height / 2, bounds.height);
-
-	  XFillArc (dpy, win, Scr.TransMaskGC, bounds.width - bounds.height - 1, 0, bounds.height, bounds.height - 1, 90 * 64, -180 * 64);
+#ifndef OLD_STYLE
+	  XFillRectangle (dpy, win, BackGC, w - (h / 2), 0, h / 2, h - 1);
+          XDrawLine (dpy, win, ReliefGC, w - (h / 2), h - 1, w, h - 1);
+#else
+	  XFillRectangle (dpy, win, BackGC, w - (h / 2), 0, h / 2, h);
+#endif
+	  XFillArc (dpy, win, Scr.TransMaskGC, w - h - 1, 0, h, h - 1, 90 * 64, -180 * 64);
 	}
 
 	if (area)
 	{
+	  XSetClipMask(dpy, ReliefGC, None);
+	  XSetClipMask(dpy, ShadowGC, None);
 	  XSetClipMask(dpy, BackGC, None);
 	  XSetClipMask(dpy, Scr.TransMaskGC, None);
 	}
@@ -1085,7 +1111,7 @@ SetTitleBar_xfce (XfwmWindow * t, XRectangle *area, Bool onoroff)
 #ifndef OLD_STYLE
   bf = &GetDecor (t, titlebar.state[title_state]);
   DrawButton_xfce (t, t->title_w, area, t->title_width, t->title_height - 1, bf, ShadowGC, ReliefGC, True, 0);
-  XDrawLine (dpy, t->title_w, ShadowGC, 0, t->title_height - 1, t->title_width, t->title_height - 1);
+  XDrawLine (dpy, t->title_w, Scr.BlackGC, 0, t->title_height - 1, t->title_width, t->title_height - 1);
 #else
   bf = &GetDecor (t, titlebar.state[title_state]);
   DrawButton_xfce (t, t->title_w, area, t->title_width, t->title_height, bf, ShadowGC, ReliefGC, True, 0);
@@ -1096,6 +1122,7 @@ SetTitleBar_xfce (XfwmWindow * t, XRectangle *area, Bool onoroff)
     XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, Scr.ScratchGC3, 0, 0, area, 1, Unsorted);
   }
 
@@ -1163,6 +1190,7 @@ SetTitleBar_xfce (XfwmWindow * t, XRectangle *area, Bool onoroff)
     XSetClipMask(dpy, ReliefGC, None);
     XSetClipMask(dpy, ShadowGC, None);
     XSetClipMask(dpy, BackGC, None);
+    XSetClipMask(dpy, Scr.BlackGC, None);
     XSetClipMask(dpy, Scr.ScratchGC3, None);
   }
 }
@@ -1173,7 +1201,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
   XSegment seg[10];
   GC BackGC = NULL;
 #ifndef OLD_STYLE
-  GC HiGC, LoGC;
+  GC HiGC, LoGC, BlGC;
 #endif
   int i;
   int edge;
@@ -1196,11 +1224,13 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
   {
     HiGC = ReliefGC;
     LoGC = ShadowGC;
+    BlGC = Scr.BlackGC;
   }
   else
   {
     HiGC = BackGC;
     LoGC = BackGC;
+    BlGC = BackGC;
   }
 #endif
 
@@ -1208,6 +1238,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
   {
     XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
   }
 
@@ -1218,7 +1249,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
     {
     case LEFT_HILITE:
 #ifndef OLD_STYLE
-      XFillRectangle (dpy, win, BackGC, x + 2, y, w - 3, h + y + 1);
+      XFillRectangle (dpy, win, BackGC, x + 2, y, w - 4, h + y + 1);
 #else
       XFillRectangle (dpy, win, BackGC, x + 2, y, w - 2, h + y + 1);
 #endif
@@ -1237,11 +1268,17 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
 
 #ifndef OLD_STYLE
       i = 0;
+      seg[i].x1 = x + w - 2;
+      seg[i].y1 = y;
+      seg[i].x2 = x + w - 2;
+      seg[i++].y2 = h + y;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      i = 0;
       seg[i].x1 = x + w - 1;
       seg[i].y1 = y;
       seg[i].x2 = x + w - 1;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
 #endif
       break;
 
@@ -1263,11 +1300,17 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
 
     case RIGHT_HILITE:
 #ifndef OLD_STYLE
-      XFillRectangle (dpy, win, BackGC, x + 1, y, w + x - 3, h + y + 1);
+      XFillRectangle (dpy, win, BackGC, x + 2, y, w + x - 4, h + y + 1);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
       seg[i].x2 = x;
+      seg[i++].y2 = h + y;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      i = 0;
+      seg[i].x1 = x + 1;
+      seg[i].y1 = y;
+      seg[i].x2 = x + 1;
       seg[i++].y2 = h + y;
       XDrawSegments (dpy, win, HiGC, seg, i);
 #else
@@ -1289,12 +1332,18 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
 
     case BOTTOM_HILITE:
 #ifndef OLD_STYLE
-      XFillRectangle (dpy, win, BackGC, x, y + 1, w + x + 1, h + y - 3);
+      XFillRectangle (dpy, win, BackGC, x, y + 2, w + x + 1, h + y - 4);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
       seg[i].x2 = w + x;
       seg[i++].y2 = y;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      i = 0;
+      seg[i].x1 = x;
+      seg[i].y1 = y + 1;
+      seg[i].x2 = w + x;
+      seg[i++].y2 = y + 1;
       XDrawSegments (dpy, win, HiGC, seg, i);
 #else
       XFillRectangle (dpy, win, BackGC, x, y, w + x + 1, h + y - 2);
@@ -1342,13 +1391,22 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i++].y2 = y + 1;
       XDrawSegments (dpy, win, ReliefGC, seg, i);
 #ifndef OLD_STYLE
-      XDrawPoint (dpy, win, LoGC, x + t->boundary_width - 1, y + h - 1);
+      i = 0;
+      seg[i].x1 = x + t->boundary_width - 2;
+      seg[i].y1 = h + y - 1;
+      seg[i].x2 = x + t->boundary_width - 2;
+      seg[i++].y2 = h + y - 2;
+      seg[i].x1 = x + t->boundary_width - 2;
+      seg[i].y1 = h + y - 2;
+      seg[i].x2 = x + t->boundary_width - 1;
+      seg[i++].y2 = h + y - 2;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawPoint (dpy, win, BlGC, x + t->boundary_width - 1, y + h - 1);
 #endif
       break;
 
     case 2:
       XFillRectangle (dpy, win, BackGC, x, y + 2, x + w - 2, y + h);
-      i = 0;
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y + 1;
@@ -1374,7 +1432,19 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i++].y2 = y;
       XDrawSegments (dpy, win, ShadowGC, seg, i);
 #ifndef OLD_STYLE
-      XDrawPoint (dpy, win, HiGC, x + w - t->boundary_width, y + h - 1);
+      i = 0;
+      seg[i].x1 = x + w - t->boundary_width;
+      seg[i].y1 = h + y - 2;
+      seg[i].x2 = x + w - t->boundary_width + 1;
+      seg[i++].y2 = h + y - 2;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      i = 0;
+      seg[i].x1 = x + w - t->boundary_width + 1;
+      seg[i].y1 = h + y - 1;
+      seg[i].x2 = x + w - t->boundary_width + 1;
+      seg[i++].y2 = h + y;
+      XDrawSegments (dpy, win, HiGC, seg, i);
+      XDrawPoint (dpy, win, BlGC, x + w - t->boundary_width, y + h - 1);
 #endif
       break;
 
@@ -1382,11 +1452,17 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       XFillRectangle (dpy, win, BackGC, x + 2, y, x + w, y + h - 2);
 #ifndef OLD_STYLE
       i = 0;
+      seg[i].x1 = x + t->boundary_width - 2;
+      seg[i].y1 = y + h - t->boundary_width + 1;
+      seg[i].x2 = x + w;
+      seg[i++].y2 = y + h - t->boundary_width + 1;
+      XDrawSegments (dpy, win, HiGC, seg, i);
+      i = 0;
       seg[i].x1 = x + t->boundary_width - 1;
       seg[i].y1 = y + h - t->boundary_width;
       seg[i].x2 = x + w;
       seg[i++].y2 = y + h - t->boundary_width;
-      XDrawSegments (dpy, win, HiGC, seg, i);
+      XDrawSegments (dpy, win, LoGC, seg, i);
 #endif
       i = 0;
       seg[i].x1 = x + 1;
@@ -1412,17 +1488,33 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       XDrawSegments (dpy, win, ShadowGC, seg, i);
 #ifndef OLD_STYLE
       i = 0;
+      seg[i].x1 = x + t->boundary_width - 2;
+      seg[i].y1 = y;
+      seg[i].x2 = x + t->boundary_width - 2;
+      seg[i++].y2 = h + y - t->boundary_width + 1;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      i = 0;
       seg[i].x1 = x + t->boundary_width - 1;
       seg[i].y1 = y;
       seg[i].x2 = x + t->boundary_width - 1;
       seg[i++].y2 = h + y - t->boundary_width - 1;
-      XDrawSegments (dpy, win, LoGC, seg, i);
+      XDrawSegments (dpy, win, BlGC, seg, i);
 #endif
       break;
 
     case 4:
       XFillRectangle (dpy, win, BackGC, x, y, x + w - 2, y + h - 2);
 #ifndef OLD_STYLE
+      i = 0;
+      seg[i].x1 = x;
+      seg[i].y1 = y + h - t->boundary_width + 1;
+      seg[i].x2 = x + w - t->boundary_width + 1;
+      seg[i++].y2 = y + h - t->boundary_width + 1;
+      seg[i].x1 = x + w - t->boundary_width + 1;
+      seg[i].y1 = y;
+      seg[i].x2 = x + w - t->boundary_width + 1;
+      seg[i++].y2 = y + h - t->boundary_width + 1;
+      XDrawSegments (dpy, win, HiGC, seg, i);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y + h - t->boundary_width;
@@ -1432,7 +1524,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
       seg[i].y1 = y;
       seg[i].x2 = x + w - t->boundary_width;
       seg[i++].y2 = y + h - t->boundary_width;
-      XDrawSegments (dpy, win, HiGC, seg, i);
+      XDrawSegments (dpy, win, LoGC, seg, i);
 #endif
       i = 0;
       seg[i].x1 = w + x - 1;
@@ -1462,6 +1554,7 @@ RelieveWindow_xfce (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
   {
     XSetClipMask(dpy, ReliefGC, None);
     XSetClipMask(dpy, ShadowGC, None);
+    XSetClipMask(dpy, Scr.BlackGC, None);
     XSetClipMask(dpy, BackGC, None);
   }
 }
