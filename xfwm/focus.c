@@ -69,6 +69,12 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering SetFocus ()\n");
 #endif
+  if ((Fw) && (Fw->flags & DoesWmTakeFocus))
+#ifdef REQUIRES_STASHEVENT
+    send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, lastTimestamp);
+#else
+    send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, CurrentTime);
+#endif
   if ((FocusByMouse) && (Fw) && (Fw != Scr.Focus) && (Fw != &Scr.XfwmRoot))
   {
     XfwmWindow *tmp_win1, *tmp_win2;
@@ -132,12 +138,6 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
   Scr.Focus = Fw;
   Scr.UnknownWinFocused = None;
 
-  if ((Fw) && (Fw->flags & DoesWmTakeFocus))
-#ifdef REQUIRES_STASHEVENT
-    send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, lastTimestamp);
-#else
-    send_clientmessage (dpy, w, _XA_WM_TAKE_FOCUS, CurrentTime);
-#endif
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
 #endif

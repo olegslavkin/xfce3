@@ -280,6 +280,9 @@ FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
   }
 
   SetFocus (t->w, t, 1);
+
+  /* Make sure UngrabEm () won't return focus to previous window ! */
+  Scr.PreviousFocus = NULL;
 }
 
 
@@ -2605,8 +2608,6 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
       break;
     }
   }
-  UninstallRootColormap ();
-  UngrabEm ();
   if (taskw != None)
   {
     XDeleteContext (dpy, taskw, MenuContext);
@@ -2630,6 +2631,8 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     /* Focus on window and deiconify if necessary */
     FocusOn (t, TRUE);
   }
+  UninstallRootColormap ();
+  UngrabEm ();
 }
 
 void
