@@ -369,7 +369,7 @@ Shade (XfwmWindow * tmp_win)
   tmp_win->shade_height = tmp_win->title_height + 2 * tmp_win->boundary_width;
 
   SetupFrame (tmp_win, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, True, True);
-  SetBorder (tmp_win, (Scr.Hilite == tmp_win), True, True, None);
+  SetBorder (tmp_win, NULL, (Scr.Hilite == tmp_win), True, True, None);
   Broadcast (XFCE_M_SHADE, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
 }
 
@@ -395,7 +395,7 @@ Unshade (XfwmWindow * tmp_win)
     RaiseWindow (tmp_win);
     FocusOn (tmp_win, False);
   }
-  SetBorder (tmp_win, (Scr.Hilite == tmp_win), True, True, None);
+  SetBorder (tmp_win, NULL, (Scr.Hilite == tmp_win), True, True, None);
   Broadcast (XFCE_M_UNSHADE, 3, tmp_win->w, tmp_win->frame, (unsigned long) tmp_win, 0, 0, 0, 0);
 }
 
@@ -471,7 +471,7 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context
     }
 
     SetupFrame (tmp_win, tmp_win->orig_x, tmp_win->orig_y, tmp_win->orig_wd, tmp_win->orig_ht, True, True);
-    SetBorder (tmp_win, Scr.Hilite == tmp_win, True, True, None);
+    SetBorder (tmp_win, NULL, Scr.Hilite == tmp_win, True, True, None);
   }
   else
   {
@@ -524,7 +524,7 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context
 	Animate (tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, new_x, new_y, new_width, new_height);
     }
     SetupFrame (tmp_win, new_x, new_y, new_width, new_height, True, True);
-    SetBorder (tmp_win, Scr.Hilite == tmp_win, True, True, None);
+    SetBorder (tmp_win, NULL, Scr.Hilite == tmp_win, True, True, None);
   }
 }
 
@@ -913,7 +913,7 @@ refresh_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long
   tmp = Scr.XfwmRoot.next;
   while (tmp != NULL)
   {
-    SetBorder (tmp, (Scr.Hilite == tmp), True, True, tmp->frame);
+    SetBorder (tmp, NULL, (Scr.Hilite == tmp), True, True, tmp->frame);
     tmp = tmp->next;
   }
 }
@@ -984,8 +984,8 @@ stick_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
   free (mode);
   if (old_flags != tmp_win->flags)
   {
-    RedrawRightButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
-    RedrawLeftButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
+    RedrawRightButtons (tmp_win, NULL, (Scr.Hilite == tmp_win), True, None);
+    RedrawLeftButtons (tmp_win, NULL, (Scr.Hilite == tmp_win), True, None);
     BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, tmp_win);
   }
 }
@@ -1347,7 +1347,7 @@ SetHiColor (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long conte
 
   if ((Scr.flags & WindowsCaptured) && (Scr.Hilite != NULL))
   {
-    SetBorder (Scr.Hilite, True, True, True, None);
+    SetBorder (Scr.Hilite, NULL, True, True, True, None);
   }
 }
 
@@ -1799,11 +1799,11 @@ LoadIconFont (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
   tmp = Scr.XfwmRoot.next;
   while (tmp != NULL)
   {
-    RedoIconName (tmp);
+    RedoIconName (tmp, NULL);
 
     if (tmp->flags & ICONIFIED)
     {
-      DrawIconWindow (tmp);
+      DrawIconWindow (tmp, NULL);
     }
     tmp = tmp->next;
   }
@@ -1918,7 +1918,7 @@ LoadWindowFont (XEvent * eventp, Window win, XfwmWindow * tmp_win, unsigned long
     tmp->frame_y = 0;
     tmp->frame_height = 0;
     tmp->frame_width = 0;
-    SetTitleBar (tmp, (tmp == Scr.Hilite));
+    SetTitleBar (tmp, NULL, (tmp == Scr.Hilite));
     SetupFrame (tmp, x, y, w, h, False, True);
     tmp = tmp->next;
   }
@@ -2191,7 +2191,7 @@ UpdateDecor (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long c
   for (fw = LastXfwmWindowList (Scr.stacklist); fw != NULL; fw = fw->prev)
   {
     {
-      SetBorder (fw->win, ((fw->win) == Scr.Hilite), True, True, None);
+      SetBorder (fw->win, NULL, ((fw->win) == Scr.Hilite), True, True, None);
     }
   }
 }
@@ -2478,8 +2478,8 @@ RedrawSwitchWindow (Window w, char *name, int width, int height)
     XDrawString (dpy, w, Scr.MenuGC, 10, (height + Scr.StdFont.y) / 2, name, strlen (name));
   }
 
-  RelieveRectangle (w, 1, 1, width - 2, height - 2, Scr.MenuReliefGC, Scr.MenuShadowGC);
-  RelieveRectangle (w, 0, 0, width, height, Scr.BlackGC, Scr.BlackGC);
+  RelieveRectangle (w, NULL, 1, 1, width - 2, height - 2, Scr.MenuReliefGC, Scr.MenuShadowGC);
+  RelieveRectangle (w, NULL, 0, 0, width, height, Scr.BlackGC, Scr.BlackGC);
 }
 
 void
@@ -3035,7 +3035,7 @@ engine_func (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
   /* redraw all windows */
   for (t = LastXfwmWindowList (Scr.stacklist); t != NULL; t = t->prev)
   {
-    SetBorder (t->win, (Scr.Hilite == (t->win)), True, True, (t->win)->frame);
+    SetBorder (t->win, NULL, (Scr.Hilite == (t->win)), True, True, (t->win)->frame);
   }
   free (style);
 }
@@ -3082,7 +3082,7 @@ show_buttons (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long con
   {
     (t->win)->nr_left_buttons = Scr.nr_left_buttons;
     (t->win)->nr_right_buttons = Scr.nr_right_buttons;
-    SetBorder ((t->win), (Scr.Hilite == (t->win)), True, True, (t->win)->frame);
+    SetBorder ((t->win), NULL, (Scr.Hilite == (t->win)), True, True, (t->win)->frame);
   }
 }
 

@@ -67,7 +67,7 @@ unsigned long Globalgcm;
  *
  ****************************************************************************/
 void
-SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_win)
+SetBorder (XfwmWindow * t, XRectangle *area, Bool onoroff, Bool force, Bool Mapped, Window expose_win)
 {
   int y, i, x, fh;
   GC ReliefGC, ShadowGC;
@@ -97,7 +97,7 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
 
     /* make sure that the previously highlighted window got unhighlighted */
     if ((Scr.Hilite != t) && (Scr.Hilite != NULL))
-      SetBorder (Scr.Hilite, False, False, True, None);
+      SetBorder (Scr.Hilite, NULL, False, False, True, None);
 
     Scr.Hilite = t;
     TextColor = GetDecor (t, HiColors.fore);
@@ -120,20 +120,26 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
     ShadowGC = GetDecor (t, LoShadowGC);
   }
 
+  /* if forced redraw or the call is not issued from an expose event, don't use clipping area */
+  if (NewColor || (expose_win == None))
+  {
+    area = NULL;
+  }
+   
   if (t->flags & ICONIFIED)
   {
-    DrawIconWindow (t);
+    DrawIconWindow (t, area);
     return;
   }
 
   valuemask = 0;
   if (t->flags & TITLE)
   {
-    RedrawLeftButtons (t, onoroff, NewColor, expose_win);
-    RedrawRightButtons (t, onoroff, NewColor, expose_win);
-    if (flush_expose (t->title_w) || (expose_win == t->title_w) || (expose_win == None) || NewColor)
+    RedrawLeftButtons (t, area, onoroff, NewColor, expose_win);
+    RedrawRightButtons (t, area, onoroff, NewColor, expose_win);
+    if ((expose_win == t->title_w) || (expose_win == None) || NewColor)
     {
-      SetTitleBar (t, onoroff);
+      SetTitleBar (t,area, onoroff);
     }
   }
 
@@ -145,21 +151,21 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
     for (i = 0; i < 4; i++)
     {
       int vertical = i % 2;
-      if (flush_expose (t->sides[i]) || (expose_win == t->sides[i]) || (expose_win == None) || NewColor)
+      if ((expose_win == t->sides[i]) || (expose_win == None) || NewColor)
       {
 	GC sgc, rgc;
 
 	rgc = ReliefGC;
 	sgc = ShadowGC;
-	RelieveWindow (t, t->sides[i], 0, 0, ((vertical) ? t->boundary_width : x), ((vertical) ? y : t->boundary_width), rgc, sgc, (0x0001 << i));
+	RelieveWindow (t, t->sides[i], area, 0, 0, ((vertical) ? t->boundary_width : x), ((vertical) ? y : t->boundary_width), rgc, sgc, (0x0001 << i));
       }
-      if (flush_expose (t->corners[i]) || (expose_win == t->corners[i]) || (expose_win == None) || NewColor)
+      if ((expose_win == t->corners[i]) || (expose_win == None) || NewColor)
       {
 	GC rgc, sgc;
 
 	rgc = ReliefGC;
 	sgc = ShadowGC;
-	RelieveWindow (t, t->corners[i], 0, 0, t->corner_width, t->corner_width, rgc, sgc, corners[i]);
+	RelieveWindow (t, t->corners[i], area, 0, 0, t->corner_width, t->corner_width, rgc, sgc, corners[i]);
       }
     }
   }
@@ -171,7 +177,7 @@ SetBorder (XfwmWindow * t, Bool onoroff, Bool force, Bool Mapped, Window expose_
 }
 
 void
-RedrawLeftButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_win)
+RedrawLeftButtons (XfwmWindow * t, XRectangle *area, Bool onoroff, Bool NewColor, Window expose_win)
 {
   int i;
   GC ReliefGC, ShadowGC;
@@ -201,18 +207,18 @@ RedrawLeftButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_wi
     {
       enum ButtonState bs = GetButtonState (t->left_w[i]);
       ButtonFace *bf = &GetDecor (t, left_buttons[i].state[bs]);
-      if (flush_expose (t->left_w[i]) || (expose_win == t->left_w[i]) || (expose_win == None) || NewColor)
+      if ((expose_win == t->left_w[i]) || (expose_win == None) || NewColor)
       {
 	int inverted = PressedW == t->left_w[i];
 	for (; bf; bf = bf->next)
-	  DrawButton (t, t->left_w[i], t->title_height, t->title_height, bf, ReliefGC, ShadowGC, inverted, GetDecor (t, left_buttons[i].flags));
+	  DrawButton (t, t->left_w[i], area, t->title_height, t->title_height, bf, ReliefGC, ShadowGC, inverted, GetDecor (t, left_buttons[i].flags));
       }
     }
   }
 }
 
 void
-RedrawRightButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_win)
+RedrawRightButtons (XfwmWindow * t, XRectangle *area, Bool onoroff, Bool NewColor, Window expose_win)
 {
   int i;
   GC ReliefGC, ShadowGC;
@@ -242,11 +248,11 @@ RedrawRightButtons (XfwmWindow * t, Bool onoroff, Bool NewColor, Window expose_w
     {
       enum ButtonState bs = GetButtonState (t->right_w[i]);
       ButtonFace *bf = &GetDecor (t, right_buttons[i].state[bs]);
-      if (flush_expose (t->right_w[i]) || (expose_win == t->right_w[i]) || (expose_win == None) || NewColor)
+      if ((expose_win == t->right_w[i]) || (expose_win == None) || NewColor)
       {
 	int inverted = PressedW == t->right_w[i];
 	for (; bf; bf = bf->next)
-	  DrawButton (t, t->right_w[i], t->title_height, t->title_height, bf, ReliefGC, ShadowGC, inverted, GetDecor (t, right_buttons[i].flags));
+	  DrawButton (t, t->right_w[i], area, t->title_height, t->title_height, bf, ReliefGC, ShadowGC, inverted, GetDecor (t, right_buttons[i].flags));
 
       }
     }

@@ -83,41 +83,6 @@ extern Bool enable_xft;
 void GrabIconButtons (XfwmWindow *, Window);
 void GrabIconKeys (XfwmWindow *, Window);
 
-void
-DrawIconPixmap(XfwmWindow * tmp_win, GC gc, int tx, int ty)
-{
-  if (tmp_win->iconDepth == 1)
-  {
-    XCopyPlane(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, gc, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty, 1);
-  }
-  else
-  {
-    static GC clipPixmapGC = None;
-    XGCValues gcv;
-    if (tmp_win->flags & SHAPED_ICON)
-    {
-      gcv.clip_mask = tmp_win->icon_maskPixmap;
-      gcv.clip_x_origin = tx;
-      gcv.clip_y_origin = ty;
-      if (clipPixmapGC == None) 
-      {
-          clipPixmapGC = XCreateGC(dpy, tmp_win->icon_pixmap_w, GCClipMask|GCClipXOrigin|GCClipYOrigin, &gcv);
-      }
-      else
-      {
-	XChangeGC(dpy, clipPixmapGC, GCClipMask|GCClipXOrigin|GCClipYOrigin, &gcv);
-      }
-      XCopyArea(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, clipPixmapGC, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty);
-      gcv.clip_mask = None;
-      XChangeGC(dpy, clipPixmapGC, GCClipMask, &gcv);
-    }
-    else
-    {
-      XCopyArea(dpy, tmp_win->iconPixmap, tmp_win->icon_pixmap_w, gc, 0, 0, tmp_win->icon_p_width - 2*tx, tmp_win->icon_p_height - 2*ty, tx, ty);
-    }
-  }
-}
-
 /****************************************************************************
  *
  * Creates an icon window as needed
@@ -851,7 +816,7 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
       if (t->icon_pixmap_w)
 	XUnmapWindow (dpy, t->icon_pixmap_w);
       SetMapStateProp (t, IconicState);
-      SetBorder (t, False, False, False, None);
+      SetBorder (t, NULL, False, False, False, None);
       if (t != tmp_win)
       {
 	t->flags |= ICONIFIED | ICON_UNMAPPED;

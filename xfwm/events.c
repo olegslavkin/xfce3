@@ -457,7 +457,7 @@ HandleFocusIn ()
       fprintf (stderr, "xfwm : HandleFocusIn () : Unsetting focus from Scr.Hilite (if any)\n");
 #endif
       Scr.Focus = NULL;
-      SetBorder (Scr.Hilite, False, True, True, None);
+      SetBorder (Scr.Hilite, NULL, False, True, True, None);
       Broadcast (XFCE_M_FOCUS_CHANGE, 5, 0, 0, 0, Scr.DefaultDecor.HiColors.fore, Scr.DefaultDecor.HiColors.back, 0, 0);
       if (Scr.ColormapFocus == COLORMAP_FOLLOWS_FOCUS)
       {
@@ -478,7 +478,7 @@ HandleFocusIn ()
     fprintf (stderr, "xfwm : HandleFocusIn () : Focus set to %s\n", Tmp_win->name);
 #endif
     Scr.Focus = Tmp_win;
-    SetBorder (Tmp_win, True, True, True, None);
+    SetBorder (Tmp_win, NULL, True, True, True, None);
     Broadcast (XFCE_M_FOCUS_CHANGE, 5, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, GetDecor (Tmp_win, HiColors.fore), GetDecor (Tmp_win, HiColors.back), 0, 0);
     if (Scr.ColormapFocus == COLORMAP_FOLLOWS_FOCUS)
     {
@@ -646,7 +646,7 @@ HandlePropertyNotify ()
 
     /* fix the name in the title bar */
     if (!(Tmp_win->flags & ICONIFIED))
-      SetTitleBar (Tmp_win, (Scr.Hilite == Tmp_win));
+      SetTitleBar (Tmp_win, NULL, (Scr.Hilite == Tmp_win));
 
     /*
      * if the icon name is NoName, set the name of the icon to be
@@ -658,7 +658,7 @@ HandlePropertyNotify ()
       Tmp_win->icon_name = (char *) safemalloc (strlen (Tmp_win->name) + 1);
       strcpy (Tmp_win->icon_name, Tmp_win->name);
       BroadcastName (XFCE_M_ICON_NAME, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, Tmp_win->icon_name);
-      RedoIconName (Tmp_win);
+      RedoIconName (Tmp_win, NULL);
     }
     break;
 
@@ -666,7 +666,7 @@ HandlePropertyNotify ()
     free_window_names (Tmp_win, False, True);
     GetWMIconName (Tmp_win);
     BroadcastName (XFCE_M_ICON_NAME, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, Tmp_win->icon_name);
-    RedoIconName (Tmp_win);
+    RedoIconName (Tmp_win, NULL);
     break;
 
   case XA_WM_HINTS:
@@ -733,7 +733,7 @@ HandlePropertyNotify ()
 	  }
 	}
 	Tmp_win->flags |= ICONIFIED;
-	DrawIconWindow (Tmp_win);
+	DrawIconWindow (Tmp_win, NULL);
 	LowerWindow (Tmp_win);
       }
     }
@@ -815,31 +815,41 @@ HandleClientMessage ()
 void
 HandleExpose ()
 {
-  if (Event.xexpose.count != 0)
-    return;
+  XEvent dummy;
+  int x1 = Event.xexpose.x;
+  int y1 = Event.xexpose.y;
+  int x2 = x1 + Event.xexpose.width;
+  int y2 = y1 + Event.xexpose.height;
 
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering HandleExpose ()\n");
 #endif
 
+  while (XCheckTypedWindowEvent(dpy, Event.xany.window, Expose, &dummy))
+  {
+    x1 = my_min(x1, dummy.xexpose.x);
+    y1 = my_min(y1, dummy.xexpose.y);
+    x2 = my_max(x2, dummy.xexpose.x + dummy.xexpose.width);
+    y2 = my_max(y2, dummy.xexpose.y + dummy.xexpose.height);
+  }
+
   if (Tmp_win)
   {
-#if 0
-    XRectangle rect;
+    XRectangle area;
 
     /* Retrieve clipping from event */
-    rect.x      = Event.xexpose.x;
-    rect.y      = Event.xexpose.y;
-    rect.width  = Event.xexpose.width;
-    rect.height = Event.xexpose.height;
-#endif    
+    area.x      = x1;
+    area.y      = y1;
+    area.width  = x2 - x1;
+    area.height = y2 - y1;
+
     if ((Event.xany.window == Tmp_win->title_w))
     {
-      SetTitleBar (Tmp_win, (Scr.Hilite == Tmp_win));
+      SetTitleBar (Tmp_win, &area, (Scr.Hilite == Tmp_win));
     }
     else
     {
-      SetBorder (Tmp_win, (Scr.Hilite == Tmp_win), False, True, Event.xany.window);
+      SetBorder (Tmp_win, &area, (Scr.Hilite == Tmp_win), False, True, Event.xany.window);
     }
   }
 #ifdef DEBUG
@@ -1236,17 +1246,17 @@ HandleButtonPress ()
 
   if (Context & C_RALL)
   {
-    RedrawRightButtons (ButtonWindow, (Scr.Hilite == ButtonWindow), True, x);
+    RedrawRightButtons (ButtonWindow, NULL, (Scr.Hilite == ButtonWindow), True, x);
   }
   else if (Context & C_LALL)
   {
-    RedrawLeftButtons (ButtonWindow, (Scr.Hilite == ButtonWindow), True, x);
+    RedrawLeftButtons (ButtonWindow, NULL, (Scr.Hilite == ButtonWindow), True, x);
   }
   else if (Context & C_TITLE)
   {
     if (RedrawTitleOnButtonPress ())
     {
-      SetTitleBar (ButtonWindow, (Scr.Hilite == ButtonWindow));
+      SetTitleBar (ButtonWindow, NULL, (Scr.Hilite == ButtonWindow));
     }
   }
 
@@ -1287,17 +1297,17 @@ HandleButtonPress ()
   PressedW = None;
   if (Context & C_RALL)
   {
-    RedrawRightButtons (ButtonWindow, (Scr.Hilite == ButtonWindow), True, x);
+    RedrawRightButtons (ButtonWindow, NULL, (Scr.Hilite == ButtonWindow), True, x);
   }
   else if (Context & C_LALL)
   {
-    RedrawLeftButtons (ButtonWindow, (Scr.Hilite == ButtonWindow), True, x);
+    RedrawLeftButtons (ButtonWindow, NULL, (Scr.Hilite == ButtonWindow), True, x);
   }
   else if (Context & C_TITLE)
   {
     if (RedrawTitleOnButtonPress ())
     {
-      SetTitleBar (ButtonWindow, (Scr.Hilite == ButtonWindow));
+      SetTitleBar (ButtonWindow, NULL, (Scr.Hilite == ButtonWindow));
     }
   }
   ButtonWindow = NULL;
@@ -1402,7 +1412,7 @@ HandleLeaveNotify ()
 	if (Scr.Focus != NULL)
 	  SetFocus (Scr.NoFocusWin, NULL, False, False);
 	if (Scr.Hilite != NULL)
-	  SetBorder (Scr.Hilite, False, False, True, None);
+	  SetBorder (Scr.Hilite, NULL, False, False, True, None);
       }
     }
   }
@@ -1563,7 +1573,7 @@ HandleConfigureRequest ()
   if (Tmp_win->flags & MAXIMIZED)
   {
     Tmp_win->flags &= ~MAXIMIZED;
-    SetBorder (Tmp_win, Scr.Hilite == Tmp_win, True, True, None);
+    SetBorder (Tmp_win, NULL, Scr.Hilite == Tmp_win, True, True, None);
   }
 
   if (cre->value_mask & (CWX | CWY | CWWidth | CWHeight))

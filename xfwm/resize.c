@@ -102,8 +102,8 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
     return;
     
   tmp_win->flags &= ~MAXIMIZED;
-  RedrawRightButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
-  RedrawLeftButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
+  RedrawRightButtons (tmp_win, NULL, (Scr.Hilite == tmp_win), True, None);
+  RedrawLeftButtons (tmp_win, NULL, (Scr.Hilite == tmp_win), True, None);
 
   center_x = tmp_win->frame_x + (tmp_win->frame_width / 2);
   center_y = tmp_win->frame_y + (tmp_win->frame_height / 2);

@@ -125,8 +125,8 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
     if ((tmp_win->flags & MAXIMIZED) && !(tmp_win->flags & ICONIFIED))
     {
       tmp_win->flags &= ~MAXIMIZED;
-      RedrawRightButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
-      RedrawLeftButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
+      RedrawRightButtons (tmp_win, NULL, (Scr.Hilite == tmp_win), True, None);
+      RedrawLeftButtons (tmp_win, NULL, (Scr.Hilite == tmp_win), True, None);
     }
     SetupFrame (tmp_win, FinalX, FinalY, tmp_win->frame_width, tmp_win->frame_height, True, True);
     if (startDesk != Scr.CurrentDesk)

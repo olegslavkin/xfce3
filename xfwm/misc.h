@@ -117,11 +117,7 @@ void SetWindowState (XfwmWindow *);
 Bool moveLoop (XfwmWindow *, int, int, int, int, int *, int *, Bool, Bool);
 
 void Keyboard_shortcuts (XEvent *, int);
-void RedoIconName (XfwmWindow *);
-void DrawIconWindow (XfwmWindow *);
-void DrawIconPixmap(XfwmWindow *, GC, int, int);
 void CreateIconWindow (XfwmWindow * tmp_win, int def_x, int def_y);
-void RelieveParts (XfwmWindow * t, int i, GC hor, GC vert);
 #define NO_HILITE     0x0000
 #define TOP_HILITE    0x0001
 #define RIGHT_HILITE  0x0002
@@ -188,9 +184,9 @@ int DeferExecution (XEvent *, Window *, XfwmWindow **, unsigned long *, int, int
 void my_sleep (int);
 void Animate (int, int, int, int, int, int, int, int);
 void ShowMeMouse (XEvent *, Window, XfwmWindow *, unsigned long, char *, int *);
-void SetBorder (XfwmWindow *, Bool, Bool, Bool, Window);
-void RedrawLeftButtons (XfwmWindow *, Bool, Bool, Window);
-void RedrawRightButtons (XfwmWindow *, Bool, Bool, Window);
+void SetBorder (XfwmWindow *, XRectangle *, Bool, Bool, Bool, Window);
+void RedrawLeftButtons (XfwmWindow *, XRectangle *, Bool, Bool, Window);
+void RedrawRightButtons (XfwmWindow *, XRectangle *, Bool, Bool, Window);
 void move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 void resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module);
 void CreateIconWindow (XfwmWindow *, int, int);
