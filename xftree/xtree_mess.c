@@ -288,6 +288,17 @@ void cb_filter_files(GtkWidget * widget, GtkWidget *ctree)
   return;
 
 }
+void
+cb_hide_dd (GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  win->preferences ^= HIDE_DD;
+  preferences = win->preferences;
+  cb_reload(widget, (gpointer) ctree);
+  save_defaults(NULL);
+  return;
+}
 
 void
 cb_hide_mode (GtkWidget * widget, GtkWidget *ctree)

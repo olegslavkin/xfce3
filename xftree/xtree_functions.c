@@ -544,7 +544,7 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
   {
    char *name;
    /* ../ is usually not filtered in, so add it */
-   if ((win->preferences&FILTER_OPTION)&&
+   if (!(win->preferences&HIDE_DD) && (win->preferences&FILTER_OPTION) &&
         ((win->filterOpts & FILTER_DIRS) || (win->filterOpts & FILTER_FILES))){ /* filtering */
      type=FT_DIR_UP;
      if ((complete=(char *)malloc(strlen(base)+3))==NULL) return;
@@ -563,8 +563,10 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
     item = NULL;
     d_len = strlen (name);
 	/*fprintf(stderr,"dbg:%s\n",name);*/
-    if (io_is_dirup (name)) type |= FT_DIR_UP | FT_DIR;
-    else if ((d_len >= 1) && io_is_hidden (name) && ((flags & IGNORE_HIDDEN))){
+    if (io_is_dirup (name)) {
+	    type |= FT_DIR_UP | FT_DIR;
+	    if (win->preferences & HIDE_DD) continue; 
+    } else if ((d_len >= 1) && io_is_hidden (name) && ((flags & IGNORE_HIDDEN))){
       if (d_len > 1) p_en->flags |= HIDDEN_PRESENT;	    
       /*fprintf(stderr,"dbg:hidden, %s\n",name);*/
       continue;

@@ -30,7 +30,7 @@
 #define HIDE_UID		0x800000
 /* BYTE 4 */
 #define HIDE_GID		0x1000000
-/* no more #define SIZE_IN_KB		0x2000000*/
+#define HIDE_DD			0x2000000
 
 
 
@@ -92,6 +92,7 @@ void set_colors(GtkWidget * ctree);
 int set_fontT(GtkWidget * ctree);
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
 void cb_show_status (GtkWidget * widget, GtkWidget *ctree);
+void cb_hide_dd (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_mode (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_uid (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_gid (GtkWidget * widget, GtkWidget *ctree);

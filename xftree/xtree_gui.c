@@ -237,7 +237,8 @@ autotype_t autotype[]= {
     {N_("Hide dates"),cb_hide_date, HIDE_DATE, GDK_d,GDK_MOD1_MASK}, \
     {N_("Hide owner"),cb_hide_uid, HIDE_UID, GDK_o,GDK_MOD1_MASK}, \
     {N_("Hide group"),cb_hide_gid, HIDE_GID, GDK_y,GDK_MOD1_MASK}, \
-    {N_("Hide mode"),cb_hide_mode, HIDE_MODE, GDK_e,GDK_MOD1_MASK}
+    {N_("Hide mode"),cb_hide_mode, HIDE_MODE, GDK_e,GDK_MOD1_MASK}, \
+    {N_("Hide ../ "),cb_hide_dd, HIDE_DD }
  
 #define HELP_MENU \
     {N_("Sort by file name"), NULL, SORT_NAME, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
@@ -1370,9 +1371,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
   reset_icon(GTK_CTREE (ctree), root); 
-  /*for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
-		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));*/
-
+  gtk_ctree_select (GTK_CTREE (ctree), root);
 
   gtk_signal_connect (GTK_OBJECT (ctree), "tree_expand", GTK_SIGNAL_FUNC (on_expand), NULL);
   gtk_signal_connect (GTK_OBJECT (ctree), "tree_collapse", GTK_SIGNAL_FUNC (on_collapse), NULL);
