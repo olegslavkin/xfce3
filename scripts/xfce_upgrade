@@ -45,10 +45,5 @@ for i in $FILES; do
         fi
 done
 
-if [ -f $HOME/.gtkrc ]; then
-	mv -f $HOME/.gtkrc $BKUP/.gtkrc.$DATE 2>/dev/null
-	echo An existing file $HOME/.gtkrc has been moved to $BKUP/.gtkrc.$DATE
-fi
-
 echo Upgrade complete
 exit 0
