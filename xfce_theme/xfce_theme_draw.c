@@ -139,6 +139,65 @@ GtkStyleClass xfce_default_class = {
 };
 
 static void
+xfce_draw_handlers (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GdkRectangle * area, GtkWidget * widget, gint x, gint y, gint width, gint height, GtkOrientation orientation)
+{
+  gint xx, yy;
+  gint xthick, ythick;
+  GdkGC *light_gc, *dark_gc;
+  GdkRectangle dest;
+  if ((width == -1) && (height == -1))
+    gdk_window_get_size (window, &width, &height);
+  else if (width == -1)
+    gdk_window_get_size (window, &width, NULL);
+  else if (height == -1)
+    gdk_window_get_size (window, NULL, &height);
+
+  light_gc = style->light_gc[state_type];
+  dark_gc = style->dark_gc[state_type];
+
+  xthick = style->klass->xthickness;
+  ythick = style->klass->ythickness;
+
+  dest.x = x + xthick;
+  dest.y = y + ythick;
+  dest.width = width - (xthick * 2);
+  dest.height = height - (ythick * 2);
+
+  gdk_gc_set_clip_rectangle (light_gc, &dest);
+  gdk_gc_set_clip_rectangle (dark_gc, &dest);
+
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+  {
+    if (width > 15 + xthick)
+    {
+      gint delta = xthick + (width / 2) - 7;
+      yy = y + ythick;
+      for (xx = 0; xx < 10; xx += 2)
+      {
+	gdk_draw_line (window, dark_gc, xx + delta, yy, xx + delta, yy + height - ythick);
+	gdk_draw_line (window, light_gc, xx + delta + 1, yy, xx + delta + 1, yy + height - ythick);
+      }
+    }
+  }
+  else
+  {
+    if (height > 15 + ythick)
+    {
+      gint delta = ythick + height / 2 - 7;
+      xx = x + xthick;
+      for (yy = 0; yy < 10; yy += 2)
+      {
+	gdk_draw_line (window, dark_gc, xx, yy + delta, xx + width - xthick, yy + delta);
+	gdk_draw_line (window, light_gc, xx, yy + delta + 1, xx + width - xthick, yy + delta + 1);
+      }
+    }
+  }
+  
+  gdk_gc_set_clip_rectangle (light_gc, NULL);
+  gdk_gc_set_clip_rectangle (dark_gc, NULL);
+}
+
+static void
 draw_hline (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GdkRectangle * area, GtkWidget * widget, gchar * detail, gint x1, gint x2, gint y)
 {
   gint thickness_light;
@@ -560,6 +619,14 @@ draw_box (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkShad
   }
   else
     gtk_style_apply_default_pixmap (style, window, state_type, area, x, y, width, height);
+
+  if (detail && (!strcmp (detail, "slider")))
+  {
+    GtkOrientation orientation = GTK_ORIENTATION_VERTICAL;
+    if (width > height)
+      orientation = GTK_ORIENTATION_HORIZONTAL;
+    xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
+  }
 #if 1
   if ((detail) && (!strcmp ("menuitem", detail)) && (state_type == GTK_STATE_PRELIGHT))
     gtk_paint_shadow (style, window, state_type, GTK_SHADOW_IN, area, widget, detail, x, y, width, height);
@@ -1221,20 +1288,12 @@ draw_slider (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
     gdk_window_get_size (window, NULL, &height);
 
   gtk_draw_box (style, window, state_type, shadow_type, x, y, width, height);
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    draw_vline (style, window, state_type, area, widget, detail, 1, height - 2, width / 2);
-  else
-    draw_hline (style, window, state_type, area, widget, detail, 1, width - 2, height / 2);
+  xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
 }
 
 static void
 draw_handle (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkShadowType shadow_type, GdkRectangle * area, GtkWidget * widget, gchar * detail, gint x, gint y, gint width, gint height, GtkOrientation orientation)
 {
-  gint xx, yy;
-  gint xthick, ythick;
-  GdkGC *light_gc, *dark_gc;
-  GdkRectangle dest;
-
   g_return_if_fail (style != NULL);
   g_return_if_fail (window != NULL);
 
@@ -1245,42 +1304,6 @@ draw_handle (GtkStyle * style, GdkWindow * window, GtkStateType state_type, GtkS
   else if (height == -1)
     gdk_window_get_size (window, NULL, &height);
 
-  light_gc = style->light_gc[state_type];
-  dark_gc = style->dark_gc[state_type];
-
-  xthick = style->klass->xthickness;
-  ythick = style->klass->ythickness;
-
   gtk_draw_box (style, window, state_type, GTK_SHADOW_OUT, x, y, width, height);
-  dest.x = x + xthick;
-  dest.y = y + ythick;
-  dest.width = width - (xthick * 2);
-  dest.height = height - (ythick * 2);
-
-  gdk_gc_set_clip_rectangle (light_gc, &dest);
-  gdk_gc_set_clip_rectangle (dark_gc, &dest);
-
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-  {
-    gint delta = xthick + (width / 2) - 7;
-    yy = y + ythick;
-    for (xx = 0; xx < 10; xx += 2)
-    {
-      gdk_draw_line (window, dark_gc, xx + delta, yy, xx + delta, yy + height - ythick);
-      gdk_draw_line (window, light_gc, xx + delta + 1, yy, xx + delta + 1, yy + height - ythick);
-    }
-  }
-  else
-  {
-    gint delta = ythick + height / 2 - 7;
-    xx = x + xthick;
-    for (yy = 0; yy < 10; yy += 2)
-    {
-      gdk_draw_line (window, dark_gc, xx, yy + delta, xx + width - xthick, yy + delta);
-      gdk_draw_line (window, light_gc, xx, yy + delta + 1, xx + width - xthick, yy + delta + 1);
-    }
-  }
-  
-  gdk_gc_set_clip_rectangle (light_gc, NULL);
-  gdk_gc_set_clip_rectangle (dark_gc, NULL);
+  xfce_draw_handlers (style, window, state_type, area, widget, x, y, width, height, orientation);
 }
