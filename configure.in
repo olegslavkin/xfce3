@@ -6,7 +6,7 @@ dnl ---------------------------------------------------------------------------
 
 AC_INIT()
 
-dnl AC_PREREQ(2.50)
+AC_PREREQ(2.52)
 
 
 AC_CANONICAL_HOST
@@ -15,7 +15,7 @@ XFCE_PACKAGE=xfce
 
 LIB_MAJOR=1
 LIB_MINOR=38
-LIB_TINY=14
+LIB_TINY=18
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
