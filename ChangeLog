@@ -1,3 +1,31 @@
+2001-08-03  xfce
+
+	* Makefile.am, Makefile.in, Makefile.init, acinclude.m4,
+	aclocal.m4, configure, configure.in, backdrops/Blue.list,
+	backdrops/Toulouse.list, libs/Makefile.in, other/xinitrc,
+	other/xinitrc.in, other/xinitrc.mwm, other/xinitrc.mwm.in,
+	po/xfce.pot, scripts/Makefile.in, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfglob/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsound/Makefile.in,
+	xftree/Makefile.in, xfumed/Makefile.in, xfwm/Makefile.in,
+	xfwm/move.c, xfwm/resize.c, xfwm/themes.c: Fixed the compilation
+	problem on some systems (for the record, it was related to
+	libtool).  Inserting libtool.m4 in acinclude.m4 as advised in
+	libtool manual keep libtool in sync even if an older version of
+	libtool is installed on the target system.
+
+2001-08-02  xfce
+
+	* xfce/xfwm.c: Change color params for xfwm's new 'GTK' lookalike
+	engine
+
+2001-08-02  xfce
+
+	* ChangeLog: Update ChangeLog
+
 2001-08-02  xfce
 
 	* xfwm/: builtins.c, xfwm.c: Add more controls over internal font
