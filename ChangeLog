@@ -1,3 +1,24 @@
+2001-10-21  xfce
+
+	* libs/Strings.c, libs/safemalloc.c, libs/utils.h, po/xfce.pot,
+	xfwm/misc.c: Add mymemset() routine, Remove some memory leaks
+	introduced during debug session.
+
+2001-10-20  xfce
+
+	* acconfig.h, config.h.in, configure, configure.in,
+	libs/safemalloc.c, xfwm/add_window.c, xfwm/events.c, xfwm/focus.c,
+	xfwm/misc.c, xfwm/session.c, xfwm/virtual.c: Various changes
+
+2001-10-19  xfce
+
+	* backdrops/Blue.list, backdrops/Toulouse.list, other/xinitrc,
+	other/xinitrc.mwm, po/xfce.pot, scripts/startxfce,
+	scripts/xfce_setup, scripts/xfhelp, xfwm/add_window.c,
+	xfwm/events.c, xfwm/misc.c, xfwm/misc.h, xfwm/module.c,
+	xfwm/xfwm.c: I think I found out the race condition after a *lot*
+	of work ;-)
+
 2001-10-16  xfce
 
 	* ChangeLog: Update ChangeLog
