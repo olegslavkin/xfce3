@@ -107,7 +107,11 @@ GetFontOrFixed (Display * disp, char *fontname, XfwmFont * xfwmfont)
     }
   }
 #ifdef HAVE_X11_XFT_XFT_H
-  if ((!mystrncasecmp (fontname, "fixed", strlen ("fixed"))) || !(xfwmfont->use_xft))
+  /* If the fontset is in use, or if the font requested is 
+   * "fixed" or at last if Xft is disabled
+   * avoid loading XftFont
+   */
+  if ((!mystrncasecmp (fontname, "fixed", strlen ("fixed"))) || (xfwmfont->fontset) || !(xfwmfont->use_xft))
   {
     xfwmfont->xftfont = NULL;
   }
