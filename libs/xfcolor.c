@@ -726,7 +726,7 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "%s\n\n", XFCE3GTKRC);
       fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
       for (i = 1; i < 8; i++)   /* Color 0 is used for the mouse pointer only */
-        write_style_to_gtkrc_file (f, p, i, 2, 4, "xfce_", (i == 7));
+        write_style_to_gtkrc_file (f, p, i, i, 4, "xfce_", (i == 7));
 #ifndef OLD_STYLE
       write_style_to_gtkrc_file (f, p, 7, 2, 4, "xfcebar_", TRUE);
 #endif
@@ -735,20 +735,20 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "  fg[NORMAL] = \"#000000\"\n");
       fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
       fprintf (f, "}\n\n");
-      fprintf (f, "widget_class \"*\"                  style \"xfce_7\"\n");
-      fprintf (f, "widget_class \"*Progress*\"         style \"xfce_1\"\n");
-      fprintf (f, "widget_class \"*List*\"	       style \"xfce_4\"\n");
-      fprintf (f, "widget_class \"*Tree*\"	       style \"xfce_4\"\n");
-      fprintf (f, "widget_class \"*Text*\"	       style \"xfce_5\"\n");
-      fprintf (f, "widget_class \"*Entry*\"	       style \"xfce_5\"\n");
-      fprintf (f, "widget_class \"*Spin*\"	       style \"xfce_5\"\n");
+      fprintf (f, "class        \"*\"                  style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*Progress*\"      style \"xfce_1\"\n");
+      fprintf (f, "widget_class \"*List*\"	    style \"xfce_4\"\n");
+      fprintf (f, "widget_class \"*Tree*\"	    style \"xfce_4\"\n");
+      fprintf (f, "widget_class \"*Text*\"	    style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Entry*\"	    style \"xfce_5\"\n");
+      fprintf (f, "widget_class \"*Spin*\"	    style \"xfce_5\"\n");
 #ifndef OLD_STYLE
-      fprintf (f, "widget_class \"*Menu*\"	       style \"xfcebar_7\"\n");
-      fprintf (f, "widget_class \"*Button*\"	       style \"xfcebar_7\"\n");
-      fprintf (f, "widget_class \"*ToggleButton*\"     style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*Menu*\"	    style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*Button*\"	    style \"xfcebar_7\"\n");
+      fprintf (f, "widget_class \"*ToggleButton*\"  style \"xfcebar_7\"\n");
 #endif
-      fprintf (f, "widget_class \"*CheckButton*\"      style \"xfce_7\"\n");
-      fprintf (f, "widget_class \"*RadioButton*\"      style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*CheckButton*\"   style \"xfce_7\"\n");
+      fprintf (f, "widget_class \"*RadioButton*\"   style \"xfce_7\"\n");
       fprintf (f, "widget       \"*gxfce_color1*\"     style \"xfce_1\"\n");        
       fprintf (f, "widget       \"*gxfce_color2*\"     style \"xfce_2\"\n");        
       fprintf (f, "widget       \"*gxfce_color3*\"     style \"xfce_3\"\n");        
@@ -803,9 +803,9 @@ defpal (XFCE_palette * p)
   p->r[0] = 255;
   p->g[0] = 255;
   p->b[0] = 255;
-  p->r[1] = 204;
-  p->g[1] = 204;
-  p->b[1] = 199;
+  p->r[1] = 192;
+  p->g[1] = 192;
+  p->b[1] = 189;
   p->r[2] = 230;
   p->g[2] = 230;
   p->b[2] = 225;
@@ -821,9 +821,9 @@ defpal (XFCE_palette * p)
   p->r[6] =  10;
   p->g[6] = 137;
   p->b[6] =  94;
-  p->r[7] = 204;
-  p->g[7] = 204;
-  p->b[7] = 199;
+  p->r[7] = 192;
+  p->g[7] = 192;
+  p->b[7] = 189;
   p->texture = g_realloc (p->texture, sizeof (char) * (strlen (DEFAULTTEXTURE) + 1));
   strcpy (p->texture, DEFAULTTEXTURE);
 }
