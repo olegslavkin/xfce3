@@ -89,6 +89,7 @@ Silver \
 Silver2 \
 Smooth \
 SmoothBW \
+SmoothGreen \
 SoftBlue \
 Spring \
 Standard \
