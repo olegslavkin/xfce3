@@ -67,10 +67,9 @@ gboolean confirm_quit (XFMENU * xfmenu)
 {
   GtkWidget *quit_dialog;
   char *message = _("There are unsaved changes to the menu.\n\n" "Do you want to save the changes ?");
-  int nbuttons = 3;
-  char *buttons[nbuttons];
+  char *buttons[3];
   int default_button = 1;
-  GtkSignalFunc signal_handlers[nbuttons];
+  GtkSignalFunc signal_handlers[3];
 
   buttons[0] = _("Yes");
   buttons[1] = _("No");
@@ -80,7 +79,7 @@ gboolean confirm_quit (XFMENU * xfmenu)
   signal_handlers[1] = GTK_SIGNAL_FUNC (confirm_quit_yes_without_save);
   signal_handlers[2] = GTK_SIGNAL_FUNC (confirm_quit_no);
 
-  quit_dialog = my_show_dialog (message, nbuttons, buttons, default_button, signal_handlers, xfmenu);
+  quit_dialog = my_show_dialog (message, 3, buttons, default_button, signal_handlers, xfmenu);
   gtk_signal_connect (GTK_OBJECT (quit_dialog), "delete_event", GTK_SIGNAL_FUNC (confirm_quit_no), NULL);
 
   gtk_widget_show (quit_dialog);
@@ -114,10 +113,8 @@ gboolean confirm_delete (GtkCTreeNode * node)
 {
   GtkWidget *delete_dialog;
   char *message;
-  int nbuttons = 2;
-  char *buttons[nbuttons];
-  int default_button = 2;
-  GtkSignalFunc signal_handlers[nbuttons];
+  char *buttons[2];
+  GtkSignalFunc signal_handlers[2];
 
   if (GTK_CTREE_ROW (node)->is_leaf)
     message = _("Do you want to delete this entry ?");
@@ -130,7 +127,7 @@ gboolean confirm_delete (GtkCTreeNode * node)
   signal_handlers[1] = GTK_SIGNAL_FUNC (confirm_delete_no);
   signal_handlers[0] = GTK_SIGNAL_FUNC (confirm_delete_yes);
 
-  delete_dialog = my_show_dialog (message, nbuttons, buttons, default_button, signal_handlers, node);
+  delete_dialog = my_show_dialog (message, 2, buttons, default_button, signal_handlers, node);
   gtk_signal_connect (GTK_OBJECT (delete_dialog), "delete_event", GTK_SIGNAL_FUNC (confirm_delete_no), NULL);
 
   gtk_widget_show (delete_dialog);
