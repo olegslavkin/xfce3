@@ -51,6 +51,8 @@
 #include "screen.h"
 #include "stack.h"
 
+#include <X11/Xlib.h>
+
 #ifndef HAVE_SNPRINTF
 #  include "snprintf.h"
 #endif

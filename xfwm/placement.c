@@ -37,6 +37,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <X11/Xlib.h>
 
 #include "xfwm.h"
 #include "menus.h"

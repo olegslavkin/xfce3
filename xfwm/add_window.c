@@ -61,11 +61,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <X11/Xlib.h>
+#include <X11/Xresource.h>
+#include <X11/extensions/shape.h>
+
 #include "xfwm.h"
 #include "misc.h"
 #include "screen.h"
-#include <X11/Xresource.h>
-#include <X11/extensions/shape.h>
 #include "module.h"
 #include "session.h"
 #include "stack.h"

@@ -35,6 +35,7 @@
 #include <signal.h>
 #include <string.h>
 
+#include <X11/Xlib.h>
 #include <X11/Intrinsic.h>
 #include <X11/xpm.h>
 #include "xfwm.h"
@@ -567,7 +568,7 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
 void
 DrawButton (XfwmWindow * t, Window win, int w, int h,
             ButtonFace * bf, GC ReliefGC, GC ShadowGC,
-            Boolean inverted, int stateflags)
+            Bool inverted, int stateflags)
 {
     if (Scr.engine == XFCE_ENGINE)
         DrawButton_xfce (t, win, w, h, bf, ReliefGC, ShadowGC, inverted, stateflags);
@@ -707,7 +708,7 @@ DrawTrianglePattern (Window w, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t
 void
 DrawButton_xfce (XfwmWindow * t, Window win, int w, int h,
                  ButtonFace * bf, GC ReliefGC, GC ShadowGC,
-                 Boolean inverted, int stateflags)
+                 Bool inverted, int stateflags)
 {
     int type = bf->style & ButtonFaceTypeMask;
     GC BackGC = NULL;
@@ -1404,7 +1405,7 @@ void RelieveIconPixmap_xfce (Window win, int w, int h, GC ReliefGC, GC ShadowGC)
 void
 DrawButton_mofit (XfwmWindow * t, Window win, int w, int h,
                   ButtonFace * bf, GC ReliefGC, GC ShadowGC,
-                  Boolean inverted, int stateflags)
+                  Bool inverted, int stateflags)
 {
     int type = bf->style & ButtonFaceTypeMask;
     GC BackGC = NULL;
@@ -2039,7 +2040,7 @@ void RelieveIconPixmap_mofit (Window win, int w, int h, GC ReliefGC, GC ShadowGC
 void
 DrawButton_trench (XfwmWindow * t, Window win, int w, int h,
                    ButtonFace * bf, GC ReliefGC, GC ShadowGC,
-                   Boolean inverted, int stateflags)
+                   Bool inverted, int stateflags)
 {
     int type = bf->style & ButtonFaceTypeMask;
     GC BackGC = NULL;
@@ -2693,7 +2694,7 @@ void RelieveIconPixmap_trench (Window win, int w, int h, GC ReliefGC, GC ShadowG
 void
 DrawButton_gtk (XfwmWindow * t, Window win, int w, int h,
                  ButtonFace * bf, GC ReliefGC, GC ShadowGC,
-                 Boolean inverted, int stateflags)
+                 Bool inverted, int stateflags)
 {
     int type = bf->style & ButtonFaceTypeMask;
     GC BackGC = NULL;

@@ -38,6 +38,9 @@
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
+#include <X11/Xlib.h>
+#include <X11/Intrinsic.h>
+#include <X11/xpm.h>
 
 #ifdef NeXT
 #include <fcntl.h>
@@ -47,8 +50,6 @@
 #include <Imlib.h>
 #endif
 
-#include <X11/Intrinsic.h>
-#include <X11/xpm.h>
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"

@@ -24,8 +24,13 @@
 #endif
 
 #include <unistd.h>
-#include <X11/Xlib.h>
 #include "xfwm.h"
+
+#include <X11/Xlib.h>
+#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
+#  include <X11/extensions/Xinerama.h>
+#endif
+
 #include "misc.h"
 #include "screen.h"
 
@@ -33,10 +38,6 @@
 #  include "dmalloc.h"
 #endif
 
-
-#ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
-#  include <X11/extensions/Xinerama.h>
-#endif
 
 /* Xinerama handling routines */
 

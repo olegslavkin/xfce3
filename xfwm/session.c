@@ -27,9 +27,11 @@
 #include <stdarg.h>
 #include <sys/types.h>
 #include <signal.h>
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+
 #include "xfwm.h"
 #include "session.h"
-#include <X11/Xatom.h>
 #include "misc.h"
 #include "screen.h"
 #include "utils.h"

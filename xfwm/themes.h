@@ -63,7 +63,7 @@ void RedoIconName (XfwmWindow *);
 void DrawIconWindow (XfwmWindow *);
 void PaintEntry (MenuRoot *, MenuItem *);
 
-void DrawButton (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Boolean, int);
+void DrawButton (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
 void SetTitleBar (XfwmWindow *, Bool);
 void RelieveWindow (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveIconTitle (Window, int, int, GC, GC);
@@ -74,7 +74,7 @@ void DrawTopMenu (Window, int, GC, GC);
 void DrawBottomMenu (Window, int, int, int, int, GC, GC);
 void DrawTrianglePattern (Window, GC, GC, GC, int, int, int, int);
 
-void DrawButton_xfce (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Boolean, int);
+void DrawButton_xfce (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
 void SetTitleBar_xfce (XfwmWindow *, Bool);
 void RelieveWindow_xfce (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_xfce (Window, int, int, int, int, GC, GC, int);
@@ -85,7 +85,7 @@ void DrawTrianglePattern_xfce (Window, GC, GC, GC, int, int, int, int);
 void RelieveIconTitle_xfce (Window, int, int, GC, GC);
 void RelieveIconPixmap_xfce (Window, int, int, GC, GC);
 
-void DrawButton_mofit (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Boolean, int);
+void DrawButton_mofit (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
 void SetTitleBar_mofit (XfwmWindow *, Bool);
 void RelieveWindow_mofit (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
 void RelieveHalfRectangle_mofit (Window, int, int, int, int, GC, GC, int);
@@ -96,7 +96,7 @@ void DrawTrianglePattern_mofit (Window, GC, GC, GC, int, int, int, int);
 void RelieveIconTitle_mofit (Window, int, int, GC, GC);
 void RelieveIconPixmap_mofit (Window, int, int, GC, GC);
 
-void DrawButton_trench (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Boolean, int);
+void DrawButton_trench (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
 void DrawStripes_trench (XfwmWindow *, Window, int, int, int, int, Bool);
 void SetTitleBar_trench (XfwmWindow *, Bool);
 void RelieveWindow_trench (XfwmWindow *, Window, int, int, int, int, GC, GC, int);
@@ -108,7 +108,7 @@ void DrawTrianglePattern_trench (Window, GC, GC, GC, int, int, int, int);
 void RelieveIconTitle_trench (Window, int, int, GC, GC);
 void RelieveIconPixmap_trench (Window, int, int, GC, GC);
 
-void DrawButton_gtk (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Boolean, int);
+void DrawButton_gtk (XfwmWindow *, Window, int, int, ButtonFace *, GC, GC, Bool, int);
 void DrawStripes_gtk (XfwmWindow *, Window, int, int, int, int, Bool);
 void SetTitleBar_gtk (XfwmWindow *, Bool);
 void RelieveWindow_gtk (XfwmWindow *, Window, int, int, int, int, GC, GC, int);

@@ -1840,10 +1840,10 @@ SetMenuFont (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     free (font);
 }
 
-Boolean ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose);
+Bool ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose);
 void FreeButtonFace (Display * dpy, ButtonFace * bf);
 
-char *ReadTitleButton (char *s, TitleButton * tb, Boolean append, int button);
+char *ReadTitleButton (char *s, TitleButton * tb, Bool append, int button);
 
 void
 SetTitleStyle (XEvent * eventp, Window w, XfwmWindow * tmp_win,
@@ -2118,7 +2118,7 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
  * Reads a button face line into a structure (veliaa@rpi.edu)
  *
  ****************************************************************************/
-Boolean
+Bool
 ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose)
 {
     XGCValues gcv;
@@ -2266,7 +2266,7 @@ ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose)
  *
  ****************************************************************************/
 char *
-ReadTitleButton (char *s, TitleButton * tb, Boolean append, int button)
+ReadTitleButton (char *s, TitleButton * tb, Bool append, int button)
 {
     char *end = NULL, *spec;
     ButtonFace tmpbf;

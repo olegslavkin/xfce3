@@ -75,8 +75,10 @@
 #include <sys/select.h>
 #endif
 
-#include "xfwm.h"
+#include <X11/Xlib.h>
 #include <X11/Xatom.h>
+
+#include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
 #include "parse.h"

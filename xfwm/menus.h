@@ -60,6 +60,9 @@
 #ifndef _MENUS_
 #define _MENUS_
 
+#include <X11/Xlib.h>
+#include "utils.h"
+
 /* Function types used for formatting menus */
 
 #define FUNC_NO_WINDOW 0
@@ -67,8 +70,6 @@
 #define FUNC_POPUP 1
 #define FUNC_TITLE 2
 #define FUNC_NOP 3
-
-#include "utils.h"
 
 typedef struct MenuItem
 {

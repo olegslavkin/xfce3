@@ -37,10 +37,11 @@
 #include <string.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include <X11/keysym.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/errno.h>
+#include <X11/Xlib.h>
+#include <X11/keysym.h>
 
 #include "xfwm.h"
 #include "menus.h"

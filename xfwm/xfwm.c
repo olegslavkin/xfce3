@@ -50,6 +50,7 @@
 #include "constant.h"
 #include "session.h"
 
+#include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <X11/Xproto.h>
 #include <X11/Xatom.h>
@@ -193,7 +194,7 @@ int JunkX = 0, JunkY = 0;
 Window JunkRoot, JunkChild;	/* junk window */
 unsigned int JunkWidth, JunkHeight, JunkBW, JunkDepth, JunkMask;
 
-Boolean PPosOverride, Blackout = False;
+Bool PPosOverride, Blackout = False;
 
 unsigned int KeyMask;
 unsigned int ButtonMask;
@@ -246,7 +247,7 @@ Atom _XA_XFWM_ICONPOS_Y;
 Atom _WIN_DESKTOP_BUTTON_PROXY;
 
 int ShapeEventBase, ShapeErrorBase;
-Boolean ShapesSupported = False;
+Bool ShapesSupported = False;
 
 long isIconicState = 0;
 extern XEvent Event;

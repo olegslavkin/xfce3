@@ -320,7 +320,7 @@ extern XContext XfwmContext;
 
 extern Window BlackoutWin;
 
-extern Boolean ShapesSupported;
+extern Bool ShapesSupported;
 
 extern Window JunkRoot, JunkChild;
 extern int JunkX, JunkY;

@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>
+#include <X11/Xlib.h>
 
 #include "xfwm.h"
 #include "menus.h"

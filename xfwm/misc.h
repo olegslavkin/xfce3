@@ -25,6 +25,8 @@
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <X11/Xlib.h>
+
 #include "menus.h"
 #include "utils.h"
 #include "screen.h"
