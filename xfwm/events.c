@@ -296,6 +296,7 @@ DispatchEvent ()
 #ifdef REQUIRES_STASHEVENT
   StashEventTime (&Event);
 #endif
+  XFlush (dpy);
   if ((w == None) || (XFindContext (dpy, w, XfwmContext, (caddr_t *) &Tmp_win) == XCNOENT))
   {
     Tmp_win = NULL;
@@ -1774,14 +1775,20 @@ My_XNextEvent (Display * dpy, XEvent * event)
   FD_ZERO (&out_fdset);
 #ifdef HAVE_SESSION
   if (sm_fd >= 0)
+  {
     FD_SET (sm_fd, &in_fdset);
+  }
 #endif
   for (i = 0; i < npipes; i++)
   {
     if (readPipes[i] >= 0)
+    {
       FD_SET (readPipes[i], &in_fdset);
+    }
     if (pipeQueue[i] != NULL)
+    {
       FD_SET (writePipes[i], &out_fdset);
+    }
   }
 
   if (alarmed)
@@ -1789,7 +1796,9 @@ My_XNextEvent (Display * dpy, XEvent * event)
     SetTimer (0);
     alarmed = False;
     if (Scr.Focus != NULL)
+    {
       RaiseWindow (Scr.Focus);
+    }
     return 0;
   }
 
