@@ -201,7 +201,8 @@ DrawIconWindow (XfwmWindow * Tmp_win)
 {
     Pixel TextColor = 0;
     Pixel BackColor = 0;
-    GC Shadow, Relief;
+    GC Shadow = (GC) NULL;
+    GC Relief = (GC) NULL;
     int x;
 
     if (!Tmp_win)
@@ -216,8 +217,22 @@ DrawIconWindow (XfwmWindow * Tmp_win)
     {
         ButtonFace *bf;
         bf = &GetDecor (t, titlebar.state[Active]);
-        Relief = bf->u.ReliefGC;
-        Shadow = bf->u.ShadowGC;
+        if (bf->u.ReliefGC)
+        {
+            Relief = bf->u.ReliefGC;
+        }
+        else
+        {
+            Relief = GetDecor (Tmp_win, HiReliefGC);
+        }
+        if (bf->u.ShadowGC)
+        {
+            Shadow = bf->u.ShadowGC;
+        }
+        else
+        {
+            Shadow = GetDecor (Tmp_win, HiShadowGC);
+        }
         TextColor = GetDecor (Tmp_win, HiColors.fore);
         BackColor = GetDecor (Tmp_win, HiColors.back);
         if (Tmp_win->icon_w != None)
@@ -2682,8 +2697,8 @@ DrawButton_gtk (XfwmWindow * t, Window win, int w, int h,
 {
     int type = bf->style & ButtonFaceTypeMask;
     GC BackGC = NULL;
-    GC HiGC   = NULL;
-    GC LoGC   = NULL;
+    GC HiGC   = ReliefGC;
+    GC LoGC   = ShadowGC;
 
     if (w - t->boundary_width + t->bw <= 0)
         return;
@@ -2695,8 +2710,6 @@ DrawButton_gtk (XfwmWindow * t, Window win, int w, int h,
     {
         case VectorButton:
         {
-             HiGC = ReliefGC;
-             LoGC = ShadowGC;
              if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED))
                      || ((stateflags & DecorSticky) && (t->flags & STICKY))
                      || ((stateflags & DecorShaded) && (t->flags & SHADED)))
@@ -2716,15 +2729,17 @@ DrawButton_gtk (XfwmWindow * t, Window win, int w, int h,
         case SolidButton:
         case GradButton:
         {
-              HiGC = bf->u.ReliefGC;
-              LoGC = bf->u.ShadowGC;
+              if (bf->u.ReliefGC)
+              {
+                  HiGC = bf->u.ReliefGC;
+              }
+              if (bf->u.ShadowGC)
+              {
+                  LoGC = bf->u.ShadowGC;
+              }
         }
         break;
         default:     
-        {
-              HiGC = ReliefGC;
-              LoGC = ShadowGC;
-        }
     }
     if (inverted)
     {

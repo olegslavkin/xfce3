@@ -1363,9 +1363,13 @@ SetXOR (XEvent * eventp, Window w, XfwmWindow * tmp_win,
                            WhitePixel (dpy, Scr.screen));
     gcv.subwindow_mode = IncludeInferiors;
     if (Scr.DrawGC)
+    {
         XChangeGC (dpy, Scr.DrawGC, gcm, &gcv);
+    }
     else
+    {
         Scr.DrawGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 }
 
 void
@@ -1422,7 +1426,7 @@ SetHiColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.graphics_exposures = False;
     gcv.line_width = 1;
     gcv.cap_style = CapProjecting;
-    if (fl->HiReliefGC != NULL)
+    if (fl->HiReliefGC)
     {
         XChangeGC (dpy, fl->HiReliefGC, gcm, &gcv);
     }
@@ -1433,7 +1437,7 @@ SetHiColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 
     gcv.foreground = fl->HiRelief.back;
     gcv.background = fl->HiRelief.fore;
-    if (fl->HiShadowGC != NULL)
+    if (fl->HiShadowGC)
     {
         XChangeGC (dpy, fl->HiShadowGC, gcm, &gcv);
     }
@@ -1448,7 +1452,7 @@ SetHiColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
         gcv.background = BlackPixel (dpy, Scr.screen);
     else
         gcv.background = WhitePixel (dpy, Scr.screen);
-    if (fl->HiBackGC != NULL)
+    if (fl->HiBackGC)
     {
         XChangeGC (dpy, fl->HiBackGC, gcm, &gcv);
     }
@@ -1499,7 +1503,7 @@ SetLoColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.graphics_exposures = False;
     gcv.line_width = 1;
     gcv.cap_style = CapProjecting;
-    if (fl->LoReliefGC != NULL)
+    if (fl->LoReliefGC)
     {
         XChangeGC (dpy, fl->LoReliefGC, gcm, &gcv);
     }
@@ -1510,7 +1514,7 @@ SetLoColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 
     gcv.foreground = fl->LoRelief.back;
     gcv.background = fl->LoRelief.fore;
-    if (fl->LoShadowGC != NULL)
+    if (fl->LoShadowGC)
     {
         XChangeGC (dpy, fl->LoShadowGC, gcm, &gcv);
     }
@@ -1528,7 +1532,7 @@ SetLoColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     {
         gcv.background = fl->LoRelief.fore;
     }
-    if (fl->LoBackGC != NULL)
+    if (fl->LoBackGC)
     {
         XChangeGC (dpy, fl->LoBackGC, gcm, &gcv);
     }
@@ -1628,7 +1632,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.graphics_exposures = False;
     gcv.line_width = 1;
     gcv.cap_style = CapProjecting;
-    if (Scr.MenuReliefGC != NULL)
+    if (Scr.MenuReliefGC)
     {
         XChangeGC (dpy, Scr.MenuReliefGC, gcm, &gcv);
     }
@@ -1639,7 +1643,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     
     gcv.foreground = Scr.MenuRelief.back;
     gcv.background = Scr.MenuRelief.fore;
-    if (Scr.MenuShadowGC != NULL)
+    if (Scr.MenuShadowGC)
     {
         XChangeGC (dpy, Scr.MenuShadowGC, gcm, &gcv);
     }
@@ -1650,7 +1654,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
 
     gcv.foreground = Scr.MenuColors.fore;
     gcv.background = Scr.MenuColors.back;
-    if (Scr.MenuGC != NULL)
+    if (Scr.MenuGC)
     {
         XChangeGC (dpy, Scr.MenuGC, gcm, &gcv);
     }
@@ -1660,7 +1664,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     }
     gcv.foreground = Scr.MenuSelColors.fore;
     gcv.background = Scr.MenuSelColors.back;
-    if (Scr.MenuSelGC != NULL)
+    if (Scr.MenuSelGC)
     {
         XChangeGC (dpy, Scr.MenuSelGC, gcm, &gcv);
     }
@@ -1683,7 +1687,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.graphics_exposures = False;
     gcv.line_width = 1;
     gcv.cap_style = CapProjecting;
-    if (Scr.MenuSelReliefGC != NULL)
+    if (Scr.MenuSelReliefGC)
     {
         XChangeGC (dpy, Scr.MenuSelReliefGC, gcm, &gcv);
     }
@@ -1693,7 +1697,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     }
    
     gcv.foreground = MenuSelLoColor;
-    if (Scr.MenuSelShadowGC != NULL)
+    if (Scr.MenuSelShadowGC)
     {
         XChangeGC (dpy, Scr.MenuSelShadowGC, gcm, &gcv);
     }
@@ -1778,28 +1782,50 @@ SetMenuFont (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcm = Scr.StdFont.font ? GCFont : 0;
     gcv.font = Scr.StdFont.font ? Scr.StdFont.font->fid : 0;
 
-    if (Scr.MenuReliefGC != NULL)
+    if (Scr.MenuReliefGC)
+    {
         XChangeGC (dpy, Scr.MenuReliefGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
-    if (Scr.MenuShadowGC != NULL)
+    if (Scr.MenuShadowGC)
+    {
         XChangeGC (dpy, Scr.MenuShadowGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
-    if (Scr.MenuGC != NULL)
+    if (Scr.MenuGC)
+    {
         XChangeGC (dpy, Scr.MenuGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
-    if (Scr.MenuSelGC != NULL)
+    if (Scr.MenuSelGC)
+    {
         XChangeGC (dpy, Scr.MenuSelGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuSelGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
-    if (Scr.HintsGC != NULL)
+    if (Scr.HintsGC)
+    {
         XChangeGC (dpy, Scr.HintsGC, gcm, &gcv);
+    }
+    else
+    {
+        Scr.HintsGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
     MakeMenus ();
     free (font);
@@ -2015,12 +2041,12 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
         if (bf->u.ShadowGC)
         {
             XFreeGC (dpy, bf->u.ShadowGC);
-            bf->u.ShadowGC = NULL;
+            bf->u.ShadowGC = (GC) NULL;
         }
         if (bf->u.ReliefGC)
         {
             XFreeGC (dpy, bf->u.ReliefGC);
-            bf->u.ReliefGC = NULL;
+            bf->u.ReliefGC = (GC) NULL;
         }
         break;
     case VectorButton:
@@ -2039,12 +2065,12 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
         if (bf->u.ShadowGC)
         {
             XFreeGC (dpy, bf->u.ShadowGC);
-            bf->u.ShadowGC = NULL;
+            bf->u.ShadowGC = (GC) NULL;
         }
         if (bf->u.ReliefGC)
         {
             XFreeGC (dpy, bf->u.ReliefGC);
-            bf->u.ReliefGC = NULL;
+            bf->u.ReliefGC = (GC) NULL;
         }
         break;
     default:

@@ -1659,35 +1659,35 @@ DestroyXfwmDecor (XfwmDecor * fl)
     }
     FreeButtonFace (dpy, &fl->BorderStyle.active);
     FreeButtonFace (dpy, &fl->BorderStyle.inactive);
-    if (fl->LoReliefGC != NULL)
+    if (fl->LoReliefGC != (GC) NULL)
     {
         XFreeGC (dpy, fl->LoReliefGC);
-        fl->LoReliefGC = NULL;
+        fl->LoReliefGC = (GC) NULL;
     }
-    if (fl->LoShadowGC != NULL)
+    if (fl->LoShadowGC != (GC) NULL)
     {
         XFreeGC (dpy, fl->LoShadowGC);
-        fl->LoShadowGC = NULL;
+        fl->LoShadowGC = (GC) NULL;
     }
-    if (fl->HiReliefGC != NULL)
+    if (fl->HiReliefGC != (GC) NULL)
     {
         XFreeGC (dpy, fl->HiReliefGC);
-        fl->HiReliefGC = NULL;
+        fl->HiReliefGC = (GC) NULL;
     }
-    if (fl->HiShadowGC != NULL)
+    if (fl->HiShadowGC != (GC) NULL)
     {
         XFreeGC (dpy, fl->HiShadowGC);
-        fl->HiShadowGC = NULL;
+        fl->HiShadowGC = (GC) NULL;
     }
-    if (fl->HiBackGC != NULL)
+    if (fl->HiBackGC != (GC) NULL)
     {
         XFreeGC (dpy, fl->HiBackGC);
-        fl->HiBackGC = NULL;
+        fl->HiBackGC = (GC) NULL;
     }
-    if (fl->LoBackGC != NULL)
+    if (fl->LoBackGC != (GC) NULL)
     {
         XFreeGC (dpy, fl->LoBackGC);
-        fl->LoBackGC = NULL;
+        fl->LoBackGC = (GC) NULL;
     }
 }
 
@@ -1707,12 +1707,12 @@ InitXfwmDecor (XfwmDecor * fl)
 #ifdef HAVE_X11_XFT_XFT_H
     fl->WindowFont.xftfont = NULL;
 #endif    
-    fl->HiReliefGC = NULL;
-    fl->HiShadowGC = NULL;
-    fl->LoReliefGC = NULL;
-    fl->LoShadowGC = NULL;
-    fl->LoBackGC = NULL;
-    fl->LoBackGC = NULL;
+    fl->HiReliefGC = (GC) NULL;
+    fl->HiShadowGC = (GC) NULL;
+    fl->LoReliefGC = (GC) NULL;
+    fl->LoShadowGC = (GC) NULL;
+    fl->LoBackGC   = (GC) NULL;
+    fl->LoBackGC   = (GC) NULL;
 
     /* initialize title-bar button styles */
     tmpbf.style = SimpleButton;
@@ -1742,8 +1742,8 @@ InitXfwmDecor (XfwmDecor * fl)
         fl->titlebar.state[i].bitmap = None;
         fl->titlebar.state[i].bitmap_pressed = None;
         fl->titlebar.state[i].style = SimpleButton;
-        fl->titlebar.state[i].u.ReliefGC = NULL;
-        fl->titlebar.state[i].u.ShadowGC = NULL;
+        fl->titlebar.state[i].u.ReliefGC = (GC) NULL;
+        fl->titlebar.state[i].u.ShadowGC = (GC) NULL;
     }
 
     /* initialize border texture styles */
@@ -1988,32 +1988,69 @@ Done (int restart, char *command)
     /* Cleanup stuff (avoid memory leak) */
 
     if (ModulePath)
+    {
         free (ModulePath);
-
+    }
     if (Scr.TransMaskGC)
+    {
         XFreeGC (dpy, Scr.TransMaskGC);
+        Scr.TransMaskGC = (GC) NULL;
+    }
     if (Scr.DrawGC)
+    {
         XFreeGC (dpy, Scr.DrawGC);
+        Scr.DrawGC = (GC) NULL;
+    }
     if (Scr.MenuGC)
+    {
         XFreeGC (dpy, Scr.MenuGC);
+        Scr.MenuGC = (GC) NULL;
+    }
     if (Scr.MenuReliefGC)
+    {
         XFreeGC (dpy, Scr.MenuReliefGC);
+        Scr.MenuReliefGC = (GC) NULL;
+    }
     if (Scr.MenuShadowGC)
+    {
         XFreeGC (dpy, Scr.MenuShadowGC);
+        Scr.MenuShadowGC = (GC) NULL;
+    }
     if (Scr.MenuSelGC)
+    {
         XFreeGC (dpy, Scr.MenuSelGC);
+        Scr.MenuSelGC = (GC) NULL;
+    }
     if (Scr.MenuSelReliefGC)
+    {
         XFreeGC (dpy, Scr.MenuSelReliefGC);
+        Scr.MenuSelReliefGC = (GC) NULL;
+    }
     if (Scr.MenuSelShadowGC)
+    {
         XFreeGC (dpy, Scr.MenuSelShadowGC);
+        Scr.MenuSelShadowGC = (GC) NULL;
+    }
     if (Scr.ScratchGC1)
+    {
         XFreeGC (dpy, Scr.ScratchGC1);
+        Scr.ScratchGC1 = (GC) NULL;
+    }
     if (Scr.ScratchGC3)
+    {
         XFreeGC (dpy, Scr.ScratchGC3);
+        Scr.ScratchGC3 = (GC) NULL;
+    }
     if (Scr.BlackGC)
+    {
         XFreeGC (dpy, Scr.BlackGC);
+        Scr.BlackGC = (GC) NULL;
+    }
     if (Scr.HintsGC)
+    {
         XFreeGC (dpy, Scr.HintsGC);
+        Scr.HintsGC = (GC) NULL;
+    }
 #ifndef EMULATE_XINERAMA
   #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
     XFree (xinerama_infos);
