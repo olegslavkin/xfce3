@@ -1428,11 +1428,11 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 		  (gpointer)((long)(SHORT_TITLES)) );
   shortcut_menu (menu, _("Drag does copy"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(DRAG_DOES_COPY)) ); 
-#if 0 
   menuitem = gtk_menu_item_new_with_label (_("Set background color"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_colors), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+#if 0 
 
   menuitem = gtk_menu_item_new_with_label (_("Change toolbar size"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_change_toolbar), ctree);

@@ -79,13 +79,22 @@
 #define BYTES "bytes"
 
 void set_colors(GtkWidget * ctree){
-	GtkStyle*  style;
+	GtkStyle *style;
+	static GtkStyle *Ostyle=NULL;
+	
 	int red,green,blue;
 
 	red = ctree_color.red & 0xffff;
 	green = ctree_color.green & 0xffff;
 	blue = ctree_color.blue & 0xffff;
-	style=gtk_widget_get_style (ctree);
+	if (!Ostyle) Ostyle=gtk_widget_get_style (ctree);
+    	style = gtk_style_copy (Ostyle);
+	
+	if (!(preferences & CUSTOM_COLORS)){
+		gtk_widget_set_style (ctree,style);
+		gtk_widget_ensure_style (ctree);
+		return;
+	}
 	
 	style->base[GTK_STATE_ACTIVE].red=red;
 	style->base[GTK_STATE_ACTIVE].green=green;
@@ -112,18 +121,19 @@ void set_colors(GtkWidget * ctree){
 	style->bg[GTK_STATE_SELECTED].blue=(blue^0xffff)&(0xffff);
 	gtk_widget_set_style (ctree,style);
 	gtk_widget_ensure_style (ctree);
+	return;
 }
 
 void
 cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
 {
-#if 0
   gdouble colors[4];
   gdouble *newcolor;
   char *geometry;
   cfg *win;
   gint wm_offsetX,wm_offsetY;
 
+  
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if ((geometry=(char *)malloc(64))==NULL) return;
   gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &wm_offsetX, &wm_offsetY);
@@ -144,11 +154,11 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
       ctree_color.green = ((guint) (newcolor[1] * COLOR_GDK));
       ctree_color.blue  = ((guint) (newcolor[2] * COLOR_GDK));
       preferences |= CUSTOM_COLORS;
-  } else preferences &= (CUSTOM_COLORS ^ 0xffffffff);
+  } else {
+      preferences &= (CUSTOM_COLORS ^ 0xffffffff);
+  }
   save_defaults (NULL);
-  execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
-  fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
-#endif
+  set_colors(ctree);
   return;
 }
 
