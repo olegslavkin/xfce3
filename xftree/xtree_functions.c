@@ -150,7 +150,9 @@ gint update_timer (GtkCTree * ctree)
 
   /* get a list of directories we have to check
    */
-  gtk_ctree_post_recursive (ctree, GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), get_visible_or_parent, &list);
+  gtk_ctree_post_recursive (ctree, 
+		  GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), 
+		  get_visible_or_parent, &list);
 
   tmp = list;
   while (tmp)
@@ -541,10 +543,7 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
     gtk_ctree_remove_node (ctree, child);
     child = GTK_CTREE_ROW (node)->children;
   }
-  if (en->flags & IGNORE_HIDDEN)
-    en->flags &= ~IGNORE_HIDDEN;
-  else
-    en->flags |= IGNORE_HIDDEN;
+  en->flags ^= IGNORE_HIDDEN;
   add_subtree (ctree, node, en->path, 2, en->flags);
   gtk_ctree_expand (ctree, node);
   gtk_clist_thaw (GTK_CLIST (ctree));
@@ -647,13 +646,20 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   cfg *win;
   gboolean manage_timeout;
 
-  if (!ctree)
-    return 0;
+  if (!ctree) return 0;
 
-  if (!node)
-    return 0;
+  if (!node) return 0;
+
+  
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  /* simple case, abbreviate preference changed in another window */
+  if ((win->preferences&ABREVIATE_PATHS) != (preferences&ABREVIATE_PATHS)) {
+	  regen_ctree(ctree);
+	  win->preferences=preferences;
+	  return 0;
+  }
+  
   manage_timeout = (win->timer != 0);
 
   if (manage_timeout)
@@ -726,25 +732,26 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
        }
        p_len = strlen (en->path);
        while ((name = xf_readdir (diren)) != NULL) {
-	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
-	if (io_is_current (name))  continue;
 	strcpy (label, name);
 	if ((preferences&ABREVIATE_PATHS)&&(strlen(label)>16)){
 	      int i;
 	      label[8]='~';
 	      for (i=9;i<=16;i++) label[i]=label[strlen(label)-(16-i)];
 	}
-	if (!node_has_child (ctree, node, label))
+	if (io_is_hidden (name) && (en->flags & IGNORE_HIDDEN))  continue;
+	if (io_is_current (name))  continue;
+	if (io_is_current (label))  continue;
+	if (!node_has_child (ctree, node, name))
 	{
-	  if (io_is_root (label)) sprintf (compl, "%s%s", en->path, label);
-	  else   sprintf (compl, "%s/%s", en->path, label);
+	  if (io_is_root (name)) sprintf (compl, "%s%s", en->path, name);
+	  else   sprintf (compl, "%s/%s", en->path, name);
 	  type = 0;
 	  new_child = NULL;
-	  if (!io_is_current (label) && label){
+	  if (name && !io_is_current (name) ){
 	    new_child = add_node (ctree, node, NULL, label, compl, &type, en->flags);
 	  }
 	  
-	  if ((type & FT_DIR) && (io_is_valid (label)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
+	  if ((type & FT_DIR) && (io_is_valid (name)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
 	    add_subtree (ctree, new_child, compl, 1, en->flags);
 	  if (entry_type_update (en) == TRUE)
 	    update_node (ctree, node, en->type, en->label);

@@ -318,8 +318,10 @@ cb_abreviate (GtkWidget * widget, GtkWidget *ctree)
 {
   cfg *win;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
 
   preferences ^= ABREVIATE_PATHS;
+  win->preferences = preferences;
   save_defaults(NULL);
   cb_reload(widget,(gpointer) ctree);
   return;

@@ -17,6 +17,7 @@ golist *popgo(golist *thisgo);
 void regen_ctree(GtkCTree *ctree);
 /* function overloading for regen_ctree: */
 void cb_reload (GtkWidget * item, GtkCTree * ctree);
+void regen_ctree (GtkCTree * ctree);
 #endif
 
 

@@ -26,6 +26,7 @@
 #define __XTREE_CFG_H__
 
 #include <gtk/gtk.h>
+#include "xtree_mess.h"
 #include "xtree_go.h"
 
 #define IGNORE_HIDDEN 1
@@ -51,6 +52,7 @@ typedef struct
   GtkWidget *filter;
   golist *gogo;
   int filterOpts;
+  unsigned int preferences;
 }
 cfg, cfg_t;
 

@@ -961,6 +961,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->dnd_row = -1;
   win->dnd_has_drag = 0;
   win->gogo =NULL;
+  win->preferences = preferences;
   win->filterOpts=FILTER_DIRS|FILTER_FILES;
   menu = g_malloc (sizeof (GtkWidget) * MENUS);
   titles[COL_NAME] = _("Name");

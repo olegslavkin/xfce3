@@ -33,6 +33,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <utime.h>
+#include <time.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -93,18 +94,26 @@
 #ifndef GLOB_TILDE
 #define GLOB_TILDE 0x0
 #endif
-#ifndef GLOB_ONLYDIR
-#define GLOB_ONLYDIR 0x0
+
+#ifndef GLOB_PERIOD
+#define GLOB_PERIOD 0
+#define EXTRA_ENTRIES 0
+#else 
+#define EXTRA_ENTRIES 2
 #endif
+
+
 
 #define CHILD_FILE_LENGTH 64
 #define MAX_LINE_SIZE (sizeof(char)*256)
 static char child_file[CHILD_FILE_LENGTH];
 static int  child_mode;
+static int total_files=0;
 
 static gboolean same_device=FALSE;
 static void *rw_fork_obj;
 static GtkWidget *cat,*info[3],*progress;
+static GtkWidget *tmp_ctree;
 static gboolean I_am_child=FALSE,incomplete_target=FALSE;
 static char *fork_target,*fork_source;
 static int child_file_number,child_path_number;
@@ -122,6 +131,12 @@ static void set_innerloop(gboolean state);
 static int process_error(int code);
 static void cb_cancel (GtkWidget * w, void *data);
 static gboolean all_recursive=FALSE;
+
+/* tmo */
+#define XTIME_IT
+#ifdef TIME_IT
+time_t tiempo;
+#endif
 
 gboolean on_same_device(void){return same_device;}
 
@@ -428,6 +443,8 @@ static gboolean SubChildTransfer(char *target,char *source){
 	 * 2- glob src
 	 * 3 foreach glob in globlist recall function.
 	 * */
+	/* non GNU fallback: wont copy hidden files in recursivity
+	 * unless specifically selected */
 
 	if (S_ISDIR(s_stat.st_mode)) { /* directories fall in here, going recursive */
   		glob_t dirlist;
@@ -446,13 +463,16 @@ static gboolean SubChildTransfer(char *target,char *source){
 		}
 	  	/*fprintf(stderr,"dbg:dir created: %s\n",target);*/
 		/* glob source dir */
-		if (glob (globstring, GLOB_ERR | GLOB_TILDE, NULL, &dirlist) != 0) {
+		if (glob (globstring, GLOB_ERR | GLOB_TILDE | GLOB_PERIOD, 
+					NULL, &dirlist) != 0) {
 		  /*fprintf (stderr, "dbg:%s: no match\n", globstring);*/
 			return TRUE;
 		}
   		else for (i = 0; i < dirlist.gl_pathc; i++) {
 		  if (strstr(dirlist.gl_pathv[i],"/")) src=strrchr(dirlist.gl_pathv[i],'/')+1;
 		  else src = dirlist.gl_pathv[i];
+		  if ((strcmp(src,".")==0)||(strcmp(src,"..")==0)) continue;
+		  
 		  newtarget=(char *)malloc(strlen(target)+strlen(src)+3);
 		  if (!newtarget) {
 			  free(globstring);
@@ -561,10 +581,109 @@ static void ChildTransfer(void){
 	_exit(123);
 }
 
+static GtkWidget *count_label;
+
+static int SubParentCount(char *source){
+	struct stat s_stat;
+	int i,count;
+	lstat(source,&s_stat); /* stat() the link itself */
+
+	if (S_ISDIR(s_stat.st_mode)) { /* directories fall in here, going recursive */
+  		glob_t dirlist;
+		char *globstring,*src;
+			
+		globstring = (char *)malloc(strlen(source)+3);
+		if (!globstring) return FALSE; /* fatal error */
+		sprintf(globstring,"%s/*",source);
+		/* glob source dir */
+		if (glob (globstring, GLOB_ERR | GLOB_TILDE | GLOB_PERIOD, 
+					NULL, &dirlist) != 0) {
+			return 0;
+		}
+  		else {
+		 char *count_txt = NULL;
+		 count = 0;
+		 count_txt=(char *)malloc(strlen(source)+strlen(" --> ")+32);
+		 if (count_txt != NULL) {
+			 char *short_txt;
+			 if (strstr(source,"/")==NULL) short_txt=source;
+			 else short_txt=strrchr(source,'/')+1;
+			 if (*short_txt==0) short_txt=source;
+			 sprintf(count_txt,"%s --> %d",short_txt,count);
+			 gtk_label_set_text (GTK_LABEL (count_label),count_txt );
+			 free(count_txt);
+			 while (gtk_events_pending()) gtk_main_iteration();
+ 			 gdk_flush();
+		 }
+		 for (i = 0; i < dirlist.gl_pathc; i++) {
+		  if (strstr(dirlist.gl_pathv[i],"/")) src=strrchr(dirlist.gl_pathv[i],'/')+1;
+		  else src = dirlist.gl_pathv[i];
+		  if ((strcmp(src,".")==0)||(strcmp(src,"..")==0)) continue;
+		  count += SubParentCount(dirlist.gl_pathv[i]);
+		  /*fprintf(stdout,"dbg:%s --> %d\n",dirlist.gl_pathv[i],count);*/
+		 }
+		}
+		free(globstring);		
+		return count;		
+	}
+       	/* not a directory entry, only one file here */
+	return 1; 
+}
+
+static gint ParentCount(gpointer data){
+	FILE *tfile;
+	char *line,*source;
+	int type;
+	total_files=0;
+	line=(char *)malloc(MAX_LINE_SIZE);
+	if (!line) goto count_done; 
+	tfile=fopen(child_file,"r");
+	if (!tfile) {
+		free(line);
+		goto count_done; 
+	}
+	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile)){
+		/*fprintf(stderr,"dbg:%s\n",line);*/
+		type=atoi(strtok(line,":"));
+		source=strtok(NULL,":");
+		total_files += SubParentCount(source);
+		/*fprintf(stdout,"dbg:%s --> %d\n",source,total_files);*/
+	}
+	fclose(tfile);
+	free (line);
+count_done:
+	gtk_main_quit();
+	return FALSE;
+}
+static void count_window(GtkWidget *parent){
+  GtkWidget *countW;
+  countW=gtk_dialog_new ();
+  
+  gtk_window_position (GTK_WINDOW (countW), GTK_WIN_POS_CENTER);
+  gtk_window_set_modal (GTK_WINDOW (countW), TRUE);
+  count_label = gtk_label_new ( _("Counting files"));
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->vbox), count_label, TRUE, TRUE, 3);
+  
+  count_label = gtk_label_new ( ".........................................");
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (countW)->action_area), count_label, TRUE, TRUE, 3);
+  gtk_widget_show(count_label);
+  gtk_widget_realize (countW);
+  gdk_window_set_decorations (countW->window,GDK_DECOR_BORDER);
+  if (parent) gtk_window_set_transient_for (GTK_WINDOW (countW), GTK_WINDOW (parent)); 
+  gtk_widget_show_all(countW);
+  gdk_flush();
+  /* add timeout */
+  gtk_timeout_add (260, (GtkFunction) ParentCount, NULL);
+  gtk_main();
+  gtk_widget_destroy(countW);
+  return ;
+}
+
 gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
         GtkWidget *cpy_dlg=NULL;
 	cfg *win;
 
+	tmp_ctree=ctree;
 	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
         if (CHILD_FILE_LENGTH < strlen("/tmp/xftree.9999.tmp")+1){
 		fprintf(stderr,"dbg:This is a serious mistake, I need %d bytes\n",
@@ -573,17 +692,27 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	strncpy(child_file,tmpfile,CHILD_FILE_LENGTH);
 	child_file[CHILD_FILE_LENGTH-1]=(char)0;
 	child_mode = mode;
-  	if (!cpy_dlg) cpy_dlg=show_cpy(win->top,TRUE,mode);
-        set_show_cpy_bar(0,nitems);
+ 	/* count total files to transfer */
+	count_window(win->top);
+	/*fprintf(stderr,"dbg:Total files=%d\n",total_files);*/
+ 	if (!cpy_dlg) cpy_dlg=show_cpy(win->top,TRUE,mode);
+        /*set_show_cpy_bar(0,nitems);*/
+        set_show_cpy_bar(0,total_files);
         /*fprintf(stderr,"dbg:about to fork with %s\n",tmpfile);*/
-	gtk_timeout_remove(win->timer);
+	gtk_timeout_remove(win->timer);	
 	fflush(NULL);
+
+#ifdef TIME_IT
+	tiempo=time(NULL); 
+#endif
+	
         rw_fork_obj = Tubo (ChildTransfer, rwForkOver, TRUE, rwStdout, rwStderr);
 	/* only parent continues from here */
         win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);	
 	/*fprintf(stderr,"dbg:call to innerloop from IndirectTransfer()\n");*/
 	set_innerloop(TRUE);
-       if (cpy_dlg) set_show_cpy_bar(nitems,nitems);
+       if (cpy_dlg) set_show_cpy_bar(total_files,total_files);
+       /*if (cpy_dlg) set_show_cpy_bar(nitems,nitems);*/
        show_cpy(win->top,FALSE,mode);
        return TRUE;
 }
@@ -630,31 +759,38 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
  *
  * recursive function for directories
  * */
-#define BUFFER_SIZE (8192)
+#define BUFFER_SIZE (4096)
 static int internal_rw_file(char *target,char *source,long int size){
 	int i,j=0,source_file,target_file,total_size=0;
 	char *buffer;
 	gboolean too_few=FALSE,too_many=FALSE;
+	int b_size=BUFFER_SIZE;
+        struct stat statbuf;
 
 	
 	fork_target=target;
 	fork_source=source;
-	buffer=(char *)malloc(BUFFER_SIZE);
-	/* allocate buffer */
-	if (!buffer) return (RW_ERROR_MALLOC);
 	/* open source */
 	source_file=open(source,O_RDONLY);
-	if (source_file < 0) {
-	free(buffer);
-		return (RW_ERROR_OPENING_SRC);
-	}
+	if (source_file < 0) return (RW_ERROR_OPENING_SRC);
 	/* open target */
 	target_file=open(target,O_WRONLY|O_TRUNC|O_CREAT);
 	if (target_file < 0) {
 		close (source_file);
-		free(buffer);
 		return (RW_ERROR_OPENING_TGT);
 	}
+
+		/* assign optimum block size */
+	if (fstat(source_file,&statbuf)==0) b_size=ST_BLKSIZE(statbuf);
+	/* allocate buffer */
+	buffer=(char *)malloc(BUFFER_SIZE);
+	if (!buffer) {
+		close (source_file);
+		close (target_file);
+		unlink(target); /* erase empty file created */
+		return (RW_ERROR_MALLOC);
+	}
+
 	incomplete_target=TRUE;
 	/* read/write loop */
 	/* 
@@ -665,15 +801,19 @@ static int internal_rw_file(char *target,char *source,long int size){
 	 * because the child process will terminate, closing it then. 
 	 * */
 	child_file_number++;
+	fprintf(stdout,"child:bytes: %d / %d \n",child_file_number-1,total_files);fflush(NULL);
+	fprintf(stdout,"child:item: %d \n",child_file_number-1);fflush(NULL);
 	while ((i = read (source_file,buffer,BUFFER_SIZE)) > 0){
 		if ((j=write(target_file,buffer,i)) < 0) break;
 		if (i > j){ too_few=TRUE; break;}
 		if (i < j){ too_many=TRUE; break;}
 		total_size += j;
+		
+		/* This is not really any good information, and it just
+		 * slows xftree down too much.
 		fprintf(stdout,"child:bytes:path %d, file %d -> %d bytes\n",
 				child_path_number,child_file_number,total_size);fflush(NULL);
-		/* don't hog cpu: */
-		usleep(5000);
+		usleep(50);	*/
 	}
 	free(buffer);
 	if (close(source_file)<0){
@@ -763,7 +903,8 @@ static int rwStdout (int n, void *data){
   if (strncmp(line,"child:item:",strlen("child:item:"))==0) {
   	strtok(line,":");
   	strtok(NULL,":");
-        set_show_cpy_bar(atoi(strtok(NULL,"\n")),0);
+        set_show_cpy_bar(atoi(strtok(NULL,"\n")),total_files);
+        /*set_show_cpy_bar(atoi(strtok(NULL,"\n")),0);*/
 	return TRUE;
   }
   
@@ -794,7 +935,14 @@ static void rwForkOver (void)
   rw_fork_obj = NULL;
   /*fprintf(stderr,"dbg: call to innerloop from forkover()\n");fflush(NULL);*/
   set_innerloop(FALSE);
-}
+#ifdef TIME_IT
+  fprintf(stderr,"seconds to copy=%lu\n",time(NULL)-tiempo);
+#endif
+  //if(tmp_ctree){
+	 // update_tree(GTK_CTREE(tmp_ctree),GTK_CTREE_NODE (GTK_CLIST (tmp_ctree)->row_list));
+	//  tmp_ctree=NULL;
+ // }
+	 /* regen_ctree(GTK_CTREE(tmp_ctree));*/}
 
 
 /* function to set source and target strings
@@ -805,12 +953,11 @@ void set_show_cpy(char *target,char *source){
 	if (!cat) return; /* abort if show_cpy not called yet */
 	gtk_entry_set_text (GTK_ENTRY (info[0]), source);
 	gtk_entry_set_text (GTK_ENTRY (info[1]), target);
-	sprintf (line, _("%d bytes"), 0);
+	sprintf (line, _("%d / %d"), 0,total_files);
 	gtk_label_set_text (GTK_LABEL (info[2]),line );
 }
 
-/* function to set the state of the progress bar
- * can send 0 for nitems if it's just an update */
+/* function to set the state of the progress bar*/
 void set_show_cpy_bar(int item,int nitems){
 	float p;
 	static int n;
@@ -818,8 +965,9 @@ void set_show_cpy_bar(int item,int nitems){
 	if (n < item) n=item;
 	if (!cat) return; /* abort if show_cpy not called yet */
 	/* this optionally sets the progress bar */
-	p = ((float)item)/((float)n);
-	gtk_progress_set_percentage((GtkProgress *)progress,p);	
+	if (n) p = ((float)item)/((float)n); else p=1;
+	if ((p>=0)&&(p<=1))
+		gtk_progress_set_percentage((GtkProgress *)progress,p);	
 }
 
 /* function to clean up the mess after child process
