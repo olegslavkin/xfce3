@@ -1442,6 +1442,7 @@ HandleConfigureRequest ()
   }
 
   /* compress configure requests (Shamely stolen to kwin 2.2) */
+  XSync (dpy, 0);
   while (XCheckTypedWindowEvent (dpy, cre->window, ConfigureRequest, &otherEvent) ) 
   {
     if (otherEvent.xconfigurerequest.value_mask == cre->value_mask)
