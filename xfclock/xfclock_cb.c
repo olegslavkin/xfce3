@@ -214,5 +214,5 @@ toggle_military_cb (GtkWidget * widget, gpointer data)
 void
 about_cb (GtkWidget * widget, gpointer data)
 {
-  my_show_message (_("XFClock\n(c) 1997-2000 Olivier Fourdan"));
+  my_show_message (_("XFClock\n(c) 1997-2002 Olivier Fourdan"));
 }

@@ -2,16 +2,16 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: xfsamba/xfsamba_gui.c:1322 xfsamba/xfsamba_gui.c:1327
-#: xfsamba/xfsamba_gui.c:1333 xfsamba/xfsamba_gui.c:1338
-#: xfsamba/xfsamba_gui.c:1343 xftree/xtree_toolbar.c:93
+#: xfsamba/xfsamba_gui.c:1326 xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1337 xfsamba/xfsamba_gui.c:1342
+#: xfsamba/xfsamba_gui.c:1347 xftree/xtree_toolbar.c:93
 #: xftree/xtree_toolbar.c:99 xftree/xtree_toolbar.c:104
 #: xftree/xtree_toolbar.c:108 xftree/xtree_toolbar.c:112
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-03-29 12:35+0100\n"
+"POT-Creation-Date: 2002-04-28 15:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Wojciech Ku¶ <wojciech@cool.waw.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,17 +201,17 @@ msgstr ""
 msgid "Info ..."
 msgstr "Informacja..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1243
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "Nie mogê utworzyæ pixmapy"
 
 #: xfce/info.c:121
-msgid "By Olivier Fourdan (c) 1997-2000"
-msgstr "Olivier Fourdan (c) 1997-2000"
+msgid "By Olivier Fourdan (c) 1997-2002"
+msgstr "Olivier Fourdan (c) 1997-2002"
 
 #: xfce/info.c:184
 msgid "Accept"
@@ -258,15 +258,15 @@ msgstr ""
 "Musisz podaæ co najmniej polecenie\n"
 " i etykietê!"
 
-#: xfce/popup.c:190
+#: xfce/popup.c:199
 msgid "Add a new entry..."
 msgstr "Dodaj nowy wpis..."
 
-#: xfce/popup.c:219
+#: xfce/popup.c:228
 msgid "Add icon..."
 msgstr "Dodaj ikonê..."
 
-#: xfce/popup.c:245
+#: xfce/popup.c:254
 msgid "Click to tear off popup menu"
 msgstr "Kliknij, aby od³±czyæ menu podrêczne"
 
@@ -988,22 +988,22 @@ msgstr "Zarejestruj program dla pliku \"%s\""
 msgid "Register program for suffix \"%s\""
 msgstr "Zarejestruj program dla rozszerzenia \"%s\""
 
-#: xftree/xtree.c:220
+#: xftree/xtree.c:223
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, oparty na XTree wersja %s\n"
 
-#: xftree/xtree.c:221
+#: xftree/xtree.c:224
 #, c-format
 msgid "directory: %s\n"
 msgstr "katalog: %s\n"
 
-#: xftree/xtree.c:228 xftree/xtree.c:267
+#: xftree/xtree.c:231 xftree/xtree.c:270
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "tworzê katalog: %s\n"
 
-#: xftree/xtree.c:284
+#: xftree/xtree.c:287
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometria: %dx%d+%d+%d\n"
@@ -1014,7 +1014,7 @@ msgid "error deleting file"
 msgstr "Wybierz plik"
 
 #. nothing to delete
-#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:753
+#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:775
 msgid "No files marked !"
 msgstr "Nie zaznaczy³e¶ plików!"
 
@@ -1262,7 +1262,7 @@ msgstr "Przejd¼ do..."
 msgid "Symlink ..."
 msgstr "Znajd¼..."
 
-#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_gui.c:165
+#: xfsamba/xfsamba_gui.c:1336 xftree/xtree_gui.c:165
 #: xftree/xtree_toolbar.c:103
 msgid "Delete ..."
 msgstr "Usuñ..."
@@ -1455,30 +1455,30 @@ msgstr "Duplikat"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1262 xftree/xtree_gui.c:750
+#: xfsamba/xfsamba_gui.c:1266 xftree/xtree_gui.c:750
 #, fuzzy
 msgid "File"
 msgstr "Nie uda³o siê"
 
 #. Create "Edit" menu
-#: xfsamba/xfsamba_gui.c:1273 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
+#: xfsamba/xfsamba_gui.c:1277 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
 #, fuzzy
 msgid "Edit"
 msgstr "Osiem"
 
 #. Create "Tools" menu
-#: xfsamba/xfsamba_gui.c:1285 xftree/xtree_gui.c:835
+#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:835
 #, fuzzy
 msgid "Tools"
 msgstr "Podpowiedzi"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:859
+#: xfsamba/xfsamba_gui.c:1293 xftree/xtree_gui.c:859
 msgid "View"
 msgstr ""
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1300 xftree/xtree_gui.c:889
+#: xfsamba/xfsamba_gui.c:1304 xftree/xtree_gui.c:889
 #, fuzzy
 msgid "Preferences"
 msgstr "Usuñ..."
@@ -1503,11 +1503,11 @@ msgstr ""
 msgid "Use rsync instead of scp"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1301 xftree/xtree_gui.c:941
+#: xfsamba/xfsamba_gui.c:1305 xftree/xtree_gui.c:941
 msgid "Set background color"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1302 xftree/xtree_gui.c:946
+#: xfsamba/xfsamba_gui.c:1306 xftree/xtree_gui.c:946
 #, fuzzy
 msgid "Set font"
 msgstr "Czcionka menu:"
@@ -1524,7 +1524,7 @@ msgstr "Celem musi byæ katalog!"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1307 xftree/xtree_gui.c:963
+#: xfsamba/xfsamba_gui.c:1311 xftree/xtree_gui.c:963
 msgid "Help"
 msgstr ""
 
@@ -1533,7 +1533,7 @@ msgstr ""
 msgid "Icon view"
 msgstr "Plik ikony:"
 
-#: xfsamba/xfsamba_gui.c:1308 xftree/xtree_gui.c:975
+#: xfsamba/xfsamba_gui.c:1312 xftree/xtree_gui.c:975
 msgid "Drag and drop"
 msgstr ""
 
@@ -1557,7 +1557,7 @@ msgstr ""
 msgid "About ..."
 msgstr "O programie..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1482 xftree/xtree_gui.c:1127
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1486 xftree/xtree_gui.c:1127
 msgid "Name"
 msgstr "Nazwa"
 
@@ -1696,7 +1696,7 @@ msgstr ""
 msgid "No pasteboard available."
 msgstr ""
 
-#: xftree/xtree_tar.c:387
+#: xftree/xtree_tar.c:417
 msgid "tar: execution error"
 msgstr ""
 
@@ -1730,17 +1730,17 @@ msgstr "Otwórz..."
 msgid "Go back ..."
 msgstr "&T³o..."
 
-#: xfsamba/xfsamba_gui.c:1328 xftree/xtree_toolbar.c:100
+#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_toolbar.c:100
 #, fuzzy
 msgid "Cut ..."
 msgstr "O programie..."
 
-#: xfsamba/xfsamba_gui.c:1329 xftree/xtree_toolbar.c:101
+#: xfsamba/xfsamba_gui.c:1333 xftree/xtree_toolbar.c:101
 #, fuzzy
 msgid "Copy ..."
 msgstr "Ustawienia..."
 
-#: xfsamba/xfsamba_gui.c:1330 xftree/xtree_toolbar.c:102
+#: xfsamba/xfsamba_gui.c:1334 xftree/xtree_toolbar.c:102
 #, fuzzy
 msgid "Paste ..."
 msgstr "Zapisz..."
@@ -2123,7 +2123,7 @@ msgid "Switch to diff mode"
 msgstr ""
 
 #: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
-#: xfsamba/xfsamba_gui.c:1270
+#: xfsamba/xfsamba_gui.c:1274
 #, fuzzy
 msgid "Exit"
 msgstr "Osiem"
@@ -2781,7 +2781,7 @@ msgstr "XFZegar - Zegar i Terminarz XFce"
 #: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
-"(c) 1997-2000 Olivier Fourdan"
+"(c) 1997-2002 Olivier Fourdan"
 msgstr ""
 
 #: xfclock/xfclock_config.c:53
@@ -3359,261 +3359,261 @@ msgstr ""
 msgid "Only elements from a single share may be selected!"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1037
+#: xfsamba/xfsamba_gui.c:1041
 msgid "Going to master browser..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1047
+#: xfsamba/xfsamba_gui.c:1051
 msgid "Going back..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1059
+#: xfsamba/xfsamba_gui.c:1063
 msgid "Going forward..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1075
+#: xfsamba/xfsamba_gui.c:1079
 msgid "Attempting to stop query..."
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1079
+#: xfsamba/xfsamba_gui.c:1083
 msgid "Query stopped."
 msgstr ""
 
 #. (s): multiple file upload/download enabled by DnD mostly
-#: xfsamba/xfsamba_gui.c:1264
+#: xfsamba/xfsamba_gui.c:1268
 #, fuzzy
 msgid "Download..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1265
+#: xfsamba/xfsamba_gui.c:1269
 #, fuzzy
 msgid "Upload..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1267
+#: xfsamba/xfsamba_gui.c:1271
 #, fuzzy
 msgid "New folder..."
 msgstr "Nowy katalog..."
 
-#: xfsamba/xfsamba_gui.c:1268
+#: xfsamba/xfsamba_gui.c:1272
 #, fuzzy
 msgid "Delete..."
 msgstr "Usuñ..."
 
-#: xfsamba/xfsamba_gui.c:1269 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
 #, fuzzy
 msgid "Tar..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1274
+#: xfsamba/xfsamba_gui.c:1278
 #, fuzzy
 msgid "Paste..."
 msgstr "Zapisz..."
 
-#: xfsamba/xfsamba_gui.c:1275
+#: xfsamba/xfsamba_gui.c:1279
 #, fuzzy
 msgid "Cut..."
 msgstr "O programie..."
 
-#: xfsamba/xfsamba_gui.c:1276
+#: xfsamba/xfsamba_gui.c:1280
 #, fuzzy
 msgid "Copy..."
 msgstr "Ustawienia..."
 
 #. GOTO
-#: xfsamba/xfsamba_gui.c:1279
+#: xfsamba/xfsamba_gui.c:1283
 msgid "Go"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1280
+#: xfsamba/xfsamba_gui.c:1284
 #, fuzzy
 msgid "Home..."
 msgstr "Przegl±daj..."
 
-#: xfsamba/xfsamba_gui.c:1281
+#: xfsamba/xfsamba_gui.c:1285
 #, fuzzy
 msgid "Reload..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1282
+#: xfsamba/xfsamba_gui.c:1286
 #, fuzzy
 msgid "Forward..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1283
+#: xfsamba/xfsamba_gui.c:1287
 #, fuzzy
 msgid "Back..."
 msgstr "&T³o..."
 
-#: xfsamba/xfsamba_gui.c:1286
+#: xfsamba/xfsamba_gui.c:1290
 msgid "Local file browser"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1287
+#: xfsamba/xfsamba_gui.c:1291
 msgid "Mount remote share"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1291
+#: xfsamba/xfsamba_gui.c:1295
 msgid "Show diagnostics"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1293
+#: xfsamba/xfsamba_gui.c:1297
 msgid "Hide diagnostics"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1295
+#: xfsamba/xfsamba_gui.c:1299
 msgid "Show browser links"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1297
+#: xfsamba/xfsamba_gui.c:1301
 msgid "Hide browser links"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1303
+#: xfsamba/xfsamba_gui.c:1307
 #, fuzzy
 msgid "Browse as..."
 msgstr "Przegl±daj..."
 
-#: xfsamba/xfsamba_gui.c:1309
+#: xfsamba/xfsamba_gui.c:1313
 #, fuzzy
 msgid "Mounting SMB shares"
 msgstr "Przenoszê plik...\n"
 
-#: xfsamba/xfsamba_gui.c:1310
+#: xfsamba/xfsamba_gui.c:1314
 #, fuzzy
 msgid "Searching"
 msgstr "Ostrze¿enie"
 
-#: xfsamba/xfsamba_gui.c:1311
+#: xfsamba/xfsamba_gui.c:1315
 #, fuzzy
 msgid "Differences"
 msgstr "Usuñ..."
 
-#: xfsamba/xfsamba_gui.c:1312
+#: xfsamba/xfsamba_gui.c:1316
 #, fuzzy
 msgid "Master browsers"
 msgstr "Narzêdzia/przegl±darki pocztowe"
 
-#: xfsamba/xfsamba_gui.c:1313
+#: xfsamba/xfsamba_gui.c:1317
 #, fuzzy
 msgid "About xfsamba"
 msgstr "O programie..."
 
-#: xfsamba/xfsamba_gui.c:1317
+#: xfsamba/xfsamba_gui.c:1321
 #, fuzzy
 msgid "Stop ..."
 msgstr "Ustawienia..."
 
-#: xfsamba/xfsamba_gui.c:1321
+#: xfsamba/xfsamba_gui.c:1325
 #, fuzzy
 msgid "Xftree ..."
 msgstr "Usuñ..."
 
-#: xfsamba/xfsamba_gui.c:1323
+#: xfsamba/xfsamba_gui.c:1327
 #, fuzzy
 msgid "Back ..."
 msgstr "&T³o..."
 
-#: xfsamba/xfsamba_gui.c:1324
+#: xfsamba/xfsamba_gui.c:1328
 #, fuzzy
 msgid "Forward ..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1325
+#: xfsamba/xfsamba_gui.c:1329
 #, fuzzy
 msgid "Reload ..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1326
+#: xfsamba/xfsamba_gui.c:1330
 #, fuzzy
 msgid "Home ..."
 msgstr "Przegl±daj..."
 
-#: xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1335
 #, fuzzy
 msgid "New folder ..."
 msgstr "Nowy katalog..."
 
-#: xfsamba/xfsamba_gui.c:1334
+#: xfsamba/xfsamba_gui.c:1338
 #, fuzzy
 msgid "Mount ..."
 msgstr "O programie..."
 
-#: xfsamba/xfsamba_gui.c:1335
+#: xfsamba/xfsamba_gui.c:1339
 #, fuzzy
 msgid "Download ..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1336
+#: xfsamba/xfsamba_gui.c:1340
 #, fuzzy
 msgid "Upload ..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1337
+#: xfsamba/xfsamba_gui.c:1341
 #, fuzzy
 msgid "Tar ..."
 msgstr "Otwórz..."
 
-#: xfsamba/xfsamba_gui.c:1339
+#: xfsamba/xfsamba_gui.c:1343
 msgid "Set View 1"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1340
+#: xfsamba/xfsamba_gui.c:1344
 msgid "Set View 2"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1341
+#: xfsamba/xfsamba_gui.c:1345
 msgid "Set View 3"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1342
+#: xfsamba/xfsamba_gui.c:1346
 msgid "Set View 4"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1344
+#: xfsamba/xfsamba_gui.c:1348
 #, fuzzy
 msgid "Help ..."
 msgstr "Usuñ..."
 
-#: xfsamba/xfsamba_gui.c:1428
+#: xfsamba/xfsamba_gui.c:1432
 #, fuzzy
 msgid "Location : "
 msgstr "Przyspieszenie: "
 
-#: xfsamba/xfsamba_gui.c:1442
+#: xfsamba/xfsamba_gui.c:1446
 msgid "Show IP"
 msgstr ""
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1468
+#: xfsamba/xfsamba_gui.c:1472
 msgid "Location shares : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1483
+#: xfsamba/xfsamba_gui.c:1487
 #, fuzzy
 msgid "Size"
 msgstr "Rozmiar: "
 
-#: xfsamba/xfsamba_gui.c:1484
+#: xfsamba/xfsamba_gui.c:1488
 #, fuzzy
 msgid "Date"
 msgstr "Duplikat"
 
-#: xfsamba/xfsamba_gui.c:1485
+#: xfsamba/xfsamba_gui.c:1489
 msgid "Comment"
 msgstr ""
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1534
+#: xfsamba/xfsamba_gui.c:1538
 msgid "Location known servers : "
 msgstr ""
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1562
+#: xfsamba/xfsamba_gui.c:1566
 msgid "Location known workgroups : "
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1624
+#: xfsamba/xfsamba_gui.c:1628
 msgid "Welcome to xfsamba."
 msgstr ""
 

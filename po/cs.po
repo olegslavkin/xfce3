@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #
-#: xfsamba/xfsamba_gui.c:1322 xfsamba/xfsamba_gui.c:1327
-#: xfsamba/xfsamba_gui.c:1333 xfsamba/xfsamba_gui.c:1338
-#: xfsamba/xfsamba_gui.c:1343 xftree/xtree_toolbar.c:93
+#: xfsamba/xfsamba_gui.c:1326 xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1337 xfsamba/xfsamba_gui.c:1342
+#: xfsamba/xfsamba_gui.c:1347 xftree/xtree_toolbar.c:93
 #: xftree/xtree_toolbar.c:99 xftree/xtree_toolbar.c:104
 #: xftree/xtree_toolbar.c:108 xftree/xtree_toolbar.c:112
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.14\n"
-"POT-Creation-Date: 2002-03-29 12:35+0100\n"
+"POT-Creation-Date: 2002-04-28 15:15+0200\n"
 "PO-Revision-Date: 2001-03-23  12:00+0200\n"
 "Last-Translator: Rudolf Ulc <rudolf.ulc@oku-st.cz>\n"
 "Language-Team: CZ      <li@linux.cz>\n"
@@ -200,17 +200,17 @@ msgstr "Zavøít"
 msgid "Info ..."
 msgstr "Informace ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1243
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "Nemohu vytvoøit pixmapu"
 
 #: xfce/info.c:121
-msgid "By Olivier Fourdan (c) 1997-2000"
-msgstr "Od Oliviera Fourdana (c) 1997-2000"
+msgid "By Olivier Fourdan (c) 1997-2002"
+msgstr "Od Oliviera Fourdana (c) 1997-2002"
 
 #: xfce/info.c:184
 msgid "Accept"
@@ -256,15 +256,15 @@ msgstr ""
 "Je tøeba zadat alespoò pøíkaz\n"
 "a  název !"
 
-#: xfce/popup.c:190
+#: xfce/popup.c:199
 msgid "Add a new entry..."
 msgstr "Pøidat novou polo¾ku..."
 
-#: xfce/popup.c:219
+#: xfce/popup.c:228
 msgid "Add icon..."
 msgstr "Pøidat ikonu..."
 
-#: xfce/popup.c:245
+#: xfce/popup.c:254
 msgid "Click to tear off popup menu"
 msgstr "Kliknutí zpùsobí odpojení menu"
 
@@ -972,22 +972,22 @@ msgstr "Registrovat program k souboru  \"%s\""
 msgid "Register program for suffix \"%s\""
 msgstr "Registrovat program k pøíponì  \"%s\""
 
-#: xftree/xtree.c:220
+#: xftree/xtree.c:223
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, postaveno na XTree verze %s\n"
 
-#: xftree/xtree.c:221
+#: xftree/xtree.c:224
 #, c-format
 msgid "directory: %s\n"
 msgstr "adresáø:  %s\n"
 
-#: xftree/xtree.c:228 xftree/xtree.c:267
+#: xftree/xtree.c:231 xftree/xtree.c:270
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "vytváøím adresáø: %s\n"
 
-#: xftree/xtree.c:284
+#: xftree/xtree.c:287
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometrie : %dx%d+%d+%d\n"
@@ -997,7 +997,7 @@ msgid "error deleting file"
 msgstr "chyba pøi mazání souboru"
 
 #. nothing to delete
-#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:753
+#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:775
 msgid "No files marked !"
 msgstr "®ádné soubory nejsou oznaèeny !"
 
@@ -1225,7 +1225,7 @@ msgstr "Èasové údaje ..."
 msgid "Symlink ..."
 msgstr "Symbolický link ..."
 
-#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_gui.c:165
+#: xfsamba/xfsamba_gui.c:1336 xftree/xtree_gui.c:165
 #: xftree/xtree_toolbar.c:103
 msgid "Delete ..."
 msgstr "Smazat ..."
@@ -1409,27 +1409,27 @@ msgstr "Vytvoøit"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1262 xftree/xtree_gui.c:750
+#: xfsamba/xfsamba_gui.c:1266 xftree/xtree_gui.c:750
 msgid "File"
 msgstr "Soubor"
 
 #. Create "Edit" menu
-#: xfsamba/xfsamba_gui.c:1273 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
+#: xfsamba/xfsamba_gui.c:1277 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr "Upravit"
 
 #. Create "Tools" menu
-#: xfsamba/xfsamba_gui.c:1285 xftree/xtree_gui.c:835
+#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:835
 msgid "Tools"
 msgstr "Nástroje"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:859
+#: xfsamba/xfsamba_gui.c:1293 xftree/xtree_gui.c:859
 msgid "View"
 msgstr "Zobrazit"
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1300 xftree/xtree_gui.c:889
+#: xfsamba/xfsamba_gui.c:1304 xftree/xtree_gui.c:889
 msgid "Preferences"
 msgstr "Pøedvolby"
 
@@ -1453,11 +1453,11 @@ msgstr "Ta¾ení kopíruje"
 msgid "Use rsync instead of scp"
 msgstr "Pou¾ijte rsync místo scp"
 
-#: xfsamba/xfsamba_gui.c:1301 xftree/xtree_gui.c:941
+#: xfsamba/xfsamba_gui.c:1305 xftree/xtree_gui.c:941
 msgid "Set background color"
 msgstr "Nastavit barvu pozadí"
 
-#: xfsamba/xfsamba_gui.c:1302 xftree/xtree_gui.c:946
+#: xfsamba/xfsamba_gui.c:1306 xftree/xtree_gui.c:946
 msgid "Set font"
 msgstr "Nastavit font"
 
@@ -1471,7 +1471,7 @@ msgstr "Pøedefinovat domovský adresáø"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1307 xftree/xtree_gui.c:963
+#: xfsamba/xfsamba_gui.c:1311 xftree/xtree_gui.c:963
 msgid "Help"
 msgstr "Pomoc"
 
@@ -1479,7 +1479,7 @@ msgstr "Pomoc"
 msgid "Icon view"
 msgstr "Pohled s ikonami"
 
-#: xfsamba/xfsamba_gui.c:1308 xftree/xtree_gui.c:975
+#: xfsamba/xfsamba_gui.c:1312 xftree/xtree_gui.c:975
 msgid "Drag and drop"
 msgstr "Tahni a pus»"
 
@@ -1503,7 +1503,7 @@ msgstr "Registrované aplikace"
 msgid "About ..."
 msgstr "O programu ..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1482 xftree/xtree_gui.c:1127
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1486 xftree/xtree_gui.c:1127
 msgid "Name"
 msgstr "Název"
 
@@ -1666,7 +1666,7 @@ msgstr "Schránka je nyní prázdná.\n"
 msgid "No pasteboard available."
 msgstr "®ádná schránka není dostupná"
 
-#: xftree/xtree_tar.c:387
+#: xftree/xtree_tar.c:417
 msgid "tar: execution error"
 msgstr "tar: chyba pøi provádìní"
 
@@ -1695,15 +1695,15 @@ msgstr "Aktualizovat ..."
 msgid "Go back ..."
 msgstr "Jdi zpìt..."
 
-#: xfsamba/xfsamba_gui.c:1328 xftree/xtree_toolbar.c:100
+#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_toolbar.c:100
 msgid "Cut ..."
 msgstr "Vyjmout ..."
 
-#: xfsamba/xfsamba_gui.c:1329 xftree/xtree_toolbar.c:101
+#: xfsamba/xfsamba_gui.c:1333 xftree/xtree_toolbar.c:101
 msgid "Copy ..."
 msgstr "Zkopírovat..."
 
-#: xfsamba/xfsamba_gui.c:1330 xftree/xtree_toolbar.c:102
+#: xfsamba/xfsamba_gui.c:1334 xftree/xtree_toolbar.c:102
 msgid "Paste ..."
 msgstr "Vlo¾it ..."
 
@@ -2089,7 +2089,7 @@ msgid "Switch to diff mode"
 msgstr "Pøepnout do diff módu"
 
 #: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
-#: xfsamba/xfsamba_gui.c:1270
+#: xfsamba/xfsamba_gui.c:1274
 msgid "Exit"
 msgstr "Konec"
 
@@ -2786,10 +2786,10 @@ msgstr "XFClock - XFce hodiny a kalendáø"
 #: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
-"(c) 1997-2000 Olivier Fourdan"
+"(c) 1997-2002 Olivier Fourdan"
 msgstr ""
 "XFClock\n"
-"(c) 1997-2000 Olivier Fourdan"
+"(c) 1997-2002 Olivier Fourdan"
 
 #: xfclock/xfclock_config.c:53
 #, c-format
@@ -3372,228 +3372,228 @@ msgstr "Musí být vybrány soubory ke smazání!"
 msgid "Only elements from a single share may be selected!"
 msgstr "Mohou být vybrány pouze prvky z jednoho sdílení!"
 
-#: xfsamba/xfsamba_gui.c:1037
+#: xfsamba/xfsamba_gui.c:1041
 msgid "Going to master browser..."
 msgstr "Zkou¹ím master browsera..."
 
-#: xfsamba/xfsamba_gui.c:1047
+#: xfsamba/xfsamba_gui.c:1051
 msgid "Going back..."
 msgstr "Jdi zpìt..."
 
-#: xfsamba/xfsamba_gui.c:1059
+#: xfsamba/xfsamba_gui.c:1063
 msgid "Going forward..."
 msgstr "Jdi vpøed..."
 
-#: xfsamba/xfsamba_gui.c:1075
+#: xfsamba/xfsamba_gui.c:1079
 msgid "Attempting to stop query..."
 msgstr "Pokusím se pøeru¹it dotaz..."
 
-#: xfsamba/xfsamba_gui.c:1079
+#: xfsamba/xfsamba_gui.c:1083
 msgid "Query stopped."
 msgstr "Dotaz zastaven."
 
 #. (s): multiple file upload/download enabled by DnD mostly
-#: xfsamba/xfsamba_gui.c:1264
+#: xfsamba/xfsamba_gui.c:1268
 msgid "Download..."
 msgstr "Download ..."
 
-#: xfsamba/xfsamba_gui.c:1265
+#: xfsamba/xfsamba_gui.c:1269
 msgid "Upload..."
 msgstr "Upload ..."
 
-#: xfsamba/xfsamba_gui.c:1267
+#: xfsamba/xfsamba_gui.c:1271
 msgid "New folder..."
 msgstr "Nový adresáø ..."
 
-#: xfsamba/xfsamba_gui.c:1268
+#: xfsamba/xfsamba_gui.c:1272
 msgid "Delete..."
 msgstr "Smazat ..."
 
-#: xfsamba/xfsamba_gui.c:1269 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
 msgid "Tar..."
 msgstr "Tar..."
 
-#: xfsamba/xfsamba_gui.c:1274
+#: xfsamba/xfsamba_gui.c:1278
 msgid "Paste..."
 msgstr "Vlo¾it ..."
 
-#: xfsamba/xfsamba_gui.c:1275
+#: xfsamba/xfsamba_gui.c:1279
 msgid "Cut..."
 msgstr "Vyjmout ..."
 
-#: xfsamba/xfsamba_gui.c:1276
+#: xfsamba/xfsamba_gui.c:1280
 msgid "Copy..."
 msgstr "Zkopírovat..."
 
 #. GOTO
-#: xfsamba/xfsamba_gui.c:1279
+#: xfsamba/xfsamba_gui.c:1283
 msgid "Go"
 msgstr "Pøejít"
 
-#: xfsamba/xfsamba_gui.c:1280
+#: xfsamba/xfsamba_gui.c:1284
 msgid "Home..."
 msgstr "Domù ..."
 
-#: xfsamba/xfsamba_gui.c:1281
+#: xfsamba/xfsamba_gui.c:1285
 msgid "Reload..."
 msgstr "Znovu naèíst ..."
 
-#: xfsamba/xfsamba_gui.c:1282
+#: xfsamba/xfsamba_gui.c:1286
 msgid "Forward..."
 msgstr "Vpøed ..."
 
-#: xfsamba/xfsamba_gui.c:1283
+#: xfsamba/xfsamba_gui.c:1287
 msgid "Back..."
 msgstr "Vzad..."
 
-#: xfsamba/xfsamba_gui.c:1286
+#: xfsamba/xfsamba_gui.c:1290
 msgid "Local file browser"
 msgstr "Místní prohlí¾eè souborù"
 
-#: xfsamba/xfsamba_gui.c:1287
+#: xfsamba/xfsamba_gui.c:1291
 msgid "Mount remote share"
 msgstr "Namontovat vzdálené sdílení"
 
-#: xfsamba/xfsamba_gui.c:1291
+#: xfsamba/xfsamba_gui.c:1295
 msgid "Show diagnostics"
 msgstr "Zobrazit diagnostiku"
 
-#: xfsamba/xfsamba_gui.c:1293
+#: xfsamba/xfsamba_gui.c:1297
 msgid "Hide diagnostics"
 msgstr "Skrýt diagnostiku"
 
-#: xfsamba/xfsamba_gui.c:1295
+#: xfsamba/xfsamba_gui.c:1299
 msgid "Show browser links"
 msgstr "Zobrazit seznamy prohlí¾eèe"
 
-#: xfsamba/xfsamba_gui.c:1297
+#: xfsamba/xfsamba_gui.c:1301
 msgid "Hide browser links"
 msgstr "Skrýt seznam serverù a pracovních skupin"
 
-#: xfsamba/xfsamba_gui.c:1303
+#: xfsamba/xfsamba_gui.c:1307
 msgid "Browse as..."
 msgstr "Prohlí¾et jako ..."
 
-#: xfsamba/xfsamba_gui.c:1309
+#: xfsamba/xfsamba_gui.c:1313
 msgid "Mounting SMB shares"
 msgstr "Montuji SMB sdílení"
 
-#: xfsamba/xfsamba_gui.c:1310
+#: xfsamba/xfsamba_gui.c:1314
 msgid "Searching"
 msgstr "Hledání"
 
-#: xfsamba/xfsamba_gui.c:1311
+#: xfsamba/xfsamba_gui.c:1315
 msgid "Differences"
 msgstr "Rozdíly"
 
-#: xfsamba/xfsamba_gui.c:1312
+#: xfsamba/xfsamba_gui.c:1316
 msgid "Master browsers"
 msgstr "Master browsery"
 
-#: xfsamba/xfsamba_gui.c:1313
+#: xfsamba/xfsamba_gui.c:1317
 msgid "About xfsamba"
 msgstr "O xfsambì"
 
-#: xfsamba/xfsamba_gui.c:1317
+#: xfsamba/xfsamba_gui.c:1321
 msgid "Stop ..."
 msgstr "Stop..."
 
-#: xfsamba/xfsamba_gui.c:1321
+#: xfsamba/xfsamba_gui.c:1325
 msgid "Xftree ..."
 msgstr "Xftree ..."
 
-#: xfsamba/xfsamba_gui.c:1323
+#: xfsamba/xfsamba_gui.c:1327
 msgid "Back ..."
 msgstr "Zpìt..."
 
-#: xfsamba/xfsamba_gui.c:1324
+#: xfsamba/xfsamba_gui.c:1328
 msgid "Forward ..."
 msgstr "Vpøed ..."
 
-#: xfsamba/xfsamba_gui.c:1325
+#: xfsamba/xfsamba_gui.c:1329
 msgid "Reload ..."
 msgstr "Znovu naèíst ..."
 
-#: xfsamba/xfsamba_gui.c:1326
+#: xfsamba/xfsamba_gui.c:1330
 msgid "Home ..."
 msgstr "Domù ..."
 
-#: xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1335
 msgid "New folder ..."
 msgstr "Nový adresáø ..."
 
-#: xfsamba/xfsamba_gui.c:1334
+#: xfsamba/xfsamba_gui.c:1338
 msgid "Mount ..."
 msgstr "Montování ..."
 
-#: xfsamba/xfsamba_gui.c:1335
+#: xfsamba/xfsamba_gui.c:1339
 msgid "Download ..."
 msgstr "Download ..."
 
-#: xfsamba/xfsamba_gui.c:1336
+#: xfsamba/xfsamba_gui.c:1340
 msgid "Upload ..."
 msgstr "Upload ..."
 
-#: xfsamba/xfsamba_gui.c:1337
+#: xfsamba/xfsamba_gui.c:1341
 msgid "Tar ..."
 msgstr "Tar ..."
 
-#: xfsamba/xfsamba_gui.c:1339
+#: xfsamba/xfsamba_gui.c:1343
 msgid "Set View 1"
 msgstr "Nastavit pohled 1"
 
-#: xfsamba/xfsamba_gui.c:1340
+#: xfsamba/xfsamba_gui.c:1344
 msgid "Set View 2"
 msgstr "Nastavit pohled 2"
 
-#: xfsamba/xfsamba_gui.c:1341
+#: xfsamba/xfsamba_gui.c:1345
 msgid "Set View 3"
 msgstr "Nastavit pohled 3"
 
-#: xfsamba/xfsamba_gui.c:1342
+#: xfsamba/xfsamba_gui.c:1346
 msgid "Set View 4"
 msgstr "Nastavit pohled 4"
 
-#: xfsamba/xfsamba_gui.c:1344
+#: xfsamba/xfsamba_gui.c:1348
 msgid "Help ..."
 msgstr "Nápovìda ..."
 
-#: xfsamba/xfsamba_gui.c:1428
+#: xfsamba/xfsamba_gui.c:1432
 msgid "Location : "
 msgstr "Jméno serveru : "
 
-#: xfsamba/xfsamba_gui.c:1442
+#: xfsamba/xfsamba_gui.c:1446
 msgid "Show IP"
 msgstr "Ukázat IP"
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1468
+#: xfsamba/xfsamba_gui.c:1472
 msgid "Location shares : "
 msgstr "Umístìní sdílení : "
 
-#: xfsamba/xfsamba_gui.c:1483
+#: xfsamba/xfsamba_gui.c:1487
 msgid "Size"
 msgstr "Velikost"
 
-#: xfsamba/xfsamba_gui.c:1484
+#: xfsamba/xfsamba_gui.c:1488
 msgid "Date"
 msgstr "Datum"
 
-#: xfsamba/xfsamba_gui.c:1485
+#: xfsamba/xfsamba_gui.c:1489
 msgid "Comment"
 msgstr "Komentáø"
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1534
+#: xfsamba/xfsamba_gui.c:1538
 msgid "Location known servers : "
 msgstr "Umístìní známých serverù : "
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1562
+#: xfsamba/xfsamba_gui.c:1566
 msgid "Location known workgroups : "
 msgstr "Umístìní známých pracovních skupin : "
 
-#: xfsamba/xfsamba_gui.c:1624
+#: xfsamba/xfsamba_gui.c:1628
 msgid "Welcome to xfsamba."
 msgstr "Vítá vás xfsamba."
 

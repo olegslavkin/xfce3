@@ -2,15 +2,15 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # babyfai <babyfai_cheung@hotmail.com, 2002.
 #
-#: xfsamba/xfsamba_gui.c:1322 xfsamba/xfsamba_gui.c:1327
-#: xfsamba/xfsamba_gui.c:1333 xfsamba/xfsamba_gui.c:1338
-#: xfsamba/xfsamba_gui.c:1343 xftree/xtree_toolbar.c:93
+#: xfsamba/xfsamba_gui.c:1326 xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1337 xfsamba/xfsamba_gui.c:1342
+#: xfsamba/xfsamba_gui.c:1347 xftree/xtree_toolbar.c:93
 #: xftree/xtree_toolbar.c:99 xftree/xtree_toolbar.c:104
 #: xftree/xtree_toolbar.c:108 xftree/xtree_toolbar.c:112
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce\n"
-"POT-Creation-Date: 2002-03-29 12:35+0100\n"
+"POT-Creation-Date: 2002-04-28 15:15+0200\n"
 "PO-Revision-Date: 2002-04-08 20:00+0800\n"
 "Last-Translator: babyfai <babyfai_cheung@hotmail.com>\n"
 "Language-Team: None\n"
@@ -199,18 +199,17 @@ msgstr "離開"
 msgid "Info ..."
 msgstr "信息 ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
+#: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
-#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1243
+#: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr "不能創建圖像"
 
 #: xfce/info.c:121
-msgid "By Olivier Fourdan (c) 1997-2000"
-msgstr ""
-"By Olivier Fourdan (c) 1997-2000(翻譯:小玩意)"
+msgid "By Olivier Fourdan (c) 1997-2002"
+msgstr "By Olivier Fourdan (c) 1997-2002(翻譯:小玩意)"
 
 #: xfce/info.c:184
 msgid "Accept"
@@ -256,15 +255,15 @@ msgstr ""
 "你必須提供要執行的命令\n"
 "和標籤 !"
 
-#: xfce/popup.c:190
+#: xfce/popup.c:199
 msgid "Add a new entry..."
 msgstr "添加新條目..."
 
-#: xfce/popup.c:219
+#: xfce/popup.c:228
 msgid "Add icon..."
 msgstr "添加圖示……"
 
-#: xfce/popup.c:245
+#: xfce/popup.c:254
 msgid "Click to tear off popup menu"
 msgstr "收起彈出選單"
 
@@ -549,7 +548,6 @@ msgid "KDE menu (xfmenu)"
 msgstr "KDE 選單"
 
 #: xfce/setup.c:1126
-#,
 msgid "Debian menu (xfmenu)"
 msgstr "Debian 選單"
 
@@ -954,7 +952,7 @@ msgid "This function is not available for the contents of tar files"
 msgstr "巧能尚未支援"
 
 #: xftree/reg.c:613
-#, , c-format
+#, c-format
 msgid "Register program for directory \"%s\""
 msgstr "註冊文件關聯程式“%s”"
 
@@ -972,40 +970,38 @@ msgstr "註冊文件關聯程式“%s”"
 msgid "Register program for suffix \"%s\""
 msgstr "註冊副檔名關聯程式“%s”"
 
-#: xftree/xtree.c:220
+#: xftree/xtree.c:223
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr ""
 "XFTree、 基於 XTree 版本 %s\n"
 "一個極快極實用的檔案管理器\n"
 
-#: xftree/xtree.c:221
+#: xftree/xtree.c:224
 #, c-format
 msgid "directory: %s\n"
 msgstr "目錄： %s\n"
 
-#: xftree/xtree.c:228 xftree/xtree.c:267
+#: xftree/xtree.c:231 xftree/xtree.c:270
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "建立目錄： %s\n"
 
-#: xftree/xtree.c:284
+#: xftree/xtree.c:287
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "幾何位置: %dx%d+%d+%d\n"
 
 #: xftree/xtree_cb.c:327
-#,
 msgid "error deleting file"
 msgstr "刪除檔案時發生錯誤"
 
 #. nothing to delete
-#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:753
+#: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:775
 msgid "No files marked !"
 msgstr "沒有檔案被標記!"
 
 #: xftree/xtree_cb.c:475 xftree/xtree_cb.c:477
-#,
 msgid "Delete item ?"
 msgstr "刪除項目?"
 
@@ -1014,12 +1010,10 @@ msgid "Can't move file to trash, hard delete ?"
 msgstr "不能移至回收站、強行刪除 ?"
 
 #: xftree/xtree_cb.c:573
-#,
 msgid "This is XFTree "
 msgstr "這是XFTree、檔案管理器"
 
 #: xftree/xtree_cb.c:573
-#,
 msgid ""
 " (C) under GNU GPL\n"
 "with code contributed by:\n"
@@ -1034,17 +1028,14 @@ msgstr ""
 "Edscott Wilson Garcia\n"
 
 #: xftree/xtree_cb.c:591 xftree/xtree_cb.c:602
-#,
 msgid "New_Folder"
 msgstr "新資料夾"
 
 #: xftree/xtree_cb.c:642 xftree/xtree_cb.c:650
-#,
 msgid "New_File"
 msgstr "新檔案"
 
 #: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
-#,
 msgid "File exists !"
 msgstr "檔案已存在 !"
 
@@ -1053,7 +1044,6 @@ msgid "No item marked !"
 msgstr "沒有項目被標記 !"
 
 #: xftree/xtree_cb.c:715
-#,
 msgid "Rename to : "
 msgstr "命名為 ： "
 
@@ -1062,17 +1052,14 @@ msgid "Character not allowed in filename"
 msgstr "非法的檔案名稱"
 
 #: xftree/xtree_cb.c:807
-#,
 msgid "Nothing selected !"
 msgstr "尚未選擇目錄 !"
 
 #: xftree/xtree_cb.c:1069
-#,
 msgid "command finished\n"
 msgstr "指令完成\n"
 
 #: xftree/xtree_cb.c:1294
-#,
 msgid "Override?"
 msgstr "覆寫?"
 
@@ -1146,22 +1133,18 @@ msgid "XFTree: Link"
 msgstr "XFTree： 鏈結"
 
 #: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
-#,
 msgid "No file or directory selected!"
 msgstr "尚未選擇目錄!"
 
 #: xftree/xtree_cpy.c:1439
-#,
 msgid "Only one file or directory can be selected!"
 msgstr "必須先選擇一個目錄!"
 
 #: xftree/xtree_cpy.c:1445
-#,
 msgid "This function is not available for the contents of tar/rpm files"
 msgstr "功能尚未支援"
 
 #: xftree/xtree_cpy.c:1455
-#,
 msgid "Symlink name : "
 msgstr "鏈結名稱"
 
@@ -1201,7 +1184,6 @@ msgstr "解壓檔案從"
 
 #: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
 #: xftree/xtree_gui.c:123
-#,
 msgid "Extract into"
 msgstr "解壓檔案從"
 
@@ -1215,17 +1197,14 @@ msgid "Install/update"
 msgstr "安裝/升級"
 
 #: xftree/xtree_gui.c:152 xftree/xtree_gui.c:564 xftree/xtree_gui.c:566
-#,
 msgid "Open icon view"
 msgstr "新圖示窗口"
 
 #: xftree/xtree_gui.c:155
-#,
 msgid "Open tree view"
 msgstr "新樹狀窗口"
 
 #: xftree/xtree_gui.c:156
-#,
 msgid "Open terminal view"
 msgstr "在終端機開啟"
 
@@ -1239,22 +1218,19 @@ msgid "New file"
 msgstr "新檔案"
 
 #: xftree/xtree_gui.c:163
-#,
 msgid "Touch ..."
 msgstr "關於..."
 
 #: xftree/xtree_gui.c:164
-#,
 msgid "Symlink ..."
 msgstr "符號鏈結..."
 
-#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_gui.c:165
+#: xfsamba/xfsamba_gui.c:1336 xftree/xtree_gui.c:165
 #: xftree/xtree_toolbar.c:103
 msgid "Delete ..."
 msgstr "刪除 ..."
 
 #: xftree/xtree_gui.c:168
-#,
 msgid "Paste"
 msgstr "貼上"
 
@@ -1267,12 +1243,10 @@ msgid "Show disk usage ..."
 msgstr "顯示磁碟中用量 ..."
 
 #: xftree/xtree_gui.c:175
-#,
 msgid "Cut"
 msgstr "剪下"
 
 #: xftree/xtree_gui.c:176
-#,
 msgid "Copy"
 msgstr "複製"
 
@@ -1435,27 +1409,27 @@ msgstr "創建"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1262 xftree/xtree_gui.c:750
+#: xfsamba/xfsamba_gui.c:1266 xftree/xtree_gui.c:750
 msgid "File"
 msgstr "檔案"
 
 #. Create "Edit" menu
-#: xfsamba/xfsamba_gui.c:1273 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
+#: xfsamba/xfsamba_gui.c:1277 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr "編輯"
 
 #. Create "Tools" menu
-#: xfsamba/xfsamba_gui.c:1285 xftree/xtree_gui.c:835
+#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:835
 msgid "Tools"
 msgstr "工具"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:859
+#: xfsamba/xfsamba_gui.c:1293 xftree/xtree_gui.c:859
 msgid "View"
 msgstr "檢視"
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1300 xftree/xtree_gui.c:889
+#: xfsamba/xfsamba_gui.c:1304 xftree/xtree_gui.c:889
 msgid "Preferences"
 msgstr "設定"
 
@@ -1479,11 +1453,11 @@ msgstr "拖放=複製"
 msgid "Use rsync instead of scp"
 msgstr "用 rsync 替代 scp"
 
-#: xfsamba/xfsamba_gui.c:1301 xftree/xtree_gui.c:941
+#: xfsamba/xfsamba_gui.c:1305 xftree/xtree_gui.c:941
 msgid "Set background color"
 msgstr "背景顏色"
 
-#: xfsamba/xfsamba_gui.c:1302 xftree/xtree_gui.c:946
+#: xfsamba/xfsamba_gui.c:1306 xftree/xtree_gui.c:946
 msgid "Set font"
 msgstr "字體設定"
 
@@ -1497,16 +1471,15 @@ msgstr "重新定義家目錄"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1307 xftree/xtree_gui.c:963
+#: xfsamba/xfsamba_gui.c:1311 xftree/xtree_gui.c:963
 msgid "Help"
 msgstr "說明"
 
 #: xftree/xtree_gui.c:970
-#,
 msgid "Icon view"
 msgstr "圖示檔案："
 
-#: xfsamba/xfsamba_gui.c:1308 xftree/xtree_gui.c:975
+#: xfsamba/xfsamba_gui.c:1312 xftree/xtree_gui.c:975
 msgid "Drag and drop"
 msgstr "拖放定義"
 
@@ -1530,7 +1503,7 @@ msgstr "程式註冊"
 msgid "About ..."
 msgstr "關於..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1482 xftree/xtree_gui.c:1127
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1486 xftree/xtree_gui.c:1127
 msgid "Name"
 msgstr "名稱"
 
@@ -1642,7 +1615,6 @@ msgstr ""
 "請參巧 ~/.xfce/xtree.reg。"
 
 #: xftree/xtree_mess.c:832
-#,
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1684,7 +1656,6 @@ msgid "Not a valid file transfer pasteboard."
 msgstr "非法的檔案傳輸"
 
 #: xftree/xtree_pasteboard.c:244
-#,
 msgid "The pasteboard is currently empty.\n"
 msgstr "剪貼簿是空的.\n"
 
@@ -1692,13 +1663,12 @@ msgstr "剪貼簿是空的.\n"
 msgid "No pasteboard available."
 msgstr "剪貼簿失效"
 
-#: xftree/xtree_tar.c:387
+#: xftree/xtree_tar.c:417
 msgid "tar: execution error"
 msgstr "tar: 執行錯誤"
 
 #. only 32 elements allowed in TOOLBARICONS
 #: xftree/xtree_toolbar.c:88
-#,
 msgid "New icon view"
 msgstr "新圖示化"
 
@@ -1707,47 +1677,38 @@ msgid "New tree view"
 msgstr "新樹狀化"
 
 #: xftree/xtree_toolbar.c:90
-#,
 msgid "New terminal"
 msgstr "新終端機"
 
 #: xftree/xtree_toolbar.c:92
-#,
 msgid "Run ..."
 msgstr "執行 ..."
 
 #: xftree/xtree_toolbar.c:94
-#,
 msgid "Update ..."
 msgstr "重新整理 ..."
 
 #: xftree/xtree_toolbar.c:95
-#,
 msgid "Go back ..."
 msgstr "返回..."
 
-#: xfsamba/xfsamba_gui.c:1328 xftree/xtree_toolbar.c:100
-#,
+#: xfsamba/xfsamba_gui.c:1332 xftree/xtree_toolbar.c:100
 msgid "Cut ..."
 msgstr "剪下 ..."
 
-#: xfsamba/xfsamba_gui.c:1329 xftree/xtree_toolbar.c:101
-#,
+#: xfsamba/xfsamba_gui.c:1333 xftree/xtree_toolbar.c:101
 msgid "Copy ..."
 msgstr "複製 ..."
 
-#: xfsamba/xfsamba_gui.c:1330 xftree/xtree_toolbar.c:102
-#,
+#: xfsamba/xfsamba_gui.c:1334 xftree/xtree_toolbar.c:102
 msgid "Paste ..."
 msgstr "貼上 ..."
 
 #: xftree/xtree_toolbar.c:110
-#,
 msgid "New file ..."
 msgstr "新檔案 ..."
 
 #: xftree/xtree_toolbar.c:337
-#,
 msgid "Action"
 msgstr "動作"
 
@@ -1756,12 +1717,10 @@ msgid "Small icons. "
 msgstr "小圖示"
 
 #: xftree/xtree_toolbar.c:339
-#,
 msgid "Large icons. "
 msgstr "大圖示"
 
 #: xftree/xtree_toolbar.c:342
-#,
 msgid "Regen"
 msgstr "更新"
 
@@ -1771,12 +1730,10 @@ msgstr "大型按鈕"
 
 #. printf("dbg:%s\n",_("File download failed."));
 #: xftree/xtree_smb.c:175
-#,
 msgid "File download failed."
 msgstr "下載失敗"
 
 #: xftree/xtree_smb.c:199
-#,
 msgid "Downloading files from "
 msgstr "下載檔案從"
 
@@ -1789,7 +1746,6 @@ msgstr ""
 "不明的指令"
 
 #: xftree/xtree_smb.c:238
-#,
 msgid "Cannot open"
 msgstr "不能打開檔案"
 
@@ -2129,7 +2085,7 @@ msgid "Switch to diff mode"
 msgstr "切換到差別模式"
 
 #: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
-#: xfsamba/xfsamba_gui.c:1270
+#: xfsamba/xfsamba_gui.c:1274
 msgid "Exit"
 msgstr "退出"
 
@@ -2254,7 +2210,6 @@ msgid "Could not set selected font"
 msgstr "不能加載指定的字體"
 
 #: xfdiff/xfdiff_misc.c:130
-#,
 msgid "Confirm"
 msgstr "確認"
 
@@ -2829,10 +2784,10 @@ msgstr "XFClock - XFce 時鐘和日曆"
 #: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
-"(c) 1997-2000 Olivier Fourdan"
+"(c) 1997-2002 Olivier Fourdan"
 msgstr ""
 "XFClock效能完整的時鐘\n"
-"(c) 1997-2000 Olivier Fourdan"
+"(c) 1997-2002 Olivier Fourdan"
 
 #: xfclock/xfclock_config.c:53
 #, c-format
@@ -3371,7 +3326,6 @@ msgid "This is XFSamba "
 msgstr "這是 XFSamba網絡鄰居 "
 
 #: xfsamba/xfsamba_gui.c:358
-#,
 msgid ""
 "\n"
 "(c) Edscott Wilson Garcia under GNU GPL"
@@ -3396,14 +3350,12 @@ msgid "Password  : "
 msgstr "密碼 ： "
 
 #: xfsamba/xfsamba_gui.c:625 xfsamba/xfsamba_gui.c:631
-#,
 msgid "A single file can be selected!"
 msgstr "必須先選擇一個檔案!"
 
 #: xfsamba/xfsamba_gui.c:644 xfsamba/xfsamba_gui.c:650
 #: xfsamba/xfsamba_gui.c:663 xfsamba/xfsamba_gui.c:669
 #: xfsamba/xfsamba_gui.c:719 xfsamba/xfsamba_gui.c:725
-#,
 msgid "A single directory must be selected!"
 msgstr "必須先選擇一個目錄!"
 
@@ -3412,242 +3364,231 @@ msgid "Something to be deleted must be selected!"
 msgstr "請先選擇目標再行刪除"
 
 #: xfsamba/xfsamba_gui.c:694
-#,
 msgid "Only elements from a single share may be selected!"
 msgstr "必須先選擇一個目錄!"
 
-#: xfsamba/xfsamba_gui.c:1037
+#: xfsamba/xfsamba_gui.c:1041
 msgid "Going to master browser..."
 msgstr "到主瀏覽器..."
 
-#: xfsamba/xfsamba_gui.c:1047
+#: xfsamba/xfsamba_gui.c:1051
 msgid "Going back..."
 msgstr "返回..."
 
-#: xfsamba/xfsamba_gui.c:1059
+#: xfsamba/xfsamba_gui.c:1063
 msgid "Going forward..."
 msgstr "往前.."
 
-#: xfsamba/xfsamba_gui.c:1075
+#: xfsamba/xfsamba_gui.c:1079
 msgid "Attempting to stop query..."
 msgstr "嘗試終止查詢……"
 
-#: xfsamba/xfsamba_gui.c:1079
+#: xfsamba/xfsamba_gui.c:1083
 msgid "Query stopped."
 msgstr "查詢停止。"
 
 #. (s): multiple file upload/download enabled by DnD mostly
-#: xfsamba/xfsamba_gui.c:1264
+#: xfsamba/xfsamba_gui.c:1268
 msgid "Download..."
 msgstr "下載..."
 
-#: xfsamba/xfsamba_gui.c:1265
+#: xfsamba/xfsamba_gui.c:1269
 msgid "Upload..."
 msgstr "上傳..."
 
-#: xfsamba/xfsamba_gui.c:1267
+#: xfsamba/xfsamba_gui.c:1271
 msgid "New folder..."
 msgstr "新資料夾..."
 
-#: xfsamba/xfsamba_gui.c:1268
+#: xfsamba/xfsamba_gui.c:1272
 msgid "Delete..."
 msgstr "刪除..."
 
-#: xfsamba/xfsamba_gui.c:1269 xfsamba/xfsamba_tar.c:441
+#: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:441
 msgid "Tar..."
 msgstr "打包(tar)..."
 
-#: xfsamba/xfsamba_gui.c:1274
-#,
+#: xfsamba/xfsamba_gui.c:1278
 msgid "Paste..."
 msgstr "貼上 ..."
 
-#: xfsamba/xfsamba_gui.c:1275
-#,
+#: xfsamba/xfsamba_gui.c:1279
 msgid "Cut..."
 msgstr "剪下 ..."
 
-#: xfsamba/xfsamba_gui.c:1276
-#,
+#: xfsamba/xfsamba_gui.c:1280
 msgid "Copy..."
 msgstr "複製 ..."
 
 #. GOTO
-#: xfsamba/xfsamba_gui.c:1279
+#: xfsamba/xfsamba_gui.c:1283
 msgid "Go"
 msgstr "開始"
 
-#: xfsamba/xfsamba_gui.c:1280
+#: xfsamba/xfsamba_gui.c:1284
 msgid "Home..."
 msgstr "家..."
 
-#: xfsamba/xfsamba_gui.c:1281
+#: xfsamba/xfsamba_gui.c:1285
 msgid "Reload..."
 msgstr "重新載入..."
 
-#: xfsamba/xfsamba_gui.c:1282
+#: xfsamba/xfsamba_gui.c:1286
 msgid "Forward..."
 msgstr "向前..."
 
-#: xfsamba/xfsamba_gui.c:1283
+#: xfsamba/xfsamba_gui.c:1287
 msgid "Back..."
 msgstr "返回.."
 
-#: xfsamba/xfsamba_gui.c:1286
+#: xfsamba/xfsamba_gui.c:1290
 msgid "Local file browser"
 msgstr "內部檔案瀏覽器"
 
-#: xfsamba/xfsamba_gui.c:1287
+#: xfsamba/xfsamba_gui.c:1291
 msgid "Mount remote share"
 msgstr "掛入共享資源"
 
-#: xfsamba/xfsamba_gui.c:1291
+#: xfsamba/xfsamba_gui.c:1295
 msgid "Show diagnostics"
 msgstr "顯示診斷信息"
 
-#: xfsamba/xfsamba_gui.c:1293
+#: xfsamba/xfsamba_gui.c:1297
 msgid "Hide diagnostics"
 msgstr "隱藏診斷信息"
 
-#: xfsamba/xfsamba_gui.c:1295
+#: xfsamba/xfsamba_gui.c:1299
 msgid "Show browser links"
 msgstr "顯示瀏覽器鏈結"
 
-#: xfsamba/xfsamba_gui.c:1297
+#: xfsamba/xfsamba_gui.c:1301
 msgid "Hide browser links"
 msgstr "隱藏瀏覽器鏈結"
 
-#: xfsamba/xfsamba_gui.c:1303
+#: xfsamba/xfsamba_gui.c:1307
 msgid "Browse as..."
 msgstr "瀏覽.."
 
-#: xfsamba/xfsamba_gui.c:1309
-#,
+#: xfsamba/xfsamba_gui.c:1313
 msgid "Mounting SMB shares"
 msgstr "掛入SMB共享資源中"
 
-#: xfsamba/xfsamba_gui.c:1310
+#: xfsamba/xfsamba_gui.c:1314
 msgid "Searching"
 msgstr "搜尋中"
 
-#: xfsamba/xfsamba_gui.c:1311
-#,
+#: xfsamba/xfsamba_gui.c:1315
 msgid "Differences"
 msgstr "差別"
 
-#: xfsamba/xfsamba_gui.c:1312
-#,
+#: xfsamba/xfsamba_gui.c:1316
 msgid "Master browsers"
 msgstr "主瀏覽器"
 
-#: xfsamba/xfsamba_gui.c:1313
-#,
+#: xfsamba/xfsamba_gui.c:1317
 msgid "About xfsamba"
 msgstr "關於 XFsamba網絡"
 
-#: xfsamba/xfsamba_gui.c:1317
+#: xfsamba/xfsamba_gui.c:1321
 msgid "Stop ..."
 msgstr "停止 ..."
 
-#: xfsamba/xfsamba_gui.c:1321
-#,
+#: xfsamba/xfsamba_gui.c:1325
 msgid "Xftree ..."
 msgstr "Xftree檔案管理..."
 
-#: xfsamba/xfsamba_gui.c:1323
+#: xfsamba/xfsamba_gui.c:1327
 msgid "Back ..."
 msgstr "返回..."
 
-#: xfsamba/xfsamba_gui.c:1324
+#: xfsamba/xfsamba_gui.c:1328
 msgid "Forward ..."
 msgstr "向前..."
 
-#: xfsamba/xfsamba_gui.c:1325
+#: xfsamba/xfsamba_gui.c:1329
 msgid "Reload ..."
 msgstr "重新載入 ..."
 
-#: xfsamba/xfsamba_gui.c:1326
+#: xfsamba/xfsamba_gui.c:1330
 msgid "Home ..."
 msgstr "家 ..."
 
-#: xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1335
 msgid "New folder ..."
 msgstr "新資料夾 ..."
 
-#: xfsamba/xfsamba_gui.c:1334
-#,
+#: xfsamba/xfsamba_gui.c:1338
 msgid "Mount ..."
 msgstr "掛入..."
 
-#: xfsamba/xfsamba_gui.c:1335
+#: xfsamba/xfsamba_gui.c:1339
 msgid "Download ..."
 msgstr "下載 ..."
 
-#: xfsamba/xfsamba_gui.c:1336
+#: xfsamba/xfsamba_gui.c:1340
 msgid "Upload ..."
 msgstr "上傳 ..."
 
-#: xfsamba/xfsamba_gui.c:1337
+#: xfsamba/xfsamba_gui.c:1341
 msgid "Tar ..."
 msgstr "打包(Tar) ..."
 
-#: xfsamba/xfsamba_gui.c:1339
+#: xfsamba/xfsamba_gui.c:1343
 msgid "Set View 1"
 msgstr "基本顯示"
 
-#: xfsamba/xfsamba_gui.c:1340
+#: xfsamba/xfsamba_gui.c:1344
 msgid "Set View 2"
 msgstr "進楷顯示"
 
-#: xfsamba/xfsamba_gui.c:1341
+#: xfsamba/xfsamba_gui.c:1345
 msgid "Set View 3"
 msgstr "詳細顯示"
 
-#: xfsamba/xfsamba_gui.c:1342
-#,
+#: xfsamba/xfsamba_gui.c:1346
 msgid "Set View 4"
 msgstr "更詳顯示"
 
-#: xfsamba/xfsamba_gui.c:1344
+#: xfsamba/xfsamba_gui.c:1348
 msgid "Help ..."
 msgstr "說明 ..."
 
-#: xfsamba/xfsamba_gui.c:1428
+#: xfsamba/xfsamba_gui.c:1432
 msgid "Location : "
 msgstr "位址 : "
 
-#: xfsamba/xfsamba_gui.c:1442
+#: xfsamba/xfsamba_gui.c:1446
 msgid "Show IP"
 msgstr "顯示 IP"
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1468
+#: xfsamba/xfsamba_gui.c:1472
 msgid "Location shares : "
 msgstr "共享位址 : "
 
-#: xfsamba/xfsamba_gui.c:1483
+#: xfsamba/xfsamba_gui.c:1487
 msgid "Size"
 msgstr "大小"
 
-#: xfsamba/xfsamba_gui.c:1484
+#: xfsamba/xfsamba_gui.c:1488
 msgid "Date"
 msgstr "日期"
 
-#: xfsamba/xfsamba_gui.c:1485
+#: xfsamba/xfsamba_gui.c:1489
 msgid "Comment"
 msgstr "註釋"
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1534
+#: xfsamba/xfsamba_gui.c:1538
 msgid "Location known servers : "
 msgstr "定位已知伺服器 : "
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1562
+#: xfsamba/xfsamba_gui.c:1566
 msgid "Location known workgroups : "
 msgstr "定位已知工作組 :"
 
-#: xfsamba/xfsamba_gui.c:1624
+#: xfsamba/xfsamba_gui.c:1628
 msgid "Welcome to xfsamba."
 msgstr "歡迎使用 XFSamba。"
 
@@ -3770,7 +3711,6 @@ msgstr "創建目錄..."
 
 #. here, dialog to ask new dir name
 #: xfsamba/xfsamba_mkdir.c:200
-#,
 msgid "New directory name:"
 msgstr "新目錄名稱:"
 
@@ -3887,22 +3827,18 @@ msgid "Upload failed."
 msgstr "上傳失敗。"
 
 #: xfsamba/xfsamba_upload.c:252
-#,
 msgid "Upload produced errors. See diagnostics for reason."
 msgstr "檔案上傳失敗。請查看診斷信息。"
 
 #: xfsamba/xfsamba_upload.c:359
-#,
 msgid "Uploading files..."
 msgstr "上傳檔案中..."
 
 #: xfsamba/xfsamba_dnd.c:502
-#,
 msgid "No target selected!"
 msgstr "尚未選擇目錄!"
 
 #: xfsamba/xfsamba_dnd.c:507
-#, 
 msgid "More than one target selected!"
 msgstr "尚未選擇目錄 !"
 

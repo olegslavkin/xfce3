@@ -19,7 +19,7 @@ LIB_TINY=14
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.16
+XFCE_VERSION=3.8.18
 AC_MSG_CHECKING(versioncode $XFCE_VERSION in xfce.spec)
 xfce_version=`grep version xfce.spec | grep define | sed -e 's,^[[^0-9.]]*,,g'`
 case `echo $xfce_version | sed -e "s,$XFCE_VERSION,DEVELOPMENTVERSION,"` in

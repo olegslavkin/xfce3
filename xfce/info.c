@@ -118,7 +118,7 @@ create_info (void)
   gtk_container_border_width (GTK_CONTAINER (info_centralframe), 4);
   gtk_frame_set_shadow_type (GTK_FRAME (info_centralframe), GTK_SHADOW_IN);
 
-  info_copyright_label = gtk_label_new (_("By Olivier Fourdan (c) 1997-2000"));
+  info_copyright_label = gtk_label_new (_("By Olivier Fourdan (c) 1997-2002"));
   gtk_widget_set_name (info_copyright_label, "info_copyright_label");
   gtk_object_set_data (GTK_OBJECT (info), "info_copyright_label", info_copyright_label);
   gtk_widget_show (info_copyright_label);
