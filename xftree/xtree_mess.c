@@ -1116,3 +1116,53 @@ void cleanup_tmpfiles(void){
 	   unlink(dirlist.gl_pathv[i]);
    }
 }
+
+gboolean
+sane (char *bin)
+{
+  char *spath, *path, *globstring;
+  glob_t dirlist;
+
+  /* printf("getenv=%s\n",getenv("PATH")); */
+  if (getenv ("PATH"))
+  {
+    path = (char *) malloc (strlen (getenv ("PATH")) + 2);
+    strcpy (path, getenv ("PATH"));
+    strcat (path, ":");
+  }
+  else
+  {
+    path = (char *) malloc (4);
+    strcpy (path, "./:");
+  }
+
+  globstring = (char *) malloc (strlen (path) + strlen (bin) + 1);
+
+/* printf("path=%s\n",path);*/
+
+  if (strstr (path, ":"))
+    spath = strtok (path, ":");
+  else
+    spath = path;
+
+  while (spath)
+  {
+    sprintf (globstring, "%s/%s", spath, bin);
+/*	 printf("checking for %s...\n",globstring);*/
+    if (glob (globstring, GLOB_ERR, NULL, &dirlist) == 0)
+    {
+      /*       printf("found at %s\n",globstring); */
+      free (globstring);
+      globfree (&dirlist);
+      free (path);
+      return TRUE;
+    }
+    globfree (&dirlist);
+    spath = strtok (NULL, ":");
+  }
+  free (globstring);
+  free(path);
+  return FALSE;
+}
+
+

@@ -7,7 +7,7 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
- * Edscott Wilson Garcia 2001 for xfce project.
+ * Edscott Wilson Garcia 2001-2002 for xfce project.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -77,6 +77,8 @@
 #endif
 
 static char *regfile = NULL;
+extern gboolean sane (char *bin);
+
 
 /*
  */
@@ -263,6 +265,22 @@ reg_build_list (char *file)
 	*ep = '\0';
 	if (p != ep)
 	  prg->arg = g_strdup (p);
+      }
+      /* check for coherent values */
+      /* if it is a directory register, does the directory exist? */
+      if (*(prg->sfx)=='/'){
+	      struct stat s;
+	      if (stat(prg->sfx,&s)<0)       {
+	         fprintf (stderr, "xftree:removing nonexitant %s from xtree.reg\n",prg->sfx);
+		 reg_free_reg (prg);
+		 continue;
+	      }
+      }
+      /* does the application exist? glob the path */
+      if (!sane(prg->app)){
+          fprintf (stderr, "xftree:removing nonexitant %s application from xtree.reg\n",prg->app);
+	  reg_free_reg (prg);
+	  continue;      
       }
       g_reg = g_list_append (g_reg, prg);
     }
@@ -548,9 +566,15 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
 	return;
   }
 
-  sfx = strrchr (en->label, '.');
-  if (!sfx)
-  {
+  if ((en->type & FT_DIR)&& !(en->type &(FT_RPM|FT_TAR))) {
+    sfx=en->path;
+    sprintf (label, _("Register program for directory \"%s\""), en->path);
+    /* FIXME: on xftree startup, remove directory regitrations that are not found */
+  }
+  else {
+   sfx = strrchr (en->label, '.');
+   if (!sfx)
+   {
     if (xf_dlg_continue (win->top,_("Can't find suffix in filename, using complete filename"), en->label) != DLG_RC_OK)
     {
       gtk_clist_thaw (GTK_CLIST (ctree));
@@ -559,11 +583,13 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
     }
     sfx = en->label;
     sprintf (label, _("Register program for file \"%s\""), sfx);
-  }
-  else
-  {
+   }
+   else
+   {
     sprintf (label, _("Register program for suffix \"%s\""), sfx);
+   }
   }
+  
   prog = reg_prog_by_suffix (win->reg, sfx);
   if (prog)
   {
@@ -590,8 +616,13 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
 	if (!*arg)
 	  arg = NULL;
       }
-      win->reg = reg_add_suffix (win->reg, sfx, entry_return, arg);
-      reg_save (win->reg);
+      if (!sane(entry_return)){
+          xf_dlg_error (win->top,_("Can't find in PATH"),entry_return);
+      }
+      else {
+	 win->reg = reg_add_suffix (win->reg, sfx, entry_return, arg);
+         reg_save (win->reg);
+      }
     }
   }
   gtk_clist_thaw (GTK_CLIST (ctree));

@@ -73,6 +73,7 @@ typedef struct xf_dirent {
 }xf_dirent;
 
 
+gboolean sane (char *bin);
 void read_defaults(void);
 void save_defaults(GtkWidget *parent);
 char * override_txt(char *new_file,char *old_file);

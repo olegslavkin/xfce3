@@ -7,7 +7,7 @@
  * Olivier Fourdan (fourdan@xfce.org)
  * Heavily modified as part of the Xfce project (http://www.xfce.org)
  *
- * Edscott Wilson Garcia C-2001 for xfce project
+ * Edscott Wilson Garcia C-2001-2002 for xfce project
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -128,9 +128,9 @@ on_ok (GtkWidget * ok, gpointer data)
 /*
  * create a modal dialog and handle it
  * dlg_open_with is deprecated */
-gint dlg_open_with (char *xap, char *defval, char *file){
+/*gint dlg_open_with (char *xap, char *defval, char *file){
 	return (xf_dlg_open_with (NULL,xap,defval,file));
-}
+}*/
 gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *label, *box, *check;
@@ -138,6 +138,9 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   char cmd[(PATH_MAX + NAME_MAX) * 3 + 6];
   char *title;
   char *path;
+  cfg *win;
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   path=valid_path((GtkCTree *)ctree,FALSE);
 
@@ -154,7 +157,8 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   dl.result = 0;
   dl.win=gtk_object_get_user_data (GTK_OBJECT (ctree));
   dl.in_terminal = 0;
-  dl.file=file;
+  if (file) dl.file=g_strdup(file);
+  else dl.file=NULL;
   dl.top = gtk_dialog_new ();
   gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (dl.top), title);
@@ -184,9 +188,9 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (dl.combo)->entry), defval);
   gtk_box_pack_start (GTK_BOX (box), dl.combo, TRUE, TRUE, 0);
 
-  if (file)
+  if (dl.file)
   {
-    label = gtk_label_new (file);
+    label = gtk_label_new (dl.file);
     gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
   }
   /* check button */
@@ -198,7 +202,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
  
 #if 0
  /*on first exec of dialog, something wrong with dl.remember */
-  if (file) { 
+  if (dl.file) { 
    dl.remember = gtk_check_button_new_with_label (_("Remember application"));
    gtk_toggle_button_set_active((GtkToggleButton *)dl.remember,FALSE);
    gtk_box_pack_start (GTK_BOX (box), dl.remember, FALSE, FALSE, 0);
@@ -224,13 +228,18 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
       cleanup_tmpfiles();
       exit (1);
     }
+    else if (!sane(dl.cmd)){
+       xf_dlg_error (win->top,_("Can't find in PATH"),dl.cmd);
+       g_free (dl.cmd);
+       goto cmd_over;      
+    }
     chdir(path);
     if (dl.in_terminal)
     {
       /* start in terminal window */
-      if (file)
+      if (dl.file)
       {
-	sprintf (cmd, "%s -e %s \"%s\" &", TERMINAL, dl.cmd, file);
+	sprintf (cmd, "%s -e %s \"%s\" &", TERMINAL, dl.cmd, dl.file);
       }
       else
       {
@@ -239,9 +248,9 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     }
     else
     {
-      if (file)
+      if (dl.file)
       {
-	sprintf (cmd, "%s \"%s\" &", dl.cmd, file);
+	sprintf (cmd, "%s \"%s\" &", dl.cmd, dl.file);
       }
       else
       {
@@ -251,6 +260,8 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     g_free (dl.cmd);
     io_system (cmd);
   }
+cmd_over:
   update_timer((GtkCTree *)ctree);
+  if (dl.file) g_free(dl.file);
   return (dl.result);
 }

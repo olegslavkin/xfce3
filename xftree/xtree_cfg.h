@@ -53,6 +53,7 @@ typedef struct
   GtkWidget *filter;
   GtkWidget *status;
   GtkWidget *autotype_C;
+  GtkWidget *autotype_D;
   GtkWidget *autotar_C;
   GtkCTreeNode *status_node;
   golist *gogo;

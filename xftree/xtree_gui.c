@@ -492,23 +492,27 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 	if (GTK_CLIST (ctree)->selection) num = selection_type (ctree, &node);
       }
     }
+    gtk_widget_hide(win->autotype_D);
     gtk_widget_hide(win->autotype_C);
     if (node==find_root((GtkCTree *)ctree))
 	    gtk_widget_hide(win->autotar_C);
     else gtk_widget_show(win->autotar_C);
     en = gtk_ctree_node_get_row_data (ctree, node); 
-    if (!(en->type & FT_TARCHILD)&&(num==MN_FILE)){
+    if (!(en->type & FT_TARCHILD)&&((num==MN_FILE)||(num==MN_DIR))){
       int i;
       GtkLabel *label;
       prg = reg_prog_by_file (win->reg, en->path);
       if (prg) {/* look in registered programs first */
         char cmd[(PATH_MAX + 3) * 2];
-        label=(GtkLabel *)(((GtkBin *)(win->autotype_C))->child);
+	GtkWidget *at;
+	if (num==MN_DIR) at=win->autotype_D;
+	else at=win->autotype_C;
+        label=(GtkLabel *)(((GtkBin *)(at))->child);
 	if (prg->arg) sprintf (cmd, "%s %s %s", prg->app, prg->arg, en->path);
 	else sprintf (cmd, "%s %s", prg->app, en->path);
 	gtk_label_set_text(label,cmd);
-	gtk_widget_show(win->autotype_C);
-      } else {/* use default autotypes */	       
+	gtk_widget_show(at);
+      } else if (num==MN_FILE) {/* use default autotypes */	      
        char *loc;
        loc=strrchr(en->path,'.');
        if (loc) for (i=0;1;i++){
@@ -527,7 +531,8 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 	       }
        }
       }
-    } else if   (!(en->type & FT_TARCHILD)&&(num==MN_DIR)){ 
+    } 
+    if (!(en->type & FT_TARCHILD)&&(num==MN_DIR)){ 
         GtkLabel *label;
         static char *text=NULL;
 	label=(GtkLabel *)(((GtkBin *)(win->autotar_C))->child);
@@ -984,7 +989,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   struct group *gr;
 
   menu_entry dir_mlist[] = {
+    AUTOTYPE_MENU,
     MAINF_DIRECTORY_MENU,
+    FILE_MENU,
     AUTOTAR_MENU,
     DIRECTORY_MENU,
     MAINF_MENU,
@@ -1210,6 +1217,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       menu_item = gtk_menu_item_new_with_label (_(dir_mlist[i].label));
     else
       menu_item = gtk_menu_item_new ();
+    if (!i) win->autotype_D=menu_item;	    
     if (dir_mlist[i].func)
     {
       if (dir_mlist[i].func==cb_autotar) win->autotar_C=menu_item;
@@ -1484,6 +1492,9 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   init_pixmaps();  
 
   reg = reg_build_list (reg_file);
+  /* clean up stale entries should be cleaned with reg_build */
+  /* now save clean register */
+  reg_save(reg);
   if (SAVE_GEOMETRY & preferences){
 	  geo->width=geometryX;
 	  geo->height=geometryY;
