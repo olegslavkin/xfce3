@@ -70,6 +70,7 @@
 #include "xtree_cb.h"
 #include "xtree_toolbar.h"
 #include "xtree_functions.h"
+#include "xtree_icons.h"
 #include "tubo.h"
 
 #ifdef HAVE_GDK_PIXBUF
@@ -148,6 +149,7 @@ static tar_dir *clean_tar_dir(void){
 /* dummy entry to get expander without expanding */
 GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
    GtkCTreeNode *item;
+   icon_pix pix;
    entry *en;
    gchar *text[COLUMNS];
    text[COL_NAME]=text[COL_DATE]=text[COL_SIZE]="";
@@ -157,10 +159,11 @@ GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
    en->label=g_strdup(".");
    en->path=g_strdup("tar:.");
    memcpy((void *)(&(en->st)),(void *)(&(p_en->st)),sizeof(struct stat));
+   set_icon_pix(&pix,en->type,en->label);   
    item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
-		  		gPIX[PIX_TAR_TABLE],gPIM[PIM_PAGE],
-				gPIX[PIX_TAR_TABLE],gPIM[PIM_PAGE],
-				TRUE,FALSE);
+		  pix.pixmap,pix.pixmask,
+		  pix.open,pix.openmask,
+		  TRUE,FALSE);
    gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);   
 }
 
@@ -279,20 +282,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      g_free(P_path);
 			      
 		      }
-	      	      if (d_en->type &  FT_DIR){
-			      if ((p_en->type & FT_GZ)||(p_en->type & FT_COMPRESS )||(p_en->type & FT_BZ2)){
-			        pix.pixmap=gPIX[PIX_TAR_TABLE_R];
-			        pix.pixmask=gPIM[PIM_DIR_CLOSE];
-			        pix.open=gPIX[PIX_TAR_EXP_R];
-			        pix.openmask=gPIM[PIM_DIR_OPEN];
-			      } else {
-			        pix.pixmap=gPIX[PIX_TAR_TABLE];
-			        pix.pixmask=gPIM[PIM_DIR_CLOSE];
-			        pix.open=gPIX[PIX_TAR_EXP];
-			        pix.openmask=gPIM[PIM_DIR_OPEN];
-			      }				
-		      }
-		      else set_icon_pix(&pix,d_en);
+	      	      set_icon_pix(&pix,d_en->type,d_en->label);
 		      s_item=gtk_ctree_insert_node (ctree,p_node, NULL, text, SPACING, 
 		  		pix.pixmap,pix.pixmask,pix.open,pix.openmask,
 				(d_en->type &  FT_DIR)?FALSE:TRUE,FALSE);

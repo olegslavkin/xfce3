@@ -73,16 +73,9 @@
 #include "xtree_cb.h"
 #include "xtree_toolbar.h"
 #include "xtree_cpy.h"
-#include "icons.h"
+#include "xtree_icons.h"
+#include "icons/xftree_icon.xpm"
 
-#ifdef HAVE_GDK_PIXBUF
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#endif
-
-
-#ifdef HAVE_GDK_IMLIB
-#include <gdk_imlib.h>
-#endif
 
 #ifndef HAVE_SNPRINTF
 #  include "snprintf.h"
@@ -893,101 +886,6 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   return menubar;
 }
 
-/* pixmap list */
-typedef struct pixmap_list {
-GdkPixmap  **pixmap;
-GdkBitmap  **pixmask;
-char **xpm;
-} pixmap_list;
-
-typedef struct gen_pixmap_list {
-GdkPixmap  **pixmap;
-GdkPixmap  **pixmask;
-char **xpm;
-char *c;
-int kolor;
-} gen_pixmap_list;
-
-/* masks that are duplicated elsewhere are initialized to NULL */
-static pixmap_list pixmaps[]={
-	{gPIX+PIX_PAGE,		gPIM+PIM_PAGE,		page_xpm},
-	{gPIX+PIX_PS,		NULL,			page_ps_xpm},
-	{gPIX+PIX_ADOBE,	NULL,			page_adobe_xpm},
-	{gPIX+PIX_PACKAGE,	gPIM+PIM_PACKAGE,	package_green_xpm},
-	{gPIX+PIX_LINKFLAG,	gPIM+PIM_LINKFLAG,	link_flag_xpm},
-	{gPIX+PIX_PAGE_AUDIO,	NULL,			page_audio_xpm},
-	{gPIX+PIX_TEXT,		NULL,			page_text_xpm},
-	{gPIX+PIX_COMPRESSED,	NULL,			page_compressed_xpm},
-	{gPIX+PIX_IMAGE,	NULL,			page_image_xpm},
-	{gPIX+PIX_TAR,		NULL,			page_tar_xpm},
-	{gPIX+PIX_PAGE_LNK,	NULL,			page_link_xpm},
-	{gPIX+PIX_PO,		NULL,			page_po_xpm},
-	{gPIX+PIX_BAK,		NULL,			page_backup_xpm},
-	{gPIX+PIX_DIR_PD,	NULL,			dir_pd_xpm},
-	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
-	{gPIX+PIX_DIR_OPEN_LNK,	NULL,			dir_open_lnk_xpm},
-	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
-	{gPIX+PIX_DIR_CLOSE_LNK,NULL,			dir_close_lnk_xpm},
-	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
-	{gPIX+PIX_EXE,		gPIM+PIM_EXE,		page_exe_xpm},
-	{gPIX+PIX_EXE_LINK,	NULL,			page_exe_link_xpm},
-	{gPIX+PIX_EXE_SCRIPT,	NULL,			page_exe_script_xpm},
-	{gPIX+PIX_CORE,		NULL,			page_core_xpm},
-	{gPIX+PIX_CHAR_DEV,	gPIM+PIM_CHAR_DEV,	char_dev_xpm},
-	{gPIX+PIX_BLOCK_DEV,	gPIM+PIM_BLOCK_DEV,	block_dev_xpm},
-	{gPIX+PIX_FIFO,		gPIM+PIM_FIFO,		fifo_xpm},
-	{gPIX+PIX_SOCKET,	gPIM+PIM_SOCKET,	socket_xpm},
-	{gPIX+PIX_STALE_LNK,	gPIM+PIM_STALE_LNK,	stale_lnk_xpm},
-	{gPIX+PIX_PAGE_HTML,	gPIM+PIM_PAGE_HTML,	page_html_xpm},
-	{NULL,NULL,NULL}
-};
-
-static gen_pixmap_list gen_pixmaps[]={
-	{gPIX+PIX_PAGE_C,	NULL,	page_xpm,	"c",	0},
-	{gPIX+PIX_PAGE_H,	NULL,	page_xpm,	"h",	1},
-	{gPIX+PIX_PAGE_F,	NULL,	page_xpm,	"f",	0},
-	{gPIX+PIX_PAGE_O,	NULL,	page_xpm,	"o",	3},
-	{gPIX+PIX_MAIL,		NULL,	page_xpm,	"@",	4},
-	{gPIX+PIX_WORD,		NULL,	page_xpm,	"W",	1},
-	{gPIX+PIX_DUP,		NULL,	page_xpm,	"*",	3},
-	{gPIX+PIX_TAR_TABLE,	NULL,	dir_close_xpm,	".",	0},
-	{gPIX+PIX_TAR_EXP,	NULL,	dir_open_xpm,	".",	0},
-	{gPIX+PIX_TAR_TABLE_R,	NULL,	dir_close_xpm,	".",	2},
-	{gPIX+PIX_TAR_EXP_R,	NULL,	dir_open_xpm,	".",	2},
-	{NULL,NULL,NULL,0}
-};
-
-static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
-		GdkPixmap **pixmap, GdkBitmap **pixmask){
-#ifdef HAVE_GDK_PIXBUF
-	if (h>0){
-		GdkPixbuf *orig_pixbuf,*new_pixbuf;
-		float r=0;
-		int w,x,y;
-	  	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **)(xpm));
-		w=gdk_pixbuf_get_width (orig_pixbuf);
-		if (w) r=(float)h/w; if (r<1.0) r=1.0;
-		x=r*w;
-		y=r*gdk_pixbuf_get_height (orig_pixbuf);
-
-  		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf,x,y,GDK_INTERP_NEAREST);
-  		gdk_pixbuf_render_pixmap_and_mask (new_pixbuf,pixmap,pixmask,
-				gdk_pixbuf_get_has_alpha (new_pixbuf));
-  		gdk_pixbuf_unref (orig_pixbuf);
-  		gdk_pixbuf_unref (new_pixbuf);
- 	        gtk_clist_set_row_height ((GtkCList *)ctree,h);
-	} else
-#endif	
-	{
-	      	*pixmap = MyCreateGdkPixmapFromData(xpm,hack,pixmask,FALSE);
-                gtk_clist_set_row_height ((GtkCList *)ctree,16);
-	}
-
-
-	return ;
-
-}
-
 static gint on_filter (GtkWidget * widget, GdkEventKey * event, GtkWidget *ctree)
 {
   if (event->keyval == GDK_Return)
@@ -998,74 +896,6 @@ static gint on_filter (GtkWidget * widget, GdkEventKey * event, GtkWidget *ctree
   return (FALSE);
 }
 
-
-void create_pixmaps(int h,GtkWidget *ctree){
-  GtkStyle  *style;
-  GdkColormap *colormap;
-  GdkGC *gc; 
-
-  int i;
-  static GtkWidget *hack=NULL; 
-  /* hack: to be able to use icons globally, independent of xftree window.*/
-  if (!hack) {hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);}
-  
-#ifndef HAVE_GDK_PIXBUF
-  else return; /* don't recreate pixmaps without gdk-pixbuf  */
-#endif
-  	
-  for (i=0;pixmaps[i].pixmap != NULL; i++){ 
-	  if (*(pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(pixmaps[i].pixmap));
-	  if ((pixmaps[i].pixmask)&&(*(pixmaps[i].pixmask) != NULL)) gdk_bitmap_unref(*(pixmaps[i].pixmask));
-	  scale_pixmap(hack,h,ctree,pixmaps[i].xpm,pixmaps[i].pixmap,pixmaps[i].pixmask);
-  }
- 
-  style=gtk_widget_get_style (ctree);
-  for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
-	int x,y;
-	GdkColor back;
-	GdkColor kolor[5];
-	gint lbearing, rbearing, width, ascent, descent;
-
-	kolor[0].pixel=0, kolor[0].red= kolor[0].green=0;kolor[0].blue =65535;
-	kolor[1].pixel=1, kolor[1].red= kolor[1].blue=0; kolor[1].green=40000;
-	kolor[2].pixel=2, kolor[2].blue=kolor[2].green=0;kolor[2].red  =65535;
-	kolor[3].pixel=3, kolor[3].red= kolor[3].green=  kolor[3].blue =42000;
-	kolor[4].pixel=4, kolor[4].red= kolor[4].green=  kolor[4].blue =0;
-	
-	colormap = gdk_colormap_get_system();
-	gdk_colormap_alloc_color (colormap,kolor+gen_pixmaps[i].kolor,FALSE,TRUE);  
-	  	  
-        if (!gdk_color_white (colormap,&back)) fprintf(stderr,"DBG: no white\n");
-	gc = gdk_gc_new (hack->window);
-	gdk_gc_set_foreground (gc,kolor+gen_pixmaps[i].kolor);
-	gdk_gc_set_background (gc,&back);
-  	
-
-	
-	if (*(gen_pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(gen_pixmaps[i].pixmap));
-	scale_pixmap(hack,h,ctree,gen_pixmaps[i].xpm,gen_pixmaps[i].pixmap,gen_pixmaps[i].pixmask);
-        gdk_string_extents (style->font,gen_pixmaps[i].c,
-			&lbearing,&rbearing,&width,&ascent,&descent);
-#if 0	
-  	fprintf(stderr,"dbg: drawing %s...lbearing=%d,rbearing=%d,width=%d,ascent=%d,descent=%d,measure=%d,width=%d,height=%d\n",
-			gen_pixmaps[i].c,lbearing,rbearing,width,ascent,descent,
-			gdk_char_measure(style->font,gen_pixmaps[i].c[0]),
-			gdk_char_width(style->font,gen_pixmaps[i].c[0]),
-			gdk_char_height (style->font,gen_pixmaps[i].c[0]));
-#endif	
-
-
-	/* numbers for page_xpm */
-        x=h/4-lbearing+1;
-        y=13*h/16-descent-1;
-	gdk_draw_text ((GdkDrawable *)(*(gen_pixmaps[i].pixmap)),style->font,gc,
-				x,y,gen_pixmaps[i].c,strlen(gen_pixmaps[i].c));
-	gdk_gc_destroy (gc);
-	  
-  }
-   
-  return;
-}
 
 /*
  * create a new toplevel window
@@ -1478,10 +1308,14 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_UID] = (pw)? pw->pw_name : _("unknown");
   gr=getgrgid (en->st.st_gid); 
   label[COL_GID] = (gr)? gr->gr_name : _("unknown");
-  
-  root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
-		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
-		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);   
+  {
+    icon_pix pix;
+    set_icon_pix(&pix,en->type,en->label);   
+    root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
+		  pix.pixmap,pix.pixmask,
+		  pix.open,pix.openmask,
+		  FALSE, TRUE);  
+  } 
   gtk_ctree_node_set_row_data_full (GTK_CTREE (ctree), root, en, node_destroy);
   add_subtree (GTK_CTREE (ctree), root, path, 2, flags);
   for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
@@ -1584,9 +1418,7 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   int i;
   
   /*fprintf(stderr,"dbg:sizeof(off_t)=%d\n",sizeof(off_t));*/
-  for (i=0;i<LAST_PIX;i++) gPIX[i]=NULL;
-  for (i=0;i<LAST_PIM;i++) gPIM[i]=NULL;
-  
+  init_pixmaps();  
 
   reg = reg_build_list (reg_file);
   if (SAVE_GEOMETRY & preferences){

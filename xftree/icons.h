@@ -18,7 +18,6 @@
 #include "icons/socket.xpm"
 #include "icons/block_dev.xpm"
 #include "icons/stale_lnk.xpm"
-#include "icons/xftree_icon.xpm"
 #include "icons/page_tar.xpm"
 #include "icons/page_compressed.xpm"
 #include "icons/page_text.xpm"

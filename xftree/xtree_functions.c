@@ -72,6 +72,7 @@
 #include "xtree_tar.h"
 #include "xtree_toolbar.h"
 #include "xtree_functions.h"
+#include "xtree_icons.h"
 
 #ifdef HAVE_GDK_PIXBUF
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -295,222 +296,6 @@ ctree_thaw (GtkCTree * ctree)
   cursor_reset (GTK_WIDGET (ctree));
 }
 
-static gboolean checkif_type(char **Type,char *loc){
-  int i;
-  for (i=0;Type[i]!=NULL;i++) 
-	  if (strcmp(loc,Type[i])==0) return TRUE;
-  return FALSE;
-}
-
-static gboolean image_type(char *loc){
-  char *Type[]={
-	  ".jpg",".JPG",".gif",".GIF",".png",".PNG",
-	  ".JPEG",".jpeg",".TIFF",".tiff",".xbm","XBM",
-	  ".XPM",".xpm",".XCF",".xcf",".PCX",".pcx",
-	  ".BMP",".bmp",
-	  NULL
-  };
-  return checkif_type(Type,loc);			  
-}
-static gboolean text_type(char *loc){
-  char *Type[]={
-	  ".txt",".TXT",".tex",".TEX",
-	  ".doc",".DOC",
-	  ".readme",".README",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-static gboolean word_type(char *loc){
-  char *Type[]={
-	  ".doc",".DOC",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-
-static gboolean compressed_type(char *loc){
-  char *Type[]={
-	  ".gz",".tgz",".bz2",".Z",
-	  ".zip",
-	  ".ZIP",
-	  ".arj",".ARJ",
-	  ".lha",".LHA",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-
-static gboolean www_type(char *loc){
-  char *Type[]={
-	  ".html",".htm",".HTM",".HTML",
-	  ".sgml",".SGML",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-static gboolean audio_type(char *loc){
-  char *Type[]={
-	  ".wav",".mp3",".mid",".midi",
-	  ".kar",".mpga",".mp2",
-	  ".ra",".aif",".aiff",".ram",
-	  ".rm",".au",".snd",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-
-static gboolean script_type(char *loc){
-  char *Type[]={
-	  ".pl",".sh",".csh",".py",".tsh",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-static gboolean mail_type(char *loc){
-  char *Type[]={
-	  "inbox","outbox","mbox","dead.letter",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-
-static gboolean bak_type(char *loc){
-  char *Type[]={
-	  ".bak",".BAK",".old",".rpmsave",".rpmnew",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-
-static gboolean dup_type(char *loc){
-  char *l;
-  for (l=loc+1;*l!=0;l++){
-	  if ((*l > '9')||(*l < '0')) return FALSE;
-  }
-  return TRUE;			    
-}
-static gboolean adobe_type(char *loc){
-  char *Type[]={
-	  ".pdf",".PDF",
-	  NULL
-  };
-  return checkif_type(Type,loc);			  
-}
-static gboolean ps_type(char *loc){
-  char *Type[]={
-	  ".ps",".PS",
-	  ".dvi",
-	  NULL
-  };
-  return checkif_type(Type,loc);			  
-}
-static gboolean packed_type(char *loc){
-  char *Type[]={
-	  ".deb",".rpm",
-	  NULL
-  };
-  return checkif_type(Type,loc);			    
-}
-
-
-
-gboolean set_icon_pix(icon_pix *pix,entry *en) {
-  char *loc;
-  gboolean isleaf=TRUE;
-  pix->open=pix->openmask=NULL;
-  /* default link icon */
-  if (en->type & FT_LINK){
-	 pix->pixmap=gPIX[PIX_LINKFLAG];
-         pix->pixmask=gPIM[PIM_LINKFLAG];    
-  }
-  if (en->type & FT_EXE) {
-    if (en->type & FT_LINK) pix->pixmap=gPIX[PIX_EXE_LINK]; 
-    else pix->pixmap=gPIX[PIX_EXE];
-    if ( (loc=strrchr(en->path,'.')) != NULL ){
-    	if (script_type(loc)) pix->pixmap=gPIX[PIX_EXE_SCRIPT];
-    }
-    pix->pixmask=gPIM[PIM_EXE];    
-  }
-  else if (en->type & FT_FILE)/* letter modified here */
-  {
-    pix->pixmask=gPIM[PIM_PAGE];
-    if (en->type & FT_LINK) {
-	    pix->pixmap=gPIX[PIX_PAGE_LNK]; 
-    }
-    else {
-      pix->pixmap=gPIX[PIX_PAGE]; /* default */
-      if (strcmp(en->label,"core")==0) pix->pixmap=gPIX[PIX_CORE];
-      else if (mail_type(en->label))	pix->pixmap=gPIX[PIX_MAIL];	      
-      else if ( (loc=strrchr(en->label,'-')) != NULL ){
-         if (dup_type(loc)) pix->pixmap=gPIX[PIX_DUP];	      
-      }
-      if ( (loc=strrchr(en->label,'.')) != NULL ){
-	      if (strlen(loc)==2) switch (loc[1]){
-		      case 'c': pix->pixmap=gPIX[PIX_PAGE_C]; break;
-		      case 'h': pix->pixmap=gPIX[PIX_PAGE_H]; break;
-		      case 'f': pix->pixmap=gPIX[PIX_PAGE_F]; break;
-		      case 'o': pix->pixmap=gPIX[PIX_PAGE_O]; break;
-		      default: break;				      
-	      }
-	      else if (bak_type(loc)) 		pix->pixmap=gPIX[PIX_BAK];	      
-	      else if (image_type(loc)) 	pix->pixmap=gPIX[PIX_IMAGE];
-	      else if (text_type(loc))  	pix->pixmap=gPIX[PIX_TEXT];
-	      else if (ps_type(loc))  		pix->pixmap=gPIX[PIX_PS];
-	      else if (adobe_type(loc))  	pix->pixmap=gPIX[PIX_ADOBE];
-	      else if (packed_type(loc)){
-	      	      pix->pixmap=gPIX[PIX_PACKAGE];
-	              pix->pixmask=gPIM[PIM_PACKAGE];
-	      }
-	      else if (compressed_type(loc)) {
-	      	     pix->pixmap=gPIX[PIX_COMPRESSED];
-  		     pix->open=gPIX[PIX_COMPRESSED];
-		     pix->openmask=gPIM[PIM_PAGE];
-	      }
-	      else if (www_type(loc)) {
-		           pix->pixmap=gPIX[PIX_PAGE_HTML];
-	                   pix->pixmask=gPIM[PIM_PAGE_HTML];
-	      }
- 	      else if (audio_type(loc)) {
-		           pix->pixmap=gPIX[PIX_PAGE_AUDIO];
-	      }
-   	      else if (strcmp(loc,".po")==0) pix->pixmap=gPIX[PIX_PO];
-   	      else if (strcmp(loc,".tar")==0){
-		     pix->pixmap=gPIX[PIX_TAR];
-  		     pix->open=gPIX[PIX_TAR];
-		     pix->openmask=gPIM[PIM_PAGE];
-	      }
-      }
-    }  
-  }
-  else if (en->type & FT_DIR_UP) {pix->pixmap=gPIX[PIX_DIR_UP],pix->pixmask=gPIM[PIM_DIR_CLOSE];}
-  else if (en->type & FT_DIR_PD) {
-	  isleaf=FALSE;
-	  pix->pixmap=gPIX[PIX_DIR_PD],pix->pixmask=gPIM[PIM_DIR_CLOSE];
-	  pix->open=gPIX[PIX_DIR_OPEN],pix->openmask=gPIM[PIM_DIR_OPEN];
-  }
-  else if (en->type & FT_DIR){
-    isleaf=FALSE;
-    if (en->type & FT_LINK) {
-	    pix->pixmap=gPIX[PIX_DIR_CLOSE_LNK];
-	    pix->open=gPIX[PIX_DIR_OPEN_LNK]; 
-    }
-    else {
-	    pix->pixmap=gPIX[PIX_DIR_CLOSE];
-            pix->open=gPIX[PIX_DIR_OPEN];
-    }
-    pix->pixmask=gPIM[PIM_DIR_CLOSE],pix->openmask=gPIM[PIM_DIR_OPEN];
-  }
-  else if (en->type & FT_CHAR_DEV){pix->pixmap=gPIX[PIX_CHAR_DEV],pix->pixmask=gPIM[PIM_CHAR_DEV];}
-  else if (en->type & FT_BLOCK_DEV){pix->pixmap=gPIX[PIX_BLOCK_DEV],pix->pixmask=gPIM[PIM_BLOCK_DEV];}
-  else if (en->type & FT_FIFO){pix->pixmap=gPIX[PIX_FIFO],pix->pixmask=gPIM[PIM_FIFO];}
-  else if (en->type & FT_SOCKET){pix->pixmap=gPIX[PIX_SOCKET],pix->pixmask=gPIM[PIM_SOCKET];}
-  else if (en->type & FT_STALE_LINK){pix->pixmap=gPIX[PIX_STALE_LNK],pix->pixmask=gPIM[PIM_STALE_LNK];}
-
-  return isleaf;
-}
-
-
 GtkCTreeNode *
 add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char *label, char *path, int *type, int flags)
 {
@@ -585,7 +370,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   gr=getgrgid (en->st.st_gid); 
   text[COL_GID] = (gr)? gr->gr_name : _("unknown");
 
-  isleaf=set_icon_pix(&pix,en);
+  isleaf=set_icon_pix(&pix,en->type,en->label);
   if (en->type & FT_TAR) isleaf=FALSE;
   
   /*fprintf(stderr,"dbg:%s en_is_tar=%d\n",en->label,en->type & FT_TAR);*/
@@ -616,7 +401,7 @@ update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
     return;
   }
   en = gtk_ctree_node_get_row_data (ctree, node); 
-  isleaf=set_icon_pix(&pix,en);
+  isleaf=set_icon_pix(&pix,en->type,en->label);
   gtk_ctree_set_node_info (ctree, node, label, SPACING, 
 		  pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, FALSE);
   

@@ -77,59 +77,9 @@ enum
   COLUMNS			/* number of columns */
 };
 
-enum
-{
-  PIX_DIR_OPEN=0, PIX_DIR_OPEN_LNK,
-  PIX_DIR_CLOSE,PIX_DIR_CLOSE_LNK,PIX_DIR_UP,
-  PIX_DIR_PD,
-  PIX_PAGE,PIX_PAGE_C,PIX_PAGE_F,PIX_PAGE_O,
-  	PIX_PAGE_H,PIX_PAGE_LNK,PIX_CORE,PIX_TAR,
-	PIX_COMPRESSED,PIX_IMAGE,PIX_TEXT,PIX_MAIL,
-	PIX_BAK,PIX_DUP,PIX_TAR_TABLE,PIX_TAR_EXP,
-	PIX_TAR_TABLE_R,PIX_TAR_EXP_R,PIX_PS,
-	PIX_ADOBE,PIX_PO,PIX_WORD,
-  PIX_PAGE_AUDIO,
-  PIX_PACKAGE,
-  PIX_LINKFLAG, 
-  PIX_PAGE_HTML, 
-  PIX_CHAR_DEV,
-  PIX_FIFO,
-  PIX_SOCKET,
-  PIX_BLOCK_DEV,
-  PIX_STALE_LNK,
-  PIX_EXE,PIX_EXE_SCRIPT,PIX_EXE_LINK,
-  LAST_PIX
-};
-/* don't repeat masks that already exist */
-enum
-{
-  PIM_DIR_OPEN=0,
-  PIM_DIR_CLOSE,
-  PIM_PACKAGE,
-  PIM_LINKFLAG, 
-  PIM_DIR_PD,
-  PIM_PAGE,
-  PIM_PAGE_HTML, 
-  PIM_CHAR_DEV,
-  PIM_FIFO,
-  PIM_SOCKET,
-  PIM_BLOCK_DEV,
-  PIM_STALE_LNK,
-  PIM_EXE,
-  LAST_PIM
-};
-
-#ifdef __XFTREE_GUI_MAIN__
-#define EXTERN
-#else 
-#define EXTERN extern
-#endif
-EXTERN GdkPixmap *gPIX[LAST_PIX];
-EXTERN GdkPixmap *gPIM[LAST_PIM];
 
 void gui_main (char *path, char *xap, char *trash, char *reg, wgeo_t *, int);
 char *mode_txt(mode_t mode);
 cfg *new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags);
 
-void create_pixmaps(int h,GtkWidget * ctree);
 #endif

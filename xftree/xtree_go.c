@@ -69,6 +69,7 @@
 #include "xtree_mess.h"
 #include "xtree_pasteboard.h"
 #include "xtree_go.h"
+#include "xtree_icons.h"
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -183,10 +184,15 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   ctree_freeze (ctree);
   
   /* fprintf(stderr,"dbg: 3go_to path=%s\n",path); */
-  gtk_ctree_remove_node (ctree, root); 
-  root = gtk_ctree_insert_node (ctree, NULL, NULL, label, 8, 
-		  gPIX[PIX_DIR_CLOSE], gPIM[PIM_DIR_CLOSE], 
-		  gPIX[PIX_DIR_OPEN], gPIM[PIM_DIR_OPEN], FALSE, TRUE);  	  
+  gtk_ctree_remove_node (ctree, root);
+  {
+    icon_pix pix;
+    set_icon_pix(&pix,en->type,en->label);   
+    root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
+		  pix.pixmap,pix.pixmask,
+		  pix.open,pix.openmask,
+		  FALSE, TRUE);  
+  }    
   gtk_ctree_node_set_row_data_full (ctree, root, en, node_destroy);
   add_subtree (ctree, root, uri_clear_path (en->path), 2, en->flags);
   
