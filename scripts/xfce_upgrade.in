@@ -45,23 +45,25 @@ for i in $FILES; do
         fi
 done
 
-if ! grep "id38121117" "$HOME/.xinitrc" > /dev/null 2>&1; then
-	echo "#!/bin/sh" \
-	> $HOME/.xinitrc.xfce.tmp
-	echo "#" \
-	>> $HOME/.xinitrc.xfce.tmp
-	echo "### Added by xfce_upgrade version 3.8.12 ###" \
-	>> $HOME/.xinitrc.xfce.tmp
-	echo "# Set up additionnal fonts that ship with Xfce (Change id38121117)" \
-	>> $HOME/.xinitrc.xfce.tmp
-	echo "xset fp+ \"XFCE_DIR/fonts\"" \
-	>> $HOME/.xinitrc.xfce.tmp
-	echo "### End of changes version 3.8.12 ###" \
-	>> $HOME/.xinitrc.xfce.tmp
-	echo "#" \
-	>> $HOME/.xinitrc.xfce.tmp
-	cat $HOME/.xinitrc >> $HOME/.xinitrc.xfce.tmp
-	mv -f $HOME/.xinitrc.xfce.tmp $HOME/.xinitrc
+if [ -f $HOME/.xinitrc ]; then
+	if ! grep "id38121117" "$HOME/.xinitrc" > /dev/null 2>&1; then
+		echo "#!/bin/sh" \
+		> $HOME/.xinitrc.xfce.tmp
+		echo "#" \
+		>> $HOME/.xinitrc.xfce.tmp
+		echo "### Added by xfce_upgrade version 3.8.12 ###" \
+		>> $HOME/.xinitrc.xfce.tmp
+		echo "# Set up additionnal fonts that ship with Xfce (Change id38121117)" \
+		>> $HOME/.xinitrc.xfce.tmp
+		echo "xset fp+ \"XFCE_DIR/fonts\"" \
+		>> $HOME/.xinitrc.xfce.tmp
+		echo "### End of changes version 3.8.12 ###" \
+		>> $HOME/.xinitrc.xfce.tmp
+		echo "#" \
+		>> $HOME/.xinitrc.xfce.tmp
+		cat $HOME/.xinitrc >> $HOME/.xinitrc.xfce.tmp
+		mv -f $HOME/.xinitrc.xfce.tmp $HOME/.xinitrc
+	fi
 fi
 
 echo Upgrade complete
