@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-02-09 10:14+0100\n"
+"POT-Creation-Date: 2002-02-09 14:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -919,7 +919,7 @@ msgstr ""
 msgid "RPM info"
 msgstr ""
 
-#: xftree/reg.c:545 xftree/xtree_cb.c:692 xftree/xtree_cb.c:809
+#: xftree/reg.c:545 xftree/xtree_cb.c:694 xftree/xtree_cb.c:811
 #: xftree/xtree_cpy.c:1291 xftree/xtree_cpy.c:1361
 msgid "This function is not available for the contents of tar files"
 msgstr ""
@@ -958,24 +958,24 @@ msgstr ""
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr ""
 
-#: xftree/xtree_cb.c:322
+#: xftree/xtree_cb.c:323
 msgid "error deleting file"
 msgstr ""
 
 #. nothing to delete
-#: xftree/xtree_cb.c:410 xftree/xtree_cb.c:767 xftree/xtree_tar.c:752
+#: xftree/xtree_cb.c:411 xftree/xtree_cb.c:769 xftree/xtree_tar.c:752
 msgid "No files marked !"
 msgstr ""
 
-#: xftree/xtree_cb.c:466 xftree/xtree_cb.c:468
+#: xftree/xtree_cb.c:468 xftree/xtree_cb.c:470
 msgid "Delete item ?"
 msgstr ""
 
-#: xftree/xtree_cb.c:478 xftree/xtree_cb.c:482
+#: xftree/xtree_cb.c:480 xftree/xtree_cb.c:484
 msgid "Can't move file to trash, hard delete ?"
 msgstr ""
 
-#: xftree/xtree_cb.c:560
+#: xftree/xtree_cb.c:562
 msgid ""
 "This is XFTree (C) under GNU GPL\n"
 "with code contributed by:\n"
@@ -984,43 +984,43 @@ msgid ""
 "Edscott Wilson Garcia\n"
 msgstr ""
 
-#: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
+#: xftree/xtree_cb.c:580 xftree/xtree_cb.c:591
 msgid "New_Folder"
 msgstr ""
 
-#: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
+#: xftree/xtree_cb.c:631 xftree/xtree_cb.c:639
 msgid "New_File"
 msgstr ""
 
-#: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733 xftree/xtree_cpy.c:1402
+#: xftree/xtree_cb.c:659 xftree/xtree_cb.c:735 xftree/xtree_cpy.c:1402
 msgid "File exists !"
 msgstr ""
 
-#: xftree/xtree_cb.c:686
+#: xftree/xtree_cb.c:688
 msgid "No item marked !"
 msgstr ""
 
-#: xftree/xtree_cb.c:702
+#: xftree/xtree_cb.c:704
 msgid "Rename to : "
 msgstr ""
 
-#: xftree/xtree_cb.c:710 xftree/xtree_cpy.c:1380
+#: xftree/xtree_cb.c:712 xftree/xtree_cpy.c:1380
 msgid "Character not allowed in filename"
 msgstr ""
 
-#: xftree/xtree_cb.c:794
+#: xftree/xtree_cb.c:796
 msgid "Nothing selected !"
 msgstr ""
 
-#: xftree/xtree_cb.c:1023
+#: xftree/xtree_cb.c:1025
 msgid "** command error:\n"
 msgstr ""
 
-#: xftree/xtree_cb.c:1048
+#: xftree/xtree_cb.c:1050
 msgid "command finished\n"
 msgstr ""
 
-#: xftree/xtree_cb.c:1188
+#: xftree/xtree_cb.c:1190
 msgid "Override?"
 msgstr ""
 

@@ -282,7 +282,6 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long tflag, int Desk)
   /* Desk has been selected, now pick a location for the window */
   if (!(tmp_win->flags & TRANSIENT) && !(tmp_win->hints.flags & (USPosition | PPosition)) && !(PPosOverride) && !((tmp_win->wmhints) && (tmp_win->wmhints->flags & StateHint) && (tmp_win->wmhints->initial_state == IconicState)))
   {
-
     bestplace (tmp_win, xl, yt);
   }
   else
