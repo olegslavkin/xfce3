@@ -29,6 +29,11 @@ then
   UNMOUNTCMD=umount
 fi
 
+if [ "x$EJECTCMD" = "x" ]
+then
+  EJECTCMD=eject
+fi
+
 if [ "x$1" = "x" ]; then
     echo $0: You must provide a mount point
     exit -1
@@ -37,9 +42,16 @@ else
 		MOUNTPNT="$1"
                 echo Mount point = $MOUNTPNT
                 shift
+                echo Mounting media...
         	$MOUNTCMD "$MOUNTPNT" $*
+                echo Browsing media...
                 xftree "$MOUNTPNT"
+                echo Unmounting media...
         	$UNMOUNTCMD "$MOUNTPNT"
+		if [ "x$EJECTCMD" != "xno" ]; then
+                        echo Ejecting media...
+			$EJECTCMD "$MOUNTPNT"
+		fi
                 exit 0
         else
 		echo $0: The mount point $1 does not exist
