@@ -1,13 +1,13 @@
-> 2) One thing I quite like about Nautilus (though not enough to use it
-> day-to-day) is the use of file manager scripts.  Since it looks like a
-> lot of this functionality is now being built right into XFTree, I was
-> wondering if perhaps just having these scripts would be a more flexible
-> way to do it?  In fact, it'd be great if XFtree was able to make use of
-> the Nautilus scripts directly.  (I like the scp_to_host one, and there
-> are plenty of other useful things there too.)
+--> xfsamba dnd:
+- enable more than one file dropped
+- enable directory drop
+- enable copy + paste, must use X clipboard by now.
 
-- tar extraction should open dialog defaulting to current directory so the
-  autotype function can be directed.
+- MUST FIX A WORKAROUND: 
+  Damn gtk bug of mistaking a drag from another widget with a drag initiation
+  on the same widget (only on first drag)
+
+
 - incorporate hostnames for dnd so rcp works with rox. Add the rsync option
   with choice for rsh, ssh ssh2.
 - incorporate root level entries for roxy pinboards
@@ -25,7 +25,7 @@
   the changing of the X pasteboard should cause a update_tree (because of
   the icon story).i.e., changing the Xpastboard caused an update of the
   linked lists cut/copy, which in turn, when changed, causes an update_tree
-  event. (what ?)
+  event. (what ?) 
 - (see above) add rsync by d+d between two xftrees running on two different
   hosts, but on the same X display or something equivalent like adding rsync 
   nodes at the root level.
