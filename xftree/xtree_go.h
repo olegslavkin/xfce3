@@ -5,4 +5,9 @@ void cb_go_up (GtkWidget * item, GtkCTree * ctree);
 void cb_go_back (GtkWidget * item, GtkCTree * ctree);
 void *pushgo(char *path,void *vgo);
 
+typedef struct golist {
+	struct golist *previous;
+	char *path;
+} golist;
+
 

@@ -43,6 +43,7 @@
 #include <X11/Xproto.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#include <gtk/gtkenums.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "my_string.h"
@@ -2548,9 +2549,14 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   shortcut_menu (menu, _("Short titles"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(SHORT_TITLES)) );
   shortcut_menu (menu, _("Drag does copy"), (gpointer) cb_toggle_preferences, 
-		  (gpointer)((long)(DRAG_DOES_COPY)) );
+		  (gpointer)((long)(DRAG_DOES_COPY)) ); 
   
+  menuitem = gtk_menu_item_new_with_label (_("Set background color"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_colors), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
 
+ 
   /* Create "Help" menu */
   menuitem = gtk_menu_item_new_with_label (_("Help"));
   gtk_menu_item_right_justify (GTK_MENU_ITEM (menuitem));
@@ -2783,7 +2789,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->width = width;
   win->height = height;
   gtk_object_set_user_data (GTK_OBJECT (ctree), win);
-
+  if (preferences & CUSTOM_COLORS) set_colors(ctree); 
   gtk_clist_set_compare_func (GTK_CLIST (ctree), my_compare);
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
   gtk_clist_set_column_auto_resize (GTK_CLIST (ctree), 0, TRUE);

@@ -65,6 +65,7 @@
 
 #include "xtree_mess.h"
 #include "xtree_pasteboard.h"
+#include "xtree_go.h"
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
@@ -81,10 +82,6 @@
 extern GdkPixmap  *gPIX_dir_close,  *gPIX_dir_open;
 extern GdkBitmap *gPIM_dir_close, *gPIM_dir_open;
 
-typedef struct golist {
-	struct golist *previous;
-	char *path;
-} golist;
 
 /* gogo will be duplicate on fork, so child must reset to NULL. 
  * The heap allocated memory will not be duplicated in child

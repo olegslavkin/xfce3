@@ -54,6 +54,8 @@
 #include "xfcolor.h"
 #include "xfce-common.h"
 #include "../xfsamba/tubo.h"
+#include "../xfdiff/xfdiff_colorsel.h"
+#include "xtree_go.h"
 
 
 #ifdef HAVE_GDK_IMLIB
@@ -75,6 +77,80 @@
 #include "xtree_mess.h"
 
 #define BYTES "bytes"
+
+void set_colors(GtkWidget * ctree){
+	GtkStyle*  style;
+	int red,green,blue;
+
+	red = ctree_color.red & 0xffff;
+	green = ctree_color.green & 0xffff;
+	blue = ctree_color.blue & 0xffff;
+	style=gtk_widget_get_style (ctree);
+	
+	style->base[GTK_STATE_ACTIVE].red=red;
+	style->base[GTK_STATE_ACTIVE].green=green;
+	style->base[GTK_STATE_ACTIVE].blue=blue;
+	  
+	style->base[GTK_STATE_NORMAL].red=red;
+	style->base[GTK_STATE_NORMAL].green=green;
+	style->base[GTK_STATE_NORMAL].blue=blue;
+	  
+	style->bg[GTK_STATE_NORMAL].red=red;
+	style->bg[GTK_STATE_NORMAL].green=green;
+	style->bg[GTK_STATE_NORMAL].blue=blue;
+	  
+	style->fg[GTK_STATE_SELECTED].red=red;
+	style->fg[GTK_STATE_SELECTED].green=green;
+	style->fg[GTK_STATE_SELECTED].blue=blue;
+	  /* foregrounds */
+	style->fg[GTK_STATE_NORMAL].red=(red^0xffff)&(0xffff);
+	style->fg[GTK_STATE_NORMAL].green=(green^0xffff)&(0xffff);
+	style->fg[GTK_STATE_NORMAL].blue=(blue^0xffff)&(0xffff);
+	  
+	style->bg[GTK_STATE_SELECTED].red=(red^0xffff)&(0xffff);
+	style->bg[GTK_STATE_SELECTED].green=(green^0xffff)&(0xffff);
+	style->bg[GTK_STATE_SELECTED].blue=(blue^0xffff)&(0xffff);
+	gtk_widget_set_style (ctree,style);
+	gtk_widget_ensure_style (ctree);
+}
+
+void
+cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
+{
+  gdouble colors[4];
+  gdouble *newcolor;
+  char *geometry;
+  cfg *win;
+   /* FIXME: must add the xfwm border width and title bar.
+   * for now using 5 and 30, WFM */
+  int wm_offsetX=8,wm_offsetY=40;
+
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if ((geometry=(char *)malloc(64))==NULL) return;
+  sprintf(geometry,"%dx%d+%d+%d",
+		  win->top->allocation.width,
+		  win->top->allocation.height,
+		  win->top->allocation.x+wm_offsetX,
+		  win->top->allocation.y+wm_offsetY);
+
+  colors[0] = ((gdouble) ctree_color.red) / COLOR_GDK;
+  colors[1] = ((gdouble) ctree_color.green) / COLOR_GDK;
+  colors[2] = ((gdouble) ctree_color.blue) / COLOR_GDK;
+  
+  newcolor=xfdiff_colorselect (colors);
+  if (newcolor){
+      ctree_color.red   = ((guint) (newcolor[0] * COLOR_GDK));
+      ctree_color.green = ((guint) (newcolor[1] * COLOR_GDK));
+      ctree_color.blue  = ((guint) (newcolor[2] * COLOR_GDK));
+      preferences |= CUSTOM_COLORS;
+  } else preferences &= (CUSTOM_COLORS ^ 0xffffffff);
+  save_defaults (NULL);
+  execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
+  fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
+  return;
+ }
+
+
 
 char * override_txt(char *new_file,char *old_file)
 {
@@ -184,6 +260,8 @@ failed:
 	  /*printf("dbg:x=%d,y=%d\n",geometryX,geometryY);*/
 	  fprintf (defaults, "geometry : %d,%d\n",geometryX,geometryY);
   }
+  fprintf (defaults, "ctree_color : %d,%d,%d\n",ctree_color.red,ctree_color.green,ctree_color.blue);
+  
   fclose (defaults);
   return;
 }
@@ -193,6 +271,8 @@ void read_defaults(void){
   char *homedir,*word;
   int len;
 
+  /* default custom colors: */
+  ctree_color.red = ctree_color.green = ctree_color.blue = 10000;
   len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFTREE_CONFIG_FILE) + 1;
   homedir = (char *) malloc ((len) * sizeof (char));
   if (!homedir) {
@@ -221,6 +301,15 @@ void read_defaults(void){
 		geometryX=atoi(word);
 		word=strtok(NULL,"\n");if (!word) break;
 		geometryY=atoi(word);
+	}
+	if (strstr(homedir,"ctree_color :")){
+		strtok(homedir,":");
+		word=strtok(NULL,",");if (!word) break;
+		ctree_color.red=atoi(word);
+		word=strtok(NULL,",");if (!word) break;
+		ctree_color.green=atoi(word);
+		word=strtok(NULL,"\n");if (!word) break;
+		ctree_color.blue=atoi(word);
 	}
   }
   free(homedir);
