@@ -12,15 +12,25 @@
                               
 
 
-void taskbar_xfwm_init();
-void taskbar_check_events(unsigned long type,unsigned long *body);
+void 
+taskbar_xfwm_init();
+
+void 
+taskbar_check_events(unsigned long type,unsigned long *body);
 
 /* 
  * create taskbar frame (to be added to xfce main window) 
  */
-GtkWidget *taskbar_create_gxfce_with_taskbar (GtkWidget *gxfce,
+GtkWidget 
+*taskbar_create_gxfce_with_taskbar (GtkWidget *gxfce,
                                               GtkWidget *size_model,GtkWidget *top_level_window);      
+/* save config WITHOUT header */
+void 
+taskbar_save_config(FILE *f);
       
+/* return next non-taskbar related line */
+char*
+taskbar_read_config(FILE *f, char *lineread,int max);
 
 
 #endif

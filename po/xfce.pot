@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-05-16 00:11+0200\n"
+"POT-Creation-Date: 2002-06-14 23:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,67 +108,67 @@ msgstr ""
 msgid "You must provide the command to execute !"
 msgstr ""
 
-#: xfce/configfile.c:61
+#: xfce/configfile.c:69
 #, c-format
 msgid ""
 "XFce : Syntax error in configuration file\n"
 "(%s)\n"
 msgstr ""
 
-#: xfce/configfile.c:62 xfclock/xfclock_config.c:54
+#: xfce/configfile.c:70 xfclock/xfclock_config.c:54
 msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
 msgstr ""
 
-#: xfce/configfile.c:69
+#: xfce/configfile.c:77
 #, c-format
 msgid ""
 "XFce : Data mismatch error in config file\n"
 "(%s)\n"
 msgstr ""
 
-#: xfce/configfile.c:70 xfclock/xfclock_config.c:62
+#: xfce/configfile.c:78 xfclock/xfclock_config.c:62
 msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
 msgstr ""
 
-#: xfce/configfile.c:229 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:237 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr ""
 
-#: xfce/configfile.c:380
+#: xfce/configfile.c:393
 msgid "Cannot reset configuration file"
 msgstr ""
 
-#: xfce/configfile.c:383
+#: xfce/configfile.c:396
 msgid "Creating new config file...\n"
 msgstr ""
 
-#: xfce/configfile.c:558 xfce/configfile.c:568
+#: xfce/configfile.c:497 xfce/configfile.c:507
 msgid "Cannot open configuration file"
 msgstr ""
 
-#: xfce/configfile.c:574
+#: xfce/configfile.c:513
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr ""
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:514
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
 msgstr ""
 
-#: xfce/configfile.c:586
+#: xfce/configfile.c:525
 msgid "Cannot open new config, Giving up..."
 msgstr ""
 
-#: xfce/configfile.c:587
+#: xfce/configfile.c:526
 msgid "Cannot load configuration file"
 msgstr ""
 
-#: xfce/configfile.c:593
+#: xfce/configfile.c:532
 msgid "Cannot use old version of XFce configuration files"
 msgstr ""
 
@@ -192,8 +192,8 @@ msgstr ""
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
 #: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:202 xfce/xfce.c:242
-#: xfce/xfce.c:520 xfce/xfce.c:551 xfce/xfce.c:648 xfce/xfce.c:669
-#: xfce/xfce.c:702 xfce/xfce.c:717 xfce/xfce.c:775 xfce/xfce.c:796
+#: xfce/xfce.c:521 xfce/xfce.c:552 xfce/xfce.c:649 xfce/xfce.c:670
+#: xfce/xfce.c:703 xfce/xfce.c:718 xfce/xfce.c:776 xfce/xfce.c:797
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
 msgstr ""
@@ -653,15 +653,15 @@ msgstr ""
 msgid "24 hours mode"
 msgstr ""
 
-#: xfce/xfce.c:664 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:665 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr ""
 
-#: xfce/xfce.c:697
+#: xfce/xfce.c:698
 msgid "Setup..."
 msgstr ""
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:724 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:725 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr ""

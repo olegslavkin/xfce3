@@ -16,6 +16,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
+  #include <config.h>
+#endif
+
 #include <sys/stat.h>
 #include <unistd.h>
 #include <stdarg.h>
@@ -46,6 +50,10 @@
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
+#endif
+
+#ifdef XFCE_TASKBAR
+  #include "taskbar.h"
 #endif
 
 char *rcfile = "xfce3rc";
@@ -352,6 +360,11 @@ writeconfig (void)
       }
 
     }
+#ifdef XFCE_TASKBAR
+    fprintf (configfile, "[Taskbar]\n");
+    taskbar_save_config(configfile);
+    taskbar_applay_xfce_config(&current_config);
+#endif
     fflush (configfile);
     fclose (configfile);
 #  ifdef HAVE_LIBXML2
@@ -440,6 +453,13 @@ resetconfig (void)
     {
       fprintf (configfile, "[Menu%u]\n", i + 1);
     }
+#ifdef XFCE_TASKBAR
+/* Reset taskbar config by removie [TAskbar] entry in xfce3rc file    
+    fprintf (configfile, "[Taskbar]\n");
+    taskbar_save_config(configfile);
+*/    
+    taskbar_applay_xfce_config(&current_config);
+#endif
     fflush (configfile);
     fclose (configfile);
 #  ifdef HAVE_LIBXML2
@@ -452,88 +472,7 @@ resetconfig (void)
 /*static*/ char *
 localize_rcfilename (gboolean disable_user_config)
 {
-  char *charset_code;
-  char *area_code;
-  char *country_code;
-  char *temp;
-  char *homedir;
-  char *rcfile_default;
-  int bottom_ptr = 0;
-
-  if (!disable_user_config)
-  {
-    if (!(homedir = (char *) getenv ("HOME")))
-    {
-      fprintf (stderr, "Can't fetch $HOME. Aborting\n");
-      exit (-1);
-    }
-
-    temp = g_strdup_printf ("%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
-    if (existfile (temp))
-    {
-      return (temp);
-    }
-    g_free (temp);
-  }
-  
-  rcfile_default = g_strdup_printf ("%s/%s", XFCE_CONFDIR, rcfile);
-  if ((strcmp (rcfile_default, "") == 0) || 
-      !(charset_code = getenv ("LANG")) || 
-      (strcmp (charset_code, "") == 0))
-  {
-    return (rcfile_default);
-  }
-  bottom_ptr = strlen (charset_code) - 1;
-
-  /* Try Charset Code */
-  temp = g_strdup_printf ("%s.%s", rcfile_default, charset_code);
-  if (existfile (temp))
-  {
-    g_free (rcfile_default);
-    return (temp);
-  }
-  g_free (temp);
-
-  /* Try Area Code */
-  while (charset_code[bottom_ptr] != '.')
-  {
-    if (bottom_ptr <= 0)
-    {
-      bottom_ptr = strlen (charset_code);
-      break;
-    }
-    bottom_ptr--;
-  }
-  area_code = g_strndup (charset_code, bottom_ptr);
-  temp = g_strdup_printf ("%s.%s", rcfile_default, area_code);
-  g_free (area_code);
-  if (existfile (temp))
-  {
-    g_free (rcfile_default);
-    return (temp);
-  }
-  g_free (temp);
-
-  /* Try Country Code */
-  while (charset_code[bottom_ptr] != '_')
-  {
-    if (bottom_ptr <= 0)
-    {
-      bottom_ptr = strlen (charset_code);
-      break;
-    }
-    bottom_ptr--;
-  }
-  country_code = g_strndup (charset_code, bottom_ptr);
-  temp = g_strdup_printf ("%s.%s", rcfile_default, country_code);
-  g_free (country_code);
-  if (existfile (temp))
-  {
-    g_free (rcfile_default);
-    return (temp);
-  }
-  g_free (temp);
-  return (rcfile_default);
+  return getlocalizedconffilename(rcfile,disable_user_config==TRUE);
 }
 
 void
@@ -826,25 +765,33 @@ readconfig (void)
     {
       sprintf (dummy, "[Menu%u]", i + 1);
       p = nextline (configfile, lineread);
+      if(p&&(*p=='[')&&!my_strnSTARTS(p,"[Menu"))
+        break; /* Marcin Staszyszyn: CHECK IT */
       j = 0;
       while ((p) && (!my_strnSTARTS (p, dummy)))
       {
         label = g_strdup (p ? p : "None");
-	p = nextline (configfile, lineread);
+        p = nextline (configfile, lineread);
         pixfile = g_strdup (p ? p : "Default icon");
-	p = nextline (configfile, lineread);
-	if (strcmp (p, "None"))
-	{
+        p = nextline (configfile, lineread);
+        if (strcmp (p, "None"))
+        {
           command = g_strdup (p ? p : "None");
-	  if (j++ < NBMAXITEMS)
-	    add_popup_entry (i - 1, label, pixfile, command, -1);
-	  g_free (command);
-	}
-	g_free (label);
-	g_free (pixfile);
-	p = nextline (configfile, lineread);
+          if (j++ < NBMAXITEMS)
+            add_popup_entry (i - 1, label, pixfile, command, -1);
+          g_free (command);
+        }
+        g_free (label);
+        g_free (pixfile);
+        p = nextline (configfile, lineread);
       }
     }
+#ifdef XFCE_TASKBAR
+ if(p&&my_strnSTARTS(p,"[Taskbar]")) {
+  p=taskbar_read_config(configfile,lineread,MAXSTRLEN);
+  taskbar_applay_xfce_config(&current_config);
+ }
+#endif
     fclose (configfile);
 #  ifdef HAVE_LIBXML2
     if (! current_config.disable_xmlconfigs)

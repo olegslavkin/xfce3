@@ -21,6 +21,7 @@
 #define __FILEUTIL_H__
 
 extern int existfile (const char *);
+extern char* getlocalizedconffilename (const char *,int);
 extern void my_sleep (int);
 extern int initdiag (void);
 extern void exec_comm (char *, int wm);

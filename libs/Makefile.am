@@ -11,6 +11,7 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
 noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 
 libxfcecore_la_SOURCES = \
+	wild.c Strings.c safemalloc.c Parse.c \
 	colorselect.c colorselect.h \
 	constant.h \
 	empty.h \

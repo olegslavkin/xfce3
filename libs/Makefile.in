@@ -156,6 +156,7 @@ INCLUDES = @GTK_CFLAGS@ @GDK_IMLIB_CFLAGS@ @GDK_PIXBUF_CFLAGS@ \
 noinst_LTLIBRARIES = libxfcecore.la libxfwmcore.la
 
 libxfcecore_la_SOURCES = \
+	wild.c Strings.c safemalloc.c Parse.c \
 	colorselect.c colorselect.h \
 	constant.h \
 	empty.h \
@@ -210,10 +211,10 @@ LTLIBRARIES = $(noinst_LTLIBRARIES)
 
 libxfcecore_la_LDFLAGS =
 libxfcecore_la_DEPENDENCIES =
-am_libxfcecore_la_OBJECTS = colorselect.lo fileselect.lo fileutil.lo \
-	fontselection.lo gnome_protocol.lo my_string.lo my_tooltips.lo \
-	mygtkclock.lo sendinfo.lo snprintf.lo xfce-common.lo xfcolor.lo \
-	xpmext.lo
+am_libxfcecore_la_OBJECTS = wild.lo Strings.lo safemalloc.lo Parse.lo \
+	colorselect.lo fileselect.lo fileutil.lo fontselection.lo \
+	gnome_protocol.lo my_string.lo my_tooltips.lo mygtkclock.lo \
+	sendinfo.lo snprintf.lo xfce-common.lo xfcolor.lo xpmext.lo
 libxfcecore_la_OBJECTS = $(am_libxfcecore_la_OBJECTS)
 libxfwmcore_la_LDFLAGS =
 libxfwmcore_la_DEPENDENCIES =

@@ -55,6 +55,94 @@ existfile (const char *s)
   return (0);
 }
 
+
+char* getlocalizedconffilename (const char *file,int disable_user_config)
+{
+  char *charset_code;
+  char *area_code;
+  char *country_code;
+  char *temp;
+  char *homedir;
+  char *file_default;
+  int bottom_ptr = 0;
+
+  if (!disable_user_config)
+  {
+    if (!(homedir = (char *) getenv ("HOME")))
+    {
+      fprintf (stderr, "Can't fetch $HOME. Aborting\n");
+      exit (-1);
+    }
+  
+    temp = g_strdup_printf ("%s/.xfce/%s", (char *) getenv ("HOME"), file);
+    if (existfile (temp))
+    {
+      return (temp);
+    }
+    g_free (temp);
+  }
+  
+  file_default = g_strdup_printf ("%s/%s", XFCE_CONFDIR, file);
+  if ((strcmp (file_default, "") == 0) || 
+      !(charset_code = getenv ("LANG")) || 
+      (strcmp (charset_code, "") == 0))
+  {
+    return (file_default);
+  }
+  bottom_ptr = strlen (charset_code) - 1;
+
+  /* Try Charset Code */
+  temp = g_strdup_printf ("%s.%s", file_default, charset_code);
+  if (existfile (temp))
+  {
+    g_free (file_default);
+    return (temp);
+  }
+  g_free (temp);
+
+  /* Try Area Code */
+  while (charset_code[bottom_ptr] != '.')
+  {
+    if (bottom_ptr <= 0)
+    {
+      bottom_ptr = strlen (charset_code);
+      break;
+    }
+    bottom_ptr--;
+  }
+  area_code = g_strndup (charset_code, bottom_ptr);
+  temp = g_strdup_printf ("%s.%s", file_default, area_code);
+  g_free (area_code);
+  if (existfile (temp))
+  {
+    g_free (file_default);
+    return (temp);
+  }
+  g_free (temp);
+
+  /* Try Country Code */
+  while (charset_code[bottom_ptr] != '_')
+  {
+    if (bottom_ptr <= 0)
+    {
+      bottom_ptr = strlen (charset_code);
+      break;
+    }
+    bottom_ptr--;
+  }
+  country_code = g_strndup (charset_code, bottom_ptr);
+  temp = g_strdup_printf ("%s.%s", file_default, country_code);
+  g_free (country_code);
+  if (existfile (temp))
+  {
+    g_free (file_default);
+    return (temp);
+  }
+  g_free (temp);
+  return (file_default);
+}
+
+
 void
 my_sleep (int n)
 {

@@ -482,7 +482,8 @@ create_gxfce (XFCE_palette * pal)
   gtk_container_add (GTK_CONTAINER (gxfce_mainframe), gxfce_taskbar_hbox0);
   gtk_box_pack_start(GTK_BOX(gxfce_taskbar_hbox0),gxfce_hbox1,TRUE,TRUE,0);
   gxfce_taskbar=taskbar_create_gxfce_with_taskbar(gxfce_taskbar_hbox0,gxfce_hbox1,gxfce);
-  gtk_box_pack_start(GTK_BOX(gxfce_taskbar_hbox0),gxfce_taskbar,TRUE,TRUE,0);
+  if(!gxfce_taskbar->parent)
+    gtk_box_pack_start(GTK_BOX(gxfce_taskbar_hbox0),gxfce_taskbar,TRUE,TRUE,0);
 #endif
 
   gxfce_hbox2 = gtk_hbox_new (FALSE, 0);

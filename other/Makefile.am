@@ -48,7 +48,8 @@ conffiles_DATA=\
  xinitrc.mwm \
  xinitrc \
  xsession \
- xtree.reg
+ xtree.reg \
+ taskbarrc
 
 sysfilesdir=@XFCE_DIR@
 sysfiles_DATA=\

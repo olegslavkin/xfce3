@@ -82,6 +82,11 @@ if [ -f $XFCE_CONF/xinitrc ]; then
 	echo A new file $HOME/.xfce/xinitrc has been created
 fi
 
+if [ -f $XFCE_CONF/taskbarrc ]; then
+	cp -f XFCE_CONFDIR/taskbarrc $HOME/.xfce/ 
+	echo A new file $HOME/.xfce/taskbarrc has been created
+fi
+
 if [ ! -f $HOME/.xfcolors ]; then
 	cp -f $XFCE_DATADIR/palettes/Default $HOME/.xfce/xfcolors
 	echo An new file $HOME/.xfce/xfcolors has been created
