@@ -136,7 +136,6 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *label, *box, *check;
   GList *apps=NULL;
-  char cmd[(PATH_MAX + NAME_MAX) * 3 + 6];
   char *title;
   char *path;
   cfg *win;
@@ -220,6 +219,8 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   /* */
   if (dl.result == DLG_RC_OK)
   {
+    char *argv[64];
+    int i;
     if (!dl.cmd)
     {
       /* this should never happen
@@ -239,32 +240,47 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     chdir(path);
     if (dl.in_terminal)
     {
+      argv[0]=TERMINAL;
+      argv[1]="-e";
+      if (strstr(dl.cmd," ")){
+	      argv[2]=strtok(dl.cmd," ");
+	      i=3;
+	      do {
+		      argv[i]=strtok(NULL," ");
+		      if (!argv[i]) break;
+		      i++;
+	      } while (1);
+      } else {
+          argv[2]=dl.cmd;
+	  i=3;	      
+      }
+      
       /* start in terminal window */
-      if (dl.file)
-      {
-	sprintf (cmd, "%s -e %s \"%s\" &", TERMINAL, dl.cmd, dl.file);
-      }
-      else
-      {
-	sprintf (cmd, "%s -e %s &", TERMINAL, dl.cmd);
-      }
-      io_system (cmd,FALSE,win->top); /* open by shell (xfterm is a shell script anyways) */
+      if (dl.file) { argv[i++]=dl.file; argv[i]=0;}
+      else argv[i]=0;
     }
     else
     {
-      if (dl.file) 
-	      /* FIXME: dl.file may contain arguments, voiding direct open */
-      {
-	sprintf (cmd, "%s \"%s\" &", dl.cmd, dl.file);
-        io_system (cmd,FALSE,win->top); /* shell open */
+      if (strstr(dl.cmd," ")){
+	      /*printf("dbg:cmd=%s\n",dl.cmd);*/
+	      argv[0]=strtok(dl.cmd," ");
+	      i=1;
+	      do {
+		      argv[i]=strtok(NULL," ");
+		      if (!argv[i]) break;
+		      i++;
+	      } while (1);
+      } else {
+          argv[0]=dl.cmd;
+	  i=1;	      
       }
-      else
-      {
-	sprintf (cmd, "%s",dl.cmd);
-        io_system (cmd,TRUE,win->top); /* direct open */
-      }
+
+      if (dl.file) { argv[i++]=dl.file; argv[i]=0;}
+      else argv[i]=0;
     }
-    g_free (dl.cmd);
+    /*{int j;for (j=0;j<i;j++) printf("dbg:%d %s\n",j,argv[j]);}*/
+    io_system (argv,win->top); /* direct open */
+    if (dl.cmd) g_free (dl.cmd);
   }
 /*cmd_over:*/
   update_timer((GtkCTree *)ctree);

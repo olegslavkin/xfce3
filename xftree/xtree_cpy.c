@@ -1205,6 +1205,7 @@ GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode)
   
  
   cat = gtk_dialog_new ();
+  gtk_window_position (GTK_WINDOW (cat), GTK_WIN_POS_MOUSE);
   gtk_signal_connect (GTK_OBJECT (cat), "destroy", GTK_SIGNAL_FUNC (cb_cancel), NULL);
  
   box = gtk_vbox_new (FALSE, 4);

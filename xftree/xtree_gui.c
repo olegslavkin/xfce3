@@ -272,9 +272,9 @@ char *mode_txt(mode_t mode){
 }
 
 static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node){
-  char cmd[(PATH_MAX + 3) * 2];
   cfg *win;
   reg_t *prg;
+  char *argv[64];
     entry *up;
    /* disable openwith on FT_TARCHILD */
     win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -305,12 +305,15 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
     chdir (up->path);
     if (en->type & FT_EXE) { /*io_can_exec (en->path)) */
       if (mod_mask & GDK_MOD1_MASK){
-	sprintf (cmd, "%s -e \"%s\" &", TERMINAL, en->path);
-        io_system (cmd,FALSE,win->top); /* open by shell */
+	argv[0]=TERMINAL;
+	argv[1]="-e";
+	argv[2]=en->path;
+	argv[3]=0;
       } else {
-	sprintf (cmd, "./%s", en->label);
-        io_system (cmd,TRUE,win->top); /* open directly */ 
+	argv[0]=en->path;
+	argv[1]=0;
       }
+      io_system (argv,win->top); /* open directly */ 
     }
     else
     {
@@ -318,15 +321,16 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       prg = reg_prog_by_file (win->reg, en->path);
       if (prg)
       {
+	argv[0]=prg->app;
 	if (prg->arg){
-	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
-	  io_system (cmd,FALSE,win->top);  /*open by shell */
-	  /*sprintf (cmd, "%s %s %s", prg->app, prg->arg, en->path);*/
+	  argv[1]=prg->arg;
+	  argv[2]=en->path;
+	  argv[3]=0;
 	} else {
-	  /*sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);*/
-	  sprintf (cmd, "%s %s", prg->app, en->path);
-	  io_system (cmd,TRUE,win->top); /* open direct */
+	  argv[1]=en->path;
+	  argv[2]=0;
 	}
+	io_system (argv,win->top); /* open direct */
       }
       else
       {

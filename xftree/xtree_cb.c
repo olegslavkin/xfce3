@@ -209,7 +209,7 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
    * */
   int num;
   GtkCTreeNode *node;
-  char *command;
+  char *argv[4];
   entry *en_1;  /*,*en_2;*/
   GList *selection;
   cfg *win;
@@ -227,33 +227,20 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
   }
   num = count_selection (ctree, &node);
   
+  argv[0]="xfdiff";
+  argv[1]=0;
   if (!num) {
-    io_system ("xfdiff",TRUE,win->top);
+    io_system (argv,win->top);
     return;
   }
   
   selection = GTK_CLIST (ctree)->selection;
   node = selection->data;
   en_1 = gtk_ctree_node_get_row_data (ctree, node);
-  if (en_1->type & FT_TARCHILD){io_system ("xfdiff",TRUE,win->top); return;}
-#if 0
-  selection=selection->next;
-  if (selection){
-	node = selection->data;
-	en_2 = gtk_ctree_node_get_row_data (ctree, node);
-        if (en_2->type & FT_TARCHILD){io_system ("xfdiff",TRUE,win->top); return;} 
-	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+6);
-  	if (!command) return;
-  	sprintf(command,"xfdiff %s %s",en_1->path,en_2->path);
-  } else
-#endif
-  {
-  	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+4);
-  	if (!command) return;
-  	sprintf(command,"xfdiff %s",en_1->path);
-  }
-  io_system (command,TRUE,win->top);
-  free(command);
+  if (en_1->type & FT_TARCHILD){io_system (argv,win->top); return;}
+  argv[1]=en_1->path;
+  argv[2]=0;
+  io_system (argv,win->top);
 }
 
 /* function2 to call xfdiff */
@@ -261,13 +248,17 @@ void
 cb_patch (GtkWidget * widget,  GtkCTree * ctree)
 {
   cfg *win;
-    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  char *argv[3];
+  argv[0]="xfdiff";
+  argv[1]="-p";
+  argv[2]=0;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   /* use:
    * prompting for left and right files: xfdiff [left file] [right file]
    * without prompting for files:        xfdiff -n  
    * prompting for patch dir and file:   xfdiff -p [directory] [patch file]
    * */
-    io_system ("xfdiff -p",TRUE,win->top);
+  io_system (argv,win->top);
 }
 
 
@@ -556,15 +547,15 @@ cb_refresh (GtkWidget * widget, GtkWidget * ctree){
 void
 cb_find (GtkWidget * item, GtkWidget * ctree)
 {
-  char *cmd,*path;
+  char *argv[3],*path;
   cfg *win;
-    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   path=valid_path((GtkCTree *)ctree,TRUE);
-  cmd=(char *)malloc(strlen(path)+1+10);
-  if (!cmd) return;
-  sprintf (cmd, "xfglob %s",path);
-  io_system (cmd,TRUE,win->top);  
-  free(cmd);  
+  argv[0]="xfglob";
+  argv[1]=path;
+  argv[2]=0;
+  io_system (argv,win->top);  
 }
 
 void
@@ -996,17 +987,16 @@ cb_quit (GtkWidget * top,  GtkCTree * ctree)
 void
 cb_term (GtkWidget * item, GtkWidget * ctree)
 {
-  char *path,*cmd;
+  char *path,*argv[3];
   cfg *win;
     win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   path=valid_path((GtkCTree *)ctree,FALSE);
   if (!path) return;
-  cmd=(char *)malloc(strlen(path)+13);
-  if (!cmd) return;
-  sprintf (cmd, "xfterm \"%s\"& ", path);
-  io_system (cmd,FALSE,win->top); /* keep at false, its a shell script */
-  free(cmd);
+  argv[0]= "xfterm";
+  argv[1]= path;
+  argv[2]=0;
+  io_system (argv,win->top); /* keep at false, its a shell script */
 }
 
 void
@@ -1021,8 +1011,11 @@ void
 cb_samba (GtkWidget * top,GtkWidget * ctree)
 {
   cfg *win;
+  char *argv[2];
+  argv[0]="xfsamba";
+  argv[1]=0;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  io_system ("xfsamba",TRUE,win->top);  
+  io_system (argv,win->top);  
 }
 
 extern GtkWidget *autotype_C;
@@ -1113,7 +1106,7 @@ int autotype_tubo(GtkWidget *parent){
 
 void cb_rox (GtkWidget * top,GtkWidget * ctree){
   /*FILE *pipe;*/
-  char cmd[(PATH_MAX + 3) * 2];
+  char *argv[4];
   GtkCTreeNode *node;
   int num;
   entry *en;
@@ -1125,13 +1118,15 @@ void cb_rox (GtkWidget * top,GtkWidget * ctree){
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
   /*sprintf (cmd, "%s %s","xfrox",en->path);*/
+  argv[0]="rox";
+  argv[1]=en->path;
+  argv[2]=0;
   if (!sane("rox")){
      xf_dlg_error(win->top,_("Not found:"),"Rox-filer");
      ctree_thaw ((GtkCTree *)ctree);
      return;
   } else {
-    sprintf (cmd, "%s %s","rox",en->path);
-    io_system (cmd,TRUE,win->top);
+    io_system (argv,win->top);
   }
   ctree_thaw ((GtkCTree *)ctree);
 }
@@ -1140,6 +1135,7 @@ void
 cb_autotype (GtkWidget * top,GtkWidget * ctree)
 {
   /*FILE *pipe;*/
+  char *argv[4];
   GtkCTreeNode *node;
   int num;
   entry *en;
@@ -1157,26 +1153,24 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   en = gtk_ctree_node_get_row_data ((GtkCTree *)ctree, node);
   prg = reg_prog_by_file (win->reg, en->path);
   if (prg) {
-        char cmd[(PATH_MAX + 3) * 2];
-	
-	if (prg->arg)
-	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
-	else
-	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
-	io_system (cmd,FALSE,win->top);
+	argv[0]=prg->app;
+	if (prg->arg){argv[1]=prg->arg; argv[2]=en->path; argv[3]=0;} 
+	else {argv[1]=en->path; argv[2]=0;}
+	io_system (argv,win->top);
 	goto end_autotype;
   }     
  
   if (S_ISDIR(en->st.st_mode)) {
-     char cmd[(PATH_MAX + 3) * 2];
      /*sprintf (cmd, "%s %s","xfrox",en->path);*/
      if (!sane("rox")){
 	     xf_dlg_error(win->top,_("Not found"),"Rox-filer");
              ctree_thaw ((GtkCTree *)ctree);
 	     return;
      } else {
-      sprintf (cmd, "%s %s","rox",en->path);
-      io_system (cmd,TRUE,win->top);
+      argv[0]="rox";
+      argv[1]=en->path;
+      argv[2]=0;
+      io_system (argv,win->top);
       goto end_autotype;
      }
   }
