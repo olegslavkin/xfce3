@@ -230,12 +230,24 @@ void regen_ctree(GtkCTree *ctree){
 }
 
 void go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags){
+  cfg *win;
   pushpath(ctree,path);
   internal_go_to (ctree,root,path,flags);
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if (win->source_set_sem) {
+	  gtk_drag_source_unset ((GtkWidget *)ctree);
+	  win->source_set_sem=FALSE;
+  }
 }
 
 void cb_reload(GtkWidget * item, GtkCTree * ctree){
-	regen_ctree(ctree);
+  cfg *win;
+  regen_ctree(ctree);
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if (win->source_set_sem) {
+	  gtk_drag_source_unset ((GtkWidget *)ctree);
+	  win->source_set_sem=FALSE;
+  }
 }
 
 
@@ -296,6 +308,10 @@ void cb_go_back (GtkWidget * item, GtkCTree * ctree){
     root = find_root((GtkCTree *)ctree);
     internal_go_to (ctree, root, win->gogo->path, IGNORE_HIDDEN);
     gtk_object_set_user_data (GTK_OBJECT (ctree),win);
+    if (win->source_set_sem) {
+	  gtk_drag_source_unset ((GtkWidget *)ctree);
+	  win->source_set_sem=FALSE;
+    }   
   }
 }
 

@@ -64,6 +64,7 @@ typedef struct
   int filterOpts;
   unsigned int preferences;
   unsigned int stateTB[2];
+  gboolean source_set_sem;
 }
 cfg, cfg_t;
 

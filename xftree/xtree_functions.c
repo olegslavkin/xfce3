@@ -653,7 +653,6 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
 
 /*
  */
-extern gboolean source_set_sem;
 void
 on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
 {
@@ -664,9 +663,9 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   en = gtk_ctree_node_get_row_data (ctree, node);
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if (source_set_sem) {
+  if (win->source_set_sem) {
 	  gtk_drag_source_unset ((GtkWidget *)ctree);
-	  source_set_sem=FALSE;
+	  win->source_set_sem=FALSE;
   }
 
 
@@ -728,13 +727,14 @@ on_collapse (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   entry *en;
   GtkCTreeNode *child,*parent;
 
-  if (source_set_sem) {
-	  gtk_drag_source_unset ((GtkWidget *)ctree);
-	  source_set_sem=FALSE;
-  }
   
   /* unselect all children */
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  if (win->source_set_sem) {
+	  gtk_drag_source_unset ((GtkWidget *)ctree);
+	  win->source_set_sem=FALSE;
+  }
+  
   child = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->children);
   if (node==find_root(ctree)) parent=node;
   else parent = GTK_CTREE_NODE (GTK_CTREE_ROW (node)->parent);

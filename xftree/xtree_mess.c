@@ -812,7 +812,7 @@ void cb_dnd_help(GtkWidget * item, GtkWidget * ctree)
 "To drag multiple files, use the middle button.\n"
 "Also:\n"
 "Multiple selection by button 1 click-and-drag\n"
-"is available on the first click after a GOTO.\n")
+"is available on the first click after a GOTO or REGEN.\n")
 	);
 }
 

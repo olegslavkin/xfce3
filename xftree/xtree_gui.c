@@ -347,14 +347,15 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
 /*
  * start the marked program on double click
  */
-gboolean source_set_sem=FALSE;
 gboolean was_double_click=FALSE;
 static gint
 on_button_release (GtkWidget * ctree, GdkEventButton * event, void *menu){
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (was_double_click) return 1;
   if ( (event->button == 1)){
-     if (!source_set_sem) {
-        source_set_sem=TRUE;
+     if (!win->source_set_sem) {
+        win->source_set_sem=TRUE;
         gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, 
 		  target_table, NUM_TARGETS, 
 		  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
@@ -1056,6 +1057,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   XSetErrorHandler ((XErrorHandler) ErrorHandler);
 
   win = g_malloc (sizeof (cfg));
+  win->source_set_sem=FALSE;
   win->dnd_row = -1;
   win->dnd_data = NULL;
   win->gogo =NULL;
