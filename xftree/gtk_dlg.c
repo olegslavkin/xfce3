@@ -86,8 +86,14 @@ on_cancel (GtkWidget * btn, gpointer * data)
   dl.result = DLG_RC_CANCEL;
   /*fprintf(stderr,"dbg: at cancel\n");*/
    if (dl.return_data) g_free(dl.return_data); dl.return_data=NULL;
+}
+
+static void
+on_destroy (GtkWidget * btn, gpointer * data)
+{
   gtk_main_quit ();
 }
+
 
 /*
  * called if user presses ok button
@@ -100,7 +106,6 @@ on_ok (GtkWidget * ok, gpointer * data)
 {
   gtk_widget_destroy (dl.top);
   dl.result = (int) ((long) data);
-  gtk_main_quit ();
 }
 
 
@@ -112,13 +117,13 @@ on_ok_combo (GtkWidget * ok, gpointer * data)
   if (dl.return_data) g_free(dl.return_data);
   dl.return_data=NULL; /* return value of false for fails */
   if (!(dl.entry)) return;
-  if (dl.return_data) g_free(dl.return_data);
   dl.return_data = (void *)malloc(1+strlen(gtk_entry_get_text (GTK_ENTRY (dl.entry) )) ); 
   if (!(dl.return_data)) return;
+  /*fprintf(stderr,"dbg: at ok_combo:%s\n",gtk_entry_get_text (GTK_ENTRY (dl.entry)));*/
   strcpy((char *)dl.return_data,gtk_entry_get_text (GTK_ENTRY (dl.entry)));
+  /*fprintf(stderr,"dbg: at ok_combo->%s\n",(char *)dl.return_data);*/
   gtk_widget_destroy (dl.top);
   dl.result = 0; /* value not used */
-  gtk_main_quit ();
 }
 
 
@@ -443,7 +448,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     if (type & DLG_ENTRY_EDIT)
       gtk_entry_select_region (GTK_ENTRY (dl.entry), 0, -1);
   }
-  gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
+  gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_signal_connect (GTK_OBJECT (dl.top), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
   gtk_widget_show_all (dl.top);
 
