@@ -1,3 +1,4 @@
+- Toolbar icon + menu elements for "print"
 - Use the conventional Xpasteboard and provide compatibility with
   other file managers and programs for cut+paste (also for the
   future rsync option). Perhaps still use the private file for

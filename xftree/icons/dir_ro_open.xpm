@@ -1,7 +1,7 @@
 /* XPM */
 static char *dir_ro_open_xpm[] = {
 /* width height num_colors chars_per_pixel */
-"    16    16        6            1",
+"    16    16        7            1",
 /* colors */
 ". c none",
 "# c #ffe79c",
@@ -9,6 +9,7 @@ static char *dir_ro_open_xpm[] = {
 "b c #ffc78c",
 "c c #000000",
 "d c #0000ff",
+"e c #ffffff",
 /* pixels */
 "...###a. .......",
 "..#bbbba. ......",
@@ -16,14 +17,14 @@ static char *dir_ro_open_xpm[] = {
 "#bbbaaaaaaaaaaac",
 "#bbaaaaaaaaaaaac",
 "#baaaa##########",
-"#baaaddddddbbbba",
-"#baadbbbbbddbbbc",
-"#baadbbbbdbdbbbc",
-"#badbbbbdbbbdbac",
-"#ba#dbbdbbbdbaac",
-"##bbdbdbbbbdbacc",
-"##bbbdbbbbdbaccc",
-"#aaaaaddddaaacc.",
+"#baaaccccccbbbba",
+"#baaceeeeeccbbbc",
+"#baaceeeececbbbc",
+"#baceeeeceeecbac",
+"#ba#ceeceeecbaac",
+"##bbceceeeecbacc",
+"##bbbceeeecbaccc",
+"#aaaaaccccaaacc.",
 ".ccccccccccccc .",
 "               .",
 };
