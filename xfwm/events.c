@@ -828,6 +828,7 @@ HandleDestroyNotify ()
     fprintf (stderr, "xfwm : HandleDestroyNotify (): Destroying %s\n", Tmp_win->name);
 #endif
     Destroy (Tmp_win);
+    Tmp_win = NULL;
   }
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleDestroyNotify ()\n");
@@ -1099,7 +1100,7 @@ HandleUnmapNotify ()
     MyXUngrabServer (dpy);
   }
   Destroy (Tmp_win);
-  fast_process_expose ();
+  Tmp_win = NULL;
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif
@@ -1127,6 +1128,7 @@ void HandleReparentNotify(void)
     XSelectInput (dpy, Event.xreparent.window, NoEventMask);
     discard_events(SubstructureRedirectMask | VisibilityChangeMask);
     Destroy(Tmp_win);
+    Tmp_win = NULL;
   }
 
   return;

@@ -753,6 +753,7 @@ destroy_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long
   if (XGetGeometry (dpy, tmp_win->w, &JunkRoot, &JunkX, &JunkY, &JunkWidth, &JunkHeight, &JunkBW, &JunkDepth) == 0)
   {
     Destroy (tmp_win);
+    tmp_win = NULL;
   }
   else
   {
@@ -791,6 +792,7 @@ close_function (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long c
   else if (XGetGeometry (dpy, tmp_win->w, &JunkRoot, &JunkX, &JunkY, &JunkWidth, &JunkHeight, &JunkBW, &JunkDepth) == 0)
   {
     Destroy (tmp_win);
+    tmp_win = NULL;
   }
   else
   {
