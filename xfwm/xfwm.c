@@ -1355,6 +1355,8 @@ CreateCursors (void)
 void
 LoadDefaultLeftButton (ButtonFace * bf, int i)
 {
+    bf->u.ShadowGC = (GC) NULL;
+    bf->u.ReliefGC = (GC) NULL;
     bf->style = VectorButton;
     switch (i % 3)
     {
@@ -1478,6 +1480,8 @@ LoadDefaultLeftButton (ButtonFace * bf, int i)
 void
 LoadDefaultRightButton (ButtonFace * bf, int i)
 {
+    bf->u.ShadowGC = (GC) NULL;
+    bf->u.ReliefGC = (GC) NULL;
     bf->style = VectorButton;
     switch (i % 3)
     {
@@ -1714,6 +1718,8 @@ InitXfwmDecor (XfwmDecor * fl)
     tmpbf.style = SimpleButton;
     tmpbf.bitmap = None;
     tmpbf.bitmap_pressed = None;
+    tmpbf.u.ReliefGC = (GC) NULL;
+    tmpbf.u.ShadowGC = (GC) NULL;
     tmpbf.next = NULL;
     for (i = 0; i < 2; ++i)
     {
@@ -1735,6 +1741,9 @@ InitXfwmDecor (XfwmDecor * fl)
         fl->titlebar.state[i].next = NULL;
         fl->titlebar.state[i].bitmap = None;
         fl->titlebar.state[i].bitmap_pressed = None;
+        fl->titlebar.state[i].style = SimpleButton;
+        fl->titlebar.state[i].u.ReliefGC = NULL;
+        fl->titlebar.state[i].u.ShadowGC = NULL;
     }
 
     /* initialize border texture styles */

@@ -195,6 +195,9 @@ typedef struct ButtonFace
     struct
     {
         Pixel back;
+        ColorPair Relief;
+        GC ShadowGC;              /* GC for button shadow */
+        GC ReliefGC;              /* GC for button background */
         struct
         {
             int npixels;
@@ -244,15 +247,15 @@ TitleButton;
 typedef struct XfwmDecor
 {
     ColorPair HiColors;		/* standard fore/back colors */
-    ColorPair HiRelief;
     ColorPair LoColors;		/* standard fore/back colors */
+    ColorPair HiRelief;
     ColorPair LoRelief;
     GC HiReliefGC;		/* GC for active window relief */
     GC HiShadowGC;		/* GC for active window shadow */
-    GC HiBackGC;			/* GC for active window background */
+    GC HiBackGC;		/* GC for active window background */
     GC LoReliefGC;		/* GC for inactive window relief */
     GC LoShadowGC;		/* GC for inactive window shadow */
-    GC LoBackGC;			/* GC for inactive window background */
+    GC LoBackGC;		/* GC for inactive window background */
 
     int TitleHeight;		/* height of the title bar window */
     XfwmFont WindowFont;		/* font structure for window titles */

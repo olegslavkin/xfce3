@@ -2012,6 +2012,16 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
     case GradButton:
         free (bf->u.grad.pixels);
         bf->u.grad.pixels = NULL;
+        if (bf->u.ShadowGC)
+        {
+            XFreeGC (dpy, bf->u.ShadowGC);
+            bf->u.ShadowGC = NULL;
+        }
+        if (bf->u.ReliefGC)
+        {
+            XFreeGC (dpy, bf->u.ReliefGC);
+            bf->u.ReliefGC = NULL;
+        }
         break;
     case VectorButton:
         if (bf->bitmap != None)
@@ -2025,9 +2035,22 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
             bf->bitmap_pressed = None;
         }
         break;
+    case SolidButton:
+        if (bf->u.ShadowGC)
+        {
+            XFreeGC (dpy, bf->u.ShadowGC);
+            bf->u.ShadowGC = NULL;
+        }
+        if (bf->u.ReliefGC)
+        {
+            XFreeGC (dpy, bf->u.ReliefGC);
+            bf->u.ReliefGC = NULL;
+        }
+        break;
     default:
         break;
     }
+
     if (bf->next)
     {
         FreeButtonFace (dpy, bf->next);
@@ -2045,6 +2068,8 @@ FreeButtonFace (Display * dpy, ButtonFace * bf)
 Boolean
 ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose)
 {
+    XGCValues gcv;
+    unsigned long gcm;
     int offset;
     char style[256], *file;
     char *action = s;
@@ -2057,8 +2082,17 @@ ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose)
     }
 
     s += offset;
-
     FreeButtonFace (dpy, bf);
+
+    /* Prepare GC creation */
+    gcm = GCFunction | GCPlaneMask | GCGraphicsExposures | GCLineWidth |
+          GCForeground | GCBackground | GCCapStyle;
+    gcv.fill_style = FillSolid;
+    gcv.plane_mask = AllPlanes;
+    gcv.function = GXcopy;
+    gcv.graphics_exposures = False;
+    gcv.line_width = 1;
+    gcv.cap_style = CapProjecting;
 
     /* determine button style */
     if (mystrncasecmp (style, "Simple", 6) == 0)
@@ -2098,6 +2132,13 @@ ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose)
         {
             bf->style = SolidButton;
             bf->u.back = GetColor (file);
+            bf->u.Relief.fore = GetHilite (bf->u.back);
+            bf->u.Relief.back = GetShadow (bf->u.back);
+            gcv.foreground = bf->u.Relief.fore;
+            gcv.background = bf->u.back;
+            bf->u.ReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+            gcv.foreground = bf->u.Relief.back;
+            bf->u.ShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
         }
         else
         {
@@ -2147,6 +2188,13 @@ ReadButtonFace (char *s, ButtonFace * bf, int button, int verbose)
         bf->u.grad.pixels = pixels;
         bf->u.grad.npixels = npixels;
         bf->style = GradButton;
+        bf->u.Relief.fore = GetHilite (bf->u.back);
+        bf->u.Relief.back = GetShadow (bf->u.back);
+        gcv.foreground = bf->u.Relief.fore;
+        gcv.background = bf->u.back;
+        bf->u.ReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+        gcv.foreground = bf->u.Relief.back;
+        bf->u.ShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
     }
     else
     {
