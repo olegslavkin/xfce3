@@ -132,14 +132,14 @@ initconfig (config * newconf)
   newconf->snapsize = 10;
   newconf->autoraise = 0;
   newconf->tooltipsdelay = 250;
-  newconf->startup_flags = (F_SOUNDMODULE | F_MOUSEMODULE | F_BACKDROPMODULE | F_PAGERMODULE | F_GNOMEMODULE | F_GNOMEMENUMODULE | F_KDEMENUMODULE);
+  newconf->startup_flags = (F_SOUNDMODULE | F_MOUSEMODULE | 
+			    F_BACKDROPMODULE | F_PAGERMODULE | 
+			    F_GNOMEMODULE | F_GNOMEMENUMODULE | 
+			    F_KDEMENUMODULE);
   newconf->iconpos = 0;		/* Top of screen */
-  newconf->fonts[0] = (char *) g_malloc (sizeof (char) * (strlen (XFWM_TITLEFONT) + 1));
-  newconf->fonts[1] = (char *) g_malloc (sizeof (char) * (strlen (XFWM_MENUFONT) + 1));
-  newconf->fonts[2] = (char *) g_malloc (sizeof (char) * (strlen (XFWM_ICONFONT) + 1));
-  strcpy (newconf->fonts[0], XFWM_TITLEFONT);
-  strcpy (newconf->fonts[1], XFWM_MENUFONT);
-  strcpy (newconf->fonts[2], XFWM_ICONFONT);
+  newconf->fonts[0] = (char *) g_strdup (XFWM_TITLEFONT);
+  newconf->fonts[1] = (char *) g_strdup (XFWM_MENUFONT);
+  newconf->fonts[2] = (char *) g_strdup (XFWM_ICONFONT);
   newconf->digital_clock = 0;
   newconf->hrs_mode = 1;
   newconf->panel_layer = DEFAULT_LAYER;
@@ -431,7 +431,6 @@ localize_rcfilename (gboolean disable_user_config)
   char *homedir;
   char *rcfile_default;
   int bottom_ptr = 0;
-  int len;
 
   if (!disable_user_config)
   {
@@ -441,9 +440,7 @@ localize_rcfilename (gboolean disable_user_config)
       exit (-1);
     }
 
-    len = strlen (homedir) + strlen(rcfile) + 8;  
-    temp = g_malloc ((len + 1) * sizeof (char));
-    snprintf (temp, len, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
+    temp = g_strdup_printf ("%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
     if (existfile (temp))
     {
       return (temp);
@@ -451,19 +448,17 @@ localize_rcfilename (gboolean disable_user_config)
     g_free (temp);
   }
   
-  len = strlen (XFCE_CONFDIR) + strlen(rcfile) + 2;  
-  rcfile_default = g_malloc ((len + 1) * sizeof (char));
-  snprintf (rcfile_default, len, "%s/%s", XFCE_CONFDIR, rcfile);
-  if ((strcmp (rcfile_default, "") == 0) || !(charset_code = getenv ("LANG")) || (strcmp (charset_code, "") == 0))
+  rcfile_default = g_strdup_printf ("%s/%s", XFCE_CONFDIR, rcfile);
+  if ((strcmp (rcfile_default, "") == 0) || 
+      !(charset_code = getenv ("LANG")) || 
+      (strcmp (charset_code, "") == 0))
   {
     return (rcfile_default);
   }
   bottom_ptr = strlen (charset_code) - 1;
 
   /* Try Charset Code */
-  len = strlen (rcfile_default) + strlen (charset_code) + 2;
-  temp = g_malloc ((len + 1) * sizeof (char));
-  snprintf (temp, len, "%s.%s", rcfile_default, charset_code);
+  temp = g_strdup_printf ("%s.%s", rcfile_default, charset_code);
   if (existfile (temp))
   {
     g_free (rcfile_default);
@@ -481,12 +476,8 @@ localize_rcfilename (gboolean disable_user_config)
     }
     bottom_ptr--;
   }
-  area_code = g_malloc ((bottom_ptr + 1) * sizeof (char));
-  strncpy (area_code, charset_code, bottom_ptr);
-  area_code[bottom_ptr] = '\0';
-  len = strlen (rcfile_default) + strlen (area_code) + 2;
-  temp = g_malloc ((len + 1) * sizeof (char));
-  snprintf (temp, len, "%s.%s", rcfile_default, area_code);
+  area_code = g_strndup (charset_code, bottom_ptr);
+  temp = g_strdup_printf ("%s.%s", rcfile_default, area_code);
   g_free (area_code);
   if (existfile (temp))
   {
@@ -505,12 +496,8 @@ localize_rcfilename (gboolean disable_user_config)
     }
     bottom_ptr--;
   }
-  country_code = g_malloc ((bottom_ptr + 1) * sizeof (char));
-  strncpy (country_code, charset_code, bottom_ptr);
-  country_code[bottom_ptr] = '\0';
-  len = strlen (rcfile_default) + strlen (country_code) + 2;
-  temp = g_malloc ((len + 1) * sizeof (char));
-  snprintf (temp, len, "%s.%s", rcfile_default, country_code);
+  country_code = g_strndup (charset_code, bottom_ptr);
+  temp = g_strdup_printf ("%s.%s", rcfile_default, country_code);
   g_free (country_code);
   if (existfile (temp))
   {
@@ -683,18 +670,15 @@ readconfig (void)
       p = nextline (configfile, lineread);
       if (current_config.fonts[0])
 	g_free (current_config.fonts[0]);
-      current_config.fonts[0] = (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
-      strcpy (current_config.fonts[0], p);
+      current_config.fonts[0] = g_strdup (p);
       p = nextline (configfile, lineread);
       if (current_config.fonts[1])
 	g_free (current_config.fonts[1]);
-      current_config.fonts[1] = (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
-      strcpy (current_config.fonts[1], p);
+      current_config.fonts[1] = g_strdup (p);
       p = nextline (configfile, lineread);
       if (current_config.fonts[2])
 	g_free (current_config.fonts[2]);
-      current_config.fonts[2] = (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
-      strcpy (current_config.fonts[2], p);
+      current_config.fonts[2] = g_strdup (p);
       p = nextline (configfile, lineread);
       if (my_strnSTARTS (p, "MapFocus"))
       {
@@ -817,16 +801,13 @@ readconfig (void)
       j = 0;
       while ((p) && (!my_strnSTARTS (p, dummy)))
       {
-        label = g_malloc ((strlen (p ? p : "None") + 1) * sizeof (char));
-	strcpy (label, (p ? p : "None"));
+        label = g_strdup (p ? p : "None");
 	p = nextline (configfile, lineread);
-        pixfile = g_malloc ((strlen (p ? p : "Default icon") + 1) * sizeof (char));
-	strcpy (pixfile, (p ? p : "Default icon"));
+        pixfile = g_strdup (p ? p : "Default icon");
 	p = nextline (configfile, lineread);
 	if (strcmp (p, "None"))
 	{
-          command = g_malloc ((strlen (p ? p : "None") + 1) * sizeof (char));
-	  strcpy (command, (p ? p : "None"));
+          command = g_strdup (p ? p : "None");
 	  if (j++ < NBMAXITEMS)
 	    add_popup_entry (i - 1, label, pixfile, command, -1);
 	  g_free (command);
