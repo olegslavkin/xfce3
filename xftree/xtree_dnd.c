@@ -162,7 +162,6 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     /*fprintf(stderr,"dbg:at dnd 3\n");*/
     
-    // tmpfile ==NULL means drop cancelled
     u = list->data;
     s_en = entry_new_by_path (u->url);
     if (strcmp(s_en->path,t_en->path)==0){
@@ -173,7 +172,6 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     tmpfile=CreateTmpList(win->top,list,t_en);
     /*fprintf(stderr,"dbg:at dnd 5\n");*/
     if (!tmpfile) break;
-    // acording to tmpfile name, do a direct move, here, and break.
     cursor_wait (GTK_WIDGET (ctree));
     /* FIXME: links on same device should also be a DirectTransfer() */
     if (on_same_device() && (mode == TR_MOVE)) DirectTransfer(win->top,mode,tmpfile);

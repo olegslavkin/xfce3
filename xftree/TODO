@@ -1,11 +1,17 @@
+easy:
 15- Add "copy" and "insert" keyboard shortcuts and functions
-3- Debug the "goto" option (seems the "fork" may lose variables at times).
-4- gtk-2 
+12- Add a "Go Back" function. (do while debugging goto option)
+16- Config option: Default open with program
+
+complicated:
 6.- MC style opening of packed files: Click on files and you see the internal
 structure as if it wasn't packed. Makes it very easy to copy and move content
 from these files straight to where you want it.
+4- gtk-2 
 7- Add code necesary to d+d files to/from xfsamba.
-12- Add a "Go Back" function. (do while debugging goto option)
+
+unknown:
+3- Debug the "goto" option (seems the "fork" may lose variables at times).
 14- add "save user shortcutkeys to config options:
     does gtk store the custom values in the associated accel?
     if so, how do you retrieve the values?
@@ -17,10 +23,12 @@ bugs to fix: information dialogs can get lost beneath
              erratic behavior when the top open folder gets moved away by 
              another process.
 + desktop icons
-+ useful dialog by copying multiple files (repeats #10)
 + different type documents have different pixmapped icons
 + much more configurable (file open actons ...)
+
+****************************************************************
 done:
++ useful dialog by copying multiple files (repeats #10)
 
 10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place, also faster than opening and closing dialogs).
 (with new xtree_cpy.c routines)
