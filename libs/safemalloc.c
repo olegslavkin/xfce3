@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "utils.h"
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -32,18 +33,6 @@ safemalloc (int length)
     fprintf (stderr, "malloc of %d bytes failed. Exiting\n", length);
     exit (1);
   }
-#ifdef HAVE_MEMSET
-  memset (ptr, 0, length);
-#else
-  {
-    int i;
-    char *ptr2 = ptr;
-    for (i = 0; i < length; i++)
-    {
-      *ptr2 = 0;
-      ptr2++;
-    }
-  }
-#endif
+  mymemset (ptr, 0, length);
   return ptr;
 }

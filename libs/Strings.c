@@ -20,6 +20,24 @@
 #endif
 
 char *
+mymemset (char *dst, int c, int size)
+{
+#ifndef HAVE_MEMSET
+  int i;
+  char *ptr = dst;
+
+  for (i = 0; i < size; i++)
+  {
+    *ptr = (char) c;
+    ptr++;
+  }
+  return (dst);
+#else
+  return ((char *) memset(dst, c, (size_t) size));
+#endif
+}
+
+char *
 mymemcpy (char *dst, char *src, int size)
 {
 #ifndef HAVE_MEMCPY

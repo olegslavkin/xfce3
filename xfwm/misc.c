@@ -457,7 +457,6 @@ Destroy (XfwmWindow * tmp_win)
   free_window_names (tmp_win, True, True);
   if (tmp_win->wmhints)
     XFree (tmp_win->wmhints);
-/*
   if (tmp_win->class.res_name && tmp_win->class.res_name != NoResource)
     XFree (tmp_win->class.res_name);
   if (tmp_win->class.res_class && tmp_win->class.res_class != NoClass)
@@ -466,7 +465,6 @@ Destroy (XfwmWindow * tmp_win)
     XFree (tmp_win->mwm_hints);
   if (tmp_win->cmap_windows)
     XFree (tmp_win->cmap_windows);
- */
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Destroying frame\n");
 #endif
@@ -475,6 +473,7 @@ Destroy (XfwmWindow * tmp_win)
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Freeing data\n");
 #endif
+  mymemset ((char *) tmp_win, 0, sizeof(XfwmWindow));
   free (tmp_win);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Destroy () : Leaving routine\n");

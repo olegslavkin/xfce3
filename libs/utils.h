@@ -29,6 +29,7 @@ XfwmFont;
 /***********************************************************************
  * Routines for dealing with strings
  ***********************************************************************/
+char *mymemset (char *dst, int c, int size);
 char *mymemcpy (char *dst, char *src, int size);
 char *mymemcpy (char *dst, char *src, int size);
 int mystrcasecmp (char *a, char *b);
