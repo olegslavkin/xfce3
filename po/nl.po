@@ -3323,7 +3323,9 @@ msgstr "Dit is XFSamba "
 msgid ""
 "\n"
 "(c) Edscott Wilson Garcia under GNU GPL"
-msgstr "\n(c) Edscott Wilson Garcia onder GNU GPL"
+msgstr ""
+"\n"
+"(c) Edscott Wilson Garcia onder GNU GPL"
 
 #: xfsamba/xfsamba_gui.c:542
 msgid "Please provide information for server "
