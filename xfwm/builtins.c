@@ -2330,7 +2330,7 @@ Circulate (char *action, int Direction, char **restofline)
 
   while ((pass < 3) && (found == NULL))
   {
-    while ((fw != NULL) && (found == NULL) && (fw != &Scr.XfwmRoot))
+    while ((fw != NULL) && (AcceptInput(fw)) && (found == NULL) && (fw != &Scr.XfwmRoot))
     {
       /* Make CirculateUp and CirculateDown take args. by Y.NOMURA */
       if ((onFlags & fw->flags) == onFlags && (offFlags & fw->flags) == 0 && (useCirculateHit || !(fw->flags & CirculateSkip)) && ((useCirculateHitIcon && fw->flags & ICONIFIED) || !(fw->flags & CirculateSkipIcon && fw->flags & ICONIFIED)) && (!needsCurrentDesk || fw->Desk == Scr.CurrentDesk) && (!needsCurrentPage || (fw->frame_x < MyDisplayMaxX (fw->frame_x, fw->frame_y) && fw->frame_y < MyDisplayMaxY (fw->frame_x, fw->frame_y) && fw->frame_x + fw->frame_width > MyDisplayX (fw->frame_x, fw->frame_y) && fw->frame_y + fw->frame_height > MyDisplayY (fw->frame_x, fw->frame_y)))
