@@ -112,7 +112,7 @@ node_is_open (GtkCTree * ctree, GtkCTreeNode * node, void *data)
   GtkCTreeRow *row;
   entry *check = (entry *) data;
   entry *en = gtk_ctree_node_get_row_data (ctree, node);
-  if (strcmp (en->path, check->path) == 0)
+  if ((en->path) && (strcmp (en->path, check->path) == 0))
   {
     row = GTK_CTREE_ROW (node);
     if (row->expanded)
@@ -280,7 +280,8 @@ delete_files (GtkWidget *ctree,char *path)
 
   /*printf("dbg:delete_files():%s\n",path);fflush(NULL);*/
   if (abort_delete) return TRUE;
-  tar_entry=(strncmp(path,"tar:",strlen("tar:")))?FALSE:TRUE;
+  if (!path)tar_entry= FALSE;
+  else tar_entry=(strncmp(path,"tar:",strlen("tar:")))?FALSE:TRUE;
   if (!tar_entry) {
 	 if (lstat (path, &st) == -1) goto delete_error_errno;
 	 if ((test = strrchr (path, '/')))  {
@@ -440,6 +441,7 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     zap=FALSE;
     node = selection->data;
     en = gtk_ctree_node_get_row_data (ctree, node);
+    if (!en) continue;
     tar_entry=(strncmp(en->path,"tar:",strlen("tar:")))?FALSE:TRUE;
     if (!io_is_valid (en->label) || (en->type & FT_DIR_UP) || (tar_entry && (en->type & FT_DIR))) {
       /* we do not process ".." */
