@@ -246,7 +246,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     uri_remove_file_prefix_from_list (list);
     /* tmpfile ==NULL means drop cancelled*/
     u = list->data;
-    tmpfile=CreateTmpList(smb_nav,list,"FIXME(use smb tgt here)");
+    tmpfile=CreateTmpList(smb_nav,list,NULL);
     if (!tmpfile) {
          /*fprintf(stderr,"dbg:null tmpfile\n");*/
 	 break;
@@ -306,4 +306,68 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
  
  return (TRUE);
 }
+
+#if 0
+void
+on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data)
+{
+  GtkCTreeNode *node = NULL;
+  GtkCTree *ctree = GTK_CTREE (widget);
+  GList *selection;
+  int num, i, len, slen;
+  gchar *files;
+
+  if (!ctree){
+	 /*fprintf(stderr,"dbg: return 1 from oddg()\n");*/
+	 return;
+  }
+
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0){
+	 /*fprintf(stderr,"dbg: return 2 from oddg()\n");*/
+	 return;
+  }
+  
+  /*node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);*/
+  /*fprintf(stderr,"dbg: preparing drag data\n");*/
+
+  /* prepare data for the receiver */
+  switch (info)
+  {
+  case TARGET_ROOTWIN:
+    /* not implemented */
+    break;
+  default:
+#if 0
+    selection = GTK_CLIST (ctree)->selection;
+    for (len = 0, i = 0; i < num; i++)
+    {
+      node = selection->data;
+      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+      if (!en->path) return;
+      len += strlen (en->path) + 5 + 2;
+      selection = selection->next;
+    }
+    files = g_malloc (len + 1);
+    files[0] = '\0';
+    selection = GTK_CLIST (ctree)->selection;
+    for (i = 0; i < num; i++)
+    {
+      node = selection->data;
+      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+      if (!en->path) return;
+      slen = strlen (en->path);
+
+      sprintf (files, "smb://%s\@%s/%s/%s\r\n",NMBpassword,selected.share,selected.dirname,selected.filename);
+      files += strlen(files) + 1;
+
+      selection = selection->next;
+    }
+    /*printf("gdkatom=%lu(%s)\n",selection_data->target,gdk_atom_name(selection_data->target));*/
+#endif
+    
+    gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) win->dnd_data, len);
+    break;
+  }
+}
+#endif
 
