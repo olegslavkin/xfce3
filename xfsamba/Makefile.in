@@ -156,7 +156,10 @@ xfsamba_SOURCES = tubo.h tubo.c \
 		xfsamba_mkdir.c \
 		xfsamba_rm.c \
 		xfsamba_tar.c \
-		xfsamba_smblookup.c
+		xfsamba_smblookup.c \
+		xfsamba_dnd.c xfsamba_dnd.h \
+		uri.c uri.h \
+		gtk_dlg.c gtk_dlg.h
 
 
 xfsamba_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
@@ -185,7 +188,8 @@ xfsamba_gui.$(OBJEXT) xfsamba_mem.$(OBJEXT) xfsamba_nmblookup.$(OBJEXT) \
 xfsamba_masterlookup.$(OBJEXT) xfsamba_masterresolve.$(OBJEXT) \
 xfsamba_list.$(OBJEXT) xfsamba_download.$(OBJEXT) \
 xfsamba_upload.$(OBJEXT) xfsamba_mkdir.$(OBJEXT) xfsamba_rm.$(OBJEXT) \
-xfsamba_tar.$(OBJEXT) xfsamba_smblookup.$(OBJEXT)
+xfsamba_tar.$(OBJEXT) xfsamba_smblookup.$(OBJEXT) xfsamba_dnd.$(OBJEXT) \
+uri.$(OBJEXT) gtk_dlg.$(OBJEXT)
 xfsamba_LDFLAGS = 
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)

@@ -48,7 +48,16 @@
 /* local xfsamba includes : */
 #undef XFSAMBA_MAIN
 #include "xfsamba.h"
+#include "xfsamba_dnd.h"
 #include "tubo.h"
+
+static GtkTargetEntry target_table[] = {
+  {"text/uri-list", 0, TARGET_URI_LIST},
+  {"text/plain", 0, TARGET_PLAIN},
+  {"STRING", 0, TARGET_STRING}
+};
+#define NUM_TARGETS (sizeof(target_table)/sizeof(GtkTargetEntry))
+
 
 static GtkWidget *vpaned, *hpaned, *vpaned2, *show_links, *hide_links, *show_diag, *hide_diag;
 /* diagnostics=0x01, links=0x10 :*/
@@ -1208,7 +1217,8 @@ create_smb_window (void)
 	  gtk_clist_set_reorderable (GTK_CLIST (shares), FALSE);
 	  gtk_signal_connect (GTK_OBJECT (shares), "tree-select-row", GTK_SIGNAL_FUNC (select_share), (gpointer) GTK_WIDGET (shares));
 	  gtk_signal_connect (GTK_OBJECT (shares), "click_column", GTK_SIGNAL_FUNC (on_click_column), NULL);
-
+  	  gtk_signal_connect (GTK_OBJECT (shares), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data), NULL);
+  	  gtk_signal_connect (GTK_OBJECT (shares), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
 	  gtk_container_add (GTK_CONTAINER (scrolled), shares);
 	  for (i = 0; i < SHARE_COLUMNS; i++)
 	    gtk_clist_set_column_auto_resize ((GtkCList *) shares, i, TRUE);
@@ -1216,6 +1226,10 @@ create_smb_window (void)
 	  gtk_widget_show (shares);
 	}
       }
+      //gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);*/
+      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_MOTION, target_table, NUM_TARGETS,  GDK_ACTION_MOVE | GDK_ACTION_COPY );
+//      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
+	  
 
       hbox = gtk_hbox_new (FALSE, 0);
       gtk_paned_pack2 (GTK_PANED (vpaned2), hbox, TRUE, TRUE);
