@@ -307,14 +307,10 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
  return (TRUE);
 }
 
-#if 0
 void
-on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data)
+on_drag_data_get (GtkWidget * ctree, GdkDragContext * context, GtkSelectionData * selection_data, guint info, guint time, gpointer data)
 {
-  GtkCTreeNode *node = NULL;
-  GtkCTree *ctree = GTK_CTREE (widget);
-  GList *selection;
-  int num, i, len, slen;
+  int num,len;
   gchar *files;
 
   if (!ctree){
@@ -330,44 +326,27 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
   /*node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);*/
   /*fprintf(stderr,"dbg: preparing drag data\n");*/
 
-  /* prepare data for the receiver */
+  /* prepare data for the receiver (just one element for now) */
   switch (info)
   {
   case TARGET_ROOTWIN:
     /* not implemented */
     break;
   default:
-#if 0
-    selection = GTK_CLIST (ctree)->selection;
-    for (len = 0, i = 0; i < num; i++)
-    {
-      node = selection->data;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (!en->path) return;
-      len += strlen (en->path) + 5 + 2;
-      selection = selection->next;
-    }
+    if (!thisN->password || !selected.share || !selected.dirname 
+		  || !thisN->netbios || !selected.filename) break;
+    len=strlen("smb://@:/\r\n")+strlen(selected.share)
+	    +strlen(selected.dirname)+strlen(selected.filename)
+	    +strlen(thisN->netbios)+strlen(thisN->password);
     files = g_malloc (len + 1);
-    files[0] = '\0';
-    selection = GTK_CLIST (ctree)->selection;
-    for (i = 0; i < num; i++)
-    {
-      node = selection->data;
-      en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (!en->path) return;
-      slen = strlen (en->path);
-
-      sprintf (files, "smb://%s\@%s/%s/%s\r\n",NMBpassword,selected.share,selected.dirname,selected.filename);
-      files += strlen(files) + 1;
-
-      selection = selection->next;
-    }
-    /*printf("gdkatom=%lu(%s)\n",selection_data->target,gdk_atom_name(selection_data->target));*/
-#endif
-    
-    gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) win->dnd_data, len);
+    if (!files) break;
+    sprintf (files, "smb://%s@%s:%s%s%s%s\r\n",thisN->password,thisN->netbios,
+		    selected.share,selected.dirname,
+		    (strcmp(selected.dirname,"/")==0)?"":"/",
+		    selected.filename);
+       
+    gtk_selection_data_set (selection_data, selection_data->target, 8, (const guchar *) files, len);
     break;
   }
 }
-#endif
 

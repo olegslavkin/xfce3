@@ -346,7 +346,7 @@ passwd_dialog (int caso)
   passwd_caso = caso;
 
   dialog = gtk_dialog_new ();
-  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+  gtk_window_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
   gtk_window_set_policy (GTK_WINDOW (dialog), TRUE, TRUE, FALSE);
   gtk_container_border_width (GTK_CONTAINER (dialog), 5);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
@@ -1228,6 +1228,7 @@ create_smb_window (void)
 	  gtk_clist_set_reorderable (GTK_CLIST (shares), FALSE);
 	  gtk_signal_connect (GTK_OBJECT (shares), "tree-select-row", GTK_SIGNAL_FUNC (select_share), (gpointer) GTK_WIDGET (shares));
 	  gtk_signal_connect (GTK_OBJECT (shares), "click_column", GTK_SIGNAL_FUNC (on_click_column), NULL);
+          gtk_signal_connect (GTK_OBJECT (shares), "drag_data_get", GTK_SIGNAL_FUNC (on_drag_data_get), NULL);
   	  gtk_signal_connect (GTK_OBJECT (shares), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data), NULL);
   	  gtk_signal_connect (GTK_OBJECT (shares), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
 	  gtk_container_add (GTK_CONTAINER (scrolled), shares);
@@ -1238,6 +1239,7 @@ create_smb_window (void)
 	}
       }
       //gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);*/
+	gtk_drag_source_set (shares, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK | GDK_BUTTON3_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY );
       gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_MOTION, target_table, NUM_TARGETS,  GDK_ACTION_MOVE | GDK_ACTION_COPY );
 //      gtk_drag_dest_set (shares, GTK_DEST_DEFAULT_DROP|GTK_DEST_DEFAULT_HIGHLIGHT, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
 	  
