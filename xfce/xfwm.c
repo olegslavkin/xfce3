@@ -225,9 +225,9 @@ apply_wm_colors (const XFCE_palette * p)
 
     howbright = brightness_pal (p, 6);
 #ifndef OLD_STYLE
-    if (current_config.xfwm_engine == GTK_ENGINE)
+    if ((current_config.xfwm_engine == GTK_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
 #else
-    if ((current_config.xfwm_engine == GTK_ENGINE) || (current_config.xfwm_engine == XFCE_ENGINE))
+    if ((current_config.xfwm_engine == GTK_ENGINE) || (current_config.xfwm_engine == XFCE_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
 #endif
     {
       howdark = brightness_pal (p, 3);

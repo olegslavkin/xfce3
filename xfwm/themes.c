@@ -3337,7 +3337,7 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
 
   if (onoroff)
   {
-    Forecolor = GetDecor (t, HiColors.fore);
+    Forecolor = WhitePixel (dpy, Scr.screen);
     BackColor = GetDecor (t, HiColors.back);
     ReliefGC = GetDecor (t, HiReliefGC);
     ShadowGC = GetDecor (t, HiShadowGC);
@@ -3385,15 +3385,6 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
   tb_flags = GetDecor (t, titlebar.flags);
   hor_off = 5;
 
-  if (GetDecor (t, WindowFont.font))
-  {
-    NewFontAndColor (GetDecor (t, WindowFont.font->fid), Forecolor, BackColor);
-  }
-  else
-  {
-    NewFontAndColor (0, Forecolor, BackColor);
-  }
-
   bf = &GetDecor (t, titlebar.state[title_state]);
   DrawButton_linea (t, t->title_w, t->title_width, t->title_height, bf, ReliefGC, ShadowGC, (t->title_w == PressedW), 0);
 
@@ -3402,7 +3393,27 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
     XFontSet fontset = GetDecor (t, WindowFont.fontset);
     if (fontset)
     {
-      XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
+      if (onoroff)
+      {
+        if (GetDecor (t, WindowFont.font))
+        {
+          NewFontAndColor (GetDecor (t, WindowFont.font->fid), BlackPixel (dpy, Scr.screen), BackColor);
+        }
+        else
+        {
+          NewFontAndColor (0, BlackPixel (dpy, Scr.screen), BackColor);
+        }
+        XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off + 1, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
+      }
+      if (GetDecor (t, WindowFont.font))
+      {
+        NewFontAndColor (GetDecor (t, WindowFont.font->fid), Forecolor, BackColor);
+      }
+      else
+      {
+        NewFontAndColor (0, Forecolor, BackColor);
+      }
+      XmbDrawString (dpy, t->title_w, fontset, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y), t->name, strlen (t->name));
     }
 #ifdef HAVE_X11_XFT_XFT_H
     else if (enable_xft && GetDecor (t, WindowFont.xftfont))
@@ -3418,6 +3429,17 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
       xftfont = GetDecor (t, WindowFont.xftfont);
       xftdraw = XftDrawCreate (dpy, (Drawable) t->title_w, DefaultVisual (dpy, Scr.screen), attributes.colormap);
 
+      if (onoroff)
+      {
+        dummyc.pixel = BlackPixel (dpy, Scr.screen);
+        XQueryColor (dpy, attributes.colormap, &dummyc);
+        color_fg.color.red = dummyc.red;
+        color_fg.color.green = dummyc.green;
+        color_fg.color.blue = dummyc.blue;
+        color_fg.color.alpha = 0xffff;
+        color_fg.pixel = Forecolor;
+        XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off + 1, GetDecor (t, WindowFont.y) + 1, (XftChar8 *) t->name, strlen (t->name));
+      }
       dummyc.pixel = Forecolor;
       XQueryColor (dpy, attributes.colormap, &dummyc);
       color_fg.color.red = dummyc.red;
@@ -3425,14 +3447,34 @@ SetTitleBar_linea (XfwmWindow * t, Bool onoroff)
       color_fg.color.blue = dummyc.blue;
       color_fg.color.alpha = 0xffff;
       color_fg.pixel = Forecolor;
+      XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off, GetDecor (t, WindowFont.y), (XftChar8 *) t->name, strlen (t->name));
 
-      XftDrawString8 (xftdraw, &color_fg, xftfont, hor_off, GetDecor (t, WindowFont.y) + 1, (XftChar8 *) t->name, strlen (t->name));
       XftDrawDestroy (xftdraw);
     }
 #endif
     else
     {
-      XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
+      if (onoroff)
+      {
+        if (GetDecor (t, WindowFont.font))
+        {
+          NewFontAndColor (GetDecor (t, WindowFont.font->fid), BlackPixel (dpy, Scr.screen), BackColor);
+        }
+        else
+        {
+          NewFontAndColor (0, BlackPixel (dpy, Scr.screen), BackColor);
+        }
+        XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off + 1, GetDecor (t, WindowFont.y) + 1, t->name, strlen (t->name));
+      }
+      if (GetDecor (t, WindowFont.font))
+      {
+        NewFontAndColor (GetDecor (t, WindowFont.font->fid), Forecolor, BackColor);
+      }
+      else
+      {
+        NewFontAndColor (0, Forecolor, BackColor);
+      }
+      XDrawString (dpy, t->title_w, Scr.ScratchGC3, hor_off, GetDecor (t, WindowFont.y), t->name, strlen (t->name));
     }
   }
 }
