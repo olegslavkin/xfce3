@@ -6,6 +6,8 @@ from these files straight to where you want it.
 7- Add code necesary to d+d files to/from xfsamba.
 10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place, also faster than opening and closing dialogs).
 12- Add a "Go Back" function. (do while debugging goto option)
+13- add help for creating custom shortcut keys, and default defined shorcut keys
+14- add "save user shortcutkeys to config options
 
 done:
 1- Some configuration options --> save geometry on exit and double click does goto
