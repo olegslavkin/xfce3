@@ -45,8 +45,9 @@
 #include <signal.h>
 #include <stdarg.h>
 #include <string.h>
-#include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
 
 #include "xfwm.h"
 #include "menus.h"

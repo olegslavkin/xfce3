@@ -37,7 +37,7 @@
 #include <string.h>
 #include "xfwm.h"
 #include <X11/Xlib.h>
-#include <X11/extensions/shape.h>
+#include <X11/Xutil.h>
 
 #include "xfwm.h"
 #include "menus.h"
@@ -47,6 +47,8 @@
 #include "themes.h"
 #include "xinerama.h"
 #include "module.h"
+
+#include <X11/extensions/shape.h>
 
 #ifdef DMALLOC
 #  include "dmalloc.h"

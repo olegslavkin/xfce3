@@ -27,6 +27,7 @@
 #include "xfwm.h"
 
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
 #  include <X11/extensions/Xinerama.h>
 #endif

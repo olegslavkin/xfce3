@@ -52,6 +52,7 @@
 #include "stack.h"
 
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 #ifndef HAVE_SNPRINTF
 #  include "snprintf.h"

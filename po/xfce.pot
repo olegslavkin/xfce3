@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-08-04 16:46+0200\n"
+"POT-Creation-Date: 2001-08-05 10:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -749,9 +749,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr ""
 
-#: xfce/xfwm.c:451 xfwm/xfwm.c:878 xfwm/xfwm.c:879 xfwm/xfwm.c:880
-#: xfwm/xfwm.c:881 xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884
-#: xfwm/xfwm.c:885 xfwm/xfwm.c:886 xfwm/xfwm.c:887
+#: xfce/xfwm.c:451 xfwm/xfwm.c:879 xfwm/xfwm.c:880 xfwm/xfwm.c:881
+#: xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884 xfwm/xfwm.c:885
+#: xfwm/xfwm.c:886 xfwm/xfwm.c:887 xfwm/xfwm.c:888
 msgid "Workspace"
 msgstr ""
 
@@ -914,7 +914,7 @@ msgstr ""
 
 #: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
 #: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
-#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:913
+#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:914
 msgid "Run program ..."
 msgstr ""
 
@@ -1257,7 +1257,7 @@ msgid "Patch viewer ..."
 msgstr ""
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:905
+#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:906
 msgid "Settings"
 msgstr ""
 
@@ -2562,119 +2562,119 @@ msgstr ""
 msgid "File not found.\n"
 msgstr ""
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:876
 msgid "&Restart"
 msgstr ""
 
-#: xfwm/xfwm.c:876
+#: xfwm/xfwm.c:877
 msgid "&Quit"
 msgstr ""
 
-#: xfwm/xfwm.c:889
+#: xfwm/xfwm.c:890
 msgid "&Move"
 msgstr ""
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:891
 msgid "&Resize"
 msgstr ""
 
-#: xfwm/xfwm.c:891
+#: xfwm/xfwm.c:892
 msgid "(De)&Iconify"
 msgstr ""
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:893
 msgid "(Un)&Stick"
 msgstr ""
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:894
 msgid "(Un)S&hade"
 msgstr ""
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:895
 msgid "(Un)Ma&ximize"
 msgstr ""
 
-#: xfwm/xfwm.c:896
+#: xfwm/xfwm.c:897
 msgid "Se&nd to..."
 msgstr ""
 
-#: xfwm/xfwm.c:897
+#: xfwm/xfwm.c:898
 msgid "S&witch to..."
 msgstr ""
 
-#: xfwm/xfwm.c:899
+#: xfwm/xfwm.c:900
 msgid "&Close"
 msgstr ""
 
-#: xfwm/xfwm.c:901
+#: xfwm/xfwm.c:902
 msgid "User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:902
+#: xfwm/xfwm.c:903
 msgid "Edit menu..."
 msgstr ""
 
-#: xfwm/xfwm.c:906
+#: xfwm/xfwm.c:907
 msgid "&Mouse..."
 msgstr ""
 
-#: xfwm/xfwm.c:907
+#: xfwm/xfwm.c:908
 msgid "&Backdrop..."
 msgstr ""
 
-#: xfwm/xfwm.c:908
+#: xfwm/xfwm.c:909
 msgid "&Sound..."
 msgstr ""
 
-#: xfwm/xfwm.c:910
+#: xfwm/xfwm.c:911
 msgid "&New window"
 msgstr ""
 
-#: xfwm/xfwm.c:911
+#: xfwm/xfwm.c:912
 msgid "&User Menu"
 msgstr ""
 
-#: xfwm/xfwm.c:915
+#: xfwm/xfwm.c:916
 msgid "&Arrange icons"
 msgstr ""
 
-#: xfwm/xfwm.c:916
+#: xfwm/xfwm.c:917
 msgid "&Iconify all"
 msgstr ""
 
-#: xfwm/xfwm.c:917
+#: xfwm/xfwm.c:918
 msgid "&Refresh"
 msgstr ""
 
-#: xfwm/xfwm.c:918
+#: xfwm/xfwm.c:919
 msgid "Shuffle &Up"
 msgstr ""
 
-#: xfwm/xfwm.c:919
+#: xfwm/xfwm.c:920
 msgid "Shuffle &Down"
 msgstr ""
 
-#: xfwm/xfwm.c:921
+#: xfwm/xfwm.c:922
 msgid "&Settings"
 msgstr ""
 
-#: xfwm/xfwm.c:923
+#: xfwm/xfwm.c:924
 msgid "&Quit XFwm"
 msgstr ""
 
-#: xfwm/xfwm.c:925
+#: xfwm/xfwm.c:926
 msgid "&Full Screen"
 msgstr ""
 
-#: xfwm/xfwm.c:926
+#: xfwm/xfwm.c:927
 msgid "&Vertical"
 msgstr ""
 
-#: xfwm/xfwm.c:927
+#: xfwm/xfwm.c:928
 msgid "&Horizontal"
 msgstr ""
 
-#: xfwm/xfwm.c:1264
+#: xfwm/xfwm.c:1265
 msgid "xfwm terminated: "
 msgstr ""
 

@@ -76,6 +76,7 @@
 #endif
 
 #include <X11/Xlib.h>
+#include <X11/Xutil.h>
 #include <X11/Xatom.h>
 
 #include "xfwm.h"
@@ -84,13 +85,14 @@
 #include "parse.h"
 #include "screen.h"
 #include "xfwm.h"
-#include <X11/extensions/shape.h>
 #include "module.h"
 #include "stack.h"
 #include "themes.h"
 #include "xinerama.h"
 #include "constant.h"
 #include "session.h"
+
+#include <X11/extensions/shape.h>
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
