@@ -30,7 +30,6 @@
 #include "xtree_cfg.h"
 
 #define SPACING 	5
-/* moved to reg.h: #define DEF_APP		"netscape"*/
 #define TIMERVAL 	6000
 #define MAXBUF		8192
 

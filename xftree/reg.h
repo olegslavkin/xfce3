@@ -46,6 +46,6 @@ int reg_save (GList * list);
 void cb_register (GtkWidget * item, GtkWidget * ctree);
 
 /* FIXME: make DEF_APP a dynamic configurable option: */
-#define DEF_APP		"netscape"
+#define DEF_APP		"dillo"
 
 #endif

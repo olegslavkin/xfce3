@@ -143,7 +143,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
-  path=valid_path((GtkCTree *)ctree,FALSE);
+  path=file_path(file);
 
   if (file)
   {

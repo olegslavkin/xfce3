@@ -103,6 +103,16 @@ char *valid_path(GtkCTree *ctree,gboolean expand){
   return en->path;
 }
 
+char *file_path(char *path){
+  static char *dir=NULL;
+  if (dir) g_free(NULL);
+  dir=g_strdup(path);
+  if ((!dir) || !(strchr(dir,'/'))) return "/tmp";
+  *(strrchr(dir,'/'))=0;
+  if (!strlen(dir) || !(strchr(dir,'/'))) return "/tmp";
+  return dir;
+}
+
 /*
  * find a node and check if it is expanded
  */

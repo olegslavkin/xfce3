@@ -53,4 +53,5 @@ cb_autotype(GtkWidget * item, GtkCTree * ctree);
 void 
 cb_autotar(GtkWidget * item, GtkCTree * ctree);
 char *valid_path(GtkCTree *ctree,gboolean expand);
+char *file_path(char *path);
 #endif
