@@ -121,6 +121,8 @@ Style "XMMS*"       icon "XFCE_DIR/icons/CDPlayer.xpm"
 Style "*gnome*"     icon "XFCE_DIR/icons/Gnome-apps.xpm"
 Style "*Gnome*"     icon "XFCE_DIR/icons/Gnome-apps.xpm"
 Style "*GNOME*"     icon "XFCE_DIR/icons/Gnome-apps.xpm"
+Style "sylpheed"    icon "XFCE_DIR/icons/Mail.xpm"
+
 
 # Common init and restart functions
 #AddToFunc "InitFunction"
