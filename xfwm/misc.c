@@ -261,6 +261,37 @@ free_window_names (XfwmWindow * tmp, Bool nukename, Bool nukeicon)
   return;
 }
 
+void
+RevertFocus (XfwmWindow * Tmp_win)
+{
+  XfwmWindow * t;
+  if ((!Tmp_win) || (Scr.Focus != Tmp_win))
+    return;
+    
+  t = Tmp_win->next;
+  while (t && (t->wmhints) && (t->wmhints->flags & InputHint) && !(t->wmhints->input))
+  {
+    t = t->next;
+  }
+  if (t)
+  {
+    SetFocus (t->w, t, 1);
+    return;
+  }
+
+  t = Tmp_win->prev;
+  while (t && (t->wmhints) && (t->wmhints->flags & InputHint) && !(t->wmhints->input))
+  {
+    t = t->prev;
+  }
+  if (t)
+  {
+    SetFocus (t->w, t, 1);
+    return;
+  }
+
+  SetFocus (Scr.NoFocusWin, NULL, 0);
+}
 /***************************************************************************
  *
  * Handles destruction of a window 
@@ -315,12 +346,7 @@ Destroy (XfwmWindow * Tmp_win)
 
   if (Scr.Focus == Tmp_win)
   {
-    if (Tmp_win->next)
-      SetFocus (Tmp_win->next->w, Tmp_win->next, 1);
-    else if (Tmp_win->prev)
-      SetFocus (Tmp_win->prev->w, Tmp_win->prev, 1);
-    else
-      SetFocus (Scr.NoFocusWin, NULL, 0);
+    RevertFocus (Tmp_win);
   }
 
   XDeleteContext (dpy, Tmp_win->frame, XfwmContext);

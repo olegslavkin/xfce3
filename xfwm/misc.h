@@ -199,6 +199,7 @@ Bool PlaceWindow (XfwmWindow * tmp_win, unsigned long flags, int Desk);
 void GetWMName (XfwmWindow *);
 void GetWMIconName (XfwmWindow *);
 void free_window_names (XfwmWindow * tmp, Bool nukename, Bool nukeicon);
+void RevertFocus (XfwmWindow *);
 int do_menu (MenuRoot * menu, int style);
 int check_allowed_function (MenuItem * mi);
 void ReInstallActiveColormap (void);

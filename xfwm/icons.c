@@ -849,12 +849,7 @@ Iconify (XfwmWindow * tmp_win, int def_x, int def_y, Bool stackit)
     {
       if (Scr.PreviousFocus == Scr.Focus)
 	Scr.PreviousFocus = NULL;
-      if (tmp_win->next)
-	SetFocus (tmp_win->next->w, tmp_win->next, 1);
-      else if (tmp_win->prev)
-	SetFocus (tmp_win->prev->w, tmp_win->prev, 1);
-      else
-	SetFocus (Scr.NoFocusWin, NULL, 0);
+      RevertFocus (tmp_win);
     }
   }
   fast_process_expose ();

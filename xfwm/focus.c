@@ -68,6 +68,16 @@ SetFocus (Window w, XfwmWindow * Fw, Bool FocusByMouse)
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Entering SetFocus ()\n");
 #endif
+  /* if there are hints, only set focus if inputhint isn't False */
+  if ((Fw) && (Fw->wmhints) && (Fw->wmhints->flags & InputHint) && !(Fw->wmhints->input))
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : SetFocus canceled because input hint is false\n");
+    fprintf (stderr, "xfwm : Leaving SetFocus ()\n");
+#endif
+    return;
+  }
+  
   if ((FocusByMouse) && (Fw) && (Fw != Scr.Focus) && (Fw != &Scr.XfwmRoot))
   {
     XfwmWindow *tmp_win1, *tmp_win2;
