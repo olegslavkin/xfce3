@@ -1465,7 +1465,7 @@ create_find (char *path)
 
 		  if (DEFAULT_FILTER)
 		    gtk_entry_set_text (GTK_ENTRY (find_options.filter_entry), DEFAULT_FILTER);
-		  filterScroll = create_help (vbox, N_("Basic rules:\n" "\n" "*  Will match any character zero or more times.\n" "?  Will match any character exactly one time\n"));
+		  filterScroll = create_help (vbox, _("Basic rules:\n" "\n" "*  Will match any character zero or more times.\n" "?  Will match any character exactly one time\n"));
 
 
 		  hbox2 = gtk_hbox_new (FALSE, 0);
@@ -1519,7 +1519,7 @@ create_find (char *path)
 		  gtk_widget_show (button);
 		  regexpScroll =
 		    create_help (vbox,
-				 N_("Reserved characters for extended regexp are\n" ". ^ $ [ ] ? * + { } | \\ ( ) : \n" "In  basic regular expressions the metacharacters\n" "?, +, {, |, (, and ) lose their special meaning.\n" "\n" "The  period  .   matches  any  single  character.\n" "The caret ^ matches at the start of line.\n" "The dollar $ matches at the end of line.\n" "\n" "Characters within [ ] matches any single \n" "       character in the list.\n" "Characters within [^ ] matches any single\n" "       character *not* in the list.\n" "Characters inside [ - ] matches a range of\n" "       characters (ie [0-9] or [a-z]).\n" "\n" "A regular expression may be followed by one\n" "       of several repetition operators:\n" "?      The preceding item is optional and matched\n" "       at most once.\n" "*      The preceding item will be matched zero\n" "       or more times.\n" "+      The preceding item will be matched one or\n" "       more times.\n" "{n}    The preceding item is matched exactly n times.\n"
+				 _("Reserved characters for extended regexp are\n" ". ^ $ [ ] ? * + { } | \\ ( ) : \n" "In  basic regular expressions the metacharacters\n" "?, +, {, |, (, and ) lose their special meaning.\n" "\n" "The  period  .   matches  any  single  character.\n" "The caret ^ matches at the start of line.\n" "The dollar $ matches at the end of line.\n" "\n" "Characters within [ ] matches any single \n" "       character in the list.\n" "Characters within [^ ] matches any single\n" "       character *not* in the list.\n" "Characters inside [ - ] matches a range of\n" "       characters (ie [0-9] or [a-z]).\n" "\n" "A regular expression may be followed by one\n" "       of several repetition operators:\n" "?      The preceding item is optional and matched\n" "       at most once.\n" "*      The preceding item will be matched zero\n" "       or more times.\n" "+      The preceding item will be matched one or\n" "       more times.\n" "{n}    The preceding item is matched exactly n times.\n"
 				    "{n,}   The preceding item is matched n or more times.\n" "{n,m}  The preceding item is matched at least n times,\n" "       but not more than m times.\n" "\n" "To match any reserved character, precede it with \\. \n" "\n" "Two regular expressions may be joined by the logical or\n" "       operator |.\n" "Two regular expressions may be concatenated.\n" "\n" "More information is available by typing \"man grep\"\n" "       at the command prompt.\n"));
 
 		}		/* end - circle 9 */
@@ -1569,7 +1569,7 @@ create_find (char *path)
 		  gtk_box_pack_end (GTK_BOX (hbox2), button, FALSE, FALSE, 0);
 		  gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (toggle_view), (gpointer) ((long) 10));
 		  gtk_widget_show (button);
-		  xdevScroll = create_help (vbox, N_("Staying on a single filesystem will hinder\n" "searching on different physical disk partitions.\n" "This is especially useful if you do not want\n" "to search into nfs or smb mounts.\n"));
+		  xdevScroll = create_help (vbox, _("Staying on a single filesystem will hinder\n" "searching on different physical disk partitions.\n" "This is especially useful if you do not want\n" "to search into nfs or smb mounts.\n"));
 
 
 
@@ -1599,7 +1599,7 @@ create_find (char *path)
 		gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (toggle_view), (gpointer) ((long) 6));
 		gtk_widget_show (button);
-		permScroll = create_help (vbox, N_("When permission filtering is active:\n" "-If a file has one of the chosen permission bits,\n" "  it will match.\n" "-If no permission bit is chosen, files with \n" "  no set permission bits will match.\n"));
+		permScroll = create_help (vbox, _("When permission filtering is active:\n" "-If a file has one of the chosen permission bits,\n" "  it will match.\n" "-If no permission bit is chosen, files with \n" "  no set permission bits will match.\n"));
 
 		PermVbox = gtk_vbox_new (FALSE, 0);
 		set_widget (PACK, BOX, "vbox2x", PermVbox, vbox, find, 0, NULL);
@@ -1703,7 +1703,7 @@ create_find (char *path)
 		gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (toggle_view), (gpointer) ((long) 7));
 		gtk_widget_show (button);
-		userScroll = create_help (vbox, N_("If user and group are both set to any \n" "value other than anyone:\n" "-files must meet both criteria in order\n" "  to match\n"));
+		userScroll = create_help (vbox, _("If user and group are both set to any \n" "value other than anyone:\n" "-files must meet both criteria in order\n" "  to match\n"));
 
 
 		UserVbox = gtk_vbox_new (FALSE, 0);
@@ -1748,7 +1748,7 @@ create_find (char *path)
 		gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (toggle_view), (gpointer) ((long) 8));
 		gtk_widget_show (button);
-		sizeScroll = create_help (vbox, N_("-If a size of 0 (zero) is specified for \n" " size-less-than, this will be ignored.\n" "-If both size-greater-than and size-less-than\n" " are specified, both criteria must be met\n" " in order for a file to match.\n"));
+		sizeScroll = create_help (vbox, _("-If a size of 0 (zero) is specified for \n" " size-less-than, this will be ignored.\n" "-If both size-greater-than and size-less-than\n" " are specified, both criteria must be met\n" " in order for a file to match.\n"));
 
 		SizeVbox = gtk_vbox_new (FALSE, 0);
 		set_widget (PACK, BOX, "vbox2", SizeVbox, vbox, find, 0, NULL);
@@ -1803,7 +1803,7 @@ create_find (char *path)
 		gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (toggle_view), (gpointer) ((long) 9));
 		gtk_widget_show (button);
-		timeScroll = create_help (vbox, N_("Three different time modes may be selected:\n" "*modified:\n" "  This changes when the file is modified, e.g.\n" "  by mknod(2), truncate(2), utime(2) and write(2)\n" " (of  more than  zero  bytes). Moreover, modification\n" "  time of a directory is changed by the creation or \n" "  deletion of  files  in  that directory. Modification\n" "  time is not changed for changes in owner, group,\n" "  hard link count, or mode.\n" "\n" "*changed:\n" "  This field is changed by writing or setting inode\n" "  information (i.e., owner, group, link count, mode).\n" "\n" "*accessed:\n" "  This field is changed by file accesses, e.g. by\n" "  exec(2), mknod(2), pipe(2), utime(2) and read(2)\n" "  (of more than zero bytes). Other routines, like\n" "  mmap(2), may or may not update access time.\n" "\n" "Please note: after filtering a file through glob, it\n" "will have its access time altered, so two consecutive\n" "runs will not produce identical results.\n"));
+		timeScroll = create_help (vbox, _("Three different time modes may be selected:\n" "*modified:\n" "  This changes when the file is modified, e.g.\n" "  by mknod(2), truncate(2), utime(2) and write(2)\n" " (of  more than  zero  bytes). Moreover, modification\n" "  time of a directory is changed by the creation or \n" "  deletion of  files  in  that directory. Modification\n" "  time is not changed for changes in owner, group,\n" "  hard link count, or mode.\n" "\n" "*changed:\n" "  This field is changed by writing or setting inode\n" "  information (i.e., owner, group, link count, mode).\n" "\n" "*accessed:\n" "  This field is changed by file accesses, e.g. by\n" "  exec(2), mknod(2), pipe(2), utime(2) and read(2)\n" "  (of more than zero bytes). Other routines, like\n" "  mmap(2), may or may not update access time.\n" "\n" "Please note: after filtering a file through glob, it\n" "will have its access time altered, so two consecutive\n" "runs will not produce identical results.\n"));
 
 		TimeVbox = gtk_vbox_new (FALSE, 0);
 		set_widget (PACK, BOX, "vbox2", TimeVbox, vbox, find, 0, NULL);
