@@ -830,7 +830,7 @@ SetRCDefaults ()
     "ActiveColor white #0A895E",
     "InactiveColor white #D4D4CF",
     "TitleStyle Active Solid #0A895E",
-    "TitleStyle Inactive Solid #1764A3",
+    "TitleStyle Inactive Solid #0A5E89",
     "MenuColor black #D4D4CF black #E6E6E1",
     "CursorColor #FFFFFF black",
     "FocusMode Click",
