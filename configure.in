@@ -319,6 +319,11 @@ AC_ARG_ENABLE(libxml2,
   [
     LIBXML2_CONFIG=xml2-config
 
+   case "$VERSION" in
+   3.*)
+    AC_MSG_RESULT(checking for libxml2 is not enabled... skipped)
+    ;;
+   *)
     LIBXML2_LIBS=`$LIBXML2_CONFIG --libs`
     LIBXML2_CFLAGS=`$LIBXML2_CONFIG --cflags`
 
@@ -326,6 +331,8 @@ AC_ARG_ENABLE(libxml2,
     AC_CHECK_LIB(xml2, xmlParseDoc, AC_DEFINE(HAVE_LIBXML2), ,
       [$LIBXML2_LIBS])
     LIBS=$save_LIBS
+    ;;
+   esac
   ]
 )
 
