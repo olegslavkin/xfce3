@@ -193,7 +193,11 @@ i_play (char *soundfile)
     fprintf (stderr, "Format requested: sampleWidth=%i channelCount=%i frameRate=%i\n", sampleWidth, channelCount, frameRate);
     fprintf (stderr, "Format supported: sampleWidth=%i channelCount=%i frameRate=%i\n", curr[0], curr[1], curr[2]);
     close (masterfd);
+#if defined(HAVE_AUDIOFILE)
     afCloseFile (fp);
+#else  
+    close (fp);
+#endif
     exit(-1);
   }
 #endif
