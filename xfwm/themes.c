@@ -2028,7 +2028,7 @@ DrawStripes_trench (XfwmWindow * t, Window win, int x, int y, int w, int h, Bool
     BackGC = GetDecor (t, LoBackGC);
   }
 
-  rh = ((h - 2) >> 1) << 1;
+  rh = ((int) ((h - 2) / 3)) * 3;
   for (i = 0; i < rh; i++)
   {
     if ((i % 3) == 0)
