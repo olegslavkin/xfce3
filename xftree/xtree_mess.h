@@ -10,7 +10,7 @@
 #define HIDE_DATE		0x200
 #define HIDE_MENU		0x400
 #define HIDE_TITLES		0x800
-
+#define SUBSORT_BY_FILETYPE	0x1000
 
 #define XFTREE_CONFIG_FILE "xftreerc"
 
@@ -47,4 +47,5 @@ int set_fontT(GtkWidget * ctree);
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
 void cb_hide_menu (GtkWidget * widget, GtkWidget *ctree);
 void cb_hide_titles (GtkWidget * widget, GtkWidget *ctree);
+void cb_subsort(GtkWidget * widget, GtkWidget *ctree);
 

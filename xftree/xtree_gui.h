@@ -91,5 +91,5 @@ gint update_timer (GtkCTree * ctree);
 
 void on_dotfiles (GtkWidget * item, GtkCTree * ctree);
 
-void create_pixmaps(int h);
+void create_pixmaps(int h,GtkWidget * ctree);
 #endif

@@ -83,6 +83,11 @@
 #include "icons/block_dev.xpm"
 #include "icons/stale_lnk.xpm"
 #include "icons/xftree_icon.xpm"
+#include "icons/tar.xpm"
+#include "icons/compressed.xpm"
+#include "icons/text.xpm"
+#include "icons/image.xpm"
+#include "icons/core.xpm"
 
 #ifdef HAVE_GDK_PIXBUF
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -121,23 +126,21 @@ typedef struct
 }
 menu_entry;
 
-/*FIXME: initialize all pixmaps and pixmasks to NULL */
 
 GdkPixmap  *gPIX_dir_close=NULL,  *gPIX_dir_open=NULL;
 GdkBitmap *gPIM_dir_close=NULL, *gPIM_dir_open=NULL;
 
-static GdkPixmap * gPIX_page=NULL, *gPIX_page_lnk=NULL, *gPIX_dir_pd=NULL, 
+static GdkPixmap * gPIX_page=NULL,*gPIX_core=NULL, 
+	*gPIX_pageC=NULL, *gPIX_pageH=NULL,*gPIX_pageF=NULL,
+	*gPIX_tar=NULL,*gPIX_compressed=NULL,*gPIX_image=NULL,*gPIX_text=NULL,
+	*gPIX_page_lnk=NULL, *gPIX_dir_pd=NULL, 
 	*gPIX_dir_close_lnk=NULL, *gPIX_dir_open_lnk=NULL, *gPIX_dir_up=NULL, 
 	*gPIX_char_dev=NULL, *gPIX_fifo=NULL, *gPIX_socket=NULL, 
 	*gPIX_block_dev=NULL, *gPIX_exe=NULL, *gPIX_stale_lnk=NULL, *gPIX_exe_lnk=NULL;
 
-static GdkBitmap * gPIM_page=NULL, *gPIM_page_lnk=NULL, *gPIM_dir_pd=NULL, 
-	*gPIM_dir_close_lnk=NULL, *gPIM_dir_open_lnk=NULL, *gPIM_dir_up=NULL, 
-	*gPIM_char_dev=NULL, *gPIM_fifo=NULL, *gPIM_socket=NULL, 
-	*gPIM_block_dev=NULL, *gPIM_exe=NULL, *gPIM_stale_lnk=NULL, *gPIM_exe_lnk=NULL;
-
-
-int move_dir (char *source, char *label, char *target, int trash);
+/* don't repeat masks that already exist */
+static GdkBitmap * gPIM_page=NULL,*gPIM_char_dev=NULL, *gPIM_fifo=NULL, *gPIM_socket=NULL, 
+	*gPIM_block_dev=NULL, *gPIM_exe=NULL, *gPIM_stale_lnk=NULL;
 
 static GtkAccelGroup *accel;
 
@@ -169,6 +172,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   GtkCTreeRow *row1 = (GtkCTreeRow *) ptr1;
   GtkCTreeRow *row2 = (GtkCTreeRow *) ptr2;
   entry *en1, *en2;
+  char *loc1=NULL,*loc2=NULL;
   int type1, type2;
 
   en1 = row1->row.data;
@@ -177,19 +181,42 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
   type2 = en2->type & (FT_DIR | FT_FILE);
   if (type1 != type2)
   {
-    /* i want to have the directories at the top
-     */
+    /* i want to have the directories at the top  */
     return (type1 < type2 ? -1 : 1);
   }
+
+  
+/* subsort by filetype */
+  if (preferences&SUBSORT_BY_FILETYPE) {
+	  loc1=strrchr(en1->label,'.');
+	  loc2=strrchr(en2->label,'.');
+  }
+ 
+  /* this would make the last sort method sticky: */
+  /*gtk_clist_set_sort_column ((GtkCList *)ctree,clist->sort_column);*/
+
+ 
   if (clist->sort_column != COL_NAME)
   {
-    /* use default compare function which we have saved before
-     */
+    /* use default compare function which we have saved before  */
     GtkCListCompareFunc compare;
     cfg *win;
     win = gtk_object_get_user_data (GTK_OBJECT (clist));
     compare = (GtkCListCompareFunc) win->compare;
+    if (preferences&SUBSORT_BY_FILETYPE) {
+	  if ((!loc1)&&(!loc2)) return compare (clist, ptr1, ptr2);
+	  if ((!loc1)&&(loc2)) return strcmp (".",loc2);
+	  if ((loc1)&&(!loc2)) return strcmp (loc1,".");
+	  if (strcmp(loc1,loc2)) return strcmp(loc1,loc2);
+    }
     return compare (clist, ptr1, ptr2);
+  }
+  
+  if (preferences&SUBSORT_BY_FILETYPE) {
+    if ((!loc1)&&(!loc2)) return strcmp (en1->label, en2->label);
+    if ((!loc1)&&(loc2)) return strcmp (".",loc2);
+    if ((loc1)&&(!loc2)) return strcmp (loc1,".");
+    if (strcmp(loc1,loc2)) return strcmp(loc1,loc2);
   }
   return strcmp (en1->label, en2->label);
 }
@@ -362,6 +389,80 @@ ctree_thaw (GtkCTree * ctree)
   cursor_reset (GTK_WIDGET (ctree));
 }
 
+typedef struct icon_pix {
+	GdkPixmap *pixmap;
+	GdkBitmap *pixmask;
+	GdkPixmap *open;
+	GdkBitmap *openmask;
+} icon_pix;
+
+static gboolean set_icon_pix(icon_pix *pix,entry *en) {
+  gboolean isleaf=TRUE;
+  pix->open=pix->openmask=NULL;
+  if (en->type & FT_EXE) {
+    if (en->type & FT_LINK) pix->pixmap=gPIX_exe_lnk; 
+    else pix->pixmap=gPIX_exe;
+    pix->pixmask=gPIM_exe;    
+  }
+  else if (en->type & FT_FILE)/* letter modified here */
+  {
+    if (en->type & FT_LINK) pix->pixmap=gPIX_page_lnk; 
+    else {
+      char *loc;
+      pix->pixmap=gPIX_page; /* default */
+      if (strcmp(en->label,"core")==0) pix->pixmap=gPIX_core;
+      if ( (loc=strrchr(en->path,'.')) != NULL ){
+	      if (strlen(loc)==2) switch (loc[1]){
+		      case 'c': pix->pixmap=gPIX_pageC; break;
+		      case 'h': pix->pixmap=gPIX_pageH; break;
+		      case 'f': pix->pixmap=gPIX_pageF; break;
+		      default: break;				      
+	      }
+	      else if ((strcmp(loc,".txt")==0) ||
+	               (strcmp(loc,".doc")==0) ||
+	               (strcmp(loc,".tex")==0)) pix->pixmap=gPIX_text;
+	      
+	      else if ((strcmp(loc,".jpg")==0) ||
+	               (strcmp(loc,".gif")==0) ||
+	       	       (strcmp(loc,".png")==0) ||
+	               (strcmp(loc,".jpeg")==0)||
+	               (strcmp(loc,".tiff")==0)||
+	               (strcmp(loc,".xbm")==0) ||
+	               (strcmp(loc,".xpm")==0) ||
+	               (strcmp(loc,".xcf")==0) ||
+	               (strcmp(loc,".pcx")==0)) pix->pixmap=gPIX_image;
+	      
+	      else if ((strcmp(loc,".gz")==0)  || 
+	               (strcmp(loc,".tgz")==0) || 
+	               (strcmp(loc,".bz2")==0) || 
+	               (strcmp(loc,".zip")==0)) pix->pixmap=gPIX_compressed;
+	      
+	      else if (strcmp(loc,".tar")==0) pix->pixmap=gPIX_tar;
+      }
+    }  
+    pix->pixmask=gPIM_page;
+  }
+  else if (en->type & FT_DIR_UP) {pix->pixmap=gPIX_dir_up,pix->pixmask=gPIM_dir_close;}
+  else if (en->type & FT_DIR_PD) {
+	  isleaf=FALSE;
+	  pix->pixmap=gPIX_dir_pd,pix->pixmask=gPIM_dir_close;
+	  pix->open=gPIX_dir_open,pix->openmask=gPIM_dir_open;
+  }
+  else if (en->type & FT_DIR){
+    isleaf=FALSE;
+    if (en->type & FT_LINK) pix->pixmap=gPIX_dir_close_lnk;
+    else pix->pixmap=gPIX_dir_close;
+    pix->pixmask=gPIM_dir_close;
+    pix->open=gPIX_dir_open,pix->openmask=gPIM_dir_open;
+  }
+  else if (en->type & FT_CHAR_DEV){pix->pixmap=gPIX_char_dev,pix->pixmask=gPIM_char_dev;}
+  else if (en->type & FT_BLOCK_DEV){pix->pixmap=gPIX_block_dev,pix->pixmask=gPIM_block_dev;}
+  else if (en->type & FT_FIFO){pix->pixmap=gPIX_fifo,pix->pixmask=gPIM_fifo;}
+  else if (en->type & FT_SOCKET){pix->pixmap=gPIX_socket,pix->pixmask=gPIM_socket;}
+  else {pix->pixmap=gPIX_stale_lnk,pix->pixmask=gPIM_stale_lnk;}
+
+  return isleaf;
+}
 /*
  */
 GtkCTreeNode *
@@ -372,6 +473,8 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   gchar *text[COLUMNS];
   gchar size[16] = { "" };
   gchar date[32] = { "" };
+  icon_pix pix;  
+  gboolean isleaf;
 
   if (!label || !path)
   {
@@ -407,67 +510,12 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   text[COL_DATE] = date;
   text[COL_SIZE] = size;
 
-  if (en->type & FT_EXE)
-  {
-    if (en->type & FT_LINK)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_exe_lnk, gPIM_exe_lnk, NULL, NULL, TRUE, FALSE);
-    }
-    else
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_exe, gPIM_exe, NULL, NULL, TRUE, FALSE);
-    }
-  }
-  else if (en->type & FT_FILE)
-  {
-    if (en->type & FT_LINK)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_page_lnk, gPIM_page_lnk, NULL, NULL, TRUE, FALSE);
-    }
-    else
-    {
-      item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
-    }
-  }
-  else if (en->type & FT_DIR_UP)
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_dir_up, gPIM_dir_up, NULL, NULL, TRUE, FALSE);
-  }
-  else if (en->type & FT_DIR_PD)
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_dir_pd, gPIM_dir_pd, gPIX_dir_pd, gPIM_dir_pd, FALSE, FALSE);
-  }
-  else if (en->type & FT_DIR)
-  {
-    if (en->type & FT_LINK)
-    {
-      item = gtk_ctree_insert_node (ctree, parent, sibling, text, SPACING, gPIX_dir_close_lnk, gPIM_dir_close_lnk, gPIX_dir_open_lnk, gPIM_dir_open_lnk, FALSE, FALSE);
-    }
-    else
-    {
-      item = gtk_ctree_insert_node (ctree, parent, sibling, text, SPACING, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
-    }
-  }
-  else if (en->type & FT_CHAR_DEV)
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_char_dev, gPIM_char_dev, NULL, NULL, TRUE, FALSE);
-  }
-  else if (en->type & FT_BLOCK_DEV)
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_block_dev, gPIM_block_dev, NULL, NULL, TRUE, FALSE);
-  }
-  else if (en->type & FT_FIFO)
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_fifo, gPIM_fifo, NULL, NULL, TRUE, FALSE);
-  }
-  else if (en->type & FT_SOCKET)
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_socket, gPIM_socket, NULL, NULL, TRUE, FALSE);
-  }
-  else
-  {
-    item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, gPIX_stale_lnk, gPIM_stale_lnk, NULL, NULL, TRUE, FALSE);
-  }
+  isleaf=set_icon_pix(&pix,en);
+
+/**************************/
+
+  item = gtk_ctree_insert_node (ctree, parent, NULL, text, SPACING, 
+		  pix.pixmap,pix.pixmask, pix.open,pix.openmask, isleaf, FALSE);
   if (item)
     gtk_ctree_node_set_row_data_full (ctree, item, en, node_destroy);
   *type = en->type;
@@ -477,72 +525,19 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
 void
 update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
 {
+  icon_pix pix;  
+  gboolean isleaf;
+  entry *en;
+  
   if (!ctree || !node || !label)
   {
     return;
   }
-
-  if (type & FT_EXE)
-  {
-    if (type & FT_LINK)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_exe_lnk, gPIM_exe_lnk, NULL, NULL, TRUE, FALSE);
-    }
-    else
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_exe, gPIM_exe, NULL, NULL, TRUE, FALSE);
-    }
-  }
-  else if (type & FT_FILE)
-  {
-    if (type & FT_LINK)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_page_lnk, gPIM_page_lnk, NULL, NULL, TRUE, FALSE);
-    }
-    else
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_page, gPIM_page, NULL, NULL, TRUE, FALSE);
-    }
-  }
-  else if (type & FT_DIR_UP)
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_up, gPIM_dir_up, NULL, NULL, TRUE, FALSE);
-  }
-  else if (type & FT_DIR_PD)
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_pd, gPIM_dir_pd, gPIX_dir_pd, gPIM_dir_pd, FALSE, FALSE);
-  }
-  else if (type & FT_DIR)
-  {
-    if (type & FT_LINK)
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_close_lnk, gPIM_dir_close_lnk, gPIX_dir_open_lnk, gPIM_dir_open_lnk, FALSE, FALSE);
-    }
-    else
-    {
-      gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_dir_close, gPIM_dir_close, gPIX_dir_open, gPIM_dir_open, FALSE, FALSE);
-    }
-  }
-  else if (type & FT_CHAR_DEV)
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_char_dev, gPIM_char_dev, NULL, NULL, TRUE, FALSE);
-  }
-  else if (type & FT_BLOCK_DEV)
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_block_dev, gPIM_block_dev, NULL, NULL, TRUE, FALSE);
-  }
-  else if (type & FT_FIFO)
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_fifo, gPIM_fifo, NULL, NULL, TRUE, FALSE);
-  }
-  else if (type & FT_SOCKET)
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_socket, gPIM_socket, NULL, NULL, TRUE, FALSE);
-  }
-  else
-  {
-    gtk_ctree_set_node_info (ctree, node, label, SPACING, gPIX_stale_lnk, gPIM_stale_lnk, NULL, NULL, TRUE, FALSE);
-  }
+  en = gtk_ctree_node_get_row_data (ctree, node); 
+  isleaf=set_icon_pix(&pix,en);
+  gtk_ctree_set_node_info (ctree, node, label, SPACING, 
+		  pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, FALSE);
+  
 }
 
 /*
@@ -1362,6 +1357,15 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 
+  menuitem = gtk_check_menu_item_new_with_label (_("Subsort by file type"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (SUBSORT_BY_FILETYPE & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_subsort), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_t, GDK_CONTROL_MASK | GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+
   shortcut_menu (menu, _("Save geometry on exit"), (gpointer) cb_toggle_preferences, 
 		  (gpointer)((long)(SAVE_GEOMETRY)) );
   shortcut_menu (menu, _("Double click does GOTO"), (gpointer) cb_toggle_preferences, 
@@ -1475,18 +1479,30 @@ GdkBitmap  **pixmask;
 char **xpm;
 } pixmap_list;
 
+typedef struct gen_pixmap_list {
+GdkPixmap  **pixmap;
+GdkPixmap  **pixmask;
+char **xpm;
+char *c;
+} gen_pixmap_list;
 
+/* masks that are duplicated elsewhere are initialized to NULL */
 pixmap_list pixmaps[]={
 	{&gPIX_page,		&gPIM_page,		page_xpm},
-	{&gPIX_page_lnk,	&gPIM_page_lnk,		page_lnk_xpm},
-	{&gPIX_dir_pd,		&gPIM_dir_pd,		dir_pd_xpm},
+	{&gPIX_core,		NULL,			core_xpm},
+	{&gPIX_text,		NULL,			text_xpm},
+	{&gPIX_compressed,	NULL,			compressed_xpm},
+	{&gPIX_image,		NULL,			image_xpm},
+	{&gPIX_tar,		NULL,			tar_xpm},
+	{&gPIX_page_lnk,	NULL,			page_lnk_xpm},
+	{&gPIX_dir_pd,		NULL,			dir_pd_xpm},
 	{&gPIX_dir_open,	&gPIM_dir_open,		dir_open_xpm},
-	{&gPIX_dir_open_lnk,	&gPIM_dir_open_lnk,	dir_open_lnk_xpm},
+	{&gPIX_dir_open_lnk,	NULL,			dir_open_lnk_xpm},
 	{&gPIX_dir_close,	&gPIM_dir_close,	dir_close_xpm},
-	{&gPIX_dir_close_lnk,	&gPIM_dir_close_lnk,	dir_close_lnk_xpm},
-	{&gPIX_dir_up,		&gPIM_dir_up,		dir_up_xpm},
+	{&gPIX_dir_close_lnk,	NULL,			dir_close_lnk_xpm},
+	{&gPIX_dir_up,		NULL,			dir_up_xpm},
 	{&gPIX_exe,		&gPIM_exe,		exe_xpm},
-	{&gPIX_exe_lnk,		&gPIM_exe_lnk,		exe_lnk_xpm},
+	{&gPIX_exe_lnk,		NULL,			exe_lnk_xpm},
 	{&gPIX_char_dev,	&gPIM_char_dev,		char_dev_xpm},
 	{&gPIX_block_dev,	&gPIM_block_dev,	block_dev_xpm},
 	{&gPIX_fifo,		&gPIM_fifo,		fifo_xpm},
@@ -1494,43 +1510,91 @@ pixmap_list pixmaps[]={
 	{&gPIX_stale_lnk,	&gPIM_stale_lnk,	stale_lnk_xpm},
 	{NULL,NULL,NULL}
 };
-void create_pixmaps(int h){
+
+gen_pixmap_list gen_pixmaps[]={
+	{&gPIX_pageC,	NULL,	page_xpm,	"c"},
+	{&gPIX_pageH,	NULL,	page_xpm,	"h"},
+	{&gPIX_pageF,	NULL,	page_xpm,	"f"},
+	{NULL,NULL,NULL}
+};
+
+static void scale_pixmap(GtkWidget *hack,int h,GtkWidget *ctree,char **xpm,
+		GdkPixmap **pixmap, GdkBitmap **pixmask){
+#ifdef HAVE_GDK_PIXBUF
+	if (h>0){
+		GdkPixbuf *orig_pixbuf,*new_pixbuf;
+		float r=0;
+		int w,x,y;
+	  	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **)(xpm));
+		w=gdk_pixbuf_get_width (orig_pixbuf);
+		if (w) r=(float)h/w; if (r<1.0) r=1.0;
+		x=r*w;
+		y=r*gdk_pixbuf_get_height (orig_pixbuf);
+
+  		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf,x,y,GDK_INTERP_NEAREST);
+  		gdk_pixbuf_render_pixmap_and_mask (new_pixbuf,pixmap,pixmask,
+				gdk_pixbuf_get_has_alpha (new_pixbuf));
+  		gdk_pixbuf_unref (orig_pixbuf);
+  		gdk_pixbuf_unref (new_pixbuf);
+
+	} else
+#endif	
+	      *pixmap = MyCreateGdkPixmapFromData(xpm,hack,pixmask,FALSE);
+	return ;
+
+}
+
+void create_pixmaps(int h,GtkWidget *ctree){
+  GtkStyle  *style;
+  static GdkColormap *colormap=NULL;
+  static GdkGC* gc=NULL; 
   int i;
   static GtkWidget *hack=NULL; 
   /* hack: to be able to use icons globally, independent of xftree window.*/
   if (!hack) {hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);}
+  
 #ifndef HAVE_GDK_PIXBUF
-  else return -1; /* don't recreate pixmaps without gdk-pixbuf */
+  else return; /* don't recreate pixmaps without gdk-pixbuf  */
 #endif
+  
+  if (!gc) {
+	GdkColor fore,back;
 	
-  for (i=0;pixmaps[i].pixmap != NULL; i++){
-	  if (*(pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(pixmaps[i].pixmap));
-	  if (*(pixmaps[i].pixmask) != NULL) gdk_bitmap_unref(*(pixmaps[i].pixmask));
-#ifdef HAVE_GDK_PIXBUF			 		
-	  if (h<0) 
-#endif
-	      *(pixmaps[i].pixmap) = MyCreateGdkPixmapFromData(pixmaps[i].xpm,hack,
-			      		pixmaps[i].pixmask,FALSE);
-#ifdef HAVE_GDK_PIXBUF			 		
-	  else {
-  		GdkPixbuf *orig_pixbuf,*new_pixbuf;
-		float r=0;
-	  	orig_pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **)(pixmaps[i].xpm));
-		if (gdk_pixbuf_get_width (orig_pixbuf)) r=(float)h/gdk_pixbuf_get_width (orig_pixbuf);
-		if (r<1.0) r=1.0;
-  		new_pixbuf  = gdk_pixbuf_scale_simple (orig_pixbuf, r*gdk_pixbuf_get_width (orig_pixbuf), 
-		  r*gdk_pixbuf_get_height (orig_pixbuf), GDK_INTERP_NEAREST);
-  		gdk_pixbuf_render_pixmap_and_mask (new_pixbuf, 
-				pixmaps[i].pixmap,pixmaps[i].pixmask, 
-				gdk_pixbuf_get_has_alpha (new_pixbuf));
-  		gdk_pixbuf_unref (orig_pixbuf);
-  		gdk_pixbuf_unref (new_pixbuf);
-		 /*
-		    *(pixmaps[i].pixmap) = duplicate_xpm(hack,pixmaps[i].xpm,pixmaps[i].pixmask);
-		 */   
-	  }
-#endif
+       /*if (!gdk_color_black (colormap,&fore)) fprintf(stderr,"DBG: no black\n");*/
+   	fore.red=fore.green=0;
+	fore.blue=65535;
+	if (!colormap) {
+		colormap = gdk_colormap_get_system();
+		gdk_colormap_alloc_color (colormap,&fore,FALSE,TRUE);
+	}
+        if (!gdk_color_white (colormap,&back)) fprintf(stderr,"DBG: no white\n");
+	gc = gdk_gc_new (hack->window);
+	gdk_gc_set_foreground (gc,&fore);
+	gdk_gc_set_background (gc,&back);
   }
+	
+  for (i=0;pixmaps[i].pixmap != NULL; i++){ 
+	  if (*(pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(pixmaps[i].pixmap));
+	  if ((pixmaps[i].pixmask)&&(*(pixmaps[i].pixmask) != NULL)) gdk_bitmap_unref(*(pixmaps[i].pixmask));
+	  scale_pixmap(hack,h,ctree,pixmaps[i].xpm,pixmaps[i].pixmap,pixmaps[i].pixmask);
+  }
+ 
+  style=gtk_widget_get_style (ctree);
+  for (i=0;gen_pixmaps[i].pixmap != NULL; i++){
+	int x,y,ch;
+	if (*(gen_pixmaps[i].pixmap) != NULL) gdk_pixmap_unref(*(gen_pixmaps[i].pixmap));
+	scale_pixmap(hack,h,ctree,gen_pixmaps[i].xpm,gen_pixmaps[i].pixmap,gen_pixmaps[i].pixmask);
+ 	ch=gdk_char_height (style->font,gen_pixmaps[i].c[0]);
+        x=h/5;
+        y=h/2+2*ch/3;
+  	/*fprintf(stderr,"dbg: drawing...ch=%d, y=%d, pixH=%d\n",ch,y,h);*/
+	/*gdk_draw_line ((GdkDrawable *)(*(pixmaps[i].pixmap)),gc,0,0,30,30);*/
+	gdk_draw_text ((GdkDrawable *)(*(gen_pixmaps[i].pixmap)),style->font,gc,
+				x,y,gen_pixmaps[i].c,1);
+	  
+  }
+   
+  return;
 }
 
 /*
@@ -1623,9 +1687,10 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     
 #define COMMON_HELP_3 \
     {NULL, NULL, 0}, \
-    {N_("Sort by filename"), NULL, 0, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
-    {N_("Sort by size"), NULL, 0, GDK_s,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
-    {N_("Sort by date"), NULL, 0, GDK_d,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Subsort by file type"), NULL, 0, GDK_t, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Sort by file name"), NULL, 0, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Sort by file size"), NULL, 0, GDK_s,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Sort by file date"), NULL, 0, GDK_d,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
     {NULL, NULL, 0}, \
     {N_("Hide/show menu"), NULL, 0, GDK_m,GDK_MOD1_MASK}, \
     {N_("Hide/show toolbar"), NULL, 0, GDK_t,GDK_MOD1_MASK}, \
@@ -1760,7 +1825,8 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   win->height = height;
   gtk_object_set_user_data (GTK_OBJECT (ctree), win);
   if (preferences & CUSTOM_COLORS) set_colors(ctree); 
-  if (preferences & CUSTOM_FONT) create_pixmaps(set_fontT(ctree));
+  if (preferences & CUSTOM_FONT) create_pixmaps(set_fontT(ctree),ctree);
+  else create_pixmaps(-1,ctree);
   gtk_clist_set_compare_func (GTK_CLIST (ctree), my_compare);
   gtk_clist_set_shadow_type (GTK_CLIST (ctree), GTK_SHADOW_IN);
 
@@ -2000,7 +2066,6 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
 {
   GList *reg;
   cfg *new_win;
-  create_pixmaps(-1);
 
   if (!io_is_directory (path))
   {
