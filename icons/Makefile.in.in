@@ -43,13 +43,13 @@ install: install-exec install-data
 install-exec:
 install-data:
 	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir)/$(subdir); \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfcedir)/$(subdir); \
 	else \
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir)/$(subdir); \
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfcedir)/$(subdir); \
 	fi
 	@catalogs='$(DISTFILES)'; \
 	for cat in $$catalogs; do \
-	  $(INSTALL_DATA) $$cat $(DESTDIR)/$(xfcedir)/$(subdir); \
+	  $(INSTALL_DATA) $$cat $(DESTDIR)$(xfcedir)/$(subdir); \
 	done
 
 # Define this as empty until I found a useful application.

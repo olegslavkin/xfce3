@@ -43,19 +43,19 @@ install: install-exec install-data
 install-exec:
 install-data:
 	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir)/help/; \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir)/help/images; \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir)/help/html; \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir)/help/html/stylesheet-images; \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfcedir)/help/; \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfcedir)/help/images; \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfcedir)/help/html; \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfcedir)/help/html/stylesheet-images; \
 	else \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir)/help/; \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir)/help/images; \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir)/help/html; \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir)/help/html/stylesheet-images; \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfcedir)/help/; \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfcedir)/help/images; \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfcedir)/help/html; \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfcedir)/help/html/stylesheet-images; \
 	fi
 	@catalogs='$(DISTFILES)'; \
 	for cat in $$catalogs; do \
-	  $(INSTALL_DATA) $$cat $(DESTDIR)/$(xfcedir)/help/$$cat; \
+	  $(INSTALL_DATA) $$cat $(DESTDIR)$(xfcedir)/help/$$cat; \
 	done
 
 # Define this as empty until I found a useful application.

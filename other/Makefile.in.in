@@ -52,19 +52,19 @@ install: all install-exec install-data
 install-exec:
 install-data:
 	if test -r "$(MKINSTALLDIRS)"; then \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfcedir); \
-	  $(MKINSTALLDIRS) $(DESTDIR)/$(xfceconfdir); \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfcedir); \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(xfceconfdir); \
 	else \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfcedir); \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)/$(xfceconfdir); \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfcedir); \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(xfceconfdir); \
 	fi
 	@catalogs='$(DISTFILES)'; \
 	for cat in $$catalogs; do \
-	  $(INSTALL_DATA) $$cat $(DESTDIR)/$(xfcedir); \
+	  $(INSTALL_DATA) $$cat $(DESTDIR)$(xfcedir); \
 	done
 	@catalogs='$(CONFFILES)'; \
 	for cat in $$catalogs; do \
-	  $(INSTALL_DATA) $$cat $(DESTDIR)/$(xfceconfdir); \
+	  $(INSTALL_DATA) $$cat $(DESTDIR)$(xfceconfdir); \
 	done
 
 # Define this as empty until I found a useful application.
