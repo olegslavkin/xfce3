@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.8.5\n"
-"POT-Creation-Date: 2001-09-17 15:54+0200\n"
+"POT-Creation-Date: 2001-09-27 22:53+0200\n"
 "PO-Revision-Date: 2001-08-01 02:45+0200\n"
 "Last-Translator: Milan Avramoviæ <chomee@operamail.com>\n"
 "Language-Team: sr_YU <LL@li.org>\n"
@@ -80,7 +80,7 @@ msgstr "Prelistaj ..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:239 xfce/screen.c:134
-#: xfce/setup.c:1128 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
@@ -89,7 +89,7 @@ msgid "Ok"
 msgstr "U redu"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
-#: xfce/setup.c:1145 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 msgid "Cancel"
@@ -137,23 +137,23 @@ msgstr ""
 msgid "Cannot create file"
 msgstr "Ne mogu da kreiram fajl"
 
-#: xfce/configfile.c:350
+#: xfce/configfile.c:353
 msgid "Cannot reset configuration file"
 msgstr "Ne mogu da ispraznim konfiguracioni fajl"
 
-#: xfce/configfile.c:353
+#: xfce/configfile.c:356
 msgid "Creating new config file...\n"
 msgstr "Kreiram novi konfiguracioni fajl...\n"
 
-#: xfce/configfile.c:537 xfce/configfile.c:547
+#: xfce/configfile.c:540 xfce/configfile.c:550
 msgid "Cannot open configuration file"
 msgstr "Ne mogu da otvorim konfiguracioni fajl"
 
-#: xfce/configfile.c:553
+#: xfce/configfile.c:556
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "Ne lièi na XFce 3 konfiguracioni fajl !"
 
-#: xfce/configfile.c:554
+#: xfce/configfile.c:557
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
@@ -161,15 +161,15 @@ msgstr ""
 "®elite li da poni¹tite konfiguracioni fajl ?\n"
 " \t(Sada¹nja æe biti snimljena sa nastavkom \".orig\")"
 
-#: xfce/configfile.c:565
+#: xfce/configfile.c:568
 msgid "Cannot open new config, Giving up..."
 msgstr "Ne mogu da otvorim novu konfiguraciju, odustajem..."
 
-#: xfce/configfile.c:566
+#: xfce/configfile.c:569
 msgid "Cannot load configuration file"
 msgstr "Ne mogu da uèitam konfiguracioni fajl"
 
-#: xfce/configfile.c:572
+#: xfce/configfile.c:575
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Ne mo¾ete koristiti stare verzije XFce konfiguracionih fajlova"
 
@@ -370,7 +370,7 @@ msgstr "Sloj sa panelom"
 msgid "Bottom"
 msgstr "Dole"
 
-#: xfce/setup.c:499 xfce/setup.c:877
+#: xfce/setup.c:499 xfce/setup.c:878
 msgid "Top"
 msgstr "Gore"
 
@@ -434,7 +434,7 @@ msgstr "Velièina ikona u menijima"
 msgid "Font style"
 msgstr "Tip slova"
 
-#: xfce/setup.c:710 xfce/setup.c:1004 xfce/setup.c:1011 xfce/setup.c:1018
+#: xfce/setup.c:710 xfce/setup.c:1005 xfce/setup.c:1012 xfce/setup.c:1019
 msgid "Browse..."
 msgstr "Prelistaj..."
 
@@ -470,83 +470,83 @@ msgstr "Koristi preliv na neaktivnom prozoru"
 msgid "Window border style : "
 msgstr "Izgled rama prozora : "
 
-#: xfce/setup.c:838
+#: xfce/setup.c:839
 msgid "Window snapping size (0 disable) : "
 msgstr "Korak za promenu prozora (0 - iskljuèeno) : "
 
-#: xfce/setup.c:865
+#: xfce/setup.c:866
 msgid "Icon position"
 msgstr "Polo¾aj ikona"
 
-#: xfce/setup.c:884 xfmouse/xfmouse.c:206
+#: xfce/setup.c:885 xfmouse/xfmouse.c:206
 msgid "Left"
 msgstr "Levo"
 
-#: xfce/setup.c:891
+#: xfce/setup.c:892
 msgid "bottom"
 msgstr "U dnu"
 
-#: xfce/setup.c:898 xfmouse/xfmouse.c:216
+#: xfce/setup.c:899 xfmouse/xfmouse.c:216
 msgid "Right"
 msgstr "Desno"
 
-#: xfce/setup.c:977
+#: xfce/setup.c:978
 msgid "Title font :"
 msgstr "Tip slova u zaglavlju :"
 
-#: xfce/setup.c:986
+#: xfce/setup.c:987
 msgid "Icon font :"
 msgstr "Tip slova ispod ikona :"
 
-#: xfce/setup.c:995
+#: xfce/setup.c:996
 msgid "Menu font :"
 msgstr "Tip slova u menijima :"
 
-#: xfce/setup.c:1042
+#: xfce/setup.c:1043
 msgid "Sound module (xfsound)"
 msgstr "Pode¹avanje zvuka (xfsound)"
 
-#: xfce/setup.c:1049
+#: xfce/setup.c:1050
 msgid "Mouse settings (xfmouse)"
 msgstr "Pode¹avanje mi¹a (xfmouse)"
 
-#: xfce/setup.c:1056
+#: xfce/setup.c:1057
 msgid "Backdrop settings (xfbd)"
 msgstr "Pode¹avanje pozadine (xfbd)"
 
-#: xfce/setup.c:1063
+#: xfce/setup.c:1064
 msgid "Pager (xfpager)"
 msgstr "Pregled virtuelnih ekrana (xfpager)"
 
-#: xfce/setup.c:1070
+#: xfce/setup.c:1071
 msgid "GNOME (xfgnome)"
 msgstr "GNOME (xfgnome)"
 
-#: xfce/setup.c:1077
+#: xfce/setup.c:1078
 msgid "GNOME menu (xfmenu)"
 msgstr "GNOME meni (xfmenu)"
 
-#: xfce/setup.c:1084
+#: xfce/setup.c:1085
 msgid "KDE menu (xfmenu)"
 msgstr "KDE meni (xfmenu)"
 
-#: xfce/setup.c:1091
+#: xfce/setup.c:1092
 msgid "Palette"
 msgstr "Paleta"
 
-#: xfce/setup.c:1097
+#: xfce/setup.c:1098
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1103
+#: xfce/setup.c:1104
 msgid "Windows"
 msgstr "Prozori"
 
-#: xfce/setup.c:1109 xfce/startup.c:60 xfsound/xfsound.c:88
+#: xfce/setup.c:1110 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
 msgstr "Startovanje"
 
-#: xfbd/xfbd.c:541 xfce/setup.c:1137 xfmouse/xfmouse.c:299
+#: xfbd/xfbd.c:541 xfce/setup.c:1138 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr "Primeni"
@@ -755,7 +755,7 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFce: Cev za komunikacije zatvorena. Izlazim...\n"
 
-#: xfce/xfwm.c:431 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
+#: xfce/xfwm.c:434 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
 #: xfwm/xfwm.c:848 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
 #: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854
 msgid "Workspace"

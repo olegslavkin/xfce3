@@ -12,11 +12,11 @@ XFCE_PACKAGE=xfce
 
 LIB_MAJOR=1
 LIB_MINOR=38
-LIB_TINY=9
+LIB_TINY=8
 
 LIBVERSION=${LIB_MAJOR}:${LIB_MINOR}:${LIB_TINY}
 
-XFCE_VERSION=3.8.9
+XFCE_VERSION=3.8.8
 
 AC_SUBST(VERSION, $XFCE_VERSION)
 AC_SUBST(LIBVERSION)
@@ -303,6 +303,26 @@ AC_ARG_WITH(dt-suffix,
 ])
 AC_SUBST(DT_SUFFIX)
 
+dnl enable GDM-specific startup files?
+AC_MSG_CHECKING(whether to install GDM specific files)
+AC_ARG_ENABLE(gdm,
+	[  --enable-gdm            enable GDM specific files],
+	[USE_GDM=$enableval],
+	[USE_GDM=no]
+)
+AC_MSG_RESULT($USE_GDM)
+AC_SUBST(USE_GDM)
+
+GDM_PREFIX=/etc/X11/gdm/Sessions
+AC_MSG_CHECKING(where GDM keeps session files)
+AC_ARG_WITH(gdm-prefix,
+[  --gdm-session-prefix=STR  [default=/etc/X11/gdm/Sessions] where GDM
+keeps session files],[
+      GDM_PREFIX="$withval", GDM_PREFIX=/etc/X11/gdm/Sessions
+])
+AC_MSG_RESULT($GDM_PREFIX)
+AC_SUBST(GDM_PREFIX)
+
 compiler_warnings=yes
 AC_MSG_CHECKING(if we want compiler warnings)
 AC_ARG_ENABLE(
@@ -412,8 +432,8 @@ AC_OUTPUT(Makefile libs/Makefile xfce/Makefile xfwm/Makefile \
 	xftree/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile \
 	xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile \
 	xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile \
-	xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile  \
-	po/Makefile.in other/Makefile.in backdrops/Makefile.in \
+	xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile \
+	gdm/Makefile po/Makefile.in other/Makefile.in backdrops/Makefile.in \
 	icons/Makefile.in palettes/Makefile.in fonts/Makefile.in \
 	sounds/Makefile.in docs/Makefile.in textures/Makefile.in \
 	xfce_theme/Makefile)

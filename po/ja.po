@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-17 15:54+0200\n"
+"POT-Creation-Date: 2001-09-27 22:53+0200\n"
 "PO-Revision-Date: 1999-09-28 14:36+0900\n"
 "Last-Translator: Yamahata Kenichiro <mogutan@din.or.jp>\n"
 "Language-Team: Japanese <mogutan@din.or.jp>\n"
@@ -80,7 +80,7 @@ msgstr "参照..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:239 xfce/screen.c:134
-#: xfce/setup.c:1128 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
+#: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
@@ -89,7 +89,7 @@ msgid "Ok"
 msgstr "了解"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
-#: xfce/setup.c:1145 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
+#: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
 msgid "Cancel"
@@ -131,23 +131,23 @@ msgstr ""
 msgid "Cannot create file"
 msgstr "ファイルが作成できません"
 
-#: xfce/configfile.c:350
+#: xfce/configfile.c:353
 msgid "Cannot reset configuration file"
 msgstr "設定ファイルを作成し直せません"
 
-#: xfce/configfile.c:353
+#: xfce/configfile.c:356
 msgid "Creating new config file...\n"
 msgstr "新しい設定ファイルを作成しています...\n"
 
-#: xfce/configfile.c:537 xfce/configfile.c:547
+#: xfce/configfile.c:540 xfce/configfile.c:550
 msgid "Cannot open configuration file"
 msgstr "設定ファイルを開けません"
 
-#: xfce/configfile.c:553
+#: xfce/configfile.c:556
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr "XFce3の設定ファイルではないようです。"
 
-#: xfce/configfile.c:554
+#: xfce/configfile.c:557
 #, fuzzy
 msgid ""
 "Do you want to reset the configuration file ?\n"
@@ -156,15 +156,15 @@ msgstr ""
 "設定ファイルを作成し直しますか？\n"
 "\t(現在の設定ファイルは \".orig\" という拡張子をつけられて保存されます)"
 
-#: xfce/configfile.c:565
+#: xfce/configfile.c:568
 msgid "Cannot open new config, Giving up..."
 msgstr "新たな設定ファイルを開けません あきらめます..."
 
-#: xfce/configfile.c:566
+#: xfce/configfile.c:569
 msgid "Cannot load configuration file"
 msgstr "設定ファイルがロードできません"
 
-#: xfce/configfile.c:572
+#: xfce/configfile.c:575
 msgid "Cannot use old version of XFce configuration files"
 msgstr "古いバージョンのXFceの設定ファイルは使用できません"
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "Bottom"
 msgstr "下"
 
-#: xfce/setup.c:499 xfce/setup.c:877
+#: xfce/setup.c:499 xfce/setup.c:878
 msgid "Top"
 msgstr "上"
 
@@ -430,7 +430,7 @@ msgstr "メニュー用アイコンのサイズ"
 msgid "Font style"
 msgstr "フォント"
 
-#: xfce/setup.c:710 xfce/setup.c:1004 xfce/setup.c:1011 xfce/setup.c:1018
+#: xfce/setup.c:710 xfce/setup.c:1005 xfce/setup.c:1012 xfce/setup.c:1019
 msgid "Browse..."
 msgstr "参照..."
 
@@ -470,83 +470,83 @@ msgstr "非アクティブウィンドウにグラデーションを使用する"
 msgid "Window border style : "
 msgstr ""
 
-#: xfce/setup.c:838
+#: xfce/setup.c:839
 msgid "Window snapping size (0 disable) : "
 msgstr "ウィンドウのスナップ数 (0で無効)"
 
-#: xfce/setup.c:865
+#: xfce/setup.c:866
 msgid "Icon position"
 msgstr "アイコンの位置"
 
-#: xfce/setup.c:884 xfmouse/xfmouse.c:206
+#: xfce/setup.c:885 xfmouse/xfmouse.c:206
 msgid "Left"
 msgstr "左"
 
-#: xfce/setup.c:891
+#: xfce/setup.c:892
 msgid "bottom"
 msgstr "下"
 
-#: xfce/setup.c:898 xfmouse/xfmouse.c:216
+#: xfce/setup.c:899 xfmouse/xfmouse.c:216
 msgid "Right"
 msgstr "右"
 
-#: xfce/setup.c:977
+#: xfce/setup.c:978
 msgid "Title font :"
 msgstr "タイトルのフォント"
 
-#: xfce/setup.c:986
+#: xfce/setup.c:987
 msgid "Icon font :"
 msgstr "アイコンのフォント"
 
-#: xfce/setup.c:995
+#: xfce/setup.c:996
 msgid "Menu font :"
 msgstr "メニューのフォント"
 
-#: xfce/setup.c:1042
+#: xfce/setup.c:1043
 msgid "Sound module (xfsound)"
 msgstr "サウンドモジュール (xfsound)"
 
-#: xfce/setup.c:1049
+#: xfce/setup.c:1050
 msgid "Mouse settings (xfmouse)"
 msgstr "マウスの設定 (xfmouse)"
 
-#: xfce/setup.c:1056
+#: xfce/setup.c:1057
 msgid "Backdrop settings (xfbd)"
 msgstr "背景の設定 (xfbd)"
 
-#: xfce/setup.c:1063
+#: xfce/setup.c:1064
 msgid "Pager (xfpager)"
 msgstr "ページャー (xfpager)"
 
-#: xfce/setup.c:1070
+#: xfce/setup.c:1071
 msgid "GNOME (xfgnome)"
 msgstr ""
 
-#: xfce/setup.c:1077
+#: xfce/setup.c:1078
 msgid "GNOME menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1084
+#: xfce/setup.c:1085
 msgid "KDE menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1091
+#: xfce/setup.c:1092
 msgid "Palette"
 msgstr "配色"
 
-#: xfce/setup.c:1097
+#: xfce/setup.c:1098
 msgid "XFce"
 msgstr ""
 
-#: xfce/setup.c:1103
+#: xfce/setup.c:1104
 msgid "Windows"
 msgstr "ウィンドウ"
 
-#: xfce/setup.c:1109 xfce/startup.c:60 xfsound/xfsound.c:88
+#: xfce/setup.c:1110 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
 msgstr "スタートアップ"
 
-#: xfbd/xfbd.c:541 xfce/setup.c:1137 xfmouse/xfmouse.c:299
+#: xfbd/xfbd.c:541 xfce/setup.c:1138 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:619
 msgid "Apply"
 msgstr "適用"
@@ -756,7 +756,7 @@ msgstr "現在XFceパネルからは認識できないデスクトップが選択されました"
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: 通信パイプが切断されました 終了します...\n"
 
-#: xfce/xfwm.c:431 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
+#: xfce/xfwm.c:434 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
 #: xfwm/xfwm.c:848 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
 #: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854
 msgid "Workspace"

@@ -29,4 +29,4 @@ libtool: $(LIBTOOL_DEPS)
 
 SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock \
 	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts \
-	other backdrops icons palettes fonts textures sounds docs po dt
+	other backdrops icons palettes fonts textures sounds docs po dt gdm

@@ -3333,12 +3333,26 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
     if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
     {
       XSetClipOrigin (dpy, Scr.TransMaskGC, (w - 16) / 2, (h - 16) / 2);
-      XCopyPlane (dpy, bf->bitmap_pressed, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      if (inverted)
+      {
+        XCopyPlane (dpy, bf->bitmap_pressed, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2 + 1, (h - 16) / 2 + 1, 1);
+      }
+      else
+      {
+        XCopyPlane (dpy, bf->bitmap_pressed, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      }
     }
     else
     {
       XSetClipOrigin (dpy, Scr.TransMaskGC, (w - 16) / 2, (h - 16) / 2);
-      XCopyPlane (dpy, bf->bitmap, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      if (inverted)
+      {
+        XCopyPlane (dpy, bf->bitmap, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2 + 1, (h - 16) / 2 + 1, 1);
+      }
+      else
+      {
+        XCopyPlane (dpy, bf->bitmap, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      }
     }
 
     if (inverted)

@@ -1,0 +1,78 @@
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+XFCE_CONFDIR = @XFCE_CONFDIR@
+
+SHELL = /bin/sh
+@SET_MAKE@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+gdm_prefix = @GDM_PREFIX@
+subdir = gdm
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+
+MKINSTALLDIRS = $(top_srcdir)/@MKINSTALLDIRS@
+
+DEFS = @DEFS@
+
+DISTFILES = Makefile.in XFce.in
+
+.SUFFIXES:
+
+all: XFCE
+
+XFCE:
+	@sed -e "s%BIN_DIR%$(bindir)%g" \
+	$(srcdir)/XFce.in > $(srcdir)/XFce
+
+install: install-exec install-data
+install-exec:
+install-data: install-data-@USE_GDM@
+install-data-no: all
+
+install-data-yes: all
+	if test -r "$(MKINSTALLDIRS)"; then \
+	  $(INSTALL_SCRIPT) $(srcdir)/XFce $(gdm_prefix)/XFce; \
+	fi
+
+installcheck:
+
+uninstall:
+	rm -f $(gdm_prefix)/XFce
+
+check: all
+
+dvi info tags TAGS ID:
+
+mostlyclean:
+	rm -f core core.*
+	rm -fr *.bak
+
+clean: mostlyclean
+
+distclean: clean
+	rm -f Makefile
+	rm -f XFce
+
+maintainer-clean: distclean
+
+Makefile:
+
+# Tell versions [3.59,3.63) of GNU make not to export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
+

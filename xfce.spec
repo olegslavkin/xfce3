@@ -36,7 +36,7 @@ environment for Linux and various Unices...
 
 %build
 ./configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
---disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft
+--disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft --enable-gdm
 make
 
 %install

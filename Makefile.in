@@ -68,6 +68,7 @@ DLLTOOL = @DLLTOOL@
 DT_SUFFIX = @DT_SUFFIX@
 ECHO = @ECHO@
 EXEEXT = @EXEEXT@
+GDM_PREFIX = @GDM_PREFIX@
 GENCAT = @GENCAT@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_CONFIG = @GLIB_CONFIG@
@@ -102,6 +103,7 @@ POFILES = @POFILES@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
 STRIP = @STRIP@
+USE_GDM = @USE_GDM@
 VERSION = @VERSION@
 XFCE_CONFDIR = @XFCE_CONFDIR@
 XFCE_DIR = @XFCE_DIR@
@@ -131,7 +133,7 @@ ARTS_CFLAGS = @ARTS_CFLAGS@
 
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 
-SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock 	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts 	other backdrops icons palettes fonts textures sounds docs po dt
+SUBDIRS = intl libs xfce_theme xfce xfwm xftree xfpager xfmouse xfbd xfclock 	xfsound xfgnome xfrun xfmenu xfdiff xfglob xfsamba xfumed scripts 	other backdrops icons palettes fonts textures sounds docs po dt gdm
 
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
