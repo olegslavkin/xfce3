@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -64,6 +64,7 @@ ARTS_LIBS = @ARTS_LIBS@
 AS = @AS@
 AUDIOFILE_CFLAGS = @AUDIOFILE_CFLAGS@
 AUDIOFILE_LIBS = @AUDIOFILE_LIBS@
+BUILD_INCLUDED_LIBINTL = @BUILD_INCLUDED_LIBINTL@
 CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 CC = @CC@
@@ -71,12 +72,15 @@ DATADIRNAME = @DATADIRNAME@
 DLLTOOL = @DLLTOOL@
 DMALLOC_LIB = @DMALLOC_LIB@
 DT_SUFFIX = @DT_SUFFIX@
+ECHO = @ECHO@
+EXEEXT = @EXEEXT@
 GDK_IMLIB_CFLAGS = @GDK_IMLIB_CFLAGS@
 GDK_IMLIB_LIBS = @GDK_IMLIB_LIBS@
 GDK_PIXBUF_CFLAGS = @GDK_PIXBUF_CFLAGS@
 GDK_PIXBUF_LIBS = @GDK_PIXBUF_LIBS@
 GDM_PREFIX = @GDM_PREFIX@
 GENCAT = @GENCAT@
+GLIBC21 = @GLIBC21@
 GLIB_CFLAGS = @GLIB_CFLAGS@
 GLIB_CONFIG = @GLIB_CONFIG@
 GLIB_LIBS = @GLIB_LIBS@
@@ -86,8 +90,6 @@ GTK_CFLAGS = @GTK_CFLAGS@
 GTK_CONFIG = @GTK_CONFIG@
 GTK_ENGINE_DIR = @GTK_ENGINE_DIR@
 GTK_LIBS = @GTK_LIBS@
-GT_NO = @GT_NO@
-GT_YES = @GT_YES@
 HAVE_ARTS = @HAVE_ARTS@
 HAVE_AUDIOFILE = @HAVE_AUDIOFILE@
 HAVE_GDK_IMLIB = @HAVE_GDK_IMLIB@
@@ -96,11 +98,12 @@ HAVE_IMLIB = @HAVE_IMLIB@
 HAVE_LIBXML2 = @HAVE_LIBXML2@
 IMLIB_CFLAGS = @IMLIB_CFLAGS@
 IMLIB_LIBS = @IMLIB_LIBS@
-INCLUDE_LOCALE_H = @INCLUDE_LOCALE_H@
 INSTOBJEXT = @INSTOBJEXT@
-INTLDEPS = @INTLDEPS@
+INTLBISON = @INTLBISON@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
+INTL_LIBTOOL_SUFFIX_PREFIX = @INTL_LIBTOOL_SUFFIX_PREFIX@
+LIBICONV = @LIBICONV@
 LIBTOOL = @LIBTOOL@
 LIBTOOL_DEPS = @LIBTOOL_DEPS@
 LIBVERSION = @LIBVERSION@
@@ -111,10 +114,12 @@ MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 OBJDUMP = @OBJDUMP@
+OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
+STRIP = @STRIP@
 USE_DT = @USE_DT@
 USE_GDM = @USE_GDM@
 USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
@@ -125,10 +130,64 @@ XFCE_DIR = @XFCE_DIR@
 XFCE_LOCALE_DIR = @XFCE_LOCALE_DIR@
 XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
-l = @l@
 
 EXTRA_DIST = $(noinst_DATA)
-noinst_DATA =  appinfo.xpm block_dev.xpm char_dev.xpm closewin.xpm comp1.xpm delete.xpm dir_close.xpm dir_open.xpm dir_pd.xpm dir_up.xpm dotfile.xpm empty_trash.xpm error.xpm exe_file.xpm exe.xpm fifo.xpm go_back.xpm go_to.xpm go_up.xpm home.xpm info.xpm link_flag.xpm new_dir.xpm new_file.xpm new_win.xpm package_green.xpm page_adobe.xpm page_audio.xpm page_backup.xpm page_compressed.xpm page_core.xpm page_html.xpm page_image.xpm page_movie.xpm page_po.xpm page_ps.xpm page_spreadsheet.xpm page_tar.xpm page_text.xpm page.xpm question.xpm reload.xpm socket.xpm stale_lnk.xpm tb_copy.xpm tb_cut.xpm tb_find.xpm tb_macro.xpm tb_paste.xpm tb_vsplit.xpm text.xpm trash.xpm warning.xpm wg1.xpm xftree_icon.xpm
+noinst_DATA = \
+appinfo.xpm \
+block_dev.xpm \
+char_dev.xpm \
+closewin.xpm \
+comp1.xpm \
+delete.xpm \
+dir_close.xpm \
+dir_open.xpm \
+dir_pd.xpm \
+dir_up.xpm \
+dotfile.xpm \
+empty_trash.xpm \
+error.xpm \
+exe_file.xpm \
+exe.xpm \
+fifo.xpm \
+go_back.xpm \
+go_to.xpm \
+go_up.xpm \
+home.xpm \
+info.xpm \
+link_flag.xpm \
+new_dir.xpm \
+new_file.xpm \
+new_win.xpm \
+package_green.xpm \
+page_adobe.xpm \
+page_audio.xpm \
+page_backup.xpm \
+page_compressed.xpm \
+page_core.xpm \
+page_html.xpm \
+page_image.xpm \
+page_movie.xpm \
+page_po.xpm \
+page_ps.xpm \
+page_spreadsheet.xpm \
+page_tar.xpm \
+page_text.xpm \
+page.xpm \
+question.xpm \
+reload.xpm \
+socket.xpm \
+stale_lnk.xpm \
+tb_copy.xpm \
+tb_cut.xpm \
+tb_find.xpm \
+tb_macro.xpm \
+tb_paste.xpm \
+tb_vsplit.xpm \
+text.xpm \
+trash.xpm \
+warning.xpm \
+wg1.xpm \
+xftree_icon.xpm
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h

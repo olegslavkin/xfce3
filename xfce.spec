@@ -38,9 +38,15 @@ environment for Linux and various Unices...
 %setup -q -n %{name}-%{version}
 
 %build
-%configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
---disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft \
---enable-gdm --with-gdm-prefix=%{gdmdata}
+if [ ! -f configure ]; then
+  ./autogen.sh --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
+  --disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft \
+  --enable-gdm --with-gdm-prefix=%{gdmdata}
+else
+  ./configure --prefix=%{prefix} --datadir=%{datadir} --sysconfdir=%{confdir} \
+  --disable-dt --enable-gtk-engine=%{gtkengines} --disable-xft \
+  --enable-gdm --with-gdm-prefix=%{gdmdata}
+fi
 make
 
 %install

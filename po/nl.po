@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFce 3.8.14\n"
-"POT-Creation-Date: 2002-01-18 20:16+0100\n"
+"POT-Creation-Date: 2002-01-19 00:06+0100\n"
 "PO-Revision-Date: 2001-12-11 21:44GMT\n"
 "Last-Translator: Jasper Huijsmans <j.b.huijsmans@freeler.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -811,11 +811,11 @@ msgstr "_Alles"
 msgid "_Close"
 msgstr "_Sluiten"
 
-#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:188
+#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:189
 msgid "Open with ..."
 msgstr "Openen met ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:202
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:203
 #: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr "Programma uitvoeren ..."
@@ -919,19 +919,19 @@ msgstr "Anderen :"
 msgid "Sticky"
 msgstr "Plakkerig"
 
-#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1002
+#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1003
 msgid "Owner"
 msgstr "Eigenaar"
 
 #: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
-#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:841
-#: xftree/xtree_functions.c:843 xftree/xtree_go.c:180 xftree/xtree_go.c:181
-#: xftree/xtree_gui.c:1308 xftree/xtree_gui.c:1310
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:842
+#: xftree/xtree_functions.c:844 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_gui.c:1309 xftree/xtree_gui.c:1311
 msgid "unknown"
 msgstr "onbekend"
 
 #: xftree/reg.c:545 xftree/xtree_cb.c:688 xftree/xtree_cb.c:805
-#: xftree/xtree_cpy.c:1184
+#: xftree/xtree_cpy.c:1184 xftree/xtree_cpy.c:1254
 msgid "This function is not available for the contents of tar files"
 msgstr "Deze functie is niet beschikbaar voor de inhoud van tar bestanden"
 
@@ -1008,7 +1008,7 @@ msgstr "Nieuwe_Map"
 msgid "New_File"
 msgstr "Nieuw_Bestand"
 
-#: xftree/xtree_cb.c:653 xftree/xtree_cb.c:729
+#: xftree/xtree_cb.c:653 xftree/xtree_cb.c:729 xftree/xtree_cpy.c:1295
 msgid "File exists !"
 msgstr "Bestand bestaat !"
 
@@ -1020,7 +1020,7 @@ msgstr "Geen item gemarkeerd !"
 msgid "Rename to : "
 msgstr "Hernoemen naar : "
 
-#: xftree/xtree_cb.c:706
+#: xftree/xtree_cb.c:706 xftree/xtree_cpy.c:1273
 msgid "Character not allowed in filename"
 msgstr "Karakter niet toegestaan in bestandsnaam"
 
@@ -1101,6 +1101,11 @@ msgstr "XFTree: Verplaatsen"
 msgid "XFTree: Link"
 msgstr "XFTree: Link"
 
+#: xftree/xtree_cpy.c:1265
+#, fuzzy
+msgid "Symlink name : "
+msgstr "Symlink"
+
 #: xftree/xtree_dnd.c:141
 msgid "Unknown action !"
 msgstr "Onbekende actie !"
@@ -1113,7 +1118,7 @@ msgstr "Schijfgebruik"
 msgid "No directory selected !"
 msgstr "Geen map geselecteerd!"
 
-#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1063
+#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1064
 msgid "files"
 msgstr "bestanden"
 
@@ -1126,7 +1131,7 @@ msgid "Cannot find path"
 msgstr "Kan pad niet vinden"
 
 #. Create "Goto" menu
-#: xftree/xtree_go.c:269 xftree/xtree_gui.c:705
+#: xftree/xtree_go.c:269 xftree/xtree_gui.c:706
 msgid "Go to"
 msgstr "Ga naar"
 
@@ -1142,298 +1147,303 @@ msgstr "Nieuwe Map"
 msgid "New file"
 msgstr "Nieuw bestand"
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:153
+#: xftree/xtree_gui.c:153
+#, fuzzy
+msgid "Symlink ..."
+msgstr "Symlink"
+
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:154
 #: xftree/xtree_toolbar.c:100
 msgid "Delete ..."
 msgstr "Verwijderen ..."
 
-#: xftree/xtree_gui.c:156
+#: xftree/xtree_gui.c:157
 msgid "Insert from pasteboard"
 msgstr "Invoegen van klembord"
 
-#: xftree/xtree_gui.c:159 xftree/xtree_gui.c:203 xftree/xtree_toolbar.c:101
+#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:101
 msgid "Find ..."
 msgstr "Zoeken ..."
 
-#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:207
+#: xftree/xtree_gui.c:161 xftree/xtree_gui.c:208
 msgid "Show disk usage ..."
 msgstr "Schijfgebruik ..."
 
-#: xftree/xtree_gui.c:163
+#: xftree/xtree_gui.c:164
 msgid "Cut to pasteboard"
 msgstr "Knippen naar klembord"
 
-#: xftree/xtree_gui.c:164
+#: xftree/xtree_gui.c:165
 msgid "Copy to pasteboard"
 msgstr "Kopiëren naar klembord"
 
-#: xftree/xtree_gui.c:167
+#: xftree/xtree_gui.c:168
 msgid "List pasteboard contents"
 msgstr "Inhoud klembord tonen"
 
-#: xftree/xtree_gui.c:168
+#: xftree/xtree_gui.c:169
 msgid "Clear pasteboard"
 msgstr "Klembord leegmaken"
 
-#: xftree/xtree_gui.c:170
+#: xftree/xtree_gui.c:171
 msgid "Select all"
 msgstr "Alles selecteren"
 
-#: xftree/xtree_gui.c:171
+#: xftree/xtree_gui.c:172
 msgid "Unselect"
 msgstr "De-selecteren"
 
-#: xftree/xtree_gui.c:172 xftree/xtree_toolbar.c:109
+#: xftree/xtree_gui.c:173 xftree/xtree_toolbar.c:109
 msgid "Toggle Dotfiles"
 msgstr "Puntbestanden Aan/Uit"
 
-#: xftree/xtree_gui.c:174 xftree/xtree_toolbar.c:107
+#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:107
 msgid "Open Trash"
 msgstr "Prullenbak Openen"
 
-#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:108
+#: xftree/xtree_gui.c:176 xftree/xtree_toolbar.c:108
 msgid "Empty Trash"
 msgstr "Prullenbak Legen"
 
-#: xftree/xtree_gui.c:179
+#: xftree/xtree_gui.c:180
 msgid "Duplicate"
 msgstr "Dupliceren"
 
-#: xftree/xtree_gui.c:180
+#: xftree/xtree_gui.c:181
 msgid "Rename ..."
 msgstr "Hernoemen ..."
 
-#: xftree/xtree_gui.c:181
+#: xftree/xtree_gui.c:182
 msgid "Properties ..."
 msgstr "Eigenschappen ..."
 
-#: xftree/xtree_gui.c:185 xftree/xtree_gui.c:192 xftree/xtree_toolbar.c:94
+#: xftree/xtree_gui.c:186 xftree/xtree_gui.c:193 xftree/xtree_toolbar.c:94
 msgid "Go to ..."
 msgstr "Ga naar ..."
 
-#: xftree/xtree_gui.c:189
+#: xftree/xtree_gui.c:190
 msgid "Register ..."
 msgstr "Registreren ..."
 
-#: xftree/xtree_gui.c:195 xftree/xtree_toolbar.c:96
+#: xftree/xtree_gui.c:196 xftree/xtree_toolbar.c:96
 msgid "Go home"
 msgstr "Ga naar thuismap"
 
-#: xftree/xtree_gui.c:196
+#: xftree/xtree_gui.c:197
 msgid "Go back"
 msgstr "Teruggaan"
 
-#: xftree/xtree_gui.c:197 xftree/xtree_toolbar.c:95
+#: xftree/xtree_gui.c:198 xftree/xtree_toolbar.c:95
 msgid "Go up"
 msgstr "Omhoog gaan"
 
-#: xftree/xtree_gui.c:198
+#: xftree/xtree_gui.c:199
 msgid "Update"
 msgstr "Vernieuwen"
 
-#: xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:102
+#: xftree/xtree_gui.c:205 xftree/xtree_toolbar.c:102
 msgid "Differences ..."
 msgstr "Verschillen ..."
 
-#: xftree/xtree_gui.c:205
+#: xftree/xtree_gui.c:206
 msgid "Patch viewer ..."
 msgstr "Patch viewer ..."
 
-#: xftree/xtree_gui.c:206 xftree/xtree_toolbar.c:103
+#: xftree/xtree_gui.c:207 xftree/xtree_toolbar.c:103
 msgid "Browse SMB network ..."
 msgstr "Bladeren door SMB netwerk ..."
 
-#: xftree/xtree_gui.c:210 xftree/xtree_toolbar.c:90
+#: xftree/xtree_gui.c:211 xftree/xtree_toolbar.c:90
 msgid "Close window"
 msgstr "Venster sluiten"
 
-#: xftree/xtree_gui.c:211
+#: xftree/xtree_gui.c:212
 msgid "Quit ..."
 msgstr "Afsluiten ..."
 
 #. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
-#: xftree/xtree_gui.c:216
+#: xftree/xtree_gui.c:217
 msgid "Subsort by file type"
 msgstr "Subsorteren op bestandstype"
 
-#: xftree/xtree_gui.c:217
+#: xftree/xtree_gui.c:218
 msgid "Enable filter"
 msgstr "Filter gebruiken"
 
-#: xftree/xtree_gui.c:218
+#: xftree/xtree_gui.c:219
 msgid "Abbreviate paths"
 msgstr "Padnamen inkorten"
 
-#: xftree/xtree_gui.c:220
+#: xftree/xtree_gui.c:221
 msgid "Status box"
 msgstr "Status regel"
 
-#: xftree/xtree_gui.c:221
+#: xftree/xtree_gui.c:222
 msgid "Status titles"
 msgstr "Status titels"
 
-#: xftree/xtree_gui.c:222
+#: xftree/xtree_gui.c:223
 msgid "Short titles"
 msgstr "Korte titels"
 
-#: xftree/xtree_gui.c:224 xftree/xtree_toolbar.c:420
+#: xftree/xtree_gui.c:225 xftree/xtree_toolbar.c:420
 msgid "Hide toolbar"
 msgstr "Knoppenbalk verbergen"
 
-#: xftree/xtree_gui.c:225
+#: xftree/xtree_gui.c:226
 msgid "Hide titles"
 msgstr "Titels verbergen"
 
-#: xftree/xtree_gui.c:226
+#: xftree/xtree_gui.c:227
 msgid "Hide sizes"
 msgstr "Groottes verbergen"
 
-#: xftree/xtree_gui.c:227
+#: xftree/xtree_gui.c:228
 msgid "Hide dates"
 msgstr "Datums verbergen"
 
-#: xftree/xtree_gui.c:228
+#: xftree/xtree_gui.c:229
 msgid "Hide owner"
 msgstr "Eigenaars verbergen"
 
-#: xftree/xtree_gui.c:229
+#: xftree/xtree_gui.c:230
 msgid "Hide group"
 msgstr "Groepen verbergen"
 
-#: xftree/xtree_gui.c:230
+#: xftree/xtree_gui.c:231
 msgid "Hide mode"
 msgstr "Modus verbergen"
 
-#: xftree/xtree_gui.c:233
+#: xftree/xtree_gui.c:234
 msgid "Sort by file name"
 msgstr "Sorteren op bestandsnaam"
 
-#: xftree/xtree_gui.c:234
+#: xftree/xtree_gui.c:235
 msgid "Sort by file size"
 msgstr "Sorteren op grootte"
 
-#: xftree/xtree_gui.c:235
+#: xftree/xtree_gui.c:236
 msgid "Sort by file date"
 msgstr "Sorteren op datum"
 
-#: xftree/xtree_gui.c:464 xftree/xtree_gui.c:466
+#: xftree/xtree_gui.c:465 xftree/xtree_gui.c:467
 msgid "Create"
 msgstr "Maken"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:647
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:648
 msgid "File"
 msgstr "Bestand"
 
 #. Create "Edit" menu
-#: xftree/xtree_gui.c:676 xfumed/xfumed_gui.c:129
+#: xftree/xtree_gui.c:677 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr "Bewerken"
 
 #. Create "Tools" menu
-#: xftree/xtree_gui.c:730
+#: xftree/xtree_gui.c:731
 msgid "Tools"
 msgstr "Hulpmiddelen"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:754
+#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:755
 msgid "View"
 msgstr "Beeld"
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:784
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:785
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: xftree/xtree_gui.c:790
+#: xftree/xtree_gui.c:791
 msgid "Hide main menu"
 msgstr "Menubalk verbergen"
 
-#: xftree/xtree_gui.c:798 xftree/xtree_gui.c:821
+#: xftree/xtree_gui.c:799 xftree/xtree_gui.c:822
 msgid "Save geometry on exit"
 msgstr "Vensterafmetingen bewaren bij afsluiten"
 
-#: xftree/xtree_gui.c:805 xftree/xtree_gui.c:823
+#: xftree/xtree_gui.c:806 xftree/xtree_gui.c:824
 msgid "Double click does GOTO"
 msgstr "Dubbelklikken is Ga Naar"
 
-#: xftree/xtree_gui.c:813 xftree/xtree_gui.c:825
+#: xftree/xtree_gui.c:814 xftree/xtree_gui.c:826
 msgid "Drag does copy"
 msgstr "Slepen kopieert"
 
-#: xftree/xtree_gui.c:829
+#: xftree/xtree_gui.c:830
 msgid "Set background color"
 msgstr "Achtergrondkleur instellen"
 
-#: xftree/xtree_gui.c:834
+#: xftree/xtree_gui.c:835
 msgid "Set font"
 msgstr "Lettertype instellen"
 
-#: xftree/xtree_gui.c:840 xftree/xtree_toolbar.c:339
+#: xftree/xtree_gui.c:841 xftree/xtree_toolbar.c:339
 msgid "Configure toolbar"
 msgstr "Knoppenbalk instellen"
 
-#: xftree/xtree_gui.c:845
+#: xftree/xtree_gui.c:846
 msgid "Redefine home directory"
 msgstr "Nieuwe thuismap instellen"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:851
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:852
 msgid "Help"
 msgstr "Help"
 
-#: xftree/xtree_gui.c:858
+#: xftree/xtree_gui.c:859
 msgid "Drag and drop"
 msgstr "Slepen en loslaten"
 
-#: xftree/xtree_gui.c:864
+#: xftree/xtree_gui.c:865
 msgid "Unlisted shortcut keys"
 msgstr "Niet-genoemde sneltoetsen"
 
-#: xftree/xtree_gui.c:869
+#: xftree/xtree_gui.c:870
 msgid "Custom shortcut keys"
 msgstr "Aangepaste sneltoetsen"
 
-#: xftree/xtree_gui.c:874
+#: xftree/xtree_gui.c:875
 msgid "Registered applications"
 msgstr "Geregistreerde toepassingen"
 
-#: xftree/xtree_gui.c:880
+#: xftree/xtree_gui.c:881
 msgid "About ..."
 msgstr "Info ..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:997
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:998
 msgid "Name"
 msgstr "Naam"
 
 #. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:999
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1000
 msgid "Size (bytes)"
 msgstr "Grootte (bytes)"
 
-#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1000
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1001
 msgid "Last changed"
 msgstr "Laatst veranderd"
 
-#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1001
+#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1002
 msgid "Mode"
 msgstr "Modus"
 
-#: xftree/xtree_gui.c:1003
+#: xftree/xtree_gui.c:1004
 msgid "Group"
 msgstr "Groep"
 
-#: xftree/xtree_gui.c:1046
+#: xftree/xtree_gui.c:1047
 msgid "Filter:"
 msgstr "Filter:"
 
-#: xftree/xtree_gui.c:1057
+#: xftree/xtree_gui.c:1058
 msgid "dirs"
 msgstr "mappen"
 
-#: xftree/xtree_gui.c:1169
+#: xftree/xtree_gui.c:1170
 msgid "Show main menu"
 msgstr "Menubalk tonen"
 
@@ -1509,7 +1519,7 @@ msgstr "Sneltoetsen zijn en snelle manier om menuopties te activieren."
 msgid "Xftree results"
 msgstr "Xftree resultaten"
 
-#: xftree/xtree_mess.c:1048
+#: xftree/xtree_mess.c:1060
 msgid "Home directory : "
 msgstr "Thuismap : "
 

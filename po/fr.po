@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-17 10:59+0100\n"
+"POT-Creation-Date: 2002-01-19 00:06+0100\n"
 "PO-Revision-Date: 2002-01-16 18:50+0100\n"
 "Last-Translator: Olivier Fourdan <fourdan@xfce.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,13 +87,13 @@ msgstr "Parcourir ..."
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:160 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1179 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:160 xftree/gtk_prop.c:201
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_prop.c:201
 #: xftree/xtree_cpy.c:1131 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Annuler"
@@ -179,12 +179,12 @@ msgid "Subprocess diagnostic"
 msgstr "Diagnostique sous-processus"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:854
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:855
 msgid "Clear"
 msgstr "Effacer"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:859
+#: xftree/xtree_mess.c:860
 msgid "Dismiss"
 msgstr "Ignorer"
 
@@ -806,34 +806,33 @@ msgstr "_Tous"
 msgid "_Close"
 msgstr "_Fermer"
 
-#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:188
+#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:189
 msgid "Open with ..."
 msgstr "Ouvrir avec ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:142 xftree/xtree_gui.c:202
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:203
 #: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr "Exécuter ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:146
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:189 xftree/xtree_gui.c:146
 msgid "Open in terminal"
 msgstr "Ouvrir un terminal"
 
-#: xftree/gtk_exec.c:192
+#: xftree/gtk_exec.c:193
 msgid "Remember application"
 msgstr "Mémoriser l'application"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:211
+#: xftree/gtk_exec.c:212
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Erreur fatale dans %s à %d\n"
 
-#: xftree/gtk_get.c:95
-#, c-format
-msgid "child:bytes:%d bytes received (%d bps)"
-msgstr "fils:octets:%d octets reçus (%d octets/sec.)"
+#: xftree/gtk_get.c:96
+msgid " bytes received"
+msgstr ""
 
 #: xftree/gtk_prop.c:191 xftree/xtree_toolbar.c:106
 msgid "Properties"
@@ -915,19 +914,19 @@ msgstr "Autres"
 msgid "Sticky"
 msgstr "Fixe"
 
-#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1002
+#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1003
 msgid "Owner"
 msgstr "Propriétaire"
 
 #: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
-#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:834
-#: xftree/xtree_functions.c:836 xftree/xtree_go.c:180 xftree/xtree_go.c:181
-#: xftree/xtree_gui.c:1308 xftree/xtree_gui.c:1310
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:842
+#: xftree/xtree_functions.c:844 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_gui.c:1309 xftree/xtree_gui.c:1311
 msgid "unknown"
 msgstr "inconnu"
 
-#: xftree/reg.c:545 xftree/xtree_cb.c:692 xftree/xtree_cb.c:809
-#: xftree/xtree_cpy.c:1184
+#: xftree/reg.c:545 xftree/xtree_cb.c:688 xftree/xtree_cb.c:805
+#: xftree/xtree_cpy.c:1184 xftree/xtree_cpy.c:1254
 msgid "This function is not available for the contents of tar files"
 msgstr "Cette fonction n'est pas disponible pour le contenu des fichiers tar"
 
@@ -970,7 +969,7 @@ msgid "error deleting file"
 msgstr "Erreur à la suppression "
 
 #. nothing to delete
-#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:767
+#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:763
 msgid "No files marked !"
 msgstr "Aucun fichier marqué !"
 
@@ -996,35 +995,35 @@ msgstr ""
 "Olivier Fourdan\n"
 "Edscott Wilson Garcia\n"
 
-#: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
+#: xftree/xtree_cb.c:576 xftree/xtree_cb.c:587
 msgid "New_Folder"
 msgstr "Nouveau répertoire"
 
-#: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
+#: xftree/xtree_cb.c:625 xftree/xtree_cb.c:633
 msgid "New_File"
 msgstr "Nouveau fichier"
 
-#: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733
+#: xftree/xtree_cb.c:653 xftree/xtree_cb.c:729 xftree/xtree_cpy.c:1295
 msgid "File exists !"
 msgstr "Fichier existant !"
 
-#: xftree/xtree_cb.c:686
+#: xftree/xtree_cb.c:682
 msgid "No item marked !"
 msgstr "Aucun objet marqué !"
 
-#: xftree/xtree_cb.c:702
+#: xftree/xtree_cb.c:698
 msgid "Rename to : "
 msgstr "REnommer en :"
 
-#: xftree/xtree_cb.c:710
+#: xftree/xtree_cb.c:706 xftree/xtree_cpy.c:1273
 msgid "Character not allowed in filename"
 msgstr "Caractère non autorisé dans un nom de fichier"
 
-#: xftree/xtree_cb.c:794
+#: xftree/xtree_cb.c:790
 msgid "Nothing selected !"
 msgstr "Rien de sélectionné !"
 
-#: xftree/xtree_cb.c:1105
+#: xftree/xtree_cb.c:1099
 msgid "Override?"
 msgstr "Ecraser ?"
 
@@ -1097,6 +1096,11 @@ msgstr "XFTree: Déplacer"
 msgid "XFTree: Link"
 msgstr "XFTree: Lier"
 
+#: xftree/xtree_cpy.c:1265
+#, fuzzy
+msgid "Symlink name : "
+msgstr "Lien"
+
 #: xftree/xtree_dnd.c:141
 msgid "Unknown action !"
 msgstr "Action inconnue !"
@@ -1109,11 +1113,11 @@ msgstr "Utilisation disque :"
 msgid "No directory selected !"
 msgstr "Aucun répertoire sélectionné !"
 
-#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1063
+#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1064
 msgid "files"
 msgstr "Fichiers"
 
-#: xftree/xtree_functions.c:494
+#: xftree/xtree_functions.c:495
 msgid "internal malloc error:"
 msgstr "Erreur d'allocation mémoire:"
 
@@ -1122,7 +1126,7 @@ msgid "Cannot find path"
 msgstr "Impossible de trouver le chemin"
 
 #. Create "Goto" menu
-#: xftree/xtree_go.c:269 xftree/xtree_gui.c:705
+#: xftree/xtree_go.c:269 xftree/xtree_gui.c:706
 msgid "Go to"
 msgstr "Aller à"
 
@@ -1138,324 +1142,329 @@ msgstr "Nouveau répertoire"
 msgid "New file"
 msgstr "Nouveau fichier"
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:153
+#: xftree/xtree_gui.c:153
+#, fuzzy
+msgid "Symlink ..."
+msgstr "Lien"
+
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:154
 #: xftree/xtree_toolbar.c:100
 msgid "Delete ..."
 msgstr "Effacer ..."
 
-#: xftree/xtree_gui.c:156
+#: xftree/xtree_gui.c:157
 msgid "Insert from pasteboard"
 msgstr "Coller à partir du presse-papier"
 
-#: xftree/xtree_gui.c:159 xftree/xtree_gui.c:203 xftree/xtree_toolbar.c:101
+#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:101
 msgid "Find ..."
 msgstr "Rechercher ..."
 
-#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:207
+#: xftree/xtree_gui.c:161 xftree/xtree_gui.c:208
 msgid "Show disk usage ..."
 msgstr "Montrer l'utilisation disque..."
 
-#: xftree/xtree_gui.c:163
+#: xftree/xtree_gui.c:164
 msgid "Cut to pasteboard"
 msgstr "Déplacer vers le presse-papier"
 
-#: xftree/xtree_gui.c:164
+#: xftree/xtree_gui.c:165
 msgid "Copy to pasteboard"
 msgstr "Copier vers le presse-papier"
 
-#: xftree/xtree_gui.c:167
+#: xftree/xtree_gui.c:168
 msgid "List pasteboard contents"
 msgstr "Affichier le contenu du presse-papier"
 
-#: xftree/xtree_gui.c:168
+#: xftree/xtree_gui.c:169
 msgid "Clear pasteboard"
 msgstr "Effacer le presse-papier"
 
-#: xftree/xtree_gui.c:170
+#: xftree/xtree_gui.c:171
 msgid "Select all"
 msgstr "Sélectionner tout"
 
-#: xftree/xtree_gui.c:171
+#: xftree/xtree_gui.c:172
 msgid "Unselect"
 msgstr "Désélectionner"
 
-#: xftree/xtree_gui.c:172 xftree/xtree_toolbar.c:109
+#: xftree/xtree_gui.c:173 xftree/xtree_toolbar.c:109
 msgid "Toggle Dotfiles"
 msgstr "Fichiers cachés"
 
-#: xftree/xtree_gui.c:174 xftree/xtree_toolbar.c:107
+#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:107
 msgid "Open Trash"
 msgstr "Ouvrir la corbeille"
 
-#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:108
+#: xftree/xtree_gui.c:176 xftree/xtree_toolbar.c:108
 msgid "Empty Trash"
 msgstr "Vider la corbeille"
 
-#: xftree/xtree_gui.c:179
+#: xftree/xtree_gui.c:180
 msgid "Duplicate"
 msgstr "Dupliquer"
 
-#: xftree/xtree_gui.c:180
+#: xftree/xtree_gui.c:181
 msgid "Rename ..."
 msgstr "Renommer ..."
 
-#: xftree/xtree_gui.c:181
+#: xftree/xtree_gui.c:182
 msgid "Properties ..."
 msgstr "Propriétés ..."
 
-#: xftree/xtree_gui.c:185 xftree/xtree_gui.c:192 xftree/xtree_toolbar.c:94
+#: xftree/xtree_gui.c:186 xftree/xtree_gui.c:193 xftree/xtree_toolbar.c:94
 msgid "Go to ..."
 msgstr "Aller à ..."
 
-#: xftree/xtree_gui.c:189
+#: xftree/xtree_gui.c:190
 msgid "Register ..."
 msgstr "Enregistrer ..."
 
-#: xftree/xtree_gui.c:195 xftree/xtree_toolbar.c:96
+#: xftree/xtree_gui.c:196 xftree/xtree_toolbar.c:96
 msgid "Go home"
 msgstr "Retourner au répertoire utilisateur"
 
-#: xftree/xtree_gui.c:196
+#: xftree/xtree_gui.c:197
 msgid "Go back"
 msgstr "Retour"
 
-#: xftree/xtree_gui.c:197 xftree/xtree_toolbar.c:95
+#: xftree/xtree_gui.c:198 xftree/xtree_toolbar.c:95
 msgid "Go up"
 msgstr "Précédent"
 
-#: xftree/xtree_gui.c:198
+#: xftree/xtree_gui.c:199
 msgid "Update"
 msgstr "Mise à jour"
 
-#: xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:102
+#: xftree/xtree_gui.c:205 xftree/xtree_toolbar.c:102
 msgid "Differences ..."
 msgstr "Différences ..."
 
-#: xftree/xtree_gui.c:205
+#: xftree/xtree_gui.c:206
 msgid "Patch viewer ..."
 msgstr "Visualiseur de patch ..."
 
-#: xftree/xtree_gui.c:206 xftree/xtree_toolbar.c:103
+#: xftree/xtree_gui.c:207 xftree/xtree_toolbar.c:103
 msgid "Browse SMB network ..."
 msgstr "Parcourir le réseau SMB ..."
 
-#: xftree/xtree_gui.c:210 xftree/xtree_toolbar.c:90
+#: xftree/xtree_gui.c:211 xftree/xtree_toolbar.c:90
 msgid "Close window"
 msgstr "Fermer la fenêtre"
 
-#: xftree/xtree_gui.c:211
+#: xftree/xtree_gui.c:212
 msgid "Quit ..."
 msgstr "Quitter ..."
 
 #. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
-#: xftree/xtree_gui.c:216
+#: xftree/xtree_gui.c:217
 msgid "Subsort by file type"
 msgstr "Reclasser par type de fichier"
 
-#: xftree/xtree_gui.c:217
+#: xftree/xtree_gui.c:218
 msgid "Enable filter"
 msgstr "Activer le filtre"
 
-#: xftree/xtree_gui.c:218
+#: xftree/xtree_gui.c:219
 msgid "Abbreviate paths"
 msgstr "Abbréviation des chemins"
 
-#: xftree/xtree_gui.c:220
+#: xftree/xtree_gui.c:221
 msgid "Status box"
 msgstr "Boîte de status"
 
-#: xftree/xtree_gui.c:221
+#: xftree/xtree_gui.c:222
 msgid "Status titles"
 msgstr "Titres"
 
-#: xftree/xtree_gui.c:222
+#: xftree/xtree_gui.c:223
 msgid "Short titles"
 msgstr "Abbréviation des titres"
 
-#: xftree/xtree_gui.c:224 xftree/xtree_toolbar.c:420
+#: xftree/xtree_gui.c:225 xftree/xtree_toolbar.c:420
 msgid "Hide toolbar"
 msgstr "Cacher la barre d'outils"
 
-#: xftree/xtree_gui.c:225
+#: xftree/xtree_gui.c:226
 msgid "Hide titles"
 msgstr "Cacher les titres"
 
-#: xftree/xtree_gui.c:226
+#: xftree/xtree_gui.c:227
 msgid "Hide sizes"
 msgstr "Cacher les tailles"
 
-#: xftree/xtree_gui.c:227
+#: xftree/xtree_gui.c:228
 msgid "Hide dates"
 msgstr "Cacher les dates"
 
-#: xftree/xtree_gui.c:228
+#: xftree/xtree_gui.c:229
 msgid "Hide owner"
 msgstr "Cacher le propriétaire"
 
-#: xftree/xtree_gui.c:229
+#: xftree/xtree_gui.c:230
 msgid "Hide group"
 msgstr "Cacher le groupe"
 
-#: xftree/xtree_gui.c:230
+#: xftree/xtree_gui.c:231
 msgid "Hide mode"
 msgstr "Cacher le mode"
 
-#: xftree/xtree_gui.c:233
+#: xftree/xtree_gui.c:234
 msgid "Sort by file name"
 msgstr "Classer par nom"
 
-#: xftree/xtree_gui.c:234
+#: xftree/xtree_gui.c:235
 msgid "Sort by file size"
 msgstr "Classer par taille"
 
-#: xftree/xtree_gui.c:235
+#: xftree/xtree_gui.c:236
 msgid "Sort by file date"
 msgstr "Classer par date"
 
-#: xftree/xtree_gui.c:464 xftree/xtree_gui.c:466
+#: xftree/xtree_gui.c:465 xftree/xtree_gui.c:467
 msgid "Create"
 msgstr "Créer"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:647
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:648
 msgid "File"
 msgstr "Fichier"
 
 #. Create "Edit" menu
-#: xftree/xtree_gui.c:676 xfumed/xfumed_gui.c:129
+#: xftree/xtree_gui.c:677 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr "Editer"
 
 #. Create "Tools" menu
-#: xftree/xtree_gui.c:730
+#: xftree/xtree_gui.c:731
 msgid "Tools"
 msgstr "Outils"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:754
+#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:755
 msgid "View"
 msgstr "Voir"
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:784
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:785
 msgid "Preferences"
 msgstr "Préférences"
 
-#: xftree/xtree_gui.c:790
+#: xftree/xtree_gui.c:791
 msgid "Hide main menu"
 msgstr "Cacher la barre de menu principal"
 
-#: xftree/xtree_gui.c:798 xftree/xtree_gui.c:821
+#: xftree/xtree_gui.c:799 xftree/xtree_gui.c:822
 msgid "Save geometry on exit"
 msgstr "Memoriser la taille/position"
 
-#: xftree/xtree_gui.c:805 xftree/xtree_gui.c:823
+#: xftree/xtree_gui.c:806 xftree/xtree_gui.c:824
 msgid "Double click does GOTO"
 msgstr "Double-clique pour se déplacer"
 
-#: xftree/xtree_gui.c:813 xftree/xtree_gui.c:825
+#: xftree/xtree_gui.c:814 xftree/xtree_gui.c:826
 msgid "Drag does copy"
 msgstr "Glisser/déplacer pour copier"
 
-#: xftree/xtree_gui.c:829
+#: xftree/xtree_gui.c:830
 msgid "Set background color"
 msgstr "Couleur du fond"
 
-#: xftree/xtree_gui.c:834
+#: xftree/xtree_gui.c:835
 msgid "Set font"
 msgstr "Fonte"
 
-#: xftree/xtree_gui.c:840 xftree/xtree_toolbar.c:339
+#: xftree/xtree_gui.c:841 xftree/xtree_toolbar.c:339
 msgid "Configure toolbar"
 msgstr "Configuration de la barre d'outils"
 
-#: xftree/xtree_gui.c:845
+#: xftree/xtree_gui.c:846
 msgid "Redefine home directory"
 msgstr "Redéfinir le répertoire de base"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:851
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:852
 msgid "Help"
 msgstr "Aide"
 
-#: xftree/xtree_gui.c:858
+#: xftree/xtree_gui.c:859
 msgid "Drag and drop"
 msgstr "Glisser/déplacer"
 
-#: xftree/xtree_gui.c:864
+#: xftree/xtree_gui.c:865
 msgid "Unlisted shortcut keys"
 msgstr "Touches de raccourci non listées"
 
-#: xftree/xtree_gui.c:869
+#: xftree/xtree_gui.c:870
 msgid "Custom shortcut keys"
 msgstr "Modification des touches de raccourci"
 
-#: xftree/xtree_gui.c:874
+#: xftree/xtree_gui.c:875
 msgid "Registered applications"
 msgstr "Application enregistrées"
 
-#: xftree/xtree_gui.c:880
+#: xftree/xtree_gui.c:881
 msgid "About ..."
 msgstr "A propos ..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:997
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:998
 msgid "Name"
 msgstr "Nom"
 
 #. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:999
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1000
 msgid "Size (bytes)"
 msgstr "Taille (octets)"
 
-#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1000
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1001
 msgid "Last changed"
 msgstr "Dernière modification"
 
-#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1001
+#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1002
 msgid "Mode"
 msgstr "Mode"
 
-#: xftree/xtree_gui.c:1003
+#: xftree/xtree_gui.c:1004
 msgid "Group"
 msgstr "Groupe"
 
-#: xftree/xtree_gui.c:1046
+#: xftree/xtree_gui.c:1047
 msgid "Filter:"
 msgstr "Filtre:"
 
-#: xftree/xtree_gui.c:1057
+#: xftree/xtree_gui.c:1058
 msgid "dirs"
 msgstr "répertoires"
 
-#: xftree/xtree_gui.c:1169
+#: xftree/xtree_gui.c:1170
 msgid "Show main menu"
 msgstr "Afficher le menu principal"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:95
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:96
 msgid "Could not load specified font\n"
 msgstr "Impossible de charger la fonte spécifiée\n"
 
-#: xftree/xtree_mess.c:428
+#: xftree/xtree_mess.c:429
 msgid "Override ?"
 msgstr "Ecraser ?"
 
-#: xftree/xtree_mess.c:429
+#: xftree/xtree_mess.c:430
 msgid "with"
 msgstr "avec"
 
-#: xftree/xtree_mess.c:508 xftree/xtree_mess.c:509 xftree/xtree_mess.c:525
-#: xftree/xtree_mess.c:526
+#: xftree/xtree_mess.c:509 xftree/xtree_mess.c:510 xftree/xtree_mess.c:526
+#: xftree/xtree_mess.c:527
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Le fichier xftreerc ne peut être créé\n"
 
-#: xftree/xtree_mess.c:562
+#: xftree/xtree_mess.c:563
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Le fichier xtreerc ne peut être lu\n"
 
-#: xftree/xtree_mess.c:756
+#: xftree/xtree_mess.c:757
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1466,7 +1475,7 @@ msgstr ""
 "une entrée et presser la combinaison de touche que vous\n"
 "voulez associer comme raccourci."
 
-#: xftree/xtree_mess.c:765
+#: xftree/xtree_mess.c:766
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1481,7 +1490,7 @@ msgstr ""
 "Pour éditer les associations déjà enregistrées, elles sont mémorisées\n"
 "dans le fichier ~/.xfce/xtree.reg."
 
-#: xftree/xtree_mess.c:774
+#: xftree/xtree_mess.c:775
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1500,17 +1509,17 @@ msgstr ""
 "Pour déplacer plusiers fichiers, utiliser le boutton du milieu de la "
 "souris.\n"
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:790
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 "Les raccourcis clavier sont un moyen rapide d'accéder aux fonctions des "
 "menus."
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:833
 msgid "Xftree results"
 msgstr "Résultats"
 
-#: xftree/xtree_mess.c:1047
+#: xftree/xtree_mess.c:1060
 msgid "Home directory : "
 msgstr "Répertoire de base :"
 
@@ -3635,3 +3644,6 @@ msgstr "Sous menu"
 #: xfumed/xfumed.h:12
 msgid "Separator"
 msgstr "Séparateur"
+
+#~ msgid "child:bytes:%d bytes received (%d bps)"
+#~ msgstr "fils:octets:%d octets reçus (%d octets/sec.)"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.13\n"
-"POT-Creation-Date: 2002-01-17 10:59+0100\n"
+"POT-Creation-Date: 2002-01-19 00:06+0100\n"
 "PO-Revision-Date: 2002-01-17 18:31+0200\n"
 "Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -88,13 +88,13 @@ msgstr "Lehitse ..."
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:160 xftree/gtk_prop.c:200 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Olgu"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1179 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:160 xftree/gtk_prop.c:201
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_prop.c:201
 #: xftree/xtree_cpy.c:1131 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Loobu"
@@ -182,12 +182,12 @@ msgid "Subprocess diagnostic"
 msgstr "Alamprotsessi diagnostika"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:854
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:855
 msgid "Clear"
 msgstr "Puhasta"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:859
+#: xftree/xtree_mess.c:860
 msgid "Dismiss"
 msgstr "Pole enam vaja"
 
@@ -811,34 +811,34 @@ msgstr "_Kõik"
 msgid "_Close"
 msgstr "_Sulge"
 
-#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:188
+#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:189
 msgid "Open with ..."
 msgstr "Ava kasutades ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:142 xftree/xtree_gui.c:202
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:203
 #: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr "Käivita programm ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:188 xftree/xtree_gui.c:146
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:189 xftree/xtree_gui.c:146
 msgid "Open in terminal"
 msgstr "Ava terminalis"
 
-#: xftree/gtk_exec.c:192
+#: xftree/gtk_exec.c:193
 msgid "Remember application"
 msgstr "Pea programm meeles"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:211
+#: xftree/gtk_exec.c:212
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Saatuslik viga failis %s kohal %d\n"
 
-#: xftree/gtk_get.c:95
-#, c-format
-msgid "child:bytes:%d bytes received (%d bps)"
-msgstr "Saabus %d baiti (%d B/s)"
+#: xftree/gtk_get.c:96
+#, fuzzy
+msgid " bytes received"
+msgstr "0 baiti saabus"
 
 #: xftree/gtk_prop.c:191 xftree/xtree_toolbar.c:106
 msgid "Properties"
@@ -920,19 +920,19 @@ msgstr "Muu :"
 msgid "Sticky"
 msgstr "Naelutatud"
 
-#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1002
+#: xftree/gtk_prop.c:393 xftree/xtree_gui.c:1003
 msgid "Owner"
 msgstr "Omanik"
 
 #: xftree/gtk_prop.c:398 xftree/gtk_prop.c:409 xftree/xtree_functions.c:369
-#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:834
-#: xftree/xtree_functions.c:836 xftree/xtree_go.c:180 xftree/xtree_go.c:181
-#: xftree/xtree_gui.c:1308 xftree/xtree_gui.c:1310
+#: xftree/xtree_functions.c:371 xftree/xtree_functions.c:842
+#: xftree/xtree_functions.c:844 xftree/xtree_go.c:180 xftree/xtree_go.c:181
+#: xftree/xtree_gui.c:1309 xftree/xtree_gui.c:1311
 msgid "unknown"
 msgstr "tundmatu"
 
-#: xftree/reg.c:545 xftree/xtree_cb.c:692 xftree/xtree_cb.c:809
-#: xftree/xtree_cpy.c:1184
+#: xftree/reg.c:545 xftree/xtree_cb.c:688 xftree/xtree_cb.c:805
+#: xftree/xtree_cpy.c:1184 xftree/xtree_cpy.c:1254
 msgid "This function is not available for the contents of tar files"
 msgstr "See funktsioon ei ole veel saadaval tar failide jaoks"
 
@@ -975,7 +975,7 @@ msgid "error deleting file"
 msgstr "Viga faili kustutamisel"
 
 #. nothing to delete
-#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:767
+#: xftree/xtree_cb.c:408 xftree/xtree_cb.c:763
 msgid "No files marked !"
 msgstr "Ühtki faili pole märgitud !"
 
@@ -1001,35 +1001,35 @@ msgstr ""
 "Oliver Fourdan\n"
 "Edscott Wilson Gracia\n"
 
-#: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
+#: xftree/xtree_cb.c:576 xftree/xtree_cb.c:587
 msgid "New_Folder"
 msgstr "Uus_Kataloog"
 
-#: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
+#: xftree/xtree_cb.c:625 xftree/xtree_cb.c:633
 msgid "New_File"
 msgstr "Uus_Fail"
 
-#: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733
+#: xftree/xtree_cb.c:653 xftree/xtree_cb.c:729 xftree/xtree_cpy.c:1295
 msgid "File exists !"
 msgstr "Fail juba leidub !"
 
-#: xftree/xtree_cb.c:686
+#: xftree/xtree_cb.c:682
 msgid "No item marked !"
 msgstr "Ühtki faili/kataloogi ei ole märgitud !"
 
-#: xftree/xtree_cb.c:702
+#: xftree/xtree_cb.c:698
 msgid "Rename to : "
 msgstr "Uus nimi : "
 
-#: xftree/xtree_cb.c:710
+#: xftree/xtree_cb.c:706 xftree/xtree_cpy.c:1273
 msgid "Character not allowed in filename"
 msgstr "Sümbolid ei ole failinimes lubatud"
 
-#: xftree/xtree_cb.c:794
+#: xftree/xtree_cb.c:790
 msgid "Nothing selected !"
 msgstr "Midagi pole märgitud !"
 
-#: xftree/xtree_cb.c:1105
+#: xftree/xtree_cb.c:1099
 msgid "Override?"
 msgstr "Alistame?"
 
@@ -1102,6 +1102,11 @@ msgstr "XFTree: Liiguta"
 msgid "XFTree: Link"
 msgstr "viita"
 
+#: xftree/xtree_cpy.c:1265
+#, fuzzy
+msgid "Symlink name : "
+msgstr "Sümboolviit"
+
 #: xftree/xtree_dnd.c:141
 msgid "Unknown action !"
 msgstr "Tundmatu tegevus !"
@@ -1114,11 +1119,11 @@ msgstr "Ketta kasutus:"
 msgid "No directory selected !"
 msgstr "Ühtki kataloogi pole märgitud!"
 
-#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1063
+#: xftree/xtree_functions.c:459 xftree/xtree_gui.c:1064
 msgid "files"
 msgstr "Failid"
 
-#: xftree/xtree_functions.c:494
+#: xftree/xtree_functions.c:495
 msgid "internal malloc error:"
 msgstr "sisemine mälueralduse viga"
 
@@ -1127,7 +1132,7 @@ msgid "Cannot find path"
 msgstr "Ei leidnud teekonda"
 
 #. Create "Goto" menu
-#: xftree/xtree_go.c:269 xftree/xtree_gui.c:705
+#: xftree/xtree_go.c:269 xftree/xtree_gui.c:706
 msgid "Go to"
 msgstr "Mine"
 
@@ -1143,324 +1148,329 @@ msgstr "Uus kataloog"
 msgid "New file"
 msgstr "Uus fail"
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:153
+#: xftree/xtree_gui.c:153
+#, fuzzy
+msgid "Symlink ..."
+msgstr "Sümboolviit"
+
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:154
 #: xftree/xtree_toolbar.c:100
 msgid "Delete ..."
 msgstr "Kustutamine ..."
 
-#: xftree/xtree_gui.c:156
+#: xftree/xtree_gui.c:157
 msgid "Insert from pasteboard"
 msgstr "Lisa kleepeplaadilt"
 
-#: xftree/xtree_gui.c:159 xftree/xtree_gui.c:203 xftree/xtree_toolbar.c:101
+#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:101
 msgid "Find ..."
 msgstr "Otsi ..."
 
-#: xftree/xtree_gui.c:160 xftree/xtree_gui.c:207
+#: xftree/xtree_gui.c:161 xftree/xtree_gui.c:208
 msgid "Show disk usage ..."
 msgstr "Näita ketta kasutust ..."
 
-#: xftree/xtree_gui.c:163
+#: xftree/xtree_gui.c:164
 msgid "Cut to pasteboard"
 msgstr "Lõika kleepeplaadile"
 
-#: xftree/xtree_gui.c:164
+#: xftree/xtree_gui.c:165
 msgid "Copy to pasteboard"
 msgstr "Kopeeri kleepeplaadile"
 
-#: xftree/xtree_gui.c:167
+#: xftree/xtree_gui.c:168
 msgid "List pasteboard contents"
 msgstr "Näita kleepeplaadi sisu"
 
-#: xftree/xtree_gui.c:168
+#: xftree/xtree_gui.c:169
 msgid "Clear pasteboard"
 msgstr "Puhasta kleepeplaat"
 
-#: xftree/xtree_gui.c:170
+#: xftree/xtree_gui.c:171
 msgid "Select all"
 msgstr "Märgi kõik"
 
-#: xftree/xtree_gui.c:171
+#: xftree/xtree_gui.c:172
 msgid "Unselect"
 msgstr "Eemalda märgistus"
 
-#: xftree/xtree_gui.c:172 xftree/xtree_toolbar.c:109
+#: xftree/xtree_gui.c:173 xftree/xtree_toolbar.c:109
 msgid "Toggle Dotfiles"
 msgstr "Märgi ümber punktifailid"
 
-#: xftree/xtree_gui.c:174 xftree/xtree_toolbar.c:107
+#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:107
 msgid "Open Trash"
 msgstr "Ava prügikast"
 
-#: xftree/xtree_gui.c:175 xftree/xtree_toolbar.c:108
+#: xftree/xtree_gui.c:176 xftree/xtree_toolbar.c:108
 msgid "Empty Trash"
 msgstr "Tühjenda prügikast"
 
-#: xftree/xtree_gui.c:179
+#: xftree/xtree_gui.c:180
 msgid "Duplicate"
 msgstr "Dublitseeeri"
 
-#: xftree/xtree_gui.c:180
+#: xftree/xtree_gui.c:181
 msgid "Rename ..."
 msgstr "Ümbernimetus ..."
 
-#: xftree/xtree_gui.c:181
+#: xftree/xtree_gui.c:182
 msgid "Properties ..."
 msgstr "Seadistused ..."
 
-#: xftree/xtree_gui.c:185 xftree/xtree_gui.c:192 xftree/xtree_toolbar.c:94
+#: xftree/xtree_gui.c:186 xftree/xtree_gui.c:193 xftree/xtree_toolbar.c:94
 msgid "Go to ..."
 msgstr "Mine ..."
 
-#: xftree/xtree_gui.c:189
+#: xftree/xtree_gui.c:190
 msgid "Register ..."
 msgstr "Registreeri ..."
 
-#: xftree/xtree_gui.c:195 xftree/xtree_toolbar.c:96
+#: xftree/xtree_gui.c:196 xftree/xtree_toolbar.c:96
 msgid "Go home"
 msgstr "Mine koju"
 
-#: xftree/xtree_gui.c:196
+#: xftree/xtree_gui.c:197
 msgid "Go back"
 msgstr "Tagasi"
 
-#: xftree/xtree_gui.c:197 xftree/xtree_toolbar.c:95
+#: xftree/xtree_gui.c:198 xftree/xtree_toolbar.c:95
 msgid "Go up"
 msgstr "Mine ülesse"
 
-#: xftree/xtree_gui.c:198
+#: xftree/xtree_gui.c:199
 msgid "Update"
 msgstr "Uuenda"
 
-#: xftree/xtree_gui.c:204 xftree/xtree_toolbar.c:102
+#: xftree/xtree_gui.c:205 xftree/xtree_toolbar.c:102
 msgid "Differences ..."
 msgstr "Erinevused ..."
 
-#: xftree/xtree_gui.c:205
+#: xftree/xtree_gui.c:206
 msgid "Patch viewer ..."
 msgstr "Patch'ide lehitseja ..."
 
-#: xftree/xtree_gui.c:206 xftree/xtree_toolbar.c:103
+#: xftree/xtree_gui.c:207 xftree/xtree_toolbar.c:103
 msgid "Browse SMB network ..."
 msgstr "Lehitse SMB võrku"
 
-#: xftree/xtree_gui.c:210 xftree/xtree_toolbar.c:90
+#: xftree/xtree_gui.c:211 xftree/xtree_toolbar.c:90
 msgid "Close window"
 msgstr "Sulge aken"
 
-#: xftree/xtree_gui.c:211
+#: xftree/xtree_gui.c:212
 msgid "Quit ..."
 msgstr "Välju ..."
 
 #. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
-#: xftree/xtree_gui.c:216
+#: xftree/xtree_gui.c:217
 msgid "Subsort by file type"
 msgstr "Alamsorteeri tüübi järgi"
 
-#: xftree/xtree_gui.c:217
+#: xftree/xtree_gui.c:218
 msgid "Enable filter"
 msgstr "Luba filter"
 
-#: xftree/xtree_gui.c:218
+#: xftree/xtree_gui.c:219
 msgid "Abbreviate paths"
 msgstr "Lühendatud teekond"
 
-#: xftree/xtree_gui.c:220
+#: xftree/xtree_gui.c:221
 msgid "Status box"
 msgstr "Teadete kast"
 
-#: xftree/xtree_gui.c:221
+#: xftree/xtree_gui.c:222
 msgid "Status titles"
 msgstr "Oleku pealkirjad"
 
-#: xftree/xtree_gui.c:222
+#: xftree/xtree_gui.c:223
 msgid "Short titles"
 msgstr "Lühidad pealkirjad"
 
-#: xftree/xtree_gui.c:224 xftree/xtree_toolbar.c:420
+#: xftree/xtree_gui.c:225 xftree/xtree_toolbar.c:420
 msgid "Hide toolbar"
 msgstr "Varja Nupuriba"
 
-#: xftree/xtree_gui.c:225
+#: xftree/xtree_gui.c:226
 msgid "Hide titles"
 msgstr "Varja pealkirjad"
 
-#: xftree/xtree_gui.c:226
+#: xftree/xtree_gui.c:227
 msgid "Hide sizes"
 msgstr "Varja suurusi"
 
-#: xftree/xtree_gui.c:227
+#: xftree/xtree_gui.c:228
 msgid "Hide dates"
 msgstr "Varja kuupäevi"
 
-#: xftree/xtree_gui.c:228
+#: xftree/xtree_gui.c:229
 msgid "Hide owner"
 msgstr "Varja omanik"
 
-#: xftree/xtree_gui.c:229
+#: xftree/xtree_gui.c:230
 msgid "Hide group"
 msgstr "Varja grupp"
 
-#: xftree/xtree_gui.c:230
+#: xftree/xtree_gui.c:231
 msgid "Hide mode"
 msgstr "Varja re¸iimi"
 
-#: xftree/xtree_gui.c:233
+#: xftree/xtree_gui.c:234
 msgid "Sort by file name"
 msgstr "Sorteeri faili nime järgi"
 
-#: xftree/xtree_gui.c:234
+#: xftree/xtree_gui.c:235
 msgid "Sort by file size"
 msgstr "Sorteeri faili suuruse järgi"
 
-#: xftree/xtree_gui.c:235
+#: xftree/xtree_gui.c:236
 msgid "Sort by file date"
 msgstr "Sorteeri faili kuupäeva järgi"
 
-#: xftree/xtree_gui.c:464 xftree/xtree_gui.c:466
+#: xftree/xtree_gui.c:465 xftree/xtree_gui.c:467
 msgid "Create"
 msgstr "Tekita"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:647
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:648
 msgid "File"
 msgstr "Fail"
 
 #. Create "Edit" menu
-#: xftree/xtree_gui.c:676 xfumed/xfumed_gui.c:129
+#: xftree/xtree_gui.c:677 xfumed/xfumed_gui.c:129
 msgid "Edit"
 msgstr "Redigeeri"
 
 #. Create "Tools" menu
-#: xftree/xtree_gui.c:730
+#: xftree/xtree_gui.c:731
 msgid "Tools"
 msgstr "Vahendid"
 
 #. Create "View" menu
-#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:754
+#: xfsamba/xfsamba_gui.c:1027 xftree/xtree_gui.c:755
 msgid "View"
 msgstr "Vaata"
 
 #. Create "Preferences" menu
-#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:784
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:785
 msgid "Preferences"
 msgstr "Parameetrid"
 
-#: xftree/xtree_gui.c:790
+#: xftree/xtree_gui.c:791
 msgid "Hide main menu"
 msgstr "Varja peamenüü"
 
-#: xftree/xtree_gui.c:798 xftree/xtree_gui.c:821
+#: xftree/xtree_gui.c:799 xftree/xtree_gui.c:822
 msgid "Save geometry on exit"
 msgstr "Salvesta akna geomeetria väljumisel"
 
-#: xftree/xtree_gui.c:805 xftree/xtree_gui.c:823
+#: xftree/xtree_gui.c:806 xftree/xtree_gui.c:824
 msgid "Double click does GOTO"
 msgstr "Topeltklõpsuga kaust peamiseks"
 
-#: xftree/xtree_gui.c:813 xftree/xtree_gui.c:825
+#: xftree/xtree_gui.c:814 xftree/xtree_gui.c:826
 msgid "Drag does copy"
 msgstr "Lohistamine kopeerib"
 
-#: xftree/xtree_gui.c:829
+#: xftree/xtree_gui.c:830
 msgid "Set background color"
 msgstr "Määra tausta värv"
 
-#: xftree/xtree_gui.c:834
+#: xftree/xtree_gui.c:835
 msgid "Set font"
 msgstr "Määra kirjatüüp"
 
-#: xftree/xtree_gui.c:840 xftree/xtree_toolbar.c:339
+#: xftree/xtree_gui.c:841 xftree/xtree_toolbar.c:339
 msgid "Configure toolbar"
 msgstr "Nupurea konfiguratsioon"
 
-#: xftree/xtree_gui.c:845
+#: xftree/xtree_gui.c:846
 msgid "Redefine home directory"
 msgstr "Defineeri kodukataloog"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:851
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:852
 msgid "Help"
 msgstr "Abimees"
 
-#: xftree/xtree_gui.c:858
+#: xftree/xtree_gui.c:859
 msgid "Drag and drop"
 msgstr "Lohistamine"
 
-#: xftree/xtree_gui.c:864
+#: xftree/xtree_gui.c:865
 msgid "Unlisted shortcut keys"
 msgstr "Kasutamata kiirklahvid"
 
-#: xftree/xtree_gui.c:869
+#: xftree/xtree_gui.c:870
 msgid "Custom shortcut keys"
 msgstr "Oma kiirklahvid"
 
-#: xftree/xtree_gui.c:874
+#: xftree/xtree_gui.c:875
 msgid "Registered applications"
 msgstr "Registreeritud programmid"
 
-#: xftree/xtree_gui.c:880
+#: xftree/xtree_gui.c:881
 msgid "About ..."
 msgstr "Sellest ..."
 
-#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:997
+#: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:998
 msgid "Name"
 msgstr "Nimi"
 
 #. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:999
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:1000
 msgid "Size (bytes)"
 msgstr "Suurus (Baitides)"
 
-#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1000
+#: xfglob/xfglob.c:609 xftree/xtree_gui.c:1001
 msgid "Last changed"
 msgstr "Viimati muudetud"
 
-#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1001
+#: xfglob/xfglob.c:610 xftree/xtree_gui.c:1002
 msgid "Mode"
 msgstr "Reziim"
 
-#: xftree/xtree_gui.c:1003
+#: xftree/xtree_gui.c:1004
 msgid "Group"
 msgstr "Grupp"
 
-#: xftree/xtree_gui.c:1046
+#: xftree/xtree_gui.c:1047
 msgid "Filter:"
 msgstr "Filter:"
 
-#: xftree/xtree_gui.c:1057
+#: xftree/xtree_gui.c:1058
 msgid "dirs"
 msgstr "kataloogid"
 
-#: xftree/xtree_gui.c:1169
+#: xftree/xtree_gui.c:1170
 msgid "Show main menu"
 msgstr "Näita peamenüüd"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:95
+#: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xftree/xtree_mess.c:96
 msgid "Could not load specified font\n"
 msgstr "Ei suutnud laadida määratletud tekstikuju\n"
 
-#: xftree/xtree_mess.c:428
+#: xftree/xtree_mess.c:429
 msgid "Override ?"
 msgstr "Alistame ?"
 
-#: xftree/xtree_mess.c:429
+#: xftree/xtree_mess.c:430
 msgid "with"
 msgstr "koos"
 
-#: xftree/xtree_mess.c:508 xftree/xtree_mess.c:509 xftree/xtree_mess.c:525
-#: xftree/xtree_mess.c:526
+#: xftree/xtree_mess.c:509 xftree/xtree_mess.c:510 xftree/xtree_mess.c:526
+#: xftree/xtree_mess.c:527
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Vaikimisi xftreerc faili ei suudetud luua\n"
 
-#: xftree/xtree_mess.c:562
+#: xftree/xtree_mess.c:563
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Vaikimisi xftreerc faili ei suudetud lugeda\n"
 
-#: xftree/xtree_mess.c:756
+#: xftree/xtree_mess.c:757
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1470,7 +1480,7 @@ msgstr ""
 "See tähendab et te võite avada menüü, valida sissekanne\n"
 "ja vajutada klaviatuuril klahvi, mida soovite kiirklahviks."
 
-#: xftree/xtree_mess.c:765
+#: xftree/xtree_mess.c:766
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1484,7 +1494,7 @@ msgstr ""
 "Kui te soovite redigeerida programmi, mis on juba registreeritud,\n"
 "siis vaadake palun faili ~/.xfce/xtree.reg."
 
-#: xftree/xtree_mess.c:774
+#: xftree/xtree_mess.c:775
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1502,15 +1512,15 @@ msgstr ""
 "kuid seda saab muuta Häälestuse menüüs. Et lohistada\n"
 "palju faile, selleks kasuta keskmist hiire nuppu.\n"
 
-#: xftree/xtree_mess.c:789
+#: xftree/xtree_mess.c:790
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr "Kiirklahvidega on mõnus kiiresti kasutada menüü funktsioone."
 
-#: xftree/xtree_mess.c:832
+#: xftree/xtree_mess.c:833
 msgid "Xftree results"
 msgstr "Xftree tulemused"
 
-#: xftree/xtree_mess.c:1047
+#: xftree/xtree_mess.c:1060
 msgid "Home directory : "
 msgstr "Kodukataloog : "
 
@@ -2314,8 +2324,8 @@ msgstr ""
 " [^... ] -iga täht, mis pole '.'de asemel vastab õigele.\n"
 "  [..-..] -vastab piirkond sümboleid, nt: [0-9] või [a-z].\n"
 " \n"
-"Regulaarsele tingimusele võivad järgneda erinevad operaatorid (eelnev liige "
-"...):\n"
+"Regulaarsele tingimusele võivad järgneda erinevad operaatorid (eelnev "
+"liige ...):\n"
 " ?       -on lisaks ja leidub ainult üks kord.\n"
 " *       -esineb null või palju kordi.\n"
 " +       -eelnev esineb üks või rohkem kordi.\n"
@@ -3645,14 +3655,14 @@ msgstr "Alammenüü"
 msgid "Separator"
 msgstr "Eraldaja"
 
+#~ msgid "child:bytes:%d bytes received (%d bps)"
+#~ msgstr "Saabus %d baiti (%d B/s)"
+
 #~ msgid "Source : "
 #~ msgstr "Läte : "
 
 #~ msgid "Target : "
 #~ msgstr "Siht : "
-
-#~ msgid "0 bytes received"
-#~ msgstr "0 baiti saabus"
 
 #~ msgid "XFTree: Download"
 #~ msgstr "XFTree: Loe alla"

@@ -422,7 +422,7 @@ dnl ---------------------------------------------------------------------------
   fi
 fi
 
-#echo "dbg:target $target"
+dnl echo "dbg:target $target"
 case "$target" in
 "")
 ;;
