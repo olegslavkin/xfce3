@@ -98,7 +98,6 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
 
   if (grab)
   {
-    XSync (dpy, 0);
     MyXGrabServer (dpy);
   }
   if (broadcast)
@@ -190,8 +189,8 @@ changeDesks (int val1, int val2, Bool handle_focus, Bool broadcast, Bool grab)
   }
   if (grab)
   {
-    XSync (dpy, 0);
     MyXUngrabServer (dpy);
+    XFlush(dpy);
   }
 }
 

@@ -483,7 +483,6 @@ AddWindow (Window w)
   tmp_win->frame_height = 0;
   SetupFrame (tmp_win, x, y, width, height, True, True);
 
-  XSync (dpy, 0);
   MyXUngrabServer (dpy);
   
   BroadcastConfig (XFCE_M_ADD_WINDOW, tmp_win);

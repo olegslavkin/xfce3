@@ -942,8 +942,6 @@ HandleMapRequest ()
     case NormalState:
     case InactiveState:
     default:
-      XSync (dpy, 0);
-      MyXGrabServer (dpy);
       if (Tmp_win->Desk == Scr.CurrentDesk)
       {
 	XMapWindow (dpy, Tmp_win->frame);
@@ -952,8 +950,6 @@ HandleMapRequest ()
       XMapWindow (dpy, Tmp_win->Parent);
       XMapWindow (dpy, Tmp_win->w);
       SetMapStateProp (Tmp_win, NormalState);
-      XSync (dpy, 0);
-      MyXUngrabServer (dpy);
       break;
     }
   }
@@ -995,14 +991,6 @@ HandleMapNotify ()
     return;
   }
 
-  if (Event.xmap.event != Event.xmap.window)
-  {
-#ifdef DEBUG
-    fprintf (stderr, "xfwm : Leaving HandleMapNotify ()\n");
-#endif
-    return;
-  }
-  XSync (dpy, 0);
   MyXGrabServer (dpy);
   if (Tmp_win->icon_w)
     XUnmapWindow (dpy, Tmp_win->icon_w);
@@ -1013,9 +1001,9 @@ HandleMapNotify ()
   XMapWindow (dpy, Tmp_win->Parent);
   XMapWindow (dpy, Tmp_win->w);
   SetMapStateProp (Tmp_win, NormalState);
-  XSync (dpy, 0);
   MyXUngrabServer (dpy);
-
+  XFlush (dpy);
+  
   Tmp_win->flags |= MAPPED;
   Tmp_win->flags &= ~(MAP_PENDING | ICONIFIED | ICON_UNMAPPED);
 
@@ -1111,7 +1099,6 @@ HandleUnmapNotify ()
   {
     XUnmapWindow (dpy, Tmp_win->frame);
   }
-  XSync (dpy, 0);
   MyXGrabServer (dpy);
   if (!XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy))
   {
@@ -1134,8 +1121,8 @@ HandleUnmapNotify ()
     XRemoveFromSaveSet (dpy, w);
   }
   Destroy (Tmp_win);
-  XSync (dpy, 0);
   MyXUngrabServer (dpy);
+  XFlush (dpy);
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
 #endif
@@ -1198,6 +1185,7 @@ HandleButtonPress ()
     return;
   }
 
+  XSync(dpy, 0);
   if (Tmp_win)
   {
     if (!(Tmp_win->triggered) || (Event.xbutton.window == Tmp_win->frame))

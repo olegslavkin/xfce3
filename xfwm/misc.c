@@ -135,21 +135,14 @@ GetWMName (XfwmWindow * t)
 
   if (XGetWMName (dpy, t->w, &text_prop) != 0)
   {
-    if (text_prop.format == 8)
-    {				/* Multi-byte string */
-      char **text_list = NULL;
-      int text_list_num;
-      if (XmbTextPropertyToTextList (dpy, &text_prop, &text_list, &text_list_num) == Success)
+    char **text_list = NULL;
+    int text_list_num;
+    if (XmbTextPropertyToTextList (dpy, &text_prop, &text_list, &text_list_num) == Success)
+    {
+      if (text_list)
       {
-	if (text_list)
-	{
-          t->name = bound_name (text_list[0], MAX_TITLE_LEN);
-	  XFreeStringList (text_list);
-	}
-      }
-      else
-      {
-	t->name = bound_name ((char *) text_prop.value, MAX_TITLE_LEN);
+        t->name = bound_name (text_list[0], MAX_TITLE_LEN);
+	XFreeStringList (text_list);
       }
     }
     else
@@ -177,21 +170,14 @@ GetWMIconName (XfwmWindow * t)
   
   if (XGetWMIconName (dpy, t->w, &text_prop) != 0)
   {
-    if (text_prop.format == 8)
-    {				/* Multi-byte string */
-      char **text_list = NULL;
-      int text_list_num;
-      if (XmbTextPropertyToTextList (dpy, &text_prop, &text_list, &text_list_num) == Success)
+    char **text_list = NULL;
+    int text_list_num;
+    if (XmbTextPropertyToTextList (dpy, &text_prop, &text_list, &text_list_num) == Success)
+    {
+      if (text_list)
       {
-	if (text_list)
-	{
-          t->icon_name = bound_name (text_list[0], MAX_ICON_LEN);
-	  XFreeStringList (text_list);
-	}
-      }
-      else
-      {
-	t->icon_name = bound_name ((char *) text_prop.value, MAX_ICON_LEN);
+        t->icon_name = bound_name (text_list[0], MAX_ICON_LEN);
+	XFreeStringList (text_list);
       }
     }
     else

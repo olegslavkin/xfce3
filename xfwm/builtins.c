@@ -114,6 +114,7 @@ Animate (int o_x, int o_y, int o_w, int o_h, int f_x, int f_y, int f_w, int f_h)
     }
     MoveOutline (0, 0, 0, 0, 0);
     MyXUngrabServer (dpy);
+    XFlush (dpy);
   }
 }
 
@@ -144,6 +145,7 @@ ShowMeMouse (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long c
     XDrawArc (dpy, Scr.Root, Scr.DrawGC, xl - (i / 2), yt - (i / 2), i, i, 0, 360 * 64);
   }
   MyXUngrabServer (dpy);
+  XFlush (dpy);
 }
 
 /***********************************************************************

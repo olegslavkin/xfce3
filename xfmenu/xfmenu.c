@@ -229,11 +229,19 @@ char *convert_code (char *fromcode)
   if (utf8) {
        iconv_t cd;
        cd = iconv_open(charset, "UTF8");
-       iconv (cd, &fromcode, &len, &outptr, &outlen);
-       iconv_close(cd);
+       if (cd != (iconv_t) (-1))
+       {
+         iconv (cd, &fromcode, &len, &outptr, &outlen);
+         iconv_close(cd);
+       }
+       else
+       {
+         /* unsupported conversion */
+	 g_snprintf (outbuf, OUTBUF_SIZE - 1, "%s", fromcode);
+         outlen = strlen (fromcode);
+       }
   }
   outbuf[outlen] = '\0';
-  outbuf[outlen+1] = '\0';
   return outbuf;
      
 }
@@ -306,6 +314,11 @@ init_nls (void)
 {
   char *temp;
 
+  temp = g_getenv ("CHARSET");
+  if (temp)
+  {
+    charset = g_strdup (temp);
+  }
   /* these are global variables so they can be used easily in many places */
   temp = g_getenv ("LC_MESSAGES");
   if (temp)
@@ -316,7 +329,7 @@ init_nls (void)
     lcmessages = g_strndup (temp, 5);
     lcmessages_base = g_strdup (lcmessages);
 
-    if ((dot = strrchr (lcmessages , '.')))
+    if ((!charset) && (dot = strrchr (lcmessages , '.')))
     {
       dot++;
       charset = (char *) safemalloc (strlen (dot) + 1);
@@ -342,7 +355,7 @@ init_nls (void)
     lang = g_strndup (temp, 5);
     lang_base = g_strdup (lang);
 
-    if ((dot = strrchr (lcmessages , '.')))
+    if ((!charset) && (dot = strrchr (lcmessages , '.')))
     {
       dot++;
       charset = (char *) safemalloc (strlen (dot) + 1);
@@ -1227,6 +1240,8 @@ main (int argc, char **argv)
     g_free (lcmessages);
   if (lang_base)
     g_free (lang_base);
+  if (charset)
+    g_free (charset);
 
   return n;
 }

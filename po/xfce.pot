@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-16 23:18+0100\n"
+"POT-Creation-Date: 2001-12-18 07:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1144 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_exec.c:161 xftree/gtk_get.c:138
-#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:905 xfumed/xfumed_gui.c:359
+#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:1053 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr ""
 
@@ -171,12 +171,12 @@ msgid "Subprocess diagnostic"
 msgstr ""
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:675
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:658 xftree/xtree_mess.c:677
 msgid "Clear"
 msgstr ""
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
-#: xftree/xtree_mess.c:680
+#: xftree/xtree_mess.c:682
 msgid "Dismiss"
 msgstr ""
 
@@ -958,68 +958,72 @@ msgstr ""
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr ""
 
-#: xftree/xtree_cpy.c:141
+#: xftree/xtree_cpy.c:156
 msgid "Insufficient system memory"
 msgstr ""
 
-#: xftree/xtree_cpy.c:161
+#: xftree/xtree_cpy.c:176
 msgid "Too few bytes transferred ! Device full ?"
 msgstr ""
 
-#: xftree/xtree_cpy.c:165
+#: xftree/xtree_cpy.c:180
 msgid "Too many bytes transferred !?"
 msgstr ""
 
-#: xftree/xtree_cpy.c:169 xftree/xtree_cpy.c:173
+#: xftree/xtree_cpy.c:184 xftree/xtree_cpy.c:188
 msgid "Can't stat() file"
 msgstr ""
 
-#: xftree/xtree_cpy.c:177 xftree/xtree_cpy.c:181
+#: xftree/xtree_cpy.c:192 xftree/xtree_cpy.c:196
 msgid "Error closing file"
 msgstr ""
 
-#: xftree/xtree_cpy.c:185
+#: xftree/xtree_cpy.c:200
 msgid "Error deleting"
 msgstr ""
 
-#: xftree/xtree_cpy.c:189 xftree/xtree_cpy.c:374
+#: xftree/xtree_cpy.c:204 xftree/xtree_cpy.c:389
 msgid "Can't copy FIFO"
 msgstr ""
 
-#: xftree/xtree_cpy.c:193 xftree/xtree_cpy.c:377
+#: xftree/xtree_cpy.c:208 xftree/xtree_cpy.c:392
 msgid "Can't copy device file"
 msgstr ""
 
-#: xftree/xtree_cpy.c:197 xftree/xtree_cpy.c:380
+#: xftree/xtree_cpy.c:212 xftree/xtree_cpy.c:395
 msgid "Can't copy socket"
 msgstr ""
 
-#: xftree/xtree_cpy.c:808
-#, c-format
-msgid "%d bytes"
+#: xftree/xtree_cpy.c:664
+msgid "Counting files"
 msgstr ""
 
-#: xftree/xtree_cpy.c:883
+#: xftree/xtree_cpy.c:956
+#, c-format
+msgid "%d / %d"
+msgstr ""
+
+#: xftree/xtree_cpy.c:1031
 msgid "Source: "
 msgstr ""
 
-#: xftree/xtree_cpy.c:890
+#: xftree/xtree_cpy.c:1038
 msgid "Target: "
 msgstr ""
 
-#: xftree/xtree_cpy.c:897
+#: xftree/xtree_cpy.c:1045
 msgid "file x of x"
 msgstr ""
 
-#: xftree/xtree_cpy.c:912
+#: xftree/xtree_cpy.c:1060
 msgid "XFTree: Copy"
 msgstr ""
 
-#: xftree/xtree_cpy.c:913
+#: xftree/xtree_cpy.c:1061
 msgid "XFTree: Move"
 msgstr ""
 
-#: xftree/xtree_cpy.c:914
+#: xftree/xtree_cpy.c:1062
 msgid "XFTree: Link"
 msgstr ""
 
@@ -1296,27 +1300,27 @@ msgstr ""
 msgid "About ..."
 msgstr ""
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:966
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:967
 msgid "Name"
 msgstr ""
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:967
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:968
 msgid "Size (bytes)"
 msgstr ""
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:968
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:969
 msgid "Last changed"
 msgstr ""
 
-#: xftree/xtree_gui.c:1004
+#: xftree/xtree_gui.c:1005
 msgid "Filter:"
 msgstr ""
 
-#: xftree/xtree_gui.c:1015
+#: xftree/xtree_gui.c:1016
 msgid "dirs"
 msgstr ""
 
-#: xftree/xtree_gui.c:1021
+#: xftree/xtree_gui.c:1022
 msgid "files"
 msgstr ""
 
@@ -1325,31 +1329,31 @@ msgstr ""
 msgid "Could not load specified font\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:356
+#: xftree/xtree_mess.c:358
 msgid "Override ?"
 msgstr ""
 
-#: xftree/xtree_mess.c:357
+#: xftree/xtree_mess.c:359
 msgid "with"
 msgstr ""
 
-#: xftree/xtree_mess.c:433 xftree/xtree_mess.c:434 xftree/xtree_mess.c:450
-#: xftree/xtree_mess.c:451
+#: xftree/xtree_mess.c:435 xftree/xtree_mess.c:436 xftree/xtree_mess.c:452
+#: xftree/xtree_mess.c:453
 msgid "Default xftreerc file cannot be created\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:485
+#: xftree/xtree_mess.c:487
 msgid "Default xftreerc file cannot be read\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:586
+#: xftree/xtree_mess.c:588
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
 "and press a keyboard key to create the shortcut."
 msgstr ""
 
-#: xftree/xtree_mess.c:595
+#: xftree/xtree_mess.c:597
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1360,15 +1364,15 @@ msgid ""
 "To drag multiple files, use the middle button.\n"
 msgstr ""
 
-#: xftree/xtree_mess.c:610
+#: xftree/xtree_mess.c:612
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr ""
 
-#: xftree/xtree_mess.c:653
+#: xftree/xtree_mess.c:655
 msgid "Xftree results"
 msgstr ""
 
-#: xftree/xtree_mess.c:845
+#: xftree/xtree_mess.c:847
 msgid "Home directory : "
 msgstr ""
 
