@@ -86,6 +86,8 @@ char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
 extern ImlibData *imlib_id;
 #endif
 
+static int ButtonGrabs = 0;
+
 int
 check_existfile (char *filename)
 {
@@ -728,11 +730,27 @@ MyXUngrabKey (Display * dpi, int keycode, unsigned int modifiers, Window grab_wi
 Bool GrabEm (int cursor)
 {
   int i = 0, val = 0;
-  unsigned int mask;
+  unsigned int mask = (ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask);
   Cursor vs = None;
 
-  XSync (dpy, 0);
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : GrabEm () : Entering routine\n");
+#endif
   vs = ((cursor >= 0) ? Scr.XfwmCursors[cursor] : None);
+  if (ButtonGrabs > 0)
+  {
+    ButtonGrabs++;
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : GrabEm () : Already grabbed\n");
+    fprintf (stderr, "xfwm : GrabEm () : Grab #%i\n", ButtonGrabs);
+#endif
+    XChangeActivePointerGrab (dpy, mask, vs, CurrentTime);
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : GrabEm () : Leaving routine\n");
+#endif
+    return True;
+  }
+  XSync (dpy, 0);
   /* move the keyboard focus prior to grabbing the pointer to
    * eliminate the enterNotify and exitNotify events that go
    * to the windows */
@@ -744,7 +762,6 @@ Bool GrabEm (int cursor)
   XSetInputFocus (dpy, Scr.NoFocusWin, RevertToParent, CurrentTime);
 #endif
   XSync (dpy, 0);
-  mask = ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask;
   while ((i < 1000) && (val = XGrabPointer (dpy, Scr.Root, True, mask, GrabModeAsync, GrabModeAsync, Scr.Root, vs, CurrentTime) != GrabSuccess))
   {
     i++;
@@ -757,8 +774,18 @@ Bool GrabEm (int cursor)
    * time to give up */
   if (val != GrabSuccess)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : GrabEm () : Cannot grab\n");
+    fprintf (stderr, "xfwm : GrabEm () : Leaving routine\n");
+#endif
     return False;
   }
+
+  ButtonGrabs++;
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : GrabEm () : Grab ok (#%i)\n", ButtonGrabs);
+  fprintf (stderr, "xfwm : GrabEm () : Leaving routine\n");
+#endif
   return True;
 }
 
@@ -772,12 +799,38 @@ void
 UngrabEm (void)
 {
   Window w;
+  /* Dummy var for XGetGeometry */
+  Window dummy_root;
+  int dummy_x, dummy_y;
+  unsigned int dummy_width, dummy_height, dummy_bw, dummy_depth;
 
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : UngrabEm () : Entering routine\n");
+#endif
+  if (--ButtonGrabs < 0)
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : UngrabEm () : Error too many UngrabEm () calls\n");
+#endif
+    ButtonGrabs = 0;
+  }
+  if (ButtonGrabs > 0)
+  {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : UngrabEm () : Grab stack not empty\n");
+    fprintf (stderr, "xfwm : UngrabEm () : Leaving routine\n");
+#endif
+    return;
+  }
   XSync (dpy, 0);
   XUngrabPointer (dpy, CurrentTime);
   XSync (dpy, 0);
   if (Scr.PreviousFocus != NULL)
   {
+#ifdef DEBUG
+    fprintf (stderr, "xfwm : UngrabEm () : Scr.PreviousFocus set\n");
+#endif
+    MyXGrabServer (dpy);
     if ((Scr.PreviousFocus->flags & ICONIFIED) && (Scr.PreviousFocus->icon_w))
     {
       w = Scr.PreviousFocus->icon_w;
@@ -786,16 +839,24 @@ UngrabEm (void)
     {
       w = Scr.PreviousFocus->w;
     }
+    if (XGetGeometry (dpy, w, &dummy_root, &dummy_x, &dummy_y, &dummy_width, &dummy_height, &dummy_bw, &dummy_depth))
+    {
 #ifdef DEBUG
-    fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
+      fprintf (stderr, "xfwm : UngrabEm () : Calling SetFocus on %s\n", Scr.PreviousFocus->name);
 #endif
 #ifdef REQUIRES_STASHEVENT
-    XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
+      XSetInputFocus (dpy, w, RevertToParent, lastTimestamp);
 #else
-    XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
+      XSetInputFocus (dpy, w, RevertToParent, CurrentTime);
 #endif
-    Scr.PreviousFocus = NULL;
+      XSync (dpy, 0);
+      Scr.PreviousFocus = NULL;
+    }
+    MyXUngrabServer (dpy);
   }
+#ifdef DEBUG
+  fprintf (stderr, "xfwm : UngrabEm () : Leaving routine\n");
+#endif
 }
 
 /**************************************************************************
