@@ -132,6 +132,7 @@ AddWindow (Window w)
   Bool status;
   XrmValue rm_value;
   Atom atype;
+  XEvent dummy_event;
 
   extern XfwmWindow *colormap_win;
 
@@ -485,6 +486,13 @@ AddWindow (Window w)
   if (tmp_win->attr.colormap == None)
     tmp_win->attr.colormap = Scr.XfwmRoot.attr.colormap;
   InstallWindowColormaps (colormap_win);
+
+  /* Shortcut : If the newly created window is about to be destroyed, remove it right away */
+  if (XCheckTypedWindowEvent (dpy, w, DestroyNotify, &dummy_event) || XCheckTypedWindowEvent (dpy, w, UnmapNotify, &dummy_event))
+  {
+    Destroy (tmp_win);
+    return (NULL);
+  }
 
   /* When we're all clear, map window */
   XMapSubwindows (dpy, tmp_win->frame);
