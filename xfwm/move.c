@@ -116,6 +116,7 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
 
   if (window_deleted)
   {
+    XSync (dpy, 0);
     return;
   }
 

@@ -711,6 +711,11 @@ RedrawTitleOnButtonPress (void)
 void
 SetTitleBar (XfwmWindow * t, XRectangle *area, Bool onoroff)
 {
+  if (!t)
+    return;
+  if (!(t->flags & TITLE))
+    return;
+
   if (!area)
   {
     flush_expose (t->title_w);
