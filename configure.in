@@ -514,7 +514,7 @@ sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3r
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.in >  other/xinitrc
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.mwm.in >  other/xinitrc.mwm
-sed -e "s%XFCE_VERSION%$(VERSION)%g" -e "s%DATE%`date`%g" -e "s%HOSTNAME%`hostname`%g" other/COPYING.in > other/COPYING
+sed -e "s%XFCE_VERSION%$VERSION%g" -e "s%DATE%`date`%g" -e "s%HOSTNAME%`hostname`%g" other/COPYING.in > other/COPYING
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Blue.list.in >  backdrops/Blue.list
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Toulouse.list.in >  backdrops/Toulouse.list
 sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile
