@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <signal.h>
 #include <string.h>
 
 #include "utils.h"
@@ -21,7 +23,6 @@
  * unsigned long header[HEADER_SIZE];
  * unsigned long *body;
  * int fd[2];
- * void DeadPipe(int nonsense);  * Called if the pipe is no longer open  *
  *
  * ReadXfwmPacket(fd[1],header, &body);
  *
@@ -37,7 +38,6 @@ ReadXfwmPacket (int fd, unsigned long *header, unsigned long **body)
 {
   int count, total, count2, body_length;
   char *cbody;
-  extern void DeadPipe (int);
 
   if ((count = read (fd, header, HEADER_SIZE * sizeof (unsigned long))) > 0)
     {
@@ -58,7 +58,7 @@ ReadXfwmPacket (int fd, unsigned long *header, unsigned long **body)
 		}
 	      else if (count2 < 0)
 		{
-		  DeadPipe (1);
+		  kill (getpid (), SIGPIPE);
 		}
 	    }
 	}
@@ -66,7 +66,7 @@ ReadXfwmPacket (int fd, unsigned long *header, unsigned long **body)
 	count = 0;
     }
   if (count <= 0)
-    DeadPipe (1);
+    kill (getpid (), SIGPIPE);
   return count;
 }
 

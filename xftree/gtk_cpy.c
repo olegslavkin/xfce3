@@ -175,7 +175,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
     {
       char msg[DLG_MAX];
       sprintf (msg, _("Do you want to %s the item(s) to"), string);
-      if (dlg_question (msg, sen->path) != DLG_RC_OK)
+      if (dlg_question (msg, ten->path) != DLG_RC_OK)
 	{
 	  return (TRUE);
 	}

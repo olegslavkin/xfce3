@@ -665,6 +665,8 @@ my_gtk_clock_draw_digital (GtkWidget * widget)
     {
       if (h > 12)
 	h -= 12;
+      if (h == 0)
+	h = 12;
     }
 
   if (clock->military_time)
