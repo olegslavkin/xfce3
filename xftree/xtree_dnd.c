@@ -81,7 +81,9 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   int row, col;
   GtkCList *clist;
   char *tmpfile=NULL;
-
+#ifdef DISABLE_DND
+  return;
+#endif
   while (gtk_events_pending()) gtk_main_iteration();
 
   if ((!ctree) || (data->length < 0) || (data->format != 8))
@@ -159,7 +161,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     if ((!(t_en->type & FT_DIR)) || (t_en->type & FT_DIR_UP) || (!io_is_valid (t_en->label))|| (EN_IS_DIRUP (t_en)))
     {
-	    /*fprintf(stderr,"dbg:nonsense input\n");*/
+	   /* fprintf(stderr,"dbg:nonsense input\n");*/
       break;
       /*gtk_drag_finish (context, FALSE, (mode == TR_MOVE), time);
       uri_free_list (list);
@@ -180,14 +182,16 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     }
     /* acording to tmpfile name, do a direct move, here, and break.-*/
     cursor_wait (GTK_WIDGET (ctree));
-    /* FIXME: links on same device should also be a DirectTransfer() */
     if (tar_extraction){
 	    /* FIXME: if a tar_extraction is mixed with copy/move 
 	     * (who would do a thing like that?)
 	     * only tar_extraction will work. */
 	    DirectTransfer(ctree,mode,tmpfile);
     } else {
-	    if (on_same_device() && (mode == TR_MOVE)) DirectTransfer(ctree,mode,tmpfile);
+	    if ((mode & TR_LINK)||(on_same_device() && (mode & TR_MOVE))) 
+	    /*if (mode & TR_LINK) */
+		   /* printf("dbg:emulating transfer\n");*/
+	    DirectTransfer(ctree,mode,tmpfile);
 	    else IndirectTransfer(ctree,mode,tmpfile);
     }    
     if (tmpfile) unlink(tmpfile);
@@ -222,15 +226,20 @@ on_drag_data_get (GtkWidget * widget, GdkDragContext * context, GtkSelectionData
   gchar *files;
   cfg *win = (cfg *) data;
 
-  if (!ctree) return;
+  if (!ctree){
+	 /*fprintf(stderr,"dbg: return 1 from oddg()\n");*/
+	 return;
+  }
 
-  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0) return;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0){
+	 /*fprintf(stderr,"dbg: return 2 from oddg()\n");*/
+	 return;
+  }
   
-  node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
+  /*node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);*/
   /*fprintf(stderr,"dbg: preparing drag data\n");*/
 
-  /* prepare data for the receiver
-   */
+  /* prepare data for the receiver */
   switch (info)
   {
   case TARGET_ROOTWIN:
@@ -276,13 +285,10 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
 {
   GdkDragAction action;
   cfg *win;
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   
-  /*fprintf(stderr,"dbg: drag motion...\n");*/
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
-  /* Get source widget and check if it is the same as the
-   * destination widget. 
-   *  ...and then do nothing with the result. */
+   
 #if 0
  {
   gboolean same;
@@ -291,13 +297,19 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
   same = ((source_widget == ctree) ? TRUE : FALSE);
   if (same){
 	  printf("same widget for dnd motion\n");
-	  return TRUE;
+	  //return TRUE;
   } else {
 	  printf("different widget for dnd motion\n");
-	  return FALSE;
+	  //return FALSE;
   }
  }
 #endif
+ 
+  /*fprintf(stderr,"dbg: drag motion...x=%d y=%d t=%d\n",x,y,t);*/
+
+  /* Get source widget and check if it is the same as the
+   * destination widget. 
+   *  ...and then do nothing with the result. */
 
   /* Insert code to get our default action here. */
   if (win->preferences & DRAG_DOES_COPY) action = GDK_ACTION_COPY;
@@ -317,8 +329,9 @@ on_drag_motion (GtkWidget * ctree, GdkDragContext * dc, gint x, gint y, guint t,
   else if (dc->actions == GDK_ACTION_LINK)		gdk_drag_status (dc, GDK_ACTION_LINK, t);  
   else if (dc->actions & action)			gdk_drag_status (dc, action, t);
   else							gdk_drag_status (dc, 0, t);
-
-  return (TRUE);
+  /*fprintf(stderr,"dbg: drag motion done...\n");*/
+ 
+ return (TRUE);
 }
 
 void

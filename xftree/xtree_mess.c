@@ -85,7 +85,7 @@ static GdkFont *the_font;
 static char *custom_font=NULL;
 
 GtkCTreeNode *find_root(GtkCTree * ctree){
-	GtkCTreeNode *node;
+	GtkCTreeNode *node=NULL;
 	entry *en;
 	node=gtk_ctree_node_nth (ctree,0);
 	while (node){
@@ -93,7 +93,7 @@ GtkCTreeNode *find_root(GtkCTree * ctree){
 		if (en->type & FT_ISROOT) return node;
 		node = GTK_CTREE_ROW (node)->sibling;
 	}
-	if (!node) return NULL;
+	return node;
 }
 
 int set_fontT(GtkWidget * ctree){

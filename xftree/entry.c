@@ -272,6 +272,7 @@ int entry_update (entry * en)
         /*en->type = (FT_STALE_LINK|FT_LINK);*/
         en->type = FT_STALE_LINK;
 	dup_stat(&(en->st),&s);
+        set_time(&(en->date),&s);
 	return (1); 
      }
      if (S_ISDIR (ss.st_mode)) {

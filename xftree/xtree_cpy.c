@@ -172,8 +172,8 @@ static int process_error(int code){
 	  case RW_ERROR_OPENING_TGT:
 		  txt=fork_target;
 		  message=strerror(errno); 
-		  return code; /* don't create any warning, just abort */
-		  /*break;*/
+		  /*return code; */
+		  break;
 	  case RW_ERROR_TOO_FEW:
 		  txt=fork_target;
 		  message=_("Too few bytes transferred ! Device full ?"); 
@@ -378,8 +378,9 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 			 unlink (fname);
 			 return NULL;
 		default: 
-			 if ((u->type != URI_LOCAL)||(u->type != URI_FILE)) same_device=FALSE;
-			 else if (s_en->st.st_dev != t_stat.st_dev) same_device=FALSE;
+			 /*if ((u->type != URI_LOCAL)||(u->type != URI_FILE)) same_device=FALSE; else */
+			 if (s_en->st.st_dev != t_stat.st_dev) same_device=FALSE;
+			 
 			 nitems++;
 			 fprintf(tmpfile,"%d:%s:%s\n",u->type,s_en->path,target);
 			 /*fprintf(stderr,"dbg:%d:%s:%s\n",u->type,s_en->path,target);*/
@@ -408,7 +409,7 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
   gboolean target_exists=TRUE;
   
   source=s_en->path;
-  if (stat (target, &t_stat) < 0) {
+  if (lstat (target, &t_stat) < 0) {
 	if (errno != ENOENT) return xf_dlg_error_continue (parent,target, strerror (errno));
 	else target_exists=FALSE;
   }
@@ -463,7 +464,8 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
 static gboolean SubChildTransfer(char *target,char *source){
 	struct stat s_stat,t_stat;
 	int i,rc;
-	if (stat(target,&t_stat)<0){  /* follow link stat() */
+	
+	if (stat(target,&t_stat)<0){  /* follow link for target: stat() */
 		char *route,*end;
 		route=(char *)malloc(strlen(target)+1);
 		if (route) {
@@ -476,17 +478,42 @@ static gboolean SubChildTransfer(char *target,char *source){
 		  g_free(route);
 		}
 	}
-	lstat(source,&s_stat); /* stat() the link itself */
-	
 	/* do the link business before going recursive:
 	 * (link directories, not contents) */
+	/* (historical, TR_LINK should fall to DirectTransfer) */
 	if (child_mode & TR_LINK){ 
+	  printf("xftree:Calling IndirectTransfer for TR_LINK is obsolete (but works)\n");
 	  if (symlink (source, target) < 0) {
 	     return process_error(RW_ERROR_WRITING_TGT);
 	  } else return TRUE;
 	}
-	
-	
+
+	lstat(source,&s_stat); /* stat() the link itself */
+
+/* what if we find a symlink in our path? */       	
+	if (S_ISLNK(s_stat.st_mode)) {
+	  char *src_lnk;
+	  int len;
+	  struct stat st;
+	  lstat(source,&st);
+	  src_lnk=(char *)malloc(st.st_size+1);
+	  if (!src_lnk) return TRUE;
+	  len = readlink (source, src_lnk, st.st_size);
+	  if (len <= 0) {fprintf(stderr,"xftree:%s\n",strerror(errno));return (TRUE); }
+      	  src_lnk[len] = 0;
+	  if (symlink (src_lnk, target) == -1){
+	     g_free(src_lnk);
+	     return process_error(RW_ERROR_WRITING_TGT);
+	  }
+	  g_free(src_lnk);
+      	  if (child_mode & TR_MOVE) {
+		  if (unlink (source) == ERROR) {
+	            return process_error(RW_ERROR_WRITING_SRC);
+		  }
+	  }
+	  return (TRUE);
+	}
+
 	/* recursivity, if src is directory:
 	 * 1- mkdir tgt/src
 	 * 2- glob src
@@ -782,7 +809,7 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	child_mode = mode;
  	/* count total files to transfer */
 	count_cancelled=FALSE;
-	count_window(win->top);
+	if (mode != TR_LINK) count_window(win->top);
 	if (count_cancelled) return TRUE;
 	/*fprintf(stderr,"dbg:Total files=%d\n",total_files);*/
  	if (!cpy_dlg) cpy_dlg=show_cpy(win->top,TRUE,mode);
@@ -808,12 +835,13 @@ gboolean IndirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
        return TRUE;
 }
 
-/* function for non forked move on same device */
+/* function for non forked move on same device, or symlink too */
 gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 	FILE *tfile;
 	char *line,*source,*target;
 	int type,i;
 	cfg *win;
+	struct stat st;
     	/*fprintf(stderr,"dbg: at DirectTransfer\n");*/
         
 	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -834,6 +862,39 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 		source=strtok(NULL,"\n");
 		target=strrchr(source,':')+1;
 		*(strrchr(source,':'))=0;
+		lstat(source,&st);
+		if (S_ISLNK(st.st_mode)) {
+	  	  char *src_lnk;
+ 	  	  int len;
+	 	  struct stat st;
+		  lstat(source,&st);
+		  src_lnk=(char *)malloc(st.st_size+1);
+		  if (!src_lnk) continue;
+		  len = readlink (source, src_lnk, st.st_size);
+		  if (len <= 0) {
+			  if (xf_dlg_error_continue(win->top,strerror(errno),source)==DLG_RC_CANCEL)
+			  {
+		            g_free(src_lnk);
+			    continue;
+			  }
+		  }
+	      	  src_lnk[len] = 0;
+		  if (symlink (src_lnk, target) == -1){
+		     if (xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL){
+		        g_free(src_lnk);
+ 		        continue;
+		     }
+		  }
+		  g_free(src_lnk);
+	      	  if (mode & TR_MOVE) {
+		   if (unlink (source) == ERROR) {
+	             if (xf_dlg_error_continue(win->top,strerror(errno),source)==DLG_RC_CANCEL)
+ 		        continue;
+		   }
+		  }
+ 		  continue;
+		}
+		
 		if (tar_extraction){
 			char *o_src;
 			o_src=g_strdup(source);
@@ -843,9 +904,17 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 			if (mode==TR_MOVE) tar_delete((GtkCTree *)ctree,o_src);
 			g_free (o_src);
 		} else {/* moveit */
-			if (rename (source, target) < 0){
-			  if (xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL)
-	          	  return FALSE;
+			if (mode & TR_MOVE) {
+			  if (rename (source, target) < 0){
+			    if (xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL)
+	          	    return FALSE;
+			  }
+			} else if (mode & TR_LINK) {
+	                    if (symlink (source, target) < 0) {
+				if ((xf_dlg_error_continue(win->top,strerror(errno),target)==DLG_RC_CANCEL))
+				    return process_error(RW_ERROR_WRITING_TGT);
+			    }
+			    else return TRUE;
 			}
 		}
 	}

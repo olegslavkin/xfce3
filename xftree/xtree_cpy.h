@@ -31,10 +31,10 @@
 #define RW_OK			0x200000
 #define RW_ERROR_WRITING_DIR 	0x400000
 
-#define TR_COPY		1
-#define TR_MOVE		2
-#define TR_LINK		4
-#define TR_OVERRIDE	8
+#define TR_COPY		0x01
+#define TR_MOVE		0x02
+#define TR_LINK		0x04
+#define TR_OVERRIDE	0x08
 
 void cb_symlink (GtkWidget * item, GtkCTree * ctree);
 void cb_duplicate (GtkWidget * item, GtkCTree * ctree);

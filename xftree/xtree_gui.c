@@ -267,6 +267,66 @@ char *mode_txt(mode_t mode){
 	else modeT[9]='-';
 	return modeT;
 }
+
+static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node){
+  char cmd[(PATH_MAX + 3) * 2];
+  cfg *win;
+  reg_t *prg;
+    entry *up;
+   /* disable openwith on FT_TARCHILD */
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+    if (en->type & FT_RPMCHILD) return TRUE;
+    if (en->type & FT_TARCHILD) {
+	    cb_tar_open_with(NULL,GTK_CTREE (ctree));
+	    return TRUE;
+    }
+
+    if (en->type & (FT_TAR|FT_RPM)){
+      if (!GTK_CTREE_ROW (node)->expanded) {
+	      on_expand(GTK_CTREE (ctree),node,NULL);
+	      gtk_ctree_expand (GTK_CTREE (ctree), node); 
+      } else {
+	      on_collapse(GTK_CTREE (ctree),node,NULL);
+	      gtk_ctree_collapse (GTK_CTREE (ctree), node);
+      }
+      return (TRUE);
+    }
+    if (en->type & FT_DIR_UP)
+    {
+      cb_go_up(NULL,GTK_CTREE (ctree)); 	    
+      return (TRUE);
+    }
+    if (!(en->type & FT_FILE)) return (FALSE);
+    up = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), GTK_CTREE_ROW (node)->parent);
+    cursor_wait (GTK_WIDGET (ctree));
+    chdir (up->path);
+    if (en->type & FT_EXE) { /*io_can_exec (en->path)) */
+      if (mod_mask & GDK_MOD1_MASK)
+	sprintf (cmd, "%s -e \"%s\" &", TERMINAL, en->path);
+      else
+	sprintf (cmd, "\"%s\" &", en->path);
+      io_system (cmd);
+    }
+    else
+    {
+      /* call open with dialog */
+      prg = reg_prog_by_file (win->reg, en->path);
+      if (prg)
+      {
+	if (prg->arg)
+	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
+	else
+	  sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);
+	io_system (cmd);
+      }
+      else
+      {
+	xf_dlg_open_with (ctree,win->xap, "", en->path);
+      }
+    }
+    cursor_reset (GTK_WIDGET (ctree));
+    return (TRUE);
+}
     
 /*
  * start the marked program on double click
@@ -275,11 +335,8 @@ static gint
 on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
 {
   GtkCTreeNode *node;
-  entry *en, *up;
-  char cmd[(PATH_MAX + 3) * 2];
-  char *wd;
+  entry *en;
   cfg *win;
-  reg_t *prg;
   gint row, col;
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
     /*fprintf(stderr,"dbg:  click detected\n"); */
@@ -312,6 +369,10 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
       return (TRUE);
     }
     en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+
+    return startit(ctree,en,event->state, node);
+  }
+#if 0
     /* disable openwith on FT_TARCHILD */
     if (en->type & FT_RPMCHILD) return TRUE;
     if (en->type & FT_TARCHILD) {
@@ -361,6 +422,7 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     cursor_reset (GTK_WIDGET (ctree));
     return (TRUE);
   }
+#endif
   return (FALSE);
 }
 
@@ -491,10 +553,16 @@ on_button_press (GtkWidget * widget, GdkEventButton * event, void *data)
 static gint
 on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
 {
-  int num, i;
+  int num,i;
   entry *en;
   GtkCTreeNode *node;
-  GdkEventButton evbtn;
+  /*GdkEventButton evbtn;*/
+  GList *selection;
+  
+  selection = GTK_CLIST (ctree)->selection;
+  if ((num = g_list_length (GTK_CLIST (ctree)->selection))==0)return (TRUE);
+  node=selection->data;
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree),node);
 
   switch (event->keyval)
   {
@@ -503,42 +571,23 @@ on_key_press (GtkWidget * ctree, GdkEventKey * event, void *menu)
     return (TRUE);
     break;
   case GDK_Return:
-    num = g_list_length (GTK_CLIST(find_root((GtkCTree *)ctree))->row_list);
-    for (i = 0; i < num; i++)
-    {
-      if (GTK_CLIST (ctree)->focus_row == i)
-      {
-	node = gtk_ctree_node_nth (GTK_CTREE (ctree), i);
-	en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-	if (EN_IS_DIR (en) && !(en->type & FT_DIR_UP))
-	{
+    if (!en->path) return (TRUE); 
+    if ((en->type & FT_DIR) && !(en->type & FT_DIR_UP)){
 	  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
 	  {
 	    /* Alt or Ctrl button is pressed, it's the same as _go_to().. */
 	    go_to (GTK_CTREE (ctree), find_root((GtkCTree *)ctree), en->path, en->flags);
 	    return (TRUE);
-	    break;
 	  }
-	  if (!GTK_CTREE_ROW (node)->expanded)
-	    gtk_ctree_expand (GTK_CTREE (ctree), node);
-	  else
-	    gtk_ctree_collapse (GTK_CTREE (ctree), node);
+	  if (!GTK_CTREE_ROW (node)->expanded) gtk_ctree_expand (GTK_CTREE (ctree), node);
+	  else gtk_ctree_collapse (GTK_CTREE (ctree), node);
 	  return (TRUE);
-	  break;
-	}
-      }
     }
-
-    evbtn.type = GDK_2BUTTON_PRESS;
-    evbtn.button = 1;
-    evbtn.state = event->state;
-    on_double_click (ctree, &evbtn, menu);
-    return (TRUE);
-    break;
-  default:
+    return startit(ctree,en,event->state, node);
+  default: /*FIXME: */
     if ((event->keyval >= GDK_A) && (event->keyval <= GDK_z) && (event->state <= GDK_SHIFT_MASK))
     {
-      num = g_list_length (GTK_CLIST(find_root((GtkCTree *)ctree))->row_list);
+      num = g_list_length (GTK_CLIST (ctree)->row_list);
       /*(GTK_CLIST (ctree)->row_list);*/
       for (i = 0; i < num; i++)
       {
