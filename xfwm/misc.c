@@ -343,10 +343,6 @@ Destroy (XfwmWindow * Tmp_win)
   if (!Tmp_win)
     return;
 
-  /* Block events on the destroyed window */
-  XSelectInput (dpy, Tmp_win->frame, NoEventMask);
-  XSelectInput (dpy, Tmp_win->w, NoEventMask);
-
   if (Tmp_win->prev != NULL)
     Tmp_win->prev->next = Tmp_win->next;
   if (Tmp_win->next != NULL)
@@ -390,12 +386,13 @@ Destroy (XfwmWindow * Tmp_win)
 
   XUnmapWindow (dpy, Tmp_win->frame);
   XSync (dpy, 0);
-  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
 
   if (Scr.Focus == Tmp_win)
   {
     RevertFocus (Tmp_win, False);
   }
+
+  Broadcast (XFCE_M_DESTROY_WINDOW, 3, Tmp_win->w, Tmp_win->frame, (unsigned long) Tmp_win, 0, 0, 0, 0);
 
   XDeleteContext (dpy, Tmp_win->frame, XfwmContext);
   XDeleteContext (dpy, Tmp_win->Parent, XfwmContext);
