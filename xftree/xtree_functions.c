@@ -645,6 +645,7 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
   add_subtree (ctree, node, en->path, 2, en->flags);
   reset_icon(ctree, node);
   /* select affected node to enable easy toggle on/off */
+  gtk_ctree_expand (ctree,node);
   gtk_ctree_select (ctree,node);
   gtk_clist_thaw (GTK_CLIST (ctree));
 }
