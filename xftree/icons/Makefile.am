@@ -59,5 +59,7 @@ pd.xpm \
 dir_ro.xpm \
 dir_ro_open.xpm \
 dir_ro_open_dot.xpm \
-dir_open_dot.xpm
+dir_open_dot.xpm \
+dir_ro_open_hidden.xpm \
+dir_open_hidden.xpm
 
