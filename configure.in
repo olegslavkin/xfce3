@@ -394,9 +394,9 @@ AC_ARG_ENABLE(
 	compiler_warnings="$enableval", compiler_warnings="yes"
 	)
 AC_MSG_RESULT($compiler_warnings)
-
-if test "$ac_cv_prog_CC" = gcc -o "$ac_cv_prog_CC" = g++; then
-  if test $compiler_warnings = yes; then
+if test "$CC" = "gcc" -o "$CC" = "g++"; then
+  echo "GCC compiler found"
+  if test "$compiler_warnings" = "yes"; then
     if echo "$CFLAGS" | grep "\-Wall" > /dev/null 2> /dev/null; then
       CFLAGS="$CFLAGS"
     else

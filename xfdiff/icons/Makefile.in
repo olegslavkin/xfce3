@@ -133,7 +133,8 @@ XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(noinst_DATA)
 # really _noinst_?
-noinst_DATA =   xfdiff.xpm
+noinst_DATA = \
+ xfdiff.xpm
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h

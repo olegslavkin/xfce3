@@ -444,7 +444,7 @@ DrawIconWindow (XfwmWindow * Tmp_win, XRectangle *area)
       XftColor color_fg;
       XWindowAttributes attributes;
       XColor dummyc;
-      Region region;
+      Region region = None;
 
       XGetWindowAttributes (dpy, Scr.Root, &attributes);
 
@@ -1091,7 +1091,7 @@ SetTitleBar_xfce (XfwmWindow * t, XRectangle *area, Bool onoroff)
       XftFont *xftfont;
       XWindowAttributes attributes;
       XColor dummyc;
-      Region region;
+      Region region = None;
 
       XGetWindowAttributes (dpy, Scr.Root, &attributes);
 
@@ -1749,7 +1749,7 @@ SetTitleBar_mofit (XfwmWindow * t, XRectangle *area, Bool onoroff)
       XftFont *xftfont;
       XWindowAttributes attributes;
       XColor dummyc;
-      Region region;
+      Region region = None;
 
       XGetWindowAttributes (dpy, Scr.Root, &attributes);
 
@@ -2524,7 +2524,7 @@ SetTitleBar_trench (XfwmWindow * t, XRectangle *area, Bool onoroff)
       XftFont *xftfont;
       XWindowAttributes attributes;
       XColor dummyc;
-      Region region;
+      Region region = None;
 
       XGetWindowAttributes (dpy, Scr.Root, &attributes);
 
@@ -3207,7 +3207,7 @@ SetTitleBar_gtk (XfwmWindow * t, XRectangle *area, Bool onoroff)
       XftFont *xftfont;
       XWindowAttributes attributes;
       XColor dummyc;
-      Region region;
+      Region region = None;
 
       XGetWindowAttributes (dpy, Scr.Root, &attributes);
 
@@ -3927,7 +3927,7 @@ SetTitleBar_linea (XfwmWindow * t, XRectangle *area, Bool onoroff)
       XftFont *xftfont;
       XWindowAttributes attributes;
       XColor dummyc;
-      Region region;
+      Region region = None;
 
       XGetWindowAttributes (dpy, Scr.Root, &attributes);
 
