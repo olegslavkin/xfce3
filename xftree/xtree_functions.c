@@ -466,11 +466,11 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
     sprintf (date, "%02d-%02d-%02d  %02d:%02d", en->date.year, en->date.month, en->date.day, en->date.hour, en->date.min);
     if (en->size < 0)
     {
-      sprintf (size, "?(ERR %d)", -en->size);
+      sprintf (size, "?(ERR %lu)", -(long unsigned int)en->size);
     }
     else
     {
-      sprintf (size, "%10d", (int) en->size);
+      sprintf (size, "%10lu", (long unsigned int) en->size);
     }
   }
   if (win->preferences&ABREVIATE_PATHS) text[COL_NAME] = abreviateP(en->label); else 

@@ -383,7 +383,7 @@ char * override_txt(char *new_file,char *old_file)
   static char *message=NULL;
   char *ot=_("Override ?"),*otime=NULL,*ntime;
   char *with=_("with");
-  int i,osize=0,nsize;
+  long unsigned int i,osize=0,nsize;
   
   if (message) {free (message);}
   if (lstat (new_file, &nst) == ERROR){
@@ -393,13 +393,13 @@ char * override_txt(char *new_file,char *old_file)
   if (lstat (old_file, &ost) != ERROR){
     old_exists=TRUE;
     osize=1;
-    i=ost.st_size;
+    i=(long unsigned int)ost.st_size;
     otime=(char *)malloc( strlen(ctime(&(ost.st_mtime))) + 1 );
     strcpy(otime,ctime(&(ost.st_mtime)) );
     while (i) {i = i/10; osize++;}
   }
   nsize=1;
-  i=nst.st_size;
+  i=(long unsigned int)nst.st_size;
   while (i) {i = i/10; nsize++;}
   ntime=ctime(&(nst.st_mtime));
    
@@ -414,14 +414,14 @@ char * override_txt(char *new_file,char *old_file)
   if (!message) {return ot;}
   if (old_exists){
 	sprintf(message,"%s\n%s %s %ld %s\n%s\n%s %s %ld %s\n",ot,
-			new_file,ntime,nst.st_size,BYTES,
+			new_file,ntime,(long int)nst.st_size,BYTES,
 			with,
-			old_file,otime,ost.st_size,BYTES);
+			old_file,otime,(long int)ost.st_size,BYTES);
 	free(otime);
   }
   else
 	sprintf(message,"%s\n%s %s %ld %s\n",ot,
-			new_file,ntime,nst.st_size,BYTES);
+			new_file,ntime,(long int)nst.st_size,BYTES);
   return message;
 }
 	

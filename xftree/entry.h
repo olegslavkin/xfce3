@@ -24,7 +24,7 @@
 
 #ifndef __ENTRY_H__
 #define __ENTRY_H__
-
+#include <sys/types.h>
 typedef struct
 {
   int year;
@@ -39,7 +39,7 @@ typedef struct
 {
   gchar *path;
   gchar *label;
-  int size;
+  off_t size;
   int type;
   int flags;
   int mtime;

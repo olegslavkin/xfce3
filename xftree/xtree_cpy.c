@@ -123,7 +123,7 @@ static	char *targetdir;
 
 static int ok_input(GtkWidget *parent,char *target,entry *s_en);
 static gboolean force_override=FALSE;
-static int internal_rw_file(char *target,char *source,long int size);
+static int internal_rw_file(char *target,char *source,off_t size);
 static int rwStderr (int n, void *data);
 static int rwStdout (int n, void *data);
 static void rwForkOver (void);
@@ -775,7 +775,7 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
  * recursive function for directories
  * */
 #define BUFFER_SIZE (4096)
-static int internal_rw_file(char *target,char *source,long int size){
+static int internal_rw_file(char *target,char *source,off_t size){
 	int i,j=0,source_file,target_file,total_size=0;
 	char *buffer;
 	gboolean too_few=FALSE,too_many=FALSE;
