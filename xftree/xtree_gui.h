@@ -28,7 +28,7 @@
 #define __XTREE_GUI_H__
 #include <gtk/gtk.h>
 #include "xtree_cfg.h"
-#define __XTREE_VERSION__ "3.8.16.2"
+#define __XTREE_VERSION__ "3.8.18"
 
 #define SPACING 	5
 #define TIMERVAL 	6000
