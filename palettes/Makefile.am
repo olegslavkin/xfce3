@@ -57,6 +57,7 @@ palettes_DATA=\
  Iceland \
  Jazza \
  Jazza2 \
+ KDE \
  Kdetheme \
  Liquid \
  Liquid2 \
