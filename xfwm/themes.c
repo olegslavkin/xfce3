@@ -916,7 +916,11 @@ DrawButton_xfce (XfwmWindow * t, Window win, XRectangle *area, int w, int h, But
 
     if (inverted)
     {
-      RelieveRectangle (win, NULL, 0, 0, w - 1, h - 1, ShadowGC, ReliefGC);
+#ifndef OLD_STYLE
+      RelieveRectangle (win, NULL, 1, 1, w - 2, h - 2, ShadowGC, ReliefGC);
+#else
+      RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, ReliefGC);
+#endif
     }
 #ifndef OLD_STYLE
     XDrawLine (dpy, win, ShadowGC, 0, h - 1, w - 1, h - 1);

@@ -1,7 +1,6 @@
-EXTRA_DIST = $(palettes_DATA) $(palettes_dist)
+EXTRA_DIST = $(palettes_DATA)
 
 palettesdir=$(XFCE_DIR)/palettes
-palettes_dist = HIFI Win3   # forgotten? _obsolete_?
 palettes_DATA=\
  Alpine \
  Altxfce \
@@ -118,5 +117,6 @@ palettes_DATA=\
  Vanadium \
  Win \
  Win2 \
+ Win3 \
  Xfce-1 \
  Xfce-2
