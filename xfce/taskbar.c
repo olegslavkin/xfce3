@@ -140,6 +140,8 @@ void taskbar_synch_labels();
 void taskbar_set_standalone_state(GtkWidget *tb_panel);
 gint tb_set_proc_load(gpointer data);
 void taskbar_put_in_taskjar(taskbar_window *tbw);
+void 
+taskbar_remove_from_taskjar(taskbar_window *tbw);
 
 
   #ifdef LOG_FILE
@@ -400,6 +402,7 @@ void taskbar_check_events(unsigned long type,unsigned long *body)
     fprintf(_f,"DESTROY_WINDOW: %ld\n",body[0]);
 #endif    
     if ((tbw=taskbar_find_window(body[0]))) {
+      taskbar_remove_from_taskjar(tbw);
       taskbar_remove_task_widget(tbw->window);
       if(tbw->my_flags&TASKBAR_TASK_FLAG_VISIBLE) {
         g_xfce_taskbar.gtk_task_no--;
@@ -1170,8 +1173,7 @@ taskbar_window *tbw;
       tbw=taskbar_find_window(id);
       if(!tbw)
         return FALSE;
-      tbw->my_flags&=~TASKBAR_TASK_FLAG_TASKJAR;
-      gtk_container_remove(GTK_CONTAINER(g_xfce_taskbar.gtk_taskjar_menu),widget);
+      taskbar_remove_from_taskjar(tbw);
       taskbar_synch_single_task_widget_with_desk(-1,tbw);
       taskbar_synch_labels();
       gtk_menu_popdown(GTK_MENU(g_xfce_taskbar.gtk_taskjar_menu));
@@ -1200,17 +1202,37 @@ taskbar_on_popup_desk_menu_select(GtkWidget *w, gpointer user_data)
   g_xfce_taskbar.cmd_to_execute=NULL;
 }
 
+void 
+taskbar_remove_from_taskjar(taskbar_window *tbw)
+{
+  GtkWidget *widget;
+  char sid[64];
+
+  if(!tbw->my_flags&TASKBAR_TASK_FLAG_TASKJAR)
+    return;
+  g_snprintf(sid,sizeof(sid)-1,"task%ld",tbw->window);
+  widget=(GtkWidget*)gtk_object_get_data(GTK_OBJECT(g_xfce_taskbar.gtk_taskjar_menu),sid);
+  if(!widget)
+    return;
+  tbw->my_flags&=~TASKBAR_TASK_FLAG_TASKJAR;
+  gtk_container_remove(GTK_CONTAINER(g_xfce_taskbar.gtk_taskjar_menu),widget);
+}
+
 void
 taskbar_put_in_taskjar(taskbar_window *tbw)
 {
   GtkWidget *menu_item;
-  
+  char sid[64];
+
   if(tbw->my_flags&TASKBAR_TASK_FLAG_TASKJAR)
     return;
+  g_snprintf(sid,sizeof(sid)-1,"task%ld",tbw->window);
   tbw->my_flags|=TASKBAR_TASK_FLAG_TASKJAR;
   g_xfce_taskbar.curr_window=-1;
   menu_item=gtk_menu_item_new_with_label(tbw->name);
   gtk_menu_append(GTK_MENU(g_xfce_taskbar.gtk_taskjar_menu),menu_item);
+  gtk_object_set_data (GTK_OBJECT (g_xfce_taskbar.gtk_taskjar_menu), strdup(sid), menu_item);
+
   gtk_widget_show(menu_item);
   gtk_signal_connect (GTK_OBJECT (menu_item), "button_press_event",
                       GTK_SIGNAL_FUNC (taskbar_on_taskjar_task_menu_clicked),
