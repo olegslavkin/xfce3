@@ -1,3 +1,35 @@
+2002-09-11  xfce
+
+	* libs/xfcolor.c, palettes/Default: [no log message]
+
+2002-09-11  xfce
+
+	* libs/xfcolor.c, palettes/Default: [no log message]
+
+2002-09-10  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Revert changes in theme.
+
+2002-09-09  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-09-02  xfce
+
+	* Makefile.am, Makefile.in: Replace "rpm -ta" with "rpmbuild -ta"
+
+2002-09-01  xfce
+
+	* ChangeLog, libs/xpmext.c, other/xfce3rc.cs.in,
+	other/xfce3rc.de.in, other/xfce3rc.fr.in, other/xfce3rc.hu.in,
+	other/xfce3rc.in, other/xfce3rc.ja.in, other/xfce3rc.ko.in,
+	other/xfce3rc.nl.in, other/xfce3rc.sr.in, other/xfce3rc.uk.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	po/cs.gmo, po/cs.po, po/xfce.pot, po/zh_TW.Big5.gmo,
+	po/zh_TW.Big5.po, xfwm/xfwm.c: Implement esetroot_pmap_id as
+	suggested by Thomas Leonard Update Czech translation by Rudolf Ulc
+	<rudolf.ulc@oku-st.cz> Small fixes
+
 2002-09-01  xfce
 
 	* po/bg.gmo, po/bg.po, po/ca.po, po/cs.gmo, po/cs.po, po/da.gmo,
