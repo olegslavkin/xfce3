@@ -166,24 +166,6 @@ gint update_timer (GtkCTree * ctree)
 
 
 /*
- */
-#define FATAL 1
-#define alloc_error_fatal() alloc_error(__FILE__,__LINE__,FATAL)
-/*
-static int errno_error(GtkWidget *parent,char *path){
-	return xf_dlg_error (parent,strerror(errno),path);
-}*/
-static void
-alloc_error (char *file, int num, int mode)
-{
-  fprintf (stderr, _("dbg:malloc error in %s at line %d\n"), file, num);
-  /*xf_dlg_error (parent,strerror(errno),file);*/
-  if (mode == FATAL) exit (1);
-}
-
-
-
-/*
  * count the number of  selected nodes, if there are no nodes selected
  * in "first" the root node is returned
  */
@@ -458,8 +440,12 @@ add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int f
     len++;
   }
   base = g_malloc (len + 1);
-  if (!base)
-    alloc_error_fatal ();
+  if (!base){
+    cfg * win;
+    win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+    xf_dlg_error(win->top,_("internal malloc error:"),strerror(errno));
+    exit(1);
+  }
   strcpy (base, path);
   if (add_slash)
     strcat (base, "/");

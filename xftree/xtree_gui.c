@@ -426,7 +426,7 @@ my_compare (GtkCList * clist, gconstpointer ptr1, gconstpointer ptr2)
 
 /* FIXME: this routine should me a loop to reduce excessive lines of code 
  * (make for easier maintaince) */
-GtkWidget *
+static GtkWidget *
 create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 {
   GtkWidget *menubar;
@@ -767,7 +767,7 @@ char *c;
 } gen_pixmap_list;
 
 /* masks that are duplicated elsewhere are initialized to NULL */
-pixmap_list pixmaps[]={
+static pixmap_list pixmaps[]={
 	{&gPIX_page,		&gPIM_page,		page_xpm},
 	{&gPIX_core,		NULL,			core_xpm},
 	{&gPIX_text,		NULL,			text_xpm},
@@ -791,7 +791,7 @@ pixmap_list pixmaps[]={
 	{NULL,NULL,NULL}
 };
 
-gen_pixmap_list gen_pixmaps[]={
+static gen_pixmap_list gen_pixmaps[]={
 	{&gPIX_pageC,	NULL,	page_xpm,	"c"},
 	{&gPIX_pageH,	NULL,	page_xpm,	"h"},
 	{&gPIX_pageF,	NULL,	page_xpm,	"f"},
