@@ -60,6 +60,8 @@ palettes_DATA=\
  Jazza2 \
  KDE \
  Kdetheme \
+ KStyle2 \
+ KXfce \
  Liquid \
  Liquid2 \
  LightBulb \
