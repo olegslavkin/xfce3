@@ -252,7 +252,8 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     }
     else
     {
-      if (dl.file)
+      if (dl.file) 
+	      /* FIXME: dl.file may contain arguments, voiding direct open */
       {
 	sprintf (cmd, "%s \"%s\" &", dl.cmd, dl.file);
         io_system (cmd,FALSE,win->top); /* shell open */

@@ -133,6 +133,7 @@ io_can_write_to_parent (char *file)
 pid_t io_pid;
 extern GtkWidget *io_parent;
 int
+/*FIXME: should be io_system (char **cmd,int ejecutable,GtkWidget *parent)*/
 io_system (char *cmd,int ejecutable,GtkWidget *parent)
 {
   int pid, status;
@@ -184,17 +185,15 @@ io_system (char *cmd,int ejecutable,GtkWidget *parent)
 	    if (fork ()==0) {
 		       /*printf("dbg:by direct...\n");*/
 	       if (execve (argv[0], argv, environ) == -1) {
+	           FILE *mess;
 		   if (errno != ENOEXEC) execvp (argv[0], argv); 
-		   {
-		       FILE *mess;
-		       mess=fopen("/tmp/xftree.USR1","w");
-		       if (mess){
-			       fprintf(mess,"%s: %s\n",argv[0],strerror(errno));
-			       fclose(mess);
-			       kill(io_pid,SIGUSR1);
-		       }
-		       /*perror (argv[0]);*/
+		   mess=fopen("/tmp/xftree.USR1","w");
+		   if (mess){
+		       fprintf(mess,"%s: %s\n",argv[0],strerror(errno));
+		       fclose(mess);
+		       kill(io_pid,SIGUSR1);
 		   }
+		   /*perror (argv[0]);*/
 	       }
 	    }
 	    _exit (127);

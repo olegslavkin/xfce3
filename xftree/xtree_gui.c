@@ -315,14 +315,15 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       prg = reg_prog_by_file (win->reg, en->path);
       if (prg)
       {
-	if (prg->arg)
-	  /*sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);*/
-	  sprintf (cmd, "%s %s %s", prg->app, prg->arg, en->path);
-	else
+	if (prg->arg){
+	  sprintf (cmd, "\"%s\" %s \"%s\" &", prg->app, prg->arg, en->path);
+	  io_system (cmd,FALSE,win->top);  /*open by shell */
+	  /*sprintf (cmd, "%s %s %s", prg->app, prg->arg, en->path);*/
+	} else {
 	  /*sprintf (cmd, "\"%s\" \"%s\" &", prg->app, en->path);*/
 	  sprintf (cmd, "%s %s", prg->app, en->path);
-	/*io_system (cmd,FALSE,win->top);  open by shell */
-	io_system (cmd,TRUE,win->top); /* open direct */
+	  io_system (cmd,TRUE,win->top); /* open direct */
+	}
       }
       else
       {
