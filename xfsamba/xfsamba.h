@@ -6,7 +6,7 @@
 #include "gtk_dlg.h"
 #include "io.h"
 #include "fontselection.h"
-#include "xfdiff_colorsel.h"
+#include "../xfdiff/xfdiff_colorsel.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
 #define XFSAMBA_VERSION "0.43"
