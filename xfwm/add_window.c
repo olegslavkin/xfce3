@@ -406,6 +406,7 @@ AddWindow (Window w)
   }
 
   XRaiseWindow (dpy, tmp_win->Parent);
+  XUnmapWindow (dpy, w);
   XReparentWindow (dpy, w, tmp_win->Parent, 0, 0);
   valuemask = (CWEventMask | CWDontPropagate);
   attributes.event_mask = (StructureNotifyMask | PropertyChangeMask | ColormapChangeMask | EnterWindowMask | LeaveWindowMask | FocusChangeMask);

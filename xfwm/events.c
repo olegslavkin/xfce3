@@ -1567,6 +1567,10 @@ HandleConfigureRequest ()
      */
     SetupFrame (Tmp_win, x, y, width, height, True, True);
   }
+  else
+  {
+    sendclient_event (Tmp_win, x, y, width, height);
+  }
 #ifdef DEBUG
   fprintf (stderr, "xfwm : Leaving HandleConfigureRequest ()\n");
 #endif
