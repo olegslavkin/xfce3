@@ -10,102 +10,102 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce\n"
-"POT-Creation-Date: 2002-09-01 01:01+0200\n"
+"POT-Creation-Date: 2002-07-05 22:28+0200\n"
 "PO-Revision-Date: 2002-04-08 20:00+0800\n"
 "Last-Translator: babyfai <babyfai_cheung@hotmail.com>\n"
 "Language-Team: None\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=big5\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libs/colorselect.c:91 xfclock/xfclock_colorsel.c:77
 #: xfdiff/xfdiff_colorsel.c:85
 msgid "Select Color"
-msgstr "¿ï¾ÜÃC¦â"
+msgstr "é¸æ“‡é¡è‰²"
 
 #: libs/fileselect.c:79
 msgid "Select File"
-msgstr "¿ï¾ÜÀÉ®×"
+msgstr "é¸æ“‡æª”æ¡ˆ"
 
 #: libs/fontselection.c:80
 msgid "Font Selection"
-msgstr "¿ï¾Ü¦rÅé"
+msgstr "é¸æ“‡å­—é«”"
 
 #. this is an invisible button
 #: libs/xfce-common.c:268 xfdiff/xfdiff_gui.c:1401 xfdiff/xfdiff_misc.c:130
 #: xfdiff/xfdiff_misc.c:136 xftree/xtree_toolbar.c:343
 msgid "OK"
-msgstr "½T©w"
+msgstr "ç¢ºå®š"
 
 #: libs/xfce-common.c:278
 msgid "Message"
-msgstr "¨t²Î«H®§"
+msgstr "ç³»çµ±ä¿¡æ¯"
 
 #: libs/xfce-common.c:391 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
 #: xfumed/xfumed_gui_cb.c:126
 msgid "Yes"
-msgstr "¬O"
+msgstr "æ˜¯"
 
 #: libs/xfce-common.c:392 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:76
 #: xfumed/xfumed_gui_cb.c:127
 msgid "No"
-msgstr "§_"
+msgstr "å¦"
 
 #: libs/xfce-common.c:397 xfdiff/xfdiff_misc.c:133
 msgid "Question"
-msgstr "°İÃD"
+msgstr "å•é¡Œ"
 
 #: libs/xfce-common.c:632
 msgid "Terminated: "
-msgstr "²×¤î¡G"
+msgstr "çµ‚æ­¢ï¼š"
 
 #: libs/xpmext.c:377 libs/xpmext.c:404
 #, c-format
 msgid "*** WARNING ***: Cannot load image file %s\n"
-msgstr "*** Äµ§i ***¡G¤£¯à¸ü¤J¹Ï¹³ÀÉ®×%s\n"
+msgstr "*** è­¦å‘Š ***ï¼šä¸èƒ½è¼‰å…¥åœ–åƒæª”æ¡ˆ%s\n"
 
 #: libs/xpmext.c:425
 #, c-format
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
-msgstr "*** Äµ§i ***¡G¤£¯à¸ü¤J¹³¯ÀÀÉ®×%s\n"
+msgstr "*** è­¦å‘Š ***ï¼šä¸èƒ½è¼‰å…¥åƒç´ æª”æ¡ˆ%s\n"
 
 #: xfce/action.c:64
 msgid "Define action ..."
-msgstr "©w¸q°Ê§@..."
+msgstr "å®šç¾©å‹•ä½œ..."
 
 #: xfce/action.c:109 xfce/modify.c:160
 msgid "Command Line :"
-msgstr "©R¥O¦æ¡G"
+msgstr "å‘½ä»¤è¡Œï¼š"
 
 #: xfce/action.c:118
 msgid "Icon Style :"
-msgstr "¹Ï¥Ü­·®æ ¡G"
+msgstr "åœ–ç¤ºé¢¨æ ¼ ï¼š"
 
 #: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:232
 #: xfce/modify.c:240 xfsound/xfsound.c:509
 msgid "Browse ..."
-msgstr "ÂsÄı ..."
+msgstr "ç€è¦½ ..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:272 xfsamba/xfsamba_gui.c:596
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:422
-#: xfsound/xfsound.c:606 xftree/gtk_exec.c:188 xftree/gtk_prop.c:214
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
-msgstr "½T©w"
+msgstr "ç¢ºå®š"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:189 xftree/gtk_prop.c:215
-#: xftree/xtree_cpy.c:860 xftree/xtree_cpy.c:1324 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
 msgid "Cancel"
-msgstr "¨ú®ø"
+msgstr "å–æ¶ˆ"
 
 #: xfce/action_cb.c:77
 msgid "You must provide the command to execute !"
-msgstr "§A¥²¶·´£¨Ñ­n°õ¦æªº©R¥O!"
+msgstr "ä½ å¿…é ˆæä¾›è¦åŸ·è¡Œçš„å‘½ä»¤!"
 
 #: xfce/configfile.c:69
 #, c-format
@@ -113,7 +113,7 @@ msgid ""
 "XFce : Syntax error in configuration file\n"
 "(%s)\n"
 msgstr ""
-"XFce ¡G »yªk¿ù»~\n"
+"XFce ï¼š èªæ³•éŒ¯èª¤\n"
 "(%s)\n"
 
 #: xfce/configfile.c:70 xfclock/xfclock_config.c:54
@@ -121,8 +121,8 @@ msgid ""
 "Syntax error in configuration file\n"
 "Aborting"
 msgstr ""
-"°t¸mÀÉ®×»yªk¿ù»~\n"
-"²×¤î"
+"é…ç½®æª”æ¡ˆèªæ³•éŒ¯èª¤\n"
+"çµ‚æ­¢"
 
 #: xfce/configfile.c:77
 #, c-format
@@ -130,7 +130,7 @@ msgid ""
 "XFce : Data mismatch error in config file\n"
 "(%s)\n"
 msgstr ""
-"°t¸mÀÉ®×¼Æ¾Ú¤Ç°t¿ù»~\n"
+"é…ç½®æª”æ¡ˆæ•¸æ“šåŒ¹é…éŒ¯èª¤\n"
 "(%s)\n"
 
 #: xfce/configfile.c:78 xfclock/xfclock_config.c:62
@@ -138,66 +138,66 @@ msgid ""
 "Data mismatch error in configuration file\n"
 "Aborting"
 msgstr ""
-"°t¸mÀÉ®×¼Æ¾Ú¤Ç°t¿ù»~\n"
-"²×¤î"
+"é…ç½®æª”æ¡ˆæ•¸æ“šåŒ¹é…éŒ¯èª¤\n"
+"çµ‚æ­¢"
 
 #: xfce/configfile.c:237 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
-msgstr "¤£¯à³Ğ«ØÀÉ®×"
+msgstr "ä¸èƒ½å‰µå»ºæª”æ¡ˆ"
 
 #: xfce/configfile.c:393
 msgid "Cannot reset configuration file"
-msgstr "¤£¯à­«³]°t¸mÀÉ®×"
+msgstr "ä¸èƒ½é‡è¨­é…ç½®æª”æ¡ˆ"
 
 #: xfce/configfile.c:396
 msgid "Creating new config file...\n"
-msgstr "³Ğ«Ø·sªº°t¸mÀÉ®×¡K¡K\n"
+msgstr "å‰µå»ºæ–°çš„é…ç½®æª”æ¡ˆâ€¦â€¦\n"
 
 #: xfce/configfile.c:497 xfce/configfile.c:507
 msgid "Cannot open configuration file"
-msgstr "¤£¯à¥´¶}°t¸mÀÉ®×"
+msgstr "ä¸èƒ½æ‰“é–‹é…ç½®æª”æ¡ˆ"
 
 #: xfce/configfile.c:513
 msgid "Does not looks like an XFce 3 configuration file !"
-msgstr "¥i¯à¤£¬O XFce 3 °t¸mÀÉ®× !"
+msgstr "å¯èƒ½ä¸æ˜¯ XFce 3 é…ç½®æª”æ¡ˆ !"
 
 #: xfce/configfile.c:514
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
 msgstr ""
-"­n­«³]°t¸mÀÉ®×¶Ü ?\n"
-" \t(­ì¤å¥ó«O¦s¬°¡§.orig¡¨²Ô©µÀÉ)"
+"è¦é‡è¨­é…ç½®æª”æ¡ˆå— ?\n"
+" \t(åŸæ–‡ä»¶ä¿å­˜ç‚ºâ€œ.origâ€ç´³å»¶æª”)"
 
 #: xfce/configfile.c:525
 msgid "Cannot open new config, Giving up..."
-msgstr "¤£¯à¥´¶}·s°t¸mÀÉ®×, ©ñ±ó¡K¡K"
+msgstr "ä¸èƒ½æ‰“é–‹æ–°é…ç½®æª”æ¡ˆ, æ”¾æ£„â€¦â€¦"
 
 #: xfce/configfile.c:526
 msgid "Cannot load configuration file"
-msgstr "¤£¯à¸ü¤J°t¸mÀÉ®×"
+msgstr "ä¸èƒ½è¼‰å…¥é…ç½®æª”æ¡ˆ"
 
 #: xfce/configfile.c:532
 msgid "Cannot use old version of XFce configuration files"
-msgstr "¤£¯à¨Ï¥ÎÂÂª©¥»ªº XFce °t¸mÀÉ®×"
+msgstr "ä¸èƒ½ä½¿ç”¨èˆŠç‰ˆæœ¬çš„ XFce é…ç½®æª”æ¡ˆ"
 
 #: xfce/diagnostic.c:88 xfce/diagnostic.c:124
 msgid "Subprocess diagnostic"
-msgstr "¤l¶iµ{°İÃD¶EÂ_"
+msgstr "å­é€²ç¨‹å•é¡Œè¨ºæ–·"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:927
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
 msgid "Clear"
-msgstr "²M°£"
+msgstr "æ¸…é™¤"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:932
+#: xftree/xtree_mess.c:921
 msgid "Dismiss"
-msgstr "Â÷¶}"
+msgstr "é›¢é–‹"
 
 #: xfce/info.c:76
 msgid "Info ..."
-msgstr "«H®§ ..."
+msgstr "ä¿¡æ¯ ..."
 
 #: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:116
 #: xfce/popup.c:222 xfce/startup.c:91 xfce/xfce.c:202 xfce/xfce.c:242
@@ -205,335 +205,335 @@ msgstr "«H®§ ..."
 #: xfce/xfce.c:703 xfce/xfce.c:718 xfce/xfce.c:776 xfce/xfce.c:797
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1247
 msgid "Couldn't create pixmap"
-msgstr "¤£¯à³Ğ«Ø¹Ï¹³"
+msgstr "ä¸èƒ½å‰µå»ºåœ–åƒ"
 
 #: xfce/info.c:121
 msgid "By Olivier Fourdan (c) 1997-2002"
-msgstr "By Olivier Fourdan (c) 1997-2002(Â½Ä¶:¤pª±·N)"
+msgstr "By Olivier Fourdan (c) 1997-2000(ç¿»è­¯:å°ç©æ„)"
 
 #: xfce/info.c:184
 msgid "Accept"
-msgstr "¦P·N"
+msgstr "åŒæ„"
 
 #: xfce/modify.c:74 xfce/modify.c:352
 msgid "Modify Item ..."
-msgstr "­×§ï¶µ¥Ø ..."
+msgstr "ä¿®æ”¹é …ç›® ..."
 
 #: xfce/modify.c:138
 msgid "Preview Icon"
-msgstr "¹wÄı¹Ï¥Ü"
+msgstr "é è¦½åœ–ç¤º"
 
 #: xfce/modify.c:169
 msgid "Icon File :"
-msgstr "¹Ï¥ÜÀÉ®×¡G"
+msgstr "åœ–ç¤ºæª”æ¡ˆï¼š"
 
 #: xfce/modify.c:178
 msgid "Label :"
-msgstr "¼ĞÅÒ ¡G"
+msgstr "æ¨™ç±¤ ï¼š"
 
 #: xfce/modify.c:187
 msgid "Position :"
-msgstr "¦ì¸m ¡G"
+msgstr "ä½ç½® ï¼š"
 
 #: xfbd/xfbdmgr.c:179 xfce/modify.c:285 xfumed/xfumed_gui.c:136
 msgid "Remove"
-msgstr "§R°£"
+msgstr "åˆªé™¤"
 
 #: xfbd/xfbdmgr.c:173 xfce/modify.c:335
 msgid "Add Item ..."
-msgstr "²K¥[¶µ¥Ø ..."
+msgstr "æ·»åŠ é …ç›® ..."
 
 #: xfce/modify_cb.c:115
 msgid "Are you sure you want to remove this entry ?"
-msgstr "±z½T©w­n§R°£¸Ó±ø¥Ø¶Ü?"
+msgstr "æ‚¨ç¢ºå®šè¦åˆªé™¤è©²æ¢ç›®å—?"
 
 #: xfce/modify_cb.c:156 xfce/modify_cb.c:185
 msgid ""
 "You must provide the command\n"
 "and the label, at least !"
 msgstr ""
-"§A¥²¶·´£¨Ñ­n°õ¦æªº©R¥O\n"
-"©M¼ĞÅÒ !"
+"ä½ å¿…é ˆæä¾›è¦åŸ·è¡Œçš„å‘½ä»¤\n"
+"å’Œæ¨™ç±¤ !"
 
 #: xfce/popup.c:199
 msgid "Add a new entry..."
-msgstr "²K¥[·s±ø¥Ø..."
+msgstr "æ·»åŠ æ–°æ¢ç›®..."
 
 #: xfce/popup.c:228
 msgid "Add icon..."
-msgstr "²K¥[¹Ï¥Ü¡K¡K"
+msgstr "æ·»åŠ åœ–ç¤ºâ€¦â€¦"
 
 #: xfce/popup.c:254
 msgid "Click to tear off popup menu"
-msgstr "¦¬°_¼u¥X¿ï³æ"
+msgstr "æ”¶èµ·å½ˆå‡ºé¸å–®"
 
 #: xfce/popup_cb.c:192
 msgid "Cannot find the file you dropped !"
-msgstr "¤£¯à§ä¨ì±z©ì©ñ¤UªºÀÉ®×!"
+msgstr "ä¸èƒ½æ‰¾åˆ°æ‚¨æ‹–æ”¾ä¸‹çš„æª”æ¡ˆ!"
 
 #: xfce/screen.c:60
 msgid "Screen label ..."
-msgstr "«Ì¹õ¼ĞÅÒ ¡K¡K"
+msgstr "å±å¹•æ¨™ç±¤ â€¦â€¦"
 
 #: xfce/screen.c:105
 msgid "Define screen label :"
-msgstr "©w¸q«Ì¹õ¼ĞÅÒ ¡G"
+msgstr "å®šç¾©å±å¹•æ¨™ç±¤ ï¼š"
 
 #: xfce/selects.c:58
 msgid "Files related"
-msgstr "¬ÛÃöÀÉ®×"
+msgstr "ç›¸é—œæª”æ¡ˆ"
 
 #: xfce/selects.c:59
 msgid "Terminals/Connections"
-msgstr "²×ºİ/Áp¾÷"
+msgstr "çµ‚ç«¯/è¯æ©Ÿ"
 
 #: xfce/selects.c:60
 msgid "Mail tools/browsers"
-msgstr "¹q¤l¶l¥ó/ÂsÄı¾¹"
+msgstr "é›»å­éƒµä»¶/ç€è¦½å™¨"
 
 #: xfce/selects.c:61
 msgid "Print manager"
-msgstr "¥´¦LºŞ²z"
+msgstr "æ‰“å°ç®¡ç†"
 
 #: xfce/selects.c:62
 msgid "Configuration"
-msgstr "°t¸m"
+msgstr "é…ç½®"
 
 #: xfce/selects.c:63
 msgid "Misc. tools/Utilities"
-msgstr "Âø¶µ/¹ê¥Î¤u¨ã"
+msgstr "é›œé …/å¯¦ç”¨å·¥å…·"
 
 #: xfce/selects.c:64
 msgid "Manual/Help browser"
-msgstr "¤â¥U/À°§UÂsÄı¾¹"
+msgstr "æ‰‹å†Š/å¹«åŠ©ç€è¦½å™¨"
 
 #: xfce/selects.c:65
 msgid "Writing/Text tools"
-msgstr "¼g§@/½s¿è¤u¨ã"
+msgstr "å¯«ä½œ/ç·¨è¼¯å·¥å…·"
 
 #: xfce/selects.c:66
 msgid "Schedule/Appointments"
-msgstr "¤éµ{ªí/·|Ä³¦w±Æ"
+msgstr "æ—¥ç¨‹è¡¨/æœƒè­°å®‰æ’"
 
 #: xfce/selects.c:67
 msgid "Multimedia"
-msgstr "¦h´CÅé"
+msgstr "å¤šåª’é«”"
 
 #: xfce/selects.c:68
 msgid "Games"
-msgstr "¹CÀ¸"
+msgstr "éŠæˆ²"
 
 #: xfce/selects.c:69
 msgid "Network"
-msgstr "ºôµ¸"
+msgstr "ç¶²çµ¡"
 
 #: xfce/selects.c:70
 msgid "Sound"
-msgstr "Án­µ"
+msgstr "è²éŸ³"
 
 #: xfce/selects.c:71
 msgid "External..."
-msgstr "¥~³¡¾Ş§@..."
+msgstr "å¤–éƒ¨æ“ä½œ..."
 
 #: xfce/setup.c:283
 msgid "Setup"
-msgstr "³]©w"
+msgstr "è¨­å®š"
 
 #: xfce/setup.c:362
 msgid "GTK theme engine : "
-msgstr "GTK §G´º¥DÃD¡G"
+msgstr "GTK ä½ˆæ™¯ä¸»é¡Œï¼š"
 
 #: xfce/setup.c:384
 msgid "Apply colors to all applications"
-msgstr "®M¥ÎÃC¦â°t¸m¨ì©Ò¦³µ{§Ç"
+msgstr "å¥—ç”¨é¡è‰²é…ç½®åˆ°æ‰€æœ‰ç¨‹åº"
 
 #: xfbd/xfbdmgr.c:167 xfce/setup.c:404
 msgid "Load ..."
-msgstr "¸ü¤J..."
+msgstr "è¼‰å…¥..."
 
 #: xfbd/xfbdmgr.c:161 xfce/setup.c:412
 msgid "Save ..."
-msgstr "Àx¦s..."
+msgstr "å„²å­˜..."
 
 #: xfce/setup.c:420
 msgid "Default"
-msgstr "¹w³]­È"
+msgstr "é è¨­å€¼"
 
 #: xfce/setup.c:442
 msgid "Repaint root window of workspace"
-msgstr "¨ê·s®Úµ¡¤f"
+msgstr "åˆ·æ–°æ ¹çª—å£"
 
 #: xfce/setup.c:449
 msgid "Use gradient color as wallpaper"
-msgstr "¨Ï¥Îº¥ÅÜ¦â±m§@Àğ¯È"
+msgstr "ä½¿ç”¨æ¼¸è®Šè‰²å½©ä½œç‰†ç´™"
 
 #: xfce/setup.c:456
 msgid "Use tear-off menus"
-msgstr "¨Ï¥Î¿ï³æ"
+msgstr "ä½¿ç”¨é¸å–®"
 
 #: xfce/setup.c:463
 msgid "Show subprocess diagnostic dialog"
-msgstr "Åã¥Ü¤l¶iµ{°İÃD¶EÂ_¹ï¸Ü®Ø"
+msgstr "é¡¯ç¤ºå­é€²ç¨‹å•é¡Œè¨ºæ–·å°è©±æ¡†"
 
 #: xfce/setup.c:470
 msgid "Panel layer"
-msgstr "­±ªO¼h"
+msgstr "é¢æ¿å±¤"
 
 #: xfce/setup.c:484
 msgid "Bottom"
-msgstr "©³³¡"
+msgstr "åº•éƒ¨"
 
 #: xfce/setup.c:502 xfce/setup.c:911
 msgid "Top"
-msgstr "³»³¡"
+msgstr "é ‚éƒ¨"
 
 #: xfce/setup.c:509
 msgid "Clock"
-msgstr "®ÉÄÁ"
+msgstr "æ™‚é˜"
 
 #: xfce/setup.c:523
 msgid "Use digital clock on panel"
-msgstr "­±ªO¤W¨Ï¥Î¼Æ¦r®ÉÄÁ"
+msgstr "é¢æ¿ä¸Šä½¿ç”¨æ•¸å­—æ™‚é˜"
 
 #: xfce/setup.c:530
 msgid "Use military time (24 hours)"
-msgstr "¨Ï¥Î24¤p®É¨î"
+msgstr "ä½¿ç”¨24å°æ™‚åˆ¶"
 
 #: xfce/setup.c:537
 msgid "Tooltips"
-msgstr "¤u¨ã"
+msgstr "å·¥å…·"
 
 #: xfce/setup.c:551
 msgid "Tooltips delay (ms.) : "
-msgstr "¤u¨ã´£¥Ü©µ¿ğ(²@¬í.) ¡G "
+msgstr "å·¥å…·æç¤ºå»¶é²(æ¯«ç§’.) ï¼š "
 
 #: xfce/setup.c:566
 msgid "Virtual Screens"
-msgstr "µêÀÀ«Ì¹õ"
+msgstr "è™›æ“¬å±å¹•"
 
 #: xfce/setup.c:587
 msgid "Number of virtual desktops : "
-msgstr "µêÀÀ®à­±¼Æ¥Ø¡G"
+msgstr "è™›æ“¬æ¡Œé¢æ•¸ç›®ï¼š"
 
 #: xfce/setup.c:608
 msgid "switch desktop at screen border, fixed factor 4: "
-msgstr "¦b«Ì¹õÃäªu¿ï¾Ü¨ô­±¡B¥H¸Ñ¨M¦]¯À 4¡G "
+msgstr "åœ¨å±å¹•é‚Šæ²¿é¸æ“‡å“é¢ã€ä»¥è§£æ±ºå› ç´  4ï¼š "
 
 #: xfce/setup.c:626
 msgid "Popups & Icons"
-msgstr "¼u¥X¿ï³æ©M¹Ï¥Ü"
+msgstr "å½ˆå‡ºé¸å–®å’Œåœ–ç¤º"
 
 #: xfce/setup.c:640
 msgid "Number of popup menus : "
-msgstr "¼u¥X¿ï³æ¼Æ¥Ø¡G "
+msgstr "å½ˆå‡ºé¸å–®æ•¸ç›®ï¼š "
 
 #: xfce/setup.c:654
 msgid "Size of icons on panel"
-msgstr "­±ªO¤W¹Ï¥Ü¤j¤p"
+msgstr "é¢æ¿ä¸Šåœ–ç¤ºå¤§å°"
 
 #: xfce/setup.c:668 xfce/setup.c:703
 msgid "Large"
-msgstr "¤j"
+msgstr "å¤§"
 
 #: xfce/setup.c:675 xfce/setup.c:710
 msgid "Medium"
-msgstr "¤¤"
+msgstr "ä¸­"
 
 #: xfce/setup.c:682 xfce/setup.c:717
 msgid "Small"
-msgstr "¤p"
+msgstr "å°"
 
 #: xfce/setup.c:689
 msgid "Size of icons on pop-up menus"
-msgstr "¿ï³æªº¹Ï¥Ü¤j¤p"
+msgstr "é¸å–®çš„åœ–ç¤ºå¤§å°"
 
 #: xfce/setup.c:724
 msgid "Font style"
-msgstr "¦rÅé­·®æ"
+msgstr "å­—é«”é¢¨æ ¼"
 
 #: xfce/setup.c:745 xfce/setup.c:1038 xfce/setup.c:1045 xfce/setup.c:1052
 msgid "Browse..."
-msgstr "ÂsÄı..."
+msgstr "ç€è¦½..."
 
 #: xfce/setup.c:769
 msgid "Click to focus windows"
-msgstr "ÂIÀ»¨Ó»EµJµ¡¤f"
+msgstr "é»æ“Šä¾†èšç„¦çª—å£"
 
 #: xfce/setup.c:776
 msgid "Automatically focus on new window"
-msgstr "¦Û°Ê»EµJ¨ì·sµ¡¤f"
+msgstr "è‡ªå‹•èšç„¦åˆ°æ–°çª—å£"
 
 #: xfce/setup.c:783
 msgid "Auto raise windows"
-msgstr "¦Û°Ê´£¤Éµ¡¤f"
+msgstr "è‡ªå‹•æå‡çª—å£"
 
 #: xfce/setup.c:790
 msgid "Show contents of window while moving"
-msgstr "²¾°Ê®ÉÅã¥Üµ¡¤f¤º®e"
+msgstr "ç§»å‹•æ™‚é¡¯ç¤ºçª—å£å…§å®¹"
 
 #: xfce/setup.c:797
 msgid "Show contents of window while resizing"
-msgstr "ÁY©ñµ¡¤f®ÉÅã¥Üµ¡¤f¤º®e"
+msgstr "ç¸®æ”¾çª—å£æ™‚é¡¯ç¤ºçª—å£å…§å®¹"
 
 #: xfce/setup.c:804
 msgid "Use gradient color for the active window"
-msgstr "¬¡°Êµ¡¤f¨Ï¥Îº¥ÅÜÃC¦â"
+msgstr "æ´»å‹•çª—å£ä½¿ç”¨æ¼¸è®Šé¡è‰²"
 
 #: xfce/setup.c:811
 msgid "Use gradient color for inactive windows"
-msgstr "«D¬¡°Êµ¡¤f¨Ï¥Îº¥ÅÜÃC¦â"
+msgstr "éæ´»å‹•çª—å£ä½¿ç”¨æ¼¸è®Šé¡è‰²"
 
 #: xfce/setup.c:834
 msgid "Window border style : "
-msgstr "µ¡¤fÃä½t¼Ë¦¡¡G"
+msgstr "çª—å£é‚Šç·£æ¨£å¼ï¼š"
 
 #: xfce/setup.c:872
 msgid "Window snapping size (0 disable) : "
-msgstr "µ¡¤f©w¦ì­È (0 ¬°¸T¤î)"
+msgstr "çª—å£å®šä½å€¼ (0 ç‚ºç¦æ­¢)"
 
 #: xfce/setup.c:899
 msgid "Icon position"
-msgstr "¹Ï¥Ü¦ì¸m"
+msgstr "åœ–ç¤ºä½ç½®"
 
 #: xfce/setup.c:918 xfmouse/xfmouse.c:206
 msgid "Left"
-msgstr "¥ª°¼"
+msgstr "å·¦å´"
 
 #: xfce/setup.c:925
 msgid "bottom"
-msgstr "©³³¡"
+msgstr "åº•éƒ¨"
 
 #: xfce/setup.c:932 xfmouse/xfmouse.c:216
 msgid "Right"
-msgstr "¥k°¼"
+msgstr "å³å´"
 
 #: xfce/setup.c:1011
 msgid "Title font :"
-msgstr "¼ĞÃD¦rÅé¡G"
+msgstr "æ¨™é¡Œå­—é«”ï¼š"
 
 #: xfce/setup.c:1020
 msgid "Icon font :"
-msgstr "¹Ï¥Ü¦rÅé¡G"
+msgstr "åœ–ç¤ºå­—é«”ï¼š"
 
 #: xfce/setup.c:1029
 msgid "Menu font :"
-msgstr "¿ï³æ¦rÅé¡G"
+msgstr "é¸å–®å­—é«”ï¼š"
 
 #: xfce/setup.c:1076
 msgid "Sound module (xfsound)"
-msgstr "Án­µ¼Ò²Õ"
+msgstr "è²éŸ³æ¨¡çµ„"
 
 #: xfce/setup.c:1083
 msgid "Mouse settings (xfmouse)"
-msgstr "·Æ¹«³]¸m"
+msgstr "æ»‘é¼ è¨­ç½®"
 
 #: xfce/setup.c:1090
 msgid "Backdrop settings (xfbd)"
-msgstr "­I´º³]¸m"
+msgstr "èƒŒæ™¯è¨­ç½®"
 
 #: xfce/setup.c:1097
 msgid "Pager (xfpager)"
-msgstr "µê«ÌºŞ²z¾¹"
+msgstr "è™›å±ç®¡ç†å™¨"
 
 #: xfce/setup.c:1104
 msgid "GNOME (xfgnome)"
@@ -541,19 +541,19 @@ msgstr "GNOME(xfgnome)"
 
 #: xfce/setup.c:1111
 msgid "GNOME menu (xfmenu)"
-msgstr "GNOME ¿ï³æ"
+msgstr "GNOME é¸å–®"
 
 #: xfce/setup.c:1118
 msgid "KDE menu (xfmenu)"
-msgstr "KDE ¿ï³æ"
+msgstr "KDE é¸å–®"
 
 #: xfce/setup.c:1126
 msgid "Debian menu (xfmenu)"
-msgstr "Debian ¿ï³æ"
+msgstr "Debian é¸å–®"
 
 #: xfce/setup.c:1138
 msgid "Palette"
-msgstr "½Õ¦âªO"
+msgstr "èª¿è‰²æ¿"
 
 #: xfce/setup.c:1144
 msgid "XFce"
@@ -561,371 +561,371 @@ msgstr "XFce"
 
 #: xfce/setup.c:1150
 msgid "Windows"
-msgstr "µ¡¤f"
+msgstr "çª—å£"
 
 #: xfce/setup.c:1156 xfce/startup.c:60 xfsound/xfsound.c:88
 msgid "Startup"
-msgstr "±Ò°Ê"
+msgstr "å•Ÿå‹•"
 
 #: xfbd/xfbd.c:541 xfce/setup.c:1184 xfmouse/xfmouse.c:299
 #: xfsound/xfsound.c:619
 msgid "Apply"
-msgstr "®M¥Î"
+msgstr "å¥—ç”¨"
 
 #: xfce/startup.c:97
 msgid "Please wait, XFce is loading..."
-msgstr "½Ğµy«J, XFce ¥¿¦b¸ü¤J¤¤..."
+msgstr "è«‹ç¨ä¾¯, XFce æ­£åœ¨è¼‰å…¥ä¸­..."
 
 #: xfce/xfce.c:67
 msgid "One"
-msgstr "¤@"
+msgstr "ä¸€"
 
 #: xfce/xfce.c:67
 msgid "Two"
-msgstr "¤G"
+msgstr "äºŒ"
 
 #: xfce/xfce.c:67
 msgid "Three"
-msgstr "¤T"
+msgstr "ä¸‰"
 
 #: xfce/xfce.c:67
 msgid "Four"
-msgstr "¥|"
+msgstr "å››"
 
 #: xfce/xfce.c:67
 msgid "Five"
-msgstr "¤­"
+msgstr "äº”"
 
 #: xfce/xfce.c:68
 msgid "Six"
-msgstr "¤»"
+msgstr "å…­"
 
 #: xfce/xfce.c:68
 msgid "Seven"
-msgstr "¤C"
+msgstr "ä¸ƒ"
 
 #: xfce/xfce.c:68
 msgid "Eight"
-msgstr "¤K"
+msgstr "å…«"
 
 #: xfce/xfce.c:68
 msgid "Nine"
-msgstr "¤E"
+msgstr "ä¹"
 
 #: xfce/xfce.c:68
 msgid "Ten"
-msgstr "¤Q"
+msgstr "å"
 
 #: xfce/xfce.c:69
 msgid "Eleven"
-msgstr "¤Q¤@"
+msgstr "åä¸€"
 
 #: xfce/xfce.c:69
 msgid "Twelve"
-msgstr "¤Q¤G"
+msgstr "åäºŒ"
 
 #: xfce/xfce.c:69
 msgid "Thirteen"
-msgstr "¤Q¤T"
+msgstr "åä¸‰"
 
 #: xfce/xfce.c:69
 msgid "Fourteen"
-msgstr "¤Q¥|"
+msgstr "åå››"
 
 #: xfce/xfce.c:69
 msgid "Fifteen"
-msgstr "¤Q¤­"
+msgstr "åäº”"
 
 #: xfce/xfce.c:70
 msgid "Sixteen"
-msgstr "¤Q¤»"
+msgstr "åå…­"
 
 #: xfce/xfce.c:70
 msgid "Seventeen"
-msgstr "¤Q¤C"
+msgstr "åä¸ƒ"
 
 #: xfce/xfce.c:70
 msgid "Eighteen"
-msgstr "¤Q¤K"
+msgstr "åå…«"
 
 #: xfce/xfce.c:70
 msgid "Nineteen"
-msgstr "¤Q¤E"
+msgstr "åä¹"
 
 #: xfce/xfce.c:70
 msgid "Twenty"
-msgstr "¤G¤Q"
+msgstr "äºŒå"
 
 #: xfce/xfce.c:107 xfclock/xfclock_menus.c:112
 msgid "Digital mode"
-msgstr "¼Æ¦r¼Ò¦¡"
+msgstr "æ•¸å­—æ¨¡å¼"
 
 #: xfce/xfce.c:115
 msgid "24 hours mode"
-msgstr "24¤p®É¼Ò¦¡"
+msgstr "24å°æ™‚æ¨¡å¼"
 
 #: xfce/xfce.c:665 xfclock/xfclock_menus.c:241
 msgid "About..."
-msgstr "Ãö©ó..."
+msgstr "é—œæ–¼..."
 
 #: xfce/xfce.c:698
 msgid "Setup..."
-msgstr "³]©w..."
+msgstr "è¨­å®š..."
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:725 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1953 xfumed/xfumed_gui.c:171
 msgid "Quit"
-msgstr "°h¥X"
+msgstr "é€€å‡º"
 
 #. kind of semphor
 #: xfce/xfce_cb.c:66
 msgid "Sunday"
-msgstr "¬P´Á¤é"
+msgstr "æ˜ŸæœŸæ—¥"
 
 #: xfce/xfce_cb.c:67
 msgid "Monday"
-msgstr "¬P´Á¤@"
+msgstr "æ˜ŸæœŸä¸€"
 
 #: xfce/xfce_cb.c:68
 msgid "Tuesday"
-msgstr "¬P´Á¤G"
+msgstr "æ˜ŸæœŸäºŒ"
 
 #: xfce/xfce_cb.c:69
 msgid "Wednesday"
-msgstr "¬P´Á¤T"
+msgstr "æ˜ŸæœŸä¸‰"
 
 #: xfce/xfce_cb.c:70
 msgid "Thursday"
-msgstr "¬P´Á¥|"
+msgstr "æ˜ŸæœŸå››"
 
 #: xfce/xfce_cb.c:71
 msgid "Friday"
-msgstr "¬P´Á¤­"
+msgstr "æ˜ŸæœŸäº”"
 
 #: xfce/xfce_cb.c:72
 msgid "Saturday"
-msgstr "¬P´Á¤»"
+msgstr "æ˜ŸæœŸå…­"
 
 #: xfce/xfce_cb.c:75
 msgid "January"
-msgstr "¤@¤ë"
+msgstr "ä¸€æœˆ"
 
 #: xfce/xfce_cb.c:76
 msgid "February"
-msgstr "¤G¤ë"
+msgstr "äºŒæœˆ"
 
 #: xfce/xfce_cb.c:77
 msgid "March"
-msgstr "¤T¤ë"
+msgstr "ä¸‰æœˆ"
 
 #: xfce/xfce_cb.c:78
 msgid "April"
-msgstr "¥|¤ë"
+msgstr "å››æœˆ"
 
 #: xfce/xfce_cb.c:79
 msgid "May"
-msgstr "¤­¤ë"
+msgstr "äº”æœˆ"
 
 #: xfce/xfce_cb.c:80
 msgid "June"
-msgstr "¤»¤ë"
+msgstr "å…­æœˆ"
 
 #: xfce/xfce_cb.c:81
 msgid "July"
-msgstr "¤C¤ë"
+msgstr "ä¸ƒæœˆ"
 
 #: xfce/xfce_cb.c:82
 msgid "August"
-msgstr "¤K¤ë"
+msgstr "å…«æœˆ"
 
 #: xfce/xfce_cb.c:83
 msgid "September"
-msgstr "¤E¤ë"
+msgstr "ä¹æœˆ"
 
 #: xfce/xfce_cb.c:84
 msgid "October"
-msgstr "¤Q¤ë"
+msgstr "åæœˆ"
 
 #: xfce/xfce_cb.c:85
 msgid "November"
-msgstr "¤Q¤@¤ë"
+msgstr "åä¸€æœˆ"
 
 #: xfce/xfce_cb.c:86
 msgid "December"
-msgstr "¤Q¤G¤ë"
+msgstr "åäºŒæœˆ"
 
 #: xfce/xfce_cb.c:101
 msgid ""
 "Are you sure you want to Quit ?\n"
 "This might log you off !"
 msgstr ""
-"±z½T©w­nÂ÷¶}¶Ü ?\n"
-"³o¥i¯à·|µn¥X¨t²Î !"
+"æ‚¨ç¢ºå®šè¦é›¢é–‹å— ?\n"
+"é€™å¯èƒ½æœƒç™»å‡ºç³»çµ± !"
 
 #: xfce/xfce_cb.c:169
 msgid ""
 "You've selected a desktop which is not currently\n"
 "visible in XFce panel."
 msgstr ""
-"§A¿ï¾Ü¤F¤@­Ó·í«e¦b XFce ­±ªO¤W\n"
-"¦ı¥Ø«eÁÙ¬İ¤£¨£ªº®à­±¡C"
+"ä½ é¸æ“‡äº†ä¸€å€‹ç•¶å‰åœ¨ XFce é¢æ¿ä¸Š\n"
+"ä½†ç›®å‰é‚„çœ‹ä¸è¦‹çš„æ¡Œé¢ã€‚"
 
 #: xfce/xfwm.c:94
 msgid "XFCE: Communication pipe closed. Exiting...\n"
-msgstr "XFCE¡G ³q°TºŞ¹DÃö³¬¡C°h¥X¡K¡K\n"
+msgstr "XFCEï¼š é€šè¨Šç®¡é“é—œé–‰ã€‚é€€å‡ºâ€¦â€¦\n"
 
 #: xfce/xfwm.c:471 xfwm/xfwm.c:865 xfwm/xfwm.c:866 xfwm/xfwm.c:867
 #: xfwm/xfwm.c:868 xfwm/xfwm.c:869 xfwm/xfwm.c:870 xfwm/xfwm.c:871
 #: xfwm/xfwm.c:872 xfwm/xfwm.c:873 xfwm/xfwm.c:874
 msgid "Workspace"
-msgstr "¤u§@ªÅ¶¡"
+msgstr "å·¥ä½œç©ºé–“"
 
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
 #: xftree/gtk_dlg.c:318
 msgid "_Ok"
-msgstr "½T©w(_O)"
+msgstr "ç¢ºå®š(_O)"
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
 #: xftree/gtk_dlg.c:323
 msgid "_Yes"
-msgstr "¬O(_Y)"
+msgstr "æ˜¯(_Y)"
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
 #: xftree/gtk_dlg.c:328
 msgid "_Continue"
-msgstr "Ä~Äò(_C)"
+msgstr "ç¹¼çºŒ(_C)"
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
 #: xftree/gtk_dlg.c:351
 msgid "_Cancel"
-msgstr "¨ú®ø(_C)"
+msgstr "å–æ¶ˆ(_C)"
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
 #: xftree/gtk_dlg.c:356
 msgid "_No"
-msgstr "§_(_N)"
+msgstr "å¦(_N)"
 
 #: xftree/gtk_dlg.c:366 xftree/gtk_prop.c:229
 msgid "Skip"
-msgstr "¸õ¹L"
+msgstr "è·³é"
 
 #. SJB all = gtk_button_new_with_label (_("All"));
 #: xftree/gtk_dlg.c:376
 msgid "_All"
-msgstr "¥ş³¡(_A)"
+msgstr "å…¨éƒ¨(_A)"
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
 #: xftree/gtk_dlg.c:386
 msgid "_Close"
-msgstr "Ãö³¬(_C)"
+msgstr "é—œé–‰(_C)"
 
-#: xftree/gtk_exec.c:166 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
+#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
-msgstr "¥´¶}¥Î ..."
+msgstr "æ‰“é–‹ç”¨ ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:170 xftree/xtree_gui.c:219
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
 #: xfwm/xfwm.c:900
 msgid "Run program ..."
-msgstr "°õ¦æµ{¦¡ ..."
+msgstr "åŸ·è¡Œç¨‹å¼ ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:220
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
 msgid "Open in terminal"
-msgstr "¦b²×ºİ¾÷¤º¥´¶}"
+msgstr "åœ¨çµ‚ç«¯æ©Ÿå…§æ‰“é–‹"
 
-#: xftree/gtk_exec.c:225
+#: xftree/gtk_exec.c:220
 msgid "Remember application"
-msgstr "°O¤U©Ò¥Îµ{¦¡"
+msgstr "è¨˜ä¸‹æ‰€ç”¨ç¨‹å¼"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:249
+#: xftree/gtk_exec.c:244
 #, c-format
 msgid "Fatal error in %s at %d\n"
-msgstr "­P©R¿ù»~ %s ¦b %d\n"
+msgstr "è‡´å‘½éŒ¯èª¤ %s åœ¨ %d\n"
 
-#: xftree/gtk_exec.c:256 xftree/reg.c:667
+#: xftree/gtk_exec.c:251 xftree/reg.c:662
 msgid "Can't find in PATH"
-msgstr "¸ô®|¤£©ú"
+msgstr "è·¯å¾‘ä¸æ˜"
 
 #: xftree/gtk_get.c:96
 msgid " bytes received"
-msgstr " bytes ¤w±µ¦¬"
+msgstr " bytes å·²æ¥æ”¶"
 
 #: xftree/gtk_prop.c:205 xftree/xtree_toolbar.c:111
 msgid "Properties"
-msgstr "¤º®e"
+msgstr "å…§å®¹"
 
 #: xftree/gtk_prop.c:230
 msgid "All"
-msgstr "¥ş³¡"
+msgstr "å…¨éƒ¨"
 
 #. date and size page
 #: xftree/gtk_prop.c:241
 msgid "Info"
-msgstr "«H®§"
+msgstr "ä¿¡æ¯"
 
 #: xftree/gtk_prop.c:246
 msgid "Name :"
-msgstr "¦WºÙ¡G"
+msgstr "åç¨±ï¼š"
 
 #: xftree/gtk_prop.c:265
 msgid "Type :"
-msgstr "Ãş«¬¡G"
+msgstr "é¡å‹ï¼š"
 
 #: xftree/gtk_prop.c:285
 msgid "Size :"
-msgstr "¤j¤p¡G"
+msgstr "å¤§å°ï¼š"
 
 #: xftree/gtk_prop.c:293
 msgid "Creation Time :"
-msgstr "³Ğ«Ø®É¶¡¡G"
+msgstr "å‰µå»ºæ™‚é–“ï¼š"
 
 #: xftree/gtk_prop.c:301
 msgid "Modification Time :"
-msgstr "­×§ï®É¶¡¡G"
+msgstr "ä¿®æ”¹æ™‚é–“ï¼š"
 
 #: xftree/gtk_prop.c:309
 msgid "Access Time :"
-msgstr "³X°İ®É¶¡¡G"
+msgstr "è¨ªå•æ™‚é–“ï¼š"
 
 #: xftree/gtk_prop.c:317
 msgid "Permissions"
-msgstr "Åv­­"
+msgstr "æ¬Šé™"
 
 #: xfglob/xfglob.c:1616 xftree/gtk_prop.c:321 xftree/gtk_prop.c:418
 msgid "Owner :"
-msgstr "¾Ö¦³ªÌ¡G"
+msgstr "æ“æœ‰è€…ï¼š"
 
 #: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
 #: xftree/gtk_prop.c:322 xftree/gtk_prop.c:346 xftree/gtk_prop.c:369
 msgid "Read"
-msgstr "Åª¨ú"
+msgstr "è®€å–"
 
 #: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
 #: xftree/gtk_prop.c:326 xftree/gtk_prop.c:350 xftree/gtk_prop.c:373
 msgid "Write"
-msgstr "¼g¤J"
+msgstr "å¯«å…¥"
 
 #: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
 #: xftree/gtk_prop.c:330 xftree/gtk_prop.c:354 xftree/gtk_prop.c:377
 msgid "Execute"
-msgstr "°õ¦æ"
+msgstr "åŸ·è¡Œ"
 
 #: xfglob/xfglob.c:1629 xftree/gtk_prop.c:334
 msgid "Set UID"
-msgstr "³]©wUID"
+msgstr "è¨­å®šUID"
 
 #: xfglob/xfglob.c:1640 xftree/gtk_prop.c:345 xftree/gtk_prop.c:429
 msgid "Group :"
-msgstr "²Õ§O¡G"
+msgstr "çµ„åˆ¥ï¼š"
 
 #: xfglob/xfglob.c:1653 xftree/gtk_prop.c:358
 msgid "Set GID"
-msgstr "³]©wGID"
+msgstr "è¨­å®šGID"
 
 #: xfglob/xfglob.c:1663 xftree/gtk_prop.c:368
 msgid "Other :"
-msgstr "¨ä¥L¡G"
+msgstr "å…¶ä»–ï¼š"
 
 #: xfglob/xfglob.c:1676 xftree/gtk_prop.c:381
 msgid "Sticky"
@@ -933,85 +933,85 @@ msgstr "Sticky"
 
 #: xftree/gtk_prop.c:407 xftree/xtree_gui.c:1132
 msgid "Owner"
-msgstr "¾Ö¦³ªÌ"
+msgstr "æ“æœ‰è€…"
 
 #: xftree/gtk_prop.c:412 xftree/gtk_prop.c:423 xftree/xtree_functions.c:407
 #: xftree/xtree_functions.c:409 xftree/xtree_functions.c:455
 #: xftree/xtree_functions.c:457 xftree/xtree_go.c:188 xftree/xtree_go.c:189
 #: xftree/xtree_gui.c:1474 xftree/xtree_gui.c:1476
 msgid "unknown"
-msgstr "¥¼ª¾"
+msgstr "æœªçŸ¥"
 
 #: xftree/gtk_prop.c:450
 msgid "RPM info"
-msgstr "RPM ¸ê°T"
+msgstr "RPM è³‡è¨Š"
 
-#: xftree/reg.c:610 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
-#: xftree/xtree_cpy.c:1375
+#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1374
 msgid "This function is not available for the contents of tar files"
-msgstr "¥©¯à©|¥¼¤ä´©"
+msgstr "å·§èƒ½å°šæœªæ”¯æ´"
 
-#: xftree/reg.c:618
+#: xftree/reg.c:613
 #, c-format
 msgid "Register program for directory \"%s\""
-msgstr "µù¥U¤å¥óÃöÁpµ{¦¡¡§%s¡¨"
+msgstr "è¨»å†Šæ–‡ä»¶é—œè¯ç¨‹å¼â€œ%sâ€"
 
-#: xftree/reg.c:625
+#: xftree/reg.c:620
 msgid "Can't find suffix in filename, using complete filename"
-msgstr "§ä¤£¨ì¤å¥ó°ÆÀÉ¦W¡B¨Ï¥Î¤å¥ó¥ş¦W"
+msgstr "æ‰¾ä¸åˆ°æ–‡ä»¶å‰¯æª”åã€ä½¿ç”¨æ–‡ä»¶å…¨å"
 
-#: xftree/reg.c:632
+#: xftree/reg.c:627
 #, c-format
 msgid "Register program for file \"%s\""
-msgstr "µù¥U¤å¥óÃöÁpµ{¦¡¡§%s¡¨"
+msgstr "è¨»å†Šæ–‡ä»¶é—œè¯ç¨‹å¼â€œ%sâ€"
 
-#: xftree/reg.c:636
+#: xftree/reg.c:631
 #, c-format
 msgid "Register program for suffix \"%s\""
-msgstr "µù¥U°ÆÀÉ¦WÃöÁpµ{¦¡¡§%s¡¨"
+msgstr "è¨»å†Šå‰¯æª”åé—œè¯ç¨‹å¼â€œ%sâ€"
 
-#: xftree/xtree.c:236
+#: xftree/xtree.c:223
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr ""
-"XFTree¡B °ò©ó XTree ª©¥» %s\n"
-"¤@­Ó·¥§Ö·¥¹ê¥ÎªºÀÉ®×ºŞ²z¾¹\n"
+"XFTreeã€ åŸºæ–¼ XTree ç‰ˆæœ¬ %s\n"
+"ä¸€å€‹æ¥µå¿«æ¥µå¯¦ç”¨çš„æª”æ¡ˆç®¡ç†å™¨\n"
 
-#: xftree/xtree.c:237
+#: xftree/xtree.c:224
 #, c-format
 msgid "directory: %s\n"
-msgstr "¥Ø¿ı¡G %s\n"
+msgstr "ç›®éŒ„ï¼š %s\n"
 
-#: xftree/xtree.c:244 xftree/xtree.c:283
+#: xftree/xtree.c:231 xftree/xtree.c:270
 #, c-format
 msgid "creating directory: %s\n"
-msgstr "«Ø¥ß¥Ø¿ı¡G %s\n"
+msgstr "å»ºç«‹ç›®éŒ„ï¼š %s\n"
 
-#: xftree/xtree.c:300
+#: xftree/xtree.c:287
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
-msgstr "´X¦ó¦ì¸m: %dx%d+%d+%d\n"
+msgstr "å¹¾ä½•ä½ç½®: %dx%d+%d+%d\n"
 
 #: xftree/xtree_cb.c:327
 msgid "error deleting file"
-msgstr "§R°£ÀÉ®×®Éµo¥Í¿ù»~"
+msgstr "åˆªé™¤æª”æ¡ˆæ™‚ç™¼ç”ŸéŒ¯èª¤"
 
 #. nothing to delete
 #: xftree/xtree_cb.c:414 xftree/xtree_cb.c:780 xftree/xtree_tar.c:775
 msgid "No files marked !"
-msgstr "¨S¦³ÀÉ®×³Q¼Ğ°O!"
+msgstr "æ²’æœ‰æª”æ¡ˆè¢«æ¨™è¨˜!"
 
 #: xftree/xtree_cb.c:475 xftree/xtree_cb.c:477
 msgid "Delete item ?"
-msgstr "§R°£¶µ¥Ø?"
+msgstr "åˆªé™¤é …ç›®?"
 
 #: xftree/xtree_cb.c:487 xftree/xtree_cb.c:491
 msgid "Can't move file to trash, hard delete ?"
-msgstr "¤£¯à²¾¦Ü¦^¦¬¯¸¡B±j¦æ§R°£ ?"
+msgstr "ä¸èƒ½ç§»è‡³å›æ”¶ç«™ã€å¼·è¡Œåˆªé™¤ ?"
 
 #: xftree/xtree_cb.c:573
 msgid "This is XFTree "
-msgstr "³o¬OXFTree¡BÀÉ®×ºŞ²z¾¹"
+msgstr "é€™æ˜¯XFTreeã€æª”æ¡ˆç®¡ç†å™¨"
 
 #: xftree/xtree_cb.c:573
 msgid ""
@@ -1022,563 +1022,563 @@ msgid ""
 "Edscott Wilson Garcia\n"
 msgstr ""
 " (C) under GNU GPL\n"
-"¹õ«áªº°¶¤jµ{¦¡­û¡G\n"
+"å¹•å¾Œçš„å‰å¤§ç¨‹å¼å“¡ï¼š\n"
 "Rasca, Berlin\n"
 "Olivier Fourdan\n"
 "Edscott Wilson Garcia\n"
 
 #: xftree/xtree_cb.c:591 xftree/xtree_cb.c:602
 msgid "New_Folder"
-msgstr "·s¸ê®Æ§¨"
+msgstr "æ–°è³‡æ–™å¤¾"
 
 #: xftree/xtree_cb.c:642 xftree/xtree_cb.c:650
 msgid "New_File"
-msgstr "·sÀÉ®×"
+msgstr "æ–°æª”æ¡ˆ"
 
-#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1486
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
 msgid "File exists !"
-msgstr "ÀÉ®×¤w¦s¦b !"
+msgstr "æª”æ¡ˆå·²å­˜åœ¨ !"
 
 #: xftree/xtree_cb.c:699
 msgid "No item marked !"
-msgstr "¨S¦³¶µ¥Ø³Q¼Ğ°O !"
+msgstr "æ²’æœ‰é …ç›®è¢«æ¨™è¨˜ !"
 
 #: xftree/xtree_cb.c:715
 msgid "Rename to : "
-msgstr "©R¦W¬° ¡G "
+msgstr "å‘½åç‚º ï¼š "
 
-#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1464
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
 msgid "Character not allowed in filename"
-msgstr "«DªkªºÀÉ®×¦WºÙ"
+msgstr "éæ³•çš„æª”æ¡ˆåç¨±"
 
 #: xftree/xtree_cb.c:807
 msgid "Nothing selected !"
-msgstr "©|¥¼¿ï¾Ü¥Ø¿ı !"
+msgstr "å°šæœªé¸æ“‡ç›®éŒ„ !"
 
 #: xftree/xtree_cb.c:1069
 msgid "command finished\n"
-msgstr "«ü¥O§¹¦¨\n"
+msgstr "æŒ‡ä»¤å®Œæˆ\n"
 
 #: xftree/xtree_cb.c:1294
 msgid "Override?"
-msgstr "ÂĞ¼g?"
+msgstr "è¦†å¯«?"
 
 #: xftree/xtree_cpy.c:228
 msgid "Insufficient system memory"
-msgstr "°O¾ĞÅé¤£¨¬"
+msgstr "è¨˜æ†¶é«”ä¸è¶³"
 
 #: xftree/xtree_cpy.c:249
 msgid "Too few bytes transferred ! Device full ?"
-msgstr "¶Ç¿é¶q¤Ó¤Ö!ºÏºĞªÅ¶¡¬O§_¤£¨¬ ?"
+msgstr "å‚³è¼¸é‡å¤ªå°‘!ç£ç¢Ÿç©ºé–“æ˜¯å¦ä¸è¶³ ?"
 
 #: xftree/xtree_cpy.c:253
 msgid "Too many bytes transferred !?"
-msgstr "¶Ç¿é¶q¹L¤j !?"
+msgstr "å‚³è¼¸é‡éå¤§ !?"
 
 #: xftree/xtree_cpy.c:257 xftree/xtree_cpy.c:261
 msgid "Can't stat() file"
-msgstr "¤£¯à²Î­p() ÀÉ®×"
+msgstr "ä¸èƒ½çµ±è¨ˆ() æª”æ¡ˆ"
 
 #: xftree/xtree_cpy.c:265 xftree/xtree_cpy.c:269
 msgid "Error closing file"
-msgstr "Ãö³¬ÀÉ®×®Éµo¥Í¿ù»~"
+msgstr "é—œé–‰æª”æ¡ˆæ™‚ç™¼ç”ŸéŒ¯èª¤"
 
 #: xftree/xtree_cpy.c:273
 msgid "Error deleting"
-msgstr "§R°£ÀÉ®×®Éµo¥Í¿ù»~"
+msgstr "åˆªé™¤æª”æ¡ˆæ™‚ç™¼ç”ŸéŒ¯èª¤"
 
-#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:509
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
 msgid "Can't copy FIFO"
-msgstr "¤£¯à½Æ»sFIFO"
+msgstr "ä¸èƒ½è¤‡è£½FIFO"
 
-#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:512
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
 msgid "Can't copy device file"
-msgstr "¤£¯à½Æ»s³]³ÆÀÉ®×"
+msgstr "ä¸èƒ½è¤‡è£½è¨­å‚™æª”æ¡ˆ"
 
-#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:515
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
 msgid "Can't copy socket"
-msgstr "¤£¯à½Æ»s®M¸`¦r"
+msgstr "ä¸èƒ½è¤‡è£½å¥—ç¯€å­—"
 
-#: xftree/xtree_cpy.c:854
+#: xftree/xtree_cpy.c:853
 msgid "Counting files"
-msgstr "¥¿¦b­pºâÀÉ®×"
+msgstr "æ­£åœ¨è¨ˆç®—æª”æ¡ˆ"
 
-#: xftree/xtree_cpy.c:1226
+#: xftree/xtree_cpy.c:1225
 #, c-format
 msgid "%d / %d"
 msgstr "%d / %d"
 
-#: xftree/xtree_cpy.c:1302
+#: xftree/xtree_cpy.c:1301
 msgid "Source: "
-msgstr "·½ÀÉ®×¡G"
+msgstr "æºæª”æ¡ˆï¼š"
 
-#: xftree/xtree_cpy.c:1309
+#: xftree/xtree_cpy.c:1308
 msgid "Target: "
-msgstr "¥Ø¼ĞÀÉ®×¡G"
+msgstr "ç›®æ¨™æª”æ¡ˆï¼š"
 
-#: xftree/xtree_cpy.c:1316
+#: xftree/xtree_cpy.c:1315
 msgid "beginning copy operation"
-msgstr "¶}©l½Æ»sµ{§Ç"
+msgstr "é–‹å§‹è¤‡è£½ç¨‹åº"
+
+#: xftree/xtree_cpy.c:1330
+msgid "XFTree: Copy"
+msgstr "XFTreeï¼š è¤‡è£½"
 
 #: xftree/xtree_cpy.c:1331
-msgid "XFTree: Copy"
-msgstr "XFTree¡G ½Æ»s"
+msgid "XFTree: Move"
+msgstr "XFTreeï¼š ç§»å‹•"
 
 #: xftree/xtree_cpy.c:1332
-msgid "XFTree: Move"
-msgstr "XFTree¡G ²¾°Ê"
-
-#: xftree/xtree_cpy.c:1333
 msgid "XFTree: Link"
-msgstr "XFTree¡G Ãìµ²"
+msgstr "XFTreeï¼š éˆçµ"
 
-#: xftree/xtree_cpy.c:1437 xftree/xtree_cpy.c:1525
+#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
 msgid "No file or directory selected!"
-msgstr "©|¥¼¿ï¾Ü¥Ø¿ı!"
+msgstr "å°šæœªé¸æ“‡ç›®éŒ„!"
 
-#: xftree/xtree_cpy.c:1440
+#: xftree/xtree_cpy.c:1439
 msgid "Only one file or directory can be selected!"
-msgstr "¥²¶·¥ı¿ï¾Ü¤@­Ó¥Ø¿ı!"
+msgstr "å¿…é ˆå…ˆé¸æ“‡ä¸€å€‹ç›®éŒ„!"
 
-#: xftree/xtree_cpy.c:1446
+#: xftree/xtree_cpy.c:1445
 msgid "This function is not available for the contents of tar/rpm files"
-msgstr "¥\¯à©|¥¼¤ä´©"
+msgstr "åŠŸèƒ½å°šæœªæ”¯æ´"
 
-#: xftree/xtree_cpy.c:1456
+#: xftree/xtree_cpy.c:1455
 msgid "Symlink name : "
-msgstr "Ãìµ²¦WºÙ"
+msgstr "éˆçµåç¨±"
 
 #: xftree/xtree_dnd.c:169
 msgid "Unknown action !"
-msgstr "¤£©úªº¾Ş§@!"
+msgstr "ä¸æ˜çš„æ“ä½œ!"
 
 #: xftree/xtree_du.c:82
 msgid "Disk usage:"
-msgstr "ºÏºĞ¥Î¶q¡G"
+msgstr "ç£ç¢Ÿç”¨é‡ï¼š"
 
 #: xftree/xtree_du.c:148
 msgid "No directory selected !"
-msgstr "©|¥¼¿ï¾Ü¥Ø¿ı!"
+msgstr "å°šæœªé¸æ“‡ç›®éŒ„!"
 
 #: xftree/xtree_functions.c:518 xftree/xtree_gui.c:1224
 msgid "files"
-msgstr "ÀÉ®×"
+msgstr "æª”æ¡ˆ"
 
 #: xftree/xtree_functions.c:581
 msgid "internal malloc error:"
-msgstr "°O¾ĞÅé¿ù»~:"
+msgstr "è¨˜æ†¶é«”éŒ¯èª¤:"
 
 #: xftree/xtree_go.c:171
 msgid "Cannot find path"
-msgstr "¤£¯à§ä¨ì«ü©w¸ô®|"
+msgstr "ä¸èƒ½æ‰¾åˆ°æŒ‡å®šè·¯å¾‘"
 
 #. entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), "/", list);
 #: xftree/xtree_go.c:294 xftree/xtree_gui.c:810
 msgid "Go to"
-msgstr "²¾°Ê"
+msgstr "ç§»å‹•"
 
 #: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
 #: xftree/xtree_gui.c:123
 msgid "Extract files from"
-msgstr "¸ÑÀ£ÀÉ®×±q"
+msgstr "è§£å£“æª”æ¡ˆå¾"
 
 #: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
 #: xftree/xtree_gui.c:123
 msgid "Extract into"
-msgstr "¸ÑÀ£ÀÉ®×±q"
+msgstr "è§£å£“æª”æ¡ˆå¾"
 
 #: xftree/xtree_gui.c:120 xftree/xtree_gui.c:124 xftree/xtree_gui.c:125
 #: xftree/xtree_gui.c:126 xftree/xtree_gui.c:127
 msgid "Uncompress"
-msgstr "¤ÏÀ£ÁY"
+msgstr "åå£“ç¸®"
 
 #: xftree/xtree_gui.c:128 xftree/xtree_gui.c:129
 msgid "Install/update"
-msgstr "¦w¸Ë/¤É¯Å"
+msgstr "å®‰è£/å‡ç´š"
 
 #: xftree/xtree_gui.c:152 xftree/xtree_gui.c:564 xftree/xtree_gui.c:566
 msgid "Open icon view"
-msgstr "·s¹Ï¥Üµ¡¤f"
+msgstr "æ–°åœ–ç¤ºçª—å£"
 
 #: xftree/xtree_gui.c:155
 msgid "Open tree view"
-msgstr "·s¾ğª¬µ¡¤f"
+msgstr "æ–°æ¨¹ç‹€çª—å£"
 
 #: xftree/xtree_gui.c:156
 msgid "Open terminal view"
-msgstr "¦b²×ºİ¾÷¶}±Ò"
+msgstr "åœ¨çµ‚ç«¯æ©Ÿé–‹å•Ÿ"
 
 #: xfsamba/xfsamba_mkdir.c:202 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
 msgid "New Folder"
-msgstr "·s¸ê®Æ§¨"
+msgstr "æ–°è³‡æ–™å¤¾"
 
 #: xftree/xtree_gui.c:159
 msgid "New file"
-msgstr "·sÀÉ®×"
+msgstr "æ–°æª”æ¡ˆ"
 
 #: xftree/xtree_gui.c:163
 msgid "Touch ..."
-msgstr "Ãö©ó..."
+msgstr "é—œæ–¼..."
 
 #: xftree/xtree_gui.c:164
 msgid "Symlink ..."
-msgstr "²Å¸¹Ãìµ²..."
+msgstr "ç¬¦è™Ÿéˆçµ..."
 
 #: xfsamba/xfsamba_gui.c:1336 xftree/xtree_gui.c:165
 #: xftree/xtree_toolbar.c:103
 msgid "Delete ..."
-msgstr "§R°£ ..."
+msgstr "åˆªé™¤ ..."
 
 #: xftree/xtree_gui.c:168
 msgid "Paste"
-msgstr "¶K¤W"
+msgstr "è²¼ä¸Š"
 
 #: xftree/xtree_gui.c:171 xftree/xtree_gui.c:220 xftree/xtree_toolbar.c:105
 msgid "Find ..."
-msgstr "´M§ä ..."
+msgstr "å°‹æ‰¾ ..."
 
 #: xftree/xtree_gui.c:172 xftree/xtree_gui.c:224
 msgid "Show disk usage ..."
-msgstr "Åã¥ÜºÏºĞ¤¤¥Î¶q ..."
+msgstr "é¡¯ç¤ºç£ç¢Ÿä¸­ç”¨é‡ ..."
 
 #: xftree/xtree_gui.c:175
 msgid "Cut"
-msgstr "°Å¤U"
+msgstr "å‰ªä¸‹"
 
 #: xftree/xtree_gui.c:176
 msgid "Copy"
-msgstr "½Æ»s"
+msgstr "è¤‡è£½"
 
 #: xftree/xtree_gui.c:179
 msgid "List pasteboard contents"
-msgstr "¦C¥X°Å¶KÃ¯¤º®e"
+msgstr "åˆ—å‡ºå‰ªè²¼ç°¿å…§å®¹"
 
 #: xftree/xtree_gui.c:180
 msgid "Clear pasteboard"
-msgstr "²MªÅ°Å¶KÃ¯"
+msgstr "æ¸…ç©ºå‰ªè²¼ç°¿"
 
 #: xftree/xtree_gui.c:182
 msgid "Select all"
-msgstr "¥ş¿ï"
+msgstr "å…¨é¸"
 
 #: xftree/xtree_gui.c:183
 msgid "Unselect"
-msgstr "¤£¥ş¿ï"
+msgstr "ä¸å…¨é¸"
 
 #: xftree/xtree_gui.c:184 xftree/xtree_toolbar.c:115
 msgid "Toggle Dotfiles"
-msgstr "Åã¥ÜÂIÀÉ®×"
+msgstr "é¡¯ç¤ºé»æª”æ¡ˆ"
 
 #: xftree/xtree_gui.c:186 xftree/xtree_toolbar.c:113
 msgid "Open Trash"
-msgstr "¥´¶}¦^¦¬¯¸"
+msgstr "æ‰“é–‹å›æ”¶ç«™"
 
 #: xftree/xtree_gui.c:187 xftree/xtree_toolbar.c:114
 msgid "Empty Trash"
-msgstr "²MªÅ¦^¦¬¯¸"
+msgstr "æ¸…ç©ºå›æ”¶ç«™"
 
 #: xftree/xtree_gui.c:191
 msgid "Duplicate"
-msgstr "½Æ¨î¤@­Ó¦W¬°...-0"
+msgstr "è¤‡åˆ¶ä¸€å€‹åç‚º...-0"
 
 #: xftree/xtree_gui.c:192
 msgid "Rename ..."
-msgstr "­«·s©R¦W..."
+msgstr "é‡æ–°å‘½å..."
 
 #: xftree/xtree_gui.c:193
 msgid "Properties ..."
-msgstr "¤º®e..."
+msgstr "å…§å®¹..."
 
 #: xftree/xtree_gui.c:197 xftree/xtree_gui.c:209 xftree/xtree_toolbar.c:96
 msgid "Go to ..."
-msgstr "²¾¦Ü ..."
+msgstr "ç§»è‡³ ..."
 
 #: xftree/xtree_gui.c:206
 msgid "Register ..."
-msgstr "µù¥U ..."
+msgstr "è¨»å†Š ..."
 
 #: xftree/xtree_gui.c:212 xftree/xtree_toolbar.c:98
 msgid "Go home"
-msgstr "¨ì®a¥Ø¿ı"
+msgstr "åˆ°å®¶ç›®éŒ„"
 
 #: xftree/xtree_gui.c:213
 msgid "Go back"
-msgstr "ªğ¦^"
+msgstr "è¿”å›"
 
 #: xftree/xtree_gui.c:214 xftree/xtree_toolbar.c:97
 msgid "Go up"
-msgstr "²¾¦Ü¤W¼h"
+msgstr "ç§»è‡³ä¸Šå±¤"
 
 #: xftree/xtree_gui.c:215
 msgid "Update"
-msgstr "­«·s¾ã²z"
+msgstr "é‡æ–°æ•´ç†"
 
 #: xftree/xtree_gui.c:221 xftree/xtree_toolbar.c:106
 msgid "Differences ..."
-msgstr "®t§O ..."
+msgstr "å·®åˆ¥ ..."
 
 #: xftree/xtree_gui.c:222
 msgid "Patch viewer ..."
-msgstr "¸É¤B¬d¬İ¾¹ ..."
+msgstr "è£œä¸æŸ¥çœ‹å™¨ ..."
 
 #: xftree/xtree_gui.c:223 xftree/xtree_toolbar.c:107
 msgid "Browse SMB network ..."
-msgstr "ºôµ¸¾F©~ ..."
+msgstr "ç¶²çµ¡é„°å±… ..."
 
 #: xftree/xtree_gui.c:227 xftree/xtree_toolbar.c:91
 msgid "Close window"
-msgstr "Ãö³¬µ¡¤f"
+msgstr "é—œé–‰çª—å£"
 
 #: xftree/xtree_gui.c:228
 msgid "Quit ..."
-msgstr "Â÷¶} ..."
+msgstr "é›¢é–‹ ..."
 
 #. quit only on main menu now, so that default geometry is saved correctly with cb_quit.
 #: xftree/xtree_gui.c:233
 msgid "Subsort by file type"
-msgstr "«öÃş«¬±Æ§Ç"
+msgstr "æŒ‰é¡å‹æ’åº"
 
 #: xftree/xtree_gui.c:234
 msgid "Enable filter"
-msgstr "ÀÉ®×¹LÂo"
+msgstr "æª”æ¡ˆéæ¿¾"
 
 #: xftree/xtree_gui.c:235
 msgid "Abbreviate paths"
-msgstr "Â²¤Æ¸ô®|Åã¥Ü"
+msgstr "ç°¡åŒ–è·¯å¾‘é¡¯ç¤º"
 
 #: xftree/xtree_gui.c:237
 msgid "Status box"
-msgstr "ª¬ºA©³®Ø"
+msgstr "ç‹€æ…‹åº•æ¡†"
 
 #: xftree/xtree_gui.c:238
 msgid "Status titles"
-msgstr "¸Ô¥Ü¼ĞÃD"
+msgstr "è©³ç¤ºæ¨™é¡Œ"
 
 #: xftree/xtree_gui.c:239
 msgid "Short titles"
-msgstr "Â²¤Æ¼ĞÃD"
+msgstr "ç°¡åŒ–æ¨™é¡Œ"
 
 #: xftree/xtree_gui.c:241 xftree/xtree_toolbar.c:436
 msgid "Hide toolbar"
-msgstr "ÁôÂÃ¤u¨ã¦C"
+msgstr "éš±è—å·¥å…·åˆ—"
 
 #: xftree/xtree_gui.c:242
 msgid "Hide titles"
-msgstr "ÁôÂÃ¼ĞÃD"
+msgstr "éš±è—æ¨™é¡Œ"
 
 #: xftree/xtree_gui.c:243
 msgid "Hide sizes"
-msgstr "ÁôÂÃ¤j¤p"
+msgstr "éš±è—å¤§å°"
 
 #: xftree/xtree_gui.c:244
 msgid "Hide dates"
-msgstr "ÁôÂÃ¤é´Á"
+msgstr "éš±è—æ—¥æœŸ"
 
 #: xftree/xtree_gui.c:245
 msgid "Hide owner"
-msgstr "ÁôÂÃ¾Ö¦³ªÌ"
+msgstr "éš±è—æ“æœ‰è€…"
 
 #: xftree/xtree_gui.c:246
 msgid "Hide group"
-msgstr "ÁôÂÃ²Õ§O"
+msgstr "éš±è—çµ„åˆ¥"
 
 #: xftree/xtree_gui.c:247
 msgid "Hide mode"
-msgstr "ÁôÂÃÅv­­"
+msgstr "éš±è—æ¬Šé™"
 
 #: xftree/xtree_gui.c:248
 msgid "Hide ../ "
-msgstr "ÁôÂÃ ../ "
+msgstr "éš±è— ../ "
 
 #: xftree/xtree_gui.c:251
 msgid "Sort by file name"
-msgstr "«ö¦WºÙ±Æ§Ç"
+msgstr "æŒ‰åç¨±æ’åº"
 
 #: xftree/xtree_gui.c:252
 msgid "Sort by file size"
-msgstr "«ö¤j¤p±Æ§Ç"
+msgstr "æŒ‰å¤§å°æ’åº"
 
 #: xftree/xtree_gui.c:253
 msgid "Sort by file date"
-msgstr "«ö¤é´Á±Æ§Ç"
+msgstr "æŒ‰æ—¥æœŸæ’åº"
 
 #: xftree/xtree_gui.c:577 xftree/xtree_gui.c:579
 msgid "Create"
-msgstr "³Ğ«Ø"
+msgstr "å‰µå»º"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
 #: xfsamba/xfsamba_gui.c:1266 xftree/xtree_gui.c:750
 msgid "File"
-msgstr "ÀÉ®×"
+msgstr "æª”æ¡ˆ"
 
 #. Create "Edit" menu
 #: xfsamba/xfsamba_gui.c:1277 xftree/xtree_gui.c:781 xfumed/xfumed_gui.c:129
 msgid "Edit"
-msgstr "½s¿è"
+msgstr "ç·¨è¼¯"
 
 #. Create "Tools" menu
 #: xfsamba/xfsamba_gui.c:1289 xftree/xtree_gui.c:835
 msgid "Tools"
-msgstr "¤u¨ã"
+msgstr "å·¥å…·"
 
 #. Create "View" menu
 #: xfsamba/xfsamba_gui.c:1293 xftree/xtree_gui.c:859
 msgid "View"
-msgstr "ÀËµø"
+msgstr "æª¢è¦–"
 
 #. Create "Preferences" menu
 #: xfsamba/xfsamba_gui.c:1304 xftree/xtree_gui.c:889
 msgid "Preferences"
-msgstr "³]©w"
+msgstr "è¨­å®š"
 
 #: xftree/xtree_gui.c:895
 msgid "Hide main menu"
-msgstr "ÁôÂÃ¥D¥\¯à¦C"
+msgstr "éš±è—ä¸»åŠŸèƒ½åˆ—"
 
 #: xftree/xtree_gui.c:903 xftree/xtree_gui.c:933
 msgid "Save geometry on exit"
-msgstr "Àx¦s³]©w"
+msgstr "å„²å­˜è¨­å®š"
 
 #: xftree/xtree_gui.c:910 xftree/xtree_gui.c:935
 msgid "Double click does GOTO"
-msgstr "Âù«ö=°õ¦æ"
+msgstr "é›™æŒ‰=åŸ·è¡Œ"
 
 #: xftree/xtree_gui.c:918 xftree/xtree_gui.c:937
 msgid "Drag does copy"
-msgstr "©ì©ñ=½Æ»s"
+msgstr "æ‹–æ”¾=è¤‡è£½"
 
 #: xftree/xtree_gui.c:925
 msgid "Use rsync instead of scp"
-msgstr "¥Î rsync ´À¥N scp"
+msgstr "ç”¨ rsync æ›¿ä»£ scp"
 
 #: xfsamba/xfsamba_gui.c:1305 xftree/xtree_gui.c:941
 msgid "Set background color"
-msgstr "­I´ºÃC¦â"
+msgstr "èƒŒæ™¯é¡è‰²"
 
 #: xfsamba/xfsamba_gui.c:1306 xftree/xtree_gui.c:946
 msgid "Set font"
-msgstr "¦rÅé³]©w"
+msgstr "å­—é«”è¨­å®š"
 
 #: xftree/xtree_gui.c:952 xftree/xtree_toolbar.c:354
 msgid "Configure toolbar"
-msgstr "³]¸m¤u¨ã¦C"
+msgstr "è¨­ç½®å·¥å…·åˆ—"
 
 #: xftree/xtree_gui.c:957
 msgid "Redefine home directory"
-msgstr "­«·s©w¸q®a¥Ø¿ı"
+msgstr "é‡æ–°å®šç¾©å®¶ç›®éŒ„"
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
 #: xfsamba/xfsamba_gui.c:1311 xftree/xtree_gui.c:963
 msgid "Help"
-msgstr "»¡©ú"
+msgstr "èªªæ˜"
 
 #: xftree/xtree_gui.c:970
 msgid "Icon view"
-msgstr "¹Ï¥ÜÀÉ®×¡G"
+msgstr "åœ–ç¤ºæª”æ¡ˆï¼š"
 
 #: xfsamba/xfsamba_gui.c:1312 xftree/xtree_gui.c:975
 msgid "Drag and drop"
-msgstr "©ì©ñ©w¸q"
+msgstr "æ‹–æ”¾å®šç¾©"
 
 #: xftree/xtree_gui.c:980
 msgid "Rsync and scp"
-msgstr "Rsync ¤Î SCP"
+msgstr "Rsync åŠ SCP"
 
 #: xftree/xtree_gui.c:987
 msgid "Unlisted shortcut keys"
-msgstr "¤º«Ø§Ö±¶Áä"
+msgstr "å…§å»ºå¿«æ·éµ"
 
 #: xftree/xtree_gui.c:992
 msgid "Custom shortcut keys"
-msgstr "¦Û©w§Ö±¶Áä"
+msgstr "è‡ªè¨‚å¿«æ·éµ"
 
 #: xftree/xtree_gui.c:997
 msgid "Registered applications"
-msgstr "µ{¦¡µù¥U"
+msgstr "ç¨‹å¼è¨»å†Š"
 
 #: xftree/xtree_gui.c:1003
 msgid "About ..."
-msgstr "Ãö©ó..."
+msgstr "é—œæ–¼..."
 
 #: xfglob/xfglob.c:606 xfsamba/xfsamba_gui.c:1486 xftree/xtree_gui.c:1127
 msgid "Name"
-msgstr "¦WºÙ"
+msgstr "åç¨±"
 
 #. titles[COL_SIZE] = (preferences & SIZE_IN_KB)?_("Size (Kb)"):_("Size (bytes)");
 #: xfglob/xfglob.c:608 xftree/xtree_gui.c:1129
 msgid "Size (bytes)"
-msgstr "¤j¤p(bytes)"
+msgstr "å¤§å°(bytes)"
 
 #: xfglob/xfglob.c:609 xftree/xtree_gui.c:1130
 msgid "Last changed"
-msgstr "³Ì«á§ïÅÜ"
+msgstr "æœ€å¾Œæ”¹è®Š"
 
 #: xfglob/xfglob.c:610 xftree/xtree_gui.c:1131
 msgid "Mode"
-msgstr "Åv­­¦C"
+msgstr "æ¬Šé™åˆ—"
 
 #: xftree/xtree_gui.c:1133
 msgid "Group"
-msgstr "²Õ§O"
+msgstr "çµ„åˆ¥"
 
 #: xftree/xtree_gui.c:1207
 msgid "Filter:"
-msgstr "¹LÂo:"
+msgstr "éæ¿¾:"
 
 #: xftree/xtree_gui.c:1218
 msgid "dirs"
-msgstr "¥Ø¿ı"
+msgstr "ç›®éŒ„"
 
 #: xftree/xtree_gui.c:1331
 msgid "Show main menu"
-msgstr "Åã¥Ü¥D¥\¯à¦C"
+msgstr "é¡¯ç¤ºä¸»åŠŸèƒ½åˆ—"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
 #: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
-#: xftree/xtree_mess.c:109
+#: xftree/xtree_mess.c:108
 msgid "Could not load specified font\n"
-msgstr "¤£¯à¥[¸ü«ü©wªº¦rÅé\n"
+msgstr "ä¸èƒ½åŠ è¼‰æŒ‡å®šçš„å­—é«”\n"
+
+#: xftree/xtree_mess.c:452
+msgid "Override ?"
+msgstr "è¦†å¯«?"
 
 #: xftree/xtree_mess.c:453
-msgid "Override ?"
-msgstr "ÂĞ¼g?"
-
-#: xftree/xtree_mess.c:454
 msgid "with"
-msgstr "¥Î"
+msgstr "ç”¨"
 
-#: xftree/xtree_mess.c:533 xftree/xtree_mess.c:534 xftree/xtree_mess.c:550
-#: xftree/xtree_mess.c:551
+#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
+#: xftree/xtree_mess.c:550
 msgid "Default xftreerc file cannot be created\n"
-msgstr "¹w³]ªºxftreercÀÉ®×¤£¯à³Q³Ğ«Ø\n"
+msgstr "é è¨­çš„xftreercæª”æ¡ˆä¸èƒ½è¢«å‰µå»º\n"
 
-#: xftree/xtree_mess.c:588
+#: xftree/xtree_mess.c:586
 msgid "Default xftreerc file cannot be read\n"
-msgstr "¹w³]ªºxftreercÀÉ®×¤£¯à³QÅª¨ú\n"
+msgstr "é è¨­çš„xftreercæª”æ¡ˆä¸èƒ½è¢«è®€å–\n"
 
-#: xftree/xtree_mess.c:800
+#: xftree/xtree_mess.c:789
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
 "and press a keyboard key to create the shortcut."
 msgstr ""
-"Xftree ¥i°ÊºA³B²zÁä½L±¶®|¡C\n"
-"¶}±Ò¬Y¿ï³æ¡B¨Ã¿ï¾Ü¬Y¤@¥Ø¿ı\n"
-"¦bÁä½L¤W«ö¬Y¤@Áä³]¬°Áä½L±¶®|¡C"
+"Xftree å¯å‹•æ…‹è™•ç†å¿«æ·éµã€‚\n"
+"æ‹‰ä¸‹æŸä¸»é¸å–®ã€ä¸¦æŒ‡å‘æŸä¸€é …ç›®\n"
+"å†åœ¨éµç›¤æŒ‰ä¸‹æŸäº›éµè¨­ç‚ºå¿«æ·éµã€‚"
 
-#: xftree/xtree_mess.c:809
+#: xftree/xtree_mess.c:798
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
 "installed\n"
 "separately from XFCE. A ROX-filer specific for XFCE will soon be available."
 msgstr ""
-"Xftreeªº¹Ï¥Ü¤Æ¥\¯à¬O¥HROX-filerÅã¥Ü.²{®É¦¹¥\¯à¬O¿W¥ß¦w¸Ëªº\n"
-"¨Ã¤£¥]§t¦bXFCE®M¥ó¤º,¦ıXFCE©Ó¿Õ±N·|ºÉ§Ö¥[¤JROX-filerªº¤ä´©."
+"Xftreeçš„åœ–ç¤ºåŒ–åŠŸèƒ½æ˜¯ä»¥ROX-fileré¡¯ç¤º.ç¾æ™‚æ­¤åŠŸèƒ½æ˜¯ç¨ç«‹å®‰è£çš„\n"
+"ä¸¦ä¸åŒ…å«åœ¨XFCEå¥—ä»¶å…§,ä½†XFCEå°‡ç›¡å¿«æ¨å‡ºæœ¬èº«çš„ROX-filer."
 
-#: xftree/xtree_mess.c:818
+#: xftree/xtree_mess.c:807
 msgid ""
 "Xftree allows you to drag and drop to/from\n"
 "xftree windows running on different hosts.\n"
@@ -1590,17 +1590,17 @@ msgid ""
 "Xftree will also accept drops from other\n"
 "filemanagers running on different hosts.\n"
 msgstr ""
-"Xftree®e³\¥H·Æ¹«©ì©ñÀÉ®×(¦Ü©Î±q)¨ä¥L\n"
-"¥¿¦b°õ¦æXftreeªº¤£¦P¥D¾÷¤W.\n"
-"¥i¿ï¾Ü¥Hscp©Îrsync¥ô¤@µ{¦¡¨Ó°õ¦æÀÉ®×½Æ»s.\n"
-"¥Î¤áÅv­­Åçµı¬O¥Hsshµ{§Ç³]©w.\n"
-"¸Ô±¡½Ğ°Ñ¾\¡Cman ssh¡C¥H¶i¦æ°ò©ó¥D¾÷¦WºÙ©Î\n"
-"°ò©ó±K½XÅçµıªº¬Û¤¬´À¥N.\n"
+"Xftreeå®¹è¨±ä»¥æ»‘é¼ æ‹–æ”¾æª”æ¡ˆ(è‡³æˆ–å¾)å…¶ä»–\n"
+"æ­£åœ¨åŸ·è¡ŒXftreeçš„ä¸åŒä¸»æ©Ÿä¸Š.\n"
+"å¯é¸æ“‡ä»¥scpæˆ–rsyncä»»ä¸€ç¨‹å¼ä¾†åŸ·è¡Œæª”æ¡ˆè¤‡è£½.\n"
+"ç”¨æˆ¶æ¬Šé™é©—è¨¼æ˜¯ä»¥sshç¨‹åºè¨­å®š.\n"
+"è©³æƒ…è«‹åƒé–±ã€‚man sshã€‚ä»¥é€²è¡ŒåŸºæ–¼ä¸»æ©Ÿåç¨±æˆ–\n"
+"åŸºæ–¼å¯†ç¢¼é©—è¨¼çš„ç›¸äº’æ›¿ä»£.\n"
 "\n"
-"XftreeÁÙ®e³\ÀÉ®×©ì©ñ±q¨ä¥Lªº\n"
-"¥D¾÷¤WªºÀÉ®×ºŞ²z¾¹¡B¨ì¥»¾÷¤W.\n"
+"Xftreeé‚„å®¹è¨±æª”æ¡ˆæ‹–æ”¾å¾å…¶ä»–çš„\n"
+"ä¸»æ©Ÿä¸Šçš„æª”æ¡ˆç®¡ç†å™¨ã€åˆ°æœ¬æ©Ÿä¸Š.\n"
 
-#: xftree/xtree_mess.c:834
+#: xftree/xtree_mess.c:823
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1608,13 +1608,13 @@ msgid ""
 "If you wish to edit the applications that are already registered,\n"
 " please look at ~/.xfce/xtree.reg."
 msgstr ""
-"Xftree¥i«ü©w¶}±Ò¦UÃş«¬ÀÉ®×¤§À³¥Îµ{¦¡\n"
-"¿ï¾Ü¿ï³æ¡§µù¥U¡¨©Î¥t¿ï\n"
-"¡§µù¥UÀ³¥Îµ{¦¡¡¨ ·í¥Î·Æ¹«ÂùÀ»¥¦¡C\n"
-"¦p±ı­×§ï¤wµù¥U¤§ÀÉ®×¡B\n"
-"½Ğ°Ñ¥© ~/.xfce/xtree.reg¡C"
+"Xftreeå¯æŒ‡å®šé–‹å•Ÿå„é¡å‹æª”æ¡ˆä¹‹æ‡‰ç”¨ç¨‹å¼\n"
+"é¸æ“‡é¸å–®â€œè¨»å†Šâ€æˆ–å¦é¸\n"
+"â€œè¨»å†Šæ‡‰ç”¨ç¨‹å¼â€ åœ¨ç”¨æ»‘é¼ é›™æ“Šæ™‚ã€‚\n"
+"å¦‚æ¬²ä¿®æ”¹å·²è¨»å†Šä¹‹æª”æ¡ˆã€\n"
+"è«‹åƒå·§ ~/.xfce/xtree.regã€‚"
 
-#: xftree/xtree_mess.c:843
+#: xftree/xtree_mess.c:832
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1627,271 +1627,271 @@ msgid ""
 "Multiple selection by button 1 click-and-drag\n"
 "is available on the first click after a GOTO or REGEN.\n"
 msgstr ""
-"Xftree·Æ¹«©ì©ñ»¡©ú¡G\n"
-"SHIFT+©ì©ñ --> ·h²¾\n"
-"CTRL+©ì©ñ --> ½Æ»s\n"
-"SHIFT+CTRL+©ì©ñ --> ³sµ²\n"
-"¹w³]©ì©ñ­È¬°¡G·h²¾\n"
-"¦ı¥i¦b³]©w¤º§ó§ï¹w³]­È¡C\n"
-"¦P®É©ì©ñ¦h­ÓÀÉ®×¡B½Ğ¥Î¤¤Áä©Î¥ª¥k»ô«ö¡C\n"
+"Xftreeæ»‘é¼ æ‹–æ”¾èªªæ˜ï¼š\n"
+"SHIFT+æ‹–æ”¾ --> æ¬ç§»\n"
+"CTRL+æ‹–æ”¾ --> è¤‡è£½\n"
+"SHIFT+CTRL+æ‹–æ”¾ --> é€£çµ\n"
+"é è¨­æ‹–æ”¾å€¼ç‚ºï¼šæ¬ç§»\n"
+"ä½†å¯åœ¨è¨­å®šå…§æ›´æ”¹é è¨­å€¼ã€‚\n"
+"åŒæ™‚æ‹–æ”¾å¤šå€‹æª”æ¡ˆã€è«‹ç”¨ä¸­éµæˆ–å·¦å³é½ŠæŒ‰ã€‚\n"
 
-#: xftree/xtree_mess.c:861
+#: xftree/xtree_mess.c:850
 msgid "Keyboard shortcuts are a fast way to access menu functions."
-msgstr "³z¹LÁä½L±¶®|¥i§Ö³t¶i¤J¿ï³æ¡C"
+msgstr "é€éå¿«æ·éµå¯å¿«é€Ÿå•Ÿå‹•é¸å–®å…§é …ç›®ã€‚"
 
-#: xftree/xtree_mess.c:905
+#: xftree/xtree_mess.c:894
 msgid "Xftree results"
-msgstr "Xftree µ²ªG"
+msgstr "Xftree çµæœ"
 
-#: xftree/xtree_mess.c:1158
+#: xftree/xtree_mess.c:1147
 msgid "Home directory : "
-msgstr "®a¥Ø¿ı¡G "
+msgstr "å®¶ç›®éŒ„ï¼š "
 
 #: xfsamba/xfsamba_dnd.c:528 xftree/xtree_pasteboard.c:166
 msgid "The pasteboard is currently empty."
-msgstr "°Å¶KÃ¯¬OªÅªº"
+msgstr "å‰ªè²¼ç°¿æ˜¯ç©ºçš„"
 
 #: xfsamba/xfsamba_dnd.c:535 xftree/xtree_pasteboard.c:173
 msgid "Not a valid file transfer pasteboard."
-msgstr "«DªkªºÀÉ®×¶Ç¿é"
+msgstr "éæ³•çš„æª”æ¡ˆå‚³è¼¸"
 
 #: xftree/xtree_pasteboard.c:244
 msgid "The pasteboard is currently empty.\n"
-msgstr "°Å¶KÃ¯¬OªÅªº.\n"
+msgstr "å‰ªè²¼ç°¿æ˜¯ç©ºçš„.\n"
 
 #: xftree/xtree_pasteboard.c:246
 msgid "No pasteboard available."
-msgstr "°Å¶KÃ¯¥¢®Ä"
+msgstr "å‰ªè²¼ç°¿å¤±æ•ˆ"
 
 #: xftree/xtree_tar.c:417
 msgid "tar: execution error"
-msgstr "tar: °õ¦æ¿ù»~"
+msgstr "tar: åŸ·è¡ŒéŒ¯èª¤"
 
 #. only 32 elements allowed in TOOLBARICONS
 #: xftree/xtree_toolbar.c:88
 msgid "New icon view"
-msgstr "·s¹Ï¥Ü¤Æ"
+msgstr "æ–°åœ–ç¤ºåŒ–"
 
 #: xftree/xtree_toolbar.c:89
 msgid "New tree view"
-msgstr "·s¾ğª¬¤Æ"
+msgstr "æ–°æ¨¹ç‹€åŒ–"
 
 #: xftree/xtree_toolbar.c:90
 msgid "New terminal"
-msgstr "·s²×ºİ¾÷"
+msgstr "æ–°çµ‚ç«¯æ©Ÿ"
 
 #: xftree/xtree_toolbar.c:92
 msgid "Run ..."
-msgstr "°õ¦æ ..."
+msgstr "åŸ·è¡Œ ..."
 
 #: xftree/xtree_toolbar.c:94
 msgid "Update ..."
-msgstr "­«·s¾ã²z ..."
+msgstr "é‡æ–°æ•´ç† ..."
 
 #: xftree/xtree_toolbar.c:95
 msgid "Go back ..."
-msgstr "ªğ¦^..."
+msgstr "è¿”å›..."
 
 #: xfsamba/xfsamba_gui.c:1332 xftree/xtree_toolbar.c:100
 msgid "Cut ..."
-msgstr "°Å¤U ..."
+msgstr "å‰ªä¸‹ ..."
 
 #: xfsamba/xfsamba_gui.c:1333 xftree/xtree_toolbar.c:101
 msgid "Copy ..."
-msgstr "½Æ»s ..."
+msgstr "è¤‡è£½ ..."
 
 #: xfsamba/xfsamba_gui.c:1334 xftree/xtree_toolbar.c:102
 msgid "Paste ..."
-msgstr "¶K¤W ..."
+msgstr "è²¼ä¸Š ..."
 
 #: xftree/xtree_toolbar.c:110
 msgid "New file ..."
-msgstr "·sÀÉ®× ..."
+msgstr "æ–°æª”æ¡ˆ ..."
 
 #: xftree/xtree_toolbar.c:337
 msgid "Action"
-msgstr "°Ê§@"
+msgstr "å‹•ä½œ"
 
 #: xftree/xtree_toolbar.c:338
 msgid "Small icons. "
-msgstr "¤p¹Ï¥Ü"
+msgstr "å°åœ–ç¤º"
 
 #: xftree/xtree_toolbar.c:339
 msgid "Large icons. "
-msgstr "¤j¹Ï¥Ü"
+msgstr "å¤§åœ–ç¤º"
 
 #: xftree/xtree_toolbar.c:342
 msgid "Regen"
-msgstr "§ó·s"
+msgstr "æ›´æ–°"
 
 #: xftree/xtree_toolbar.c:443
 msgid "Large buttons"
-msgstr "¤j«¬«ö¶s"
+msgstr "å¤§å‹æŒ‰éˆ•"
 
 #. printf("dbg:%s\n",_("File download failed."));
 #: xftree/xtree_smb.c:175
 msgid "File download failed."
-msgstr "¤U¸ü¥¢±Ñ"
+msgstr "ä¸‹è¼‰å¤±æ•—"
 
 #: xftree/xtree_smb.c:199
 msgid "Downloading files from "
-msgstr "¤U¸üÀÉ®×±q"
+msgstr "ä¸‹è¼‰æª”æ¡ˆå¾"
 
 #: xftree/xtree_smb.c:232
 msgid ""
 "SMB downloads disabled.\n"
 "Command not found"
 msgstr ""
-"SMB ¤U¸ü³Q¨ú®ø.\n"
-"¤£©úªº«ü¥O"
+"SMB ä¸‹è¼‰è¢«å–æ¶ˆ.\n"
+"ä¸æ˜çš„æŒ‡ä»¤"
 
 #: xftree/xtree_smb.c:238
 msgid "Cannot open"
-msgstr "¤£¯à¥´¶}ÀÉ®×"
+msgstr "ä¸èƒ½æ‰“é–‹æª”æ¡ˆ"
 
 #: xftree/xtree_smb.c:263
 msgid "DnD error"
-msgstr "DnD ¿ù»~"
+msgstr "DnD éŒ¯èª¤"
 
 #: xftree/xtree_smb.c:263
 msgid "Incorrect DnD specification"
-msgstr "¿ù»~ªºDnD³W½d"
+msgstr "éŒ¯èª¤çš„DnDè¦ç¯„"
 
 #: xftree/xtree_smb.c:307
 msgid "Only drops from a single share are allowed"
-msgstr "¯­¥i±q¤@­Ó¦@¥Î¸ê®Æ§¨¤º©ì©ñ"
+msgstr "ç¥—å¯å¾ä¸€å€‹å…±äº«è³‡æ–™å¤¾å…§æ‹–æ”¾"
 
 #. convenience location of duplicate dialog texts
 #. non-static
 #: xfdiff/xfdiff.c:116
 msgid "Strip level now set to "
-msgstr "Strip ¯Å§O²{¦b³]¸m¬°"
+msgstr "Strip ç´šåˆ¥ç¾åœ¨è¨­ç½®ç‚º"
 
 #: xfdiff/xfdiff.c:117
 msgid "No patch file has been selected."
-msgstr "¨S¦³¸É¤BÀÉ®×³Q¿ï¤¤"
+msgstr "æ²’æœ‰è£œä¸æª”æ¡ˆè¢«é¸ä¸­"
 
 #: xfdiff/xfdiff.c:118
 msgid "No directory to apply patch has been selected."
-msgstr "¨S¦³¿ï¾Ü¥Ø¿ı¨Ó¥´¸É¤B"
+msgstr "æ²’æœ‰é¸æ“‡ç›®éŒ„ä¾†æ‰“è£œä¸"
 
 #: xfdiff/xfdiff.c:119
 msgid "No left path has been selected."
-msgstr "¨S¦³¿ï¾Ü¥ª°¼¸ô®|"
+msgstr "æ²’æœ‰é¸æ“‡å·¦å´è·¯å¾‘"
 
 #: xfdiff/xfdiff.c:120
 msgid "No right path has been selected."
-msgstr "¨S¦³¿ï¾Ü¥k°¼¸ô®|"
+msgstr "æ²’æœ‰é¸æ“‡å³å´è·¯å¾‘"
 
 #. static
 #: xfdiff/xfdiff.c:122
 msgid "Patch file can not be opened for read!"
-msgstr "¸É¤BÀÉ®×¤£¯à³QÅª¨ú!"
+msgstr "è£œä¸æª”æ¡ˆä¸èƒ½è¢«è®€å–!"
 
 #: xfdiff/xfdiff.c:123
 msgid ""
 "Files are identical\n"
 "(or binary files that may or may not differ)"
 msgstr ""
-"ÀÉ®×¬O¬Û¦Pªº\n"
-"(©ÎªÌ¤G¶i¨îÀÉ®×¥i¯à¤£¦P)"
+"æª”æ¡ˆæ˜¯ç›¸åŒçš„\n"
+"(æˆ–è€…äºŒé€²åˆ¶æª”æ¡ˆå¯èƒ½ä¸åŒ)"
 
 #: xfdiff/xfdiff.c:124
 msgid "Patch file is not in unified format"
-msgstr "¸É¤BÀÉ®×¤£¬O²Î¤@®æ¦¡"
+msgstr "è£œä¸æª”æ¡ˆä¸æ˜¯çµ±ä¸€æ ¼å¼"
 
 #: xfdiff/xfdiff.c:125
 msgid "****Empty file****\n"
-msgstr "**** ªÅÀÉ®× ****\n"
+msgstr "**** ç©ºæª”æ¡ˆ ****\n"
 
 #. missing color attribute
 #: xfdiff/xfdiff.c:314 xfdiff/xfdiff.c:320
 msgid "****Binary data****\n"
-msgstr "**** ¤G¶i¨î¼Æ¾Ú ****\n"
+msgstr "**** äºŒé€²åˆ¶æ•¸æ“š ****\n"
 
 #: xfdiff/xfdiff.c:404
 msgid ""
 "You have selected a directory.\n"
 "Should subdirectories be included?"
 msgstr ""
-"§A¤w¿ï¨ú¤@­Ó¥Ø¿ı¡C\n"
-"­n¥]¬A¤ºùØªº¤l¥Ø¿ı¶Ü?"
+"ä½ å·²é¸å–ä¸€å€‹ç›®éŒ„ã€‚\n"
+"è¦åŒ…æ‹¬å…§è£çš„å­ç›®éŒ„å—?"
 
 #: xfdiff/xfdiff.c:469
 msgid " versus "
-msgstr "¬Û¹ï"
+msgstr "ç›¸å°"
 
 #. 10 is size of MAXINT of 32 bits:
 #: xfdiff/xfdiff.c:489 xfdiff/xfdiff.c:493
 msgid "different sections found"
-msgstr "µo²{¤£¦Pªº³¡¤À"
+msgstr "ç™¼ç¾ä¸åŒçš„éƒ¨åˆ†"
 
 #: xfdiff/xfdiff.c:577
 msgid "Include binary files?"
-msgstr "¥]§t¤G¶i¨îÀÉ®×¶Ü?"
+msgstr "åŒ…å«äºŒé€²åˆ¶æª”æ¡ˆå—?"
 
 #: xfdiff/xfdiff.c:579
 msgid "Include subdirectories?"
-msgstr "¥]§t¤l¥Ø¿ı¶Ü?"
+msgstr "åŒ…å«å­ç›®éŒ„å—?"
 
 #: xfdiff/xfdiff.c:583
 msgid "Working diff...\n"
-msgstr "¥¿¦b¤ñ¸û¡K¡K\n"
+msgstr "æ­£åœ¨æ¯”è¼ƒâ€¦â€¦\n"
 
 #: xfdiff/xfdiff.c:948
 msgid ""
 "Patch file has been modified by another process\n"
 "Please reload\n"
 msgstr ""
-"¸É¤BÀÉ®×¤w¸g³Q¨ä¥L¶iµ{§ïÅÜ\n"
-"½Ğ­«·s¸ü¤J\n"
+"è£œä¸æª”æ¡ˆå·²ç¶“è¢«å…¶ä»–é€²ç¨‹æ”¹è®Š\n"
+"è«‹é‡æ–°è¼‰å…¥\n"
 
 #: xfdiff/xfdiff.c:1158
 msgid "Reversed patch detected. Should I try reversing it?"
-msgstr "ÀË´ú¨ì¤Ï¦V¸É¤B¡C ¬O§_¸Õ¥Î?"
+msgstr "æª¢æ¸¬åˆ°åå‘è£œä¸ã€‚ æ˜¯å¦è©¦ç”¨?"
 
 #: xfdiff/xfdiff.c:1167
 msgid "Now forking diff. Please be patient.\n"
-msgstr "²{¦b¥¿¦b¤À¤ä®t§O¡C ½Ğµ¥«İ¡C\n"
+msgstr "ç¾åœ¨æ­£åœ¨åˆ†æ”¯å·®åˆ¥ã€‚ è«‹ç­‰å¾…ã€‚\n"
 
 #: xfdiff/xfdiff.c:1169
 msgid "Finished forking.\n"
-msgstr "§¹¦¨¤À¤ä¡C\n"
+msgstr "å®Œæˆåˆ†æ”¯ã€‚\n"
 
 #: xfdiff/xfdiff.c:1388
 msgid "Running patch...\n"
-msgstr "°õ¦æ¸É¤B¡K¡K\n"
+msgstr "åŸ·è¡Œè£œä¸â€¦â€¦\n"
 
 #: xfdiff/xfdiff.c:1456
 msgid "xfdiff version"
-msgstr "xfdiff ª©¥»"
+msgstr "xfdiff ç‰ˆæœ¬"
 
 #: xfdiff/xfdiff.c:1457
 msgid "use xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
-msgstr "°õ¦æ°Ñ¼Æ xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
+msgstr "åŸ·è¡Œåƒæ•¸ xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
 
 #: xfdiff/xfdiff.c:1458
 msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
-msgstr "-p ¡G leftfile and rightfile ¬°¤@¸É¤B¥Ø¿ı¤Î¸É¤BÀÉ®×\n"
+msgstr "-p ï¼š leftfile and rightfile ç‚ºä¸€è£œä¸ç›®éŒ„åŠè£œä¸æª”æ¡ˆ\n"
 
 #: xfdiff/xfdiff.c:1459
 msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
-msgstr "-PN¡G N ¥H strip level (0-9) ­×¸É (quick toggle)\n"
+msgstr "-PNï¼š N ä»¥ strip level (0-9) ä¿®è£œ (quick toggle)\n"
 
 #: xfdiff/xfdiff.c:1460
 msgid "-R: patch file is reversed (quick toggle)\n"
-msgstr "-R¡G ¸Ó¸É¤B¬O¤Ï¦Vªº (quick toggle)\n"
+msgstr "-Rï¼š è©²è£œä¸æ˜¯åå‘çš„ (quick toggle)\n"
 
 #: xfdiff/xfdiff.c:1461
 msgid "-N: patch file is not reversed (quick toggle)\n"
-msgstr "-N¡G ¸Ó¸É¤B¤£¬O¤Ï¦Vªº (quick toggle)\n"
+msgstr "-Nï¼š è©²è£œä¸ä¸æ˜¯åå‘çš„ (quick toggle)\n"
 
 #: xfdiff/xfdiff.c:1462
 msgid ""
 "-h, --help : print this message\n"
 "\n"
 msgstr ""
-"-h, --help ¡G Åã¥Ü¦¹½s°T®§\n"
+"-h, --help ï¼š é¡¯ç¤ºæ­¤ç·¨è¨Šæ¯\n"
 "\n"
 
 #: xfdiff/xfdiff.c:1463
@@ -1908,23 +1908,23 @@ msgstr ""
 
 #: xfdiff/xfdiff_diag.c:135
 msgid "Xfdiff diagnostic"
-msgstr "XFdiff ¶EÂ_"
+msgstr "XFdiff è¨ºæ–·"
 
 #: xfdiff/xfdiff_gui.c:175
 msgid "A patch file and directory must be selected first!"
-msgstr "¥²¶·­º¥ı¿ï¾Ü¤@­Ó¸É¤BÀÉ®×©M¤@­Ó¥Ø¿ı!"
+msgstr "å¿…é ˆé¦–å…ˆé¸æ“‡ä¸€å€‹è£œä¸æª”æ¡ˆå’Œä¸€å€‹ç›®éŒ„!"
 
 #: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been undone."
-msgstr "¸É¤B¥¼³Q§¹¦¨"
+msgstr "è£œä¸æœªè¢«å¥—ç”¨"
 
 #: xfdiff/xfdiff_gui.c:187
 msgid "Patch has been applied."
-msgstr "¸É¤B¤w³Q®M¥Î"
+msgstr "è£œä¸å·²è¢«å¥—ç”¨"
 
 #: xfdiff/xfdiff_gui.c:202
 msgid "Please select a name for the patch file in the next dialog."
-msgstr "½Ğ¦b¤U¤@­Ó¹ï¸Ü®Ø¤¤¿ï¾Ü¤@­Ó¸É¤BÀÉ®×¦WºÙ"
+msgstr "è«‹åœ¨ä¸‹ä¸€å€‹å°è©±æ¡†ä¸­é¸æ“‡ä¸€å€‹è£œä¸æª”æ¡ˆåç¨±"
 
 #: xfdiff/xfdiff_gui.c:221
 msgid ""
@@ -1932,98 +1932,98 @@ msgid ""
 "Please be patient (xfdiff might seem to hang).\n"
 "Diff will be working"
 msgstr ""
-"XFdiff ±N¶}©l¤ñ¸û¡C\n"
-"½Ğ­@¤ßµ¥«İ (xfdiff ¥i¯à­n¤@©w®É¶¡)¡C\n"
-"¤ñ¸û¥¿¦b¶i¦æ¤¤¡C"
+"XFdiff å°‡é–‹å§‹æ¯”è¼ƒã€‚\n"
+"è«‹è€å¿ƒç­‰å¾… (xfdiff å¯èƒ½è¦ä¸€å®šæ™‚é–“)ã€‚\n"
+"æ¯”è¼ƒæ­£åœ¨é€²è¡Œä¸­ã€‚"
 
 #: xfdiff/xfdiff_gui.c:228
 msgid "Patch file could not be created"
-msgstr "¸É¤BÀÉ®×¤£¯à³Q³Ğ«Ø"
+msgstr "è£œä¸æª”æ¡ˆä¸èƒ½è¢«å‰µå»º"
 
 #: xfdiff/xfdiff_gui.c:233 xfdiff/xfdiff_gui.c:238
 msgid "Strip level for created patch file="
-msgstr "³Ğ«Ø¸É¤B Strip level="
+msgstr "å‰µå»ºè£œä¸ Strip level="
 
 #: xfdiff/xfdiff_gui.c:240
 msgid " has been created\n"
-msgstr "§¹¦¨«Ø¥ß\n"
+msgstr "å®Œæˆå»ºç«‹\n"
 
 #: xfdiff/xfdiff_gui.c:254
 msgid "Patch file creation cancelled"
-msgstr "¸É¤BÀÉ®×³Ğ«Ø³Q¨ú®ø"
+msgstr "è£œä¸æª”æ¡ˆå‰µå»ºè¢«å–æ¶ˆ"
 
 #: xfdiff/xfdiff_gui.c:404
 msgid "Line synchronization enabled.\n"
-msgstr "¦æ¦P¨B¥´¶}¡C\n"
+msgstr "è¡ŒåŒæ­¥æ‰“é–‹ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:406
 msgid "Line synchronization disabled.\n"
-msgstr "¦æ¦P¨BÃö³¬¡C\n"
+msgstr "è¡ŒåŒæ­¥é—œé–‰ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:443
 msgid "Patch verbose diagnostics enabled.\n"
-msgstr "¸É¤B¸Ô²Ó¶EÂ_¥´¶}¡C\n"
+msgstr "è£œä¸è©³ç´°è¨ºæ–·æ‰“é–‹ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:445
 msgid "Patch verbose diagnostics disabled.\n"
-msgstr "¸É¤B¸Ô²Ó¶EÂ_Ãö³¬¡C\n"
+msgstr "è£œä¸è©³ç´°è¨ºæ–·é—œé–‰ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:464
 msgid "Line numbers enabled.\n"
-msgstr "¦æ¸¹¥´¶}¡C\n"
+msgstr "è¡Œè™Ÿæ‰“é–‹ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:466
 msgid "Line numbers disabled.\n"
-msgstr "¦æ¸¹Ãö³¬¡C\n"
+msgstr "è¡Œè™Ÿé—œé–‰ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:478
 msgid "Polygons will now be filled.\n"
-msgstr "¦hÃä§Î±N³Q¶ñ¥R¡C\n"
+msgstr "å¤šé‚Šå½¢å°‡è¢«å¡«å……ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:480
 msgid "Polygons will now *not* be filled.\n"
-msgstr "¦hÃä§Î±N¤£³Q¶ñ¥R¡C\n"
+msgstr "å¤šé‚Šå½¢å°‡ä¸è¢«å¡«å……ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:494
 msgid "Patch will now be assumed reversed.\n"
-msgstr "¸É¤B±N°²©w¬O¤Ï¦Vªº¡C\n"
+msgstr "è£œä¸å°‡å‡å®šæ˜¯åå‘çš„ã€‚\n"
 
 #: xfdiff/xfdiff_gui.c:496
 msgid "Patch will now be assumed *not* reversed.\n"
-msgstr "¸É¤B±N°²©w¤£¬O¤Ï¦Vªº¡C\n"
+msgstr "è£œä¸å°‡å‡å®šä¸æ˜¯åå‘çš„ã€‚\n"
 
 #.
 #: xfdiff/xfdiff_gui.c:517
 msgid "Font selection"
-msgstr "¿ï¾Ü¦rÅé"
+msgstr "é¸æ“‡å­—é«”"
 
 #: xfdiff/xfdiff_gui.c:585
 msgid "Select highlight background color"
-msgstr "¿ï¨ú¥[«Gªº­I´ºÃC¦â"
+msgstr "é¸å–åŠ äº®çš„èƒŒæ™¯é¡è‰²"
 
 #: xfdiff/xfdiff_gui.c:588
 msgid "Select highlight text color"
-msgstr "¥[«G¤å¥»ÃC¦â"
+msgstr "åŠ äº®æ–‡æœ¬é¡è‰²"
 
 #: xfdiff/xfdiff_gui.c:686 xfdiff/xfdiff_gui.c:687
 msgid "Warning: cannot read from "
-msgstr "Äµ§i¡G ¤£¯àÅª¨ú"
+msgstr "è­¦å‘Šï¼š ä¸èƒ½è®€å–"
 
 #: xfdiff/xfdiff_gui.c:691 xfdiff/xfdiff_gui.c:692
 msgid "is not in patch file."
-msgstr "¤£¦b¸É¤BÀÉ®×¤¤"
+msgstr "ä¸åœ¨è£œä¸æª”æ¡ˆä¸­"
 
 #: xfdiff/xfdiff_gui.c:798
 msgid "Default .xfdiffrc file cannot be created\n"
-msgstr "¹w³]ªº .xfdiffrc ÀÉ®×¤£¯à³Q³Ğ«Ø\n"
+msgstr "é è¨­çš„ .xfdiffrc æª”æ¡ˆä¸èƒ½è¢«å‰µå»º\n"
 
 #: xfdiff/xfdiff_gui.c:818
 msgid "Default configuration has been saved\n"
-msgstr "¹w³]ªº°t¸m³Q«O¦s\n"
+msgstr "é è¨­çš„é…ç½®è¢«ä¿å­˜\n"
 
 #: xfdiff/xfdiff_gui.c:826
 msgid "This is XFDiff "
-msgstr "³o¬O XFDiff¡BÀÉ®×®t§OÀËµø¾¹"
+msgstr "é€™æ˜¯ XFDiffã€æª”æ¡ˆå·®åˆ¥æª¢è¦–å™¨"
 
 #: xfdiff/xfdiff_gui.c:826
 msgid ""
@@ -2033,154 +2033,154 @@ msgid ""
 msgstr ""
 "\n"
 "(c) by Edscott Wilson Garcia under GNU GPL\n"
-"XFCE ¼Ò²Õ (c) Olivier Fourdan http://www.xfce.org/"
+"XFCE æ¨¡çµ„ (c) Olivier Fourdan http://www.xfce.org/"
 
 #: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
-msgstr "¨S¦³¤U­Ó¤À§O"
+msgstr "æ²’æœ‰ä¸‹å€‹åˆ†åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:854
 msgid "There is no previous difference"
-msgstr "¨S¦³¤W­Ó¤À§O"
+msgstr "æ²’æœ‰ä¸Šå€‹åˆ†åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:876
 msgid "There is no such file"
-msgstr "¨S¦³³o­ÓÀÉ®×"
+msgstr "æ²’æœ‰é€™å€‹æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:886
 msgid "There is no next file"
-msgstr "¨S¦³¤U­ÓÀÉ®×"
+msgstr "æ²’æœ‰ä¸‹å€‹æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:897
 msgid "There is no previous file"
-msgstr "¨S¦³¤W­ÓÀÉ®×"
+msgstr "æ²’æœ‰ä¸Šå€‹æª”æ¡ˆ"
 
 #. only spot where directories for input is not OK:
 #: xfdiff/xfdiff_gui.c:984
 msgid "That is a directory (or symlink)"
-msgstr "¨º¬O¥Ø¿ı(©Î²Å¸¹Ãìµ²)"
+msgstr "é‚£æ˜¯ç›®éŒ„(æˆ–ç¬¦è™Ÿéˆçµ)"
 
 #: xfdiff/xfdiff_gui.c:1169
 msgid "Select left file"
-msgstr "¿ï¾Ü¥ªÃäÀÉ®×"
+msgstr "é¸æ“‡å·¦é‚Šæª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:1170
 msgid "Select right file"
-msgstr "¿ï¾Ü¥kÃäÀÉ®×"
+msgstr "é¸æ“‡å³é‚Šæª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:1171
 msgid "Select patch file"
-msgstr "¿ï¾Ü¸É¤BÀÉ®×"
+msgstr "é¸æ“‡è£œä¸æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:1172
 msgid "Select directory where to apply patch"
-msgstr "½Ğ¿ï¾Ü¥Ø¿ı¨Ó¨Ï¥Î¸É¤B"
+msgstr "è«‹é¸æ“‡ç›®éŒ„ä¾†ä½¿ç”¨è£œä¸"
 
 #: xfdiff/xfdiff_gui.c:1175
 msgid "Switch to patch mode"
-msgstr "¤Á´«¨ì¸É¤B¼Ò¦¡"
+msgstr "åˆ‡æ›åˆ°è£œä¸æ¨¡å¼"
 
 #: xfdiff/xfdiff_gui.c:1178
 msgid "Switch to diff mode"
-msgstr "¤Á´«¨ì®t§O¼Ò¦¡"
+msgstr "åˆ‡æ›åˆ°å·®åˆ¥æ¨¡å¼"
 
 #: xfdiff/xfdiff_gui.c:1183 xfdiff/xfdiff_gui.c:1610
 #: xfsamba/xfsamba_gui.c:1274
 msgid "Exit"
-msgstr "°h¥X"
+msgstr "é€€å‡º"
 
 #. Create "Settings" menu
 #: xfdiff/xfdiff_gui.c:1186
 msgid "Diff Settings"
-msgstr "³]©w"
+msgstr "è¨­å®š"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
 #: xfdiff/xfdiff_gui.c:1189
 msgid "Font"
-msgstr "¦rÅé"
+msgstr "å­—é«”"
 
 #: xfdiff/xfdiff_gui.c:1190
 msgid "Highlight text color"
-msgstr "¥[«G¤å¥»ÃC¦â"
+msgstr "åŠ äº®æ–‡å­—é¡è‰²"
 
 #: xfdiff/xfdiff_gui.c:1191
 msgid "Highlight background color"
-msgstr "¥[«G­I´º¦â"
+msgstr "åŠ äº®èƒŒæ™¯è‰²"
 
 #: xfdiff/xfdiff_gui.c:1192
 msgid "Fill polygons"
-msgstr "¶ñ¥R¦hÃä§Î"
+msgstr "å¡«å……å¤šé‚Šå½¢"
 
 #: xfdiff/xfdiff_gui.c:1193
 msgid "Show line numbers"
-msgstr "Åã¥Ü¦æ¸¹"
+msgstr "é¡¯ç¤ºè¡Œè™Ÿ"
 
 #: xfdiff/xfdiff_gui.c:1195
 msgid "Use line synchronization voids"
-msgstr "¨Ï¥Î¦æ¦P¨BµL®Ä"
+msgstr "ä½¿ç”¨è¡ŒåŒæ­¥ç„¡æ•ˆ"
 
 #: xfdiff/xfdiff_gui.c:1201
 msgid "Save settings as default"
-msgstr "Àx¦s³]¸m¬°¹w³]­È"
+msgstr "å„²å­˜è¨­ç½®ç‚ºé è¨­å€¼"
 
 #: xfdiff/xfdiff_gui.c:1203
 msgid "Patch Settings"
-msgstr "¸É¤B³]©w"
+msgstr "è£œä¸è¨­å®š"
 
 #: xfdiff/xfdiff_gui.c:1205
 msgid "Verbose patch diagnostics"
-msgstr "¸Ô²Óªº¸É¤B¶EÂ_"
+msgstr "è©³ç´°çš„è£œä¸è¨ºæ–·"
 
 #: xfdiff/xfdiff_gui.c:1207
 msgid "Patch options only active in patch-mode"
-msgstr "¸É¤B¿ï¶µ¥u¯à¦b¸É¤B¼Ò¦¡¿E¬¡"
+msgstr "è£œä¸é¸é …åªèƒ½åœ¨è£œä¸æ¨¡å¼æ¿€æ´»"
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
 #: xfdiff/xfdiff_gui.c:1212
 msgid "Assume patch is reversed"
-msgstr "°²©w«O¤B¬O¤Ï¦V"
+msgstr "å‡å®šä¿ä¸æ˜¯åå‘"
 
 #: xfdiff/xfdiff_gui.c:1214
 msgid "Auto strip level"
-msgstr "¦Û°Ê Strip ¯Å§O"
+msgstr "è‡ªå‹• Strip ç´šåˆ¥"
 
 #. Create "Actions" menu
 #: xfdiff/xfdiff_gui.c:1243 xfumed/xfumed_gui.c:92
 msgid "Actions"
-msgstr "°Ê§@"
+msgstr "å‹•ä½œ"
 
 #: xfdiff/xfdiff_gui.c:1244
 msgid "View differences"
-msgstr "¬d¬İ®t§O"
+msgstr "æŸ¥çœ‹å·®åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:1245
 msgid "View differences in new"
-msgstr "¦b·sµ¡¤f¤¤¬d¬İ®t§O"
+msgstr "åœ¨æ–°çª—å£ä¸­æŸ¥çœ‹å·®åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:1247
 msgid "View patch created differences"
-msgstr "¬d¬İ¸É¤B³Ğ«Ø®t§O"
+msgstr "æŸ¥çœ‹è£œä¸å‰µå»ºå·®åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:1250
 msgid "View patch created differences in new"
-msgstr "¦b·sµ¡¤f¤ºÅã¥Ü¸É¤B"
+msgstr "åœ¨æ–°çª—å£å…§é¡¯ç¤ºè£œä¸"
 
 #: xfdiff/xfdiff_gui.c:1255
 msgid "Create patch file"
-msgstr "³Ğ«Ø¸É¤BÀÉ®×"
+msgstr "å‰µå»ºè£œä¸æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:1262
 msgid "Apply patch to Hard Drive"
-msgstr "®M¥Î¸É¤B"
+msgstr "å¥—ç”¨è£œä¸"
 
 #: xfdiff/xfdiff_gui.c:1265
 msgid "Undo patch to Hard Drive"
-msgstr "ºM¾P¸É¤B"
+msgstr "æ’¤éŠ·è£œä¸"
 
 #: xfdiff/xfdiff_gui.c:1271 xfglob/xfglob.c:1922
 msgid "About"
-msgstr "Ãö©ó"
+msgstr "é—œæ–¼"
 
 #. gtk_button_new_with_label (_("Clear"));
 #. gtk_box_pack_end (GTK_BOX (bbox),button,TRUE,TRUE , 0);
@@ -2191,55 +2191,55 @@ msgstr "Ãö©ó"
 #. (gpointer) text);
 #: xfdiff/xfdiff_gui.c:1603
 msgid "Next difference"
-msgstr "¤U­Ó°Ï§O"
+msgstr "ä¸‹å€‹å€åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:1606
 msgid "Prev difference"
-msgstr "¤W­Ó°Ï§O"
+msgstr "ä¸Šå€‹å€åˆ¥"
 
 #: xfdiff/xfdiff_gui.c:1607
 msgid "Next file"
-msgstr "¤U­ÓÀÉ®×"
+msgstr "ä¸‹å€‹æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_gui.c:1608
 msgid "Previous file"
-msgstr "¤W­ÓÀÉ®×"
+msgstr "ä¸Šå€‹æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_misc.c:91
 msgid "Could not set selected font"
-msgstr "¤£¯à¥[¸ü«ü©wªº¦rÅé"
+msgstr "ä¸?é„[è¼‰æŒ‡å®šçš„å­—é«”"
 
 #: xfdiff/xfdiff_misc.c:130
 msgid "Confirm"
-msgstr "½T»{"
+msgstr "ç¢ºèª"
 
 #: xfdiff/xfdiff_misc.c:130
 msgid "Abort"
-msgstr "Â÷¶}"
+msgstr "é›¢é–‹"
 
 #: xfdiff/xfdiff_misc.c:136
 msgid "Alert"
-msgstr "²M°£"
+msgstr "æ¸…é™¤"
 
 #: xfdiff/xfdiff_misc.c:361
 msgid ""
 "A bug?\n"
 "Please send full traceback to xfce-dev@moongroup.com"
 msgstr ""
-"µo²{µ{¦¡¿ù»~?\n"
-"½Ğ±N¸Ô±¡¹q¶l¦Üxfce-dev@moongroup.com"
+"ç™¼ç¾ç¨‹å¼éŒ¯èª¤?\n"
+"è«‹å°‡è©³æƒ…é›»éƒµè‡³xfce-dev@moongroup.com"
 
 #: xfdiff/xfdiff_misc.c:366
 msgid "Low memory (malloc) error: xfdiff_aborting run"
-msgstr "°O¾ĞÅé¤£¨¬(malloc)¡Gxfdiff¹B§@²×¤î"
+msgstr "è¨˜æ†¶é«”ä¸è¶³(malloc)ï¼šxfdiffé‹ä½œçµ‚æ­¢"
 
 #: xfdiff/xfdiff_misc.c:369
 msgid "file open error: xfdiff_aborting run"
-msgstr "ÀÉ®×¶}±Ò¿ù»~¡Gxfdiff¹B§@²×¤î"
+msgstr "æª”æ¡ˆé–‹å•ŸéŒ¯èª¤ï¼šxfdiffé‹ä½œçµ‚æ­¢"
 
 #: xfdiff/xfdiff_misc.c:372
 msgid "unspecified error: xfdiff_aborting run"
-msgstr "¤£©ú¿ù»~¡Gxfdiff¹B§@²×¤î"
+msgstr "ä¸æ˜éŒ¯èª¤ï¼šxfdiffé‹ä½œçµ‚æ­¢"
 
 #: xfdiff/xfdiff_misc.c:604
 msgid ""
@@ -2247,156 +2247,156 @@ msgid ""
 "Either the directory to apply patch is not correctly selected\n"
 "or an incorrect strip level was used.\n"
 msgstr ""
-"¨S¦³¥ipatchingªºÀÉ®×\n"
-"½Ğ«ü©ú¥¿½T¸ô®|\n"
-"©Î¥¿½Tªºstrip level¡C\n"
+"æ²’æœ‰å¯patchingçš„æª”æ¡ˆ\n"
+"è«‹æŒ‡æ˜æ­£ç¢ºè·¯å¾‘\n"
+"æˆ–æ­£ç¢ºçš„strip levelã€‚\n"
 
 #: xfdiff/xfdiff_misc.c:621
 msgid ""
 "Patch command has produced reject output.\n"
 "See diagnostics window."
 msgstr ""
-"¸É¤B°õ¦æ«ü¥O¦^¶Ç©Úµ´¿é¥X¡C\n"
-"½Ğ°Ñ¦Ò¶EÂ_µøµ¡¡C"
+"è£œä¸åŸ·è¡ŒæŒ‡ä»¤å›å‚³æ‹’çµ•è¼¸å‡ºã€‚\n"
+"è«‹åƒè€ƒè¨ºæ–·è¦–çª—ã€‚"
 
 #: xfdiff/xfdiff_misc.c:648
 msgid "No directory was selected!"
-msgstr "¨S¦³¿ï¾Ü¥Ø¿ı!"
+msgstr "æ²’æœ‰é¸æ“‡ç›®éŒ„!"
 
 #.
 #: xfdiff/xfdiff_misc.c:662
 msgid "Directory or file selection"
-msgstr "¥ı¿ï¾Ü¥Ø¿ı©ÎÀÉ®×"
+msgstr "å…ˆé¸æ“‡ç›®éŒ„æˆ–æª”æ¡ˆ"
 
 #: xfdiff/xfdiff_misc.c:697 xfdiff/xfdiff_misc.c:700
 msgid "Please select it in the next dialog."
-msgstr "½Ğ¦b¤U­Ó¹ï¸Ü®Ø¤º¿ï¾Ü¡C"
+msgstr "è«‹åœ¨ä¸‹å€‹å°è©±æ¡†å…§é¸æ“‡ã€‚"
 
 #: xfdiff/xfdiff_misc.c:738
 msgid "File exists, overwrite?"
-msgstr "ÀÉ®×¤w¦s¦b¡BÂĞ¼g?"
+msgstr "æª”æ¡ˆå·²å­˜åœ¨ã€è¦†å¯«?"
 
 #: xfdiff/xfdiff_misc.c:742
 msgid "Cannot open file for write\n"
-msgstr "¤£¯à¶}±ÒÀÉ®×\n"
+msgstr "ä¸èƒ½é–‹å•Ÿæª”æ¡ˆ\n"
 
 #: xfdiff/xfdiff_misc.c:924 xfdiff/xfdiff_misc.c:929
 msgid "couldn't allocate color"
-msgstr "¤£¯à¤À°t¦â±m"
+msgstr "ä¸èƒ½åˆ†é…è‰²å½©"
 
 #. font color!
 #: xfdiff/xfdiff_misc.c:963 xfdiff/xfdiff_misc.c:987
 msgid "Patch: "
-msgstr "¸É¤B¡G"
+msgstr "è£œä¸ï¼š"
 
 #: xfdiff/xfdiff_misc.c:966 xfdiff/xfdiff_misc.c:992
 msgid " applied at: "
-msgstr "®M¥Î©ó¡G"
+msgstr "å¥—ç”¨æ–¼ï¼š"
 
 #: xfdiff/xfdiff_misc.c:1012
 msgid "Press OK to see patch diffs"
-msgstr "½Ğ«ö¡y½T©w¡v¨Ó¬d¬İ¸É¤B°Ï§O"
+msgstr "è«‹æŒ‰ã€ç¢ºå®šã€ä¾†æŸ¥çœ‹è£œä¸å€åˆ¥"
 
 #: xfglob/xfglob.c:460 xfglob/xfglob.c:461
 msgid "Results limit reached"
-msgstr "¹F¨ìµ²ªG¼Æ¥Ø­­¨î"
+msgstr "é”åˆ°çµæœæ•¸ç›®é™åˆ¶"
 
 #: xfglob/xfglob.c:469
 msgid "Cancelled"
-msgstr "¨ú®ø"
+msgstr "å–æ¶ˆ"
 
 #: xfglob/xfglob.c:470
 msgid "Search canceled!\n"
-msgstr "¬d§ä³Q¨ú®ø!\n"
+msgstr "æŸ¥æ‰¾è¢«å–æ¶ˆ!\n"
 
 #: xfglob/xfglob.c:495 xfglob/xfglob.c:525
 msgid "Glob run must finish or be cancelled first."
-msgstr "½Ğ¥ıµ²³t©Î¨ú®øGlob·j´M¡C"
+msgstr "è«‹å…ˆçµé€Ÿæˆ–å–æ¶ˆGlobæœå°‹ã€‚"
 
 #: xfglob/xfglob.c:508
 msgid "Find results.\n"
-msgstr "´M§äµ²ªG¡C\n"
+msgstr "å°‹æ‰¾çµæœã€‚\n"
 
 #: xfglob/xfglob.c:588 xfglob/xfglob.c:680
 msgid "Find results..."
-msgstr "´M§äµ²ªG¡K¡K"
+msgstr "å°‹æ‰¾çµæœâ€¦â€¦"
 
 #: xfglob/xfglob.c:607 xfglob/xfglob.c:1362
 msgid "Directory"
-msgstr "¥Ø¿ı"
+msgstr "ç›®éŒ„"
 
 #: xfglob/xfglob.c:1032
 msgid "Incoherent size considerations!"
-msgstr "ÀÉ®×¤j¤p°İÃD!"
+msgstr "æª”æ¡ˆå¤§å°å•é¡Œ!"
 
 #. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
 #: xfglob/xfglob.c:1202
 msgid "Result of "
-msgstr "µ²ªG©ó"
+msgstr "çµæœæ–¼"
 
 #: xfglob/xfglob.c:1213 xfglob/xfglob.c:1556
 msgid "File type :"
-msgstr "ÀÉ®×Ãş«¬¡G"
+msgstr "æª”æ¡ˆé¡å‹ï¼š"
 
 #: xfglob/xfglob.c:1285
 msgid "Anyone"
-msgstr "¥ô¦ó¤@­Ó"
+msgstr "ä»»ä½•ä¸€å€‹"
 
 #. translation of filetypes
 #: xfglob/xfglob.c:1362
 msgid "Any kind"
-msgstr "¥ô¦óÃş«¬"
+msgstr "ä»»ä½•é¡å‹"
 
 #: xfglob/xfglob.c:1362
 msgid "Regular"
-msgstr "±`³W"
+msgstr "å¸¸è¦"
 
 #: xfglob/xfglob.c:1362
 msgid "Symlink"
-msgstr "²Å¸¹Ãìµ²"
+msgstr "ç¬¦è™Ÿéˆçµ"
 
 #: xfglob/xfglob.c:1362
 msgid "Socket"
-msgstr "®M±µ¦r"
+msgstr "å¥—æ¥å­—"
 
 #: xfglob/xfglob.c:1362
 msgid "Block device"
-msgstr "°Ï¶ô³]³Æ"
+msgstr "å€å¡Šè¨­å‚™"
 
 #: xfglob/xfglob.c:1362
 msgid "Character device"
-msgstr "¦r²Å³]³Æ"
+msgstr "å­—ç¬¦è¨­å‚™"
 
 #: xfglob/xfglob.c:1362
 msgid "FIFO"
-msgstr "§Ö¥X§Ö¤J"
+msgstr "å¿«å‡ºå¿«å…¥"
 
 #: xfglob/xfglob.c:1372
 msgid "Xfglob"
-msgstr "ÀÉ®×§ä´M¾¹"
+msgstr "æª”æ¡ˆæ‰¾å°‹å™¨"
 
 #. *******************************
 #. show the notebook pages:
 #. fourth circle : notebook tabs stuff
 #: xfglob/xfglob.c:1423 xfglob/xfglob.c:1913 xfglob/xfglob.c:1941
 msgid "Find"
-msgstr "¬d§ä"
+msgstr "æŸ¥æ‰¾"
 
 #: xfglob/xfglob.c:1435
 msgid "Path : "
-msgstr "¸ô®|¡G"
+msgstr "è·¯å¾‘ï¼š"
 
 #: xfglob/xfglob.c:1444
 msgid "Browse"
-msgstr "ÂsÄı"
+msgstr "ç€è¦½"
 
 #: xfglob/xfglob.c:1453
 msgid "File filter : "
-msgstr "ÀÉ®×¹LÂo ¡G"
+msgstr "æª”æ¡ˆéæ¿¾ ï¼š"
 
 #: xfglob/xfglob.c:1461
 msgid "What's a file filter?"
-msgstr "¦ó¿×ÀÉ®×¹LÂo¾¹?"
+msgstr "ä½•è¬‚æª”æ¡ˆéæ¿¾å™¨?"
 
 #: xfglob/xfglob.c:1468
 msgid ""
@@ -2405,38 +2405,38 @@ msgid ""
 "*  Will match any character zero or more times.\n"
 "?  Will match any character exactly one time\n"
 msgstr ""
-"°ò¥»³W«h¡G\n"
+"åŸºæœ¬è¦å‰‡ï¼š\n"
 "\n"
-"*  ¤Ç°t¥ô¦ó¦r²Å 0 ©Î¥ô·N¦¸¡C\n"
-"?  ¤Ç°t¥ô¦ó¦r²Å 1 ¦¸¡C\n"
+"*  åŒ¹é…ä»»ä½•å­—ç¬¦ 0 æˆ–ä»»æ„æ¬¡ã€‚\n"
+"?  åŒ¹é…ä»»ä½•å­—ç¬¦ 1 æ¬¡ã€‚\n"
 
 #: xfglob/xfglob.c:1474
 msgid "Search subdirectories too"
-msgstr "·j¯Á¤l¥Ø¿ı"
+msgstr "æœç´¢å­ç›®éŒ„"
 
 #: xfglob/xfglob.c:1476
 msgid "Limit results to first : "
-msgstr "­­¨îµ²ªG¬°­º ¡G"
+msgstr "é™åˆ¶çµæœç‚ºé¦– ï¼š"
 
 #: xfglob/xfglob.c:1489
 msgid "Content search"
-msgstr "¤º®e·j¯Á"
+msgstr "å…§å®¹æœç´¢"
 
 #: xfglob/xfglob.c:1501
 msgid "Containing : "
-msgstr "¥]§t¡G"
+msgstr "åŒ…å«ï¼š"
 
 #: xfglob/xfglob.c:1512
 msgid "Case sensitive search"
-msgstr "¤j¤p¼g±Ó·P·j¯Á"
+msgstr "å¤§å°å¯«æ•æ„Ÿæœç´¢"
 
 #: xfglob/xfglob.c:1513
 msgid "Extended regexp"
-msgstr "©µ²Ô±`³W²Å¸¹ªk«h"
+msgstr "å»¶ç´³å¸¸è¦ç¬¦è™Ÿæ³•å‰‡"
 
 #: xfglob/xfglob.c:1516
 msgid "What's a regexp?"
-msgstr "¦ó¿×±`³W²Å¸¹ªk«h?"
+msgstr "ä½•è¬‚å¸¸è¦ç¬¦è™Ÿæ³•å‰‡?"
 
 #: xfglob/xfglob.c:1522
 msgid ""
@@ -2478,55 +2478,55 @@ msgid ""
 "More information is available by typing \"man grep\"\n"
 "       at the command prompt.\n"
 msgstr ""
-"©µ²Ôªº±`³W²Å¸¹¦³\n"
+"å»¶ç´³çš„å¸¸è¦ç¬¦è™Ÿæœ‰\n"
 ". ^ $ [ ] ? * + { } | \\ ( ) : \n"
-"¦b°ò¥»ªº±`³W²Å¸¹¤¤¬Y¨Ç¤¸¦r²Å¦p\n"
-"?¡B +¡B {¡B |¡B (¡B ©M ) ·|¥¢¥h¨ä­ì¥»·N¸q¡C\n"
+"åœ¨åŸºæœ¬çš„å¸¸è¦ç¬¦è™Ÿä¸­æŸäº›å…ƒå­—ç¬¦å¦‚\n"
+"?ã€ +ã€ {ã€ |ã€ (ã€ å’Œ ) æœƒå¤±å»å…¶åŸæœ¬æ„ç¾©ã€‚\n"
 "\n"
-" . ®M¥Î©ó¥ô¦ó³æ¦r¤¸¡C\n"
-" ^ ®M¥Î©ó¦r¦æªº¶}ÀY¡C\n"
-" $ ®M¥Î©ó¦r¦æªºµ²§À¡C\n"
+" . å¥—ç”¨æ–¼ä»»ä½•å–®å­—å…ƒã€‚\n"
+" ^ å¥—ç”¨æ–¼å­—è¡Œçš„é–‹é ­ã€‚\n"
+" $ å¥—ç”¨æ–¼å­—è¡Œçš„çµå°¾ã€‚\n"
 "\n"
-"¦b [ ] ¤ºªº¦r¤¸®M¥Î©ó¥ô¦ó³æ¤@ªº\n"
-"     ¥i¦C¥X¤§¦r¤¸¡C\n"
-"¦b [^ ] ¤ºªº¦r¤¸®M¥Î©ó¥ô¦ó³æ¤@ªº\n"
-"     ¤£¥i¦C¥X¤§¦r¤¸¡C\n"
-"¦b [ - ] ¤ºªº¦r¤¸®M¥Î©ó¤@½d³ò¤ºªº\n"
-"     ¥i¦C¥X¤§¦r¤¸ (¨Ò¦p [0-9] ©Î [a-z])¡C\n"
+"åœ¨ [ ] å…§çš„å­—å…ƒå¥—ç”¨æ–¼ä»»ä½•å–®ä¸€çš„\n"
+"     å¯åˆ—å‡ºä¹‹å­—å…ƒã€‚\n"
+"åœ¨ [^ ] å…§çš„å­—å…ƒå¥—ç”¨æ–¼ä»»ä½•å–®ä¸€çš„\n"
+"     ä¸å¯åˆ—å‡ºä¹‹å­—å…ƒã€‚\n"
+"åœ¨ [ - ] å…§çš„å­—å…ƒå¥—ç”¨æ–¼ä¸€ç¯„åœå…§çš„\n"
+"     å¯åˆ—å‡ºä¹‹å­—å…ƒ (ä¾‹å¦‚ [0-9] æˆ– [a-z])ã€‚\n"
 "\n"
-"¤@­Ó©µ²Ôªº±`³W²Å¸¹ªk«h«á­±¥²¶·¦³\n"
-"     ¨ä¤¤¤@­Ó¥i­«½Æ¹Bºâ¤¸¡G\n"
-"?    ¦b¦¹²Å¸¹«eªº¶µ¥Ø¬O¿ï¾Ü©Êªº¨Ã³Q®M¥Î\n"
-"     ³Ì¦h¤@¦¸¡C\n"
-"*    ¦b¦¹²Å¸¹«eªº¶µ¥Ø·|³Q®M¥Î¹s\n"
-"     ©Î¦h¦¸¡C\n"
-"+    ¦b¦¹²Å¸¹«eªº¶µ¥Ø·|³Q®M¥Î¤@©Î\n"
-"     ©Î¦h¦¸¡C\n"
-"{n}  ¦b¦¹²Å¸¹«eªº¶µ¥Ø·|³Q®M¥În¦¸¡C\n"
-"{n,} ¦b¦¹²Å¸¹«eªº¶µ¥Ø·|³Q®M¥În©Î¦h¦¸¡C\n"
-"{n,m}¦b¦¹²Å¸¹«eªº¶µ¥Ø·|³Q®M¥Î³Ì¤Ön¦¸¡C\n"
-"     ¦ı¤£¦h©óm¦¸¡C\n"
+"ä¸€å€‹å»¶ç´³çš„å¸¸è¦ç¬¦è™Ÿæ³•å‰‡å¾Œé¢å¿…é ˆæœ‰\n"
+"     å…¶ä¸­ä¸€å€‹å¯é‡è¤‡é‹ç®—å…ƒï¼š\n"
+"?    åœ¨æ­¤ç¬¦è™Ÿå‰çš„é …ç›®æ˜¯é¸æ“‡æ€§çš„ä¸¦è¢«å¥—ç”¨\n"
+"     æœ€å¤šä¸€æ¬¡ã€‚\n"
+"*    åœ¨æ­¤ç¬¦è™Ÿå‰çš„é …ç›®æœƒè¢«å¥—ç”¨é›¶\n"
+"     æˆ–å¤šæ¬¡ã€‚\n"
+"+    åœ¨æ­¤ç¬¦è™Ÿå‰çš„é …ç›®æœƒè¢«å¥—ç”¨ä¸€æˆ–\n"
+"     æˆ–å¤šæ¬¡ã€‚\n"
+"{n}  åœ¨æ­¤ç¬¦è™Ÿå‰çš„é …ç›®æœƒè¢«å¥—ç”¨næ¬¡ã€‚\n"
+"{n,} åœ¨æ­¤ç¬¦è™Ÿå‰çš„é …ç›®æœƒè¢«å¥—ç”¨næˆ–å¤šæ¬¡ã€‚\n"
+"{n,m}åœ¨æ­¤ç¬¦è™Ÿå‰çš„é …ç›®æœƒè¢«å¥—ç”¨æœ€å°‘næ¬¡ã€‚\n"
+"     ä½†ä¸å¤šæ–¼mæ¬¡ã€‚\n"
 "\n"
-"­n®M¥Î¥ô¦ó«O¯d¦r¤¸¡B¥i¦b¦¹«e¿é¤J\\¡C\n"
+"è¦å¥—ç”¨ä»»ä½•ä¿ç•™å­—å…ƒã€å¯åœ¨æ­¤å‰è¼¸å…¥\\ã€‚\n"
 "\n"
-"­n¬Û³s¨â­Ó±`³W²Å¸¹¡B¥i¥ÎÅŞ¿è²Å©Î\n"
-"     ¹Bºâ¤¸ |¡C\n"
-"¨â­Ó±`³W²Å¸¹«K¯à¤¬¬Û³s±µ¡C\n"
+"è¦ç›¸é€£å…©å€‹å¸¸è¦ç¬¦è™Ÿã€å¯ç”¨é‚è¼¯ç¬¦æˆ–\n"
+"     é‹ç®—å…ƒ |ã€‚\n"
+"å…©å€‹å¸¸è¦ç¬¦è™Ÿä¾¿èƒ½äº’ç›¸é€£æ¥ã€‚\n"
 "\n"
-"¦p­n§ó¸ÔºÉ¸ê®Æ½ĞÁä¤J«ü¥O \"man grep\"\n"
-"     ¦b²×ºİ¾÷¼Ò¦¡¡C\n"
+"å¦‚è¦æ›´è©³ç›¡è³‡æ–™è«‹éµå…¥æŒ‡ä»¤ \"man grep\"\n"
+"     åœ¨çµ‚ç«¯æ©Ÿæ¨¡å¼ã€‚\n"
 
 #: xfglob/xfglob.c:1543
 msgid "File considerations"
-msgstr "ÀÉ®×¯S¼x"
+msgstr "æª”æ¡ˆç‰¹å¾µ"
 
 #: xfglob/xfglob.c:1567
 msgid "Stay on single filesystem"
-msgstr "§½­­©ó³æ¤@¨t²Î"
+msgstr "å±€é™æ–¼å–®ä¸€ç³»çµ±"
 
 #: xfglob/xfglob.c:1568
 msgid "What's a single filesystem?"
-msgstr "¦ó¿×³æ¤@¨t²Î?"
+msgstr "ä½•è¬‚å–®ä¸€ç³»çµ±?"
 
 #: xfglob/xfglob.c:1572
 msgid ""
@@ -2535,18 +2535,18 @@ msgid ""
 "This is especially useful if you do not want\n"
 "to search into nfs or smb mounts.\n"
 msgstr ""
-"§½­­©ó³æ¤@¨t²Î·|©¿²¤\n"
-"¨ä¥LºÏºĞ¤À³Î°Ïªº·j¯Á¡C\n"
-"¨ä§@¥Î¦b°²¦p§A¤£·Q\n"
-"¦bnfs©Îsmb±¾¸ü¤U·j´MÀÉ®×¡C\n"
+"å±€é™æ–¼å–®ä¸€ç³»çµ±æœƒå¿½ç•¥\n"
+"å…¶ä»–ç£ç¢Ÿåˆ†å‰²å€çš„æœç´¢ã€‚\n"
+"å…¶ä½œç”¨åœ¨å‡å¦‚ä½ ä¸æƒ³\n"
+"åœ¨nfsæˆ–smbæ›è¼‰ä¸‹æœå°‹æª”æ¡ˆã€‚\n"
 
 #: xfglob/xfglob.c:1594
 msgid "Permission considerations"
-msgstr "Åv­­¯S¼x"
+msgstr "æ¬Šé™ç‰¹å¾µ"
 
 #: xfglob/xfglob.c:1598
 msgid "How does permission filtering work?"
-msgstr "¦p¦ó³]©wÅv­­¹LÂo?"
+msgstr "å¦‚ä½•è¨­å®šæ¬Šé™é?o?"
 
 #: xfglob/xfglob.c:1602
 msgid ""
@@ -2556,19 +2556,19 @@ msgid ""
 "-If no permission bit is chosen, files with \n"
 "  no set permission bits will match.\n"
 msgstr ""
-"·íÅv­­¹LÂo³Q®M¥Î®É¡G\n"
-"-°²­Y¤@­ÓÀÉ®×¤w¾Ö¦³¨ä¤¤¤@¨Ç¹LÂo±ø¥ó¡B\n"
-" ¥¦±N³Q®M¤J·j´M¥Ø¼Ğ¤¤¡C\n"
-"-°²­Y¨S¦³¹LÂo±ø¥ó³Q¿ï¥Î¡B·j´M·|¥H\n"
-" ¥¼³]Åv­­±ø¥óªºÀÉ®×¬°¥Ø¼Ğ¡C\n"
+"ç•¶æ¬Šé™éæ¿¾è¢«å¥—ç”¨æ™‚ï¼š\n"
+"-å‡è‹¥ä¸€å€‹æª”æ¡ˆå·²æ“æœ‰å…¶ä¸­ä¸€äº›éæ¿¾æ¢ä»¶ã€\n"
+" å®ƒå°‡è¢«å¥—å…¥æœå°‹ç›®æ¨™ä¸­ã€‚\n"
+"-å‡è‹¥æ²’æœ‰éæ¿¾æ¢ä»¶è¢«é¸ç”¨ã€æœå°‹æœƒä»¥\n"
+" æœªè¨­æ¬Šé™æ¢ä»¶çš„æª”æ¡ˆç‚ºç›®æ¨™ã€‚\n"
 
 #: xfglob/xfglob.c:1698
 msgid "User/group considerations"
-msgstr "¥Î¤á/²Õ§O¯S¼x"
+msgstr "ç”¨æˆ¶/çµ„åˆ¥ç‰¹å¾µ"
 
 #: xfglob/xfglob.c:1702
 msgid "How does user/group filtering work?"
-msgstr "¦p¦ó³]©w¥Î¤á/²Õ§O¹LÂo?"
+msgstr "å¦‚ä½•è¨­å®šç”¨æˆ¶/çµ„åˆ¥éæ¿¾?"
 
 #: xfglob/xfglob.c:1706
 msgid ""
@@ -2577,26 +2577,26 @@ msgid ""
 "-files must meet both criteria in order\n"
 "  to match\n"
 msgstr ""
-"°²­Y¥Î¤á¤Î²Õ§O¦P³Q³]¬°¥ô¦óªº\n"
-"¹LÂo±ø¥ó¬O¦U¤£¬Û¦Pªº­È¡G\n"
-"-ÀÉ®×¥²¶·²Å¦X¥H¤W¨â­Ó±ø¥ó\n"
-" ¤~·|³Q®M¥Î¬°·j´M¥Ø¼Ğ\n"
+"å‡è‹¥ç”¨æˆ¶åŠçµ„åˆ¥åŒè¢«è¨­ç‚ºä»»ä½•çš„\n"
+"éæ¿¾æ¢ä»¶æ˜¯å„ä¸ç›¸åŒçš„å€¼ï¼š\n"
+"-æª”æ¡ˆå¿…é ˆç¬¦åˆä»¥ä¸Šå…©å€‹æ¢ä»¶\n"
+" æ‰æœƒè¢«å¥—ç”¨ç‚ºæœå°‹ç›®æ¨™\n"
 
 #: xfglob/xfglob.c:1717
 msgid "User ID: "
-msgstr "¥Î¤á ID¡G"
+msgstr "ç”¨æˆ¶ IDï¼š"
 
 #: xfglob/xfglob.c:1728
 msgid "Group ID: "
-msgstr "²Õ§O ID¡G"
+msgstr "çµ„åˆ¥ IDï¼š"
 
 #: xfglob/xfglob.c:1743
 msgid "Size considerations"
-msgstr "¤j¤p¯S¼x"
+msgstr "å¤§å°ç‰¹å¾µ"
 
 #: xfglob/xfglob.c:1747
 msgid "How does size filtering work?"
-msgstr "¦p¦ó³]©wÀÉ®×¤j¤pªº¹LÂo?"
+msgstr "å¦‚ä½•è¨­å®šæª”æ¡ˆå¤§å°çš„éæ¿¾?"
 
 #: xfglob/xfglob.c:1751
 msgid ""
@@ -2606,27 +2606,27 @@ msgid ""
 " are specified, both criteria must be met\n"
 " in order for a file to match.\n"
 msgstr ""
-"-¦p¤j¤p³]¬°0\n"
-"©Î¤p©ó0¡B±N³Q©¿²¤¡C\n"
-"-¦p¤j©ó¤Î¤p©ó¦P®É\n"
-"³Q³]©w¡B¨â­Ó¼Ğ·Ç¥²¶·¦Xªk\n"
-"§_«h¦³ÃöÀÉ®×¤£¯à®M¥Î¨ä¤j¤p³]©w¡C\n"
+"-å¦‚å¤§å°è¨­ç‚º0\n"
+"æˆ–å°æ–¼0ã€å°‡è¢«å¿½ç•¥ã€‚\n"
+"-å¦‚å¤§æ–¼åŠå°æ–¼åŒæ™‚\n"
+"è¢«è¨­å®šã€å…©å€‹æ¨™æº–å¿…é ˆåˆæ³•\n"
+"å¦å‰‡æœ‰é—œæª”æ¡ˆä¸èƒ½å¥—ç”¨å…¶å¤§å°è¨­å®šã€‚\n"
 
 #: xfglob/xfglob.c:1763
 msgid "Size greater than (KB): "
-msgstr "ªø«×¤j©ó (KB)¡G"
+msgstr "é•·åº¦å¤§æ–¼ (KB)ï¼š"
 
 #: xfglob/xfglob.c:1778
 msgid "Size less than (KB): "
-msgstr "ªø«×¤p©ó (KB)¡G"
+msgstr "é•·åº¦å°æ–¼ (KB)ï¼š"
 
 #: xfglob/xfglob.c:1798
 msgid "Time considerations"
-msgstr "®É¶¡¯S¼x"
+msgstr "æ™‚é–“ç‰¹å¾µ"
 
 #: xfglob/xfglob.c:1802
 msgid "How does time filtering work?"
-msgstr "¦p¦ó³]©w®É¶¡¹LÂo?"
+msgstr "å¦‚ä½•è¨­å®šæ™‚é–“éæ¿¾?"
 
 #: xfglob/xfglob.c:1806
 msgid ""
@@ -2654,140 +2654,140 @@ msgid ""
 "will have its access time altered, so two consecutive\n"
 "runs will not produce identical results.\n"
 msgstr ""
-"¥H¤U¤T­Ó¬°¥i³Q¿ï¥Îªº®É¶¡¼Ò¦¡¡G\n"
-"*­×§ï¤é´Á¡G\n"
-"  ¸ÓÂàÅÜ¬°·í¬YÀÉ®×³Q§ó§ï¡B¨Ò¦p¡G\n"
-"  ³Q«Ø¥ß(2)¡B³QÁYµu(2)¡B³Q¥[ªø(2)¤Î³Q¼g¤J(2)\n"
-"  (¶W¹L0­Óbytes)¡C¦AªÌ¡B­×§ï®É¶¡\n"
-"  ¥ç¥]¬A¥Ø¿ı¤Î¥Ø¿ı¤ºªºÀÉ®×¡B³Ğ«Ø©M§R°£ªº¤é´Á¡C¦ı\n"
-"  §ïÅÜ¥Î¤á¡B²Õ§O¡Bµw³sµ²¡B©Î¼Ò¦¡¡B\n"
-"  ¤£·|¼vÅT­×§ï¤é´Á¡C\n"
+"ä»¥ä¸‹ä¸‰å€‹ç‚ºå¯è¢«é¸ç”¨çš„æ™‚é–“æ¨¡å¼ï¼š\n"
+"*ä¿®æ”¹æ—¥æœŸï¼š\n"
+"  è©²è½‰è®Šç‚ºç•¶æŸæª”æ¡ˆè¢«æ›´æ”¹ã€ä¾‹å¦‚ï¼š\n"
+"  è¢«å»ºç«‹(2)ã€è¢«ç¸®çŸ­(2)ã€è¢«åŠ é•·(2)åŠè¢«å¯«å…¥(2)\n"
+"  (è¶…é0å€‹bytes)ã€‚å†è€…ã€ä¿®æ”¹æ™‚é–“\n"
+"  äº¦åŒ…æ‹¬ç›®éŒ„åŠç›®éŒ„å…§çš„æª”æ¡ˆã€å‰µå»ºå’Œåˆªé™¤çš„æ—¥æœŸã€‚ä½†\n"
+"  æ”¹è®Šç”¨æˆ¶ã€çµ„åˆ¥ã€ç¡¬é€£çµã€æˆ–æ¨¡å¼ã€\n"
+"  ä¸æœƒå½±éŸ¿ä¿®æ”¹æ—¥æœŸã€‚\n"
 "\n"
-"*ÅÜ§ó¤é´Á¡G\n"
-"  ¦¹±ø¥ó¬°§ïÅÜ©ó¼g¤J©Î³]©w inode\n"
-"  ¸ê®Æ(¨Ò¦p¡G¾Ö¦³ªÌ¡B²Õ§O¡B³sµ²¼Æ¥Ø¡B¼Ò¦¡)¡C\n"
+"*è®Šæ›´æ—¥æœŸï¼š\n"
+"  æ­¤æ¢ä»¶ç‚ºæ”¹è®Šæ–¼å¯«å…¥æˆ–è¨­å®š inode\n"
+"  è³‡æ–™(ä¾‹å¦‚ï¼šæ“æœ‰è€…ã€çµ„åˆ¥ã€é€£çµæ•¸ç›®ã€æ¨¡å¼)ã€‚\n"
 "\n"
-"*³X°İ¤é´Á¡G\n"
-"   ¦¹±ø¥ó¬°§ïÅÜ©óÀÉ®×³Q³X°İ¡B¨Ò¦p¡G³Q\n"
-"   °õ¦æ(2)¡B«Ø¥ß(2)¡B¾É¥Î(2)¤ÎÅª¨ú(2)\n"
-"   (¶W¹L0­Óbytes)¡C¨ä¥L±`³W©Ê¤u§@¡B¹³\n"
-"   ¬M®g¡B½Æ»s¡B¥ç¥i¯à¼vÅT³X°İ¤é´Á¡C\n"
+"*è¨ªå•æ—¥æœŸï¼š\n"
+"   æ­¤æ¢ä»¶ç‚ºæ”¹è®Šæ–¼æª”æ¡ˆè¢«è¨ªå•ã€ä¾‹å¦‚ï¼šè¢«\n"
+"   åŸ·è¡Œ(2)ã€å»ºç«‹(2)ã€å°ç”¨(2)åŠè®€å–(2)\n"
+"   (è¶…é0å€‹bytes)ã€‚å…¶ä»–å¸¸è¦æ€§å·¥ä½œã€åƒ\n"
+"   æ˜ å°„ã€è¤‡è£½ã€äº¦å¯èƒ½å½±éŸ¿è¨ªå•æ—¥æœŸã€‚\n"
 "\n"
-"½Ğª`·N¡G¨C¦¸¥Hxfglob·j´MªºÀÉ®×¡B¥¦\n"
-"¥ç·|³Q§ï¼g³X°İ¤é´Á¡B¦]¦¹¨â¦¸³sÄò°õ¦æ\n"
-"xfglob·|¹ï¤w³]©w¹LÂo±ø¥óªºÀÉ®×²£¥Í¤£¦Pµ²ªG¡C\n"
+"è«‹æ³¨æ„ï¼šæ¯æ¬¡ä»¥xfglobæœå°‹çš„æª”æ¡ˆã€å®ƒ\n"
+"äº¦æœƒè¢«æ”¹å¯«è¨ªå•æ—¥æœŸã€å› æ­¤å…©æ¬¡é€£çºŒåŸ·è¡Œ\n"
+"xfglobæœƒå°å·²è¨­å®šéæ¿¾æ¢ä»¶çš„æª”æ¡ˆç”¢ç”Ÿä¸åŒçµæœã€‚\n"
 
 #: xfglob/xfglob.c:1818
 msgid "Modified"
-msgstr "­×§ï¤é´Á"
+msgstr "ä¿®æ”¹æ—¥æœŸ"
 
 #: xfglob/xfglob.c:1819
 msgid "Changed"
-msgstr "ÅÜ§ó¤é´Á"
+msgstr "è®Šæ›´æ—¥æœŸ"
 
 #: xfglob/xfglob.c:1820
 msgid "Accessed"
-msgstr "³X°İ¤é´Á"
+msgstr "è¨ªå•æ—¥æœŸ"
 
 #: xfglob/xfglob.c:1826
 msgid "In the previous : "
-msgstr "¦b¦¹¤§«e¡G"
+msgstr "åœ¨æ­¤ä¹‹å‰ï¼š"
 
 #: xfglob/xfglob.c:1836
 msgid "Minutes"
-msgstr "¤À"
+msgstr "åˆ†"
 
 #: xfglob/xfglob.c:1837
 msgid "Hours"
-msgstr "¤p®É"
+msgstr "å°æ™‚"
 
 #: xfglob/xfglob.c:1838
 msgid "Days"
-msgstr "¤Ñ"
+msgstr "å¤©"
 
 #: xfglob/xfglob.c:1839
 msgid "Months"
-msgstr "¤ë"
+msgstr "æœˆ"
 
 #: xfglob/xfglob.c:1870
 msgid "General considerations"
-msgstr "¤@¯ë¯S¼x"
+msgstr "ä¸€èˆ¬ç‰¹å¾µ"
 
 #: xfglob/xfglob.c:1880
 msgid "Do not look into binary files"
-msgstr "¤£¬d¬İ¤G¶i¨îÀÉ®×"
+msgstr "ä¸æŸ¥çœ‹äºŒé€²åˆ¶æª”æ¡ˆ"
 
 #: xfglob/xfglob.c:1882
 msgid "Output count of matching lines"
-msgstr "¿é¥X¤Ç°tªº¦æ¼Æ"
+msgstr "è¼¸å‡ºåŒ¹é…çš„è¡Œæ•¸"
 
 #: xfglob/xfglob.c:1884
 msgid "Match anywhere"
-msgstr "¤Ç°t¥ô¦ó¦a¤è"
+msgstr "åŒ¹é…ä»»ä½•åœ°æ–¹"
 
 #: xfglob/xfglob.c:1885
 msgid "Match whole words only"
-msgstr "¶È¤Ç°t¾ãµü"
+msgstr "åƒ…åŒ¹é…æ•´è©"
 
 #: xfglob/xfglob.c:1886
 msgid "Match whole lines only"
-msgstr "¶È¤Ç°t¾ã¦æ"
+msgstr "åƒ…åŒ¹é…æ•´è¡Œ"
 
 #: xfglob/xfglob.c:1887
 msgid "Output files where no match is found"
-msgstr "¿é¥X¤£¤Ç°tªºÀÉ®×"
+msgstr "è¼¸å‡ºä¸åŒ¹é…çš„æª”æ¡ˆ"
 
 #: xfglob/xfglob.c:1916
 msgid "Filter options"
-msgstr "¹LÂo¾¹¿ï¶µ"
+msgstr "éæ¿¾å™¨é¸é …"
 
 #: xfglob/xfglob.c:1919
 msgid "Content options"
-msgstr "¤º®e¿ï¶µ"
+msgstr "å…§å®¹é¸é …"
 
 #: xfglob/xfglob.c:1947
 msgid "Results"
-msgstr "µ²ªG"
+msgstr "çµæœ"
 
 #: xfglob/xfglob.c:1962
 msgid "working..."
-msgstr "¶i¦æ¤¤¡K¡K"
+msgstr "é€²è¡Œä¸­â€¦â€¦"
 
 #: xfglob/xfglob.c:1965
 msgid "Cancel Search"
-msgstr "¨ú®ø·j¯Á"
+msgstr "å–æ¶ˆæœç´¢"
 
 #: xfglob/xfglob.c:2014
 msgid "Nothing found...\n"
-msgstr "§ä¤£¨ì¡K¡K\n"
+msgstr "æ‰¾ä¸åˆ°â€¦â€¦\n"
 
 #: xfglob/xfglob.c:2022
 msgid "Files found="
-msgstr "§ä¨ìÀÉ®×¡F"
+msgstr "æ‰¾åˆ°æª”æ¡ˆï¼›"
 
 #: xfglob/xfglob.c:2025
 msgid "(interrupted because limit exceded)"
-msgstr "(¤w¸g¹F¨ì­­¨î¼Æ¥Ø)"
+msgstr "(å·²ç¶“é”åˆ°é™åˆ¶æ•¸ç›®)"
 
 #: xfglob/xfglob.c:2079
 msgid "lines"
-msgstr "¦æ"
+msgstr "è¡Œ"
 
 #: xfglob/xfglob.c:2145
 msgid "unable to stat:"
-msgstr "µLªk²Î­p¡G"
+msgstr "ç„¡æ³•çµ±è¨ˆï¼š"
 
 #: xfclock/xfclock.c:118
 msgid "XFClock - XFce Clock & Calendar"
-msgstr "XFClock - XFce ®ÉÄÁ©M¤é¾ä"
+msgstr "XFClock - XFce æ™‚é˜å’Œæ—¥æ›†"
 
 #: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
 "(c) 1997-2002 Olivier Fourdan"
 msgstr ""
-"XFClock®Ä¯à§¹¾ãªº®ÉÄÁ\n"
-"(c) 1997-2002 Olivier Fourdan"
+"XFClockæ•ˆèƒ½å®Œæ•´çš„æ™‚é˜\n"
+"(c) 1997-2000 Olivier Fourdan"
 
 #: xfclock/xfclock_config.c:53
 #, c-format
@@ -2795,7 +2795,7 @@ msgid ""
 "XFclock : Syntax error in configuration file\n"
 "(%s)\n"
 msgstr ""
-"®ÉÄÁ ¡G ³]¸mÀÉ»yªk¿ù»~\n"
+"æ™‚é˜ ï¼š è¨­ç½®æª”èªæ³•éŒ¯èª¤\n"
 "(%s)\n"
 
 #: xfclock/xfclock_config.c:61
@@ -2804,130 +2804,130 @@ msgid ""
 "XFclock : Data mismatch error in config file\n"
 "(%s)\n"
 msgstr ""
-"®ÉÄÁ ¡G °t¸mÀÉ®×¼Æ¾Ú¤Ç°t¿ù»~\n"
+"æ™‚é˜ ï¼š é…ç½®æª”æ¡ˆæ•¸æ“šåŒ¹é…éŒ¯èª¤\n"
 "(%s)\n"
 
 #: xfclock/xfclock_menus.c:48
 msgid "Hide/show menubar"
-msgstr "ÁôÂÃ/Åã¥Ü ¿ï³æ¦C"
+msgstr "éš±è—/é¡¯ç¤º é¸å–®åˆ—"
 
 #: xfclock/xfclock_menus.c:54 xfclock/xfclock_menus.c:103
 msgid "Hide/show calendar"
-msgstr "ÁôÂÃ/Åã¥Ü ¤é¾ä"
+msgstr "éš±è—/é¡¯ç¤º æ—¥æ›†"
 
 #. Create "Settings" menu
 #: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:892
 msgid "Settings"
-msgstr "³]©w"
+msgstr "è¨­å®š"
 
 #: xfclock/xfclock_menus.c:119
 msgid "24 hour mode"
-msgstr "24¤p®É¼Ò¦¡"
+msgstr "24å°æ™‚æ¨¡å¼"
 
 #: xfclock/xfclock_menus.c:126
 msgid "Display AM/PM"
-msgstr "Åã¥Ü¤W¤È/¤U¤È"
+msgstr "é¡¯ç¤ºä¸Šåˆ/ä¸‹åˆ"
 
 #: xfclock/xfclock_menus.c:133
 msgid "Display seconds"
-msgstr "Åã¥Ü¬í"
+msgstr "é¡¯ç¤ºç§’"
 
 #: xfclock/xfclock_menus.c:144
 msgid "Background color..."
-msgstr "­I´ºÃC¦â..."
+msgstr "èƒŒæ™¯é¡è‰²..."
 
 #: xfclock/xfclock_menus.c:149
 msgid "Foreground color..."
-msgstr "«e´ºÃC¦â..."
+msgstr "å‰æ™¯é¡è‰²..."
 
 #: xfclock/xfclock_menus.c:154
 msgid "Font..."
-msgstr "¦rÅé..."
+msgstr "å­—é«”..."
 
 #: xfclock/xfclock_menus.c:163
 msgid "Hide menubar"
-msgstr "ÁôÂÃ¿ï³æ¦C"
+msgstr "éš±è—é¸å–®åˆ—"
 
 #. Create "Calendar options" menu
 #: xfclock/xfclock_menus.c:169
 msgid "Calendar Options"
-msgstr "¤é¾ä¿ï¶µ"
+msgstr "æ—¥æ›†é¸é …"
 
 #: xfclock/xfclock_menus.c:176
 msgid "Mark Fridays"
-msgstr "¼Ğ°O¬P´Á¤­"
+msgstr "æ¨™è¨˜æ˜ŸæœŸäº”"
 
 #: xfclock/xfclock_menus.c:183
 msgid "Mark Saturdays"
-msgstr "¼Ğ°O¬P´Á¤»"
+msgstr "æ¨™è¨˜æ˜ŸæœŸå…­"
 
 #: xfclock/xfclock_menus.c:190
 msgid "Mark Sundays"
-msgstr "¼Ğ°O¬P´Á¤é"
+msgstr "æ¨™è¨˜æ˜ŸæœŸæ—¥"
 
 #: xfclock/xfclock_menus.c:201
 msgid "Show week numbers"
-msgstr "Åã¥Ü¬P´Á¼Æ"
+msgstr "é¡¯ç¤ºæ˜ŸæœŸæ•¸"
 
 #: xfclock/xfclock_menus.c:208
 msgid "Show day names"
-msgstr "Åã¥Ü¤é´Á¦W"
+msgstr "é¡¯ç¤ºæ—¥æœŸå"
 
 #: xfclock/xfclock_menus.c:215
 msgid "Show heading"
-msgstr "Åã¥Ü©ïÀY"
+msgstr "é¡¯ç¤ºæŠ¬é ­"
 
 #: xfclock/xfclock_menus.c:226
 msgid "Week starts on Monday"
-msgstr "¥H¬P´Á¤@¶}ÀY"
+msgstr "ä»¥æ˜ŸæœŸä¸€é–‹é ­"
 
 #: xfmouse/xfmouse.c:66
 msgid "xfmouse: Error, cannot open display.\n"
-msgstr "xfmouse: ¿ù»~¡B ¤£¯à¥´¶}Åã¥Ü¡C\n"
+msgstr "xfmouse: éŒ¯èª¤ã€ ä¸èƒ½æ‰“é–‹é¡¯ç¤ºã€‚\n"
 
 #: xfmouse/xfmouse.c:67
 msgid "Is X running and $DISPLAY correctly set ?\n"
-msgstr "X ¹B¦æ¤F? $DISPLAY ³]¸m¥¿½T?\n"
+msgstr "X é‹è¡Œäº†? $DISPLAY è¨­ç½®æ­£ç¢º?\n"
 
 #: xfmouse/xfmouse.c:144
 msgid "XFMouse - XFce Mouse Configuration"
-msgstr "XFMouse - XFce ·Æ¹«³]¸m"
+msgstr "XFMouse - XFce æ»‘é¼ è¨­ç½®"
 
 #: xfmouse/xfmouse.c:177
 msgid "Button Settings"
-msgstr "¹«¼Ğ«ö¶s³]©w"
+msgstr "é¼ æ¨™æŒ‰éˆ•è¨­å®š"
 
 #: xfmouse/xfmouse.c:225
 msgid "Motion Settings"
-msgstr "¹«¼Ğ¹B°Ê³]©w"
+msgstr "é¼ æ¨™é‹å‹•è¨­å®š"
 
 #: xfmouse/xfmouse.c:252
 msgid "Threshold : "
-msgstr "Á{¬É­È:"
+msgstr "è‡¨ç•Œå€¼:"
 
 #: xfmouse/xfmouse.c:261
 msgid "Acceleration : "
-msgstr "¥[³t«× :"
+msgstr "åŠ é€Ÿåº¦ :"
 
 #: xfbd/xfbd.c:695 xfmouse/xfmouse.c:441
 #, c-format
 msgid "Usage : %s [OPTIONS]\n"
-msgstr "¹B¥Î¿ï¾Ü ¡G %s [OPTIONS]\n"
+msgstr "é‹ç”¨é¸æ“‡ ï¼š %s [OPTIONS]\n"
 
 #: xfbd/xfbd.c:696 xfmouse/xfmouse.c:442
 msgid "   Where OPTIONS are :\n"
-msgstr " ¿ï¾Ü OPTIONS ¬O ¡G\n"
+msgstr " é¸æ“‡ OPTIONS æ˜¯ ï¼š\n"
 
 #: xfmouse/xfmouse.c:443
 msgid "   -i : interactive\n"
-msgstr "   -i ¡G ¥æ¤¬ªº\n"
+msgstr "   -i ï¼š äº¤äº’çš„\n"
 
 #: xfmouse/xfmouse.c:444
 msgid ""
 "   -d : apply configuration and exit (default)\n"
 "\n"
 msgstr ""
-"   -d ¡G ¥[¤J³]©w¨Ã°h¥X (¹w³])\n"
+"   -d ï¼š åŠ å…¥è¨­å®šä¸¦é€€å‡º (é è¨­)\n"
 "\n"
 
 #: xfbd/xfbd.c:699 xfmouse/xfmouse.c:445
@@ -2936,329 +2936,329 @@ msgid ""
 "%s is part of the XFce distribution, written by Olivier Fourdan\n"
 "\n"
 msgstr ""
-"%s ¬O XFceªº¤@³¡¤À¡B§@ªÌ Olivier Fourdan\n"
+"%s æ˜¯ XFceçš„ä¸€éƒ¨åˆ†ã€ä½œè€… Olivier Fourdan\n"
 "\n"
 
 #: xfsound/xfsound.c:75
 msgid "New Desk"
-msgstr "·s®à­±"
+msgstr "æ–°æ¡Œé¢"
 
 #: xfsound/xfsound.c:76
 msgid "Add Window"
-msgstr "²K¥[µ¡¤f"
+msgstr "æ·»åŠ çª—å£"
 
 #: xfsound/xfsound.c:77
 msgid "Raise Window"
-msgstr "´£¤Éµ¡¤f"
+msgstr "æå‡çª—å£"
 
 #: xfsound/xfsound.c:78
 msgid "Lower Window"
-msgstr "¤U­°µ¡¤f"
+msgstr "ä¸‹é™çª—å£"
 
 #: xfsound/xfsound.c:79
 msgid "Configure Window"
-msgstr "³]¸mµ¡¤f"
+msgstr "è¨­ç½®çª—å£"
 
 #: xfsound/xfsound.c:80
 msgid "Focus Change"
-msgstr "§ïÅÜµJÂI"
+msgstr "æ”¹è®Šç„¦é»"
 
 #: xfsound/xfsound.c:81
 msgid "Destroy Window"
-msgstr "±j¦æÃö³¬"
+msgstr "å¼·è¡Œé—œé–‰"
 
 #: xfsound/xfsound.c:82
 msgid "Iconify"
-msgstr "¹Ï¥Ü¤Æ"
+msgstr "åœ–ç¤ºåŒ–"
 
 #: xfsound/xfsound.c:83
 msgid "De-iconify"
-msgstr "¥h¹Ï¥Ü¤Æ"
+msgstr "å»åœ–ç¤ºåŒ–"
 
 #: xfsound/xfsound.c:84
 msgid "Shade"
-msgstr "±²°_"
+msgstr "æ²èµ·"
 
 #: xfsound/xfsound.c:85
 msgid "Un-Shade"
-msgstr "®i¶}"
+msgstr "å±•é–‹"
 
 #: xfsound/xfsound.c:86
 msgid "Maximize"
-msgstr "³Ì¤j¤Æ"
+msgstr "æœ€å¤§åŒ–"
 
 #: xfsound/xfsound.c:87
 msgid "De-maximize"
-msgstr "¥h³Ì¤j¤Æ"
+msgstr "å»æœ€å¤§åŒ–"
 
 #: xfsound/xfsound.c:89
 msgid "Shutdown"
-msgstr "Ãö³¬"
+msgstr "é—œé–‰"
 
 #: xfsound/xfsound.c:90
 msgid "Unknown"
-msgstr "¥¼ª¾"
+msgstr "æœªçŸ¥"
 
 #: xfsound/xfsound.c:442
 msgid "XFSound - XFce Sound Manager"
-msgstr "XFSound - XFce Án­µºŞ²z­û"
+msgstr "XFSound - XFce è²éŸ³ç®¡ç†å“¡"
 
 #: xfsound/xfsound.c:489
 msgid "Event : "
-msgstr "¨Æ¥ó:"
+msgstr "äº‹ä»¶:"
 
 #: xfsound/xfsound.c:496
 msgid "Sound file : "
-msgstr "Án­µÀÉ®×:"
+msgstr "è²éŸ³æª”æ¡ˆ:"
 
 #: xfsound/xfsound.c:503
 msgid "Test"
-msgstr "´ú¸Õ"
+msgstr "æ¸¬è©¦"
 
 #: xfsound/xfsound.c:543
 msgid "Play Sound"
-msgstr "¼½©ñÁn­µ"
+msgstr "æ’­æ”¾è²éŸ³"
 
 #: xfsound/xfsound.c:551
 msgid "Command : "
-msgstr "«ü¥O:"
+msgstr "æŒ‡ä»¤:"
 
 #: xfsound/xfsound.c:575
 msgid "Internal"
-msgstr "¤º³¡"
+msgstr "å…§éƒ¨"
 
 #: xfsound/xfsound.c:581
 msgid "External"
-msgstr "¥~³¡"
+msgstr "å¤–éƒ¨"
 
 #: xfbd/xfbd.c:280
 msgid ""
 "Error\n"
 "Cannot open file"
 msgstr ""
-"¿ù»~\n"
-"¤£¯à¥´¶}ÀÉ®×"
+"éŒ¯èª¤\n"
+"ä¸èƒ½æ‰“é–‹æª”æ¡ˆ"
 
 #: xfbd/xfbd.c:282
 msgid ""
 "Error\n"
 "Cannot allocate colors"
 msgstr ""
-"¿ù»~\n"
-"¤£¯à¤À°t¦â±m"
+"éŒ¯èª¤\n"
+"ä¸èƒ½åˆ†é…è‰²å½©"
 
 #: xfbd/xfbd.c:284
 msgid ""
 "Error\n"
 "File format invalid"
 msgstr ""
-"¿ù»~\n"
-"«DªkÀÉ®×®æ¦¡"
+"éŒ¯èª¤\n"
+"éæ³•æª”æ¡ˆæ ¼å¼"
 
 #: xfbd/xfbd.c:286
 msgid ""
 "Error\n"
 "Color definition invalid"
 msgstr ""
-"¿ù»~\n"
-"«DªkÃC¦â©w¸q"
+"éŒ¯èª¤\n"
+"éæ³•é¡è‰²å®šç¾©"
 
 #: xfbd/xfbd.c:288
 msgid ""
 "Error\n"
 "Not enough Memory"
 msgstr ""
-"¿ù»~\n"
-"°O¾ĞÅé¤£¨¬"
+"éŒ¯èª¤\n"
+"è¨˜æ†¶é«”ä¸è¶³"
 
 #: xfbd/xfbd.c:405
 msgid "XFbd - XFce Backdrop Manager"
-msgstr "XFbd - XFce ­I´ººŞ²z­û"
+msgstr "XFbd - XFce èƒŒæ™¯ç®¡ç†å“¡"
 
 #: xfbd/xfbd.c:448 xfbd/xfbdmgr.c:148
 msgid "Filename : "
-msgstr "ÀÉ®×¦WºÙ ¡G"
+msgstr "æª”æ¡ˆåç¨± ï¼š"
 
 #: xfbd/xfbd.c:470
 msgid "Display image : "
-msgstr "Åã¥Ü¹Ï¤ù ¡G"
+msgstr "é¡¯ç¤ºåœ–ç‰‡ ï¼š"
 
 #: xfbd/xfbd.c:477
 msgid "Tiled"
-msgstr "¥­çE"
+msgstr "å¹³èˆ–"
 
 #: xfbd/xfbd.c:485
 msgid "Stretched"
-msgstr "¦ù®i"
+msgstr "ä¼¸å±•"
 
 #: xfbd/xfbd.c:493
 msgid "Auto"
-msgstr "¦Û°Ê"
+msgstr "è‡ªå‹•"
 
 #: xfbd/xfbd.c:697
 msgid "   -i : interactive, prompts for backdrop to display\n"
-msgstr "   -i ¡G ¥æ¤¬ªº¡B´£¥ÜÅã¥Ü­I´º\n"
+msgstr "   -i ï¼š äº¤äº’çš„ã€æç¤ºé¡¯ç¤ºèƒŒæ™¯\n"
 
 #: xfbd/xfbd.c:698
 msgid ""
 "   -d : display, reads configuration and exit (default)\n"
 "\n"
 msgstr ""
-"   -d ¡G Åã¥Ü¡BÅª¨ú³]¸mµM«á°h¥X(¹w³])\n"
+"   -d ï¼š é¡¯ç¤ºã€è®€å–è¨­ç½®ç„¶å¾Œé€€å‡º(é è¨­)\n"
 "\n"
 
 #: xfbd/xfbdmgr.c:89
 msgid "xfbdmgr - XFCE List Manager"
-msgstr "xfbdmgr - XFCE ¦CªíºŞ²z­û"
+msgstr "xfbdmgr - XFCE åˆ—è¡¨ç®¡ç†å“¡"
 
 #: xfbd/xfbdmgr.c:257
 msgid "File not found.\n"
-msgstr "§ä¤£¨ìÀÉ®×¡C\n"
+msgstr "æ‰¾ä¸åˆ°æª”æ¡ˆã€‚\n"
 
 #: xfwm/xfwm.c:862
 msgid "&Restart"
-msgstr "­«·s±Ò°Ê(&R)"
+msgstr "é‡æ–°å•Ÿå‹•(&R)"
 
 #: xfwm/xfwm.c:863
 msgid "&Quit"
-msgstr "°h¥X(&Q)"
+msgstr "é€€å‡º(&Q)"
 
 #: xfwm/xfwm.c:876
 msgid "&Move"
-msgstr "²¾°Ê(&M)"
+msgstr "ç§»å‹•(&M)"
 
 #: xfwm/xfwm.c:877
 msgid "&Resize"
-msgstr "ÁY©ñ(&R)"
+msgstr "ç¸®æ”¾(&R)"
 
 #: xfwm/xfwm.c:878
 msgid "(De)&Iconify"
-msgstr "(¥h)¹Ï¥Ü¤Æ(&I)"
+msgstr "(å»)åœ–ç¤ºåŒ–(&I)"
 
 #: xfwm/xfwm.c:879
 msgid "(Un)&Stick"
-msgstr "(¥h)Stick(&S)"
+msgstr "(å»)Stick(&S)"
 
 #: xfwm/xfwm.c:880
 msgid "(Un)S&hade"
-msgstr "(¥h)±²°_(&H)"
+msgstr "(å»)æ²èµ·(&H)"
 
 #: xfwm/xfwm.c:881
 msgid "(Un)Ma&ximize"
-msgstr "(¥h)³Ì¤j¤Æ(&X)"
+msgstr "(å»)æœ€å¤§åŒ–(&X)"
 
 #: xfwm/xfwm.c:883
 msgid "Se&nd to..."
-msgstr "¶Ç°e¨ì(&N)..."
+msgstr "å‚³é€åˆ°(&N)..."
 
 #: xfwm/xfwm.c:884
 msgid "S&witch to..."
-msgstr "¤Á´«¨ì(&W)..."
+msgstr "åˆ‡æ›åˆ°(&W)..."
 
 #: xfwm/xfwm.c:886
 msgid "&Close"
-msgstr "Ãö³¬(&C)"
+msgstr "é—œé–‰(&C)"
 
 #: xfwm/xfwm.c:888
 msgid "User Menu"
-msgstr "¥Î¤á¿ï³æ"
+msgstr "ç”¨æˆ¶é¸å–®"
 
 #: xfwm/xfwm.c:889
 msgid "Edit menu..."
-msgstr "½s¿è¿ï³æ¡K¡K"
+msgstr "ç·¨è¼¯é¸å–®â€¦â€¦"
 
 #: xfwm/xfwm.c:893
 msgid "&Mouse..."
-msgstr "¹«¼Ğ(&M)..."
+msgstr "é¼ æ¨™(&M)..."
 
 #: xfwm/xfwm.c:894
 msgid "&Backdrop..."
-msgstr "­I´º(&B)..."
+msgstr "èƒŒæ™¯(&B)..."
 
 #: xfwm/xfwm.c:895
 msgid "&Sound..."
-msgstr "Án­µ(&S)..."
+msgstr "è²éŸ³(&S)..."
 
 #: xfwm/xfwm.c:897
 msgid "&New window"
-msgstr "·sµ¡¤f(&N)"
+msgstr "æ–°çª—å£(&N)"
 
 #: xfwm/xfwm.c:898
 msgid "&User Menu"
-msgstr "¥Î¤á¿ï³æ(&U)"
+msgstr "ç”¨æˆ¶é¸å–®(&U)"
 
 #: xfwm/xfwm.c:902
 msgid "&Arrange icons"
-msgstr "±Æ¦C¹Ï¥Ü(&A)"
+msgstr "æ’åˆ—åœ–ç¤º(&A)"
 
 #: xfwm/xfwm.c:903
 msgid "&Iconify all"
-msgstr "¥ş³¡¹Ï¥Ü¤Æ(&I)"
+msgstr "å…¨éƒ¨åœ–ç¤ºåŒ–(&I)"
 
 #: xfwm/xfwm.c:904
 msgid "&Refresh"
-msgstr "¨ê·s(&R)"
+msgstr "åˆ·æ–°(&R)"
 
 #: xfwm/xfwm.c:905
 msgid "Shuffle &Up"
-msgstr "¦¸§Ç¤W½Õ(&U)"
+msgstr "æ¬¡åºä¸Šèª¿(&U)"
 
 #: xfwm/xfwm.c:906
 msgid "Shuffle &Down"
-msgstr "¦¸§Ç¤U½Õ(&D)"
+msgstr "æ¬¡åºä¸‹èª¿(&D)"
 
 #: xfwm/xfwm.c:908
 msgid "&Settings"
-msgstr "³]©w(&S)"
+msgstr "è¨­å®š(&S)"
 
 #: xfwm/xfwm.c:910
 msgid "&Quit XFwm"
-msgstr "°h¥X XFwm(&Q)"
+msgstr "é€€å‡º XFwm(&Q)"
 
 #: xfwm/xfwm.c:912
 msgid "&Full Screen"
-msgstr "¥ş¿Ã¹õ(&F)"
+msgstr "å…¨è¢å¹•(&F)"
 
 #: xfwm/xfwm.c:913
 msgid "&Vertical"
-msgstr "Áa¦V(&V)"
+msgstr "ç¸±å‘(&V)"
 
 #: xfwm/xfwm.c:914
 msgid "&Horizontal"
-msgstr "¾î¦V(&H)"
+msgstr "æ©«å‘(&H)"
 
 #: xfwm/xfwm.c:1244
 msgid "xfwm terminated: "
-msgstr "xfwm ³Q²×¤î¡G"
+msgstr "xfwm è¢«çµ‚æ­¢ï¼š"
 
 #: xfsamba/xfsamba.c:260
 msgid "Samba failure! Xfsamba could not find file:"
-msgstr "Samba ¥¢±Ñ! XFsamba ¤£¯à§ä¨ìÀÉ®×¡G"
+msgstr "Samba å¤±æ•—! XFsamba ä¸èƒ½æ‰¾åˆ°æª”æ¡ˆï¼š"
 
 #: xfsamba/xfsamba.c:268
 msgid "(please install Samba or else correct the PATH environment variable)"
-msgstr "(½Ğ¥ı¦w¸Ë Samba ©ÎªÌÀË¬dµ{§Ç¸ô®|¬O§_¥¿½T)"
+msgstr "(è«‹å…ˆå®‰è£ Samba æˆ–è€…æª¢æŸ¥ç¨‹åºè·¯å¾‘æ˜¯å¦æ­£ç¢º)"
 
 #: xfsamba/xfsamba_download.c:86
 msgid "File download failed. See diagnostics for reason."
-msgstr "ÀÉ®×¤U¸ü¥¢±Ñ¡C½Ğ¬d¬İ¶EÂ_«H®§¡C"
+msgstr "æª”æ¡ˆä¸‹è¼‰å¤±æ•—ã€‚è«‹æŸ¥çœ‹è¨ºæ–·ä¿¡æ¯ã€‚"
 
 #. upload was successful:
 #: xfsamba/xfsamba_download.c:90
 msgid "Download done."
-msgstr "¤U¸ü§¹¦¨¡C"
+msgstr "ä¸‹è¼‰å®Œæˆã€‚"
 
 #: xfsamba/xfsamba_download.c:126
 msgid "Downloading file..."
-msgstr "ÀÉ®×¤U¸ü¤¤¡K¡K"
+msgstr "æª”æ¡ˆä¸‹è¼‰ä¸­â€¦â€¦"
 
 #: xfsamba/xfsamba_download.c:139
 msgid "File download cancelled."
-msgstr "¤U¸ü³Q¨ú®ø¡C"
+msgstr "ä¸‹è¼‰è¢«å–æ¶ˆã€‚"
 
 #: xfsamba/xfsamba_download.c:147
 msgid "Download failed."
-msgstr "¤U¸ü¥¢±Ñ¡C"
+msgstr "ä¸‹è¼‰å¤±æ•—ã€‚"
 
 #: xfsamba/xfsamba_gui.c:319
 msgid ""
@@ -3269,12 +3269,12 @@ msgid ""
 "for changes to take effect. Otherwise,\n"
 "you must type in the node to be browsed and hit RETURN.\n"
 msgstr ""
-"°²­Yºôµ¸¤W¦³¡§win95¡¨¸`ÂI¡B xfsamba ¥i¯à§ä¤£¨ì\n"
-"¥DÂsÄı¾¹¡C¦p§A¦b linux ªº¥D¾÷¤W°õ¦æ SMB ªA°È,\n"
-"«Ø·N§A§â¥¦³]¦¨ samba-server¡B·í§A­«·s±Ò°Ê¡§win95¡¨\n"
-"°İÃDÀ³¥i¸Ñ¨M¡C¦p§A¤wª¾¸ô¥Ñ¾¹³]©w¡B­«±Ò¡§wind*ws¡¨\n"
-"«K·|§Y®É¥Í®Ä¡C§_«h¡B\n"
-"«K­n¦Û¦æÁä¤J³QÂsÄıªº¸`ÂI¡C\n"
+"å‡è‹¥ç¶²çµ¡ä¸Šæœ‰â€œwin95â€ç¯€é»ã€ xfsamba å¯èƒ½æ‰¾ä¸åˆ°\n"
+"ä¸»ç€è¦½å™¨ã€‚å¦‚ä½ åœ¨ linux çš„ä¸»æ©Ÿä¸ŠåŸ·è¡Œ SMB æœå‹™,\n"
+"å»ºæ„ä½ æŠŠå®ƒè¨­æˆ samba-serverã€ç•¶ä½ é‡æ–°å•Ÿå‹•â€œwin95â€\n"
+"å•é¡Œæ‡‰å¯è§£æ±ºã€‚å¦‚ä½ å·²çŸ¥è·¯ç”±å™¨è¨­å®šã€é‡å•Ÿâ€œwind*wsâ€\n"
+"ä¾¿æœƒå³æ™‚ç”Ÿæ•ˆã€‚å¦å‰‡ã€\n"
+"ä¾¿è¦è‡ªè¡Œéµå…¥è¢«ç€è¦½çš„ç¯€é»ã€‚\n"
 
 #: xfsamba/xfsamba_gui.c:324
 msgid ""
@@ -3282,9 +3282,9 @@ msgid ""
 "the companion file browser \"xftree\". Drag and drop may or not\n"
 "work with other file browsers"
 msgstr ""
-"§¹¾ãªº©ì©ñ¥\¯à¤w¾ã¦X¨ìSMBºôµ¸¤Î\n"
-"XFceªºÀÉ®×ÂsÄı¾¹¤§¤¤¡A¦ı¥\¯à¥¼¥²\n"
-"¥i»P¨ä¥¦ªºÂsÄı¾¹¦X¥Î"
+"å®Œæ•´çš„æ‹–æ”¾åŠŸèƒ½å·²æ•´åˆåˆ°SMBç¶²çµ¡åŠ\n"
+"XFceçš„æª”æ¡ˆç€è¦½å™¨ä¹‹ä¸­ï¼Œä½†åŠŸèƒ½æœªå¿…\n"
+"å¯èˆ‡å…¶å®ƒçš„ç€è¦½å™¨åˆç”¨"
 
 #: xfsamba/xfsamba_gui.c:331
 msgid ""
@@ -3295,12 +3295,12 @@ msgid ""
 "$ chmod u+s smbmount smbumount\n"
 "(This option is not available in FreeBSD4.4)"
 msgstr ""
-"¬°¤F¹F¨ì±¾¤JSMB¦@¨É¸ê·½¡A¥H¤UªºÀÉ®×¥²¶·³Q³]¬°suid-root:\n"
+"ç‚ºäº†é”åˆ°æ›å…¥SMBå…±äº«è³‡æºï¼Œä»¥ä¸‹çš„æª”æ¡ˆå¿…é ˆè¢«è¨­ç‚ºsuid-root:\n"
 "- smbmnt\n"
 "- smbumount\n"
-"³o¨â­ÓÀÉ®×³q±`¦b /usr/bin¡A½Ğ¥Hrootªº¨­¥÷¤U¥H¤U«ü¥O:\n"
+"é€™å…©å€‹æª”æ¡ˆé€šå¸¸åœ¨ /usr/binï¼Œè«‹ä»¥rootçš„èº«ä»½ä¸‹ä»¥ä¸‹æŒ‡ä»¤:\n"
 "$ chmod u+s smbmount smbumount\n"
-"(¦¹¥\¯à¤£¦XFreeBSD4.4)"
+"(æ­¤åŠŸèƒ½ä¸åˆFreeBSD4.4)"
 
 #: xfsamba/xfsamba_gui.c:343
 msgid ""
@@ -3308,9 +3308,9 @@ msgid ""
 "first mount the share with the mount tool\n"
 "and then use the xftree search utility to do the search\n"
 msgstr ""
-"·Q­n¦b¥~SMB¦@¨É¤º·j´MÀÉ®×\n"
-"¥ı­n¥H±¾¸ü¤u¨ã±¾¤J¦@¨Éªº¸ê·½\n"
-"¦A¥Hxftree¤ºªº·j´M¤u¨ã¨Ó°õ¦æ\n"
+"æƒ³è¦åœ¨å¤–SMBå…±äº«å…§æœå°‹æª”æ¡ˆ\n"
+"å…ˆè¦ä»¥æ›è¼‰å·¥å…·æ›å…¥å…±äº«çš„è³‡æº\n"
+"å†ä»¥xftreeå…§çš„æœå°‹å·¥å…·ä¾†åŸ·è¡Œ\n"
 
 #: xfsamba/xfsamba_gui.c:350
 msgid ""
@@ -3318,12 +3318,12 @@ msgid ""
 "first mount the share with the mount tool\n"
 "and then use the xftree diff utility to display the differences.\n"
 msgstr ""
-"·Q­n¦b¥~SMB¦@¨É¤º¬d¬İ¡y¤ñ¸û®t§O¡z¥ı­n¥H±¾¸ü¤u¨ã±¾¤J¦@¨Éªº¸ê·½\n"
-"¦A¥Hxftree¤ºªº¡y¤ñ¸û®t§O¡z¤u¨ã¨Ó°õ¦æ\n"
+"æƒ³è¦åœ¨å¤–SMBå…±äº«å…§æŸ¥çœ‹ã€æ¯”è¼ƒå·®åˆ¥ã€å…ˆè¦ä»¥æ›è¼‰å·¥å…·æ›å…¥å…±äº«çš„è³‡æº\n"
+"å†ä»¥xftreeå…§çš„ã€æ¯”è¼ƒå·®åˆ¥ã€å·¥å…·ä¾†åŸ·è¡Œ\n"
 
 #: xfsamba/xfsamba_gui.c:358
 msgid "This is XFSamba "
-msgstr "³o¬O XFSambaºôµ¸¾F©~ "
+msgstr "é€™æ˜¯ XFSambaç¶²çµ¡é„°å±… "
 
 #: xfsamba/xfsamba_gui.c:358
 msgid ""
@@ -3335,572 +3335,572 @@ msgstr ""
 
 #: xfsamba/xfsamba_gui.c:542
 msgid "Please provide information for server "
-msgstr "½Ğ´£¨Ñ¦øªA¾¹«H®§ "
+msgstr "è«‹æä¾›ä¼ºæœå™¨ä¿¡æ¯ "
 
 #: xfsamba/xfsamba_gui.c:544
 msgid "Please provide browsing preferences "
-msgstr "½Ğ´£¨ÑÂsÄı¤è¦¡ "
+msgstr "è«‹æä¾›ç€è¦½æ–¹å¼ "
 
 #: xfsamba/xfsamba_gui.c:561
 msgid "Username : "
-msgstr "¥Î¤á¦WºÙ¡G"
+msgstr "ç”¨æˆ¶åç¨±ï¼š"
 
 #: xfsamba/xfsamba_gui.c:585
 msgid "Password  : "
-msgstr "±K½X ¡G "
+msgstr "å¯†ç¢¼ ï¼š "
 
 #: xfsamba/xfsamba_gui.c:625 xfsamba/xfsamba_gui.c:631
 msgid "A single file can be selected!"
-msgstr "¥²¶·¥ı¿ï¾Ü¤@­ÓÀÉ®×!"
+msgstr "å¿…é ˆå…ˆé¸æ“‡ä¸€å€‹æª”æ¡ˆ!"
 
 #: xfsamba/xfsamba_gui.c:644 xfsamba/xfsamba_gui.c:650
 #: xfsamba/xfsamba_gui.c:663 xfsamba/xfsamba_gui.c:669
 #: xfsamba/xfsamba_gui.c:719 xfsamba/xfsamba_gui.c:725
 msgid "A single directory must be selected!"
-msgstr "¥²¶·¥ı¿ï¾Ü¤@­Ó¥Ø¿ı!"
+msgstr "å¿…é ˆå…ˆé¸æ“‡ä¸€å€‹ç›®éŒ„!"
 
 #: xfsamba/xfsamba_gui.c:683 xfsamba/xfsamba_gui.c:706
 msgid "Something to be deleted must be selected!"
-msgstr "½Ğ¥ı¿ï¾Ü¥Ø¼Ğ¦A¦æ§R°£"
+msgstr "è«‹å…ˆé¸æ“‡ç›®æ¨™å†è¡Œåˆªé™¤"
 
 #: xfsamba/xfsamba_gui.c:694
 msgid "Only elements from a single share may be selected!"
-msgstr "¥²¶·¥ı¿ï¾Ü¤@­Ó¥Ø¿ı!"
+msgstr "å¿…é ˆå…ˆé¸æ“‡ä¸€å€‹ç›®éŒ„!"
 
 #: xfsamba/xfsamba_gui.c:1041
 msgid "Going to master browser..."
-msgstr "¨ì¥DÂsÄı¾¹..."
+msgstr "åˆ°ä¸»ç€è¦½å™¨..."
 
 #: xfsamba/xfsamba_gui.c:1051
 msgid "Going back..."
-msgstr "ªğ¦^..."
+msgstr "è¿”å›..."
 
 #: xfsamba/xfsamba_gui.c:1063
 msgid "Going forward..."
-msgstr "©¹«e.."
+msgstr "å¾€å‰.."
 
 #: xfsamba/xfsamba_gui.c:1079
 msgid "Attempting to stop query..."
-msgstr "¹Á¸Õ²×¤î¬d¸ß¡K¡K"
+msgstr "å˜—è©¦çµ‚æ­¢æŸ¥è©¢â€¦â€¦"
 
 #: xfsamba/xfsamba_gui.c:1083
 msgid "Query stopped."
-msgstr "¬d¸ß°±¤î¡C"
+msgstr "æŸ¥è©¢åœæ­¢ã€‚"
 
 #. (s): multiple file upload/download enabled by DnD mostly
 #: xfsamba/xfsamba_gui.c:1268
 msgid "Download..."
-msgstr "¤U¸ü..."
+msgstr "ä¸‹è¼‰..."
 
 #: xfsamba/xfsamba_gui.c:1269
 msgid "Upload..."
-msgstr "¤W¶Ç..."
+msgstr "ä¸Šå‚³..."
 
 #: xfsamba/xfsamba_gui.c:1271
 msgid "New folder..."
-msgstr "·s¸ê®Æ§¨..."
+msgstr "æ–°è³‡æ–™å¤¾..."
 
 #: xfsamba/xfsamba_gui.c:1272
 msgid "Delete..."
-msgstr "§R°£..."
+msgstr "åˆªé™¤..."
 
 #: xfsamba/xfsamba_gui.c:1273 xfsamba/xfsamba_tar.c:443
 msgid "Tar..."
-msgstr "¥´¥](tar)..."
+msgstr "æ‰“åŒ…(tar)..."
 
 #: xfsamba/xfsamba_gui.c:1278
 msgid "Paste..."
-msgstr "¶K¤W ..."
+msgstr "è²¼ä¸Š ..."
 
 #: xfsamba/xfsamba_gui.c:1279
 msgid "Cut..."
-msgstr "°Å¤U ..."
+msgstr "å‰ªä¸‹ ..."
 
 #: xfsamba/xfsamba_gui.c:1280
 msgid "Copy..."
-msgstr "½Æ»s ..."
+msgstr "è¤‡è£½ ..."
 
 #. GOTO
 #: xfsamba/xfsamba_gui.c:1283
 msgid "Go"
-msgstr "¶}©l"
+msgstr "é–‹å§‹"
 
 #: xfsamba/xfsamba_gui.c:1284
 msgid "Home..."
-msgstr "®a..."
+msgstr "å®¶..."
 
 #: xfsamba/xfsamba_gui.c:1285
 msgid "Reload..."
-msgstr "­«·s¸ü¤J..."
+msgstr "é‡æ–°è¼‰å…¥..."
 
 #: xfsamba/xfsamba_gui.c:1286
 msgid "Forward..."
-msgstr "¦V«e..."
+msgstr "å‘å‰..."
 
 #: xfsamba/xfsamba_gui.c:1287
 msgid "Back..."
-msgstr "ªğ¦^.."
+msgstr "è¿”å›.."
 
 #: xfsamba/xfsamba_gui.c:1290
 msgid "Local file browser"
-msgstr "¤º³¡ÀÉ®×ÂsÄı¾¹"
+msgstr "å…§éƒ¨æª”æ¡ˆç€è¦½å™¨"
 
 #: xfsamba/xfsamba_gui.c:1291
 msgid "Mount remote share"
-msgstr "±¾¤J¦@¨É¸ê·½"
+msgstr "æ›å…¥å…±äº«è³‡æº"
 
 #: xfsamba/xfsamba_gui.c:1295
 msgid "Show diagnostics"
-msgstr "Åã¥Ü¶EÂ_«H®§"
+msgstr "é¡¯ç¤ºè¨ºæ–·ä¿¡æ¯"
 
 #: xfsamba/xfsamba_gui.c:1297
 msgid "Hide diagnostics"
-msgstr "ÁôÂÃ¶EÂ_«H®§"
+msgstr "éš±è—è¨ºæ–·ä¿¡æ¯"
 
 #: xfsamba/xfsamba_gui.c:1299
 msgid "Show browser links"
-msgstr "Åã¥ÜÂsÄı¾¹Ãìµ²"
+msgstr "é¡¯ç¤ºç€è¦½å™¨éˆçµ"
 
 #: xfsamba/xfsamba_gui.c:1301
 msgid "Hide browser links"
-msgstr "ÁôÂÃÂsÄı¾¹Ãìµ²"
+msgstr "éš±è—ç€è¦½å™¨éˆçµ"
 
 #: xfsamba/xfsamba_gui.c:1307
 msgid "Browse as..."
-msgstr "ÂsÄı.."
+msgstr "ç€è¦½.."
 
 #: xfsamba/xfsamba_gui.c:1313
 msgid "Mounting SMB shares"
-msgstr "±¾¤JSMB¦@¨É¸ê·½¤¤"
+msgstr "æ›å…¥SMBå…±äº«è³‡æºä¸­"
 
 #: xfsamba/xfsamba_gui.c:1314
 msgid "Searching"
-msgstr "·j´M¤¤"
+msgstr "æœå°‹ä¸­"
 
 #: xfsamba/xfsamba_gui.c:1315
 msgid "Differences"
-msgstr "®t§O"
+msgstr "å·®åˆ¥"
 
 #: xfsamba/xfsamba_gui.c:1316
 msgid "Master browsers"
-msgstr "¥DÂsÄı¾¹"
+msgstr "ä¸»ç€è¦½å™¨"
 
 #: xfsamba/xfsamba_gui.c:1317
 msgid "About xfsamba"
-msgstr "Ãö©ó XFsambaºôµ¸"
+msgstr "é—œæ–¼ XFsambaç¶²çµ¡"
 
 #: xfsamba/xfsamba_gui.c:1321
 msgid "Stop ..."
-msgstr "°±¤î ..."
+msgstr "åœæ­¢ ..."
 
 #: xfsamba/xfsamba_gui.c:1325
 msgid "Xftree ..."
-msgstr "XftreeÀÉ®×ºŞ²z..."
+msgstr "Xftreeæª”æ¡ˆç®¡ç†..."
 
 #: xfsamba/xfsamba_gui.c:1327
 msgid "Back ..."
-msgstr "ªğ¦^..."
+msgstr "è¿”å›..."
 
 #: xfsamba/xfsamba_gui.c:1328
 msgid "Forward ..."
-msgstr "¦V«e..."
+msgstr "å‘å‰..."
 
 #: xfsamba/xfsamba_gui.c:1329
 msgid "Reload ..."
-msgstr "­«·s¸ü¤J ..."
+msgstr "é‡æ–°è¼‰å…¥ ..."
 
 #: xfsamba/xfsamba_gui.c:1330
 msgid "Home ..."
-msgstr "®a ..."
+msgstr "å®¶ ..."
 
 #: xfsamba/xfsamba_gui.c:1335
 msgid "New folder ..."
-msgstr "·s¸ê®Æ§¨ ..."
+msgstr "æ–°è³‡æ–™å¤¾ ..."
 
 #: xfsamba/xfsamba_gui.c:1338
 msgid "Mount ..."
-msgstr "±¾¤J..."
+msgstr "æ›å…¥..."
 
 #: xfsamba/xfsamba_gui.c:1339
 msgid "Download ..."
-msgstr "¤U¸ü ..."
+msgstr "ä¸‹è¼‰ ..."
 
 #: xfsamba/xfsamba_gui.c:1340
 msgid "Upload ..."
-msgstr "¤W¶Ç ..."
+msgstr "ä¸Šå‚³ ..."
 
 #: xfsamba/xfsamba_gui.c:1341
 msgid "Tar ..."
-msgstr "¥´¥](Tar) ..."
+msgstr "æ‰“åŒ…(Tar) ..."
 
 #: xfsamba/xfsamba_gui.c:1343
 msgid "Set View 1"
-msgstr "°ò¥»Åã¥Ü"
+msgstr "åŸºæœ¬é¡¯ç¤º"
 
 #: xfsamba/xfsamba_gui.c:1344
 msgid "Set View 2"
-msgstr "¶i·¢Åã¥Ü"
+msgstr "é€²æ¥·é¡¯ç¤º"
 
 #: xfsamba/xfsamba_gui.c:1345
 msgid "Set View 3"
-msgstr "¸Ô²ÓÅã¥Ü"
+msgstr "è©³ç´°é¡¯ç¤º"
 
 #: xfsamba/xfsamba_gui.c:1346
 msgid "Set View 4"
-msgstr "§ó¸ÔÅã¥Ü"
+msgstr "æ›´è©³é¡¯ç¤º"
 
 #: xfsamba/xfsamba_gui.c:1348
 msgid "Help ..."
-msgstr "»¡©ú ..."
+msgstr "èªªæ˜ ..."
 
 #: xfsamba/xfsamba_gui.c:1432
 msgid "Location : "
-msgstr "¦ì§} : "
+msgstr "ä½å€ : "
 
 #: xfsamba/xfsamba_gui.c:1446
 msgid "Show IP"
-msgstr "Åã¥Ü IP"
+msgstr "é¡¯ç¤º IP"
 
 #. location shares
 #: xfsamba/xfsamba_gui.c:1472
 msgid "Location shares : "
-msgstr "¦@¨É¦ì§} : "
+msgstr "å…±äº«ä½å€ : "
 
 #: xfsamba/xfsamba_gui.c:1487
 msgid "Size"
-msgstr "¤j¤p"
+msgstr "å¤§å°"
 
 #: xfsamba/xfsamba_gui.c:1488
 msgid "Date"
-msgstr "¤é´Á"
+msgstr "æ—¥æœŸ"
 
 #: xfsamba/xfsamba_gui.c:1489
 msgid "Comment"
-msgstr "µùÄÀ"
+msgstr "è¨»é‡‹"
 
 #. location computer links
 #: xfsamba/xfsamba_gui.c:1538
 msgid "Location known servers : "
-msgstr "©w¦ì¤wª¾¦øªA¾¹ : "
+msgstr "å®šä½å·²çŸ¥ä¼ºæœå™¨ : "
 
 #. location workgroup links
 #: xfsamba/xfsamba_gui.c:1566
 msgid "Location known workgroups : "
-msgstr "©w¦ì¤wª¾¤u§@²Õ :"
+msgstr "å®šä½å·²çŸ¥å·¥ä½œçµ„ :"
 
 #: xfsamba/xfsamba_gui.c:1628
 msgid "Welcome to xfsamba."
-msgstr "Åwªï¨Ï¥Î XFSamba¡C"
+msgstr "æ­¡è¿ä½¿ç”¨ XFSambaã€‚"
 
 #. no jalo para arreglar directorios:
 #. gtk_ctree_sort_node ((GtkCTree *)shares,(GtkCTreeNode *)selected.node);
 #.
 #: xfsamba/xfsamba_list.c:236
 msgid "Retrieve done."
-msgstr "±µ¦¬§¹¦¨¡C"
+msgstr "æ¥æ”¶å®Œæˆã€‚"
 
 #: xfsamba/xfsamba_list.c:241 xfsamba/xfsamba_smblookup.c:175
 msgid "Query password has been requested."
-msgstr "±K½X½Ğ¨D¡C"
+msgstr "å¯†ç¢¼è«‹æ±‚ã€‚"
 
 #: xfsamba/xfsamba_list.c:284
 msgid "List failed."
-msgstr "¦Cªí¥¢±Ñ¡C"
+msgstr "åˆ—è¡¨å¤±æ•—ã€‚"
 
 #: xfsamba/xfsamba_list.c:303
 msgid "Retreiving..."
-msgstr "±µ¦¬¤¤..."
+msgstr "æ¥æ”¶ä¸­..."
 
 #: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
 #: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 msgid "Resolved"
-msgstr "¤w¸ÑªR"
+msgstr "å·²è§£æ"
 
 #: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
 msgid "Resolving for"
-msgstr "¸ÑªR¤¤"
+msgstr "è§£æä¸­"
 
 #: xfsamba/xfsamba_smblookup.c:86
 msgid "Shares"
-msgstr "¦@¨É"
+msgstr "å…±äº«"
 
 #: xfsamba/xfsamba_smblookup.c:88
 msgid "Links to other servers"
-msgstr "³s±µ¨ì¨ä¥L¦øªA¾¹"
+msgstr "é€£æ¥åˆ°å…¶ä»–ä¼ºæœå™¨"
 
 #: xfsamba/xfsamba_smblookup.c:90
 msgid "Links to other workgroups"
-msgstr "³s±µ¨ì¨ä¥L¤u§@²Õ"
+msgstr "é€£æ¥åˆ°å…¶ä»–å·¥ä½œçµ„"
 
 #: xfsamba/xfsamba_smblookup.c:154
 msgid "Query done."
-msgstr "¬d¸ß§¹¦¨¡C"
+msgstr "æŸ¥è©¢å®Œæˆã€‚"
 
 #: xfsamba/xfsamba_smblookup.c:160
 msgid "Query failed. Machine may be down."
-msgstr "¬d¸ß¥¢±Ñ¡C¾÷¾¹¥i¯à³QÃö³¬¡C"
+msgstr "æŸ¥è©¢å¤±æ•—ã€‚æ©Ÿå™¨å¯èƒ½è¢«é—œé–‰ã€‚"
 
 #: xfsamba/xfsamba_smblookup.c:354
 msgid "Querying"
-msgstr "¥¿¦b¬d¸ß"
+msgstr "æ­£åœ¨æŸ¥è©¢"
 
 #: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
-msgstr "¨S¦³¥DÂsÄı¾¹¡C½Ğ¬d¬İ¶EÂ_«H®§"
+msgstr "æ²’æœ‰ä¸»ç€è¦½å™¨ã€‚è«‹æŸ¥çœ‹è¨ºæ–·ä¿¡æ¯"
 
 #: xfsamba/xfsamba_masterlookup.c:78
 msgid ""
 "No master browser found.\n"
 "Please type a computer name at location and hit RETURN"
 msgstr ""
-"§ä¤£¨ì¥DÂsÄı¾¹¡C\n"
-"½ĞÁä¤J¤@­Ó¥D¾÷¦WºÙµM«áEnter"
+"æ‰¾ä¸åˆ°ä¸»ç€è¦½å™¨ã€‚\n"
+"è«‹éµå…¥ä¸€å€‹ä¸»æ©Ÿåç¨±ç„¶å¾ŒEnter"
 
 #: xfsamba/xfsamba_masterlookup.c:134
 msgid "Looking for master browsers..."
-msgstr "¬d§ä¥DÂsÄı¾¹..."
+msgstr "æŸ¥æ‰¾ä¸»ç€è¦½å™¨..."
 
 #: xfsamba/xfsamba_masterresolve.c:110
 msgid "Please provide netbios name for master browser at "
-msgstr "½Ğ´£¨Ñ¤@­Ó¥DÂsÄı¾¹ªº netbios ¦WºÙ¦b"
+msgstr "è«‹æä¾›ä¸€å€‹ä¸»ç€è¦½å™¨çš„ netbios åç¨±åœ¨"
 
 #: xfsamba/xfsamba_masterresolve.c:179
 msgid "Master browser netbios name must be provided."
-msgstr "¥DÂsÄı¾¹ªº netbios ¦WºÙ¥²¶·³Q´£¨Ñ"
+msgstr "ä¸»ç€è¦½å™¨çš„ netbios åç¨±å¿…é ˆè¢«æä¾›"
 
 #: xfsamba/xfsamba_masterresolve.c:227 xfsamba/xfsamba_masterresolve.c:228
 #: xfsamba/xfsamba_masterresolve.c:234
 msgid "No status response"
-msgstr "¨S¦³À³µªª¬ºA"
+msgstr "æ²’æœ‰æ‡‰ç­”ç‹€æ…‹"
 
 #: xfsamba/xfsamba_masterresolve.c:246
 msgid "Master browser not resolved. Use location box to browse."
-msgstr "¥DÂsÄı¾¹¤£¯à³Q¸ÑªR¡C¸Õ¥Î¥»¾÷ÂsÄı¡C"
+msgstr "ä¸»ç€è¦½å™¨ä¸èƒ½è¢«è§£æã€‚è©¦ç”¨æœ¬æ©Ÿç€è¦½ã€‚"
 
 #: xfsamba/xfsamba_masterresolve.c:247
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
 msgstr ""
-"¥DÂsÄı¾¹¤£¯à³Q¸ÑªR¡C\n"
-"½ĞÁä¤J¤@­Ó¥D¾÷¦WºÙµM«áEnter"
+"ä¸»ç€è¦½å™¨ä¸èƒ½è¢«è§£æã€‚\n"
+"è«‹éµå…¥ä¸€å€‹ä¸»æ©Ÿåç¨±ç„¶å¾ŒEnter"
 
 #: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
 msgid "Resolving"
-msgstr "¥¿¦b¸ÑªR"
+msgstr "æ­£åœ¨è§£æ"
 
 #: xfsamba/xfsamba_mkdir.c:93
 msgid "Directory creation failed. See diagnostics for details."
-msgstr "³Ğ«Ø¥Ø¿ı¥¢±Ñ¡C½Ğ¬d¬İ¶EÂ_«H®§¡C"
+msgstr "å‰µå»ºç›®éŒ„å¤±æ•—ã€‚è«‹æŸ¥çœ‹è¨ºæ–·ä¿¡æ¯ã€‚"
 
 #: xfsamba/xfsamba_mkdir.c:102
 msgid "Directory created."
-msgstr "¥Ø¿ı§¹¦¨³Ğ«Ø¡C"
+msgstr "ç›®éŒ„å®Œæˆå‰µå»ºã€‚"
 
 #: xfsamba/xfsamba_mkdir.c:151
 msgid "Create directory cancelled."
-msgstr "³Ğ«Ø¥Ø¿ı³Q¨ú®ø¡C"
+msgstr "å‰µå»ºç›®éŒ„è¢«å–æ¶ˆã€‚"
 
 #: xfsamba/xfsamba_mkdir.c:162
 msgid "Create directory failed."
-msgstr "³Ğ«Ø¥Ø¿ı¥¢±Ñ¡C"
+msgstr "å‰µå»ºç›®éŒ„å¤±æ•—ã€‚"
 
 #: xfsamba/xfsamba_mkdir.c:187
 msgid "Creating dir..."
-msgstr "³Ğ«Ø¥Ø¿ı..."
+msgstr "å‰µå»ºç›®éŒ„..."
 
 #. here, dialog to ask new dir name
 #: xfsamba/xfsamba_mkdir.c:202
 msgid "New directory name:"
-msgstr "·s¥Ø¿ı¦WºÙ:"
+msgstr "æ–°ç›®éŒ„åç¨±:"
 
 #: xfsamba/xfsamba_rm.c:48
 msgid "Really delete remote items?"
-msgstr "§R°£ºôµ¸¤¤ªº¶µ¥Ø?"
+msgstr "åˆªé™¤ç¶²çµ¡ä¸­çš„é …ç›®?"
 
 #: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:189
 msgid "Remove cancelled."
-msgstr "²¾°£³Q¨ú®ø¡C"
+msgstr "ç§»é™¤è¢«å–æ¶ˆã€‚"
 
 #: xfsamba/xfsamba_rm.c:137
 msgid "Remove failed. See diagnostics for details."
-msgstr "²¾°£¥¢±Ñ¡C½Ğ¬d¬İ¶EÂ_«H®§¡C"
+msgstr "ç§»é™¤å¤±æ•—ã€‚è«‹æŸ¥çœ‹è¨ºæ–·ä¿¡æ¯ã€‚"
 
 #: xfsamba/xfsamba_rm.c:152
 msgid "Remove complete."
-msgstr "²¾°£§¹¦¨¡C"
+msgstr "ç§»é™¤å®Œæˆã€‚"
 
 #: xfsamba/xfsamba_rm.c:179
 msgid "Removing..."
-msgstr "¥¿¦b²¾°£..."
+msgstr "æ­£åœ¨ç§»é™¤..."
 
 #: xfsamba/xfsamba_rm.c:186
 msgid "Sorry, top level shares cannot be removed."
-msgstr "¹ï¤£°_¡B³»¯Å¦@¨É¤£¯à³Q²¾°£¡C"
+msgstr "å°ä¸èµ·ã€é ‚ç´šå…±äº«ä¸èƒ½è¢«ç§»é™¤ã€‚"
 
 #: xfsamba/xfsamba_tar.c:123
 msgid "Tar failed. See diagnostics for details."
-msgstr "Tar ¥¢±Ñ¡C¸Ô±¡½Ğ¬İ¶EÂ_³ø§i¡C"
+msgstr "Tar å¤±æ•—ã€‚è©³æƒ…è«‹çœ‹è¨ºæ–·å ±å‘Šã€‚"
 
 #: xfsamba/xfsamba_tar.c:128
 msgid "Tar extraction has completed"
-msgstr "Tar ¸Ñ¶}§¹¦¨"
+msgstr "Tar è§£é–‹å®Œæˆ"
 
 #: xfsamba/xfsamba_tar.c:133
 msgid "Tar command complete."
-msgstr "Tar ©R¥O§¹¦¨¡C"
+msgstr "Tar å‘½ä»¤å®Œæˆã€‚"
 
 #: xfsamba/xfsamba_tar.c:155
 msgid "Please select input tarfile next."
-msgstr "½Ğ¿ï¾Ü¿é¤Jªº tar ÀÉ®×¡C"
+msgstr "è«‹é¸æ“‡è¼¸å…¥çš„ tar æª”æ¡ˆã€‚"
 
 #: xfsamba/xfsamba_tar.c:159
 msgid "Please select the output tarfile next."
-msgstr "½Ğ¿ï¾Ü¿é¥Xªº tar ÀÉ®×¡C"
+msgstr "è«‹é¸æ“‡è¼¸å‡ºçš„ tar æª”æ¡ˆã€‚"
 
 #: xfsamba/xfsamba_tar.c:193 xfsamba/xfsamba_tar.c:234
 msgid "Tar cancelled."
-msgstr "Tar ³Q¨ú®ø¡C"
+msgstr "Tar è¢«å–æ¶ˆã€‚"
 
 #: xfsamba/xfsamba_tar.c:205
 msgid "Cannot open tar file"
-msgstr "¤£¯à¥´¶} tar ÀÉ®×"
+msgstr "ä¸èƒ½æ‰“é–‹ tar æª”æ¡ˆ"
 
 #: xfsamba/xfsamba_tar.c:216
 msgid "Cannot create tar file"
-msgstr "¤£¯à³Ğ«Ø tar ÀÉ®×"
+msgstr "ä¸èƒ½å‰µå»º tar æª”æ¡ˆ"
 
 #: xfsamba/xfsamba_tar.c:327
 msgid "create"
-msgstr "³Ğ«Ø"
+msgstr "å‰µå»º"
 
 #: xfsamba/xfsamba_tar.c:330
 msgid "extract"
-msgstr "¸Ñ¶}"
+msgstr "è§£é–‹"
 
 #: xfsamba/xfsamba_tar.c:373
 msgid "full"
-msgstr "¥ş³¡"
+msgstr "å…¨éƒ¨"
 
 #: xfsamba/xfsamba_tar.c:376
 msgid "incremental"
-msgstr "¼W¶q"
+msgstr "å¢é‡"
 
 #: xfsamba/xfsamba_tar.c:399
 msgid "do not reset archive bit"
-msgstr "¤£­«³]À£ÁYÀÉ¦ì"
+msgstr "ä¸é‡è¨­å£“ç¸®æª”ä½"
 
 #: xfsamba/xfsamba_tar.c:402
 msgid "reset archive bit"
-msgstr "­«³]À£ÁYÀÉ¦ì"
+msgstr "é‡è¨­å£“ç¸®æª”ä½"
 
 #: xfsamba/xfsamba_tar.c:414
 msgid "Options"
-msgstr "¿ï¶µ"
+msgstr "é¸é …"
 
 #: xfsamba/xfsamba_upload.c:106
 msgid "Uploaded file."
-msgstr "¤W¶ÇªºÀÉ®×¡C"
+msgstr "ä¸Šå‚³çš„æª”æ¡ˆã€‚"
 
 #: xfsamba/xfsamba_upload.c:138
 msgid "File upload failed. See diagnostics for reason."
-msgstr "ÀÉ®×¤W¶Ç¥¢±Ñ¡C½Ğ¬d¬İ¶EÂ_«H®§¡C"
+msgstr "æª”æ¡ˆä¸Šå‚³å¤±æ•—ã€‚è«‹æŸ¥çœ‹è¨ºæ–·ä¿¡æ¯ã€‚"
 
 #: xfsamba/xfsamba_upload.c:143 xfsamba/xfsamba_upload.c:284
 msgid "Upload done."
-msgstr "¤W¶Ç§¹¦¨¡C"
+msgstr "ä¸Šå‚³å®Œæˆã€‚"
 
 #: xfsamba/xfsamba_upload.c:170
 msgid "Uploading file..."
-msgstr "¤W¶ÇÀÉ®×¤¤..."
+msgstr "ä¸Šå‚³æª”æ¡ˆä¸­..."
 
 #: xfsamba/xfsamba_upload.c:176
 msgid "File upload cancelled."
-msgstr "ÀÉ®×¤W¶Ç³Q¨ú®ø¡C"
+msgstr "æª”æ¡ˆä¸Šå‚³è¢«å–æ¶ˆã€‚"
 
 #: xfsamba/xfsamba_upload.c:186
 msgid "Specified file does not exist"
-msgstr "«ü©wªºÀÉ®×¤£¦s¦b"
+msgstr "æŒ‡å®šçš„æª”æ¡ˆä¸å­˜åœ¨"
 
 #: xfsamba/xfsamba_upload.c:187 xfsamba/xfsamba_upload.c:201
 msgid "Upload failed."
-msgstr "¤W¶Ç¥¢±Ñ¡C"
+msgstr "ä¸Šå‚³å¤±æ•—ã€‚"
 
 #: xfsamba/xfsamba_upload.c:254
 msgid "Upload produced errors. See diagnostics for reason."
-msgstr "ÀÉ®×¤W¶Ç¥¢±Ñ¡C½Ğ¬d¬İ¶EÂ_«H®§¡C"
+msgstr "æª”æ¡ˆä¸Šå‚³å¤±æ•—ã€‚è«‹æŸ¥çœ‹è¨ºæ–·ä¿¡æ¯ã€‚"
 
 #: xfsamba/xfsamba_upload.c:361
 msgid "Uploading files..."
-msgstr "¤W¶ÇÀÉ®×¤¤..."
+msgstr "ä¸Šå‚³æª”æ¡ˆä¸­..."
 
 #: xfsamba/xfsamba_dnd.c:502
 msgid "No target selected!"
-msgstr "©|¥¼¿ï¾Ü¥Ø¿ı!"
+msgstr "å°šæœªé¸æ“‡ç›®éŒ„!"
 
 #: xfsamba/xfsamba_dnd.c:507
 msgid "More than one target selected!"
-msgstr "©|¥¼¿ï¾Ü¥Ø¿ı !"
+msgstr "å°šæœªé¸æ“‡ç›®éŒ„ !"
 
 #: xfsamba/xfsamba_dnd.c:545
 msgid "Files are on a remote host"
-msgstr "ÀÉ®×¦ì©ó¥~³¡¥D¾÷¤W"
+msgstr "æª”æ¡ˆä½æ–¼å¤–éƒ¨ä¸»æ©Ÿä¸Š"
 
 #: xfumed/xfumed_gui.c:47
 msgid "User Menu Editor"
-msgstr "¥Î¤á¿ï³æ½s¿è¾¹"
+msgstr "ç”¨æˆ¶é¸å–®ç·¨è¼¯å™¨"
 
 #: xfumed/xfumed_gui.c:80
 msgid "Caption"
-msgstr "¼ĞÃD"
+msgstr "æ¨™é¡Œ"
 
 #: xfumed/xfumed_gui.c:86
 msgid "Command"
-msgstr "«ü¥O"
+msgstr "æŒ‡ä»¤"
 
 #: xfumed/xfumed_gui.c:108
 msgid "Move Up"
-msgstr "¤W²¾"
+msgstr "ä¸Šç§»"
 
 #: xfumed/xfumed_gui.c:115
 msgid "Move Down"
-msgstr "¤U²¾"
+msgstr "ä¸‹ç§»"
 
 #: xfumed/xfumed_gui.c:122
 msgid "Add"
-msgstr "²K¥["
+msgstr "æ·»åŠ "
 
 #: xfumed/xfumed_gui.c:157
 msgid "Save"
-msgstr "Àx¦s"
+msgstr "å„²å­˜"
 
 #: xfumed/xfumed_gui.c:164
 msgid "Reset"
-msgstr "­«³]"
+msgstr "é‡è¨­"
 
 #: xfumed/xfumed_gui.c:252
 msgid "Edit Entry"
-msgstr "½s¿è±ø¥Ø"
+msgstr "ç·¨è¼¯æ¢ç›®"
 
 #: xfumed/xfumed_gui.c:254
 msgid "Add Entry"
-msgstr "¥[¤J±ø¥Ø"
+msgstr "åŠ å…¥æ¢ç›®"
 
 #: xfumed/xfumed_gui.c:275
 msgid "Type: "
-msgstr "Ãş«¬ "
+msgstr "é¡å‹ "
 
 #: xfumed/xfumed_gui.c:282
 msgid "Caption: "
-msgstr "¼ĞÃD:"
+msgstr "æ¨™é¡Œ:"
 
 #: xfumed/xfumed_gui.c:289
 msgid "Command: "
-msgstr "«ü¥O:"
+msgstr "æŒ‡ä»¤:"
 
 #: xfumed/xfumed_gui_cb.c:24
 msgid "Your changes will take effect on next startup"
-msgstr "§ïÅÜ±N¦b¤U¦¸±Ò°Ê®É¥Í®Ä"
+msgstr "æ”¹è®Šå°‡åœ¨ä¸‹æ¬¡å•Ÿå‹•æ™‚ç”Ÿæ•ˆ"
 
 #: xfumed/xfumed_gui_cb.c:70
 msgid ""
@@ -3908,17 +3908,17 @@ msgid ""
 "\n"
 "Do you want to save the changes ?"
 msgstr ""
-"¿ï³æ§ïÅÜ©|¥¼Àx¦s¡C\n"
+"é¸å–®æ”¹è®Šå°šæœªå„²å­˜ã€‚\n"
 "\n"
-"¬O§_©ñ±óÀx¦sµM«á°h¥X?"
+"æ˜¯å¦æ”¾æ£„å„²å­˜ç„¶å¾Œé€€å‡º?"
 
 #: xfumed/xfumed_gui_cb.c:77
 msgid "Don't Quit"
-msgstr "¨ú®ø"
+msgstr "å–æ¶ˆ"
 
 #: xfumed/xfumed_gui_cb.c:122
 msgid "Do you want to delete this entry ?"
-msgstr "½T©w­n§R°£¸Ó±ø¥Ø¶Ü?"
+msgstr "ç¢ºå®šè¦åˆªé™¤è©²æ¢ç›®å—?"
 
 #: xfumed/xfumed_gui_cb.c:124
 msgid ""
@@ -3927,19 +3927,19 @@ msgid ""
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
-"¦p­n§R°£¤l¿ï³æ¡B¤º¦bªº©Ò¦³±ø¥Ø©M\n"
-"¨ä¥¦¤l¿ï³æÉÊ·|³Q§R°£¡C\n"
+"å¦‚è¦åˆªé™¤å­é¸å–®ã€å…§åœ¨çš„æ‰€æœ‰æ¢ç›®å’Œ\n"
+"å…¶å®ƒå­é¸å–®åœ´æœƒè¢«åˆªé™¤ã€‚\n"
 "\n"
-"½T»{§R°£¦¹¤l¿ï³æ?"
+"ç¢ºèªåˆªé™¤æ­¤å­é¸å–®?"
 
 #: xfumed/xfumed.h:10
 msgid "Item"
-msgstr "¶µ¥Ø"
+msgstr "é …ç›®"
 
 #: xfumed/xfumed.h:11
 msgid "Submenu"
-msgstr "¨ì¤l¿ï³æ"
+msgstr "åˆ°å­é¸å–®"
 
 #: xfumed/xfumed.h:12
 msgid "Separator"
-msgstr "¤À¹j¾¹"
+msgstr "åˆ†éš”å™¨"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-09-01 01:01+0200\n"
+"POT-Creation-Date: 2002-09-01 22:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,12 +60,12 @@ msgstr ""
 msgid "Terminated: "
 msgstr ""
 
-#: libs/xpmext.c:377 libs/xpmext.c:404
+#: libs/xpmext.c:378 libs/xpmext.c:405
 #, c-format
 msgid "*** WARNING ***: Cannot load image file %s\n"
 msgstr ""
 
-#: libs/xpmext.c:425
+#: libs/xpmext.c:426
 #, c-format
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
 msgstr ""

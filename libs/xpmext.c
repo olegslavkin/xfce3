@@ -55,7 +55,8 @@
 
 #define ROUND(x) (int) ((double) x + .5)
 
-static Atom prop = 0;
+static Atom xrootpmap_id = None;
+static Atom esetroot_pmap_id = None;
 
 static int
 dummyErrorHandler (Display * dpy, XErrorEvent * err)
@@ -97,12 +98,13 @@ setPixmapProperty (Pixmap pixmap)
   Atom type;
   int format;
   unsigned long length, after;
-  int mode;
 
   XGrabServer (GDK_DISPLAY ());
-  if (!prop)
-    prop = XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", False);
-  XGetWindowProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), prop, 0L, 1L, False, AnyPropertyType, &type, &format, &length, &after, &data);
+  if (!xrootpmap_id)
+    xrootpmap_id = XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", False);
+  if (!esetroot_pmap_id)
+    esetroot_pmap_id = XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", False);
+  XGetWindowProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), esetroot_pmap_id, 0L, 1L, False, AnyPropertyType, &type, &format, &length, &after, &data);
   if ((type == XA_PIXMAP) && (format == 32) && (length == 1))
   {
     XSetErrorHandler (dummyErrorHandler);
@@ -110,18 +112,17 @@ setPixmapProperty (Pixmap pixmap)
     XSync (GDK_DISPLAY (), False);
     XSetErrorHandler (NULL);
   }
-  else
-  {
-    mode = PropModeAppend;
-  }
-  mode = PropModeReplace;
   XFree ((char *) data);
   if (pixmap)
   {
-    XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), prop, XA_PIXMAP, 32, mode, (unsigned char *) &pixmap, 1);
+    XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), xrootpmap_id, XA_PIXMAP, 32, PropModeReplace, (unsigned char *) &pixmap, 1);
+    XChangeProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), esetroot_pmap_id, XA_PIXMAP, 32, PropModeReplace, (unsigned char *) &pixmap, 1);
   }
   else
-    XDeleteProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), prop);
+  {
+    XDeleteProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), xrootpmap_id);
+    XDeleteProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), esetroot_pmap_id);
+  }
   XUngrabServer (GDK_DISPLAY ());
   XFlush (GDK_DISPLAY ());
 }
@@ -654,10 +655,12 @@ ApplyRootColor (XFCE_palette * pal, gboolean gradient, int col_index)
   }
   else
   {
-    if (!prop)
-      prop = XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", False);
+    if (!xrootpmap_id)
+      xrootpmap_id = XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", False);
+    if (!esetroot_pmap_id)
+      esetroot_pmap_id = XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", False);
     XGrabServer (GDK_DISPLAY ());
-    XGetWindowProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), prop, 0L, 1L, False, AnyPropertyType, &type, &format, &length, &after, &data);
+    XGetWindowProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), esetroot_pmap_id, 0L, 1L, False, AnyPropertyType, &type, &format, &length, &after, &data);
     if ((type == XA_PIXMAP) && (format == 32) && (length == 1))
     {
       XSetErrorHandler (dummyErrorHandler);
@@ -666,7 +669,8 @@ ApplyRootColor (XFCE_palette * pal, gboolean gradient, int col_index)
       XSetErrorHandler (NULL);
     }
     XFree ((char *) data);
-    XDeleteProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), prop);
+    XDeleteProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), xrootpmap_id);
+    XDeleteProperty (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), esetroot_pmap_id);
     XSetWindowBackground (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()), get_pixel_from_palette (pal, ci));
     XClearWindow (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GDK_ROOT_PARENT ()));
     XUngrabServer (GDK_DISPLAY ());

@@ -1773,7 +1773,7 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
-  Scr.engine = TRENCH_ENGINE;
+  Scr.engine = XFCE_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;

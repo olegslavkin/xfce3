@@ -10,9 +10,9 @@
 #: xftree/xtree_toolbar.c:108 xftree/xtree_toolbar.c:112
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce 3.8.14\n"
-"POT-Creation-Date: 2002-09-01 01:01+0200\n"
-"PO-Revision-Date: 2001-03-23  12:00+0200\n"
+"Project-Id-Version: xfce 3.8.18\n"
+"POT-Creation-Date: 2002-07-14 22:39+0200\n"
+"PO-Revision-Date: 2002-08-02 16:13+0200\n"
 "Last-Translator: Rudolf Ulc <rudolf.ulc@oku-st.cz>\n"
 "Language-Team: CZ      <li@linux.cz>\n"
 "MIME-Version: 1.0\n"
@@ -92,15 +92,15 @@ msgstr "Vybrat ..."
 #: xfce/setup.c:1175 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:272 xfsamba/xfsamba_gui.c:596
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_tar.c:422
-#: xfsound/xfsound.c:606 xftree/gtk_exec.c:188 xftree/gtk_prop.c:214
+#: xfsound/xfsound.c:606 xftree/gtk_exec.c:183 xftree/gtk_prop.c:214
 #: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1192 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:189 xftree/gtk_prop.c:215
-#: xftree/xtree_cpy.c:860 xftree/xtree_cpy.c:1324 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:184 xftree/gtk_prop.c:215
+#: xftree/xtree_cpy.c:859 xftree/xtree_cpy.c:1323 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Zru¹it"
 
@@ -187,12 +187,12 @@ msgid "Subprocess diagnostic"
 msgstr "Diagnostický dialog subprocesù"
 
 #: xfbd/xfbd.c:550 xfce/diagnostic.c:110 xfdiff/xfdiff_diag.c:181
-#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:927
+#: xfdiff/xfdiff_gui.c:1593 xfglob/xfglob.c:659 xftree/xtree_mess.c:916
 msgid "Clear"
 msgstr "Smazat"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:670
-#: xftree/xtree_mess.c:932
+#: xftree/xtree_mess.c:921
 msgid "Dismiss"
 msgstr "Zavøít"
 
@@ -210,7 +210,7 @@ msgstr "Nemohu vytvoøit pixmapu"
 
 #: xfce/info.c:121
 msgid "By Olivier Fourdan (c) 1997-2002"
-msgstr "Od Oliviera Fourdana (c) 1997-2002"
+msgstr "Od Oliviera Fourdana (c) 1997-2000"
 
 #: xfce/info.c:184
 msgid "Accept"
@@ -549,9 +549,8 @@ msgid "KDE menu (xfmenu)"
 msgstr "KDE Menu (xfmenu)"
 
 #: xfce/setup.c:1126
-#, fuzzy
 msgid "Debian menu (xfmenu)"
-msgstr "KDE Menu (xfmenu)"
+msgstr "Debian  Menu (xfmenu)"
 
 #: xfce/setup.c:1138
 msgid "Palette"
@@ -821,31 +820,31 @@ msgstr "_V¹echny"
 msgid "_Close"
 msgstr "_Zavøít"
 
-#: xftree/gtk_exec.c:166 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
+#: xftree/gtk_exec.c:161 xftree/xtree_gui.c:200 xftree/xtree_gui.c:203
 msgid "Open with ..."
 msgstr "Otevøít pomocí ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:170 xftree/xtree_gui.c:219
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:165 xftree/xtree_gui.c:219
 #: xfwm/xfwm.c:900
 msgid "Run program ..."
 msgstr "Spustit program ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:220
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:215
 msgid "Open in terminal"
 msgstr "Otevøít v terminálu"
 
-#: xftree/gtk_exec.c:225
+#: xftree/gtk_exec.c:220
 msgid "Remember application"
 msgstr "Zapamatovaná aplikace"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:249
+#: xftree/gtk_exec.c:244
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Kritická chyba v %s na %d\n"
 
-#: xftree/gtk_exec.c:256 xftree/reg.c:667
+#: xftree/gtk_exec.c:251 xftree/reg.c:662
 msgid "Can't find in PATH"
 msgstr "Nemohu nalézt z PATH"
 
@@ -948,46 +947,46 @@ msgstr "neznámý"
 msgid "RPM info"
 msgstr "Informace o RPM"
 
-#: xftree/reg.c:610 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
-#: xftree/xtree_cpy.c:1375
+#: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
+#: xftree/xtree_cpy.c:1374
 msgid "This function is not available for the contents of tar files"
 msgstr "Tato funkce naní pou¾itelná pro obsah souborù tar"
 
-#: xftree/reg.c:618
+#: xftree/reg.c:613
 #, c-format
 msgid "Register program for directory \"%s\""
 msgstr "Registrovat program k adresáøi \"%s\""
 
-#: xftree/reg.c:625
+#: xftree/reg.c:620
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Nemohu najít pøíponu ve jménì, pou¾ije se celé jméno"
 
-#: xftree/reg.c:632
+#: xftree/reg.c:627
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Registrovat program k souboru  \"%s\""
 
-#: xftree/reg.c:636
+#: xftree/reg.c:631
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Registrovat program k pøíponì  \"%s\""
 
-#: xftree/xtree.c:236
+#: xftree/xtree.c:223
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr "XFTree, postaveno na XTree verze %s\n"
 
-#: xftree/xtree.c:237
+#: xftree/xtree.c:224
 #, c-format
 msgid "directory: %s\n"
 msgstr "adresáø:  %s\n"
 
-#: xftree/xtree.c:244 xftree/xtree.c:283
+#: xftree/xtree.c:231 xftree/xtree.c:270
 #, c-format
 msgid "creating directory: %s\n"
 msgstr "vytváøím adresáø: %s\n"
 
-#: xftree/xtree.c:300
+#: xftree/xtree.c:287
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometrie : %dx%d+%d+%d\n"
@@ -1035,7 +1034,7 @@ msgstr "Nový adresáø"
 msgid "New_File"
 msgstr "Nový soubor"
 
-#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1486
+#: xftree/xtree_cb.c:670 xftree/xtree_cb.c:746 xftree/xtree_cpy.c:1485
 msgid "File exists !"
 msgstr "Soubor u¾ existuje !"
 
@@ -1047,7 +1046,7 @@ msgstr "®ádná polo¾ka není oznaèena !"
 msgid "Rename to : "
 msgstr "Pøejmenovat na  : "
 
-#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1464
+#: xftree/xtree_cb.c:723 xftree/xtree_cpy.c:1463
 msgid "Character not allowed in filename"
 msgstr "Jméno souboru obsahuje nepovolený znak"
 
@@ -1087,64 +1086,64 @@ msgstr "Chyba pøi uzavøení souboru"
 msgid "Error deleting"
 msgstr "Chyba pøi mazání"
 
-#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:509
+#: xfsamba/xfsamba_dnd.c:96 xftree/xtree_cpy.c:277 xftree/xtree_cpy.c:508
 msgid "Can't copy FIFO"
 msgstr "Nemohu kopírovat FIFO"
 
-#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:512
+#: xfsamba/xfsamba_dnd.c:99 xftree/xtree_cpy.c:281 xftree/xtree_cpy.c:511
 msgid "Can't copy device file"
 msgstr "Nemohu kopírovat soubor zaøízení"
 
-#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:515
+#: xfsamba/xfsamba_dnd.c:102 xftree/xtree_cpy.c:285 xftree/xtree_cpy.c:514
 msgid "Can't copy socket"
 msgstr "Nemohu kopírovat socket"
 
-#: xftree/xtree_cpy.c:854
+#: xftree/xtree_cpy.c:853
 msgid "Counting files"
 msgstr "Poèítám soubory"
 
-#: xftree/xtree_cpy.c:1226
+#: xftree/xtree_cpy.c:1225
 #, c-format
 msgid "%d / %d"
 msgstr "%d / %d"
 
-#: xftree/xtree_cpy.c:1302
+#: xftree/xtree_cpy.c:1301
 msgid "Source: "
 msgstr "Zdroj: "
 
-#: xftree/xtree_cpy.c:1309
+#: xftree/xtree_cpy.c:1308
 msgid "Target: "
 msgstr "Cíl: "
 
-#: xftree/xtree_cpy.c:1316
+#: xftree/xtree_cpy.c:1315
 msgid "beginning copy operation"
 msgstr "zaèínám kopírovat"
 
-#: xftree/xtree_cpy.c:1331
+#: xftree/xtree_cpy.c:1330
 msgid "XFTree: Copy"
 msgstr "XFTree: Kopírování"
 
-#: xftree/xtree_cpy.c:1332
+#: xftree/xtree_cpy.c:1331
 msgid "XFTree: Move"
 msgstr "XFTree: Pøesouvání"
 
-#: xftree/xtree_cpy.c:1333
+#: xftree/xtree_cpy.c:1332
 msgid "XFTree: Link"
 msgstr "XFTree: Linkování"
 
-#: xftree/xtree_cpy.c:1437 xftree/xtree_cpy.c:1525
+#: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
 msgid "No file or directory selected!"
 msgstr "Nebyl vybrán ¾ádný adresáønebo soubor!"
 
-#: xftree/xtree_cpy.c:1440
+#: xftree/xtree_cpy.c:1439
 msgid "Only one file or directory can be selected!"
 msgstr "Mù¾e být vybrán jen jeden adresáø nebo soubor!"
 
-#: xftree/xtree_cpy.c:1446
+#: xftree/xtree_cpy.c:1445
 msgid "This function is not available for the contents of tar/rpm files"
 msgstr "Tato funkce naní pou¾itelná pro obsah souborù tar/rpm"
 
-#: xftree/xtree_cpy.c:1456
+#: xftree/xtree_cpy.c:1455
 msgid "Symlink name : "
 msgstr "Jméno symbolickéhp linku"
 
@@ -1538,28 +1537,28 @@ msgstr "Zobrazovat hlavní menu"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
 #: xfdiff/xfdiff_gui.c:526 xfdiff/xfdiff_misc.c:801 xfsamba/xfsamba_gui.c:84
-#: xftree/xtree_mess.c:109
+#: xftree/xtree_mess.c:108
 msgid "Could not load specified font\n"
 msgstr "Nemohu naèíst vybraný font\n"
 
-#: xftree/xtree_mess.c:453
+#: xftree/xtree_mess.c:452
 msgid "Override ?"
 msgstr "Pøepsat ?"
 
-#: xftree/xtree_mess.c:454
+#: xftree/xtree_mess.c:453
 msgid "with"
 msgstr "s"
 
-#: xftree/xtree_mess.c:533 xftree/xtree_mess.c:534 xftree/xtree_mess.c:550
-#: xftree/xtree_mess.c:551
+#: xftree/xtree_mess.c:532 xftree/xtree_mess.c:533 xftree/xtree_mess.c:549
+#: xftree/xtree_mess.c:550
 msgid "Default xftreerc file cannot be created\n"
 msgstr "Nemohu vytvoøit defaultní xfdiffrc\n"
 
-#: xftree/xtree_mess.c:588
+#: xftree/xtree_mess.c:586
 msgid "Default xftreerc file cannot be read\n"
 msgstr "Nemohu vytvoøit defaultní xfdiffrc\n"
 
-#: xftree/xtree_mess.c:800
+#: xftree/xtree_mess.c:789
 msgid ""
 "Xftree handles keyboard shortcuts dynamically.\n"
 "This means that you can open a menu,highlight an entry\n"
@@ -1569,7 +1568,7 @@ msgstr ""
 "To znamená, ¾e mù¾ete otevøít menu, zvýraznit polo¾ku\n"
 "a stisknout klávesu na klávesnici pro vytvoøení zkratky."
 
-#: xftree/xtree_mess.c:809
+#: xftree/xtree_mess.c:798
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
 "installed\n"
@@ -1578,7 +1577,7 @@ msgstr ""
 "ROX-filer dìlá pohled s ikonami v Xftree. V této chvíli musí bý instalován \n"
 "zvlá¹» mimo XFCE. Brzy bude dostupná specifikace ROX-fileru pro XFCE. "
 
-#: xftree/xtree_mess.c:818
+#: xftree/xtree_mess.c:807
 msgid ""
 "Xftree allows you to drag and drop to/from\n"
 "xftree windows running on different hosts.\n"
@@ -1600,7 +1599,7 @@ msgstr ""
 "Xftree bude také akceptovat upu¹tìní souborù z jiných\n"
 "správcù souborù spu¹tìných na rùzných po¹ítaèích.\n"
 
-#: xftree/xtree_mess.c:834
+#: xftree/xtree_mess.c:823
 msgid ""
 "Xftree can register applications by filename or filetype\n"
 "by selecting \"Register\" from one of the menus or by selecting\n"
@@ -1614,7 +1613,7 @@ msgstr ""
 "Jesti¾e chcete upravit pøiøazení aplikace, která je u¾\n"
 "registrovaná, podívejte se do ~/.xfce.xftree.reg."
 
-#: xftree/xtree_mess.c:843
+#: xftree/xtree_mess.c:832
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1638,15 +1637,15 @@ msgstr ""
 "Vícenásobný výbìr tlaèítkem 1 stisknutím a ta¾ením\n"
 "je mo¾ný pøi prvním stisknutí po GOTO nebo REGEN.\n"
 
-#: xftree/xtree_mess.c:861
+#: xftree/xtree_mess.c:850
 msgid "Keyboard shortcuts are a fast way to access menu functions."
 msgstr "Klávesové zkratky jsou rychlou cestou k pøístupu k fukcím menu."
 
-#: xftree/xtree_mess.c:905
+#: xftree/xtree_mess.c:894
 msgid "Xftree results"
 msgstr "Výsledky Xftree"
 
-#: xftree/xtree_mess.c:1158
+#: xftree/xtree_mess.c:1147
 msgid "Home directory : "
 msgstr "Domovský adresáø :"
 

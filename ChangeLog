@@ -1,3 +1,379 @@
+2002-09-01  xfce
+
+	* po/bg.gmo, po/bg.po, po/ca.po, po/cs.gmo, po/cs.po, po/da.gmo,
+	po/da.po, po/de.gmo, po/de.po, po/en_GB.po, po/es.gmo, po/es.po,
+	po/et.gmo, po/et.po, po/fi.po, po/fr.gmo, po/fr.po, po/gl.gmo,
+	po/gl.po, po/he.gmo, po/he.po, po/hu.gmo, po/hu.po, po/it.gmo,
+	po/it.po, po/ja.po, po/ms.gmo, po/ms.po, po/nl.gmo, po/nl.po,
+	po/pl.po, po/pt_BR.gmo, po/pt_BR.po, po/ro.gmo, po/ro.po, po/ru.po,
+	po/sk.po, po/sr.gmo, po/sr.po, po/sv.po, po/uk.gmo, po/uk.po,
+	po/zh.po, po/zh_CN.po, po/zh_TW.Big5.gmo, po/zh_TW.Big5.po,
+	xfdiff/Makefile.am, xfdiff/Makefile.in, xfdiff/icons/Makefile.am,
+	xfdiff/icons/Makefile.in: Fix a problem with xfdiff Makefile.am:x
+
+2002-09-01  xfce
+
+	* libs/fileutil.c, po/et.gmo, po/xfce.pot, xfdiff/Makefile.in,
+	xfwm/builtins.c: Reset SIGCHLD to SIGDFL before execl() a child
+	process.
+
+2002-08-31  edscott
+
+	* xftree/io.c: - uncomment a line which should not be commented
+
+2002-08-31  edscott
+
+	* xftree/: io.c, xtree.c: - uncommented lines which should not be
+	commented.
+
+2002-08-31  edscott
+
+	* xftree/xtree_mess.c: - fix a small bobo
+
+2002-08-31  edscott
+
+	* xftree/xtree_cpy.c: - unplug the pipe clogging which causes a
+	hang in FreeBSD
+
+2002-08-30  edscott
+
+	* xftree/xtree_mess.c: - remove debugging information output
+
+2002-08-30  edscott
+
+	* xftree/: xtree_icons.c, xtree_mess.c: - save last -p option
+
+2002-08-30  xfce
+
+	* libs/xfcolor.c, palettes/Default: [no log message]
+
+2002-08-29  edscott
+
+	* xftree/: xtree.c, xtree_icons.c: - correct for compilation of
+	xfsamba
+
+2002-08-29  edscott
+
+	* xftree/: xtree.c, xtree_functions.c, xtree_icons.c: - added -p
+	option to set icon level to: 0 = no icons at all 1 = basic icon
+	set, no scaling done 2 = extended icon set, no scaling done 3 =
+	extended icon set with scaling to font size
+
+2002-08-29  edscott
+
+	* xftree/reg.c: - only remove stale entries from xtree.reg if
+	DISPLAY=:0.0
+
+2002-08-29  edscott
+
+	* xftree/: io.c, xtree_rpm.c: - Make a clean compile in FreeBSD 4.6
+
+2002-08-29  edscott
+
+	* xfdiff/Makefile.am: - Make a clean compile in freeBSD
+
+2002-08-28  edscott
+
+	* xftree/io.c: - removed a debugging line
+
+2002-08-28  xfce
+
+	* xfce_theme/xfce_theme_draw.c: BAckport gtk-xfce-theme
+
+2002-08-27  edscott
+
+	* xftree/: gtk_exec.c, io.c, reg.c, xtree.c, xtree_mess.c: - fixed
+	a referencing null pointer bug in reg.c - fixed incorrect register
+	application parsing in gtk_exec.c
+
+2002-08-26  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-08-26  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-08-26  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-08-26  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Backport latest gtk-xfce-engine.
+
+2002-08-26  peetervois
+
+	* po/et.po: Translations for 3.8.18
+
+2002-08-24  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Backport latest xfce_engine from
+	xfce4
+
+2002-08-21  xfce
+
+	* palettes/Redmond: [no log message]
+
+2002-07-22  xfce
+
+	* palettes/: Xfce-light, Xfce-light: [no log message]
+
+2002-07-20  xfce
+
+	* palettes/Makefile.am, palettes/Makefile.in, palettes/Xfce-light,
+	po/xfce.pot: Add a new palette to match gtk-xfce-engine-2 serie
+	(and, yes, I like to share the same look across gtk+-1.2 and
+	gtk+-2.0 apps ;-)
+
+2002-07-15  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-07-15  xfce
+
+	* xfce_theme/xfce_theme_draw.c: Change shadows
+
+2002-07-14  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-07-07  edscott
+
+	* xfce/taskbar.c: - got rid of a gtk warning while moving the
+	panel.
+
+2002-07-06  edscott
+
+	* xfce/configfile.c: - avoid a sigsegv when corrupt config file
+	found
+
+2002-07-05  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.in,
+	backdrops/Makefile.in, cursors/Makefile.in, docs/Makefile.in,
+	docs/html/Makefile.in, docs/html/stylesheet-images/Makefile.in,
+	docs/images/Makefile.in, docs/sgml/Makefile.in, dt/Makefile.in,
+	fonts/Makefile.in, gdm/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, palettes/Makefile.in,
+	po/he.gmo, po/he.po, po/xfce.pot, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in, xfskin/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in: Add
+	Hebrew locate by Solomon Gruber <piql7@yahoo.com>, migrate to
+	autoconf 1.6.2 and automake 2.53
+
+2002-06-27  xfce
+
+	* libs/xfcolor.c: [no log message]
+
+2002-06-24  mstaszyszyn
+
+	* xfce/: configfile.c, setup_cb.c, taskbar.c, taskbar.h: fixed
+	taskbar bug when 12 menus used
+
+2002-06-20  edscott
+
+	* xftree/xtree_gui.c: - make sure iconname is not NULL before
+	calling set_icon().
+
+2002-06-20  mstaszyszyn
+
+	* xfce/taskbar.c: FIX: remove taskjar entry when closing a window
+
+2002-06-17  xfce
+
+	* po/xfce.pot: [no log message]
+
+2002-06-14  xfce
+
+	* Makefile.in, aclocal.m4, configure, docs/taskbar.txt,
+	libs/Makefile.am, libs/Makefile.in, libs/fileutil.c,
+	libs/fileutil.h, other/Makefile.am, other/Makefile.in,
+	other/taskbarrc, po/xfce.pot, scripts/xfce_setup.in,
+	xfce/configfile.c, xfce/taskbar.c, xfce/taskbar.h, xfce/xfce.c: Add
+	taskbar update by Marcin Staszyszyn <mstaszyszyn@heiler.com>
+
+2002-06-13  xfce
+
+	* depcomp: Add depcomp for automake 1.6
+
+2002-06-13  xfce
+
+	* Makefile.in, aclocal.m4, compile, configure, missing,
+	backdrops/Makefile.in, cursors/Makefile.in, docs/Makefile.in,
+	docs/html/Makefile.in, docs/html/stylesheet-images/Makefile.in,
+	docs/images/Makefile.in, docs/sgml/Makefile.in, dt/Makefile.in,
+	fonts/Makefile.in, gdm/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, palettes/Makefile.in,
+	po/hu.gmo, po/it.gmo, po/it.po, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in, xfskin/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in:
+	Update Italian translation by Yuri Bongiorno
+	<yuri.bongiorno@logika.com> Autoconf 1.6
+
+2002-06-09  xfce
+
+	* config.guess, config.sub, ltmain.sh: libtoolize
+
+2002-06-09  xfce
+
+	* Makefile.in, aclocal.m4, configure, backdrops/Makefile.in,
+	cursors/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, fonts/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, po/hu.po, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in:
+	Update Hungarian translation by Horn Gabor <Horn.Gabor@aktiv.co.hu>
+
+2002-06-06  xfce
+
+	* libs/xfcolor.c: [no log message]
+
+2002-06-05  xfce
+
+	* libs/xfcolor.c: [no log message]
+
+2002-06-05  xfce
+
+	* palettes/Default, libs/xfcolor.c: Slightly change default color
+	theme
+
+2002-06-03  xfce
+
+	* palettes/Kindaker, palettes/Makefile.am, palettes/Makefile.in,
+	xfwm/resize.c: [no log message]
+
+2002-05-31  xfce
+
+	* libs/xfcolor.c: [no log message]
+
+2002-05-31  xfce
+
+	* libs/xfcolor.c, palettes/Default: [no log message]
+
+2002-05-24  xfce
+
+	* libs/constant.h, libs/xfcolor.c, palettes/Default: Remove
+	relative path in generated .gtkrc (gtk+-2.0 complains about this)
+
+2002-05-22  xfce
+
+	* other/xfwmrc.in, other/xinitrc.in, xfwm/add_window.c,
+	xfwm/move.c, xfwm/screen.h, xfwm/style.c, xfwm/xfwm.h: Add
+	"AllowFreeMove" to style list in order to move title/borderless
+	windows using the Alt+Click shortcut
+
+2002-05-22  xfce
+
+	* libs/constant.h, palettes/Default: Change default engine to
+	default gtk instead of xfce engine
+
+2002-05-21  xfce
+
+	* palettes/Monkey: [no log message]
+
+2002-05-16  xfce
+
+	* aclocal.m4, configure, libs/xfcolor.c, palettes/Default: [no log
+	message]
+
+2002-05-16  xfce
+
+	* aclocal.m4, configure, configure.in, other/Makefile.in: Try to
+	fix the configure issue
+
+2002-05-16  xfce
+
+	* aclocal.m4, configure, configure.in, other/Makefile.in,
+	po/nl.gmo, po/xfce.pot: Add mandatory check for autoconf 2.52
+
+2002-05-15  xfce
+
+	* xfce/: taskbar.c, taskbar.h: Whoops, forgot to actually add the
+	code for the taskbar !
+
+2002-05-15  xfce
+
+	* acconfig.h, config.h.in, configure, configure.in, xfce.spec,
+	libs/xfcolor.c, xfce/Makefile.am, xfce/Makefile.in, xfce/handle.h,
+	xfce/xfce.c, xfce/xfwm.c: Taskbar! Contributed by Staszyszyn,
+	Marcin <mstaszyszyn@heiler.com> ACtivate at compile time by using
+	--enable-taskbar
+
+2002-05-11  edscott
+
+	* xfsamba/: xfsamba.c, xfsamba.h, xfsamba_download.c,
+	xfsamba_list.c, xfsamba_mkdir.c, xfsamba_rm.c, xfsamba_smblookup.c,
+	xfsamba_tar.c, xfsamba_upload.c: - modifications to take into
+	account changes in smaba 2.2.3
+
+2002-05-03  huysmans
+
+	* docs/images/Makefile.am, docs/images/Makefile.in,
+	xfglob/icons/Makefile.am, xfglob/icons/Makefile.in,
+	xfwm/Makefile.am, xfwm/Makefile.in: fixed docs/images installation
+	and removed some trailing backslashes
+
+2002-05-02  xfce
+
+	* xfce-3.8.18.lsm, palettes/Redmond: Minor updates
+
+2002-04-30  xfce
+
+	* palettes/Redmond: [no log message]
+
+2002-04-30  xfce
+
+	* palettes/Redmond: [no log message]
+
+2002-04-30  xfce
+
+	* xfwm/move.c: Let move icons even for windows w/out title and
+	borders
+
+2002-04-30  xfce
+
+	* palettes/Redmond: [no log message]
+
+2002-04-29  xfce
+
+	* palettes/Redmond: [no log message]
+
+2002-04-29  xfce
+
+	* aclocal.m4, config.h.in, configure, palettes/Makefile.am,
+	palettes/Makefile.in, palettes/Redmond, po/bg.gmo, po/cs.gmo,
+	po/da.gmo, po/de.gmo, po/es.gmo, po/et.gmo, po/fr.gmo, po/gl.gmo,
+	po/hu.gmo, po/ms.gmo, po/pt_BR.gmo, po/ro.gmo, po/sr.gmo,
+	po/uk.gmo, po/xfce.pot, po/zh_TW.Big5.gmo: Add a new palette
+
+2002-04-29  edscott
+
+	* xfsamba/xfsamba.h, xftree/xtree_gui.h: [no log message]
+
+2002-04-28  xfce
+
+	* ChangeLog, xfce-3.8.18.lsm: Update ChangeLog
+
 2002-04-28  edscott
 
 	* xftree/xtree_functions.c: - Previous bug fix was somehow undone.
