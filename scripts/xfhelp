@@ -50,9 +50,9 @@ if [ "x`basename $BROWSER`" = "xnetscape" -o "x`basename $BROWSER`" = "xmozilla"
 then
   $BROWSER -remote openurl\(file:///"$HELP_FILE"\) || $BROWSER "$HELP_FILE"
 # opera requires this command
-elif [ "x`basename $BROWSER`" = "opera" ]
+elif [ "x`basename $BROWSER`" = "xopera" ]
 then
-  $BROWSER -remote openurl\(file:///"$HELP_FILE",new-window\) || $BROWSER "$HELP_FILE"
+  $BROWSER -remote openURL\(file:///"$HELP_FILE",new-window\) || $BROWSER "$HELP_FILE"
 else
   $BROWSER "$HELP_FILE"
 fi
