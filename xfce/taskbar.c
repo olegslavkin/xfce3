@@ -1355,7 +1355,6 @@ taskbar_read_taskbarrc()
 
   /* pop-up menu */
   popup_menu=gtk_menu_new();
-
   for(i=0;i<cmd_no;i++) {
     if(cmds[i].type==XFWM_CMD_TYPE_SEP) {
       menu_item=gtk_menu_item_new();
@@ -1370,7 +1369,6 @@ taskbar_read_taskbarrc()
     gtk_menu_append(GTK_MENU(popup_menu),menu_item);
     gtk_widget_show(menu_item);
   }
-
   return popup_menu;
 }
 
@@ -1389,9 +1387,9 @@ int i;
       l=l->next;
     }
     g_list_free(l);
-  } else {
-    g_xfce_taskbar.gtk_desk_menu=gtk_menu_new();
-  }
+    gtk_widget_destroy(GTK_WIDGET(g_xfce_taskbar.gtk_desk_menu));
+  }  
+  g_xfce_taskbar.gtk_desk_menu=gtk_menu_new();
   for(i=0;i<config->visible_screen;i++) {
     g_snprintf(buff,sizeof(buff)-1,"%d: %s",i+1,get_gxfce_screen_label(i));
     menu_item=gtk_menu_item_new_with_label(buff);
