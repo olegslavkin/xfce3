@@ -146,6 +146,8 @@ static rpm_dir *clean_rpm_dir(void){
 	return NULL;
 }
 
+#if 0
+tar dummy does this.
 /* dummy entry to get expander without expanding */
 GtkCTreeNode *add_rpm_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
    GtkCTreeNode *item=NULL;
@@ -167,6 +169,7 @@ GtkCTreeNode *add_rpm_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
    gtk_ctree_node_set_row_data_full (ctree,item,en,node_destroy);
    return (item);   
 }
+#endif
 
 static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_level,char *rpmfile){
 	GtkCTreeNode *Tnode,*s_item;
@@ -237,6 +240,7 @@ GtkCTreeNode *add_rpm_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       GtkCTreeNode *p_node;
       entry *d_en;
       FILE *pipe;
+      char *ddir,*dpath;
       char *cmd,*p;
       gchar *text[COLUMNS],date[32],size[32];
       cfg *win;
@@ -246,11 +250,22 @@ GtkCTreeNode *add_rpm_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       text[COL_DATE]=date;
       text[COL_SIZE]=size;
 
-      cmd=(char *)malloc(strlen("rpm --dump -qlp ")+strlen(p_en->path)+1);
+      /* to handle spaces in paths: (quotes are buggy in rpm) */
+      {
+	ddir=g_strdup(p_en->path);
+	if (!strrchr(ddir,'/')) return NULL;
+	dpath=strrchr(ddir,'/')+1;
+	*(strrchr(ddir,'/'))=0;
+	if (ddir[0]==0) return NULL;
+	chdir(ddir);
+      }
+
+      cmd=(char *)malloc(strlen("rpm --dump -qlp \"\"")+strlen(dpath)+1);
       if (!cmd) return NULL;
-      sprintf (cmd, "rpm --dump -qlp %s", p_en->path);
+      sprintf (cmd, "rpm --dump -qlp \"%s\"", dpath);
       /*fprintf(stderr,"dbg:%s\n",cmd);*/
       pipe = popen (cmd, "r");
+      g_free(ddir);
       g_free(cmd);
       if (pipe) {
               icon_pix pix;  
@@ -350,7 +365,7 @@ GtkCTreeNode *add_rpm_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 	 d_en->type =  FT_RPM|FT_RPMCHILD;
 	 d_en->path=d_en->label=NULL;
 	 text[COL_DATE]=text[COL_SIZE]=text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
-	 text[COL_NAME] = _("rpm: command not found");
+	 text[COL_NAME] = _("rpm: execution error");
 	 /* use open pixmaps for error situation */
 	 s_item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
 	  		pix.open,pix.openmask,NULL,NULL,TRUE,FALSE);

@@ -13,3 +13,6 @@ Known bugs:
 
 *Symlinks that point to directories are filtered as files, not directories
 
+*Extraction of files with embeded spaces from the inside of tar files will
+ fail.
+

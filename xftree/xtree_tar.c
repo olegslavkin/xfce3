@@ -255,10 +255,10 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 
       cmd=(char *)malloc(strlen("tar -vtzZf --use-compress-program bunzip2 ")+strlen(p_en->path)+1);
       if (!cmd) return NULL;
-      if (p_en->type & FT_GZ) sprintf (cmd, "tar -vtzf %s", p_en->path);
-      else if (p_en->type & FT_COMPRESS ) sprintf (cmd, "tar -vtZf %s", p_en->path);
-      else if (p_en->type & FT_BZ2 ) sprintf (cmd, "tar --use-compress-program bunzip2 -vtf %s", p_en->path);
-      else sprintf (cmd, "tar -vtf %s", p_en->path);
+      if (p_en->type & FT_GZ) sprintf (cmd, "tar -vtzf \"%s\"", p_en->path);
+      else if (p_en->type & FT_COMPRESS ) sprintf (cmd, "tar -vtZf \"%s\"", p_en->path);
+      else if (p_en->type & FT_BZ2 ) sprintf (cmd, "tar --use-compress-program bunzip2 -vtf \"%s\"", p_en->path);
+      else sprintf (cmd, "tar -vtf \"%s\"", p_en->path);
       /*printf("dbg:%s\n",cmd);*/
       pipe = popen (cmd, "r");
       g_free(cmd);
@@ -381,7 +381,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 	 d_en->type =  FT_RPM|FT_RPMCHILD;
 	 d_en->path=d_en->label=NULL;
 	 text[COL_DATE]=text[COL_SIZE]=text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
-	 text[COL_NAME] = _("tar: command not found");
+	 text[COL_NAME] = _("tar: execution error");
 	 /* use open pixmaps for error situation */
 	 s_item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
 	  		pix.open,pix.openmask,NULL,NULL,TRUE,FALSE);
@@ -539,9 +539,46 @@ static int inner_tar_delete(GtkCTree *ctree,char *path){
 	}
 
 	
-	strtok(check.path,":");
+	if (strchr(strchr(check.path,':')+1,':')) {
+	 /* double colon format, not standard */
+	 tar_entry=strrchr(check.path,':');
+	 if (!tar_entry) return FALSE;
+	 *tar_entry='+';	
+	 tar_file=strrchr(check.path,':');
+	 if (!tar_file) return FALSE;
+	 tar_file++;
+	 *tar_entry=0;
+	 tar_entry++;
+	} else {
+	  char *p,*g;
+	  struct stat s;
+	  p=g_strdup(strchr(check.path,':')+1);
+	  while (stat(p,&s)<0){
+		  g=strrchr(p,'/');
+		  if (!g){
+			  fprintf(stderr,"xftree: error 989-1\n");/* should not happen */
+			  return FALSE;
+		  }
+		  *g=0;
+	  }
+	  tar_file=strchr(check.path,':')+1;
+	  tar_file[strlen(p)]=0;
+	  tar_entry=tar_file+strlen(p)+1;
+	  g_free(p);
+	}
+	/* avoid directories with spaces */
+	{
+	  char *ddir;
+	  ddir=tar_file;
+	  tar_file=strrchr(tar_file,'/')+1;
+	  *(strrchr(ddir,'/'))=0;
+	  chdir(ddir);
+	}
+	
+	
+/*	strtok(check.path,":");
 	tar_file=strtok(NULL,":"); if (!tar_file){errno=EFAULT;return -1;}
-	tar_entry=strtok(NULL,"\n"); if (!tar_entry){errno=EFAULT;return -1;}
+	tar_entry=strtok(NULL,"\n"); if (!tar_entry){errno=EFAULT;return -1;}*/
 	if (strlen("tar -zZ --use-compress-program bunzip2 --delete  -f ")+strlen(tar_file)+1+strlen(tar_entry)+1 >TAR_CMD_LEN){
 		errno=EIO;return -1;
 	}
@@ -639,6 +676,14 @@ int tar_extract(GtkCTree *ctree,char *tgt,char *src){
 	  tar_file[strlen(p)]=0;
 	  tar_entry=tar_file+strlen(p)+1;
 	  g_free(p);
+	}
+	/* avoid directories with spaces */
+	{
+	  char *ddir;
+	  ddir=tar_file;
+	  tar_file=strrchr(tar_file,'/')+1;
+	  *(strrchr(ddir,'/'))=0;
+	  chdir(ddir);
 	}
 	
 	if (strlen("tar --use-compress-program bunzip2 -OZ -f %% -x %%")+strlen(tar_file)+1+strlen(tar_entry)+1 >TAR_CMD_LEN){

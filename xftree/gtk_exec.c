@@ -34,10 +34,13 @@
 #include <dirent.h>
 #include <gtk/gtk.h>
 #include <unistd.h>
+#include <X11/Xlib.h>
+#include <X11/Xproto.h>
 #include "constant.h"
 #include "my_intl.h"
 #include "gtk_exec.h"
 #include "gtk_dlg.h"
+#include "xtree_functions.h"
 #include "xtree_cfg.h"
 #include "xtree_cb.h"
 #include "io.h"
@@ -52,7 +55,7 @@ typedef struct
   GtkWidget *top;
   GtkWidget *combo;
   GtkWidget *check;
-  GtkWidget *reg;
+  GtkWidget *remember;
   cfg *win;
   char *cmd;
   char *file;
@@ -98,7 +101,9 @@ on_ok (GtkWidget * ok, gpointer data)
     dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
     gtk_widget_destroy (dl.top);
     dl.result = (int) ((long) data);
-    if (dl.reg&&(gtk_toggle_button_get_active((GtkToggleButton *)dl.reg))){
+#if 0
+    /*something wrong here, on first execution of instance.*/
+    if ((dl.remember!=NULL)&&(gtk_toggle_button_get_active((GtkToggleButton *)dl.remember))){
       char  *sfx;
       sfx = strrchr (dl.file, '.');
       if (!sfx) {
@@ -111,6 +116,8 @@ on_ok (GtkWidget * ok, gpointer data)
       }
 	    
     }
+#endif
+
     gtk_main_quit ();
   }
   else
@@ -143,7 +150,7 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     title = _("Run program ...");
   }
 
-  dl.reg=NULL;
+  dl.remember=NULL;
   dl.result = 0;
   dl.win=gtk_object_get_user_data (GTK_OBJECT (ctree));
   dl.in_terminal = 0;
@@ -189,10 +196,14 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
   dl.check = check = gtk_check_button_new_with_label (_("Open in terminal"));
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 0);
  
+#if 0
+ /*on first exec of dialog, something wrong with dl.remember */
   if (file) { 
-   dl.reg = gtk_check_button_new_with_label (_("Remember application"));
-   gtk_box_pack_start (GTK_BOX (box), dl.reg, FALSE, FALSE, 0);
+   dl.remember = gtk_check_button_new_with_label (_("Remember application"));
+   gtk_toggle_button_set_active((GtkToggleButton *)dl.remember,FALSE);
+   gtk_box_pack_start (GTK_BOX (box), dl.remember, FALSE, FALSE, 0);
   }
+#endif
 
   gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.combo)->entry), "activate", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
@@ -239,5 +250,6 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
     g_free (dl.cmd);
     io_system (cmd);
   }
+  update_timer((GtkCTree *)ctree);
   return (dl.result);
 }

@@ -458,6 +458,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
    }
 
 icon_identified:
+   if (type & (FT_TAR|FT_RPM)) isleaf=FALSE;   
    {
     int offsetB=0,offsetP=0; 
     if ((type & FT_EXE) && (PIXid[0]==PIX_PAGE)) {

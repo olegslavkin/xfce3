@@ -332,25 +332,6 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
       return 0;
     }
     en->flags = flags;
-    if (strstr(en->label,".")){
-	  char *w;
-	  w=strrchr(en->label,'.');
-	  if (strcmp(w,".rpm")==0) en->type |= (FT_RPM|FT_RPM_DUMMY);
-	  if (strcmp(w,".tar")==0) en->type |= (FT_TAR|FT_TAR_DUMMY);
-	  if (strcmp(w,".tgz")==0) en->type |= (FT_TAR|FT_TAR_DUMMY|FT_GZ);
-	  if (strcmp(w,".gz")==0) {
-		  en->type |= (FT_GZ);
-		  if (strstr(en->label,".tar.gz")) en->type |= (FT_TAR|FT_TAR_DUMMY);
-	  } 
-	  if (strcmp(w,".Z")==0) {
-		  en->type |= (FT_COMPRESS);
-		  if (strstr(en->label,".tar.Z")) en->type |= (FT_TAR|FT_TAR_DUMMY);
-	  }
-	  if (strcmp(w,".bz2")==0) {
-		  en->type |= (FT_BZ2);
-		  if (strstr(en->label,".tar.bz2")) en->type |= (FT_TAR|FT_TAR_DUMMY);
-	  }
-    }
     {
       char *tag="  ";
       unsigned long long tama;
@@ -382,29 +363,52 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
 		  pix.pixmap,pix.pixmask, pix.open,pix.openmask, isleaf, FALSE);
   if (item){
     gtk_ctree_node_set_row_data_full (ctree, item, en, node_destroy);
-    if (en->type & FT_TAR) add_tar_dummy(ctree, item,en);
-    if (en->type & FT_RPM) add_rpm_dummy(ctree, item,en);
+    if (en->type & (FT_TAR|FT_RPM)) add_tar_dummy(ctree, item,en);
+   /* if (en->type & FT_TAR) add_tar_dummy(ctree, item,en);
+    if (en->type & FT_RPM) add_rpm_dummy(ctree, item,en);*/
   }
   *type = en->type;
   return (item);
 }
 
-void
-update_node (GtkCTree * ctree, GtkCTreeNode * node, int type, char *label)
+static void
+update_node (GtkCTree * ctree, GtkCTreeNode * child, entry *child_en)
 {
-  icon_pix pix;  
-  gboolean isleaf;
-  entry *en;
-  
-  if (!ctree || !node || !label)
+  gchar size[32];
+  gchar date[32];
+     /* update the labels */
+  struct passwd *pw;
+  struct group *gr;
+     /*fprintf(stderr,"dbg: doing update for %s\n",en->label);*/
   {
-    return;
+       char *tag="  ";
+       unsigned long long tama;
+       tama =  child_en->st.st_size;
+       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" Gb";}
+       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
+       else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+       sprintf (size, " %llu%s", tama,tag);
   }
-  en = gtk_ctree_node_get_row_data (ctree, node); 
-  isleaf=set_icon_pix(&pix,en->type,en->label);
-  gtk_ctree_set_node_info (ctree, node, label, SPACING, 
+     
+  sprintf (date, "%02d-%02d-%02d  %02d:%02d", 
+		      child_en->date.year, child_en->date.month, 
+		      child_en->date.day, child_en->date.hour, child_en->date.min);
+  gtk_ctree_node_set_text (ctree, child, COL_DATE, date);
+  gtk_ctree_node_set_text (ctree, child, COL_SIZE, size);
+  gtk_ctree_node_set_text (ctree, child, COL_MODE, mode_txt(child_en->st.st_mode));
+  pw=getpwuid(child_en->st.st_uid); 
+  gtk_ctree_node_set_text (ctree, child, COL_UID,(pw)? pw->pw_name : _("unknown") );
+  gr=getgrgid (child_en->st.st_gid); 
+  gtk_ctree_node_set_text (ctree, child, COL_GID,(gr)? gr->gr_name : _("unknown") );      
+
+  {
+    icon_pix pix;  
+    gboolean isleaf; 
+    isleaf=set_icon_pix(&pix,child_en->type,child_en->label);
+  /*printf("dbg: updating %s, (%d)\n",en->label,FT_TAR|FT_RPM);*/
+    gtk_ctree_set_node_info (ctree,child, child_en->label, SPACING, 
 		  pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, FALSE);
-  
+  } 
 }
 
 static void update_status(GtkCTreeNode * node,GtkCTree * ctree){
@@ -616,6 +620,7 @@ on_expand (GtkCTree * ctree, GtkCTreeNode * node, char *path)
   entry *en;
 
   en = gtk_ctree_node_get_row_data (ctree, node);
+  
   if (en->type & (FT_TAR|FT_TARCHILD|FT_RPM|FT_RPMCHILD)) {	 
       if  (en->type & (FT_TAR_DUMMY|FT_RPM_DUMMY)){
 	      /*printf("doingit\n");*/
@@ -760,8 +765,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
   entry *en, *child_en;
   char compl[PATH_MAX + 1];
   int type, p_len, changed, tree_updated, root_changed;
-  gchar size[32];
-  gchar date[32];
+  /*gchar size[32];  gchar date[32];*/
   cfg *win;
   gboolean manage_timeout;
   deletenode_t *head_delete=NULL,*p_del=NULL,*l_del=NULL;
@@ -821,6 +825,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
     }
     else if (changed == TRUE)
     {
+#if 0
       /* update the labels */
      struct passwd *pw;
      struct group *gr;
@@ -846,6 +851,8 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
       gr=getgrgid (en->st.st_gid); 
       gtk_ctree_node_set_text (ctree, child, COL_GID,(gr)? gr->gr_name : _("unknown") );      
       update_node (ctree, child, child_en->type, child_en->label); /* icon changes */
+#endif
+      update_node (ctree, child, child_en); /* icon changes */
       /* skip sort if no files added tree_updated = TRUE;*/
     }
     /* this may be a dummy subtree, and need not be updated when node is collapsed
@@ -868,8 +875,7 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 
     /*fprintf(stderr,"dbg:(%s)rc=%d,tu=%d, isdir=%d\n",en->path,root_changed,tree_updated,en->type & FT_DIR);fflush(NULL);*/
   /*if ((root_changed || tree_updated) && (en->type & FT_DIR))*/
-  if (root_changed && (en->type & FT_DIR) && !(en->type & (FT_TARCHILD|FT_TAR))
-		   && !(en->type & (FT_RPMCHILD|FT_RPM))) {
+  if (root_changed && (en->type & FT_DIR) && !(en->type & (FT_TARCHILD|FT_TAR|FT_RPMCHILD|FT_RPM))){
     /* root changed == maybe new entries */
     /*fprintf(stderr,"dbg:rc=%d,tu=%d\n",root_changed,tree_updated);fflush(NULL);*/
     if (GTK_CTREE_ROW (node)->expanded)
@@ -902,14 +908,15 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
 	  new_child = add_node (ctree, node, NULL, name, compl, &type, en->flags);
 	  if ((type & FT_DIR) && (io_is_valid (name)) && !(type & FT_DIR_UP) && !(type & FT_DIR_PD) && new_child)
 	    add_subtree (ctree, new_child, compl, 1, en->flags);
-	  if (entry_update (en) > 0) update_node (ctree, node, en->type, en->label);
+	  if (entry_update (en) > 0) update_node (ctree, node, en);
+/*	  if (entry_update (en) > 0) update_node (ctree, node, en->type, en->label);*/
 	  /* root is changed: tree_updated = TRUE;*/
 	}
 	/*else {fprintf(stderr,"dbg:update_tree()...node has child\n");fflush(NULL);}*/
        } /* end while */
        diren = xf_closedir (diren);  
     }
-    else if ((GTK_CTREE_ROW (node)->children) && (io_is_valid (en->label)) && !(en->type & FT_DIR_UP) && !(en->type & FT_DIR_PD))
+    else if ((GTK_CTREE_ROW (node)->children) && (io_is_valid (en->label)) && !(en->type & (FT_DIR_UP|FT_DIR_PD)))
     {
       add_subtree (GTK_CTREE (ctree), node, en->path, 1, en->flags);
       /* icon changes after adding the node? not going to happen: */

@@ -298,8 +298,27 @@ int entry_update (entry * en)
         tipo |= FT_FILE;
         if ((s.st_mode & S_IXUSR) || (s.st_mode & S_IXGRP) || (s.st_mode & S_IXOTH))
              tipo |= FT_EXE;
+        if (strstr(en->label,".")){
+	  char *w;
+	  w=strrchr(en->label,'.');
+	  if (strcmp(w,".rpm")==0) tipo |= (FT_RPM|FT_RPM_DUMMY);
+	  if (strcmp(w,".tar")==0) tipo |= (FT_TAR|FT_TAR_DUMMY);
+	  if (strcmp(w,".tgz")==0) tipo |= (FT_TAR|FT_TAR_DUMMY|FT_GZ);
+	  if (strcmp(w,".gz")==0) {
+		  tipo |= (FT_GZ);
+		  if (strstr(en->label,".tar.gz")) tipo |= (FT_TAR|FT_TAR_DUMMY);
+	  } 
+	  if (strcmp(w,".Z")==0) {
+		  tipo |= (FT_COMPRESS);
+		  if (strstr(en->label,".tar.Z")) tipo |= (FT_TAR|FT_TAR_DUMMY);
+	  }
+	  if (strcmp(w,".bz2")==0) {
+		  tipo |= (FT_BZ2);
+		  if (strstr(en->label,".tar.bz2")) tipo |= (FT_TAR|FT_TAR_DUMMY);
+	  }
+	}
      }
-     else if (S_ISCHR (s.st_mode)) tipo |= FT_CHAR_DEV;
+      else if (S_ISCHR (s.st_mode)) tipo |= FT_CHAR_DEV;
      else if (S_ISBLK (s.st_mode)) tipo |= FT_BLOCK_DEV;
      else if (S_ISFIFO (s.st_mode)) tipo |= FT_FIFO;
      else if (S_ISSOCK (s.st_mode)) tipo |= FT_SOCKET;

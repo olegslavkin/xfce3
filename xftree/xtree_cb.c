@@ -1011,7 +1011,7 @@ extern autotype_t autotype[];
 #define AUTOTYPE_CMD_LEN 1024
 static char autotype_cmd[AUTOTYPE_CMD_LEN];
 /*static gboolean rpm_cmd_error;*/
-static GtkWidget *autotype_parent;
+static GtkWidget *autotype_parent,*auto_ctree;
 static void *autotype_fork_obj=NULL;
 
 /* function to process stderr produced by child */
@@ -1046,20 +1046,22 @@ static void rwForkOver (void)
   /*if (rpm_cmd_error) fprintf(stderr,"dbg: fork is over with error\n");*/
   autotype_fork_obj=NULL;
   show_cat(_("command finished\n"));
+  update_timer ((GtkCTree *)auto_ctree);
 }
 
 static void tubo_cmd(void){
-	char *args[10];
+	/*char *args[10];*/
 	int i;
 	int status;
-	args[0]=strtok(autotype_cmd," ");
+	/*args[0]=strtok(autotype_cmd," ");
 	if (args[0]) for (i=1;i<10;i++){
 		args[i]=strtok(NULL," ");
 		if (!args[i]) break;
-	}
+	}*/
 	i=fork();
 	if (!i){
-	   execvp(args[0],args);
+	   execlp("sh","sh","-c",autotype_cmd,(char *)0);
+/*	   execvp(args[0],args);*/
 	   _exit(123);
 	}
 	wait(&status);
@@ -1129,7 +1131,8 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   if (autotype[i].command==NULL) goto end_autotype;
   path=valid_path((GtkCTree *)ctree,FALSE);
   chdir(path);
-  sprintf (autotype_cmd, "%s %s",autotype[i].command,en->path);
+  sprintf (autotype_cmd, "%s \"%s\"",autotype[i].command,en->path);
+  auto_ctree=ctree;
   autotype_tubo(win->top);
 
 #if 0
