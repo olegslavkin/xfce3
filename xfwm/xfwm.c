@@ -829,7 +829,7 @@ SetRCDefaults ()
     "ModulePath $PATH",
     "ActiveColor white #CCCCC7",
     "InactiveColor white #CCCCC7",
-    "TitleStyle Active Solid #409840",
+    "TitleStyle Active Solid #0A895E",
     "TitleStyle Inactive Solid #1764A3",
     "MenuColor black #CCCCC7 black #E6E6E1",
     "CursorColor #FFFFFF black",
