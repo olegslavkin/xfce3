@@ -179,6 +179,7 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
         icon_pix pix;  
 	
 	/*fprintf(stderr,"dbg: looking for %s\n",path);*/
+	if (!strchr(path,'/') && !strchr(path,'\\')) return NULL;
 	text[COL_DATE]=text[COL_SIZE]=text[COL_MODE]=text[COL_UID]=text[COL_GID]="";
 	Tnode=find_tar_dir(path);
 	if (!Tnode) {
