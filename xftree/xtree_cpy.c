@@ -128,7 +128,7 @@ static gboolean force_override=FALSE;
 static int internal_rw_file(char *target,char *source,off_t size);
 static int rwStderr (int n, void *data);
 static int rwStdout (int n, void *data);
-static void rwForkOver (void);
+static void rwForkOver (pid_t pid);
 static void set_innerloop(gboolean state);
 static int process_error(int code);
 static void cb_cancel (GtkWidget * w, void *data);
@@ -1125,7 +1125,7 @@ static int rwStdout (int n, void *data){
 }
 
 /* function called when child is dead */
-static void rwForkOver (void)
+static void rwForkOver (pid_t pid)
 {
   char *allfile;
   allfile=(char *)malloc(strlen(child_file)+1+strlen(".all"));

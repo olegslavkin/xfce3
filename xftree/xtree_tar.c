@@ -474,7 +474,7 @@ static int rwStdout (int n, void *data){
 }
 
 /* function called when child is dead */
-static void rwForkOver (void)
+static void rwForkOver (pid_t pid)
 {
   if (tar_cmd_error) {
     /*fprintf(stderr,"dbg fork is over with error\n");*/
@@ -494,7 +494,7 @@ static void rwForkOver (void)
   update_timer (tar_ctree);
 }
 /* function called when child is dead */
-static void rwForkOverE (void)
+static void rwForkOverE (pid_t pid)
 {
   if (tar_output) {
 	  close(tar_output);

@@ -159,7 +159,7 @@ SMBStdout (int n, void *data)
 
 
 static void
-SMBForkOver (void)
+SMBForkOver (pid_t pid)
 {
   extern gint update_timer (GtkCTree * ctree);
    

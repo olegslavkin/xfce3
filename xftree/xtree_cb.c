@@ -1063,7 +1063,7 @@ static int rwStdout (int n, void *data){
 }
 
 /* function called when child is dead */
-static void rwForkOver (void)
+static void rwForkOver (pid_t pid)
 {
   /*if (rpm_cmd_error) fprintf(stderr,"dbg: fork is over with error\n");*/
   autotype_fork_obj=NULL;
