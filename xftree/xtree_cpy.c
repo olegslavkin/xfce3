@@ -283,6 +283,23 @@ static int nitems;
 char *randomTmpName(char *ext){
     static char *fname=NULL;
     int fnamelen;
+    if (fname) g_free(fname);
+    if (ext==NULL) fnamelen=strlen("/tmp/xftree.XXXXXX")+1;
+    else fnamelen=strlen("/tmp/xftree.XXXXXX")+strlen(ext)+2;
+    fname = (char *)malloc(sizeof(char)*(fnamelen));
+    if (!fname) return NULL;
+    sprintf(fname,"/tmp/xftree.XXXXXX");
+    close(mkstemp(fname));
+    if (ext) {
+	    unlink(fname);
+	    strcat(fname,"."); strcat(fname,ext);
+    }
+    return fname;
+}
+
+/*char *randomTmpName(char *ext){
+    static char *fname=NULL;
+    int fnamelen;
     long long id;
     if (ext==NULL) ext="tmp";
     if (fname) g_free(fname);
@@ -294,7 +311,7 @@ char *randomTmpName(char *ext){
     if (!fname) return NULL;
     sprintf(fname,"/tmp/xftree.%lld.%s",id,ext);
     return fname;
-}
+}*/
 
 static char *SimpleTmpList(GtkWidget *parent,char *tgt,char *src){
     static char *fname=NULL;

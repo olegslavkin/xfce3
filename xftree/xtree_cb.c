@@ -94,7 +94,7 @@ char *valid_path(GtkCTree *ctree,gboolean expand){
   entry *en;
   count_selection (GTK_CTREE (ctree), &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  while (!(en->type&FT_DIR)||(en->type&FT_TARCHILD)){
+  while (!(en->type&FT_DIR)||(en->type&(FT_TARCHILD|FT_RPMCHILD|FT_DIR_UP))){
 	  node=GTK_CTREE_ROW (node)->parent;
 	  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   }
@@ -418,23 +418,14 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
      
   if (fname) g_free(fname);
   if (mname) g_free(mname);
-  fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
-  srandom(time(NULL));
-  {
-   long long fid,mid;
-   fid=random()*(9999.0/RAND_MAX);   
-   mid=random()*(9999.0/RAND_MAX);   
-   /*printf("dbg:fid=%lld, mid=%lld\n",fid,mid);*/
-   while (fid > 9999) fid /= 2; 
-   while (mid > 9999) mid /= 2; 
-   if (fid==mid){ if (fid < 9999) mid++; else mid--; }
-   fname = (char *)malloc(sizeof(char)*(fnamelen));
-   mname = (char *)malloc(sizeof(char)*(fnamelen));
-   if (!fname) return ; if (!mname) return ;
-   sprintf(fname,"/tmp/xftree.%lld.tmp",fid);
-   sprintf(mname,"/tmp/xftree.%lld.tmp",mid);
-  }
-  
+  fnamelen=strlen("/tmp/xftree.XXXXXX")+1;
+  fname = (char *)malloc(sizeof(char)*(fnamelen));
+  mname = (char *)malloc(sizeof(char)*(fnamelen)); 
+  if (!fname) return ; if (!mname) return ;
+  strcpy(fname,"/tmp/xftree.XXXXXX");
+  strcpy(mname,"/tmp/xftree.XXXXXX");
+  close(mkstemp(fname));
+  close(mkstemp(mname));
   /*fprintf(stderr,"dbg:fname=%s,mname=%s",fname,mname);*/
   
   if ((tmpfile=fopen(fname,"w"))==NULL) return ;

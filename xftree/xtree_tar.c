@@ -631,13 +631,18 @@ int tar_delete(GtkCTree *ctree,char *path){
 	return 0;
 }
 
-int tar_extract(GtkCTree *ctree,char *tgt,char *src){
+int tar_extract(GtkCTree *ctree,char *tgt,char *o_src){
 	char *tar_file,*tar_entry,*loc;
+	static char *src=NULL;
 	entry *en;
 	cfg *win;
 	entry check;
 	mode_t mode=S_IRUSR|S_IWUSR|S_IRGRP;
 
+	if (src) g_free(src);
+	src=g_strdup(o_src);
+	if (!src) return FALSE;
+	
 	tar_ctree=ctree;
 	
 	while (tar_fork_obj){
