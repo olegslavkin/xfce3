@@ -2240,6 +2240,18 @@ version (void)
 #else
   fprintf (stderr, "disabled\n");
 #endif
+  fprintf (stderr, "  Debugging info.....: ");
+#ifdef DEBUG
+  fprintf (stderr, "enabled\n");
+#else
+  fprintf (stderr, "disabled\n");
+#endif
+  fprintf (stderr, "  Stash event time...: ");
+#ifdef REQUIRES_STASHEVENT
+  fprintf (stderr, "enabled\n");
+#else
+  fprintf (stderr, "disabled\n");
+#endif
   fprintf (stderr, "\n");
 }
 

@@ -380,6 +380,13 @@ AC_ARG_ENABLE(manage-overrides,
   AC_DEFINE(MANAGE_OVERRIDES)
 ],)
 
+AC_ARG_ENABLE(debug,
+[  --enable-debug          Enable extra debugging [default=no]],[
+  AC_DEFINE(DEBUG)
+],)
+
+AC_DEFINE(REQUIRES_STASHEVENT)
+
 AC_MSG_CHECKING(if prototype for gethostname exists)
 AC_EGREP_CPP(gethostname,[
 #include <unistd.h>],
