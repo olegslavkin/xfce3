@@ -387,15 +387,15 @@ PaintEntry (MenuRoot * mr, MenuItem * mi)
 
     ShadowGC = Scr.MenuShadowGC;
     ReliefGC = Scr.MenuReliefGC;
-
     currentGC = Scr.MenuGC;
 
     /* active cursor over entry? */
     if ((mi->state) && (mi->func_type != F_TITLE) &&
             (mi->func_type != F_NOP) && *mi->item)
     {
+
         DrawSelectedEntry (mr->w, 2, y_offset, mr->width - 4, mi->y_height,
-                           ReliefGC, ShadowGC, &currentGC);
+			   &currentGC);
         Selected = TRUE;
     }
     else
@@ -620,15 +620,14 @@ RelieveHalfRectangle (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawSelectedEntry (Window win, int x, int y, int w, int h,
-                   GC ReliefGC, GC ShadowGC, GC *currentGC)
+DrawSelectedEntry (Window win, int x, int y, int w, int h, GC *currentGC)
 {
     if (Scr.engine == XFCE_ENGINE)
-        DrawSelectedEntry_xfce (win, x, y, w, h, ReliefGC, ShadowGC, currentGC);
+        DrawSelectedEntry_xfce (win, x, y, w, h, currentGC);
     else if (Scr.engine == TRENCH_ENGINE)
-        DrawSelectedEntry_trench (win, x, y, w, h, ReliefGC, ShadowGC, currentGC);
+        DrawSelectedEntry_trench (win, x, y, w, h, currentGC);
     else
-        DrawSelectedEntry_mofit (win, x, y, w, h, ReliefGC, ShadowGC, currentGC);
+        DrawSelectedEntry_mofit (win, x, y, w, h, currentGC);
 }
 
 void
@@ -1309,14 +1308,13 @@ RelieveHalfRectangle_xfce (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawSelectedEntry_xfce (Window win, int x, int y, int w, int h,
-                        GC ReliefGC, GC ShadowGC, GC *currentGC)
+DrawSelectedEntry_xfce (Window win, int x, int y, int w, int h, GC *currentGC)
 {
     Globalgcv.foreground = Scr.MenuSelColors.back;
     Globalgcm = GCForeground;
     XChangeGC (dpy, Scr.ScratchGC1, Globalgcm, &Globalgcv);
     XFillRectangle (dpy, win, Scr.ScratchGC1, x, y, w, h);
-    RelieveRectangle (win, x, y, w, h, ShadowGC, ReliefGC);
+    RelieveRectangle (win, x, y, w, h, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
     *currentGC = Scr.MenuSelGC;
 }
 
@@ -1923,15 +1921,14 @@ RelieveHalfRectangle_mofit (Window win, int x, int y, int w, int h,
 }
 
 void
-DrawSelectedEntry_mofit (Window win, int x, int y, int w, int h,
-                         GC ReliefGC, GC ShadowGC, GC *currentGC)
+DrawSelectedEntry_mofit (Window win, int x, int y, int w, int h, GC *currentGC)
 {
     Globalgcv.foreground = Scr.MenuColors.back;
     Globalgcm = GCForeground;
     XChangeGC (dpy, Scr.ScratchGC1, Globalgcm, &Globalgcv);
     XFillRectangle (dpy, win, Scr.ScratchGC1, x, y, w, h);
-    RelieveRectangle (win, x, y, w, h, ReliefGC, ShadowGC);
-    RelieveRectangle (win, x + 1, y + 1, w - 2, h - 2, ReliefGC, ShadowGC);
+    RelieveRectangle (win, x, y, w, h, Scr.MenuReliefGC, Scr.MenuShadowGC);
+    RelieveRectangle (win, x + 1, y + 1, w - 2, h - 2, Scr.MenuReliefGC, Scr.MenuShadowGC);
     *currentGC = Scr.MenuGC;
 }
 
@@ -2581,8 +2578,7 @@ RelieveHalfRectangle_trench (Window win, int x, int y, int w, int h,
 
 
 void
-DrawSelectedEntry_trench (Window win, int x, int y, int w, int h,
-                          GC ReliefGC, GC ShadowGC, GC *currentGC)
+DrawSelectedEntry_trench (Window win, int x, int y, int w, int h, GC *currentGC)
 {
     Globalgcv.foreground = Scr.MenuSelColors.back;
     Globalgcm = GCForeground;

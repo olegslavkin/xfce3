@@ -1424,17 +1424,23 @@ SetHiColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.cap_style = CapProjecting;
     if (fl->HiReliefGC != NULL)
     {
-        XFreeGC (dpy, fl->HiReliefGC);
+        XChangeGC (dpy, fl->HiReliefGC, gcm, &gcv);
     }
-    fl->HiReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    else
+    {
+        fl->HiReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
     gcv.foreground = fl->HiRelief.back;
     gcv.background = fl->HiRelief.fore;
     if (fl->HiShadowGC != NULL)
     {
-        XFreeGC (dpy, fl->HiShadowGC);
+        XChangeGC (dpy, fl->HiShadowGC, gcm, &gcv);
     }
-    fl->HiShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    else
+    {
+        fl->HiShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
     gcv.foreground = fl->HiColors.back;
 
@@ -1442,12 +1448,14 @@ SetHiColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
         gcv.background = BlackPixel (dpy, Scr.screen);
     else
         gcv.background = WhitePixel (dpy, Scr.screen);
-
     if (fl->HiBackGC != NULL)
     {
-        XFreeGC (dpy, fl->HiBackGC);
+        XChangeGC (dpy, fl->HiBackGC, gcm, &gcv);
     }
-    fl->HiBackGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    else
+    {
+        fl->HiBackGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
     if ((Scr.flags & WindowsCaptured) && (Scr.Hilite != NULL))
     {
@@ -1493,31 +1501,42 @@ SetLoColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.cap_style = CapProjecting;
     if (fl->LoReliefGC != NULL)
     {
-        XFreeGC (dpy, fl->LoReliefGC);
+        XChangeGC (dpy, fl->LoReliefGC, gcm, &gcv);
     }
-    fl->LoReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    else
+    {
+        fl->LoReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
     gcv.foreground = fl->LoRelief.back;
     gcv.background = fl->LoRelief.fore;
     if (fl->LoShadowGC != NULL)
     {
-        XFreeGC (dpy, fl->LoShadowGC);
+        XChangeGC (dpy, fl->LoShadowGC, gcm, &gcv);
     }
-
-    fl->LoShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
-
+    else
+    {
+        fl->LoShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
+    
     gcv.foreground = fl->LoColors.back;
     if (brightness (gcv.foreground) > 45)
+    {
         gcv.background = fl->LoRelief.back;
+    }
     else
+    {
         gcv.background = fl->LoRelief.fore;
-
+    }
     if (fl->LoBackGC != NULL)
     {
-        XFreeGC (dpy, fl->LoBackGC);
+        XChangeGC (dpy, fl->LoBackGC, gcm, &gcv);
     }
-    fl->LoBackGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
-}
+    else
+    {
+        fl->LoBackGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
+} 
 
 void
 SafeDefineCursor (Window w, Cursor cursor)
@@ -1571,6 +1590,7 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     XGCValues gcv;
     unsigned long gcm;
     char *fore = NULL, *back = NULL, *selfore = NULL, *selback = NULL;
+    Pixel MenuSelHiColor, MenuSelLoColor;
 
     action = GetNextToken (action, &fore);
     action = GetNextToken (action, &back);
@@ -1609,31 +1629,79 @@ SetMenuColor (XEvent * eventp, Window w, XfwmWindow * tmp_win,
     gcv.line_width = 1;
     gcv.cap_style = CapProjecting;
     if (Scr.MenuReliefGC != NULL)
+    {
         XChangeGC (dpy, Scr.MenuReliefGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
-
+    }
+    
     gcv.foreground = Scr.MenuRelief.back;
     gcv.background = Scr.MenuRelief.fore;
     if (Scr.MenuShadowGC != NULL)
+    {
         XChangeGC (dpy, Scr.MenuShadowGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
 
     gcv.foreground = Scr.MenuColors.fore;
     gcv.background = Scr.MenuColors.back;
     if (Scr.MenuGC != NULL)
+    {
         XChangeGC (dpy, Scr.MenuGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
-
+    }
     gcv.foreground = Scr.MenuSelColors.fore;
     gcv.background = Scr.MenuSelColors.back;
     if (Scr.MenuSelGC != NULL)
+    {
         XChangeGC (dpy, Scr.MenuSelGC, gcm, &gcv);
+    }
     else
+    {
         Scr.MenuSelGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
-    MakeMenus ();
+    }
+
+    MenuSelHiColor = GetHilite (Scr.MenuSelColors.back);
+    MenuSelLoColor = GetShadow (Scr.MenuSelColors.back);
+
+    gcm =
+        GCFunction | GCPlaneMask | GCGraphicsExposures | GCLineWidth |
+        GCForeground | GCBackground | GCCapStyle;
+    gcv.foreground = MenuSelHiColor;
+    gcv.background = Scr.MenuSelColors.back;
+    gcv.fill_style = FillSolid;
+    gcv.plane_mask = AllPlanes;
+    gcv.function = GXcopy;
+    gcv.graphics_exposures = False;
+    gcv.line_width = 1;
+    gcv.cap_style = CapProjecting;
+    if (Scr.MenuSelReliefGC != NULL)
+    {
+        XChangeGC (dpy, Scr.MenuSelReliefGC, gcm, &gcv);
+    }
+    else
+    {
+        Scr.MenuSelReliefGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
+   
+    gcv.foreground = MenuSelLoColor;
+    if (Scr.MenuSelShadowGC != NULL)
+    {
+        XChangeGC (dpy, Scr.MenuSelShadowGC, gcm, &gcv);
+    }
+    else
+    {
+        Scr.MenuSelShadowGC = XCreateGC (dpy, Scr.Root, gcm, &gcv);
+    }
+    
     if (fore != NULL)
         free (fore);
     if (back != NULL)

@@ -1771,9 +1771,11 @@ InitVariables (void)
     Scr.TransMaskGC = (GC) NULL;
     Scr.DrawGC = (GC) NULL;
     Scr.MenuGC = (GC) NULL;
-    Scr.MenuSelGC = (GC) NULL;
     Scr.MenuReliefGC = (GC) NULL;
     Scr.MenuShadowGC = (GC) NULL;
+    Scr.MenuSelGC = (GC) NULL;
+    Scr.MenuSelReliefGC = (GC) NULL;
+    Scr.MenuSelShadowGC = (GC) NULL;
     Scr.ScratchGC1 = (GC) NULL;
     Scr.ScratchGC3 = (GC) NULL;
     Scr.BlackGC = (GC) NULL;
@@ -1985,12 +1987,16 @@ Done (int restart, char *command)
         XFreeGC (dpy, Scr.DrawGC);
     if (Scr.MenuGC)
         XFreeGC (dpy, Scr.MenuGC);
-    if (Scr.MenuSelGC)
-        XFreeGC (dpy, Scr.MenuSelGC);
     if (Scr.MenuReliefGC)
         XFreeGC (dpy, Scr.MenuReliefGC);
     if (Scr.MenuShadowGC)
         XFreeGC (dpy, Scr.MenuShadowGC);
+    if (Scr.MenuSelGC)
+        XFreeGC (dpy, Scr.MenuSelGC);
+    if (Scr.MenuSelReliefGC)
+        XFreeGC (dpy, Scr.MenuSelReliefGC);
+    if (Scr.MenuSelShadowGC)
+        XFreeGC (dpy, Scr.MenuSelShadowGC);
     if (Scr.ScratchGC1)
         XFreeGC (dpy, Scr.ScratchGC1);
     if (Scr.ScratchGC3)

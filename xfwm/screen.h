@@ -307,9 +307,11 @@ typedef struct ScreenInfo
     GC DrawGC;			/* GC to draw lines for move and resize */
     GC HintsGC;			/* GC to draw lines and strings */
     GC MenuGC;
-    GC MenuSelGC;
     GC MenuReliefGC;
     GC MenuShadowGC;
+    GC MenuSelGC;
+    GC MenuSelReliefGC;
+    GC MenuSelShadowGC;
     GC ScratchGC1;
     GC ScratchGC3;
     GC BlackGC;
