@@ -458,11 +458,7 @@ create_gxfce (XFCE_palette * pal)
   gtk_widget_show (gxfce_hbox1);
   gtk_container_add (GTK_CONTAINER (gxfce_mainframe), gxfce_hbox1);
   gtk_widget_set_usize (gxfce_hbox1, 0, 0);
-#ifndef OLD_STYLE
   gtk_container_border_width (GTK_CONTAINER (gxfce_hbox1), 0);
-#else
-  gtk_container_border_width (GTK_CONTAINER (gxfce_hbox1), 2);
-#endif
 
   gxfce_hbox2 = gtk_hbox_new (FALSE, 0);
   gtk_widget_set_name (gxfce_hbox2, "gxfce_hbox2");
