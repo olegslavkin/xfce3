@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
+#include <stdlib.h>
 #include "my_intl.h"
 #include "xfmouse.h"
 #include "xfmouse_cb.h"

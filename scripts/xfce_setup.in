@@ -71,7 +71,7 @@ for i in $FILES; do
 	fi
 	if [ -f $XFCE_CONF/$i ]; then
 		cp -f XFCE_CONFDIR/$i $HOME/.$i 
-		chmod -f u+x $HOME/.$i
+		chmod u+x $HOME/.$i
 		echo A new file $HOME/.$i has been created
 	fi
 done

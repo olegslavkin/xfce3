@@ -11,7 +11,7 @@
 xsetroot -solid black -cursor_name watch
 
 # Unselect the following line to get a BIG mouse cursor in Xfce :
-# xset +fp "/usr/share/xfce/fonts"
+# xset +fp "/usr/local/share/xfce/fonts"
 
 for i in `ls ${HOME}/Desktop/Autostart/`; do
   if test -x $HOME/Desktop/Autostart/$i; then

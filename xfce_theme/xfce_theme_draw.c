@@ -1,5 +1,6 @@
 #include <math.h>
 #include <gtk/gtk.h>
+#include <string.h>
 
 /* 
   Portions based on Raleigh theme by Owen Taylor
