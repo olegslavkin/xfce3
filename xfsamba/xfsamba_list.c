@@ -65,7 +65,7 @@ SMBListStdout (int n, void *data)
   /* ok. Now we have a line to process */
   /* client.c: "  %-30s%7.7s %8.0f  %s",filename,attr,size,asctime */
   /* asctime=25 */
-  // if (strlen(line) > 25+2+8+1+7)
+  /* if (strlen(line) > 25+2+8+1+7) */
 
   pw = line + (strlen (line) - 1 - 25 - 2 - 8);
   while (pw[0] != ' ')

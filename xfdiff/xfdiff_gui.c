@@ -1446,7 +1446,7 @@ create_diff_window (void)
   gtk_widget_show (hbox);
 
 #ifdef __GTK_2_0
-  // viewL should be using horiz-adjust adj!!!!
+  /* viewL should be using horiz-adjust adj!!!! */
   scrolled_windowL = gtk_scrolled_window_new (NULL, GTK_ADJUSTMENT (adj));
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_windowL), GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
   gtk_widget_show (scrolled_windowL);
@@ -1609,7 +1609,7 @@ create_diff_window (void)
 
   button = shortcut_button (bbox, _("Exit"), (gpointer) delete_event, NULL);
 
-  // gtk_widget_set_events (drawA,GDK_EXPOSURE_MASK);
+  /* gtk_widget_set_events (drawA,GDK_EXPOSURE_MASK); */
 
   gtk_drag_dest_set (viewL, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
   gtk_drag_dest_set (viewR, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
