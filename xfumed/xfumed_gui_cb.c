@@ -114,6 +114,7 @@ gboolean confirm_delete (GtkCTreeNode * node)
   GtkWidget *delete_dialog;
   char *message;
   char *buttons[2];
+  int default_button = 1;
   GtkSignalFunc signal_handlers[2];
 
   if (GTK_CTREE_ROW (node)->is_leaf)

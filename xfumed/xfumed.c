@@ -420,7 +420,11 @@ insert_node (XFMENU * xfmenu, GtkCTreeNode * parent, GtkCTreeNode * sibling, cha
 GtkCTreeNode *
 new_temp_node (XFMENU * xfmenu, char *menuname)
 {
-  char *text[] = { TEMPNODETEXT, NULL, menuname };
+  char *text[3];
+  
+  text[0] = TEMPNODETEXT;
+  text[1] = NULL;
+  text[2] = menuname;
 
   return insert_node (xfmenu, NULL, NULL, text, FALSE);
 }
