@@ -328,8 +328,10 @@ AddWindow (Window w)
 			   VisibilityChangeMask | 
 			   EnterWindowMask | LeaveWindowMask | 
 			   ExposureMask);
-
-  tmp_win->frame = XCreateWindow (dpy, Scr.Root, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, 0, CopyFromParent, InputOutput, CopyFromParent, valuemask, &attributes);
+  attributes.win_gravity = StaticGravity;
+  attributes.bit_gravity = StaticGravity;
+  
+  tmp_win->frame = XCreateWindow (dpy, Scr.Root, tmp_win->frame_x, tmp_win->frame_y, tmp_win->frame_width, tmp_win->frame_height, 0, CopyFromParent, InputOutput, CopyFromParent, CWWinGravity | CWBitGravity | valuemask, &attributes);
 
   attributes.cursor = Scr.XfwmCursors[DEFAULT];
 #ifndef OLD_STYLE
@@ -338,7 +340,7 @@ AddWindow (Window w)
   attributes.event_mask = SubstructureRedirectMask;
   tmp_win->Parent = XCreateWindow (dpy, tmp_win->frame, tmp_win->boundary_width, tmp_win->boundary_width + tmp_win->title_height, tmp_win->frame_width - 2 * (tmp_win->boundary_width + tmp_win->bw), tmp_win->frame_height - 2 * (tmp_win->boundary_width + tmp_win->bw) - tmp_win->title_height, tmp_win->bw, CopyFromParent, InputOutput, CopyFromParent,
 #ifndef OLD_STYLE
-				   valuemask | CWBorderPixel,
+				   CWBorderPixel | valuemask,
 #else
 				   valuemask,
 #endif
