@@ -149,6 +149,7 @@ find_gtk_engines (void)
 
        if ((gtk_engines_dir = opendir(path)) != NULL)
          {
+           list = g_list_append(list, "gtk");
            while((dir_entry = (struct dirent *)readdir(gtk_engines_dir)) 
                    != NULL)
              {

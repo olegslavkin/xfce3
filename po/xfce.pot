@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-07-30 09:24+0200\n"
+"POT-Creation-Date: 2001-07-31 21:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
-#: xfce/setup.c:1583 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
+#: xfce/setup.c:1584 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
 #: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
 #: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
 #: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
@@ -90,7 +90,7 @@ msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
-#: xfce/setup.c:1607 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
+#: xfce/setup.c:1608 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
 #: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
 #: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
 msgid "Cancel"
@@ -316,231 +316,231 @@ msgstr ""
 msgid "External..."
 msgstr ""
 
-#: xfce/setup.c:283
+#: xfce/setup.c:284
 msgid "Setup"
 msgstr ""
 
-#: xfce/setup.c:374
+#: xfce/setup.c:375
 msgid "GTK theme engine : "
 msgstr ""
 
-#: xfce/setup.c:403
+#: xfce/setup.c:404
 msgid "Apply colors to all applications"
 msgstr ""
 
-#: xfbd/xfbdmgr.c:166 xfce/setup.c:430
+#: xfbd/xfbdmgr.c:166 xfce/setup.c:431
 msgid "Load ..."
 msgstr ""
 
-#: xfbd/xfbdmgr.c:160 xfce/setup.c:444
+#: xfbd/xfbdmgr.c:160 xfce/setup.c:445
 msgid "Save ..."
 msgstr ""
 
-#: xfce/setup.c:458
+#: xfce/setup.c:459
 msgid "Default"
 msgstr ""
 
-#: xfce/setup.c:492
+#: xfce/setup.c:493
 msgid "Repaint root window of workspace"
 msgstr ""
 
-#: xfce/setup.c:505
+#: xfce/setup.c:506
 msgid "Use gradient color as wallpaper"
 msgstr ""
 
-#: xfce/setup.c:518
+#: xfce/setup.c:519
 msgid "Use tear-off menus"
 msgstr ""
 
-#: xfce/setup.c:531
+#: xfce/setup.c:532
 msgid "Show subprocess diagnostic dialog"
 msgstr ""
 
-#: xfce/setup.c:543
+#: xfce/setup.c:544
 msgid "Panel layer"
 msgstr ""
 
-#: xfce/setup.c:561
+#: xfce/setup.c:562
 msgid "Bottom"
 msgstr ""
 
-#: xfce/setup.c:584 xfce/setup.c:1173
+#: xfce/setup.c:585 xfce/setup.c:1174
 msgid "Top"
 msgstr ""
 
-#: xfce/setup.c:594
+#: xfce/setup.c:595
 msgid "Clock"
 msgstr ""
 
-#: xfce/setup.c:612
+#: xfce/setup.c:613
 msgid "Use digital clock on panel"
 msgstr ""
 
-#: xfce/setup.c:626
+#: xfce/setup.c:627
 msgid "Use military time (24 hours)"
 msgstr ""
 
-#: xfce/setup.c:638
+#: xfce/setup.c:639
 msgid "Tooltips"
 msgstr ""
 
-#: xfce/setup.c:657
+#: xfce/setup.c:658
 msgid "Tooltips delay (ms.) : "
 msgstr ""
 
-#: xfce/setup.c:685
+#: xfce/setup.c:686
 msgid "Virtual Screens"
 msgstr ""
 
-#: xfce/setup.c:703
+#: xfce/setup.c:704
 msgid "Number of virtual desktops : "
 msgstr ""
 
-#: xfce/setup.c:728
+#: xfce/setup.c:729
 msgid "Popups & Icons"
 msgstr ""
 
-#: xfce/setup.c:746
+#: xfce/setup.c:747
 msgid "Number of popup menus : "
 msgstr ""
 
-#: xfce/setup.c:771
+#: xfce/setup.c:772
 msgid "Size of icons on panel"
 msgstr ""
 
-#: xfce/setup.c:790 xfce/setup.c:848
+#: xfce/setup.c:791 xfce/setup.c:849
 msgid "Large"
 msgstr ""
 
-#: xfce/setup.c:804 xfce/setup.c:862
+#: xfce/setup.c:805 xfce/setup.c:863
 msgid "Medium"
 msgstr ""
 
-#: xfce/setup.c:817 xfce/setup.c:875
+#: xfce/setup.c:818 xfce/setup.c:876
 msgid "Small"
 msgstr ""
 
-#: xfce/setup.c:829
+#: xfce/setup.c:830
 msgid "Size of icons on pop-up menus"
 msgstr ""
 
-#: xfce/setup.c:887
+#: xfce/setup.c:888
 msgid "Font style"
 msgstr ""
 
-#: xfce/setup.c:917 xfce/setup.c:1374 xfce/setup.c:1388 xfce/setup.c:1402
+#: xfce/setup.c:918 xfce/setup.c:1375 xfce/setup.c:1389 xfce/setup.c:1403
 msgid "Browse..."
 msgstr ""
 
-#: xfce/setup.c:952
+#: xfce/setup.c:953
 msgid "Click to focus windows"
 msgstr ""
 
-#: xfce/setup.c:965
+#: xfce/setup.c:966
 msgid "Automatically focus on new window"
 msgstr ""
 
-#: xfce/setup.c:978
+#: xfce/setup.c:979
 msgid "Auto raise windows"
 msgstr ""
 
-#: xfce/setup.c:992
+#: xfce/setup.c:993
 msgid "Show contents of window while moving"
 msgstr ""
 
-#: xfce/setup.c:1007
+#: xfce/setup.c:1008
 msgid "Show contents of window while resizing"
 msgstr ""
 
-#: xfce/setup.c:1022
+#: xfce/setup.c:1023
 msgid "Use gradient color for the active window"
 msgstr ""
 
-#: xfce/setup.c:1036
+#: xfce/setup.c:1037
 msgid "Use gradient color for inactive windows"
 msgstr ""
 
-#: xfce/setup.c:1074
+#: xfce/setup.c:1075
 msgid "Window border style : "
 msgstr ""
 
-#: xfce/setup.c:1117
+#: xfce/setup.c:1118
 msgid "Window snapping size (0 disable) : "
 msgstr ""
 
-#: xfce/setup.c:1156
+#: xfce/setup.c:1157
 msgid "Icon position"
 msgstr ""
 
-#: xfce/setup.c:1188 xfmouse/xfmouse.c:209
+#: xfce/setup.c:1189 xfmouse/xfmouse.c:209
 msgid "Left"
 msgstr ""
 
-#: xfce/setup.c:1203
+#: xfce/setup.c:1204
 msgid "bottom"
 msgstr ""
 
-#: xfce/setup.c:1218 xfmouse/xfmouse.c:220
+#: xfce/setup.c:1219 xfmouse/xfmouse.c:220
 msgid "Right"
 msgstr ""
 
-#: xfce/setup.c:1334
+#: xfce/setup.c:1335
 msgid "Title font :"
 msgstr ""
 
-#: xfce/setup.c:1347
+#: xfce/setup.c:1348
 msgid "Icon font :"
 msgstr ""
 
-#: xfce/setup.c:1360
+#: xfce/setup.c:1361
 msgid "Menu font :"
 msgstr ""
 
-#: xfce/setup.c:1438
+#: xfce/setup.c:1439
 msgid "Sound module (xfsound)"
 msgstr ""
 
-#: xfce/setup.c:1452
+#: xfce/setup.c:1453
 msgid "Mouse settings (xfmouse)"
 msgstr ""
 
-#: xfce/setup.c:1466
+#: xfce/setup.c:1467
 msgid "Backdrop settings (xfbd)"
 msgstr ""
 
-#: xfce/setup.c:1480
+#: xfce/setup.c:1481
 msgid "Pager (xfpager)"
 msgstr ""
 
-#: xfce/setup.c:1494
+#: xfce/setup.c:1495
 msgid "GNOME (xfgnome)"
 msgstr ""
 
-#: xfce/setup.c:1508
+#: xfce/setup.c:1509
 msgid "GNOME menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1522
+#: xfce/setup.c:1523
 msgid "KDE menu (xfmenu)"
 msgstr ""
 
-#: xfce/setup.c:1535
+#: xfce/setup.c:1536
 msgid "Palette"
 msgstr ""
 
-#: xfce/setup.c:1543
+#: xfce/setup.c:1544
 msgid "XFce"
 msgstr ""
 
-#: xfce/setup.c:1551
+#: xfce/setup.c:1552
 msgid "Windows"
 msgstr ""
 
-#: xfce/setup.c:1559 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1560 xfce/startup.c:60 xfsound/xfsound.c:92
 msgid "Startup"
 msgstr ""
 
-#: xfbd/xfbd.c:560 xfce/setup.c:1595 xfmouse/xfmouse.c:322
+#: xfbd/xfbd.c:560 xfce/setup.c:1596 xfmouse/xfmouse.c:322
 #: xfsound/xfsound.c:572
 msgid "Apply"
 msgstr ""
