@@ -83,9 +83,7 @@ on_cancel (GtkWidget * btn, gpointer * data)
   }
   dl.result = DLG_RC_CANCEL;
   /*fprintf(stderr,"dbg: at cancel\n");*/
-  /*FIXME: this should work, but doesn't. Goto is
-   * pusing current dir to history on cancel.
-   *   if (dl.return_data) free(dl.return_data);*/
+   if (dl.return_data) free(dl.return_data); dl.return_data=NULL;
   gtk_main_quit ();
 }
 
@@ -246,7 +244,7 @@ static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
 long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *data, int type)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *all = NULL, *skip = NULL, *close = NULL, *icon = NULL, *combo = NULL, *label, *box, *button_box;
-  char title[DLG_MAX];
+  /*char title[DLG_MAX];*/
   char *longlabel = NULL;
   GdkPixmap *pix = NULL, *pim;
   GtkAccelGroup *accelgrp;
@@ -273,42 +271,29 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
 
   /* what kind of pixmap do we want to use..?
    */
-  if (type & DLG_QUESTION)
-  {
-    pix = MyCreateGdkPixmapFromData (question_xpm, dl.top, &pim, FALSE);
-    sprintf (title, _("Question"));
+  if (type & DLG_MASK_QUESTION){
+	  pix = MyCreateGdkPixmapFromData (question_xpm, dl.top, &pim, FALSE);
+  } 
+  else if (type & DLG_INFO){
+	  pix = MyCreateGdkPixmapFromData (info_xpm, dl.top, &pim, FALSE);
   }
-  else if (type & DLG_INFO)
-  {
-    pix = MyCreateGdkPixmapFromData (info_xpm, dl.top, &pim, FALSE);
-    sprintf (title, _("Information"));
+  else if (type & DLG_ERROR){
+	  pix = MyCreateGdkPixmapFromData (error_xpm, dl.top, &pim, FALSE);
   }
-  else if (type & DLG_ERROR)
-  {
-    pix = MyCreateGdkPixmapFromData (error_xpm, dl.top, &pim, FALSE);
-    sprintf (title, _("Error"));
+  else if (type & DLG_WARN) {
+	  pix = MyCreateGdkPixmapFromData (warning_xpm, dl.top, &pim, FALSE);
   }
-  else if (type & DLG_WARN)
-  {
-    pix = MyCreateGdkPixmapFromData (warning_xpm, dl.top, &pim, FALSE);
-    sprintf (title, _("Warning"));
-  }
-  else
-  {
-    sprintf (title, _("Dialog"));
-  }
+  else pix=NULL;
   if (pix)
   {
     icon = gtk_pixmap_new (pix, pim);
     gtk_box_pack_start (GTK_BOX (box), icon, FALSE, FALSE, 0);
   }
-  gtk_window_set_title (GTK_WINDOW (dl.top), title);
 
   button_box = gtk_hbutton_box_new ();
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->action_area), button_box, TRUE, FALSE, 0);
 
-  /* create the requested buttons..
-   */
+  /* create the requested buttons.. */
   if (type & (DLG_OK | DLG_YES | DLG_CONTINUE))
   {
     if (type & DLG_OK)

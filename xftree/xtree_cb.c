@@ -225,20 +225,27 @@ cb_diff (GtkWidget * widget,  GtkCTree * ctree)
     io_system ("xfdiff&");
     return;
   }
-  if (num != 2) {
-    xf_dlg_warning (win->top,_("Please select two files or directories!"));
-    return;
+  /* take first 2 */
+  if (num > 2) {
+    if (xf_dlg_continue (win->top,_("Proceed with the first 2 selections?"),NULL)==DLG_RC_CANCEL)
+	    return;
   }
+  
   selection = GTK_CLIST (ctree)->selection;
   node = selection->data;
   en_1 = gtk_ctree_node_get_row_data (ctree, node);
   selection=selection->next;
-  node = selection->data;
-  en_2 = gtk_ctree_node_get_row_data (ctree, node);
-	  
-  command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+4);
-  if (!command) return;
-  sprintf(command,"xfdiff %s %s&",en_1->path,en_2->path);
+  if (selection){
+	node = selection->data;
+	en_2 = gtk_ctree_node_get_row_data (ctree, node);
+  	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+strlen(en_2->path)+4);
+  	if (!command) return;
+  	sprintf(command,"xfdiff %s %s&",en_1->path,en_2->path);
+  } else {
+  	command=(char *)malloc(strlen("xfdiff")+strlen(en_1->path)+4);
+  	if (!command) return;
+  	sprintf(command,"xfdiff %s&",en_1->path);
+  }
   io_system (command);
   free(command);
 }
