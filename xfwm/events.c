@@ -1556,7 +1556,7 @@ HandleConfigureRequest ()
     SetBorder (Tmp_win, Scr.Hilite == Tmp_win, True, True, None);
   }
 
-  if (cre->value_mask & (CWX | CWY | CWWidth | CWHeight | CWStackMode))
+  if (cre->value_mask & (CWX | CWY | CWWidth | CWHeight))
   {
     /* 
        Not sure if we should send an event in all cases when
