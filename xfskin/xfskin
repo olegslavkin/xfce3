@@ -1,6 +1,14 @@
 #!/bin/sh
 # \
 exec wish "$0" "$@"
+#-- version check
+if {$tcl_version < 8} {
+  label .label -text "you need tcl version 8.x to run xfskin"
+  button .ok -text OK -command "exit" -border 1
+  pack .label -side top -pady 5
+  pack .ok -side top -pady 5
+  bind . <Return> "exit"
+} else {
 #------------------------------------------------------------------------------
 set skin_root	[file join $env(HOME) "xfskins"]
 
@@ -22,7 +30,7 @@ if {([file exists [file join $env(HOME) ".xfce"]])&&([file isdirectory [file joi
 set xfce_share "/usr/local/share/xfce"
 #------------------------------------------------------------------------------
 #--gui--
-set version		"0.1.2"
+set version		"0.2.0"
 wm title . 		"xfskin ($version)"
 wm iconname .		"xfskin ($version)"
 set fixedfont		"-*-lucidatypewriter-medium-r-normal-*-12-*-*-*-m-*-*-*"
@@ -36,7 +44,7 @@ set oppalet		1
 set opsounds		1
 #------------------------------------------------------------------------------
 #--enable testing of themes
-set tst_skin		1
+set tst_skin		0
 set tst_conf		1
 #------------------------------------------------------------------------------
 #--settings--
@@ -83,11 +91,8 @@ set snd_conf(9)		"de-iconify=";	set snd_conf(10)	"shade="
 set snd_conf(11)	"un-shade=";	set snd_conf(12)	"maximize="
 set snd_conf(13)	"de-maximize=";	set snd_conf(14)	"startup="
 set snd_conf(15)	"shutdown=";	set snd_conf(16)	"unknown="
+#--
 #------------------------------------------------------------------------------
-# Changelog
-# 0.1.1
-#		changed the killall call to kill.
-#		altered the get_skin_sounds to adjust on skins with spaces.
 
 proc initvals {} {
   .inst.val.back select
@@ -129,15 +134,21 @@ enjoy!
 #get_skin_dir
 
 proc restartXFCE {} {
-global exitinst
-  set uid [exec sh -c "id |cut -f 2 -d =|cut -f 1 -d \\("]
-  set pid [string trim [exec sh -c "ps -U $uid |grep xfwm"]]
+global exitinst 
+  set sysname [string tolower [exec uname]]
+  switch $sysname \
+  "sunos" { set uid [exec sh -c "id |cut -f 2 -d =|cut -f 1 -d \\("]
+            set pid [string trim [ exec ps -ae -o pid,comm | grep xfwm ]]} \
+  "linux" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
+  "freebsd" { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]} \
+  default { set pid [string trim [ exec ps x -opid,command | egrep {(xfwm$)|(xfwm )} ]]}
   set pid [string range $pid 0 [expr [string first \  $pid] -1]]
   exec kill -USR1 $pid
   if {$exitinst} { 
   exit
   }
 }
+#restartXFCE
 
 proc txt_screen {title height} {
 global fixedfont
@@ -159,7 +170,17 @@ global fixedfont
   pack		.scrn.txt -fill both
   pack		.scrn.but -fill both
 }
-#--txt_screen
+#txt_screen
+
+proc file_open {} {
+  set types {
+    {"gzip tarred skins"	{.tar.gz}	}
+    {"all files"		*}
+  }
+  return [tk_getOpenFile -filetypes $types -parent .]
+}
+#file_open
+
 #------------------------------------------------------------------------------
 #--help procs
 proc cut_string {substr  line default} {
@@ -864,6 +885,17 @@ global skin_root
 }
 #del_skin
 
+proc unpack_skin {} {
+global skin_root
+  set skin_name [file_open]
+  if {[string length $skin_name] > 0} {
+    cd $skin_root
+    exec tar xzf $skin_name
+    get_skin_dir    
+  }
+}
+#unpack_skin
+
 proc pack_skin {} {
 global skin_root skin_name
   cd $skin_root
@@ -969,7 +1001,7 @@ global version
 proc buildscreen {} {
 global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_skin tst_conf
   
-  frame .inst -relief sunken -border 1
+  frame .inst -border 1
   frame .inst.val
   frame .inst.skins
   label .inst.val.label  -font $fixedfont -anchor w -text " <skin options>"
@@ -1001,19 +1033,19 @@ global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_
   pack .setup.exit -fill x -expand no
   #--buttons
   frame  .buttons -relief raised -border 1
-  button .buttons.install -border 1  -command "put_config"  -text "install" 
-  button .buttons.delete  -border 1  -command "del_skin"    -text "delete"
-  button .buttons.revert  -border 1  -command "prev_skin"   -text "revert"  
-  button .buttons.create  -border 1  -command "ask_info"    -text "create"
-  button .buttons.info    -border 1  -command "put_info"    -text "info"
-  button .buttons.exit    -border 1  -command "exit"        -text "exit"
+  button .buttons.install -border 1  -command "put_config"    -text "install" 
+  button .buttons.delete  -border 1  -command "del_skin"      -text "delete"
+  button .buttons.revert  -border 1  -command "prev_skin"     -text "revert"  
+  button .buttons.create  -border 1  -command "ask_info"      -text "create"
+  button .buttons.info    -border 1  -command "get_skin_dir"  -text "refresh"
+  button .buttons.exit    -border 1  -command "exit"          -text "exit"
   if {$tst_skin >0} { 
     button .buttons.test    -border 1  -command "get_skin"    -text "test"  
     pack .buttons.test -side left -expand yes -pady 5 -padx 3
   }
   
   pack .buttons.install .buttons.delete .buttons.revert .buttons.create .buttons.info .buttons.exit -side left -pady 5 -padx 3
-  pack .inst -side top -fill both -expand yes -ipady 5
+  pack .inst -side top -fill both -expand yes -pady 5
 
   # -expand yes
   pack .setup -side top -fill both -ipady 2 
@@ -1021,11 +1053,40 @@ global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_
 }
 #buildscreen
 
+proc buildmenu {} {
+global exitinst opback opfonts opicons oppalet opsounds fixedfont sel_color tst_skin tst_conf
 
+  menu .menu -tearoff 0 -border 1
+  #--file
+  set m .menu.file
+  menu $m -tearoff 0 -border 1
+  .menu add cascade -label "file" -menu $m -underline 0
+  $m add command -label "add" -command {"unpack_skin"}
+  $m add separator
+  $m add command -label "install" -command {"put_config"}
+  $m add command -label "delete" -command {"del_skin"}
+  $m add command -label "revert" -command {"prev_skin"}
+  $m add separator
+  $m add command -label "exit" -command "exit"
+  #info
+  set m .menu.info
+  menu $m -tearoff 0 -border 1
+  .menu add cascade -label "info" -menu $m -underline 0
+  $m add command -label "author" -command {"put_info"}  
+  $m add command -label "resources" -command {"get_skin"}
+
+  #--
+  . configure -menu .menu
+}
+#buildmenu
 
 #main
 tk_setPalette [. cget -background]
 buildscreen 
+buildmenu
 initvals
 if {[winfo exists .scrn]} { lower . }
-  
+
+
+#--end version check
+}

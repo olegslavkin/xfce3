@@ -1,3 +1,9 @@
+0.2.0
+- added menubar with extra file - add option
+- replaced the info button -> refresh button
+  (info now in the menu)
+- fix for restartXFCE (freeBSD / Linux / Solaris)
+- version check: need tcl >= 8
 0.1.2
 - fix for xfskin if no xfsoundrc is found
 0.1.1
