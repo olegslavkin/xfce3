@@ -210,7 +210,7 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
 	  if (s_item) {
 	        headTar=push_tar_dir(s_item,path);
 	        gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
-	       /*fprintf(stderr,"subitem inserted\n");*/
+	        /*fprintf(stderr,"subitem inserted\n");*/
 		return s_item;
 	  }
 	  
@@ -305,9 +305,16 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      else if (strstr(d,"\\")) d=strrchr(d_en->path,'\\')+1;
 		      } 				   
 		      d_en->label=g_strdup (d);
-		      if ((d_en->type &  FT_DIR)&&(strlen(d_en->label)>1)) 
-			      d_en->label[strlen(d_en->label)-1]=0;
 		      
+		      /*if ((d_en->type &  FT_DIR)&&(strlen(d_en->label)>1)) 
+		           d_en->label[strlen(d_en->label)-1]=0; */
+			/*
+		      if ((strlen(d_en->label)>1)&&
+				      ((d_en->label[strlen(d_en->label)-1]=='/')
+				       ||(d_en->label[strlen(d_en->label)-1]=='\\'))) {
+			      d_en->type |=  FT_DIR;
+		      }*/
+		           		      
 		      if (win->preferences&ABREVIATE_PATHS) 
 			      text[COL_NAME] = (d_en->type &  FT_DIR)?
 				      abreviate(d_en->label):abreviateP(d_en->label);
@@ -320,10 +327,10 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 		      {
 			      char *P_path,*d=NULL;
 			      P_path=g_strdup (p);
-			      if (d_en->type &  FT_DIR) {
+			      /*if (d_en->type &  FT_DIR) {
 			         if (P_path[strlen(P_path)-1]=='/') P_path[strlen(P_path)-1]=0;
 				 else if (P_path[strlen(P_path)-1]=='\\') P_path[strlen(P_path)-1]=0;
-			      }
+			      }*/
 			      if (strstr(P_path,"/")) d=strrchr(P_path,'/');
 			      else if (strstr(P_path,"\\")) d=strrchr(P_path,'\\');
 			      if (d) d[1]=0;
@@ -333,14 +340,16 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      g_free(P_path);
 			      
 		      }
-	      	      set_icon_pix(&pix,d_en->type,d_en->label);
-		      s_item=gtk_ctree_insert_node (ctree,p_node, NULL, text, SPACING, 
+		      if (!(d_en->type &  FT_DIR)) {
+	      	        set_icon_pix(&pix,d_en->type,d_en->label);
+		        s_item=gtk_ctree_insert_node (ctree,p_node, NULL, text, SPACING, 
 		  		pix.pixmap,pix.pixmask,pix.open,pix.openmask,
 				(d_en->type &  FT_DIR)?FALSE:TRUE,FALSE);
-		      if (s_item) {
+		        if (s_item) {
 		          if (d_en->type &  FT_DIR) headTar=push_tar_dir(s_item,p);
 		          gtk_ctree_node_set_row_data_full (ctree, s_item, d_en, node_destroy);
 			  /*fprintf(stderr,"subitem inserted\n");*/
+		        }
 		      }
 	      }
 	      pclose (pipe);
