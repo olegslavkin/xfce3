@@ -359,6 +359,7 @@ AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CON
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.in >  other/xfce3rc])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ja.in >  other/xfce3rc.ja])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.cs.in >  other/xfce3rc.cs])
+AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.sr.in >  other/xfce3rc.sr])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.hu.in >  other/xfce3rc.hu])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.ko.in >  other/xfce3rc.ko])
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3rc.nl.in >  other/xfce3rc.nl])
