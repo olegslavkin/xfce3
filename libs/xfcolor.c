@@ -675,6 +675,7 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
 
   fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[base], DARK), (short int) shift (p->g[base], DARK), (short int) shift (p->b[base], DARK));
 
+#if 0
   if (normal == selected)
   {
     fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[normal], LIGHT), (short int) shift (p->g[normal], LIGHT), (short int) shift (p->b[normal], LIGHT));
@@ -683,7 +684,9 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
   {
     fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[selected], (short int) p->g[selected], (short int) p->b[selected]);
   }
-
+#else
+  fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[selected], (short int) p->g[selected], (short int) p->b[selected]);
+#endif
   fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[base], (short int) p->g[base], (short int) p->b[base]);
 
   fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((short int) p->r[selected]) ^ 255, ((short int) p->g[selected]) ^ 128, ((short int) p->b[selected]) ^ 64);

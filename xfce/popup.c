@@ -368,7 +368,7 @@ show_popup_menu (gint nbr, gint x, gint y, gboolean animation)
     gtk_window_set_modal (GTK_WINDOW (popup_menus[nbr].animatewin), TRUE);
     gtk_widget_realize (popup_menus[nbr].animatewin);
     gtk_window_set_transient_for (GTK_WINDOW (popup_menus[nbr].animatewin), GTK_WINDOW (gxfce));
-    gdk_window_set_decorations ((popup_menus[nbr].animatewin)->window, (gulong) 0);
+    gdk_window_set_decorations ((popup_menus[nbr].animatewin)->window, (GdkWMDecoration) 0);
   }
 
   if (anim)
@@ -396,7 +396,7 @@ show_popup_menu (gint nbr, gint x, gint y, gboolean animation)
     gdk_window_move_resize (popup_menus[nbr].animatewin->window, tempx, tempy, uwidth, uheight);
   }
 #endif
-  gdk_window_set_decorations (((GtkWidget *) popup_menus[nbr].popup_toplevel)->window, ((popup_menus[nbr].detach) ? (GDK_DECOR_TITLE | GDK_DECOR_MENU | GDK_DECOR_BORDER) : (gulong) 0));
+  gdk_window_set_decorations (((GtkWidget *) popup_menus[nbr].popup_toplevel)->window, ((popup_menus[nbr].detach) ? (GDK_DECOR_TITLE | GDK_DECOR_MENU | GDK_DECOR_BORDER) : (GdkWMDecoration) 0));
   if (!GTK_WIDGET_VISIBLE (popup_menus[nbr].popup_toplevel))
     gtk_widget_show_now (popup_menus[nbr].popup_toplevel);
   gdk_flush ();

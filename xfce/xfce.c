@@ -447,7 +447,7 @@ create_gxfce (XFCE_palette * pal)
   gtk_object_set_data (GTK_OBJECT (gxfce), "gxfce", gxfce);
   gtk_window_set_title (GTK_WINDOW (gxfce), "XFce Main Panel");
   gtk_widget_realize (gxfce);
-  gdk_window_set_decorations (gxfce->window, (gulong) 0);
+  gdk_window_set_decorations (gxfce->window, (GdkWMDecoration) 0);
 
   gxfce_mainframe = gtk_frame_new (NULL);
   gtk_widget_set_name (gxfce_mainframe, "gxfce_mainframe");

@@ -61,7 +61,7 @@ create_startup ()
   gtk_window_position (GTK_WINDOW (startup), GTK_WIN_POS_CENTER);
   gtk_window_set_policy (GTK_WINDOW (startup), FALSE, FALSE, FALSE);
   gtk_widget_realize (startup);
-  gdk_window_set_decorations (startup->window, (gulong) 0);
+  gdk_window_set_decorations (startup->window, (GdkWMDecoration) 0);
   gnome_layer (startup->window, MAX_LAYERS);
 
   startup_mainframe = gtk_frame_new (NULL);
