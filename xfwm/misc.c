@@ -339,7 +339,8 @@ Destroy (XfwmWindow * tmp_win)
 
   /* Blocking events on application window */ 
   XSelectInput (dpy, tmp_win->w, NoEventMask);
-
+  XSync (dpy, 0);
+  
   /* Removing window from internal window stack */
   if (tmp_win->prev != NULL)
     tmp_win->prev->next = tmp_win->next;
