@@ -209,7 +209,7 @@ msgstr "Información ..."
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
 #: xfglob/xfglob.c:559 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:1243
 msgid "Couldn't create pixmap"
-Msgstr "No se pudo crear el mapa de píxeles"
+msgstr "No se pudo crear el mapa de píxeles"
 
 #: xfce/info.c:121
 msgid "By Olivier Fourdan (c) 1997-2000"
@@ -1902,7 +1902,7 @@ msgstr "-R : el archivo \"patch\" está invertido (cambio rápido)\n"
 
 #: xfdiff/xfdiff.c:1461
 msgid "-N: patch file is not reversed (quick toggle)\n"
-msgstr "-N : el archivo "\patch\" no está invertido (cambio rápido)\n"
+msgstr "-N : el archivo \"patch\" no está invertido (cambio rápido)\n"
 
 #: xfdiff/xfdiff.c:1462
 msgid ""
@@ -2457,7 +2457,7 @@ msgstr "Expreg extendida"
 
 #: xfglob/xfglob.c:1516
 msgid "What's a regexp?"
-msgstr "¿Qué es una "\expreg\"?"
+msgstr "¿Qué es una \"expreg\"?"
 
 #: xfglob/xfglob.c:1522
 msgid ""
@@ -3655,7 +3655,7 @@ msgstr "Enlaces a otros grupos de trabajo"
 
 #: xfsamba/xfsamba_smblookup.c:154
 msgid "Query done."
-msgstr "Petición finalizada.
+msgstr "Petición finalizada."
 
 #: xfsamba/xfsamba_smblookup.c:160
 msgid "Query failed. Machine may be down."
@@ -3675,7 +3675,7 @@ msgid ""
 "Please type a computer name at location and hit RETURN"
 msgstr ""
 "No se encontró ningún navegador maestro.\n"
-"Ponga el nombre del computador en el cuadro ubicación"\n
+"Ponga el nombre del computador en el cuadro ubicación\n"
 "y pulse ENTER"
 
 #: xfsamba/xfsamba_masterlookup.c:134
@@ -3998,3 +3998,4 @@ msgstr "Separador"
 
 #~ msgid "child:bytes:%d bytes received (%d bps)"
 #~ msgstr "hijo:bytes:%d bytes recibidos (%d bps)"
+
