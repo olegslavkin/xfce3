@@ -27,9 +27,55 @@
 #endif
 
 char buffer[512];
-char hexnum[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-  'f'
+char hexnum[] = { 
+ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
 };
+
+char *
+my_memmove (char *dst, char *src, int size)
+{
+  char *psrc = NULL;
+  char *pdst = NULL;
+  short int forward = 1;
+  int ptr;
+  
+  if (!src)
+    return NULL;
+  if (!dst)
+    return NULL;
+  if (!size)
+    return dst;
+  
+  if (src > dst)
+  {
+    psrc = src;
+    pdst = dst;
+    forward = 1;
+  }
+  else
+  {
+    psrc = src + size;
+    pdst = dst + size;
+    forward = 0; 
+  }
+  ptr = size;
+  while (ptr)
+  {
+    *pdst = *psrc;
+    if (forward)
+    {
+      psrc++;
+      pdst++;
+    }
+    else
+    {
+      psrc--;
+      pdst--;
+    }
+    ptr--;
+  }
+  return dst;
+}
 
 char *
 skiphead (char *s)
@@ -76,12 +122,21 @@ char *
 cleanup (char *s)
 {
   char *t;
+  int len;
   if (!s)
     return (NULL);
   t = skiphead (s);
+  skiptail (t);
+  len = strlen (t); 
   if (strlen (t))
-    return (skiptail (t));
-  return (t);
+  {
+    my_memmove (s, t, len);
+  }
+  else
+  {
+    *s = '\0';
+  }  
+  return (s);
 }
 
 char

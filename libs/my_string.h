@@ -21,6 +21,7 @@
 #ifndef __MY_STRING_H__
 #define __MY_STRING_H__
 
+char *my_memmove (char *, char *, int);
 char *skiphead (char *);
 char *skiptail (char *);
 char *nextl (char *s);
