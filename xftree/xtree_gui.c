@@ -1360,7 +1360,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_GID] = (gr)? gr->gr_name : _("unknown");
   {
     icon_pix pix;
-    set_icon_pix(&pix,en->type,en->label);   
+    set_icon_pix(&pix,en->type,en->label,en->flags);   
     root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
 		  pix.pixmap,pix.pixmask,
 		  pix.open,pix.openmask,

@@ -161,7 +161,7 @@ GtkCTreeNode *add_tar_dummy(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en)
    en->label=g_strdup(".");
    en->path=g_strdup("tar:.");
    memcpy((void *)(&(en->st)),(void *)(&(p_en->st)),sizeof(struct stat));
-   set_icon_pix(&pix,en->type,en->label);   
+   set_icon_pix(&pix,en->type,en->label,en->flags);   
    item=gtk_ctree_insert_node (ctree,parent, NULL, text, SPACING, 
 		  pix.pixmap,pix.pixmask,
 		  pix.open,pix.openmask,
@@ -210,7 +210,7 @@ static  GtkCTreeNode *parent_node(GtkCTree * ctree,char *path,GtkCTreeNode *top_
 	  else d_en->label=g_strdup(path); 
 	  g_free(c);
 	  text[COL_NAME] = d_en->label;
-	  set_icon_pix(&pix,FT_TARCHILD|FT_DIR|type,path);
+	  set_icon_pix(&pix,FT_TARCHILD|FT_DIR|type,path,IGNORE_HIDDEN);
   
 	  N_path=g_strdup(path);
 	  if (strstr(N_path,"/")) c=strrchr(N_path,'/');else c=strrchr(N_path,'\\');
@@ -311,10 +311,10 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			unsigned long long tama;
 			tama =  atol(strtok(NULL," "));
 			if (tama >= (long long)1024*1024*1024*10){
-				tama /= (long long)1024*1024*1024; tag=" Gb";
+				tama /= (long long)1024*1024*1024; tag=" GB";
 			}
-		  	else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
-		  	else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+		  	else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" MB";}
+		  	else if (tama >= 1024*10) {tama /= 1024; tag=" KB";}
 		  	sprintf (text[COL_SIZE], " %llu%s", tama,tag);
 		      }
 		      /* date */
@@ -364,7 +364,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
 			      
 		      }
 		      if (!(d_en->type &  FT_DIR)) {
-	      	        set_icon_pix(&pix,d_en->type,d_en->label);
+	      	        set_icon_pix(&pix,d_en->type,d_en->label,d_en->flags);
 		        s_item=gtk_ctree_insert_node (ctree,p_node, NULL, text, SPACING, 
 		  		pix.pixmap,pix.pixmask,pix.open,pix.openmask,
 				(d_en->type &  FT_DIR)?FALSE:TRUE,FALSE);
@@ -379,7 +379,7 @@ GtkCTreeNode *add_tar_tree(GtkCTree * ctree, GtkCTreeNode * parent,entry *p_en){
       }
       if (nopipe) {
          icon_pix pix;  
-	 set_icon_pix(&pix,FT_PD," ");
+	 set_icon_pix(&pix,FT_PD," ",IGNORE_HIDDEN);
 	 if ((d_en = entry_new ())==NULL) return NULL;
 	 d_en->type =  FT_RPM|FT_RPMCHILD;
 	 d_en->path=d_en->label=NULL;

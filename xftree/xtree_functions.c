@@ -335,9 +335,9 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
       char *tag="  ";
       unsigned long long tama;
       tama =  en->st.st_size;
-      if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" Gb";}
-      else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
-      else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+      if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" GB";}
+      else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" MB";}
+      else if (tama >= 1024*10) {tama /= 1024; tag=" KB";}
       sprintf (size, " %llu%s", tama,tag);
     }
   }
@@ -352,7 +352,7 @@ add_node (GtkCTree * ctree, GtkCTreeNode * parent, GtkCTreeNode * sibling, char 
   gr=getgrgid (en->st.st_gid); 
   text[COL_GID] = (gr)? gr->gr_name : _("unknown");
 
-  isleaf=set_icon_pix(&pix,en->type,en->label);
+  isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
   if (en->type & (FT_TAR|FT_RPM)) isleaf=FALSE;
   
   /*fprintf(stderr,"dbg:%s en_is_tar=%d\n",en->label,en->type & FT_TAR);*/
@@ -383,9 +383,9 @@ update_node (GtkCTree * ctree, GtkCTreeNode * child, entry *child_en)
        char *tag="  ";
        unsigned long long tama;
        tama =  child_en->st.st_size;
-       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" Gb";}
-       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
-       else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" GB";}
+       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" MB";}
+       else if (tama >= 1024*10) {tama /= 1024; tag=" KB";}
        sprintf (size, " %llu%s", tama,tag);
   }
      
@@ -403,7 +403,7 @@ update_node (GtkCTree * ctree, GtkCTreeNode * child, entry *child_en)
   {
     icon_pix pix;  
     gboolean isleaf; 
-    isleaf=set_icon_pix(&pix,child_en->type,child_en->label);
+    isleaf=set_icon_pix(&pix,child_en->type,child_en->label,child_en->flags);
   /*printf("dbg: updating %s, (%d)\n",en->label,FT_TAR|FT_RPM);*/
     gtk_ctree_set_node_info (ctree,child, child_en->label, SPACING, 
 		  pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, FALSE);
@@ -578,8 +578,11 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
 {
   GtkCTreeNode *node, *child;
   entry *en;
+  int i;
+  cfg *win;
 
   gtk_clist_freeze (GTK_CLIST (ctree));
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
 
   /* use first selection if available
    */
@@ -606,6 +609,18 @@ on_dotfiles (GtkWidget * item, GtkCTree * ctree)
   en->flags ^= IGNORE_HIDDEN;
   add_subtree (ctree, node, en->path, 2, en->flags);
   gtk_ctree_expand (ctree, node);
+  {
+    icon_pix pix; 
+    gboolean isleaf; 
+    isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
+    /*printf("dbg: updating %s\n",en->label);*/
+    gtk_ctree_set_node_info (ctree,node, (win->preferences&ABREVIATE_PATHS)? abreviate(en->label):en->label, 
+		  SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, TRUE);
+  } 
+  /* select affected node to enable easy toggle on/off */
+  gtk_ctree_select (ctree,node);
+  for (i = 0; i < COLUMNS; i++)  gtk_clist_set_column_width ((GtkCList *)ctree,
+		  i,gtk_clist_optimal_column_width ((GtkCList *)ctree,i));
   gtk_clist_thaw (GTK_CLIST (ctree));
 }
 
@@ -834,9 +849,9 @@ update_tree (GtkCTree * ctree, GtkCTreeNode * node)
        char *tag="  ";
        unsigned long long tama;
        tama =  child_en->st.st_size;
-       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" Gb";}
-       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" Mb";}
-       else if (tama >= 1024*10) {tama /= 1024; tag=" Kb";}
+       if (tama >= (long long)1024*1024*1024*10) {tama /= (long long)1024*1024*1024; tag=" GB";}
+       else if (tama >= 1024*1024*10) {tama /= 1024*1024; tag=" MB";}
+       else if (tama >= 1024*10) {tama /= 1024; tag=" KB";}
        sprintf (size, " %llu%s", tama,tag);
       }
      

@@ -9,7 +9,7 @@ typedef struct icon_pix {
 	GdkBitmap *openmask;
 } icon_pix;
 
-gboolean set_icon_pix(icon_pix *pix,int type,char *label); 
+gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags); 
 void init_pixmaps(void);
 
 void create_pixmaps(int h,GtkWidget * ctree);

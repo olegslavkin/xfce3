@@ -1121,13 +1121,8 @@ void cb_rox (GtkWidget * top,GtkWidget * ctree){
   argv[0]="rox";
   argv[1]=en->path;
   argv[2]=0;
-  if (!sane("rox")){
-     xf_dlg_error(win->top,_("Not found:"),"Rox-filer");
-     ctree_thaw ((GtkCTree *)ctree);
-     return;
-  } else {
-    io_system (argv,win->top);
-  }
+  io_system (argv,win->top);
+
   ctree_thaw ((GtkCTree *)ctree);
 }
 
@@ -1161,18 +1156,12 @@ cb_autotype (GtkWidget * top,GtkWidget * ctree)
   }     
  
   if (S_ISDIR(en->st.st_mode)) {
-     /*sprintf (cmd, "%s %s","xfrox",en->path);*/
-     if (!sane("rox")){
-	     xf_dlg_error(win->top,_("Not found"),"Rox-filer");
-             ctree_thaw ((GtkCTree *)ctree);
-	     return;
-     } else {
       argv[0]="rox";
       argv[1]=en->path;
       argv[2]=0;
       io_system (argv,win->top);
       goto end_autotype;
-     }
+     
   }
   loc=strrchr(en->path,'.');
   if (loc) for (i=0;1;i++){

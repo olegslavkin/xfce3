@@ -6,6 +6,7 @@
 #include "icons/dir_close.xpm"
 #include "icons/dir_pd.xpm"
 #include "icons/dir_open.xpm"
+#include "icons/dir_open_dot.xpm"
 #include "icons/dir_up.xpm"
 #include "icons/char_dev.xpm"
 #include "icons/fifo.xpm"
@@ -29,5 +30,6 @@
 #include "icons/stale_lnk.xpm"
 #include "icons/dir_ro.xpm"
 #include "icons/dir_ro_open.xpm"
+#include "icons/dir_ro_open_dot.xpm"
 #include "icons/pd.xpm"
 #endif

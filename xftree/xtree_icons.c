@@ -29,6 +29,7 @@
 
 #include "icons.h"
 #include "xtree_icons.h"
+#include "xtree_cfg.h"
 #include "entry.h"
 #include "xpmext.h"
 
@@ -61,7 +62,7 @@ enum
   PIX_DIR_CLOSE,PIX_DIR_UP,
   PIX_DIR_PD,
   PIX_DIR_RO,
-  PIX_DIR_RO_OPEN,
+  PIX_DIR_RO_OPEN,PIX_DIR_RO_OPEN_DOT,PIX_DIR_OPEN_DOT,
   PIX_PD,
   PIX_PAGE,PIX_PAGE_C,PIX_PAGE_F,PIX_PAGE_O,
   	PIX_PAGE_H,PIX_PAGE_LNK,PIX_CORE,PIX_TAR,
@@ -132,6 +133,8 @@ static pixmap_list pixmaps[]={
 	{gPIX+PIX_PD,		gPIM+PIM_PD,		pd_xpm},
 	{gPIX+PIX_DIR_RO,	NULL,			dir_ro_xpm},
 	{gPIX+PIX_DIR_RO_OPEN,	NULL,			dir_ro_open_xpm},
+	{gPIX+PIX_DIR_RO_OPEN_DOT,	NULL,		dir_ro_open_dot_xpm},
+	{gPIX+PIX_DIR_OPEN_DOT,	NULL,			dir_open_dot_xpm},
 	{gPIX+PIX_DIR_OPEN,	gPIM+PIM_DIR_OPEN,	dir_open_xpm},
 	{gPIX+PIX_DIR_CLOSE,	gPIM+PIM_DIR_CLOSE,	dir_close_xpm},
 	{gPIX+PIX_DIR_UP,	NULL,			dir_up_xpm},
@@ -364,7 +367,7 @@ static void create_higher_bitmap(int PIMid){
 
 
 
-gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
+gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
   char *loc,*loc2;
   gboolean isleaf=TRUE;
   int PIXid[4];
@@ -392,7 +395,8 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
 	}	
       } else {
  	PIXid[0]=PIX_DIR_CLOSE;
-        PIXid[2]=PIX_DIR_OPEN;
+        if (flags & IGNORE_HIDDEN) PIXid[2]=PIX_DIR_OPEN;
+	else PIXid[2]=PIX_DIR_OPEN_DOT; 
         PIXid[1]=PIM_DIR_CLOSE;
         PIXid[3]=PIM_DIR_OPEN;
       }
@@ -402,7 +406,8 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label) {
       }
       if (type & FT_DIR_RO) {
        PIXid[0]=PIX_DIR_RO;
-       PIXid[2]=PIX_DIR_RO_OPEN;
+       if (flags & IGNORE_HIDDEN) PIXid[2]=PIX_DIR_RO_OPEN;
+       else PIXid[2]=PIX_DIR_RO_OPEN_DOT;
       }
       goto icon_identified;
   } else if (type & FT_DIR_UP){

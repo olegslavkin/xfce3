@@ -605,7 +605,7 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   else
     strcpy (path, DEF_APP);
   apps = reg_app_list (win->reg);
-  entry_return = (char *) xf_dlg_combo (win->top,label, path, apps);
+  entry_return = (char *) xf_dlg_comboOK (win->top,label, path, apps);
   if (entry_return)
   {
     if (strlen(entry_return))

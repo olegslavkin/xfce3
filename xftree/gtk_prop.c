@@ -222,7 +222,7 @@ xf_dlg_prop (GtkWidget *ctree,char *path, fprop * prop, int flags)
 
   gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_CANCEL));
-  gtk_widget_grab_default (ok);
+  gtk_widget_grab_default (cancel);
 
   if (flags & IS_MULTI)
   {

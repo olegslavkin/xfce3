@@ -197,7 +197,7 @@ static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, i
   gtk_ctree_remove_node (ctree, root);
   {
     icon_pix pix;
-    set_icon_pix(&pix,en->type,en->label);   
+    set_icon_pix(&pix,en->type,en->label,en->flags);   
     root = gtk_ctree_insert_node (GTK_CTREE (ctree), NULL, NULL, label, 8, 
 		  pix.pixmap,pix.pixmask,
 		  pix.open,pix.openmask,
