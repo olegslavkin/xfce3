@@ -460,6 +460,9 @@ HandleFocusOut ()
     XGetInputFocus (dpy, &focusBug, &rt);
     if ((Tmp_win == NULL) && (Scr.Focus != NULL) && (focusBug == None))
     {
+#ifdef DEBUG
+        fprintf (stderr, "xfwm : HandleFocusOut () Forcing focus\n");
+#endif
         XSetInputFocus (dpy, Scr.Focus->w, RevertToParent, CurrentTime);
         XSync(dpy, 0);
     }
@@ -755,39 +758,6 @@ HandleClientMessage ()
         button.type = 0;
         ExecuteFunction ("Iconify", Tmp_win, &button, C_FRAME, -1);
     }
-    else if (Event.xclient.message_type == _XA_WIN_STATE)
-    {
-        unsigned long old_flags = Tmp_win->flags;
-        unsigned long new_members = Event.xclient.data.l[0];
-	unsigned long change_mask = Event.xclient.data.l[1];
-
-        if (new_members & WIN_STATE_STICKY)
-        {
-	    if (!(Tmp_win->flags & STICKY))
-	    {
-                Tmp_win->flags |= STICKY;
-#ifdef DEBUG
-		fprintf (stderr, "HandleClientMessage: setting state sticky for win %s\n", Tmp_win->name);
-#endif
-            }
-	}
-        else if (change_mask & WIN_STATE_STICKY)
-        {
-	    if (Tmp_win->flags & STICKY)
-	    {
-                Tmp_win->flags &= ~STICKY;
-#ifdef DEBUG
-                fprintf (stderr, "HandleClientMessage: removing state sticky for win %s\n", Tmp_win->name);
-#endif
-            }
-	}
-	if (Tmp_win->flags != old_flags)
-	{
-            RedrawRightButtons (Tmp_win, (Scr.Hilite == Tmp_win), True, None);
-            RedrawLeftButtons (Tmp_win, (Scr.Hilite == Tmp_win), True, None);
-            BroadcastConfig (XFCE_M_CONFIGURE_WINDOW, Tmp_win);
-	}
-    }
 
 #ifdef DEBUG
     fprintf (stderr, "xfwm : Leaving HandleClientMessage ()\n");
@@ -1045,8 +1015,19 @@ HandleUnmapNotify ()
     if ((Event.xunmap.event != Event.xunmap.window) &&
             (Event.xunmap.event != Scr.Root || !Event.xunmap.send_event))
     {
+        Window focusBug;
+        int rt;
+
+        XGetInputFocus (dpy, &focusBug, &rt);
+        if ((Scr.Focus != NULL) && (focusBug == None))
+        {
 #ifdef DEBUG
-        fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
+            fprintf (stderr, "xfwm : HandleUnmapNotify () Forcing focus\n");
+#endif
+	    SetFocus (Scr.NoFocusWin, NULL, 0);
+        }
+#ifdef DEBUG
+        fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Event ignored\n");
 #endif
         return;
     }
@@ -1065,7 +1046,7 @@ HandleUnmapNotify ()
     if (!Tmp_win)
     {
 #ifdef DEBUG
-        fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
+        fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): Tmp_win == NULL\n");
 #endif
         return;
     }
@@ -1117,7 +1098,7 @@ HandleUnmapNotify ()
     if (!(Tmp_win->flags & (MAPPED | ICONIFIED)))
     {
 #ifdef DEBUG
-        fprintf (stderr, "xfwm : Leaving HandleUnmapNotify ()\n");
+        fprintf (stderr, "xfwm : Leaving HandleUnmapNotify (): win !mapped & !iconified\n");
 #endif
         return;
     }
