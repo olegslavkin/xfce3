@@ -41,6 +41,7 @@
 #include <pwd.h>
 #include <sys/types.h>
 
+#include "UTF8.h"
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
@@ -203,6 +204,7 @@ unsigned int CapsLockMask;
 unsigned int SuperMask;
 unsigned int HyperMask;
 
+char *charset = NULL;
 char **g_argv;
 int g_argc;
 
@@ -1848,7 +1850,8 @@ InitVariables (void)
       Scr.Margin[i] = 0;
     }
   }
-
+  charset = get_charset_from_lang();
+  xfwm_msg (INFO, "Init", "Charset set to \"%s\"", charset);
   return;
 }
 

@@ -47,6 +47,7 @@
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 
+#include "UTF8.h"
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
@@ -67,6 +68,7 @@
 extern Bool enable_xft;
 #endif
 
+extern char *charset;
 int menu_on = 0;
 
 MenuRoot *ActiveMenu = NULL;	/* the active menu */
@@ -941,7 +943,16 @@ AddToMenu (MenuRoot * menu, char *item, char *action)
       tmp->item2[end - start] = 0;
     }
   }
-
+  /* TODO
+  if (strlen (tmp->item))
+  {
+    char *val = NULL;
+    if (iconv_string (charset, "autodetect_utf8", tmp->item, tmp->item + strlen (tmp->item), &val, NULL) < 0)
+      perror ("iconv_string");
+    free (tmp->item);
+    tmp->item = val;
+  }
+  */
   if (item != (char *) 0)
   {
     scanForHotkeys (tmp, 1);	/* pete@tecc.co.uk */

@@ -48,6 +48,7 @@
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 
+#include "UTF8.h"
 #include "xfwm.h"
 #include "menus.h"
 #include "misc.h"
@@ -78,6 +79,7 @@
 #define MAX_ICON_LEN 80
 #endif
 
+extern char *charset;
 char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
 char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
@@ -106,21 +108,35 @@ check_existfile (char *filename)
 char *
 bound_name (char *s, int max_len)
 {
+  char *tmp = NULL;
   char *res;
   int length;
   
-  length = strlen (s);
+  
+  if (strlen (s))
+  {
+    if (iconv_string (charset, "autodetect_utf8", s, s + strlen (s), &tmp, NULL) < 0)
+      perror ("iconv_string");
+  }
+  else
+  {
+    res = (char *) safemalloc (1);
+    *res = '\0';
+    return (res);
+  }
+  length = strlen (tmp);
   if (length > max_len)
   {
     res = (char *) safemalloc (max_len + 5);
-    snprintf (res, max_len, "%s", s);
+    snprintf (res, max_len, "%s", tmp);
     strcat (res, "...");
   }
   else
   {
     res = (char *) safemalloc (length + 1);
-    strcpy (res, s);
+    strcpy (res, tmp);
   }
+  free (tmp);
   return (res);
 }
 

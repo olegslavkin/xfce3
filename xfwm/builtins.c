@@ -564,7 +564,6 @@ void
 add_item_to_menu (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
   MenuRoot *mr;
-
   char *token, *rest, *item;
 
   rest = GetNextToken (action, &token);
@@ -588,7 +587,6 @@ void
 add_another_item (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
   MenuRoot *mr;
-
   char *rest, *item;
 
   if (last_menu == NULL)

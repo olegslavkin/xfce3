@@ -34,6 +34,7 @@ char * get_charset_from_lang (void)
   {
     if ((dot = strrchr (lang , '.')))
     {
+      dot++;
       charset = (char *) safemalloc (strlen (dot) + 1);
       strcpy (charset, dot);
       return (charset);
