@@ -1,3 +1,56 @@
+2001-11-20  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2001-11-20  xfce
+
+	* xfce-3.8.12.lsm, other/xfce3rc.cs.in, other/xfce3rc.de.in,
+	other/xfce3rc.fr.in, other/xfce3rc.hu.in, other/xfce3rc.in,
+	other/xfce3rc.ja.in, other/xfce3rc.ko.in, other/xfce3rc.nl.in,
+	other/xfce3rc.sr.in, other/xfce3rc.uk.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in: Chage
+	default cinfig files to use digital clock by default
+
+2001-11-20  xfce
+
+	* libs/constant.h, libs/xfcolor.c, other/xfce3rc.cs.in,
+	other/xfce3rc.de.in, other/xfce3rc.fr.in, other/xfce3rc.hu.in,
+	other/xfce3rc.in, other/xfce3rc.ja.in, other/xfce3rc.ko.in,
+	other/xfce3rc.nl.in, other/xfce3rc.sr.in, other/xfce3rc.uk.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	palettes/Default, xfwm/themes.c, xfwm/xfwm.c: [no log message]
+
+2001-11-20  xfce
+
+	* configure, configure.in: Forgot to increment version number...
+
+2001-11-19  xfce
+
+	* xfce_theme/xfce_theme_draw.c, xfwm/themes.c: Improve themes
+
+2001-11-19  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2001-11-18  xfce
+
+	* xftree/xtree_gui.c: change kbd shortcuts in xftree (ie replace
+	Ctrl+C by Ctrl+Q for quit, etc.)
+
+2001-11-18  xfce
+
+	* po/xfce.pot, xfsamba/xfsamba_masterresolve.c, xftree/xtree_gui.c:
+	Apply few patches from Albert Chin (china@thewrittenword.com)
+
+2001-11-17  xfce
+
+	* po/: ca.gmo, ca.po, cs.gmo, cs.po, da.gmo, da.po, de.gmo, de.po,
+	en_GB.gmo, en_GB.po, es.gmo, es.po, et.gmo, et.po, fi.gmo, fi.po,
+	fr.gmo, fr.po, gl.gmo, gl.po, hu.gmo, hu.po, it.gmo, it.po, ja.gmo,
+	ja.po, nl.gmo, nl.po, pl.gmo, pl.po, pt_BR.gmo, pt_BR.po, ro.gmo,
+	ro.po, ru.gmo, ru.po, sk.gmo, sk.po, sr.gmo, sr.po, sv.gmo, sv.po,
+	uk.gmo, uk.po, zh.gmo, zh.po, zh_CN.gmo, zh_CN.po: Update potfiles
+
 2001-11-17  xfce
 
 	* ChangeLog: Update ChangeLog
