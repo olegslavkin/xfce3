@@ -386,8 +386,14 @@ MyCreateGdkPixmapFromFile (char *filename, GtkWidget * widget, GdkBitmap ** mask
       gdk_imlib_render (im, w, h);
     else
       gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+
     pixmap = gdk_imlib_copy_image (im);
-    *mask = gdk_imlib_copy_mask (im);
+
+    if (mask)
+    {
+      *mask = gdk_imlib_copy_mask (im);
+    }
+    
     gdk_imlib_kill_image (im);
   }
 #else /* without HAVE_GDK_IMLIB */
@@ -478,8 +484,14 @@ MyCreateGdkPixmapFromData (char **data, GtkWidget * widget, GdkBitmap ** mask, g
       gdk_imlib_render (im, w, h);
     else
       gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+ 
     pixmap = gdk_imlib_copy_image (im);
-    *mask = gdk_imlib_copy_mask (im);
+
+    if (mask)
+    {
+      *mask = gdk_imlib_copy_mask (im);
+    }
+
     gdk_imlib_kill_image (im);
   }
 #else /* without HAVE_GDK_IMLIB */
