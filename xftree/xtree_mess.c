@@ -217,6 +217,12 @@ cb_hide_date (GtkWidget * widget, GtkWidget *ctree)
 {
   preferences ^= HIDE_DATE;
   gtk_clist_set_column_visibility ((GtkCList *)ctree,2,!(preferences & HIDE_DATE));
+  if (preferences & HIDE_TITLES) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button))){ 
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
+	  }
+  }
+  save_defaults(NULL);
   return;
 }
 
@@ -225,6 +231,51 @@ cb_hide_size (GtkWidget * widget, GtkWidget *ctree)
 {
   preferences ^= HIDE_SIZE;
   gtk_clist_set_column_visibility ((GtkCList *)ctree,1,!(preferences & HIDE_SIZE));
+  if (preferences & HIDE_TITLES) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button))){ 
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
+	  }
+  }
+  save_defaults(NULL);
+  return;
+}
+
+void
+cb_hide_menu (GtkWidget * widget, GtkWidget *ctree)
+{
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+
+  preferences ^= HIDE_MENU;
+  if (preferences & HIDE_MENU) {
+	  if (GTK_WIDGET_VISIBLE(win->menu->parent)) gtk_widget_hide(win->menu->parent);
+  } else {
+	  if (!GTK_WIDGET_VISIBLE(win->menu->parent)) gtk_widget_show(win->menu->parent);
+  }
+  save_defaults(NULL);
+  return;
+}
+
+void
+cb_hide_titles (GtkWidget * widget, GtkWidget *ctree)
+{
+  preferences ^= HIDE_TITLES;
+  if (preferences & HIDE_TITLES) {
+	  if (GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button))){ 
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
+	      gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
+	  }
+  } else {
+	  if (!GTK_WIDGET_VISIBLE(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button))) {
+	      gtk_widget_show(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
+	      if (!(preferences&HIDE_DATE)) 
+		      gtk_widget_show(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
+	      if (!(preferences&HIDE_SIZE))
+		      gtk_widget_show(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
+	  }
+  }
+  save_defaults(NULL);
   return;
 }
 
@@ -432,6 +483,7 @@ cb_toggle_preferences (GtkWidget * widget, gpointer data)
   if (toggler&SHORT_TITLES) {
 	  if (Apath&&Awin) set_title(Awin,Apath);
   }
+  save_defaults(NULL);
 }
 			  
 void cb_custom_SCK(GtkWidget * item, GtkWidget * ctree)

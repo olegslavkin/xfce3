@@ -1381,12 +1381,44 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
+  menuitem = gtk_check_menu_item_new_with_label (_("Hide menu"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_MENU & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_hide_menu), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_m,GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+
+  /* hidden element (already in configuration dialog) */
+  menuitem = gtk_check_menu_item_new_with_label (_("Hide toolbar"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_MENU & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (toggle_toolbar), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_t,GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+
+  menuitem = gtk_check_menu_item_new_with_label (_("Hide titles"));
+  GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_MENU & preferences)?1:0;
+  gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_hide_titles), ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_h,GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+
+
   menuitem = gtk_check_menu_item_new_with_label (_("Hide dates"));
   GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_DATE & preferences)?1:0;
   gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_hide_date), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_d,GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+
 
   menuitem = gtk_check_menu_item_new_with_label (_("Hide sizes"));
   GTK_CHECK_MENU_ITEM (menuitem)->active = (HIDE_SIZE & preferences)?1:0;
@@ -1394,6 +1426,9 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_hide_size), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+  gtk_menu_set_accel_group (GTK_MENU (menu), accel);
+  gtk_widget_add_accelerator (menuitem, "activate", accel, GDK_s,GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+
 
   menuitem = gtk_menu_item_new_with_label (_("Configure toolbar"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_config_toolbar), ctree);
@@ -1527,6 +1562,9 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
  * these macros should make it easier to avoid conflicting entries.
  * Please place any duplicate entries as a macro. (since all entries
  * duplicate at least with help menu, all should be here).
+ *
+ * All should appear in help menu, if not, something is wrong
+ * (delete is the only exception).
  * 
  * note: "unselect all" was eliminated since the function call was identical
  * to plain unselect. 
@@ -1584,6 +1622,17 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 /* quit only on main menu now, so that default geometry is saved correctly with cb_quit.*/
     
 #define COMMON_HELP_3 \
+    {NULL, NULL, 0}, \
+    {N_("Sort by filename"), NULL, 0, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Sort by size"), NULL, 0, GDK_s,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {N_("Sort by date"), NULL, 0, GDK_d,GDK_CONTROL_MASK | GDK_MOD1_MASK}, \
+    {NULL, NULL, 0}, \
+    {N_("Hide/show menu"), NULL, 0, GDK_m,GDK_MOD1_MASK}, \
+    {N_("Hide/show toolbar"), NULL, 0, GDK_t,GDK_MOD1_MASK}, \
+    {N_("Hide/show titles"), NULL, 0, GDK_h,GDK_MOD1_MASK}, \
+    {N_("Hide/show dates"), NULL, 0, GDK_d,GDK_MOD1_MASK}, \
+    {N_("Hide/show sizes"), NULL, 0, GDK_s,GDK_MOD1_MASK}, \
+    {NULL, NULL, 0}, \
     {N_("Quit ..."), NULL, 0, GDK_q,GDK_CONTROL_MASK}
 
   menu_entry dir_mlist[] = {
@@ -1896,6 +1945,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   menutop = create_menu (win->top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
   gtk_widget_show (menutop);
+  win->menu = menutop;
 
   
   toolbar = create_toolbar (win->top, ctree, win,FALSE);
@@ -1910,6 +1960,23 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
 
   gtk_widget_show_all (win->top);
 
+  /* hide what must be hidden */
+  if (preferences & HIDE_TOOLBAR) {
+	  if (GTK_WIDGET_VISIBLE(win->toolbar->parent))
+		  gtk_widget_hide(win->toolbar->parent);
+	  if (GTK_WIDGET_VISIBLE(win->toolbarO->parent))
+		  gtk_widget_hide(win->toolbarO->parent);
+  }
+  if (preferences & HIDE_MENU) {
+	  if (GTK_WIDGET_VISIBLE(win->menu->parent))
+		  gtk_widget_hide(win->menu->parent);
+  }
+  if (preferences & HIDE_TITLES) {
+	gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button));
+	gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button));
+	gtk_widget_hide(GTK_WIDGET (GTK_CLIST (ctree)->column[COL_SIZE].button));
+  }
+  
   icon_name = strrchr (path, '/');
   if ((icon_name) && (!(*(++icon_name))))
     icon_name = NULL;

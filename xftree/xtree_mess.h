@@ -8,6 +8,8 @@
 #define CUSTOM_FONT		0x80
 #define HIDE_SIZE		0x100
 #define HIDE_DATE		0x200
+#define HIDE_MENU		0x400
+#define HIDE_TITLES		0x800
 
 
 #define XFTREE_CONFIG_FILE "xftreerc"
@@ -43,3 +45,6 @@ void cb_hide_size (GtkWidget * widget, GtkWidget * ctree);
 void set_colors(GtkWidget * ctree);
 int set_fontT(GtkWidget * ctree);
 void cb_dnd_help(GtkWidget * item, GtkWidget * ctree);
+void cb_hide_menu (GtkWidget * widget, GtkWidget *ctree);
+void cb_hide_titles (GtkWidget * widget, GtkWidget *ctree);
+

@@ -276,17 +276,19 @@ static void toggle_toolbars0(GtkWidget * widget,gpointer data){
 	unsigned int mask;
 	mask=(unsigned int)((long)data);
 	toggle_toolbars(mask,0);
-	return;
+	  save_defaults(NULL);
+return;
 }
 
 static void toggle_toolbars1(GtkWidget * widget,gpointer data){
 	unsigned int mask;
 	mask=(unsigned int)((long)data);
 	toggle_toolbars(mask,1);
-	return;
+	  save_defaults(NULL);
+return;
 }
 
-static void toggle_toolbar(GtkWidget * widget, GtkWidget *ctree){
+void toggle_toolbar(GtkWidget * widget, GtkWidget *ctree){
 	cfg *win;
 	GtkWidget *tb;
   	win = gtk_object_get_user_data (GTK_OBJECT (ctree));
@@ -300,6 +302,7 @@ static void toggle_toolbar(GtkWidget * widget, GtkWidget *ctree){
 		if (GTK_WIDGET_VISIBLE(tb)) gtk_widget_hide(tb);
 	}
 	else if (!GTK_WIDGET_VISIBLE(tb)) gtk_widget_show(tb);
+  save_defaults(NULL);
 	
 }
 

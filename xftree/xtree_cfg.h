@@ -47,6 +47,7 @@ typedef struct
   GtkWidget *top;
   GtkWidget *toolbar;
   GtkWidget *toolbarO;
+  GtkWidget *menu;
   golist *gogo;
 }
 cfg, cfg_t;
