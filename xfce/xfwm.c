@@ -214,47 +214,62 @@ apply_wm_colors (const XFCE_palette * p)
 {
   char *s, *t, *u, *v;
   int howbright, howdark;
-
-
+  
   if ((p) && (current_config.wm == XFWM))
   {
+    int activeindex   = 0;
+    int inactiveindex = 0;
+    int lobackindex   = 0;
+    int hibackindex   = 0;
+    
     s = (char *) g_malloc (10 * sizeof (char));
     t = (char *) g_malloc (10 * sizeof (char));
     u = (char *) g_malloc (255 * sizeof (char));
     v = (char *) g_malloc (10 * sizeof (char));
 
-    howbright = brightness_pal (p, 6);
+    switch  (current_config.xfwm_engine)
+    {
+      case MOFIT_ENGINE:
+        activeindex   = 6;
+	inactiveindex = 7;
+        hibackindex   = 6;
+	lobackindex   = 7;
+	break;
+      case TRENCH_ENGINE:
+        activeindex   = 7;
+	inactiveindex = 7;
+        hibackindex   = 6;
+	lobackindex   = 7;
+	break;
+      case GTK_ENGINE:
+      case XFCE_ENGINE:
+      case LINEA_ENGINE:
+      default:
+        activeindex   = 7;
+	inactiveindex = 7;
+        hibackindex   = 6;
+        lobackindex   = 3;
+	break;
+    }
+    howbright = brightness_pal (p, hibackindex);
+    howdark = brightness_pal (p, lobackindex);
     
-    if ((current_config.xfwm_engine == GTK_ENGINE) || (current_config.xfwm_engine == XFCE_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
-    {
-      howdark = brightness_pal (p, 3);
-    }
-    else
-    {
-      howdark = brightness_pal (p, 7);
-    }
-    
-    if ((current_config.xfwm_engine == MOFIT_ENGINE) || (current_config.xfwm_engine == LINEA_ENGINE))
-    {
-      color_to_hex (s, p, 6);
-    }
-    else
-    {
-      color_to_hex (s, p, 7);
-    }
+    color_to_hex (s, p, activeindex);
     sprintf (u, ACTIVECOLOR_CMD, (howbright < fadeblack) ? "white" : "black", s);
     sendinfo (fd_internal_pipe, u, 0);
-    color_to_hex (s, p, 7);
+
+    color_to_hex (s, p, inactiveindex);
     sprintf (u, INACTIVECOLOR_CMD, (howdark < darklim) ? "white" : "black", s);
     sendinfo (fd_internal_pipe, u, 0);
 
+    color_to_hex (s, p, inactiveindex);
+    howdark = brightness_pal (p, inactiveindex);
     howbright = brightness_pal (p, 2);
-    howdark = brightness_pal (p, 7);
     color_to_hex (t, p, 2);
     sprintf (u, MENUCOLOR_CMD, (howdark < fadeblack) ? "white" : "black", s, (howbright < fadeblack) ? "white" : "black", t);
     sendinfo (fd_internal_pipe, u, 0);
 
-    color_to_hex (t, p, 6);
+    color_to_hex (t, p, hibackindex);
     color_to_hex (v, p, 5);
     if ((DEFAULT_DEPTH >= 16) && (current_config.gradient_active_title))
       sprintf (u, TITLESTYLE_CMD, ACTIVE, GRADIENT, t, v);
@@ -262,7 +277,7 @@ apply_wm_colors (const XFCE_palette * p)
       sprintf (u, TITLESTYLE_CMD, ACTIVE, SOLID, t, "");
     sendinfo (fd_internal_pipe, u, 0);
 
-    color_to_hex (t, p, 3);
+    color_to_hex (t, p, lobackindex);
     if ((DEFAULT_DEPTH >= 16) && (current_config.gradient_inactive_title))
       sprintf (u, TITLESTYLE_CMD, INACTIVE, GRADIENT, t, s);
     else

@@ -7,6 +7,7 @@ Bronze2.xpm \
 BWGrad.xpm \
 Chrome.xpm \
 DarkMetal.xpm \
+DefaultGrad.xpm \
 Glass.xpm \
 GoldenBoy.xpm \
 Kdetheme.xpm \
