@@ -109,9 +109,10 @@ i_play (char *soundfile)
 {
   void *buffer;
   ST_CONFIG curr;
+  int sampleWidth, channelCount, frameRate;
 #if defined(HAVE_AUDIOFILE)
+  int frameSize, sampleFormat;
   AFfilehandle fp;
-  int sampleFormat, sampleWidth, channelCount, frameSize, frameRate;
   AFframecount	frameCount, framesRead;
 #else
   int fp;
@@ -165,9 +166,9 @@ i_play (char *soundfile)
   curr[1] = channelCount;
   curr[2] = frameRate;
 #else
-  curr[0] = 8;
-  curr[1] = 1;
-  curr[2] = 8000;
+  curr[0] = sampleWidth = 8;
+  curr[1] = channelCount = 1;
+  curr[2] = frameRate = 8000;
 #endif
 
 #if defined(HAVE_ARTS)
