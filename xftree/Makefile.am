@@ -26,7 +26,8 @@ xftree_SOURCES = \
 	xtree_dnd.c xtree_dnd.h \
 	xtree_gui.c xtree_gui.h \
 	xtree_misc.c xtree_misc.h \
-	xtree_du.c tubo.c tubo.h
+	xtree_du.c tubo.c tubo.h \
+	xtree_mess.c
 
 xftree_LDADD = ../libs/libxfcecore.la @DMALLOC_LIB@ @GTK_LIBS@ \
 @GDK_IMLIB_LIBS@ @GDK_PIXBUF_LIBS@ @INTLLIBS@ @LIBS@ \

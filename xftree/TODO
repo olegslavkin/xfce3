@@ -6,10 +6,14 @@ structure as if it wasn't packed. Makes it very easy to copy and move content
 from these files straight to where you want it.
 7- Add code necesary to d+d files to/from xfsamba.
 8- Add ctrl-T for keyboard shortcut to open terminal. Probably keyboard shorcuts for all menu items, toggled from config file.
-9- Override file dialog should lstat both new and old file and show info so user can decide whether or not to override. Also, on non-confirm copy operation, if file will be overwritten, ask for confirmation, please.
-10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place.
+10- Instead of opening multiple boxes for multiple copying, open a single box and use a progress status bar. (easier for the user to do something else while long copy operation takes place, also faster than opening and closing dialogs).
+11- make a tree refresh inmediate after "duplicate file" and other actions that don't respond quickly (which others?)
 
 done:
+ 9- Override file dialog should lstat both new and old file and show info 
+  so user can decide whether or not to override. Also, on non-confirm 
+  copy operation, if file will be overwritten, ask for confirmation, 
+  please. --Also fixed "cancel" button on override and added "all" button.
  2- An "all" button when doing hard deletes.
  5.- Somehow be able to show the total size of a folder including all it's
 content, sub-folders and their content.

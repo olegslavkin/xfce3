@@ -157,6 +157,7 @@ static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg, int width
 int move_dir (char *source, char *label, char *target, int trash);
 
 gint update_timer (GtkCTree * ctree);
+char * override_txt(char *new_file,char *old_file);
 
 /*
  */
@@ -1909,7 +1910,8 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
     sprintf (compl, "%s%s", path, label);
     if (stat (compl, &st) != -1)
     {
-      if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
+      /*if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)*/
+      if (dlg_new(override_txt(compl,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
 	return;
       }
@@ -2027,7 +2029,8 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
     strcpy (ofile, en->path);
     if (lstat (nfile, &st) != ERROR)
     {
-      if (dlg_question (_("Override ?"), nfile) != DLG_RC_OK)
+      /*if (dlg_question (_("Override ?"), nfile) != DLG_RC_OK)*/
+      if (dlg_new(override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
 	ctree_thaw (ctree);
 	return;

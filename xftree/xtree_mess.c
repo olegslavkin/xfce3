@@ -69,13 +69,14 @@
 /* this file is for processing certain common messages.
  * override warning to begin with */
 
+#define BYTES "bytes"
 
 char * override_txt(char *new_file,char *old_file)
 {
   gboolean old_exists=FALSE;
   struct stat nst,ost;
   static char *message=NULL;
-  char *ot=_("Override ?");
+  char *ot=_("Override ?"),*otime=NULL,*ntime;
   char *with=_("with");
   int i,osize=0,nsize;
   
@@ -88,29 +89,34 @@ char * override_txt(char *new_file,char *old_file)
     old_exists=TRUE;
     osize=1;
     i=ost.st_size;
+    otime=(char *)malloc( strlen(ctime(&(ost.st_mtime))) + 1 );
+    strcpy(otime,ctime(&(ost.st_mtime)) );
     while (i) {i = i/10; osize++;}
   }
   nsize=1;
   i=nst.st_size;
   while (i) {i = i/10; nsize++;}
+  ntime=ctime(&(nst.st_mtime));
    
-  i=strlen(ot) +1+ 
-	  strlen(new_file) +1+ strlen(ctime(&(nst.st_ctime))) +1+ nsize +1;
+  i= 1 + strlen(ot) +1+ 
+	  strlen(new_file) +1+ strlen(ntime) +1+ nsize +1+ strlen("bytes") + 1;
   if (old_exists) {
     i = i + 
 	  + strlen(with) +1+
-	  strlen(old_file) +1+ strlen(ctime(&(ost.st_ctime))) +1+ osize +1;
+	  strlen(old_file) +1+ strlen(otime) +1+ osize +1+ strlen("bytes") + 1;
   }
   message=(char *)malloc(i);
   if (!message) {return ot;}
-  if (old_exists)
-	sprintf(message,"%s\n%s %s %d\n%s\n%s %s %d",ot,
-			new_file,ctime(&(nst.st_ctime)),nsize,
+  if (old_exists){
+	sprintf(message,"%s\n%s %s %ld %s\n%s\n%s %s %ld %s\n",ot,
+			new_file,ntime,nst.st_size,BYTES,
 			with,
-			old_file,ctime(&(ost.st_ctime)),osize);
+			old_file,otime,ost.st_size,BYTES);
+	free(otime);
+  }
   else
-	sprintf(message,"%s\n%s %s %d",ot,
-			new_file,ctime(&(nst.st_ctime)),nsize);
+	sprintf(message,"%s\n%s %s %ld %s\n",ot,
+			new_file,ntime,nst.st_size,BYTES);
   return message;
 }
 			 

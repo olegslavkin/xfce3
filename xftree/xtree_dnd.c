@@ -47,6 +47,8 @@
 #  include "dmalloc.h"
 #endif
 
+extern gboolean force_override;
+
 extern int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
 
 /*
@@ -77,6 +79,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     gtk_drag_finish (context, FALSE, FALSE, time);
     return;
   }
+  force_override=FALSE;
 
   action = context->action <= GDK_ACTION_DEFAULT ? GDK_ACTION_COPY : context->action;
 
@@ -158,7 +161,11 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
 	  continue;
 	}
 	tmp = g_list_append (tmp, s_en);
-	transfer (NULL, tmp, en->path, mode, &source_state);
+        /*printf("dbg:dnd transfer\n");*/
+	if (!transfer (NULL, tmp, en->path, mode, &source_state)) {
+        /*printf("dbg:dnd transfer returned false\n");*/
+		goto END;
+	}
       }
       else
       {
@@ -171,6 +178,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
   default:
     break;
   }
+END:
   gtk_drag_finish (context, TRUE, TRUE, time);
   update_tree (GTK_CTREE (ctree), node);
 }

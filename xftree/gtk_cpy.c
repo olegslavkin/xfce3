@@ -60,6 +60,9 @@ typedef struct
 }
 state;
 
+char * override_txt(char *new_file,char *old_file);
+/* variable shared from xtree_dnd.c: */
+gboolean force_override=FALSE;
 /*
  * callback if source ctree is destroyed
  * so we do not have to update the labels
@@ -151,11 +154,15 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
     /* check if they are the same files */
     if (t_stat.st_ino != sen->inode)
     {
-      rc = dlg_ok_skip (_("Override file?"), target);
-      if (rc == DLG_RC_SKIP)
-	return (TRUE);
-      if (rc == DLG_RC_CANCEL)
-	return (FALSE);
+     /* rc = dlg_ok_skip (_("Override file?"), target);*/ 
+      if (!force_override) {
+	rc=dlg_new(override_txt(target,sen->path),NULL,NULL,DLG_CANCEL|DLG_OK|DLG_SKIP|DLG_ALL);
+      
+        if (rc == DLG_RC_SKIP) 	 return (TRUE);
+        if (rc == DLG_RC_CANCEL) return (FALSE);
+        if (rc == DLG_RC_ALL)	 force_override=TRUE;
+      } else rc=DLG_RC_OK;
+      /*printf ("dbg: doing %s\n",target);*/
     }
     else
     {
@@ -455,6 +462,8 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
   status = ST_OK;
   st[0].status = st[1].status = &status;
 
+  /*printf("dbg: transfer with %s\n",path);*/
+
   if (mode == TR_COPY)
   {
     sprintf (title, _("XFTree: Copy"));
@@ -549,6 +558,7 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
       else
       {
 	rc = trans_file (en, target_en, mode, info, &st[0]);
+        /*printf("dbg: return is %d\n",rc);*/
       }
       if (*alive && (mode == TR_MOVE) && rc && s_ctree)
       {
@@ -562,8 +572,12 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
       }
       else if (!rc)
       {
+	    /* this was not working before today */  
+        /*printf("dbg: bailing out.\n");*/
 	entry_free (target_en);
-	goto END;
+        top_delete (dialog);
+        if (status == ST_OK) gtk_widget_destroy (dialog);
+	return (0);
       }
     }
     list = list->next;
