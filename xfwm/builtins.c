@@ -269,9 +269,6 @@ FocusOn (XfwmWindow * t, Bool DeIconifyFlag)
   if (!AcceptInput(t))
     return;
 
-  /* Make sure UngrabEm () won't return focus to previous window ! */
-  Scr.PreviousFocus = NULL;
-
   if ((DeIconifyFlag) && (t->flags & ICONIFIED))
     DeIconify (t);
 
@@ -301,7 +298,7 @@ WarpOn (XfwmWindow * t, int warp_x, int x_unit, int warp_y, int y_unit)
 {
   int x, y;
 
-  if (t == (XfwmWindow *) 0 || (t->flags & ICONIFIED && t->icon_w == None))
+  if (!t || (t->flags & ICONIFIED && t->icon_w == None))
     return;
 
   if (t->Desk != Scr.CurrentDesk)
@@ -2648,6 +2645,10 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     XDestroyWindow (dpy, taskw);
   }
 
+  UninstallRootColormap ();
+  UngrabEm ();
+  discard_events (EnterWindowMask | LeaveWindowMask);  
+
   if ((!abort) && (t != NULL))
   {
     /* switch to the window (without warping the pointer) */
@@ -2655,10 +2656,6 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
     /* Focus on window and deiconify if necessary */
     FocusOn (t, True);
   }
-  UninstallRootColormap ();
-  UngrabEm ();
-  XFlush (dpy);
-  discard_events (EnterWindowMask | LeaveWindowMask);  
 }
 
 void

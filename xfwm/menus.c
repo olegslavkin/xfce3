@@ -434,7 +434,7 @@ UpdateMenu (int sticks)
       {
 	int x, y;
 	XQueryPointer (dpy, Scr.Root, &dummy_root, &dummy_child, &dummy_x, &dummy_y, &x, &y, &dummy_mask);
-	if ((XFindContext (dpy, dummy_child, MenuContext, (caddr_t *) & actual_mr) != XCNOENT) && (actual_mr != ActiveMenu))
+	if ((dummy_child != None) && (XFindContext (dpy, dummy_child, MenuContext, (caddr_t *) &actual_mr) != XCNOENT) && (actual_mr != ActiveMenu))
 	{
 	  done = 1;
 	  break;
