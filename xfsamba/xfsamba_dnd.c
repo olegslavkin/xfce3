@@ -243,12 +243,17 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
    
     nitems = uri_parse_list ((const char *) data->data, &list);
     if (!nitems) break; /* of course */
+    u = list->data;
+    if (u->type!=URI_FILE) {
+           list=uri_free_list (list);
+ 	    break;
+    }
     uri_remove_file_prefix_from_list (list);
     /* tmpfile ==NULL means drop cancelled*/
-    u = list->data;
     tmpfile=CreateTmpList(smb_nav,list,NULL);
     if (!tmpfile) {
          /*fprintf(stderr,"dbg:null tmpfile\n");*/
+         list=uri_free_list (list);
 	 break;
     }
     /*else fprintf(stderr,"dbg:tmpfile=%s\n",tmpfile);*/
