@@ -13574,7 +13574,7 @@ echo "${ECHO_T}XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&6
 echo "$as_me:13574: result: XFCE_CONFDIR set to $XFCE_CONFDIR" >&5
 echo "${ECHO_T}XFCE_CONFDIR set to $XFCE_CONFDIR" >&6
 
-ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xftree/icons/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfdiff/icons/Makefile xfglob/Makefile xfglob/icons/Makefile xfskin/Makefile xfsamba/Makefile xfsamba/icons/Makefile xfumed/Makefile xfumed/icons/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/sgml/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
+ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xftree/icons/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfdiff/icons/Makefile xfglob/Makefile xfglob/icons/Makefile xfsamba/Makefile xfsamba/icons/Makefile xfskin/Makefile xfumed/Makefile xfumed/icons/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile cursors/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile docs/images/Makefile docs/sgml/Makefile docs/html/Makefile docs/html/stylesheet-images/Makefile textures/Makefile fonts/Makefile po/Makefile.in po/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -13914,9 +13914,9 @@ do
   "xfglob/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfglob/icons/Makefile" ;;
   "xfsamba/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfsamba/Makefile" ;;
   "xfsamba/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfsamba/icons/Makefile" ;;
+  "xfskin/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfskin/Makefile" ;;
   "xfumed/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfumed/Makefile" ;;
   "xfumed/icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfumed/icons/Makefile" ;;
-  "xfskin/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfskin/Makefile" ;;
   "scripts/Makefile" ) CONFIG_FILES="$CONFIG_FILES scripts/Makefile" ;;
   "intl/Makefile" ) CONFIG_FILES="$CONFIG_FILES intl/Makefile" ;;
   "dt/Makefile" ) CONFIG_FILES="$CONFIG_FILES dt/Makefile" ;;
@@ -13941,7 +13941,7 @@ do
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "default-2" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-2" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
-  *) { { echo "$as_me:13943: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:13944: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -14235,7 +14235,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:14237: creating $ac_file" >&5
+    { echo "$as_me:14238: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -14253,7 +14253,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:14255: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:14256: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -14266,7 +14266,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:14268: error: cannot find input file: $f" >&5
+           { { echo "$as_me:14269: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -14327,7 +14327,7 @@ for ac_file in : $CONFIG_HEADERS; do test "x$ac_file" = x: && continue
   * )   ac_file_in=$ac_file.in ;;
   esac
 
-  test x"$ac_file" != x- && { echo "$as_me:14329: creating $ac_file" >&5
+  test x"$ac_file" != x- && { echo "$as_me:14330: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
 
   # First look for the input files in the build tree, otherwise in the
@@ -14338,7 +14338,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:14340: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:14341: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -14351,7 +14351,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:14353: error: cannot find input file: $f" >&5
+           { { echo "$as_me:14354: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -14468,7 +14468,7 @@ cat >>$CONFIG_STATUS <<\EOF
   rm -f $tmp/in
   if test x"$ac_file" != x-; then
     if cmp -s $ac_file $tmp/config.h 2>/dev/null; then
-      { echo "$as_me:14470: $ac_file is unchanged" >&5
+      { echo "$as_me:14471: $ac_file is unchanged" >&5
 echo "$as_me: $ac_file is unchanged" >&6;}
     else
       ac_dir=`$as_expr X"$ac_file" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
@@ -14519,11 +14519,11 @@ for ac_file in : $CONFIG_LINKS; do test "x$ac_file" = x: && continue
   ac_dest=`echo "$ac_file" | sed 's,:.*,,'`
   ac_source=`echo "$ac_file" | sed 's,[^:]*:,,'`
 
-  { echo "$as_me:14521: linking $srcdir/$ac_source to $ac_dest" >&5
+  { echo "$as_me:14522: linking $srcdir/$ac_source to $ac_dest" >&5
 echo "$as_me: linking $srcdir/$ac_source to $ac_dest" >&6;}
 
   if test ! -r $srcdir/$ac_source; then
-    { { echo "$as_me:14525: error: $srcdir/$ac_source: File not found" >&5
+    { { echo "$as_me:14526: error: $srcdir/$ac_source: File not found" >&5
 echo "$as_me: error: $srcdir/$ac_source: File not found" >&2;}
    { (exit 1); exit 1; }; }
   fi
@@ -14573,7 +14573,7 @@ done; }
   # Make a symlink if possible; otherwise try a hard link.
   ln -s $ac_rel_source $ac_dest 2>/dev/null ||
     ln $srcdir/$ac_source $ac_dest ||
-    { { echo "$as_me:14575: error: cannot link $ac_dest to $srcdir/$ac_source" >&5
+    { { echo "$as_me:14576: error: cannot link $ac_dest to $srcdir/$ac_source" >&5
 echo "$as_me: error: cannot link $ac_dest to $srcdir/$ac_source" >&2;}
    { (exit 1); exit 1; }; }
 done
@@ -14667,7 +14667,7 @@ sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfce3r
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xfwmrc.in >  other/xfwmrc
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.in >  other/xinitrc
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" other/xinitrc.mwm.in >  other/xinitrc.mwm
-sed -e "s%XFCE_DIR%$XFCE_DIR%g" xfskin/xfskin.in > xfskin/xfskin
+sed -e "s%XFCE_DIR%$XFCE_DIR%g" xfskin/xfskin.in >  xfskin/xfskin
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" other/xfbdrc.in > other/xfbdrc
 sed -e "s%XFCE_VERSION%$VERSION%g" -e "s%DATE%`date`%g" -e "s%HOSTNAME%`hostname`%g" other/COPYING.in > other/COPYING
 sed -e "s%XFCE_DIR%$XFCE_DIR%g" backdrops/Blue.list.in >  backdrops/Blue.list

@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -133,7 +133,52 @@ XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(fonts_DATA)
 fontsdir = $(XFCE_DIR)/fonts
-fonts_DATA =   uniread-variable-05-b-i-ISO8859-1.pcf.gz  uniread-variable-05-b-i.pcf.gz  uniread-variable-05-b-r-ISO8859-1.pcf.gz  uniread-variable-05-b-r.pcf.gz  uniread-variable-05-m-i-ISO8859-1.pcf.gz  uniread-variable-05-m-i.pcf.gz  uniread-variable-05-m-r-ISO8859-1.pcf.gz  uniread-variable-05-m-r.pcf.gz  uniread-variable-07-b-i-ISO8859-1.pcf.gz  uniread-variable-07-b-i.pcf.gz  uniread-variable-07-b-r-ISO8859-1.pcf.gz  uniread-variable-07-b-r.pcf.gz  uniread-variable-07-m-i-ISO8859-1.pcf.gz  uniread-variable-07-m-i.pcf.gz  uniread-variable-07-m-r-ISO8859-1.pcf.gz  uniread-variable-07-m-r.pcf.gz  uniread-variable-09-b-i-ISO8859-1.pcf.gz  uniread-variable-09-b-i.pcf.gz  uniread-variable-09-b-r-ISO8859-1.pcf.gz  uniread-variable-09-b-r.pcf.gz  uniread-variable-09-m-i-ISO8859-1.pcf.gz  uniread-variable-09-m-i.pcf.gz  uniread-variable-09-m-r-ISO8859-1.pcf.gz  uniread-variable-09-m-r.pcf.gz  uniread-variable-10-b-i-ISO8859-1.pcf.gz  uniread-variable-10-b-i.pcf.gz  uniread-variable-10-b-r-ISO8859-1.pcf.gz  uniread-variable-10-b-r.pcf.gz  uniread-variable-10-m-i-ISO8859-1.pcf.gz  uniread-variable-10-m-i.pcf.gz  uniread-variable-10-m-r-ISO8859-1.pcf.gz  uniread-variable-10-m-r.pcf.gz  uniread-variable-12-b-i-ISO8859-1.pcf.gz  uniread-variable-12-b-i.pcf.gz  uniread-variable-12-b-r-ISO8859-1.pcf.gz  uniread-variable-12-b-r.pcf.gz  uniread-variable-12-m-r-ISO8859-1.pcf.gz  uniread-variable-12-m-r.pcf.gz  uniread-variable-14-b-r-ISO8859-1.pcf.gz  uniread-variable-14-b-r.pcf.gz  uniread-variable-14-m-r-ISO8859-1.pcf.gz  uniread-variable-14-m-r.pcf.gz  uniread-variable-18-m-r-ISO8859-1.pcf.gz  uniread-variable-18-m-r.pcf.gz  fonts.dir
+fonts_DATA = \
+ uniread-variable-05-b-i-ISO8859-1.pcf.gz \
+ uniread-variable-05-b-i.pcf.gz \
+ uniread-variable-05-b-r-ISO8859-1.pcf.gz \
+ uniread-variable-05-b-r.pcf.gz \
+ uniread-variable-05-m-i-ISO8859-1.pcf.gz \
+ uniread-variable-05-m-i.pcf.gz \
+ uniread-variable-05-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-05-m-r.pcf.gz \
+ uniread-variable-07-b-i-ISO8859-1.pcf.gz \
+ uniread-variable-07-b-i.pcf.gz \
+ uniread-variable-07-b-r-ISO8859-1.pcf.gz \
+ uniread-variable-07-b-r.pcf.gz \
+ uniread-variable-07-m-i-ISO8859-1.pcf.gz \
+ uniread-variable-07-m-i.pcf.gz \
+ uniread-variable-07-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-07-m-r.pcf.gz \
+ uniread-variable-09-b-i-ISO8859-1.pcf.gz \
+ uniread-variable-09-b-i.pcf.gz \
+ uniread-variable-09-b-r-ISO8859-1.pcf.gz \
+ uniread-variable-09-b-r.pcf.gz \
+ uniread-variable-09-m-i-ISO8859-1.pcf.gz \
+ uniread-variable-09-m-i.pcf.gz \
+ uniread-variable-09-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-09-m-r.pcf.gz \
+ uniread-variable-10-b-i-ISO8859-1.pcf.gz \
+ uniread-variable-10-b-i.pcf.gz \
+ uniread-variable-10-b-r-ISO8859-1.pcf.gz \
+ uniread-variable-10-b-r.pcf.gz \
+ uniread-variable-10-m-i-ISO8859-1.pcf.gz \
+ uniread-variable-10-m-i.pcf.gz \
+ uniread-variable-10-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-10-m-r.pcf.gz \
+ uniread-variable-12-b-i-ISO8859-1.pcf.gz \
+ uniread-variable-12-b-i.pcf.gz \
+ uniread-variable-12-b-r-ISO8859-1.pcf.gz \
+ uniread-variable-12-b-r.pcf.gz \
+ uniread-variable-12-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-12-m-r.pcf.gz \
+ uniread-variable-14-b-r-ISO8859-1.pcf.gz \
+ uniread-variable-14-b-r.pcf.gz \
+ uniread-variable-14-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-14-m-r.pcf.gz \
+ uniread-variable-18-m-r-ISO8859-1.pcf.gz \
+ uniread-variable-18-m-r.pcf.gz \
+ fonts.dir
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
@@ -145,7 +190,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:

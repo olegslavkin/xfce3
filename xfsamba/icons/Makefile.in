@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -132,7 +132,43 @@ XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(noinst_DATA)
-noinst_DATA =   comp1.xpm  comp2.xpm  delete.xpm  dir_close_lnk.xpm  dir_close.xpm  dir_open_lnk.xpm  dir_open.xpm  dotfile.xpm  download.xpm  go_back.xpm  go_to.xpm  help.xpm  home.xpm  ip.xpm  new_dir.xpm  page.xpm  print.xpm  rdotfile.xpm  reload.xpm  rpage.xpm  stop.xpm  tar.xpm  upload.xpm  view1.xpm  view2.xpm  view3.xpm  warning.xpm  wg1.xpm  wg2.xpm  mount.xpm  tb_paste.xpm  tb_cut.xpm  tb_copy.xpm  new_win.xpm  xfsamba.xpm
+noinst_DATA = \
+ comp1.xpm \
+ comp2.xpm \
+ delete.xpm \
+ dir_close_lnk.xpm \
+ dir_close.xpm \
+ dir_open_lnk.xpm \
+ dir_open.xpm \
+ dotfile.xpm \
+ download.xpm \
+ go_back.xpm \
+ go_to.xpm \
+ help.xpm \
+ home.xpm \
+ ip.xpm \
+ new_dir.xpm \
+ page.xpm \
+ print.xpm \
+ rdotfile.xpm \
+ reload.xpm \
+ rpage.xpm \
+ stop.xpm \
+ tar.xpm \
+ upload.xpm \
+ view1.xpm \
+ view2.xpm \
+ view3.xpm \
+ view4.xpm \
+ warning.xpm \
+ wg1.xpm \
+ wg2.xpm \
+ mount.xpm \
+ tb_paste.xpm \
+ tb_cut.xpm \
+ tb_copy.xpm \
+ new_win.xpm \
+ xfsamba.xpm
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
@@ -144,7 +180,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:

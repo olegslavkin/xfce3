@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -132,7 +132,70 @@ XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(noinst_DATA)
-noinst_DATA =  appinfo.xpm block_dev.xpm char_dev.xpm closewin.xpm comp1.xpm delete.xpm dir_close.xpm dir_open.xpm dir_pd.xpm dir_up.xpm dotfile.xpm empty_trash.xpm error.xpm exe_file.xpm exe.xpm fifo.xpm go_back.xpm go_to.xpm go_up.xpm home.xpm info.xpm link_flag.xpm new_dir.xpm new_file.xpm new_win.xpm package_green.xpm page_adobe.xpm page_audio.xpm page_backup.xpm page_compressed.xpm page_core.xpm page_html.xpm page_image.xpm page_movie.xpm page_po.xpm page_ps.xpm page_spreadsheet.xpm page_tar.xpm page_text.xpm page.xpm question.xpm reload.xpm socket.xpm stale_lnk.xpm tb_copy.xpm tb_cut.xpm tb_find.xpm tb_macro.xpm tb_paste.xpm tb_vsplit.xpm text.xpm trash.xpm warning.xpm wg1.xpm xftree_icon.xpm pd.xpm dir_ro.xpm dir_ro_open.xpm dir_ro_open_dot.xpm dir_open_dot.xpm dir_ro_open_hidden.xpm dir_open_hidden.xpm new_rox.xpm
+noinst_DATA = \
+appinfo.xpm \
+block_dev.xpm \
+char_dev.xpm \
+closewin.xpm \
+comp1.xpm \
+delete.xpm \
+dir_close.xpm \
+dir_open.xpm \
+dir_pd.xpm \
+dir_up.xpm \
+dotfile.xpm \
+empty_trash.xpm \
+error.xpm \
+exe_file.xpm \
+exe.xpm \
+fifo.xpm \
+go_back.xpm \
+go_to.xpm \
+go_up.xpm \
+home.xpm \
+info.xpm \
+link_flag.xpm \
+new_dir.xpm \
+new_file.xpm \
+new_win.xpm \
+package_green.xpm \
+page_adobe.xpm \
+page_audio.xpm \
+page_backup.xpm \
+page_compressed.xpm \
+page_core.xpm \
+page_html.xpm \
+page_image.xpm \
+page_movie.xpm \
+page_po.xpm \
+page_ps.xpm \
+page_spreadsheet.xpm \
+page_tar.xpm \
+page_text.xpm \
+page.xpm \
+question.xpm \
+reload.xpm \
+socket.xpm \
+stale_lnk.xpm \
+tb_copy.xpm \
+tb_cut.xpm \
+tb_find.xpm \
+tb_macro.xpm \
+tb_paste.xpm \
+tb_vsplit.xpm \
+text.xpm \
+trash.xpm \
+warning.xpm \
+wg1.xpm \
+xftree_icon.xpm \
+pd.xpm \
+dir_ro.xpm \
+dir_ro_open.xpm \
+dir_ro_open_dot.xpm \
+dir_open_dot.xpm \
+dir_ro_open_hidden.xpm \
+dir_open_hidden.xpm \
+new_rox.xpm
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
@@ -144,7 +207,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
