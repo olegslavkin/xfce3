@@ -132,10 +132,7 @@ XFT_LIBS = @XFT_LIBS@
 XINERAMA_LIBS = @XINERAMA_LIBS@
 
 EXTRA_DIST = $(noinst_DATA)
-noinst_DATA = \
-	dir_close.xpm \
-	dir_open.xpm \
-	exe.xpm
+noinst_DATA =  	dir_close.xpm 	dir_open.xpm 	exe.xpm
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
