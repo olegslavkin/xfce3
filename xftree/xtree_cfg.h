@@ -26,6 +26,7 @@
 #define __XTREE_CFG_H__
 
 #include <gtk/gtk.h>
+#include "xtree_go.h"
 
 #define IGNORE_HIDDEN 1
 
@@ -44,7 +45,7 @@ typedef struct
   int width;
   int height;
   GtkWidget *top;
-  void *gogo;
+  golist *gogo;
 }
 cfg, cfg_t;
 

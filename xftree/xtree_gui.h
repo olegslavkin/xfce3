@@ -27,6 +27,7 @@
 #ifndef __XTREE_GUI_H__
 #define __XTREE_GUI_H__
 #include <gtk/gtk.h>
+#include "xtree_cfg.h"
 
 #define SPACING 	5
 /* moved to reg.h: #define DEF_APP		"netscape"*/
@@ -68,18 +69,23 @@ enum
 };
 
 int count_selection (GtkCTree * ctree, GtkCTreeNode ** first);
+
 void node_destroy (gpointer p);
+
 void ctree_thaw (GtkCTree * ctree);
+
 void ctree_freeze (GtkCTree * ctree);
+
 void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, int flags);
+
 void set_title (GtkWidget * w, const char *path);
 
-
 void gui_main (char *path, char *xap, char *trash, char *reg, wgeo_t *, int);
-GtkWidget *
-new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags);
-int
-update_tree (GtkCTree * ctree, GtkCTreeNode * node);
+
+cfg *new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags);
+
+int update_tree (GtkCTree * ctree, GtkCTreeNode * node);
+
 gint update_timer (GtkCTree * ctree);
 
 

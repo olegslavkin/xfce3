@@ -83,13 +83,6 @@ extern GdkPixmap  *gPIX_dir_close,  *gPIX_dir_open;
 extern GdkBitmap *gPIM_dir_close, *gPIM_dir_open;
 
 
-/* gogo will be duplicate on fork, so child must reset to NULL. 
- * The heap allocated memory will not be duplicated in child
- * if TFM is right about dynamic memory. 
- * Best is to fork, and then exec a new instance: 
- *   - New window
- *   - Open in new
- *   */
 
 static GList *
 free_list (GList * list)
@@ -98,25 +91,25 @@ free_list (GList * list)
   return NULL;
 }
 
-void *pushgo(char *path,void *vgo){
+golist *pushgo(char *path,golist *thisgo){
 	golist *lastgo,*gogo;
-	gogo=(golist *)vgo;	
+	gogo=thisgo;	
 	lastgo=gogo;
 	gogo=(golist *)malloc(sizeof(golist));
 	if (!gogo){
 		gogo=lastgo;
-		return (void *)gogo;
+		return gogo;
 	}
 	gogo->previous=lastgo;
 	gogo->path=(char *)malloc(strlen(path)+1);
 	if (!(gogo->path)){
 		free(gogo);
 		gogo=lastgo;
-		return (void *)gogo;
+		return gogo;
 	}
 	strcpy(gogo->path,path);
 	/*fprintf(stderr,"dbg: path pushed=%s\n",path);*/
-	return (void *)gogo;
+	return gogo;
 }
 
 static void pushpath(GtkCTree * ctree,char *path){
@@ -127,10 +120,10 @@ static void pushpath(GtkCTree * ctree,char *path){
   return;
 }
 
-static void *popgo(void *vgo){
-	golist *thisgo,*gogo;
-	gogo=(golist *)vgo;	
-	if (!gogo) return (void *)gogo;
+golist *popgo(golist *thisgo){
+	golist *gogo;
+	gogo=thisgo;
+	if (!gogo) return gogo;
 	thisgo=gogo->previous;
 	if (gogo->path) {
 		/*fprintf(stderr,"dbg: path popped=%s\n",gogo->path);*/
@@ -138,7 +131,7 @@ static void *popgo(void *vgo){
 	}
 	free(gogo);
 	gogo=thisgo;
-	return (void *)gogo;
+	return gogo;
 }
 
 static void internal_go_to (GtkCTree * ctree, GtkCTreeNode * root, char *path, int flags)
@@ -234,7 +227,7 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   
   strcpy (path, en->path);
   if ((count != 1) || !(en->type & FT_DIR)) { /* make combo box */
-    if (win->gogo) for (thisgo=((golist *)(win->gogo))->previous; thisgo!=NULL; thisgo=thisgo->previous){
+    if (win->gogo) for (thisgo=win->gogo->previous; thisgo!=NULL; thisgo=thisgo->previous){
 	golist *testgo;
 	for (testgo=thisgo->previous;testgo!=NULL;testgo=testgo->previous) {
 		/* if ahead in list, dont put it in now */
@@ -259,10 +252,10 @@ void cb_go_back (GtkWidget * item, GtkCTree * ctree){
 	  fprintf(stderr,"dbg:This shouldn't happen. cb_go_back()\n");
 	  return; 
   }
-  if ((win->gogo) && (((golist *)(win->gogo))->previous)) {
-    win->gogo=popgo ((golist *)(win->gogo)); 
+  if ((win->gogo) && (win->gogo->previous)) {
+    win->gogo=popgo (win->gogo); 
     root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
-    internal_go_to (ctree, root, ((golist *)(win->gogo))->path, IGNORE_HIDDEN);
+    internal_go_to (ctree, root, win->gogo->path, IGNORE_HIDDEN);
   }
 }
 

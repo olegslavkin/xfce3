@@ -1133,7 +1133,7 @@ on_destroy (GtkWidget * top,  GtkCTree * ctree)
 }
 
 void
-cb_destroy (GtkWidget * top, GtkCTree * ctree)
+cb_destroy (GtkWidget * widget, GtkCTree * ctree)
 {
   cfg *win;
   GtkWidget *root;
@@ -1142,6 +1142,14 @@ cb_destroy (GtkWidget * top, GtkCTree * ctree)
   geometryX = root->allocation.width;
   geometryY = root->allocation.height;
   save_defaults(NULL);
+  /* free history list (avoid memory leaks)*/
+  while (win->gogo){
+	  golist *previous;
+	  previous=win->gogo->previous;
+	  if (win->gogo->path) free (win->gogo->path);
+	  free(win->gogo);
+	  win->gogo=previous;
+  }
   gtk_widget_destroy (root);
 }
 void 

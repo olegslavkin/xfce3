@@ -1432,13 +1432,11 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select_colors), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-#if 0 
 
   menuitem = gtk_menu_item_new_with_label (_("Change toolbar size"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_change_toolbar), ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-#endif
 
   /* Create "Help" menu */
   menuitem = gtk_menu_item_new_with_label (_("Help"));
@@ -1470,7 +1468,7 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win,GtkWidget *hlpmenu)
 /*
  * create a new toplevel window
  */
-GtkWidget *
+cfg *
 new_top (char *path, char *xap, char *trash, GList * reg, int width, int height, int flags)
 {
   GtkWidget *vbox;
@@ -1478,7 +1476,6 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   GtkWidget *handlebox2;
   GtkWidget *menutop;
   GtkWidget *toolbar;
-  GtkWidget *top;
   GtkWidget *scrolled;
   GtkWidget *ctree;
   GtkWidget **menu;
@@ -1629,13 +1626,13 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_NAME] = path;
   label[COL_SIZE] = "";
   label[COL_DATE] = "";
-  win->top = top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  win->top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   win->gogo = pushgo(path,win->gogo);
 
-  top_register (top);
+  top_register (win->top);
 
   vbox = gtk_vbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (top), vbox);
+  gtk_container_add (GTK_CONTAINER (win->top), vbox);
   gtk_widget_show (vbox);
 
   handlebox1 = gtk_handle_box_new ();
@@ -1656,11 +1653,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_signal_connect (GTK_OBJECT (ctree), "tree-expand", GTK_SIGNAL_FUNC (tree_unselect),ctree);
   gtk_signal_connect (GTK_OBJECT (ctree), "tree-collapse", GTK_SIGNAL_FUNC (tree_unselect),ctree);
   
-  gtk_signal_connect (GTK_OBJECT (top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) ctree);
-  gtk_signal_connect (GTK_OBJECT (top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (win->top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) ctree);
+  gtk_signal_connect (GTK_OBJECT (win->top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) ctree);
 
   accel = gtk_accel_group_new ();
-  gtk_accel_group_attach (accel, GTK_OBJECT (top));
+  gtk_accel_group_attach (accel, GTK_OBJECT (win->top));
 
   gtk_widget_add_accelerator (GTK_WIDGET (GTK_CLIST (ctree)->column[COL_NAME].button), "clicked", accel, GDK_n, GDK_CONTROL_MASK | GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
   gtk_widget_add_accelerator (GTK_WIDGET (GTK_CLIST (ctree)->column[COL_DATE].button), "clicked", accel, GDK_d, GDK_CONTROL_MASK | GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
@@ -1725,7 +1722,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       if (dir_mlist[i].data == WINCFG)
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), win);
       else if (dir_mlist[i].data == TOPWIN)
-	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), GTK_WIDGET (top));
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), GTK_WIDGET (win->top));
       else
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (dir_mlist[i].func), (gpointer) ctree);
     }
@@ -1752,7 +1749,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       if (file_mlist[i].data == WINCFG)
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), win);
       else if (file_mlist[i].data == TOPWIN)
-	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), GTK_WIDGET (top));
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), GTK_WIDGET (win->top));
       else
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (file_mlist[i].func), (gpointer) ctree);
     }
@@ -1779,7 +1776,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       if (mixed_mlist[i].data == WINCFG)
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), win);
       else if (mixed_mlist[i].data == TOPWIN)
-	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), GTK_WIDGET (top));
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), GTK_WIDGET (win->top));
       else
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (mixed_mlist[i].func), (gpointer) ctree);
     }
@@ -1806,7 +1803,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
       if (none_mlist[i].data == WINCFG)
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), win);
       else if (none_mlist[i].data == TOPWIN)
-	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), GTK_WIDGET (top));
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), GTK_WIDGET (win->top));
       else
 	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (none_mlist[i].func), (gpointer) ctree);
     }
@@ -1842,34 +1839,34 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   gtk_signal_connect (GTK_OBJECT (ctree), "drag_motion", GTK_SIGNAL_FUNC (on_drag_motion), NULL);
   gtk_signal_connect (GTK_OBJECT (ctree), "drag_end", GTK_SIGNAL_FUNC (on_drag_end), win);
 
-  set_title (top, en->path);
+  set_title (win->top, en->path);
   if (win->width > 0 && win->height > 0)
   {
-    gtk_window_set_default_size (GTK_WINDOW (top), width, height);
+    gtk_window_set_default_size (GTK_WINDOW (win->top), width, height);
   }
 
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   gtk_drag_source_set (ctree, GDK_BUTTON1_MASK | GDK_BUTTON2_MASK, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
   gtk_drag_dest_set (ctree, GTK_DEST_DEFAULT_DROP, target_table, NUM_TARGETS, GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
-  if (!(preferences & LARGE_TOOLBAR)) gtk_widget_show_all (top);
+  if (!(preferences & LARGE_TOOLBAR)) gtk_widget_show_all (win->top);
 
-  menutop = create_menu (top, ctree, win, menu[MN_HLP]);
+  menutop = create_menu (win->top, ctree, win, menu[MN_HLP]);
   gtk_container_add (GTK_CONTAINER (handlebox1), menutop);
   gtk_widget_show (menutop);
 
-  toolbar = create_toolbar (top, ctree, win);
+  toolbar = create_toolbar (win->top, ctree, win);
   gtk_container_add (GTK_CONTAINER (handlebox2), toolbar);
   gtk_widget_show (toolbar);
 
-  if (preferences & LARGE_TOOLBAR) gtk_widget_show_all (top);
+  if (preferences & LARGE_TOOLBAR) gtk_widget_show_all (win->top);
 
   icon_name = strrchr (path, '/');
   if ((icon_name) && (!(*(++icon_name))))
     icon_name = NULL;
 
-  set_icon (top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
+  set_icon (win->top, (icon_name ? icon_name : "/"), xftree_icon_xpm);
 
-  return (top);
+  return (win);
 }
 
 /*
@@ -1879,32 +1876,31 @@ void
 gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo, int flags)
 {
   GList *reg;
-  GtkWidget *top, *new_win;
+  cfg *new_win;
+  GtkWidget *hack;
 
-  top = gtk_window_new (GTK_WINDOW_POPUP);
-  gtk_widget_realize (top);
+  /* hack: to be able to use icons globally, independent of xftree window.*/
+  hack = gtk_window_new (GTK_WINDOW_POPUP); gtk_widget_realize (hack);
 
-  gPIX_page = MyCreateGdkPixmapFromData (page_xpm, top, &gPIM_page, FALSE);
-  gPIX_page_lnk = MyCreateGdkPixmapFromData (page_lnk_xpm, top, &gPIM_page_lnk, FALSE);
-  gPIX_dir_pd = MyCreateGdkPixmapFromData (dir_pd_xpm, top, &gPIM_dir_pd, FALSE);
-  gPIX_dir_open = MyCreateGdkPixmapFromData (dir_open_xpm, top, &gPIM_dir_open, FALSE);
-  gPIX_dir_open_lnk = MyCreateGdkPixmapFromData (dir_open_lnk_xpm, top, &gPIM_dir_open_lnk, FALSE);
-  gPIX_dir_close = MyCreateGdkPixmapFromData (dir_close_xpm, top, &gPIM_dir_close, FALSE);
-  gPIX_dir_close_lnk = MyCreateGdkPixmapFromData (dir_close_lnk_xpm, top, &gPIM_dir_close_lnk, FALSE);
-  gPIX_dir_up = MyCreateGdkPixmapFromData (dir_up_xpm, top, &gPIM_dir_up, FALSE);
-  gPIX_exe = MyCreateGdkPixmapFromData (exe_xpm, top, &gPIM_exe, FALSE);
-  gPIX_exe_lnk = MyCreateGdkPixmapFromData (exe_lnk_xpm, top, &gPIM_exe_lnk, FALSE);
-  gPIX_char_dev = MyCreateGdkPixmapFromData (char_dev_xpm, top, &gPIM_char_dev, FALSE);
-  gPIX_block_dev = MyCreateGdkPixmapFromData (block_dev_xpm, top, &gPIM_block_dev, FALSE);
-  gPIX_fifo = MyCreateGdkPixmapFromData (fifo_xpm, top, &gPIM_fifo, FALSE);
-  gPIX_socket = MyCreateGdkPixmapFromData (socket_xpm, top, &gPIM_socket, FALSE);
-  gPIX_stale_lnk = MyCreateGdkPixmapFromData (stale_lnk_xpm, top, &gPIM_stale_lnk, FALSE);
+  gPIX_page = MyCreateGdkPixmapFromData (page_xpm, hack, &gPIM_page, FALSE);
+  gPIX_page_lnk = MyCreateGdkPixmapFromData (page_lnk_xpm, hack, &gPIM_page_lnk, FALSE);
+  gPIX_dir_pd = MyCreateGdkPixmapFromData (dir_pd_xpm, hack, &gPIM_dir_pd, FALSE);
+  gPIX_dir_open = MyCreateGdkPixmapFromData (dir_open_xpm, hack, &gPIM_dir_open, FALSE);
+  gPIX_dir_open_lnk = MyCreateGdkPixmapFromData (dir_open_lnk_xpm, hack, &gPIM_dir_open_lnk, FALSE);
+  gPIX_dir_close = MyCreateGdkPixmapFromData (dir_close_xpm, hack, &gPIM_dir_close, FALSE);
+  gPIX_dir_close_lnk = MyCreateGdkPixmapFromData (dir_close_lnk_xpm, hack, &gPIM_dir_close_lnk, FALSE);
+  gPIX_dir_up = MyCreateGdkPixmapFromData (dir_up_xpm, hack, &gPIM_dir_up, FALSE);
+  gPIX_exe = MyCreateGdkPixmapFromData (exe_xpm, hack, &gPIM_exe, FALSE);
+  gPIX_exe_lnk = MyCreateGdkPixmapFromData (exe_lnk_xpm, hack, &gPIM_exe_lnk, FALSE);
+  gPIX_char_dev = MyCreateGdkPixmapFromData (char_dev_xpm, hack, &gPIM_char_dev, FALSE);
+  gPIX_block_dev = MyCreateGdkPixmapFromData (block_dev_xpm, hack, &gPIM_block_dev, FALSE);
+  gPIX_fifo = MyCreateGdkPixmapFromData (fifo_xpm, hack, &gPIM_fifo, FALSE);
+  gPIX_socket = MyCreateGdkPixmapFromData (socket_xpm, hack, &gPIM_socket, FALSE);
+  gPIX_stale_lnk = MyCreateGdkPixmapFromData (stale_lnk_xpm, hack, &gPIM_stale_lnk, FALSE);
 
   if (!io_is_directory (path))
-  { /* to what window does this dlg_error correspond to? top has not yet been shown! 
-     * It is probably a top level window, and not modal dialog, unless modal
-     * dialogs of unshown windows can be shown */
-    dlg_error (path, strerror (errno));
+  {
+    fprintf(stderr,"%s: %s\n",path, strerror (errno));
     return;
   }
   reg = reg_build_list (reg_file);
@@ -1916,15 +1912,14 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   if (geo->x > -1 && geo->y > -1)
   {
     gint x,y;
-    gtk_widget_set_uposition (new_win, geo->x, geo->y);
-    gdk_window_get_root_origin (new_win->window, &x, &y);
-    gtk_widget_set_uposition (new_win,geo->x+(geo->x-x), geo->y+(geo->y-y) );
+    gtk_widget_set_uposition (new_win->top, geo->x, geo->y);
+    gdk_window_get_root_origin ((new_win->top)->window, &x, &y);
+    gtk_widget_set_uposition (new_win->top,geo->x+(geo->x-x), geo->y+(geo->y-y) );
     gdk_flush();
     /*fprintf(stderr,"root: x=%d,y=%d\n",x,y);*/
   }
-  /*gtk_widget_show_all (top);*/
 
   gtk_main ();
-  save_defaults(top);
+  save_defaults(NULL);
   exit (0);
 }

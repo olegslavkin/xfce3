@@ -56,6 +56,7 @@
 #include "../xfsamba/tubo.h"
 #include "../xfdiff/xfdiff_colorsel.h"
 #include "xtree_go.h"
+#include "xtree_cb.h"
 
 
 #ifdef HAVE_GDK_IMLIB
@@ -166,26 +167,52 @@ cb_select_colors (GtkWidget * widget, GtkWidget * ctree)
 void
 cb_change_toolbar (GtkWidget * widget, GtkWidget * ctree)
 {
-#if 0
-  cfg *win;
-  gint wm_offsetX,wm_offsetY;
-  char *geometry;
+  cfg *win,*new_win;
+  gint X,Y;
+  GtkCTreeNode *node;
+  entry *en;
   
+  gdk_flush();
   win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-  if ((geometry=(char *)malloc(64))==NULL) return;
-  gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &wm_offsetX, &wm_offsetY);
-  /*fprintf(stderr,"exiting: x=%d,y=%d\n",wm_offsetX, wm_offsetY);*/
-  sprintf(geometry,"%dx%d+%d+%d",
-		  win->top->allocation.width,
-		  win->top->allocation.height,
-		  wm_offsetX,
-		  wm_offsetY);
+  gdk_window_get_root_origin (((GtkWidget *) (win->top))->window, &X, &Y);
 
   preferences ^= LARGE_TOOLBAR;
+  /* save preferences */
   save_defaults (NULL);
-  execlp("xftree","xftree",((golist *)(win->gogo))->path,"-g",geometry,0);
-  fprintf(stderr,"this shouldn't happen: cb_select_colors()\n");
+
+  /* apply new configuration: */
+  node=GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
+  en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
+
+  new_win=new_top (win->gogo->path, win->xap, win->trash, win->reg, win->width, win->height, en->flags);
+  gdk_flush();
+  /* pass on history list*/
+  while (new_win->gogo) new_win->gogo = popgo(new_win->gogo);
+  new_win->gogo = win->gogo;
+  win->gogo = NULL; /* so golist wont be destroyed */
+  cb_destroy (NULL,(GtkCTree *)ctree);/* destroy old configuration */
+  
+/*#define __NO_RACE_CONDITION_WITH_XFWM */
+#ifdef __NO_RACE_CONDITION_WITH_XFWM
+  {
+    gint x,y;
+    gtk_widget_set_uposition (new_win->top, X, Y); /* this instruction races xfwm */
+    gdk_flush(); /* helps control race, but cannot avoid */
+
+    /* xfwm won the race? Try again */
+    gtk_widget_set_uposition (new_win->top, X, Y); 
+    gdk_flush(); 
+    /* no use trying again :-( */
+   
+    gdk_window_get_root_origin ((new_win->top)->window, &x, &y);
+    gtk_widget_set_uposition (new_win->top,x+(X-x), Y+(Y-y) );
+    gdk_flush();
+    printf("dbg:old x=%d, y=%d\n",X,Y);
+    printf("dbg:new x=%d, y=%d\n",x,y);
+    printf("dbg:correct x=%d, y=%d\n",X+(X-x), Y+(Y-y));
+  }
 #endif
+
   return;
 }
 
