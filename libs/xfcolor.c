@@ -723,7 +723,6 @@ create_gtkrc_file (XFCE_palette * p, char *name)
     {
       fprintf (f, "%s\n\n", XFCE3GTKRC);
       fprintf (f, "pixmap_path \"%s:.:/\"\n\n", build_path ("/"));
-      write_style_to_gtkrc_file (f, p, 7, 7, "plain_", FALSE);
       for (i = 1; i < 8; i++)   /* Color 0 is used for the mouse pointer only */
         write_style_to_gtkrc_file (f, p, i, i, "xfce_", (i == 7));
 #ifndef OLD_STYLE
@@ -734,8 +733,7 @@ create_gtkrc_file (XFCE_palette * p, char *name)
       fprintf (f, "  fg[NORMAL] = \"#000000\"\n");
       fprintf (f, "  bg_pixmap[NORMAL] = \"<none>\"\n");
       fprintf (f, "}\n\n");
-      fprintf (f, "class        \"*\"                  style \"plain_7\"\n");
-      fprintf (f, "class        \"Gtk*\"               style \"xfce_7\"\n");
+      fprintf (f, "class        \"*\"                  style \"xfce_7\"\n");
       fprintf (f, "widget_class \"Gtk*Progress*\"      style \"xfce_1\"\n");
       fprintf (f, "widget_class \"Gtk*List*\"          style \"xfce_4\"\n");
       fprintf (f, "widget_class \"Gtk*Tree*\"          style \"xfce_4\"\n");
