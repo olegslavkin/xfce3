@@ -13,6 +13,7 @@ prefix = @prefix@
 exec_prefix = @exec_prefix@
 bindir = @bindir@
 gdm_prefix = @GDM_PREFIX@
+switchdesk_prefix = "/usr/share/apps/switchdesk"
 subdir = gdm
 
 ACLOCAL = @ACLOCAL@
@@ -29,7 +30,7 @@ MKINSTALLDIRS = $(top_srcdir)/@MKINSTALLDIRS@
 
 DEFS = @DEFS@
 
-DISTFILES = Makefile.in XFce.in
+DISTFILES = Makefile.in XFce.in Xclients.xfce.in
 
 .SUFFIXES:
 
@@ -38,6 +39,8 @@ all: XFCE
 XFCE:
 	@sed -e "s%BIN_DIR%$(bindir)%g" \
 	$(srcdir)/XFce.in > $(srcdir)/XFce
+	@sed -e "s%BIN_DIR%$(bindir)%g" \
+	$(srcdir)/Xclients.xfce.in > $(srcdir)/Xclients.xfce
 
 install: install-exec install-data
 install-exec:
@@ -51,11 +54,18 @@ install-data-yes: all
 	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(gdm_prefix); \
 	fi
 	$(INSTALL_SCRIPT) $(srcdir)/XFce $(DESTDIR)$(gdm_prefix)/XFce; \
+	if test -r "$(MKINSTALLDIRS)"; then \
+	  $(MKINSTALLDIRS) $(DESTDIR)$(switchdesk_prefix); \
+	else \
+	  $(SHELL) $(MKINSTALLDIRS) $(DESTDIR)$(switchdesk_prefix); \
+	fi
+	$(INSTALL_SCRIPT) $(srcdir)/Xclients.xfce $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce; \
 
 installcheck:
 
 uninstall:
 	rm -f $(DESTDIR)$(gdm_prefix)/XFce
+	rm -f $(DESTDIR)$(switchdesk_prefix)/Xclients.xfce
 
 check: all
 
@@ -70,6 +80,7 @@ clean: mostlyclean
 distclean: clean
 	rm -f Makefile
 	rm -f XFce
+	rm -f Xclients.xfce
 
 maintainer-clean: distclean
 

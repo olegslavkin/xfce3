@@ -1,5 +1,5 @@
 /* XPM */
-static char * Softblue2_xpm[] = {
+static char * Default_xpm[] = {
 "83 79 8 1",
 " 	c None",
 ".	c #4C6789",

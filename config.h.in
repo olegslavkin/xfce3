@@ -29,8 +29,6 @@
 #undef HAVE_GETHOSTNAME_PROTO
 #undef OLD_STYLE
 #undef MANAGE_OVERRIDES
-#undef _FILE_OFFSET_BITS
-#undef _LARGE_FILES
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
@@ -39,6 +37,10 @@
 
 /* Define if using `alloca.c'. */
 #undef C_ALLOCA
+
+/* Define to 1 if translation of program messages to the user's native
+   language is requested. */
+#undef ENABLE_NLS
 
 /* Define if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
@@ -64,8 +66,23 @@
 /* Define if you have the <fcntl.h> header file. */
 #undef HAVE_FCNTL_H
 
+/* Define if you have the `feof_unlocked' function. */
+#undef HAVE_FEOF_UNLOCKED
+
+/* Define if you have the `fgets_unlocked' function. */
+#undef HAVE_FGETS_UNLOCKED
+
 /* Define if you have the `getcwd' function. */
 #undef HAVE_GETCWD
+
+/* Define if you have the `getegid' function. */
+#undef HAVE_GETEGID
+
+/* Define if you have the `geteuid' function. */
+#undef HAVE_GETEUID
+
+/* Define if you have the `getgid' function. */
+#undef HAVE_GETGID
 
 /* Define if you have the <getopt.h> header file. */
 #undef HAVE_GETOPT_H
@@ -73,11 +90,23 @@
 /* Define if you have the `getpagesize' function. */
 #undef HAVE_GETPAGESIZE
 
+/* Define if the GNU gettext() function is already present or preinstalled. */
+#undef HAVE_GETTEXT
+
+/* Define if you have the `getuid' function. */
+#undef HAVE_GETUID
+
+/* Define if you have the iconv() function. */
+#undef HAVE_ICONV
+
 /* Define if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define if you have the `i' library (-li). */
-#undef HAVE_LIBI
+/* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
+#undef HAVE_LANGINFO_CODESET
+
+/* Define if your <locale.h> file defines LC_MESSAGES. */
+#undef HAVE_LC_MESSAGES
 
 /* Define if you have the `Xpm' library (-lXpm). */
 #undef HAVE_LIBXPM
@@ -105,6 +134,9 @@
 
 /* Define if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define if you have the `mempcpy' function. */
+#undef HAVE_MEMPCPY
 
 /* Define if you have the `memset' function. */
 #undef HAVE_MEMSET
@@ -142,6 +174,9 @@
 /* Define if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
 
+/* Define if you have the <stddef.h> header file. */
+#undef HAVE_STDDEF_H
+
 /* Define if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
 
@@ -157,6 +192,9 @@
 /* Define if you have the `strchr' function. */
 #undef HAVE_STRCHR
 
+/* Define if you have the `strdup' function. */
+#undef HAVE_STRDUP
+
 /* Define if you have the <strings.h> header file. */
 #undef HAVE_STRINGS_H
 
@@ -165,6 +203,9 @@
 
 /* Define if you have the `strncasecmp' function. */
 #undef HAVE_STRNCASECMP
+
+/* Define if you have the `strtoul' function. */
+#undef HAVE_STRTOUL
 
 /* Define if you have the <sys/dir.h> header file, and it defines `DIR'. */
 #undef HAVE_SYS_DIR_H
@@ -184,11 +225,11 @@
 /* Define if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
+/* Define if you have the `tsearch' function. */
+#undef HAVE_TSEARCH
+
 /* Define if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
-
-/* Define if you have the <values.h> header file. */
-#undef HAVE_VALUES_H
 
 /* Define if you have the `vsnprintf' function. */
 #undef HAVE_VSNPRINTF
@@ -216,6 +257,9 @@
 
 /* Define if you have the `__argz_stringify' function. */
 #undef HAVE___ARGZ_STRINGIFY
+
+/* Define as const if the declaration of iconv() needs const. */
+#undef ICONV_CONST
 
 /* Name of package */
 #undef PACKAGE

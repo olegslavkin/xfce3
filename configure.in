@@ -32,7 +32,6 @@ AM_PROG_CC_STDC
 AC_HEADER_STDC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-AM_PROG_LIBTOOL
 AC_PROG_LIBTOOL
 AC_SUBST(LIBTOOL_DEPS)
 dnl AC_SYS_LARGEFILE is missing in Autoconf-2.13
@@ -40,8 +39,6 @@ ifelse(AC_ACVERSION, [2.13], [],
 [
    AC_SYS_LARGEFILE
 ])
-
-AC_SYS_LARGEFILE
 
 # Taken from Jamie Zawinski's configure script for xscreensaver :
 #

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-28 21:30+0100\n"
+"POT-Creation-Date: 2001-12-31 10:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,14 +87,14 @@ msgstr ""
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_exec.c:153 xftree/gtk_prop.c:191 xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:157 xftree/gtk_prop.c:195 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr ""
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1144 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_exec.c:154 xftree/gtk_get.c:138
-#: xftree/gtk_prop.c:192 xftree/xtree_cpy.c:1100 xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_exec.c:158 xftree/gtk_get.c:142
+#: xftree/gtk_prop.c:196 xftree/xtree_cpy.c:1100 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr ""
 
@@ -752,179 +752,179 @@ msgid "Workspace"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Ok"));
-#: xftree/gtk_dlg.c:298
+#: xftree/gtk_dlg.c:302
 msgid "_Ok"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Yes"));
-#: xftree/gtk_dlg.c:303
+#: xftree/gtk_dlg.c:307
 msgid "_Yes"
 msgstr ""
 
 #. SJB ok = gtk_button_new_with_label (_("Continue"));
-#: xftree/gtk_dlg.c:308
+#: xftree/gtk_dlg.c:312
 msgid "_Continue"
 msgstr ""
 
-#: xftree/gtk_dlg.c:327 xftree/gtk_prop.c:206
+#: xftree/gtk_dlg.c:331 xftree/gtk_prop.c:210
 msgid "Skip"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("Cancel"));
-#: xftree/gtk_dlg.c:338
+#: xftree/gtk_dlg.c:342
 msgid "_Cancel"
 msgstr ""
 
 #. SJB cancel = gtk_button_new_with_label (_("No"));
-#: xftree/gtk_dlg.c:343
+#: xftree/gtk_dlg.c:347
 msgid "_No"
 msgstr ""
 
 #. SJB all = gtk_button_new_with_label (_("All"));
-#: xftree/gtk_dlg.c:355
+#: xftree/gtk_dlg.c:359
 msgid "_All"
 msgstr ""
 
 #. SJB close = gtk_button_new_with_label (_("Close"));
-#: xftree/gtk_dlg.c:365
+#: xftree/gtk_dlg.c:369
 msgid "_Close"
 msgstr ""
 
-#: xftree/gtk_exec.c:133 xftree/xtree_gui.c:172
+#: xftree/gtk_exec.c:137 xftree/xtree_gui.c:172
 msgid "Open with ..."
 msgstr ""
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:137 xftree/xtree_gui.c:186
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:141 xftree/xtree_gui.c:186
 #: xfwm/xfwm.c:892
 msgid "Run program ..."
 msgstr ""
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:182 xftree/xtree_gui.c:130
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:186 xftree/xtree_gui.c:130
 msgid "Open in terminal"
 msgstr ""
 
-#: xftree/gtk_exec.c:186
+#: xftree/gtk_exec.c:190
 msgid "Remember application"
 msgstr ""
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:205
+#: xftree/gtk_exec.c:209
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr ""
 
-#: xftree/gtk_get.c:121
+#: xftree/gtk_get.c:125
 msgid "Source : "
 msgstr ""
 
-#: xftree/gtk_get.c:128
+#: xftree/gtk_get.c:132
 msgid "Target : "
 msgstr ""
 
-#: xftree/gtk_get.c:135
+#: xftree/gtk_get.c:139
 msgid "0 bytes received"
 msgstr ""
 
-#: xftree/gtk_get.c:142
+#: xftree/gtk_get.c:146
 msgid "XFTree: Download"
 msgstr ""
 
-#: xftree/gtk_get.c:168
+#: xftree/gtk_get.c:172
 #, c-format
 msgid "%d bytes received (%d bps)"
 msgstr ""
 
-#: xftree/gtk_prop.c:182
+#: xftree/gtk_prop.c:186
 msgid "Properties"
 msgstr ""
 
-#: xftree/gtk_prop.c:207
+#: xftree/gtk_prop.c:211
 msgid "All"
 msgstr ""
 
 #. date and size page
-#: xftree/gtk_prop.c:218
+#: xftree/gtk_prop.c:222
 msgid "Info"
 msgstr ""
 
-#: xftree/gtk_prop.c:223
+#: xftree/gtk_prop.c:227
 msgid "Name :"
 msgstr ""
 
-#: xftree/gtk_prop.c:242
+#: xftree/gtk_prop.c:246
 msgid "Type :"
 msgstr ""
 
-#: xftree/gtk_prop.c:248
+#: xftree/gtk_prop.c:252
 #, c-format
 msgid "%lld Bytes"
 msgstr ""
 
-#: xftree/gtk_prop.c:250
+#: xftree/gtk_prop.c:254
 msgid "Size :"
 msgstr ""
 
-#: xftree/gtk_prop.c:258
+#: xftree/gtk_prop.c:262
 msgid "Creation Time :"
 msgstr ""
 
-#: xftree/gtk_prop.c:266
+#: xftree/gtk_prop.c:270
 msgid "Modification Time :"
 msgstr ""
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:278
 msgid "Access Time :"
 msgstr ""
 
-#: xftree/gtk_prop.c:282
+#: xftree/gtk_prop.c:286
 msgid "Permissions"
 msgstr ""
 
-#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
+#: xfglob/xfglob.c:1616 xftree/gtk_prop.c:290 xftree/gtk_prop.c:387
 msgid "Owner :"
 msgstr ""
 
 #: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
-#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
+#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
 msgid "Read"
 msgstr ""
 
 #: xfglob/xfglob.c:1621 xfglob/xfglob.c:1645 xfglob/xfglob.c:1668
-#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
+#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
 msgid "Write"
 msgstr ""
 
 #: xfglob/xfglob.c:1625 xfglob/xfglob.c:1649 xfglob/xfglob.c:1672
-#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
+#: xftree/gtk_prop.c:299 xftree/gtk_prop.c:323 xftree/gtk_prop.c:346
 msgid "Execute"
 msgstr ""
 
-#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:299
+#: xfglob/xfglob.c:1629 xftree/gtk_prop.c:303
 msgid "Set UID"
 msgstr ""
 
-#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
+#: xfglob/xfglob.c:1640 xftree/gtk_prop.c:314 xftree/gtk_prop.c:398
 msgid "Group :"
 msgstr ""
 
-#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:323
+#: xfglob/xfglob.c:1653 xftree/gtk_prop.c:327
 msgid "Set GID"
 msgstr ""
 
-#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:333
+#: xfglob/xfglob.c:1663 xftree/gtk_prop.c:337
 msgid "Other :"
 msgstr ""
 
-#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:346
+#: xfglob/xfglob.c:1676 xftree/gtk_prop.c:350
 msgid "Sticky"
 msgstr ""
 
-#: xftree/gtk_prop.c:372
+#: xftree/gtk_prop.c:376
 msgid "Owner"
 msgstr ""
 
-#: xftree/gtk_prop.c:377 xftree/gtk_prop.c:388
+#: xftree/gtk_prop.c:381 xftree/gtk_prop.c:392
 msgid "unknown"
 msgstr ""
 
@@ -942,22 +942,22 @@ msgstr ""
 msgid "Register program for suffix \"%s\""
 msgstr ""
 
-#: xftree/xtree.c:114
+#: xftree/xtree.c:118
 #, c-format
 msgid "XFTree, based on XTree Version %s\n"
 msgstr ""
 
-#: xftree/xtree.c:115
+#: xftree/xtree.c:119
 #, c-format
 msgid "directory: %s\n"
 msgstr ""
 
-#: xftree/xtree.c:122 xftree/xtree.c:161
+#: xftree/xtree.c:126 xftree/xtree.c:165
 #, c-format
 msgid "creating directory: %s\n"
 msgstr ""
 
-#: xftree/xtree.c:178
+#: xftree/xtree.c:182
 #, c-format
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr ""
