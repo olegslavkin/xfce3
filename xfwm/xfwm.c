@@ -1753,7 +1753,7 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus);
-  Scr.engine = XFCE_ENGINE;
+  Scr.engine = GTK_ENGINE;
   Scr.AutoRaiseDelay = 200;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;

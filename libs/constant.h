@@ -51,7 +51,7 @@
 #endif
 
 #ifndef DEFAULTENGINE
-#define DEFAULTENGINE 	"xfce"
+#define DEFAULTENGINE 	"gtk"
 #endif
 
 #ifndef DEFAULTTEXTURE

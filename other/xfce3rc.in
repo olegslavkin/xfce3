@@ -51,6 +51,8 @@
 	-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1
 	-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1
 	-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1
+	MapFocus
+	Gtk_engine
 [Screens]
 	4
 [Tooltips]

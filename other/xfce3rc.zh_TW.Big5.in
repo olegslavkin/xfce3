@@ -51,6 +51,8 @@
 	-*-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-big5-0
 	-*-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-big5-0
 	-*-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-big5-0
+	MapFocus
+	Gtk_engine
 [Screens]
 	4
 [Tooltips]
