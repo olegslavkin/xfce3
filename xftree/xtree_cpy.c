@@ -227,7 +227,7 @@ static int process_error(int code){
 		  sprintf(allfile,"%s.all",child_file);
 		  allF=fopen(allfile,"r");
 		  if (allF) {doall=TRUE;fclose(allF);}
-        	  free(allfile);
+        	  g_free(allfile);
 		}
 		if (!doall) {
 		  FILE *hold;
@@ -255,7 +255,7 @@ static int process_error(int code){
 
 char *mktgpath(entry *ten,entry *sen){
   static char *target=NULL;
-  if (target) free(target);
+  if (target) g_free(target);
   target=(char *)malloc((strlen(ten->path)+strlen(sen->label)+2)*sizeof(char));
   if (!target) target="malloc error: mktgpath()\n";
   
@@ -282,7 +282,7 @@ static int nitems;
 static char *randomTmpName(void){
     static char *fname=NULL;
     int fnamelen;
-    if (fname) free(fname);
+    if (fname) g_free(fname);
     fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
     srandom(time(NULL));
     fname = (char *)malloc(sizeof(char)*(fnamelen));
@@ -338,7 +338,7 @@ char  *CreateTmpList(GtkWidget *parent,GList *list,entry *t_en){
 				t_stat.st_dev=113;
 			}
 		  }
-		  free(route);  
+		  g_free(route);  
 		}
 	}
 
@@ -450,7 +450,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 		    else end[0]=0;
 		    stat(route,&t_stat);
 		  }
-		  free(route);
+		  g_free(route);
 		}
 	}
 	lstat(source,&s_stat); /* stat() the link itself */
@@ -504,7 +504,7 @@ static gboolean SubChildTransfer(char *target,char *source){
 		  
 		  newtarget=(char *)malloc(strlen(target)+strlen(src)+3);
 		  if (!newtarget) {
-			  free(globstring);
+			  g_free(globstring);
 			  globfree(&dirlist);
 			  return FALSE; /* fatal error */
 		  }
@@ -512,14 +512,14 @@ static gboolean SubChildTransfer(char *target,char *source){
 		  /*fprintf(stderr,"dbg:dirlist: %s\n",dirlist.gl_pathv[i]);*/
 		  if (!SubChildTransfer(newtarget,dirlist.gl_pathv[i])){
 			/*fprintf(stderr,"dbg:dirlisterror: %s\n",dirlist.gl_pathv[i]);*/
-	  		free(globstring);
-		 	free(newtarget);
+	  		g_free(globstring);
+		 	g_free(newtarget);
 			globfree(&dirlist);
 			return FALSE; /* fatal error */
 		  }
-		  free(newtarget);
+		  g_free(newtarget);
 		}
-		free(globstring);
+		g_free(globstring);
 		globfree(&dirlist);
 		
 		/* remove old directory (rmdir should fail if any interior move failed) */
@@ -625,7 +625,7 @@ static void ChildTransfer(void){
 	}
 cut_out:
 	fclose(tfile);
-	free (line);
+	g_free (line);
 	fflush(NULL);
 	_exit(123);
 }
@@ -660,7 +660,7 @@ static int SubParentCount(char *source){
 			 if (*short_txt==0) short_txt=source;
 			 sprintf(count_txt,"%s --> %d",short_txt,count);
 			 gtk_label_set_text (GTK_LABEL (count_label),count_txt );
-			 free(count_txt);
+			 g_free(count_txt);
 			 while (gtk_events_pending()) gtk_main_iteration();
  			 gdk_flush();
 		 }
@@ -672,7 +672,7 @@ static int SubParentCount(char *source){
 		  /*fprintf(stdout,"dbg:%s --> %d\n",dirlist.gl_pathv[i],count);*/
 		 }
 		}
-		free(globstring);		
+		g_free(globstring);		
 		return count;		
 	}
        	/* not a directory entry, only one file here */
@@ -688,7 +688,7 @@ static gint ParentCount(gpointer data){
 	if (!line) goto count_done; 
 	tfile=fopen(child_file,"r");
 	if (!tfile) {
-		free(line);
+		g_free(line);
 		goto count_done; 
 	}
 	while (fgets(line,MAX_LINE_SIZE-1,tfile) && !feof(tfile)){
@@ -701,7 +701,7 @@ static gint ParentCount(gpointer data){
 		/*fprintf(stdout,"dbg:%s --> %d\n",source,total_files);*/
 	}
 	fclose(tfile);
-	free (line);
+	g_free (line);
 count_done:
 	gtk_main_quit();
 	return FALSE;
@@ -812,7 +812,7 @@ gboolean DirectTransfer(GtkWidget *ctree,int mode,char *tmpfile) {
 		}
 	}
 	fclose(tfile);
-	free (line);
+	g_free (line);
 	return TRUE; 
 }
 
@@ -878,7 +878,7 @@ static int internal_rw_file(char *target,char *source,off_t size){
 				child_path_number,child_file_number,(long long)total_size);fflush(NULL);
 		usleep(50);	*/
 	}
-	free(buffer);
+	g_free(buffer);
 	if (close(source_file)<0){
 		close(target_file);
 		return (RW_ERROR_CLOSE_SRC);
@@ -986,7 +986,7 @@ static int rwStdout (int n, void *data){
     if (allfile) { 
 	sprintf(allfile,"%s.all",child_file);
 	allF=fopen(allfile,"w"); if (allF) fclose(allF);	    
-        free(allfile);
+        g_free(allfile);
     }
   }
   
@@ -998,7 +998,7 @@ static int rwStdout (int n, void *data){
   sprintf(holdfile,"%s.hold",child_file);  
   if (rc==DLG_RC_CANCEL) cb_cancel(NULL,NULL); /* terminates child */
   usleep(500000); /* give child time to close */
-  unlink(holdfile); free(holdfile);
+  unlink(holdfile); g_free(holdfile);
   /*set_innerloop(FALSE);*/
   return TRUE;
 }
@@ -1011,7 +1011,7 @@ static void rwForkOver (void)
   if (allfile) { 
     sprintf(allfile,"%s.all",child_file);
     unlink(allfile);
-    free(allfile);
+    g_free(allfile);
   }  
 /*  cursor_reset (GTK_WIDGET (smb_nav));*/
   rw_fork_obj = NULL;
@@ -1143,7 +1143,7 @@ GtkWidget *show_cpy(GtkWidget *parent,gboolean show,int mode)
   if (title) {
 	sprintf (title, tit);
 	gtk_window_set_title (GTK_WINDOW (cat), title);
-        free(title);
+        g_free(title);
   }
 
   
@@ -1222,7 +1222,7 @@ next:;
    /* immediate refresh */
   update_timer (ctree);
   cursor_reset (GTK_WIDGET (ctree));
-  free(nfile);
+  g_free(nfile);
 duplicate_return:
   gtk_clist_thaw (GTK_CLIST (ctree));
   cursor_reset (GTK_WIDGET (ctree));   return;
@@ -1278,10 +1278,10 @@ void cb_symlink (GtkWidget * item, GtkCTree * ctree)
 	  goto symlink_return;
   }	  
   strcpy(ofile,en->path);
-  free(nfile);
+  g_free(nfile);
   nfile = (char *)malloc(strlen(en->path)+strlen(entry_return)+1);
   if (!nfile) {
-	  free(ofile);
+	  g_free(ofile);
 	  goto symlink_return;
   }
   strcpy (nfile,ofile);
@@ -1293,7 +1293,7 @@ void cb_symlink (GtkWidget * item, GtkCTree * ctree)
 
   if (lstat (nfile, &st) != ERROR)  {
       xf_dlg_error (win->top,_("File exists !"), nfile);
-      free(ofile); free(nfile);
+      g_free(ofile); g_free(nfile);
       goto symlink_return;
   }
 
@@ -1306,8 +1306,8 @@ void cb_symlink (GtkWidget * item, GtkCTree * ctree)
    /* immediate refresh */
   update_timer (ctree);
   cursor_reset (GTK_WIDGET (ctree));
-  free(nfile);
-  free(ofile);
+  g_free(nfile);
+  g_free(ofile);
 symlink_return:
   gtk_clist_thaw (GTK_CLIST (ctree));
   cursor_reset (GTK_WIDGET (ctree));   return;

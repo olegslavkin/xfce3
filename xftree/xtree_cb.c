@@ -414,8 +414,8 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   ctree_freeze (ctree);
   
      
-  if (fname) free(fname);
-  if (mname) free(mname);
+  if (fname) g_free(fname);
+  if (mname) g_free(mname);
   fnamelen=strlen("/tmp/xftree.9999.tmp")+1;
   srandom(time(NULL));
   fname = (char *)malloc(sizeof(char)*(fnamelen));
