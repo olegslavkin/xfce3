@@ -81,6 +81,10 @@ move_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long cont
   if (DeferExecution (eventp, &w, &tmp_win, &context, MOVE, ButtonPress))
     return;
 
+  /* Undecorated managed windows should not be moved */
+  if (!(tmp_win->flags & (TITLE | BORDER)))
+    return;
+    
   center_x = tmp_win->frame_x + (tmp_win->frame_width / 2);
   center_y = tmp_win->frame_y + (tmp_win->frame_height / 2);
 

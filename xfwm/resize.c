@@ -97,6 +97,10 @@ resize_window (XEvent * eventp, Window w, XfwmWindow * tmp_win, unsigned long co
   if (tmp_win->flags & ICONIFIED)
     return;
 
+  /* Undecorated managed windows should not be moved */
+  if (!(tmp_win->flags & BORDER))
+    return;
+    
   tmp_win->flags &= ~MAXIMIZED;
   RedrawRightButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
   RedrawLeftButtons (tmp_win, (Scr.Hilite == tmp_win), True, None);
