@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFce 3.8.0\n"
-"POT-Creation-Date: 2001-10-04 12:24+0200\n"
+"POT-Creation-Date: 2001-10-05 22:56+0200\n"
 "PO-Revision-Date: 2001-05-04 23:03+0200\n"
 "Last-Translator: Jasper Huijsmans <j.b.huijsmans@freeler.nl>\n"
 "Language-Team: \n"
@@ -36,12 +36,12 @@ msgid "Message"
 msgstr "Bericht"
 
 #: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
-#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:133
+#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:127
 msgid "Yes"
 msgstr "Ja"
 
 #: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
-#: xfumed/xfumed_gui_cb.c:77 xfumed/xfumed_gui_cb.c:134
+#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:128
 msgid "No"
 msgstr "Nee"
 
@@ -67,7 +67,7 @@ msgstr "*** WAARSCHUWING ***: Kan pixmap bestand %s niet laden\n"
 msgid "Define action ..."
 msgstr "Actie definiëren ..."
 
-#: xfce/action.c:109 xfce/modify.c:161
+#: xfce/action.c:109 xfce/modify.c:160
 msgid "Command Line :"
 msgstr "Commando Regel :"
 
@@ -75,27 +75,27 @@ msgstr "Commando Regel :"
 msgid "Icon Style :"
 msgstr "Pictogram Stijl :"
 
-#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:233
-#: xfce/modify.c:241 xfsound/xfsound.c:509
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:232
+#: xfce/modify.c:240 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr "Bladeren ..."
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:277 xfce/screen.c:134
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
 #: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
-#: xfumed/xfumed_gui.c:437
+#: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
-#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:294 xfce/screen.c:144
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
-#: xfumed/xfumed_gui.c:445
+#: xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -194,10 +194,10 @@ msgstr "Sluiten"
 msgid "Info ..."
 msgstr "Info ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:133 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
-#: xfce/xfce.c:495 xfce/xfce.c:526 xfce/xfce.c:623 xfce/xfce.c:644
-#: xfce/xfce.c:677 xfce/xfce.c:692 xfce/xfce.c:750 xfce/xfce.c:771
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
+#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
+#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
 #: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr "Kan pixmap niet maken"
@@ -210,32 +210,31 @@ msgstr "Door Olivier Fourdan (c) 1997-2000"
 msgid "Accept"
 msgstr "Akkoord"
 
-#: xfce/modify.c:75 xfce/modify.c:352
+#: xfce/modify.c:74 xfce/modify.c:352
 msgid "Modify Item ..."
 msgstr "Item Wijzigen ..."
 
-#: xfce/modify.c:139
+#: xfce/modify.c:138
 msgid "Preview Icon"
 msgstr "Pictogram Weergeven"
 
-#: xfce/modify.c:170
+#: xfce/modify.c:169
 msgid "Icon File :"
 msgstr "Pictogram Bestand :"
 
-#: xfce/modify.c:179
+#: xfce/modify.c:178
 msgid "Label :"
 msgstr "Label :"
 
-#: xfce/modify.c:188
-#, fuzzy
+#: xfce/modify.c:187
 msgid "Position :"
-msgstr "Locatie : "
+msgstr "Positie :"
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/xfumed_gui.c:149
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:285 xfumed/xfumed_gui.c:136
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: xfbd/xfbdmgr.c:173 xfce/modify.c:336
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:335
 msgid "Add Item ..."
 msgstr "Item Toevoegen ..."
 
@@ -652,18 +651,18 @@ msgstr "Digitaal"
 msgid "24 hours mode"
 msgstr "24-uursklok"
 
-#: xfce/xfce.c:639 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "Info..."
 
-#: xfce/xfce.c:672
+#: xfce/xfce.c:676
 msgid "Setup..."
 msgstr "Setup..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:699 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:189
+#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Afsluiten"
 
@@ -1737,7 +1736,7 @@ msgid "Auto strip level"
 msgstr "Automatisch strip niveau"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:99
+#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:92
 msgid "Actions"
 msgstr "Acties"
 
@@ -2371,7 +2370,7 @@ msgstr "kon stat() niet uitvoeren op:"
 msgid "XFClock - XFce Clock & Calendar"
 msgstr "XFClock - XFce Klok en Kalender"
 
-#: xfclock/xfclock_cb.c:211
+#: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
 "(c) 1997-2000 Olivier Fourdan"
@@ -3318,76 +3317,68 @@ msgid "Upload failed."
 msgstr "Bestand uploaden mislukt."
 
 #: xfumed/xfumed_gui.c:47
-#, fuzzy
 msgid "User Menu Editor"
-msgstr "XFce Gebruikersmenu Editor"
+msgstr "Gebruikersmenu Editor"
 
-#: xfumed/xfumed_gui.c:85
+#: xfumed/xfumed_gui.c:80
 msgid "Caption"
-msgstr "Opties"
+msgstr "Beschrijving"
 
-#: xfumed/xfumed_gui.c:92
+#: xfumed/xfumed_gui.c:86
 msgid "Command"
 msgstr "Commando"
 
-#: xfumed/xfumed_gui.c:117
-#, fuzzy
+#: xfumed/xfumed_gui.c:108
 msgid "Move Up"
-msgstr "&Verplaatsen"
+msgstr "Omhoog"
 
-#: xfumed/xfumed_gui.c:125
+#: xfumed/xfumed_gui.c:115
 msgid "Move Down"
-msgstr ""
+msgstr "Omlaag"
 
-#: xfumed/xfumed_gui.c:133
+#: xfumed/xfumed_gui.c:122
 msgid "Add"
 msgstr "Toevoegen"
 
-#: xfumed/xfumed_gui.c:141
-#, fuzzy
+#: xfumed/xfumed_gui.c:129
 msgid "Edit"
-msgstr "Afsluiten"
+msgstr "Bewerken"
 
-#: xfumed/xfumed_gui.c:173
+#: xfumed/xfumed_gui.c:157
 msgid "Save"
 msgstr "Opslaan"
 
-#: xfumed/xfumed_gui.c:181
+#: xfumed/xfumed_gui.c:164
 msgid "Reset"
 msgstr "Reset"
 
-#: xfumed/xfumed_gui.c:313
-#, fuzzy
+#: xfumed/xfumed_gui.c:252
 msgid "Edit Entry"
-msgstr "Item bewerken"
+msgstr "Menuoptie bewerken"
 
-#: xfumed/xfumed_gui.c:315
+#: xfumed/xfumed_gui.c:254
 msgid "Add Entry"
-msgstr ""
+msgstr "Menuoptie toevoegen"
 
-#: xfumed/xfumed_gui.c:338
-#, fuzzy
+#: xfumed/xfumed_gui.c:275
 msgid "Type: "
-msgstr "Type : "
+msgstr "Type: "
 
-#: xfumed/xfumed_gui.c:348
-#, fuzzy
+#: xfumed/xfumed_gui.c:282
 msgid "Caption: "
-msgstr "Naam : "
+msgstr "Beschrijving: "
 
-#: xfumed/xfumed_gui.c:358
-#, fuzzy
+#: xfumed/xfumed_gui.c:289
 msgid "Command: "
-msgstr "Commando : "
+msgstr "Commando: "
 
-#: xfumed/xfumed_gui_cb.c:22
+#: xfumed/xfumed_gui_cb.c:23
 msgid "Your changes will take effect on next startup"
 msgstr ""
 "Uw veranderingen worden van kracht bij \n"
 "de volgende keer opstarten"
 
 #: xfumed/xfumed_gui_cb.c:69
-#, fuzzy
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
@@ -3395,48 +3386,27 @@ msgid ""
 msgstr ""
 "Sommige wijzigingen zij niet opgeslagen.\n"
 "\n"
-"Wilt u afsluiten en de wijzigingen verliezen ?"
+"Wilt u de wijzigingen opslaan ?"
 
-#: xfumed/xfumed_gui_cb.c:78
+#: xfumed/xfumed_gui_cb.c:77
 msgid "Don't Quit"
 msgstr "Niet Afsluiten"
 
-#: xfumed/xfumed_gui_cb.c:127
-#, fuzzy
+#: xfumed/xfumed_gui_cb.c:123
 msgid "Do you want to delete this entry ?"
 msgstr "Weet u zeker dat u deze optie wilt verwijderen ?"
 
-#: xfumed/xfumed_gui_cb.c:129
+#: xfumed/xfumed_gui_cb.c:125
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
-
-#~ msgid "   Menu: %s   Parent: %s"
-#~ msgstr "   Menu: %s   Hoger menu: %s"
-
-#~ msgid "Toplevel"
-#~ msgstr "Hoofdmenu"
-
-#~ msgid "None"
-#~ msgstr "Geen"
-
-#~ msgid "Go to parent menu"
-#~ msgstr "Ga naar hoger menu"
-
-#~ msgid "Go to submenu"
-#~ msgstr "Ga naar submenu"
-
-#~ msgid "Type"
-#~ msgstr "Type"
-
-#~ msgid "Update"
-#~ msgstr "Bijwerken"
-
-#~ msgid "Quit, don't save"
-#~ msgstr "Afsluiten, niet opslaan"
+"Als u een submenu verwijdert, zullen ook alle\n"
+"submenus verwijderd worden.\n"
+"\n"
+"Wilt u dit submenu verwijderen ?"
 
 #~ msgid "XFce : %s File not found.\n"
 #~ msgstr "XFce : %s Bestand niet gevonden.\n"
