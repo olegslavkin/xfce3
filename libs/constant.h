@@ -54,6 +54,10 @@
 #define DEFAULTENGINE 	"gtk"
 #endif
 
+#ifndef XFCE_THEME_ENGINE
+#define XFCE_THEME_ENGINE	"xfce"
+#endif
+
 #ifndef DEFAULTTEXTURE
 #define DEFAULTTEXTURE 	""
 #endif
