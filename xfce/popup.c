@@ -739,18 +739,18 @@ set_entry (gint menu, gint entry, char *label, char *pixfile, char *command)
     }
 
   if (popup_menus[menu].popup_buttons[entry].label)
-    free (popup_menus[menu].popup_buttons[entry].label);
+    g_free (popup_menus[menu].popup_buttons[entry].label);
   if (popup_menus[menu].popup_buttons[entry].pixfile)
-    free (popup_menus[menu].popup_buttons[entry].pixfile);
+    g_free (popup_menus[menu].popup_buttons[entry].pixfile);
   if (popup_menus[menu].popup_buttons[entry].command)
-    free (popup_menus[menu].popup_buttons[entry].command);
+    g_free (popup_menus[menu].popup_buttons[entry].command);
 
   popup_menus[menu].popup_buttons[entry].label =
-    (char *) malloc (sizeof (char) * (l1 + 1));
+    (char *) g_malloc (sizeof (char) * (l1 + 1));
   popup_menus[menu].popup_buttons[entry].pixfile =
-    (char *) malloc (sizeof (char) * (l2 + 1));
+    (char *) g_malloc (sizeof (char) * (l2 + 1));
   popup_menus[menu].popup_buttons[entry].command =
-    (char *) malloc (sizeof (char) * (l3 + 1));
+    (char *) g_malloc (sizeof (char) * (l3 + 1));
 
   strcpy (popup_menus[menu].popup_buttons[entry].label, label);
   strcpy (popup_menus[menu].popup_buttons[entry].pixfile,
@@ -806,18 +806,18 @@ set_like_entry (gint menu_s, gint entry_s, gint menu_d, gint entry_d)
     }
 
   if (popup_menus[menu_d].popup_buttons[entry_d].label)
-    free (popup_menus[menu_d].popup_buttons[entry_d].label);
+    g_free (popup_menus[menu_d].popup_buttons[entry_d].label);
   if (popup_menus[menu_d].popup_buttons[entry_d].pixfile)
-    free (popup_menus[menu_d].popup_buttons[entry_d].pixfile);
+    g_free (popup_menus[menu_d].popup_buttons[entry_d].pixfile);
   if (popup_menus[menu_d].popup_buttons[entry_d].command)
-    free (popup_menus[menu_d].popup_buttons[entry_d].command);
+    g_free (popup_menus[menu_d].popup_buttons[entry_d].command);
 
   popup_menus[menu_d].popup_buttons[entry_d].label =
-    (char *) malloc (sizeof (char) * (l1 + 1));
+    (char *) g_malloc (sizeof (char) * (l1 + 1));
   popup_menus[menu_d].popup_buttons[entry_d].pixfile =
-    (char *) malloc (sizeof (char) * (l2 + 1));
+    (char *) g_malloc (sizeof (char) * (l2 + 1));
   popup_menus[menu_d].popup_buttons[entry_d].command =
-    (char *) malloc (sizeof (char) * (l3 + 1));
+    (char *) g_malloc (sizeof (char) * (l3 + 1));
 
   strcpy (popup_menus[menu_d].popup_buttons[entry_d].label,
 	  popup_menus[menu_s].popup_buttons[entry_s].label);
@@ -871,17 +871,17 @@ remove_popup_entry (gint nbr_menu, gint entry)
   update_popup_entries (nbr_menu);
   if (popup_menus[nbr_menu].popup_buttons[j].label)
     {
-      free (popup_menus[nbr_menu].popup_buttons[j].label);
+      g_free (popup_menus[nbr_menu].popup_buttons[j].label);
       popup_menus[nbr_menu].popup_buttons[j].label = NULL;
     }
   if (popup_menus[nbr_menu].popup_buttons[j].pixfile)
     {
-      free (popup_menus[nbr_menu].popup_buttons[j].pixfile);
+      g_free (popup_menus[nbr_menu].popup_buttons[j].pixfile);
       popup_menus[nbr_menu].popup_buttons[j].pixfile = NULL;
     }
   if (popup_menus[nbr_menu].popup_buttons[j].command)
     {
-      free (popup_menus[nbr_menu].popup_buttons[j].command);
+      g_free (popup_menus[nbr_menu].popup_buttons[j].command);
       popup_menus[nbr_menu].popup_buttons[j].command = NULL;
     }
   MySetPixmapData (popup_menus[nbr_menu].popup_buttons[j].item_pixmap,

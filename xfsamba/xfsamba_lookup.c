@@ -86,11 +86,15 @@ void
 NMBLookup (GtkWidget * widget, gpointer data)
 {
   char *message;
+
+  if (fork_obj)
+	    return;
+
+  if ((!thisN)||(!thisN->server)||(!thisN->netbios)) return;
+
   print_status ("entering nmblookup");
   stopcleanup=FALSE;
 
-  if (fork_obj)
-    return;
 
   message = (char *) malloc (strlen (_("Resolving for")) +
 			     strlen (thisN->server) +

@@ -10,7 +10,7 @@ AC_CANONICAL_HOST
 
 XFCE_PACKAGE=xfce
 
-LIB_MAJOR=0
+LIB_MAJOR=1
 LIB_MINOR=38
 LIB_TINY=0
 
@@ -32,7 +32,7 @@ AC_PROG_INSTALL
 AC_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
-ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sv zh zh_CN"
+ALL_LINGUAS="ca cs da de en_GB es et fi fr gl hu it ja nl pl pt_BR ro ru sk sr sv zh zh_CN"
 AM_GNU_GETTEXT
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
@@ -55,6 +55,7 @@ AC_TYPE_SIGNAL
 
 AC_CHECK_FUNCS(wait3 wait4 waitpid)
 AC_CHECK_FUNCS(snprintf vsnprintf strcasecmp strncasecmp)
+AC_CHECK_FUNCS(sendmsg)
 AC_CHECK_FUNCS(sigaction siginterrupt)
 AC_CHECK_FUNC(scandir, AC_DEFINE(HAVE_SCANDIR),)
 
@@ -338,7 +339,7 @@ AC_OUTPUT(Makefile libs/Makefile xfce/Makefile xfwm/Makefile \
 	xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile  \
 	po/Makefile.in other/Makefile.in backdrops/Makefile.in \
 	icons/Makefile.in palettes/Makefile.in fonts/Makefile.in \
-	sounds/Makefile.in html/Makefile.in textures/Makefile.in \
+	sounds/Makefile.in docs/Makefile.in textures/Makefile.in \
 	xfce_theme/Makefile)
 dnl
 AC_OUTPUT_COMMANDS([sed -e "s%XFCE_DIR%$XFCE_DIR%g" -e "s%XFCE_CONFDIR%$XFCE_CONFDIR%g" scripts/xfce_setup.in > scripts/xfce_setup])
@@ -368,4 +369,4 @@ AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r icons/DISTFILES.in" icons/Makefile.in
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r palettes/DISTFILES.in" palettes/Makefile.in > palettes/Makefile])
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r fonts/DISTFILES.in" fonts/Makefile.in > fonts/Makefile])
 AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r sounds/DISTFILES.in" sounds/Makefile.in > sounds/Makefile])
-AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r html/DISTFILES.in" html/Makefile.in > html/Makefile])
+AC_OUTPUT_COMMANDS([sed -e "/DISTFILES =/r docs/DISTFILES.in" docs/Makefile.in > docs/Makefile])

@@ -728,7 +728,7 @@ select_combo_server (GtkWidget * widget, gpointer data)
   char *s;
   s = gtk_entry_get_text (GTK_ENTRY (widget));
   /* is it in history list? */
-
+  nonstop=TRUE;
   SMBrefresh ((unsigned char *) s, RELOAD);
 }
 
@@ -777,8 +777,14 @@ go_forward (GtkWidget * widget, gpointer data)
 void
 go_stop (GtkWidget * widget, gpointer data)
 {
+	 
   if (fork_obj)
     {
+      if (nonstop) {
+          print_status (_("Attempting to stop query...")); /* this is called atole */
+	  return;
+      }
+     
       print_status (_("Query stopped."));
       if (stopcleanup) TuboCancel (fork_obj,clean_nmb);
       else TuboCancel (fork_obj,NULL);
@@ -1213,7 +1219,7 @@ create_smb_window (void)
 			    GTK_SIGNAL_FUNC (NMBLookup), NULL);
 	gtk_widget_show (button);
 
-	locationIP = gtk_label_new ("");
+	locationIP = gtk_label_new ("-");
 	gtk_box_pack_start (GTK_BOX (hbox), locationIP, NOEXPAND, NOFILL, 0);
 	gtk_widget_show (locationIP);
       }

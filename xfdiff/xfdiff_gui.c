@@ -47,6 +47,8 @@
 
 #define COLOR_GDK	65535.0
 
+#include "icons/xfdiff.xpm"
+
 static GtkTargetEntry target_table[] = {
  	{"text/uri-list", 0, TARGET_URI_LIST},
 	{"text/plain", 0, TARGET_PLAIN},
@@ -1443,9 +1445,10 @@ GtkWidget * create_diff_window (void){
   gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
                       GTK_SIGNAL_FUNC (cb_adjust), 
                       (gpointer) adj);
-  
+  set_icon (diff, "Xfdiff", xfdiff_xpm);  
   gtk_widget_show (diff);
   set_highlight();
+  
   
   return diff;
 

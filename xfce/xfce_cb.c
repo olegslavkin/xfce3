@@ -337,7 +337,7 @@ select_drag_data_received (GtkWidget * widget,
   count = g_list_length (fnames);
   if (count > 0)
     {
-      execute = (char *) malloc (MAXSTRLEN);
+      execute = (char *) g_malloc (MAXSTRLEN);
       cmd = get_command ((gint)((long) cbdata));
       for (fnp = fnames; fnp; fnp = fnp->next, count--)
 	{
@@ -345,7 +345,7 @@ select_drag_data_received (GtkWidget * widget,
 		    (char *) (fnp->data));
 	  exec_comm (execute, current_config.wm);
 	}
-      free (execute);
+      g_free (execute);
     }
   gnome_uri_list_free_strings (fnames);
   gtk_drag_finish (context, (count > 0), (context->action == GDK_ACTION_MOVE),

@@ -60,6 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %{gtkengines}/libxfce.*
 
 %post
+ldconfig
 if [ "$LC_ALL" = "pt_BR" ]; then
    echo
    echo Nota :

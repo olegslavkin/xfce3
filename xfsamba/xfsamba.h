@@ -2,7 +2,7 @@
  * copyright 2001 Edscott Wilson Garcia under GNU/GPL
  * */
 
-#define XFSAMBA_VERSION "0.30"
+#define XFSAMBA_VERSION "0.32"
 /*#define DBG_XFSAMBA*/
 
 
@@ -163,7 +163,7 @@ EXTERN nmb_history *thisH, *headH;
 EXTERN void *fork_obj;
 EXTERN int SMBResult;
 EXTERN char *default_user;
-EXTERN gboolean stopcleanup;
+EXTERN gboolean stopcleanup,nonstop;
 
 /* public variables from gui : */
 

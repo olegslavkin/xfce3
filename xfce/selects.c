@@ -97,9 +97,9 @@ alloc_selects (void)
 
   for (i = 0; i < NBSELECTS + 1; i++)
     {
-      selects[i].command = (char *) malloc (5 * sizeof (char));
+      selects[i].command = (char *) g_malloc (5 * sizeof (char));
       strcpy (selects[i].command, "None");
-      selects[i].ext_icon = (char *) malloc (5 * sizeof (char));
+      selects[i].ext_icon = (char *) g_malloc (5 * sizeof (char));
       strcpy (selects[i].ext_icon, "None");
       selects[i].icon_nbr = 99;
     }
@@ -112,8 +112,8 @@ free_selects (void)
 
   for (i = 0; i < NBSELECTS + 1; i++)
     {
-      free (selects[i].command);
-      free (selects[i].ext_icon);
+      g_free (selects[i].command);
+      g_free (selects[i].ext_icon);
     }
 
 }
@@ -151,14 +151,14 @@ save_icon_str (void)
   char *temp;
   int i;
 
-  temp = (char *) malloc (4);
+  temp = (char *) g_malloc (4);
   sprintf (str, "%i", selects[0].icon_nbr);
   for (i = 1; i < NBSELECTS; i++)
     {
       sprintf (temp, ",%i", selects[i].icon_nbr);
       strcat (str, temp);
     }
-  free (temp);
+  g_free (temp);
   return (str);
 }
 
@@ -167,16 +167,16 @@ set_exticon_str (int i, char *s)
 {
   if (i < NBSELECTS)
     {
-      free (selects[i].ext_icon);
+      g_free (selects[i].ext_icon);
       if ((s) && (strlen (s)))
 	{
 	  selects[i].ext_icon =
-	    (char *) malloc ((strlen (s) + 1) * sizeof (char));
+	    (char *) g_malloc ((strlen (s) + 1) * sizeof (char));
 	  strcpy (selects[i].ext_icon, s);
 	}
       else
 	{
-	  selects[i].ext_icon = (char *) malloc (5 * sizeof (char));
+	  selects[i].ext_icon = (char *) g_malloc (5 * sizeof (char));
 	  strcpy (selects[i].ext_icon, "None");
 	}
     }
@@ -214,11 +214,11 @@ default_icon_str (void)
 {
   char *s;
 
-  s = (char *) malloc ((NBSELECTS + 2) * 3 + 1);
+  s = (char *) g_malloc ((NBSELECTS + 2) * 3 + 1);
   strcpy (s, DEFAULT_ICON_SEQ);
   load_icon_str (s);
   setup_icon ();
-  free (s);
+  g_free (s);
 }
 
 int
@@ -275,16 +275,16 @@ set_choice_value (int no_cmd)
 void
 set_command (int no_sel, char *s)
 {
-  free (selects[no_sel].command);
+  g_free (selects[no_sel].command);
   if (!strlen (s) || !my_strncasecmp (s, "None", strlen ("None")))
     {
-      selects[no_sel].command = (char *) malloc (5 * sizeof (char));
+      selects[no_sel].command = (char *) g_malloc (5 * sizeof (char));
       strcpy (selects[no_sel].command, "None");
     }
   else
     {
       selects[no_sel].command =
-	(char *) malloc ((strlen (s) + 1) * sizeof (char));
+	(char *) g_malloc ((strlen (s) + 1) * sizeof (char));
       strcpy (selects[no_sel].command, s);
     }
   gtk_tooltips_set_tip (select_buttons.select_tooltips[no_sel],

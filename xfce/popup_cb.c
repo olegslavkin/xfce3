@@ -149,7 +149,7 @@ popup_entry_drag_data_received (GtkWidget * widget,
     {
       if (!popup_menus[menu].detach)
 	private_close_popup_button (menu);
-      execute = (char *) malloc (MAXSTRLEN * sizeof (char) + 1);
+      execute = (char *) g_malloc (MAXSTRLEN * sizeof (char) + 1);
       cmd = popup_menus[menu].popup_buttons[item].command;
       for (fnp = fnames; fnp; fnp = fnp->next, count--)
 	{
@@ -157,7 +157,7 @@ popup_entry_drag_data_received (GtkWidget * widget,
 		    (char *) (fnp->data));
 	  exec_comm (execute, current_config.wm);
 	}
-      free (execute);
+      g_free (execute);
       gtk_drag_finish (context, TRUE, TRUE, time);
     }
   gnome_uri_list_free_strings (fnames);
@@ -186,7 +186,7 @@ popup_addicon_drag_data_received (GtkWidget * widget,
   if (count > 0)
     {
       hide_popup_menu (menu, FALSE);
-      label = (char *) malloc (MAXSTRLEN * sizeof (char) + 1);
+      label = (char *) g_malloc (MAXSTRLEN * sizeof (char) + 1);
       cmd = (char *) fnames->data;
       if (existfile (cmd))
 	{
@@ -201,7 +201,7 @@ popup_addicon_drag_data_received (GtkWidget * widget,
 	}
       else
 	my_show_message (_("Cannot find the file you dropped !"));
-      free (label);
+      g_free (label);
       show_popup_menu (menu, -1, -1, FALSE);
       gtk_drag_finish (context, TRUE, TRUE, time);
     }

@@ -65,7 +65,6 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y,
   int nitems, action;
   int mode = 0;
   int source_state;
-  char *string;
   int row, col;
   GtkCList *clist;
   
@@ -111,17 +110,14 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y,
     case TARGET_URI_LIST:
       if (action == GDK_ACTION_MOVE)
 	{
-	  string = _("move");
 	  mode = TR_MOVE;
 	}
       else if (action == GDK_ACTION_COPY)
 	{
-	  string = _("copy");
 	  mode = TR_COPY;
 	}
       else if (action == GDK_ACTION_LINK)
 	{
-	  string = _("link");
 	  mode = TR_LINK;
 	}
       else
@@ -147,17 +143,6 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y,
 	  uri_free_list (list);
 	  return;
 	}
-      if (mode != TR_MOVE)
-        {
-          char msg[DLG_MAX];
-          sprintf (msg, _("Do you want to %s the item(s) to"), string);
-          if (dlg_question (msg, en->path) != DLG_RC_OK)
-	    {
-	      gtk_drag_finish (context, FALSE, (mode == TR_MOVE), time);
-	      uri_free_list (list);
-	      return;
-	    }
-        }
       t = list;
       while (t)
 	{
@@ -191,7 +176,7 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y,
     default:
       break;
     }
-  gtk_drag_finish (context, TRUE, (mode == TR_MOVE), time);
+  gtk_drag_finish (context, TRUE, TRUE, time);
   update_tree (GTK_CTREE (ctree), node);
 }
 
@@ -307,7 +292,9 @@ on_drag_end (GtkWidget * widget, GdkDragContext * context, gpointer data)
   if (!num)
     node = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   else
-    node = GTK_CTREE_NODE (GTK_CLIST (ctree)->selection->data);
+    {
+      node = GTK_CTREE_ROW (GTK_CLIST (ctree)->selection->data)->parent;
+    }
   update_tree (GTK_CTREE (ctree), node);
   return;
 }

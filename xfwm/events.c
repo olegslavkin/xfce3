@@ -601,7 +601,7 @@ HandlePropertyNotify ()
         if (!mystrncasecmp (Tmp_win->icon_name, NoName, strlen (NoName)))
         {
             free_window_names (Tmp_win, False, True);
-            Tmp_win->icon_name = (char *) malloc (strlen (Tmp_win->name) + 1);
+            Tmp_win->icon_name = (char *) safemalloc (strlen (Tmp_win->name) + 1);
             strcpy (Tmp_win->icon_name, Tmp_win->name);
             BroadcastName (XFCE_M_ICON_NAME, Tmp_win->w, Tmp_win->frame,
                            (unsigned long) Tmp_win, Tmp_win->icon_name);
@@ -724,7 +724,6 @@ HandlePropertyNotify ()
                 RaiseWindow (Tmp_win);
             }
         }
-#if 0
         else if (Event.xproperty.atom == _XA_WIN_STATE)
         {
             unsigned long state = 0L;
@@ -747,7 +746,6 @@ HandlePropertyNotify ()
 		}
             }
         }
-#endif
         break;
     }
 #ifdef DEBUG

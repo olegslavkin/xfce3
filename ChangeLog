@@ -1,3 +1,177 @@
+2001-07-11  huysmans  <j.b.huijsmans@chem.rug.nl>
+
+	* /cvsroot/xfce/xfce/po/cs.gmo, /cvsroot/xfce/xfce/po/cs.po, /cvsroot/xfce/xfce/po/da.gmo, /cvsroot/xfce/xfce/po/da.po, /cvsroot/xfce/xfce/po/de.gmo, /cvsroot/xfce/xfce/po/de.po, /cvsroot/xfce/xfce/po/en_GB.po, /cvsroot/xfce/xfce/po/es.gmo, /cvsroot/xfce/xfce/po/es.po, /cvsroot/xfce/xfce/po/et.po, /cvsroot/xfce/xfce/po/fi.po, /cvsroot/xfce/xfce/po/fr.gmo, /cvsroot/xfce/xfce/po/fr.po, /cvsroot/xfce/xfce/po/gl.gmo, /cvsroot/xfce/xfce/po/gl.po, /cvsroot/xfce/xfce/po/hu.gmo, /cvsroot/xfce/xfce/po/hu.po, /cvsroot/xfce/xfce/po/it.po, /cvsroot/xfce/xfce/po/ja.po, /cvsroot/xfce/xfce/po/nl.gmo, /cvsroot/xfce/xfce/po/nl.po, /cvsroot/xfce/xfce/po/pl.po, /cvsroot/xfce/xfce/po/pt_BR.gmo, /cvsroot/xfce/xfce/po/pt_BR.po, /cvsroot/xfce/xfce/po/ro.gmo, /cvsroot/xfce/xfce/po/ro.po, /cvsroot/xfce/xfce/po/ru.po, /cvsroot/xfce/xfce/po/sk.po, /cvsroot/xfce/xfce/po/sr.po, /cvsroot/xfce/xfce/po/sv.po, /cvsroot/xfce/xfce/po/xfce.pot, /cvsroot/xfce/xfce/po/zh.po, /cvsroot/xfce/xfce/po/zh_CN.po, /cvsroot/xfce/xfce/po/ca.po:
+	Big po file update: rebuild xfce.pot and did a 'make update-po'.
+
+2001-07-11  xfce  <fourdan@xfce.org>
+
+	* /cvsroot/xfce/xfce/Makefile.am, /cvsroot/xfce/xfce/Makefile.in, /cvsroot/xfce/xfce/config.h.in, /cvsroot/xfce/xfce/configure, /cvsroot/xfce/xfce/configure.in, /cvsroot/xfce/xfce/scripts/xfhelp, /cvsroot/xfce/xfce/scripts/xfhelp.in:
+	Fix a small bug in xfhelp script
+
+2001-07-11  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/docs/images/xfsamba.jpg:
+	xfsamba snapshot, xfce window style
+
+2001-07-11  huysmans  <j.b.huijsmans@chem.rug.nl>
+
+	* /cvsroot/xfce/xfce/docs/sgml/ch-fileman.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-panel.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-setup.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-utilities.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm.sgml, /cvsroot/xfce/xfce/docs/sgml/preface.sgml, /cvsroot/xfce/xfce/docs/sgml/xfce-help.sgml, /cvsroot/xfce/xfce/docs/html/fileman.html, /cvsroot/xfce/xfce/docs/html/help.html, /cvsroot/xfce/xfce/docs/html/intro.html, /cvsroot/xfce/xfce/docs/html/panel.html, /cvsroot/xfce/xfce/docs/html/setup-startup.html, /cvsroot/xfce/xfce/docs/html/setup-wm.html, /cvsroot/xfce/xfce/docs/html/setup-xfce.html, /cvsroot/xfce/xfce/docs/html/setup.html, /cvsroot/xfce/xfce/docs/html/utilities.html, /cvsroot/xfce/xfce/docs/html/utils-xfbdmgr.html, /cvsroot/xfce/xfce/docs/html/utils-xfclock.html, /cvsroot/xfce/xfce/docs/html/utils-xfdiff.html, /cvsroot/xfce/xfce/docs/html/utils-xfglob.html, /cvsroot/xfce/xfce/docs/html/utils-xfmouse.html, /cvsroot/xfce/xfce/docs/html/utils-xfpager.html, /cvsroot/xfce/xfce/docs/html/utils-xfrun.html, /cvsroot/xfce/xfce/docs/html/utils-xfsamba.html, /cvsroot/xfce/xfce/docs/html/utils-xfsound.html, /cvsroot/xfce/xfce/docs/html/utils-xfumed.html, /cvsroot/xfce/xfce/docs/html/wm.html:
+	Correct error in image references in docs, update configure and configure.in
+
+	* /cvsroot/xfce/xfce/docs/html/stylesheet-images/prev.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/tip.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/toc-blank.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/toc-minus.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/toc-plus.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/up.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/warning.gif, /cvsroot/xfce/xfce/docs/images/buttons.jpg, /cvsroot/xfce/xfce/docs/images/xfbd.jpg, /cvsroot/xfce/xfce/docs/images/xfbdmgr.jpg, /cvsroot/xfce/xfce/docs/images/xfce_panel.jpg, /cvsroot/xfce/xfce/docs/images/xfce_popup.jpg, /cvsroot/xfce/xfce/docs/images/xfce_setup1.jpg, /cvsroot/xfce/xfce/docs/images/xfce_setup2.jpg, /cvsroot/xfce/xfce/docs/images/xfce_setup3.jpg, /cvsroot/xfce/xfce/docs/images/xfce_setup4.jpg, /cvsroot/xfce/xfce/docs/images/xfce_slogan.jpg, /cvsroot/xfce/xfce/docs/images/xfce_snap.jpg, /cvsroot/xfce/xfce/docs/images/xfclock.jpg, /cvsroot/xfce/xfce/docs/images/xfdiff.jpg, /cvsroot/xfce/xfce/docs/images/xfglob.jpg, /cvsroot/xfce/xfce/docs/images/xfmouse.jpg, /cvsroot/xfce/xfce/docs/images/xfpager.jpg, /cvsroot/xfce/xfce/docs/images/xfrun.jpg, /cvsroot/xfce/xfce/docs/images/xfsound.jpg, /cvsroot/xfce/xfce/docs/images/xftree.jpg, /cvsroot/xfce/xfce/docs/images/xfumed.jpg, /cvsroot/xfce/xfce/docs/sgml/GPL.sgml, /cvsroot/xfce/xfce/docs/sgml/advanced-xfwm.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-fileman.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-install.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-overview.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-panel.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-resources.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-setup.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-utilities.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-appearance.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-bindings.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-commands.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-defaults.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-examples.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-general.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-management.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-menus.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-style.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm-xresources.sgml, /cvsroot/xfce/xfce/docs/sgml/ch-wm.sgml, /cvsroot/xfce/xfce/docs/sgml/copyright.sgml, /cvsroot/xfce/xfce/docs/sgml/license.sgml, /cvsroot/xfce/xfce/docs/sgml/preface.sgml, /cvsroot/xfce/xfce/docs/sgml/userman.sgml, /cvsroot/xfce/xfce/docs/sgml/xfce-help.sgml, /cvsroot/xfce/xfce/docs/DISTFILES.in, /cvsroot/xfce/xfce/docs/Makefile.in.in, /cvsroot/xfce/xfce/docs/html/adv-wm-appearance.html, /cvsroot/xfce/xfce/docs/html/adv-wm-bindings.html, /cvsroot/xfce/xfce/docs/html/adv-wm-commands.html, /cvsroot/xfce/xfce/docs/html/adv-wm-defaults.html, /cvsroot/xfce/xfce/docs/html/adv-wm-examples.html, /cvsroot/xfce/xfce/docs/html/adv-wm-general.html, /cvsroot/xfce/xfce/docs/html/adv-wm-management.html, /cvsroot/xfce/xfce/docs/html/adv-wm-menus.html, /cvsroot/xfce/xfce/docs/html/adv-wm-style.html, /cvsroot/xfce/xfce/docs/html/adv-wm-xresources.html, /cvsroot/xfce/xfce/docs/html/advanced-wm.html, /cvsroot/xfce/xfce/docs/html/copyright.html, /cvsroot/xfce/xfce/docs/html/fileman.html, /cvsroot/xfce/xfce/docs/html/gpl.html, /cvsroot/xfce/xfce/docs/html/help.html, /cvsroot/xfce/xfce/docs/html/install.html, /cvsroot/xfce/xfce/docs/html/intro.html, /cvsroot/xfce/xfce/docs/html/license.html, /cvsroot/xfce/xfce/docs/html/ln9.html, /cvsroot/xfce/xfce/docs/html/overview.html, /cvsroot/xfce/xfce/docs/html/panel.html, /cvsroot/xfce/xfce/docs/html/resources.html, /cvsroot/xfce/xfce/docs/html/setup-startup.html, /cvsroot/xfce/xfce/docs/html/setup-wm.html, /cvsroot/xfce/xfce/docs/html/setup-xfce.html, /cvsroot/xfce/xfce/docs/html/setup.html, /cvsroot/xfce/xfce/docs/html/stylesheet-images/caution.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/home.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/important.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/next.gif, /cvsroot/xfce/xfce/docs/html/stylesheet-images/note.gif, /cvsroot/xfce/xfce/docs/html/user-manual.html, /cvsroot/xfce/xfce/docs/html/utilities.html, /cvsroot/xfce/xfce/docs/html/utils-xfbdmgr.html, /cvsroot/xfce/xfce/docs/html/utils-xfclock.html, /cvsroot/xfce/xfce/docs/html/utils-xfdiff.html, /cvsroot/xfce/xfce/docs/html/utils-xfglob.html, /cvsroot/xfce/xfce/docs/html/utils-xfgnome.html, /cvsroot/xfce/xfce/docs/html/utils-xfmenu.html, /cvsroot/xfce/xfce/docs/html/utils-xfmouse.html, /cvsroot/xfce/xfce/docs/html/utils-xfpager.html, /cvsroot/xfce/xfce/docs/html/utils-xfrun.html, /cvsroot/xfce/xfce/docs/html/utils-xfsamba.html, /cvsroot/xfce/xfce/docs/html/utils-xfsound.html, /cvsroot/xfce/xfce/docs/html/utils-xfumed.html, /cvsroot/xfce/xfce/docs/html/wm-examples-2.html, /cvsroot/xfce/xfce/docs/html/wm.html, /cvsroot/xfce/xfce/scripts/xfhelp, /cvsroot/xfce/xfce/scripts/xfhelp.in:
+	New docs/ directory with html/, images/ and sgml/ subdirectory
+
+2001-07-10  xfce  <fourdan@xfce.org>
+
+	* /cvsroot/xfce/xfce/palettes/AltXfce2, /cvsroot/xfce/xfce/palettes/AltXfce3, /cvsroot/xfce/xfce/palettes/Altxfce2, /cvsroot/xfce/xfce/palettes/Altxfce3:
+	Hummm, typo...
+
+	* /cvsroot/xfce/xfce/po/de.gmo, /cvsroot/xfce/xfce/po/de.po, /cvsroot/xfce/xfce/po/en_GB.gmo, /cvsroot/xfce/xfce/po/en_GB.po, /cvsroot/xfce/xfce/po/es.gmo, /cvsroot/xfce/xfce/po/es.po, /cvsroot/xfce/xfce/po/et.gmo, /cvsroot/xfce/xfce/po/et.po, /cvsroot/xfce/xfce/po/fi.gmo, /cvsroot/xfce/xfce/po/fi.po, /cvsroot/xfce/xfce/po/fr.gmo, /cvsroot/xfce/xfce/po/fr.po, /cvsroot/xfce/xfce/po/gl.gmo, /cvsroot/xfce/xfce/po/gl.po, /cvsroot/xfce/xfce/po/hu.gmo, /cvsroot/xfce/xfce/po/hu.po, /cvsroot/xfce/xfce/po/it.gmo, /cvsroot/xfce/xfce/po/it.po, /cvsroot/xfce/xfce/po/ja.po, /cvsroot/xfce/xfce/po/nl.gmo, /cvsroot/xfce/xfce/po/nl.po, /cvsroot/xfce/xfce/po/pl.gmo, /cvsroot/xfce/xfce/po/pl.po, /cvsroot/xfce/xfce/po/pt_BR.gmo, /cvsroot/xfce/xfce/po/pt_BR.po, /cvsroot/xfce/xfce/po/ro.gmo, /cvsroot/xfce/xfce/po/ro.po, /cvsroot/xfce/xfce/po/ru.gmo, /cvsroot/xfce/xfce/po/ru.po, /cvsroot/xfce/xfce/po/sk.gmo, /cvsroot/xfce/xfce/po/sk.po, /cvsroot/xfce/xfce/po/sr.gmo, /cvsroot/xfce/xfce/po/sr.po, /cvsroot/xfce/xfce/po/sv.gmo, /cvsroot/xfce/xfce/po/sv.po, /cvsroot/xfce/xfce/po/xfce.pot, /cvsroot/xfce/xfce/po/zh.gmo, /cvsroot/xfce/xfce/po/zh.po, /cvsroot/xfce/xfce/po/zh_CN.gmo, /cvsroot/xfce/xfce/po/zh_CN.po, /cvsroot/xfce/xfce/xfsamba/Makefile.in, /cvsroot/xfce/xfce/configure, /cvsroot/xfce/xfce/configure.in, /cvsroot/xfce/xfce/other/CONFFILES.in, /cvsroot/xfce/xfce/other/xfce3rc.sr, /cvsroot/xfce/xfce/other/xfce3rc.sr.in, /cvsroot/xfce/xfce/po/ca.gmo, /cvsroot/xfce/xfce/po/ca.po, /cvsroot/xfce/xfce/po/cat-id-tbl.c, /cvsroot/xfce/xfce/po/cs.gmo, /cvsroot/xfce/xfce/po/cs.po, /cvsroot/xfce/xfce/po/da.gmo, /cvsroot/xfce/xfce/po/da.po:
+	Add Serbian localization (from Milan Avramovic),
+	and fix a problem with other localizations
+
+2001-07-10  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/xfzvt/makefile.edscott:
+	this make file will build xfzvt with static versions of libzvt modules.
+
+	* /cvsroot/xfce/xfce/xfzvt/vtx.h, /cvsroot/xfce/xfce/xfzvt/zvtterm.h:
+	change includes from zvt/whatever to xfzvt/whatever
+
+	* /cvsroot/xfce/xfce/xfzvt/xfzvt.c: - small change on font option
+
+2001-07-09  xfce  <fourdan@xfce.org>
+
+	* /cvsroot/xfce/xfce/po/hu.gmo, /cvsroot/xfce/xfce/po/hu.po, /cvsroot/xfce/xfce/po/it.gmo, /cvsroot/xfce/xfce/po/it.po, /cvsroot/xfce/xfce/po/ja.gmo, /cvsroot/xfce/xfce/po/ja.po, /cvsroot/xfce/xfce/po/nl.gmo, /cvsroot/xfce/xfce/po/nl.po, /cvsroot/xfce/xfce/po/pl.gmo, /cvsroot/xfce/xfce/po/pl.po, /cvsroot/xfce/xfce/po/pt_BR.gmo, /cvsroot/xfce/xfce/po/pt_BR.po, /cvsroot/xfce/xfce/po/ro.gmo, /cvsroot/xfce/xfce/po/ro.po, /cvsroot/xfce/xfce/po/ru.gmo, /cvsroot/xfce/xfce/po/ru.po, /cvsroot/xfce/xfce/po/sk.gmo, /cvsroot/xfce/xfce/po/sk.po, /cvsroot/xfce/xfce/po/sv.gmo, /cvsroot/xfce/xfce/po/sv.po, /cvsroot/xfce/xfce/po/xfce.pot, /cvsroot/xfce/xfce/po/zh.gmo, /cvsroot/xfce/xfce/po/zh.po, /cvsroot/xfce/xfce/po/zh_CN.gmo, /cvsroot/xfce/xfce/po/zh_CN.po, /cvsroot/xfce/xfce/xfce/configfile.c, /cvsroot/xfce/xfce/xfce/diagnostic.c, /cvsroot/xfce/xfce/xfce/popup.c, /cvsroot/xfce/xfce/xfce/popup_cb.c, /cvsroot/xfce/xfce/xfce/selects.c, /cvsroot/xfce/xfce/xfce/setup.c, /cvsroot/xfce/xfce/xfce/xfce_cb.c, /cvsroot/xfce/xfce/xfce/xfwm.c, /cvsroot/xfce/xfce/xftree/gtk_cpy.c, /cvsroot/xfce/xfce/xftree/xtree_dnd.c, /cvsroot/xfce/xfce/xftree/xtree_gui.c, /cvsroot/xfce/xfce/xfwm/builtins.c, /cvsroot/xfce/xfce/xfwm/events.c, /cvsroot/xfce/xfce/xfwm/misc.c, /cvsroot/xfce/xfce/xfwm/placement.c, /cvsroot/xfce/xfce/xfwm/screen.h, /cvsroot/xfce/xfce/xfwm/session.c, /cvsroot/xfce/xfce/xfwm/stack.c, /cvsroot/xfce/xfce/xfwm/xfwm.c, /cvsroot/xfce/xfce/backdrops/DISTFILES.in, /cvsroot/xfce/xfce/backdrops/GreyArena.xpm, /cvsroot/xfce/xfce/backdrops/WhiteStripes.xpm, /cvsroot/xfce/xfce/configure, /cvsroot/xfce/xfce/configure.in, /cvsroot/xfce/xfce/libs/Makefile.am, /cvsroot/xfce/xfce/libs/Makefile.in, /cvsroot/xfce/xfce/libs/fileutil.c, /cvsroot/xfce/xfce/palettes/AltXfce2, /cvsroot/xfce/xfce/palettes/AltXfce3, /cvsroot/xfce/xfce/palettes/DISTFILES.in, /cvsroot/xfce/xfce/po/ca.gmo, /cvsroot/xfce/xfce/po/ca.po, /cvsroot/xfce/xfce/po/cat-id-tbl.c, /cvsroot/xfce/xfce/po/cs.gmo, /cvsroot/xfce/xfce/po/cs.po, /cvsroot/xfce/xfce/po/da.gmo, /cvsroot/xfce/xfce/po/da.po, /cvsroot/xfce/xfce/po/de.gmo, /cvsroot/xfce/xfce/po/de.po, /cvsroot/xfce/xfce/po/en_GB.gmo, /cvsroot/xfce/xfce/po/en_GB.po, /cvsroot/xfce/xfce/po/es.gmo, /cvsroot/xfce/xfce/po/et.gmo, /cvsroot/xfce/xfce/po/et.po, /cvsroot/xfce/xfce/po/fi.gmo, /cvsroot/xfce/xfce/po/fi.po, /cvsroot/xfce/xfce/po/fr.gmo, /cvsroot/xfce/xfce/po/fr.po, /cvsroot/xfce/xfce/po/gl.gmo, /cvsroot/xfce/xfce/po/gl.po:
+	Huuuge update after a week offline !
+
+2001-07-09  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/xfzvt/makefile.edscott:
+	makefile that works for me with redhat 7.1
+
+	* /cvsroot/xfce/xfce/xfzvt/icons/comp1.xpm, /cvsroot/xfce/xfce/xfzvt/icons/comp2.xpm, /cvsroot/xfce/xfce/xfzvt/libzvt.la, /cvsroot/xfce/xfce/xfzvt/xfzvt.c:
+	- first version for a terminal environment for xfce.
+
+2001-07-06  csm1975  <csm@moongroup.com>
+
+	* /cvsroot/xfce/xfce/ChangeLog: just updating the changelog
+
+	* /cvsroot/xfce/xfce/xfwm/session.c: updating session.c for Olivier!
+
+	* /cvsroot/xfce/xfce/xfrun/xfrun.c: updating xfrun for Olivier.
+
+2001-07-06  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/xfdiff/icons/xfdiff.xpm, /cvsroot/xfce/xfce/xfdiff/xfdiff_gui.c:
+	added a icon for the application
+
+	* /cvsroot/xfce/xfce/other/xfce3rc.in:
+	Changed default icon for xfsamba to application icon
+
+	* /cvsroot/xfce/xfce/icons/xfsamba.xpm: xfsamba application icon
+
+	* /cvsroot/xfce/xfce/xfsamba/ChangeLog, /cvsroot/xfce/xfce/xfsamba/xfsamba.c, /cvsroot/xfce/xfce/xfsamba/xfsamba.h:
+	application icon added
+
+	* /cvsroot/xfce/xfce/xfsamba/icons/xfsamba.xpm: application icon
+
+2001-07-06  csm1975  <csm@moongroup.com>
+
+	* /cvsroot/xfce/xfce/xfwm/session.c: updating session.c for Olivier!
+
+	* /cvsroot/xfce/xfce/xfrun/xfrun.c: updating xfrun for Olivier.
+
+2001-07-06  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/xfdiff/xfdiff_gui.c:
+	added a icon for the application
+
+	* /cvsroot/xfce/xfce/other/xfce3rc.in:
+	Changed default icon for xfsamba to application icon
+
+	* /cvsroot/xfce/xfce/icons/xfsamba.xpm: xfsamba application icon
+
+	* /cvsroot/xfce/xfce/xfsamba/ChangeLog, /cvsroot/xfce/xfce/xfsamba/xfsamba.c, /cvsroot/xfce/xfce/xfsamba/xfsamba.h:
+	application icon added
+
+	* /cvsroot/xfce/xfce/xfsamba/icons/xfsamba.xpm: application icon
+
+2001-07-05  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/xftree/gtk_dlg.c:
+	- added a gtk_get_focus to the entry widget for questions
+
+	* /cvsroot/xfce/xfce/po/es.po: - updated po file for spanish
+
+	* /cvsroot/xfce/xfce/xfsamba/ChangeLog, /cvsroot/xfce/xfce/xfsamba/README, /cvsroot/xfce/xfce/xfsamba/xfsamba.c, /cvsroot/xfce/xfce/xfsamba/xfsamba.h, /cvsroot/xfce/xfce/xfsamba/xfsamba_gui.c, /cvsroot/xfce/xfce/xfsamba/xfsamba_lookup.c:
+	- buried a couple of hidden bugs
+
+2001-06-29  edscott  <edscott@imp.mx>
+
+	* /cvsroot/xfce/xfce/xfdiff/globber.c, /cvsroot/xfce/xfce/xfdiff/globber.h, /cvsroot/xfce/xfce/xfdiff/xfdiff.c:
+	updated globber module
+
+	* /cvsroot/xfce/xfce/xfglob/ChangeLog, /cvsroot/xfce/xfce/xfglob/glob.c, /cvsroot/xfce/xfce/xfglob/globber.c, /cvsroot/xfce/xfce/xfglob/globber.h, /cvsroot/xfce/xfce/xfglob/xfglob.c:
+	- "full path" column changed to "directory"
+	- help buttons for xdev, permissions, user/group, size
+	- Size GT and size LT can now be used simultaneously
+	- Permission conderations now more refined
+	- time considerations can be ctime, mtime or atime
+	- raise buttons in xfglob+results windows
+	- about tab
+	- (glob.c,globber.c) moved to object oriented structure, optimized code
+	- changed version numbers to 0.5.0 for glob, globber + xfglob
+
+2001-06-28  csm1975  <csm@moongroup.com>
+
+	* /cvsroot/xfce/xfce/ChangeLog:
+	one more edit of the ChangLog! Don't you love me Olivier? You rascal frenchman you!
+
+	* /cvsroot/xfce/xfce/xfzvt/AUTHORS, /cvsroot/xfce/xfce/xfzvt/BUGS, /cvsroot/xfce/xfce/xfzvt/ChangeLog, /cvsroot/xfce/xfce/xfzvt/Makefile.am, /cvsroot/xfce/xfce/xfzvt/Makefile.in, /cvsroot/xfce/xfce/xfzvt/README, /cvsroot/xfce/xfce/xfzvt/TODO, /cvsroot/xfce/xfce/xfzvt/gnome-login-support.c, /cvsroot/xfce/xfce/xfzvt/gnome-login-support.h, /cvsroot/xfce/xfce/xfzvt/gnome-pty-helper.c, /cvsroot/xfce/xfce/xfzvt/gnome-pty.h, /cvsroot/xfce/xfce/xfzvt/gnome-utmp.c, /cvsroot/xfce/xfce/xfzvt/lists.c, /cvsroot/xfce/xfce/xfzvt/lists.h, /cvsroot/xfce/xfce/xfzvt/subshell-includes.h, /cvsroot/xfce/xfce/xfzvt/subshell.c, /cvsroot/xfce/xfce/xfzvt/subshell.h, /cvsroot/xfce/xfce/xfzvt/test-utmp.c, /cvsroot/xfce/xfce/xfzvt/update.c, /cvsroot/xfce/xfce/xfzvt/vt.c, /cvsroot/xfce/xfce/xfzvt/vt.h, /cvsroot/xfce/xfce/xfzvt/vtx.h, /cvsroot/xfce/xfce/xfzvt/zterm.c, /cvsroot/xfce/xfce/xfzvt/zvtterm.c, /cvsroot/xfce/xfce/xfzvt/zvtterm.h, /cvsroot/xfce/xfce/xfzvt/zvtterm.sgml:
+	After discussions with Alan I've added zvt znd re-christened it xfzvt! :-)
+
+	* /cvsroot/xfce/xfce/ChangeLog:
+	more repair to the addresses in the ChangeLog... this is one more thing I do not like about sourceforge!
+
+	* /cvsroot/xfce/xfce/ChangeLog: updating the changelog! :-)
+
+2001-06-28  alancox   <alan@lxorguk.ukuu.org.uk>
+
+	* /cvsroot/xfce/xfce/xfdiff/xfdiff.c, /cvsroot/xfce/xfce/xfdiff/xfdiff_gui.c:
+	Try that again, cvs got annoyed
+	First xdiff minor fixes
+
+	* /cvsroot/xfce/xfce/xftree/gtk_cpy.c: Language/typo bits
+		transferred (double R)
+
+	Also English uses 'fewer' not 'less'
+	[Less of an object, fewer objects if anyone is curious]
+
+	* /cvsroot/xfce/xfce/xfce/startup.c: Shoot excess capital letters
+
+	* /cvsroot/xfce/xfce/xfclock/xfclock_menus.c:
+	24 hour not 24 hours clock
+
+	* /cvsroot/xfce/xfce/xfce/setup.c: Missed one
+
+	* /cvsroot/xfce/xfce/xfce/setup.c: Further cosmetic/minor text fixups
+
+	* /cvsroot/xfce/xfce/xfce/setup.c: Remove some excess capitalisation
+
+	* /cvsroot/xfce/xfce/xfce/popup.c:
+	Everywhere else we 'tear off' or it is a 'tear-off' menu. Make this match
+	[pedantry I know]
+
+	* /cvsroot/xfce/xfce/xfce/info.c:
+	"Agreement" in English is a noun, the button does something so it should
+	be 'Accept' or 'Accept Agreement' or 'Agree' .. 'I agree' etc..
+
+	Made it 'accept'
+
+	* /cvsroot/xfce/xfce/xfce/configfile.c:
+	add "a " to the .orig extension message
+
 2001-06-28  csm1975  <csm@moongroup.com>
 
 	* /cvsroot/xfce/xfce/xfzvt/AUTHORS, /cvsroot/xfce/xfce/xfzvt/BUGS, /cvsroot/xfce/xfce/xfzvt/ChangeLog, /cvsroot/xfce/xfce/xfzvt/Makefile.am, /cvsroot/xfce/xfce/xfzvt/Makefile.in, /cvsroot/xfce/xfce/xfzvt/README, /cvsroot/xfce/xfce/xfzvt/TODO, /cvsroot/xfce/xfce/xfzvt/gnome-login-support.c, /cvsroot/xfce/xfce/xfzvt/gnome-login-support.h, /cvsroot/xfce/xfce/xfzvt/gnome-pty-helper.c, /cvsroot/xfce/xfce/xfzvt/gnome-pty.h, /cvsroot/xfce/xfce/xfzvt/gnome-utmp.c, /cvsroot/xfce/xfce/xfzvt/lists.c, /cvsroot/xfce/xfce/xfzvt/lists.h, /cvsroot/xfce/xfce/xfzvt/subshell-includes.h, /cvsroot/xfce/xfce/xfzvt/subshell.c, /cvsroot/xfce/xfce/xfzvt/subshell.h, /cvsroot/xfce/xfce/xfzvt/test-utmp.c, /cvsroot/xfce/xfce/xfzvt/update.c, /cvsroot/xfce/xfce/xfzvt/vt.c, /cvsroot/xfce/xfce/xfzvt/vt.h, /cvsroot/xfce/xfce/xfzvt/vtx.h, /cvsroot/xfce/xfce/xfzvt/zterm.c, /cvsroot/xfce/xfce/xfzvt/zvtterm.c, /cvsroot/xfce/xfce/xfzvt/zvtterm.h, /cvsroot/xfce/xfce/xfzvt/zvtterm.sgml:

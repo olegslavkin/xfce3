@@ -51,6 +51,7 @@
 #define ST_OK		1
 
 #define ERROR		-1
+#define BUFLEN 8192
 
 typedef struct
 {
@@ -95,8 +96,8 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   char lnk[PATH_MAX + 1];
   FILE *ofp, *nfp;
   int len, all, rc;
-#define BUFLEN 8192
   char buff[BUFLEN], transfered[32];
+  char *string;
   struct stat s_stat, t_stat;
 
   if (EN_IS_DIRUP (sen) || (!io_is_valid (sen->label))
@@ -105,6 +106,25 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   if (EN_IS_DIRUP (ten) || (!io_is_valid (ten->label))
       || (ten->type & FT_DIR_UP))
     return (FALSE);
+
+  if (mode == TR_MOVE)
+    {
+      string = _("move");
+    }
+  else if (mode == TR_COPY)
+    {
+      string = _("copy");
+    }
+  else if (mode == TR_LINK)
+    {
+      string = _("link");
+    }
+  else
+    {
+      string = "?";
+    }
+    
+
   if (EN_IS_DIR (ten))
     {
       /* if target is a directory add the filename to the new path */
@@ -123,31 +143,44 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
       sprintf (target, "%s", ten->path);
     }
 
-  if (strcmp (sen->path, target) == 0)
-    {
-      return dlg_skip (_("Source and Target are the same"), target);
-    }
   gtk_entry_set_text (GTK_ENTRY (info[0]), sen->path);
   gtk_entry_set_text (GTK_ENTRY (info[1]), target);
   sprintf (transfered, _("%d bytes"), 0);
   gtk_label_set_text (GTK_LABEL (info[2]), transfered);
 
-  while (gtk_events_pending ())
-    gtk_main_iteration ();
-
   if (lstat (target, &t_stat) != ERROR)
     {
       /* check if they are the same files */
-      if (t_stat.st_ino == sen->inode)
+      if (t_stat.st_ino != sen->inode)
 	{
-	  return dlg_continue (_("Can't transfer, same Inode !"), sen->path);
-	}
-      rc = dlg_ok_skip (_("Override file?"), target);
-      if (rc == DLG_RC_SKIP)
-	return (TRUE);
-      if (rc == DLG_RC_CANCEL)
-	return (FALSE);
+	  rc = dlg_ok_skip (_("Override file?"), target);
+	  if (rc == DLG_RC_SKIP)
+	    return (TRUE);
+	  if (rc == DLG_RC_CANCEL)
+	    return (FALSE);
+        }
     }
+  else if (lstat (ten->path, &t_stat) == ERROR)
+    {
+      return dlg_continue (_("Can't stat() file"), ten->path);
+    }
+
+  if (lstat (sen->path, &s_stat) == ERROR)
+    {
+      return dlg_continue (_("Can't stat() file"), sen->path);
+    }
+
+  /* If src and dest aren't on the same device, ask user */
+  if (s_stat.st_dev != t_stat.st_dev)
+    {
+      char msg[DLG_MAX];
+      sprintf (msg, _("Do you want to %s the item(s) to"), string);
+      if (dlg_question (msg, sen->path) != DLG_RC_OK)
+	{
+	  return (TRUE);
+	}
+    }
+
   if (mode & TR_MOVE)
     {
       /* first check if the files are on the
@@ -157,14 +190,6 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
       /* we copy/move symbolic links as links, so stat() the link
        * itself
        */
-      if (lstat (sen->path, &s_stat) == ERROR)
-	{
-	  return dlg_continue (_("Can't stat() file"), sen->path);
-	}
-      if (stat (ten->path, &t_stat) == ERROR)
-	{
-	  return dlg_continue (_("Can't stat() file"), ten->path);
-	}
       if (s_stat.st_dev == t_stat.st_dev)
 	{
 	  /* are on the same device, so we have just to rename
@@ -243,8 +268,6 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
       all += len;
       sprintf (transfered, _("%d bytes"), all);
       gtk_label_set_text (GTK_LABEL (info[2]), transfered);
-      while (gtk_events_pending ())
-	gtk_main_iteration ();
       if (*st->status == ST_CANCEL)
 	{
 	  fclose (nfp);
@@ -302,8 +325,6 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
    */
   gtk_entry_set_text (GTK_ENTRY (info[0]), sen->path);
   gtk_entry_set_text (GTK_ENTRY (info[1]), ten->path);
-  while (gtk_events_pending ())
-    gtk_main_iteration ();
 
   sprintf (target, "%s/%s", ten->path, sen->label);
 
@@ -374,9 +395,6 @@ trans_dir (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
     }
   while ((de = readdir (dir)) != NULL)
     {
-      while (gtk_events_pending ())
-	gtk_main_iteration ();
-
       if (*st->status == ST_CANCEL)
 	{
 	  closedir (dir);
@@ -509,14 +527,8 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
   gtk_window_set_title (GTK_WINDOW (dialog), title);
   gtk_widget_show_all (dialog);
 
-  while (gtk_events_pending ())
-    gtk_main_iteration ();
-
   while (list)
     {
-      while (gtk_events_pending ())
-	gtk_main_iteration ();
-
       if (status == ST_CANCEL)
 	{
 	  entry_free (target_en);
@@ -568,8 +580,6 @@ transfer (GtkCTree * s_ctree, GList * list, char *path, int mode, int *alive)
    */
 END:
   top_delete (dialog);
-  if (!top_has_more ())
-    gtk_main_quit ();
   if (status == ST_OK)
     gtk_widget_destroy (dialog);
   return (ST_OK);

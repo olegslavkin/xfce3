@@ -554,6 +554,21 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win,
             new_width  = MyDisplayWidth(center_x, center_y)  - (Scr.Margin[1] + Scr.Margin[3]);
         }
         tmp_win->flags |= MAXIMIZED;
+        ConstrainSize (tmp_win, &new_width, &new_height);
+	/* 
+	   Just make sure that the window is not off screen once ConstrainSize
+	   has been called...
+	 */
+	if ((new_x + new_width) > MyDisplayWidth(center_x, center_y))
+	  {
+	    new_x = my_max (new_x + (MyDisplayWidth(center_x, center_y) - new_width), 
+	                    MyDisplayX(center_x, center_y));
+	  }
+	if ((new_y + new_height) > MyDisplayHeight(center_x, center_y))
+	  {
+	    new_y = my_max ((new_y + (MyDisplayHeight(center_x, center_y) - new_height)), 
+	                    MyDisplayY(center_x, center_y));
+	  }
         if (!(tmp_win->flags & ICONIFIED))
         {
             Broadcast (XFCE_M_MAXIMIZE, 3, tmp_win->w, tmp_win->frame,
@@ -574,7 +589,6 @@ Maximize (XEvent * eventp, Window w, XfwmWindow * tmp_win,
                          tmp_win->frame_height,
                          new_x, new_y, new_width, new_height);
         }
-        ConstrainSize (tmp_win, &new_width, &new_height);
         SetupFrame (tmp_win, new_x, new_y, new_width, new_height, TRUE, TRUE);
         SetBorder (tmp_win, Scr.Hilite == tmp_win, True, True, None);
     }
@@ -920,20 +934,27 @@ exec_function (XEvent * eventp, Window w, XfwmWindow * tmp_win,
      * we wont be held up waiting for the function to finish,
      * so the pointer-gram just caused needless delay and flashing
      * on the screen */
-    if (!(fork ()))		/* child process */
+    switch (fork ())
     {
-        /* The following is to avoid X locking when executing
-           terminal based application that requires user input */
-        if ((nulldev = open ("/dev/null", O_RDWR)))
-        {
-            close (0); dup (nulldev);
-        }
-        if (execl (exec_shell_name, exec_shell_name, "-c", cmd, NULL) == -1)
-        {
-            xfwm_msg (ERR, "exec_function", "execl failed (%s)",
-                      strerror (errno));
-            exit (100);
-        }
+        case 0: /* child process */
+            /* The following is to avoid X locking when executing
+               terminal based application that requires user input */
+            if ((nulldev = open ("/dev/null", O_RDWR)))
+            {
+        	close (0); dup (nulldev);
+            }
+            if (execl (exec_shell_name, exec_shell_name, "-c", cmd, NULL) == -1)
+            {
+        	xfwm_msg (ERR, "exec_function", "execl failed (%s)",
+                	  strerror (errno));
+        	exit (100);
+            }
+	    break;
+        case -1:
+            xfwm_msg (WARN, "exec_function", "Cannot fork process");
+            break;
+	default:
+            break;	
     }
     free (cmd);
     return;

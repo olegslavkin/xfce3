@@ -1,0 +1,3468 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-3.8.3\n"
+"POT-Creation-Date: 2001-07-11 22:25+0200\n"
+"PO-Revision-Date: 2001-07-08 19:45+0200\n"
+"Last-Translator: Milan Avramoviæ <chomee@operamail.com>\n"
+"Language-Team: sr_YU <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libs/colorselect.c:93 xfclock/xfclock_colorsel.c:79
+#: xfdiff/xfdiff_colorsel.c:87
+msgid "Select Color"
+msgstr "Izaberite boju"
+
+#: libs/fileselect.c:80
+msgid "Select File"
+msgstr "Izaberite datoteku"
+
+#: libs/fontselection.c:82
+msgid "Font Selection"
+msgstr "Izbor tipa slova"
+
+#: libs/xfce-common.c:264 xfdiff/xfdiff_gui.c:1191 xfdiff/xfdiff_misc.c:129
+#: xfdiff/xfdiff_misc.c:139
+msgid "OK"
+msgstr "U redu"
+
+#: libs/xfce-common.c:279
+msgid "Message"
+msgstr "Poruka"
+
+#: libs/xfce-common.c:400 xfdiff/xfdiff_misc.c:134 xftree/gtk_dlg.c:217
+msgid "Yes"
+msgstr "Da"
+
+#: libs/xfce-common.c:400 xfdiff/xfdiff_misc.c:134 xftree/gtk_dlg.c:249
+msgid "No"
+msgstr "Ne"
+
+#: libs/xfce-common.c:415 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:175
+msgid "Question"
+msgstr "Pitanje"
+
+#: libs/xfce-common.c:628
+msgid "Terminated: "
+msgstr "Prekinut: "
+
+#: libs/xpmext.c:421 libs/xpmext.c:443
+#, c-format
+msgid "*** WARNING ***: Cannot load image file %s\n"
+msgstr "*** UPOZORENJE ***: Ne mogu da uèitam sliku %s\n"
+
+#: libs/xpmext.c:473
+#, c-format
+msgid "*** WARNING ***: Cannot load pixmap file %s\n"
+msgstr "*** UPOZORENJE ***: Ne mogu da uèitam pixmapu %s\n"
+
+#: xfce/action.c:63
+msgid "Define action ..."
+msgstr "Defini¹ite akciju ..."
+
+#: xfce/action.c:110 xfce/modify.c:168
+msgid "Command Line :"
+msgstr "Naredba :"
+
+#: xfce/action.c:122
+msgid "Icon Style :"
+msgstr "Stil ikone :"
+
+#: xfbd/xfbd.c:550 xfce/action.c:155 xfce/action.c:168 xfce/modify.c:232
+#: xfce/modify.c:245 xfsound/xfsound.c:445
+msgid "Browse ..."
+msgstr "Prelistaj ..."
+
+#. ok and cancel buttons
+#: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
+#: xfce/setup.c:1583 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
+#: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
+#: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
+#: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
+#: xftree/gtk_dlg.c:213 xftree/gtk_exec.c:157 xftree/gtk_prop.c:187
+msgid "Ok"
+msgstr "U redu"
+
+#: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
+#: xfce/setup.c:1607 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
+#: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
+#: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
+msgid "Cancel"
+msgstr "Odustani"
+
+#: xfce/action_cb.c:81
+msgid "You must provide the command to execute !"
+msgstr "Unesite naredbu koja treba da se izvr¹i !"
+
+#: xfce/configfile.c:54
+#, c-format
+msgid ""
+"XFce : Syntax error in configuration file\n"
+"(%s)\n"
+msgstr ""
+"XFce : Sintaksna gre¹ka u konfiguracionoj datoteci\n"
+"(%s)\n"
+
+#: xfce/configfile.c:55 xfclock/xfclock_config.c:55
+msgid ""
+"Syntax error in configuration file\n"
+"Aborting"
+msgstr ""
+"Sintaksna gre¹ka u konfiguracionoj datoteci\n"
+"Odustajem"
+
+#: xfce/configfile.c:62
+#, c-format
+msgid ""
+"XFce : Data mismatch error in config file\n"
+"(%s)\n"
+msgstr ""
+"XFce : Pogre¹an podatak u konfiguracionoj datoteci\n"
+"(%s)\n"
+
+#: xfce/configfile.c:63 xfclock/xfclock_config.c:64
+msgid ""
+"Data mismatch error in configuration file\n"
+"Aborting"
+msgstr ""
+"Pogre¹an podatak u konfiguracionoj datoteci\n"
+"Odustajem"
+
+#: xfce/configfile.c:188 xfclock/xfclock_config.c:134
+msgid "Cannot create file"
+msgstr "Ne mogu da kreiram datoteku"
+
+#: xfce/configfile.c:347
+msgid "Cannot reset configuration file"
+msgstr "Ne mogu da ispraznim konfiguracionu datoteku"
+
+#: xfce/configfile.c:350
+msgid "Creating new config file...\n"
+msgstr "Kreiram novu konfiguracionu datoteku...\n"
+
+#: xfce/configfile.c:561 xfce/configfile.c:570 xfce/configfile.c:578
+#, c-format
+msgid "XFce : %s File not found.\n"
+msgstr "XFce : ne mogu da pronaðem datoteku %s .\n"
+
+#: xfce/configfile.c:577 xfce/configfile.c:584
+msgid "Cannot open configuration file"
+msgstr "Ne mogu da otvorim konfiguracionu datoteku"
+
+#: xfce/configfile.c:590
+msgid "Does not looks like an XFce 3 configuration file !"
+msgstr "Ne lièi na XFce 3 konfiguracionu datoteku !"
+
+#: xfce/configfile.c:592
+#, fuzzy
+msgid ""
+"Do you want to reset the configuration file ?\n"
+" \t(The previous file will be saved with a \".orig\" extension)"
+msgstr ""
+"®elite li da poni¹tite konfiguracionu datoteku ?\n"
+" \t(Sada¹nja æe biti snimljena sa nasstavkom \".orig\")"
+
+#: xfce/configfile.c:602
+msgid "Cannot open new config, Giving up..."
+msgstr "Ne mogu da otvorim novu konfiguraciju, odustajem..."
+
+#: xfce/configfile.c:603
+msgid "Cannot load configuration file"
+msgstr "Ne mogu da uèitam konfiguracionu datoteku"
+
+#: xfce/configfile.c:610
+msgid "Cannot use old version of XFce configuration files"
+msgstr "Ne mo¾ete koristiti stare verzije XFce konfiguracionih datoteka"
+
+#: xfce/diagnostic.c:91 xfce/diagnostic.c:136
+msgid "Subprocess diagnostic"
+msgstr "Dijagnostièke poruke"
+
+#: xfbd/xfbd.c:570 xfce/diagnostic.c:116 xfdiff/xfdiff_diag.c:186
+#: xfdiff/xfdiff_gui.c:1386 xfglob/xfglob.c:675
+msgid "Clear"
+msgstr "Oèisti"
+
+#: xfce/diagnostic.c:121 xfdiff/xfdiff_diag.c:191 xfglob/xfglob.c:689
+msgid "Dismiss"
+msgstr "Ukloni prozor"
+
+#: xfce/info.c:77
+msgid "Info ..."
+msgstr "Informacije ..."
+
+#: xfbd/xfbd.c:447 xfce/info.c:108 xfce/modify.c:134 xfce/popup.c:147
+#: xfce/popup.c:315 xfce/startup.c:95 xfce/xfce.c:223 xfce/xfce.c:293
+#: xfce/xfce.c:595 xfce/xfce.c:634 xfce/xfce.c:777 xfce/xfce.c:806
+#: xfce/xfce.c:848 xfce/xfce.c:939 xfce/xfce.c:967 xfglob/xfglob.c:563
+#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:940
+msgid "Couldn't create pixmap"
+msgstr "Ne mogu da kreiram sliku"
+
+#: xfce/info.c:125
+msgid "By Olivier Fourdan (c) 1997-2000"
+msgstr "Autor: Olivier Fourdan (c) 1997-2000"
+
+#: xfce/info.c:193
+msgid "Accept"
+msgstr "Sla¾em se"
+
+#: xfce/modify.c:70 xfce/modify.c:372
+msgid "Modify Item ..."
+msgstr "Izmeni stavku ..."
+
+#: xfce/modify.c:142
+msgid "Preview Icon"
+msgstr "Izgled ikone"
+
+#: xfce/modify.c:180
+msgid "Icon File :"
+msgstr "Datoteka ikone :"
+
+#: xfce/modify.c:192
+msgid "Label :"
+msgstr "Naziv :"
+
+#: xfbd/xfbdmgr.c:178 xfce/modify.c:294 xfumed/interface.c:389
+msgid "Remove"
+msgstr "Ukloni"
+
+#: xfbd/xfbdmgr.c:172 xfce/modify.c:353
+msgid "Add Item ..."
+msgstr "Dodaj stavku ..."
+
+#: xfce/modify_cb.c:118
+msgid "Are you sure you want to remove this entry ?"
+msgstr "Da li ¾elite da uklonite ovu stavku?"
+
+#: xfce/modify_cb.c:159 xfce/modify_cb.c:191
+msgid ""
+"You must provide the command\n"
+"and the label, at least !"
+msgstr ""
+"Morate uneti bar\n"
+"naredbu i naziv !"
+
+#: xfce/popup.c:277
+msgid "Add a new entry..."
+msgstr "Dodaj stavku"
+
+#: xfce/popup.c:326
+msgid "Add icon..."
+msgstr "Dodaj ikonu..."
+
+#: xfce/popup.c:366
+msgid "Click to tear off popup menu"
+msgstr "Kliknite da odvojite meni"
+
+#: xfce/popup_cb.c:203
+msgid "Cannot find the file you dropped !"
+msgstr "Ne mogu da naðem datoteku koju ste prevukli !"
+
+#: xfce/screen.c:59
+msgid "Screen label ..."
+msgstr "Naziv ekrana ..."
+
+#: xfce/screen.c:106
+msgid "Define screen label :"
+msgstr "Unesite naziv ekrana :"
+
+#: xfce/selects.c:58
+msgid "Files related"
+msgstr "Rad sa datotekama"
+
+#: xfce/selects.c:59
+msgid "Terminals/Connections"
+msgstr "Terminali / Povezivanje"
+
+#: xfce/selects.c:60
+msgid "Mail tools/browsers"
+msgstr "Po¹ta / Internet"
+
+#: xfce/selects.c:61
+msgid "Print manager"
+msgstr "Kontrola ¹tampe"
+
+#: xfce/selects.c:62
+msgid "Configuration"
+msgstr "Pode¹avanje"
+
+#: xfce/selects.c:63
+msgid "Misc. tools/Utilities"
+msgstr "Razni alati"
+
+#: xfce/selects.c:64
+msgid "Manual/Help browser"
+msgstr "Uputstva / Pomoæ"
+
+#: xfce/selects.c:65
+msgid "Writing/Text tools"
+msgstr "Pisanje / Obrada teksta"
+
+#: xfce/selects.c:66
+msgid "Schedule/Appointments"
+msgstr "Raspored / Sastanci"
+
+#: xfce/selects.c:67
+msgid "Multimedia"
+msgstr "Multimedija"
+
+#: xfce/selects.c:68
+msgid "Games"
+msgstr "Igre"
+
+#: xfce/selects.c:69
+msgid "Network"
+msgstr "Mre¾a"
+
+#: xfce/selects.c:70
+msgid "Sound"
+msgstr "Zvuk"
+
+#: xfce/selects.c:71
+msgid "External..."
+msgstr "Spolja¹nja..."
+
+#: xfce/setup.c:283
+msgid "Setup"
+msgstr "Pode¹avanja"
+
+#: xfce/setup.c:374
+msgid "GTK theme engine : "
+msgstr "Izgled GTK : "
+
+#: xfce/setup.c:403
+msgid "Apply colors to all applications"
+msgstr "Primeni boje na sve aplikacije"
+
+#: xfbd/xfbdmgr.c:166 xfce/setup.c:430
+msgid "Load ..."
+msgstr "Uèitaj ..."
+
+#: xfbd/xfbdmgr.c:160 xfce/setup.c:444
+msgid "Save ..."
+msgstr "Snimi ..."
+
+#: xfce/setup.c:458
+msgid "Default"
+msgstr "Fabrièke"
+
+#: xfce/setup.c:492
+msgid "Repaint root window of workspace"
+msgstr "Postavi boju pozadine"
+
+#: xfce/setup.c:505
+msgid "Use gradient color as wallpaper"
+msgstr "Koristi preliv kao pozadinu"
+
+#: xfce/setup.c:518
+msgid "Use tear-off menus"
+msgstr "Koristi menije koji se odvajaju"
+
+#: xfce/setup.c:531
+msgid "Show subprocess diagnostic dialog"
+msgstr "Prika¾i prozor sas dijagnostièkim porukama"
+
+#: xfce/setup.c:543
+msgid "Panel layer"
+msgstr "Sloj sa panelom"
+
+#: xfce/setup.c:561
+msgid "Bottom"
+msgstr "Dole"
+
+#: xfce/setup.c:584 xfce/setup.c:1173
+msgid "Top"
+msgstr "Gore"
+
+#: xfce/setup.c:594
+msgid "Clock"
+msgstr "Sat"
+
+#: xfce/setup.c:612
+msgid "Use digital clock on panel"
+msgstr "Prika¾i digitalni sat na panelu"
+
+#: xfce/setup.c:626
+msgid "Use military time (24 hours)"
+msgstr "Prika¾i 24-èasovno vreme"
+
+#: xfce/setup.c:638
+msgid "Tooltips"
+msgstr "Tooltips"
+
+#: xfce/setup.c:657
+msgid "Tooltips delay (ms.) : "
+msgstr "Ka¹njenje tooltips-a (ms) : "
+
+#: xfce/setup.c:685
+msgid "Virtual Screens"
+msgstr "Virtuelni ekrani"
+
+#: xfce/setup.c:703
+msgid "Number of virtual desktops : "
+msgstr "Broj virtuelnih ekrana : "
+
+#: xfce/setup.c:728
+msgid "Popups & Icons"
+msgstr "Meniji i ikone"
+
+#: xfce/setup.c:746
+msgid "Number of popup menus : "
+msgstr "Broj menija"
+
+#: xfce/setup.c:771
+msgid "Size of icons on panel"
+msgstr "Velièina ikona na panelu"
+
+#: xfce/setup.c:790 xfce/setup.c:848
+msgid "Large"
+msgstr "Velike"
+
+#: xfce/setup.c:804 xfce/setup.c:862
+msgid "Medium"
+msgstr "Srednje"
+
+#: xfce/setup.c:817 xfce/setup.c:875
+msgid "Small"
+msgstr "Male"
+
+#: xfce/setup.c:829
+msgid "Size of icons on pop-up menus"
+msgstr "Velièina ikona u menijima"
+
+#: xfce/setup.c:887
+msgid "Font style"
+msgstr "Tip slova"
+
+#: xfce/setup.c:917 xfce/setup.c:1374 xfce/setup.c:1388 xfce/setup.c:1402
+msgid "Browse..."
+msgstr "Prelistaj..."
+
+#: xfce/setup.c:952
+msgid "Click to focus windows"
+msgstr "Promena prozora samo klikom"
+
+#: xfce/setup.c:965
+msgid "Automatically focus on new window"
+msgstr "Automatski prebaci kontrolu u novi prozor"
+
+#: xfce/setup.c:978
+msgid "Auto raise windows"
+msgstr "Automatski podigni prozor"
+
+#: xfce/setup.c:992
+#, fuzzy
+msgid "Show contents of window while moving"
+msgstr "Prikazuj sadr¾inu prozora tokom pomeranja"
+
+#: xfce/setup.c:1007
+#, fuzzy
+msgid "Show contents of window while resizing"
+msgstr "Prikazuj sadr¾inu prozora tokom promene velièine"
+
+#: xfce/setup.c:1022
+#, fuzzy
+msgid "Use gradient color for the active window"
+msgstr "Koristi preliv na aktivnom prozoru"
+
+#: xfce/setup.c:1036
+#, fuzzy
+msgid "Use gradient color for inactive windows"
+msgstr "Koristi preliv na neaktivnom prozoru"
+
+#: xfce/setup.c:1074
+msgid "Window border style : "
+msgstr "Izgled rama prozora : "
+
+#: xfce/setup.c:1117
+msgid "Window snapping size (0 disable) : "
+msgstr "Korak za promenu prozora (0 - iskljuèeno) : "
+
+#: xfce/setup.c:1156
+msgid "Icon position"
+msgstr "Polo¾aj ikona"
+
+#: xfce/setup.c:1188 xfmouse/xfmouse.c:209
+msgid "Left"
+msgstr "Levo"
+
+#: xfce/setup.c:1203
+msgid "bottom"
+msgstr "U dnu"
+
+#: xfce/setup.c:1218 xfmouse/xfmouse.c:220
+msgid "Right"
+msgstr "Desno"
+
+#: xfce/setup.c:1334
+msgid "Title font :"
+msgstr "Tip slova u zaglavlju :"
+
+#: xfce/setup.c:1347
+msgid "Icon font :"
+msgstr "Tip slova ispod ikona :"
+
+#: xfce/setup.c:1360
+msgid "Menu font :"
+msgstr "Tip slova u menijima :"
+
+#: xfce/setup.c:1438
+msgid "Sound module (xfsound)"
+msgstr "Pode¹avanje zvuka (xfsound)"
+
+#: xfce/setup.c:1452
+msgid "Mouse settings (xfmouse)"
+msgstr "Pode¹avanje mi¹a (xfmouse)"
+
+#: xfce/setup.c:1466
+msgid "Backdrop settings (xfbd)"
+msgstr "Pode¹avanje pozadine (xfbd)"
+
+#: xfce/setup.c:1480
+msgid "Pager (xfpager)"
+msgstr "Pregled virtuelnih ekrana (xfpager)"
+
+#: xfce/setup.c:1494
+msgid "GNOME (xfgnome)"
+msgstr "GNOME (xfgnome)"
+
+#: xfce/setup.c:1508
+msgid "GNOME menu (xfmenu)"
+msgstr "GNOME meni (xfmenu)"
+
+#: xfce/setup.c:1522
+msgid "KDE menu (xfmenu)"
+msgstr "KDE meni (xfmenu)"
+
+#: xfce/setup.c:1535
+msgid "Palette"
+msgstr "Paleta"
+
+#: xfce/setup.c:1543
+msgid "XFce"
+msgstr "XFce"
+
+#: xfce/setup.c:1551
+msgid "Windows"
+msgstr "Prozori"
+
+#: xfce/setup.c:1559 xfce/startup.c:60 xfsound/xfsound.c:92
+msgid "Startup"
+msgstr "Startovanje"
+
+#: xfbd/xfbd.c:560 xfce/setup.c:1595 xfmouse/xfmouse.c:322
+#: xfsound/xfsound.c:572
+msgid "Apply"
+msgstr "Primeni"
+
+#: xfce/startup.c:102
+#, fuzzy
+msgid "Please wait, XFce is loading..."
+msgstr "Molim saèekajte, XFce se uèitava..."
+
+#: xfce/xfce.c:63
+msgid "One"
+msgstr "Jedan"
+
+#: xfce/xfce.c:63
+msgid "Two"
+msgstr "Dva"
+
+#: xfce/xfce.c:63
+msgid "Three"
+msgstr "Tri"
+
+#: xfce/xfce.c:63
+msgid "Four"
+msgstr "Èetiri"
+
+#: xfce/xfce.c:63
+msgid "Five"
+msgstr "Pet"
+
+#: xfce/xfce.c:64
+msgid "Six"
+msgstr "©est"
+
+#: xfce/xfce.c:64
+msgid "Seven"
+msgstr "Sedam"
+
+#: xfce/xfce.c:64
+msgid "Eight"
+msgstr "Osam"
+
+#: xfce/xfce.c:64
+msgid "Nine"
+msgstr "Devet"
+
+#: xfce/xfce.c:64
+msgid "Ten"
+msgstr "Deset"
+
+#: xfce/xfce.c:65
+msgid "Eleven"
+msgstr "Jedanaest"
+
+#: xfce/xfce.c:65
+msgid "Twelve"
+msgstr "Dvanaest"
+
+#: xfce/xfce.c:65
+msgid "Thirteen"
+msgstr "Trinaest"
+
+#: xfce/xfce.c:65
+msgid "Fourteen"
+msgstr "Èetrnaest"
+
+#: xfce/xfce.c:65
+msgid "Fifteen"
+msgstr "Petnaest"
+
+#: xfce/xfce.c:66
+msgid "Sixteen"
+msgstr "©esnaest"
+
+#: xfce/xfce.c:66
+msgid "Seventeen"
+msgstr "Sedamnaest"
+
+#: xfce/xfce.c:66
+msgid "Eighteen"
+msgstr "Osamnaest"
+
+#: xfce/xfce.c:66
+msgid "Nineteen"
+msgstr "Devetnaest"
+
+#: xfce/xfce.c:66
+msgid "Twenty"
+msgstr "Dvadeset"
+
+#: xfce/xfce.c:106 xfclock/xfclock_menus.c:119
+msgid "Digital mode"
+msgstr "Digitalni prikaz"
+
+#: xfce/xfce.c:118
+#, fuzzy
+msgid "24 hours mode"
+msgstr "24-èasovni prikaz"
+
+#: xfce/xfce.c:800 xfclock/xfclock_menus.c:269
+msgid "About..."
+msgstr "O..."
+
+#: xfce/xfce.c:842
+msgid "Setup..."
+msgstr "Pode¹avanja..."
+
+#: xfce/xfce.c:868
+msgid "Whoooops !"
+msgstr "Uuups !"
+
+#: xfbd/xfbdmgr.c:184 xfce/xfce.c:872 xfclock/xfclock_menus.c:68
+#: xfclock/xfclock_menus.c:95 xfglob/xfglob.c:2164 xftree/xtree_gui.c:2864
+#: xftree/xtree_gui.c:3000 xftree/xtree_gui.c:3046 xftree/xtree_gui.c:3088
+#: xftree/xtree_gui.c:3124 xfumed/interface.c:428
+msgid "Quit"
+msgstr "Izaði"
+
+#. kind of semphor
+#: xfce/xfce_cb.c:66
+msgid "Sunday"
+msgstr "Nedelja"
+
+#: xfce/xfce_cb.c:67
+msgid "Monday"
+msgstr "Ponedeljak"
+
+#: xfce/xfce_cb.c:68
+msgid "Tuesday"
+msgstr "Utorak"
+
+#: xfce/xfce_cb.c:69
+msgid "Wednesday"
+msgstr "Sreda"
+
+#: xfce/xfce_cb.c:70
+msgid "Thursday"
+msgstr "Èetvrtak"
+
+#: xfce/xfce_cb.c:71
+msgid "Friday"
+msgstr "Petak"
+
+#: xfce/xfce_cb.c:72
+msgid "Saturday"
+msgstr "Subota"
+
+#: xfce/xfce_cb.c:75
+msgid "January"
+msgstr "Januar"
+
+#: xfce/xfce_cb.c:76
+msgid "February"
+msgstr "Februar"
+
+#: xfce/xfce_cb.c:77
+msgid "March"
+msgstr "Mart"
+
+#: xfce/xfce_cb.c:78
+msgid "April"
+msgstr "April"
+
+#: xfce/xfce_cb.c:79
+msgid "May"
+msgstr "Maj"
+
+#: xfce/xfce_cb.c:80
+msgid "June"
+msgstr "Jun"
+
+#: xfce/xfce_cb.c:81
+msgid "July"
+msgstr "Jul"
+
+#: xfce/xfce_cb.c:82
+msgid "August"
+msgstr "Avgust"
+
+#: xfce/xfce_cb.c:83
+msgid "September"
+msgstr "Septembar"
+
+#: xfce/xfce_cb.c:84
+msgid "October"
+msgstr "Oktobar"
+
+#: xfce/xfce_cb.c:85
+msgid "November"
+msgstr "Novembar"
+
+#: xfce/xfce_cb.c:86
+msgid "December"
+msgstr "Decembar"
+
+#: xfce/xfce_cb.c:105
+msgid ""
+"Are you sure you want to Quit ?\n"
+"This might log you off !"
+msgstr ""
+"Da li sigurno ¾elite da izaðete ?\n"
+"Ovo vas mo¾e izlogovati !"
+
+#: xfce/xfce_cb.c:179
+msgid ""
+"You've selected a desktop which is not currently\n"
+"visible in XFce panel."
+msgstr ""
+"Odabrali ste ekran koji se trenutno\n"
+"ne vidi na XFce panelu."
+
+#: xfce/xfwm.c:81
+msgid "XFCE: Communication pipe closed. Exiting...\n"
+msgstr "XFce: Cev za komunikacije zatvorena. Izlazim...\n"
+
+#: xfce/xfwm.c:441 xfwm/xfwm.c:878 xfwm/xfwm.c:879 xfwm/xfwm.c:880
+#: xfwm/xfwm.c:881 xfwm/xfwm.c:882 xfwm/xfwm.c:883 xfwm/xfwm.c:884
+#: xfwm/xfwm.c:885 xfwm/xfwm.c:886 xfwm/xfwm.c:887
+msgid "Workspace"
+msgstr "Radni prostor"
+
+#: xftree/gtk_cpy.c:70
+#, c-format
+msgid "transfer_view() %d\n"
+msgstr "transfer_view() %d\n"
+
+#: xftree/gtk_cpy.c:112
+msgid "move"
+msgstr "prenesete"
+
+#: xftree/gtk_cpy.c:116
+msgid "copy"
+msgstr "kopirate"
+
+#: xftree/gtk_cpy.c:120
+msgid "link"
+msgstr "pove¾ete"
+
+#: xftree/gtk_cpy.c:148 xftree/gtk_cpy.c:269
+#, c-format
+msgid "%d bytes"
+msgstr "%d bajtova"
+
+#: xftree/gtk_cpy.c:156
+msgid "Override file?"
+msgstr "Da prevaziðem datoteku?"
+
+#: xftree/gtk_cpy.c:165 xftree/gtk_cpy.c:170 xftree/gtk_cpy.c:347
+#: xftree/gtk_cpy.c:351 xftree/xtree_gui.c:1354 xftree/xtree_gui.c:1361
+msgid "Can't stat() file"
+msgstr "Ne mogu da izvr¹im stat()"
+
+#: xftree/gtk_cpy.c:177
+#, c-format
+msgid "Do you want to %s the item(s) to"
+msgstr "®elite li da %s stavke u"
+
+#: xftree/gtk_cpy.c:219
+msgid "readlink()"
+msgstr "readlink()"
+
+#: xftree/gtk_cpy.c:239
+msgid "Can't copy device file"
+msgstr "Ne mo¾ete kopirati datoteku ureðaja"
+
+#: xftree/gtk_cpy.c:244
+msgid "Can't copy FIFO"
+msgstr "Ne mo¾ete kopirati FIFO"
+
+#: xftree/gtk_cpy.c:248
+msgid "Can't copy socket"
+msgstr "Ne mo¾ete kopirati SOCKET"
+
+#: xftree/gtk_cpy.c:283
+#, fuzzy
+msgid "Too free bytes transferred ! Device full ?"
+msgstr "Premalo podataka preneto ! Ureðaj pun ?"
+
+#: xftree/gtk_cpy.c:287
+#, fuzzy
+msgid "Too many bytes transferred !?"
+msgstr "Previ¹e podataka preneto !?"
+
+#: xftree/gtk_cpy.c:333
+msgid "Source and Target directories are the same"
+msgstr "Izvorni i ciljni direktorijum su isti"
+
+#: xftree/gtk_cpy.c:384
+msgid "exists and is not a directory"
+msgstr "postoji i nije direktorijum"
+
+#: xftree/gtk_cpy.c:458
+msgid "XFTree: Copy"
+msgstr "XFTree: Kopiranje"
+
+#: xftree/gtk_cpy.c:462
+msgid "XFTree: Move"
+msgstr "XFTree: Pomeranje"
+
+#: xftree/gtk_cpy.c:466
+msgid "XFTree: Link"
+msgstr "XFTree: Povezivanje"
+
+#: xftree/gtk_cpy.c:470
+#, c-format
+msgid "Unknown transfer mode: %d\n"
+msgstr "Nepoznat naèin prenosa: %d\n"
+
+#: xftree/gtk_cpy.c:476
+msgid "transfer()"
+msgstr "transfer()"
+
+#: xftree/gtk_cpy.c:476
+msgid "fatal error"
+msgstr "Fatalna gre¹ka"
+
+#: xftree/gtk_cpy.c:482
+msgid "Error getting info from"
+msgstr "Gre¹ka tokom dobijanja informacija od"
+
+#: xftree/gtk_cpy.c:487
+msgid "Fatal Error"
+msgstr "Fatalna gre¹ka"
+
+#: xftree/gtk_cpy.c:487
+msgid "Can't transfer items to a file"
+msgstr "Ne mogu preneti stavke u datoteku"
+
+#: xftree/gtk_cpy.c:506
+msgid "Source: "
+msgstr "Izvor: "
+
+#: xftree/gtk_cpy.c:512
+msgid "Target: "
+msgstr "Cilj: "
+
+#: xftree/gtk_cpy.c:518
+msgid "0 bytes transferred"
+msgstr "Preneto 0 bajtova"
+
+#: xftree/gtk_cpy.c:541 xftree/gtk_dlg.c:185
+msgid "Error"
+msgstr "Gre¹ka"
+
+#: xftree/gtk_cpy.c:541
+msgid "Can't transfer a directory to a file"
+msgstr "Ne mo¾ete preneti direktorijum u datoteku"
+
+#: xftree/gtk_dlg.c:180
+msgid "Information"
+msgstr "Obave¹tenje"
+
+#: xftree/gtk_dlg.c:190
+msgid "Warning"
+msgstr "Upozorenje"
+
+#: xftree/gtk_dlg.c:194
+msgid "Dialog"
+msgstr "Dijalog"
+
+#: xftree/gtk_dlg.c:221
+msgid "Continue"
+msgstr "Nastavi"
+
+#: xftree/gtk_dlg.c:234 xftree/gtk_prop.c:207
+msgid "Skip"
+msgstr "Izbegni"
+
+#: xftree/gtk_dlg.c:260 xftree/gtk_prop.c:208
+msgid "All"
+msgstr "Sve"
+
+#: xftree/gtk_dlg.c:270
+msgid "Close"
+msgstr "Zatvori"
+
+#: xftree/gtk_exec.c:138 xftree/xtree_gui.c:3008
+msgid "Open with ..."
+msgstr "Otvori pomoæu ..."
+
+#: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
+#: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
+#: xftree/xtree_gui.c:3121 xfwm/xfwm.c:913
+msgid "Run program ..."
+msgstr "Startuj program ..."
+
+#: xfrun/xfrun.c:243 xftree/gtk_exec.c:190 xftree/xtree_gui.c:2771
+#: xftree/xtree_gui.c:2954
+msgid "Open in terminal"
+msgstr "Startuj u terminalu"
+
+#. this should never happen
+#.
+#: xftree/gtk_exec.c:212
+#, c-format
+msgid "Fatal error in %s at %d\n"
+msgstr "Fatalna gre¹ka u %s na %d\n"
+
+#: xftree/gtk_get.c:83
+msgid "Override file ?"
+msgstr "Da prevaziðem datoteku?"
+
+#: xftree/gtk_get.c:121
+msgid "Source : "
+msgstr "Izvor : "
+
+#: xftree/gtk_get.c:128
+msgid "Target : "
+msgstr "Cilj : "
+
+#: xftree/gtk_get.c:135
+msgid "0 bytes received"
+msgstr "Primljeno 0 bajtova"
+
+#: xftree/gtk_get.c:144
+msgid "XFTree: Download"
+msgstr "XFTree: Skidanje s mre¾e"
+
+#: xftree/gtk_get.c:170
+#, c-format
+msgid "%d bytes received (%d bps)"
+msgstr "Primljeno %d bajtova (%d b/sec)"
+
+#: xftree/gtk_prop.c:176 xftree/xtree_gui.c:2700 xftree/xtree_gui.c:2701
+#: xftree/xtree_gui.c:2702
+msgid "Properties"
+msgstr "Osobine"
+
+#. date and size page
+#: xftree/gtk_prop.c:225
+msgid "Info"
+msgstr "Obave¹tenja"
+
+#: xftree/gtk_prop.c:230
+msgid "Name :"
+msgstr "Ime :"
+
+#: xftree/gtk_prop.c:251
+msgid "Type :"
+msgstr "Tip :"
+
+#: xftree/gtk_prop.c:260
+#, c-format
+msgid "%ld Bytes"
+msgstr "%ld bajtova"
+
+#: xftree/gtk_prop.c:262
+msgid "Size :"
+msgstr "Velièina :"
+
+#: xftree/gtk_prop.c:274
+msgid "Creation Time :"
+msgstr "Vreme kreiranja :"
+
+#: xftree/gtk_prop.c:286
+msgid "Modification Time :"
+msgstr "Vreme poslednje modifikacije :"
+
+#: xftree/gtk_prop.c:298
+msgid "Access Time :"
+msgstr "Vreme poslednjeg pristupa :"
+
+#: xftree/gtk_prop.c:308
+msgid "Permissions"
+msgstr "Prava pristupa"
+
+#: xfglob/xfglob.c:1706 xftree/gtk_prop.c:312 xftree/gtk_prop.c:448
+msgid "Owner :"
+msgstr "Vlasnik :"
+
+#: xfglob/xfglob.c:1707 xfglob/xfglob.c:1739 xfglob/xfglob.c:1770
+#: xftree/gtk_prop.c:313 xftree/gtk_prop.c:350 xftree/gtk_prop.c:386
+msgid "Read"
+msgstr "Èitanje"
+
+#: xfglob/xfglob.c:1713 xfglob/xfglob.c:1745 xfglob/xfglob.c:1776
+#: xftree/gtk_prop.c:319 xftree/gtk_prop.c:356 xftree/gtk_prop.c:392
+msgid "Write"
+msgstr "Pisanje"
+
+#: xfglob/xfglob.c:1719 xfglob/xfglob.c:1751 xfglob/xfglob.c:1782
+#: xftree/gtk_prop.c:325 xftree/gtk_prop.c:362 xftree/gtk_prop.c:398
+msgid "Execute"
+msgstr "Izvr¹avanje"
+
+#: xfglob/xfglob.c:1725 xftree/gtk_prop.c:331
+msgid "Set UID"
+msgstr "Set UID"
+
+#: xfglob/xfglob.c:1738 xftree/gtk_prop.c:349 xftree/gtk_prop.c:460
+msgid "Group :"
+msgstr "Grupa :"
+
+#: xfglob/xfglob.c:1757 xftree/gtk_prop.c:368
+msgid "Set GID"
+msgstr "Set GID"
+
+#: xfglob/xfglob.c:1769 xftree/gtk_prop.c:385
+msgid "Other :"
+msgstr "Ostali :"
+
+#: xfglob/xfglob.c:1788 xftree/gtk_prop.c:404
+msgid "Sticky"
+msgstr "Sticky"
+
+#: xftree/gtk_prop.c:437
+msgid "Owner"
+msgstr "Vlasnik"
+
+#: xftree/gtk_prop.c:442 xftree/gtk_prop.c:454
+msgid "unknown"
+msgstr "nepoznat"
+
+#: xftree/xtree.c:112
+#, c-format
+msgid "XFTree, based on XTree Version %s\n"
+msgstr "XFTree, zasnovan na XTree verziji %s\n"
+
+#: xftree/xtree.c:113
+#, c-format
+msgid "directory: %s\n"
+msgstr "direktorijum: %s\n"
+
+#: xftree/xtree.c:120 xftree/xtree.c:159
+#, c-format
+msgid "creating directory: %s\n"
+msgstr "kreiram direktorijum: %s\n"
+
+#: xftree/xtree.c:177
+#, c-format
+msgid "geometry: %dx%d+%d+%d\n"
+msgstr "geometry: %dx%d+%d+%d\n"
+
+#: xftree/xtree_gui.c:187
+#, c-format
+msgid "malloc error in %s at line %d\n"
+msgstr "malloc gre¹ka u %s u liniji %d\n"
+
+#: xftree/xtree_gui.c:343
+msgid "menu_detach()\n"
+msgstr "menu_detach()\n"
+
+#: xftree/xtree_gui.c:1058
+msgid "Can't copy device, fifo and socket files as regular files!\n"
+msgstr ""
+"Ne mo¾ete kopirati datoteke ureðaja, fifo i socket-e kao obiène datoteke!\n"
+
+#: xftree/xtree_gui.c:1150
+msgid "Moving file..\n"
+msgstr "Pomeram datoteku...\n"
+
+#: xftree/xtree_gui.c:1187
+msgid "move_dir() recursive failed\n"
+msgstr "Rekurzivni move_dir() nije uspeo\n"
+
+#: xftree/xtree_gui.c:1195
+msgid "move_dir() move_file() failed\n"
+msgstr "move_dir() move_file() nije uspeo\n"
+
+#. nothing to delete
+#: xftree/xtree_gui.c:1311 xftree/xtree_gui.c:2236
+msgid "No files marked !"
+msgstr "Nijedna datoteka nije obele¾ena"
+
+#: xftree/xtree_gui.c:1331 xftree/xtree_gui.c:1333
+msgid "Delete item ?"
+msgstr "Da obri¹em stavku?"
+
+#: xftree/xtree_gui.c:1375
+msgid "move_file()"
+msgstr "move_file()"
+
+#: xftree/xtree_gui.c:1378
+msgid "Move to trash failed"
+msgstr "Prebacivanje u ðubre nije uspelo"
+
+#: xftree/xtree_gui.c:1393
+msgid "Can't move file to trash, hard delete ?"
+msgstr "Ne mogu da prebacim datoteku u ðubre, da je obri¹em?"
+
+#: xftree/xtree_gui.c:1435
+msgid ""
+"This is XFTree, based on 'XTree' \n"
+"(c) by Rasca\n"
+"published under GNU GPL\n"
+"http://home.pages.de/~rasca/xap/"
+msgstr ""
+"Ovo je XFTree, zasnovan na 'XTree' \n"
+"(c) Rasca\n"
+"objavljen pod GNU GPL\n"
+"http://home.pages.de/~rasca/xap/"
+
+#: xftree/xtree_gui.c:1463
+msgid "Can't find row data\n"
+msgstr "Ne mogu da pronaðem podatke o redu\n"
+
+#: xftree/xtree_gui.c:1568
+msgid "Go to"
+msgstr "Idi na"
+
+#: xftree/xtree_gui.c:2008
+msgid "New_Folder"
+msgstr "Novi_direktorijum"
+
+#: xftree/xtree_gui.c:2058
+msgid "File exists ! Override ?"
+msgstr "Datoteka veæ postoji ! Da je prepi¹em?"
+
+#: xftree/xtree_gui.c:2067
+msgid "Can't create : "
+msgstr "Ne mogu da kreiram : "
+
+#: xftree/xtree_gui.c:2149
+msgid "No item marked !"
+msgstr "Nijedna stavka nije obele¾ena"
+
+#: xftree/xtree_gui.c:2160
+msgid "Rename to : "
+msgstr "Preimenuj u : "
+
+#: xftree/xtree_gui.c:2166
+msgid "Character not allowed in filename"
+msgstr "Znak nije dozvoljen u imenu datoteke"
+
+#: xftree/xtree_gui.c:2178
+msgid "Override ?"
+msgstr "Da prevaziðem?"
+
+#: xftree/xtree_gui.c:2410
+msgid "Can't find suffix in filename, using complete filename"
+msgstr "Ne mogu da odredim nastavak u imenu datoteke, koristim celo ime"
+
+#: xftree/xtree_gui.c:2417
+#, c-format
+msgid "Register program for file \"%s\""
+msgstr "Koristi program za datoteku \"%s\""
+
+#: xftree/xtree_gui.c:2421
+#, c-format
+msgid "Register program for suffix \"%s\""
+msgstr "Koristi program za nastavak \"%s\""
+
+#: xftree/xtree_gui.c:2643 xftree/xtree_gui.c:2644 xftree/xtree_gui.c:2645
+#: xftree/xtree_gui.c:2765 xftree/xtree_gui.c:3006 xftree/xtree_gui.c:3094
+msgid "New window"
+msgstr "Novi prozor"
+
+#: xftree/xtree_gui.c:2651 xftree/xtree_gui.c:2652 xftree/xtree_gui.c:2653
+#: xftree/xtree_gui.c:2854 xftree/xtree_gui.c:2998 xftree/xtree_gui.c:3044
+#: xftree/xtree_gui.c:3086 xftree/xtree_gui.c:3122
+msgid "Close window"
+msgstr "Zatvori prozor"
+
+#: xftree/xtree_gui.c:2661 xftree/xtree_gui.c:2662 xftree/xtree_gui.c:2663
+#: xftree/xtree_gui.c:2877 xftree/xtree_gui.c:2967 xftree/xtree_gui.c:3018
+#: xftree/xtree_gui.c:3057 xftree/xtree_gui.c:3100
+msgid "Go to ..."
+msgstr "Idi na ..."
+
+#: xftree/xtree_gui.c:2668 xftree/xtree_gui.c:2669 xftree/xtree_gui.c:2670
+msgid "Go up ..."
+msgstr "Idi gore ..."
+
+#: xftree/xtree_gui.c:2675 xftree/xtree_gui.c:2676 xftree/xtree_gui.c:2677
+#: xftree/xtree_gui.c:2891 xftree/xtree_gui.c:2972 xftree/xtree_gui.c:3021
+#: xftree/xtree_gui.c:3060 xftree/xtree_gui.c:3103
+msgid "Go home"
+msgstr "Idi u poèetni direktorijum"
+
+#: xftree/xtree_gui.c:2684 xftree/xtree_gui.c:2685 xftree/xtree_gui.c:2686
+msgid "New Folder"
+msgstr "Novi direktorijum"
+
+#: xftree/xtree_gui.c:2692 xftree/xtree_gui.c:2693 xftree/xtree_gui.c:2694
+#: xftree/xtree_gui.c:2783 xftree/xtree_gui.c:2959 xftree/xtree_gui.c:3097
+msgid "New file ..."
+msgstr "Nova datoteka ..."
+
+#: xfsamba/xfsamba_gui.c:1132 xftree/xtree_gui.c:2710 xftree/xtree_gui.c:2711
+#: xftree/xtree_gui.c:2712 xftree/xtree_gui.c:2799 xftree/xtree_gui.c:2964
+#: xftree/xtree_gui.c:3013 xftree/xtree_gui.c:3054
+msgid "Delete ..."
+msgstr "Obri¹i ..."
+
+#: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2719 xftree/xtree_gui.c:2720
+#: xftree/xtree_gui.c:2838 xftree/xtree_gui.c:2992 xftree/xtree_gui.c:3038
+#: xftree/xtree_gui.c:3076 xftree/xtree_gui.c:3080 xftree/xtree_gui.c:3116
+msgid "Open Trash"
+msgstr "Otvori dubre"
+
+#: xftree/xtree_gui.c:2725 xftree/xtree_gui.c:2726 xftree/xtree_gui.c:2727
+#: xftree/xtree_gui.c:2844 xftree/xtree_gui.c:2990 xftree/xtree_gui.c:3036
+#: xftree/xtree_gui.c:3075 xftree/xtree_gui.c:3078 xftree/xtree_gui.c:3114
+msgid "Empty Trash"
+msgstr "Isprazni ðubre"
+
+#: xftree/xtree_gui.c:2736 xftree/xtree_gui.c:2737 xftree/xtree_gui.c:2738
+#: xftree/xtree_gui.c:2902 xftree/xtree_gui.c:2984 xftree/xtree_gui.c:3072
+#: xftree/xtree_gui.c:3109
+msgid "Toggle Dotfiles"
+msgstr "Prikaz skrivenih datoteka"
+
+#. Create "File" menu
+#: xfclock/xfclock_menus.c:89 xfdiff/xfdiff_gui.c:938
+#: xfsamba/xfsamba_gui.c:1038 xftree/xtree_gui.c:2758
+msgid "File"
+msgstr "Glavni"
+
+#: xftree/xtree_gui.c:2777 xftree/xtree_gui.c:2957 xftree/xtree_gui.c:3096
+msgid "New Folder ..."
+msgstr "Novi direktorijum ..."
+
+#: xftree/xtree_gui.c:2809 xftree/xtree_gui.c:2981 xftree/xtree_gui.c:3069
+#: xftree/xtree_gui.c:3112
+msgid "Find ..."
+msgstr "Naði ..."
+
+#: xftree/xtree_gui.c:2815 xftree/xtree_gui.c:2987 xftree/xtree_gui.c:3031
+msgid "Properties ..."
+msgstr "Osobine ..."
+
+#: xftree/xtree_gui.c:2822
+msgid "Differences ..."
+msgstr "Razlike ..."
+
+#: xftree/xtree_gui.c:2828
+msgid "Patch viewer ..."
+msgstr "Pregledaj patch ..."
+
+#. Create "Settings" menu
+#: xfclock/xfclock_menus.c:101 xftree/xtree_gui.c:2870 xfwm/xfwm.c:905
+msgid "Settings"
+msgstr "Pode¹avanja"
+
+#: xftree/xtree_gui.c:2884 xftree/xtree_gui.c:2970 xftree/xtree_gui.c:3019
+#: xftree/xtree_gui.c:3058 xftree/xtree_gui.c:3101
+msgid "Go up"
+msgstr "Idi gore"
+
+#. Create "Help" menu
+#: xfclock/xfclock_menus.c:262 xfdiff/xfdiff_gui.c:1057
+#: xfsamba/xfsamba_gui.c:1082 xftree/xtree_gui.c:2910
+msgid "Help"
+msgstr "Pomoæ"
+
+#: xftree/xtree_gui.c:2917 xftree/xtree_gui.c:2994 xftree/xtree_gui.c:3040
+#: xftree/xtree_gui.c:3082 xftree/xtree_gui.c:3118
+msgid "About ..."
+msgstr "O ..."
+
+#: xftree/xtree_gui.c:2953
+msgid "Open in new"
+msgstr "Otvori u novom"
+
+#: xftree/xtree_gui.c:2962 xftree/xtree_gui.c:3011
+msgid "Rename ..."
+msgstr "Preimenuj ..."
+
+#: xftree/xtree_gui.c:2968
+msgid "Go to marked"
+msgstr "Idi na obele¾eni"
+
+#: xftree/xtree_gui.c:2976 xftree/xtree_gui.c:3025 xftree/xtree_gui.c:3064
+msgid "Unselect"
+msgstr "Deselektuj"
+
+#: xftree/xtree_gui.c:2978 xftree/xtree_gui.c:3027 xftree/xtree_gui.c:3066
+#: xftree/xtree_gui.c:3105
+msgid "Select all"
+msgstr "Selektuj sve"
+
+#: xftree/xtree_gui.c:2980 xftree/xtree_gui.c:3029 xftree/xtree_gui.c:3068
+#: xftree/xtree_gui.c:3107
+msgid "Unselect all"
+msgstr "Deselektuj sve"
+
+#: xftree/xtree_gui.c:3015
+msgid "Duplicate"
+msgstr "Dupliciraj"
+
+#: xftree/xtree_gui.c:3033
+msgid "Register ..."
+msgstr "Registruj ..."
+
+#: xftree/xtree_gui.c:3052
+msgid "New windows"
+msgstr "Novi prozori"
+
+#: xfglob/xfglob.c:612 xfsamba/xfsamba_gui.c:1258 xftree/xtree_gui.c:3136
+msgid "Name"
+msgstr "Ime"
+
+#: xfglob/xfglob.c:614 xftree/xtree_gui.c:3137
+msgid "Size (bytes)"
+msgstr "Velièina (bajta)"
+
+#: xfglob/xfglob.c:615 xftree/xtree_gui.c:3138
+msgid "Last changed"
+msgstr "Poslednja promena"
+
+#: xftree/xtree_dnd.c:125
+msgid "Unknown action !"
+msgstr "Nepoznata radnja !"
+
+#: xftree/xtree_dnd.c:141
+msgid "Target must be a directory !"
+msgstr "Cilj mora biti direktorijum !"
+
+#: xftree/xtree_dnd.c:170
+#, c-format
+msgid "Type not supported.. (%d)\n"
+msgstr "Tip nije podr¾an... (%d)\n"
+
+#. convenience location of duplicate dialog texts
+#. non-static
+#: xfdiff/xfdiff.c:102
+msgid "Strip level now set to "
+msgstr "Broj direktorijuma koji se ignori¹u je "
+
+#: xfdiff/xfdiff.c:103
+msgid "No patch file has been selected."
+msgstr "Niste odabrali patch datoteku."
+
+#: xfdiff/xfdiff.c:104
+msgid "No directory to apply patch has been selected."
+msgstr "Niste odabrali direktorijum na koji treba primeniti patch."
+
+#: xfdiff/xfdiff.c:105
+msgid "No left path has been selected."
+msgstr "Niste odabrali putanju u levom prozoru."
+
+#: xfdiff/xfdiff.c:106
+msgid "No right path has been selected."
+msgstr "Niste odabrali putanju u desnom prozoru."
+
+#. static
+#: xfdiff/xfdiff.c:108
+msgid "Patch file can not be opened for read!"
+msgstr "Ne mogu da proèitam patch datoteku!"
+
+#: xfdiff/xfdiff.c:109
+msgid ""
+"Files are identical\n"
+"(or binary files that may or may not differ)"
+msgstr ""
+"Datoteke su identiène\n"
+"(ili nisu tekstualne -- mogu se i ne moraju razlikovati)"
+
+#: xfdiff/xfdiff.c:110
+msgid "Patch file is not in unified format"
+msgstr "Datoteka nije u objedinjenom formatu"
+
+#: xfdiff/xfdiff.c:111
+msgid "****Empty file****\n"
+msgstr "****Prazna datoteka****\n"
+
+#. missing color attribute
+#: xfdiff/xfdiff.c:255 xfdiff/xfdiff.c:260 xfdiff/xfdiff.c:261
+msgid "****Binary data****\n"
+msgstr "****Ne-tekstualni podaci****\n"
+
+#: xfdiff/xfdiff.c:329
+msgid ""
+"You have selected a directory.\n"
+"Should subdirectories be included?"
+msgstr ""
+
+#: xfdiff/xfdiff.c:377
+msgid " versus "
+msgstr " prema "
+
+#. 10 is size of MAXINT of 32 bits:
+#: xfdiff/xfdiff.c:390 xfdiff/xfdiff.c:393
+msgid "different sections found"
+msgstr "razlièitih sekcija naðeno"
+
+#: xfdiff/xfdiff.c:464
+msgid "Include binary files?"
+msgstr "Da ukljuèim i ne-tekstualne datoteke?"
+
+#: xfdiff/xfdiff.c:465
+msgid "Include subdirectories?"
+msgstr "Da obradim i poddirektorijume?"
+
+#: xfdiff/xfdiff.c:468
+msgid "Working diff...\n"
+msgstr "Primenjujem diff...\n"
+
+#: xfdiff/xfdiff.c:758
+msgid ""
+"Patch file has been modified by another process\n"
+"Please reload\n"
+msgstr ""
+"Drugi program je izmenio patch datoteku\n"
+"Molim uèitajte je ponovo\n"
+
+#: xfdiff/xfdiff.c:927
+msgid "Reversed patch detected. Should I try reversing it?"
+msgstr "Prona¹ao sam obrnuti patch. Da poku¹am da ga obrnem?"
+
+#: xfdiff/xfdiff.c:934
+msgid "Now forking diff. Please be patient.\n"
+msgstr "Startujem diff. Molim saèekajte.\n"
+
+#: xfdiff/xfdiff.c:936
+msgid "Finished forking.\n"
+msgstr "Zavr¹eno startovanje.\n"
+
+#: xfdiff/xfdiff.c:1053
+msgid "Running patch...\n"
+msgstr "Primenjujem patch...\n"
+
+#: xfdiff/xfdiff.c:1103
+msgid "xfdiff version"
+msgstr "xfdiff verzija"
+
+#: xfdiff/xfdiff.c:1105
+msgid "use xfdiff [ -h | --help | -p] [leftfile] [rightfile]\n"
+msgstr ""
+"Upotreba: xfdiff [ -h | --help | -p] [-Pn] [-R | -N] [leva_datoteka] "
+"[desna_datoteka]\n"
+
+#: xfdiff/xfdiff.c:1107
+msgid "-p : leftfile and rightfile are a patchdir and a patchfile\n"
+msgstr ""
+"-p : leva_datoteka je direktorijum, a desna_datoteka patch koji treba "
+"primeniti\n"
+
+#: xfdiff/xfdiff.c:1109
+msgid "-PN: N is strip level (0-9) for patch (quick toggle)\n"
+msgstr ""
+"-Pn: ignori¹e se n (0-9) nivoa direktorijuma iz putanje u patch datoteci\n"
+
+#: xfdiff/xfdiff.c:1111
+msgid "-R: patch file is reversed (quick toggle)\n"
+msgstr "-R : patch datoteka je obrnuta (brzo pode¹avanje)\n"
+
+#: xfdiff/xfdiff.c:1113
+msgid "-N: patch file is not reversed (quick toggle)\n"
+msgstr "-N : patch datoteka nije obrnuta (brzo pode¹avanje)\n"
+
+#: xfdiff/xfdiff.c:1115
+msgid ""
+"-h, --help : print this message\n"
+"\n"
+msgstr ""
+"-h, --help : prikazuje ovu poruku\n"
+"\n"
+
+#: xfdiff/xfdiff.c:1117
+msgid "xfdiff (c) Edscott Wilson Garcia 2001, under GNU-GPL\n"
+msgstr "xfdiff (c) Edscott Wilson Garcia 2001, prema GNU-GPL\n"
+
+#: xfdiff/xfdiff.c:1119
+msgid ""
+"XFCE modules copyright Olivier Fourdan 1999-2001, under GNU-GPL\n"
+"\n"
+msgstr ""
+"XFCE moduli: copyright Olivier Fourdan 1999-2001, prema GNU-GPL\n"
+"\n"
+
+#: xfdiff/xfdiff_diag.c:138
+msgid "Xfdiff diagnostic"
+msgstr "xfdiff dijagnostièka poruka"
+
+#: xfdiff/xfdiff_gui.c:151
+msgid "A patch file and directory must be selected first!"
+msgstr "Morate prvo odabrati patch datoteku i direktorijum!"
+
+#: xfdiff/xfdiff_gui.c:160
+msgid "Patch has been undone."
+msgstr "Ranije primenjeni patch je poni¹ten."
+
+#: xfdiff/xfdiff_gui.c:160
+msgid "Patch has been applied."
+msgstr "Primenjen je patch."
+
+#: xfdiff/xfdiff_gui.c:173
+msgid "Please select a name for the patch file in the next dialog."
+msgstr "Molim izaberite ime patch datoteke u sledeæem prozoru."
+
+#: xfdiff/xfdiff_gui.c:183
+msgid ""
+"XFdiff will now start diff.\n"
+"Please be patient (xfdiff might seem to hang).\n"
+"Diff will be working"
+msgstr ""
+"Sada æu pokrenuti diff.\n"
+"Molim za strpljenje (mo¾e izgledati kao da je xfdiff prestao da radi).\n"
+"diff æe raditi"
+
+#: xfdiff/xfdiff_gui.c:188
+msgid "Patch file could not be created"
+msgstr "Ne mogu da kreiram patch datoteku"
+
+#: xfdiff/xfdiff_gui.c:192 xfdiff/xfdiff_gui.c:195
+msgid "Strip level for created patch file="
+msgstr "Broj ignorisanih direktorijuma u putanji kreirane patch datoteke="
+
+#: xfdiff/xfdiff_gui.c:196
+msgid " has been created\n"
+msgstr " je kreiran\n"
+
+#: xfdiff/xfdiff_gui.c:206
+msgid "Patch file creation cancelled"
+msgstr "Prekinuto je kreiranje patch datoteke"
+
+#: xfdiff/xfdiff_gui.c:317
+msgid "Line synchronization enabled.\n"
+msgstr "Ukljuèena je sinhronizacija redova.\n"
+
+#: xfdiff/xfdiff_gui.c:318
+msgid "Line synchronization disabled.\n"
+msgstr "Iskljuèena je sinhronizacija redova.\n"
+
+#: xfdiff/xfdiff_gui.c:342
+msgid "Patch verbose diagnostics enabled.\n"
+msgstr "Ukljuèene su detaljne dijagnostièke poruke od patch-a.\n"
+
+#: xfdiff/xfdiff_gui.c:343
+msgid "Patch verbose diagnostics disabled.\n"
+msgstr "Iskljuèene su detaljne dijagnostièke poruke od patch-a.\n"
+
+#: xfdiff/xfdiff_gui.c:357
+msgid "Line numbers enabled.\n"
+msgstr "Ukljuèeni su brojevi redova.\n"
+
+#: xfdiff/xfdiff_gui.c:358
+msgid "Line numbers disabled.\n"
+msgstr "Isskljuèeni su brojevi redova.\n"
+
+#: xfdiff/xfdiff_gui.c:367
+msgid "Polygons will now be filled.\n"
+msgstr "Ispunjavaæu poligone.\n"
+
+#: xfdiff/xfdiff_gui.c:368
+#, fuzzy
+msgid "Polygons will now *not* be filled.\n"
+msgstr "Neæu ispunjavati poligone.\n"
+
+#: xfdiff/xfdiff_gui.c:379
+msgid "Patch will now be assumed reversed.\n"
+msgstr "Smatraæu da je patch obrnut.\n"
+
+#: xfdiff/xfdiff_gui.c:380
+msgid "Patch will now be assumed *not* reversed.\n"
+msgstr "Smatraæu da patch *nije* obrnut.\n"
+
+#.
+#: xfdiff/xfdiff_gui.c:397
+#, fuzzy
+msgid "Font selection"
+msgstr "Izbor tipa slova"
+
+#. some fonts are buggy on startup with iso-8859-1 systems (like mine)
+#: xfdiff/xfdiff_gui.c:404 xfdiff/xfdiff_misc.c:661
+msgid "Could not load specified font\n"
+msgstr "Ne mogu da uèitam ¾eljeni tip slova\n"
+
+#: xfdiff/xfdiff_gui.c:459
+#, fuzzy
+msgid "Select highlight background color"
+msgstr "Boja nagla¹ene pozadine"
+
+#: xfdiff/xfdiff_gui.c:463
+#, fuzzy
+msgid "Select highlight text color"
+msgstr "Boja nagla¹enih slova"
+
+#: xfdiff/xfdiff_gui.c:539 xfdiff/xfdiff_gui.c:540
+msgid "Warning: cannot read from "
+msgstr "Upozorenje: ne mogu da èitam iz "
+
+#: xfdiff/xfdiff_gui.c:543 xfdiff/xfdiff_gui.c:544
+msgid "is not in patch file."
+msgstr "nije patch datoteka."
+
+#: xfdiff/xfdiff_gui.c:620
+msgid "Default .xfdiffrc file cannot be created\n"
+msgstr "Ne mogu da kreiram poèetnu .xfdiffrc datoteku\n"
+
+#: xfdiff/xfdiff_gui.c:640
+msgid "Default configuration has been saved\n"
+msgstr "Snimljena je poèetna konfiguracija\n"
+
+#: xfdiff/xfdiff_gui.c:647
+msgid "This is XFDiff "
+msgstr "Ovo je XFDiff "
+
+#: xfdiff/xfdiff_gui.c:648
+msgid ""
+"\n"
+"(c) by Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
+
+#: xfdiff/xfdiff_gui.c:660
+msgid "There is no next difference"
+msgstr "Nema sledeæe razlike"
+
+#: xfdiff/xfdiff_gui.c:663
+msgid "There is no previous difference"
+msgstr "Nema prethodne razlike"
+
+#: xfdiff/xfdiff_gui.c:679
+msgid "There is no such file"
+msgstr "Ta datoteka ne postoji"
+
+#: xfdiff/xfdiff_gui.c:683
+msgid "There is no next file"
+msgstr "Nema sledeæe datoteke"
+
+#: xfdiff/xfdiff_gui.c:687
+msgid "There is no previous file"
+msgstr "Nema prethodne datoteke"
+
+#. only spot where directories for input is not OK:
+#: xfdiff/xfdiff_gui.c:760
+msgid "That is a directory (or symlink)"
+msgstr "To je direktorijum (ili symlink)"
+
+#: xfdiff/xfdiff_gui.c:939
+msgid "Select left file"
+msgstr "Odaberite levu datoteku"
+
+#: xfdiff/xfdiff_gui.c:941
+msgid "Select right file"
+msgstr "Odaberite desnu datoteku"
+
+#: xfdiff/xfdiff_gui.c:943
+msgid "Select patch file"
+msgstr "Odaberite patch datoteku"
+
+#: xfdiff/xfdiff_gui.c:945
+msgid "Select directory where to apply patch"
+msgstr "Odaberite direktorijum na koji treba primeniti patch"
+
+#: xfdiff/xfdiff_gui.c:949
+msgid "Switch to patch mode"
+msgstr "Preði u patch re¾im"
+
+#: xfdiff/xfdiff_gui.c:952
+msgid "Switch to diff mode"
+msgstr "Preði u diff re¾im"
+
+#: xfdiff/xfdiff_gui.c:957 xfdiff/xfdiff_gui.c:1408 xfsamba/xfsamba_gui.c:1051
+msgid "Exit"
+msgstr "Izlaz"
+
+#. Create "Settings" menu
+#: xfdiff/xfdiff_gui.c:961
+msgid "Diff Settings"
+msgstr "Pode¹avanja za diff"
+
+#. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
+#. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
+#: xfdiff/xfdiff_gui.c:964
+msgid "Font"
+msgstr "Tip slova"
+
+#: xfdiff/xfdiff_gui.c:966
+msgid "Highlight text color"
+msgstr "Boja nagla¹enih slova"
+
+#: xfdiff/xfdiff_gui.c:968
+msgid "Highlight background color"
+msgstr "Boja nagla¹ene pozadine"
+
+#: xfdiff/xfdiff_gui.c:970
+msgid "Fill polygons"
+msgstr "Ispuni poligone"
+
+#: xfdiff/xfdiff_gui.c:972
+msgid "Show line numbers"
+msgstr "Prika¾i brojeve redova"
+
+#: xfdiff/xfdiff_gui.c:975
+msgid "Use line synchronization voids"
+msgstr "Korissti praznine za sinhronizaciju redova"
+
+#: xfdiff/xfdiff_gui.c:981
+msgid "Save settings as default"
+msgstr "Snimi pode¹avanja kao poèetna"
+
+#: xfdiff/xfdiff_gui.c:984
+msgid "Patch Settings"
+msgstr "Pode¹avanja za patch"
+
+#: xfdiff/xfdiff_gui.c:986
+msgid "Verbose patch diagnostics"
+msgstr "Obimne dijagnostièke poruke od patch-a"
+
+#: xfdiff/xfdiff_gui.c:989
+msgid "Patch options only active in patch-mode"
+msgstr "Opcije za patch se primenjuju samo u patch re¾imu"
+
+#. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
+#: xfdiff/xfdiff_gui.c:994
+msgid "Assume patch is reversed"
+msgstr "Pretpostavi da je patch obrnut"
+
+#: xfdiff/xfdiff_gui.c:997
+msgid "Auto strip level"
+msgstr "Automatsko ignorisanje direktorijuma iz putanje"
+
+#. Create "Actions" menu
+#: xfdiff/xfdiff_gui.c:1027
+msgid "Actions"
+msgstr "Radnje"
+
+#: xfdiff/xfdiff_gui.c:1028
+msgid "View differences"
+msgstr "Pogledaj razlike"
+
+#: xfdiff/xfdiff_gui.c:1030
+msgid "View differences in new"
+msgstr "Pogledaj razlike u novom"
+
+#: xfdiff/xfdiff_gui.c:1033
+msgid "View patch created differences"
+msgstr "Pogledaj razlike koje je napravio patch"
+
+#: xfdiff/xfdiff_gui.c:1036
+msgid "View patch created differences in new"
+msgstr "Pogledaj razlike koje je napravio patch"
+
+#: xfdiff/xfdiff_gui.c:1041
+msgid "Create patch file"
+msgstr "Kreiraj patch datoteku"
+
+#: xfdiff/xfdiff_gui.c:1049
+msgid "Apply patch to Hard Drive"
+msgstr "Primeni patch na hard disk"
+
+#: xfdiff/xfdiff_gui.c:1052
+msgid "Undo patch to Hard Drive"
+msgstr "Poni¹ti patch na hard disku"
+
+#: xfdiff/xfdiff_gui.c:1058 xfglob/xfglob.c:2125
+msgid "About"
+msgstr "O ..."
+
+#. gtk_button_new_with_label (_("Clear"));
+#. gtk_box_pack_end (GTK_BOX (bbox),button,TRUE,TRUE , 0);
+#. GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+#. gtk_widget_show (button);
+#. gtk_signal_connect (GTK_OBJECT (button), "clicked",
+#. GTK_SIGNAL_FUNC (on_clear_show_diag),
+#. (gpointer) text);
+#: xfdiff/xfdiff_gui.c:1397
+msgid "Next difference"
+msgstr "Sledeæa razlika"
+
+#: xfdiff/xfdiff_gui.c:1401
+msgid "Prev difference"
+msgstr "Prethodna razlika"
+
+#: xfdiff/xfdiff_gui.c:1403
+msgid "Next file"
+msgstr "Sledeæa datoteka"
+
+#: xfdiff/xfdiff_gui.c:1405
+msgid "Previous file"
+msgstr "Prethodna datoteka"
+
+#: xfdiff/xfdiff_misc.c:89
+#, fuzzy
+msgid "Could not set selected font"
+msgstr "Ne mogu da uèitam ¾eljeni tip slova\n"
+
+#: xfdiff/xfdiff_misc.c:128
+#, fuzzy
+msgid "Confirm"
+msgstr "Potvrdite brisanje."
+
+#: xfdiff/xfdiff_misc.c:129
+#, fuzzy
+msgid "Abort"
+msgstr "O ..."
+
+#: xfdiff/xfdiff_misc.c:138
+#, fuzzy
+msgid "Alert"
+msgstr "Oèisti"
+
+#: xfdiff/xfdiff_misc.c:325
+msgid ""
+"A bug?\n"
+"Please send full traceback to xfce-dev@moongroup.com"
+msgstr ""
+"Na¹li ste bag?\n"
+"Molimo po¹aljite punu informaciju na xfce-dev@moongroup.com"
+
+#: xfdiff/xfdiff_misc.c:330
+msgid "Low memory (malloc) error: xfdiff_aborting run"
+msgstr "Gre¹ka usled manjka memorije: prekidam izvr¹avanje"
+
+#: xfdiff/xfdiff_misc.c:333
+msgid "file open error: xfdiff_aborting run"
+msgstr "Gre¹ka pri otvaranju datoteke: prekidam izvr¹avanje"
+
+#: xfdiff/xfdiff_misc.c:336
+msgid "unspecified error: xfdiff_aborting run"
+msgstr "Neodreðena gre¹ka: prekidam izvr¹avanje"
+
+#: xfdiff/xfdiff_misc.c:516
+msgid ""
+"No file was found for patching\n"
+"Either the directory to apply patch is not correctly selected\n"
+"or an incorrect strip level was used.\n"
+msgstr ""
+"Nije naðena nijedna datoteka na koju se patch odnosi\n"
+"Ili niste izabrali ispravan direktorijum na koji treba primeniti patch\n"
+"ili je ignorisan pogre¹an broj direktorijuma iz putanje patch-a.\n"
+
+#: xfdiff/xfdiff_misc.c:530
+msgid ""
+"Patch command has produced reject output.\n"
+"See diagnostics window."
+msgstr ""
+"Pri primeni patch-a je bilo odbijenih delova.\n"
+"Pogledajte dijagnostièki prozor."
+
+#: xfdiff/xfdiff_misc.c:551
+msgid "No directory was selected!"
+msgstr "Niste odabrali direktorijum!"
+
+#.
+#: xfdiff/xfdiff_misc.c:563
+#, fuzzy
+msgid "Directory or file selection"
+msgstr "Morate odabrati direktorijum!"
+
+#: xfdiff/xfdiff_misc.c:586 xfdiff/xfdiff_misc.c:588
+msgid "Please select it in the next dialog."
+msgstr "Molimo odaberite ga u sledeæem prozoru."
+
+#: xfdiff/xfdiff_misc.c:618
+msgid "File exists, overwrite?"
+msgstr "Datoteka postoji, da je prepi¹em?"
+
+#: xfdiff/xfdiff_misc.c:621
+msgid "Cannot open file for write\n"
+msgstr "Ne mogu da otvorim datoteku za upis\n"
+
+#: xfdiff/xfdiff_misc.c:764 xfdiff/xfdiff_misc.c:766
+msgid "couldn't allocate color"
+msgstr "Ne mogu da zauzmem boju"
+
+#. font color!
+#: xfdiff/xfdiff_misc.c:793 xfdiff/xfdiff_misc.c:813
+msgid "Patch: "
+msgstr "Patch: "
+
+#: xfdiff/xfdiff_misc.c:796 xfdiff/xfdiff_misc.c:818
+msgid " applied at: "
+msgstr " primenjen na: "
+
+#: xfdiff/xfdiff_misc.c:832
+msgid "Press OK to see patch diffs"
+msgstr "Pritisnite \"U redu\" da vidite razlike patch-a"
+
+#: xfglob/xfglob.c:471 xfglob/xfglob.c:472
+msgid "Results limit reached"
+msgstr "Dostignut granièni broj rezultata"
+
+#: xfglob/xfglob.c:480
+msgid "Cancelled"
+msgstr "Prekinut"
+
+#: xfglob/xfglob.c:481
+msgid "Search canceled!\n"
+msgstr "Pretraga prekinuta!\n"
+
+#: xfglob/xfglob.c:505 xfglob/xfglob.c:532
+msgid "Glob run must finish or be cancelled first."
+msgstr "Izvr¹avanje glob-a mora biti prvo prekinuto."
+
+#: xfglob/xfglob.c:516
+#, fuzzy
+msgid "Find results.\n"
+msgstr "Naði rezultate..."
+
+#: xfglob/xfglob.c:593 xfglob/xfglob.c:704
+msgid "Find results..."
+msgstr "Naði rezultate..."
+
+#: xfglob/xfglob.c:613 xfglob/xfglob.c:1325
+msgid "Directory"
+msgstr "Direktorijum"
+
+#: xfglob/xfglob.c:616
+msgid "Mode"
+msgstr "Mod"
+
+#: xfglob/xfglob.c:1021
+#, fuzzy
+msgid "Incoherent size considerations!"
+msgstr "Velièina"
+
+#. for (j=0;j<i;j++) printf ("%s ",argument[j]);printf ("\n");
+#: xfglob/xfglob.c:1178
+msgid "Result of "
+msgstr "Rezultat "
+
+#: xfglob/xfglob.c:1189 xfglob/xfglob.c:1621
+msgid "File type :"
+msgstr "Tip datoteke :"
+
+#: xfglob/xfglob.c:1253
+msgid "Anyone"
+msgstr "Svako"
+
+#. translation of filetypes
+#: xfglob/xfglob.c:1323
+msgid "Any kind"
+msgstr ""
+
+#: xfglob/xfglob.c:1324
+msgid "Regular"
+msgstr "Obièna"
+
+#: xfglob/xfglob.c:1326
+msgid "Symlink"
+msgstr "Symlink"
+
+#: xfglob/xfglob.c:1327
+msgid "Socket"
+msgstr "Socket"
+
+#: xfglob/xfglob.c:1328
+msgid "Block device"
+msgstr "Blok ureðaj"
+
+#: xfglob/xfglob.c:1329
+msgid "Character device"
+msgstr "Character ureðaj"
+
+#: xfglob/xfglob.c:1330
+msgid "FIFO"
+msgstr "FIFO"
+
+#: xfglob/xfglob.c:1341
+#, fuzzy
+msgid "Xfglob"
+msgstr "XFglob"
+
+#. *******************************
+#. show the notebook pages:
+#. fourth circle : notebook tabs stuff
+#: xfglob/xfglob.c:1404 xfglob/xfglob.c:2113 xfglob/xfglob.c:2148
+msgid "Find"
+msgstr "Naði"
+
+#: xfglob/xfglob.c:1419
+msgid "Path : "
+msgstr "Putanja : "
+
+#: xfglob/xfglob.c:1436
+msgid "Browse"
+msgstr "Prelistaj"
+
+#: xfglob/xfglob.c:1447
+msgid "File filter : "
+msgstr "Izbor datoteka : "
+
+#: xfglob/xfglob.c:1462
+msgid "What's a file filter?"
+msgstr "©ta je izbor datoteka?"
+
+#: xfglob/xfglob.c:1473
+msgid ""
+"Basic rules:\n"
+"\n"
+"*  Will match any character zero or more times.\n"
+"?  Will match any character exactly one time\n"
+msgstr ""
+"Osnovna pravila:\n"
+"\n"
+"*  odgovara nula ili vi¹e pojavljivanja bilo kog znaka.\n"
+"?  odgovara taèno jednom pojavljivanju bilo kog znaka\n"
+
+#: xfglob/xfglob.c:1483
+msgid "Search subdirectories too"
+msgstr "Pretra¾i i poddirektorijume"
+
+#: xfglob/xfglob.c:1487
+msgid "Limit results to first : "
+msgstr "Prika¾i prvih : "
+
+#: xfglob/xfglob.c:1502
+msgid "Content search"
+msgstr "Pretraga po sadr¾ini"
+
+#: xfglob/xfglob.c:1517
+msgid "Containing : "
+msgstr "Sadr¾i : "
+
+#: xfglob/xfglob.c:1535
+msgid "Case sensitive search"
+msgstr "Razlikuj velika i mala slova"
+
+#: xfglob/xfglob.c:1538
+msgid "Extended regexp"
+msgstr "Pro¹ireni regexp"
+
+#: xfglob/xfglob.c:1542
+msgid "What's a regexp?"
+msgstr "©ta je regexp?"
+
+#: xfglob/xfglob.c:1549
+#, fuzzy
+msgid ""
+"Reserved characters for extended regexp are\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"In  basic regular expressions the metacharacters\n"
+"?, +, {, |, (, and ) lose their special meaning.\n"
+"\n"
+"The  period  .   matches  any  single  character.\n"
+"The caret ^ matches at the start of line.\n"
+"The dollar $ matches at the end of line.\n"
+"\n"
+"Characters within [ ] matches any single \n"
+"       character in the list.\n"
+"Characters within [^ ] matches any single\n"
+"       character *not* in the list.\n"
+"Characters inside [ - ] matches a range of\n"
+"       characters (ie [0-9] or [a-z]).\n"
+"\n"
+"A regular expression may be followed by one\n"
+"       of several repetition operators:\n"
+"?      The preceding item is optional and matched\n"
+"       at most once.\n"
+"*      The preceding item will be matched zero\n"
+"       or more times.\n"
+"+      The preceding item will be matched one or\n"
+"       more times.\n"
+"{n}    The preceding item is matched exactly n times.\n"
+"{n,}   The preceding item is matched n or more times.\n"
+"{n,m}  The preceding item is matched at least n times,\n"
+"       but not more than m times.\n"
+"\n"
+"To match any reserved character, precede it with \\. \n"
+"\n"
+"Two regular expressions may be joined by the logical or\n"
+"       operator |.\n"
+"Two regular expressions may be concatenated.\n"
+"\n"
+"More information is available by typing \"man grep\"\n"
+"       at the command prompt.\n"
+msgstr ""
+"Rezervisani znaci za pro¹ireni regexp su:\n"
+". ^ $ [ ] ? * + { } | \\ ( ) : \n"
+"U osnovnim regexp rezervisani znaci\n"
+"?, +, {, |, (, and ) gube svoje posebno znaèenje.\n"
+"\n"
+"Taèka . odgovara bilo kom (jednom) znaku.\n"
+"Kare ^ odgovara poèetku reda.\n"
+"Dolar $ odgovara kraju reda.\n"
+"\n"
+"Znaci unutar [ ]: mo¾e se pojaviti bilo koji (ali samo jedan) od znaka iz "
+"zagrade\n"
+"Znaci unutar [^ ]: mo¾e se pojaviti bilo koji znak, *osim* onih u zagradi\n"
+"Znaci unutar [ - ]: mo¾e se pojaviti bilo koji znak iz opsega, npr. [1-9]\n"
+"\n"
+"Iza regexp-a se mo¾e pojaviti neki od sledeæih operatora za ponavljanje:\n"
+"?      Prethodni izraz se pojavljuje jednom ili nijednom\n"
+"*      Prethodni izraz se pojavljuje nijednom ili vi¹e puta\n"
+"+      Prethodni izraz se pojavljuje jednom ili vi¹e puta\n"
+"{n}    Prethodni izraz se pojavljuje taèno n puta\n"
+"{n,}   Prethodni izraz se pojavljuje n ili vi¹e puta\n"
+"{n,m}  Prethodni izraz se pojavljuje najmanje n puta i ne vi¹e od m puta\n"
+"\n"
+"Da bi prona¹li bilo koji rezervisani znak, stavite \\ ispred njega.\n"
+"\n"
+"Dva regexp-a mo¾ete spojiti operatorom | (logièko ili).\n"
+"Dva regexp-a mo¾ete i nadovezati.\n"
+"\n"
+"Vi¹e informacija mo¾ete dobiti naredbom \"man grep\" na komandnoj liniji.\n"
+
+#: xfglob/xfglob.c:1607
+msgid "File considerations"
+msgstr "Osobine datoteka"
+
+#: xfglob/xfglob.c:1634
+msgid "Stay on single filesystem"
+msgstr "Samo u jednom fajl sistemu"
+
+#: xfglob/xfglob.c:1636
+#, fuzzy
+msgid "What's a single filesystem?"
+msgstr "©ta je izbor datoteka?"
+
+#: xfglob/xfglob.c:1643
+msgid ""
+"Staying on a single filesystem will hinder\n"
+"searching on different physical disk partitions.\n"
+"This is especially useful if you do not want\n"
+"to search into nfs or smb mounts.\n"
+msgstr ""
+
+#: xfglob/xfglob.c:1671
+#, fuzzy
+msgid "Permission considerations"
+msgstr "Osobine datoteka"
+
+#: xfglob/xfglob.c:1678
+msgid "How does permission filtering work?"
+msgstr ""
+
+#: xfglob/xfglob.c:1685
+msgid ""
+"When permission filtering is active:\n"
+"-If a file has one of the chosen permission bits,\n"
+"  it will match.\n"
+"-If no permission bit is chosen, files with \n"
+"  no set permission bits will match.\n"
+msgstr ""
+
+#: xfglob/xfglob.c:1813
+msgid "User/group considerations"
+msgstr "Korisnik i grupa"
+
+#: xfglob/xfglob.c:1820
+msgid "How does user/group filtering work?"
+msgstr ""
+
+#: xfglob/xfglob.c:1827
+msgid ""
+"If user and group are both set to any \n"
+"value other than anyone:\n"
+"-files must meet both criteria in order\n"
+"  to match\n"
+msgstr ""
+
+#: xfglob/xfglob.c:1844
+msgid "User ID: "
+msgstr "User ID: "
+
+#: xfglob/xfglob.c:1858
+msgid "Group ID: "
+msgstr "Group ID: "
+
+#: xfglob/xfglob.c:1875
+msgid "Size considerations"
+msgstr "Velièina"
+
+#: xfglob/xfglob.c:1882
+msgid "How does size filtering work?"
+msgstr ""
+
+#: xfglob/xfglob.c:1889
+msgid ""
+"-If a size of 0 (zero) is specified for \n"
+" size-less-than, this will be ignored.\n"
+"-If both size-greater-than and size-less-than\n"
+" are specified, both criteria must be met\n"
+" in order for a file to match.\n"
+msgstr ""
+
+#: xfglob/xfglob.c:1908
+msgid "Size greater than (KB): "
+msgstr "Veæa od (kB): "
+
+#: xfglob/xfglob.c:1927
+msgid "Size less than (KB): "
+msgstr "Manja od (kB): "
+
+#: xfglob/xfglob.c:1951
+msgid "Time considerations"
+msgstr "Vreme"
+
+#: xfglob/xfglob.c:1958
+msgid "How does time filtering work?"
+msgstr ""
+
+#: xfglob/xfglob.c:1965
+msgid ""
+"Three different time modes may be selected:\n"
+"*modified:\n"
+"  This changes when the file is modified, e.g.\n"
+"  by mknod(2), truncate(2), utime(2) and write(2)\n"
+" (of  more than  zero  bytes). Moreover, modification\n"
+"  time of a directory is changed by the creation or \n"
+"  deletion of  files  in  that directory. Modification\n"
+"  time is not changed for changes in owner, group,\n"
+"  hard link count, or mode.\n"
+"\n"
+"*changed:\n"
+"  This field is changed by writing or setting inode\n"
+"  information (i.e., owner, group, link count, mode).\n"
+"\n"
+"*accessed:\n"
+"  This field is changed by file accesses, e.g. by\n"
+"  exec(2), mknod(2), pipe(2), utime(2) and read(2)\n"
+"  (of more than zero bytes). Other routines, like\n"
+"  mmap(2), may or may not update access time.\n"
+"\n"
+"Please note: after filtering a file through glob, it\n"
+"will have its access time altered, so two consecutive\n"
+"runs will not produce identical results.\n"
+msgstr ""
+
+#: xfglob/xfglob.c:2001
+#, fuzzy
+msgid "Modified"
+msgstr "Mod"
+
+#: xfglob/xfglob.c:2002
+#, fuzzy
+msgid "Changed"
+msgstr "Poslednja promena"
+
+#: xfglob/xfglob.c:2003
+#, fuzzy
+msgid "Accessed"
+msgstr "Vreme poslednjeg pristupa :"
+
+#: xfglob/xfglob.c:2012
+#, fuzzy
+msgid "In the previous : "
+msgstr "Kreirana ili modifikovana u prethodnih : "
+
+#: xfglob/xfglob.c:2025
+#, fuzzy
+msgid "Minutes"
+msgstr "redova"
+
+#: xfglob/xfglob.c:2026
+#, fuzzy
+msgid "Hours"
+msgstr "sati"
+
+#: xfglob/xfglob.c:2027
+#, fuzzy
+msgid "Days"
+msgstr "dana"
+
+#: xfglob/xfglob.c:2028
+#, fuzzy
+msgid "Months"
+msgstr "meseci"
+
+#: xfglob/xfglob.c:2061
+msgid "General considerations"
+msgstr "Ostale osobine"
+
+#: xfglob/xfglob.c:2072
+msgid "Do not look into binary files"
+msgstr "Ne pretra¾uj netekstualne datoteke"
+
+#: xfglob/xfglob.c:2075
+msgid "Output count of matching lines"
+msgstr "Od¹tampaj broj linija u kojima se izraz pojavljuje"
+
+#: xfglob/xfglob.c:2078
+msgid "Match anywhere"
+msgstr "Pronaði bilo gde"
+
+#: xfglob/xfglob.c:2080
+msgid "Match whole words only"
+msgstr "Pronaði samo cele reèi"
+
+#: xfglob/xfglob.c:2082
+msgid "Match whole lines only"
+msgstr "Pronaði samo cele redove"
+
+#: xfglob/xfglob.c:2084
+msgid "Output files where no match is found"
+msgstr "Prika¾i datoteke koje ne sadr¾e zadati izraz"
+
+#: xfglob/xfglob.c:2117
+msgid "Filter options"
+msgstr "Pode¹avanja filtra"
+
+#: xfglob/xfglob.c:2121
+msgid "Content options"
+msgstr "Pode¹avanja sadr¾ine"
+
+#: xfglob/xfglob.c:2156
+#, fuzzy
+msgid "Results"
+msgstr "Rezultat "
+
+#: xfglob/xfglob.c:2177
+msgid "working..."
+msgstr "radim..."
+
+#: xfglob/xfglob.c:2182
+msgid "Cancel Search"
+msgstr "Prekini pretragu"
+
+#: xfglob/xfglob.c:2241
+msgid "Nothing found...\n"
+msgstr "Ni¹ta nije naðeno...\n"
+
+#: xfglob/xfglob.c:2249
+msgid "Files found="
+msgstr "Naðenih datoteka="
+
+#: xfglob/xfglob.c:2252
+msgid "(interrupted because limit exceded)"
+msgstr "(prekinuto jer je prekoraèena granica)"
+
+#: xfglob/xfglob.c:2309
+msgid "lines"
+msgstr "redova"
+
+#: xfglob/xfglob.c:2375
+msgid "unable to stat:"
+msgstr "ne mogu da izvr¹im stat:"
+
+#: xfclock/xfclock.c:120
+msgid "XFClock - XFce Clock & Calendar"
+msgstr "XFClock - XFce Sat i Kalendar"
+
+#: xfclock/xfclock_cb.c:213
+msgid ""
+"XFClock\n"
+"(c) 1997-2000 Olivier Fourdan"
+msgstr ""
+"XFClock\n"
+"(c) 1997-2000 Olivier Fourdan"
+
+#: xfclock/xfclock_config.c:53
+#, c-format
+msgid ""
+"XFclock : Syntax error in configuration file\n"
+"(%s)\n"
+msgstr ""
+"XFclock : Sintaksna gre¹ka u konfiguracionoj datoteci\n"
+"(%s)\n"
+
+#: xfclock/xfclock_config.c:62
+#, c-format
+msgid ""
+"XFclock : Data mismatch error in config file\n"
+"(%s)\n"
+msgstr ""
+"XFclock : Pogre¹an tip podataka u konfiguracionoj datoteci\n"
+"(%s)\n"
+
+#: xfclock/xfclock_menus.c:48
+msgid "Hide/show menubar"
+msgstr "Skloni/prika¾i meni"
+
+#: xfclock/xfclock_menus.c:55 xfclock/xfclock_menus.c:108
+msgid "Hide/show calendar"
+msgstr "Skloni/prika¾i kalendar"
+
+#: xfclock/xfclock_menus.c:128
+msgid "24 hour mode"
+msgstr "24-èasovni prikaz"
+
+#: xfclock/xfclock_menus.c:138
+msgid "Display AM/PM"
+msgstr "Prika¾i AM/PM"
+
+#: xfclock/xfclock_menus.c:147
+msgid "Display seconds"
+msgstr "Prika¾i sekunde"
+
+#: xfclock/xfclock_menus.c:160
+msgid "Background color..."
+msgstr "Boja pozadine..."
+
+#: xfclock/xfclock_menus.c:166
+msgid "Foreground color..."
+msgstr "Boja teksta..."
+
+#: xfclock/xfclock_menus.c:172
+msgid "Font..."
+msgstr "Tip slova..."
+
+#: xfclock/xfclock_menus.c:182
+msgid "Hide menubar"
+msgstr "Sakrij meni"
+
+#. Create "Calendar options" menu
+#: xfclock/xfclock_menus.c:189
+msgid "Calendar Options"
+msgstr "Pode¹avanje kalendara"
+
+#: xfclock/xfclock_menus.c:196
+msgid "Mark Fridays"
+msgstr "Obele¾i petke"
+
+#: xfclock/xfclock_menus.c:204
+msgid "Mark Saturdays"
+msgstr "Obele¾i subote"
+
+#: xfclock/xfclock_menus.c:212
+msgid "Mark Sundays"
+msgstr "Obele¾i nedelje"
+
+#: xfclock/xfclock_menus.c:224
+msgid "Show week numbers"
+msgstr "Prika¾i broj nedelje"
+
+#: xfclock/xfclock_menus.c:233
+msgid "Show day names"
+msgstr "Prika¾i imena dana"
+
+#: xfclock/xfclock_menus.c:241
+msgid "Show heading"
+msgstr "Prika¾i zaglavlje"
+
+#: xfclock/xfclock_menus.c:253
+msgid "Week starts on Monday"
+msgstr "Sedmica poèinje ponedeljkom"
+
+#: xfmouse/xfmouse.c:66
+msgid "xfmouse: Error, cannot open display.\n"
+msgstr "xfmouse: Gre¹ka, ne mogu da otvorim ekran.\n"
+
+#: xfmouse/xfmouse.c:67
+msgid "Is X running and $DISPLAY correctly set ?\n"
+msgstr "Da li je startovan X i $DISPLAY pravilno postavljen ?\n"
+
+#: xfmouse/xfmouse.c:146
+msgid "XFMouse - XFce Mouse Configuration"
+msgstr "XFMouse - Konfiguracija mi¹a za XFce"
+
+#: xfmouse/xfmouse.c:180
+msgid "Button Settings"
+msgstr "Pode¹avanje dugmadi"
+
+#: xfmouse/xfmouse.c:230
+msgid "Motion Settings"
+msgstr "Pode¹avanje kretanja"
+
+#: xfmouse/xfmouse.c:265
+msgid "Threshold : "
+msgstr "Granica : "
+
+#: xfmouse/xfmouse.c:277
+msgid "Acceleration : "
+msgstr "Ubrzanje : "
+
+#: xfbd/xfbd.c:735 xfmouse/xfmouse.c:471
+#, c-format
+msgid "Usage : %s [OPTIONS]\n"
+msgstr "Upotreba : %s [OPCIJE]\n"
+
+#: xfbd/xfbd.c:736 xfmouse/xfmouse.c:472
+msgid "   Where OPTIONS are :\n"
+msgstr "   Gde su OPCIJE :\n"
+
+#: xfmouse/xfmouse.c:473
+msgid "   -i : interactive\n"
+msgstr "   -i : interaktivni rad\n"
+
+#: xfmouse/xfmouse.c:474
+msgid ""
+"   -d : apply configuration and exit (default)\n"
+"\n"
+msgstr ""
+"   -d : primeni pode¹avanja i izaði (podrazumevana)\n"
+"\n"
+
+#: xfbd/xfbd.c:743 xfmouse/xfmouse.c:477
+#, c-format
+msgid ""
+"%s is part of the XFce distribution, written by Olivier Fourdan\n"
+"\n"
+msgstr "%s je deo XFce, autor: Olivije Furdan\n"
+
+#: xfsound/xfsound.c:66
+msgid "New Desk"
+msgstr "Novi ekran"
+
+#: xfsound/xfsound.c:68
+msgid "Add Window"
+msgstr "Dodavanje prozora"
+
+#: xfsound/xfsound.c:70
+msgid "Raise Window"
+msgstr "Podizanje prozora"
+
+#: xfsound/xfsound.c:72
+msgid "Lower Window"
+msgstr "Spu¹tanje prozora"
+
+#: xfsound/xfsound.c:74
+msgid "Configure Window"
+msgstr "Prozor za pode¹avanje"
+
+#: xfsound/xfsound.c:76
+msgid "Focus Change"
+msgstr "Promena fokusa"
+
+#: xfsound/xfsound.c:78
+msgid "Destroy Window"
+msgstr "Zatvaranje prozora"
+
+#: xfsound/xfsound.c:80
+msgid "Iconify"
+msgstr "Ikoniziranje"
+
+#: xfsound/xfsound.c:82
+msgid "De-iconify"
+msgstr "Raz-ikoniziranje"
+
+#: xfsound/xfsound.c:84
+msgid "Shade"
+msgstr "Umanjivanje"
+
+#: xfsound/xfsound.c:86
+msgid "Un-Shade"
+msgstr "Raz-umanjivanje"
+
+#: xfsound/xfsound.c:88
+msgid "Maximize"
+msgstr "Maksimiziranje"
+
+#: xfsound/xfsound.c:90
+msgid "De-maximize"
+msgstr "Raz-maksimiziranje"
+
+#: xfsound/xfsound.c:94
+msgid "Shutdown"
+msgstr "Ga¹enje"
+
+#: xfsound/xfsound.c:96
+msgid "Unknown"
+msgstr "Nepoznat"
+
+#: xfsound/xfsound.c:371
+msgid "XFSound - XFce Sound Manager"
+msgstr "XFSound - Pode¹avanje zvuka u XFce-u"
+
+#: xfsound/xfsound.c:419
+msgid "Event : "
+msgstr "Dogaðaj : "
+
+#: xfsound/xfsound.c:428
+msgid "Sound file : "
+msgstr "Datoteka sa zvukom : "
+
+#: xfsound/xfsound.c:437
+msgid "Test"
+msgstr "Proba"
+
+#: xfsound/xfsound.c:488
+msgid "Play Sound"
+msgstr "Odsviraj"
+
+#: xfsound/xfsound.c:497 xfumed/interface.c:295
+msgid "Command : "
+msgstr "Naredba : "
+
+#: xfsound/xfsound.c:522
+msgid "Internal"
+msgstr "Ugraðeni"
+
+#: xfsound/xfsound.c:529
+msgid "External"
+msgstr "Spolja¹nji"
+
+#: xfbd/xfbd.c:290
+msgid ""
+"Error\n"
+"Cannot open file"
+msgstr ""
+"Gre¹ka\n"
+"Ne mogu da otvorim datoteku"
+
+#: xfbd/xfbd.c:292
+msgid ""
+"Error\n"
+"Cannot allocate colors"
+msgstr ""
+"Gre¹ka\n"
+"Ne mogu da zauzmem boje"
+
+#: xfbd/xfbd.c:294
+msgid ""
+"Error\n"
+"File format invalid"
+msgstr ""
+"Gre¹ka\n"
+"Neispravna datoteka"
+
+#: xfbd/xfbd.c:296
+msgid ""
+"Error\n"
+"Color definition invalid"
+msgstr ""
+"Gre¹ka\n"
+"Neispravna definicija boje"
+
+#: xfbd/xfbd.c:298
+msgid ""
+"Error\n"
+"Not enough Memory"
+msgstr ""
+"Gre¹ka\n"
+"Nema dovoljno memorije"
+
+#: xfbd/xfbd.c:415
+msgid "XFbd - XFce Backdrop Manager"
+msgstr "XFbd - Pode¹avanje pozadine u XFce-u"
+
+#: xfbd/xfbd.c:459 xfbd/xfbdmgr.c:147
+msgid "Filename : "
+msgstr "Ime datoteke : "
+
+#: xfbd/xfbd.c:481
+msgid "Display image : "
+msgstr "Prika¾i sliku : "
+
+#: xfbd/xfbd.c:488
+msgid "Tiled"
+msgstr "Ponovljenu"
+
+#: xfbd/xfbd.c:497
+msgid "Stretched"
+msgstr "Razvuèenu"
+
+#: xfbd/xfbd.c:506
+msgid "Auto"
+msgstr "Automatski"
+
+#: xfbd/xfbd.c:738
+msgid "   -i : interactive, prompts for backdrop to display\n"
+msgstr "   -i : interaktivno, pita koju sliku da prika¾e\n"
+
+#: xfbd/xfbd.c:740
+msgid ""
+"   -d : display, reads configuration and exit (default)\n"
+"\n"
+msgstr ""
+"   -d : prika¾i, oèita konfiguraciju i izaðe (podrazumevano)\n"
+"\n"
+
+#: xfbd/xfbdmgr.c:88
+msgid "xfbdmgr - XFCE List Manager"
+msgstr "xfbdmgr - Rad sa vi¹e pozadina u XFce-u"
+
+#: xfbd/xfbdmgr.c:278
+msgid "File not found.\n"
+msgstr "Ne mogu da naðem datoteku.\n"
+
+#: xfwm/xfwm.c:875
+msgid "&Restart"
+msgstr "&Restartuj"
+
+#: xfwm/xfwm.c:876
+msgid "&Quit"
+msgstr "Izaði (&Q)"
+
+#: xfwm/xfwm.c:889
+msgid "&Move"
+msgstr "Po&meri"
+
+#: xfwm/xfwm.c:890
+msgid "&Resize"
+msgstr "&Razvuci"
+
+#: xfwm/xfwm.c:891
+msgid "(De)&Iconify"
+msgstr "(Raz)&Ikoniziraj"
+
+#: xfwm/xfwm.c:892
+msgid "(Un)&Stick"
+msgstr "Zakaèi (&s)"
+
+#: xfwm/xfwm.c:893
+msgid "(Un)S&hade"
+msgstr "(Raz)Umanji (&h)"
+
+#: xfwm/xfwm.c:894
+msgid "(Un)Ma&ximize"
+msgstr "(Raz)Maksimiziraj (&x)"
+
+#: xfwm/xfwm.c:896
+msgid "Se&nd to..."
+msgstr "Po¹alji &na..."
+
+#: xfwm/xfwm.c:897
+msgid "S&witch to..."
+msgstr "Preði na... (&w)"
+
+#: xfwm/xfwm.c:899
+msgid "&Close"
+msgstr "Zatvori (&c)"
+
+#: xfwm/xfwm.c:901
+msgid "User Menu"
+msgstr "Korisnièki meni"
+
+#: xfwm/xfwm.c:902
+msgid "Edit menu..."
+msgstr "Popuni meni..."
+
+#: xfwm/xfwm.c:906
+msgid "&Mouse..."
+msgstr "&Mi¹..."
+
+#: xfwm/xfwm.c:907
+msgid "&Backdrop..."
+msgstr "Pozadina ekrana (&b)"
+
+#: xfwm/xfwm.c:908
+msgid "&Sound..."
+msgstr "Zvuk (&s)"
+
+#: xfwm/xfwm.c:910
+msgid "&New window"
+msgstr "&Novi prozor"
+
+#: xfwm/xfwm.c:911
+msgid "&User Menu"
+msgstr "Korisnièki meni (&u)"
+
+#: xfwm/xfwm.c:915
+msgid "&Arrange icons"
+msgstr "Uredi ikone (&a)"
+
+#: xfwm/xfwm.c:916
+msgid "&Iconify all"
+msgstr "&Ikoniziraj sve"
+
+#: xfwm/xfwm.c:917
+msgid "&Refresh"
+msgstr "Osve¾i (&r)"
+
+#: xfwm/xfwm.c:918
+msgid "Shuffle &Up"
+msgstr "Pre&uredi na gore"
+
+#: xfwm/xfwm.c:919
+msgid "Shuffle &Down"
+msgstr "Preuredi na &dole"
+
+#: xfwm/xfwm.c:921
+msgid "&Settings"
+msgstr "Pode¹avanja (&s)"
+
+#: xfwm/xfwm.c:923
+msgid "&Quit XFwm"
+msgstr "Zatvori XFwm (&q)"
+
+#: xfwm/xfwm.c:925
+msgid "&Full Screen"
+msgstr "Ceo ekran (&f)"
+
+#: xfwm/xfwm.c:926
+msgid "&Vertical"
+msgstr "&Vertikalno"
+
+#: xfwm/xfwm.c:927
+msgid "&Horizontal"
+msgstr "&Horizontalno"
+
+#: xfwm/xfwm.c:1264
+msgid "xfwm terminated: "
+msgstr "xfwm ukinut: "
+
+#: xfsamba/xfsamba.c:313
+msgid "Shares"
+msgstr "Deljeni resursi"
+
+#: xfsamba/xfsamba.c:315
+msgid "Links to other servers"
+msgstr "Veze s ostalim serverima"
+
+#: xfsamba/xfsamba.c:317
+msgid "Links to other workgroups"
+msgstr "Veze s ostalim radnim grupama"
+
+#: xfsamba/xfsamba.c:379
+msgid "Query done."
+msgstr "Upit izvr¹en."
+
+#: xfsamba/xfsamba.c:381
+msgid "Query failed. Machine may be down."
+msgstr "Upit nije uspeo. Mo¾da je ma¹ina oborena."
+
+#: xfsamba/xfsamba.c:399 xfsamba/xfsamba_list.c:183
+msgid "Query password has been requested."
+msgstr "Neophodna je lozinka za upit."
+
+#: xfsamba/xfsamba.c:559
+msgid "Querying"
+msgstr "©aljem upit"
+
+#: xfsamba/xfsamba.c:655
+msgid "Samba failure! Xfsamba could not find file:"
+msgstr "Gre¹ka u Sambi! Xfsamba ne mo¾e da naðe datoteku:"
+
+#: xfsamba/xfsamba.c:667
+msgid "(please install Samba or else correct the PATH environment variable)"
+msgstr "(molim instalirajte Sambu, ili podesite $PATH promenljivu)"
+
+#: xfsamba/xfsamba_download.c:63
+msgid "File download failed. See diagnostics for reason."
+msgstr ""
+"Nije uspeo prenos datoteke. Pogledajte dijagnostièke poruke za obja¹njenje."
+
+#. upload was successful:
+#: xfsamba/xfsamba_download.c:67
+msgid "Download done."
+msgstr "Prenos uspeo."
+
+#: xfsamba/xfsamba_download.c:104
+msgid "Downloading file..."
+msgstr "Prenosim datoteku..."
+
+#: xfsamba/xfsamba_download.c:117
+msgid "File download cancelled."
+msgstr "Prenos prekinut."
+
+#: xfsamba/xfsamba_download.c:126
+msgid "Download failed."
+msgstr "Prenos nije uspeo."
+
+#: xfsamba/xfsamba_gui.c:138
+msgid ""
+"If you have win95 nodes on your network, xfsamba might not find\n"
+"a master browser. If you start smb services on your linux box,\n"
+"making it a samba-server, the problem will be fixed as long as\n"
+"the win95 box(es) are reset. You know the routine, reset wind*ws\n"
+"for changes to take effect. Otherwise,\n"
+"you must type in the node to be browsed and hit RETURN.\n"
+msgstr ""
+"Ako imate win95 ma¹ina u mre¾i, mo¾e se desiti da xfsamba ne naðe\n"
+"Master Broser. Ako imate smb na Linux ma¹ini, koja  slu¾i kao\n"
+"Samba server, problem æe re¹iti resetovanje windows ma¹ina, \n"
+"da bi one prihvatile promene. Inaèe, morate uneti ime ma¹ine \n"
+"koju ¾elite da prelistate i pritisnuti Enter.\n"
+
+#: xfsamba/xfsamba_gui.c:150
+msgid "This is XFSamba "
+msgstr "Ovo je XFsamba "
+
+#: xfsamba/xfsamba_gui.c:151
+msgid ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:316
+msgid "Please provide information for server "
+msgstr "Molim unesite podatke za server "
+
+#: xfsamba/xfsamba_gui.c:317
+#, fuzzy
+msgid "Please provide browsing preferences "
+msgstr "Molim unesite podatke za server "
+
+#: xfsamba/xfsamba_gui.c:334
+msgid "Username : "
+msgstr "Korisnièko ime : "
+
+#: xfsamba/xfsamba_gui.c:356
+#, fuzzy
+msgid "Password  : "
+msgstr "Lozinka : "
+
+#: xfsamba/xfsamba_gui.c:400
+msgid "A file must be selected!"
+msgstr "Morate odabrati datoteku!"
+
+#: xfsamba/xfsamba_gui.c:409 xfsamba/xfsamba_gui.c:418
+#: xfsamba/xfsamba_gui.c:440
+msgid "A directory must be selected!"
+msgstr "Morate odabrati direktorijum!"
+
+#: xfsamba/xfsamba_gui.c:428
+msgid "Something to be deleted must be selected!"
+msgstr "Morate odabrati ¹ta da obri¹em!"
+
+#: xfsamba/xfsamba_gui.c:747
+msgid "Going to master browser..."
+msgstr "Idem na Master Browser..."
+
+#: xfsamba/xfsamba_gui.c:757
+msgid "Going back..."
+msgstr "Idem nazad..."
+
+#: xfsamba/xfsamba_gui.c:769
+msgid "Going forward..."
+msgstr "Idem napred..."
+
+#: xfsamba/xfsamba_gui.c:784
+msgid "Attempting to stop query..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:788
+msgid "Query stopped."
+msgstr "Upit prekinut."
+
+#. (s): multiple file upload/download to be enabled in future
+#: xfsamba/xfsamba_gui.c:1040
+msgid "Download..."
+msgstr "Skidam..."
+
+#: xfsamba/xfsamba_gui.c:1042
+msgid "Upload..."
+msgstr "©aljem..."
+
+#: xfsamba/xfsamba_gui.c:1045
+msgid "New folder..."
+msgstr "Novi direktorijum..."
+
+#: xfsamba/xfsamba_gui.c:1047
+msgid "Delete..."
+msgstr "Obri¹i..."
+
+#: xfsamba/xfsamba_gui.c:1049 xfsamba/xfsamba_tar.c:386
+msgid "Tar..."
+msgstr "Tar..."
+
+#: xfsamba/xfsamba_gui.c:1054
+#, fuzzy
+msgid "Preferences"
+msgstr "Prethodna razlika"
+
+#: xfsamba/xfsamba_gui.c:1055
+#, fuzzy
+msgid "Browse as..."
+msgstr "Prelistaj ..."
+
+#: xfsamba/xfsamba_gui.c:1058
+msgid "View"
+msgstr "Pogledaj"
+
+#: xfsamba/xfsamba_gui.c:1061
+msgid "Show diagnostics"
+msgstr "Prika¾i dijagnostièke poruke"
+
+#: xfsamba/xfsamba_gui.c:1064
+msgid "Hide diagnostics"
+msgstr "Sakrij dijagnostièke informacije"
+
+#: xfsamba/xfsamba_gui.c:1067
+msgid "Show browser links"
+msgstr "Poka¾i veze u browseru"
+
+#: xfsamba/xfsamba_gui.c:1070
+msgid "Hide browser links"
+msgstr "Sakrij veze u browseru"
+
+#: xfsamba/xfsamba_gui.c:1073
+msgid "Go"
+msgstr "Idi"
+
+#: xfsamba/xfsamba_gui.c:1074
+msgid "Home..."
+msgstr "Kuæi..."
+
+#: xfsamba/xfsamba_gui.c:1076
+msgid "Reload..."
+msgstr "Osve¾i..."
+
+#: xfsamba/xfsamba_gui.c:1078
+msgid "Forward..."
+msgstr "NApred..."
+
+#: xfsamba/xfsamba_gui.c:1080
+msgid "Back..."
+msgstr "Nazad..."
+
+#: xfsamba/xfsamba_gui.c:1083
+msgid "About master browser..."
+msgstr "O Master Browser-u..."
+
+#: xfsamba/xfsamba_gui.c:1085
+msgid "About xfsamba..."
+msgstr "O xfsambi..."
+
+#.
+#. hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{
+#.
+#. icon bar
+#: xfsamba/xfsamba_gui.c:1095
+msgid "Back ..."
+msgstr "Nazad ..."
+
+#: xfsamba/xfsamba_gui.c:1100
+msgid "Forward ..."
+msgstr "Napred ..."
+
+#: xfsamba/xfsamba_gui.c:1105
+msgid "Reload ..."
+msgstr "Osve¾i ..."
+
+#: xfsamba/xfsamba_gui.c:1111
+msgid "Home ..."
+msgstr "Kuæi ..."
+
+#: xfsamba/xfsamba_gui.c:1116
+msgid "Stop ..."
+msgstr "Prekini ..."
+
+#: xfsamba/xfsamba_gui.c:1126
+msgid "New folder ..."
+msgstr "Novi direktorijum ..."
+
+#: xfsamba/xfsamba_gui.c:1142
+msgid "Download ..."
+msgstr "Skidanje ..."
+
+#: xfsamba/xfsamba_gui.c:1148
+msgid "Upload ..."
+msgstr "Slanje ..."
+
+#: xfsamba/xfsamba_gui.c:1155
+msgid "Tar ..."
+msgstr "Tar ..."
+
+#: xfsamba/xfsamba_gui.c:1166
+msgid "Help ..."
+msgstr "Pomoæ ..."
+
+#: xfsamba/xfsamba_gui.c:1176
+msgid "Set View 3"
+msgstr "Postavi pogled 3"
+
+#: xfsamba/xfsamba_gui.c:1182
+msgid "Set View 2"
+msgstr "Postavi pogled 2"
+
+#: xfsamba/xfsamba_gui.c:1188
+msgid "Set View 1"
+msgstr "Postavi pogled 1"
+
+#: xfsamba/xfsamba_gui.c:1200
+msgid "Location : "
+msgstr "Lokacija : "
+
+#: xfsamba/xfsamba_gui.c:1216
+msgid "Show IP"
+msgstr "Prika¾i IP"
+
+#. location shares
+#: xfsamba/xfsamba_gui.c:1243
+msgid "Location shares : "
+msgstr "Deljeni resursi na lokaciji : "
+
+#: xfsamba/xfsamba_gui.c:1259
+msgid "Size"
+msgstr "Velièina"
+
+#: xfsamba/xfsamba_gui.c:1260
+msgid "Date"
+msgstr "Datum"
+
+#: xfsamba/xfsamba_gui.c:1261
+msgid "Comment"
+msgstr "Komentar"
+
+#. location computer links
+#: xfsamba/xfsamba_gui.c:1305
+msgid "Location known servers : "
+msgstr "Serveri znani na lokaciji : "
+
+#. location workgroup links
+#: xfsamba/xfsamba_gui.c:1337
+msgid "Location known workgroups : "
+msgstr "Radne grupe znane na lokaciji : "
+
+#: xfsamba/xfsamba_gui.c:1404
+msgid "Welcome to xfsamba."
+msgstr "Dobrodo¹li u xfsambu."
+
+#: xfsamba/xfsamba_list.c:178
+msgid "Retrieve done."
+msgstr "Preno¹enje uspelo."
+
+#: xfsamba/xfsamba_list.c:226
+msgid "List failed."
+msgstr "Listanje nije uspelo."
+
+#: xfsamba/xfsamba_list.c:245
+msgid "Retreiving..."
+msgstr "Prenosim..."
+
+#: xfsamba/xfsamba_lookup.c:43 xfsamba/xfsamba_lookup.c:46
+#: xfsamba/xfsamba_masterresolve.c:203 xfsamba/xfsamba_masterresolve.c:205
+msgid "Resolved"
+msgstr "Pronaðen"
+
+#: xfsamba/xfsamba_lookup.c:99 xfsamba/xfsamba_lookup.c:102
+msgid "Resolving for"
+msgstr "Pronalazim za"
+
+#: xfsamba/xfsamba_masterlookup.c:70
+msgid "No master browser found. See diagnostics."
+msgstr "Nisam na¹ao Master browser. Pogledajte dijagnostièke poruke."
+
+#: xfsamba/xfsamba_masterlookup.c:71
+msgid ""
+"No master browser found.\n"
+"Please type a computer name at location and hit RETURN"
+msgstr ""
+"Nisam na¹ao Master browser.\n"
+"Molim ukucajte ime raèunara na lokaciji i pritisnite Enter"
+
+#: xfsamba/xfsamba_masterlookup.c:127
+msgid "Looking for master browsers..."
+msgstr "Tra¾im Master Browser..."
+
+#: xfsamba/xfsamba_masterresolve.c:97
+msgid "Please provide netbios name for master browser at "
+msgstr "Molim unesite netbios ime Master Browsera na "
+
+#: xfsamba/xfsamba_masterresolve.c:164
+msgid "Master browser netbios name must be provided."
+msgstr "Morate uneti ime Master browser-a."
+
+#: xfsamba/xfsamba_masterresolve.c:215 xfsamba/xfsamba_masterresolve.c:217
+#: xfsamba/xfsamba_masterresolve.c:223
+msgid "No status response"
+msgstr "Nema odgovora sa statusom"
+
+#: xfsamba/xfsamba_masterresolve.c:234
+msgid "Master browser not resolved. Use location box to browse."
+msgstr ""
+"Ne mogu da lociram Master browser. Koristite polje Lokacija za pregled."
+
+#: xfsamba/xfsamba_masterresolve.c:235
+msgid ""
+"No master browser resolved.\n"
+"Please type a computer name at location and hit RETURN"
+msgstr ""
+"Ne mogu da lociram Master browser.\n"
+"Molim unesite ime raèunara u Lokaciju i pritisnite Enter"
+
+#: xfsamba/xfsamba_masterresolve.c:290 xfsamba/xfsamba_masterresolve.c:292
+msgid "Resolving"
+msgstr "Lociram"
+
+#: xfsamba/xfsamba_mkdir.c:75
+msgid "Please provide a name for the new directory at"
+msgstr "Molim unesite ime novog direktorijuma na"
+
+#: xfsamba/xfsamba_mkdir.c:181
+msgid "Directory creation failed. See diagnostics for details."
+msgstr ""
+"Ne mogu da kreiram direktorijum. Potra¾ite obja¹njenje u dijagnostièkim "
+"porukama."
+
+#: xfsamba/xfsamba_mkdir.c:190
+msgid "Directory created."
+msgstr "Direktorijum kreiran."
+
+#: xfsamba/xfsamba_mkdir.c:237
+msgid "Create directory cancelled."
+msgstr "Prekinuto kreiranje direktorijuma."
+
+#: xfsamba/xfsamba_mkdir.c:249
+msgid "Create directory failed."
+msgstr "Kreiranje direktorijuma nije uspelo."
+
+#: xfsamba/xfsamba_mkdir.c:281
+msgid "Creating dir..."
+msgstr "Kreiram direktorijum..."
+
+#: xfsamba/xfsamba_rm.c:63
+msgid "Remove failed. See diagnostics for details."
+msgstr "Brisanje nije uspelo. Potra¾ite obja¹njenje u dijagnostièkim porukama."
+
+#: xfsamba/xfsamba_rm.c:70
+msgid "Remove complete."
+msgstr "Brisanje zavr¹eno."
+
+#: xfsamba/xfsamba_rm.c:104
+msgid "Removing..."
+msgstr "Bri¹em..."
+
+#: xfsamba/xfsamba_rm.c:109
+msgid "Sorry, top level shares cannot be removed."
+msgstr "Izvinite, ne mo¾ete brisati deljene resurse na najvi¹em nivou."
+
+#: xfsamba/xfsamba_rm.c:112 xfsamba/xfsamba_rm.c:168
+msgid "Remove cancelled."
+msgstr "Brisanje prekinuto."
+
+#: xfsamba/xfsamba_rm.c:204
+msgid "Confirm remove?"
+msgstr "Potvrdite brisanje."
+
+#: xfsamba/xfsamba_tar.c:99
+msgid "Tar failed. See diagnostics for details."
+msgstr "Tar nije uspeo. Potra¾ite obja¹njenje u dijagnostièkim porukama."
+
+#: xfsamba/xfsamba_tar.c:103
+msgid "Tar extraction has completed"
+msgstr "Raspakivanje tarom zavr¹eno."
+
+#: xfsamba/xfsamba_tar.c:106
+msgid "Tar command complete."
+msgstr "Naredba tar izvr¹ena."
+
+#: xfsamba/xfsamba_tar.c:126
+msgid "Please select input tarfile next."
+msgstr "Unesite ulaznu tar datoteku."
+
+#: xfsamba/xfsamba_tar.c:128
+msgid "Please select the output tarfile next."
+msgstr "Unesite izlaznu tar datoteku."
+
+#: xfsamba/xfsamba_tar.c:152 xfsamba/xfsamba_tar.c:189
+msgid "Tar cancelled."
+msgstr "Prekinuto izvr¹avanje tara."
+
+#: xfsamba/xfsamba_tar.c:162
+msgid "Cannot open tar file"
+msgstr "Ne mogu da otvorim tar datoteku"
+
+#: xfsamba/xfsamba_tar.c:170
+msgid "Cannot create tar file"
+msgstr "Ne mogu da kreiram tar datoteku"
+
+#: xfsamba/xfsamba_tar.c:272
+msgid "create"
+msgstr "kreiraj"
+
+#: xfsamba/xfsamba_tar.c:275
+msgid "extract"
+msgstr "raspakuj"
+
+#: xfsamba/xfsamba_tar.c:316
+msgid "full"
+msgstr "pun"
+
+#: xfsamba/xfsamba_tar.c:319
+msgid "incremental"
+msgstr "inkrementalni"
+
+#: xfsamba/xfsamba_tar.c:339
+msgid "do not reset archive bit"
+msgstr "ne bri¹i oznaku \"arhivirati\""
+
+#: xfsamba/xfsamba_tar.c:342
+msgid "reset archive bit"
+msgstr "obri¹i oznaku \"arhivirati\""
+
+#: xfsamba/xfsamba_tar.c:355
+msgid "Options"
+msgstr "Pode¹avanja"
+
+#: xfsamba/xfsamba_upload.c:62
+msgid "File upload failed. See diagnostics for reason."
+msgstr ""
+"Prenos datoteke nije uspeo. Potra¾ite obja¹njenje u dijagnostièkim porukama."
+
+#: xfsamba/xfsamba_upload.c:72
+msgid "Upload done."
+msgstr "Prenos uspeo."
+
+#: xfsamba/xfsamba_upload.c:87
+msgid "Uploaded file."
+msgstr "Preneta datoteka."
+
+#: xfsamba/xfsamba_upload.c:125
+msgid "Uploading file..."
+msgstr "Prenosim datoteku..."
+
+#: xfsamba/xfsamba_upload.c:131
+msgid "File upload cancelled."
+msgstr "Prenos datoteke prekinut."
+
+#: xfsamba/xfsamba_upload.c:141
+msgid "Specified file does not exist"
+msgstr "Navedena datoteka ne postoji"
+
+#: xfsamba/xfsamba_upload.c:142 xfsamba/xfsamba_upload.c:157
+msgid "Upload failed."
+msgstr "Prenos nije uspeo."
+
+#: xfumed/clistmenu.c:33
+#, c-format
+msgid "   Menu: %s   Parent: %s"
+msgstr "   Meni: %s   Prethodni: %s"
+
+#. nothing found
+#: xfumed/clistmenu.c:41 xfumed/clistmenu.c:51 xfumed/usermenu.c:55
+#: xfumed/usermenu.c:66
+msgid "Toplevel"
+msgstr "Najvi¹i"
+
+#: xfumed/clistmenu.c:41
+msgid "None"
+msgstr "Ne postoji"
+
+#: xfumed/clistmenu.c:449
+msgid "Your changes will take effect on next startup"
+msgstr "Promene æe biti primenjene pri sledeæem startovanju"
+
+#: xfumed/interface.c:89
+msgid "XFce User Menu Editor"
+msgstr "Editor za XFce korisnièki meni"
+
+#: xfumed/interface.c:145
+msgid "Go to parent menu"
+msgstr "Idi u prethodni meni"
+
+#: xfumed/interface.c:153
+msgid "Go to submenu"
+msgstr "Idi u podmeni"
+
+#: xfumed/interface.c:182
+msgid "Type"
+msgstr "Tip"
+
+#: xfumed/interface.c:189
+msgid "Caption"
+msgstr "Naziv"
+
+#: xfumed/interface.c:196
+msgid "Command"
+msgstr "Naredba"
+
+#: xfumed/interface.c:257
+msgid "Edit item"
+msgstr "Izmeni stavku"
+
+#: xfumed/interface.c:273
+msgid "Type : "
+msgstr "Tip : "
+
+#: xfumed/interface.c:284
+msgid "Caption : "
+msgstr "Naziv : "
+
+#: xfumed/interface.c:373
+msgid "Add"
+msgstr "Dodaj"
+
+#: xfumed/interface.c:381
+msgid "Update"
+msgstr "A¾uriraj"
+
+#: xfumed/interface.c:412
+msgid "Save"
+msgstr "Snimi"
+
+#: xfumed/interface.c:420
+msgid "Reset"
+msgstr "Poni¹ti izmene"
+
+#: xfumed/interface.c:491
+msgid ""
+"There are unsaved changes to the menu.\n"
+"\n"
+"Do you want to quit and lose the changes ?"
+msgstr ""
+"Neke izmene menija nisu snimljene.\n"
+"\n"
+"®elite li da izaðete i poni¹tite izmene?"
+
+#: xfumed/interface.c:494
+msgid "Don't Quit"
+msgstr "Ne izlazi"
+
+#: xfumed/interface.c:494
+msgid "Quit, don't save"
+msgstr "Izaði bez snimanja"
+
+#: xfumed/interface.h:21
+msgid "Item"
+msgstr ""
+
+#: xfumed/interface.h:22
+#, fuzzy
+msgid "Submenu"
+msgstr "Idi u podmeni"
+
+#: xfumed/interface.h:23
+msgid "Separator"
+msgstr ""
+
+#: xfumed/usermenu.h:28
+msgid "# This file was generated by xfumed - XFce User Menu Editor"
+msgstr ""
+
+#~ msgid "Source and Target are the same"
+#~ msgstr "Izvor i cilj su isti"
+
+#~ msgid "Can't transfer, same Inode !"
+#~ msgstr "Ne mogu da prenesem, isti i-èvor !"
+
+#~ msgid "Diff diagnostics disabled.\n"
+#~ msgstr "Iskljuèene su dijagnostièke poruke od diff-a.\n"
+
+#~ msgid "(Patch diagnostics remain enabled)\n"
+#~ msgstr "(Dijagnostièke poruke od patch-a su i dalje ukljuèene)\n"
+
+#~ msgid "Diff diagnostics enabled.\n"
+#~ msgstr "Ukljuèene su dijagnostièke poruke od diff-a.\n"
+
+#~ msgid "Full path to file"
+#~ msgstr "Puna putanja do datoteke"
+
+#~ msgid "Permissions :"
+#~ msgstr "Prava pristupa :"
+
+#~ msgid "Any"
+#~ msgstr "Bilo koje"
+
+#~ msgid "suid"
+#~ msgstr "suid"
+
+#~ msgid "Executable"
+#~ msgstr "Izvr¹no"

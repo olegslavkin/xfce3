@@ -344,6 +344,7 @@ dlg_new (char *labelval, char *defval, void *data, int type)
 				     "activate",
 				     GTK_SIGNAL_FUNC
 				     (gtk_button_clicked), GTK_OBJECT (ok));
+      gtk_widget_grab_focus (dl.entry);
 	  gtk_signal_connect (GTK_OBJECT (dl.entry),
 			      "key_press_event",
 			      GTK_SIGNAL_FUNC (on_key_press),

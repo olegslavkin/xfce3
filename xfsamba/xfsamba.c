@@ -239,6 +239,8 @@ SMBrefresh (unsigned char *servidor, int reload)
   if (!headN)
     {
       static gboolean NMBmastersLookup (gpointer data);
+      
+      stopcleanup=TRUE;
       if (servidor)
 	headN = push_nmbName (servidor);
       else
@@ -289,28 +291,32 @@ SMBprintTitles (void)
     currentH = thisH;
     while (currentH)
       {
-	if (currentH->record->server)
-	  items = g_list_append (items, currentH->record->server);
-	if (currentH->record->serverIP)
-	  gtk_label_set_text ((GtkLabel *) locationIP,
+	if (currentH->record) {
+	  if (currentH->record->server)
+	    items = g_list_append (items, currentH->record->server);
+	  if (currentH->record->serverIP)
+	    gtk_label_set_text ((GtkLabel *) locationIP,
 			      currentH->record->serverIP);
-	else
-	  gtk_label_set_text ((GtkLabel *) locationIP, "");
+	  else
+	    gtk_label_set_text ((GtkLabel *) locationIP, "-");
+	}
 	currentH = currentH->previous;
       }
     if (items)
       gtk_combo_set_popdown_strings (GTK_COMBO (location), items);
-    if (thisH->record->serverIP)
+    if ((thisH)&&(thisH->record)&&(thisH->record->serverIP))
       gtk_label_set_text ((GtkLabel *) locationIP, thisH->record->serverIP);
     else
       gtk_label_set_text ((GtkLabel *) locationIP, "");
   }
-  sprintf (message, "%s : %s", thisN->server, _("Shares"));
-  gtk_label_set_text ((GtkLabel *) sharesL, message);
-  sprintf (message, "%s : %s", thisN->server, _("Links to other servers"));
-  gtk_label_set_text ((GtkLabel *) serversL, message);
-  sprintf (message, "%s : %s", thisN->server, _("Links to other workgroups"));
-  gtk_label_set_text ((GtkLabel *) workgroupsL, message);
+  if (thisN->server){
+    sprintf (message, "%s : %s", thisN->server, _("Shares"));
+    gtk_label_set_text ((GtkLabel *) sharesL, message);
+    sprintf (message, "%s : %s", thisN->server, _("Links to other servers"));
+    gtk_label_set_text ((GtkLabel *) serversL, message);
+    sprintf (message, "%s : %s", thisN->server, _("Links to other workgroups"));
+    gtk_label_set_text ((GtkLabel *) workgroupsL, message);
+  }
 }
 
 static void
@@ -395,6 +401,7 @@ SMBForkOver (void)
 				    GTK_WINDOW (smb_nav));
     }
   fork_obj = NULL;
+  nonstop=FALSE;
 }
 
 /* function to process stdout produced by child */
@@ -726,6 +733,8 @@ gboolean sane (char *bin)
   exit (1);
 }
 
+#include "icons/xfsamba.xpm"
+
 int
 main (int argc, char *argv[])
 {
@@ -746,6 +755,7 @@ main (int argc, char *argv[])
      signal(SIGTERM,finish);
    */
   create_smb_window ();
+  set_icon (smb_nav, "Xfsamba", xfsamba_xpm);
   cursor_wait (GTK_WIDGET (smb_nav));
   animation (TRUE);
   sane ("nmblookup");

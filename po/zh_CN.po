@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-07-01 11:53+0200\n"
+"POT-Creation-Date: 2001-07-11 22:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Merlin <merlin@turbolinux.com.cn>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "选择文件"
 msgid "Font Selection"
 msgstr "选择字体"
 
-#: libs/xfce-common.c:264 xfdiff/xfdiff_gui.c:1189 xfdiff/xfdiff_misc.c:129
+#: libs/xfce-common.c:264 xfdiff/xfdiff_gui.c:1191 xfdiff/xfdiff_misc.c:129
 #: xfdiff/xfdiff_misc.c:139
 msgid "OK"
 msgstr "确定"
@@ -81,8 +81,8 @@ msgstr "浏览..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
-#: xfce/setup.c:1588 xfmouse/xfmouse.c:307 xfrun/xfrun.c:191
-#: xfsamba/xfsamba.c:665 xfsamba/xfsamba_gui.c:368
+#: xfce/setup.c:1583 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
+#: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
 #: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
 #: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
 #: xftree/gtk_dlg.c:213 xftree/gtk_exec.c:157 xftree/gtk_prop.c:187
@@ -90,8 +90,8 @@ msgid "Ok"
 msgstr "确定"
 
 #: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
-#: xfce/setup.c:1612 xfmouse/xfmouse.c:332 xfrun/xfrun.c:192
-#: xfsound/xfsound.c:581 xftree/gtk_cpy.c:503 xftree/gtk_dlg.c:246
+#: xfce/setup.c:1607 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
+#: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
 #: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
 msgid "Cancel"
 msgstr "取消"
@@ -178,16 +178,16 @@ msgstr "不能载入配置文件"
 msgid "Cannot use old version of XFce configuration files"
 msgstr "不能使用旧版本的 XFce 配置文件"
 
-#: xfce/diagnostic.c:93 xfce/diagnostic.c:138
+#: xfce/diagnostic.c:91 xfce/diagnostic.c:136
 msgid "Subprocess diagnostic"
 msgstr "子进程问题诊断"
 
-#: xfbd/xfbd.c:570 xfce/diagnostic.c:118 xfdiff/xfdiff_diag.c:186
-#: xfdiff/xfdiff_gui.c:1384 xfglob/xfglob.c:675
+#: xfbd/xfbd.c:570 xfce/diagnostic.c:116 xfdiff/xfdiff_diag.c:186
+#: xfdiff/xfdiff_gui.c:1386 xfglob/xfglob.c:675
 msgid "Clear"
 msgstr "清除"
 
-#: xfce/diagnostic.c:123 xfdiff/xfdiff_diag.c:191 xfglob/xfglob.c:689
+#: xfce/diagnostic.c:121 xfdiff/xfdiff_diag.c:191 xfglob/xfglob.c:689
 msgid "Dismiss"
 msgstr "离开"
 
@@ -199,7 +199,7 @@ msgstr "信息 ..."
 #: xfce/popup.c:315 xfce/startup.c:95 xfce/xfce.c:223 xfce/xfce.c:293
 #: xfce/xfce.c:595 xfce/xfce.c:634 xfce/xfce.c:777 xfce/xfce.c:806
 #: xfce/xfce.c:848 xfce/xfce.c:939 xfce/xfce.c:967 xfglob/xfglob.c:563
-#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:934
+#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:940
 msgid "Couldn't create pixmap"
 msgstr "不能创建图像"
 
@@ -375,7 +375,7 @@ msgstr "面板层"
 msgid "Bottom"
 msgstr "底部"
 
-#: xfce/setup.c:584 xfce/setup.c:1178
+#: xfce/setup.c:584 xfce/setup.c:1173
 msgid "Top"
 msgstr "顶部"
 
@@ -439,7 +439,7 @@ msgstr "弹出菜单和图标大小"
 msgid "Font style"
 msgstr "字体风格"
 
-#: xfce/setup.c:917 xfce/setup.c:1379 xfce/setup.c:1393 xfce/setup.c:1407
+#: xfce/setup.c:917 xfce/setup.c:1374 xfce/setup.c:1388 xfce/setup.c:1402
 msgid "Browse..."
 msgstr "浏览..."
 
@@ -457,7 +457,7 @@ msgstr "自动提升窗口"
 
 #: xfce/setup.c:992
 #, fuzzy
-msgid "Show contents of window whlile moving"
+msgid "Show contents of window while moving"
 msgstr "移动时显示窗口内容"
 
 #: xfce/setup.c:1007
@@ -472,90 +472,90 @@ msgstr "活动窗口使用渐进颜色"
 
 #: xfce/setup.c:1036
 #, fuzzy
-msgid "Use gradient colour for inactive windowss"
+msgid "Use gradient color for inactive windows"
 msgstr "非活动窗口使用渐进颜色"
 
 #: xfce/setup.c:1074
 msgid "Window border style : "
 msgstr "窗口边缘样式"
 
-#: xfce/setup.c:1122
+#: xfce/setup.c:1117
 msgid "Window snapping size (0 disable) : "
 msgstr "窗口磁性效果阀值 (0 为禁止) : "
 
-#: xfce/setup.c:1161
+#: xfce/setup.c:1156
 msgid "Icon position"
 msgstr "图标位置"
 
-#: xfce/setup.c:1193 xfmouse/xfmouse.c:209
+#: xfce/setup.c:1188 xfmouse/xfmouse.c:209
 msgid "Left"
 msgstr "左侧"
 
-#: xfce/setup.c:1208
+#: xfce/setup.c:1203
 msgid "bottom"
 msgstr "底部"
 
-#: xfce/setup.c:1223 xfmouse/xfmouse.c:220
+#: xfce/setup.c:1218 xfmouse/xfmouse.c:220
 msgid "Right"
 msgstr "右侧"
 
-#: xfce/setup.c:1339
+#: xfce/setup.c:1334
 msgid "Title font :"
 msgstr "标题字体:"
 
-#: xfce/setup.c:1352
+#: xfce/setup.c:1347
 msgid "Icon font :"
 msgstr "图标字体:"
 
-#: xfce/setup.c:1365
+#: xfce/setup.c:1360
 msgid "Menu font :"
 msgstr "菜单字体:"
 
-#: xfce/setup.c:1443
+#: xfce/setup.c:1438
 msgid "Sound module (xfsound)"
 msgstr "声音模块 (xfsound)"
 
-#: xfce/setup.c:1457
+#: xfce/setup.c:1452
 msgid "Mouse settings (xfmouse)"
 msgstr "鼠标设置 (xfmouse)"
 
-#: xfce/setup.c:1471
+#: xfce/setup.c:1466
 msgid "Backdrop settings (xfbd)"
 msgstr "背景设置 (xfbd)"
 
-#: xfce/setup.c:1485
+#: xfce/setup.c:1480
 msgid "Pager (xfpager)"
 msgstr "虚屏管理器 (xfpager)"
 
-#: xfce/setup.c:1499
+#: xfce/setup.c:1494
 msgid "GNOME (xfgnome)"
 msgstr "GNOME (xfgnome)"
 
-#: xfce/setup.c:1513
+#: xfce/setup.c:1508
 msgid "GNOME menu (xfmenu)"
 msgstr "GNOME 菜单 (xfmenu)"
 
-#: xfce/setup.c:1527
+#: xfce/setup.c:1522
 msgid "KDE menu (xfmenu)"
 msgstr "KDE 菜单 (xfmenu)"
 
-#: xfce/setup.c:1540
+#: xfce/setup.c:1535
 msgid "Palette"
 msgstr "调色板"
 
-#: xfce/setup.c:1548
+#: xfce/setup.c:1543
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1556
+#: xfce/setup.c:1551
 msgid "Windows"
 msgstr "窗口"
 
-#: xfce/setup.c:1564 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1559 xfce/startup.c:60 xfsound/xfsound.c:92
 msgid "Startup"
 msgstr "启动"
 
-#: xfbd/xfbd.c:560 xfce/setup.c:1600 xfmouse/xfmouse.c:322
+#: xfbd/xfbd.c:560 xfce/setup.c:1595 xfmouse/xfmouse.c:322
 #: xfsound/xfsound.c:572
 msgid "Apply"
 msgstr "应用"
@@ -651,7 +651,7 @@ msgstr "数字模式"
 
 #: xfce/xfce.c:118
 #, fuzzy
-msgid "24 hour mode"
+msgid "24 hours mode"
 msgstr "24小时模式"
 
 #: xfce/xfce.c:800 xfclock/xfclock_menus.c:269
@@ -776,121 +776,130 @@ msgstr "XFCE: 通讯管道关闭.退出...\n"
 msgid "Workspace"
 msgstr "工作空间"
 
-#: xftree/gtk_cpy.c:69
+#: xftree/gtk_cpy.c:70
 #, c-format
 msgid "transfer_view() %d\n"
 msgstr "transfer_view() %d\n"
 
-#: xftree/gtk_cpy.c:128
-msgid "Source and Target are the same"
-msgstr "源文件与目标文件相同"
+#: xftree/gtk_cpy.c:112
+msgid "move"
+msgstr "移动"
 
-#: xftree/gtk_cpy.c:132 xftree/gtk_cpy.c:244
+#: xftree/gtk_cpy.c:116
+msgid "copy"
+msgstr "拷贝"
+
+#: xftree/gtk_cpy.c:120
+msgid "link"
+msgstr "链接"
+
+#: xftree/gtk_cpy.c:148 xftree/gtk_cpy.c:269
 #, c-format
 msgid "%d bytes"
 msgstr "%d 字节"
 
-#: xftree/gtk_cpy.c:143
-msgid "Can't transfer, same Inode !"
-msgstr "不能传递, 节点相同!"
-
-#: xftree/gtk_cpy.c:145
+#: xftree/gtk_cpy.c:156
 msgid "Override file?"
 msgstr "覆盖文件 ?"
 
-#: xftree/gtk_cpy.c:162 xftree/gtk_cpy.c:166 xftree/gtk_cpy.c:326
-#: xftree/gtk_cpy.c:330 xftree/xtree_gui.c:1354 xftree/xtree_gui.c:1361
+#: xftree/gtk_cpy.c:165 xftree/gtk_cpy.c:170 xftree/gtk_cpy.c:347
+#: xftree/gtk_cpy.c:351 xftree/xtree_gui.c:1354 xftree/xtree_gui.c:1361
 msgid "Can't stat() file"
 msgstr "不能stat()文件"
 
-#: xftree/gtk_cpy.c:194
+#: xftree/gtk_cpy.c:177
+#, c-format
+msgid "Do you want to %s the item(s) to"
+msgstr "你想要把项目%s 到"
+
+#: xftree/gtk_cpy.c:219
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:214
+#: xftree/gtk_cpy.c:239
 msgid "Can't copy device file"
 msgstr "不能拷贝设备文件"
 
-#: xftree/gtk_cpy.c:219
+#: xftree/gtk_cpy.c:244
 msgid "Can't copy FIFO"
 msgstr "不能拷贝FIFO"
 
-#: xftree/gtk_cpy.c:223
+#: xftree/gtk_cpy.c:248
 msgid "Can't copy socket"
 msgstr "不能拷贝SOCKET"
 
-#: xftree/gtk_cpy.c:260
+#: xftree/gtk_cpy.c:283
 #, fuzzy
 msgid "Too free bytes transferred ! Device full ?"
 msgstr "传输数据太少! 设备满了?"
 
-#: xftree/gtk_cpy.c:264
+#: xftree/gtk_cpy.c:287
 #, fuzzy
 msgid "Too many bytes transferred !?"
 msgstr "传输数据太多了?!"
 
-#: xftree/gtk_cpy.c:312
+#: xftree/gtk_cpy.c:333
 msgid "Source and Target directories are the same"
 msgstr "源和目标目录相同"
 
-#: xftree/gtk_cpy.c:363
+#: xftree/gtk_cpy.c:384
 msgid "exists and is not a directory"
 msgstr "已存在, 不是一个目录"
 
-#: xftree/gtk_cpy.c:440
+#: xftree/gtk_cpy.c:458
 msgid "XFTree: Copy"
 msgstr "XFTree: 复制"
 
-#: xftree/gtk_cpy.c:444
+#: xftree/gtk_cpy.c:462
 msgid "XFTree: Move"
 msgstr "XFTree: 移动"
 
-#: xftree/gtk_cpy.c:448
+#: xftree/gtk_cpy.c:466
 msgid "XFTree: Link"
 msgstr "XFTree: 链接"
 
-#: xftree/gtk_cpy.c:452
+#: xftree/gtk_cpy.c:470
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "未知的传输模式: %d\n"
 
-#: xftree/gtk_cpy.c:458
+#: xftree/gtk_cpy.c:476
 msgid "transfer()"
 msgstr "transfer()"
 
-#: xftree/gtk_cpy.c:458
+#: xftree/gtk_cpy.c:476
 msgid "fatal error"
 msgstr "致命错误"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:482
 msgid "Error getting info from"
 msgstr "信息读取错误从"
 
-#: xftree/gtk_cpy.c:469
+#: xftree/gtk_cpy.c:487
 msgid "Fatal Error"
 msgstr "致命错误"
 
-#: xftree/gtk_cpy.c:469
+#: xftree/gtk_cpy.c:487
 msgid "Can't transfer items to a file"
 msgstr "不能传输项目至文件"
 
-#: xftree/gtk_cpy.c:488
+#: xftree/gtk_cpy.c:506
 msgid "Source: "
 msgstr "源文件:"
 
-#: xftree/gtk_cpy.c:494
+#: xftree/gtk_cpy.c:512
 msgid "Target: "
 msgstr "目标文件:"
 
-#: xftree/gtk_cpy.c:500
+#: xftree/gtk_cpy.c:518
 msgid "0 bytes transferred"
 msgstr "传输了 0 bytes "
 
-#: xftree/gtk_cpy.c:529 xftree/gtk_dlg.c:185
+#: xftree/gtk_cpy.c:541 xftree/gtk_dlg.c:185
 msgid "Error"
 msgstr "错误"
 
-#: xftree/gtk_cpy.c:529
+#: xftree/gtk_cpy.c:541
 msgid "Can't transfer a directory to a file"
 msgstr "不能传输一个目录至一个文件"
 
@@ -926,13 +935,13 @@ msgstr "关闭"
 msgid "Open with ..."
 msgstr "打开用..."
 
-#: xfrun/xfrun.c:187 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
+#: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
 #: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
 #: xftree/xtree_gui.c:3121 xfwm/xfwm.c:913
 msgid "Run program ..."
 msgstr "运行程序..."
 
-#: xfrun/xfrun.c:221 xftree/gtk_exec.c:190 xftree/xtree_gui.c:2771
+#: xfrun/xfrun.c:243 xftree/gtk_exec.c:190 xftree/xtree_gui.c:2771
 #: xftree/xtree_gui.c:2954
 msgid "Open in terminal"
 msgstr "在终端内打开"
@@ -1223,7 +1232,7 @@ msgstr "新文件夹"
 msgid "New file ..."
 msgstr "新文件..."
 
-#: xfsamba/xfsamba_gui.c:1126 xftree/xtree_gui.c:2710 xftree/xtree_gui.c:2711
+#: xfsamba/xfsamba_gui.c:1132 xftree/xtree_gui.c:2710 xftree/xtree_gui.c:2711
 #: xftree/xtree_gui.c:2712 xftree/xtree_gui.c:2799 xftree/xtree_gui.c:2964
 #: xftree/xtree_gui.c:3013 xftree/xtree_gui.c:3054
 msgid "Delete ..."
@@ -1248,8 +1257,8 @@ msgid "Toggle Dotfiles"
 msgstr "切换点文件显示"
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:89 xfdiff/xfdiff_gui.c:936
-#: xfsamba/xfsamba_gui.c:1032 xftree/xtree_gui.c:2758
+#: xfclock/xfclock_menus.c:89 xfdiff/xfdiff_gui.c:938
+#: xfsamba/xfsamba_gui.c:1038 xftree/xtree_gui.c:2758
 msgid "File"
 msgstr "文件"
 
@@ -1285,8 +1294,8 @@ msgid "Go up"
 msgstr "向上"
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:262 xfdiff/xfdiff_gui.c:1055
-#: xfsamba/xfsamba_gui.c:1076 xftree/xtree_gui.c:2910
+#: xfclock/xfclock_menus.c:262 xfdiff/xfdiff_gui.c:1057
+#: xfsamba/xfsamba_gui.c:1082 xftree/xtree_gui.c:2910
 msgid "Help"
 msgstr "帮助"
 
@@ -1333,7 +1342,7 @@ msgstr "注册..."
 msgid "New windows"
 msgstr "新建窗口"
 
-#: xfglob/xfglob.c:612 xfsamba/xfsamba_gui.c:1252 xftree/xtree_gui.c:3136
+#: xfglob/xfglob.c:612 xfsamba/xfsamba_gui.c:1258 xftree/xtree_gui.c:3136
 msgid "Name"
 msgstr "名称"
 
@@ -1345,32 +1354,15 @@ msgstr "大小(字节)"
 msgid "Last changed"
 msgstr "最后改变"
 
-#: xftree/xtree_dnd.c:114
-msgid "move"
-msgstr "移动"
-
-#: xftree/xtree_dnd.c:119
-msgid "copy"
-msgstr "拷贝"
-
-#: xftree/xtree_dnd.c:124
-msgid "link"
-msgstr "链接"
-
-#: xftree/xtree_dnd.c:129
+#: xftree/xtree_dnd.c:125
 msgid "Unknown action !"
 msgstr "未知操作!"
 
-#: xftree/xtree_dnd.c:145
+#: xftree/xtree_dnd.c:141
 msgid "Target must be a directory !"
 msgstr "目标必须是目录!"
 
-#: xftree/xtree_dnd.c:153
-#, c-format
-msgid "Do you want to %s the item(s) to"
-msgstr "你想要把项目%s 到"
-
-#: xftree/xtree_dnd.c:185
+#: xftree/xtree_dnd.c:170
 #, c-format
 msgid "Type not supported.. (%d)\n"
 msgstr "类型不支持.. (%d)\n"
@@ -1418,6 +1410,7 @@ msgstr "补丁文件不是统一格式"
 msgid "****Empty file****\n"
 msgstr "*** 空文件 ***\n"
 
+#. missing color attribute
 #: xfdiff/xfdiff.c:255 xfdiff/xfdiff.c:260 xfdiff/xfdiff.c:261
 msgid "****Binary data****\n"
 msgstr "*** 二进制数据 ***\n"
@@ -1521,23 +1514,23 @@ msgstr ""
 msgid "Xfdiff diagnostic"
 msgstr "XFdiff 诊断"
 
-#: xfdiff/xfdiff_gui.c:149
+#: xfdiff/xfdiff_gui.c:151
 msgid "A patch file and directory must be selected first!"
 msgstr "必须首先选择一个补丁文件和一个目录!"
 
-#: xfdiff/xfdiff_gui.c:158
+#: xfdiff/xfdiff_gui.c:160
 msgid "Patch has been undone."
 msgstr "补丁未被完成."
 
-#: xfdiff/xfdiff_gui.c:158
+#: xfdiff/xfdiff_gui.c:160
 msgid "Patch has been applied."
 msgstr "补丁已经被应用."
 
-#: xfdiff/xfdiff_gui.c:171
+#: xfdiff/xfdiff_gui.c:173
 msgid "Please select a name for the patch file in the next dialog."
 msgstr "请在下一个对话框中选择一个补丁文件名"
 
-#: xfdiff/xfdiff_gui.c:181
+#: xfdiff/xfdiff_gui.c:183
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
@@ -1547,247 +1540,254 @@ msgstr ""
 "请耐心等待. (xfdiff 可能要一定时间).\n"
 "比较正在进行中."
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:188
 msgid "Patch file could not be created"
 msgstr "补丁文件不能被创建"
 
-#: xfdiff/xfdiff_gui.c:190 xfdiff/xfdiff_gui.c:193
+#: xfdiff/xfdiff_gui.c:192 xfdiff/xfdiff_gui.c:195
 msgid "Strip level for created patch file="
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:194
+#: xfdiff/xfdiff_gui.c:196
 msgid " has been created\n"
 msgstr "已经被建立\n"
 
-#: xfdiff/xfdiff_gui.c:204
+#: xfdiff/xfdiff_gui.c:206
 msgid "Patch file creation cancelled"
 msgstr "补丁文件创建被取消"
 
-#: xfdiff/xfdiff_gui.c:315
+#: xfdiff/xfdiff_gui.c:317
 msgid "Line synchronization enabled.\n"
 msgstr "行同步打开.\n"
 
-#: xfdiff/xfdiff_gui.c:316
+#: xfdiff/xfdiff_gui.c:318
 msgid "Line synchronization disabled.\n"
 msgstr "行同步关闭.\n"
 
-#: xfdiff/xfdiff_gui.c:340
+#: xfdiff/xfdiff_gui.c:342
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr "补丁详细诊断打开.\n"
 
-#: xfdiff/xfdiff_gui.c:341
+#: xfdiff/xfdiff_gui.c:343
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr "补丁详细诊断关闭.\n"
 
-#: xfdiff/xfdiff_gui.c:355
+#: xfdiff/xfdiff_gui.c:357
 msgid "Line numbers enabled.\n"
 msgstr "打开行号.\n"
 
-#: xfdiff/xfdiff_gui.c:356
+#: xfdiff/xfdiff_gui.c:358
 msgid "Line numbers disabled.\n"
 msgstr "关闭行号.\n"
 
-#: xfdiff/xfdiff_gui.c:365
+#: xfdiff/xfdiff_gui.c:367
 msgid "Polygons will now be filled.\n"
 msgstr "多边形将被填充.\n"
 
-#: xfdiff/xfdiff_gui.c:366
+#: xfdiff/xfdiff_gui.c:368
 #, fuzzy
 msgid "Polygons will now *not* be filled.\n"
 msgstr "多边形将不被填充.\n"
 
-#: xfdiff/xfdiff_gui.c:377
+#: xfdiff/xfdiff_gui.c:379
 msgid "Patch will now be assumed reversed.\n"
 msgstr "补丁将假定是反向的.\n"
 
-#: xfdiff/xfdiff_gui.c:378
+#: xfdiff/xfdiff_gui.c:380
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr "补丁将假定不是反向的.\n"
 
 #.
-#: xfdiff/xfdiff_gui.c:395
+#: xfdiff/xfdiff_gui.c:397
 #, fuzzy
 msgid "Font selection"
 msgstr "选择字体"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:402 xfdiff/xfdiff_misc.c:661
+#: xfdiff/xfdiff_gui.c:404 xfdiff/xfdiff_misc.c:661
 msgid "Could not load specified font\n"
 msgstr "不能加在指定的字体\n"
 
-#: xfdiff/xfdiff_gui.c:457
+#: xfdiff/xfdiff_gui.c:459
 #, fuzzy
 msgid "Select highlight background color"
 msgstr "高亮背景色"
 
-#: xfdiff/xfdiff_gui.c:461
+#: xfdiff/xfdiff_gui.c:463
 #, fuzzy
 msgid "Select highlight text color"
 msgstr "高亮文本颜色"
 
-#: xfdiff/xfdiff_gui.c:537 xfdiff/xfdiff_gui.c:538
+#: xfdiff/xfdiff_gui.c:539 xfdiff/xfdiff_gui.c:540
 msgid "Warning: cannot read from "
 msgstr "警告: 不能读取 "
 
-#: xfdiff/xfdiff_gui.c:541 xfdiff/xfdiff_gui.c:542
+#: xfdiff/xfdiff_gui.c:543 xfdiff/xfdiff_gui.c:544
 msgid "is not in patch file."
 msgstr "不在补丁文件中."
 
-#: xfdiff/xfdiff_gui.c:618
+#: xfdiff/xfdiff_gui.c:620
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr "默认的 .xfdiffrc 文件不能被创建\n"
 
-#: xfdiff/xfdiff_gui.c:638
+#: xfdiff/xfdiff_gui.c:640
 msgid "Default configuration has been saved\n"
 msgstr "默认配置被保存\n"
 
-#: xfdiff/xfdiff_gui.c:645
+#: xfdiff/xfdiff_gui.c:647
 msgid "This is XFDiff "
 msgstr "这是 XFDiff"
 
-#: xfdiff/xfdiff_gui.c:658
+#: xfdiff/xfdiff_gui.c:648
+msgid ""
+"\n"
+"(c) by Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
+
+#: xfdiff/xfdiff_gui.c:660
 msgid "There is no next difference"
 msgstr "没有下一个区别"
 
-#: xfdiff/xfdiff_gui.c:661
+#: xfdiff/xfdiff_gui.c:663
 msgid "There is no previous difference"
 msgstr "没有上一个区别"
 
-#: xfdiff/xfdiff_gui.c:677
+#: xfdiff/xfdiff_gui.c:679
 msgid "There is no such file"
 msgstr "没有这么个文件"
 
-#: xfdiff/xfdiff_gui.c:681
+#: xfdiff/xfdiff_gui.c:683
 msgid "There is no next file"
 msgstr "没有下一个文件"
 
-#: xfdiff/xfdiff_gui.c:685
+#: xfdiff/xfdiff_gui.c:687
 msgid "There is no previous file"
 msgstr "没有上一个文件"
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:758
+#: xfdiff/xfdiff_gui.c:760
 msgid "That is a directory (or symlink)"
 msgstr "那是目录(或者链接)"
 
-#: xfdiff/xfdiff_gui.c:937
+#: xfdiff/xfdiff_gui.c:939
 msgid "Select left file"
 msgstr "选择左文件"
 
-#: xfdiff/xfdiff_gui.c:939
+#: xfdiff/xfdiff_gui.c:941
 msgid "Select right file"
 msgstr "选择右文件"
 
-#: xfdiff/xfdiff_gui.c:941
+#: xfdiff/xfdiff_gui.c:943
 msgid "Select patch file"
 msgstr "选择补丁文件"
 
-#: xfdiff/xfdiff_gui.c:943
+#: xfdiff/xfdiff_gui.c:945
 msgid "Select directory where to apply patch"
 msgstr "请选择目录来使用补丁"
 
-#: xfdiff/xfdiff_gui.c:947
+#: xfdiff/xfdiff_gui.c:949
 msgid "Switch to patch mode"
 msgstr "切换到补丁模式"
 
-#: xfdiff/xfdiff_gui.c:950
+#: xfdiff/xfdiff_gui.c:952
 msgid "Switch to diff mode"
 msgstr "切换到差别模式"
 
-#: xfdiff/xfdiff_gui.c:955 xfdiff/xfdiff_gui.c:1406 xfsamba/xfsamba_gui.c:1045
+#: xfdiff/xfdiff_gui.c:957 xfdiff/xfdiff_gui.c:1408 xfsamba/xfsamba_gui.c:1051
 msgid "Exit"
 msgstr "退出"
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:959
+#: xfdiff/xfdiff_gui.c:961
 msgid "Diff Settings"
 msgstr "diff 设定"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:962
+#: xfdiff/xfdiff_gui.c:964
 msgid "Font"
 msgstr "字体"
 
-#: xfdiff/xfdiff_gui.c:964
+#: xfdiff/xfdiff_gui.c:966
 msgid "Highlight text color"
 msgstr "高亮文本颜色"
 
-#: xfdiff/xfdiff_gui.c:966
+#: xfdiff/xfdiff_gui.c:968
 msgid "Highlight background color"
 msgstr "高亮背景色"
 
-#: xfdiff/xfdiff_gui.c:968
+#: xfdiff/xfdiff_gui.c:970
 msgid "Fill polygons"
 msgstr "填充多边形"
 
-#: xfdiff/xfdiff_gui.c:970
+#: xfdiff/xfdiff_gui.c:972
 msgid "Show line numbers"
 msgstr "显示行号"
 
-#: xfdiff/xfdiff_gui.c:973
+#: xfdiff/xfdiff_gui.c:975
 msgid "Use line synchronization voids"
 msgstr "使用行同步无效"
 
-#: xfdiff/xfdiff_gui.c:979
+#: xfdiff/xfdiff_gui.c:981
 msgid "Save settings as default"
 msgstr "保存设置为默认值"
 
-#: xfdiff/xfdiff_gui.c:982
+#: xfdiff/xfdiff_gui.c:984
 msgid "Patch Settings"
 msgstr "补丁设定"
 
-#: xfdiff/xfdiff_gui.c:984
+#: xfdiff/xfdiff_gui.c:986
 msgid "Verbose patch diagnostics"
 msgstr "详细的补丁诊断"
 
-#: xfdiff/xfdiff_gui.c:987
+#: xfdiff/xfdiff_gui.c:989
 msgid "Patch options only active in patch-mode"
 msgstr "补丁选项只能在补丁模式激活"
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:992
+#: xfdiff/xfdiff_gui.c:994
 msgid "Assume patch is reversed"
 msgstr "假定补丁是反向的"
 
-#: xfdiff/xfdiff_gui.c:995
+#: xfdiff/xfdiff_gui.c:997
 msgid "Auto strip level"
 msgstr "自动 Strip 级"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1025
+#: xfdiff/xfdiff_gui.c:1027
 msgid "Actions"
 msgstr "行动"
 
-#: xfdiff/xfdiff_gui.c:1026
+#: xfdiff/xfdiff_gui.c:1028
 msgid "View differences"
 msgstr "查看差别"
 
-#: xfdiff/xfdiff_gui.c:1028
+#: xfdiff/xfdiff_gui.c:1030
 msgid "View differences in new"
 msgstr "在新窗口中查看差别"
 
-#: xfdiff/xfdiff_gui.c:1031
+#: xfdiff/xfdiff_gui.c:1033
 msgid "View patch created differences"
 msgstr "查看补丁创建差别"
 
-#: xfdiff/xfdiff_gui.c:1034
+#: xfdiff/xfdiff_gui.c:1036
 msgid "View patch created differences in new"
 msgstr "在新窗口内显示补丁"
 
-#: xfdiff/xfdiff_gui.c:1039
+#: xfdiff/xfdiff_gui.c:1041
 msgid "Create patch file"
 msgstr "创建补丁文件"
 
-#: xfdiff/xfdiff_gui.c:1047
+#: xfdiff/xfdiff_gui.c:1049
 msgid "Apply patch to Hard Drive"
 msgstr "应用补丁到硬盘"
 
-#: xfdiff/xfdiff_gui.c:1050
+#: xfdiff/xfdiff_gui.c:1052
 msgid "Undo patch to Hard Drive"
 msgstr "撤销补丁到硬盘"
 
-#: xfdiff/xfdiff_gui.c:1056 xfglob/xfglob.c:2125
+#: xfdiff/xfdiff_gui.c:1058 xfglob/xfglob.c:2125
 msgid "About"
 msgstr "关于"
 
@@ -1798,19 +1798,19 @@ msgstr "关于"
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1395
+#: xfdiff/xfdiff_gui.c:1397
 msgid "Next difference"
 msgstr "下一个区别"
 
-#: xfdiff/xfdiff_gui.c:1399
+#: xfdiff/xfdiff_gui.c:1401
 msgid "Prev difference"
 msgstr "上一个区别"
 
-#: xfdiff/xfdiff_gui.c:1401
+#: xfdiff/xfdiff_gui.c:1403
 msgid "Next file"
 msgstr "下一个文件"
 
-#: xfdiff/xfdiff_gui.c:1403
+#: xfdiff/xfdiff_gui.c:1405
 msgid "Previous file"
 msgstr "上一个文件"
 
@@ -1891,6 +1891,7 @@ msgstr "不能写文件\n"
 msgid "couldn't allocate color"
 msgstr "不能分配色彩"
 
+#. font color!
 #: xfdiff/xfdiff_misc.c:793 xfdiff/xfdiff_misc.c:813
 msgid "Patch: "
 msgstr "补丁:"
@@ -2772,39 +2773,39 @@ msgstr "横向"
 msgid "xfwm terminated: "
 msgstr "xfwm 被终止:"
 
-#: xfsamba/xfsamba.c:308
+#: xfsamba/xfsamba.c:313
 msgid "Shares"
 msgstr "共享"
 
-#: xfsamba/xfsamba.c:310
+#: xfsamba/xfsamba.c:315
 msgid "Links to other servers"
 msgstr "连接到其他服务器"
 
-#: xfsamba/xfsamba.c:312
+#: xfsamba/xfsamba.c:317
 msgid "Links to other workgroups"
 msgstr "连接到其他工作组"
 
-#: xfsamba/xfsamba.c:373
+#: xfsamba/xfsamba.c:379
 msgid "Query done."
 msgstr "查询完成."
 
-#: xfsamba/xfsamba.c:375
+#: xfsamba/xfsamba.c:381
 msgid "Query failed. Machine may be down."
 msgstr "查询失败. 机器可能被关闭."
 
-#: xfsamba/xfsamba.c:393 xfsamba/xfsamba_list.c:183
+#: xfsamba/xfsamba.c:399 xfsamba/xfsamba_list.c:183
 msgid "Query password has been requested."
 msgstr "口令请求"
 
-#: xfsamba/xfsamba.c:552
+#: xfsamba/xfsamba.c:559
 msgid "Querying"
 msgstr "正在请求"
 
-#: xfsamba/xfsamba.c:648
+#: xfsamba/xfsamba.c:655
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Samba 失败! XFsamba 不能找到文件: "
 
-#: xfsamba/xfsamba.c:660
+#: xfsamba/xfsamba.c:667
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr "(请安装 Samba 或者检查程序路径是否正确)"
 
@@ -2842,6 +2843,13 @@ msgstr ""
 #: xfsamba/xfsamba_gui.c:150
 msgid "This is XFSamba "
 msgstr "这是 XFSamba "
+
+#: xfsamba/xfsamba_gui.c:151
+msgid ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
 
 #: xfsamba/xfsamba_gui.c:316
 msgid "Please provide information for server "
@@ -2886,86 +2894,90 @@ msgstr "返回..."
 msgid "Going forward..."
 msgstr "向前..."
 
-#: xfsamba/xfsamba_gui.c:782
+#: xfsamba/xfsamba_gui.c:784
+msgid "Attempting to stop query..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:788
 msgid "Query stopped."
 msgstr "查询停止."
 
 #. (s): multiple file upload/download to be enabled in future
-#: xfsamba/xfsamba_gui.c:1034
+#: xfsamba/xfsamba_gui.c:1040
 msgid "Download..."
 msgstr "下载..."
 
-#: xfsamba/xfsamba_gui.c:1036
+#: xfsamba/xfsamba_gui.c:1042
 msgid "Upload..."
 msgstr "上载..."
 
-#: xfsamba/xfsamba_gui.c:1039
+#: xfsamba/xfsamba_gui.c:1045
 msgid "New folder..."
 msgstr "新目录..."
 
-#: xfsamba/xfsamba_gui.c:1041
+#: xfsamba/xfsamba_gui.c:1047
 msgid "Delete..."
 msgstr "删除..."
 
-#: xfsamba/xfsamba_gui.c:1043 xfsamba/xfsamba_tar.c:386
+#: xfsamba/xfsamba_gui.c:1049 xfsamba/xfsamba_tar.c:386
 msgid "Tar..."
 msgstr "打包(tar)..."
 
-#: xfsamba/xfsamba_gui.c:1048
+#: xfsamba/xfsamba_gui.c:1054
 #, fuzzy
 msgid "Preferences"
 msgstr "上一个区别"
 
-#: xfsamba/xfsamba_gui.c:1049
+#: xfsamba/xfsamba_gui.c:1055
 #, fuzzy
 msgid "Browse as..."
 msgstr "浏览..."
 
-#: xfsamba/xfsamba_gui.c:1052
+#: xfsamba/xfsamba_gui.c:1058
 msgid "View"
 msgstr "查看"
 
-#: xfsamba/xfsamba_gui.c:1055
+#: xfsamba/xfsamba_gui.c:1061
 msgid "Show diagnostics"
 msgstr "显示诊断信息"
 
-#: xfsamba/xfsamba_gui.c:1058
+#: xfsamba/xfsamba_gui.c:1064
 msgid "Hide diagnostics"
 msgstr "隐藏诊断信息"
 
-#: xfsamba/xfsamba_gui.c:1061
+#: xfsamba/xfsamba_gui.c:1067
 msgid "Show browser links"
 msgstr "显示浏览器链接"
 
-#: xfsamba/xfsamba_gui.c:1064
+#: xfsamba/xfsamba_gui.c:1070
 msgid "Hide browser links"
 msgstr "隐藏浏览器链接"
 
-#: xfsamba/xfsamba_gui.c:1067
+#: xfsamba/xfsamba_gui.c:1073
 msgid "Go"
 msgstr "开始"
 
-#: xfsamba/xfsamba_gui.c:1068
+#: xfsamba/xfsamba_gui.c:1074
 msgid "Home..."
 msgstr "家..."
 
-#: xfsamba/xfsamba_gui.c:1070
+#: xfsamba/xfsamba_gui.c:1076
 msgid "Reload..."
 msgstr "刷新..."
 
-#: xfsamba/xfsamba_gui.c:1072
+#: xfsamba/xfsamba_gui.c:1078
 msgid "Forward..."
 msgstr "向前..."
 
-#: xfsamba/xfsamba_gui.c:1074
+#: xfsamba/xfsamba_gui.c:1080
 msgid "Back..."
 msgstr "返回..."
 
-#: xfsamba/xfsamba_gui.c:1077
+#: xfsamba/xfsamba_gui.c:1083
 msgid "About master browser..."
 msgstr "关于主浏览器..."
 
-#: xfsamba/xfsamba_gui.c:1079
+#: xfsamba/xfsamba_gui.c:1085
 msgid "About xfsamba..."
 msgstr "关于 XFsamba..."
 
@@ -2973,94 +2985,94 @@ msgstr "关于 XFsamba..."
 #. hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{
 #.
 #. icon bar
-#: xfsamba/xfsamba_gui.c:1089
+#: xfsamba/xfsamba_gui.c:1095
 msgid "Back ..."
 msgstr "返回..."
 
-#: xfsamba/xfsamba_gui.c:1094
+#: xfsamba/xfsamba_gui.c:1100
 msgid "Forward ..."
 msgstr "向前..."
 
-#: xfsamba/xfsamba_gui.c:1099
+#: xfsamba/xfsamba_gui.c:1105
 msgid "Reload ..."
 msgstr "刷新..."
 
-#: xfsamba/xfsamba_gui.c:1105
+#: xfsamba/xfsamba_gui.c:1111
 msgid "Home ..."
 msgstr "家..."
 
-#: xfsamba/xfsamba_gui.c:1110
+#: xfsamba/xfsamba_gui.c:1116
 msgid "Stop ..."
 msgstr "停止..."
 
-#: xfsamba/xfsamba_gui.c:1120
+#: xfsamba/xfsamba_gui.c:1126
 msgid "New folder ..."
 msgstr "新目录..."
 
-#: xfsamba/xfsamba_gui.c:1136
+#: xfsamba/xfsamba_gui.c:1142
 msgid "Download ..."
 msgstr "下载..."
 
-#: xfsamba/xfsamba_gui.c:1142
+#: xfsamba/xfsamba_gui.c:1148
 msgid "Upload ..."
 msgstr "上载..."
 
-#: xfsamba/xfsamba_gui.c:1149
+#: xfsamba/xfsamba_gui.c:1155
 msgid "Tar ..."
 msgstr "打包(Tar)..."
 
-#: xfsamba/xfsamba_gui.c:1160
+#: xfsamba/xfsamba_gui.c:1166
 msgid "Help ..."
 msgstr "帮助..."
 
-#: xfsamba/xfsamba_gui.c:1170
+#: xfsamba/xfsamba_gui.c:1176
 msgid "Set View 3"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1176
+#: xfsamba/xfsamba_gui.c:1182
 msgid "Set View 2"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1182
+#: xfsamba/xfsamba_gui.c:1188
 msgid "Set View 1"
 msgstr ""
 
-#: xfsamba/xfsamba_gui.c:1194
+#: xfsamba/xfsamba_gui.c:1200
 msgid "Location : "
 msgstr "位置: "
 
-#: xfsamba/xfsamba_gui.c:1210
+#: xfsamba/xfsamba_gui.c:1216
 msgid "Show IP"
 msgstr "显示 IP"
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1237
+#: xfsamba/xfsamba_gui.c:1243
 msgid "Location shares : "
 msgstr "共享位置:"
 
-#: xfsamba/xfsamba_gui.c:1253
+#: xfsamba/xfsamba_gui.c:1259
 msgid "Size"
 msgstr "大小"
 
-#: xfsamba/xfsamba_gui.c:1254
+#: xfsamba/xfsamba_gui.c:1260
 msgid "Date"
 msgstr "日期"
 
-#: xfsamba/xfsamba_gui.c:1255
+#: xfsamba/xfsamba_gui.c:1261
 msgid "Comment"
 msgstr "注释"
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1299
+#: xfsamba/xfsamba_gui.c:1305
 msgid "Location known servers : "
 msgstr "定位已知服务器 : "
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1337
 msgid "Location known workgroups : "
 msgstr "定位已知工作组 : "
 
-#: xfsamba/xfsamba_gui.c:1398
+#: xfsamba/xfsamba_gui.c:1404
 msgid "Welcome to xfsamba."
 msgstr "欢迎使用 XFSamba. "
 
@@ -3081,7 +3093,7 @@ msgstr "接收..."
 msgid "Resolved"
 msgstr "解析"
 
-#: xfsamba/xfsamba_lookup.c:95 xfsamba/xfsamba_lookup.c:98
+#: xfsamba/xfsamba_lookup.c:99 xfsamba/xfsamba_lookup.c:102
 msgid "Resolving for"
 msgstr "正在解析"
 
@@ -3354,6 +3366,29 @@ msgstr "不退出"
 #: xfumed/interface.c:494
 msgid "Quit, don't save"
 msgstr "退出, 不保存"
+
+#: xfumed/interface.h:21
+msgid "Item"
+msgstr ""
+
+#: xfumed/interface.h:22
+#, fuzzy
+msgid "Submenu"
+msgstr "去到子菜单"
+
+#: xfumed/interface.h:23
+msgid "Separator"
+msgstr ""
+
+#: xfumed/usermenu.h:28
+msgid "# This file was generated by xfumed - XFce User Menu Editor"
+msgstr ""
+
+#~ msgid "Source and Target are the same"
+#~ msgstr "源文件与目标文件相同"
+
+#~ msgid "Can't transfer, same Inode !"
+#~ msgstr "不能传递, 节点相同!"
 
 #~ msgid "Diff diagnostics disabled.\n"
 #~ msgstr "Diff 诊断被关闭.\n"

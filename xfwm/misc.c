@@ -105,7 +105,7 @@ GetWMName (XfwmWindow *t)
             {
                 if (text_list)
                 {
-                    t->name = (char *) malloc (strlen (text_list[0]) + 1);
+                    t->name = (char *) safemalloc (strlen (text_list[0]) + 1);
                     strcpy (t->name, text_list[0]);
                     XFreeStringList (text_list);
                 }
@@ -113,21 +113,21 @@ GetWMName (XfwmWindow *t)
             else
             {
                 t->name =
-                    (char *) malloc (strlen ((char *) text_prop.value) + 1);
+                    (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
                 strcpy (t->name, (char *) text_prop.value);
             }
         }
         else
         {
             t->name =
-                (char *) malloc (strlen ((char *) text_prop.value) + 1);
+                (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
             strcpy (t->name, (char *) text_prop.value);
         }
         XFree (text_prop.value);
     }
     if (!(t->name))
     {
-        t->name = (char *) malloc (strlen (NoName) + 1);
+        t->name = (char *) safemalloc (strlen (NoName) + 1);
         strcpy (t->name, NoName);
     }
 }
@@ -149,7 +149,7 @@ GetWMIconName (XfwmWindow *t)
                 if (text_list)
                 {
                     t->icon_name =
-                        (char *) malloc (strlen (text_list[0]) + 1);
+                        (char *) safemalloc (strlen (text_list[0]) + 1);
                     strcpy (t->icon_name, text_list[0]);
                     XFreeStringList (text_list);
                 }
@@ -157,14 +157,14 @@ GetWMIconName (XfwmWindow *t)
             else
             {
                 t->icon_name =
-                    (char *) malloc (strlen ((char *) text_prop.value) + 1);
+                    (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
                 strcpy (t->icon_name, (char *) text_prop.value);
             }
         }
         else
         {
             t->icon_name =
-                (char *) malloc (strlen ((char *) text_prop.value) + 1);
+                (char *) safemalloc (strlen ((char *) text_prop.value) + 1);
             strcpy (t->icon_name, (char *) text_prop.value);
         }
         XFree (text_prop.value);
@@ -173,12 +173,12 @@ GetWMIconName (XfwmWindow *t)
     {
         if (t->name)
         {
-            t->icon_name = (char *) malloc (strlen (t->name) + 1);
+            t->icon_name = (char *) safemalloc (strlen (t->name) + 1);
             strcpy (t->icon_name, t->name);
         }
         else
         {
-            t->name = (char *) malloc (strlen (NoName) + 1);
+            t->name = (char *) safemalloc (strlen (NoName) + 1);
             strcpy (t->name, NoName);
         }
     }

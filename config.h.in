@@ -98,6 +98,9 @@
 /* Define if you have the putenv function.  */
 #undef HAVE_PUTENV
 
+/* Define if you have the sendmsg function.  */
+#undef HAVE_SENDMSG
+
 /* Define if you have the setenv function.  */
 #undef HAVE_SETENV
 

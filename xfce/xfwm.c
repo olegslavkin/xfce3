@@ -223,10 +223,10 @@ apply_wm_colors (const XFCE_palette * p)
 
   if ((p) && (current_config.wm == XFWM))
     {
-      s = (char *) malloc (10 * sizeof (char));
-      t = (char *) malloc (10 * sizeof (char));
-      u = (char *) malloc (255 * sizeof (char));
-      v = (char *) malloc (10 * sizeof (char));
+      s = (char *) g_malloc (10 * sizeof (char));
+      t = (char *) g_malloc (10 * sizeof (char));
+      u = (char *) g_malloc (255 * sizeof (char));
+      v = (char *) g_malloc (10 * sizeof (char));
 
       howbright = brightness_pal (p, 6);
 #ifndef OLD_STYLE      
@@ -274,10 +274,10 @@ apply_wm_colors (const XFCE_palette * p)
       sendinfo (fd_internal_pipe, u, 0);
 
       sendinfo (fd_internal_pipe, REFRESH_CMD, 0);
-      free (s);
-      free (t);
-      free (u);
-      free (v);
+      g_free (s);
+      g_free (t);
+      g_free (u);
+      g_free (v);
     }
 }
 
@@ -287,7 +287,7 @@ apply_wm_fonts (void)
   char *s;
   if (current_config.wm == XFWM)
     {
-      s = (char *) malloc (sizeof (char) * 256);
+      s = (char *) g_malloc (sizeof (char) * 256);
       if ((current_config.fonts[0]) && strlen (current_config.fonts[0]))
 	snprintf (s, 255, WINDOWFONT_CMD, current_config.fonts[0]);
       else
@@ -303,7 +303,7 @@ apply_wm_fonts (void)
       else
 	snprintf (s, 255, ICONFONT_CMD, XFWM_ICONFONT);
       sendinfo (fd_internal_pipe, s, 0);
-      free (s);
+      g_free (s);
     }
 }
 
@@ -313,10 +313,10 @@ apply_wm_iconpos (void)
   char *s;
   if (current_config.wm == XFWM)
     {
-      s = (char *) malloc (sizeof (char) * 256);
+      s = (char *) g_malloc (sizeof (char) * 256);
       snprintf (s, 255, ICONPOS_CMD, current_config.iconpos);
       sendinfo (fd_internal_pipe, s, 0);
-      free (s);
+      g_free (s);
     }
 }
 
@@ -379,7 +379,7 @@ startup_wm_modules (void)
   char *command;
   if ((current_config.wm == XFWM) && current_config.startup_flags)
     {
-      command = (char *) malloc (sizeof (char) * 256);
+      command = (char *) g_malloc (sizeof (char) * 256);
       if (current_config.startup_flags & F_SOUNDMODULE)
 	{
 	  strcpy (command, "Module xfsound");
@@ -420,7 +420,7 @@ startup_wm_modules (void)
 	  strcpy (command, "Module xfmenu -kde");
 	  exec_comm (command, current_config.wm);
 	}
-      free (command);
+      g_free (command);
     }
 }
 
@@ -432,7 +432,7 @@ apply_wm_desk_names (int ndesks)
 
   if (current_config.wm == XFWM)
     {
-      command = (char *) malloc (sizeof (char) * 256);
+      command = (char *) g_malloc (sizeof (char) * 256);
       snprintf (command, 255, DESTROYMENU_CMD, DESKMENU);
       sendinfo (fd_internal_pipe, command, 0);
       for (i = 0; i < ndesks; i++)
@@ -441,7 +441,7 @@ apply_wm_desk_names (int ndesks)
                     _("Workspace"), i + 1, get_gxfce_screen_label (i), i);
           sendinfo (fd_internal_pipe, command, 0);
         }
-      free (command);
+      g_free (command);
     }
 }
 

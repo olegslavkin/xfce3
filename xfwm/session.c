@@ -73,21 +73,165 @@ static Bool sent_save_done = 0;
 
 extern Bool Restarting;
 
-static char *
-duplicate (char *s)
-{
-    int l;
-    char *r;
+static char *last_used_filename = NULL;
 
-    if (!s)
-        return NULL;
-    l = strlen (s);
-    r = (char *) malloc (sizeof (char) * (l + 1));
-    strncpy (r, s, l + 1);
-    return r;
+/* 
+   2-pass function to compute new string length,
+   allocate memory and finally copy string 
+   - Returned value must be freed -
+ */
+static char *
+escape_quote (char *s)
+{
+  char *ns;
+  char *idx1, *idx2;
+  int nbquotes = 0;
+  int lg = 0;
+  
+  if (!s)
+    return NULL;
+  
+  lg = strlen (s);
+  /* First, count quotes in string */
+  idx1 = s;
+  while (*idx1)
+  {
+    if (*(idx1++) == '"') nbquotes++;
+  }
+  /* If there is no quote in the string, return it */
+  if (!nbquotes)
+    return (strdup (s));
+  /* Or else, allocate memory for the new string */
+  ns = (char *) safemalloc (sizeof (char) * (lg + nbquotes + 1));
+  /* And prepend a backslash before any quote found in string */
+  idx1 = s;
+  idx2 = ns;
+  while (*idx1)
+  {
+    if (*idx1 == '"')
+    {
+      *(idx2++) = '\\';
+      *(idx2++) = '"';
+    }
+    else
+    {
+      *(idx2++) = *idx1;
+    }
+    idx1++;
+  }
+  /* Add null char */
+  *idx2 = '\0';
+  return ns;
 }
 
-static char *last_used_filename = NULL;
+/* 
+   single-pass function to replace backslash+quotes
+   by quotes. 
+   - Returned value must be freed -
+ */
+static char *
+unescape_quote (char *s)
+{
+  char *ns;
+  Bool backslash;
+  char *idx1, *idx2;
+  int lg;
+  
+  if (!s)
+    return NULL;
+  
+  lg = strlen (s);
+  backslash = False;
+  ns = (char *) safemalloc (sizeof (char) * (lg + 1));
+  idx1 = s;
+  idx2 = ns;
+  while (*idx1)
+  {
+    if (*idx1 == '\\')
+    {
+      *(idx2++) = *idx1;
+      backslash = True;
+    }
+    else if ((*idx1 == '"') && backslash)
+    {
+      /* Move backward to override the "\" */
+      *(--idx2) = *idx1;
+      idx2++;
+      backslash = False;
+    }
+    else
+    {
+      *(idx2++) = *idx1;
+      backslash = False;
+    }
+    idx1++;
+  }
+  *idx2 = '\0';
+  return ns;
+}
+
+static char *
+getsubstring (char *s, int *length)
+{
+  char pbrk;
+  char *ns;
+  char *end, *idx1, *idx2, *skip;
+  int lg;
+  Bool finished = False, backslash = False;
+  
+  lg = *length = 0;
+  if (!s)
+    return NULL;
+    
+  end = skip = s;
+  while ((*skip == ' ') || (*skip == '\t'))
+  {
+    end = ++skip;
+    (*length)++;
+  }
+  if (*skip == '"')
+  {
+    pbrk = '"';
+    end = ++skip;
+    (*length)++;
+  }
+  else
+  {
+    pbrk = ' ';
+  }
+  
+  finished = False;
+  while ((!finished) && (*end))
+  {
+    if (*end == '\\')
+    {
+      backslash = True;
+    }
+    else if ((*end == pbrk) && backslash)
+    {
+      backslash = False;
+    }
+    else if (*end == pbrk)
+    {
+      finished = True;
+    }
+    end++;
+    lg++;
+    (*length)++;
+  }
+  ns = (char *) safemalloc (sizeof (char) * (lg + 1));
+  /* Skip pbrk character */
+  end--;
+  idx1 = skip;
+  idx2 = ns;
+  do
+  {
+    *(idx2++) = *idx1;
+  }
+  while (++idx1 < end);
+  *idx2 = '\0';
+  return ns;
+}
 
 #ifdef HAVE_SESSION
 #include <X11/SM/SMlib.h>
@@ -247,8 +391,13 @@ SaveWindowStates (FILE * f)
         {
             fprintf (f, "  [WM_COMMAND] %i", wm_command_count);
             for (i = 0; i < wm_command_count; i++)
-                fprintf (f, " %s", wm_command[i]);
-            fprintf (f, "\n");
+	    {
+	        char *escaped_string;
+		escaped_string = escape_quote (wm_command[i]);
+                fprintf (f, " \"%s\"", escaped_string);
+		free (escaped_string);
+            }
+	    fprintf (f, "\n");
             XFreeStringList (wm_command);
         }
 
@@ -333,41 +482,42 @@ LoadWindowStates (char *filename)
             else if (!strcmp (s1, "[CLIENT_ID]"))
             {
                 sscanf (s, "%*s %[^\n]", s1);
-                matches[num_match - 1].client_id = duplicate (s1);
+                matches[num_match - 1].client_id = strdup (s1);
             }
             else if (!strcmp (s1, "[WINDOW_ROLE]"))
             {
                 sscanf (s, "%*s %[^\n]", s1);
-                matches[num_match - 1].window_role = duplicate (s1);
+                matches[num_match - 1].window_role = strdup (s1);
             }
             else if (!strcmp (s1, "[RES_NAME]"))
             {
                 sscanf (s, "%*s %[^\n]", s1);
-                matches[num_match - 1].res_name = duplicate (s1);
+                matches[num_match - 1].res_name = strdup (s1);
             }
             else if (!strcmp (s1, "[RES_CLASS]"))
             {
                 sscanf (s, "%*s %[^\n]", s1);
-                matches[num_match - 1].res_class = duplicate (s1);
+                matches[num_match - 1].res_class = strdup (s1);
             }
             else if (!strcmp (s1, "[WM_NAME]"))
             {
                 sscanf (s, "%*s %[^\n]", s1);
-                matches[num_match - 1].wm_name = duplicate (s1);
+                matches[num_match - 1].wm_name = strdup (s1);
             }
             else if (!strcmp (s1, "[WM_COMMAND]"))
             {
-                sscanf (s, "%*s %i%n", &matches[num_match - 1].wm_command_count,
-                        &pos);
+                sscanf (s, "%*s %i%n", &matches[num_match - 1].wm_command_count, &pos);
                 matches[num_match - 1].wm_command =
-                    (char **) malloc (matches[num_match - 1].wm_command_count *
-                                      sizeof (char *));
+                    (char **) safemalloc ((matches[num_match - 1].wm_command_count + 1) * sizeof (char *));
                 for (i = 0; i < matches[num_match - 1].wm_command_count; i++)
                 {
-                    sscanf (s + pos, "%s%n", s1, &pos1);
+		    char *substring;
+		    substring = getsubstring (s + pos, &pos1);
                     pos += pos1;
-                    matches[num_match - 1].wm_command[i] = duplicate (s1);
+                    matches[num_match - 1].wm_command[i] = unescape_quote (substring);
+		    free (substring);
                 }
+		matches[num_match - 1].wm_command[matches[num_match - 1].wm_command_count] = NULL;
             }
 
         }
@@ -642,7 +792,7 @@ set_sm_properties (SmcConn sm_conn, char *filename, char hint)
     prop5.name = SmRestartCommand;
     prop5.type = SmLISTofARRAY8;
 
-    prop5.vals = (SmPropValue *) malloc ((g_argc + 7) * sizeof (SmPropValue));
+    prop5.vals = (SmPropValue *) safemalloc ((g_argc + 7) * sizeof (SmPropValue));
 
     numVals = 0;
 
@@ -690,7 +840,7 @@ set_sm_properties (SmcConn sm_conn, char *filename, char hint)
        should be LISTofARRAY8 on posix systems, but xsm
        demands that it be ARRAY8.
      */
-    sprintf (discardCommand, "rm -f %s", filename);
+    sprintf (discardCommand, "rm -f \"%s\"", filename);
     prop6.type = SmARRAY8;
     prop6.num_vals = 1;
     prop6.vals = &prop6val;
@@ -699,7 +849,7 @@ set_sm_properties (SmcConn sm_conn, char *filename, char hint)
 #else
     prop6.type = SmLISTofARRAY8;
     prop6.num_vals = 3;
-    prop6.vals = (SmPropValue *) malloc (3 * sizeof (SmPropValue));
+    prop6.vals = (SmPropValue *) safemalloc (3 * sizeof (SmPropValue));
     prop6.vals[0].value = "rm";
     prop6.vals[0].length = 2;
     prop6.vals[1].value = "-f";
@@ -895,8 +1045,7 @@ LogoutICEConn (void)
 void
 builtin_session_startup (void)
 {
-    int i, j, len;
-    char *command;
+    int i, j;
     Bool found;
 
     /* Ignore session management if restarting xfwm */
@@ -926,37 +1075,30 @@ builtin_session_startup (void)
                 }
             if (found)
                 continue;
-            /* Compute command line length and allocate memory */
-            len = 1;
-            for (j = 0; j < matches[i].wm_command_count; j++)
-                len += strlen (matches[i].wm_command[j]) + 1;
-            /* build command line */
-            command = (char *) malloc (sizeof (char) * (len + 1));
-            strcpy (command, matches[i].wm_command[0]);
-            for (j = 1; j < matches[i].wm_command_count; j++)
-            {
-                strcat (command, " ");
-                strcat (command, matches[i].wm_command[j]);
-            }
             /* Execute command line */
-            if (!(fork ()))	/* child process */
-            {
-                /*
-                 * We shall have a rest before starting the actual command,
-                 * that will give time for other modules to complete and
-                 * it will definitely decrease the server load at startup
-                 */
-                sleep_a_little (Scr.sessionwait * 1000000);
-                if (execl (DEFAULT_SHELL, DEFAULT_SHELL, "-c", command, NULL) ==
-                        -1)
-                {
-                    xfwm_msg (WARN, "builtin_session_startup",
-                              "Startup of %s failed",
-                              matches[num_match].wm_command);
-                    exit (100);
-                }
+	    switch (fork())
+	    {
+	        case 0: /* Child process */
+                    /*
+                     * We shall have a rest before starting the actual command,
+                     * that will give time for other modules to complete and
+                     * it will definitely decrease the server load at startup
+                     */
+                    sleep_a_little (Scr.sessionwait * 1000000);
+                    if (execvp (matches[i].wm_command[0], matches[i].wm_command) == -1)
+                    {
+                	xfwm_msg (WARN, "builtin_session_startup",
+                        	  "Startup of %s failed",
+                        	  matches[num_match].wm_command);
+                	exit (100);
+                    }
+		    break;
+		case -1:
+  		    xfwm_msg (WARN, "builtin_session_startup", "Cannot fork process");
+		    break;
+		default:
+		    break;
             }
-            free (command);
         }
     }
 }
@@ -977,7 +1119,7 @@ builtin_save_session (void)
         path = pwd->pw_dir;
     }
 
-    filename = (char *) malloc (sizeof (char) * (MAXSTRLEN + 1));
+    filename = (char *) safemalloc (sizeof (char) * (MAXSTRLEN + 1));
 
     /* If we have a multiheaded screen, save/load session from different
      * filenames.

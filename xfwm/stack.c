@@ -301,7 +301,7 @@ WindowSorted(void)
             i = i->next;
         }
         /* Create new element */
-        wl = (XfwmWindowList *) malloc (sizeof (XfwmWindowList));
+        wl = (XfwmWindowList *) safemalloc (sizeof (XfwmWindowList));
         wl->win = t;
         if (i == NULL) /* Insert after prev */
         {
@@ -419,7 +419,7 @@ AddToXfwmWindowList(XfwmWindowList* start, XfwmWindow *t)
         i = i->next;
     }
 
-    new = (XfwmWindowList *) malloc (sizeof (XfwmWindowList));
+    new = (XfwmWindowList *) safemalloc (sizeof (XfwmWindowList));
     new->next = NULL;
     new->prev = prev;
     new->win  = t;
@@ -525,7 +525,7 @@ AddToWindowList(WindowList* start, Window t)
         i = i->next;
     }
 
-    new = (WindowList *) malloc (sizeof (WindowList));
+    new = (WindowList *) safemalloc (sizeof (WindowList));
     new->next = NULL;
     new->w  = t;
     if (prev != NULL)

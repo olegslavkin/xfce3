@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.8.5\n"
-"POT-Creation-Date: 2001-07-01 11:53+0200\n"
+"POT-Creation-Date: 2001-07-11 22:25+0200\n"
 "PO-Revision-Date: 2001-06-20 12:21+0100\n"
 "Last-Translator: Alan Cox <alan@redhat.com>\n"
 "Language-Team: LANGUAGE <alan@redhat.com>\n"
@@ -27,7 +27,7 @@ msgstr "Select File"
 msgid "Font Selection"
 msgstr "Font Selection"
 
-#: libs/xfce-common.c:264 xfdiff/xfdiff_gui.c:1189 xfdiff/xfdiff_misc.c:129
+#: libs/xfce-common.c:264 xfdiff/xfdiff_gui.c:1191 xfdiff/xfdiff_misc.c:129
 #: xfdiff/xfdiff_misc.c:139
 msgid "OK"
 msgstr "OK"
@@ -81,8 +81,8 @@ msgstr "Browse ..."
 
 #. ok and cancel buttons
 #: xfbd/xfbd.c:533 xfce/action.c:200 xfce/modify.c:284 xfce/screen.c:146
-#: xfce/setup.c:1588 xfmouse/xfmouse.c:307 xfrun/xfrun.c:191
-#: xfsamba/xfsamba.c:665 xfsamba/xfsamba_gui.c:368
+#: xfce/setup.c:1583 xfmouse/xfmouse.c:307 xfrun/xfrun.c:209
+#: xfsamba/xfsamba.c:672 xfsamba/xfsamba_gui.c:368
 #: xfsamba/xfsamba_masterresolve.c:119 xfsamba/xfsamba_mkdir.c:131
 #: xfsamba/xfsamba_rm.c:221 xfsamba/xfsamba_tar.c:363 xfsound/xfsound.c:557
 #: xftree/gtk_dlg.c:213 xftree/gtk_exec.c:157 xftree/gtk_prop.c:187
@@ -90,8 +90,8 @@ msgid "Ok"
 msgstr "Ok"
 
 #: xfbd/xfbd.c:581 xfce/action.c:210 xfce/modify.c:303 xfce/screen.c:157
-#: xfce/setup.c:1612 xfmouse/xfmouse.c:332 xfrun/xfrun.c:192
-#: xfsound/xfsound.c:581 xftree/gtk_cpy.c:503 xftree/gtk_dlg.c:246
+#: xfce/setup.c:1607 xfmouse/xfmouse.c:332 xfrun/xfrun.c:210
+#: xfsound/xfsound.c:581 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:246
 #: xftree/gtk_exec.c:158 xftree/gtk_get.c:138 xftree/gtk_prop.c:188
 msgid "Cancel"
 msgstr "Cancel"
@@ -180,16 +180,16 @@ msgstr "Cannot load configuration file"
 msgid "Cannot use old version of XFce configuration files"
 msgstr "Cannot use old version of XFce configuration files"
 
-#: xfce/diagnostic.c:93 xfce/diagnostic.c:138
+#: xfce/diagnostic.c:91 xfce/diagnostic.c:136
 msgid "Subprocess diagnostic"
 msgstr "Subprocess diagnostic"
 
-#: xfbd/xfbd.c:570 xfce/diagnostic.c:118 xfdiff/xfdiff_diag.c:186
-#: xfdiff/xfdiff_gui.c:1384 xfglob/xfglob.c:675
+#: xfbd/xfbd.c:570 xfce/diagnostic.c:116 xfdiff/xfdiff_diag.c:186
+#: xfdiff/xfdiff_gui.c:1386 xfglob/xfglob.c:675
 msgid "Clear"
 msgstr "Clear"
 
-#: xfce/diagnostic.c:123 xfdiff/xfdiff_diag.c:191 xfglob/xfglob.c:689
+#: xfce/diagnostic.c:121 xfdiff/xfdiff_diag.c:191 xfglob/xfglob.c:689
 msgid "Dismiss"
 msgstr "Dismiss"
 
@@ -201,7 +201,7 @@ msgstr "Info ..."
 #: xfce/popup.c:315 xfce/startup.c:95 xfce/xfce.c:223 xfce/xfce.c:293
 #: xfce/xfce.c:595 xfce/xfce.c:634 xfce/xfce.c:777 xfce/xfce.c:806
 #: xfce/xfce.c:848 xfce/xfce.c:939 xfce/xfce.c:967 xfglob/xfglob.c:563
-#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:934
+#: xfmouse/xfmouse.c:203 xfsamba/xfsamba_gui.c:940
 msgid "Couldn't create pixmap"
 msgstr "Couldn't create pixmap"
 
@@ -377,7 +377,7 @@ msgstr "Panel layer"
 msgid "Bottom"
 msgstr "Bottom"
 
-#: xfce/setup.c:584 xfce/setup.c:1178
+#: xfce/setup.c:584 xfce/setup.c:1173
 msgid "Top"
 msgstr "Top"
 
@@ -441,7 +441,7 @@ msgstr "Size of icons on popup menus"
 msgid "Font style"
 msgstr "Font style"
 
-#: xfce/setup.c:917 xfce/setup.c:1379 xfce/setup.c:1393 xfce/setup.c:1407
+#: xfce/setup.c:917 xfce/setup.c:1374 xfce/setup.c:1388 xfce/setup.c:1402
 msgid "Browse..."
 msgstr "Browse..."
 
@@ -459,7 +459,7 @@ msgstr "Auto raise windows"
 
 #: xfce/setup.c:992
 #, fuzzy
-msgid "Show contents of window whlile moving"
+msgid "Show contents of window while moving"
 msgstr "Show window contents while moving"
 
 #: xfce/setup.c:1007
@@ -474,90 +474,90 @@ msgstr "Use gradient colour for the active window"
 
 #: xfce/setup.c:1036
 #, fuzzy
-msgid "Use gradient colour for inactive windowss"
+msgid "Use gradient color for inactive windows"
 msgstr "Use gradient colour for inactive windows"
 
 #: xfce/setup.c:1074
 msgid "Window border style : "
 msgstr "Window border style : "
 
-#: xfce/setup.c:1122
+#: xfce/setup.c:1117
 msgid "Window snapping size (0 disable) : "
 msgstr "Window snapping size (0 disable) : "
 
-#: xfce/setup.c:1161
+#: xfce/setup.c:1156
 msgid "Icon position"
 msgstr "Icon position"
 
-#: xfce/setup.c:1193 xfmouse/xfmouse.c:209
+#: xfce/setup.c:1188 xfmouse/xfmouse.c:209
 msgid "Left"
 msgstr "Left"
 
-#: xfce/setup.c:1208
+#: xfce/setup.c:1203
 msgid "bottom"
 msgstr "bottom"
 
-#: xfce/setup.c:1223 xfmouse/xfmouse.c:220
+#: xfce/setup.c:1218 xfmouse/xfmouse.c:220
 msgid "Right"
 msgstr "Right"
 
-#: xfce/setup.c:1339
+#: xfce/setup.c:1334
 msgid "Title font :"
 msgstr "Title font :"
 
-#: xfce/setup.c:1352
+#: xfce/setup.c:1347
 msgid "Icon font :"
 msgstr "Icon font :"
 
-#: xfce/setup.c:1365
+#: xfce/setup.c:1360
 msgid "Menu font :"
 msgstr "Menu font :"
 
-#: xfce/setup.c:1443
+#: xfce/setup.c:1438
 msgid "Sound module (xfsound)"
 msgstr "Sound module (xfsound)"
 
-#: xfce/setup.c:1457
+#: xfce/setup.c:1452
 msgid "Mouse settings (xfmouse)"
 msgstr "Mouse settings (xfmouse)"
 
-#: xfce/setup.c:1471
+#: xfce/setup.c:1466
 msgid "Backdrop settings (xfbd)"
 msgstr "Backdrop settings (xfbd)"
 
-#: xfce/setup.c:1485
+#: xfce/setup.c:1480
 msgid "Pager (xfpager)"
 msgstr "Pager (xfpager)"
 
-#: xfce/setup.c:1499
+#: xfce/setup.c:1494
 msgid "GNOME (xfgnome)"
 msgstr "GNOME (xfgnome)"
 
-#: xfce/setup.c:1513
+#: xfce/setup.c:1508
 msgid "GNOME menu (xfmenu)"
 msgstr "GNOME menu (xfmenu)"
 
-#: xfce/setup.c:1527
+#: xfce/setup.c:1522
 msgid "KDE menu (xfmenu)"
 msgstr "KDE menu (xfmenu)"
 
-#: xfce/setup.c:1540
+#: xfce/setup.c:1535
 msgid "Palette"
 msgstr "Palette"
 
-#: xfce/setup.c:1548
+#: xfce/setup.c:1543
 msgid "XFce"
 msgstr "XFce"
 
-#: xfce/setup.c:1556
+#: xfce/setup.c:1551
 msgid "Windows"
 msgstr "Windows"
 
-#: xfce/setup.c:1564 xfce/startup.c:60 xfsound/xfsound.c:92
+#: xfce/setup.c:1559 xfce/startup.c:60 xfsound/xfsound.c:92
 msgid "Startup"
 msgstr "Startup"
 
-#: xfbd/xfbd.c:560 xfce/setup.c:1600 xfmouse/xfmouse.c:322
+#: xfbd/xfbd.c:560 xfce/setup.c:1595 xfmouse/xfmouse.c:322
 #: xfsound/xfsound.c:572
 msgid "Apply"
 msgstr "Apply"
@@ -653,7 +653,7 @@ msgstr "Digital mode"
 
 #: xfce/xfce.c:118
 #, fuzzy
-msgid "24 hour mode"
+msgid "24 hours mode"
 msgstr "24 hour mode"
 
 #: xfce/xfce.c:800 xfclock/xfclock_menus.c:269
@@ -778,122 +778,130 @@ msgstr "XFCE: Communication pipe closed. Exiting...\n"
 msgid "Workspace"
 msgstr "Workspace"
 
-#: xftree/gtk_cpy.c:69
+#: xftree/gtk_cpy.c:70
 #, c-format
 msgid "transfer_view() %d\n"
 msgstr "transfer_view() %d\n"
 
-#: xftree/gtk_cpy.c:128
-msgid "Source and Target are the same"
-msgstr "Source and target are the same"
+#: xftree/gtk_cpy.c:112
+msgid "move"
+msgstr "move"
 
-#: xftree/gtk_cpy.c:132 xftree/gtk_cpy.c:244
+#: xftree/gtk_cpy.c:116
+msgid "copy"
+msgstr "copy"
+
+#: xftree/gtk_cpy.c:120
+msgid "link"
+msgstr "link"
+
+#: xftree/gtk_cpy.c:148 xftree/gtk_cpy.c:269
 #, c-format
 msgid "%d bytes"
 msgstr "%d bytes"
 
-#: xftree/gtk_cpy.c:143
-#, fuzzy
-msgid "Can't transfer, same Inode !"
-msgstr "Can't transfer, same inode !"
-
-#: xftree/gtk_cpy.c:145
+#: xftree/gtk_cpy.c:156
 msgid "Override file?"
 msgstr "Override file?"
 
-#: xftree/gtk_cpy.c:162 xftree/gtk_cpy.c:166 xftree/gtk_cpy.c:326
-#: xftree/gtk_cpy.c:330 xftree/xtree_gui.c:1354 xftree/xtree_gui.c:1361
+#: xftree/gtk_cpy.c:165 xftree/gtk_cpy.c:170 xftree/gtk_cpy.c:347
+#: xftree/gtk_cpy.c:351 xftree/xtree_gui.c:1354 xftree/xtree_gui.c:1361
 msgid "Can't stat() file"
 msgstr "Can't stat() file"
 
-#: xftree/gtk_cpy.c:194
+#: xftree/gtk_cpy.c:177
+#, c-format
+msgid "Do you want to %s the item(s) to"
+msgstr "Do you want to %s the item(s) to"
+
+#: xftree/gtk_cpy.c:219
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:214
+#: xftree/gtk_cpy.c:239
 msgid "Can't copy device file"
 msgstr "Can't copy device file"
 
-#: xftree/gtk_cpy.c:219
+#: xftree/gtk_cpy.c:244
 msgid "Can't copy FIFO"
 msgstr "Can't copy FIFO"
 
-#: xftree/gtk_cpy.c:223
+#: xftree/gtk_cpy.c:248
 msgid "Can't copy socket"
 msgstr "Can't copy socket"
 
-#: xftree/gtk_cpy.c:260
+#: xftree/gtk_cpy.c:283
 #, fuzzy
 msgid "Too free bytes transferred ! Device full ?"
 msgstr "Too few bytes transferred: Device full ?"
 
-#: xftree/gtk_cpy.c:264
+#: xftree/gtk_cpy.c:287
 #, fuzzy
 msgid "Too many bytes transferred !?"
 msgstr "Too many bytes transferred ?"
 
-#: xftree/gtk_cpy.c:312
+#: xftree/gtk_cpy.c:333
 msgid "Source and Target directories are the same"
 msgstr "Source and target directories are the same"
 
-#: xftree/gtk_cpy.c:363
+#: xftree/gtk_cpy.c:384
 msgid "exists and is not a directory"
 msgstr "exists and is not a directory"
 
-#: xftree/gtk_cpy.c:440
+#: xftree/gtk_cpy.c:458
 msgid "XFTree: Copy"
 msgstr "XFTree: Copy"
 
-#: xftree/gtk_cpy.c:444
+#: xftree/gtk_cpy.c:462
 msgid "XFTree: Move"
 msgstr "XFTree: Move"
 
-#: xftree/gtk_cpy.c:448
+#: xftree/gtk_cpy.c:466
 msgid "XFTree: Link"
 msgstr "XFTree: Link"
 
-#: xftree/gtk_cpy.c:452
+#: xftree/gtk_cpy.c:470
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Unknown transfer mode: %d\n"
 
-#: xftree/gtk_cpy.c:458
+#: xftree/gtk_cpy.c:476
 msgid "transfer()"
 msgstr "transfer()"
 
-#: xftree/gtk_cpy.c:458
+#: xftree/gtk_cpy.c:476
 msgid "fatal error"
 msgstr "fatal error"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:482
 msgid "Error getting info from"
 msgstr "Error getting info from"
 
-#: xftree/gtk_cpy.c:469
+#: xftree/gtk_cpy.c:487
 msgid "Fatal Error"
 msgstr "Fatal error"
 
-#: xftree/gtk_cpy.c:469
+#: xftree/gtk_cpy.c:487
 msgid "Can't transfer items to a file"
 msgstr "Can't transfer items to a file"
 
-#: xftree/gtk_cpy.c:488
+#: xftree/gtk_cpy.c:506
 msgid "Source: "
 msgstr "Source: "
 
-#: xftree/gtk_cpy.c:494
+#: xftree/gtk_cpy.c:512
 msgid "Target: "
 msgstr "Target: "
 
-#: xftree/gtk_cpy.c:500
+#: xftree/gtk_cpy.c:518
 msgid "0 bytes transferred"
 msgstr "0 bytes transferred"
 
-#: xftree/gtk_cpy.c:529 xftree/gtk_dlg.c:185
+#: xftree/gtk_cpy.c:541 xftree/gtk_dlg.c:185
 msgid "Error"
 msgstr "Error"
 
-#: xftree/gtk_cpy.c:529
+#: xftree/gtk_cpy.c:541
 msgid "Can't transfer a directory to a file"
 msgstr "Can't transfer a directory to a file"
 
@@ -929,13 +937,13 @@ msgstr "Close"
 msgid "Open with ..."
 msgstr "Open with ..."
 
-#: xfrun/xfrun.c:187 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
+#: xfrun/xfrun.c:204 xftree/gtk_exec.c:142 xftree/xtree_gui.c:2793
 #: xftree/xtree_gui.c:2997 xftree/xtree_gui.c:3043 xftree/xtree_gui.c:3085
 #: xftree/xtree_gui.c:3121 xfwm/xfwm.c:913
 msgid "Run program ..."
 msgstr "Run program ..."
 
-#: xfrun/xfrun.c:221 xftree/gtk_exec.c:190 xftree/xtree_gui.c:2771
+#: xfrun/xfrun.c:243 xftree/gtk_exec.c:190 xftree/xtree_gui.c:2771
 #: xftree/xtree_gui.c:2954
 msgid "Open in terminal"
 msgstr "Open in terminal"
@@ -1226,7 +1234,7 @@ msgstr "New Folder"
 msgid "New file ..."
 msgstr "New file ..."
 
-#: xfsamba/xfsamba_gui.c:1126 xftree/xtree_gui.c:2710 xftree/xtree_gui.c:2711
+#: xfsamba/xfsamba_gui.c:1132 xftree/xtree_gui.c:2710 xftree/xtree_gui.c:2711
 #: xftree/xtree_gui.c:2712 xftree/xtree_gui.c:2799 xftree/xtree_gui.c:2964
 #: xftree/xtree_gui.c:3013 xftree/xtree_gui.c:3054
 msgid "Delete ..."
@@ -1251,8 +1259,8 @@ msgid "Toggle Dotfiles"
 msgstr "Toggle Dotfiles"
 
 #. Create "File" menu
-#: xfclock/xfclock_menus.c:89 xfdiff/xfdiff_gui.c:936
-#: xfsamba/xfsamba_gui.c:1032 xftree/xtree_gui.c:2758
+#: xfclock/xfclock_menus.c:89 xfdiff/xfdiff_gui.c:938
+#: xfsamba/xfsamba_gui.c:1038 xftree/xtree_gui.c:2758
 msgid "File"
 msgstr "File"
 
@@ -1288,8 +1296,8 @@ msgid "Go up"
 msgstr "Go up"
 
 #. Create "Help" menu
-#: xfclock/xfclock_menus.c:262 xfdiff/xfdiff_gui.c:1055
-#: xfsamba/xfsamba_gui.c:1076 xftree/xtree_gui.c:2910
+#: xfclock/xfclock_menus.c:262 xfdiff/xfdiff_gui.c:1057
+#: xfsamba/xfsamba_gui.c:1082 xftree/xtree_gui.c:2910
 msgid "Help"
 msgstr "Help"
 
@@ -1336,7 +1344,7 @@ msgstr "Register ..."
 msgid "New windows"
 msgstr "New windows"
 
-#: xfglob/xfglob.c:612 xfsamba/xfsamba_gui.c:1252 xftree/xtree_gui.c:3136
+#: xfglob/xfglob.c:612 xfsamba/xfsamba_gui.c:1258 xftree/xtree_gui.c:3136
 msgid "Name"
 msgstr "Name"
 
@@ -1348,32 +1356,15 @@ msgstr "Size (bytes)"
 msgid "Last changed"
 msgstr "Last changed"
 
-#: xftree/xtree_dnd.c:114
-msgid "move"
-msgstr "move"
-
-#: xftree/xtree_dnd.c:119
-msgid "copy"
-msgstr "copy"
-
-#: xftree/xtree_dnd.c:124
-msgid "link"
-msgstr "link"
-
-#: xftree/xtree_dnd.c:129
+#: xftree/xtree_dnd.c:125
 msgid "Unknown action !"
 msgstr "Unknown action!"
 
-#: xftree/xtree_dnd.c:145
+#: xftree/xtree_dnd.c:141
 msgid "Target must be a directory !"
 msgstr "Target must be a directory!"
 
-#: xftree/xtree_dnd.c:153
-#, c-format
-msgid "Do you want to %s the item(s) to"
-msgstr "Do you want to %s the item(s) to"
-
-#: xftree/xtree_dnd.c:185
+#: xftree/xtree_dnd.c:170
 #, c-format
 msgid "Type not supported.. (%d)\n"
 msgstr "Type not supported.. (%d)\n"
@@ -1421,6 +1412,7 @@ msgstr "Patch file is not in unified diff format"
 msgid "****Empty file****\n"
 msgstr "****Empty file****\n"
 
+#. missing color attribute
 #: xfdiff/xfdiff.c:255 xfdiff/xfdiff.c:260 xfdiff/xfdiff.c:261
 msgid "****Binary data****\n"
 msgstr "****Binary data****\n"
@@ -1528,23 +1520,23 @@ msgstr ""
 msgid "Xfdiff diagnostic"
 msgstr "Xfdiff diagnostic"
 
-#: xfdiff/xfdiff_gui.c:149
+#: xfdiff/xfdiff_gui.c:151
 msgid "A patch file and directory must be selected first!"
 msgstr "A patch file and directory must be selected first."
 
-#: xfdiff/xfdiff_gui.c:158
+#: xfdiff/xfdiff_gui.c:160
 msgid "Patch has been undone."
 msgstr "Patch has been undone."
 
-#: xfdiff/xfdiff_gui.c:158
+#: xfdiff/xfdiff_gui.c:160
 msgid "Patch has been applied."
 msgstr "Patch has been applied."
 
-#: xfdiff/xfdiff_gui.c:171
+#: xfdiff/xfdiff_gui.c:173
 msgid "Please select a name for the patch file in the next dialog."
 msgstr "Please select a name for the patch file in the next dialog."
 
-#: xfdiff/xfdiff_gui.c:181
+#: xfdiff/xfdiff_gui.c:183
 msgid ""
 "XFdiff will now start diff.\n"
 "Please be patient (xfdiff might seem to hang).\n"
@@ -1554,244 +1546,251 @@ msgstr ""
 "Please be patient (xfdiff might seem to hang).\n"
 "Diff will be working"
 
-#: xfdiff/xfdiff_gui.c:186
+#: xfdiff/xfdiff_gui.c:188
 msgid "Patch file could not be created"
 msgstr "Patch file could not be created"
 
-#: xfdiff/xfdiff_gui.c:190 xfdiff/xfdiff_gui.c:193
+#: xfdiff/xfdiff_gui.c:192 xfdiff/xfdiff_gui.c:195
 msgid "Strip level for created patch file="
 msgstr "Strip level for created patch file="
 
-#: xfdiff/xfdiff_gui.c:194
+#: xfdiff/xfdiff_gui.c:196
 msgid " has been created\n"
 msgstr " has been created\n"
 
-#: xfdiff/xfdiff_gui.c:204
+#: xfdiff/xfdiff_gui.c:206
 msgid "Patch file creation cancelled"
 msgstr "Patch file creation cancelled"
 
-#: xfdiff/xfdiff_gui.c:315
+#: xfdiff/xfdiff_gui.c:317
 msgid "Line synchronization enabled.\n"
 msgstr "Line synchronisation enabled.\n"
 
-#: xfdiff/xfdiff_gui.c:316
+#: xfdiff/xfdiff_gui.c:318
 msgid "Line synchronization disabled.\n"
 msgstr "Line synchronisation disabled.\n"
 
-#: xfdiff/xfdiff_gui.c:340
+#: xfdiff/xfdiff_gui.c:342
 msgid "Patch verbose diagnostics enabled.\n"
 msgstr "Patch verbose diagnostics enabled.\n"
 
-#: xfdiff/xfdiff_gui.c:341
+#: xfdiff/xfdiff_gui.c:343
 msgid "Patch verbose diagnostics disabled.\n"
 msgstr "Patch verbose diagnostics disabled.\n"
 
-#: xfdiff/xfdiff_gui.c:355
+#: xfdiff/xfdiff_gui.c:357
 msgid "Line numbers enabled.\n"
 msgstr "Line numbers enabled.\n"
 
-#: xfdiff/xfdiff_gui.c:356
+#: xfdiff/xfdiff_gui.c:358
 msgid "Line numbers disabled.\n"
 msgstr "Line numbers disabled.\n"
 
-#: xfdiff/xfdiff_gui.c:365
+#: xfdiff/xfdiff_gui.c:367
 msgid "Polygons will now be filled.\n"
 msgstr "Polygons will now be filled.\n"
 
-#: xfdiff/xfdiff_gui.c:366
+#: xfdiff/xfdiff_gui.c:368
 #, fuzzy
 msgid "Polygons will now *not* be filled.\n"
 msgstr "Polygons will now be *not* filled.\n"
 
-#: xfdiff/xfdiff_gui.c:377
+#: xfdiff/xfdiff_gui.c:379
 msgid "Patch will now be assumed reversed.\n"
 msgstr "Patch will now be assumed reversed.\n"
 
-#: xfdiff/xfdiff_gui.c:378
+#: xfdiff/xfdiff_gui.c:380
 msgid "Patch will now be assumed *not* reversed.\n"
 msgstr "Patch will now be assumed *not* reversed.\n"
 
 #.
-#: xfdiff/xfdiff_gui.c:395
+#: xfdiff/xfdiff_gui.c:397
 msgid "Font selection"
 msgstr "Font selection"
 
 #. some fonts are buggy on startup with iso-8859-1 systems (like mine)
-#: xfdiff/xfdiff_gui.c:402 xfdiff/xfdiff_misc.c:661
+#: xfdiff/xfdiff_gui.c:404 xfdiff/xfdiff_misc.c:661
 msgid "Could not load specified font\n"
 msgstr "Could not load specified font\n"
 
-#: xfdiff/xfdiff_gui.c:457
+#: xfdiff/xfdiff_gui.c:459
 msgid "Select highlight background color"
 msgstr "Select highlight background colour"
 
-#: xfdiff/xfdiff_gui.c:461
+#: xfdiff/xfdiff_gui.c:463
 msgid "Select highlight text color"
 msgstr "Select highlight text colour"
 
-#: xfdiff/xfdiff_gui.c:537 xfdiff/xfdiff_gui.c:538
+#: xfdiff/xfdiff_gui.c:539 xfdiff/xfdiff_gui.c:540
 msgid "Warning: cannot read from "
 msgstr "Warning: cannot read from "
 
-#: xfdiff/xfdiff_gui.c:541 xfdiff/xfdiff_gui.c:542
+#: xfdiff/xfdiff_gui.c:543 xfdiff/xfdiff_gui.c:544
 msgid "is not in patch file."
 msgstr "is not in patch file."
 
-#: xfdiff/xfdiff_gui.c:618
+#: xfdiff/xfdiff_gui.c:620
 msgid "Default .xfdiffrc file cannot be created\n"
 msgstr "Default .xfdiffrc file cannot be created\n"
 
-#: xfdiff/xfdiff_gui.c:638
+#: xfdiff/xfdiff_gui.c:640
 msgid "Default configuration has been saved\n"
 msgstr "Default configuration has been saved\n"
 
-#: xfdiff/xfdiff_gui.c:645
+#: xfdiff/xfdiff_gui.c:647
 msgid "This is XFDiff "
 msgstr "This is XFDiff "
 
-#: xfdiff/xfdiff_gui.c:658
+#: xfdiff/xfdiff_gui.c:648
+msgid ""
+"\n"
+"(c) by Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
+
+#: xfdiff/xfdiff_gui.c:660
 msgid "There is no next difference"
 msgstr "There is no next difference"
 
-#: xfdiff/xfdiff_gui.c:661
+#: xfdiff/xfdiff_gui.c:663
 msgid "There is no previous difference"
 msgstr "There is no previous difference"
 
-#: xfdiff/xfdiff_gui.c:677
+#: xfdiff/xfdiff_gui.c:679
 msgid "There is no such file"
 msgstr "There is no such file"
 
-#: xfdiff/xfdiff_gui.c:681
+#: xfdiff/xfdiff_gui.c:683
 msgid "There is no next file"
 msgstr "There is no next file"
 
-#: xfdiff/xfdiff_gui.c:685
+#: xfdiff/xfdiff_gui.c:687
 msgid "There is no previous file"
 msgstr "There is no previous file"
 
 #. only spot where directories for input is not OK:
-#: xfdiff/xfdiff_gui.c:758
+#: xfdiff/xfdiff_gui.c:760
 msgid "That is a directory (or symlink)"
 msgstr "That is a directory (or symlink)"
 
-#: xfdiff/xfdiff_gui.c:937
+#: xfdiff/xfdiff_gui.c:939
 msgid "Select left file"
 msgstr "Select left file"
 
-#: xfdiff/xfdiff_gui.c:939
+#: xfdiff/xfdiff_gui.c:941
 msgid "Select right file"
 msgstr "Select right file"
 
-#: xfdiff/xfdiff_gui.c:941
+#: xfdiff/xfdiff_gui.c:943
 msgid "Select patch file"
 msgstr "Select patch file"
 
-#: xfdiff/xfdiff_gui.c:943
+#: xfdiff/xfdiff_gui.c:945
 msgid "Select directory where to apply patch"
 msgstr "Select directory where you wish to apply the patch"
 
-#: xfdiff/xfdiff_gui.c:947
+#: xfdiff/xfdiff_gui.c:949
 msgid "Switch to patch mode"
 msgstr "Switch to patch mode"
 
-#: xfdiff/xfdiff_gui.c:950
+#: xfdiff/xfdiff_gui.c:952
 msgid "Switch to diff mode"
 msgstr "Switch to diff mode"
 
-#: xfdiff/xfdiff_gui.c:955 xfdiff/xfdiff_gui.c:1406 xfsamba/xfsamba_gui.c:1045
+#: xfdiff/xfdiff_gui.c:957 xfdiff/xfdiff_gui.c:1408 xfsamba/xfsamba_gui.c:1051
 msgid "Exit"
 msgstr "Exit"
 
 #. Create "Settings" menu
-#: xfdiff/xfdiff_gui.c:959
+#: xfdiff/xfdiff_gui.c:961
 msgid "Diff Settings"
 msgstr "Diff Settings"
 
 #. shortcut_menu(TOGGLENOT,menu,_("Show diagnostics"),
 #. (gpointer)cb_toggle_diagnostics, (gpointer) silent);
-#: xfdiff/xfdiff_gui.c:962
+#: xfdiff/xfdiff_gui.c:964
 msgid "Font"
 msgstr "Font"
 
-#: xfdiff/xfdiff_gui.c:964
+#: xfdiff/xfdiff_gui.c:966
 msgid "Highlight text color"
 msgstr "Highlight text colour"
 
-#: xfdiff/xfdiff_gui.c:966
+#: xfdiff/xfdiff_gui.c:968
 msgid "Highlight background color"
 msgstr "Highlight background colour"
 
-#: xfdiff/xfdiff_gui.c:968
+#: xfdiff/xfdiff_gui.c:970
 msgid "Fill polygons"
 msgstr ""
 
-#: xfdiff/xfdiff_gui.c:970
+#: xfdiff/xfdiff_gui.c:972
 msgid "Show line numbers"
 msgstr "Show line numbers"
 
-#: xfdiff/xfdiff_gui.c:973
+#: xfdiff/xfdiff_gui.c:975
 msgid "Use line synchronization voids"
 msgstr "Use line synchronisation voids"
 
-#: xfdiff/xfdiff_gui.c:979
+#: xfdiff/xfdiff_gui.c:981
 msgid "Save settings as default"
 msgstr "Save settings as default"
 
-#: xfdiff/xfdiff_gui.c:982
+#: xfdiff/xfdiff_gui.c:984
 msgid "Patch Settings"
 msgstr "Patch settings"
 
-#: xfdiff/xfdiff_gui.c:984
+#: xfdiff/xfdiff_gui.c:986
 msgid "Verbose patch diagnostics"
 msgstr "Verbose patch diagnostics"
 
-#: xfdiff/xfdiff_gui.c:987
+#: xfdiff/xfdiff_gui.c:989
 msgid "Patch options only active in patch-mode"
 msgstr "Patch options only active in patch-mode"
 
 #. watchout, REVERSE_TOGGLE is #define patchM[whatever] at xfdiff.h
-#: xfdiff/xfdiff_gui.c:992
+#: xfdiff/xfdiff_gui.c:994
 msgid "Assume patch is reversed"
 msgstr "Assume patch is reversed"
 
-#: xfdiff/xfdiff_gui.c:995
+#: xfdiff/xfdiff_gui.c:997
 msgid "Auto strip level"
 msgstr "Auto strip level"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1025
+#: xfdiff/xfdiff_gui.c:1027
 msgid "Actions"
 msgstr "Actions"
 
-#: xfdiff/xfdiff_gui.c:1026
+#: xfdiff/xfdiff_gui.c:1028
 msgid "View differences"
 msgstr "View differences"
 
-#: xfdiff/xfdiff_gui.c:1028
+#: xfdiff/xfdiff_gui.c:1030
 msgid "View differences in new"
 msgstr "View differences in new"
 
-#: xfdiff/xfdiff_gui.c:1031
+#: xfdiff/xfdiff_gui.c:1033
 msgid "View patch created differences"
 msgstr "View patch created differences"
 
-#: xfdiff/xfdiff_gui.c:1034
+#: xfdiff/xfdiff_gui.c:1036
 msgid "View patch created differences in new"
 msgstr "View patch created differences in new"
 
-#: xfdiff/xfdiff_gui.c:1039
+#: xfdiff/xfdiff_gui.c:1041
 msgid "Create patch file"
 msgstr "Create patch file"
 
-#: xfdiff/xfdiff_gui.c:1047
+#: xfdiff/xfdiff_gui.c:1049
 msgid "Apply patch to Hard Drive"
 msgstr "Apply patch to hard drive"
 
-#: xfdiff/xfdiff_gui.c:1050
+#: xfdiff/xfdiff_gui.c:1052
 msgid "Undo patch to Hard Drive"
 msgstr "Undo patch to Hard Drive"
 
-#: xfdiff/xfdiff_gui.c:1056 xfglob/xfglob.c:2125
+#: xfdiff/xfdiff_gui.c:1058 xfglob/xfglob.c:2125
 msgid "About"
 msgstr "About"
 
@@ -1802,19 +1801,19 @@ msgstr "About"
 #. gtk_signal_connect (GTK_OBJECT (button), "clicked",
 #. GTK_SIGNAL_FUNC (on_clear_show_diag),
 #. (gpointer) text);
-#: xfdiff/xfdiff_gui.c:1395
+#: xfdiff/xfdiff_gui.c:1397
 msgid "Next difference"
 msgstr "Next difference"
 
-#: xfdiff/xfdiff_gui.c:1399
+#: xfdiff/xfdiff_gui.c:1401
 msgid "Prev difference"
 msgstr "Prev difference"
 
-#: xfdiff/xfdiff_gui.c:1401
+#: xfdiff/xfdiff_gui.c:1403
 msgid "Next file"
 msgstr "Next file"
 
-#: xfdiff/xfdiff_gui.c:1403
+#: xfdiff/xfdiff_gui.c:1405
 msgid "Previous file"
 msgstr "Previous file"
 
@@ -1897,6 +1896,7 @@ msgstr "Cannot open file for write\n"
 msgid "couldn't allocate color"
 msgstr "couldn't allocate colour"
 
+#. font color!
 #: xfdiff/xfdiff_misc.c:793 xfdiff/xfdiff_misc.c:813
 msgid "Patch: "
 msgstr "Patch: "
@@ -2803,39 +2803,39 @@ msgstr "&Horizontal"
 msgid "xfwm terminated: "
 msgstr "xfwm terminated: "
 
-#: xfsamba/xfsamba.c:308
+#: xfsamba/xfsamba.c:313
 msgid "Shares"
 msgstr "Shares"
 
-#: xfsamba/xfsamba.c:310
+#: xfsamba/xfsamba.c:315
 msgid "Links to other servers"
 msgstr "Links to other servers"
 
-#: xfsamba/xfsamba.c:312
+#: xfsamba/xfsamba.c:317
 msgid "Links to other workgroups"
 msgstr "Links to other workgroups"
 
-#: xfsamba/xfsamba.c:373
+#: xfsamba/xfsamba.c:379
 msgid "Query done."
 msgstr "Query done."
 
-#: xfsamba/xfsamba.c:375
+#: xfsamba/xfsamba.c:381
 msgid "Query failed. Machine may be down."
 msgstr "Query failed. Machine may be down."
 
-#: xfsamba/xfsamba.c:393 xfsamba/xfsamba_list.c:183
+#: xfsamba/xfsamba.c:399 xfsamba/xfsamba_list.c:183
 msgid "Query password has been requested."
 msgstr "Query password has been requested."
 
-#: xfsamba/xfsamba.c:552
+#: xfsamba/xfsamba.c:559
 msgid "Querying"
 msgstr "Querying"
 
-#: xfsamba/xfsamba.c:648
+#: xfsamba/xfsamba.c:655
 msgid "Samba failure! Xfsamba could not find file:"
 msgstr "Samba failure! Xfsamba could not find file:"
 
-#: xfsamba/xfsamba.c:660
+#: xfsamba/xfsamba.c:667
 msgid "(please install Samba or else correct the PATH environment variable)"
 msgstr "(please install Samba or else correct the PATH environment variable)"
 
@@ -2880,6 +2880,13 @@ msgstr ""
 msgid "This is XFSamba "
 msgstr "This is XFSamba "
 
+#: xfsamba/xfsamba_gui.c:151
+msgid ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL\n"
+"XFCE modules are (c) Olivier Fourdan http://www.xfce.org/"
+msgstr ""
+
 #: xfsamba/xfsamba_gui.c:316
 msgid "Please provide information for server "
 msgstr "Please provide information for server "
@@ -2921,84 +2928,88 @@ msgstr "Going back..."
 msgid "Going forward..."
 msgstr "Going forward..."
 
-#: xfsamba/xfsamba_gui.c:782
+#: xfsamba/xfsamba_gui.c:784
+msgid "Attempting to stop query..."
+msgstr ""
+
+#: xfsamba/xfsamba_gui.c:788
 msgid "Query stopped."
 msgstr "Query stopped."
 
 #. (s): multiple file upload/download to be enabled in future
-#: xfsamba/xfsamba_gui.c:1034
+#: xfsamba/xfsamba_gui.c:1040
 msgid "Download..."
 msgstr "Download..."
 
-#: xfsamba/xfsamba_gui.c:1036
+#: xfsamba/xfsamba_gui.c:1042
 msgid "Upload..."
 msgstr "Upload..."
 
-#: xfsamba/xfsamba_gui.c:1039
+#: xfsamba/xfsamba_gui.c:1045
 msgid "New folder..."
 msgstr "New folder..."
 
-#: xfsamba/xfsamba_gui.c:1041
+#: xfsamba/xfsamba_gui.c:1047
 msgid "Delete..."
 msgstr "Delete..."
 
-#: xfsamba/xfsamba_gui.c:1043 xfsamba/xfsamba_tar.c:386
+#: xfsamba/xfsamba_gui.c:1049 xfsamba/xfsamba_tar.c:386
 msgid "Tar..."
 msgstr "Tar..."
 
-#: xfsamba/xfsamba_gui.c:1048
+#: xfsamba/xfsamba_gui.c:1054
 msgid "Preferences"
 msgstr "Preferences"
 
-#: xfsamba/xfsamba_gui.c:1049
+#: xfsamba/xfsamba_gui.c:1055
 msgid "Browse as..."
 msgstr "Browse as..."
 
-#: xfsamba/xfsamba_gui.c:1052
+#: xfsamba/xfsamba_gui.c:1058
 msgid "View"
 msgstr "View"
 
-#: xfsamba/xfsamba_gui.c:1055
+#: xfsamba/xfsamba_gui.c:1061
 msgid "Show diagnostics"
 msgstr "Show diagnostics"
 
-#: xfsamba/xfsamba_gui.c:1058
+#: xfsamba/xfsamba_gui.c:1064
 msgid "Hide diagnostics"
 msgstr "Hide diagnostics"
 
-#: xfsamba/xfsamba_gui.c:1061
+#: xfsamba/xfsamba_gui.c:1067
 msgid "Show browser links"
 msgstr "Show browser links"
 
-#: xfsamba/xfsamba_gui.c:1064
+#: xfsamba/xfsamba_gui.c:1070
 msgid "Hide browser links"
 msgstr "Hide browser links"
 
-#: xfsamba/xfsamba_gui.c:1067
+#: xfsamba/xfsamba_gui.c:1073
 msgid "Go"
 msgstr "Go"
 
-#: xfsamba/xfsamba_gui.c:1068
+#: xfsamba/xfsamba_gui.c:1074
 msgid "Home..."
 msgstr "Home..."
 
-#: xfsamba/xfsamba_gui.c:1070
+#: xfsamba/xfsamba_gui.c:1076
 msgid "Reload..."
 msgstr "Reload..."
 
-#: xfsamba/xfsamba_gui.c:1072
+#: xfsamba/xfsamba_gui.c:1078
 msgid "Forward..."
 msgstr "Forward..."
 
-#: xfsamba/xfsamba_gui.c:1074
+#: xfsamba/xfsamba_gui.c:1080
 msgid "Back..."
 msgstr "Back..."
 
-#: xfsamba/xfsamba_gui.c:1077
+#: xfsamba/xfsamba_gui.c:1083
 msgid "About master browser..."
 msgstr "About master browser..."
 
-#: xfsamba/xfsamba_gui.c:1079
+#: xfsamba/xfsamba_gui.c:1085
 msgid "About xfsamba..."
 msgstr "About xfsamba..."
 
@@ -3006,94 +3017,94 @@ msgstr "About xfsamba..."
 #. hbox=newbox(PACK,HORIZONTAL,vbox1,EXPAND,FILL,0);{
 #.
 #. icon bar
-#: xfsamba/xfsamba_gui.c:1089
+#: xfsamba/xfsamba_gui.c:1095
 msgid "Back ..."
 msgstr "Back ..."
 
-#: xfsamba/xfsamba_gui.c:1094
+#: xfsamba/xfsamba_gui.c:1100
 msgid "Forward ..."
 msgstr "Forward ..."
 
-#: xfsamba/xfsamba_gui.c:1099
+#: xfsamba/xfsamba_gui.c:1105
 msgid "Reload ..."
 msgstr "Reload ..."
 
-#: xfsamba/xfsamba_gui.c:1105
+#: xfsamba/xfsamba_gui.c:1111
 msgid "Home ..."
 msgstr "Home ..."
 
-#: xfsamba/xfsamba_gui.c:1110
+#: xfsamba/xfsamba_gui.c:1116
 msgid "Stop ..."
 msgstr "Stop ..."
 
-#: xfsamba/xfsamba_gui.c:1120
+#: xfsamba/xfsamba_gui.c:1126
 msgid "New folder ..."
 msgstr "New folder ..."
 
-#: xfsamba/xfsamba_gui.c:1136
+#: xfsamba/xfsamba_gui.c:1142
 msgid "Download ..."
 msgstr "Download ..."
 
-#: xfsamba/xfsamba_gui.c:1142
+#: xfsamba/xfsamba_gui.c:1148
 msgid "Upload ..."
 msgstr "Upload ..."
 
-#: xfsamba/xfsamba_gui.c:1149
+#: xfsamba/xfsamba_gui.c:1155
 msgid "Tar ..."
 msgstr "Tar ..."
 
-#: xfsamba/xfsamba_gui.c:1160
+#: xfsamba/xfsamba_gui.c:1166
 msgid "Help ..."
 msgstr "Help ..."
 
-#: xfsamba/xfsamba_gui.c:1170
+#: xfsamba/xfsamba_gui.c:1176
 msgid "Set View 3"
 msgstr "Set View 3"
 
-#: xfsamba/xfsamba_gui.c:1176
+#: xfsamba/xfsamba_gui.c:1182
 msgid "Set View 2"
 msgstr "Set View 2"
 
-#: xfsamba/xfsamba_gui.c:1182
+#: xfsamba/xfsamba_gui.c:1188
 msgid "Set View 1"
 msgstr "Set View 1"
 
-#: xfsamba/xfsamba_gui.c:1194
+#: xfsamba/xfsamba_gui.c:1200
 msgid "Location : "
 msgstr "Location : "
 
-#: xfsamba/xfsamba_gui.c:1210
+#: xfsamba/xfsamba_gui.c:1216
 msgid "Show IP"
 msgstr "Show IP"
 
 #. location shares
-#: xfsamba/xfsamba_gui.c:1237
+#: xfsamba/xfsamba_gui.c:1243
 msgid "Location shares : "
 msgstr "Location shares : "
 
-#: xfsamba/xfsamba_gui.c:1253
+#: xfsamba/xfsamba_gui.c:1259
 msgid "Size"
 msgstr "Size"
 
-#: xfsamba/xfsamba_gui.c:1254
+#: xfsamba/xfsamba_gui.c:1260
 msgid "Date"
 msgstr "Date"
 
-#: xfsamba/xfsamba_gui.c:1255
+#: xfsamba/xfsamba_gui.c:1261
 msgid "Comment"
 msgstr "Comment"
 
 #. location computer links
-#: xfsamba/xfsamba_gui.c:1299
+#: xfsamba/xfsamba_gui.c:1305
 msgid "Location known servers : "
 msgstr "Location known servers : "
 
 #. location workgroup links
-#: xfsamba/xfsamba_gui.c:1331
+#: xfsamba/xfsamba_gui.c:1337
 msgid "Location known workgroups : "
 msgstr "Location known workgroups : "
 
-#: xfsamba/xfsamba_gui.c:1398
+#: xfsamba/xfsamba_gui.c:1404
 msgid "Welcome to xfsamba."
 msgstr "Welcome to xfsamba."
 
@@ -3114,7 +3125,7 @@ msgstr "Retreiving..."
 msgid "Resolved"
 msgstr "Resolved"
 
-#: xfsamba/xfsamba_lookup.c:95 xfsamba/xfsamba_lookup.c:98
+#: xfsamba/xfsamba_lookup.c:99 xfsamba/xfsamba_lookup.c:102
 msgid "Resolving for"
 msgstr "Resolving for"
 
@@ -3387,6 +3398,30 @@ msgstr "Don't quit"
 #: xfumed/interface.c:494
 msgid "Quit, don't save"
 msgstr "Quit, don't save"
+
+#: xfumed/interface.h:21
+msgid "Item"
+msgstr ""
+
+#: xfumed/interface.h:22
+#, fuzzy
+msgid "Submenu"
+msgstr "Go to submenu"
+
+#: xfumed/interface.h:23
+msgid "Separator"
+msgstr ""
+
+#: xfumed/usermenu.h:28
+msgid "# This file was generated by xfumed - XFce User Menu Editor"
+msgstr ""
+
+#~ msgid "Source and Target are the same"
+#~ msgstr "Source and target are the same"
+
+#, fuzzy
+#~ msgid "Can't transfer, same Inode !"
+#~ msgstr "Can't transfer, same inode !"
 
 #~ msgid "Full path to file"
 #~ msgstr "Full path to file"

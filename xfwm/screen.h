@@ -165,9 +165,7 @@ struct functions
 #define MWM_BUTTON_FLAG           (1L<<16)
 #define MWM_DECOR_FLAG            (1L<<17)
 #define MWM_FUNCTIONS_FLAG        (1L<<18)
-#define MWM_OVERRIDE_FLAG         (1L<<19)
-#define NO_PPOSITION_FLAG         (1L<<20)
-#define TRANSLATE_FLAG            (1L<<21)
+#define TRANSLATE_FLAG            (1L<<19)
 
 #define ButtonFaceTypeMask      0x000F
 

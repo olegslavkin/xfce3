@@ -48,17 +48,17 @@ typedef struct
 dlg;
 
 static dlg dl;
-static int diag [2] = { -1, -1 };
+static int diag[2] = { -1, -1 };
 /* DM: A pair of globals because I didn't want to pass these to the 
    'on_cancel' and 'on_ok' Fns
  */
-gchar * historyfile;
-GList * cbitems = NULL;
+gchar *historyfile;
+GList *cbitems = NULL;
 
 /* Fn prototypes */
-gchar * set_history_file();
-GList * get_history(gchar * hfile);
-void put_history(char * newest, gchar * hfile, GList * cb);
+gchar *set_history_file ();
+GList *get_history (gchar * hfile);
+void put_history (char *newest, gchar * hfile, GList * cb);
 
 static void
 on_cancel (GtkWidget * btn, gpointer * data)
@@ -71,12 +71,12 @@ on_cancel (GtkWidget * btn, gpointer * data)
 static void
 on_ok (GtkWidget * ok, gpointer data)
 {
-  char *cmd  = NULL;
+  char *cmd = NULL;
   char *temp = NULL;
   GtkWidget *entrytemp;
 
-  diag [0] = -1;
-  diag [1] = -1;
+  diag[0] = -1;
+  diag[1] = -1;
   entrytemp = GTK_COMBO (dl.input)->entry;
   temp = gtk_entry_get_text (GTK_ENTRY (entrytemp));
   dl.in_terminal = GTK_TOGGLE_BUTTON (dl.check)->active;
@@ -85,11 +85,11 @@ on_ok (GtkWidget * ok, gpointer data)
     {
       cmd = g_malloc (MAXSTRLEN + 1);
       if (dl.in_terminal)
-        snprintf (cmd, MAXSTRLEN, "Term %s", temp);
+	snprintf (cmd, MAXSTRLEN, "Term %s", temp);
       else
-        snprintf (cmd, MAXSTRLEN, "%s", temp);
+	snprintf (cmd, MAXSTRLEN, "%s", temp);
       exec_comm (cmd, 0);
-      put_history(cmd, historyfile, cbitems);
+      put_history (cmd, historyfile, cbitems);
       g_free (cmd);
     }
   gtk_main_quit ();
@@ -99,10 +99,12 @@ on_ok (GtkWidget * ok, gpointer data)
   Sets history file to ~/.xfrun_history
   The returned value needs to be freed after use
 */
-gchar * set_history_file() {
-  gchar * a, * result;
+gchar *
+set_history_file ()
+{
+  gchar *a, *result;
   gchar b[] = "/.xfce/xfrun_history";
-  a = g_get_home_dir();
+  a = g_get_home_dir ();
   result = (char *) g_malloc ((strlen (a) + strlen (b) + 1) * sizeof (char));
   strcpy ((char *) result, (char *) a);
   strcat ((char *) result, (char *) b);
@@ -111,64 +113,79 @@ gchar * set_history_file() {
 
 /*
  */
-GList * get_history(gchar * hfile) {
+GList *
+get_history (gchar * hfile)
+{
   gpointer xfrun_history;
-  GList * cbtemp;
-  /* read the cbtemp from ~/.xap/xfrun_history */
+  GList *cbtemp;
   xfrun_history = fopen ((char *) hfile, "r");
   cbtemp = NULL;
-  if (xfrun_history != NULL) {
-    int i=0;
-    char *line;
-    char *check;
-    check=NULL;
-    line= g_malloc(100);
-    while((i++ < 10) && (fgets(line,99,xfrun_history) != NULL)) {
-      /* no more than 10 history items */
-      if ((line[0] == '\0') || (line[0] =='\n')) {
-        g_free (line);
-        break;
-      } else {
-        /* If there is a newline, remove it from the end of the string */
-        check=line;
-        while (check[0] != '\0') {
-          check++;
-          if (check[0] == '\n') check[0] = '\0';
-        }
-        /* Add the item to the list */
-        cbtemp = g_list_append (cbtemp, line);
-        line = NULL;
-        check = NULL;
-      }
-      line = g_malloc(100);
-    } /* end for (i<10) */
-    fclose(xfrun_history);
-  } else {
-    cbtemp = g_list_append (cbtemp, "");
-  }
+  if (xfrun_history != NULL)
+    {
+      int i = 0;
+      char *line;
+      char *check;
+      check = NULL;
+      line = g_malloc (MAXSTRLEN);
+      while ((i++ < 10) && (fgets (line, MAXSTRLEN, xfrun_history) != NULL))
+	{
+	  /* no more than 10 history items */
+	  if ((line[0] == '\0') || (line[0] == '\n'))
+	    {
+	      g_free (line);
+	      break;
+	    }
+	  else
+	    {
+	      /* If there is a newline, remove it from the end of the string */
+	      check = line;
+	      while (check[0] != '\0')
+		{
+		  check++;
+		  if (check[0] == '\n')
+		    check[0] = '\0';
+		}
+	      /* Add the item to the list */
+	      cbtemp = g_list_append (cbtemp, line);
+	      line = NULL;
+	      check = NULL;
+	    }
+	  line = g_malloc (MAXSTRLEN);
+	}			/* end for (i<10) */
+      fclose (xfrun_history);
+    }
+  else
+    {
+      cbtemp = g_list_append (cbtemp, "");
+    }
   return cbtemp;
 }
 
 /*
  */
-void put_history(char * newest, gchar * hfile, GList * cb) {
+void
+put_history (char *newest, gchar * hfile, GList * cb)
+{
   gpointer xfrun_history;
   GList *node;
   /* print the new ~/.xfap/xfrun_history file here */
   /* Finish print to file */
   xfrun_history = fopen ((char *) hfile, "w");
-  if (xfrun_history != NULL) {    
-    fprintf(xfrun_history, "%s\n",newest);
-    node=cb;
-    while(node) {
-      if ((strcmp ((char *) node->data, newest) != 0) && 
-          (((char*) node->data)[0] != '\0')) {
-        fprintf(xfrun_history, "%s\n", (char *) node->data);
-      }
-      node = node->next;
-    } /* endwhile */
-    fclose(xfrun_history);
-  } /* endif */
+  if (xfrun_history != NULL)
+    {
+      fprintf (xfrun_history, "%s\n", newest);
+      node = cb;
+      while (node)
+	{
+	  if ((strcmp ((char *) node->data, newest) != 0) &&
+	      (((char *) node->data)[0] != '\0'))
+	    {
+	      fprintf (xfrun_history, "%s\n", (char *) node->data);
+	    }
+	  node = node->next;
+	}			/* endwhile */
+      fclose (xfrun_history);
+    }				/* endif */
 }
 
 int
@@ -186,7 +203,8 @@ main (int argc, char *argv[])
   gtk_window_position (GTK_WINDOW (dl.top), GTK_WIN_POS_CENTER);
   gtk_window_set_title (GTK_WINDOW (dl.top), _("Run program ..."));
   gtk_window_set_modal (GTK_WINDOW (dl.top), TRUE);
-  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dl.top)->vbox), 5);
+  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dl.top)->vbox),
+				  5);
 
   ok = gtk_button_new_with_label (_("Ok"));
   cancel = gtk_button_new_with_label (_("Cancel"));
@@ -196,49 +214,54 @@ main (int argc, char *argv[])
   gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), GTK_BUTTONBOX_END);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (bbox), 10);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->action_area), bbox,
-                      FALSE, TRUE, 0);
+		      FALSE, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (bbox), ok);
   gtk_container_add (GTK_CONTAINER (bbox), cancel);
 
   box = gtk_hbox_new (FALSE, 5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE,
-                      5);
+		      5);
 
   /* combo box, created by DM 10/4/00 */
-  historyfile = set_history_file();
-  cbitems = get_history(historyfile);
-  dl.input = gtk_combo_new();
-  gtk_combo_set_popdown_strings (GTK_COMBO(dl.input), cbitems);
+  historyfile = set_history_file ();
+  cbitems = get_history (historyfile);
+  dl.input = gtk_combo_new ();
+  gtk_combo_set_popdown_strings (GTK_COMBO (dl.input), cbitems);
   gtk_box_pack_start (GTK_BOX (box), dl.input, TRUE, TRUE, 0);
-  gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (dl.input)->entry), 0, -1);
+  gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (dl.input)->entry), 0,
+			      -1);
   gtk_combo_disable_activate (GTK_COMBO (dl.input));
+  gtk_combo_set_case_sensitive (GTK_COMBO (dl.input), 1);
+  gtk_combo_set_use_arrows (GTK_COMBO (dl.input), 1);
+  gtk_combo_set_use_arrows_always (GTK_COMBO (dl.input), 1);
 
   /* check button */
   box = gtk_hbox_new (FALSE, 5);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dl.top)->vbox), box, TRUE, TRUE,
-                      5);
+		      5);
 
   dl.check = check = gtk_check_button_new_with_label (_("Open in terminal"));
   gtk_box_pack_start (GTK_BOX (box), check, FALSE, FALSE, 5);
 
   gtk_signal_connect (GTK_OBJECT (ok), "clicked",
-                      GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
+		      GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
   gtk_signal_connect (GTK_OBJECT (GTK_COMBO (dl.input)->entry), "activate",
-                      GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
+		      GTK_SIGNAL_FUNC (on_ok), (gpointer) NULL);
   gtk_signal_connect (GTK_OBJECT (cancel), "clicked",
-                      GTK_SIGNAL_FUNC (on_cancel), (gpointer) NULL);
+		      GTK_SIGNAL_FUNC (on_cancel), (gpointer) NULL);
 
   gtk_widget_add_accelerator (ok, "clicked", accel_group,
-                              GDK_Return, 0, GTK_ACCEL_VISIBLE);
+			      GDK_Return, 0, GTK_ACCEL_VISIBLE);
   gtk_widget_add_accelerator (ok, "clicked", accel_group,
-                              GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (ok, "clicked", accel_group,
-                              GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+			      GDK_Return, GDK_CONTROL_MASK,
+			      GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (ok, "clicked", accel_group, GDK_o,
+			      GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   gtk_widget_add_accelerator (cancel, "clicked", accel_group,
-                              GDK_Escape, 0, GTK_ACCEL_VISIBLE);
+			      GDK_Escape, 0, GTK_ACCEL_VISIBLE);
   gtk_widget_add_accelerator (cancel, "clicked", accel_group,
-                              GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+			      GDK_c, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
   gtk_widget_show_all (dl.top);
   gtk_widget_grab_default (ok);

@@ -3406,7 +3406,7 @@ new_top (char *path, char *xap, char *trash, GList * reg,
   win->timer = gtk_timeout_add (TIMERVAL, (GtkFunction) update_timer, ctree);
   gtk_widget_show_all (top);
   gtk_drag_source_set (ctree,
-		       GDK_BUTTON1_MASK, target_table, NUM_TARGETS,
+		       GDK_BUTTON1_MASK|GDK_BUTTON2_MASK, target_table, NUM_TARGETS,
 		       GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK);
   gtk_drag_dest_set (ctree, 
                      GTK_DEST_DEFAULT_DROP,

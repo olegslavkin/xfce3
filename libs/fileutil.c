@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdarg.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
@@ -31,6 +32,10 @@
 #include "constant.h"
 #include "sendinfo.h"
 #include "my_string.h"
+
+#ifndef HAVE_SNPRINTF
+#include "snprintf.h"
+#endif
 
 #ifdef DMALLOC
 #  include "dmalloc.h"
@@ -82,7 +87,7 @@ exec_comm (char *comm, int wm)
   char *toexec;
   int nulldev;
 
-  command = (char *) malloc ((MAXSTRLEN + 1) * sizeof (char));
+  command = (char *) g_malloc ((MAXSTRLEN + 1) * sizeof (char));
   if (comm)
     {
       toexec = cleanup (comm);
@@ -98,10 +103,7 @@ exec_comm (char *comm, int wm)
 	       */
 	      if (!my_strncasecmp (toexec, "Term ", strlen ("Term ")))
 		{
-		  strcpy (command, "exec ");
-		  strcat (command, TERMINAL);
-		  strcat (command, " -e ");
-		  strcat (command, toexec + strlen ("Term ") * sizeof (char));
+		  snprintf (command, MAXSTRLEN - 1, "exec %s -e %s", TERMINAL, toexec + strlen ("Term ") * sizeof (char));
 		}
 	      else
 		{
@@ -110,12 +112,11 @@ exec_comm (char *comm, int wm)
 		   */
 		  if (my_strncasecmp (toexec, "exec ", strlen ("exec ")))
 		    {
-		      strcpy (command, "exec ");
-		      strcat (command, toexec);
+		      snprintf (command, MAXSTRLEN - 1, "exec %s", toexec);
 		    }
 		  else
 		    {
-		      strcpy (command, toexec);
+		      strncpy (command, toexec, MAXSTRLEN - 1);
 		    }
 		}
 	      switch (fork ())

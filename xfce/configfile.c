@@ -91,7 +91,7 @@ config *
 initconfig (config * newconf)
 {
   if (!newconf)
-    newconf = (config *) malloc (sizeof (config) + 1);
+    newconf = (config *) g_malloc (sizeof (config) + 1);
   newconf->panel_x = -1;
   newconf->panel_y = -1;
   newconf->wm = 0;
@@ -119,11 +119,11 @@ initconfig (config * newconf)
                             F_KDEMENUMODULE);
   newconf->iconpos = 0;		/* Top of screen */
   newconf->fonts[0] =
-    (char *) malloc (sizeof (char) * (strlen (XFWM_TITLEFONT) + 1));
+    (char *) g_malloc (sizeof (char) * (strlen (XFWM_TITLEFONT) + 1));
   newconf->fonts[1] =
-    (char *) malloc (sizeof (char) * (strlen (XFWM_MENUFONT) + 1));
+    (char *) g_malloc (sizeof (char) * (strlen (XFWM_MENUFONT) + 1));
   newconf->fonts[2] =
-    (char *) malloc (sizeof (char) * (strlen (XFWM_ICONFONT) + 1));
+    (char *) g_malloc (sizeof (char) * (strlen (XFWM_ICONFONT) + 1));
   strcpy (newconf->fonts[0], XFWM_TITLEFONT);
   strcpy (newconf->fonts[1], XFWM_MENUFONT);
   strcpy (newconf->fonts[2], XFWM_ICONFONT);
@@ -736,21 +736,21 @@ readconfig (void)
 	    current_config.iconpos = 0;
 	  p = nextline (configfile, lineread);
 	  if (current_config.fonts[0])
-	    free (current_config.fonts[0]);
+	    g_free (current_config.fonts[0]);
 	  current_config.fonts[0] =
-	    (char *) malloc (sizeof (char) * (strlen (p) + 1));
+	    (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
 	  strcpy (current_config.fonts[0], p);
 	  p = nextline (configfile, lineread);
 	  if (current_config.fonts[1])
-	    free (current_config.fonts[1]);
+	    g_free (current_config.fonts[1]);
 	  current_config.fonts[1] =
-	    (char *) malloc (sizeof (char) * (strlen (p) + 1));
+	    (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
 	  strcpy (current_config.fonts[1], p);
 	  p = nextline (configfile, lineread);
 	  if (current_config.fonts[2])
-	    free (current_config.fonts[2]);
+	    g_free (current_config.fonts[2]);
 	  current_config.fonts[2] =
-	    (char *) malloc (sizeof (char) * (strlen (p) + 1));
+	    (char *) g_malloc (sizeof (char) * (strlen (p) + 1));
 	  strcpy (current_config.fonts[2], p);
 	  p = nextline (configfile, lineread);
           if (!my_strncasecmp (p, "MapFocus", strlen ("MapFocus")))

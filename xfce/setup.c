@@ -989,7 +989,7 @@ create_setup (XFCE_palette * pal)
 
   setup_options.setup_opaquemove_checkbutton =
     gtk_check_button_new_with_label (_
-				     ("Show contents of window whlile moving"));
+				     ("Show contents of window while moving"));
   gtk_widget_set_name (setup_options.setup_opaquemove_checkbutton,
 		       "setup_opaquemove_checkbutton");
   gtk_object_set_data (GTK_OBJECT (setup), "setup_opaquemove_checkbutton",
@@ -1094,11 +1094,6 @@ create_setup (XFCE_palette * pal)
 			  FALSE);
   gtk_box_pack_start (GTK_BOX (setup_xfwm_engine_hbox), setup_options.setup_xfwm_engine_combo, FALSE, FALSE, 0);
   g_list_free (xfwm_engines);
-
-
-
-
-
 
   setup_snapsize_frame = gtk_frame_new (NULL);
   gtk_widget_set_name (setup_snapsize_frame, "setup_snapsize_frame");
@@ -1983,20 +1978,20 @@ get_setup_values (void)
     (gtk_toggle_button_get_active
      (GTK_TOGGLE_BUTTON (setup_options.setup_iconpos_rightbutton)) ? 1 : 0);
   if (current_config.fonts[0])
-    free (current_config.fonts[0]);
+    g_free (current_config.fonts[0]);
   if (current_config.fonts[1])
-    free (current_config.fonts[1]);
+    g_free (current_config.fonts[1]);
   if (current_config.fonts[2])
-    free (current_config.fonts[2]);
+    g_free (current_config.fonts[2]);
   s1 = gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_title_entry));
   s2 = gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_menu_entry));
   s3 = gtk_entry_get_text (GTK_ENTRY (setup_options.setup_font_icon_entry));
   current_config.fonts[0] =
-    (char *) malloc (sizeof (char) * (strlen (s1) + 1));
+    (char *) g_malloc (sizeof (char) * (strlen (s1) + 1));
   current_config.fonts[1] =
-    (char *) malloc (sizeof (char) * (strlen (s2) + 1));
+    (char *) g_malloc (sizeof (char) * (strlen (s2) + 1));
   current_config.fonts[2] =
-    (char *) malloc (sizeof (char) * (strlen (s3) + 1));
+    (char *) g_malloc (sizeof (char) * (strlen (s3) + 1));
   strcpy (current_config.fonts[0], s1);
   strcpy (current_config.fonts[1], s2);
   strcpy (current_config.fonts[2], s3);

@@ -24,25 +24,33 @@ then
   BROWSER=netscape
 fi
 
-if [ -d $XFCE_DATA/help/ ]
+if [ -d "$XFCE_DATA/help/" ]
 then 
-  HELP_DIR=$XFCE_DATA/help
+  HELP_DIR="$XFCE_DATA/help"
 else 
-  HELP_DIR=/usr/share/xfce/help
+  HELP_DIR="/usr/share/xfce/help"
 fi
 
-if [ -r $HELP_DIR/help.$LANG.html ]
-then 
-  HELP_FILE=$HELP_DIR/help.$LANG.html
-else 
-  HELP_FILE=$HELP_DIR/help.html
-fi
-
-if [ "x`basename $BROWSER`" = "xnetscape" ]
+# Look first in ne location then in old location
+if [ -r "$HELP_DIR/html.$LANG/help.html" ]
 then
-  $BROWSER -remote openurl\(file:///$HELP_FILE\) || $BROWSER $HELP_FILE
+  HELP_FILE="$HELP_DIR/html.$LANG/help.html"
+elif [ -r "$HELP_DIR/html/help.html" ]
+then
+  HELP_FILE="$HELP_DIR/html/help.html"
+elif [ -r "$HELP_DIR/help.$LANG.html" ]
+then 
+  HELP_FILE="$HELP_DIR/help.$LANG.html"
+else 
+  HELP_FILE="$HELP_DIR/help.html"
+fi
+
+# netscape and mozilla require this command
+if [ "x`basename $BROWSER`" = "xnetscape" -o "x`basename $BROWSER`" = "xmozilla" ]
+then
+  $BROWSER -remote openurl\(file:///"$HELP_FILE"\) || $BROWSER "$HELP_FILE"
 else
-  $BROWSER $HELP_FILE
+  $BROWSER "$HELP_FILE"
 fi
 
 exit 0

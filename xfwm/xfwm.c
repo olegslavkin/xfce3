@@ -348,7 +348,7 @@ main (int argc, char **argv)
             if (num_config_commands < MAX_CFG_CMDS)
             {
                 config_commands[num_config_commands] =
-                    (char *) malloc (6 + strlen (argv[i]));
+                    (char *) safemalloc (6 + strlen (argv[i]));
                 strcpy (config_commands[num_config_commands], "Read ");
                 strcat (config_commands[num_config_commands], argv[i]);
                 num_config_commands++;
