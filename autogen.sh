@@ -1,6 +1,6 @@
 #!/bin/sh
 
-aclocal -I ac --verbose \
+aclocal --verbose \
   && autoheader \
   && automake --add-missing --copy --include-deps --foreign --gnu --verbose \
   && autoconf \
