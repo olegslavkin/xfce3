@@ -588,6 +588,7 @@ main (int argc, char **argv)
   XChangeProperty (dpy, Scr.Root, _WIN_DESKTOP_BUTTON_PROXY, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &Scr.GnomeProxyWin, 1);
   XChangeProperty (dpy, Scr.GnomeProxyWin, _WIN_DESKTOP_BUTTON_PROXY, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &Scr.GnomeProxyWin, 1);
 
+  /* Set prefered icons size for apps that can handle it */
   if ((iconsize = XAllocIconSize()) != NULL)
   {
     iconsize->min_width  = 48;

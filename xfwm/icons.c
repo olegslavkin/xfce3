@@ -214,7 +214,6 @@ CreateIconWindow (XfwmWindow * tmp_win, int def_x, int def_y)
     XChangeWindowAttributes (dpy, tmp_win->icon_pixmap_w, valuemask, &attributes);
   }
 
-
   if (ShapesSupported && (tmp_win->flags & SHAPED_ICON))
   {
     XShapeCombineMask (dpy, tmp_win->icon_pixmap_w, ShapeBounding, 2, 2, tmp_win->icon_maskPixmap, ShapeSet);

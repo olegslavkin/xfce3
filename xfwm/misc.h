@@ -18,6 +18,10 @@
 #ifndef _MISC_
 #define _MISC_
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
@@ -31,8 +35,6 @@
 #include "utils.h"
 #include "screen.h"
 #include "xfwm.h"
-
-#include "config.h"
 
 /************************************************************************
  * ReapChildren - wait() for all dead child processes

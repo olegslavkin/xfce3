@@ -278,7 +278,7 @@ RevertFocus (XfwmWindow * Tmp_win, Bool fallback_to_itself)
   {
     Win = NULL;
   }
-  if ((Win) && (Win != Tmp_win) && AcceptInput (Win))
+  if ((Win) && (Win != Tmp_win) && AcceptInput(Win))
   {
 #ifdef DEBUG
     fprintf (stderr, "xfwm : RevertFocus () : Setting focus to window under pointer\n");
