@@ -1,3 +1,1782 @@
+2002-04-15  xfce
+
+	* xfce/xfce.c: Put back colored screen buttons when "old-style" is
+	enabled
+
+2002-04-15  xfce
+
+	* xfce/popup.c: Improve label alignment in popup menus
+
+2002-04-15  xfce
+
+	* palettes/XLight, po/bg.gmo, other/xfce3rc.bg.in, po/bg.po,
+	po/zh_TW.Big5.gmo, po/zh_TW.Big5.po: Update xlations
+
+2002-04-12  huysmans
+
+	* xfmenu/xfmenu.c: add /opt/kde3 to list of menu dirs
+
+2002-04-08  huysmans
+
+	* po/: nl.gmo, nl.po: Updated translations for xfce-3.8.16 (?) 2nd
+	attempt
+
+2002-04-08  huysmans
+
+	* po/nl.po: Updated translations for xfce-3.8.16 (?)
+
+2002-04-08  edscott
+
+	* po/: es.gmo, es.po: - spanish translation update
+
+2002-04-08  edscott
+
+	* po/: es.gmo, es.po: - spanish translation update
+
+2002-04-08  xfce
+
+	* po/: bg.po, ca.po, cs.po, da.po, de.po, en_GB.po, es.po, et.po,
+	fi.po, fr.po, gl.po, hu.po, it.po, ja.po, ms.po, nl.po, pl.po,
+	pt_BR.po, ro.po, ru.po, sk.po, sr.po, sv.po, uk.po, zh.po,
+	zh_CN.po, bg.gmo, ca.gmo, cs.gmo, da.gmo, zh_TW.Big5.po, de.gmo,
+	en_GB.gmo, es.gmo, et.gmo, fi.gmo, fr.gmo, gl.gmo, hu.gmo, it.gmo,
+	ja.gmo, ms.gmo, nl.gmo, pl.gmo, pt_BR.gmo, ro.gmo, ru.gmo, sk.gmo,
+	sr.gmo, sv.gmo, uk.gmo, zh.gmo, zh_CN.gmo, zh_TW.Big5.gmo: make
+	update-po
+
+2002-04-08  xfce
+
+	* configure, configure.in, other/Makefile.am, other/Makefile.in,
+	other/xfce3rc.bg, other/xfce3rc.bg.in, po/bg.gmo, po/bg.po: Add
+	Bulgarian translation by Rumen Bogdanovski <rbogdanovski@yahoo.com>
+
+2002-04-08  peetervois
+
+	* po/et.po: All translated in todays CVS
+
+2002-04-05  xfce
+
+	* po/: ms.gmo, ms.po: Update Malay translation by Harun Musa
+	<mharun@gmx.net>
+
+2002-04-05  xfce
+
+	* po/: ms.gmo, ms.po: Update Malay translation by Harun Musa
+	<mharun@gmx.net>
+
+2002-04-04  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-04-03  xfce
+
+	* configure, configure.in, po/ja.gmo, po/ja.po, po/ms.po: Update
+	Japanese translation by Yosuke Nakajima <ynakajim@janis.or.jp> Add
+	Malay translation by Harun Musa <mharun@gmx.net>
+
+2002-03-29  xfce
+
+	* palettes/: XLight, XLight: [no log message]
+
+2002-03-29  xfce
+
+	* xfce/configfile.c, xfce/configfile.h, xfce/setup.c, xfce/setup.h,
+	xfce/xfce_main.c, xfce/xfwm.c, xfmenu/xfmenu.c, xfwm/read.c,
+	xfwm/xfwm.c: Include patch for Debian menu
+
+2002-03-28  edscott
+
+	* xftree/: gtk_exec.c, reg.c, reg.h, xtree_gui.c: - included
+	program arguments in openwith dialog
+
+2002-03-28  edscott
+
+	* xfce.spec: [no log message]
+
+2002-03-28  edscott
+
+	* xftree/: xtree_cb.c, xtree_gui.c: - tweaks to the autotype
+	function
+
+2002-03-28  edscott
+
+	* xftree/xtree_cpy.c: - fix the sigsegv on move of "real long"
+	filenames.
+
+2002-03-28  edscott
+
+	* xftree/: xtree_dnd.c, xtree_functions.c, xtree_functions.h,
+	xtree_gui.c, xtree_pasteboard.c: - Use only WM_CLIENT_MACHINE for
+	rsync/scp determination
+
+2002-03-26  xfce
+
+	* xfwm/: builtins.c, screen.h, themes.c, xfwm.c: Change internal
+	enum name
+
+2002-03-25  xfce
+
+	* xfskin/Makefile.in: [no log message]
+
+2002-03-25  xfce
+
+	* palettes/KStyle2: [no log message]
+
+2002-03-25  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-25  xfce
+
+	* other/: xfce3rc.cs.in, xfce3rc.de.in, xfce3rc.fr.in,
+	xfce3rc.hu.in, xfce3rc.in, xfce3rc.ja.in, xfce3rc.ko.in,
+	xfce3rc.nl.in, xfce3rc.sr.in, xfce3rc.uk.in,
+	xfce3rc.zh_CN.GB2312.in, xfce3rc.zh_TW.Big5.in: Update defaults
+
+2002-03-25  xfce
+
+	* xfsound/xfdsp.h: Use artswrapper instead of artsd to launch arts
+	daemon
+
+2002-03-23  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure,
+	backdrops/Makefile.in, cursors/Makefile.in, docs/Makefile.in,
+	docs/html/Makefile.in, docs/html/stylesheet-images/Makefile.in,
+	docs/images/Makefile.in, docs/sgml/Makefile.in, dt/Makefile.in,
+	fonts/Makefile.in, gdm/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, other/xfce3rc.cs.in,
+	other/xfce3rc.de.in, other/xfce3rc.fr.in, other/xfce3rc.hu.in,
+	other/xfce3rc.in, other/xfce3rc.ja.in, other/xfce3rc.ko.in,
+	other/xfce3rc.nl.in, other/xfce3rc.sr.in, other/xfce3rc.uk.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	palettes/Makefile.in, po/et.gmo, po/xfce.pot, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in,
+	xfwm/xfwm.c: [no log message]
+
+2002-03-22  xfce
+
+	* xfwm/: events.c, placement.c: Fix placement problem with some
+	apps.
+
+2002-03-22  xfce
+
+	* xfwm/placement.c: [no log message]
+
+2002-03-22  xfce
+
+	* xfwm/placement.c: [no log message]
+
+2002-03-22  veerh01
+
+	* icons/: Makefile.am, rp7.xpm: [no log message]
+
+2002-03-22  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-22  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-22  xfce
+
+	* xfce/xfwm.c, xfwm/themes.c: Completely change trench engine
+
+2002-03-20  xfce
+
+	* libs/xfcolor.c, palettes/Default, xfwm/xfwm.c: [no log message]
+
+2002-03-20  xfce
+
+	* libs/xfcolor.c, palettes/Default, xfwm/xfwm.c: [no log message]
+
+2002-03-20  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-03-20  veerh01
+
+	* other/xinitrc.in: small addition -> xmodmap (commented though)
+
+2002-03-20  xfce
+
+	* libs/xfcolor.c, palettes/Default: [no log message]
+
+2002-03-19  edscott
+
+	* xfsamba/xfsamba.h: - version
+
+2002-03-19  xfce
+
+	* palettes/Default, libs/xfcolor.c, xfwm/xfwm.c: [no log message]
+
+2002-03-19  edscott
+
+	* xfsamba/xfsamba_gui.c: - fixed a bug when cancelling password
+	query.
+
+2002-03-19  xfce
+
+	* xfce_theme/xfce_theme_draw.c, xfwm/themes.c: [no log message]
+
+2002-03-19  edscott
+
+	* xfsamba/icons/Makefile.am: - another make rpm detail missing
+
+2002-03-19  edscott
+
+	* xftree/Makefile.am: - another bit missing for make rpm
+
+2002-03-19  edscott
+
+	* xftree/Makefile.am: - rpm build fix
+
+2002-03-19  edscott
+
+	* po/POTFILES.in: - xftree and xfsamba files added.
+
+2002-03-19  edscott
+
+	* xftree/xtree_cpy.c: - dialogs for ssh, scp and rsync in case they
+	are not found when requested.
+
+2002-03-19  edscott
+
+	* xftree/xtree_gui.h, xfce.spec: - version
+
+2002-03-19  edscott
+
+	* xftree/: TODO, xtree_gui.c: - menu modification
+
+2002-03-19  edscott
+
+	* xftree/: TODO, xtree_cpy.c, xtree_cpy.h, xtree_dnd.c,
+	xtree_gui.c, xtree_mess.c, xtree_mess.h, xtree_pasteboard.c: -
+	details for pasting from xfsamba - rsync/rcp options
+
+2002-03-18  xfce
+
+	* libs/xfcolor.c, backdrops/Default.xpm, palettes/Default: [no log
+	message]
+
+2002-03-18  xfce
+
+	* backdrops/Default.xpm: [no log message]
+
+2002-03-18  veerh01
+
+	* icons/playball.xpm: [no log message]
+
+2002-03-18  veerh01
+
+	* xfskin/xfskin.1: mmmm Manual Pages
+
+2002-03-18  xfce
+
+	* palettes/KStyle2: [no log message]
+
+2002-03-18  xfce
+
+	* palettes/SoftBlue: [no log message]
+
+2002-03-18  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-03-18  xfce
+
+	* po/: zh_CN.gmo, zh_CN.po: XFCE Chinese po file updated as per
+	submitted by merlin@turbolinux.com.cn
+
+2002-03-18  xfce
+
+	* backdrops/: Makefile.am, Makefile.in, Metal-blue.jpg: [no log
+	message]
+
+2002-03-18  veerh01
+
+	* xfskin/: ChangeLog, xfskin, xfskin.in: added checkbox for
+	win-engine support
+
+2002-03-15  veerh01
+
+	* Makefile.in, aclocal.m4, config.h.in, configure,
+	backdrops/Blue.list, backdrops/Makefile.in,
+	backdrops/Toulouse.list, cursors/Makefile.in, docs/Makefile.in,
+	docs/html/Makefile.in, docs/html/stylesheet-images/Makefile.in,
+	docs/images/Makefile.in, docs/sgml/Makefile.in, dt/Makefile.in,
+	fonts/Makefile.in, gdm/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, palettes/Makefile.in,
+	scripts/Makefile.in, scripts/startxfce, scripts/xfce_setup,
+	scripts/xfce_upgrade, scripts/xfhelp, sounds/Makefile.in,
+	textures/Makefile.in, xfbd/Makefile.in, xfce/Makefile.in,
+	xfce_theme/Makefile.in, xfclock/Makefile.in, xfdiff/Makefile.in,
+	xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in: [no
+	log message]
+
+2002-03-15  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-15  veerh01
+
+	* xfskin/: ChangeLog, xfskin, xfskin.in: xfskin up to 0.2.2,
+	including window-engine support!!
+
+2002-03-15  veerh01
+
+	* xfskin/: xfskin, xfskin.in: xfskin updated
+
+2002-03-15  xfce
+
+	* palettes/Win3: [no log message]
+
+2002-03-15  xfce
+
+	* palettes/Win: [no log message]
+
+2002-03-15  veerh01
+
+	* other/: Makefile.in, xfce3rc.cs.in, xfce3rc.de.in, xfce3rc.fr.in,
+	xfce3rc.hu.in, xfce3rc.in, xfce3rc.ja.in, xfce3rc.ko.in,
+	xfce3rc.nl.in, xfce3rc.sr.in, xinitrc, xinitrc.mwm: sorry, forgot
+	lines in xfce3rc
+
+2002-03-15  edscott
+
+	* xfsamba/xfsamba_gui.c: - initial default view set to 2
+
+2002-03-15  edscott
+
+	* xftree/: xtree_cb.c, xtree_gui.c: - corrected argument processing
+	for cb_autotype and doubleclick.
+
+2002-03-15  xfce
+
+	* xfwm/xfwm.c, other/xfce3rc.cs.in, other/xfce3rc.de.in,
+	other/xfce3rc.fr.in, other/xfce3rc.hu.in, other/xfce3rc.in,
+	other/xfce3rc.ja.in, other/xfce3rc.ko.in, other/xfce3rc.nl.in,
+	other/xfce3rc.sr.in, other/xfce3rc.uk.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in: Change
+	defaults
+
+2002-03-15  xfce
+
+	* xfce_theme/xfce_theme_draw.c, xfwm/themes.c: [no log message]
+
+2002-03-15  veerh01
+
+	* Makefile.am, configure, configure.in, other/xfce3rc.cs.in,
+	other/xfce3rc.de.in, other/xfce3rc.fr.in, other/xfce3rc.hu.in,
+	other/xfce3rc.in, other/xfce3rc.ja.in, other/xfce3rc.ko.in,
+	other/xfce3rc.nl.in, other/xfce3rc.sr.in: adding xfskin to the make
+	procedure
+
+2002-03-15  veerh01
+
+	* xfskin/: Makefile.am, xfskin.1: [no log message]
+
+2002-03-15  veerh01
+
+	* other/xfwmrc.in: [no log message]
+
+2002-03-15  xfce
+
+	* backdrops/Default.xpm: [no log message]
+
+2002-03-15  edscott
+
+	* xfsamba/: TODO, xfsamba_gui.c: - details for freeBSD. Discovered
+	a crash in freeBSD, not yet fixed.
+
+2002-03-15  edscott
+
+	* xfsamba/Makefile.am: - Slight modifications for error free
+	compile in FreeBSD
+
+2002-03-14  edscott
+
+	* xftree/xtree_pasteboard.c: - mistake in new pasteboard format
+	corrected
+
+2002-03-14  edscott
+
+	* xftree/xtree_toolbar.c: - fixed sigsegv on config toolbar.
+
+2002-03-14  edscott
+
+	* xftree/xtree_functions.c: - fixed sigsegv causing typo
+
+2002-03-14  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-03-14  edscott
+
+	* xftree/xtree_functions.c: - added notes on possible cause for
+	sigsegv on slackware8 on H.R. ter Veer	 and Ben Hall's boxes.
+
+2002-03-14  edscott
+
+	* xfsamba/Makefile.am, xftree/xtree_cb.c, xftree/xtree_functions.c:
+	- sync cvs with compiling xftree and xfsamba
+
+2002-03-13  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-03-13  peetervois
+
+	* po/et.po: sync with yesterdays CVS, all translated
+
+2002-03-13  edscott
+
+	* xfsamba/: TODO, xfsamba.c, xfsamba.h, xfsamba_dnd.c,
+	xfsamba_gui.c, xfsamba_mkdir.c, xfsamba_rm.c, xfsamba_upload.c: -
+	paste from xftree now enable. Paste towards xftree still pending.
+
+2002-03-12  edscott
+
+	* xftree/xtree_smb.c: - warning on drops from different shares at
+	the same time.
+
+2002-03-12  edscott
+
+	* xftree/xtree_smb.c: - Now takes drops with mixed files and
+	directories
+
+2002-03-12  edscott
+
+	* xftree/xtree_smb.c: - small fix for root level dnd
+
+2002-03-12  edscott
+
+	* xftree/xtree_smb.c: - remove debugging info
+
+2002-03-12  edscott
+
+	* xftree/TODO: - less items pending
+
+2002-03-12  edscott
+
+	* xftree/: xtree_gui.h, xtree_pasteboard.c: - new pasteboard using
+	X cut-buffer0.	- dnd from xfsamba takes directories now.
+
+2002-03-12  edscott
+
+	* xfsamba/xfsamba.h: - header modification
+
+2002-03-12  edscott
+
+	* xfsamba/xfdiff_colorsel.h: [no log message]
+
+2002-03-12  edscott
+
+	* xftree/xfdiff_colorsel.h: not longer needed
+
+2002-03-12  edscott
+
+	* xfdiff/xfdiff_colorsel.c: - eliminate need for multiple .h files
+
+2002-03-12  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-12  xfce
+
+	* xfwm/: move.c, themes.c: Fix bug that caused xfwm to crash when
+	moving window while it disappear.
+
+2002-03-12  edscott
+
+	* xftree/xtree_icons.c: - detail for smb shares
+
+2002-03-11  xfce
+
+	* gdm/XFce.in: Add XIM support along with other entries from
+	wmsession.d
+
+2002-03-11  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-11  edscott
+
+	* xfsamba/: xfdiff_colorsel.h, xfsamba.c, xfsamba.h,
+	xfsamba_colorsel.c, xfsamba_gui.c, xfsamba_icons.c, xfsamba_list.c,
+	xfsamba_smblookup.c: - icon, color and font cosmetics
+
+2002-03-11  edscott
+
+	* xftree/: entry.h, ft_types.h, icons.h, xtree_cfg.h,
+	xtree_icons.c: - generalize icon routine
+
+2002-03-11  xfce
+
+	* palettes/Default, libs/xfcolor.c: [no log message]
+
+2002-03-11  xfce
+
+	* palettes/CandyBox: [no log message]
+
+2002-03-11  xfce
+
+	* palettes/Basic: [no log message]
+
+2002-03-11  edscott
+
+	* xfsamba/TODO: [no log message]
+
+2002-03-11  edscott
+
+	* xfsamba/xfsamba_gui.c: - some help entries
+
+2002-03-11  edscott
+
+	* xfsamba/: xfsamba.c, xfsamba.h, xfsamba_dnd.c, xfsamba_gui.c,
+	xfsamba_mkdir.c, xfsamba_mnt.c, xfsamba_rm.c, xfsamba_tar.c: -
+	further modifications to accomodate the multiple selections.
+
+2002-03-11  edscott
+
+	* xfsamba/icons/view4.xpm: [no log message]
+
+2002-03-11  edscott
+
+	* xftree/xtree_toolbar.c: - Separators are now back in toolbar
+
+2002-03-09  edscott
+
+	* xfsamba/TODO: [no log message]
+
+2002-03-09  edscott
+
+	* xfsamba/: tubo.c, tubo.h, xfsamba.c, xfsamba.h,
+	xfsamba_download.c, xfsamba_list.c, xfsamba_masterlookup.c,
+	xfsamba_masterresolve.c, xfsamba_mkdir.c, xfsamba_mnt.c,
+	xfsamba_nmblookup.c, xfsamba_rm.c, xfsamba_smblookup.c,
+	xfsamba_tar.c, xfsamba_upload.c: - automatic smb unmounts and error
+	processing for smb mounts
+
+2002-03-09  edscott
+
+	* xftree/: xtree_cb.c, xtree_cpy.c, xtree_du.c, xtree_smb.c,
+	xtree_tar.c: - tubo modifications
+
+2002-03-09  edscott
+
+	* xfce.spec: - new feature in xfsamba
+
+2002-03-09  edscott
+
+	* xfsamba/: Makefile.am, io.c, io.h, xfsamba.c, xfsamba.h,
+	xfsamba_dnd.c, xfsamba_gui.c, xfsamba_list.c,
+	xfsamba_masterlookup.c, xfsamba_masterresolve.c, xfsamba_mkdir.c,
+	xfsamba_mnt.c, xfsamba_rm.c, xfsamba_smblookup.c, xfsamba_tar.c,
+	xfsamba_upload.c: - new features and fixes for dnd. Dnd features
+	with xftree still not finished.
+
+2002-03-09  edscott
+
+	* xfsamba/icons/: Makefile.am, mount.xpm, new_win.xpm, tb_copy.xpm,
+	tb_cut.xpm, tb_paste.xpm: - new toolbar buttons
+
+2002-03-09  edscott
+
+	* xftree/: gtk_dlg.c, io.c, uri.c, xtree_dnd.c, xtree_smb.c: -
+	small changes for xfsamba compatibility
+
+2002-03-08  xfce
+
+	* xfce_theme/xfce_theme_main.c: [no log message]
+
+2002-03-08  xfce
+
+	* palettes/KStyle2: [no log message]
+
+2002-03-08  xfce
+
+	* xfce_theme/xfce_theme_main.c: [no log message]
+
+2002-03-08  xfce
+
+	* palettes/Default, libs/xfcolor.c, xfwm/xfwm.c: [no log message]
+
+2002-03-08  xfce
+
+	* palettes/KStyle2: [no log message]
+
+2002-03-08  veerh01
+
+	* xfskin/: ChangeLog, xfskin: grumble... euh... modified
+	restartXFCE
+
+2002-03-08  xfce
+
+	* palettes/Default, libs/xfcolor.c: [no log message]
+
+2002-03-08  xfce
+
+	* palettes/KDE: [no log message]
+
+2002-03-08  veerh01
+
+	* xfskin/xfskin: [no log message]
+
+2002-03-08  xfce
+
+	* palettes/CandyBox: [no log message]
+
+2002-03-08  veerh01
+
+	* xfskin/xfskin: little bug-fix (more: forgotten lines...)
+
+2002-03-07  veerh01
+
+	* xfskin/: ChangeLog, xfskin: updated xfskin to version 0.2.0 for
+	changes see the ChangeLog file
+
+2002-03-07  xfce
+
+	* palettes/Default, libs/xfcolor.c: [no log message]
+
+2002-03-07  xfce
+
+	* palettes/KDE: [no log message]
+
+2002-03-07  xfce
+
+	* backdrops/: BlackStripes.xpm, BlueStripes.xpm, GreenStripes.xpm,
+	PurpleStripes.xpm, WhiteStripes.xpm: [no log message]
+
+2002-03-07  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-03-07  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-03-07  xfce
+
+	* xfwm/xfwm.c: [no log message]
+
+2002-03-07  xfce
+
+	* palettes/Default, libs/xfcolor.c, xfwm/xfwm.c: [no log message]
+
+2002-03-06  xfce
+
+	* palettes/: GtkXfce, Makefile.am, Makefile.in: [no log message]
+
+2002-03-06  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-03-06  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-03-06  xfce
+
+	* palettes/Default, libs/xfcolor.c, xfwm/xfwm.c: [no log message]
+
+2002-03-06  edscott
+
+	* xftree/xtree_gui.c: - cut unnecesary code
+
+2002-03-05  edscott
+
+	* xftree/xtree.c: - misplaced the signal commands on previous
+	updates
+
+2002-03-05  edscott
+
+	* xftree/: xtree_cpy.c, xtree_gui.c: - small bugfix in cb_duplicate
+
+2002-03-05  edscott
+
+	* xftree/xtree_toolbar.c: - PostScript image operator
+
+2002-03-05  edscott
+
+	* xftree/xtree_dnd.c: - small bugfix
+
+2002-03-05  edscott
+
+	* xftree/: xtree.c, xtree_functions.c, xtree_gui.c: - session
+	management atoms defined correctly for xfwm
+
+2002-03-05  xfce
+
+	* xfsamba/xfsamba.c, xfsamba/xfsamba.h, palettes/SaltLake: Add
+	include for Cygwin
+
+2002-03-05  edscott
+
+	* xftree/: io.c, xtree_cb.c, xtree_cpy.c, xtree_functions.c,
+	xtree_functions.h, xtree_gui.c: - Small features:    autodetection
+	of scripts on double click and started in terminal.	cancel
+	button in count dialog, better countwindow too.  - Small bugfixes: 
+	  Delete and move and copy files with embeded colons	Size of cpy
+	progress relative to font used	  Icon view (rox) will open on
+	parent directories of selected files
+
+2002-03-04  xfce
+
+	* xfwm/menus.c: Apply Stephane patch regarding
+	Installing/Uninstalling color map
+
+2002-03-04  xfce
+
+	* xfwm/: themes.c, themes.c: [no log message]
+
+2002-03-04  edscott
+
+	* xftree/: xtree_cfg.h, xtree_functions.c, xtree_go.c, xtree_gui.c:
+	- Enable icon name for use in session management
+
+2002-03-04  xfce
+
+	* xfce_theme/xfce_theme_draw.c, xfwm/themes.c: Put back black frame
+	arround widgets
+
+2002-03-04  xfce
+
+	* backdrops/Default.xpm: Use Softblue2.xpm as default
+
+2002-03-02  xfce
+
+	* icons/Makefile.in, libs/xfcolor.c, palettes/Default, po/xfce.pot,
+	xftree/Makefile.in, xftree/icons/Makefile.in, xfwm/xfwm.c: [no log
+	message]
+
+2002-03-01  edscott
+
+	* xftree/: xtree_cfg.h, xtree_functions.c, xtree_go.c, xtree_gui.c,
+	xtree_mess.c: - more tweaks on new multiple selection feature
+
+2002-03-01  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-03-01  edscott
+
+	* xftree/xtree_functions.c: - toggle dotfile small tweak.
+
+2002-03-01  edscott
+
+	* xftree/: entry.c, xtree_functions.c, xtree_gui.c, xtree_mess.c,
+	xtree_smb.c: - New function for multiple file selection by click
+	and drag
+
+2002-03-01  xfce
+
+	* libs/xfcolor.c, palettes/Default, xfwm/xfwm.c: [no log message]
+
+2002-03-01  xfce
+
+	* palettes/Monkey: [no log message]
+
+2002-03-01  xfce
+
+	* palettes/: SaltLake, XLight: [no log message]
+
+2002-03-01  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-03-01  xfce
+
+	* libs/xfcolor.c: Change hilite/darken color computation
+
+2002-03-01  edscott
+
+	* xfsamba/xfsamba.h: - Multiple file selection enabled
+
+2002-03-01  edscott
+
+	* xfsamba/: xfsamba.h, xfsamba_dnd.c, xfsamba_gui.c,
+	xfsamba_upload.c: - fixed a small bug in drop upload. Enable
+	multiple file selection (not   yet enabled at xftree)
+
+2002-02-28  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-02-28  xfce
+
+	* libs/xfcolor.c, xfce/popup.c, xfce/startup.c, xfce/xfce.c: Change
+	hilight for some GtkWidgets and use proper structure cast for
+	gdk_window_set_decoration()
+
+2002-02-28  edscott
+
+	* xftree/: TODO, xtree_dnd.c, xtree_functions.c, xtree_gui.c: -
+	FINALLY! A bug workaround for the damn gtkCTree bug of mistaking a 
+	 drag from another widget with a drag initiation on the same widget
+	  (only occurring on first drag after a expand or contract event)
+
+2002-02-28  xfce
+
+	* libs/xfcolor.c, xfwm/xfwm.c, palettes/Default: [no log message]
+
+2002-02-28  xfce
+
+	* libs/xfcolor.c, palettes/XLight: [no log message]
+
+2002-02-27  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-27  edscott
+
+	* xftree/TODO: - update TODO
+
+2002-02-27  edscott
+
+	* xfce.spec: - new feature in xftree
+
+2002-02-27  edscott
+
+	* xftree/: xtree_dnd.c, xtree_smb.c: - Drops from xfsamba now
+	enabled. (single file, no directories)
+
+2002-02-27  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-27  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-27  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-26  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-26  edscott
+
+	* xftree/xtree_cb.c: - label modification
+
+2002-02-26  edscott
+
+	* xftree/: gtk_exec.c, io.c, xtree.c, xtree_cb.c, xtree_cpy.c,
+	xtree_functions.c, xtree_gui.c, xtree_gui.h, xtree_mess.c,
+	xtree_rpm.c, xtree_toolbar.c: - improvements to the autotype and
+	reset_icon routines
+
+2002-02-26  xfce
+
+	* libs/xfcolor.c: [no log message]
+
+2002-02-26  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-02-26  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-02-26  edscott
+
+	* xfsamba/xfsamba.h: - 0.36
+
+2002-02-26  edscott
+
+	* xfsamba/xfsamba_dnd.c: - only process "file" type drops (avoid
+	self drops)
+
+2002-02-26  edscott
+
+	* xftree/: Makefile.am, xtree_dnd.c, xtree_smb.c: - added process
+	lines for smb dnd type. (drops not yet enabled)
+
+2002-02-26  edscott
+
+	* xftree/xtree_functions.c: - update status line only when
+	necesary.
+
+2002-02-26  edscott
+
+	* xfsamba/: xfsamba_dnd.c, xfsamba_dnd.h, xfsamba_gui.c: - enable
+	single file drag out of xfsamba.
+
+2002-02-25  edscott
+
+	* xftree/xtree_functions.c: - code optimization had affected status
+	line and status titles: now fixed.
+
+2002-02-25  edscott
+
+	* xftree/xtree_gui.c: - Put gtk_label color to the statusline (now
+	a nonedit gtk_entry)
+
+2002-02-25  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-02-25  xfce
+
+	* palettes/Default, libs/xfcolor.c, xfwm/xfwm.c: [no log message]
+
+2002-02-25  edscott
+
+	* xftree/: TODO, xtree_functions.c, xtree_gui.c: - change status
+	line to gtk_entry. Change text insert for paste.
+
+2002-02-25  xfce
+
+	* libs/xfcolor.c, palettes/Default, xfwm/xfwm.c: Color stuff
+
+2002-02-25  xfce
+
+	* palettes/SaltLake: [no log message]
+
+2002-02-25  edscott
+
+	* xftree/xtree_functions.c: - small bugfix for the hide ../ option
+
+2002-02-24  edscott
+
+	* xftree/xtree_icons.c: - assign .o icon to .obj files
+
+2002-02-24  edscott
+
+	* xfce.spec: - new features in xftree
+
+2002-02-24  edscott
+
+	* xftree/: xtree_cpy.c, xtree_gui.c: - added missing keyboard
+	shortcuts
+
+2002-02-24  edscott
+
+	* xftree/xtree_cpy.h: - added touch option - optimized symlink
+	option
+
+2002-02-24  edscott
+
+	* xftree/: xtree_cb.c, xtree_functions.c, xtree_go.c, xtree_gui.c:
+	- fixed bug when select-all and rpm or tar entries in tree - fixed
+	tiny bug in green star routine
+
+2002-02-24  huysmans
+
+	* scripts/: xfhelp, xfhelp.in: make xfhelp open file specified on
+	command line
+
+2002-02-24  xfce
+
+	* palettes/: Makefile.am, Makefile.in: [no log message]
+
+2002-02-24  edscott
+
+	* xfsamba/xfsamba_dnd.c: - beginning dnd to xftree. Not yet active.
+
+2002-02-24  edscott
+
+	* xftree/xtree_smb.c: - beginning smb dnd implementation. Not
+	active in build.
+
+2002-02-24  edscott
+
+	* xftree/xtree_icons.c: - dirup icon wasn't being shown (just
+	noticed this now)
+
+2002-02-24  edscott
+
+	* xftree/: toolbar_icons.h, xtree_toolbar.c: - iconview button for
+	toolbar
+
+2002-02-24  edscott
+
+	* xftree/icons/: Makefile.am, new_rox.xpm: - iconview for toolbar
+
+2002-02-23  edscott
+
+	* xftree/: xtree_functions.c, xtree_go.c, xtree_gui.c,
+	xtree_mess.c, xtree_mess.h: - Couple new options added.
+
+2002-02-23  edscott
+
+	* xftree/TODO: -update TODO
+
+2002-02-23  edscott
+
+	* xftree/: entry.c, entry.h, icons.h, xtree_cfg.h,
+	xtree_functions.c, xtree_functions.h, xtree_go.c, xtree_gui.c,
+	xtree_icons.c: - Green star for folders with hidden dotfiles.
+
+2002-02-23  edscott
+
+	* xftree/icons/: Makefile.am, dir_open_hidden.xpm,
+	dir_ro_open_hidden.xpm: - second hidden files icon flags
+
+2002-02-23  edscott
+
+	* xftree/gtk_exec.c: - process escape on exec dialog.
+
+2002-02-23  edscott
+
+	* xftree/: gtk_prop.c, icons.h, reg.c, xtree_cb.c,
+	xtree_functions.c, xtree_go.c, xtree_gui.c, xtree_icons.c,
+	xtree_icons.h, xtree_rpm.c, xtree_tar.c: - dotfile toggle
+	(dotmarker added, correct column resize).
+
+2002-02-23  edscott
+
+	* xftree/icons/: Makefile.am, dir_open_dot.xpm,
+	dir_ro_open_dot.xpm: - icons for dot marking
+
+2002-02-22  edscott
+
+	* xftree/: gtk_exec.c, io.c, io.h, xtree_cb.c, xtree_cpy.c,
+	xtree_gui.c: - Further fixes to the exec routines. Still need to
+	figure out the	 missing environment variable for xinerama+gvim
+	that the shell	 does define ok.
+
+2002-02-22  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-22  xfce
+
+	* palettes/XLight: [no log message]
+
+2002-02-22  xfce
+
+	* palettes/: Makefile.am, Makefile.in, XLight: [no log message]
+
+2002-02-22  edscott
+
+	* xftree/: gtk_dlg.c, gtk_dlg.h, xtree_cb.c, xtree_cpy.c,
+	xtree_go.c: - changed default action to OK on goto dialog
+
+2002-02-22  xfce
+
+	* palettes/Default, palettes/DefaultTextured, libs/xfcolor.c: [no
+	log message]
+
+2002-02-22  xfce
+
+	* palettes/: Makefile.am, Makefile.in, Pelgrim: [no log message]
+
+2002-02-22  xfce
+
+	* xfwm/builtins.c: [no log message]
+
+2002-02-22  xfce
+
+	* xfwm/builtins.c, libs/GetFont.c: Fnt stuff
+
+2002-02-21  xfce
+
+	* palettes/KStyle2: [no log message]
+
+2002-02-21  xfce
+
+	* palettes/Monkey: [no log message]
+
+2002-02-21  xfce
+
+	* palettes/: Makefile.am, Makefile.in, Monkey: New palette
+
+2002-02-21  xfce
+
+	* xfwm/builtins.c: Apply a patch that caused segv in xfwm when
+	using charset (patch submitted by qyb)
+
+2002-02-20  edscott
+
+	* xftree/: xtree_cb.c, xtree_cb.h, xtree_gui.c: - error dialog if
+	rox not found. Icon view on main file menu.
+
+2002-02-20  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-02-20  xfce
+
+	* libs/xfcolor.c, palettes/Default, palettes/DefaultTextured,
+	xfwm/themes.c, xfwm/xfwm.c: [no log message]
+
+2002-02-20  veerh01
+
+	* icons/: Makefile.am, Makefile.in: included xfskin.xpm
+
+2002-02-20  veerh01
+
+	* other/xfwmrc.in: [no log message]
+
+2002-02-19  edscott
+
+	* xftree/: gtk_dlg.c, gtk_exec.c, gtk_prop.c: - use GTK_POS_MOUSE
+	to avoid dialogs from appearing in different screens
+
+2002-02-18  xfce
+
+	* palettes/Metal: [no log message]
+
+2002-02-18  xfce
+
+	* palettes/Metal: [no log message]
+
+2002-02-18  xfce
+
+	* other/xfwmrc.in: [no log message]
+
+2002-02-17  edscott
+
+	* xftree/xtree_gui.c: - posix macro to identify directory mode
+
+2002-02-16  xfce
+
+	* palettes/Default, palettes/DefaultTextured, palettes/KXfce,
+	libs/xfcolor.c, xfwm/xfwm.c: [no log message]
+
+2002-02-15  xfce
+
+	* xfce_theme/xfce_theme_draw.c, xfwm/style.c, xfwm/themes.c:
+	Tweaking
+
+2002-02-15  xfce
+
+	* xfwm/themes.c: [no log message]
+
+2002-02-15  xfce
+
+	* xfwm/themes.c: Change xfce theme
+
+2002-02-14  xfce
+
+	* xfce_theme/: xfce_theme_draw.c, xfce_theme_main.c: Fix some
+	(very) small visual glitches
+
+2002-02-14  xfce
+
+	* palettes/: KStyle2, KXfce, Makefile.am: Add new palettes
+
+2002-02-14  xfce
+
+	* libs/constant.h, palettes/Default, palettes/DefaultTextured:
+	Change default fontsize to 12 (10 was too small on most displays)
+
+2002-02-13  edscott
+
+	* xftree/: gtk_exec.c, io.c, xtree_gui.c: - smoothing rough edges
+	for third program execution.
+
+2002-02-13  edscott
+
+	* xfsamba/xfsamba.h: version
+
+2002-02-13  edscott
+
+	* xfce.spec: - feature addition dnd into xfsamba
+
+2002-02-13  edscott
+
+	* xfsamba/: xfsamba.h, xfsamba_dnd.c, xfsamba_gui.c,
+	xfsamba_list.c, xfsamba_mkdir.c, xfsamba_smblookup.c,
+	xfsamba_upload.c: - enable dnd drops into xfsamba - prettier
+	sorting of folder contents (similar to xftree)
+
+2002-02-12  xfce
+
+	* palettes/KDE: Change font size to 12px
+
+2002-02-12  edscott
+
+	* xftree/: gtk_exec.c, xtree_cb.c, xtree_gui.c, xtree_mess.c,
+	xtree_mess.h: - added the icon view option (rox).
+
+2002-02-11  edscott
+
+	* xftree/xtree_gui.c: - using direct open on double click for
+	better error control.
+
+2002-02-11  edscott
+
+	* xftree/xtree_gui.c: - inserted a couple ampersands which should
+	not be removed. (while open-   by-shell is used).
+
+2002-02-11  edscott
+
+	* xftree/xtree_tar.c: - removed one unnecesary and useless
+	instruction.
+
+2002-02-11  edscott
+
+	* xftree/: gtk_exec.c, reg.h, xtree_cb.c, xtree_cb.h, xtree_gui.h,
+	xtree_tar.c: - enhancement for double click on interior tar files -
+	changed default viewer choice to dillo
+
+2002-02-11  edscott
+
+	* xftree/xtree_tar.c: - fixed a small bug on tar expansion display
+
+2002-02-11  edscott
+
+	* xftree/gtk_exec.c: - closed bug on GTK warning on open-with
+	command
+
+2002-02-11  edscott
+
+	* xfsamba/: ChangeLog, Makefile.am, gtk_dlg.c, gtk_dlg.h, uri.c,
+	uri.h, xfsamba.c, xfsamba.h, xfsamba_dnd.c, xfsamba_dnd.h,
+	xfsamba_gui.c, xfsamba_list.c, xfsamba_upload.c: - introduced dnd,
+	not activated. Bugs to remove before activation: * intermintent
+	Xlib crash on multiple upload, * cannot drop into non expanded
+	folders * cannot drop on non folders
+
+2002-02-10  edscott
+
+	* xftree/: gtk_exec.c, io.c, io.h, xtree.c, xtree_cb.c,
+	xtree_gui.c: - improved error control for "open with" "run" and
+	double-click on exe files.
+
+2002-02-10  edscott
+
+	* xftree/: TODO, gtk_exec.c: - Remember application back in open
+	with dialog. The memory problem   which caused a warning is gone
+	(was caused by the incorrect usage of	the variable "file")
+
+2002-02-10  edscott
+
+	* xfsamba/Makefile.am: [no log message]
+
+2002-02-10  edscott
+
+	* xfsamba/: xfsamba.c, xfsamba.h, xfsamba_gui.c: - undo changes
+	from premature commit
+
+2002-02-10  xfce
+
+	* po/xfce.pot, xfce_theme/xfce_theme_draw.c, xfwm/themes.c,
+	xfwm/themes.h: Cosmetics again
+
+2002-02-10  edscott
+
+	* xfsamba/: Makefile.am, Makefile.in, xfsamba.c, xfsamba.h,
+	xfsamba_gui.c: - initial dnd implementation changes for xfsamba.
+
+2002-02-10  edscott
+
+	* xftree/xtree_cpy.c: - typo fixed: is_blk instead of is_sock.
+
+2002-02-09  xfce
+
+	* xfce/xfce.c: Fix macro problem
+
+2002-02-09  edscott
+
+	* xfce.spec, xftree/gtk_exec.c, xftree/reg.c, xftree/xtree_cfg.h,
+	xftree/xtree_gui.c, xftree/xtree_mess.c, xftree/xtree_mess.h: - the
+	menu associated with directories now carries "register" and "open
+	with" - If a program is registered for a directory, the first menu
+	entry of that directory entry will be a command equivalent to "open
+	with registered app" - Registered directories that are deleted or
+	moved are automatically cleaned from registry on startup -
+	Registered applications that are not found on the system are
+	automatically cleaned from registry on startup - "open with" a non
+	existant application will now open a box telling you the
+	application is not found.  - upped to 3.8.15.7
+
+2002-02-09  xfce
+
+	* xfce/xfce.c, xfwm/themes.c: Cosmetic
+
+2002-02-09  xfce
+
+	* libs/lightdark.h, po/xfce.pot, xfce_theme/xfce_theme_draw.c,
+	xfwm/colors.c, xfwm/placement.c, xfwm/themes.c: Cosmetics
+
+2002-02-09  edscott
+
+	* xfce.spec: - upped xfce.spec version number cause of bad bug
+	fixed in xftree
+
+2002-02-09  edscott
+
+	* xftree/xtree_cpy.c: - On error that causes incomplete transfer,
+	source was being removed   instead of target :-(
+
+2002-02-09  xfce
+
+	* other/xfce3rc.cs.in, other/xfce3rc.de.in, other/xfce3rc.fr.in,
+	other/xfce3rc.hu.in, other/xfce3rc.in, other/xfce3rc.ja.in,
+	other/xfce3rc.ko.in, other/xfce3rc.nl.in, other/xfce3rc.sr.in,
+	other/xfce3rc.uk.in, other/xfce3rc.zh_CN.GB2312.in,
+	other/xfce3rc.zh_TW.Big5.in, palettes/Makefile.in, po/xfce.pot,
+	xfwm/xfwm.c: Change default xfwm engine to Linea
+
+2002-02-09  edscott
+
+	* xftree/xtree_cb.c: - fixed a freak sigsegv that could ocurr in
+	cbdelete
+
+2002-02-08  xfce
+
+	* libs/xfcolor.c, palettes/Default, palettes/DefaultTextured,
+	xfwm/xfwm.c: [no log message]
+
+2002-02-08  xfce
+
+	* palettes/: Makefile.am, Makefile.in: Forgot to put back some
+	files in Makefile
+
+2002-02-07  xfce
+
+	* libs/constant.h, libs/xfcolor.c, palettes/Default,
+	palettes/DefaultTextured, palettes/Makefile.in, po/xfce.pot,
+	xfwm/xfwm.c: Remove texture in default theme
+
+2002-02-07  xfce
+
+	* libs/constant.h: [no log message]
+
+2002-02-07  xfce
+
+	* xfwm/xfwm.c: Typo
+
+2002-02-07  xfce
+
+	* libs/constant.h, libs/xfcolor.c, xfwm/xfwm.c, palettes/KDE,
+	palettes/Makefile.am: Default colors
+
+2002-02-06  xfce
+
+	* xfwm/xfwm.c: Minor change in default config
+
+2002-02-06  edscott
+
+	* xftree/: entry.c, xtree_cpy.c, xtree_cpy.h, xtree_dnd.c,
+	xtree_gui.c, xtree_mess.c: -xtree_mess.c: fixed the "reach end of
+	non-void function" compiler warning.  -entry.c: fixed the
+	uninitialized date appearing in stale-link entries.  -xtree_cpy.c:
+	eliminated file count on TR_LINK.  -xtree_cpy.h: hex format for
+	TR-XXXX.  -xtree_dnd.c: use DirectTransfer for only selected
+	symlinks (faster).  -xtree_cpy.c: fixed bug with symlinks were
+	being followed for copy instead 	      of being copy "as
+	is".  -xtree_gui.c: fixed some bugs with pressing return on
+	selections
+
+2002-02-04  xfce
+
+	* xfce_theme/xfce_theme_draw.c: [no log message]
+
+2002-02-04  xfce
+
+	* xfce_theme/xfce_theme_draw.c, xfwm/themes.c: Change xfce theme to
+	something smoother
+
+2002-02-03  xfce
+
+	* configure, other/Makefile.in, other/xfwmrc.in, po/xfce.pot,
+	xfdiff/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfwm/xfwm.c: Change defaut bw to 4 instead of 5
+
+2002-02-02  xfce
+
+	* libs/xfcolor.c, palettes/Bingo, palettes/Cadmium,
+	palettes/Default, palettes/DefaultGrey, palettes/DefaultTextured,
+	palettes/Makefile.am, palettes/Makefile.in, xfwm/xfwm.c: Reorg
+	palettes and change default color scheme
+
+2002-02-02  edscott
+
+	* xftree/: entry.c, entry.h, xtree_cb.c, xtree_dnd.c,
+	xtree_functions.c, xtree_go.c, xtree_gui.c, xtree_mess.c,
+	xtree_mess.h, xtree_tar.c: - enable more than one root element in
+	the tree.
+
+2002-02-01  edscott
+
+	* xfdiff/TODO: - to do
+
+2002-02-01  edscott
+
+	* xftree/: xtree_cb.c, xtree_cpy.c, xtree_tar.c: - using mkstemp
+	now.  - bug with open same file within tarfile fixed - bug with
+	cb_find with rpmchild or dirup selected fixed.
+
+2002-02-01  xfce
+
+	* palettes/Bingo: [no log message]
+
+2002-02-01  veerh01
+
+	* icons/xfskin.xpm: [no log message]
+
+2002-02-01  xfce
+
+	* palettes/Bingo: [no log message]
+
+2002-02-01  veerh01
+
+	* xfskin/: ChangeLog, xfskin: Initial revision
+
+2002-02-01  veerh01
+
+	* xfskin/: ChangeLog, xfskin: initial import xfskin
+
+2002-02-01  veerh01
+
+	* AUTHORS: adjusted my e-mail adres
+
+2002-02-01  edscott
+
+	* xftree/: xtree_cb.c, xtree_cpy.c: - Tentative bug fix for the
+	solaris crash.
+
+2002-02-01  edscott
+
+	* xfce.spec: - moved version to 3.8.15.5 because of new functions
+	in xftree
+
+2002-02-01  edscott
+
+	* xftree/: README, TODO, gtk_exec.c, io.c, xtree.c, xtree_cpy.c,
+	xtree_cpy.h, xtree_functions.c, xtree_gui.c, xtree_mess.c,
+	xtree_mess.h, xtree_rpm.c, xtree_tar.c, xtree_tar.h: - added "open
+	with" function to contents of tar files.  - added cleanup tmp files
+	function, bound to exit signals.  - added double click function to
+	contents of tar files.	- minor bug fixes
+
+2002-02-01  edscott
+
+	* xfdiff/: Changelog, xfdiff.h: - follow symlinks
+
+2002-01-31  edscott
+
+	* xfdiff/xfdiff_misc.c: - follow symlinks when loading files.
+
+2002-01-31  edscott
+
+	* xftree/icons/Makefile.am: - added new icons to the makefile.am
+
+2002-01-31  edscott
+
+	* configure.in, xfce.spec: - adopting Guido's versioning idea for
+	easier rpm building and management.
+
+2002-01-31  edscott
+
+	* xftree/xtree_mess.c: - raise cat window on output.
+
+2002-01-31  edscott
+
+	* xftree/: README, entry.c, gtk_exec.c, xtree_cb.c,
+	xtree_functions.c, xtree_icons.c, xtree_rpm.c, xtree_tar.c: - bugs
+	fixed:	1- Spaces now allowed in directories containing tar, rpm,
+	and autotype files  2- FT_TAR and FT_RPM determined in entry.c,
+	this avoids small update bug.	3- After autotype function, call
+	update_timer   4- isleaf set for tar and rpm files in xtree_icon.c,
+	where it should be.   5- Remember option commented out of open
+	with. It is buggy. gtk_exec must      be carefully combed for
+	memory allocation errors similar to those      found in gtk_dlg.c
+
+2002-01-30  edscott
+
+	* xftree/: TODO, icons/closewin.xpm, icons/dir_ro.xpm,
+	icons/dir_ro_open.xpm, icons/new_win.xpm: - minor icon
+	enhancements.
+
+2002-01-30  xfce
+
+	* libs/xfcolor.c: [no log message]
+
+2002-01-30  edscott
+
+	* xftree/TODO: - Organize next TODO's
+
+2002-01-29  huysmans
+
+	* xfumed/xfumed.c: Removed to unnececary free() commands
+
+2002-01-29  xfce
+
+	* xfwm/: builtins.c, move.c, resize.c: [no log message]
+
+2002-01-29  edscott
+
+	* xftree/: entry.h, icons.h: - forgotten files uploaded
+
+2002-01-29  xfce
+
+	* libs/xfcolor.c, palettes/Default, palettes/DefaultTextured: [no
+	log message]
+
+2002-01-29  edscott
+
+	* xftree/icons/: error.xpm, info.xpm, question.xpm, warning.xpm: -
+	fix icon details
+
+2002-01-29  edscott
+
+	* xftree/icons/dir_pd.xpm: updated icon
+
+2002-01-29  edscott
+
+	* xftree/: entry.c, xtree_dnd.c, xtree_functions.c, xtree_icons.c,
+	xtree_rpm.c, xtree_tar.c: - icons for readonly folders and tar-rpm
+	errors.  - Some more code cleanups.
+
+2002-01-29  edscott
+
+	* xftree/icons/: dir_ro.xpm, dir_ro_open.xpm, link_flag.xpm,
+	pd.xpm: - icons for readonly folders and tar/deb/rpm error
+
+2002-01-29  edscott
+
+	* xftree/: entry.c, xtree_cpy.c, xtree_gui.c, xtree_icons.c,
+	xtree_rpm.c: - disactivated rpm expansion. found a bug but not
+	localized the source.  - avoid "permision denied" dialog con
+	copy/move - added install/update menu function for .deb files
+
+2002-01-28  edscott
+
+	* xftree/xtree_go.c: - cut final /.. in goto history paths
+
+2002-01-27  edscott
+
+	* configure, configure.in, xfce.spec: - 3.8.14e -> 3.8.14f
+
+2002-01-27  edscott
+
+	* xftree/: uri.c, xtree_gui.c, xtree_tar.c: - tar d+d compatible
+	with konqueror browser - update after tar extraction missing, fixed
+
+2002-01-27  edscott
+
+	* xftree/xtree_cpy.c: - correctly process destroy event in
+	"counting files" dialog.
+
+2002-01-26  edscott
+
+	* xftree/xtree_tar.c: - Do the Kb, Mb, Gb trick for contents of tar
+	files.
+
+2002-01-26  edscott
+
+	* configure, configure.in, xfce.spec: - up version to 3.8.14e
+
+2002-01-26  edscott
+
+	* xftree/: Makefile.am, entry.c, entry.h, gtk_prop.c, xtree_cb.c,
+	xtree_functions.c, xtree_gui.c, xtree_gui.h, xtree_icons.c,
+	xtree_mess.c, xtree_rpm.c, xtree_rpm.h, xtree_tar.c: - rpm
+	expansion enabled - rpm install/update menu function added -
+	autotype labels added - output control for autotype functions -
+	properties dialog has tabpage for rpm files (only if rpm on system)
+
+2002-01-26  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure,
+	backdrops/Makefile.in, cursors/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, fonts/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, palettes/Makefile.in,
+	po/xfce.pot, po/zh_CN.gmo, po/zh_CN.po, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in:
+	Update zh_CN
+
+2002-01-25  guidod
+
+	* configure, configure.in: teach configure to warn when xfce.spec
+	versioncode differs from the local XFCE_VERSION variable used as
+	VERSION later on - otherwise it would prevent a (make dist)
+	followed by a (rpm -ta) since the xfce.spec would try to grab a
+	different tarball than has been packed
+
+2002-01-25  guidod
+
+	* configure, configure.in: bump it from 3.8.14c to 3.8.14d
+
+2002-01-25  edscott
+
+	* xftree/gtk_dlg.c: - destroy event in dialogs cleaned up
+
+2002-01-25  edscott
+
+	* xftree/gtk_dlg.c: - slight correction
+
+2002-01-25  edscott
+
+	* xftree/gtk_dlg.c: - slight code cleanup
+
+2002-01-25  edscott
+
+	* xftree/: xtree_cb.c, xtree_cpy.c: - replacing free for g_free
+
+2002-01-25  edscott
+
+	* xftree/gtk_dlg.c: - destroy event not being processed - changed
+	free for g_free
+
+2002-01-25  xfce
+
+	* libs/constant.h, palettes/DefaultTextured, palettes/Makefile.am,
+	palettes/Makefile.in: Remove texture from default theme.
+
+2002-01-25  edscott
+
+	* xftree/xtree_tar.c: - small detail on gnu-tar/non-gnu-tar
+	expansion
+
+2002-01-25  xfce
+
+	* palettes/DefaultGrey: [no log message]
+
+2002-01-25  edscott
+
+	* xfce.spec, xftree/xtree_cpy.c, xftree/xtree_gui.c,
+	xftree/xtree_tar.c: - non gnu-tar generated tar files expansion
+	fixed (directories not showing) - sub-subsorting of directories
+	removed - corrected string on begin copy operation - upped to
+	xfce-3.8.14d
+
+2002-01-25  guidod
+
+	* configure, configure.in: teach it the new alpha-suffix of the
+	versioncode in xfce.spec
+
+2002-01-25  xfce
+
+	* palettes/Makefile.in: [no log message]
+
+2002-01-25  xfce
+
+	* palettes/Makefile.am: [no log message]
+
+2002-01-25  xfce
+
+	* palettes/DefaultGrey: Add new palette
+
+2002-01-24  edscott
+
+	* xftree/xtree_tar.c: - preliminary bug fix for expanding non gnu
+	generated tar files (not yet functional)
+
+2002-01-24  xfce
+
+	* palettes/CandyBox2: [no log message]
+
+2002-01-24  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, xfce.spec,
+	backdrops/Makefile.am, backdrops/Makefile.in,
+	backdrops/MiceBlue.jpg, cursors/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, fonts/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, palettes/Makefile.am,
+	palettes/Makefile.in, po/xfce.pot, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.in,
+	xfmouse/Makefile.in, xfpager/Makefile.in, xfrun/Makefile.in,
+	xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in:
+	Update zh_TW.Big5 Remove MiceBlue.jpg backdrop Remove strip from
+	spec file
+
+2002-01-23  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure,
+	backdrops/Makefile.in, cursors/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, fonts/Makefile.in, icons/Makefile.in,
+	libs/Makefile.in, other/Makefile.in, palettes/Makefile.in,
+	po/cs.gmo, po/cs.po, po/zh_TW.Big5.gmo, po/zh_TW.Big5.po,
+	scripts/Makefile.in, sounds/Makefile.in, textures/Makefile.in,
+	xfbd/Makefile.in, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfdiff/icons/Makefile.in,
+	xfglob/Makefile.in, xfglob/icons/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in: New
+	translation for zh_TW.Big5 by Babyfai Cheung
+	<babyfai_cheung@hotmail.com>, New Czech translation by Rudolf Ulc
+	<Rudolf.Ulc@oku-st.cz>
+
+2002-01-23  xfce
+
+	* Makefile.am, Makefile.in, aclocal.m4, config.h.in, configure,
+	configure.in, xfce.spec, backdrops/Makefile.in,
+	cursors/Makefile.in, docs/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, dt/Makefile.in, fonts/Makefile.in,
+	gdm/Makefile.in, icons/Makefile.in, libs/Makefile.in,
+	other/Makefile.in, palettes/Makefile.in, scripts/Makefile.in,
+	scripts/startxfce, scripts/xfce_setup, sounds/Makefile.in,
+	textures/Makefile.in, xfbd/Makefile.in, xfce/Makefile.am,
+	xfce/Makefile.in, xfce_theme/Makefile.in, xfclock/Makefile.in,
+	xfdiff/Makefile.in, xfdiff/icons/Makefile.in, xfglob/Makefile.in,
+	xfglob/icons/Makefile.in, xfgnome/Makefile.in, xfmenu/Makefile.am,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in: Fis
+	compilation problems with systems using glibc < 2.2 (typically
+	without iconv in the glibc)
+
+2002-01-22  xfce
+
+	* Makefile.am, Makefile.in, config.h.in, configure, configure.in,
+	xfce.spec, backdrops/Makefile.in, cursors/Makefile.in,
+	docs/Makefile.in, docs/html/Makefile.in,
+	docs/html/stylesheet-images/Makefile.in, docs/images/Makefile.in,
+	docs/sgml/Makefile.in, dt/Makefile.in, fonts/Makefile.in,
+	gdm/Makefile.in, icons/Makefile.in, libs/Makefile.in,
+	other/Makefile.in, palettes/Makefile.in, scripts/Makefile.in,
+	sounds/Makefile.in, textures/Makefile.in, xfbd/Makefile.in,
+	xfce/Makefile.am, xfce/Makefile.in, xfce_theme/Makefile.in,
+	xfclock/Makefile.in, xfdiff/Makefile.in, xfdiff/icons/Makefile.in,
+	xfglob/Makefile.in, xfglob/icons/Makefile.in, xfgnome/Makefile.in,
+	xfmenu/Makefile.in, xfmouse/Makefile.in, xfpager/Makefile.in,
+	xfrun/Makefile.in, xfsamba/Makefile.in, xfsamba/icons/Makefile.in,
+	xfsound/Makefile.in, xftree/Makefile.in, xftree/icons/Makefile.in,
+	xfumed/Makefile.in, xfumed/icons/Makefile.in, xfwm/Makefile.in,
+	xfwm/misc.c: Add support for libiconv
+
+2002-01-21  xfce
+
+	* ChangeLog, xfce-3.8.14.lsm, other/Makefile.in, po/ca.po,
+	po/cs.gmo, po/cs.po, po/da.gmo, po/da.po, po/de.gmo, po/de.po,
+	po/en_GB.po, po/es.gmo, po/es.po, po/et.gmo, po/et.po, po/fi.po,
+	po/fr.gmo, po/fr.po, po/gl.gmo, po/gl.po, po/hu.gmo, po/hu.po,
+	po/it.po, po/ja.po, po/nl.gmo, po/nl.po, po/pl.po, po/pt_BR.gmo,
+	po/pt_BR.po, po/ro.gmo, po/ro.po, po/ru.po, po/sk.po, po/sr.gmo,
+	po/sr.po, po/sv.po, po/uk.gmo, po/uk.po, po/xfce.pot, po/zh.po,
+	po/zh_CN.po, po/zh_TW.Big5.gmo, po/zh_TW.Big5.po: Updates
+
 2002-01-21  xfce
 
 	* libs/xfcolor.c: gtkrc generation

@@ -2,16 +2,11 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Harun Musa <mharun@gmx.net>, 2002.
 # 
-#: xfsamba/xfsamba_gui.c:1322 xfsamba/xfsamba_gui.c:1327
-#: xfsamba/xfsamba_gui.c:1333 xfsamba/xfsamba_gui.c:1338
-#: xfsamba/xfsamba_gui.c:1343 xftree/xtree_toolbar.c:93
-#: xftree/xtree_toolbar.c:99 xftree/xtree_toolbar.c:104
-#: xftree/xtree_toolbar.c:108 xftree/xtree_toolbar.c:112
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE 3.8.14c\n"
 "POT-Creation-Date: 2002-03-29 12:35+0100\n"
-"PO-Revision-Date: 2002-04-05 09:14+0800\n"
+"PO-Revision-Date: 2002-04-12 23:34+0800\n"
 "Last-Translator: Harun Musa <mharun@gmx.net>\n"
 "Language-Team: Malay/Bahasa Melayu\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +52,7 @@ msgstr "Soalan"
 
 #: libs/xfce-common.c:632
 msgid "Terminated: "
-msgstr "Ditamatkan"
+msgstr "Ditamatkan: "
 
 #: libs/xpmext.c:377 libs/xpmext.c:404
 #, c-format
@@ -122,7 +117,7 @@ msgid ""
 "Aborting"
 msgstr ""
 "Ralat syntax dalam fail konfigurasi\n"
-"Tinggalkan"
+"Gugurkan"
 
 #: xfce/configfile.c:69
 #, c-format
@@ -139,7 +134,7 @@ msgid ""
 "Aborting"
 msgstr ""
 "XFce : Ralat data tidak sepadan dalam fail konfigurasi\n"
-"Tinggalkan"
+"Gugurkan"
 
 #: xfce/configfile.c:229 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
@@ -147,7 +142,7 @@ msgstr "Tidak boleh cipta fail"
 
 #: xfce/configfile.c:380
 msgid "Cannot reset configuration file"
-msgstr "Tidak boleh set semula fail konfigurasi"
+msgstr "Tidak boleh setsemula fail konfigurasi"
 
 #: xfce/configfile.c:383
 msgid "Creating new config file...\n"
@@ -461,7 +456,7 @@ msgstr "Klik untuk fokus tetingkap"
 
 #: xfce/setup.c:776
 msgid "Automatically focus on new window"
-msgstr "Secara automatik fokus kepada tetingkap baru"
+msgstr "Secara automatik fokus pada tetingkap baru"
 
 #: xfce/setup.c:783
 msgid "Auto raise windows"
@@ -548,9 +543,8 @@ msgid "KDE menu (xfmenu)"
 msgstr "Menu KDE (xfmenu)"
 
 #: xfce/setup.c:1126
-#, fuzzy
 msgid "Debian menu (xfmenu)"
-msgstr "Menu KDE (xfmenu)"
+msgstr "Menu Debian (xfmenu)"
 
 #: xfce/setup.c:1138
 msgid "Palette"
@@ -808,7 +802,7 @@ msgstr "_Tidak"
 
 #: xftree/gtk_dlg.c:366 xftree/gtk_prop.c:229
 msgid "Skip"
-msgstr "Langkah"
+msgstr "Langkau"
 
 #. SJB all = gtk_button_new_with_label (_("All"));
 #: xftree/gtk_dlg.c:376
@@ -854,7 +848,7 @@ msgstr " bait diterima"
 
 #: xftree/gtk_prop.c:205 xftree/xtree_toolbar.c:111
 msgid "Properties"
-msgstr "Ciri-ciri"
+msgstr "Perbendaharaan"
 
 #: xftree/gtk_prop.c:230
 msgid "All"
@@ -895,7 +889,7 @@ msgstr "Kebenaran"
 
 #: xfglob/xfglob.c:1616 xftree/gtk_prop.c:321 xftree/gtk_prop.c:418
 msgid "Owner :"
-msgstr "Pemilik"
+msgstr "Pemilik :"
 
 #: xfglob/xfglob.c:1617 xfglob/xfglob.c:1641 xfglob/xfglob.c:1664
 #: xftree/gtk_prop.c:322 xftree/gtk_prop.c:346 xftree/gtk_prop.c:369
@@ -1001,14 +995,12 @@ msgid "No files marked !"
 msgstr "Tiada fail ditanda !"
 
 #: xftree/xtree_cb.c:475 xftree/xtree_cb.c:477
-#, fuzzy
 msgid "Delete item ?"
-msgstr "Padam ..."
+msgstr "Padam item ?"
 
 #: xftree/xtree_cb.c:487 xftree/xtree_cb.c:491
-#, fuzzy
 msgid "Can't move file to trash, hard delete ?"
-msgstr "Padam item ?Tidak buleh pindah fail ke sampah, padam sebenar ?"
+msgstr "Tidak boleh pindah fail ke sampah, padam sebenar ?"
 
 #: xftree/xtree_cb.c:573
 msgid "This is XFTree "
@@ -1074,7 +1066,7 @@ msgstr "Terlalu sedikit bait dipindahkan ! Peranti penuh ?"
 
 #: xftree/xtree_cpy.c:253
 msgid "Too many bytes transferred !?"
-msgstr "Terlau banyak bait dipindahkan !?"
+msgstr "Terlalu banyak bait dipindahkan !?"
 
 #: xftree/xtree_cpy.c:257 xftree/xtree_cpy.c:261
 msgid "Can't stat() file"
@@ -1167,7 +1159,7 @@ msgstr "fail-fail"
 
 #: xftree/xtree_functions.c:581
 msgid "internal malloc error:"
-msgstr "ralat malloc dalaman"
+msgstr "ralat malloc dalaman:"
 
 #: xftree/xtree_go.c:171
 msgid "Cannot find path"
@@ -1289,7 +1281,7 @@ msgstr "Namasemula ..."
 
 #: xftree/xtree_gui.c:193
 msgid "Properties ..."
-msgstr "Ciri-ciri ..."
+msgstr "Perbendaharaan ..."
 
 #: xftree/xtree_gui.c:197 xftree/xtree_gui.c:209 xftree/xtree_toolbar.c:96
 msgid "Go to ..."
@@ -1456,7 +1448,7 @@ msgstr "Guna rsync selain dari scp"
 
 #: xfsamba/xfsamba_gui.c:1301 xftree/xtree_gui.c:941
 msgid "Set background color"
-msgstr "Tetapkan warna latarbelakang"
+msgstr "Set warna latarbelakang"
 
 #: xfsamba/xfsamba_gui.c:1302 xftree/xtree_gui.c:946
 msgid "Set font"
@@ -1573,11 +1565,11 @@ msgstr ""
 #: xftree/xtree_mess.c:798
 msgid ""
 "The Xftree icon view is the ROX-filer. At the moment this has to be "
-"installed\n"
-"separately from XFCE. A ROX-filer specific for XFCE will soon be available."
+"installed\nseparately from XFCE. A ROX-filer specific for XFCE will soon be "
+"available."
 msgstr ""
-"Pelihat ikon Xftree adalah ROX-filer. Pada masa ini ianya dipasang\n"
-"berasingan dari XFCE. ROX-filer spesefik untuk XFCE akan didapati pada masa "
+"Pelihat ikon Xftree adalah ROX-filer. Pada masa ini ianya dipasang "
+"berasingan\ndari XFCE. ROX-filer spesifik untuk XFCE akan didapati pada masa "
 "akan datang."
 
 #: xftree/xtree_mess.c:807
@@ -1598,6 +1590,9 @@ msgstr ""
 "Authentikasi pengguna dilakukan oleh ssh.\n"
 "Lihat \"man ssh\" jika anda mahu berasaskan host\n"
 "selain dari authentikasi berasaskan katalaluan.\n"
+"\n"
+"Xftree juga menerima jatuhan dari pengurusfail\n"
+"lain yang dilarikan pada host yang berbeza.\n"
 
 #: xftree/xtree_mess.c:823
 msgid ""
@@ -1672,11 +1667,11 @@ msgstr "tar: ralat perlaksanaan"
 #. only 32 elements allowed in TOOLBARICONS
 #: xftree/xtree_toolbar.c:88
 msgid "New icon view"
-msgstr "Pelihat ikon baru"
+msgstr "Lihat ikon baru"
 
 #: xftree/xtree_toolbar.c:89
 msgid "New tree view"
-msgstr "Pelihat pokok baru"
+msgstr "Lihat pokok baru"
 
 #: xftree/xtree_toolbar.c:90
 msgid "New terminal"
@@ -1753,7 +1748,7 @@ msgstr "Tidak boleh buka"
 
 #: xftree/xtree_smb.c:263
 msgid "DnD error"
-msgstr "ralat DnD"
+msgstr "Ralat DnD"
 
 #: xftree/xtree_smb.c:263
 msgid "Incorrect DnD specification"
@@ -1935,7 +1930,7 @@ msgid ""
 "Diff will be working"
 msgstr ""
 "XFdiff sekarang akan mulakan diff.\n"
-"Sila bersabar (xfdiff mungkin terhantung)\n"
+"Sila bersabar (xfdiff mungkin tergantung)\n"
 "Diff akan bekerja"
 
 #: xfdiff/xfdiff_gui.c:228
@@ -2304,12 +2299,10 @@ msgid "Results limit reached"
 msgstr "Had keputusan dicapai"
 
 #: xfglob/xfglob.c:469
-#, fuzzy
 msgid "Cancelled"
-msgstr "Batal"
+msgstr "Dibatalkan"
 
 #: xfglob/xfglob.c:470
-#, fuzzy
 msgid "Search canceled!\n"
 msgstr "Pencarian dibatalkan!\n"
 
@@ -2319,7 +2312,7 @@ msgstr "Larian Glob mesti tamat atau dibatalkan terlebih dahulu."
 
 #: xfglob/xfglob.c:508
 msgid "Find results.\n"
-msgstr "Cari keputusan.\n"
+msgstr "Keputusan pencarian.\n"
 
 #: xfglob/xfglob.c:588 xfglob/xfglob.c:680
 msgid "Find results..."
@@ -2689,7 +2682,7 @@ msgstr "Diubahsuai"
 
 #: xfglob/xfglob.c:1819
 msgid "Changed"
-msgstr "Perubahan"
+msgstr "Diubahkan"
 
 #: xfglob/xfglob.c:1820
 msgid "Accessed"
@@ -2922,11 +2915,11 @@ msgstr "Pengunaan : %s [OPSYEN]\n"
 
 #: xfbd/xfbd.c:696 xfmouse/xfmouse.c:442
 msgid "   Where OPTIONS are :\n"
-msgstr "  Dimana OPSYEN adalah :\n"
+msgstr "   Dimana OPSYEN adalah :\n"
 
 #: xfmouse/xfmouse.c:443
 msgid "   -i : interactive\n"
-msgstr "  -i : interaktif\n"
+msgstr "   -i : interaktif\n"
 
 #: xfmouse/xfmouse.c:444
 msgid ""
@@ -2991,7 +2984,7 @@ msgstr "Nyah-Bebayang"
 
 #: xfsound/xfsound.c:86
 msgid "Maximize"
-msgstr "Maksima"
+msgstr "Maksimakan"
 
 #: xfsound/xfsound.c:87
 msgid "De-maximize"
@@ -3368,7 +3361,7 @@ msgstr "Satu direktori mesti dipilih!"
 
 #: xfsamba/xfsamba_gui.c:683 xfsamba/xfsamba_gui.c:706
 msgid "Something to be deleted must be selected!"
-msgstr "Mesti pilih dahulu sebelum memadam sesuatu"
+msgstr "Mesti pilih dahulu sebelum memadam sesuatu!"
 
 #: xfsamba/xfsamba_gui.c:694
 msgid "Only elements from a single share may be selected!"
@@ -3616,12 +3609,12 @@ msgstr "Senarai gagal."
 
 #: xfsamba/xfsamba_list.c:300
 msgid "Retreiving..."
-msgstr "Pengambilan.."
+msgstr "Pengambilan..."
 
 #: xfsamba/xfsamba_masterresolve.c:217 xfsamba/xfsamba_masterresolve.c:218
 #: xfsamba/xfsamba_nmblookup.c:51 xfsamba/xfsamba_nmblookup.c:52
 msgid "Resolved"
-msgstr "Diselesai"
+msgstr "Diselesaikan"
 
 #: xfsamba/xfsamba_nmblookup.c:105 xfsamba/xfsamba_nmblookup.c:106
 msgid "Resolving for"
@@ -3683,19 +3676,14 @@ msgstr "Tiada respon status"
 #: xfsamba/xfsamba_masterresolve.c:246
 msgid "Master browser not resolved. Use location box to browse."
 msgstr ""
-"Pelungsur Tuan tak dapat diselesaikan. Guna kotak lokasi untuk lungsurNo "
-"master browser resolved.\n"
-"Please type a computer name at location and hit RETURNTiada pelungsur Tuan "
-"diselesaikan.\n"
-"Sila taip nama komputer di lokasi dan tekan RETURN"
+"Pelungsur Tuan tak dapat diselesaikan. Guna kotak lokasi untuk lungsur."
 
 #: xfsamba/xfsamba_masterresolve.c:247
-#, fuzzy
 msgid ""
 "No master browser resolved.\n"
 "Please type a computer name at location and hit RETURN"
 msgstr ""
-"Tiada pelungsur Tuan dijumpai.\n"
+"Tiada pelungsur Tuan diselesaikan.\n"
 "Sila taip nama komputer di lokasi dan tekan RETURN"
 
 #: xfsamba/xfsamba_masterresolve.c:301 xfsamba/xfsamba_masterresolve.c:302
@@ -3913,13 +3901,7 @@ msgstr "Arahan: "
 
 #: xfumed/xfumed_gui_cb.c:24
 msgid "Your changes will take effect on next startup"
-msgstr ""
-"Perubahan yang anda lakukan akan berkesan pada pemula berikutnyaThere are "
-"unsaved changes to the menu.\n"
-"\n"
-"Do you want to save the changes ?Ada perubahan tak simpan pada menu.\n"
-"\n"
-"Adakah anda mahu simpan perubahan ?"
+msgstr "Perubahan akan berkesan pada pemula berikutnya"
 
 #: xfumed/xfumed_gui_cb.c:70
 msgid ""
@@ -3927,6 +3909,9 @@ msgid ""
 "\n"
 "Do you want to save the changes ?"
 msgstr ""
+"Ada perubahan pada menu yang tidak disimpan.\n"
+"\n"
+"Adakah anda mahu simpan perubahan ini ?"
 
 #: xfumed/xfumed_gui_cb.c:77
 msgid "Don't Quit"
