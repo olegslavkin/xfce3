@@ -2679,10 +2679,14 @@ SetInnerBorder_gtk (XfwmWindow * t, Bool onoroff)
   if (t->bw)
   {
     valuemask = CWBorderPixel;
-    attributes.border_pixel = BlackPixel (dpy, Scr.screen);
+    if (onoroff)
+      attributes.border_pixel = GetDecor (t, HiColors.back);
+    else
+      attributes.border_pixel = GetDecor (t, LoColors.back);
     XChangeWindowAttributes (dpy, t->Parent, valuemask, &attributes);
   }
 }
+
 
 void
 DrawButton_gtk (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
