@@ -460,6 +460,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
    else if (www_type(loc)) {PIXid[0]=PIX_PAGE_HTML,PIXid[1]=PIM_PAGE_HTML;}
    else if (audio_type(loc))PIXid[0]= PIX_PAGE_AUDIO;
    else if (movie_type(loc))PIXid[0]= PIX_PAGE_AUDIO;
+   else if (strcmp(loc,".obj")==0) PIXid[0]=PIX_PAGE_O;
    else if (strcmp(loc,".po")==0) PIXid[0]=PIX_PO;
    else if (strcmp(loc,".tar")==0){PIXid[0]=PIX_TAR;PIXid[2]=PIX_TAR;PIXid[3]=PIM_PAGE;}
    else if (strlen(loc)==2) switch (loc[1]){
