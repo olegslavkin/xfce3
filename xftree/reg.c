@@ -82,7 +82,7 @@ reg_build_list (char *file)
   }
   buf_end = buf + BUFSIZE - 1;
   line = 0;
-  while (fgets (buf, 1024, fp) != NULL)
+  while (fgets (buf, BUFSIZE, fp) != NULL)
   {
     line++;
     p = buf;
@@ -323,36 +323,19 @@ reg_prog_by_file (GList * g_reg, char *file)
 
 /*
  */
-int
-mymy_strcasecmp (char *s1, char *s2)
-{
-  if ((s1 == NULL) || (s2 == NULL))
-  {
-    if (s1 == s2)
-      return 0;
-    if (s1 > s2)
-      return 1;
-    else
-      return -1;
-  }
-  return (my_strcasecmp (s1, s2));
-}
-
-/*
- */
 GList *
 reg_add_suffix (GList * g_reg, char *sfx, char *program, char *args)
 {
   reg *prg = NULL;
   GList *g_tmp = g_reg;
   int found = 0;
-  /* is suffix still registered?
+  /* is suffix already registered?
    * check it out ..
    */
   while (g_tmp)
   {
     prg = g_tmp->data;
-    if ((my_strcasecmp (prg->sfx, sfx) == 0) && (mymy_strcasecmp (prg->arg, args) == 0))
+    if ((!my_strcasecmp (prg->sfx, sfx)) && (!my_strcasecmp (prg->arg, args)))
     {
       found = 1;
       break;

@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdarg.h>
 #include <utime.h>
 #include <stdlib.h>
 #include <time.h>
@@ -89,6 +90,10 @@
 
 #ifdef HAVE_GDK_IMLIB
 #include <gdk_imlib.h>
+#endif
+
+#ifndef HAVE_SNPRINTF
+#  include "snprintf.h"
 #endif
 
 #ifdef DMALLOC
@@ -2246,7 +2251,7 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   {
     if (prog->arg)
     {
-      sprintf (path, "%s %s", prog->app, prog->arg);
+      snprintf (path, PATH_MAX, "%s %s", prog->app, prog->arg);
     }
     else
     {

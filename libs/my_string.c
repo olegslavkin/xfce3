@@ -91,7 +91,9 @@ my_strncmp (char *a, char *b, int n)
 
   p1 = a;
   p2 = b;
-  if (!p1 || !p2)
+  if (!p1 && !p2)
+    return (0);
+  else if (!p1 || !p2)
     return (1);
   for (;;)
   {
@@ -112,20 +114,22 @@ my_strncmp (char *a, char *b, int n)
 char
 my_strcmp (char *a, char *b)
 {
-  int x, y, min;
+  int x, y, max;
 
-  if (!a || !b)
+  if (!a && !b)
+    return (0);
+  else if (!a || !b)
     return (1);
   x = strlen (a);
   y = strlen (b);
-  min = ((x < y) ? x : y);
-  return (my_strncmp (a, b, min));
+  max = ((x > y) ? x : y);
+  return (my_strncmp (a, b, max));
 }
 
 char
 my_casecmp (char a, char b)
 {
-  return (((a == b) || (a == toupper (b)) || (toupper (a) == b)));
+  return ((a == b) || ((a) && (b) && ((a == toupper (b)) || (toupper (a) == b))));
 }
 
 char
@@ -135,7 +139,9 @@ my_strncasecmp (char *a, char *b, int n)
 
   p1 = a;
   p2 = b;
-  if (!p1 || !p2)
+  if (!p1 && !p2)
+    return (0);
+  else if (!p1 || !p2)
     return (1);
   for (;;)
   {
@@ -156,14 +162,16 @@ my_strncasecmp (char *a, char *b, int n)
 char
 my_strcasecmp (char *a, char *b)
 {
-  int x, y, min;
+  int x, y, max;
 
-  if (!a || !b)
+  if (!a && !b)
+    return (0);
+  else if (!a || !b)
     return (1);
   x = strlen (a);
   y = strlen (b);
-  min = ((x < y) ? x : y);
-  return (my_strncasecmp (a, b, min));
+  max = ((x > y) ? x : y);
+  return (my_strncasecmp (a, b, max));
 }
 
 char *

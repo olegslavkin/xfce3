@@ -167,7 +167,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   {
     return dlg_continue (_("Can't stat() file"), sen->path);
   }
-
+#if 0
   /* If src and dest aren't on the same device, ask user */
   if (s_stat.st_dev != t_stat.st_dev)
   {
@@ -178,7 +178,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
       return (TRUE);
     }
   }
-
+#endif
   if (mode & TR_MOVE)
   {
     /* first check if the files are on the
@@ -278,7 +278,7 @@ trans_file (entry * sen, entry * ten, int mode, GtkWidget ** info, state * st)
   fclose (ofp);
   if (all < sen->size)
   {
-    dlg_error (_("Too free bytes transferred ! Device full ?"), target);
+    dlg_error (_("Too few bytes transferred ! Device full ?"), target);
   }
   else if (all > sen->size)
   {

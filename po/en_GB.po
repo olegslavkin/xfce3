@@ -832,7 +832,7 @@ msgstr "Can't copy socket"
 
 #: xftree/gtk_cpy.c:283
 #, fuzzy
-msgid "Too free bytes transferred ! Device full ?"
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "Too few bytes transferred: Device full ?"
 
 #: xftree/gtk_cpy.c:287

@@ -271,6 +271,15 @@ Bool moveLoop (XfwmWindow * tmp_win, int XOffset, int YOffset, int Width, int He
       }
       done = TRUE;
       break;
+    case UnmapNotify:
+      if (Event.xunmap.window == tmp_win->w)
+      {
+	finished = TRUE;
+	done = TRUE;
+	window_deleted = True;
+      }
+      DispatchEvent ();
+      break;
     case DestroyNotify:
       if ((Event.xdestroywindow.window == tmp_win->frame) || (Event.xdestroywindow.window == tmp_win->w))
       {
@@ -434,6 +443,8 @@ Bool InteractiveMove (Window * win, XfwmWindow * tmp_win, int *FinalX, int *Fina
     XNextEvent (dpy, &Event);
     if ((Event.type == ConfigureRequest) && (Event.xconfigurerequest.window == tmp_win->w))
       Event.xconfigurerequest.value_mask &= ~(CWX | CWY | CWWidth | CWHeight | CWBorderWidth);
+    else if ((Event.type == UnmapNotify) && (Event.xunmap.window == tmp_win->w))
+      window_deleted = True;
     else if ((Event.type == DestroyNotify) && (Event.xdestroywindow.window == tmp_win->frame))
       window_deleted = True;
     DispatchEvent ();

@@ -819,7 +819,7 @@ msgid "Can't copy socket"
 msgstr "Impossible de copier SOCKET"
 
 #: xftree/gtk_cpy.c:283
-msgid "Too free bytes transferred ! Device full ?"
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "Trop peu de données transférées: Périphérique plein ?"
 
 #: xftree/gtk_cpy.c:287

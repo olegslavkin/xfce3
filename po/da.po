@@ -829,7 +829,7 @@ msgstr "Kan ikke kopiere SOCKET"
 
 #: xftree/gtk_cpy.c:283
 #, fuzzy
-msgid "Too free bytes transferred ! Device full ?"
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "For få byte overført ! Enhed fuld ?"
 
 #: xftree/gtk_cpy.c:287

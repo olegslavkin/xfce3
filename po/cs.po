@@ -824,7 +824,7 @@ msgid "Can't copy socket"
 msgstr "Nemohu kopírovat socket"
 
 #: xftree/gtk_cpy.c:283
-msgid "Too free bytes transferred ! Device full ?"
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "Velmi málo pøenesených bajtù ! Zaøízení je asi plné ?"
 
 #: xftree/gtk_cpy.c:287

@@ -833,7 +833,7 @@ msgstr "Nemo¾no kopírova» SOCKET"
 
 #: xftree/gtk_cpy.c:283
 #, fuzzy
-msgid "Too free bytes transferred ! Device full ?"
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "Primálo bajtov bolo prenesených ! Nie je zariadenie plné ?"
 
 #: xftree/gtk_cpy.c:287

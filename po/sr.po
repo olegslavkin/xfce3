@@ -823,7 +823,7 @@ msgid "Can't copy socket"
 msgstr "Ne mo¾ete kopirati socket"
 
 #: xftree/gtk_cpy.c:283
-msgid "Too free bytes transferred ! Device full ?"
+msgid "Too few bytes transferred ! Device full ?"
 msgstr "Premalo podataka preneto ! Ureðaj pun ?"
 
 #: xftree/gtk_cpy.c:287
