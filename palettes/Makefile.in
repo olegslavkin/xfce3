@@ -279,7 +279,8 @@ palettes_DATA = \
  Win3 \
  XLight \
  Xfce-1 \
- Xfce-2
+ Xfce-2 \
+ Xfce-light
 
 subdir = palettes
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

@@ -133,4 +133,5 @@ palettes_DATA=\
  Win3 \
  XLight \
  Xfce-1 \
- Xfce-2
+ Xfce-2 \
+ Xfce-light
