@@ -61,6 +61,7 @@ backdrops_DATA = \
  Marbled.xpm \
  Master-Plan.jpg \
  Maze.xpm \
+ Metal-blue.jpg \
  Notes.xpm \
  Nebula.xpm \
  Overdriven.jpg \
