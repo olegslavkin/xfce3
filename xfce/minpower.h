@@ -5,7 +5,7 @@ static char *minpower[] = {
 /* colors */
   ". c none",
   "# c #595959",
-  "a c #ff0000",
+  "a c #183c59",
   "b c #fff7f7",
 /* pixels */
   ".....###b.....",

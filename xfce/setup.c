@@ -279,8 +279,8 @@ create_setup (XFCE_palette * pal)
   gtk_object_set_data (GTK_OBJECT (setup), "setup", setup);
   gtk_window_set_title (GTK_WINDOW (setup), _("Setup"));
   gtk_window_position (GTK_WINDOW (setup), GTK_WIN_POS_CENTER);
-  gtk_widget_set_usize (setup, -2, 400);
-  gtk_window_set_policy (GTK_WINDOW (setup), FALSE, TRUE, FALSE);
+  gtk_widget_set_usize (setup, -2, 380);
+  gtk_window_set_policy (GTK_WINDOW (setup), TRUE, TRUE, FALSE);
   gtk_widget_realize (setup);
   /*
      gnome_layer (setup->window, MAX_LAYERS);
@@ -1199,7 +1199,9 @@ show_setup (XFCE_palette * pal)
   hide_current_popup_menu ();
   copyvaluepal (temp_pal, pal);
   apply_pal_colortable (temp_pal);
+/*
   gtk_window_set_modal (GTK_WINDOW (setup), TRUE);
+ */
   prev_panel_icon_size = current_config.select_icon_size;
   prev_popup_icon_size = current_config.popup_icon_size;
   prev_visible_screen = current_config.visible_screen;
@@ -1298,11 +1300,13 @@ show_setup (XFCE_palette * pal)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (setup_options.setup_kdemenumodule_checkbutton), (current_config.startup_flags & F_KDEMENUMODULE));
   gnome_sticky (setup->window);
   gtk_widget_show (setup);
+/*
   gtk_main ();
   while (repaint_in_progress ());
   my_flush_events ();
   gtk_widget_hide (setup);
   gdk_window_withdraw ((GTK_WIDGET (setup))->window);
+ */
 }
 
 void

@@ -113,7 +113,11 @@ setup_ok_cb (GtkWidget * widget, gpointer data)
   }
   writeconfig ();
   cursor_reset (setup);
+/*
   gtk_main_quit ();
+ */
+  gtk_widget_hide (setup);
+  gdk_window_withdraw ((GTK_WIDGET (setup))->window);
 }
 
 void
@@ -182,7 +186,11 @@ setup_apply_cb (GtkWidget * widget, gpointer data)
 void
 setup_cancel_cb (GtkWidget * widget, gpointer data)
 {
+/*
   gtk_main_quit ();
+ */
+  gtk_widget_hide (setup);
+  gdk_window_withdraw ((GTK_WIDGET (setup))->window);
 }
 
 gboolean
