@@ -51,6 +51,7 @@ palettes_DATA=\
  GreySlate \
  GreenIron \
  Ground \
+ GtkXfce \
  Helice \
  HiTech \
  HiTech2 \
