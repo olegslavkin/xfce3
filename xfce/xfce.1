@@ -93,8 +93,12 @@ Term vi
 .fi
 .PP
 .SH ENVIRONMENT VARIABLE
-By default, xfce looks for its data in the directory specified at compile time.
-This directory can be overridden with the environment variable xfce_DATA.
+XFCE_DATA: By default, xfce looks for its data in the directory specified at compile time.
+This directory can be overridden with the environment variable XFCE_DATA.
+.PP
+DISABLE_XFCE_USER_CONFIG: When set to 1 or yes, xfce won't allow any user specific
+configuration, it will not even read user's configuration. This is for people
+using xfce on "set top boxes" or for making a terminal publicly available.
 .PP
 .SH FILES
 .PP

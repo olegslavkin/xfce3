@@ -415,31 +415,55 @@ resetconfig (void)
   }
 }
 
-static void
-localize_rcfilename (char *rcfile)
+static char *
+localize_rcfilename (gboolean disable_user_config)
 {
-  char charset_code[MAXSTRLEN + 1];
-  char area_code[MAXSTRLEN + 1];
-  char country_code[MAXSTRLEN + 1];
-  char temp[MAXSTRLEN + 1];
+  char *charset_code;
+  char *area_code;
+  char *country_code;
+  char *temp;
+  char *homedir;
+  char *rcfile_default;
   int bottom_ptr = 0;
+  int len;
 
-  if (strcmp (rcfile, "") == 0)
-    return;
-  if (!getenv ("LANG"))
-    return;
-  if (strcmp (getenv ("LANG"), "") == 0)
-    return;
-  strncpy (charset_code, getenv ("LANG"), MAXSTRLEN);
+  if (!disable_user_config)
+  {
+    if (!(homedir = (char *) getenv ("HOME")))
+    {
+      fprintf (stderr, "Can't fetch $HOME. Aborting\n");
+      exit (-1);
+    }
+
+    len = strlen (homedir) + strlen(rcfile) + 8;  
+    temp = g_malloc ((len + 1) * sizeof (char));
+    snprintf (temp, len, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
+    if (existfile (temp))
+    {
+      return (temp);
+    }
+    g_free (temp);
+  }
+  
+  len = strlen (XFCE_CONFDIR) + strlen(rcfile) + 2;  
+  rcfile_default = g_malloc ((len + 1) * sizeof (char));
+  snprintf (rcfile_default, len, "%s/%s", XFCE_CONFDIR, rcfile);
+  if ((strcmp (rcfile_default, "") == 0) || !(charset_code = getenv ("LANG")) || (strcmp (charset_code, "") == 0))
+  {
+    return (rcfile_default);
+  }
   bottom_ptr = strlen (charset_code) - 1;
 
   /* Try Charset Code */
-  snprintf (temp, MAXSTRLEN, "%s.%s", rcfile, charset_code);
+  len = strlen (rcfile_default) + strlen (charset_code) + 2;
+  temp = g_malloc ((len + 1) * sizeof (char));
+  snprintf (temp, len, "%s.%s", rcfile_default, charset_code);
   if (existfile (temp))
   {
-    strcpy (rcfile, temp);
-    return;
+    g_free (rcfile_default);
+    return (temp);
   }
+  g_free (temp);
 
   /* Try Area Code */
   while (charset_code[bottom_ptr] != '.')
@@ -451,14 +475,19 @@ localize_rcfilename (char *rcfile)
     }
     bottom_ptr--;
   }
+  area_code = g_malloc ((bottom_ptr + 1) * sizeof (char));
   strncpy (area_code, charset_code, bottom_ptr);
   area_code[bottom_ptr] = '\0';
-  snprintf (temp, MAXSTRLEN, "%s.%s", rcfile, charset_code);
+  len = strlen (rcfile_default) + strlen (area_code) + 2;
+  temp = g_malloc ((len + 1) * sizeof (char));
+  snprintf (temp, len, "%s.%s", rcfile_default, area_code);
+  g_free (area_code);
   if (existfile (temp))
   {
-    strcpy (rcfile, temp);
-    return;
+    g_free (rcfile_default);
+    return (temp);
   }
+  g_free (temp);
 
   /* Try Country Code */
   while (charset_code[bottom_ptr] != '_')
@@ -470,58 +499,48 @@ localize_rcfilename (char *rcfile)
     }
     bottom_ptr--;
   }
+  country_code = g_malloc ((bottom_ptr + 1) * sizeof (char));
   strncpy (country_code, charset_code, bottom_ptr);
-  area_code[bottom_ptr] = '\0';
-  snprintf (temp, MAXSTRLEN, "%s.%s", rcfile, country_code);
+  country_code[bottom_ptr] = '\0';
+  len = strlen (rcfile_default) + strlen (country_code) + 2;
+  temp = g_malloc ((len + 1) * sizeof (char));
+  snprintf (temp, len, "%s.%s", rcfile_default, country_code);
+  g_free (country_code);
   if (existfile (temp))
   {
-    strcpy (rcfile, temp);
-    return;
+    g_free (rcfile_default);
+    return (temp);
   }
+  g_free (temp);
+  return (rcfile_default);
 }
 
 void
 readconfig (void)
 {
-  char homedir[MAXSTRLEN + 1];
   char lineread[MAXSTRLEN + 1];
-  char pixfile[MAXSTRLEN + 1];
-  char command[MAXSTRLEN + 1];
-  char label[256];
   char dummy[16];
+  char *filename;
+  char *pixfile;
+  char *command;
+  char *label;
   char *p;
   int i, j;
   FILE *configfile = NULL;
 
   nl = 0;
-  snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
-  if (!(current_config.disable_user_config) && (existfile (homedir)))
-  {
-    configfile = fopen (homedir, "r");
-  }
-  else
-  {
-    snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rcfile);
-    localize_rcfilename (homedir);
-    if (existfile (homedir))
-    {
-      configfile = fopen (homedir, "r");
-    }
-    else
-    {
-      snprintf (homedir, MAXSTRLEN, "%s/%s", XFCE_CONFDIR, rcfile);
-      configfile = fopen (homedir, "r");
-    }
-  }
+  filename = localize_rcfilename (current_config.disable_user_config);
+  configfile = fopen (filename, "r");
+  g_free (filename);
   if (!configfile)
   {
     my_alert (_("Cannot open configuration file"));
-    fprintf (stderr, _("XFce : %s File not found.\n"), homedir);
     if (!(current_config.disable_user_config))
     {
       resetconfig ();
-      snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
-      configfile = fopen (homedir, "r");
+      filename = localize_rcfilename (FALSE);
+      configfile = fopen (filename, "r");
+      g_free (filename);
     }
   }
   if (!configfile)
@@ -538,8 +557,9 @@ readconfig (void)
 	backupconfig (".orig");
 	fclose (configfile);
 	resetconfig ();
-	snprintf (homedir, MAXSTRLEN, "%s/.xfce/%s", (char *) getenv ("HOME"), rcfile);
-	configfile = fopen (homedir, "r");
+        filename = localize_rcfilename (FALSE);
+	configfile = fopen (filename, "r");
+	g_free (filename);
 	if (!configfile)
 	{
 	  my_alert (_("Cannot open new config, Giving up..."));
@@ -784,16 +804,22 @@ readconfig (void)
       j = 0;
       while ((p) && (my_strncasecmp (p, dummy, strlen (dummy))))
       {
+        label = g_malloc ((strlen (p ? p : "None") + 1) * sizeof (char));
 	strcpy (label, (p ? p : "None"));
 	p = nextline (configfile, lineread);
+        pixfile = g_malloc ((strlen (p ? p : "Default icon") + 1) * sizeof (char));
 	strcpy (pixfile, (p ? p : "Default icon"));
 	p = nextline (configfile, lineread);
 	if (strcmp (p, "None"))
 	{
+          command = g_malloc ((strlen (p ? p : "None") + 1) * sizeof (char));
 	  strcpy (command, (p ? p : "None"));
 	  if (j++ < NBMAXITEMS)
 	    add_popup_entry (i - 1, label, pixfile, command);
+	  g_free (command);
 	}
+	g_free (label);
+	g_free (pixfile);
 	p = nextline (configfile, lineread);
       }
     }

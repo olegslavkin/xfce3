@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-08-24 20:00+0200\n"
+"POT-Creation-Date: 2001-08-25 22:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,25 +62,25 @@ msgstr ""
 msgid "*** WARNING ***: Cannot load pixmap file %s\n"
 msgstr ""
 
-#: xfce/action.c:63
+#: xfce/action.c:64
 msgid "Define action ..."
 msgstr ""
 
-#: xfce/action.c:108 xfce/modify.c:156
+#: xfce/action.c:109 xfce/modify.c:157
 msgid "Command Line :"
 msgstr ""
 
-#: xfce/action.c:117
+#: xfce/action.c:118
 msgid "Icon Style :"
 msgstr ""
 
-#: xfbd/xfbd.c:532 xfce/action.c:140 xfce/action.c:149 xfce/modify.c:201
-#: xfce/modify.c:209 xfsound/xfsound.c:429
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:202
+#: xfce/modify.c:210 xfsound/xfsound.c:429
 msgid "Browse ..."
 msgstr ""
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:518 xfce/action.c:172 xfce/modify.c:238 xfce/screen.c:133
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:239 xfce/screen.c:134
 #: xfce/setup.c:1128 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: xfbd/xfbd.c:559 xfce/action.c:181 xfce/modify.c:255 xfce/screen.c:143
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:256 xfce/screen.c:144
 #: xfce/setup.c:1145 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:547 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
@@ -126,46 +126,41 @@ msgid ""
 "Aborting"
 msgstr ""
 
-#: xfce/configfile.c:184 xfclock/xfclock_config.c:130
+#: xfce/configfile.c:206 xfclock/xfclock_config.c:130
 msgid "Cannot create file"
 msgstr ""
 
-#: xfce/configfile.c:322
+#: xfce/configfile.c:350
 msgid "Cannot reset configuration file"
 msgstr ""
 
-#: xfce/configfile.c:325
+#: xfce/configfile.c:353
 msgid "Creating new config file...\n"
 msgstr ""
 
-#: xfce/configfile.c:534 xfce/configfile.c:543 xfce/configfile.c:551
-#, c-format
-msgid "XFce : %s File not found.\n"
-msgstr ""
-
-#: xfce/configfile.c:550 xfce/configfile.c:557
+#: xfce/configfile.c:537 xfce/configfile.c:547
 msgid "Cannot open configuration file"
 msgstr ""
 
-#: xfce/configfile.c:563
+#: xfce/configfile.c:553
 msgid "Does not looks like an XFce 3 configuration file !"
 msgstr ""
 
-#: xfce/configfile.c:564
+#: xfce/configfile.c:554
 msgid ""
 "Do you want to reset the configuration file ?\n"
 " \t(The previous file will be saved with a \".orig\" extension)"
 msgstr ""
 
-#: xfce/configfile.c:574
+#: xfce/configfile.c:565
 msgid "Cannot open new config, Giving up..."
 msgstr ""
 
-#: xfce/configfile.c:575
+#: xfce/configfile.c:566
 msgid "Cannot load configuration file"
 msgstr ""
 
-#: xfce/configfile.c:581
+#: xfce/configfile.c:572
 msgid "Cannot use old version of XFce configuration files"
 msgstr ""
 
@@ -186,8 +181,8 @@ msgstr ""
 msgid "Info ..."
 msgstr ""
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:128 xfce/popup.c:116
-#: xfce/popup.c:214 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:129 xfce/popup.c:115
+#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
 #: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
 #: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
 #: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
@@ -202,27 +197,27 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
-#: xfce/modify.c:70 xfce/modify.c:306
+#: xfce/modify.c:71 xfce/modify.c:311
 msgid "Modify Item ..."
 msgstr ""
 
-#: xfce/modify.c:134
+#: xfce/modify.c:135
 msgid "Preview Icon"
 msgstr ""
 
-#: xfce/modify.c:165
+#: xfce/modify.c:166
 msgid "Icon File :"
 msgstr ""
 
-#: xfce/modify.c:174
+#: xfce/modify.c:175
 msgid "Label :"
 msgstr ""
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:247 xfumed/interface.c:338
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:248 xfumed/interface.c:338
 msgid "Remove"
 msgstr ""
 
-#: xfbd/xfbdmgr.c:173 xfce/modify.c:293
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:298
 msgid "Add Item ..."
 msgstr ""
 
@@ -236,27 +231,27 @@ msgid ""
 "and the label, at least !"
 msgstr ""
 
-#: xfce/popup.c:191
+#: xfce/popup.c:190
 msgid "Add a new entry..."
 msgstr ""
 
-#: xfce/popup.c:220
+#: xfce/popup.c:219
 msgid "Add icon..."
 msgstr ""
 
-#: xfce/popup.c:246
+#: xfce/popup.c:245
 msgid "Click to tear off popup menu"
 msgstr ""
 
-#: xfce/popup_cb.c:188
+#: xfce/popup_cb.c:192
 msgid "Cannot find the file you dropped !"
 msgstr ""
 
-#: xfce/screen.c:59
+#: xfce/screen.c:60
 msgid "Screen label ..."
 msgstr ""
 
-#: xfce/screen.c:104
+#: xfce/screen.c:105
 msgid "Define screen label :"
 msgstr ""
 
