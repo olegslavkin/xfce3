@@ -13779,7 +13779,7 @@ echo "${ECHO_T}XFCE_LOCALE_DIR set to $XFCE_LOCALE_DIR" >&6
 echo "$as_me:13779: result: XFCE_CONFDIR set to $XFCE_CONFDIR" >&5
 echo "${ECHO_T}XFCE_CONFDIR set to $XFCE_CONFDIR" >&6
 
-ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile po/Makefile.in other/Makefile.in backdrops/Makefile.in icons/Makefile.in palettes/Makefile.in sounds/Makefile.in docs/Makefile.in textures/Makefile.in xfce_theme/Makefile cursors/Makefile.in fonts/Makefile.in po/Makefile other/Makefile backdrops/Makefile icons/Makefile palettes/Makefile sounds/Makefile docs/Makefile textures/Makefile cursors/Makefile fonts/Makefile"
+ac_config_files="$ac_config_files Makefile libs/Makefile xfce/Makefile xfwm/Makefile xftree/Makefile xfpager/Makefile xfmouse/Makefile xfrun/Makefile xfbd/Makefile xfclock/Makefile xfsound/Makefile xfgnome/Makefile xfmenu/Makefile xfdiff/Makefile xfglob/Makefile xfsamba/Makefile xfumed/Makefile scripts/Makefile intl/Makefile dt/Makefile gdm/Makefile xfce_theme/Makefile po/Makefile.in po/Makefile other/Makefile.in other/Makefile backdrops/Makefile.in backdrops/Makefile icons/Makefile.in icons/Makefile palettes/Makefile.in palettes/Makefile sounds/Makefile.in sounds/Makefile docs/Makefile.in docs/Makefile textures/Makefile.in textures/Makefile cursors/Makefile.in cursors/Makefile fonts/Makefile.in fonts/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -14120,26 +14120,26 @@ do
   "intl/Makefile" ) CONFIG_FILES="$CONFIG_FILES intl/Makefile" ;;
   "dt/Makefile" ) CONFIG_FILES="$CONFIG_FILES dt/Makefile" ;;
   "gdm/Makefile" ) CONFIG_FILES="$CONFIG_FILES gdm/Makefile" ;;
-  "po/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
-  "other/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES other/Makefile.in" ;;
-  "backdrops/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES backdrops/Makefile.in" ;;
-  "icons/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES icons/Makefile.in" ;;
-  "palettes/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES palettes/Makefile.in" ;;
-  "sounds/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES sounds/Makefile.in" ;;
-  "docs/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES docs/Makefile.in" ;;
-  "textures/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES textures/Makefile.in" ;;
   "xfce_theme/Makefile" ) CONFIG_FILES="$CONFIG_FILES xfce_theme/Makefile" ;;
-  "cursors/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES cursors/Makefile.in" ;;
-  "fonts/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES fonts/Makefile.in" ;;
+  "po/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
   "po/Makefile" ) CONFIG_FILES="$CONFIG_FILES po/Makefile" ;;
+  "other/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES other/Makefile.in" ;;
   "other/Makefile" ) CONFIG_FILES="$CONFIG_FILES other/Makefile" ;;
+  "backdrops/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES backdrops/Makefile.in" ;;
   "backdrops/Makefile" ) CONFIG_FILES="$CONFIG_FILES backdrops/Makefile" ;;
+  "icons/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES icons/Makefile.in" ;;
   "icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES icons/Makefile" ;;
+  "palettes/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES palettes/Makefile.in" ;;
   "palettes/Makefile" ) CONFIG_FILES="$CONFIG_FILES palettes/Makefile" ;;
+  "sounds/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES sounds/Makefile.in" ;;
   "sounds/Makefile" ) CONFIG_FILES="$CONFIG_FILES sounds/Makefile" ;;
+  "docs/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES docs/Makefile.in" ;;
   "docs/Makefile" ) CONFIG_FILES="$CONFIG_FILES docs/Makefile" ;;
+  "textures/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES textures/Makefile.in" ;;
   "textures/Makefile" ) CONFIG_FILES="$CONFIG_FILES textures/Makefile" ;;
+  "cursors/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES cursors/Makefile.in" ;;
   "cursors/Makefile" ) CONFIG_FILES="$CONFIG_FILES cursors/Makefile" ;;
+  "fonts/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES fonts/Makefile.in" ;;
   "fonts/Makefile" ) CONFIG_FILES="$CONFIG_FILES fonts/Makefile" ;;
   "$ac_config_links_1" ) CONFIG_LINKS="$CONFIG_LINKS $ac_config_links_1" ;;
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
