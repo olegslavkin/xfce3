@@ -89,6 +89,19 @@
 #  include "dmalloc.h"
 #endif
 
+static char *dsp[] = {
+	"/dev/dsp",
+	"/dev/dsp0",
+	"/dev/dsp1",
+	"/dev/dsp2",
+	"/dev/dsp3",
+	"/dev/dsp4",
+	"/dev/dsp5",
+	"/dev/dsp6",
+	"/dev/dsp7",
+	NULL
+};
+
 void
 sound_init (void)
 {
@@ -251,12 +264,17 @@ int
 setcard (void)
 {
 #if !defined(HAVE_ARTS)
+  char **device = dsp;
   int mode = O_WRONLY | O_NONBLOCK;
-  if ((masterfd = open (DSP_NAME, mode, 0)) == -1)
+  while (*device && ((masterfd = open (*device, mode, 0)) == -1))
   {
 #ifdef DEBUG
     perror ("open");
 #endif
+    device++;
+  }
+  if (masterfd < 0)
+  {
     return -1;
   }
   mode = fcntl(masterfd, F_GETFL);
