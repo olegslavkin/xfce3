@@ -100,7 +100,7 @@ enum
 
 static GdkPixmap *gPIX[LAST_PIX*4];/*1=normal,2=exe,3=lnk,4=lnk+exe*/
 static GdkPixmap *gPIM[LAST_PIM*4];
-static int pix_w,pix_h;
+static int pix_w=16,pix_h=16;
 static GtkWidget *hack=NULL; 
 
 /* masks that are duplicated elsewhere are initialized to NULL */
@@ -302,6 +302,47 @@ static void create_higher_pixmap(int PIXid){
   gdk_gc_destroy (gc);
   return; 
 }
+
+#if 0
+void
+xf_draw_bitmap (GdkDrawable *drawable,
+		 GdkGC       *gc,
+		 GdkPixmap   *src,
+		 gint         xsrc,
+		 gint         ysrc,
+		 gint         xdest,
+		 gint         ydest,
+		 gint         width,
+		 gint         height)
+{
+  GdkWindowPrivate *drawable_private;
+  GdkWindowPrivate *src_private;
+  GdkGCPrivate *gc_private;
+
+  g_return_if_fail (drawable != NULL);
+  g_return_if_fail (src != NULL);
+  g_return_if_fail (gc != NULL);
+
+  drawable_private = (GdkWindowPrivate*) drawable;
+  src_private = (GdkWindowPrivate*) src;
+  if (drawable_private->destroyed || src_private->destroyed)
+    return;
+  gc_private = (GdkGCPrivate*) gc;
+
+  if (width == -1)
+    width = src_private->width;
+  if (height == -1)
+    height = src_private->height;
+
+  XCopyPlane (drawable_private->xdisplay,
+	     src_private->xwindow,
+	     drawable_private->xwindow,
+	     gc_private->xgc,
+	     xsrc, ysrc,
+	     width, height,
+	     xdest, ydest,1);
+}
+#endif
 
 #if 0
 static void create_higher_bitmap(int PIMid){
