@@ -2,7 +2,7 @@
 # Copyright (C) 1999 Conectiva Informática
 # Este documento puede ser redistribuido libremente bajo los términos de la GPL
 # Andrea Mara Pimenta Alonso <pimenta@conectiva.com.br>, 2000.
-# edscott@users.sourceforge.net, 2001-2, 2001-4, 2001-5, 2001-7, 2002-1
+# edscott@users.sourceforge.net, 2001-2, 2001-4, 2001-5, 2001-7, 2002-1, 2002-3
 # 
 #
 #: xfsamba/xfsamba_gui.c:1322 xfsamba/xfsamba_gui.c:1327
@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce-3.8.14\n"
-"POT-Creation-Date: 2002-03-29 12:35+0100\n"
+"POT-Creation-Date: 2002-04-08 08:21-0500\n"
 "PO-Revision-Date: 2001-05-04 14:40-06:00\n"
 "Last-Translator: Edscott Wilson García <edscott@imp.mx>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -552,9 +552,8 @@ msgid "KDE menu (xfmenu)"
 msgstr "Menú KDE (xfmenu)"
 
 #: xfce/setup.c:1126
-#, fuzzy
 msgid "Debian menu (xfmenu)"
-msgstr "Menú KDE (xfmenu)"
+msgstr "Menú Debian (xfmenu)"
 
 #: xfce/setup.c:1138
 msgid "Palette"
@@ -850,11 +849,11 @@ msgstr "Error fatal en %s en %d\n"
 
 #: xftree/gtk_exec.c:251 xftree/reg.c:662
 msgid "Can't find in PATH"
-msgstr ""
+msgstr "No se encuentra en PATH"
 
 #: xftree/gtk_get.c:96
 msgid " bytes received"
-msgstr ""
+msgstr " bytes recibidos"
 
 #: xftree/gtk_prop.c:205 xftree/xtree_toolbar.c:111
 msgid "Properties"
@@ -949,7 +948,7 @@ msgstr "desconocido"
 
 #: xftree/gtk_prop.c:450
 msgid "RPM info"
-msgstr ""
+msgstr "Información RPM"
 
 #: xftree/reg.c:605 xftree/xtree_cb.c:705 xftree/xtree_cb.c:822
 #: xftree/xtree_cpy.c:1374
@@ -958,9 +957,8 @@ msgstr ""
 "Esta función no está disponible para el contenido de archivos de cinta (tar)"
 
 #: xftree/reg.c:613
-#, fuzzy, c-format
 msgid "Register program for directory \"%s\""
-msgstr "Registrar programa para el archivo \"%s\""
+msgstr "Registrar programa para el directorio \"%s\""
 
 #: xftree/reg.c:620
 msgid "Can't find suffix in filename, using complete filename"
@@ -1016,12 +1014,10 @@ msgid "Can't move file to trash, hard delete ?"
 msgstr "No se puede llevar el archivo a la Papelera, ¿borrar por completo?"
 
 #: xftree/xtree_cb.c:573
-#, fuzzy
 msgid "This is XFTree "
-msgstr "Esto es XFdiff "
+msgstr "Esto es XFTree "
 
 #: xftree/xtree_cb.c:573
-#, fuzzy
 msgid ""
 " (C) under GNU GPL\n"
 "with code contributed by:\n"
@@ -1029,7 +1025,7 @@ msgid ""
 "Olivier Fourdan\n"
 "Edscott Wilson Garcia\n"
 msgstr ""
-"Esto es XFTree (C) bajo GNU GPL\n"
+"(C) bajo GNU GPL\n"
 "con código contribuido por:\n"
 "Rasca, Berlin\n"
 "Olivier Fourdan\n"
@@ -1064,9 +1060,8 @@ msgid "Nothing selected !"
 msgstr "¡Nada seleccionado!"
 
 #: xftree/xtree_cb.c:1069
-#, fuzzy
 msgid "command finished\n"
-msgstr "Línea de comando :"
+msgstr "comando finalizado\n"
 
 #: xftree/xtree_cb.c:1294
 msgid "Override?"
@@ -1129,7 +1124,7 @@ msgstr "Destino: "
 
 #: xftree/xtree_cpy.c:1315
 msgid "beginning copy operation"
-msgstr ""
+msgstr "comenzando operación de copiado"
 
 #: xftree/xtree_cpy.c:1330
 msgid "XFTree: Copy"
@@ -1144,25 +1139,20 @@ msgid "XFTree: Link"
 msgstr "XFTree: Enlazar"
 
 #: xftree/xtree_cpy.c:1436 xftree/xtree_cpy.c:1524
-#, fuzzy
 msgid "No file or directory selected!"
-msgstr "¡Ningún directorio fue seleccionado!"
+msgstr "¡Ningún archivo o directorio fue seleccionado!"
 
 #: xftree/xtree_cpy.c:1439
-#, fuzzy
 msgid "Only one file or directory can be selected!"
-msgstr "¡No se ha seleccionado ningún directorio!"
+msgstr "¡Sólo un archivo o directorio puede ser seleccionado!"
 
 #: xftree/xtree_cpy.c:1445
-#, fuzzy
 msgid "This function is not available for the contents of tar/rpm files"
-msgstr ""
-"Esta función no está disponible para el contenido de archivos de cinta (tar)"
+msgstr "Esta función no está disponible para el contenido de archivos tar/rpm"
 
 #: xftree/xtree_cpy.c:1455
-#, fuzzy
 msgid "Symlink name : "
-msgstr "Enlaces"
+msgstr "Enlace simbólico : "
 
 #: xftree/xtree_dnd.c:169
 msgid "Unknown action !"
@@ -1196,37 +1186,33 @@ msgstr "Ir a"
 #: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
 #: xftree/xtree_gui.c:123
 msgid "Extract files from"
-msgstr ""
+msgstr "Extraer archivos de"
 
 #: xftree/xtree_gui.c:119 xftree/xtree_gui.c:121 xftree/xtree_gui.c:122
 #: xftree/xtree_gui.c:123
-#, fuzzy
 msgid "Extract into"
-msgstr "extraer"
+msgstr "Extraer en"
 
 #: xftree/xtree_gui.c:120 xftree/xtree_gui.c:124 xftree/xtree_gui.c:125
 #: xftree/xtree_gui.c:126 xftree/xtree_gui.c:127
 msgid "Uncompress"
-msgstr ""
+msgstr "Descomprimir"
 
 #: xftree/xtree_gui.c:128 xftree/xtree_gui.c:129
 msgid "Install/update"
-msgstr ""
+msgstr "Instalar/actualizar"
 
 #: xftree/xtree_gui.c:152 xftree/xtree_gui.c:564 xftree/xtree_gui.c:566
-#, fuzzy
 msgid "Open icon view"
-msgstr "Abrir nueva ventana"
+msgstr "Abrir vista de iconos"
 
 #: xftree/xtree_gui.c:155
-#, fuzzy
 msgid "Open tree view"
-msgstr "Abrir nueva ventana"
+msgstr "Abrir vista de árbol"
 
 #: xftree/xtree_gui.c:156
-#, fuzzy
 msgid "Open terminal view"
-msgstr "Abrir en una terminal"
+msgstr "Abrir vista de terminal"
 
 #: xfsamba/xfsamba_mkdir.c:200 xftree/xtree_gui.c:158
 #: xftree/xtree_toolbar.c:109
@@ -1238,14 +1224,12 @@ msgid "New file"
 msgstr "Archivo nuevo"
 
 #: xftree/xtree_gui.c:163
-#, fuzzy
 msgid "Touch ..."
-msgstr "Acerca de ..."
+msgstr "Tocar ..."
 
 #: xftree/xtree_gui.c:164
-#, fuzzy
 msgid "Symlink ..."
-msgstr "Enlaces"
+msgstr "Enlaces simbólico ..."
 
 #: xfsamba/xfsamba_gui.c:1332 xftree/xtree_gui.c:165
 #: xftree/xtree_toolbar.c:103
@@ -1253,9 +1237,8 @@ msgid "Delete ..."
 msgstr "Borrar ..."
 
 #: xftree/xtree_gui.c:168
-#, fuzzy
 msgid "Paste"
-msgstr "Pegar ..."
+msgstr "Pegar"
 
 #: xftree/xtree_gui.c:171 xftree/xtree_gui.c:220 xftree/xtree_toolbar.c:105
 msgid "Find ..."
@@ -1266,14 +1249,12 @@ msgid "Show disk usage ..."
 msgstr "Mostrar uso de disco ..."
 
 #: xftree/xtree_gui.c:175
-#, fuzzy
 msgid "Cut"
-msgstr "Cortar ..."
+msgstr "Cortar"
 
 #: xftree/xtree_gui.c:176
-#, fuzzy
 msgid "Copy"
-msgstr "Copiar ..."
+msgstr "Copiar"
 
 #: xftree/xtree_gui.c:179
 msgid "List pasteboard contents"
@@ -1414,7 +1395,7 @@ msgstr "Ocultar modo"
 
 #: xftree/xtree_gui.c:248
 msgid "Hide ../ "
-msgstr ""
+msgstr "Esconder ../"
 
 #: xftree/xtree_gui.c:251
 msgid "Sort by file name"
@@ -1476,7 +1457,7 @@ msgstr "Jalar iconos efectua copia en lugar de mover"
 
 #: xftree/xtree_gui.c:925
 msgid "Use rsync instead of scp"
-msgstr ""
+msgstr "Use rsync en vez de scp"
 
 #: xfsamba/xfsamba_gui.c:1301 xftree/xtree_gui.c:941
 msgid "Set background color"
@@ -1501,9 +1482,8 @@ msgid "Help"
 msgstr "Ayuda"
 
 #: xftree/xtree_gui.c:970
-#, fuzzy
 msgid "Icon view"
-msgstr "Archivo del ícono :"
+msgstr "Vista de íconos"
 
 #: xfsamba/xfsamba_gui.c:1308 xftree/xtree_gui.c:975
 msgid "Drag and drop"
@@ -1511,7 +1491,7 @@ msgstr "Jalar y soltar"
 
 #: xftree/xtree_gui.c:980
 msgid "Rsync and scp"
-msgstr ""
+msgstr "Rsync y scp"
 
 #: xftree/xtree_gui.c:987
 msgid "Unlisted shortcut keys"
@@ -1603,6 +1583,10 @@ msgid ""
 "installed\n"
 "separately from XFCE. A ROX-filer specific for XFCE will soon be available."
 msgstr ""
+"La vista de icono es el ROX-filer. En este momento debe ser instalado\n"
+"por separado de XFCE. Una versión específica para XFCE pronto estará disponible"
+
+
 
 #: xftree/xtree_mess.c:807
 msgid ""
@@ -1616,6 +1600,15 @@ msgid ""
 "Xftree will also accept drops from other\n"
 "filemanagers running on different hosts.\n"
 msgstr ""
+"Xftree le permite jalar y soltar de/hacia\n"
+"ventanas xftree ejecutandos en distintas máquinas.\n"
+"Puede usar ya sea scp o rsync para el copiado.\n"
+"La autentificación de usuario se hace por ssh.\n"
+"Véase el \"man ssh\" si desea autentificación basada\n"
+"en identificación de máquina.\n"
+"\n"
+"Xftree también acceptará jalar y soltar de otros\n"
+"manejadores de archivos ejecutándose en distintas máquinas.\n"
 
 #: xftree/xtree_mess.c:823
 msgid ""
@@ -1632,7 +1625,6 @@ msgstr ""
 " por favor échele una miradita a ~/.xfce/xtree.reg."
 
 #: xftree/xtree_mess.c:832
-#, fuzzy
 msgid ""
 "Xftree handles drag and drop the following way:\n"
 "SHIFT drag+drop --> move\n"
@@ -1654,6 +1646,9 @@ msgstr ""
 "Para jalar y soltar más de un archivo, use el botón de enmedio.\n"
 "Si no tiene boton de enmedio, presione los dos botones simultaneamente.\n"
 "Si solo tiene un boton, utilize la barra de herramientas.\n"
+"También:\n"
+"Selección multiple con el botón 1 por pinchar y jalar\n"
+"está disponible en el primer pinchazo después de IR A o REGENERAR.\n"
 
 #: xftree/xtree_mess.c:850
 msgid "Keyboard shortcuts are a fast way to access menu functions."
@@ -1674,35 +1669,32 @@ msgstr "El tapiz de transferencia está vacío."
 
 #: xfsamba/xfsamba_dnd.c:535 xftree/xtree_pasteboard.c:173
 msgid "Not a valid file transfer pasteboard."
-msgstr ""
+msgstr "El tapiz de transferencia no es válido."
 
 #: xftree/xtree_pasteboard.c:244
-#, fuzzy
 msgid "The pasteboard is currently empty.\n"
-msgstr "El tapiz de transferencia está vacío."
+msgstr "El tapiz de transferencia está vacío.\n"
 
 #: xftree/xtree_pasteboard.c:246
 msgid "No pasteboard available."
-msgstr ""
+msgstr "No hay tapiz de transferencia."
 
 #: xftree/xtree_tar.c:387
 msgid "tar: execution error"
-msgstr ""
+msgstr "tar: error de ejecución"
 
 #. only 32 elements allowed in TOOLBARICONS
 #: xftree/xtree_toolbar.c:88
-#, fuzzy
 msgid "New icon view"
-msgstr "Nueva ventana"
+msgstr "Nueva vista de íconos"
 
 #: xftree/xtree_toolbar.c:89
 msgid "New tree view"
-msgstr ""
+msgstr "Nueva vista de árbol"
 
 #: xftree/xtree_toolbar.c:90
-#, fuzzy
 msgid "New terminal"
-msgstr "Abrir en una terminal"
+msgstr "Nueva terminal"
 
 #: xftree/xtree_toolbar.c:92
 msgid "Run ..."
@@ -1754,37 +1746,36 @@ msgstr "Botones grandes"
 
 #. printf("dbg:%s\n",_("File download failed."));
 #: xftree/xtree_smb.c:175
-#, fuzzy
 msgid "File download failed."
-msgstr "La transferencia del archivo ha sido cancelado."
+msgstr "La transferencia del archivo ha fallado."
 
 #: xftree/xtree_smb.c:199
-#, fuzzy
 msgid "Downloading files from "
-msgstr "Transferiendo el archivo..."
+msgstr "Transferiendo archivos de "
 
 #: xftree/xtree_smb.c:232
 msgid ""
 "SMB downloads disabled.\n"
 "Command not found"
 msgstr ""
+"Transferencias por SMB desabilitadas.\n"
+"no se encuentra el comando"
 
 #: xftree/xtree_smb.c:238
-#, fuzzy
 msgid "Cannot open"
-msgstr "No se puede abrir el archivo de tar"
+msgstr "No se puede abrir"
 
 #: xftree/xtree_smb.c:263
 msgid "DnD error"
-msgstr ""
+msgstr "Error de pinchar y jalar"
 
 #: xftree/xtree_smb.c:263
 msgid "Incorrect DnD specification"
-msgstr ""
+msgstr "Especificación de pinchar y jalar incorrecta"
 
 #: xftree/xtree_smb.c:307
 msgid "Only drops from a single share are allowed"
-msgstr ""
+msgstr "Se permite jalar y soltar de un solo servidor"
 
 #. convenience location of duplicate dialog texts
 #. non-static
@@ -2060,6 +2051,9 @@ msgid ""
 "(c) by Edscott Wilson Garcia under GNU GPL\n"
 "XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
 msgstr ""
+"\n"
+"(c)  por Edscott Wilson Garcia bajo GNU GPL\n"
+"XFCE modules (c) Olivier Fourdan http://www.xfce.org/"
 
 #: xfdiff/xfdiff_gui.c:845
 msgid "There is no next difference"
@@ -3294,6 +3288,11 @@ msgid ""
 "for changes to take effect. Otherwise,\n"
 "you must type in the node to be browsed and hit RETURN.\n"
 msgstr ""
+"Si tiene usted nodos win95 en su red, xfsamba puede no encontrar\n"
+"un navegador maestro. Si comienza los servicios smb en una máquina linux,\n"
+"haciendolo un servidor samba, el problema se comprondrá siempre y cuando\n"
+"la máquina win95 son reiniciadas. De otra manera,\n"
+"escriba el nombre del nodo a visitar y de un retorno de carro.\n"
 
 #: xfsamba/xfsamba_gui.c:324
 msgid ""
@@ -3301,6 +3300,9 @@ msgid ""
 "the companion file browser \"xftree\". Drag and drop may or not\n"
 "work with other file browsers"
 msgstr ""
+"Compatibilidad completa de jalar y soltar entre xfsamba y \n"
+"el manejador de archivos \"xftree\". Jalar y soltar puede o no\n"
+"funcionar con otros manejadores de archivo"
 
 #: xfsamba/xfsamba_gui.c:331
 msgid ""
@@ -3311,6 +3313,13 @@ msgid ""
 "$ chmod u+s smbmount smbumount\n"
 "(This option is not available in FreeBSD4.4)"
 msgstr ""
+"Para montar volúmenes SMB, los siguientes archivos de samba\n"
+"deberán ser instalados suid-root:\n"
+"- smbmount\n"
+"- smbumount\n"
+"Estos archivos se localizan usualmente en /usr/bin, y root debe hacer:\n"
+"$chmod  u+s smbmount smbumount\n"
+"(Esta opción no está disponible en FreeBSD4.4)"
 
 #: xfsamba/xfsamba_gui.c:343
 msgid ""
@@ -3318,6 +3327,9 @@ msgid ""
 "first mount the share with the mount tool\n"
 "and then use the xftree search utility to do the search\n"
 msgstr ""
+"Para hacer búsqueda de archivos en volumenes SMB\n"
+"primero monte el volumen compartido con la herramienta para montar\n"
+"y luego utilice la utilería de búsqueda de xftree.\n"
 
 #: xfsamba/xfsamba_gui.c:350
 msgid ""
@@ -3325,17 +3337,22 @@ msgid ""
 "first mount the share with the mount tool\n"
 "and then use the xftree diff utility to display the differences.\n"
 msgstr ""
+"Para visualizar diferencias de archivos en volumenes SMB\n"
+"primero monte el volumen compartido con la herramienta para montar\n"
+"y luego utilice la utilería de diferencias de xftree.\n"
+
 
 #: xfsamba/xfsamba_gui.c:358
 msgid "This is XFSamba "
 msgstr "Esto es XFSamba "
 
 #: xfsamba/xfsamba_gui.c:358
-#, fuzzy
 msgid ""
 "\n"
 "(c) Edscott Wilson Garcia under GNU GPL"
-msgstr "xfdiff (dr) Edscott Wilson Garcia 2001, bajo GNU-GPL\n"
+msgstr ""
+"\n"
+"(c) Edscott Wilson Garcia under GNU GPL"
 
 #: xfsamba/xfsamba_gui.c:542
 msgid "Please provide information for server "
@@ -3354,16 +3371,14 @@ msgid "Password  : "
 msgstr "Contraseña : "
 
 #: xfsamba/xfsamba_gui.c:625 xfsamba/xfsamba_gui.c:631
-#, fuzzy
 msgid "A single file can be selected!"
-msgstr "¡No se ha seleccionado ningun archivo!"
+msgstr "¡Sólo un archivo puede ser seleccionado!"
 
 #: xfsamba/xfsamba_gui.c:644 xfsamba/xfsamba_gui.c:650
 #: xfsamba/xfsamba_gui.c:663 xfsamba/xfsamba_gui.c:669
 #: xfsamba/xfsamba_gui.c:719 xfsamba/xfsamba_gui.c:725
-#, fuzzy
 msgid "A single directory must be selected!"
-msgstr "¡No se ha seleccionado ningún directorio!"
+msgstr "¡Sólo un directorio puede ser seleccionado!"
 
 #: xfsamba/xfsamba_gui.c:683 xfsamba/xfsamba_gui.c:706
 msgid "Something to be deleted must be selected!"
@@ -3371,7 +3386,7 @@ msgstr "¡Algo que borrar debe ser seleccionado!"
 
 #: xfsamba/xfsamba_gui.c:694
 msgid "Only elements from a single share may be selected!"
-msgstr ""
+msgstr "¡Sólo elementos de una máquina pueden ser seleccionados!"
 
 #: xfsamba/xfsamba_gui.c:1037
 msgid "Going to master browser..."
@@ -3415,19 +3430,16 @@ msgid "Tar..."
 msgstr "Tar..."
 
 #: xfsamba/xfsamba_gui.c:1274
-#, fuzzy
 msgid "Paste..."
-msgstr "Pegar ..."
+msgstr "Pegar..."
 
 #: xfsamba/xfsamba_gui.c:1275
-#, fuzzy
 msgid "Cut..."
-msgstr "Cortar ..."
+msgstr "Cortar..."
 
 #: xfsamba/xfsamba_gui.c:1276
-#, fuzzy
 msgid "Copy..."
-msgstr "Copiar ..."
+msgstr "Copiar..."
 
 #. GOTO
 #: xfsamba/xfsamba_gui.c:1279
@@ -3452,11 +3464,11 @@ msgstr "Atrás..."
 
 #: xfsamba/xfsamba_gui.c:1286
 msgid "Local file browser"
-msgstr ""
+msgstr "Árbol de archivos local"
 
 #: xfsamba/xfsamba_gui.c:1287
 msgid "Mount remote share"
-msgstr ""
+msgstr "Montar volumen remoto"
 
 #: xfsamba/xfsamba_gui.c:1291
 msgid "Show diagnostics"
@@ -3479,37 +3491,32 @@ msgid "Browse as..."
 msgstr "Navegar como..."
 
 #: xfsamba/xfsamba_gui.c:1309
-#, fuzzy
 msgid "Mounting SMB shares"
-msgstr "Contando archivos"
+msgstr "Montando el volumen SMB"
 
 #: xfsamba/xfsamba_gui.c:1310
 msgid "Searching"
-msgstr ""
+msgstr "Buscando"
 
 #: xfsamba/xfsamba_gui.c:1311
-#, fuzzy
 msgid "Differences"
-msgstr "Ver diferencias ..."
+msgstr "Diferencias"
 
 #: xfsamba/xfsamba_gui.c:1312
-#, fuzzy
 msgid "Master browsers"
-msgstr "Acerca del navegador maestro..."
+msgstr "Navegadores maestros"
 
 #: xfsamba/xfsamba_gui.c:1313
-#, fuzzy
 msgid "About xfsamba"
-msgstr "Acerca de xfsamba..."
+msgstr "Acerca de xfsamba"
 
 #: xfsamba/xfsamba_gui.c:1317
 msgid "Stop ..."
 msgstr "Detener ..."
 
 #: xfsamba/xfsamba_gui.c:1321
-#, fuzzy
 msgid "Xftree ..."
-msgstr "Ver diferencias ..."
+msgstr "Xftree ..."
 
 #: xfsamba/xfsamba_gui.c:1323
 msgid "Back ..."
@@ -3532,9 +3539,8 @@ msgid "New folder ..."
 msgstr "Nueva carpeta ..."
 
 #: xfsamba/xfsamba_gui.c:1334
-#, fuzzy
 msgid "Mount ..."
-msgstr "Acerca de ..."
+msgstr "Montar ..."
 
 #: xfsamba/xfsamba_gui.c:1335
 msgid "Download ..."
@@ -3561,9 +3567,8 @@ msgid "Set View 3"
 msgstr "Fijar vista 3"
 
 #: xfsamba/xfsamba_gui.c:1342
-#, fuzzy
 msgid "Set View 4"
-msgstr "Fijar vista 3"
+msgstr "Fijar vista 4"
 
 #: xfsamba/xfsamba_gui.c:1344
 msgid "Help ..."
@@ -3728,13 +3733,12 @@ msgstr "Creando el directorio..."
 
 #. here, dialog to ask new dir name
 #: xfsamba/xfsamba_mkdir.c:200
-#, fuzzy
 msgid "New directory name:"
-msgstr "Directorio hogar : "
+msgstr "Nombre nuevo de directorio: "
 
 #: xfsamba/xfsamba_rm.c:48
 msgid "Really delete remote items?"
-msgstr ""
+msgstr "¿De veras eliminar elementos?"
 
 #: xfsamba/xfsamba_rm.c:51 xfsamba/xfsamba_rm.c:187
 msgid "Remove cancelled."
@@ -3847,28 +3851,24 @@ msgid "Upload failed."
 msgstr "La transferencia del archivo falló."
 
 #: xfsamba/xfsamba_upload.c:252
-#, fuzzy
 msgid "Upload produced errors. See diagnostics for reason."
-msgstr "Transferencia de archivo falló. Véase diagnósticos para mayor detalle."
+msgstr "Transferencia de archivo produjo errores. Véase diagnósticos para mayor detalle."
 
 #: xfsamba/xfsamba_upload.c:359
-#, fuzzy
 msgid "Uploading files..."
-msgstr "Subiendo el archivo.."
+msgstr "Subiendo los archivos.."
 
 #: xfsamba/xfsamba_dnd.c:502
-#, fuzzy
 msgid "No target selected!"
-msgstr "¡Ningún directorio fue seleccionado!"
+msgstr "¡Ningún destino fue seleccionado!"
 
 #: xfsamba/xfsamba_dnd.c:507
-#, fuzzy
 msgid "More than one target selected!"
-msgstr "¡Nada seleccionado!"
+msgstr "¡Más de un destino seleccionado!"
 
 #: xfsamba/xfsamba_dnd.c:545
 msgid "Files are on a remote host"
-msgstr ""
+msgstr "Los archivos estan en una máquina remota"
 
 #: xfumed/xfumed_gui.c:47
 msgid "User Menu Editor"
@@ -3951,18 +3951,22 @@ msgid ""
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
+"Si borras un submenu, todas sus entradas y \n"
+"submenus también se eliminarán.\n"
+"\n"
+"¿Desea eliminar este submenu?"
 
 #: xfumed/xfumed.h:10
 msgid "Item"
-msgstr ""
+msgstr "Elemento"
 
 #: xfumed/xfumed.h:11
 msgid "Submenu"
-msgstr ""
+msgstr "Submenu"
 
 #: xfumed/xfumed.h:12
 msgid "Separator"
-msgstr ""
+msgstr "Separador"
 
 #~ msgid "file x of x"
 #~ msgstr "Comenzando operación de copiado"
