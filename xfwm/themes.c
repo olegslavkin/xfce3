@@ -3390,12 +3390,12 @@ DrawButton_linea (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC 
     {
       XDrawLine (dpy, win, LoGC, 2, 0, w - 4, 0);
       XDrawLine (dpy, win, LoGC, 0, 2, 0, h - 4);
-      XDrawLine (dpy, win, LoGC, 1, 1, w - 2, 1);
-      XDrawLine (dpy, win, LoGC, 1, 1, 1, h - 2);
+      XDrawLine (dpy, win, LoGC, 1, 1, w - 3, 1);
+      XDrawLine (dpy, win, LoGC, 1, 1, 1, h - 3);
       XDrawLine (dpy, win, LoGC, 2, 2, 3, 2);
       XDrawLine (dpy, win, LoGC, 2, 2, 2, 3);
-      XDrawLine (dpy, win, HiGC, 1, h - 1, w - 3, h - 1);
-      XDrawLine (dpy, win, HiGC, w - 1, 1, w - 1, h - 3);
+      XDrawLine (dpy, win, HiGC, 2, h - 1, w - 3, h - 1);
+      XDrawLine (dpy, win, HiGC, w - 1, 2, w - 1, h - 3);
       XDrawLine (dpy, win, HiGC, w - 4, h - 2, w - 2, h - 2);
       XDrawLine (dpy, win, HiGC, w - 2, h - 4, w - 2, h - 2);
     }
