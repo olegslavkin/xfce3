@@ -241,9 +241,9 @@ Bool StashEventTime (XEvent * ev);
 #endif
 int flush_expose (Window w);
 void fast_process_expose (void);
+int discard_events(long);
 int My_XNextEvent (Display * dpy, XEvent * event);
 void FlushQueue (int Module);
-void QuickRestart (void);
 void AddFuncKey (char *, int, int, int, char *, int, int, MenuRoot *, char, char);
 char *GetNextPtr (char *ptr);
 

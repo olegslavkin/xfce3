@@ -569,8 +569,6 @@ Bool PopUpMenu (MenuRoot * menu, int x, int y)
 void
 PopDownMenu ()
 {
-  XEvent JunkEvent;
-
   if (ActiveMenu == NULL)
     return;
 
@@ -580,21 +578,14 @@ PopDownMenu ()
     ActiveItem->state = 0;
 
   XUnmapWindow (dpy, ActiveMenu->w);
-  UninstallRootColormap ();
   if (!menu_on)
   {
+    UninstallRootColormap ();
     UngrabEm ();
     WaitForButtonsUp ();
     XFlush (dpy);
-#ifdef REQUIRES_STASHEVENT
-    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
-    {
-      StashEventTime (&JunkEvent);
-    }
-#else
-    while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
-#endif
   }
+  discard_events (EnterWindowMask | LeaveWindowMask);  
   if (Context & (C_WINDOW | C_FRAME | C_TITLE | C_SIDEBAR))
     menuFromFrameOrWindowOrTitlebar = True;
   else

@@ -2489,7 +2489,6 @@ void
 SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long context, char *action, int *Module)
 {
   XfwmWindow *t, *tp;
-  XEvent JunkEvent;
   Bool finished = False;
   Bool namechanged = False;
   Bool abort = False;
@@ -2659,14 +2658,7 @@ SwitchFunc (XEvent * eventp, Window junk, XfwmWindow * tmp_win, unsigned long co
   UninstallRootColormap ();
   UngrabEm ();
   XFlush (dpy);
-#ifdef REQUIRES_STASHEVENT
-  while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent))
-  {
-    StashEventTime (&JunkEvent);
-  }
-#else
-  while (XCheckTypedEvent (dpy, EnterNotify, &JunkEvent));
-#endif
+  discard_events (EnterWindowMask | LeaveWindowMask);  
 }
 
 void
