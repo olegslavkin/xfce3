@@ -5,7 +5,7 @@
 /********** defines ***************/
 
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.34"
+#define XFSAMBA_VERSION "0.35"
 #endif
 
 #ifdef XFSAMBA_MAIN
