@@ -269,7 +269,7 @@ int
 main (int argc, char **argv)
 {
   XSetWindowAttributes attributes;	/* attributes for create windows */
-  XIconSize *iconsize;
+  /* XIconSize *iconsize; */
   void enterAlarm (int);
   int i;
   extern int x_fd;
@@ -588,7 +588,7 @@ main (int argc, char **argv)
   XChangeProperty (dpy, Scr.Root, _WIN_DESKTOP_BUTTON_PROXY, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &Scr.GnomeProxyWin, 1);
   XChangeProperty (dpy, Scr.GnomeProxyWin, _WIN_DESKTOP_BUTTON_PROXY, XA_CARDINAL, 32, PropModeReplace, (unsigned char *) &Scr.GnomeProxyWin, 1);
 
-  /* Set prefered icons size for apps that can handle it */
+  /* Set prefered icons size for apps that can handle it
   if ((iconsize = XAllocIconSize()) != NULL)
   {
     iconsize->min_width  = 48;
@@ -599,7 +599,8 @@ main (int argc, char **argv)
     iconsize->height_inc = 1;
     XSetIconSizes (dpy, Scr.Root, iconsize, 1);
     XFree (iconsize);
-  }
+  } 
+   */
   CreateCursors ();
   InitVariables ();
   InitEventHandlerJumpTable ();
