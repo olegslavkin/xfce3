@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce 3.8.8\n"
-"POT-Creation-Date: 2001-10-04 12:24+0200\n"
-"PO-Revision-Date: 2001-09-17  12:00+0200\n"
+"Project-Id-Version: xfce 3.8.9\n"
+"POT-Creation-Date: 2001-10-08 22:32+0200\n"
+"PO-Revision-Date: 2001-10-08  12:00+0200\n"
 "Last-Translator: Rudolf Ulc <rudolf.ulc@oku-st.cz>\n"
 "Language-Team: CZ      <li@linux.cz>\n"
 "MIME-Version: 1.0\n"
@@ -37,12 +37,12 @@ msgid "Message"
 msgstr "Zpráva"
 
 #: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:206
-#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:133
+#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:127
 msgid "Yes"
 msgstr "Ano"
 
 #: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:233
-#: xfumed/xfumed_gui_cb.c:77 xfumed/xfumed_gui_cb.c:134
+#: xfumed/xfumed_gui_cb.c:76 xfumed/xfumed_gui_cb.c:128
 msgid "No"
 msgstr "Ne"
 
@@ -68,7 +68,7 @@ msgstr "*** Varování ***: Nemohu naèíst soubor pixmapy %s\n"
 msgid "Define action ..."
 msgstr "Definování akce ... "
 
-#: xfce/action.c:109 xfce/modify.c:161
+#: xfce/action.c:109 xfce/modify.c:160
 msgid "Command Line :"
 msgstr "Pøíkazová øádka :"
 
@@ -76,27 +76,27 @@ msgstr "Pøíkazová øádka :"
 msgid "Icon Style :"
 msgstr "Styl Ikon :"
 
-#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:233
-#: xfce/modify.c:241 xfsound/xfsound.c:509
+#: xfbd/xfbd.c:532 xfce/action.c:141 xfce/action.c:150 xfce/modify.c:232
+#: xfce/modify.c:240 xfsound/xfsound.c:509
 msgid "Browse ..."
 msgstr "Vybrat ..."
 
 #. ok and cancel buttons
-#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:277 xfce/screen.c:134
+#: xfbd/xfbd.c:518 xfce/action.c:173 xfce/modify.c:276 xfce/screen.c:134
 #: xfce/setup.c:1129 xfmouse/xfmouse.c:287 xfrun/xfrun.c:207
 #: xfsamba/xfsamba.c:660 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:117 xfsamba/xfsamba_mkdir.c:127
 #: xfsamba/xfsamba_rm.c:213 xfsamba/xfsamba_tar.c:413 xfsound/xfsound.c:606
 #: xftree/gtk_dlg.c:202 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
-#: xfumed/xfumed_gui.c:437
+#: xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Ok"
 
-#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:294 xfce/screen.c:144
+#: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
 #: xfsound/xfsound.c:627 xftree/gtk_cpy.c:517 xftree/gtk_dlg.c:230
 #: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
-#: xfumed/xfumed_gui.c:445
+#: xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Zru¹it"
 
@@ -195,10 +195,10 @@ msgstr "Zavøít"
 msgid "Info ..."
 msgstr "Informace ..."
 
-#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:133 xfce/popup.c:115
-#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:194 xfce/xfce.c:234
-#: xfce/xfce.c:495 xfce/xfce.c:526 xfce/xfce.c:623 xfce/xfce.c:644
-#: xfce/xfce.c:677 xfce/xfce.c:692 xfce/xfce.c:750 xfce/xfce.c:771
+#: xfbd/xfbd.c:436 xfce/info.c:107 xfce/modify.c:132 xfce/popup.c:115
+#: xfce/popup.c:213 xfce/startup.c:91 xfce/xfce.c:198 xfce/xfce.c:238
+#: xfce/xfce.c:499 xfce/xfce.c:530 xfce/xfce.c:627 xfce/xfce.c:648
+#: xfce/xfce.c:681 xfce/xfce.c:696 xfce/xfce.c:754 xfce/xfce.c:775
 #: xfglob/xfglob.c:558 xfmouse/xfmouse.c:200 xfsamba/xfsamba_gui.c:947
 msgid "Couldn't create pixmap"
 msgstr "Nemohu vytvoøit pixmapu"
@@ -211,32 +211,31 @@ msgstr "Od Oliviera Fourdana (c) 1997-2000"
 msgid "Accept"
 msgstr "Souhlasím"
 
-#: xfce/modify.c:75 xfce/modify.c:352
+#: xfce/modify.c:74 xfce/modify.c:352
 msgid "Modify Item ..."
 msgstr "Zmìnit polo¾ku"
 
-#: xfce/modify.c:139
+#: xfce/modify.c:138
 msgid "Preview Icon"
 msgstr "Zobrazení ikony"
 
-#: xfce/modify.c:170
+#: xfce/modify.c:169
 msgid "Icon File :"
 msgstr "Soubor ikony: "
 
-#: xfce/modify.c:179
+#: xfce/modify.c:178
 msgid "Label :"
 msgstr "Název :"
 
-#: xfce/modify.c:188
-#, fuzzy
+#: xfce/modify.c:187
 msgid "Position :"
-msgstr "Jméno serveru : "
+msgstr "Umístìní :"
 
-#: xfbd/xfbdmgr.c:179 xfce/modify.c:286 xfumed/xfumed_gui.c:149
+#: xfbd/xfbdmgr.c:179 xfce/modify.c:285 xfumed/xfumed_gui.c:136
 msgid "Remove"
 msgstr "Vyjmout"
 
-#: xfbd/xfbdmgr.c:173 xfce/modify.c:336
+#: xfbd/xfbdmgr.c:173 xfce/modify.c:335
 msgid "Add Item ..."
 msgstr "Pøidat polo¾ku ..."
 
@@ -653,18 +652,18 @@ msgstr "Èíselný mód"
 msgid "24 hours mode"
 msgstr "24 hodinový mód"
 
-#: xfce/xfce.c:639 xfclock/xfclock_menus.c:241
+#: xfce/xfce.c:643 xfclock/xfclock_menus.c:241
 msgid "About..."
 msgstr "O programu..."
 
-#: xfce/xfce.c:672
+#: xfce/xfce.c:676
 msgid "Setup..."
 msgstr "Nastavení..."
 
-#: xfbd/xfbdmgr.c:185 xfce/xfce.c:699 xfclock/xfclock_menus.c:65
+#: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
 #: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
 #: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:189
+#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Konec"
 
@@ -765,9 +764,9 @@ msgstr ""
 msgid "XFCE: Communication pipe closed. Exiting...\n"
 msgstr "XFCE: Komunikaèní roura byla uzavøena. Ukonèuji..\n"
 
-#: xfce/xfwm.c:434 xfwm/xfwm.c:845 xfwm/xfwm.c:846 xfwm/xfwm.c:847
-#: xfwm/xfwm.c:848 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
-#: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854
+#: xfce/xfwm.c:434 xfwm/xfwm.c:849 xfwm/xfwm.c:850 xfwm/xfwm.c:851
+#: xfwm/xfwm.c:852 xfwm/xfwm.c:853 xfwm/xfwm.c:854 xfwm/xfwm.c:855
+#: xfwm/xfwm.c:856 xfwm/xfwm.c:857 xfwm/xfwm.c:858
 msgid "Workspace"
 msgstr "Plocha"
 
@@ -930,7 +929,7 @@ msgstr "Otevøít pomocí ..."
 
 #: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
 #: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
-#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:880
+#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:884
 msgid "Run program ..."
 msgstr "Spustit program ..."
 
@@ -1272,7 +1271,7 @@ msgid "Patch viewer ..."
 msgstr "Prohlí¾eè patchù ..."
 
 #. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:872
+#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:876
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -1735,7 +1734,7 @@ msgid "Auto strip level"
 msgstr "Automatická úroveò odstraòování cest"
 
 #. Create "Actions" menu
-#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:99
+#: xfdiff/xfdiff_gui.c:1242 xfumed/xfumed_gui.c:92
 msgid "Actions"
 msgstr "Akce"
 
@@ -2371,7 +2370,7 @@ msgstr "Nelze získat stav:"
 msgid "XFClock - XFce Clock & Calendar"
 msgstr "XFClock - XFce hodiny a kalendáø"
 
-#: xfclock/xfclock_cb.c:211
+#: xfclock/xfclock_cb.c:217
 msgid ""
 "XFClock\n"
 "(c) 1997-2000 Olivier Fourdan"
@@ -2700,119 +2699,119 @@ msgstr "xfbdmgr - XFCE mana¾ér seznamu"
 msgid "File not found.\n"
 msgstr "Soubor nenalezen\n"
 
-#: xfwm/xfwm.c:842
+#: xfwm/xfwm.c:846
 msgid "&Restart"
 msgstr "&Restartovat"
 
-#: xfwm/xfwm.c:843
+#: xfwm/xfwm.c:847
 msgid "&Quit"
 msgstr "&Ukonèit"
 
-#: xfwm/xfwm.c:856
+#: xfwm/xfwm.c:860
 msgid "&Move"
 msgstr "&Pøesunout"
 
-#: xfwm/xfwm.c:857
+#: xfwm/xfwm.c:861
 msgid "&Resize"
 msgstr "&Zmìnit velikost"
 
-#: xfwm/xfwm.c:858
+#: xfwm/xfwm.c:862
 msgid "(De)&Iconify"
 msgstr "(De)&Ikonifikovat"
 
-#: xfwm/xfwm.c:859
+#: xfwm/xfwm.c:863
 msgid "(Un)&Stick"
 msgstr "(Od)&Lepit"
 
-#: xfwm/xfwm.c:860
+#: xfwm/xfwm.c:864
 msgid "(Un)S&hade"
 msgstr "(Od)R&olovat"
 
-#: xfwm/xfwm.c:861
+#: xfwm/xfwm.c:865
 msgid "(Un)Ma&ximize"
 msgstr "(Od)Ma&ximalizovat"
 
-#: xfwm/xfwm.c:863
+#: xfwm/xfwm.c:867
 msgid "Se&nd to..."
 msgstr "Po&slat do..."
 
-#: xfwm/xfwm.c:864
+#: xfwm/xfwm.c:868
 msgid "S&witch to..."
 msgstr "Pø&epnout na..."
 
-#: xfwm/xfwm.c:866
+#: xfwm/xfwm.c:870
 msgid "&Close"
 msgstr "&Zavøít"
 
-#: xfwm/xfwm.c:868
+#: xfwm/xfwm.c:872
 msgid "User Menu"
 msgstr "U¾ivatelské menu"
 
-#: xfwm/xfwm.c:869
+#: xfwm/xfwm.c:873
 msgid "Edit menu..."
 msgstr "Upravit menu ..."
 
-#: xfwm/xfwm.c:873
+#: xfwm/xfwm.c:877
 msgid "&Mouse..."
 msgstr "&My¹i"
 
-#: xfwm/xfwm.c:874
+#: xfwm/xfwm.c:878
 msgid "&Backdrop..."
 msgstr "&Pozadí..."
 
-#: xfwm/xfwm.c:875
+#: xfwm/xfwm.c:879
 msgid "&Sound..."
 msgstr "&Zvukù..."
 
-#: xfwm/xfwm.c:877
+#: xfwm/xfwm.c:881
 msgid "&New window"
 msgstr "&Nové okno"
 
-#: xfwm/xfwm.c:878
+#: xfwm/xfwm.c:882
 msgid "&User Menu"
 msgstr "&U¾ivatelské menu"
 
-#: xfwm/xfwm.c:882
+#: xfwm/xfwm.c:886
 msgid "&Arrange icons"
 msgstr "&Uspoøádat ikony"
 
-#: xfwm/xfwm.c:883
+#: xfwm/xfwm.c:887
 msgid "&Iconify all"
 msgstr "&Ikonifikovat v¹e"
 
-#: xfwm/xfwm.c:884
+#: xfwm/xfwm.c:888
 msgid "&Refresh"
 msgstr "&Obnovit"
 
-#: xfwm/xfwm.c:885
+#: xfwm/xfwm.c:889
 msgid "Shuffle &Up"
 msgstr "Pøepnout &Nahoøe"
 
-#: xfwm/xfwm.c:886
+#: xfwm/xfwm.c:890
 msgid "Shuffle &Down"
 msgstr "Pøepnout &Dole"
 
-#: xfwm/xfwm.c:888
+#: xfwm/xfwm.c:892
 msgid "&Settings"
 msgstr "&Nastavení"
 
-#: xfwm/xfwm.c:890
+#: xfwm/xfwm.c:894
 msgid "&Quit XFwm"
 msgstr "&Konec XFwm"
 
-#: xfwm/xfwm.c:892
+#: xfwm/xfwm.c:896
 msgid "&Full Screen"
 msgstr "&Celá obrazovka"
 
-#: xfwm/xfwm.c:893
+#: xfwm/xfwm.c:897
 msgid "&Vertical"
 msgstr "&Vertikálnì"
 
-#: xfwm/xfwm.c:894
+#: xfwm/xfwm.c:898
 msgid "&Horizontal"
 msgstr "&Horizontálnì"
 
-#: xfwm/xfwm.c:1224
+#: xfwm/xfwm.c:1228
 msgid "xfwm terminated: "
 msgstr "xfwm je ukonèeno: "
 
@@ -3318,75 +3317,66 @@ msgid "Upload failed."
 msgstr "Upload selhal."
 
 #: xfumed/xfumed_gui.c:47
-#, fuzzy
 msgid "User Menu Editor"
 msgstr "Editor u¾ivatelského menu XFce"
 
-#: xfumed/xfumed_gui.c:85
+#: xfumed/xfumed_gui.c:80
 msgid "Caption"
 msgstr "Titulek"
 
-#: xfumed/xfumed_gui.c:92
+#: xfumed/xfumed_gui.c:86
 msgid "Command"
 msgstr "Pøíkaz"
 
-#: xfumed/xfumed_gui.c:117
-#, fuzzy
+#: xfumed/xfumed_gui.c:108
 msgid "Move Up"
-msgstr "pøesunout"
+msgstr "pøesunout nahoru"
 
-#: xfumed/xfumed_gui.c:125
-#, fuzzy
+#: xfumed/xfumed_gui.c:115
 msgid "Move Down"
-msgstr "pøesunout"
+msgstr "pøesunout dolu"
 
-#: xfumed/xfumed_gui.c:133
+#: xfumed/xfumed_gui.c:122
 msgid "Add"
 msgstr "Pøidat"
 
-#: xfumed/xfumed_gui.c:141
-#, fuzzy
+#: xfumed/xfumed_gui.c:129
 msgid "Edit"
-msgstr "Konec"
+msgstr "Upravit"
 
-#: xfumed/xfumed_gui.c:173
+#: xfumed/xfumed_gui.c:157
 msgid "Save"
 msgstr "Ulo¾it"
 
-#: xfumed/xfumed_gui.c:181
+#: xfumed/xfumed_gui.c:164
 msgid "Reset"
 msgstr "Vynulovat"
 
-#: xfumed/xfumed_gui.c:313
-#, fuzzy
+#: xfumed/xfumed_gui.c:252
 msgid "Edit Entry"
-msgstr "Opravit polo¾ku"
+msgstr "Upravit polo¾ku"
 
-#: xfumed/xfumed_gui.c:315
+#: xfumed/xfumed_gui.c:254
 msgid "Add Entry"
-msgstr ""
+msgstr "Pøidat polo¾ku"
 
-#: xfumed/xfumed_gui.c:338
-#, fuzzy
+#: xfumed/xfumed_gui.c:275
 msgid "Type: "
 msgstr "Typ :"
 
-#: xfumed/xfumed_gui.c:348
-#, fuzzy
+#: xfumed/xfumed_gui.c:282
 msgid "Caption: "
 msgstr "Titulek : "
 
-#: xfumed/xfumed_gui.c:358
-#, fuzzy
+#: xfumed/xfumed_gui.c:289
 msgid "Command: "
 msgstr "Pøíkaz : "
 
-#: xfumed/xfumed_gui_cb.c:22
+#: xfumed/xfumed_gui_cb.c:23
 msgid "Your changes will take effect on next startup"
 msgstr "Va¹e zmìny se projeví a¾ pøi pøí¹tím startu"
 
 #: xfumed/xfumed_gui_cb.c:69
-#, fuzzy
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
@@ -3394,24 +3384,27 @@ msgid ""
 msgstr ""
 "Máte neulo¾ené zmìny v menu.\n"
 "\n"
-"Chcete skonèit a zmìny ztratit ?"
+"Chcete ulo¾it zmìny ?"
 
-#: xfumed/xfumed_gui_cb.c:78
+#: xfumed/xfumed_gui_cb.c:77
 msgid "Don't Quit"
 msgstr "Zpìt"
 
-#: xfumed/xfumed_gui_cb.c:127
-#, fuzzy
+#: xfumed/xfumed_gui_cb.c:123
 msgid "Do you want to delete this entry ?"
-msgstr "Opravdu chcete vyjmout tuto polo¾ku ?"
+msgstr "Opravdu chcete zru¹it tuto polo¾ku ?"
 
-#: xfumed/xfumed_gui_cb.c:129
+#: xfumed/xfumed_gui_cb.c:125
 msgid ""
 "If you delete a submenu, all its entries and \n"
 "submenus will also be deleted.\n"
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
+"Jestli¾e zru¹íte submenu, v¹echny polo¾ky\n"
+"submenu buou také zru¹eny.\n"
+"\n"
+"Chcete opravdu zru¹it submenu ?"
 
 #~ msgid "   Menu: %s   Parent: %s"
 #~ msgstr "   Menu: %s     Nadøazené: %s"
