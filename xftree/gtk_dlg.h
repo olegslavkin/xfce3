@@ -25,26 +25,32 @@
 #ifndef __GTK_DLG_H__
 #define __GTK_DLG_H__
 
-#define DLG_OK			(1<<0)
-#define DLG_CANCEL		(1<<1)
-#define DLG_YES			(1<<2)
-#define DLG_NO			(1<<3)
-#define DLG_CONTINUE	(1<<4)
-#define DLG_CLOSE		(1<<5)
-#define DLG_ALL			(1<<6)
-#define DLG_SKIP		(1<<7)
+/* question dialogs: */
+#define DLG_OK			0x01
+#define DLG_CANCEL		0x02
+#define DLG_YES			0x04
+#define DLG_NO			0x08
+#define DLG_CONTINUE		0x10 
+#define DLG_CLOSE		0x20
+#define DLG_ALL			0x40
+#define DLG_SKIP		0x80
+
 /* */
 #define DLG_OK_CANCEL	(DLG_OK|DLG_CANCEL)
-#define DLG_YES_NO		(DLG_YES|DLG_NO)
+#define DLG_YES_NO	(DLG_YES|DLG_NO)
 /* */
-#define DLG_ENTRY_VIEW	(1<<8)
-#define DLG_ENTRY_EDIT	(1<<9)
-#define DLG_COMBO		(1<<10)
+#define DLG_ENTRY_VIEW		0x100 /* question */
+#define DLG_ENTRY_EDIT		0x200 /* question */
+#define DLG_COMBO		0x400 /* question */
 /* */
-#define DLG_INFO		(1<<11)
-#define DLG_WARN		(1<<12)
-#define DLG_ERROR		(1<<13)
-#define DLG_QUESTION	(1<<14)
+#define DLG_INFO		0x800
+#define DLG_WARN		0x1000
+#define DLG_ERROR		0x2000
+#define DLG_QUESTION		0x4000
+
+#define  DLG_MASK_TYPE		0x7fff
+#define  DLG_MASK_QUESTION	0x47ff
+
 
 #define DLG_RC_CANCEL		0
 #define DLG_RC_OK		1
@@ -53,6 +59,7 @@
 #define DLG_RC_SKIP		4
 #define DLG_RC_DESTROY		5
 
+/* FIXME: need for DLG_MAX should be removed */
 #define DLG_MAX		1024
 
 /* true modal macros: (requiere toplevel widget address, p) */
