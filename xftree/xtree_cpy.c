@@ -449,7 +449,7 @@ static int ok_input(GtkWidget *parent,char *target,entry *s_en){
   /* check for overwrite, both files and directories */
   if ((target_exists) && (!force_override)) {
 	int rc;
-        rc=xf_dlg_new(parent,override_txt(target,s_en->path),NULL,NULL,DLG_CANCEL|DLG_OK|DLG_SKIP|DLG_ALL);
+        rc=xf_dlg_new(parent,override_txt(target,s_en->path),NULL,NULL,DLG_CANCEL|DLG_OK|DLG_SKIP|DLG_ALL,1);
         if (rc == DLG_RC_SKIP) 	 return DLG_RC_SKIP;
         if (rc == DLG_RC_CANCEL) return DLG_RC_CANCEL;
         if (rc == DLG_RC_ALL)	 {
@@ -1085,7 +1085,7 @@ static int rwStdout (int n, void *data){
   /*fprintf(stderr,"dbg(rwStdout error):%s\n",texto);fflush(NULL);*/
   /*set_dnd_status sets static variable in xtree_dnd to break loop;*/
 /*  rc=xf_dlg_error_continue (cat,texto,NULL);*/
-  rc=xf_dlg_new(cat,texto,NULL,NULL,DLG_CANCEL|DLG_CONTINUE|DLG_ALL);
+  rc=xf_dlg_new(cat,texto,NULL,NULL,DLG_CANCEL|DLG_CONTINUE|DLG_ALL,1);
   /*rc=xf_dlg_error_continue_all (cat,texto,NULL);*/
   if (rc==DLG_RC_ALL){
     FILE *allF;

@@ -67,61 +67,34 @@
 
 /* true modal macros: (requiere toplevel widget address, p) */
 #define xf_dlg_string(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_OK_CANCEL|DLG_ENTRY_EDIT|DLG_QUESTION)
+			xf_dlg_new(p,a,b,NULL,DLG_OK_CANCEL|DLG_ENTRY_EDIT|DLG_QUESTION,1)
 #define xf_dlg_continue(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_CONTINUE|DLG_CANCEL)
+			xf_dlg_new(p,a,b,NULL,DLG_CONTINUE|DLG_CANCEL,1)
 #define xf_dlg_error(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_ERROR|DLG_CLOSE)
+			xf_dlg_new(p,a,b,NULL,DLG_ERROR|DLG_CLOSE,1)
 #define xf_dlg_error_continue(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_ERROR|DLG_CONTINUE|DLG_CANCEL)
+			xf_dlg_new(p,a,b,NULL,DLG_ERROR|DLG_CONTINUE|DLG_CANCEL,1)
 #define xf_dlg_warning(p,a) \
-			xf_dlg_new(p,a,NULL,NULL,DLG_WARN|DLG_CLOSE)
+			xf_dlg_new(p,a,NULL,NULL,DLG_WARN|DLG_CLOSE,1)
 #define xf_dlg_info(p,a) \
-			xf_dlg_new(p,a,NULL,NULL,DLG_INFO|DLG_CLOSE)
+			xf_dlg_new(p,a,NULL,NULL,DLG_INFO|DLG_CLOSE,1)
 #define xf_dlg_ask(p,a) \
-			xf_dlg_new(p,a,NULL,NULL,DLG_QUESTION|DLG_YES_NO)
+			xf_dlg_new(p,a,NULL,NULL,DLG_QUESTION|DLG_YES_NO,1)
 #define xf_dlg_skip(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_QUESTION|DLG_SKIP|DLG_CANCEL)
+			xf_dlg_new(p,a,b,NULL,DLG_QUESTION|DLG_SKIP|DLG_CANCEL,1)
 #define xf_dlg_ok_skip(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_QUESTION|DLG_OK|DLG_SKIP|DLG_CANCEL)
+			xf_dlg_new(p,a,b,NULL,DLG_QUESTION|DLG_OK|DLG_SKIP|DLG_CANCEL,1)
 #define xf_dlg_question(p,a,b) \
-			xf_dlg_new(p,a,b,NULL,DLG_YES_NO|DLG_ENTRY_VIEW|DLG_QUESTION)
+			xf_dlg_new(p,a,b,NULL,DLG_YES_NO|DLG_ENTRY_VIEW|DLG_QUESTION,1)
 #define xf_dlg_question_l(p,a,b,c) \
-			xf_dlg_new(p,a,b,NULL,c|DLG_OK_CANCEL|DLG_ENTRY_VIEW|DLG_QUESTION)
+			xf_dlg_new(p,a,b,NULL,c|DLG_OK_CANCEL|DLG_ENTRY_VIEW|DLG_QUESTION,1)
 #define xf_dlg_combo(p,a,b,c) \
-			xf_dlg_new(p,a,b,c,DLG_OK_CANCEL|DLG_COMBO)
+			xf_dlg_new(p,a,b,c,DLG_OK_CANCEL|DLG_COMBO,1)
+#define xf_dlg_comboOK(p,a,b,c) \
+			xf_dlg_new(p,a,b,c,DLG_OK_CANCEL|DLG_COMBO,0)
 
-long xf_dlg_new (GtkWidget *parent,const char *label, char *defval, void *data, int flags);
 
+long xf_dlg_new (GtkWidget *parent,const char *label, char *defval, void *data, int flags, gboolean def_cancel);
 
-/* deprecated calls (because they are not transient): */
-
-#define dlg_string(a,b) \
-			dlg_new(a,b,NULL,DLG_OK_CANCEL|DLG_ENTRY_EDIT|DLG_QUESTION)
-#define dlg_continue(a,b) \
-			dlg_new(a,b,NULL,DLG_CONTINUE|DLG_CANCEL)
-#define dlg_error(a,b) \
-			dlg_new(a,b,NULL,DLG_ERROR|DLG_CLOSE)
-#define dlg_error_continue(a,b) \
-			dlg_new(a,b,NULL,DLG_ERROR|DLG_CONTINUE|DLG_CANCEL)
-#define dlg_warning(a) \
-			dlg_new(a,NULL,NULL,DLG_WARN|DLG_CLOSE)
-#define dlg_info(a) \
-			dlg_new(a,NULL,NULL,DLG_INFO|DLG_CLOSE)
-#define dlg_ask(a) \
-			dlg_new(a,NULL,NULL,DLG_QUESTION|DLG_YES_NO)
-#define dlg_skip(a,b) \
-			dlg_new(a,b,NULL,DLG_QUESTION|DLG_SKIP|DLG_CANCEL)
-#define dlg_ok_skip(a,b) \
-			dlg_new(a,b,NULL,DLG_QUESTION|DLG_OK|DLG_SKIP|DLG_CANCEL)
-#define dlg_question(a,b) \
-			dlg_new(a,b,NULL,DLG_YES_NO|DLG_ENTRY_VIEW|DLG_QUESTION)
-#define dlg_question_l(a,b,c) \
-			dlg_new(a,b,NULL,c|DLG_OK_CANCEL|DLG_ENTRY_VIEW|DLG_QUESTION)
-#define dlg_combo(a,b,c) \
-			dlg_new(a,b,c,DLG_OK_CANCEL|DLG_COMBO)
-
-/* deprecated: */
-int dlg_new (char *label, char *defval, void *data, int flags);
 
 #endif

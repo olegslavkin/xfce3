@@ -330,11 +330,11 @@ delete_files (GtkWidget *ctree,char *path)
   }
   return TRUE;
 delete_error:
-  if (xf_dlg_new (win->top,_("error deleting file"),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)
+  if (xf_dlg_new (win->top,_("error deleting file"),path,NULL,DLG_CONTINUE|DLG_CANCEL,1)==DLG_RC_CANCEL)
 	  abort_delete=TRUE;
   return FALSE;
 delete_error_errno:
-  if ((errno)&&(xf_dlg_new (win->top,strerror(errno),path,NULL,DLG_CONTINUE|DLG_CANCEL)==DLG_RC_CANCEL)) abort_delete=TRUE;	  
+  if ((errno)&&(xf_dlg_new (win->top,strerror(errno),path,NULL,DLG_CONTINUE|DLG_CANCEL,1)==DLG_RC_CANCEL)) abort_delete=TRUE;	  
   return FALSE;
   
   
@@ -669,7 +669,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   if (stat (fullpath, &st) != -1) {
       /*if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)*/
       if (xf_dlg_new(win->top,override_txt(fullpath,NULL),
-			      _("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK) {
+			      _("File exists !"),NULL,DLG_OK|DLG_CANCEL,1)!= DLG_RC_OK) {
 	 free(path);free(fullpath); free(label); 
  	 return;
       }
@@ -745,7 +745,7 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
   /*fprintf(stderr,"dbg: rename %s->%s\n",ofile,nfile);*/
 
   if (lstat (nfile, &st) != ERROR)  {
-      if (xf_dlg_new(win->top,override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
+      if (xf_dlg_new(win->top,override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL,1)!= DLG_RC_OK)
       {
 	free(ofile); free(nfile);
 	goto rename_return;

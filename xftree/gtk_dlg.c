@@ -248,7 +248,7 @@ static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
  */
 
 
-long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *data, int type)
+long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *data, int type, gboolean def_cancel)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *all = NULL, *skip = NULL, *close = NULL, *icon = NULL, *combo = NULL, *label, *box, *button_box;
   char *longlabel = NULL;
@@ -315,9 +315,10 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
       /* SJB ok = gtk_button_new_with_label (_("Continue")); */
       ok = make_button_with_accel(_("_Continue"), accelgrp);
     }
-    GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
+    if (!def_cancel) GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), ok, TRUE, FALSE, 0);
     gtk_widget_set_usize (ok, B_WIDTH, B_HEIGHT);
+    if (!def_cancel) gtk_widget_grab_default (ok);
     
     if (type &(DLG_ENTRY_EDIT | DLG_COMBO)) {
       	    gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (on_ok_combo), 
@@ -329,14 +330,6 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     /* tie escape to cancel: */ 
     gtk_signal_connect (GTK_OBJECT (ok), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), 
 	    (gpointer) cancel);
-  }
-  if ((type & DLG_SKIP) && !(type & (DLG_ENTRY_EDIT | DLG_COMBO )))
-  {
-    skip = gtk_button_new_with_label (_("Skip"));
-    GTK_WIDGET_SET_FLAGS (skip, GTK_CAN_DEFAULT);
-    gtk_box_pack_start (GTK_BOX (button_box), skip, TRUE, FALSE, 0);
-    gtk_signal_connect (GTK_OBJECT (skip), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_SKIP));
-    gtk_widget_set_usize (skip, B_WIDTH, B_HEIGHT);
   }
   if (type & (DLG_CANCEL | DLG_NO))
   {
@@ -350,11 +343,19 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
       /* SJB cancel = gtk_button_new_with_label (_("No")); */
       cancel = make_button_with_accel(_("_No"), accelgrp);
     }
-    GTK_WIDGET_SET_FLAGS (cancel, GTK_CAN_DEFAULT);
+    if (def_cancel) GTK_WIDGET_SET_FLAGS (cancel, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), cancel, TRUE, FALSE, 0);
     gtk_signal_connect (GTK_OBJECT (cancel), "clicked", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_CANCEL));
     gtk_widget_set_usize (cancel, B_WIDTH, B_HEIGHT);
-    gtk_widget_grab_default (cancel);
+    if (def_cancel) gtk_widget_grab_default (cancel);
+  }
+  if ((type & DLG_SKIP) && !(type & (DLG_ENTRY_EDIT | DLG_COMBO )))
+  {
+    skip = gtk_button_new_with_label (_("Skip"));
+    if (!ok && !cancel) GTK_WIDGET_SET_FLAGS (skip, GTK_CAN_DEFAULT);
+    gtk_box_pack_start (GTK_BOX (button_box), skip, TRUE, FALSE, 0);
+    gtk_signal_connect (GTK_OBJECT (skip), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_SKIP));
+    gtk_widget_set_usize (skip, B_WIDTH, B_HEIGHT);
   }
   if ((type & DLG_ALL) && !(type & (DLG_ENTRY_EDIT | DLG_COMBO )))
 
@@ -362,7 +363,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     /* SJB all = gtk_button_new_with_label (_("All")); */
     all = make_button_with_accel(_("_All"), accelgrp);
     
-    GTK_WIDGET_SET_FLAGS (all, GTK_CAN_DEFAULT);
+    if (!ok && !cancel) GTK_WIDGET_SET_FLAGS (all, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), all, TRUE, FALSE, 0);
     gtk_signal_connect (GTK_OBJECT (all), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_ALL));
     gtk_widget_set_usize (all, B_WIDTH, B_HEIGHT);
@@ -372,7 +373,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     /* SJB close = gtk_button_new_with_label (_("Close")); */
     close = make_button_with_accel(_("_Close"), accelgrp);
     
-    GTK_WIDGET_SET_FLAGS (close, GTK_CAN_DEFAULT);
+    if (!ok && !cancel) GTK_WIDGET_SET_FLAGS (close, GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (button_box), close, TRUE, FALSE, 0);
     gtk_signal_connect (GTK_OBJECT (close), "clicked", GTK_SIGNAL_FUNC (on_ok), (gpointer) ((long) DLG_RC_OK));
   }
@@ -393,7 +394,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     dl.entry = gtk_entry_new ();
     gtk_entry_set_max_length ((GtkEntry *)dl.entry,DLG_MAX);
     gtk_widget_set_usize (dl.entry, E_WIDTH, -1);
-    GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
+    if (!ok && !cancel) GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
     gtk_signal_connect (GTK_OBJECT (dl.entry), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data_received), NULL);
     gtk_widget_grab_focus (dl.entry);
@@ -405,7 +406,7 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
     gtk_combo_disable_activate (GTK_COMBO (combo));
     gtk_combo_set_case_sensitive (GTK_COMBO (combo), 1);
     dl.entry = GTK_COMBO (combo)->entry;
-    GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
+    if (!ok && !cancel) GTK_WIDGET_SET_FLAGS (dl.entry, GTK_CAN_DEFAULT);
     gtk_drag_dest_set (dl.entry, GTK_DEST_DEFAULT_ALL, target_table, NUM_TARGETS, GDK_ACTION_COPY);
     gtk_signal_connect (GTK_OBJECT (dl.entry), "activate", GTK_SIGNAL_FUNC (on_ok_combo), (gpointer) ((long) DLG_RC_OK));
     gtk_signal_connect (GTK_OBJECT (dl.entry), "drag_data_received", GTK_SIGNAL_FUNC (on_drag_data_received), NULL);
@@ -459,9 +460,5 @@ long xf_dlg_new (GtkWidget *parent,const char *labelval, char *defval, void *dat
   return (long)(dl.result);
 }
 
-/* function for deprecated calls: */
-gint dlg_new (char *labelval, char *defval, void *data, int type){
-	return (xf_dlg_new(NULL,labelval,defval,data,type));
-}
 
 

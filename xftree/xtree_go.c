@@ -277,7 +277,8 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
 	list = g_list_prepend (list,thisgo->path);
 skipit:;
   } 
-  entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), "/", list);
+  /*entry_return = (char *)xf_dlg_combo (win->top,_("Go to"), "/", list);*/
+  entry_return = (char *)xf_dlg_comboOK (win->top,_("Go to"), "/", list);
   if (!entry_return) return;
   go_to (ctree, root,entry_return , en->flags);
 }
