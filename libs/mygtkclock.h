@@ -41,14 +41,25 @@ extern "C"
   typedef enum
   {
     MY_GTK_CLOCK_ANALOG,
-    MY_GTK_CLOCK_DIGITAL
+    MY_GTK_CLOCK_DIGITAL,
+    MY_GTK_CLOCK_LEDS
   }
   MyGtkClockMode;
+
+  typedef enum
+  {
+    DIGIT_SMALL,
+    DIGIT_MEDIUM,
+    DIGIT_LARGE,
+    DIGIT_HUGE
+  }
+  Digit_Size;
 
   struct _MyGtkClock
   {
     GtkWidget widget;
     GtkStyle *parent_style;
+    GdkBitmap *digits_bmap;
     /* Dimensions of clock components */
     gint radius;
     gint internal;
@@ -69,6 +80,7 @@ extern "C"
     gboolean military_time;	/* true=24 hour clock, false = 12 hour clock. */
     gboolean display_am_pm;
     gboolean display_secs;
+    Digit_Size leds_size;
   };
 
   struct _MyGtkClockClass

@@ -586,8 +586,8 @@ my_get_adjustment_as_int (GtkAdjustment * adjustment)
 void
 my_set_adjustment_bounds (GtkAdjustment * adjustment, gfloat lower, gfloat upper)
 {
-  g_return_val_if_fail (adjustment != NULL, 0);
-  g_return_val_if_fail (GTK_IS_ADJUSTMENT (adjustment), 0);
+  g_return_if_fail (adjustment != NULL);
+  g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
   adjustment->lower = lower;
   adjustment->upper = upper + 1.0;
