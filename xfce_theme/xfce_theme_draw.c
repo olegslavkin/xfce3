@@ -922,7 +922,11 @@ draw_box(GtkStyle * style,
     }
   else
     gtk_style_apply_default_pixmap(style, window, state_type, area, x, y, width, height);
-  gtk_paint_shadow(style, window, state_type, shadow_type, area, widget, detail,
+  if ((detail) && (!strcmp("menuitem", detail)) && (state_type == GTK_STATE_PRELIGHT))
+    gtk_paint_shadow(style, window, state_type, GTK_SHADOW_IN, area, widget, detail,
+		   x, y, width, height);
+  else
+    gtk_paint_shadow(style, window, state_type, shadow_type, area, widget, detail,
 		   x, y, width, height);
 }
 
