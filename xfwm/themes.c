@@ -3713,27 +3713,19 @@ DrawBottomMenu_gtk (Window win, XRectangle *area, int x, int y, int w, int h, GC
 void
 DrawTrianglePattern_gtk (Window w, XRectangle *area, GC ReliefGC, GC ShadowGC, GC BackGC, int l, int t, int r, int b, short state)
 {
-  int m, i;
-  XSegment seg[10];
+  int m;
+  XPoint points[3];
 
   m = (t + b) >> 1;
 
-  i = 0;
-  seg[i].x1 = l;
-  seg[i].y1 = t;
-  seg[i].x2 = l;
-  seg[i++].y2 = b;
-  seg[i].x1 = l;
-  seg[i].y1 = t;
-  seg[i].x2 = r;
-  seg[i++].y2 = m;
-  XDrawSegments (dpy, w, ReliefGC, seg, i);
-  i = 0;
-  seg[i].x1 = l;
-  seg[i].y1 = b;
-  seg[i].x2 = r;
-  seg[i++].y2 = m;
-  XDrawSegments (dpy, w, ShadowGC, seg, i);
+  points[0].x = l;
+  points[0].y = t;
+  points[1].x = l;
+  points[1].y = b;
+  points[2].x = r;
+  points[2].y = m;
+
+  XFillPolygon (dpy, w, BackGC, points, 3, Convex, CoordModeOrigin);
 }
 
 void
