@@ -9,7 +9,7 @@
 #include "../xfdiff/xfdiff_colorsel.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.46"
+#define XFSAMBA_VERSION "0.47"
 #endif
 
 #ifdef XFSAMBA_MAIN
@@ -270,3 +270,8 @@ EXTERN GdkPixmap  *gPIX_reload,*gPIX_delete, *gPIX_new_dir,  *gPIX_view1, *gPIX_
 EXTERN GdkBitmap  *gPIM_reload,  *gPIM_delete, *gPIM_new_dir, *gPIM_view1, *gPIM_view2, *gPIM_view3, *gPIM_tar, *gPIM_help, *gPIM_ip, *gPIM_download, *gPIM_upload;
 
 EXTERN GtkWidget * smb_nav, *location, *locationIP, *shares, *servers, *workgroups, *diagnostics, *statusline, *sharesL, *serversL, *workgroupsL, *progress;
+
+/* variables initialized in xfsamba.c */
+#ifndef XFSAMBA_MAIN
+extern char *challenges[];
+#endif

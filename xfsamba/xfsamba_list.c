@@ -124,6 +124,7 @@ GtkCTreeNode *add_node(smb_entry *en,char **textos,GtkCTreeNode *nodo){
  
 }
 
+
 /* function to process stdout produced by child */
 static int
 SMBListStdout (int n, void *data)
@@ -140,11 +141,13 @@ SMBListStdout (int n, void *data)
   if (n) return TRUE;  /* this would mean binary data */
   line = (char *) data;
   print_diagnostics (line);
-  if (strstr (line, "ERRbadpw"))  {/* server has died */
-    SMBResult = CHALLENGED;
-    print_diagnostics ("DBG:");
-    print_diagnostics (line);
-/* here we must pop it from the cache!!!!! */
+  for (i=0;challenges[i]!=NULL;i++){
+      if (strstr (line, challenges[i]))  {
+        SMBResult = CHALLENGED;
+        print_diagnostics ("DBG:");
+        print_diagnostics (line);
+        /* here we must pop it from the cache!!!!! */    
+      }	
   }
   if (strlen (line) < 2)	return TRUE;
   if (strstr (line, "  .   "))	return TRUE;

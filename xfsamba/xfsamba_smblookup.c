@@ -184,6 +184,7 @@ static int
 SMBparseLookup (int n, void *data)
 {
   char *line;
+  int i;
   gchar *textos[SHARE_COLUMNS];
   static char *position[2];
 
@@ -197,13 +198,26 @@ SMBparseLookup (int n, void *data)
     SMBResult = FAILED;
     position[0] = line;
     position[1] = NULL;
+    print_diagnostics (line);
   }
+  /* pre samba 2.2 */
   if (strstr (line, "Access") && strstr (line, "denied"))
   {
     cual_chingao = LOCATION_SHARES;
     SMBResult = CHALLENGED;
     position[0] = line;
     position[1] = NULL;
+    print_diagnostics (line);
+  }
+  /* post samba 2.2 */
+  for (i=0;challenges[i]!=NULL;i++){
+      if (strstr (line, challenges[i]))  {
+        cual_chingao = LOCATION_SHARES;
+        SMBResult = CHALLENGED;
+        position[0] = line;
+        position[1] = NULL;
+        print_diagnostics (line);
+      }	
   }
   if (strstr (line, "--------"))
   {

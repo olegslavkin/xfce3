@@ -65,6 +65,24 @@
 #include "icons/warning.xpm"
 #include "icons/xfsamba.xpm"
 
+char *challenges[]={
+	  "Error opening local file",
+	  "ERRDOS",
+	  "ERRSRV",
+	  "ERRbadpw", /* before samba 2.2.3 */
+	  "NT_STATUS_WRONG_PASSWORD", 
+	  "NT_STATUS_ACCESS_DENIED",
+	  "NT_STATUS_ILL_FORMED_PASSWORD",
+	  "NT_STATUS_PASSWORD_RESTRICTION",
+	  "NT_STATUS_NO_SUCH_USER",
+	  "NT_STATUS_LOGON_FAILURE",
+	  "NT_STATUS_ACCOUNT_RESTRICTION",
+	  "NT_STATUS_INVALID_LOGON_HOURS",
+	  "NT_STATUS_INVALID_WORKSTATION",
+	  "NT_STATUS_PASSWORD_EXPIRED",
+	  "NT_STATUS_ACCOUNT_DISABLED",
+	  NULL
+};
 
 
 void cleanup_tmpfiles(void){

@@ -64,12 +64,14 @@ static int
 SMBPutStdout (int n, void *data)
 {
   char *line;
+  int i;
   if (n)
     return TRUE;		/* this would mean binary data */
   line = (char *) data;
-  if ((strstr (line, "ERRDOS"))||(strstr (line, "ERRSRV")))
-  {				/* server has died */
-    SMBResult = CHALLENGED;
+  for (i=0;challenges[i]!=NULL;i++){
+      if (strstr (line, challenges[i]))  {
+        SMBResult = CHALLENGED;
+      }	
   }
   print_diagnostics (line);
 

@@ -106,13 +106,15 @@ static int
 SMBrmStdout (int n, void *data)
 {
   char *line;
+  int i;
   if (n)
     return TRUE;		/* this would mean binary data */
   line = (char *) data;
-  if (strstr (line, "ERRDOS"))
-  {				/* server has died */
-    SMBResult = CHALLENGED;
-    xf_dlg_warning(smb_nav,line);
+  for (i=0;challenges[i]!=NULL;i++){
+      if (strstr (line, challenges[i]))  {
+        SMBResult = CHALLENGED;
+        xf_dlg_warning(smb_nav,line);
+      }	
   }
   print_diagnostics (line);
 
