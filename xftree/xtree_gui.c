@@ -1210,7 +1210,7 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
   if (!num)
   {
     /* nothing to delete */
-    dlg_warning (_("No files marked !"));
+    xf_dlg_warning (win->top,_("No files marked !"));
     return;
   }
   for (i = 0; i < num; i++)
@@ -1230,9 +1230,9 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
     if (ask)
     {
       if (num - i == 1)
-	result = dlg_question (_("Delete item ?"), en->path);
+	result = xf_dlg_question (win->top,_("Delete item ?"), en->path);
       else
-	result = dlg_question_l (_("Delete item ?"), en->path, DLG_ALL | DLG_SKIP);
+	result = xf_dlg_question_l (win->top,_("Delete item ?"), en->path, DLG_ALL | DLG_SKIP);
     }
     else
       result = DLG_RC_ALL;
@@ -1252,14 +1252,14 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
 
       if (lstat (en->path, &st_target) == -1)
       {
-	dlg_error (_("Can't stat() file"), en->path);
+	xf_dlg_error (win->top,_("Can't stat() file"), en->path);
 	ctree_thaw (ctree);
 	return;
       }
 
       if (stat (win->trash, &st_trash) == -1)
       {
-	dlg_error (_("Can't stat() file"), win->trash);
+	xf_dlg_error (win->top,_("Can't stat() file"), win->trash);
 	ctree_thaw (ctree);
 	return;
       }
@@ -1270,7 +1270,7 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
 	{
 	  perror (_("move_file()"));
 	  gtk_ctree_unselect (ctree, node);
-	  if (dlg_error_continue (en->path, _("Move to trash failed")) == DLG_RC_CANCEL)
+	  if (xf_dlg_error_continue (win->top,en->path, _("Move to trash failed")) == DLG_RC_CANCEL)
 	  {
 	    ctree_thaw (ctree);
 	    return;
@@ -1285,9 +1285,9 @@ cb_delete (GtkWidget * widget, GtkCTree * ctree)
       {
 	if (ask_again) { 
 		if (num - i == 1)
-			result = dlg_question (_("Can't move file to trash, hard delete ?"), en->path);
+			result = xf_dlg_question (win->top,_("Can't move file to trash, hard delete ?"), en->path);
 		else	
-			result = dlg_question_l (_("Can't move file to trash, hard delete ?"), en->path, DLG_ALL | DLG_SKIP);
+			result = xf_dlg_question_l (win->top,_("Can't move file to trash, hard delete ?"), en->path, DLG_ALL | DLG_SKIP);
 
 			
 		if (result == DLG_RC_ALL)
@@ -1337,7 +1337,9 @@ cb_find (GtkWidget * item, GtkWidget * ctree)
 static void
 cb_about (GtkWidget * item, GtkWidget * ctree)
 {
-  dlg_info (_("This is XFTree, based on 'XTree' " "\n(c) by Rasca\npublished under GNU GPL" "\nhttp://home.pages.de/~rasca/xap/"));
+  cfg *win;
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
+  xf_dlg_info (win->top,_("This is XFTree, based on 'XTree' " "\n(c) by Rasca\npublished under GNU GPL" "\nhttp://home.pages.de/~rasca/xap/"));
 }
 
 
@@ -1438,7 +1440,10 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
   char path[PATH_MAX + 1], *p;
   GList *list;
   int count;
+  cfg *win;
 
+  
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   root = GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list);
   count = count_selection (ctree, &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
@@ -1486,7 +1491,7 @@ cb_go_to (GtkWidget * item, GtkCTree * ctree)
       list = g_list_append (list, "/home");
       strcpy (path, "/");
     }
-    if (dlg_combo (_("Go to"), path, list) != DLG_RC_OK)
+    if (xf_dlg_combo (win->top,_("Go to"), path, list) != DLG_RC_OK)
     {
       free_list (list);
       return;
@@ -1882,7 +1887,9 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
   char path[PATH_MAX + 1];
   char label[PATH_MAX + 1];
   char compl[PATH_MAX + 1];
+  cfg *win;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   count_selection (GTK_CTREE (ctree), &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
   if (!(en->type & FT_DIR))
@@ -1899,13 +1906,13 @@ cb_new_subdir (GtkWidget * item, GtkWidget * ctree)
   else
     sprintf (path, "%s/", en->path);
   strcpy (label, _("New_Folder"));
-  if (dlg_string (path, label) == DLG_RC_OK)
+  if (xf_dlg_string (win->top,path, label) == DLG_RC_OK)
   {
     sprintf (compl, "%s%s", path, label);
     if (mkdir (compl, 0xFFFF) != -1)
       update_tree (GTK_CTREE (ctree), node);
     else
-      dlg_error (compl, strerror (errno));
+      xf_dlg_error (win->top,compl, strerror (errno));
   }
 }
 
@@ -1923,7 +1930,9 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   int exists = 0;
   struct stat st;
   FILE *fp;
+  cfg *win;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   count_selection (GTK_CTREE (ctree), &node);
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
 
@@ -1941,13 +1950,13 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
   else
     sprintf (path, "%s/", en->path);
   strcpy (label, "New_File.c");
-  if ((dlg_string (path, label) == DLG_RC_OK) && strlen (label) && io_is_valid (label))
+  if ((xf_dlg_string (win->top,path, label) == DLG_RC_OK) && strlen (label) && io_is_valid (label))
   {
     sprintf (compl, "%s%s", path, label);
     if (stat (compl, &st) != -1)
     {
       /*if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)*/
-      if (dlg_new(override_txt(compl,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
+      if (xf_dlg_new(win->top,override_txt(compl,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
 	return;
       }
@@ -1956,7 +1965,7 @@ cb_new_file (GtkWidget * item, GtkWidget * ctree)
     fp = fopen (compl, "w");
     if (!fp)
     {
-      dlg_error (_("Can't create : "), compl);
+      xf_dlg_error (win->top,_("Can't create : "), compl);
       return;
     }
     fclose (fp);
@@ -1988,7 +1997,9 @@ cb_duplicate (GtkWidget * item, GtkCTree * ctree)
   struct stat s;
   FILE *ofp, *nfp;
   char buf[MAXBUF];
+  cfg *win;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (!count_selection (ctree, &node))
   {
     return;
@@ -2007,14 +2018,14 @@ cb_duplicate (GtkWidget * item, GtkCTree * ctree)
   ofp = fopen (en->path, "rb");
   if (!ofp)
   {
-    dlg_error (en->path, strerror (errno));
+    xf_dlg_error (win->top,en->path, strerror (errno));
     cursor_reset (GTK_WIDGET (ctree));
     return;
   }
   nfp = fopen (nfile, "wb");
   if (!nfp)
   {
-    dlg_error (nfile, strerror (errno));
+    xf_dlg_error (win->top,nfile, strerror (errno));
     fclose (ofp);
     cursor_reset (GTK_WIDGET (ctree));
     return;
@@ -2047,11 +2058,13 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
   char ofile[PATH_MAX + NAME_MAX + 1];
   char nfile[PATH_MAX + NAME_MAX + 1];
   char *p;
+  cfg *win;
   struct stat st;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (!count_selection (ctree, &node))
   {
-    dlg_warning (_("No item marked !"));
+    xf_dlg_warning (win->top,_("No item marked !"));
     return;
   }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
@@ -2062,12 +2075,12 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
 
   ctree_freeze (ctree);
   sprintf (nfile, "%s", en->label);
-  if ((dlg_string (_("Rename to : "), nfile) == DLG_RC_OK) && strlen (nfile) && io_is_valid (nfile))
+  if ((xf_dlg_string (win->top,_("Rename to : "), nfile) == DLG_RC_OK) && strlen (nfile) && io_is_valid (nfile))
   {
     if ((p = strchr (nfile, '/')) != NULL)
     {
       p[1] = '\0';
-      dlg_error (_("Character not allowed in filename"), p);
+      xf_dlg_error (win->top,_("Character not allowed in filename"), p);
       ctree_thaw (ctree);
       return;
     }
@@ -2080,7 +2093,7 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
     if (lstat (nfile, &st) != ERROR)
     {
       /*if (dlg_question (_("Override ?"), nfile) != DLG_RC_OK)*/
-      if (dlg_new(override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
+      if (xf_dlg_new(win->top,override_txt(nfile,NULL),_("File exists !"),NULL,DLG_OK|DLG_CANCEL)!= DLG_RC_OK)
       {
 	ctree_thaw (ctree);
 	return;
@@ -2089,7 +2102,7 @@ cb_rename (GtkWidget * item, GtkCTree * ctree)
     }
     if (rename (ofile, nfile) == -1)
     {
-      dlg_error (nfile, strerror (errno));
+      xf_dlg_error (win->top,nfile, strerror (errno));
     }
     else
     {
@@ -2133,13 +2146,13 @@ cb_open_with (GtkWidget * item, GtkCTree * ctree)
   GtkCTreeNode *node;
   char *prg;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   if (!count_selection (ctree, &node))
   {
-    dlg_warning (_("No files marked !"));
+    xf_dlg_warning (win->top,_("No files marked !"));
     return;
   }
   en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   prg = reg_app_by_file (win->reg, en->path);
   dlg_open_with (win->xap, prg ? prg : DEF_APP, en->path);
 }
@@ -2157,7 +2170,9 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
   struct stat fst;
   int rc = DLG_RC_CANCEL, ask = 1, flags = 0;
   int first_is_stale_link = 0;
+  cfg *win;
 
+  win = gtk_object_get_user_data (GTK_OBJECT (ctree));
   ctree_freeze (ctree);
   selection = g_list_copy (GTK_CLIST (ctree)->selection);
 
@@ -2175,7 +2190,7 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
       flags |= IS_MULTI;
     if (lstat (en->path, &fst) == -1)
     {
-      if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
+      if (xf_dlg_continue (win->top,en->path, strerror (errno)) != DLG_RC_OK)
       {
 	g_list_free (selection);
 	ctree_thaw (ctree);
@@ -2231,7 +2246,7 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
 	    /* chmod() on a symlink itself isn't possible */
 	    if (chmod (en->path, nprop.mode) == -1)
 	    {
-	      if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
+	      if (xf_dlg_continue (win->top,en->path, strerror (errno)) != DLG_RC_OK)
 	      {
 		g_list_free (selection);
 		ctree_thaw (ctree);
@@ -2245,7 +2260,7 @@ cb_props (GtkWidget * item, GtkCTree * ctree)
 	  {
 	    if (chown (en->path, nprop.uid, nprop.gid) == -1)
 	    {
-	      if (dlg_continue (en->path, strerror (errno)) != DLG_RC_OK)
+	      if (xf_dlg_continue (win->top,en->path, strerror (errno)) != DLG_RC_OK)
 	      {
 		g_list_free (selection);
 		ctree_thaw (ctree);
@@ -2304,7 +2319,7 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   sfx = strrchr (en->label, '.');
   if (!sfx)
   {
-    if (dlg_continue (_("Can't find suffix in filename, using complete filename"), en->label) != DLG_RC_OK)
+    if (xf_dlg_continue (win->top,_("Can't find suffix in filename, using complete filename"), en->label) != DLG_RC_OK)
     {
       ctree_thaw (GTK_CTREE (ctree));
       return;
@@ -2331,7 +2346,7 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
   else
     strcpy (path, DEF_APP);
   apps = reg_app_list (win->reg);
-  if (dlg_combo (label, path, apps) == DLG_RC_OK)
+  if (xf_dlg_combo (win->top,label, path, apps) == DLG_RC_OK)
   {
     if (*path)
     {
@@ -2818,21 +2833,26 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Open in new"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open in terminal"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+    
 #define COMMON_HELP_1 \
     {N_("Go to marked"), (gpointer) cb_go_to, 0, GDK_g,GDK_MOD1_MASK}    
+    
 #define COMMON_HELP_2 \
      {N_("Open with ..."), (gpointer) cb_open_with, 0, GDK_o,GDK_MOD1_MASK},\
      {N_("Register ..."), (gpointer) cb_register, 0, GDK_r,GDK_MOD1_MASK},\
      {N_("Duplicate"), (gpointer) cb_duplicate, 0, GDK_d,GDK_MOD1_MASK} 
+     
 #define COMMON_MENU_NEW \
     {N_("New Folder"), (gpointer) cb_new_subdir, 0, GDK_n,GDK_MOD1_MASK},\
     {N_("New file"), (gpointer) cb_new_file, 0,GDK_n,GDK_CONTROL_MASK}
+    
 #define COMMON_MENU_2 \
     {N_("Properties ..."), (gpointer) cb_props, 0, GDK_p,GDK_CONTROL_MASK},\
     {N_("Rename ..."), (gpointer) cb_rename, 0, GDK_r,GDK_CONTROL_MASK},\
     {N_("Delete ..."), (gpointer) cb_delete, 0},\
     {N_("Show disk usage ..."), (gpointer) cb_du, 0, GDK_u,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+    
 #define COMMON_MENU_GOTO \
     {N_("Find ..."), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
     {N_("Go home"), (gpointer) cb_go_home, 0,GDK_h,GDK_CONTROL_MASK},\
@@ -2840,17 +2860,20 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {N_("Go up"), (gpointer) cb_go_up, 0,GDK_a,GDK_CONTROL_MASK},\
     {N_("Go to"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+    
 #define COMMON_MENU_SELECT \
     {N_("Select all"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
     {N_("Unselect"), (gpointer) cb_unselect, 0,GDK_q,GDK_CONTROL_MASK},\
     {N_("Toggle Dotfiles"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+    
 #define COMMON_MENU_LAST \
     {N_("Run program ..."), (gpointer) cb_exec, WINCFG,GDK_x,GDK_CONTROL_MASK},\
     {N_("Open Trash"), (gpointer) cb_open_trash, WINCFG, GDK_o,GDK_CONTROL_MASK},\
     {N_("Empty Trash"), (gpointer) cb_empty_trash, 0, GDK_e,GDK_CONTROL_MASK},\
     {N_("Close window"), (gpointer) cb_destroy, TOPWIN, GDK_z,GDK_CONTROL_MASK}
 /* quit only on main menu now, so that default geometry is saved correctly with cb_quit.*/
+    
 #define COMMON_HELP_3 \
     {N_("Quit ..."), NULL, 0, GDK_c,GDK_CONTROL_MASK}
 
@@ -2926,7 +2949,7 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   label[COL_NAME] = path;
   label[COL_SIZE] = "";
   label[COL_DATE] = "";
-  top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  win->top = top = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
   gtk_signal_connect (GTK_OBJECT (top), "destroy", GTK_SIGNAL_FUNC (on_destroy), (gpointer) win);
   gtk_signal_connect (GTK_OBJECT (top), "delete_event", GTK_SIGNAL_FUNC (on_delete), (gpointer) win);
@@ -3191,7 +3214,9 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   gPIX_stale_lnk = MyCreateGdkPixmapFromData (stale_lnk_xpm, top, &gPIM_stale_lnk, FALSE);
 
   if (!io_is_directory (path))
-  {
+  { /* to what window does this dlg_error correspond to? top has not yet been shown! 
+     * It is probably a top level window, and not modal dialog, unless modal
+     * dialogs of unshown windows can be shown */
     dlg_error (path, strerror (errno));
     return;
   }

@@ -41,6 +41,7 @@ typedef struct
   /* geometry */
   int width;
   int height;
+  GtkWidget *top;
 }
 cfg, cfg_t;
 

@@ -196,7 +196,7 @@ static GtkWidget *make_button_with_accel(gchar *label, GtkAccelGroup *accelgrp)
 /*
  * create a modal dialog and handle it
  */
-gint dlg_new (char *labelval, char *defval, void *data, int type)
+gint xf_dlg_new (GtkWidget *parent,char *labelval, char *defval, void *data, int type)
 {
   GtkWidget *ok = NULL, *cancel = NULL, *all = NULL, *skip = NULL, *close = NULL, *icon = NULL, *combo = NULL, *label, *box, *button_box;
   char title[DLG_MAX];
@@ -392,8 +392,22 @@ gint dlg_new (char *labelval, char *defval, void *data, int type)
   gtk_signal_connect (GTK_OBJECT (dl.top), "destroy", GTK_SIGNAL_FUNC (on_cancel), (gpointer) ((long) DLG_RC_DESTROY));
   gtk_signal_connect (GTK_OBJECT (dl.top), "key_press_event", GTK_SIGNAL_FUNC (on_key_press), (gpointer) cancel);
   gtk_widget_show_all (dl.top);
+
+  /*The missing instruction is: 
+  gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent));
+  the problem is that in the original routine we donot have 
+  the parent widget address.
+  */
+  if (parent) gtk_window_set_transient_for (GTK_WINDOW (dl.top), GTK_WINDOW (parent)); 
   gtk_main ();
   if (longlabel)
     g_free (longlabel);
   return (dl.result);
 }
+
+/* function for deprecated calls: */
+gint dlg_new (char *labelval, char *defval, void *data, int type){
+	return (xf_dlg_new(NULL,labelval,defval,data,type));
+}
+
+

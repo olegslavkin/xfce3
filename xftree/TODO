@@ -9,10 +9,16 @@ from these files straight to where you want it.
 14- add "save user shortcutkeys to config options:
     does gtk store the custom values in the associated accel?
     if so, how do you retrieve the values?
-bugs to fix: information dialogs can get lost beneath
+bugs to fix: information dialogs can get lost beneath 
+             * need to check behavior of dlg_prop(),
+               dlg_open_with(),dlg_execute() called in xtre_gui
+             * need to check other files
+                    all over yet)
              erratic behavior when the top open folder gets moved away by 
              another process.
 done:
+bug: information dialogs can get lost beneath 
+	- fixed for all gtk_dlg.
 13- add help for creating custom shortcut keys, and default defined shorcut keys
 1- Some configuration options --> 
     save geometry on exit, 

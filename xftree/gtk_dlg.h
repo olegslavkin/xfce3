@@ -55,6 +55,37 @@
 
 #define DLG_MAX		1024
 
+/* true modal macros: (requiere toplevel widget address, p) */
+#define xf_dlg_string(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_OK_CANCEL|DLG_ENTRY_EDIT|DLG_QUESTION)
+#define xf_dlg_continue(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_CONTINUE|DLG_CANCEL)
+#define xf_dlg_error(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_ERROR|DLG_CLOSE)
+#define xf_dlg_error_continue(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_ERROR|DLG_CONTINUE|DLG_CANCEL)
+#define xf_dlg_warning(p,a) \
+			xf_dlg_new(p,a,NULL,NULL,DLG_WARN|DLG_CLOSE)
+#define xf_dlg_info(p,a) \
+			xf_dlg_new(p,a,NULL,NULL,DLG_INFO|DLG_CLOSE)
+#define xf_dlg_ask(p,a) \
+			xf_dlg_new(p,a,NULL,NULL,DLG_QUESTION|DLG_YES_NO)
+#define xf_dlg_skip(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_QUESTION|DLG_SKIP|DLG_CANCEL)
+#define xf_dlg_ok_skip(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_QUESTION|DLG_OK|DLG_SKIP|DLG_CANCEL)
+#define xf_dlg_question(p,a,b) \
+			xf_dlg_new(p,a,b,NULL,DLG_YES_NO|DLG_ENTRY_VIEW|DLG_QUESTION)
+#define xf_dlg_question_l(p,a,b,c) \
+			xf_dlg_new(p,a,b,NULL,c|DLG_OK_CANCEL|DLG_ENTRY_VIEW|DLG_QUESTION)
+#define xf_dlg_combo(p,a,b,c) \
+			xf_dlg_new(p,a,b,c,DLG_OK_CANCEL|DLG_COMBO)
+
+int xf_dlg_new (GtkWidget *parent,char *label, char *defval, void *data, int flags);
+
+
+/* deprecated calls (because they are not transient): */
+
 #define dlg_string(a,b) \
 			dlg_new(a,b,NULL,DLG_OK_CANCEL|DLG_ENTRY_EDIT|DLG_QUESTION)
 #define dlg_continue(a,b) \
@@ -80,6 +111,7 @@
 #define dlg_combo(a,b,c) \
 			dlg_new(a,b,c,DLG_OK_CANCEL|DLG_COMBO)
 
+/* deprecated: */
 int dlg_new (char *label, char *defval, void *data, int flags);
 
 #endif
