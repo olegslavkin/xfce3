@@ -1,3 +1,89 @@
+2001-10-10  xfce
+
+	* config.h.in, configure, configure.in, libs/Strings.c,
+	libs/my_string.c, libs/utils.h, xfumed/Makefile.in, xfwm/events.c,
+	xfwm/icons.c: Add optimizations
+
+2001-10-10  xfce
+
+	* po/: cs.gmo, cs.po, et.gmo, et.po, xfce.pot: Update et.po and
+	cs.po
+
+2001-10-10  xfce
+
+	* other/xfwmrc.in: Change StaysOnTop to StayOnTop
+
+2001-10-10  xfce
+
+	* xfwm/misc.c: Whoops !
+
+2001-10-10  xfce
+
+	* xfwm/: icons.c, menus.c, misc.c: Various changes
+
+2001-10-10  xfce
+
+	* xfwm/: add_window.c, builtins.c, complex.c, events.c, focus.c,
+	icons.c, menus.c, misc.c, move.c, placement.c, resize.c, virtual.c,
+	xfwm.c, xfwm.h: Various changes
+
+2001-10-10  xfce
+
+	* xfwm/add_window.c: Grab server earlier in add_window ()
+
+2001-10-10  xfce
+
+	* xfwm/: add_window.c, placement.c, screen.h, style.c: Replace
+	StartsOnDesk by StartOnDesk and StaysOnTop by StayOnTop in style
+	definition because I just couldn't remember the "s"
+
+2001-10-10  xfce
+
+	* xfwm/add_window.c: Add even more optimization to add_window ()
+
+2001-10-10  xfce
+
+	* xfwm/: add_window.c, icons.c: Add new optimizations.
+
+2001-10-09  xfce
+
+	* xfwm/: add_window.c, events.c, icons.c, misc.c: Revert even more
+	changes (might look somehow slower)
+
+2001-10-09  xfce
+
+	* xfwm/: events.c, icons.c, misc.c: [no log message]
+
+2001-10-09  xfce
+
+	* xfwm/: icons.c, misc.c: [no log message]
+
+2001-10-09  xfce
+
+	* xfwm/misc.c: Revert more changes
+
+2001-10-09  xfce
+
+	* xfwm/: builtins.c, events.c, misc.c: Revert most changes.
+
+2001-10-09  xfce
+
+	* xfwm/: events.c, misc.c: I believe I found the problem that
+	caused xfwm to crash...
+
+2001-10-09  xfce
+
+	* xfwm/: builtins.c, events.c: [no log message]
+
+2001-10-09  xfce
+
+	* xfwm/events.c: Move the call Destroy() withing the Grab/Ungrab
+	server in HandleUnmapNotify()
+
+2001-10-08  xfce
+
+	* ChangeLog, xfce-3.8.9.lsm: Update ChangeLog
+
 2001-10-08  xfce
 
 	* libs/configure.h, po/xfce.pot, xfwm/events.c, xfwm/misc.c,
