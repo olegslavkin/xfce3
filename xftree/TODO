@@ -1,7 +1,3 @@
-a *must* do:
-Once the copy/move has gone recursive, on errors it must query continue/cancel
-instead of just cancelling. Maybe a redflag.tmpcode in /tmp, which if unlinked
-is green light, otherwise, parent will kill child before greenlight comes.
 
 Two big ones:
 7- Add code necesary to d+d files to/from xfsamba.
@@ -37,10 +33,6 @@ BUGS to fix:
                     all over yet)
 	     * merge static dialog structures with those from
   		gtk_dlg.c to avoid wasting memory "a lo buey".
-  -erratic behavior when the top open folder gets moved away by 
-             another process, must fail gracefully.
-      this also can be seen if you rename the root dir of the 
-      ctree to something else. This should be an easy thing to fix.
 ****************************************************************
 ****************************************************************
 done:
@@ -48,7 +40,11 @@ a *must* do:
 Once the copy/move has gone recursive, on errors it must query continue/cancel
 instead of just cancelling. 
 
-bugs fixed
+bugrtic behavior when the top open folder gets moved away by
+             another process, must fail gracefully.
+      this also can be seen if you rename the root dir of the
+      ctree to something else. This should be an easy thing to fix.
+ fixed
   -shift-ctrl to link: put in help and fix the directory symlink
      bug. It is symlinking the entire contents of the directory
      and not the directory itself.
