@@ -74,6 +74,14 @@ static void
 theme_rc_style_to_style (GtkStyle * style, GtkRcStyle * rc_style)
 {
   style->klass = &xfce_default_class;
+  gtk_style_set_prop_experimental (style, "GtkButton::default_spacing", 6);
+  gtk_style_set_prop_experimental (style, "GtkCheckButton::indicator_size", 13);
+  gtk_style_set_prop_experimental (style, "GtkPaned::handle_full_size", 1);
+  gtk_style_set_prop_experimental (style, "GtkRange::trough_border", 1);
+  gtk_style_set_prop_experimental (style, "GtkRange::slider_width", SCROLLBAR_WIDTH);
+  gtk_style_set_prop_experimental (style, "GtkRange::stepper_size", SCROLLBAR_WIDTH);
+  gtk_style_set_prop_experimental (style, "GtkRange::stepper_spacing", 0);
+  gtk_style_set_prop_experimental (style, "GtkSpinButton::shadow_type", GTK_SHADOW_ETCHED_IN);
 }
 
 static void
@@ -115,36 +123,11 @@ theme_init (GtkThemeEngine * engine)
   engine->destroy_rc_style = theme_destroy_rc_style;
   engine->destroy_style = theme_destroy_style;
   engine->set_background = NULL;
-
-  /* Make scrollbars wider */
-  rangeclass = (GtkRangeClass *) gtk_type_class (gtk_range_get_type ());
- 
-  /* Save old values */
-  range_slider_width = rangeclass->slider_width;
-  range_min_slider_size = rangeclass->min_slider_size;
-  range_stepper_size = rangeclass->stepper_size;
-  range_stepper_slider_spacing = rangeclass->stepper_slider_spacing;
-
-  /* Set new values */
-  rangeclass->slider_width = SCROLLBAR_WIDTH;
-  rangeclass->min_slider_size = SCROLLBAR_WIDTH;
-  rangeclass->stepper_size = SCROLLBAR_WIDTH;
-  rangeclass->stepper_slider_spacing = 0;
 }
 
 void
 theme_exit (void)
 {
-   GtkRangeClass *rangeclass;
-   GtkScaleClass *scaleclass;
-
-   rangeclass = (GtkRangeClass *)gtk_type_class(gtk_range_get_type());
-   scaleclass = (GtkScaleClass *)gtk_type_class(gtk_scale_get_type());
-
-   rangeclass->slider_width = range_slider_width;
-   rangeclass->min_slider_size = range_min_slider_size;
-   rangeclass->stepper_size = range_stepper_size;
-   rangeclass->stepper_slider_spacing = range_stepper_slider_spacing;
 }
 
 /* The following function will be called by GTK+ when the module
