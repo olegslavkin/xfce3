@@ -214,6 +214,191 @@ char *xres[] = { "/.Xdefaults",
   NULL
 };
 
+/* 
+ * The following functions are taken directly from GTK+ source code
+ */
+
+static void
+rgb_to_hls (double *r,
+            double *g,
+            double *b)
+{
+  double min;
+  double max;
+  double red;
+  double green;
+  double blue;
+  double h, l, s;
+  double delta;
+  
+  red = *r;
+  green = *g;
+  blue = *b;
+  
+  if (red > green)
+    {
+      if (red > blue)
+        max = red;
+      else
+        max = blue;
+      
+      if (green < blue)
+        min = green;
+      else
+        min = blue;
+    }
+  else
+    {
+      if (green > blue)
+        max = green;
+      else
+        max = blue;
+      
+      if (red < blue)
+        min = red;
+      else
+        min = blue;
+    }
+  
+  l = (max + min) / 2;
+  s = 0;
+  h = 0;
+  
+  if (max != min)
+    {
+      if (l <= 0.5)
+        s = (max - min) / (max + min);
+      else
+        s = (max - min) / (2 - max - min);
+      
+      delta = max -min;
+      if (red == max)
+        h = (green - blue) / delta;
+      else if (green == max)
+        h = 2 + (blue - red) / delta;
+      else if (blue == max)
+        h = 4 + (red - green) / delta;
+      
+      h *= 60;
+      if (h < 0.0)
+        h += 360;
+    }
+  
+  *r = h;
+  *g = l;
+  *b = s;
+}
+
+static void
+hls_to_rgb (double *h,
+            double *l,
+            double *s)
+{
+  double hue;
+  double lightness;
+  double saturation;
+  double m1, m2;
+  double r, g, b;
+  
+  lightness = *l;
+  saturation = *s;
+  
+  if (lightness <= 0.5)
+    m2 = lightness * (1 + saturation);
+  else
+    m2 = lightness + saturation - lightness * saturation;
+  m1 = 2 * lightness - m2;
+  
+  if (saturation == 0)
+    {
+      *h = lightness;
+      *l = lightness;
+      *s = lightness;
+    }
+  else
+    {
+      hue = *h + 120;
+      while (hue > 360)
+        hue -= 360;
+      while (hue < 0)
+        hue += 360;
+      
+      if (hue < 60)
+        r = m1 + (m2 - m1) * hue / 60;
+      else if (hue < 180)
+        r = m2;
+      else if (hue < 240)
+        r = m1 + (m2 - m1) * (240 - hue) / 60;
+      else
+        r = m1;
+      
+      hue = *h;
+      while (hue > 360)
+        hue -= 360;
+      while (hue < 0)
+        hue += 360;
+      
+      if (hue < 60)
+        g = m1 + (m2 - m1) * hue / 60;
+      else if (hue < 180)
+        g = m2;
+      else if (hue < 240)
+        g = m1 + (m2 - m1) * (240 - hue) / 60;
+      else
+        g = m1;
+      
+      hue = *h - 120;
+      while (hue > 360)
+        hue -= 360;
+      while (hue < 0)
+        hue += 360;
+      
+      if (hue < 60)
+        b = m1 + (m2 - m1) * hue / 60;
+      else if (hue < 180)
+        b = m2;
+      else if (hue < 240)
+        b = m1 + (m2 - m1) * (240 - hue) / 60;
+      else
+        b = m1;
+      
+      *h = r;
+      *l = g;
+      *s = b;
+    }
+}
+
+void color_shade (unsigned short *r, unsigned short *g, unsigned short *b, double   k)
+{
+  double red;
+  double green;
+  double blue;
+  
+  red   = (double) *r / 65535.0;
+  green = (double) *g / 65535.0;
+  blue  = (double) *b / 65535.0;
+  
+  rgb_to_hls (&red, &green, &blue);
+  
+  green *= k;
+  if (green > 1.0)
+    green = 1.0;
+  else if (green < 0.0)
+    green = 0.0;
+  
+  blue *= k;
+  if (blue > 1.0)
+    blue = 1.0;
+  else if (blue < 0.0)
+    blue = 0.0;
+  
+  hls_to_rgb (&red, &green, &blue);
+  
+  *r = red   * 65535.0;
+  *g = green * 65535.0;
+  *b = blue  * 65535.0;
+}
+
 int
 brightness (int r, int g, int b)
 {
@@ -225,7 +410,7 @@ brightness_pal (const XFCE_palette * p, int index)
 {
   if ((p) && (index >= 0) && (index < NB_XFCE_COLORS))
   {
-    return (brightness ((short int) p->r[index], (short int) p->g[index], (short int) p->b[index]));
+    return (brightness ((unsigned short) p->r[index], (unsigned short) p->g[index], (unsigned short) p->b[index]));
   }
   else
   {
@@ -303,7 +488,7 @@ apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
       color++;
     else
     {
-      snprintf (buffer, 255, "%s: #%02X%02X%02X\n", resmapSel[i], ((short int) p->r[color]) ^ 255, ((short int) p->g[color]) ^ 128, ((short int) p->b[color]) ^ 64);
+      snprintf (buffer, 255, "%s: #%02X%02X%02X\n", resmapSel[i], ((unsigned short) p->r[color]) ^ 255, ((unsigned short) p->g[color]) ^ 128, ((unsigned short) p->b[color]) ^ 64);
       write (tube[1], buffer, strlen (buffer));
     }
     i++;
@@ -337,7 +522,7 @@ apply_xpalette (XFCE_palette * p, gboolean add_or_remove)
     {
       int howbright;
 
-      howbright = brightness (((short int) p->r[color]) ^ 255, ((short int) p->g[color]) ^ 128, ((short int) p->b[color]) ^ 64);
+      howbright = brightness (((unsigned short) p->r[color]) ^ 255, ((unsigned short) p->g[color]) ^ 128, ((unsigned short) p->b[color]) ^ 64);
       if (howbright < 50)
         snprintf (buffer, 255, "%s: #FFFFFF\n", resmapSelTxt[i]);
       else
@@ -403,7 +588,7 @@ color_to_hex (char *s, const XFCE_palette * p, int index)
 
   if ((p) && (s) && (index >= 0) && (index < NB_XFCE_COLORS))
   {
-    sprintf (s, "#%02X%02X%02X", (short int) p->r[index], (short int) p->g[index], (short int) p->b[index]);
+    sprintf (s, "#%02X%02X%02X", (unsigned short) p->r[index], (unsigned short) p->g[index], (unsigned short) p->b[index]);
     return (s);
   }
   return (NULL);
@@ -594,6 +779,10 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
   int c2_howbright, c2_howbrightSel;
   char *texture;
   char nobgpixmap[] = "<none>";
+  /* Temporary RGB values */
+  unsigned short red;
+  unsigned short green;
+  unsigned short blue;
 
   /* When running on a display with 256 colors or less, avoid using textures */
   if (DEFAULT_DEPTH > 8)
@@ -603,9 +792,9 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
 
 
   c1_howbright = brightness (p->r[normal], p->g[normal], p->b[normal]);
-  c1_howbrightSel = brightness (((short int) p->r[normal]) ^ 255, ((short int) p->g[normal]) ^ 128, ((short int) p->b[normal]) ^ 64);
+  c1_howbrightSel = brightness (((unsigned short) p->r[normal]) ^ 255, ((unsigned short) p->g[normal]) ^ 128, ((unsigned short) p->b[normal]) ^ 64);
   c2_howbright = brightness (p->r[selected], p->g[selected], p->b[selected]);
-  c2_howbrightSel = brightness (((short int) p->r[selected]) ^ 255, ((short int) p->g[selected]) ^ 128, ((short int) p->b[selected]) ^ 64);
+  c2_howbrightSel = brightness (((unsigned short) p->r[selected]) ^ 255, ((unsigned short) p->g[selected]) ^ 128, ((unsigned short) p->b[selected]) ^ 64);
 
   fprintf (f, "style \"%s%u\"\n", template, normal);
   fprintf (f, "{\n");
@@ -667,33 +856,51 @@ write_style_to_gtkrc_file (FILE * f, XFCE_palette * p, int normal, int selected,
     fprintf (f, "  text[SELECTED]    = \"#000000\"\n");
   }
 
-  fprintf (f, "  bg[NORMAL]        = \"#%02X%02X%02X\"\n", (short int) p->r[normal], (short int) p->g[normal], (short int) p->b[normal]);
+  fprintf (f, "  bg[NORMAL]        = \"#%02X%02X%02X\"\n", (unsigned short) p->r[normal], (unsigned short) p->g[normal], (unsigned short) p->b[normal]);
 
-  fprintf (f, "  base[NORMAL]      = \"#%02X%02X%02X\"\n", (short int) p->r[base], (short int) p->g[base], (short int) p->b[base]);
+  fprintf (f, "  base[NORMAL]      = \"#%02X%02X%02X\"\n", (unsigned short) p->r[base], (unsigned short) p->g[base], (unsigned short) p->b[base]);
+  
+  /* Init temp colors */
+  red   = (unsigned short) p->r[selected];
+  green = (unsigned short) p->g[selected];
+  blue  = (unsigned short) p->b[selected];
 
-  fprintf (f, "  bg[ACTIVE]        = \"#%02X%02X%02X\"\n", (short int) shift (p->r[selected], DARK), (short int) shift (p->g[selected], DARK), (short int) shift (p->b[selected], DARK));
+  /* Compute shadow color */
+  color_shade (&red, &green, &blue, DARK);
 
-  fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[base], DARK), (short int) shift (p->g[base], DARK), (short int) shift (p->b[base], DARK));
+  /* Then set color */
+  fprintf (f, "  bg[ACTIVE]        = \"#%02X%02X%02X\"\n", (unsigned short) red, (unsigned short) green, (unsigned short) blue);
+
+  /* Do the same for normal GC, init temp colors */
+  red   = (unsigned short) p->r[base];
+  green = (unsigned short) p->g[base];
+  blue  = (unsigned short) p->b[base];
+
+  /* Compute shadow color */
+  color_shade (&red, &green, &blue, DARK);
+
+  /* Then set color */
+  fprintf (f, "  base[ACTIVE]      = \"#%02X%02X%02X\"\n", (unsigned short) red, (unsigned short) green, (unsigned short) blue);
 
 #if 0
   if (normal == selected)
   {
-    fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n", (short int) shift (p->r[normal], LIGHT), (short int) shift (p->g[normal], LIGHT), (short int) shift (p->b[normal], LIGHT));
+    fprintf (f, "  bg[PRELIGHT]      = \"#%02X%02X%02X\"\n", (unsigned short) shift (p->r[normal], LIGHT), (unsigned short) shift (p->g[normal], LIGHT), (unsigned short) shift (p->b[normal], LIGHT));
   }
   else
   {
-    fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[selected], (short int) p->g[selected], (short int) p->b[selected]);
+    fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (unsigned short) p->r[selected], (unsigned short) p->g[selected], (unsigned short) p->b[selected]);
   }
 #else
-  fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[selected], (short int) p->g[selected], (short int) p->b[selected]);
+  fprintf (f, "  bg[PRELIGHT]    = \"#%02X%02X%02X\"\n", (unsigned short) p->r[selected], (unsigned short) p->g[selected], (unsigned short) p->b[selected]);
 #endif
-  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (short int) p->r[base], (short int) p->g[base], (short int) p->b[base]);
+  fprintf (f, "  base[PRELIGHT]    = \"#%02X%02X%02X\"\n", (unsigned short) p->r[base], (unsigned short) p->g[base], (unsigned short) p->b[base]);
 
-  fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((short int) p->r[selected]) ^ 255, ((short int) p->g[selected]) ^ 128, ((short int) p->b[selected]) ^ 64);
+  fprintf (f, "  bg[SELECTED]      = \"#%02X%02X%02X\"\n", ((unsigned short) p->r[selected]) ^ 255, ((unsigned short) p->g[selected]) ^ 128, ((unsigned short) p->b[selected]) ^ 64);
 
-  fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (short int) p->r[normal], (short int) p->g[normal], (short int) p->b[normal]);
+  fprintf (f, "  bg[INSENSITIVE]   = \"#%02X%02X%02X\"\n", (unsigned short) p->r[normal], (unsigned short) p->g[normal], (unsigned short) p->b[normal]);
 
-  fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n", (short int) p->r[normal], (short int) p->g[normal], (short int) p->b[normal]);
+  fprintf (f, "  base[INSENSITIVE] = \"#%02X%02X%02X\"\n", (unsigned short) p->r[normal], (unsigned short) p->g[normal], (unsigned short) p->b[normal]);
 #ifndef WIN32
   if ((p->engine) && (strlen (p->engine)) && my_strncasecmp (p->engine, "gtk", 3))
     fprintf (f, "  engine \"%s\" {}\n", p->engine);
