@@ -77,7 +77,7 @@ theme_rc_style_to_style (GtkStyle * style, GtkRcStyle * rc_style)
   gtk_style_set_prop_experimental (style, "GtkButton::default_spacing", 6);
   gtk_style_set_prop_experimental (style, "GtkCheckButton::indicator_size", 13);
   gtk_style_set_prop_experimental (style, "GtkPaned::handle_full_size", 1);
-  gtk_style_set_prop_experimental (style, "GtkRange::trough_border", 2);
+  gtk_style_set_prop_experimental (style, "GtkRange::trough_border", 0);
   gtk_style_set_prop_experimental (style, "GtkRange::slider_width", SCROLLBAR_WIDTH);
   gtk_style_set_prop_experimental (style, "GtkRange::stepper_size", SCROLLBAR_WIDTH);
   gtk_style_set_prop_experimental (style, "GtkRange::stepper_spacing", 0);
