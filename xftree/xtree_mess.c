@@ -882,7 +882,9 @@ xf_dirent *xf_opendir(char *path,GtkWidget *ctree){
       diren->dir = NULL;
       diren->globstring= NULL;
       diren->glob_count=0;
-     if (!(win->preferences & FILTER_OPTION)){ /* no filtering */
+     if ((!(win->preferences & FILTER_OPTION))||
+        (!(win->filterOpts & FILTER_DIRS) && !(win->filterOpts & FILTER_FILES))){ /* no filtering */
+       /* no filtering */
           diren->dir = opendir (path);
      } else {
        char *name=NULL;
@@ -977,7 +979,8 @@ char *xf_readdir(xf_dirent *diren,GtkWidget *ctree){
       if (!diren) return NULL;
       
       win = gtk_object_get_user_data (GTK_OBJECT (ctree));
-      if (!(win->preferences & FILTER_OPTION)){ /* no filtering */
+      if (!(win->preferences & FILTER_OPTION)|| 
+        (!(win->filterOpts & FILTER_DIRS) && !(win->filterOpts & FILTER_FILES))){ /* no filtering */
         struct dirent *de;
         if (!diren->dir) return NULL;
 	de = readdir (diren->dir);
@@ -992,11 +995,20 @@ skip_it:
         /*fprintf(stderr,"dbg:%s\n",diren->dirlist.gl_pathv[diren->glob_count]);*/
 	if ((strlen(diren->dirlist.gl_pathv[diren->glob_count])>1)
 		&&
-	    (diren->dirlist.gl_pathv[diren->glob_count][strlen(diren->dirlist.gl_pathv[diren->glob_count])-1] == '/')){ /* eliminate directories that are GLOB_MARKED */
-		diren->glob_count++;
-		goto skip_it;
+	    (diren->dirlist.gl_pathv[diren->glob_count][strlen(diren->dirlist.gl_pathv[diren->glob_count])-1] == '/')){ 
+		struct stat s;
+		/* eliminate directories that are GLOB_MARKED */
+		/* but dont eliminate symlinks that are GLOB_MARKED */
+		diren->dirlist.gl_pathv[diren->glob_count][strlen(diren->dirlist.gl_pathv[diren->glob_count])-1]=0;
+		if (lstat(diren->dirlist.gl_pathv[diren->glob_count],&s)<0){
+		  diren->glob_count++;
+	  	  goto skip_it;			
+		} 
+	       	if (!S_ISLNK (s.st_mode)){
+		  diren->glob_count++;
+		  goto skip_it;
+		}
 	}
-
 	
 	name=strrchr(diren->dirlist.gl_pathv[diren->glob_count++],'/');
 	

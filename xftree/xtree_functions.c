@@ -514,7 +514,8 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
   {
    char *name;
    /* ../ is usually not filtered in, so add it */
-   if (win->preferences&FILTER_OPTION) {
+   if ((win->preferences&FILTER_OPTION)&&
+        ((win->filterOpts & FILTER_DIRS) || (win->filterOpts & FILTER_FILES))){ /* filtering */
      type=FT_DIR_UP;
      if ((complete=(char *)malloc(strlen(base)+3))==NULL) return;
      sprintf (complete, "%s..", base);
