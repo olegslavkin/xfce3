@@ -69,6 +69,13 @@
 /* this file is for processing certain common messages.
  * override warning to begin with */
 
+#define SAVE_GEOMETRY 		0x01
+#define DOUBLE_CLICK_GOTO 	0x02
+
+#define XFTREE_CONFIG_FILE "xftreerc"
+
+int preferences,geometryX,geometryY;
+
 #define BYTES "bytes"
 
 char * override_txt(char *new_file,char *old_file)
@@ -105,7 +112,7 @@ char * override_txt(char *new_file,char *old_file)
 	  + strlen(with) +1+
 	  strlen(old_file) +1+ strlen(otime) +1+ osize +1+ strlen("bytes") + 1;
   }
-  message=(char *)malloc(i);
+  message=(char *)malloc(i*sizeof(char));
   if (!message) {return ot;}
   if (old_exists){
 	sprintf(message,"%s\n%s %s %ld %s\n%s\n%s %s %ld %s\n",ot,
@@ -120,7 +127,107 @@ char * override_txt(char *new_file,char *old_file)
   return message;
 }
 			 
+GtkWidget *
+shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data)
+{
+  static GtkWidget *menuitem;
+  int togglevalue;
+
+    togglevalue =(int) ((long) data) ;
+    menuitem = gtk_check_menu_item_new_with_label (txt);
+    GTK_CHECK_MENU_ITEM (menuitem)->active = (togglevalue & preferences)?1:0;
+ /*   printf("dbg:pref=%d,toggle=%d,%s result=%d\n",preferences,togglevalue,txt,togglevalue & preferences);*/
+    gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (menuitem), 1);
+#ifdef __GTK_2_0
+    /*  */
+    gtk_menu_append (GTK_MENU_SHELL (parent), menuitem);
+#else
+    gtk_menu_append (GTK_MENU (parent), menuitem);
+#endif
+    gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (func), (gpointer) data);
+  gtk_widget_show (menuitem);
+  return menuitem;
+}
+
+void save_defaults (void)
+{
+  FILE *defaults;
+  char *homedir;
+  int len;
+
+  len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFTREE_CONFIG_FILE) + 1;
+  homedir = (char *) malloc ((len) * sizeof (char));
+  if (!homedir) {
+    my_show_message (_("Default xftreerc file cannot be created\n"));
+    return;
+  }
+  snprintf (homedir, len, "%s/.xfce/%s", (char *) getenv ("HOME"), XFTREE_CONFIG_FILE);
+  defaults = fopen (homedir, "w");
+  free (homedir);
+
+  if (!defaults)
+  {
+    my_show_message (_("Default xftreerc file cannot be created\n"));
+    return;
+  }
+  fprintf (defaults, "# file created by xftree, if removed xftree returns to defaults.\n");
+  fprintf (defaults, "preferences : %d\n", preferences);
+  if (preferences & SAVE_GEOMETRY) {
+	  /*printf("dbg:x=%d,y=%d\n",geometryX,geometryY);*/
+	  fprintf (defaults, "geometry : %d,%d\n",geometryX,geometryY);
+  }
+  fclose (defaults);
+  return;
+}
+
+void read_defaults(void){
+  FILE *defaults;
+  char *homedir,*word;
+  int len;
+
+  len = strlen ((char *) getenv ("HOME")) + strlen ("/.xfce/") + strlen (XFTREE_CONFIG_FILE) + 1;
+  homedir = (char *) malloc ((len) * sizeof (char));
+  if (!homedir) {
+    my_show_message (_("Default xftreerc file cannot be read\n"));
+    return;
+  }
+  snprintf (homedir, len, "%s/.xfce/%s", (char *) getenv ("HOME"),XFTREE_CONFIG_FILE );
+  defaults = fopen (homedir, "r");
+  free (homedir);
+
+  if (!defaults) return;
+
+  homedir = (char *)malloc(256);
+  while (!feof(defaults)){
+	fgets(homedir,255,defaults);
+	if (feof(defaults))break;
+	if (strstr(homedir,"preferences :")){
+		strtok(homedir,":");
+		word=strtok(NULL,"\n");
+		if (!word) break;
+		preferences=atoi(word);
+	}
+	if (strstr(homedir,"geometry :")){
+		strtok(homedir,":");
+		word=strtok(NULL,",");if (!word) break;
+		geometryX=atoi(word);
+		word=strtok(NULL,"\n");if (!word) break;
+		geometryY=atoi(word);
+	}
+  }
+  free(homedir);
+  fclose(defaults);  
+  
+}
 			  
+void
+cb_toggle_preferences (GtkWidget * widget, gpointer data)
+{
+  int toggler;
+  toggler = (long)(data);
+  preferences ^= toggler;
+  save_defaults ();
+}
 			  
 	  
   

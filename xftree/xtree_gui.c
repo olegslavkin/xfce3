@@ -158,8 +158,25 @@ static GtkWidget *new_top (char *p, char *x, char *trash, GList * reg, int width
 int move_dir (char *source, char *label, char *target, int trash);
 
 gint update_timer (GtkCTree * ctree);
-char * override_txt(char *new_file,char *old_file);
 static void cb_new_subdir (GtkWidget * item, GtkWidget * ctree);
+
+/* wouldbe xtree_mess.h: */
+#define SAVE_GEOMETRY 		0x01
+#define DOUBLE_CLICK_GOTO 	0x02
+
+extern int preferences;
+extern int geometryX;
+extern int geometryY;
+void read_defaults(void);
+void save_defaults(void);
+char * 
+ override_txt(char *new_file,char *old_file);
+GtkWidget *
+ shortcut_menu (GtkWidget * parent, char *txt, gpointer func, gpointer data);
+void 
+ cb_toggle_preferences (GtkWidget * widget, gpointer data);
+/* end wouldbe xtree_mess.h */
+
 
 /*
  */
@@ -1534,12 +1551,15 @@ on_double_click (GtkWidget * ctree, GdkEventButton * event, void *menu)
     {
       node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
       en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
-      if (EN_IS_DIR (en) && (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)))
-      {
-	/* Alt or Ctrl button is pressed, it's the same as _go_to()..
-	 */
+      if (preferences & DOUBLE_CLICK_GOTO) {
 	go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
 	return (TRUE);
+      } else {
+        if (EN_IS_DIR (en) && (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)))
+        {/* Alt or Ctrl button is pressed, it's the same as _go_to().. */
+ 	 go_to (GTK_CTREE (ctree), GTK_CTREE_NODE (GTK_CLIST (ctree)->row_list), en->path, en->flags);
+	 return (TRUE);
+	}
       }
     }
     if (!count_selection (GTK_CTREE (ctree), &node))
@@ -2324,6 +2344,9 @@ cb_register (GtkWidget * item, GtkWidget * ctree)
 void
 on_destroy (GtkWidget * top, cfg * win)
 {
+  geometryX = top->allocation.width;
+  geometryY = top->allocation.height;
+  save_defaults();
   top_delete (top);
   if (win->timer)
   {
@@ -2347,14 +2370,28 @@ gint on_delete (GtkWidget * w, GdkEvent * event, gpointer data)
   return (FALSE);
 }
 
-/*
- * called if Alt+w was pressed
- */
-void
-cb_destroy (GtkWidget * top, void *data)
+static void
+cb_destroy (GtkWidget * top, gpointer data)
 {
+  GtkWidget *root;
+  root = (GtkWidget *)data;
+  geometryX = root->allocation.width;
+  geometryY = root->allocation.height;
+  save_defaults();
   gtk_widget_destroy ((GtkWidget *) data);
 }
+static void 
+cb_quit (GtkWidget * top, gpointer data)
+{
+  GtkWidget *root;
+  root = (GtkWidget *)data;
+  geometryX = root->allocation.width;
+  geometryY = root->allocation.height;
+  save_defaults();
+  gtk_main_quit();	
+}
+	
+
 
 /*
  * check if a node is a directory and is visible and expanded
@@ -2543,50 +2580,106 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 
-  menuitem = gtk_menu_item_new_with_label (_("New window"));
+  menuitem = gtk_menu_item_new_with_label (_("New window ... Ctl-W"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_window), (gpointer) ctree);
 
-  menuitem = gtk_menu_item_new_with_label (_("Open in terminal"));
+  menuitem = gtk_menu_item_new_with_label (_("Open terminal ... Ctl-T"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_term), (gpointer) ctree);
 
-  menuitem = gtk_menu_item_new_with_label (_("New Folder ..."));
+  menuitem = gtk_menu_item_new ();
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new_with_label (_("New Folder ... ins"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_subdir), (gpointer) ctree);
 
-  menuitem = gtk_menu_item_new_with_label (_("New file ..."));
+  menuitem = gtk_menu_item_new_with_label (_("New file ... Ctrl-N"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_new_file), (gpointer) ctree);
 
+/*  menuitem = gtk_menu_item_new_with_label (_("Delete ... del"));
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
+*/
+  
   menuitem = gtk_menu_item_new ();
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
-  menuitem = gtk_menu_item_new_with_label (_("Run program ..."));
+  menuitem = gtk_menu_item_new_with_label (_("Close window ... Ctl-Z"));
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
+
+  menuitem = gtk_menu_item_new_with_label (_("Quit ... "));
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_quit), (gpointer) top);
+
+  /* Create "Edit" menu */
+  menuitem = gtk_menu_item_new_with_label (_("Edit"));
+  gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
+  gtk_widget_show (menuitem);
+  menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
+
+  menuitem = gtk_menu_item_new_with_label (_("Select all ... Ctl-S"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_select), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new_with_label (_("Unselect ... Ctl-Q"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_unselect), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new_with_label (_("Toggle Dotfiles ... Ctl-D"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new ();
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+
+  menuitem = gtk_menu_item_new_with_label (_("Open Trash ... Ctl-O"));
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
+
+  menuitem = gtk_menu_item_new_with_label (_("Empty Trash ... Ctl-E"));
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
+
+
+  
+  /* Create "Tools" menu */
+  menuitem = gtk_menu_item_new_with_label (_("Tools"));
+  gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
+  gtk_widget_show (menuitem);
+  menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
+
+  menuitem = gtk_menu_item_new_with_label (_("Run program ... Ctl-X"));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_exec), (gpointer) top);
 
-  menuitem = gtk_menu_item_new_with_label (_("Delete ..."));
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_delete), (gpointer) ctree);
-
-  menuitem = gtk_menu_item_new ();
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new_with_label (_("Find ..."));
+  menuitem = gtk_menu_item_new_with_label (_("Find ... Ctl-F"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_find), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
-  menuitem = gtk_menu_item_new_with_label (_("Properties ..."));
+  menuitem = gtk_menu_item_new_with_label (_("Properties ... Ctl-P"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_props), (gpointer) ctree);
 
   gtk_menu_append (GTK_MENU (menu), menuitem);
@@ -2601,73 +2694,51 @@ create_menu (GtkWidget * top, GtkWidget * ctree, cfg * win)
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_diff), (gpointer) ((int) 1));
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new ();
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new_with_label (_("Open Trash"));
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_open_trash), (gpointer) win);
-
-  menuitem = gtk_menu_item_new_with_label (_("Empty Trash"));
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_empty_trash), (gpointer) ctree);
-
-  menuitem = gtk_menu_item_new ();
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new_with_label (_("Close window"));
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_destroy), (gpointer) top);
-
-  menuitem = gtk_menu_item_new ();
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new_with_label (_("Quit"));
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (gtk_main_quit), (gpointer) ctree);
-  /* Create "Settings" menu */
-  menuitem = gtk_menu_item_new_with_label (_("Settings"));
+  /* Create "Go To" menu */
+  menuitem = gtk_menu_item_new_with_label (_("Go to"));
   gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
   gtk_widget_show (menuitem);
-
   menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
 
-  menuitem = gtk_menu_item_new_with_label (_("Go to ..."));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
-
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new_with_label (_("Go up"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
-
-  gtk_menu_append (GTK_MENU (menu), menuitem);
-  gtk_widget_show (menuitem);
-
-  menuitem = gtk_menu_item_new_with_label (_("Go home"));
+  menuitem = gtk_menu_item_new_with_label (_("Go home ... Ctl-H"));
   gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_home), (gpointer) ctree);
-
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
-  menuitem = gtk_menu_item_new ();
+  /* TODO #12:
+  menuitem = gtk_menu_item_new_with_label (_("Go back ... Ctl-B"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_back), (gpointer) ctree);
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);*/
+
+  menuitem = gtk_menu_item_new_with_label (_("Go up ... Ctl-A"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_up), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
 
-  menuitem = gtk_menu_item_new_with_label (_("Toggle Dotfiles"));
-  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (on_dotfiles), (gpointer) ctree);
-
+  menuitem = gtk_menu_item_new_with_label (_("Go to ... Ctl-G"));
+  gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (cb_go_to), (gpointer) ctree);
   gtk_menu_append (GTK_MENU (menu), menuitem);
   gtk_widget_show (menuitem);
+
+
+/*  menuitem = gtk_menu_item_new ();
+  gtk_menu_append (GTK_MENU (menu), menuitem);
+  gtk_widget_show (menuitem);*/
+
+  /* Create "Preferences" menu */
+  menuitem = gtk_menu_item_new_with_label (_("Preferences"));
+  gtk_menu_bar_append (GTK_MENU_BAR (menubar), menuitem);
+  gtk_widget_show (menuitem);
+  menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu);
+
+  shortcut_menu (menu, _("Save geometry on exit"), (gpointer) cb_toggle_preferences, 
+		  (gpointer)((long)(SAVE_GEOMETRY)) );
+  shortcut_menu (menu, _("Double click does GOTO"), (gpointer) cb_toggle_preferences, 
+		  (gpointer)((long)(DOUBLE_CLICK_GOTO)) );
+  
 
   /* Create "Help" menu */
   menuitem = gtk_menu_item_new_with_label (_("Help"));
@@ -2709,6 +2780,12 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
   cfg *win;
   GtkAccelGroup *accel;
   int i;
+
+  read_defaults();
+  if (SAVE_GEOMETRY & preferences){
+	  width=geometryX;
+	  height=geometryY;
+  }
   
 /* keyboard shortcuts used to be bugged because of conflicting entries.
  * these macros should make it easier to avoid conflicting entries.
@@ -2716,7 +2793,11 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
  * will also use GDK_CONTROL_MASK,and single entries GDK_MOD1_MASK.
  * Duplicate entries must explicitly have the key explanation
  * in the text (gtk caveat). It would be nice to put the key
- * explanation flush to the right, like gtk would do. */
+ * explanation flush to the right, like gtk would do. 
+ *
+ * note: "unselect all" was eliminated since the function call was identical
+ * to plain unselect. 
+ * */
 #define COMMON_MENU_1 \
     {N_("New window ... Ctl-W"), (gpointer) cb_new_window, 0, GDK_w,GDK_CONTROL_MASK},\
     {N_("Open terminal ... Ctl-T"), (gpointer) cb_term, 0, GDK_t,GDK_CONTROL_MASK},\
@@ -2729,22 +2810,25 @@ new_top (char *path, char *xap, char *trash, GList * reg, int width, int height,
     {NULL, NULL, 0}
 #define COMMON_MENU_GOTO \
     {N_("Find ... Ctl-F"), (gpointer) cb_find, 0, GDK_f,GDK_CONTROL_MASK},\
-    {N_("Go to ... Ctl-G"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
-    {N_("Go up ... Ctl-B"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\
     {N_("Go home ... Ctl-H"), (gpointer) cb_go_home, 0,GDK_h,GDK_CONTROL_MASK},\
+    {N_("Go up ... Ctl-A"), (gpointer) cb_go_up, 0,GDK_a,GDK_CONTROL_MASK},\
+    {N_("Go to ... Ctl-G"), (gpointer) cb_go_to, 0,GDK_g,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
+    /*{N_("Go back ... Ctl-B"), (gpointer) cb_go_up, 0,GDK_b,GDK_CONTROL_MASK},\*/
 #define COMMON_MENU_SELECT \
-    {N_("Toggle Dotfiles ... Ctl-D"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
-    {N_("Unselect ... Ctl-K"), (gpointer) cb_unselect, 0, GDK_k,GDK_CONTROL_MASK},\
     {N_("Select all ... Ctl-S"), (gpointer) cb_select, 0, GDK_s,GDK_CONTROL_MASK},\
-    {N_("Unselect all ... Ctl-Z"), (gpointer) cb_unselect, 0,GDK_z,GDK_CONTROL_MASK},\
+    {N_("Unselect ... Ctl-Q"), (gpointer) cb_unselect, 0,GDK_q,GDK_CONTROL_MASK},\
+    {N_("Toggle Dotfiles ... Ctl-D"), (gpointer) on_dotfiles, 0, GDK_d,GDK_CONTROL_MASK},\
     {NULL, NULL, 0}
 #define COMMON_MENU_LAST \
     {N_("Run program ... Ctl-X"), (gpointer) cb_exec, WINCFG,GDK_x,GDK_CONTROL_MASK},\
     {N_("Open Trash ... Ctl-O"), (gpointer) cb_open_trash, WINCFG, GDK_o,GDK_CONTROL_MASK},\
     {N_("Empty Trash ... Ctl-E"), (gpointer) cb_empty_trash, 0, GDK_e,GDK_CONTROL_MASK},\
-    {N_("Close window ... Ctl-A"), (gpointer) cb_destroy, TOPWIN, GDK_a,GDK_CONTROL_MASK},\
-    {N_("Quit ... Ctl-Q"), (gpointer) gtk_main_quit, 0, GDK_q,GDK_CONTROL_MASK}
+    {N_("Close window ... Ctl-Z"), (gpointer) cb_destroy, TOPWIN, GDK_z,GDK_CONTROL_MASK}
+    
+/* quit only on main menu now, so that default geometry is saved correctly with cb_quit.
+ *     {N_("Quit ... Ctl-C"), (gpointer) cb_quit, 0, GDK_c,GDK_CONTROL_MASK}*/
+
 #define COMMON_MENU_NEW \
     {N_("New Folder ... ins"), (gpointer) cb_new_subdir, 0},\
     {N_("New file ... Ctl-N"), (gpointer) cb_new_file, 0,GDK_n,GDK_CONTROL_MASK}
@@ -3046,6 +3130,10 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
     return;
   }
   reg = reg_build_list (reg_file);
+  if (SAVE_GEOMETRY & preferences){
+	  geo->width=geometryX;
+	  geo->height=geometryY;
+  }
   new_win = new_top (path, xap_path, trash, reg, geo->width, geo->height, flags);
   if (geo->x > -1 && geo->y > -1)
   {
@@ -3053,5 +3141,6 @@ gui_main (char *path, char *xap_path, char *trash, char *reg_file, wgeo_t * geo,
   }
 
   gtk_main ();
+  save_defaults();
   exit (0);
 }
