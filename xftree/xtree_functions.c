@@ -483,7 +483,7 @@ void reset_icon(GtkCTree * ctree, GtkCTreeNode * node){
   isleaf=set_icon_pix(&pix,en->type,en->label,en->flags);
     /*printf("dbg: updating %s\n",en->label);*/
   
-  gtk_ctree_set_node_info (ctree,node,(win->preferences&ABREVIATE_PATHS)?abreviate(en->path):en->path, 
+  gtk_ctree_set_node_info (ctree,node,(win->preferences&ABREVIATE_PATHS)?abreviate(en->label):en->label, 
 		 SPACING, pix.pixmap,pix.pixmask, pix.open, pix.openmask, isleaf, TRUE);
 } 
 	
@@ -526,7 +526,7 @@ void add_subtree (GtkCTree * ctree, GtkCTreeNode * root, char *path, int depth, 
     strcat (base, "/");
 
       /* fprintf(stderr,"dbg:base=%s\n",base);*/
-  if (depth == 1)
+  if ((depth == 1) && !(GTK_CTREE_ROW(root)->expanded))
   {
     /* create dummy entry */
     if ((complete=(char *)malloc(strlen(base)+2))==NULL) return;
