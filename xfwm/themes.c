@@ -1640,9 +1640,9 @@ DrawTrianglePattern_xfce (Window w, XRectangle *area, GC ReliefGC, GC ShadowGC, 
 
   m = (t + b) >> 1;
 
-  points[0].x = l;
+  points[0].x = l + 2;
   points[0].y = t;
-  points[1].x = l;
+  points[1].x = l + 2;
   points[1].y = b;
   points[2].x = r;
   points[2].y = m;
@@ -4535,9 +4535,9 @@ DrawTrianglePattern_linea (Window w, XRectangle *area, GC ReliefGC, GC ShadowGC,
 
   m = (t + b) >> 1;
 
-  points[0].x = l;
+  points[0].x = l + 2;
   points[0].y = t;
-  points[1].x = l;
+  points[1].x = l + 2;
   points[1].y = b;
   points[2].x = r;
   points[2].y = m;
