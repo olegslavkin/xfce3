@@ -824,12 +824,12 @@ SetRCDefaults ()
   char *defaults[] = {
     "XORValue 0",
     "ModulePath $PATH",
-    "ActiveColor white #D5CECD",
-    "InactiveColor black #D5CECD",
-    "TitleStyle Active Solid #4F6EAD",
-    "TitleStyle Inactive Solid #BDBAB4",
-    "MenuColor black #D5CECD white #4F6EAD",
-    "CursorColor #FF0000 white",
+    "ActiveColor black #C0C0C0",
+    "InactiveColor black #C0C0C0",
+    "TitleStyle Active Solid #91A0A5",
+    "TitleStyle Inactive Solid #C0C0C0",
+    "MenuColor black #C0C0C0 black",
+    "CursorColor #FFFFFF black",
     "FocusMode Click",
     "AnimateWin Off",
     "OpaqueMove On",
@@ -1762,7 +1762,7 @@ InitVariables (void)
   Scr.Hilite = NULL;
   Scr.Focus = NULL;
   Scr.Options = (ClickToFocus | AnimateWin | ForceFocus | MapFocus | HonorWMFocusHint);
-  Scr.engine = LINEA_ENGINE;
+  Scr.engine = GTK_ENGINE;
   Scr.AutoRaiseDelay = 250;
   Scr.iconbox = 0;
   Scr.StdFont.font = NULL;

@@ -48,11 +48,11 @@
 	OpaqueActive
 	GradientInactive
 	IconsOnRight
-	-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-koi8-u
-	-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-koi8-u
-	-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-koi8-u
+	-adobe-helvetica-bold-r-normal-*-12-*-*-*-p-*-koi8-u
+	-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-koi8-u
+	-adobe-helvetica-medium-r-normal-*-12-*-*-*-p-*-koi8-u
 	MapFocus
-	Linea_engine
+	Gtk_engine
 [Screens]
 	4
 [Tooltips]

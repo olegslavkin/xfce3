@@ -55,7 +55,7 @@
 #endif
 
 #ifndef XFCE_THEME_ENGINE
-#define XFCE_THEME_ENGINE	"xfce"
+#define XFCE_THEME_ENGINE	"gtk"
 #endif
 
 #ifndef DEFAULTTEXTURE

@@ -48,11 +48,11 @@
 	OpaqueActive
 	GradientInactive
 	IconsOnRight
-	-*-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-jisx0208.1983-0
-	-*-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-jisx0208.1983-0
-	-*-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-jisx0208.1983-0
+	-*-helvetica-bold-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-jisx0208.1983-0
+	-*-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-jisx0208.1983-0
+	-*-helvetica-medium-r-normal-*-12-*-*-*-p-*-iso8859-1,-*-*-medium-r-normal--16-*-*-*-c-*-jisx0208.1983-0
 	MapFocus
-	Linea_engine
+	Gtk_engine
 [Screens]
 	4
 [Tooltips]
