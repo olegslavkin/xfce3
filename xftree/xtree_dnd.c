@@ -109,16 +109,10 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     node = gtk_ctree_node_nth (GTK_CTREE (ctree), row);
     s_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
     /* disable all drops into tar files (for now)*/
-    if (s_en->type & FT_TARCHILD) goto drag_over;
-    
-    if ((((s_en->type & FT_DIR) && (access (s_en->path, W_OK | X_OK) == 0))|| ((s_en->type & FT_FILE) && (access (s_en->path, W_OK) == 0))))
-      win->dnd_row = row;
-    else
-      win->dnd_row = 0;
+    if (s_en->type & (FT_RPMCHILD|FT_TARCHILD)) goto drag_over;
+    win->dnd_row = row;
   }
-  else if (win->dnd_row >= 0)
-    win->dnd_row = 0;
-  
+    
 
   switch (info)
   {
@@ -149,10 +143,12 @@ on_drag_data (GtkWidget * ctree, GdkDragContext * context, gint x, gint y, GtkSe
     if (!nitems) break; /* of course */
     u = list->data;
     node = gtk_ctree_node_nth (GTK_CTREE (ctree), win->dnd_row);
+    /*printf ("dbg: win->dnd_row=%d\n", win->dnd_row);*/
     t_en = gtk_ctree_node_get_row_data (GTK_CTREE (ctree), node);
     /* this garantees that target will always be a directory
      * and thus no need to check further down
      * */
+    /*printf ("dbg: dndpath=%s\n", t_en->path);*/
     if (!(t_en->type & FT_DIR)) /* target is not a directory */
     {
       node = GTK_CTREE_ROW (node)->parent;
