@@ -235,12 +235,6 @@ apply_wm_colors (const XFCE_palette * p)
         hibackindex   = 6;
 	lobackindex   = 7;
 	break;
-      case TRENCH_ENGINE:
-        activeindex   = 7;
-	inactiveindex = 7;
-        hibackindex   = 6;
-	lobackindex   = 7;
-	break;
       case LINEA_ENGINE:
         activeindex   = 6;
 	inactiveindex = 7;
@@ -249,6 +243,7 @@ apply_wm_colors (const XFCE_palette * p)
 	break;
       case GTK_ENGINE:
       case XFCE_ENGINE:
+      case TRENCH_ENGINE:
       default:
         activeindex   = 7;
 	inactiveindex = 7;

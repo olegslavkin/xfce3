@@ -2419,31 +2419,39 @@ SetInnerBorder_trench (XfwmWindow * t, Bool onoroff)
 }
 
 void
-DrawStripes_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y, int w, int h, Bool onoroff)
+DrawStripes_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y, int w, int h, ButtonFace * bf, Bool onoroff)
 {
   GC BackGC = NULL;
   GC ReliefGC, ShadowGC;
   int i;
   int rh;
 
+  XSetForeground (dpy, Scr.TransMaskGC, bf->u.back);
   if (onoroff)
   {
     ReliefGC = GetDecor (t, HiReliefGC);
     ShadowGC = GetDecor (t, HiShadowGC);
-    BackGC = GetDecor (t, HiBackGC);
   }
   else
   {
     ReliefGC = GetDecor (t, LoReliefGC);
     ShadowGC = GetDecor (t, LoShadowGC);
-    BackGC = GetDecor (t, LoBackGC);
+  }
+
+  if (bf->u.ReliefGC)
+  {
+    ReliefGC = bf->u.ReliefGC;
+  }
+  if (bf->u.ShadowGC)
+  {
+    ShadowGC = bf->u.ShadowGC;
   }
 
   if (area)
   {
     XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
-    XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.TransMaskGC, 0, 0, area, 1, Unsorted);
   }
 
   rh = ((int) (h / 3)) * 3;
@@ -2451,29 +2459,29 @@ DrawStripes_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y, 
   {
     if ((i % 3) == 0)
     {
-      XDrawPoint (dpy, win, BackGC, x + w - 1, y + i);
+      XDrawPoint (dpy, win, Scr.TransMaskGC, x + w - 1, y + i);
       XDrawLine (dpy, win, ReliefGC, x, y + i, x + w - 2, y + i);
     }
     else if((i % 3) == 1)
     {
-      XDrawPoint (dpy, win, BackGC, x, y + i);
+      XDrawPoint (dpy, win, Scr.TransMaskGC, x, y + i);
       XDrawLine (dpy, win, ShadowGC, x + 1, y + i, x + w, y + i);
     }
     else
     {
-      XDrawLine (dpy, win, BackGC, x, y + i, x + w, y + i);
+      XDrawLine (dpy, win, Scr.TransMaskGC, x, y + i, x + w, y + i);
     }
   }
   for (i = rh; i < h; i++)
   {
-    XDrawLine (dpy, win, BackGC, x, y + i, x + w, y + i);
+    XDrawLine (dpy, win, Scr.TransMaskGC, x, y + i, x + w, y + i);
   }
 
   if (area)
   {
     XSetClipMask(dpy, ReliefGC, None);
     XSetClipMask(dpy, ShadowGC, None);
-    XSetClipMask(dpy, BackGC, None);
+    XSetClipMask(dpy, Scr.TransMaskGC, None);
   }
 }
 
@@ -2481,47 +2489,77 @@ void
 DrawButton_trench (XfwmWindow * t, Window win, XRectangle *area, int w, int h, ButtonFace * bf, GC ReliefGC, GC ShadowGC, Bool inverted, int stateflags)
 {
   int type = bf->style & ButtonFaceTypeMask;
-  GC BackGC = NULL;
-  GC FrameGC = NULL;
+  enum ButtonState title_state;
+  ButtonFace *bftitle;
+  Pixel Forecolor;
+  GC HiGC = ReliefGC;
+  GC LoGC = ShadowGC;
+  GC ButtonGC = NULL;
+  Bool onoroff;
 
   if (w - t->boundary_width + t->bw <= 0)
     return;
 
-  BackGC = ((Scr.Hilite == t) ? GetDecor (t, HiBackGC) : GetDecor (t, LoBackGC));
-  FrameGC = Scr.BlackGC;
+  onoroff = (Scr.Hilite == t);
+  title_state = GetButtonState (t->title_w);
+  bftitle = &GetDecor (t, titlebar.state[title_state]);
+  if (bftitle->u.ReliefGC)
+  {
+    HiGC = bftitle->u.ReliefGC;
+  }
+  if (bftitle->u.ShadowGC)
+  {
+    LoGC = bftitle->u.ShadowGC;
+  }
+
+  if (onoroff)
+  {
+    Forecolor = GetDecor (t, HiColors.fore);
+    ButtonGC = HiGC;
+  }
+  else
+  {
+    Forecolor = GetDecor (t, LoColors.fore);
+    ButtonGC = LoGC;
+  }
+
+  XSetForeground (dpy, Scr.TransMaskGC, bftitle->u.back);
+  XSetBackground (dpy, Scr.TransMaskGC, Forecolor);
 
   switch (type)
   {
   case VectorButton:
-    XFillRectangle (dpy, win, BackGC, 0, 0, w, h);
-    if (Scr.Hilite == t)
+    XFillRectangle (dpy, win, Scr.TransMaskGC, 0, 0, w, h);
+    if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
     {
-      if (((stateflags & MWMDecorMaximize) && (t->flags & MAXIMIZED)) || ((stateflags & DecorSticky) && (t->flags & STICKY)) || ((stateflags & DecorShaded) && (t->flags & SHADED)))
-      {
-	XSetClipOrigin (dpy, BackGC, (w - 16) / 2, (h - 16) / 2);
-	XCopyPlane (dpy, bf->bitmap_pressed, win, BackGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
-      }
-      else
-      {
-	XSetClipOrigin (dpy, BackGC, (w - 16) / 2, (h - 16) / 2);
-	XCopyPlane (dpy, bf->bitmap, win, BackGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
-      }
-      RelieveRectangle (win, NULL, 0, 0, w, h, ShadowGC, ReliefGC);
-      XDrawLine (dpy, win, FrameGC, 1, 1, w - 2, 1);
-      XDrawLine (dpy, win, FrameGC, w - 2, 1, w - 2, h - 2);
-      XDrawLine (dpy, win, FrameGC, w - 2, h - 2, 1, h - 2);
-      XDrawLine (dpy, win, FrameGC, 1, h - 2, 1, 1);
-
+      XSetClipOrigin (dpy, Scr.TransMaskGC, (w - 16) / 2, (h - 16) / 2);
       if (inverted)
-	RelieveRectangle (win, NULL, 2, 2, w - 4, h - 4, ShadowGC, ReliefGC);
+      {
+        XCopyPlane (dpy, bf->bitmap_pressed, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2 + 1, (h - 16) / 2 + 1, 1);
+      }
       else
-	RelieveRectangle (win, NULL, 2, 2, w - 4, h - 4, ReliefGC, ShadowGC);
+      {
+        XCopyPlane (dpy, bf->bitmap_pressed, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      }
     }
+    else
+    {
+      XSetClipOrigin (dpy, Scr.TransMaskGC, (w - 16) / 2, (h - 16) / 2);
+      if (inverted)
+      {
+        XCopyPlane (dpy, bf->bitmap, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2 + 1, (h - 16) / 2 + 1, 1);
+      }
+      else
+      {
+        XCopyPlane (dpy, bf->bitmap, win, Scr.TransMaskGC, 0, 0, 15, 15, (w - 16) / 2, (h - 16) / 2, 1);
+      }
+    }
+    XDrawLine (dpy, win, LoGC, 0, h - 1, w - 1, h - 1);
     break;
    
   default:
     {
-      DrawStripes_trench (t, win, area, 0, 0, w, h, (Scr.Hilite == t));
+      DrawStripes_trench (t, win, area, 0, 0, w, h, bf, (Scr.Hilite == t));
     }
   }
 }
@@ -2551,25 +2589,32 @@ SetTitleBar_trench (XfwmWindow * t, XRectangle *area, Bool onoroff)
 
   if (onoroff)
   {
+    Forecolor = GetDecor (t, HiColors.fore);
     BackColor = GetDecor (t, HiColors.back);
-    if (brightness (BackColor) > 45)
-      Forecolor = BlackPixel (dpy, Scr.screen);
-    else
-      Forecolor = WhitePixel (dpy, Scr.screen);
     ReliefGC = GetDecor (t, HiReliefGC);
     ShadowGC = GetDecor (t, HiShadowGC);
-    BackGC = GetDecor (t, HiBackGC);
   }
   else
   {
+    Forecolor = GetDecor (t, LoColors.fore);
     BackColor = GetDecor (t, LoColors.back);
-    if (brightness (BackColor) > 45)
-      Forecolor = GetDecor (t, LoRelief.back);
-    else
-      Forecolor = GetDecor (t, LoRelief.fore);
     ReliefGC = GetDecor (t, LoReliefGC);
     ShadowGC = GetDecor (t, LoShadowGC);
-    BackGC = GetDecor (t, LoBackGC);
+  }
+
+  title_state = GetButtonState (t->title_w);
+  tb_style = GetDecor (t, titlebar.state[title_state].style);
+  tb_flags = GetDecor (t, titlebar.flags);
+  bf = &GetDecor (t, titlebar.state[title_state]);
+  XSetForeground (dpy, Scr.TransMaskGC, bf->u.back);
+
+  if (bf->u.ReliefGC)
+  {
+    ReliefGC = bf->u.ReliefGC;
+  }
+  if (bf->u.ShadowGC)
+  {
+    ShadowGC = bf->u.ShadowGC;
   }
 
   if (t->name != (char *) NULL)
@@ -2602,9 +2647,6 @@ SetTitleBar_trench (XfwmWindow * t, XRectangle *area, Bool onoroff)
   else
     w = 0;
 
-  title_state = GetButtonState (t->title_w);
-  tb_style = GetDecor (t, titlebar.state[title_state].style);
-  tb_flags = GetDecor (t, titlebar.flags);
   hor_off = (t->title_width - w) / 2;
 
   if (GetDecor (t, WindowFont.font))
@@ -2620,22 +2662,21 @@ SetTitleBar_trench (XfwmWindow * t, XRectangle *area, Bool onoroff)
   {
     XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
-    XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
     XSetClipRectangles(dpy, Scr.ScratchGC3, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.TransMaskGC, 0, 0, area, 1, Unsorted);
   }
 
   if (onoroff)
   {
-    bf = &GetDecor (t, titlebar.state[title_state]);
-    DrawStripes_trench (t, t->title_w, NULL, 0, 0, hor_off - 5, t->title_height - 1, onoroff);
-    XFillRectangle (dpy, t->title_w, BackGC, hor_off - 5, 0, w + 10, t->title_height - 1);
-    DrawStripes_trench (t, t->title_w, NULL, hor_off + w + 5, 0, t->title_width - (hor_off + w + 5), t->title_height - 1, onoroff);
-    XDrawLine (dpy, t->title_w, ShadowGC, 0, t->title_height - 1, t->title_width - 1, t->title_height - 1);
+    DrawStripes_trench (t, t->title_w, NULL, 0, 0, hor_off - 5, t->title_height - 1, bf, onoroff);
+    XFillRectangle (dpy, t->title_w, Scr.TransMaskGC, hor_off - 5, 0, w + 10, t->title_height - 1);
+    DrawStripes_trench (t, t->title_w, NULL, hor_off + w + 5, 0, t->title_width - (hor_off + w + 5), t->title_height - 1, bf, onoroff);
   }
   else
   {
-    XFillRectangle (dpy, t->title_w, BackGC, 0, 0, t->title_width, t->title_height);
+    XFillRectangle (dpy, t->title_w, Scr.TransMaskGC, 0, 0, t->title_width, t->title_height - 1);
   }
+  XDrawLine (dpy, t->title_w, ShadowGC, 0, t->title_height - 1, t->title_width - 1, t->title_height - 1);
 
   if (t->name != (char *) NULL)
   {
@@ -2694,8 +2735,8 @@ SetTitleBar_trench (XfwmWindow * t, XRectangle *area, Bool onoroff)
   {
     XSetClipMask(dpy, ReliefGC, None);
     XSetClipMask(dpy, ShadowGC, None);
-    XSetClipMask(dpy, BackGC, None);
     XSetClipMask(dpy, Scr.ScratchGC3, None);
+    XSetClipMask(dpy, Scr.TransMaskGC, None);
   }
 }
 
@@ -2704,8 +2745,12 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
 {
   XSegment seg[10];
   GC BackGC = NULL;
-  GC HiGC1, LoGC1;
-  GC HiGC2, LoGC2;
+  GC HiGC = ReliefGC;
+  GC LoGC = ShadowGC;
+  GC BackColorGC = NULL;
+  enum ButtonState title_state;
+  ButtonFace *bftitle;
+  Bool onoroff;
   int i;
   int edge;
 
@@ -2721,7 +2766,49 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
   else if (win == t->corners[3])
     edge = 4;
 
-  BackGC = ((Scr.Hilite == t) ? GetDecor (t, HiBackGC) : GetDecor (t, LoBackGC));
+  onoroff = (Scr.Hilite == t);
+
+  BackGC = (onoroff ? GetDecor (t, HiBackGC) : GetDecor (t, LoBackGC));
+
+  if (t->flags & TITLE)
+  {
+    title_state = GetButtonState (t->title_w);
+    bftitle = &GetDecor (t, titlebar.state[title_state]);
+    XSetForeground (dpy, Scr.TransMaskGC, bftitle->u.back);
+    BackColorGC = Scr.TransMaskGC;
+
+    if (bftitle->u.ReliefGC)
+    {
+      HiGC = bftitle->u.ReliefGC;
+    }
+    if (bftitle->u.ShadowGC)
+    {
+      LoGC = bftitle->u.ShadowGC;
+    }
+  }
+  else
+  {
+    HiGC = ReliefGC;
+    LoGC = ShadowGC;
+    BackColorGC = BackGC;
+  }
+
+  if (area)
+  {
+    XSetClipRectangles(dpy, ReliefGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, ShadowGC, 0, 0, area, 1, Unsorted);
+    if (HiGC != ReliefGC)
+    {
+      XSetClipRectangles(dpy, HiGC, 0, 0, area, 1, Unsorted);
+    }
+    if (LoGC != ShadowGC)
+    {
+      XSetClipRectangles(dpy, LoGC, 0, 0, area, 1, Unsorted);
+    }
+    XSetClipRectangles(dpy, LoGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.TransMaskGC, 0, 0, area, 1, Unsorted);
+  }
 
   if (area)
   {
@@ -2730,35 +2817,13 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
     XSetClipRectangles(dpy, BackGC, 0, 0, area, 1, Unsorted);
   }
 
-  if ((Scr.Hilite == t))
-  {
-    HiGC2 = ReliefGC;
-    LoGC2 = ShadowGC;
-  }
-  else
-  {
-    HiGC2 = BackGC;
-    LoGC2 = BackGC;
-  }
-
-  if (t->flags & TITLE)
-  {
-    HiGC1 = HiGC2;
-    LoGC1 = LoGC2;
-  }
-  else
-  {
-    HiGC1 = BackGC;
-    LoGC1 = BackGC;
-  }
-
   /* window sides */
   if (edge == -1)
   {
     switch (hilite)
     {
     case LEFT_HILITE:
-      XFillRectangle (dpy, win, BackGC, x + 2, y, w - 3, h + y + 1);
+      XFillRectangle (dpy, win, BackGC, x + 2, y + 1, w - 3, h + y + 1);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
@@ -2770,17 +2835,21 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].y1 = y;
       seg[i].x2 = x + 1;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, HiGC2, seg, i);
+      seg[i].x1 = x + 1;
+      seg[i].y1 = y;
+      seg[i].x2 = x + w;
+      seg[i++].y2 = y;
+      XDrawSegments (dpy, win, ReliefGC, seg, i);
       i = 0;
       seg[i].x1 = x + w - 1;
       seg[i].y1 = y;
       seg[i].x2 = x + w - 1;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, LoGC1, seg, i);
+      XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
 
     case TOP_HILITE:
-      XFillRectangle (dpy, win, BackGC, x, y + 2, w + x + 1, y + h - 2);
+      XFillRectangle (dpy, win, BackColorGC, x, y + 2, w + x + 1, y + h - 2);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
@@ -2792,17 +2861,21 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].y1 = y + 1;
       seg[i].x2 = w + x;
       seg[i++].y2 = y + 1;
-      XDrawSegments (dpy, win, HiGC2, seg, i);
+      XDrawSegments (dpy, win, HiGC, seg, i);
       break;
 
     case RIGHT_HILITE:
-      XFillRectangle (dpy, win, BackGC, x + 1, y, w + x - 3, h + y + 1);
+      XFillRectangle (dpy, win, BackGC, x + 1, y + 1, w + x - 3, h + y + 1);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
       seg[i].x2 = x;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, HiGC1, seg, i);
+      seg[i].x1 = x + 1;
+      seg[i].y1 = y;
+      seg[i].x2 = x + w;
+      seg[i++].y2 = y;
+      XDrawSegments (dpy, win, ReliefGC, seg, i);
       i = 0;
       seg[i].x1 = w + x - 1;
       seg[i].y1 = y;
@@ -2814,17 +2887,17 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].y1 = y;
       seg[i].x2 = w + x - 2;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, LoGC2, seg, i);
+      XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
 
     case BOTTOM_HILITE:
-      XFillRectangle (dpy, win, BackGC, x, y + 1, w + x + 1, h + y - 3);
+      XFillRectangle (dpy, win, BackColorGC, x, y + 1, w + x + 1, h + y - 3);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
       seg[i].x2 = w + x;
       seg[i++].y2 = y;
-      XDrawSegments (dpy, win, HiGC1, seg, i);
+      XDrawSegments (dpy, win, HiGC, seg, i);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = h + y - 1;
@@ -2836,7 +2909,7 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].y1 = h + y - 2;
       seg[i].x2 = w + x;
       seg[i++].y2 = h + y - 2;
-      XDrawSegments (dpy, win, LoGC2, seg, i);
+      XDrawSegments (dpy, win, LoGC, seg, i);
       break;
 
     }
@@ -2847,7 +2920,7 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
     switch (edge)
     {
     case 1:
-      XFillRectangle (dpy, win, BackGC, x + 2, y + 2, x + w, y + h);
+      XFillRectangle (dpy, win, BackColorGC, x + 2, y + 2, x + w, y + h - 1);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y;
@@ -2867,25 +2940,35 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].y1 = y + 1;
       seg[i].x2 = w + x;
       seg[i++].y2 = y + 1;
-      XDrawSegments (dpy, win, HiGC2, seg, i);
-      XDrawPoint (dpy, win, LoGC1, x + t->boundary_width - 1, y + h - 1);
+      XDrawSegments (dpy, win, HiGC, seg, i);
+      i = 0;
+      seg[i].x1 = x + 1;
+      seg[i].y1 = y + h - 1;
+      seg[i].x2 = x + t->boundary_width;
+      seg[i++].y2 = y + h - 1;
+      XDrawSegments (dpy, win, LoGC, seg, i);
+      /* XDrawPoint (dpy, win, LoGC, x + t->boundary_width - 1, y + h - 1); */
       break;
 
     case 2:
-      XFillRectangle (dpy, win, BackGC, x, y + 2, x + w - 2, y + h);
+      XFillRectangle (dpy, win, BackColorGC, x, y + 2, x + w - 2, y + h - 2);
       i = 0;
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y + 1;
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = y + 1;
-      XDrawSegments (dpy, win, HiGC2, seg, i);
+      XDrawSegments (dpy, win, HiGC, seg, i);
       i = 0;
       seg[i].x1 = w + x - 2;
       seg[i].y1 = y + 2;
       seg[i].x2 = w + x - 2;
       seg[i++].y2 = h + y;
-      XDrawSegments (dpy, win, LoGC2, seg, i);
+      seg[i].x1 = x + w - t->boundary_width;
+      seg[i].y1 = y + h - 1;
+      seg[i].x2 = w + x - 2;
+      seg[i++].y2 = y + h - 1;
+      XDrawSegments (dpy, win, LoGC, seg, i);
       i = 0;
       seg[i].x1 = w + x - 1;
       seg[i].y1 = y + 1;
@@ -2896,23 +2979,29 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].x2 = w + x - 1;
       seg[i++].y2 = y;
       XDrawSegments (dpy, win, Scr.BlackGC, seg, i);
-      XDrawPoint (dpy, win, HiGC1, x + w - t->boundary_width, y + h - 1);
       break;
 
     case 3:
-      XFillRectangle (dpy, win, BackGC, x + 2, y, x + w, y + h - 2);
+      XFillRectangle (dpy, win, BackGC, x + 2, y, x + w, y + h - t->boundary_width - 1);
+      XFillRectangle (dpy, win, BackColorGC, x + 2, y + h - t->boundary_width + 1, x + w, y + h - 2);
       i = 0;
-      seg[i].x1 = x + t->boundary_width - 1;
+      seg[i].x1 = x + 1;
       seg[i].y1 = y + h - t->boundary_width;
       seg[i].x2 = x + w;
       seg[i++].y2 = y + h - t->boundary_width;
-      XDrawSegments (dpy, win, HiGC1, seg, i);
+      XDrawSegments (dpy, win, HiGC, seg, i);
       i = 0;
       seg[i].x1 = x + 1;
       seg[i].y1 = y;
       seg[i].x2 = x + 1;
-      seg[i++].y2 = h + y - 1;
-      XDrawSegments (dpy, win, HiGC2, seg, i);
+      seg[i++].y2 = h + y - t->boundary_width - 1;
+      XDrawSegments (dpy, win, ReliefGC, seg, i);
+      i = 0;
+      seg[i].x1 = x + 1;
+      seg[i].y1 = h + y - t->boundary_width;
+      seg[i].x2 = x + 1;
+      seg[i++].y2 = h + y - 2;
+      XDrawSegments (dpy, win, HiGC, seg, i);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = h + y - 1;
@@ -2928,27 +3017,34 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].y1 = h + y - 2;
       seg[i].x2 = w + x;
       seg[i++].y2 = h + y - 2;
-      XDrawSegments (dpy, win, LoGC2, seg, i);
+      XDrawSegments (dpy, win, LoGC, seg, i);
       i = 0;
       seg[i].x1 = x + t->boundary_width - 1;
       seg[i].y1 = y;
       seg[i].x2 = x + t->boundary_width - 1;
       seg[i++].y2 = h + y - t->boundary_width - 1;
-      XDrawSegments (dpy, win, LoGC1, seg, i);
+      seg[i].x1 = x + 2;
+      seg[i].y1 = y + h - t->boundary_width - 1;
+      seg[i].x2 = x + t->boundary_width - 1;
+      seg[i++].y2 = y + h - t->boundary_width - 1;
+      XDrawSegments (dpy, win, ShadowGC, seg, i);
       break;
 
     case 4:
-      XFillRectangle (dpy, win, BackGC, x, y, x + w - 2, y + h - 2);
+      XFillRectangle (dpy, win, BackGC, x, y, x + w - 2, y + h - t->boundary_width - 1);
+      XFillRectangle (dpy, win, BackColorGC, x, y + h - t->boundary_width + 1, x + w - 2, y + h - 2);
       i = 0;
       seg[i].x1 = x;
       seg[i].y1 = y + h - t->boundary_width;
-      seg[i].x2 = x + w - t->boundary_width;
+      seg[i].x2 = x + w - 2;
       seg[i++].y2 = y + h - t->boundary_width;
+      XDrawSegments (dpy, win, HiGC, seg, i);
+      i = 0;
       seg[i].x1 = x + w - t->boundary_width;
       seg[i].y1 = y;
       seg[i].x2 = x + w - t->boundary_width;
-      seg[i++].y2 = y + h - t->boundary_width;
-      XDrawSegments (dpy, win, HiGC1, seg, i);
+      seg[i++].y2 = y + h - t->boundary_width - 1;
+      XDrawSegments (dpy, win, ReliefGC, seg, i);
       i = 0;
       seg[i].x1 = w + x - 1;
       seg[i].y1 = y;
@@ -2963,12 +3059,22 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
       seg[i].x1 = w + x - 2;
       seg[i].y1 = y;
       seg[i].x2 = w + x - 2;
+      seg[i++].y2 = h + y - t->boundary_width - 1;
+      seg[i].x1 = x + w - t->boundary_width + 1;
+      seg[i].y1 = h + y - t->boundary_width - 1;
+      seg[i].x2 = w + x - 2;
+      seg[i++].y2 = h + y - t->boundary_width - 1;
+      XDrawSegments (dpy, win, ShadowGC, seg, i);
+      i = 0;
+      seg[i].x1 = w + x - 2;
+      seg[i].y1 = h + y - t->boundary_width;
+      seg[i].x2 = w + x - 2;
       seg[i++].y2 = h + y - 2;
       seg[i].x1 = x;
       seg[i].y1 = h + y - 2;
       seg[i].x2 = w + x - 2;
       seg[i++].y2 = h + y - 2;
-      XDrawSegments (dpy, win, LoGC2, seg, i);
+      XDrawSegments (dpy, win, LoGC, seg, i);
       break;
     }
   }
@@ -2977,7 +3083,16 @@ RelieveWindow_trench (XfwmWindow * t, Window win, XRectangle *area, int x, int y
   {
     XSetClipMask(dpy, ReliefGC, None);
     XSetClipMask(dpy, ShadowGC, None);
+    if (HiGC != ReliefGC)
+    {
+      XSetClipMask(dpy, HiGC, None);
+    }
+    if (LoGC != ShadowGC)
+    {
+      XSetClipMask(dpy, LoGC, None);
+    }
     XSetClipMask(dpy, BackGC, None);
+    XSetClipMask(dpy, Scr.TransMaskGC, None);
   }
 }
 
@@ -3014,14 +3129,19 @@ DrawSelectedEntry_trench (Window win, XRectangle *area, int x, int y, int w, int
   XChangeGC (dpy, Scr.ScratchGC1, Globalgcm, &Globalgcv);
   if (area)
   {
-    XSetClipRectangles(dpy, Scr.ScratchGC1, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.MenuSelReliefGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.MenuSelShadowGC, 0, 0, area, 1, Unsorted);
+    XSetClipRectangles(dpy, Scr.BlackGC, 0, 0, area, 1, Unsorted);
   }
 
-  XFillRectangle (dpy, win, Scr.ScratchGC1, x, y, w, h);
+  XFillRectangle (dpy, win, Scr.ScratchGC1, x + 1, y + 1, w - 2, h - 2);
+  RelieveRectangle (win, NULL, x, y, w, h, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
 
   if (area)
   {
-    XSetClipMask(dpy, Scr.ScratchGC1, None);
+    XSetClipMask(dpy, Scr.MenuSelShadowGC, None);
+    XSetClipMask(dpy, Scr.MenuSelReliefGC, None);
+    XSetClipMask(dpy, Scr.BlackGC, None);
   }
 
   *currentGC = Scr.MenuSelGC;
