@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce 3.8.13\n"
 "POT-Creation-Date: 2002-01-17 10:59+0100\n"
-"PO-Revision-Date: 2002-01-11 08:39+0200\n"
+"PO-Revision-Date: 2002-01-17 18:31+0200\n"
 "Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -971,23 +971,21 @@ msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geomeetria: %dx%d+%d+%d\n"
 
 #: xftree/xtree_cb.c:320
-#, fuzzy
 msgid "error deleting file"
-msgstr "Viga kustutamisel"
+msgstr "Viga faili kustutamisel"
 
 #. nothing to delete
 #: xftree/xtree_cb.c:408 xftree/xtree_cb.c:767
 msgid "No files marked !"
-msgstr ""
+msgstr "Ühtki faili pole märgitud !"
 
 #: xftree/xtree_cb.c:464 xftree/xtree_cb.c:466
-#, fuzzy
 msgid "Delete item ?"
-msgstr "Kustutamine ..."
+msgstr "Kustutame?"
 
 #: xftree/xtree_cb.c:476 xftree/xtree_cb.c:480
 msgid "Can't move file to trash, hard delete ?"
-msgstr ""
+msgstr "Faili ei saa prügikasti panna, hävitan julmalt ?"
 
 #: xftree/xtree_cb.c:558
 msgid ""
@@ -997,44 +995,43 @@ msgid ""
 "Olivier Fourdan\n"
 "Edscott Wilson Garcia\n"
 msgstr ""
+"See on XFTree (C) GNU GPL litsentsi all\n"
+"programmi on koostanud\n"
+"Rasca, Berlin\n"
+"Oliver Fourdan\n"
+"Edscott Wilson Gracia\n"
 
 #: xftree/xtree_cb.c:578 xftree/xtree_cb.c:589
-#, fuzzy
 msgid "New_Folder"
-msgstr "Uus kataloog"
+msgstr "Uus_Kataloog"
 
 #: xftree/xtree_cb.c:629 xftree/xtree_cb.c:637
-#, fuzzy
 msgid "New_File"
-msgstr "Uus fail"
+msgstr "Uus_Fail"
 
 #: xftree/xtree_cb.c:657 xftree/xtree_cb.c:733
-#, fuzzy
 msgid "File exists !"
-msgstr "Fail leidub ! Kas kirjutame üle ?"
+msgstr "Fail juba leidub !"
 
 #: xftree/xtree_cb.c:686
 msgid "No item marked !"
-msgstr ""
+msgstr "Ühtki faili/kataloogi ei ole märgitud !"
 
 #: xftree/xtree_cb.c:702
-#, fuzzy
 msgid "Rename to : "
-msgstr "Kasutajanimi  : "
+msgstr "Uus nimi : "
 
 #: xftree/xtree_cb.c:710
 msgid "Character not allowed in filename"
-msgstr ""
+msgstr "Sümbolid ei ole failinimes lubatud"
 
 #: xftree/xtree_cb.c:794
-#, fuzzy
 msgid "Nothing selected !"
-msgstr "Ühtki kataloogi pole märgitud!"
+msgstr "Midagi pole märgitud !"
 
 #: xftree/xtree_cb.c:1105
-#, fuzzy
 msgid "Override?"
-msgstr "Alistame ?"
+msgstr "Alistame?"
 
 #: xftree/xtree_cpy.c:158
 msgid "Insufficient system memory"
@@ -1123,7 +1120,7 @@ msgstr "Failid"
 
 #: xftree/xtree_functions.c:494
 msgid "internal malloc error:"
-msgstr ""
+msgstr "sisemine mälueralduse viga"
 
 #: xftree/xtree_go.c:162
 msgid "Cannot find path"
@@ -1531,72 +1528,60 @@ msgstr "Kleepeplaadi sisu:\n"
 
 #. only 32 elements allowed in TOOLBARICONS
 #: xftree/xtree_toolbar.c:88
-#, fuzzy
 msgid "New window"
 msgstr "Uus aken"
 
 #: xftree/xtree_toolbar.c:89
-#, fuzzy
 msgid "Terminal"
-msgstr "Kõrvaldatud: "
+msgstr "Terminaal"
 
 #: xftree/xtree_toolbar.c:91
-#, fuzzy
 msgid "Run ..."
-msgstr "Ümbernimetus ..."
+msgstr "Käivita ..."
 
 #: xftree/xtree_toolbar.c:92
-#, fuzzy
 msgid "Update ..."
-msgstr "Uuenda"
+msgstr "Uuenda ..."
 
 #: xftree/xtree_toolbar.c:93
-#, fuzzy
 msgid "Go back ..."
-msgstr "Tagasi..."
+msgstr "Mine tagasi..."
 
 #: xftree/xtree_toolbar.c:97
-#, fuzzy
 msgid "Cut ..."
-msgstr "Välju ..."
+msgstr "Lõika ..."
 
 #: xftree/xtree_toolbar.c:98
-#, fuzzy
 msgid "Copy ..."
-msgstr "Seiska ..."
+msgstr "Kopeeri ..."
 
 #: xftree/xtree_toolbar.c:99
-#, fuzzy
 msgid "Paste ..."
-msgstr "Salvesta ..."
+msgstr "Aseta ..."
 
 #: xftree/xtree_toolbar.c:105
-#, fuzzy
 msgid "New file ..."
-msgstr "Uus kataloog ..."
+msgstr "Uus fail ..."
 
 #: xftree/xtree_toolbar.c:322
-#, fuzzy
 msgid "Action"
-msgstr "Tegevused"
+msgstr "Tegevus"
 
 #: xftree/xtree_toolbar.c:323
 msgid "Small icons. "
-msgstr ""
+msgstr "Väikesed ikoonid"
 
 #: xftree/xtree_toolbar.c:324
-#, fuzzy
 msgid "Large icons. "
-msgstr "Järjesta ikoonid"
+msgstr "Suured ikoonid. "
 
 #: xftree/xtree_toolbar.c:327
-#, fuzzy
 msgid "Regen"
-msgstr "Reset"
+msgstr "Regen"
 
 #: xftree/xtree_toolbar.c:427
 msgid "Large buttons"
-msgstr ""
+msgstr "Suured nupud"
 
 #. convenience location of duplicate dialog texts
 #. non-static
@@ -2329,8 +2314,8 @@ msgstr ""
 " [^... ] -iga täht, mis pole '.'de asemel vastab õigele.\n"
 "  [..-..] -vastab piirkond sümboleid, nt: [0-9] või [a-z].\n"
 " \n"
-"Regulaarsele tingimusele võivad järgneda erinevad operaatorid (eelnev "
-"liige ...):\n"
+"Regulaarsele tingimusele võivad järgneda erinevad operaatorid (eelnev liige "
+"...):\n"
 " ?       -on lisaks ja leidub ainult üks kord.\n"
 " *       -esineb null või palju kordi.\n"
 " +       -eelnev esineb üks või rohkem kordi.\n"
