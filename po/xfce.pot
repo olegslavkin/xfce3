@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-16 19:33+0100\n"
+"POT-Creation-Date: 2001-11-17 08:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2943,7 +2943,7 @@ msgstr ""
 msgid "Retrieve done."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:159
 msgid "Query password has been requested."
 msgstr ""
 
@@ -2964,27 +2964,27 @@ msgstr ""
 msgid "Resolving for"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:84
+#: xfsamba/xfsamba_smblookup.c:83
 msgid "Shares"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:86
+#: xfsamba/xfsamba_smblookup.c:85
 msgid "Links to other servers"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:88
+#: xfsamba/xfsamba_smblookup.c:87
 msgid "Links to other workgroups"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:143
+#: xfsamba/xfsamba_smblookup.c:142
 msgid "Query done."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:145
+#: xfsamba/xfsamba_smblookup.c:144
 msgid "Query failed. Machine may be down."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:324
+#: xfsamba/xfsamba_smblookup.c:323
 msgid "Querying"
 msgstr ""
 

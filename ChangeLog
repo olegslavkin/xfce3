@@ -1,3 +1,333 @@
+2001-11-17  xfce
+
+	* other/xfwmrc.in, xfwm/borders.c, xfwm/themes.c, xfwm/xfwm.c:
+	Improve shaped icons option
+
+2001-11-17  edscott
+
+	* xfsamba/xfsamba_smblookup.c: incorrect directive XFSAMBA_MAIN
+	removed from smblookup.c
+
+2001-11-16  xfce
+
+	* po/xfce.pot, scripts/xfhelp, xfwm/builtins.c, xfwm/functions.c,
+	xfwm/icons.c, xfwm/misc.h, xfwm/parse.h, xfwm/themes.c,
+	xfwm/xfwm.c, xfwm/xfwm.h: Add option for support of shaped icons.
+
+2001-11-16  xfce
+
+	* scripts/: xfhelp, xfhelp.in: Fix typos
+
+2001-11-16  xfce
+
+	* palettes/Vanadium: Add new palette
+
+2001-11-16  xfce
+
+	* libs/xfcolor.c, palettes/DISTFILES.in, palettes/Default,
+	palettes/GTK+Default2, xfwm/xfwm.c: Colors stuff
+
+2001-11-15  xfce
+
+	* libs/xfcolor.c, palettes/Default, po/xfce.pot, xfwm/stack.c,
+	xfwm/xfwm.c: Minor bug fix in xfwm
+
+2001-11-15  xfce
+
+	* backdrops/: Default.jpg, Default.xpm: Update default backdrops
+
+2001-11-14  xfce
+
+	* backdrops/Default.jpg, backdrops/Default.xpm,
+	palettes/DISTFILES.in, palettes/Linea3: Add new palette "Linea3"
+	Modify Default backdrops
+
+2001-11-14  xfce
+
+	* configure: Update configure
+
+2001-11-14  xfce
+
+	* configure, configure.in, backdrops/DISTFILES.in,
+	backdrops/Default.jpg, backdrops/Default.png,
+	backdrops/Default.xpm: [no log message]
+
+2001-11-13  edscott
+
+	* xftree/TODO: More stuff suggested by Peter V.
+
+2001-11-13  xfce
+
+	* backdrops/: Default.png, Default.xpm: Change color balance on
+	default backdrops
+
+2001-11-12  xfce
+
+	* configure, configure.in, backdrops/DISTFILES.in,
+	backdrops/Default.png, backdrops/Default.xpm, other/xfbdrc.in,
+	po/xfce.pot, xftree/Makefile.in: Add a nice png backdrop as default
+
+2001-11-12  xfce
+
+	* po/xfce.pot, xftree/gtk_dlg.c: Fix a crash when using tab key in
+	delete dialog
+
+2001-11-11  edscott
+
+	* xftree/: TODO, gtk_cpy.c, gtk_cpy.h, gtk_exec.c, gtk_exec.h,
+	gtk_get.c, gtk_prop.c, gtk_prop.h, xtree_dnd.c, xtree_du.c,
+	xtree_gui.c, xtree_mess.c, xtree_mess.h: - The lack of parent for
+	modal dialog bug has been fixed throughout all files.  - A small
+	bug (due to typo) fixed for function cb_exec in xtree_gui.c
+
+2001-11-11  xfce
+
+	* fonts/DISTFILES.in, fonts/fonts.dir, libs/constant.h,
+	libs/xfcolor.c, other/xinitrc, other/xinitrc.in, other/xinitrc.mwm,
+	other/xinitrc.mwm.in: [no log message]
+
+2001-11-11  xfce
+
+	* po/xfce.pot, xfwm/events.c: A couple of small stuff in xfwm
+
+2001-11-11  xfce
+
+	* xftree/xtree_cfg.h: Fix a compilation problem with xftree
+
+2001-11-11  edscott
+
+	* xftree/: TODO, gtk_dlg.c, gtk_dlg.h, xtree_cfg.h, xtree_gui.c:
+	fixed a bug of modal dialogs being lost under frozen xftree
+	windows.  This involved redefinition of dialog macros. New macros
+	applied to xtree_gui.c, but still pending application in other
+	files where dialog macros are in use.
+
+2001-11-11  xfce
+
+	* po/cat-id-tbl.c, po/xfce.pot, xftree/xtree_gui.c: Fix a bug in
+	cb_new_window ()
+
+2001-11-10  xfce
+
+	* fonts/cursor2.pcf: [no log message]
+
+2001-11-10  xfce
+
+	* Makefile.am, Makefile.in, configure, configure.in, other/xinitrc,
+	other/xinitrc.in, other/xinitrc.mwm, other/xinitrc.mwm.in,
+	po/cat-id-tbl.c, po/xfce.pot, xftree/xtree_gui.c, xfwm/events.c:
+	Fix some problems with xftree Fix a small glitch in xfwm
+
+2001-11-10  xfce
+
+	* cursors/: DISTFILES.in, Makefile.in.in, cursor2.pcf, fonts.dir:
+	Move former dir fonts/ to cursors/
+
+2001-11-10  xfce
+
+	* fonts/: uniread-variable-05-b-i-ISO8859-1.pcf.gz,
+	uniread-variable-05-b-i.pcf.gz,
+	uniread-variable-05-b-r-ISO8859-1.pcf.gz,
+	uniread-variable-05-b-r.pcf.gz,
+	uniread-variable-05-m-i-ISO8859-1.pcf.gz,
+	uniread-variable-05-m-i.pcf.gz,
+	uniread-variable-05-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-05-m-r.pcf.gz,
+	uniread-variable-07-b-i-ISO8859-1.pcf.gz,
+	uniread-variable-07-b-i.pcf.gz,
+	uniread-variable-07-b-r-ISO8859-1.pcf.gz,
+	uniread-variable-07-b-r.pcf.gz,
+	uniread-variable-07-m-i-ISO8859-1.pcf.gz,
+	uniread-variable-07-m-i.pcf.gz,
+	uniread-variable-07-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-07-m-r.pcf.gz,
+	uniread-variable-09-b-i-ISO8859-1.pcf.gz,
+	uniread-variable-09-b-i.pcf.gz,
+	uniread-variable-09-b-r-ISO8859-1.pcf.gz,
+	uniread-variable-09-b-r.pcf.gz,
+	uniread-variable-09-m-i-ISO8859-1.pcf.gz,
+	uniread-variable-09-m-i.pcf.gz,
+	uniread-variable-09-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-09-m-r.pcf.gz,
+	uniread-variable-10-b-i-ISO8859-1.pcf.gz,
+	uniread-variable-10-b-i.pcf.gz,
+	uniread-variable-10-b-r-ISO8859-1.pcf.gz,
+	uniread-variable-10-b-r.pcf.gz,
+	uniread-variable-10-m-i-ISO8859-1.pcf.gz,
+	uniread-variable-10-m-i.pcf.gz,
+	uniread-variable-10-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-10-m-r.pcf.gz,
+	uniread-variable-12-b-i-ISO8859-1.pcf.gz,
+	uniread-variable-12-b-i.pcf.gz,
+	uniread-variable-12-b-r-ISO8859-1.pcf.gz,
+	uniread-variable-12-b-r.pcf.gz,
+	uniread-variable-12-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-12-m-r.pcf.gz,
+	uniread-variable-14-b-r-ISO8859-1.pcf.gz,
+	uniread-variable-14-b-r.pcf.gz,
+	uniread-variable-14-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-14-m-r.pcf.gz,
+	uniread-variable-18-m-r-ISO8859-1.pcf.gz,
+	uniread-variable-18-m-r.pcf.gz: Add some of the excellent fonts
+	from the LFP project by Sergej Malinovski <sergej@nospam.dk>
+
+2001-11-10  edscott
+
+	* xftree/: Makefile.in, TODO, xtree_gui.c, xtree_mess.c,
+	xtree_mess.h: - help items on shrtcut keys added - short titles
+	configuration option added - more TODO's
+
+2001-11-10  xfce
+
+	* po/ca.po, po/cat-id-tbl.c, po/cs.gmo, po/cs.po, po/da.gmo,
+	po/da.po, po/de.gmo, po/de.po, po/en_GB.po, po/es.gmo, po/es.po,
+	po/et.gmo, po/et.po, po/fi.po, po/fr.gmo, po/fr.po, po/gl.gmo,
+	po/gl.po, po/hu.gmo, po/hu.po, po/it.po, po/ja.po, po/nl.gmo,
+	po/nl.po, po/pl.po, po/pt_BR.gmo, po/pt_BR.po, po/ro.gmo, po/ro.po,
+	po/ru.po, po/sk.po, po/sr.gmo, po/sr.po, po/sv.po, po/uk.gmo,
+	po/uk.po, po/xfce.pot, po/zh.po, po/zh_CN.po, xftree/Makefile.in,
+	xftree/xtree_gui.c, xfwm/virtual.c: Fix a compilation problem with
+	xftree (xtree_gui.c)
+
+2001-11-10  edscott
+
+	* xftree/: TODO, xtree_gui.c: removed default shortcut captions
+	from menus. added more TODO's
+
+2001-11-10  edscott
+
+	* xftree/: TODO, xtree_gui.c, xtree_mess.c: added a couple
+	configuration options:	 1- Save geometry on exit   2- Double click
+	does goto   (goto debug still pending) Further debugging of
+	keyboard shortcuts.
+
+2001-11-10  edscott
+
+	* xftree/: TODO, xtree_gui.c: Keyboard shortcuts debugged and
+	working now. Debugged by macro definitions which now make the menus
+	and keyboard shortcuts easier to maintain (IMO).  Also, immediate
+	refresh after "duplicate file" and changed insert-node to refresh
+	upon newfile creation, so that it enters tree in correct position
+	(it did not enter in correct position until folder was closed and
+	opened).
+
+2001-11-09  edscott
+
+	* xftree/: Makefile.am, TODO, gtk_cpy.c, gtk_get.c, xtree_dnd.c,
+	xtree_gui.c, xtree_mess.c: - extended dialog for override files.
+	Fixed cancel button, added all button.
+
+2001-11-09  edscott
+
+	* xftree/: TODO, xtree_mess.c: new message box for file overrides
+	(not yet operational)
+
+2001-11-09  xfce
+
+	* xftree/gtk_dlg.c, xfwm/virtual.c: Add intl to modified gtk_dlg.c
+	and remove C++ comments
+
+2001-11-09  edscott
+
+	* xftree/: Makefile.am, TODO, tubo.c, tubo.h, xtree_du.c,
+	xtree_gui.c: ctrl-u or select from right button menu over folders
+	gives diskusage, nonblocking forked operation. Should work in
+	parallel with multiprocesors.
+
+2001-11-09  edscott
+
+	* xftree/: Makefile.am, TODO, xtree_du.c: preparing file for disk
+	usage option mentioned in TODO (not yet operational)
+
+2001-11-08  edscott
+
+	* xftree/TODO: update todo
+
+2001-11-08  edscott
+
+	* xftree/xtree_gui.c: added all+skip buttons for hard deletes.
+
+2001-11-08  xfce
+
+	* po/xfce.pot, xftree/gtk_dlg.c: Include xftree keyboard shortcuts
+	from Simon Beavis <simon@smartmove.co.nz>
+
+2001-11-08  xfce
+
+	* configure, configure.in, po/xfce.pot: Forgot to add Ukrainian in
+	configure script (ALL_LINGUAS)
+
+2001-11-08  edscott
+
+	* xftree/TODO: keyboard shortcuts todo added
+
+2001-11-08  xfce
+
+	* libs/constant.h, libs/xfcolor.c, other/xfce3rc.cs.in,
+	other/xfce3rc.de.in, other/xfce3rc.fr.in, other/xfce3rc.hu.in,
+	other/xfce3rc.in, other/xfce3rc.ja.in, other/xfce3rc.ko.in,
+	other/xfce3rc.nl.in, other/xfce3rc.sr.in, other/xfce3rc.uk.in,
+	other/xfce3rc.zh_CN.GB2312.in, other/xfce3rc.zh_TW.Big5.in,
+	palettes/Default, xfwm/xfwm.c: Look'n Feel
+
+2001-11-07  edscott
+
+	* configure.in: enabled the --target=TARGET option for architecture
+	specific build
+
+2001-11-07  xfce
+
+	* palettes/DISTFILES.in, palettes/GreySlate, po/xfce.pot,
+	xfumed/xfumed.c, xfumed/xfumed_gui_cb.c: Fixed compilation problem
+	in xfumed so it compiles under gcc using --predantic
+
+2001-11-07  xfce
+
+	* palettes/GTK+Default, palettes/GTK+Default2, palettes/GreySlate,
+	xfumed/xfumed_gui_cb.c: Fix constant problem in xfumed and add new
+	palettes.
+
+2001-11-07  xfce
+
+	* xfumed/xfumed.c: Fix a bug in xfumed and backup file
+
+2001-11-06  xfce
+
+	* palettes/Chrome, palettes/DISTFILES.in, po/xfce.pot,
+	textures/Chrome.xpm, textures/DISTFILES.in: Add new palette
+
+2001-11-05  xfce
+
+	* palettes/: DISTFILES.in, Linea2: Add new palette
+
+2001-11-05  xfce
+
+	* xftree/gtk_cpy.c: Fix a big bug in xftree emptying files when
+	copied onto themselves.
+
+2001-11-05  xfce
+
+	* xfwm/misc.h: Add WM_TAKE_FOCUS to check if a window accepts focus
+	or not.
+
+2001-11-04  xfce
+
+	* palettes/: DISTFILES.in, Tradition2: Add new palette
+
+2001-11-04  xfce
+
+	* configure, configure.in, xfce-3.8.11.lsm, xfce-3.8.12.lsm,
+	xfce.spec, other/CONFFILES.in, other/Makefile.in.in,
+	other/xfce3rc.uk.in, po/uk.gmo, po/uk.po, xfumed/Makefile.am,
+	xfumed/Makefile.in, xfwm/builtins.c: Upgrade version number, fix a
+	small problem in xfwm with Circulate (), add Ukrainian localization
+	by Andriy Rysin <arysin@myrealbox.com>
+
+2001-11-01  xfce
+
+	* xfwm/events.c: Add an XFlush prior to XFindContext in
+	HandleEvents
+
 2001-11-01  xfce
 
 	* ChangeLog: Update ChangeLog
