@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-08 22:21+0100\n"
+"POT-Creation-Date: 2001-11-17 08:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ismo Jokinen <ismo@joki.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,17 +36,17 @@ msgstr "OK"
 msgid "Message"
 msgstr "Viesti"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:265
-#: xfumed/xfumed_gui_cb.c:74 xfumed/xfumed_gui_cb.c:125
+#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:74
+#: xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr "Kyllä"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:296
-#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:126
+#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
+#: xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr "Ei"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:223
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:229
 msgid "Question"
 msgstr "Kysymys"
 
@@ -87,16 +87,14 @@ msgstr "Selaa ..."
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_dlg.c:260 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
-#: xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:191 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "OK"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:291
-#: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
-#: xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:530 xftree/gtk_exec.c:160
+#: xftree/gtk_get.c:138 xftree/gtk_prop.c:192 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Peruuta"
 
@@ -668,9 +666,8 @@ msgid "Setup..."
 msgstr "Asetukset ..."
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
-#: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2647
+#: xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Lopeta"
 
@@ -775,296 +772,320 @@ msgstr "XFCE: Kommunikointi suljettu. Lopetetaan ...\n"
 msgid "Workspace"
 msgstr "Työpöytä"
 
-#: xftree/gtk_cpy.c:70
+#: xftree/gtk_cpy.c:73
 #, c-format
 msgid "transfer_view() %d\n"
 msgstr "transfer_view() %d\n"
 
-#: xftree/gtk_cpy.c:110
+#: xftree/gtk_cpy.c:113
 msgid "move"
 msgstr "siirrä"
 
-#: xftree/gtk_cpy.c:114
+#: xftree/gtk_cpy.c:117
 msgid "copy"
 msgstr "kopioi"
 
-#: xftree/gtk_cpy.c:118
+#: xftree/gtk_cpy.c:121
 #, fuzzy
 msgid "link"
 msgstr "Linkki"
 
-#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:271
+#: xftree/gtk_cpy.c:149 xftree/gtk_cpy.c:277
 #, c-format
 msgid "%d bytes"
 msgstr "%d tavua"
 
-#: xftree/gtk_cpy.c:154
-msgid "Override file?"
-msgstr "Korvaa tiedosto?"
-
-#: xftree/gtk_cpy.c:167 xftree/gtk_cpy.c:172 xftree/gtk_cpy.c:349
-#: xftree/gtk_cpy.c:353 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
+#: xftree/gtk_cpy.c:173 xftree/gtk_cpy.c:178 xftree/gtk_cpy.c:355
+#: xftree/gtk_cpy.c:359 xftree/xtree_gui.c:1255 xftree/xtree_gui.c:1262
 msgid "Can't stat() file"
 msgstr "Ei voi stat() tiedostoa"
 
-#: xftree/gtk_cpy.c:179
+#: xftree/gtk_cpy.c:185
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr "Haluatko %s valinnat "
 
-#: xftree/gtk_cpy.c:221
+#: xftree/gtk_cpy.c:227
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:241
+#: xftree/gtk_cpy.c:247
 msgid "Can't copy device file"
 msgstr "Ei voi kopioida laitetiedostoa"
 
-#: xftree/gtk_cpy.c:246
+#: xftree/gtk_cpy.c:252
 msgid "Can't copy FIFO"
 msgstr "FIFOa ei voi kopioida"
 
-#: xftree/gtk_cpy.c:250
+#: xftree/gtk_cpy.c:256
 msgid "Can't copy socket"
 msgstr "SOCKETia ei voi kopioida"
 
-#: xftree/gtk_cpy.c:285
+#: xftree/gtk_cpy.c:291
 #, fuzzy
 msgid "Too few bytes transferred ! Device full ?"
 msgstr "Liian vähän siirretty ! Laite täynnä?"
 
-#: xftree/gtk_cpy.c:289
+#: xftree/gtk_cpy.c:295
 #, fuzzy
 msgid "Too many bytes transferred !?"
 msgstr "Liikaa siirretty !?"
 
-#: xftree/gtk_cpy.c:335
+#: xftree/gtk_cpy.c:341
 msgid "Source and Target directories are the same"
 msgstr "Lähde ja kohde hakemistot ovat samat"
 
-#: xftree/gtk_cpy.c:386
+#: xftree/gtk_cpy.c:392
 msgid "exists and is not a directory"
 msgstr "On jo, eikä ole hakemisto"
 
-#: xftree/gtk_cpy.c:460
+#: xftree/gtk_cpy.c:469
 msgid "XFTree: Copy"
 msgstr "XFTree: Kopioi"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:473
 msgid "XFTree: Move"
 msgstr "XFTree: Siirrä"
 
-#: xftree/gtk_cpy.c:468
+#: xftree/gtk_cpy.c:477
 #, fuzzy
 msgid "XFTree: Link"
 msgstr "XFTree: Kopioi"
 
-#: xftree/gtk_cpy.c:472
+#: xftree/gtk_cpy.c:481
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Tuntematon siirtomuoto: %d\n"
 
-#: xftree/gtk_cpy.c:478
+#: xftree/gtk_cpy.c:487
 msgid "transfer()"
 msgstr "siirrä()"
 
-#: xftree/gtk_cpy.c:478
+#: xftree/gtk_cpy.c:487
 msgid "fatal error"
 msgstr "Kohtalokas virhe"
 
-#: xftree/gtk_cpy.c:484
+#: xftree/gtk_cpy.c:493
 msgid "Error getting info from"
 msgstr "Ei löydy tietoja"
 
-#: xftree/gtk_cpy.c:489
+#: xftree/gtk_cpy.c:498
 msgid "Fatal Error"
 msgstr "Kohtalokas virhe"
 
-#: xftree/gtk_cpy.c:489
+#: xftree/gtk_cpy.c:498
 msgid "Can't transfer items to a file"
 msgstr "Ei voi siirtää tiedostoon"
 
-#: xftree/gtk_cpy.c:506
+#: xftree/gtk_cpy.c:515
 msgid "Source: "
 msgstr "Lähde: "
 
-#: xftree/gtk_cpy.c:512
+#: xftree/gtk_cpy.c:521
 msgid "Target: "
 msgstr "Kohde: "
 
-#: xftree/gtk_cpy.c:518
+#: xftree/gtk_cpy.c:527
 msgid "0 bytes transferred"
 msgstr "0 tavua siirretty"
 
-#: xftree/gtk_cpy.c:539 xftree/gtk_dlg.c:233
+#: xftree/gtk_cpy.c:548 xftree/gtk_dlg.c:239
 msgid "Error"
 msgstr "Virhe"
 
-#: xftree/gtk_cpy.c:539
+#: xftree/gtk_cpy.c:548
 msgid "Can't transfer a directory to a file"
 msgstr "Ei hakemistoa voi siirtää tiedostoon"
 
-#: xftree/gtk_dlg.c:228
+#: xftree/gtk_dlg.c:234
 msgid "Information"
 msgstr "Tiedoksi"
 
-#: xftree/gtk_dlg.c:238
+#: xftree/gtk_dlg.c:244
 msgid "Warning"
 msgstr "Varoitus"
 
-#: xftree/gtk_dlg.c:242
+#: xftree/gtk_dlg.c:248
 msgid "Dialog"
 msgstr "Dialogi"
 
-#: xftree/gtk_dlg.c:270
-msgid "Continue"
+#. SJB ok = gtk_button_new_with_label (_("Ok"));
+#: xftree/gtk_dlg.c:267
+#, fuzzy
+msgid "_Ok"
+msgstr "OK"
+
+#. SJB ok = gtk_button_new_with_label (_("Yes"));
+#: xftree/gtk_dlg.c:272
+#, fuzzy
+msgid "_Yes"
+msgstr "Kyllä"
+
+#. SJB ok = gtk_button_new_with_label (_("Continue"));
+#: xftree/gtk_dlg.c:277
+#, fuzzy
+msgid "_Continue"
 msgstr "Jatka"
 
-#: xftree/gtk_dlg.c:281 xftree/gtk_prop.c:198
+#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr "Ohita"
 
-#: xftree/gtk_dlg.c:307 xftree/gtk_prop.c:199
-msgid "All"
+#. SJB cancel = gtk_button_new_with_label (_("Cancel"));
+#: xftree/gtk_dlg.c:298
+#, fuzzy
+msgid "_Cancel"
+msgstr "Peruuta"
+
+#. SJB cancel = gtk_button_new_with_label (_("No"));
+#: xftree/gtk_dlg.c:303
+#, fuzzy
+msgid "_No"
+msgstr "Ei"
+
+#. SJB all = gtk_button_new_with_label (_("All"));
+#: xftree/gtk_dlg.c:314
+#, fuzzy
+msgid "_All"
 msgstr "Kaikki"
 
-#: xftree/gtk_dlg.c:317
-msgid "Close"
+#. SJB close = gtk_button_new_with_label (_("Close"));
+#: xftree/gtk_dlg.c:324
+#, fuzzy
+msgid "_Close"
 msgstr "Sulje"
 
-#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:2729
+#: xftree/gtk_exec.c:141
 msgid "Open with ..."
 msgstr "Avaa ..."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
-#: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
-#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:889
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:145 xftree/xtree_gui.c:2699
+#: xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr "Suorita ohjelma ..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:183 xftree/xtree_gui.c:2511
-#: xftree/xtree_gui.c:2675
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:187 xftree/xtree_gui.c:2613
 msgid "Open in terminal"
 msgstr "Avaa päätteessä"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:201
+#: xftree/gtk_exec.c:205
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr " Kohtalokas virhe %s %d\n"
 
-#: xftree/gtk_get.c:83
-msgid "Override file ?"
-msgstr "Korvaa tiedosto?"
-
-#: xftree/gtk_get.c:119
+#: xftree/gtk_get.c:121
 msgid "Source : "
 msgstr "Lähde :"
 
-#: xftree/gtk_get.c:126
+#: xftree/gtk_get.c:128
 msgid "Target : "
 msgstr "Kohde :"
 
-#: xftree/gtk_get.c:133
+#: xftree/gtk_get.c:135
 msgid "0 bytes received"
 msgstr "0 tavua saapunut"
 
-#: xftree/gtk_get.c:140
+#: xftree/gtk_get.c:142
 msgid "XFTree: Download"
 msgstr "XFTree: Imutus"
 
-#: xftree/gtk_get.c:166
+#: xftree/gtk_get.c:168
 #, c-format
 msgid "%d bytes received (%d bps)"
 msgstr "%d tavua saapunut (%d bps)"
 
-#: xftree/gtk_prop.c:175 xftree/xtree_gui.c:2470
+#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2572
 msgid "Properties"
 msgstr "Ominaisuudet"
 
+#: xftree/gtk_prop.c:207
+msgid "All"
+msgstr "Kaikki"
+
 #. date and size page
-#: xftree/gtk_prop.c:210
+#: xftree/gtk_prop.c:218
 msgid "Info"
 msgstr "Tietoja"
 
-#: xftree/gtk_prop.c:215
+#: xftree/gtk_prop.c:223
 msgid "Name :"
 msgstr "Nimi :"
 
-#: xftree/gtk_prop.c:234
+#: xftree/gtk_prop.c:242
 msgid "Type :"
 msgstr "Tyyppi :"
 
-#: xftree/gtk_prop.c:240
+#: xftree/gtk_prop.c:248
 #, c-format
 msgid "%ld Bytes"
 msgstr "%ld Tavua"
 
-#: xftree/gtk_prop.c:242
+#: xftree/gtk_prop.c:250
 msgid "Size :"
 msgstr "Koko :"
 
-#: xftree/gtk_prop.c:250
+#: xftree/gtk_prop.c:258
 msgid "Creation Time :"
 msgstr "Luonti aika :"
 
-#: xftree/gtk_prop.c:258
+#: xftree/gtk_prop.c:266
 msgid "Modification Time :"
 msgstr "Muutos aika :"
 
-#: xftree/gtk_prop.c:266
+#: xftree/gtk_prop.c:274
 msgid "Access Time :"
 msgstr "Käytetty viimeksi :"
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:282
 msgid "Permissions"
 msgstr "Oikeudet"
 
-#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:278 xftree/gtk_prop.c:375
+#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
 msgid "Owner :"
 msgstr "Omistaja :"
 
 #: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
-#: xftree/gtk_prop.c:279 xftree/gtk_prop.c:303 xftree/gtk_prop.c:326
+#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
 msgid "Read"
 msgstr "Luku"
 
 #: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
-#: xftree/gtk_prop.c:283 xftree/gtk_prop.c:307 xftree/gtk_prop.c:330
+#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
 msgid "Write"
 msgstr "Kirjoitus"
 
 #: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
-#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
+#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
 msgid "Execute"
 msgstr "Suoritus"
 
-#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:291
+#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:299
 msgid "Set UID"
 msgstr "Aseta Omistaja"
 
-#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:302 xftree/gtk_prop.c:386
+#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
 msgid "Group :"
 msgstr "Ryhmä :"
 
-#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:315
+#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:323
 msgid "Set GID"
 msgstr "Aseta Ryhmä"
 
-#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:325
+#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:333
 msgid "Other :"
 msgstr "Muut :"
 
-#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:338
+#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:346
 msgid "Sticky"
 msgstr "Liimataan"
 
-#: xftree/gtk_prop.c:364
+#: xftree/gtk_prop.c:372
 msgid "Owner"
 msgstr "Omistaja"
 
-#: xftree/gtk_prop.c:369 xftree/gtk_prop.c:380
+#: xftree/gtk_prop.c:377 xftree/gtk_prop.c:388
 msgid "unknown"
 msgstr "tuntematon"
 
@@ -1088,54 +1109,54 @@ msgstr "luodaan hakemisto: %s\n"
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "geometria: %dx%d+%d+%d\n"
 
-#: xftree/xtree_gui.c:169
+#: xftree/xtree_gui.c:182
 #, c-format
 msgid "malloc error in %s at line %d\n"
 msgstr "lukuvirhe tiedostossa %s rivillä %d\n"
 
-#: xftree/xtree_gui.c:322
+#: xftree/xtree_gui.c:335
 msgid "menu_detach()\n"
 msgstr "menu_detach()\n"
 
-#: xftree/xtree_gui.c:948
+#: xftree/xtree_gui.c:967
 msgid "Can't copy device, fifo and socket files as regular files!\n"
 msgstr ""
 "Ei voi kopioida laite-, fifo- ja sockettiedostoja tavalliseksi tiedostoksi!\n"
 
-#: xftree/xtree_gui.c:1040
+#: xftree/xtree_gui.c:1059
 msgid "Moving file..\n"
 msgstr "Siirretään tiedosto..\n"
 
-#: xftree/xtree_gui.c:1076
+#: xftree/xtree_gui.c:1095
 msgid "move_dir() recursive failed\n"
 msgstr "move_dir() rekursiivisesti epäonnistui\n"
 
-#: xftree/xtree_gui.c:1084
+#: xftree/xtree_gui.c:1103
 msgid "move_dir() move_file() failed\n"
 msgstr "move_dir() move_file() epäonnistui\n"
 
 #. nothing to delete
-#: xftree/xtree_gui.c:1193 xftree/xtree_gui.c:2068
+#: xftree/xtree_gui.c:1213 xftree/xtree_gui.c:2152
 msgid "No files marked !"
 msgstr "Ei valittuja tiedostoja!"
 
-#: xftree/xtree_gui.c:1213 xftree/xtree_gui.c:1215
+#: xftree/xtree_gui.c:1233 xftree/xtree_gui.c:1235
 msgid "Delete item ?"
 msgstr "Poista ?"
 
-#: xftree/xtree_gui.c:1251
+#: xftree/xtree_gui.c:1271
 msgid "move_file()"
 msgstr "move_file()"
 
-#: xftree/xtree_gui.c:1253
+#: xftree/xtree_gui.c:1273
 msgid "Move to trash failed"
 msgstr "Roskiin siirto epäonnistui"
 
-#: xftree/xtree_gui.c:1266
+#: xftree/xtree_gui.c:1288 xftree/xtree_gui.c:1290
 msgid "Can't move file to trash, hard delete ?"
 msgstr "Ei voi siirtää roskiin, poistetaanko kokonaan?"
 
-#: xftree/xtree_gui.c:1307
+#: xftree/xtree_gui.c:1342
 msgid ""
 "This is XFTree, based on 'XTree' \n"
 "(c) by Rasca\n"
@@ -1147,222 +1168,217 @@ msgstr ""
 "lisenssi: GNU GPL\n"
 "http://home.pages.de/~rasca/xap/"
 
-#: xftree/xtree_gui.c:1333
+#: xftree/xtree_gui.c:1387
 msgid "Can't find row data\n"
 msgstr "En löydä\n"
 
-#: xftree/xtree_gui.c:1434
+#: xftree/xtree_gui.c:1494
 msgid "Go to"
 msgstr "Siirry"
 
-#: xftree/xtree_gui.c:1847
+#: xftree/xtree_gui.c:1908
 msgid "New_Folder"
 msgstr "Uusi hakemisto"
 
-#: xftree/xtree_gui.c:1895
-msgid "File exists ! Override ?"
+#. if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
+#: xftree/xtree_gui.c:1959 xftree/xtree_gui.c:2096
+#, fuzzy
+msgid "File exists !"
 msgstr "Tiedosto olemassa ! Korvaa?"
 
-#: xftree/xtree_gui.c:1904
+#: xftree/xtree_gui.c:1968
 msgid "Can't create : "
 msgstr "Ei voi luoda :"
 
-#: xftree/xtree_gui.c:1985
+#: xftree/xtree_gui.c:2067
 msgid "No item marked !"
 msgstr "Ei valintaa !"
 
-#: xftree/xtree_gui.c:1996
+#: xftree/xtree_gui.c:2078
 msgid "Rename to : "
 msgstr "Uudelleen nimeä :"
 
-#: xftree/xtree_gui.c:2001
+#: xftree/xtree_gui.c:2083
 msgid "Character not allowed in filename"
 msgstr "Luvaton merkki nimessä"
 
-#: xftree/xtree_gui.c:2013
-msgid "Override ?"
-msgstr "Korvaa ?"
-
-#: xftree/xtree_gui.c:2237
+#: xftree/xtree_gui.c:2322
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Ei löydy tarkenninta tiedostosta, käytetään koko tiedoston nimeä"
 
-#: xftree/xtree_gui.c:2243
+#: xftree/xtree_gui.c:2328
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Linkitä ohjelma tiedostoon  \"%s\""
 
-#: xftree/xtree_gui.c:2247
+#: xftree/xtree_gui.c:2332
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Linkitä ohjelma tarkentimeen \"%s\""
 
-#: xftree/xtree_gui.c:2452 xftree/xtree_gui.c:2506 xftree/xtree_gui.c:2727
-#: xftree/xtree_gui.c:2815
+#: xftree/xtree_gui.c:2554 xftree/xtree_gui.c:2608
 msgid "New window"
 msgstr "Uusi ikkuna"
 
-#: xftree/xtree_gui.c:2454 xftree/xtree_gui.c:2583 xftree/xtree_gui.c:2719
-#: xftree/xtree_gui.c:2765 xftree/xtree_gui.c:2807 xftree/xtree_gui.c:2843
+#: xftree/xtree_gui.c:2556 xftree/xtree_gui.c:2642
 msgid "Close window"
 msgstr "Sulje ikkuna"
 
-#: xftree/xtree_gui.c:2458 xftree/xtree_gui.c:2604 xftree/xtree_gui.c:2688
-#: xftree/xtree_gui.c:2739 xftree/xtree_gui.c:2778 xftree/xtree_gui.c:2821
+#: xftree/xtree_gui.c:2560 xftree/xtree_gui.c:2747
 msgid "Go to ..."
 msgstr "Siirry ..."
 
-#: xftree/xtree_gui.c:2460
-#, fuzzy
-msgid "Go up ..."
-msgstr "Siirry ..."
+#: xftree/xtree_gui.c:2562 xftree/xtree_gui.c:2742
+msgid "Go up"
+msgstr "Siirry ylös"
 
-#: xftree/xtree_gui.c:2462 xftree/xtree_gui.c:2616 xftree/xtree_gui.c:2693
-#: xftree/xtree_gui.c:2742 xftree/xtree_gui.c:2781 xftree/xtree_gui.c:2824
+#: xftree/xtree_gui.c:2564 xftree/xtree_gui.c:2731
 msgid "Go home"
 msgstr "Mene kotiin"
 
-#: xftree/xtree_gui.c:2466
+#: xftree/xtree_gui.c:2568
 #, fuzzy
 msgid "New Folder"
 msgstr "Uusi hakemisto"
 
-#: xftree/xtree_gui.c:2468 xftree/xtree_gui.c:2521 xftree/xtree_gui.c:2680
-#: xftree/xtree_gui.c:2818
+#: xftree/xtree_gui.c:2570 xftree/xtree_gui.c:2627
 msgid "New file ..."
 msgstr "Uusi tiedosto ..."
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2474 xftree/xtree_gui.c:2535
-#: xftree/xtree_gui.c:2685 xftree/xtree_gui.c:2734 xftree/xtree_gui.c:2775
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2576 xftree/xtree_gui.c:2632
 msgid "Delete ..."
 msgstr "Poista ..."
 
-#: xftree/xtree_gui.c:2476 xftree/xtree_gui.c:2569 xftree/xtree_gui.c:2713
-#: xftree/xtree_gui.c:2759 xftree/xtree_gui.c:2797 xftree/xtree_gui.c:2801
-#: xftree/xtree_gui.c:2837
+#: xftree/xtree_gui.c:2578 xftree/xtree_gui.c:2680
 msgid "Open Trash"
 msgstr "Avaa Roskis"
 
-#: xftree/xtree_gui.c:2478 xftree/xtree_gui.c:2574 xftree/xtree_gui.c:2711
-#: xftree/xtree_gui.c:2757 xftree/xtree_gui.c:2796 xftree/xtree_gui.c:2799
-#: xftree/xtree_gui.c:2835
+#: xftree/xtree_gui.c:2580 xftree/xtree_gui.c:2685
 msgid "Empty Trash"
 msgstr "Tyhjennä Roskis"
 
-#: xftree/xtree_gui.c:2482 xftree/xtree_gui.c:2626 xftree/xtree_gui.c:2705
-#: xftree/xtree_gui.c:2793 xftree/xtree_gui.c:2830
+#: xftree/xtree_gui.c:2584 xftree/xtree_gui.c:2671
 msgid "Toggle Dotfiles"
 msgstr "Näytä piilotiedostot"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2601
 msgid "File"
 msgstr "Tiedosto"
 
-#: xftree/xtree_gui.c:2516 xftree/xtree_gui.c:2678 xftree/xtree_gui.c:2817
+#: xftree/xtree_gui.c:2622
 msgid "New Folder ..."
 msgstr "Uusi hakemisto ..."
 
-#: xftree/xtree_gui.c:2544 xftree/xtree_gui.c:2702 xftree/xtree_gui.c:2790
-#: xftree/xtree_gui.c:2833
+#. Create "Edit" menu
+#: xftree/xtree_gui.c:2655 xfumed/xfumed_gui.c:129
+#, fuzzy
+msgid "Edit"
+msgstr "Kahdeksan"
+
+#: xftree/xtree_gui.c:2661
+msgid "Select all"
+msgstr "Valitse kaikki"
+
+#: xftree/xtree_gui.c:2666
+msgid "Unselect"
+msgstr "Poista valinta"
+
+#. Create "Tools" menu
+#: xftree/xtree_gui.c:2693
+#, fuzzy
+msgid "Tools"
+msgstr "Vihjeet"
+
+#: xftree/xtree_gui.c:2704
 msgid "Find ..."
 msgstr "Etsi ..."
 
-#: xftree/xtree_gui.c:2549 xftree/xtree_gui.c:2708 xftree/xtree_gui.c:2752
+#: xftree/xtree_gui.c:2709
 msgid "Properties ..."
 msgstr "Ominaisuudet ..."
 
-#: xftree/xtree_gui.c:2555
+#: xftree/xtree_gui.c:2715
 #, fuzzy
 msgid "Differences ..."
 msgstr "Poista ..."
 
-#: xftree/xtree_gui.c:2560
+#: xftree/xtree_gui.c:2720
 msgid "Patch viewer ..."
 msgstr ""
 
-#. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:881
-msgid "Settings"
-msgstr "Asetukset"
+#. Create "Go To" menu
+#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2725
+msgid "Go"
+msgstr ""
 
-#: xftree/xtree_gui.c:2610 xftree/xtree_gui.c:2691 xftree/xtree_gui.c:2740
-#: xftree/xtree_gui.c:2779 xftree/xtree_gui.c:2822
-msgid "Go up"
-msgstr "Siirry ylös"
+#. TODO #12:
+#: xftree/xtree_gui.c:2737
+msgid "Go back"
+msgstr ""
+
+#. menuitem = gtk_menu_item_new ();
+#. gtk_menu_append (GTK_MENU (menu), menuitem);
+#. gtk_widget_show (menuitem);
+#. Create "Preferences" menu
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2758
+#, fuzzy
+msgid "Preferences"
+msgstr "Poista ..."
+
+#: xftree/xtree_gui.c:2764
+msgid "Save geometry on exit"
+msgstr ""
+
+#: xftree/xtree_gui.c:2766
+msgid "Double click does GOTO"
+msgstr ""
+
+#: xftree/xtree_gui.c:2768
+msgid "Short titles"
+msgstr ""
 
 #. Create "Help" menu
 #: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2773
 msgid "Help"
 msgstr "Ohje"
 
-#: xftree/xtree_gui.c:2640 xftree/xtree_gui.c:2715 xftree/xtree_gui.c:2761
-#: xftree/xtree_gui.c:2803 xftree/xtree_gui.c:2839
+#: xftree/xtree_gui.c:2780
+msgid "Default shortcut keys"
+msgstr ""
+
+#: xftree/xtree_gui.c:2785
+msgid "Custom shortcut keys"
+msgstr ""
+
+#: xftree/xtree_gui.c:2790
 msgid "About ..."
 msgstr "Tietoja ..."
 
-#: xftree/xtree_gui.c:2674
-msgid "Open in new"
-msgstr "Avaa uudessa"
-
-#: xftree/xtree_gui.c:2683 xftree/xtree_gui.c:2732
-msgid "Rename ..."
-msgstr "Uudelleen nimeä ..."
-
-#: xftree/xtree_gui.c:2689
-msgid "Go to marked"
-msgstr "Siirry merkkiin"
-
-#: xftree/xtree_gui.c:2697 xftree/xtree_gui.c:2746 xftree/xtree_gui.c:2785
-msgid "Unselect"
-msgstr "Poista valinta"
-
-#: xftree/xtree_gui.c:2699 xftree/xtree_gui.c:2748 xftree/xtree_gui.c:2787
-#: xftree/xtree_gui.c:2826
-msgid "Select all"
-msgstr "Valitse kaikki"
-
-#: xftree/xtree_gui.c:2701 xftree/xtree_gui.c:2750 xftree/xtree_gui.c:2789
-#: xftree/xtree_gui.c:2828
-msgid "Unselect all"
-msgstr "Poista valinnat"
-
-#: xftree/xtree_gui.c:2736
-msgid "Duplicate"
-msgstr "Kahdenna"
-
-#: xftree/xtree_gui.c:2754
-msgid "Register ..."
-msgstr "Linkitä ..."
-
-#: xftree/xtree_gui.c:2773
-msgid "New windows"
-msgstr "Uusi ikkuna"
-
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2857
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2946
 msgid "Name"
 msgstr "Nimi"
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2858
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2947
 msgid "Size (bytes)"
 msgstr "Koko (tavua)"
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2859
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2948
 #, fuzzy
 msgid "Last changed"
 msgstr "Muutettu viimeksi (Y-M-D hh:mm)"
 
-#: xftree/xtree_dnd.c:121
+#: xftree/xtree_dnd.c:124
 msgid "Unknown action !"
 msgstr "Tuntematon toiminto!"
 
-#: xftree/xtree_dnd.c:136
+#: xftree/xtree_dnd.c:139
 msgid "Target must be a directory !"
 msgstr "Kohteen pitää olla hakemisto!"
 
-#: xftree/xtree_dnd.c:165
+#: xftree/xtree_dnd.c:172
 #, c-format
 msgid "Type not supported.. (%d)\n"
 msgstr "Tuntematon tyyppi.. (%d)\n"
@@ -2373,6 +2389,11 @@ msgstr "Piilota/Näytä valikot"
 msgid "Hide/show calendar"
 msgstr "Piilota/Näytä kalenteri"
 
+#. Create "Settings" menu
+#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:881
+msgid "Settings"
+msgstr "Asetukset"
+
 #: xfclock/xfclock_menus.c:119
 msgid "24 hour mode"
 msgstr "24-tunnin näyttö"
@@ -2918,11 +2939,6 @@ msgstr "Poista ..."
 msgid "Tar..."
 msgstr "Avaa ..."
 
-#: xfsamba/xfsamba_gui.c:1024
-#, fuzzy
-msgid "Preferences"
-msgstr "Poista ..."
-
 #: xfsamba/xfsamba_gui.c:1025
 #, fuzzy
 msgid "Browse as..."
@@ -2946,10 +2962,6 @@ msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1032
 msgid "Hide browser links"
-msgstr ""
-
-#: xfsamba/xfsamba_gui.c:1034
-msgid "Go"
 msgstr ""
 
 #: xfsamba/xfsamba_gui.c:1035
@@ -3093,7 +3105,7 @@ msgstr ""
 msgid "Retrieve done."
 msgstr ""
 
-#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:159
 msgid "Query password has been requested."
 msgstr ""
 
@@ -3115,28 +3127,28 @@ msgstr "Poista"
 msgid "Resolving for"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:84
+#: xfsamba/xfsamba_smblookup.c:83
 #, fuzzy
 msgid "Shares"
 msgstr "Varjosta"
 
-#: xfsamba/xfsamba_smblookup.c:86
+#: xfsamba/xfsamba_smblookup.c:85
 msgid "Links to other servers"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:88
+#: xfsamba/xfsamba_smblookup.c:87
 msgid "Links to other workgroups"
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:143
+#: xfsamba/xfsamba_smblookup.c:142
 msgid "Query done."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:145
+#: xfsamba/xfsamba_smblookup.c:144
 msgid "Query failed. Machine may be down."
 msgstr ""
 
-#: xfsamba/xfsamba_smblookup.c:324
+#: xfsamba/xfsamba_smblookup.c:323
 #, fuzzy
 msgid "Querying"
 msgstr "Kysymys"
@@ -3358,11 +3370,6 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: xfumed/xfumed_gui.c:129
-#, fuzzy
-msgid "Edit"
-msgstr "Kahdeksan"
-
 #: xfumed/xfumed_gui.c:157
 #, fuzzy
 msgid "Save"
@@ -3423,6 +3430,40 @@ msgid ""
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
+
+#~ msgid "Override file?"
+#~ msgstr "Korvaa tiedosto?"
+
+#~ msgid "Override file ?"
+#~ msgstr "Korvaa tiedosto?"
+
+#~ msgid "Override ?"
+#~ msgstr "Korvaa ?"
+
+#, fuzzy
+#~ msgid "Go up ..."
+#~ msgstr "Siirry ..."
+
+#~ msgid "Open in new"
+#~ msgstr "Avaa uudessa"
+
+#~ msgid "Rename ..."
+#~ msgstr "Uudelleen nimeä ..."
+
+#~ msgid "Go to marked"
+#~ msgstr "Siirry merkkiin"
+
+#~ msgid "Unselect all"
+#~ msgstr "Poista valinnat"
+
+#~ msgid "Duplicate"
+#~ msgstr "Kahdenna"
+
+#~ msgid "Register ..."
+#~ msgstr "Linkitä ..."
+
+#~ msgid "New windows"
+#~ msgstr "Uusi ikkuna"
 
 #, fuzzy
 #~ msgid "None"

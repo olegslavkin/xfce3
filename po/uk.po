@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-08 22:21+0100\n"
-"PO-Revision-Date: 2001-11-03 12:14PDT\n"
+"POT-Creation-Date: 2001-11-17 08:54+0100\n"
+"PO-Revision-Date: 2001-11-17 11:06PDT\n"
 "Last-Translator: Andriy Rysin <arysin@yahoo.com>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -36,17 +36,17 @@ msgstr "Гаразд"
 msgid "Message"
 msgstr "Пов╕домлення"
 
-#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:265
-#: xfumed/xfumed_gui_cb.c:74 xfumed/xfumed_gui_cb.c:125
+#: libs/xfce-common.c:379 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:74
+#: xfumed/xfumed_gui_cb.c:125
 msgid "Yes"
 msgstr "Так"
 
-#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:296
-#: xfumed/xfumed_gui_cb.c:75 xfumed/xfumed_gui_cb.c:126
+#: libs/xfce-common.c:380 xfdiff/xfdiff_misc.c:133 xfumed/xfumed_gui_cb.c:75
+#: xfumed/xfumed_gui_cb.c:126
 msgid "No"
 msgstr "Н╕"
 
-#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:223
+#: libs/xfce-common.c:385 xfdiff/xfdiff_misc.c:133 xftree/gtk_dlg.c:229
 msgid "Question"
 msgstr "Запитання"
 
@@ -87,16 +87,14 @@ msgstr "Переглянути..."
 #: xfsamba/xfsamba.c:235 xfsamba/xfsamba_gui.c:387
 #: xfsamba/xfsamba_masterresolve.c:130 xfsamba/xfsamba_mkdir.c:155
 #: xfsamba/xfsamba_rm.c:236 xfsamba/xfsamba_tar.c:420 xfsound/xfsound.c:606
-#: xftree/gtk_dlg.c:260 xftree/gtk_exec.c:155 xftree/gtk_prop.c:183
-#: xfumed/xfumed_gui.c:352
+#: xftree/gtk_exec.c:159 xftree/gtk_prop.c:191 xfumed/xfumed_gui.c:352
 msgid "Ok"
 msgstr "Гаразд"
 
 #: xfbd/xfbd.c:559 xfce/action.c:182 xfce/modify.c:293 xfce/screen.c:144
 #: xfce/setup.c:1146 xfmouse/xfmouse.c:308 xfrun/xfrun.c:208
-#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:521 xftree/gtk_dlg.c:291
-#: xftree/gtk_exec.c:156 xftree/gtk_get.c:136 xftree/gtk_prop.c:184
-#: xfumed/xfumed_gui.c:359
+#: xfsound/xfsound.c:627 xftree/gtk_cpy.c:530 xftree/gtk_exec.c:160
+#: xftree/gtk_get.c:138 xftree/gtk_prop.c:192 xfumed/xfumed_gui.c:359
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -156,7 +154,7 @@ msgstr "Не можу в╕дкрити конф╕гурац╕йний файл"
 
 #: xfce/configfile.c:556
 msgid "Does not looks like an XFce 3 configuration file !"
-msgstr "Не вигляда╓ як файл  конф╕гурац╕╖ XFce 3!"
+msgstr "Не схоже на файл конф╕гурац╕╖ XFce 3!"
 
 #: xfce/configfile.c:557
 msgid ""
@@ -189,7 +187,7 @@ msgstr "Очистити"
 
 #: xfce/diagnostic.c:115 xfdiff/xfdiff_diag.c:186 xfglob/xfglob.c:669
 msgid "Dismiss"
-msgstr "Припинити"
+msgstr "Закрити"
 
 #: xfce/info.c:76
 msgid "Info ..."
@@ -228,8 +226,9 @@ msgid "Label :"
 msgstr "Надпис:"
 
 #: xfce/modify.c:187
+#, fuzzy
 msgid "Position :"
-msgstr "Адреса:"
+msgstr "Адреса: "
 
 #: xfbd/xfbdmgr.c:179 xfce/modify.c:285 xfumed/xfumed_gui.c:136
 msgid "Remove"
@@ -261,7 +260,7 @@ msgstr "Додати п╕ктограму..."
 
 #: xfce/popup.c:245
 msgid "Click to tear off popup menu"
-msgstr "Клацн╕ть, щоб в╕д╕рвати спливаюче меню"
+msgstr "Клацн╕ть, щоб в╕д╕рвати спливне меню"
 
 #: xfce/popup_cb.c:192
 msgid "Cannot find the file you dropped !"
@@ -341,7 +340,7 @@ msgstr "Машина тем GTK: "
 
 #: xfce/setup.c:381
 msgid "Apply colors to all applications"
-msgstr "Застосувати кольори до вс╕х завдань"
+msgstr "Застосовувати кольори до вс╕х завдань"
 
 #: xfbd/xfbdmgr.c:167 xfce/setup.c:401
 msgid "Load ..."
@@ -361,7 +360,7 @@ msgstr "Перемалювати головне в╕кно"
 
 #: xfce/setup.c:446
 msgid "Use gradient color as wallpaper"
-msgstr "Шпалери у вигляд╕ град╕╓нтного кольору"
+msgstr "Шпалери з град╕╓нтом кольору"
 
 #: xfce/setup.c:453
 msgid "Use tear-off menus"
@@ -413,11 +412,11 @@ msgstr "К╕льк╕сть в╕ртуальних ст╕льниць:"
 
 #: xfce/setup.c:591
 msgid "Popups & Icons"
-msgstr "Спливаюч╕ меню та п╕ктограми"
+msgstr "Спливн╕ меню та п╕ктограми"
 
 #: xfce/setup.c:605
 msgid "Number of popup menus : "
-msgstr "К╕льк╕сть спливаючих меню: "
+msgstr "К╕льк╕сть спливних меню: "
 
 #: xfce/setup.c:619
 msgid "Size of icons on panel"
@@ -437,7 +436,7 @@ msgstr "Мал╕"
 
 #: xfce/setup.c:654
 msgid "Size of icons on pop-up menus"
-msgstr "Розм╕р п╕ктограм на спливаючих меню"
+msgstr "Розм╕р п╕ктограм на спливних меню"
 
 #: xfce/setup.c:689
 msgid "Font style"
@@ -453,7 +452,7 @@ msgstr "Клацнути, щоб отримати фокус"
 
 #: xfce/setup.c:741
 msgid "Automatically focus on new window"
-msgstr "Автоматичний фокус новому в╕кну"
+msgstr "Надавати фокус новому в╕кну"
 
 #: xfce/setup.c:748
 msgid "Auto raise windows"
@@ -469,7 +468,7 @@ msgstr "Показувати вм╕ст в╕кна при зм╕н╕ розм╕ру"
 
 #: xfce/setup.c:769
 msgid "Use gradient color for the active window"
-msgstr "Град╕╓нтний кол╕р для активного в╕кна"
+msgstr "Град╕╓нт кольору для активного в╕кна"
 
 #: xfce/setup.c:777
 msgid "Use gradient color for inactive windows"
@@ -481,7 +480,7 @@ msgstr "Стиль меж╕ в╕кон: "
 
 #: xfce/setup.c:839
 msgid "Window snapping size (0 disable) : "
-msgstr "В╕дстань захоплення в╕кон (0 - вимкнути): "
+msgstr "Крок пересування в╕кон (0 - плавно): "
 
 #: xfce/setup.c:866
 msgid "Icon position"
@@ -661,9 +660,8 @@ msgid "Setup..."
 msgstr "Установки..."
 
 #: xfbd/xfbdmgr.c:185 xfce/xfce.c:703 xfclock/xfclock_menus.c:65
-#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2592
-#: xftree/xtree_gui.c:2721 xftree/xtree_gui.c:2767 xftree/xtree_gui.c:2809
-#: xftree/xtree_gui.c:2845 xfumed/xfumed_gui.c:171
+#: xfclock/xfclock_menus.c:91 xfglob/xfglob.c:1952 xftree/xtree_gui.c:2647
+#: xfumed/xfumed_gui.c:171
 msgid "Quit"
 msgstr "Вийти"
 
@@ -770,292 +768,317 @@ msgstr "XFCE: Комун╕кац╕йний канал зачинено. Виходжу...\n"
 msgid "Workspace"
 msgstr "Ст╕льниця"
 
-#: xftree/gtk_cpy.c:70
+#: xftree/gtk_cpy.c:73
 #, c-format
 msgid "transfer_view() %d\n"
 msgstr "transfer_view() %d\n"
 
-#: xftree/gtk_cpy.c:110
+#: xftree/gtk_cpy.c:113
 msgid "move"
 msgstr "перенести"
 
-#: xftree/gtk_cpy.c:114
+#: xftree/gtk_cpy.c:117
 msgid "copy"
 msgstr "скоп╕ювати"
 
-#: xftree/gtk_cpy.c:118
+#: xftree/gtk_cpy.c:121
 msgid "link"
 msgstr "посилання"
 
-#: xftree/gtk_cpy.c:146 xftree/gtk_cpy.c:271
+#: xftree/gtk_cpy.c:149 xftree/gtk_cpy.c:277
 #, c-format
 msgid "%d bytes"
 msgstr "%d байт╕в"
 
-#: xftree/gtk_cpy.c:154
-msgid "Override file?"
-msgstr "Зам╕стити файл?"
-
-#: xftree/gtk_cpy.c:167 xftree/gtk_cpy.c:172 xftree/gtk_cpy.c:349
-#: xftree/gtk_cpy.c:353 xftree/xtree_gui.c:1235 xftree/xtree_gui.c:1242
+#: xftree/gtk_cpy.c:173 xftree/gtk_cpy.c:178 xftree/gtk_cpy.c:355
+#: xftree/gtk_cpy.c:359 xftree/xtree_gui.c:1255 xftree/xtree_gui.c:1262
 msgid "Can't stat() file"
 msgstr "Неможливо виконати stat() для файла"
 
-#: xftree/gtk_cpy.c:179
+#: xftree/gtk_cpy.c:185
 #, c-format
 msgid "Do you want to %s the item(s) to"
 msgstr "Ви д╕йсно хочете %s елемент(и) до"
 
-#: xftree/gtk_cpy.c:221
+#: xftree/gtk_cpy.c:227
 msgid "readlink()"
 msgstr "readlink()"
 
-#: xftree/gtk_cpy.c:241
+#: xftree/gtk_cpy.c:247
 msgid "Can't copy device file"
 msgstr "Неможливо скоп╕ювати файл пристрою"
 
-#: xftree/gtk_cpy.c:246
+#: xftree/gtk_cpy.c:252
 msgid "Can't copy FIFO"
 msgstr "Неможливо скоп╕ювати FIFO"
 
-#: xftree/gtk_cpy.c:250
+#: xftree/gtk_cpy.c:256
 msgid "Can't copy socket"
 msgstr "Неможливо скоп╕ювати сокет"
 
-#: xftree/gtk_cpy.c:285
+#: xftree/gtk_cpy.c:291
+#, fuzzy
 msgid "Too few bytes transferred ! Device full ?"
-msgstr "Передано замало байт! Пристр╕й заповнений?"
+msgstr "Передано замало байт! Пристр╕й повний?"
 
-#: xftree/gtk_cpy.c:289
+#: xftree/gtk_cpy.c:295
 msgid "Too many bytes transferred !?"
 msgstr "Передано забагато байт !?"
 
-#: xftree/gtk_cpy.c:335
+#: xftree/gtk_cpy.c:341
 msgid "Source and Target directories are the same"
 msgstr "Однаковий каталог для джерела та призначення"
 
-#: xftree/gtk_cpy.c:386
+#: xftree/gtk_cpy.c:392
 msgid "exists and is not a directory"
 msgstr "╕сну╓ ╕ не ╓ каталогом"
 
-#: xftree/gtk_cpy.c:460
+#: xftree/gtk_cpy.c:469
 msgid "XFTree: Copy"
 msgstr "XFTree: Скоп╕ювати"
 
-#: xftree/gtk_cpy.c:464
+#: xftree/gtk_cpy.c:473
 msgid "XFTree: Move"
 msgstr "XFTree: Пересунути"
 
-#: xftree/gtk_cpy.c:468
+#: xftree/gtk_cpy.c:477
 msgid "XFTree: Link"
 msgstr "XFTree: Посилання"
 
-#: xftree/gtk_cpy.c:472
+#: xftree/gtk_cpy.c:481
 #, c-format
 msgid "Unknown transfer mode: %d\n"
 msgstr "Нев╕домий тип перенесення: %d\n"
 
-#: xftree/gtk_cpy.c:478
+#: xftree/gtk_cpy.c:487
 msgid "transfer()"
 msgstr "transfer()"
 
-#: xftree/gtk_cpy.c:478
+#: xftree/gtk_cpy.c:487
 msgid "fatal error"
 msgstr "фатальна помилка"
 
-#: xftree/gtk_cpy.c:484
+#: xftree/gtk_cpy.c:493
 msgid "Error getting info from"
 msgstr "Помилка при отриманн╕ ╕нформац╕╖ з"
 
-#: xftree/gtk_cpy.c:489
+#: xftree/gtk_cpy.c:498
 msgid "Fatal Error"
 msgstr "Фатальна помилка"
 
-#: xftree/gtk_cpy.c:489
+#: xftree/gtk_cpy.c:498
 msgid "Can't transfer items to a file"
 msgstr "Неможливо перенести елементи у файл"
 
-#: xftree/gtk_cpy.c:506
+#: xftree/gtk_cpy.c:515
 msgid "Source: "
 msgstr "Джерело: "
 
-#: xftree/gtk_cpy.c:512
+#: xftree/gtk_cpy.c:521
 msgid "Target: "
 msgstr "Призначення: "
 
-#: xftree/gtk_cpy.c:518
+#: xftree/gtk_cpy.c:527
 msgid "0 bytes transferred"
 msgstr "Перенесено 0 байт"
 
-#: xftree/gtk_cpy.c:539 xftree/gtk_dlg.c:233
+#: xftree/gtk_cpy.c:548 xftree/gtk_dlg.c:239
 msgid "Error"
 msgstr "Помилка"
 
-#: xftree/gtk_cpy.c:539
+#: xftree/gtk_cpy.c:548
 msgid "Can't transfer a directory to a file"
 msgstr "Неможливо перенести каталог у файл"
 
-#: xftree/gtk_dlg.c:228
+#: xftree/gtk_dlg.c:234
 msgid "Information"
 msgstr "╤нформац╕я"
 
-#: xftree/gtk_dlg.c:238
+#: xftree/gtk_dlg.c:244
 msgid "Warning"
 msgstr "Попередження"
 
-#: xftree/gtk_dlg.c:242
+#: xftree/gtk_dlg.c:248
 msgid "Dialog"
 msgstr "Д╕алог"
 
-#: xftree/gtk_dlg.c:270
-msgid "Continue"
+#. SJB ok = gtk_button_new_with_label (_("Ok"));
+#: xftree/gtk_dlg.c:267
+#, fuzzy
+msgid "_Ok"
+msgstr "Гаразд"
+
+#. SJB ok = gtk_button_new_with_label (_("Yes"));
+#: xftree/gtk_dlg.c:272
+#, fuzzy
+msgid "_Yes"
+msgstr "Так"
+
+#. SJB ok = gtk_button_new_with_label (_("Continue"));
+#: xftree/gtk_dlg.c:277
+#, fuzzy
+msgid "_Continue"
 msgstr "Продовжити"
 
-#: xftree/gtk_dlg.c:281 xftree/gtk_prop.c:198
+#: xftree/gtk_dlg.c:287 xftree/gtk_prop.c:206
 msgid "Skip"
 msgstr "Пропустити"
 
-#: xftree/gtk_dlg.c:307 xftree/gtk_prop.c:199
-msgid "All"
+#. SJB cancel = gtk_button_new_with_label (_("Cancel"));
+#: xftree/gtk_dlg.c:298
+#, fuzzy
+msgid "_Cancel"
+msgstr "Скасувати"
+
+#. SJB cancel = gtk_button_new_with_label (_("No"));
+#: xftree/gtk_dlg.c:303
+#, fuzzy
+msgid "_No"
+msgstr "Н╕"
+
+#. SJB all = gtk_button_new_with_label (_("All"));
+#: xftree/gtk_dlg.c:314
+#, fuzzy
+msgid "_All"
 msgstr "Вс╕"
 
-#: xftree/gtk_dlg.c:317
-msgid "Close"
+#. SJB close = gtk_button_new_with_label (_("Close"));
+#: xftree/gtk_dlg.c:324
+#, fuzzy
+msgid "_Close"
 msgstr "Закрити"
 
-#: xftree/gtk_exec.c:139 xftree/xtree_gui.c:2729
+#: xftree/gtk_exec.c:141
 msgid "Open with ..."
 msgstr "В╕дкрити з...."
 
-#: xfrun/xfrun.c:203 xftree/gtk_exec.c:143 xftree/xtree_gui.c:2530
-#: xftree/xtree_gui.c:2718 xftree/xtree_gui.c:2764 xftree/xtree_gui.c:2806
-#: xftree/xtree_gui.c:2842 xfwm/xfwm.c:889
+#: xfrun/xfrun.c:203 xftree/gtk_exec.c:145 xftree/xtree_gui.c:2699
+#: xfwm/xfwm.c:889
 msgid "Run program ..."
 msgstr "Запустити програму..."
 
-#: xfrun/xfrun.c:237 xftree/gtk_exec.c:183 xftree/xtree_gui.c:2511
-#: xftree/xtree_gui.c:2675
+#: xfrun/xfrun.c:237 xftree/gtk_exec.c:187 xftree/xtree_gui.c:2613
 msgid "Open in terminal"
 msgstr "В╕дкрити в терм╕нал╕"
 
 #. this should never happen
 #.
-#: xftree/gtk_exec.c:201
+#: xftree/gtk_exec.c:205
 #, c-format
 msgid "Fatal error in %s at %d\n"
 msgstr "Фатальна помилка в %s на %d\n"
 
-#: xftree/gtk_get.c:83
-msgid "Override file ?"
-msgstr "Зам╕стити файл?"
-
-#: xftree/gtk_get.c:119
+#: xftree/gtk_get.c:121
 msgid "Source : "
 msgstr "Джерело: "
 
-#: xftree/gtk_get.c:126
+#: xftree/gtk_get.c:128
 msgid "Target : "
 msgstr "Призначення: "
 
-#: xftree/gtk_get.c:133
+#: xftree/gtk_get.c:135
 msgid "0 bytes received"
 msgstr "Отримано 0 байт"
 
-#: xftree/gtk_get.c:140
+#: xftree/gtk_get.c:142
 msgid "XFTree: Download"
 msgstr "XFTree: Звантаження"
 
-#: xftree/gtk_get.c:166
+#: xftree/gtk_get.c:168
 #, c-format
 msgid "%d bytes received (%d bps)"
 msgstr "Отримано %d байт╕в (%d б/с)"
 
-#: xftree/gtk_prop.c:175 xftree/xtree_gui.c:2470
+#: xftree/gtk_prop.c:182 xftree/xtree_gui.c:2572
 msgid "Properties"
 msgstr "Властивост╕"
 
+#: xftree/gtk_prop.c:207
+msgid "All"
+msgstr "Вс╕"
+
 #. date and size page
-#: xftree/gtk_prop.c:210
+#: xftree/gtk_prop.c:218
 msgid "Info"
 msgstr "╤нформац╕я"
 
-#: xftree/gtk_prop.c:215
+#: xftree/gtk_prop.c:223
 msgid "Name :"
 msgstr "Назва: "
 
-#: xftree/gtk_prop.c:234
+#: xftree/gtk_prop.c:242
 msgid "Type :"
 msgstr "Тип: "
 
-#: xftree/gtk_prop.c:240
+#: xftree/gtk_prop.c:248
 #, c-format
 msgid "%ld Bytes"
 msgstr "%ld байт"
 
-#: xftree/gtk_prop.c:242
+#: xftree/gtk_prop.c:250
 msgid "Size :"
 msgstr "Розм╕р:"
 
-#: xftree/gtk_prop.c:250
+#: xftree/gtk_prop.c:258
 msgid "Creation Time :"
 msgstr "Час створення:"
 
-#: xftree/gtk_prop.c:258
+#: xftree/gtk_prop.c:266
 msgid "Modification Time :"
 msgstr "Час модиф╕кац╕╖:"
 
-#: xftree/gtk_prop.c:266
+#: xftree/gtk_prop.c:274
 msgid "Access Time :"
 msgstr "Час доступу:"
 
-#: xftree/gtk_prop.c:274
+#: xftree/gtk_prop.c:282
 msgid "Permissions"
 msgstr "Права"
 
-#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:278 xftree/gtk_prop.c:375
+#: xfglob/xfglob.c:1615 xftree/gtk_prop.c:286 xftree/gtk_prop.c:383
 msgid "Owner :"
 msgstr "Власник:"
 
 #: xfglob/xfglob.c:1616 xfglob/xfglob.c:1640 xfglob/xfglob.c:1663
-#: xftree/gtk_prop.c:279 xftree/gtk_prop.c:303 xftree/gtk_prop.c:326
+#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
 msgid "Read"
 msgstr "Зчитування"
 
 #: xfglob/xfglob.c:1620 xfglob/xfglob.c:1644 xfglob/xfglob.c:1667
-#: xftree/gtk_prop.c:283 xftree/gtk_prop.c:307 xftree/gtk_prop.c:330
+#: xftree/gtk_prop.c:291 xftree/gtk_prop.c:315 xftree/gtk_prop.c:338
 msgid "Write"
 msgstr "Запис"
 
 #: xfglob/xfglob.c:1624 xfglob/xfglob.c:1648 xfglob/xfglob.c:1671
-#: xftree/gtk_prop.c:287 xftree/gtk_prop.c:311 xftree/gtk_prop.c:334
+#: xftree/gtk_prop.c:295 xftree/gtk_prop.c:319 xftree/gtk_prop.c:342
 msgid "Execute"
 msgstr "Виконання"
 
-#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:291
+#: xfglob/xfglob.c:1628 xftree/gtk_prop.c:299
 msgid "Set UID"
 msgstr "Встановити UID"
 
-#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:302 xftree/gtk_prop.c:386
+#: xfglob/xfglob.c:1639 xftree/gtk_prop.c:310 xftree/gtk_prop.c:394
 msgid "Group :"
 msgstr "Група:"
 
-#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:315
+#: xfglob/xfglob.c:1652 xftree/gtk_prop.c:323
 msgid "Set GID"
 msgstr "Встановити GID"
 
-#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:325
+#: xfglob/xfglob.c:1662 xftree/gtk_prop.c:333
 msgid "Other :"
 msgstr "╤нш╕:"
 
-#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:338
+#: xfglob/xfglob.c:1675 xftree/gtk_prop.c:346
 msgid "Sticky"
 msgstr "Ст╕йкий"
 
-#: xftree/gtk_prop.c:364
+#: xftree/gtk_prop.c:372
 msgid "Owner"
 msgstr "Власник"
 
-#: xftree/gtk_prop.c:369 xftree/gtk_prop.c:380
+#: xftree/gtk_prop.c:377 xftree/gtk_prop.c:388
 msgid "unknown"
 msgstr "нев╕домий"
 
@@ -1079,53 +1102,53 @@ msgstr "створення каталогу: %s\n"
 msgid "geometry: %dx%d+%d+%d\n"
 msgstr "геометр╕я: %dx%d+%d+%d\n"
 
-#: xftree/xtree_gui.c:169
+#: xftree/xtree_gui.c:182
 #, c-format
 msgid "malloc error in %s at line %d\n"
 msgstr "Помилка malloc в %s на рядку %d\n"
 
-#: xftree/xtree_gui.c:322
+#: xftree/xtree_gui.c:335
 msgid "menu_detach()\n"
 msgstr "menu_detach()\n"
 
-#: xftree/xtree_gui.c:948
+#: xftree/xtree_gui.c:967
 msgid "Can't copy device, fifo and socket files as regular files!\n"
 msgstr "Неможливо скоп╕ювати файл пристрою, каналу або сокету як звичайний!\n"
 
-#: xftree/xtree_gui.c:1040
+#: xftree/xtree_gui.c:1059
 msgid "Moving file..\n"
-msgstr "Пересування файлу...\n"
+msgstr "Пересування файла...\n"
 
-#: xftree/xtree_gui.c:1076
+#: xftree/xtree_gui.c:1095
 msgid "move_dir() recursive failed\n"
 msgstr "Помилка рекурсивного виклику move_dir()\n"
 
-#: xftree/xtree_gui.c:1084
+#: xftree/xtree_gui.c:1103
 msgid "move_dir() move_file() failed\n"
 msgstr "Помилка move_dir() move_file()\n"
 
 #. nothing to delete
-#: xftree/xtree_gui.c:1193 xftree/xtree_gui.c:2068
+#: xftree/xtree_gui.c:1213 xftree/xtree_gui.c:2152
 msgid "No files marked !"
 msgstr "Файли не позначено!"
 
-#: xftree/xtree_gui.c:1213 xftree/xtree_gui.c:1215
+#: xftree/xtree_gui.c:1233 xftree/xtree_gui.c:1235
 msgid "Delete item ?"
 msgstr "Стерти елемент?"
 
-#: xftree/xtree_gui.c:1251
+#: xftree/xtree_gui.c:1271
 msgid "move_file()"
 msgstr "move_file()"
 
-#: xftree/xtree_gui.c:1253
+#: xftree/xtree_gui.c:1273
 msgid "Move to trash failed"
 msgstr "Помилка викидання на см╕тник"
 
-#: xftree/xtree_gui.c:1266
+#: xftree/xtree_gui.c:1288 xftree/xtree_gui.c:1290
 msgid "Can't move file to trash, hard delete ?"
 msgstr "Не можу викинути на см╕тник, знищити реально?"
 
-#: xftree/xtree_gui.c:1307
+#: xftree/xtree_gui.c:1342
 msgid ""
 "This is XFTree, based on 'XTree' \n"
 "(c) by Rasca\n"
@@ -1137,218 +1160,214 @@ msgstr ""
 "л╕ценз╕я: GNU GPL\n"
 "http://home.pages.de/~rasca/xap/"
 
-#: xftree/xtree_gui.c:1333
+#: xftree/xtree_gui.c:1387
 msgid "Can't find row data\n"
 msgstr "Не можу знайти рядок з даними\n"
 
-#: xftree/xtree_gui.c:1434
+#: xftree/xtree_gui.c:1494
 msgid "Go to"
 msgstr "Перейти до"
 
-#: xftree/xtree_gui.c:1847
+#: xftree/xtree_gui.c:1908
 msgid "New_Folder"
 msgstr "Нова тека"
 
-#: xftree/xtree_gui.c:1895
-msgid "File exists ! Override ?"
+#. if (dlg_question (_("File exists ! Override ?"), compl) != DLG_RC_OK)
+#: xftree/xtree_gui.c:1959 xftree/xtree_gui.c:2096
+#, fuzzy
+msgid "File exists !"
 msgstr "Файл вже ╓! Переписати?"
 
-#: xftree/xtree_gui.c:1904
+#: xftree/xtree_gui.c:1968
 msgid "Can't create : "
 msgstr "Не можу створити: "
 
-#: xftree/xtree_gui.c:1985
+#: xftree/xtree_gui.c:2067
 msgid "No item marked !"
 msgstr "Жодного елемента не позначено!"
 
-#: xftree/xtree_gui.c:1996
+#: xftree/xtree_gui.c:2078
 msgid "Rename to : "
 msgstr "Перейменувати на: "
 
-#: xftree/xtree_gui.c:2001
+#: xftree/xtree_gui.c:2083
 msgid "Character not allowed in filename"
 msgstr "Неприпустимий символ в ╕мен╕ файла"
 
-#: xftree/xtree_gui.c:2013
-msgid "Override ?"
-msgstr "Переписати?"
-
-#: xftree/xtree_gui.c:2237
+#: xftree/xtree_gui.c:2322
 msgid "Can't find suffix in filename, using complete filename"
 msgstr "Не можу знайти суф╕кс в ╕мен╕ файла, використовуйте повне ╕м'я"
 
-#: xftree/xtree_gui.c:2243
+#: xftree/xtree_gui.c:2328
 #, c-format
 msgid "Register program for file \"%s\""
 msgstr "Ре╓стр програм для файла \"%s\""
 
-#: xftree/xtree_gui.c:2247
+#: xftree/xtree_gui.c:2332
 #, c-format
 msgid "Register program for suffix \"%s\""
 msgstr "Ре╓стр програм для суф╕кса \"%s\""
 
-#: xftree/xtree_gui.c:2452 xftree/xtree_gui.c:2506 xftree/xtree_gui.c:2727
-#: xftree/xtree_gui.c:2815
+#: xftree/xtree_gui.c:2554 xftree/xtree_gui.c:2608
 msgid "New window"
 msgstr "Нове в╕кно"
 
-#: xftree/xtree_gui.c:2454 xftree/xtree_gui.c:2583 xftree/xtree_gui.c:2719
-#: xftree/xtree_gui.c:2765 xftree/xtree_gui.c:2807 xftree/xtree_gui.c:2843
+#: xftree/xtree_gui.c:2556 xftree/xtree_gui.c:2642
 msgid "Close window"
 msgstr "Закрити в╕кно"
 
-#: xftree/xtree_gui.c:2458 xftree/xtree_gui.c:2604 xftree/xtree_gui.c:2688
-#: xftree/xtree_gui.c:2739 xftree/xtree_gui.c:2778 xftree/xtree_gui.c:2821
+#: xftree/xtree_gui.c:2560 xftree/xtree_gui.c:2747
 msgid "Go to ..."
 msgstr "Перейти до..."
 
-#: xftree/xtree_gui.c:2460
-msgid "Go up ..."
-msgstr "Вгору..."
+#: xftree/xtree_gui.c:2562 xftree/xtree_gui.c:2742
+msgid "Go up"
+msgstr "Вгору"
 
-#: xftree/xtree_gui.c:2462 xftree/xtree_gui.c:2616 xftree/xtree_gui.c:2693
-#: xftree/xtree_gui.c:2742 xftree/xtree_gui.c:2781 xftree/xtree_gui.c:2824
+#: xftree/xtree_gui.c:2564 xftree/xtree_gui.c:2731
 msgid "Go home"
 msgstr "Додому"
 
-#: xftree/xtree_gui.c:2466
+#: xftree/xtree_gui.c:2568
 msgid "New Folder"
 msgstr "Нова тека"
 
-#: xftree/xtree_gui.c:2468 xftree/xtree_gui.c:2521 xftree/xtree_gui.c:2680
-#: xftree/xtree_gui.c:2818
+#: xftree/xtree_gui.c:2570 xftree/xtree_gui.c:2627
 msgid "New file ..."
 msgstr "Новий файл..."
 
-#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2474 xftree/xtree_gui.c:2535
-#: xftree/xtree_gui.c:2685 xftree/xtree_gui.c:2734 xftree/xtree_gui.c:2775
+#: xfsamba/xfsamba_gui.c:1081 xftree/xtree_gui.c:2576 xftree/xtree_gui.c:2632
 msgid "Delete ..."
 msgstr "Стерти..."
 
-#: xftree/xtree_gui.c:2476 xftree/xtree_gui.c:2569 xftree/xtree_gui.c:2713
-#: xftree/xtree_gui.c:2759 xftree/xtree_gui.c:2797 xftree/xtree_gui.c:2801
-#: xftree/xtree_gui.c:2837
+#: xftree/xtree_gui.c:2578 xftree/xtree_gui.c:2680
 msgid "Open Trash"
 msgstr "В╕дкрити см╕тник"
 
-#: xftree/xtree_gui.c:2478 xftree/xtree_gui.c:2574 xftree/xtree_gui.c:2711
-#: xftree/xtree_gui.c:2757 xftree/xtree_gui.c:2796 xftree/xtree_gui.c:2799
-#: xftree/xtree_gui.c:2835
+#: xftree/xtree_gui.c:2580 xftree/xtree_gui.c:2685
 msgid "Empty Trash"
 msgstr "Спорожнити см╕тник"
 
-#: xftree/xtree_gui.c:2482 xftree/xtree_gui.c:2626 xftree/xtree_gui.c:2705
-#: xftree/xtree_gui.c:2793 xftree/xtree_gui.c:2830
+#: xftree/xtree_gui.c:2584 xftree/xtree_gui.c:2671
 msgid "Toggle Dotfiles"
 msgstr "Показати/сховати прихован╕ файли"
 
 #. Create "File" menu
 #: xfclock/xfclock_menus.c:85 xfdiff/xfdiff_gui.c:1168
-#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2499
+#: xfsamba/xfsamba_gui.c:1014 xftree/xtree_gui.c:2601
 msgid "File"
 msgstr "Файл"
 
-#: xftree/xtree_gui.c:2516 xftree/xtree_gui.c:2678 xftree/xtree_gui.c:2817
+#: xftree/xtree_gui.c:2622
 msgid "New Folder ..."
 msgstr "Нова тека..."
 
-#: xftree/xtree_gui.c:2544 xftree/xtree_gui.c:2702 xftree/xtree_gui.c:2790
-#: xftree/xtree_gui.c:2833
-msgid "Find ..."
-msgstr "Знайти..."
+#. Create "Edit" menu
+#: xftree/xtree_gui.c:2655 xfumed/xfumed_gui.c:129
+#, fuzzy
+msgid "Edit"
+msgstr "Вийти"
 
-#: xftree/xtree_gui.c:2549 xftree/xtree_gui.c:2708 xftree/xtree_gui.c:2752
-msgid "Properties ..."
-msgstr "Властивост╕..."
-
-#: xftree/xtree_gui.c:2555
-msgid "Differences ..."
-msgstr "В╕дм╕нност╕..."
-
-#: xftree/xtree_gui.c:2560
-msgid "Patch viewer ..."
-msgstr "Переглядач латок..."
-
-#. Create "Settings" menu
-#: xfclock/xfclock_menus.c:96 xftree/xtree_gui.c:2597 xfwm/xfwm.c:881
-msgid "Settings"
-msgstr "Параметри"
-
-#: xftree/xtree_gui.c:2610 xftree/xtree_gui.c:2691 xftree/xtree_gui.c:2740
-#: xftree/xtree_gui.c:2779 xftree/xtree_gui.c:2822
-msgid "Go up"
-msgstr "Вгору"
-
-#. Create "Help" menu
-#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
-#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2633
-msgid "Help"
-msgstr "Дов╕дка"
-
-#: xftree/xtree_gui.c:2640 xftree/xtree_gui.c:2715 xftree/xtree_gui.c:2761
-#: xftree/xtree_gui.c:2803 xftree/xtree_gui.c:2839
-msgid "About ..."
-msgstr "Про..."
-
-#: xftree/xtree_gui.c:2674
-msgid "Open in new"
-msgstr "В╕дкрити в новому"
-
-#: xftree/xtree_gui.c:2683 xftree/xtree_gui.c:2732
-msgid "Rename ..."
-msgstr "Перейменувати..."
-
-#: xftree/xtree_gui.c:2689
-msgid "Go to marked"
-msgstr "Перейти до позначеного"
-
-#: xftree/xtree_gui.c:2697 xftree/xtree_gui.c:2746 xftree/xtree_gui.c:2785
-msgid "Unselect"
-msgstr "Невибраний"
-
-#: xftree/xtree_gui.c:2699 xftree/xtree_gui.c:2748 xftree/xtree_gui.c:2787
-#: xftree/xtree_gui.c:2826
+#: xftree/xtree_gui.c:2661
 msgid "Select all"
 msgstr "Вибрати все"
 
-#: xftree/xtree_gui.c:2701 xftree/xtree_gui.c:2750 xftree/xtree_gui.c:2789
-#: xftree/xtree_gui.c:2828
-msgid "Unselect all"
-msgstr "Зняти весь виб╕р"
+#: xftree/xtree_gui.c:2666
+msgid "Unselect"
+msgstr "Невибраний"
 
-#: xftree/xtree_gui.c:2736
-msgid "Duplicate"
-msgstr "Дублювати"
+#. Create "Tools" menu
+#: xftree/xtree_gui.c:2693
+#, fuzzy
+msgid "Tools"
+msgstr "П╕дказки"
 
-#: xftree/xtree_gui.c:2754
-msgid "Register ..."
-msgstr "Ре╓струвати..."
+#: xftree/xtree_gui.c:2704
+msgid "Find ..."
+msgstr "Знайти..."
 
-#: xftree/xtree_gui.c:2773
-msgid "New windows"
-msgstr "Нов╕ в╕кна"
+#: xftree/xtree_gui.c:2709
+msgid "Properties ..."
+msgstr "Властивост╕..."
 
-#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2857
+#: xftree/xtree_gui.c:2715
+msgid "Differences ..."
+msgstr "В╕дм╕нност╕..."
+
+#: xftree/xtree_gui.c:2720
+msgid "Patch viewer ..."
+msgstr "Переглядач латок..."
+
+#. Create "Go To" menu
+#: xfsamba/xfsamba_gui.c:1034 xftree/xtree_gui.c:2725
+msgid "Go"
+msgstr "Перейти"
+
+#. TODO #12:
+#: xftree/xtree_gui.c:2737
+#, fuzzy
+msgid "Go back"
+msgstr "Йду назад..."
+
+#. menuitem = gtk_menu_item_new ();
+#. gtk_menu_append (GTK_MENU (menu), menuitem);
+#. gtk_widget_show (menuitem);
+#. Create "Preferences" menu
+#: xfsamba/xfsamba_gui.c:1024 xftree/xtree_gui.c:2758
+msgid "Preferences"
+msgstr "Установки"
+
+#: xftree/xtree_gui.c:2764
+msgid "Save geometry on exit"
+msgstr ""
+
+#: xftree/xtree_gui.c:2766
+msgid "Double click does GOTO"
+msgstr ""
+
+#: xftree/xtree_gui.c:2768
+msgid "Short titles"
+msgstr ""
+
+#. Create "Help" menu
+#: xfclock/xfclock_menus.c:234 xfdiff/xfdiff_gui.c:1270
+#: xfsamba/xfsamba_gui.c:1039 xftree/xtree_gui.c:2773
+msgid "Help"
+msgstr "Дов╕дка"
+
+#: xftree/xtree_gui.c:2780
+msgid "Default shortcut keys"
+msgstr ""
+
+#: xftree/xtree_gui.c:2785
+msgid "Custom shortcut keys"
+msgstr ""
+
+#: xftree/xtree_gui.c:2790
+msgid "About ..."
+msgstr "Про..."
+
+#: xfglob/xfglob.c:605 xfsamba/xfsamba_gui.c:1195 xftree/xtree_gui.c:2946
 msgid "Name"
 msgstr "Назва"
 
-#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2858
+#: xfglob/xfglob.c:607 xftree/xtree_gui.c:2947
 msgid "Size (bytes)"
 msgstr "Розм╕р (в байтах)"
 
-#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2859
+#: xfglob/xfglob.c:608 xftree/xtree_gui.c:2948
 msgid "Last changed"
 msgstr "Останн╓ поновлення"
 
-#: xftree/xtree_dnd.c:121
+#: xftree/xtree_dnd.c:124
 msgid "Unknown action !"
 msgstr "Нев╕дома д╕я!"
 
-#: xftree/xtree_dnd.c:136
+#: xftree/xtree_dnd.c:139
 msgid "Target must be a directory !"
 msgstr "Ц╕ль ма╓ бути каталогом!"
 
-#: xftree/xtree_dnd.c:165
+#: xftree/xtree_dnd.c:172
 #, c-format
 msgid "Type not supported.. (%d)\n"
 msgstr "Тип не п╕дтриму╓ться.. (%d)\n"
@@ -1635,11 +1654,11 @@ msgstr "Такий файл в╕дсутн╕й"
 
 #: xfdiff/xfdiff_gui.c:886
 msgid "There is no next file"
-msgstr "Наступного файлу нема╓"
+msgstr "Наступного файла нема╓"
 
 #: xfdiff/xfdiff_gui.c:897
 msgid "There is no previous file"
-msgstr "Попереднього файлу нема╓"
+msgstr "Попереднього файла нема╓"
 
 #. only spot where directories for input is not OK:
 #: xfdiff/xfdiff_gui.c:984
@@ -1925,7 +1944,7 @@ msgstr "Результат "
 
 #: xfglob/xfglob.c:1212 xfglob/xfglob.c:1555
 msgid "File type :"
-msgstr "Тип файлу:"
+msgstr "Тип файла:"
 
 #: xfglob/xfglob.c:1284
 msgid "Anyone"
@@ -2197,9 +2216,9 @@ msgid ""
 msgstr ""
 "- Якщо вказано розм╕р 0 (нуль) для умови\n"
 " розм╕р-менше-н╕ж, цю умову буде ╕гноровано.\n"
-"- Якщо вказано обидв╕ умови розм╕р-б╕льше-н╕ж та\n"
-" розм╕р-менше-н╕ж, вони обидв╕ повинн╕\n"
-" бути взадоволен╕.\n"
+"- Якщо вказано обидв╕ умови, розм╕р-б╕льше-н╕ж та\n"
+" розм╕р-менше-н╕ж, виконуватись повинн╕\n"
+"обидв╕.\n"
 
 #: xfglob/xfglob.c:1762
 msgid "Size greater than (KB): "
@@ -2258,7 +2277,7 @@ msgstr ""
 "  ╕нформац╕╖ inode (напр., власник, група, к╕лькисть посилань, режим).\n"
 "\n"
 "*доступ:\n"
-"  Це поле зм╕ню╓ться при доступ╕ до файлу, напр., з\n"
+"  Це поле зм╕ню╓ться при доступ╕ до файла, напр., з\n"
 "  exec(2), mknod(2), pipe(2), utime(2) та read(2)\n"
 "  (при ненульов╕й к╕лькост╕ байт). ╤нш╕ процедури, як\n"
 "  mmap(2), можуть як зм╕нювати так ╕ не зм╕нювати час доступу.\n"
@@ -2313,7 +2332,7 @@ msgstr "Виводити к╕льк╕сть в╕дпов╕дних рядк╕в"
 
 #: xfglob/xfglob.c:1883
 msgid "Match anywhere"
-msgstr "Сп╕впадання усюди"
+msgstr "Сп╕впад╕ння будь-де"
 
 #: xfglob/xfglob.c:1884
 msgid "Match whole words only"
@@ -2404,6 +2423,11 @@ msgstr "Сховати/показати панель меню"
 #: xfclock/xfclock_menus.c:54 xfclock/xfclock_menus.c:103
 msgid "Hide/show calendar"
 msgstr "Сховати/показати календар"
+
+#. Create "Settings" menu
+#: xfclock/xfclock_menus.c:96 xfwm/xfwm.c:881
+msgid "Settings"
+msgstr "Параметри"
 
 #: xfclock/xfclock_menus.c:119
 msgid "24 hour mode"
@@ -2600,7 +2624,7 @@ msgstr "Тест"
 
 #: xfsound/xfsound.c:543
 msgid "Play Sound"
-msgstr "В╕дтворити звук"
+msgstr "Програвати звук"
 
 #: xfsound/xfsound.c:551
 msgid "Command : "
@@ -2620,7 +2644,7 @@ msgid ""
 "Cannot open file"
 msgstr ""
 "Помилка\n"
-"Неможливо в╕дрити файл"
+"Неможливо в╕дкрити файл"
 
 #: xfbd/xfbd.c:282
 msgid ""
@@ -2636,7 +2660,7 @@ msgid ""
 "File format invalid"
 msgstr ""
 "Помилка\n"
-"Нев╕рний формат файлу"
+"Нев╕рний формат файла"
 
 #: xfbd/xfbd.c:286
 msgid ""
@@ -2660,7 +2684,7 @@ msgstr "XFbd - Менеджер шпалер XFce"
 
 #: xfbd/xfbd.c:448 xfbd/xfbdmgr.c:148
 msgid "Filename : "
-msgstr "Назва файлу: "
+msgstr "Назва файла: "
 
 #: xfbd/xfbd.c:470
 msgid "Display image : "
@@ -2824,7 +2848,7 @@ msgstr "(будь ласка, встанов╕ть Samba або виправте зм╕нну середовища PATH)"
 
 #: xfsamba/xfsamba_download.c:87
 msgid "File download failed. See diagnostics for reason."
-msgstr "Зб╕й звантаження файлу. Причину можна побачити у д╕агностиц╕."
+msgstr "Зб╕й звантаження файла. Причину можна побачити у д╕агностиц╕."
 
 #. upload was successful:
 #: xfsamba/xfsamba_download.c:91
@@ -2833,11 +2857,11 @@ msgstr "Звантаження завершено."
 
 #: xfsamba/xfsamba_download.c:127
 msgid "Downloading file..."
-msgstr "Звантаження файлу..."
+msgstr "Звантаження файла..."
 
 #: xfsamba/xfsamba_download.c:140
 msgid "File download cancelled."
-msgstr "Звантаження файлу перервано."
+msgstr "Звантаження файла перервано."
 
 #: xfsamba/xfsamba_download.c:148
 msgid "Download failed."
@@ -2855,9 +2879,9 @@ msgstr ""
 "Якщо у мереж╕ ╓ WIN95, можливо, xfsamba не може знайти\n"
 "головний сервер перегляду. Якщо Ви запустили службу smb на сервер╕ Linux,\n"
 "створюючи сервер SMB, ця проблема може бути подолана\n"
-"перезавантаженням ус╕х машин WIN95 в мереж╕. Процедура Вам знайома:\n"
+"перезапуском ус╕х машин WIN95 в мереж╕. Процедура Вам знайома:\n"
 "просто перезавантажте win*dows. ╤накше,\n"
-"Ви повинн╕ ввести вузол для перегляду ╕ натиснути Enter.\n"
+"Введ╕ть вузол для перегляду ╕ натиснути Enter.\n"
 
 #: xfsamba/xfsamba_gui.c:151
 msgid "This is XFSamba "
@@ -2906,7 +2930,7 @@ msgstr "Йду вперед..."
 
 #: xfsamba/xfsamba_gui.c:794
 msgid "Attempting to stop query..."
-msgstr "Пробую зупинити запит..."
+msgstr "Намагаюся зупинити запит..."
 
 #: xfsamba/xfsamba_gui.c:798
 msgid "Query stopped."
@@ -2933,10 +2957,6 @@ msgstr "Стерти..."
 msgid "Tar..."
 msgstr "Tar..."
 
-#: xfsamba/xfsamba_gui.c:1024
-msgid "Preferences"
-msgstr "Установки"
-
 #: xfsamba/xfsamba_gui.c:1025
 msgid "Browse as..."
 msgstr "Зм╕нити користувача..."
@@ -2960,10 +2980,6 @@ msgstr "Показати зв'язки переглядача"
 #: xfsamba/xfsamba_gui.c:1032
 msgid "Hide browser links"
 msgstr "Сховати зв'язки переглядача"
-
-#: xfsamba/xfsamba_gui.c:1034
-msgid "Go"
-msgstr "Перейти"
 
 #: xfsamba/xfsamba_gui.c:1035
 msgid "Home..."
@@ -3088,7 +3104,7 @@ msgstr "Ласкаво просимо до xfsamba."
 msgid "Retrieve done."
 msgstr "Отримано."
 
-#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:160
+#: xfsamba/xfsamba_list.c:193 xfsamba/xfsamba_smblookup.c:159
 msgid "Query password has been requested."
 msgstr "Було виставлена вимога запиту пароля."
 
@@ -3109,29 +3125,29 @@ msgstr "Розв'язано"
 msgid "Resolving for"
 msgstr "Розв'язую"
 
-#: xfsamba/xfsamba_smblookup.c:84
+#: xfsamba/xfsamba_smblookup.c:83
 msgid "Shares"
 msgstr "Сп╕льн╕ ресурси"
 
-#: xfsamba/xfsamba_smblookup.c:86
+#: xfsamba/xfsamba_smblookup.c:85
 msgid "Links to other servers"
 msgstr "Зв'язки з ╕ншими серверами"
 
-#: xfsamba/xfsamba_smblookup.c:88
+#: xfsamba/xfsamba_smblookup.c:87
 msgid "Links to other workgroups"
 msgstr "Зв'язки з ╕ншими робочими групами"
 
-#: xfsamba/xfsamba_smblookup.c:143
+#: xfsamba/xfsamba_smblookup.c:142
 msgid "Query done."
 msgstr "Запит завершено."
 
-#: xfsamba/xfsamba_smblookup.c:145
+#: xfsamba/xfsamba_smblookup.c:144
 msgid "Query failed. Machine may be down."
 msgstr "Зб╕й запиту. Можливо машину вимкнено."
 
-#: xfsamba/xfsamba_smblookup.c:324
+#: xfsamba/xfsamba_smblookup.c:323
 msgid "Querying"
-msgstr "В╕дбува╓ться запит"
+msgstr "Трива╓ запит"
 
 #: xfsamba/xfsamba_masterlookup.c:77
 msgid "No master browser found. See diagnostics."
@@ -3147,7 +3163,7 @@ msgstr ""
 
 #: xfsamba/xfsamba_masterlookup.c:134
 msgid "Looking for master browsers..."
-msgstr "Шукаю на головний сервер перегляду..."
+msgstr "Пошук головного сервера перегляду..."
 
 #: xfsamba/xfsamba_masterresolve.c:110
 msgid "Please provide netbios name for master browser at "
@@ -3288,7 +3304,7 @@ msgstr "Опц╕╖"
 
 #: xfsamba/xfsamba_upload.c:91
 msgid "File upload failed. See diagnostics for reason."
-msgstr "Зб╕й в╕двантаження файлу. Причину можна побачити у д╕агностиц╕."
+msgstr "Зб╕й в╕двантаження файла. Причину можна побачити у д╕агностиц╕."
 
 #: xfsamba/xfsamba_upload.c:101
 msgid "Upload done."
@@ -3300,11 +3316,11 @@ msgstr "В╕двантажений файл."
 
 #: xfsamba/xfsamba_upload.c:153
 msgid "Uploading file..."
-msgstr "В╕двантажую файлу..."
+msgstr "В╕двантажую файл..."
 
 #: xfsamba/xfsamba_upload.c:159
 msgid "File upload cancelled."
-msgstr "В╕двантаження файлу скасовано."
+msgstr "В╕двантаження файла скасовано."
 
 #: xfsamba/xfsamba_upload.c:169
 msgid "Specified file does not exist"
@@ -3315,8 +3331,9 @@ msgid "Upload failed."
 msgstr "Зб╕й в╕двантаження:"
 
 #: xfumed/xfumed_gui.c:47
+#, fuzzy
 msgid "User Menu Editor"
-msgstr "Редактор меню користувача"
+msgstr "Редактор меню користувача XFce"
 
 #: xfumed/xfumed_gui.c:80
 msgid "Caption"
@@ -3327,20 +3344,17 @@ msgid "Command"
 msgstr "Команда"
 
 #: xfumed/xfumed_gui.c:108
+#, fuzzy
 msgid "Move Up"
-msgstr "Пересунути вгору"
+msgstr "&Пересунути"
 
 #: xfumed/xfumed_gui.c:115
 msgid "Move Down"
-msgstr "Пересунути вниз"
+msgstr ""
 
 #: xfumed/xfumed_gui.c:122
 msgid "Add"
 msgstr "Додати"
-
-#: xfumed/xfumed_gui.c:129
-msgid "Edit"
-msgstr "Редагувати"
 
 #: xfumed/xfumed_gui.c:157
 msgid "Save"
@@ -3351,22 +3365,26 @@ msgid "Reset"
 msgstr "Скинути"
 
 #: xfumed/xfumed_gui.c:252
+#, fuzzy
 msgid "Edit Entry"
-msgstr "Редагувати елемент"
+msgstr "Зм╕нити елемент"
 
 #: xfumed/xfumed_gui.c:254
 msgid "Add Entry"
-msgstr "Додати елемент"
+msgstr ""
 
 #: xfumed/xfumed_gui.c:275
+#, fuzzy
 msgid "Type: "
 msgstr "Тип: "
 
 #: xfumed/xfumed_gui.c:282
+#, fuzzy
 msgid "Caption: "
 msgstr "Заголовок: "
 
 #: xfumed/xfumed_gui.c:289
+#, fuzzy
 msgid "Command: "
 msgstr "Команда: "
 
@@ -3375,6 +3393,7 @@ msgid "Your changes will take effect on next startup"
 msgstr "Ваш╕ зм╕ни матимуть ефект п╕сля наступного запуску"
 
 #: xfumed/xfumed_gui_cb.c:69
+#, fuzzy
 msgid ""
 "There are unsaved changes to the menu.\n"
 "\n"
@@ -3382,13 +3401,14 @@ msgid ""
 msgstr ""
 "В меню ╓ незбережен╕ зм╕ни.\n"
 "\n"
-"Вийти ╕ втратити зм╕ни?"
+"Вийти нехтуючи зм╕нами?"
 
 #: xfumed/xfumed_gui_cb.c:76
 msgid "Don't Quit"
 msgstr "Не виходити"
 
 #: xfumed/xfumed_gui_cb.c:121
+#, fuzzy
 msgid "Do you want to delete this entry ?"
 msgstr "Ви впевнен╕, що хочете видалити цей елемент?"
 
@@ -3399,7 +3419,66 @@ msgid ""
 "\n"
 "Do you want to delete this submenu ?"
 msgstr ""
-"Якщо Ви вилучите п╕дменю, вс╕ його елементи та\n"
-"п╕дменю також будуть вилучен╕.\n"
-"\n"
-"Вилучити п╕дменю?"
+
+#~ msgid "XFce : %s File not found.\n"
+#~ msgstr "XFce: Файл %s не знайдено.\n"
+
+#~ msgid "Whoooops !"
+#~ msgstr "Опаньки!"
+
+#~ msgid "Override file?"
+#~ msgstr "Зам╕стити файл?"
+
+#~ msgid "Override file ?"
+#~ msgstr "Зам╕стити файл?"
+
+#~ msgid "Override ?"
+#~ msgstr "Переписати?"
+
+#~ msgid "Go up ..."
+#~ msgstr "Вгору..."
+
+#~ msgid "Open in new"
+#~ msgstr "В╕дкрити в новому"
+
+#~ msgid "Rename ..."
+#~ msgstr "Перейменувати..."
+
+#~ msgid "Go to marked"
+#~ msgstr "Перейти до позначеного"
+
+#~ msgid "Unselect all"
+#~ msgstr "Зняти весь виб╕р"
+
+#~ msgid "Duplicate"
+#~ msgstr "Дублювати"
+
+#~ msgid "Register ..."
+#~ msgstr "Ре╓струвати..."
+
+#~ msgid "New windows"
+#~ msgstr "Нов╕ в╕кна"
+
+#~ msgid "   Menu: %s   Parent: %s"
+#~ msgstr "   Меню: %s   Батьк╕вське: %s"
+
+#~ msgid "Toplevel"
+#~ msgstr "Верх╕вка"
+
+#~ msgid "None"
+#~ msgstr "В╕дсутн╓"
+
+#~ msgid "Go to parent menu"
+#~ msgstr "Перейти до батьк╕вського меню"
+
+#~ msgid "Go to submenu"
+#~ msgstr "Перейти до п╕дменю"
+
+#~ msgid "Type"
+#~ msgstr "Тип"
+
+#~ msgid "Update"
+#~ msgstr "Поновити"
+
+#~ msgid "Quit, don't save"
+#~ msgstr "Вийти, без збереження"
