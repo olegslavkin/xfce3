@@ -1,7 +1,5 @@
 --> xfsamba dnd:
-- enable more than one file dropped
-- enable directory drop
-- enable copy + paste, must use X clipboard by now.
+- enable copy + paste.
 
 - incorporate hostnames for dnd so rcp works with rox. Add the rsync option
   with choice for rsh, ssh ssh2.
@@ -11,10 +9,6 @@
 - In xtree_tar.c, when determining "mode", do a search of all open xfree
   windows until the extracted file is found (tar_extract()) (what ?)
 - Toolbar icon + menu elements for "print"
-- Use the conventional Xpasteboard and provide compatibility with
-  other file managers and programs for cut+paste (also for the
-  future rsync option). Perhaps still use the private file for
-  distinguising copies from moves from rsyncs
 - Create a linked list of "cut paths", "copied paths" so as to change
   the icons if the paths happen to be in the way of an update_tree. also,
   the changing of the X pasteboard should cause a update_tree (because of
@@ -25,17 +19,11 @@
   hosts, but on the same X display or something equivalent like adding rsync 
   nodes at the root level.
 - Enable .deb expansion. (I need a debian box to do the testing first).
-- Add code necesary to d+d files from xfsamba. 
 - gtk-2
 
-Maybe (only if repeatedly requested):
-- add "save user shortcutkeys" to config options:
-    (does gtk store the custom values in the associated accel?
-    if so, how do you retrieve the values?)
+Maybe :
 - open a "goto desktop", to open the ROX desktop. 
     (this implies enabling d+d to the root window)
-
-BUGS to fix:
 
 ****************************************************************
 ****************************************************************
