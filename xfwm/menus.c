@@ -169,6 +169,15 @@ do_menu (MenuRoot * menu, int style)
   {
     UngrabEm ();
     WaitForButtonsUp ();
+    XSync (dpy, 0);
+#ifdef REQUIRES_STASHEVENT
+    while (XCheckTypedEvent (dpy, EnterNotify, &Event))
+    {
+      StashEventTime (&Event);
+    }
+#else
+    while (XCheckTypedEvent (dpy, EnterNotify, &Event));
+#endif
   }
 #ifdef REQUIRES_STASHEVENT
   if (((lastTimestamp - t0) < 3 * Scr.ClickTime) && (mouse_moved == 0))
