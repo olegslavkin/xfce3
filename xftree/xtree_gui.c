@@ -378,7 +378,7 @@ static gint startit(GtkWidget * ctree,entry *en,int mod_mask,GtkCTreeNode *node)
       }
       else
       {
-	xf_dlg_open_with (ctree,win->xap, "", en->path);
+	xf_dlg_open_with (ctree,win->xap, DEF_APP, en->path);
       }
     }
     cursor_reset (GTK_WIDGET (ctree));

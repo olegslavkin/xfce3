@@ -332,9 +332,11 @@ reg_app_by_file (GList * g_reg, char *file)
 {
   reg *prg;
   int len;
+  static char *app_arg=NULL;
 
-  if (!file)
-    return NULL;
+  if (app_arg) g_free(app_arg);
+
+  if (!file) return NULL;
   len = strlen (file);
 
   while (g_reg)
@@ -345,9 +347,17 @@ reg_app_by_file (GList * g_reg, char *file)
       g_reg = g_reg->next;
       continue;
     }
-    if (my_strcasecmp (file + (len - prg->len), prg->sfx) == 0)
-    {
-      return (prg->app);
+    if (my_strcasecmp (file + (len - prg->len), prg->sfx) == 0){
+      int len;
+      len=(prg->arg)?strlen(prg->arg):0;
+      len+=strlen(prg->app);
+      len+=2;
+      app_arg=(char *) malloc(len);
+      if (app_arg) {
+        if (prg->arg) sprintf(app_arg,"%s %s",prg->app,prg->arg); 
+        else  sprintf(app_arg,"%s",prg->app);
+      }
+      return (app_arg);
     }
     g_reg = g_reg->next;
   }
@@ -447,8 +457,7 @@ reg_destroy_list (GList * list)
     prg = (reg *) g_tmp->data;
     g_free (prg->sfx);
     g_free (prg->app);
-    if (prg->arg)
-      g_free (prg->arg);
+    if (prg->arg) g_free (prg->arg);
     g_free (prg);
     g_tmp = g_tmp->next;
   }
@@ -496,18 +505,30 @@ reg_save (GList * g_reg)
 }
 
 /*
- * return a list of all registered applications
- * the list does not have their own data values, just pointers!
+ * return a list of all registered applications with arguments
  */
 GList *
 reg_app_list (GList * g_reg)
 {
   GList *g_apps = NULL;
   GList *g_tmp;
+  char *app_arg;
 
   while (g_reg)
   {
-    g_apps = g_list_append (g_apps, ((reg *) g_reg->data)->app);
+    char *app,*arg;
+    int len;
+    app=((reg *) g_reg->data)->app;
+    arg=((reg *) g_reg->data)->arg;
+    len=(arg)?strlen(arg):0;
+    len+=strlen(app);
+    len+=2;
+    app_arg=(char *) malloc(len);
+    if (app_arg) {
+      if (arg) sprintf(app_arg,"%s %s",app,arg); 
+      else  sprintf(app_arg,"%s",app);
+      g_apps = g_list_append (g_apps, app_arg);
+    }
     g_reg = g_reg->next;
   }
   g_apps = g_list_sort (g_apps, (GCompareFunc) my_strcasecmp);
@@ -519,13 +540,34 @@ reg_app_list (GList * g_reg)
     {
       if (my_strcasecmp ((char *) g_tmp->data, (char *) g_tmp->next->data) == 0)
       {
-	g_tmp = g_apps = g_list_remove (g_apps, g_tmp->data);
+	char *rem;
+	rem=g_tmp->data;
+	g_tmp = g_apps = g_list_remove (g_apps, rem);
+	g_free(rem);
 	continue;
       }
     }
     g_tmp = g_tmp->next;
   }
   return (g_apps);
+}
+
+GList *
+reg_app_list_free (GList * g_apps)
+{
+  char *rem;
+  GList *g_tmp;
+  g_tmp=g_apps;
+  while (g_tmp)
+  {
+    rem=g_tmp->data;
+    if (rem) {
+	    g_tmp = g_apps = g_list_remove (g_apps, rem);
+	    g_free(rem);
+    }
+    g_tmp = g_tmp->next;
+  }
+  return (g_tmp);
 }
 
 /*

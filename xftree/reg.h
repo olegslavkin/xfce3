@@ -42,6 +42,7 @@ char *reg_app_by_file (GList * list, char *file);
 reg_t *reg_prog_by_file (GList * list, char *file);
 reg_t *reg_prog_by_suffix (GList * list, char *sfx);
 GList *reg_app_list (GList * list);
+GList *reg_app_list_free (GList * g_apps);
 int reg_save (GList * list);
 void cb_register (GtkWidget * item, GtkWidget * ctree);
 

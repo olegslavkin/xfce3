@@ -192,8 +192,11 @@ gint xf_dlg_open_with (GtkWidget *ctree,char *xap, char *defval, char *file)
 
   dl.combo = gtk_combo_new ();
   apps = reg_app_list (dl.win->reg);
-  if (apps)
-    gtk_combo_set_popdown_strings (GTK_COMBO (dl.combo), apps);
+  if (apps) {
+	  gtk_combo_set_popdown_strings (GTK_COMBO (dl.combo), apps);
+	  apps = reg_app_list_free(apps);
+  } 
+  /* g_free apps */
   gtk_editable_select_region (GTK_EDITABLE (GTK_COMBO (dl.combo)->entry), 0, -1);
   gtk_combo_disable_activate (GTK_COMBO (dl.combo));
   if (defval)
