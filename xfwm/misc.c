@@ -78,8 +78,6 @@
 #define MAX_ICON_LEN 80
 #endif
 
-#define DEBUG
-
 char NoName[] = "Untitled";		/* name if no name in XA_WM_NAME */
 char NoClass[] = "NoClass";		/* Class if no res_class in class hints */
 char NoResource[] = "NoResource";	/* Class if no res_name in class hints */
@@ -344,6 +342,10 @@ Destroy (XfwmWindow * Tmp_win)
 
   if (!Tmp_win)
     return;
+
+  /* Block events on the destroyed window */
+  XSelectInput (dpy, Tmp_win->frame, NoEventMask);
+  XSelectInput (dpy, Tmp_win->w, NoEventMask);
 
   if (Tmp_win->prev != NULL)
     Tmp_win->prev->next = Tmp_win->next;
