@@ -9,7 +9,7 @@
 #include "../xfdiff/xfdiff_colorsel.h"
 #include <sys/types.h>
 #ifndef XFSAMBA_VERSION
-#define XFSAMBA_VERSION "0.43"
+#define XFSAMBA_VERSION "0.44"
 #endif
 
 #ifdef XFSAMBA_MAIN
