@@ -24,6 +24,20 @@ Maybe :
 - a recursive chown, chmod, chgrp for setting properties?
 - Toolbar icon + menu elements for "print"
 
+xftree2:
+Use nicer icons, like the small ones from nautilus.
+examine the way other file managers deal with problem directories (/dev, nfs)
+Modulariztion with xfsamba and xfglob.
+Top level tree entries: smb, local, glob.
+Desireable toplevel entries: rsync, rcp/scp (fish), nfs, smbfs
+Plus a rpm/pkg module (also desireable for deb)
+good details:
+  -location/goto box with dynamic label (like nautilus)
+  -icon view is good for dnd directory selection (you can have a tabulated window for examining the interior of directories a-la-xftree. Up to 3 at a time).
+  examine the use of /usr/share/nautilus/filesystem_attributes.xml.
+ 
+
+
 ****************************************************************
 ****************************************************************
 
