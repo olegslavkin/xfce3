@@ -748,7 +748,9 @@ DrawButton_xfce (XfwmWindow * t, Window win, int w, int h, ButtonFace * bf, GC R
     }
 
     if (inverted)
+    {
       RelieveRectangle (win, 0, 0, w - 1, h - 1, ShadowGC, ReliefGC);
+    }
 #ifndef OLD_STYLE
     XDrawLine (dpy, win, ShadowGC, 0, h - 1, w - 1, h - 1);
 #endif
@@ -1297,7 +1299,8 @@ DrawSelectedEntry_xfce (Window win, int x, int y, int w, int h, GC * currentGC)
   Globalgcm = GCForeground;
   XChangeGC (dpy, Scr.ScratchGC1, Globalgcm, &Globalgcv);
   XFillRectangle (dpy, win, Scr.ScratchGC1, x, y, w, h);
-  RelieveRectangle (win, x, y, w, h, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
+  RelieveRectangle (win, x, y, w, h, Scr.BlackGC, Scr.BlackGC);
+  RelieveRectangle (win, x + 1, y + 1, w - 2, h - 2, Scr.MenuSelReliefGC, Scr.MenuSelShadowGC);
   *currentGC = Scr.MenuSelGC;
 }
 
