@@ -1,3 +1,60 @@
+2001-10-08  xfce
+
+	* libs/configure.h, po/xfce.pot, xfwm/events.c, xfwm/misc.c,
+	xfwm/xfwm.c: Remove the XQueryPointer() call in RevertFocus() when
+	fallback_to_itself is False, Reorder
+	XRemoveFromSaveSet()/XDestroyWindow(), Add more debug logs
+
+2001-10-08  xfce
+
+	* xfwm/misc.c: Query mouse pointer only when fallback_to_itself is
+	set in RevertFocus
+
+2001-10-08  xfce
+
+	* xfwm/misc.c: [no log message]
+
+2001-10-08  xfce
+
+	* xfwm/xfwm.c: Remove XSetIconSize hint
+
+2001-10-08  xfce
+
+	* xfwm/: icons.c, misc.c, misc.h, xfwm.c: Fix race cond. in
+	RevertFocus() routine.
+
+2001-10-08  xfce
+
+	* xfwm/misc.c: [no log message]
+
+2001-10-08  xfce
+
+	* xfwm/: misc.c, xfwm.c: [no log message]
+
+2001-10-08  xfce
+
+	* xfwm/: icons.c, misc.c, misc.h: Fix the stability problem in xfwm
+	(I hope)
+
+2001-10-07  xfce
+
+	* xfwm/: events.c, misc.c: Misc changes
+
+2001-10-07  xfce
+
+	* po/xfce.pot, xfwm/builtins.c, xfwm/events.c: Various changes
+
+2001-10-07  xfce
+
+	* po/xfce.pot, xfwm/events.c, xfwm/misc.h: Mix small changes
+
+2001-10-07  xfce
+
+	* ChangeLog, xfwm/events.c, xfwm/misc.c, xfwm/misc.h: Update
+	ChangeLog, Add an event handler in xfwm for ReparentNotify, Change
+	UnmapNotify handler in xfwm, Select input for application window to
+	NoEvent in Destroy routine.
+
 2001-10-07  xfce
 
 	* xfwm/: builtins.c, events.c, icons.c, misc.c, move.c, virtual.c:
