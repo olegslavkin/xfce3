@@ -487,6 +487,7 @@ gboolean set_icon_pix(icon_pix *pix,int type,char *label,int flags) {
    else if (strcmp(loc,".obj")==0) PIXid[0]=PIX_PAGE_O;
    else if (strcmp(loc,".po")==0) PIXid[0]=PIX_PO;
    else if (strcmp(loc,".tar")==0){PIXid[0]=PIX_TAR;PIXid[2]=PIX_TAR;PIXid[3]=PIM_PAGE;}
+   else if ((strcmp(loc,".exe")==0)||(strcmp(loc,".EXE")==0)){PIXid[0]=PIX_EXE_FILE;PIXid[1]=PIM_EXE_FILE;}
    else if (strlen(loc)==2) switch (loc[1]){
       case 'c': PIXid[0]=PIX_PAGE_C; break;
       case 'h': PIXid[0]=PIX_PAGE_H; break;
